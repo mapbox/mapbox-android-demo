@@ -20,3 +20,15 @@ dependencies {
 	compile 'com.mapbox.mapboxsdk:Mapbox-Android-SDK:1.0.0-SNAPSHOT@aar'
 }
 ```
+
+*Satellite*
+
+![Satellite](https://raw2.github.com/bleege/MapBoxAndroidDemo/master/20140209-satellite.png)
+
+*Streets*
+
+![Streets](https://raw2.github.com/bleege/MapBoxAndroidDemo/master/20140209-streets.png)
+
+*Terrain*
+
+![Terrain](https://raw2.github.com/bleege/MapBoxAndroidDemo/master/20140209-terrain.png)
