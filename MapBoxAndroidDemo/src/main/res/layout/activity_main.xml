@@ -1,7 +1,45 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.mapbox.mapboxandroiddemo.MainActivity"
-    tools:ignore="MergeRootFrame" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+
+    <com.mapbox.mapboxsdk.views.MapView
+            android:id="@+id/mapview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            mapboxID="examples.map-zgrqqx0w">
+
+    </com.mapbox.mapboxsdk.views.MapView>
+    <LinearLayout
+            android:id="@+id/buttonsrow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="1">
+        <Button
+                android:id="@+id/satbut"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Satellite"
+                android:layout_weight="0.3333" android:layout_margin="-5dp" android:background="#3887be"
+                android:alpha="0.8"/>
+        <Button
+                android:id="@+id/terbut"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Terrain"
+                android:layout_weight="0.33333" android:layout_margin="-5dp" android:background="#3887be"
+                android:alpha="0.8"/>
+        <Button
+                android:id="@+id/strbut"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Streets"
+                android:layout_weight="0.3333" android:background="#3887be" android:alpha="0.8"/>
+    </LinearLayout>
+    <ImageView android:layout_width="100dp" android:layout_height="65dp" android:layout_alignParentTop="true"
+               android:layout_alignParentRight="true" android:src="@drawable/mblogo" android:layout_marginTop="-10dp"/>
+
+</RelativeLayout>
