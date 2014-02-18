@@ -36,5 +36,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:gridlayout-v7:19.0.0'
     compile 'com.android.support:appcompat-v7:19.0.0'
-    compile 'com.mapbox.mapboxsdk:Mapbox-Android-SDK:1.0.0-SNAPSHOT@aar'
+    compile 'com.mapbox.mapboxsdk:mb-android-sdk:1.0.0-SNAPSHOT@aar'
 }

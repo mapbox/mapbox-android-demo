@@ -21,9 +21,12 @@ repositories {
 }
 
 dependencies {
-	compile 'com.mapbox.mapboxsdk:Mapbox-Android-SDK:1.0.0-SNAPSHOT@aar'
+	compile 'com.mapbox.mapboxsdk:mapbox-android-sdk:1.0.0-SNAPSHOT@aar'
 }
 ```
+
+The string `mapbox-android-sdk` varies based on the **directory name of your SDK source**,
+so adjust it if you aren't using the default.
 
 *Satellite*
 
