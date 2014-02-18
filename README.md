@@ -28,6 +28,13 @@ dependencies {
 The string `mapbox-android-sdk` varies based on the **directory name of your SDK source**,
 so adjust it if you aren't using the default.
 
+## Usage with IntelliJ
+
+After tweaking your `build.gradle` file, start a new IntelliJ project by importing
+`./build.gradle`.
+
+## Screenshots
+
 *Satellite*
 
 ![Satellite](https://raw2.github.com/bleege/MapBoxAndroidDemo/master/20140209-satellite.png)

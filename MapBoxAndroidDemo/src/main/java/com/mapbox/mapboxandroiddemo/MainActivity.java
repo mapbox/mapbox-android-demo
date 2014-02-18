@@ -13,7 +13,7 @@ import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
 import com.mapbox.mapboxsdk.overlay.mylocation.MyLocationNewOverlay;
-import com.mapbox.mapboxsdk.tileprovider.tilesource.mapboxTileLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
@@ -95,7 +95,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     protected void replaceMapView(String layer) {
-        mv.setTileSource(new mapboxTileLayer(layer));
+        mv.setTileSource(new MapboxTileLayer(layer));
     }
 
     private void addLocationOverlay() {
