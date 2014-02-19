@@ -38,8 +38,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         mv = (MapView)findViewById(R.id.mapview);
         mapController = mv.getController();
-        mapController.setCenter(startingPoint);
-        mapController.setZoom(4);
+        mv.setCenter(startingPoint).setZoom(4);
 
         mv.loadFromGeoJSONURL("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
         setButtonListeners();
