@@ -18,28 +18,25 @@
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
             android:weightSum="1">
-        <Button
-                android:id="@+id/satbut"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Satellite"
-                android:layout_weight="0.3333" android:layout_margin="-5dp" android:background="#3887be"
-                android:alpha="0.8"/>
-        <Button
-                android:id="@+id/terbut"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Terrain"
-                android:layout_weight="0.33333" android:layout_margin="-5dp" android:background="#3887be"
-                android:alpha="0.8"/>
-        <Button
-                android:id="@+id/strbut"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Streets"
-                android:layout_weight="0.3333" android:background="#3887be" android:alpha="0.8"/>
     </LinearLayout>
     <ImageView android:layout_width="100dp" android:layout_height="65dp" android:layout_alignParentTop="true"
-               android:layout_alignParentRight="true" android:src="@drawable/mblogo" android:layout_marginTop="-10dp"/>
+               android:layout_alignParentRight="true" android:src="@drawable/mblogo" android:layout_marginTop="-10dp"
+               android:id="@+id/imageView"/>
+    <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/layerspinner"
+            android:layout_above="@+id/buttonsrow" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" android:background="@drawable/abc_ab_bottom_solid_dark_holo"
+            android:minHeight="@dimen/abc_action_bar_default_height"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:id="@+id/locationCheckBox"
+            android:checked="false"
+            android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
 
 </RelativeLayout>

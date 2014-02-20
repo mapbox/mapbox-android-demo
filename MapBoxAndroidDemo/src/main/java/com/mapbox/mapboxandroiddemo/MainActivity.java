@@ -6,29 +6,32 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.util.Log;
 import android.view.Window;
-import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.CheckBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
-import com.mapbox.mapboxsdk.overlay.mylocation.MyLocationNewOverlay;
+import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AdapterView;
+import java.util.List;
+import java.util.ArrayList;
+import android.widget.ArrayAdapter;
 
 public class MainActivity extends ActionBarActivity {
 
     private MapController mapController;
     private LatLng startingPoint = new LatLng(51f, 0f);
     private MapView mv;
-    private MyLocationNewOverlay myLocationOverlay;
-    private Paint paint;
-    private String satellite = "brunosan.map-cyglrrfu";
-    private String street = "examples.map-vyofok3q";
-    private String terrain = "examples.map-zgrqqx0w";
-    private String currentLayer = "terrain";
+    private UserLocationOverlay myLocationOverlay;
     private PathOverlay equator;
 
     @Override
@@ -41,10 +44,31 @@ public class MainActivity extends ActionBarActivity {
         mv.setCenter(startingPoint).setZoom(4);
 
         mv.loadFromGeoJSONURL("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
-        setButtonListeners();
         Marker m = new Marker(mv, "Hello", "World", new LatLng(0f, 0f));
         m.setIcon(new Icon(Icon.Size.l, "bus", "000"));
         mv.addMarker(m);
+
+        Spinner layerspinner = (Spinner) findViewById(R.id.layerspinner);
+        List<String> list = new ArrayList<String>();
+        list.add("Satellite");
+        list.add("Streets");
+        list.add("Terrain");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+        android.R.layout.simple_spinner_item, list);
+        layerspinner.setAdapter(dataAdapter);
+        layerspinner.setOnItemSelectedListener(new LayerSelectedListener());
+
+        final CheckBox layerSpinner = (CheckBox) findViewById(R.id.locationCheckBox);
+        layerSpinner.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (layerSpinner.isChecked()) {
+                    addLocationOverlay();
+                } else {
+                    removeLocationOverlay();
+                }
+            }
+        });
 
         mv.setOnTilesLoadedListener(new TilesLoadedListener() {
             @Override
@@ -59,51 +83,41 @@ public class MainActivity extends ActionBarActivity {
         mv.getOverlays().add(equator);
     }
 
-    private void setButtonListeners() {
-        Button satBut = changeButtonTypeface((Button)findViewById(R.id.satbut));
-        satBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!currentLayer.equals("satellite")) {
-                    replaceMapView(satellite);
-                    currentLayer = "satellite";
-                }
-                mv.setMultiTouchControls(false);
+    class LayerSelectedListener implements OnItemSelectedListener {
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            String label = (String) parent.getItemAtPosition(pos);
+            Log.i(TAG, label);
+            if (label.equals("Satellite")) {
+                mv.setTileSource(new MapboxTileLayer("brunosan.map-cyglrrfu"));
+            } else if (label.equals("Streets")) {
+                mv.setTileSource(new MapboxTileLayer("examples.map-vyofok3q"));
+            } else if (label.equals("Terrain")) {
+                mv.setTileSource(new MapboxTileLayer("examples.map-zgrqqx0w"));
             }
-        });
-        Button terBut = changeButtonTypeface((Button)findViewById(R.id.terbut));
-        terBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!currentLayer.equals("terrain")) {
-                    replaceMapView(terrain);
-                    currentLayer = "terrain";
-                }
-            }
-        });
-        Button strBut = changeButtonTypeface((Button)findViewById(R.id.strbut));
-        strBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!currentLayer.equals("street")) {
-                    replaceMapView(street);
-                    currentLayer = "street";
-                }
-            }
-        });
-    }
+        }
 
-    protected void replaceMapView(String layer) {
-        mv.setTileSource(new MapboxTileLayer(layer));
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+        }
     }
 
     private void addLocationOverlay() {
-        // Adds an icon that shows location
-        myLocationOverlay = new MyLocationNewOverlay(this, mv);
-        myLocationOverlay.enableMyLocation();
-        myLocationOverlay.setDrawAccuracyEnabled(true);
-        mv.getOverlays().add(myLocationOverlay);
+        if (myLocationOverlay == null) {
+            // Adds an icon that shows location
+            myLocationOverlay = new UserLocationOverlay(this, mv);
+            myLocationOverlay.enableMyLocation();
+            myLocationOverlay.setDrawAccuracyEnabled(true);
+            mv.getOverlays().add(myLocationOverlay);
+        }
     }
+
+    private void removeLocationOverlay() {
+        if (myLocationOverlay != null) {
+            mv.getOverlays().remove(myLocationOverlay);
+            myLocationOverlay = null;
+        }
+    }
+
     private void addLine() {
         // Configures a line
         PathOverlay po = new PathOverlay(Color.RED, this);
@@ -127,10 +141,6 @@ public class MainActivity extends ActionBarActivity {
 
         return true;
     }
-    private Button changeButtonTypeface(Button button){
-        //Typeface tf = Typeface.createFromAsset(this.getAssets(), "fonts/semibold.ttf");
-        //button.setTypeface(tf);
-        return button;
-    }
 
+    private final String TAG = "Mapbox Demo";
 }
