@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
+        classpath 'com.android.tools.build:gradle:0.8.+'
     }
 }
 apply plugin: 'android'
@@ -36,6 +36,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:gridlayout-v7:19.0.0'
     compile 'com.android.support:appcompat-v7:19.0.0'
-    compile 'com.mapbox.mapboxsdk:mb-android-sdk:1.0.0-SNAPSHOT@aar'
-    compile 'com.squareup.okhttp:okhttp:1.3.0'
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:1.0.0-SNAPSHOT@aar') {
+        transitive = true
+    }
 }
