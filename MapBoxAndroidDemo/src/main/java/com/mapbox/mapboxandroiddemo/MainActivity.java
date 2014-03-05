@@ -16,6 +16,7 @@ import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.PathOverlay;
 import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.MapboxTileLayer;
+import com.mapbox.mapboxsdk.tileprovider.tilesource.TileLayer;
 import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
@@ -25,6 +26,8 @@ import android.widget.AdapterView;
 import java.util.List;
 import java.util.ArrayList;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.app.AlertDialog;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -44,15 +47,43 @@ public class MainActivity extends ActionBarActivity {
         mv.setCenter(startingPoint).setZoom(4);
 
         mv.loadFromGeoJSONURL("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
+
         Marker m = new Marker(mv, "Hello", "World", new LatLng(0f, 0f));
         m.setIcon(new Icon(Icon.Size.l, "bus", "000"));
         mv.addMarker(m);
+
+
+        Button gotoButton = (Button) findViewById(R.id.gotoButton);
+
+        gotoButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mv.setCenter(new LatLng(40.747534,-73.9866663));
+                mv.setZoom(11);
+            }
+        });
+
+
+        ((Button) findViewById(R.id.zoomInButton)).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mv.zoomIn();
+            }
+        });
+
+        ((Button) findViewById(R.id.zoomOutButton)).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mv.zoomOut();
+            }
+        });
 
         Spinner layerspinner = (Spinner) findViewById(R.id.layerspinner);
         List<String> list = new ArrayList<String>();
         list.add("Satellite");
         list.add("Streets");
         list.add("Terrain");
+        list.add("OSM");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
         android.R.layout.simple_spinner_item, list);
         layerspinner.setAdapter(dataAdapter);
@@ -93,6 +124,8 @@ public class MainActivity extends ActionBarActivity {
                 mv.setTileSource(new MapboxTileLayer("examples.map-vyofok3q"));
             } else if (label.equals("Terrain")) {
                 mv.setTileSource(new MapboxTileLayer("examples.map-zgrqqx0w"));
+            } else if (label.equals("OSM")) {
+                mv.setTileSource(new TileLayer("http://a.tile.openstreetmap.org/{z}/{x}/{y}.png"));
             }
         }
 

@@ -38,5 +38,27 @@
             android:checked="false"
             android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"/>
+    <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Go"
+            android:id="@+id/gotoButton"
+            android:layout_alignRight="@+id/imageView"
+            android:layout_alignEnd="@+id/imageView"
+            android:layout_toLeftOf="@+id/imageView" android:layout_above="@+id/layerspinner"/>
+    <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:id="@+id/zoomInButton" android:layout_above="@+id/layerspinner" android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:id="@+id/zoomOutButton" android:layout_alignTop="@+id/zoomInButton"
+            android:layout_toRightOf="@+id/zoomInButton"/>
 
 </RelativeLayout>
