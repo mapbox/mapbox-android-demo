@@ -49,7 +49,7 @@ public class MainActivity extends ActionBarActivity {
         mv.loadFromGeoJSONURL("https://gist.github.com/fdansv/8541618/raw/09da8aef983c8ffeb814d0a1baa8ecf563555b5d/geojsonpointtest");
 
         Marker m = new Marker(mv, "Hello", "World", new LatLng(0f, 0f));
-        m.setIcon(new Icon(Icon.Size.l, "bus", "000"));
+        m.setIcon(new Icon(mv.getResources(), Icon.Size.LARGE, "bus", "000"));
         mv.addMarker(m);
 
 
