@@ -3,4 +3,4 @@
 .gradle
 gradle/
 local.properties
-
+mapbox_demo.keystore
