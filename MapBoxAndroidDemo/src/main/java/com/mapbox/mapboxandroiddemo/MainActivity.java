@@ -145,14 +145,6 @@ public class MainActivity extends ActionBarActivity {
         mv.getOverlays().add(myLocationOverlay);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-
-        return true;
-    }
-
     private Button changeButtonTypeface(Button button) {
         return button;
     }
