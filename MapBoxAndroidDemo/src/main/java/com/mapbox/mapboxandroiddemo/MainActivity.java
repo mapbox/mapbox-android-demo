@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.net.Uri;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -117,6 +119,16 @@ public class MainActivity extends ActionBarActivity {
                     replaceMapView(street);
                     currentLayer = "street";
                 }
+            }
+        });
+        Button bugsBut = changeButtonTypeface((Button) findViewById(R.id.bugsButton));
+        bugsBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://github.com/mapbox/mapbox-android-sdk/issues?state=open";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
             }
         });
     }
