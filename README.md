@@ -1,50 +1,14 @@
-MapBoxAndroidDemo
-=================
+# MapBoxAndroidDemo
 
-Demo application using the [MapBox Android SDK](https://github.com/mapbox/mapbox-android-sdk) in
-AAR packaging from a local Maven Repository.
+This is a public demo of the Mapbox Android SDK that's [available now in the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo).
+We use this to test out changes and collect user feedback and bug reports.
 
-How to install MapBox Android SDK to Local Maven
+## Building
 
-```sh
-# build sdk
-$ git clone https://github.com/mapbox/mapbox-android-sdk
-$ cd mapbox-android-sdk
-$ gradle clean assembleRelease install
-```
-
-Then add MapBox Android SDK as a dependency in your Android project's build.gradle Ex: `MapBoxAndroidDemo/build.gradle`
-
-```
-repositories {
-    mavenLocal()
-}
-
-dependencies {
-	compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:1.0.0-SNAPSHOT@aar') {
-        	transitive = true
-    	}
-}
-```
-
-The string `mapbox-android-sdk` varies based on the **directory name of your SDK source**,
-so adjust it if you aren't using the default.
+* Change the `versionCode` in `build.gradle`
+* Run `./MapboxAndroidDemo/release.sh` to generate a new release, which will be in `build/MapBoxAndroidDemo-release.apk`
 
 ## Usage with IntelliJ
 
 After tweaking your `build.gradle` file, start a new IntelliJ project by importing
 `./build.gradle`.
-
-## Screenshots
-
-*Satellite*
-
-![Satellite](https://raw2.github.com/bleege/MapBoxAndroidDemo/master/20140209-satellite.png)
-
-*Streets*
-
-![Streets](https://raw2.github.com/bleege/MapBoxAndroidDemo/master/20140209-streets.png)
-
-*Terrain*
-
-![Terrain](https://raw2.github.com/bleege/MapBoxAndroidDemo/master/20140209-terrain.png)
