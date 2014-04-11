@@ -8,7 +8,6 @@ import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.net.Uri;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import com.crashlytics.android.Crashlytics;
 import com.mapbox.mapboxsdk.api.ILatLng;
