@@ -16,25 +16,22 @@ apply plugin: 'crashlytics'
 
 repositories {
     mavenCentral()
-    mavenLocal()
-    flatDir {
-        dirs '../libs'
-    }
     maven { url 'http://download.crashlytics.com/maven' }
-
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots'}
 }
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.1"
+    buildToolsVersion "19.0.3"
 
     defaultConfig {
-        minSdkVersion 11
+        minSdkVersion 9
         targetSdkVersion 19
         versionCode 2
         versionName "1.1"
     }
 
+/*
     signingConfigs {
        release {
            storeFile file(RELEASE_STORE_FILE)
@@ -43,12 +40,12 @@ android {
            keyPassword RELEASE_KEY_PASSWORD
        }
     }
-
+*/
     buildTypes {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            signingConfig signingConfigs.release
+//            signingConfig signingConfigs.release
         }
     }
 
@@ -56,19 +53,10 @@ android {
 
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:gridlayout-v7:19.0.0'
-    compile 'com.android.support:appcompat-v7:19.0.0'
-
-    compile ('com.github.chrisbanes.bitmapcache:BitmapCache:2.4+@aar') {
-        transitive = true
-        exclude module: 'support-v4'
+    compile 'com.android.support:appcompat-v7:19.1.+'
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.2.3-SNAPSHOT@aar'){
+        transitive=true
     }
-    compile 'com.mapbox.mapboxsdk:library:0.2.2@aar'
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.jakewharton:disklrucache:2.0.1'
-    compile 'com.google.guava:guava:16.0.1'
-    compile 'com.squareup.okhttp:okhttp:1.3.0'
     compile 'com.crashlytics.android:crashlytics:1.+'
-
 }
