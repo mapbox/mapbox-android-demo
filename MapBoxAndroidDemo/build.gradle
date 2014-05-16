@@ -17,7 +17,6 @@ apply plugin: 'crashlytics'
 repositories {
     mavenCentral()
     maven { url 'http://download.crashlytics.com/maven' }
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots'}
 }
 
 android {
@@ -53,9 +52,9 @@ android {
 
 
 dependencies {
-    compile 'com.android.support:gridlayout-v7:19.0.0'
-    compile 'com.android.support:appcompat-v7:19.1.+'
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.2.3-SNAPSHOT@aar'){
+    compile 'com.android.support:gridlayout-v7:19.1.0'
+    compile 'com.android.support:appcompat-v7:19.1.0'
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.2.3@aar'){
         transitive=true
     }
     compile 'com.crashlytics.android:crashlytics:1.+'
