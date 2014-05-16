@@ -3,5 +3,9 @@
 
     <string name="app_name">Mapbox Dev Preview</string>
     <string name="menu_settings">Settings</string>
+	<string name="satellite">Satellite</string>
+	<string name="terrain">Terrain</string>
+	<string name="street">Street</string>
+	<string name="reportBugs">Report Bugs</string>
 
 </resources>

@@ -22,31 +22,39 @@
                 android:id="@+id/satbut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Satellite"
+                android:text="@string/satellite"
+				android:layout_weight="0.33"
                 />
         <Button
                 android:id="@+id/terbut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Terrain"
+                android:text="@string/terrain"
+				android:layout_weight="0.33"
                 />
         <Button
                 android:id="@+id/strbut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Street"
+                android:text="@string/street"
+				android:layout_weight="0.33"
                 />
 
     </LinearLayout>
-    <ImageView android:layout_width="100dp" android:layout_height="65dp" android:layout_alignParentTop="true"
-               android:layout_alignParentRight="true" android:src="@drawable/mblogo" android:layout_marginTop="-10dp"
+
+    <ImageView android:layout_width="100dp"
+			   android:layout_height="65dp"
+			   android:layout_alignParentTop="true"
+               android:layout_alignParentRight="true"
+			   android:src="@drawable/mblogo"
+			   android:layout_marginTop="-10dp"
                android:id="@+id/imageView"/>
 
     <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Report Bugs"
+            android:text="@string/reportBugs"
             android:id="@+id/bugsButton"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
