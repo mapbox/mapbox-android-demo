@@ -24,12 +24,9 @@ import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 
 public class MainActivity extends ActionBarActivity {
 
-    private MapController mapController;
-    private LatLng startingPoint = new LatLng(51f, 0f);
     private MapView mv;
-    private UserLocationOverlay myLocationOverlay;
     private String satellite = "brunosan.map-cyglrrfu";
-    private String street = "examples.map-vyofok3q";
+    private String street = "examples.map-i87786ca";
     private String terrain = "examples.map-zgrqqx0w";
     private String currentLayer = "satellite";
 
@@ -41,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         mv = (MapView) findViewById(R.id.mapview);
 
-        mapController = mv.getController();
+		MapController mapController = mv.getController();
         replaceMapView(satellite);
         addLocationOverlay();
 
@@ -78,7 +75,7 @@ public class MainActivity extends ActionBarActivity {
                 return false;
             }
         });
-        mv.setVisibility(View.VISIBLE);
+//        mv.setVisibility(View.VISIBLE);
     }
 
     private void setButtonListeners() {
@@ -142,7 +139,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void addLocationOverlay() {
         // Adds an icon that shows location
-        myLocationOverlay = new UserLocationOverlay(new GpsLocationProvider(this), mv);
+		UserLocationOverlay myLocationOverlay = new UserLocationOverlay(new GpsLocationProvider(this), mv);
         myLocationOverlay.enableMyLocation();
         myLocationOverlay.setDrawAccuracyEnabled(true);
         mv.getOverlays().add(myLocationOverlay);
