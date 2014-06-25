@@ -5,7 +5,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.10.+'
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
 
     }
@@ -15,13 +15,14 @@ apply plugin: 'android'
 apply plugin: 'crashlytics'
 
 repositories {
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots'}
     mavenCentral()
     maven { url 'http://download.crashlytics.com/maven' }
 }
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "19.1.0"
 
     defaultConfig {
         minSdkVersion 9
@@ -54,7 +55,10 @@ android {
 dependencies {
     compile 'com.android.support:gridlayout-v7:19.1.0'
     compile 'com.android.support:appcompat-v7:19.1.0'
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.2.3@aar'){
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.3.0-SNAPSHOT@aar'){
+        transitive=true
+    }
+    compile ('com.cocoahero.android:geojson:1.0.0@aar'){
         transitive=true
     }
     compile 'com.crashlytics.android:crashlytics:1.+'
