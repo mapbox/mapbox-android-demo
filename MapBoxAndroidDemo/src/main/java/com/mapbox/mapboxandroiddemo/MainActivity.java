@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
-import android.net.Uri;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import com.crashlytics.android.Crashlytics;
 import com.mapbox.mapboxsdk.api.ILatLng;
@@ -18,17 +19,12 @@ import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
 import com.mapbox.mapboxsdk.tileprovider.tilesource.*;
-import com.mapbox.mapboxsdk.views.MapController;
 import com.mapbox.mapboxsdk.views.MapView;
 import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 
 public class MainActivity extends ActionBarActivity {
 
     private MapView mv;
-    private String satellite = "brunosan.map-cyglrrfu";
-    private String street = "examples.map-i87786ca";
-    private String terrain = "examples.map-zgrqqx0w";
-    private String currentLayer = "satellite";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +32,16 @@ public class MainActivity extends ActionBarActivity {
         Crashlytics.start(this);
 
         setContentView(R.layout.activity_main);
-        mv = (MapView) findViewById(R.id.mapview);
 
-		MapController mapController = mv.getController();
-        replaceMapView(satellite);
-        addLocationOverlay();
+        mv = (MapView) findViewById(R.id.mapview);
+		mv.setMinZoomLevel(mv.getTileProvider().getMinimumZoomLevel());
+		mv.setMaxZoomLevel(mv.getTileProvider().getMaximumZoomLevel());
+		mv.setCenter(mv.getTileProvider().getCenterCoordinate());
+		mv.setZoom(0);
+		addLocationOverlay();
 
         mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/10307131/raw/21c0a20312a2833afeee3b46028c3ed0e9756d4c/map.geojson");
-        setButtonListeners();
+//        setButtonListeners();
         Marker m = new Marker(mv, "Edinburgh", "Scotland", new LatLng(55.94629, -3.20777));
         m.setIcon(new Icon(this, Icon.Size.SMALL, "marker-stroked", "FF0000"));
         mv.addMarker(m);
@@ -78,6 +76,7 @@ public class MainActivity extends ActionBarActivity {
 //        mv.setVisibility(View.VISIBLE);
     }
 
+	/*
     private void setButtonListeners() {
         Button satBut = changeButtonTypeface((Button) findViewById(R.id.satbut));
         satBut.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +119,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
     }
+*/
 
 
     protected void replaceMapView(String layer) {

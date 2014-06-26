@@ -8,39 +8,8 @@
     <com.mapbox.mapboxsdk.views.MapView
             android:id="@+id/mapview"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-    </com.mapbox.mapboxsdk.views.MapView>
-    <LinearLayout
-            android:id="@+id/buttonsrow"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
-            android:weightSum="1">
-        <Button
-                android:id="@+id/satbut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/satellite"
-				android:layout_weight="0.33"
-                />
-        <Button
-                android:id="@+id/terbut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/terrain"
-				android:layout_weight="0.33"
-                />
-        <Button
-                android:id="@+id/strbut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/street"
-				android:layout_weight="0.33"
-                />
-
-    </LinearLayout>
+            android:layout_height="fill_parent"
+			mapbox:mapid="@string/streetMapId"/>
 
     <ImageView android:layout_width="100dp"
 			   android:layout_height="65dp"
@@ -48,6 +17,7 @@
                android:layout_alignParentRight="true"
 			   android:src="@drawable/mblogo"
 			   android:layout_marginTop="-10dp"
+			   android:contentDescription="@string/mapbox"
                android:id="@+id/imageView"/>
 
     <Button
