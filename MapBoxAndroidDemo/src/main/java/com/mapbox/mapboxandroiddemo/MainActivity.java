@@ -40,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
 		mv.setMaxZoomLevel(mv.getTileProvider().getMaximumZoomLevel());
 		mv.setCenter(mv.getTileProvider().getCenterCoordinate());
 		mv.setZoom(0);
+		currentMap = getString(R.string.streetMapId);
 		addLocationOverlay();
 
         mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/10307131/raw/21c0a20312a2833afeee3b46028c3ed0e9756d4c/map.geojson");
@@ -132,6 +133,7 @@ public class MainActivity extends ActionBarActivity {
         mv.setScrollableAreaLimit(box);
         mv.setMinZoomLevel(mv.getTileProvider().getMinimumZoomLevel());
         mv.setMaxZoomLevel(mv.getTileProvider().getMaximumZoomLevel());
+		currentMap = layer;
 /*
         mv.setCenter(mv.getTileProvider().getCenterCoordinate());
         mv.setZoom(0);
