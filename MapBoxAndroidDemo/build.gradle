@@ -15,7 +15,6 @@ apply plugin: 'android'
 apply plugin: 'crashlytics'
 
 repositories {
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots'}
     mavenCentral()
     maven { url 'http://download.crashlytics.com/maven' }
 }
@@ -27,8 +26,8 @@ android {
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 19
-        versionCode 3
-        versionName "1.2"
+        versionCode 4
+        versionName "1.3"
     }
 
 /*
@@ -55,7 +54,7 @@ android {
 dependencies {
     compile 'com.android.support:gridlayout-v7:19.1.0'
     compile 'com.android.support:appcompat-v7:19.1.0'
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.3.0-SNAPSHOT@aar'){
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.3.0@aar'){
         transitive=true
     }
     compile ('com.cocoahero.android:geojson:1.0.0@aar'){
