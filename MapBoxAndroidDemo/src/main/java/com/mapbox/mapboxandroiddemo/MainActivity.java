@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import com.crashlytics.android.Crashlytics;
+import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -25,6 +26,7 @@ import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 public class MainActivity extends ActionBarActivity {
 
     private MapView mv;
+	private String currentMap = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,60 +90,38 @@ public class MainActivity extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
 		switch (item.getItemId()) {
+			case R.id.menuItemStreets:
+				replaceMapView(getString(R.string.streetMapId));
+				return true;
 			case R.id.menuItemSatellite:
+				replaceMapView(getString(R.string.satelliteMapId));
+				return true;
+			case R.id.menuItemTerrain:
+				replaceMapView(getString(R.string.terrainMapId));
+				return true;
+			case R.id.menuItemOutdoors:
+				replaceMapView(getString(R.string.outdoorsMapId));
+				return true;
+			case R.id.menuItemWoodcut:
+				replaceMapView(getString(R.string.woodcutMapId));
+				return true;
+			case R.id.menuItemPencil:
+				replaceMapView(getString(R.string.pencilMapId));
+				return true;
+			case R.id.menuItemSpaceship:
+				replaceMapView(getString(R.string.spaceShipMapId));
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
 	}
 
-	/*
-    private void setButtonListeners() {
-        Button satBut = changeButtonTypeface((Button) findViewById(R.id.satbut));
-        satBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!currentLayer.equals("satellite")) {
-                    replaceMapView(satellite);
-                    currentLayer = "satellite";
-                }
-            }
-        });
-        Button terBut = changeButtonTypeface((Button) findViewById(R.id.terbut));
-        terBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!currentLayer.equals("terrain")) {
-                    replaceMapView(terrain);
-                    currentLayer = "terrain";
-                }
-            }
-        });
-        Button strBut = changeButtonTypeface((Button) findViewById(R.id.strbut));
-        strBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!currentLayer.equals("street")) {
-                    replaceMapView(street);
-                    currentLayer = "street";
-                }
-            }
-        });
-        Button bugsBut = changeButtonTypeface((Button) findViewById(R.id.bugsButton));
-        bugsBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "https://github.com/mapbox/mapbox-android-sdk/issues?state=open";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        });
-    }
-*/
-
-
     protected void replaceMapView(String layer) {
+
+		if (Strings.isNullOrEmpty(layer) || Strings.isNullOrEmpty(currentMap) || currentMap.equalsIgnoreCase(layer)) {
+			return;
+		}
+
         ITileLayer source;
         BoundingBox box;
 
@@ -152,8 +132,10 @@ public class MainActivity extends ActionBarActivity {
         mv.setScrollableAreaLimit(box);
         mv.setMinZoomLevel(mv.getTileProvider().getMinimumZoomLevel());
         mv.setMaxZoomLevel(mv.getTileProvider().getMaximumZoomLevel());
+/*
         mv.setCenter(mv.getTileProvider().getCenterCoordinate());
         mv.setZoom(0);
+*/
     }
 
     private void addLocationOverlay() {
