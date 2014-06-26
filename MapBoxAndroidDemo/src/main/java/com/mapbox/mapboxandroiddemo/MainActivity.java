@@ -76,6 +76,25 @@ public class MainActivity extends ActionBarActivity {
 //        mv.setVisibility(View.VISIBLE);
     }
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.menu.menu_activity_main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch (item.getItemId()) {
+			case R.id.menuItemSatellite:
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
 	/*
     private void setButtonListeners() {
         Button satBut = changeButtonTypeface((Button) findViewById(R.id.satbut));
