@@ -3,12 +3,14 @@ package com.mapbox.mapboxandroiddemo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import com.crashlytics.android.Crashlytics;
 import com.google.common.base.Strings;
@@ -77,7 +79,17 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 //        mv.setVisibility(View.VISIBLE);
-    }
+
+		Button bugsBut = changeButtonTypeface((Button) findViewById(R.id.bugsButton));
+		bugsBut.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				String url = "https://github.com/mapbox/mapbox-android-sdk/issues?state=open";
+				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+				startActivity(i);
+			}
+		});
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
