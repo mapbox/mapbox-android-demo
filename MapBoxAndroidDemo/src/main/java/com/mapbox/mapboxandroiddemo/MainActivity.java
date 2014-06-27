@@ -28,6 +28,7 @@ import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 public class MainActivity extends ActionBarActivity {
 
     private MapView mv;
+	private UserLocationOverlay myLocationOverlay;
 	private String currentMap = null;
 
     @Override
@@ -43,9 +44,13 @@ public class MainActivity extends ActionBarActivity {
 		mv.setCenter(mv.getTileProvider().getCenterCoordinate());
 		mv.setZoom(0);
 		currentMap = getString(R.string.streetMapId);
-		addLocationOverlay();
 
-        mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/10307131/raw/21c0a20312a2833afeee3b46028c3ed0e9756d4c/map.geojson");
+		// Adds an icon that shows location
+		myLocationOverlay = new UserLocationOverlay(new GpsLocationProvider(this), mv);
+		myLocationOverlay.setDrawAccuracyEnabled(true);
+		mv.getOverlays().add(myLocationOverlay);
+
+		mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/10307131/raw/21c0a20312a2833afeee3b46028c3ed0e9756d4c/map.geojson");
 //        setButtonListeners();
         Marker m = new Marker(mv, "Edinburgh", "Scotland", new LatLng(55.94629, -3.20777));
         m.setIcon(new Icon(this, Icon.Size.SMALL, "marker-stroked", "FF0000"));
@@ -89,6 +94,20 @@ public class MainActivity extends ActionBarActivity {
 				startActivity(i);
 			}
 		});
+	}
+
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		myLocationOverlay.enableMyLocation();
+	}
+
+	@Override
+	protected void onPause()
+	{
+		super.onPause();
+		myLocationOverlay.disableMyLocation();
 	}
 
 	@Override
@@ -150,14 +169,6 @@ public class MainActivity extends ActionBarActivity {
         mv.setCenter(mv.getTileProvider().getCenterCoordinate());
         mv.setZoom(0);
 */
-    }
-
-    private void addLocationOverlay() {
-        // Adds an icon that shows location
-		UserLocationOverlay myLocationOverlay = new UserLocationOverlay(new GpsLocationProvider(this), mv);
-        myLocationOverlay.enableMyLocation();
-        myLocationOverlay.setDrawAccuracyEnabled(true);
-        mv.getOverlays().add(myLocationOverlay);
     }
 
     private Button changeButtonTypeface(Button button) {
