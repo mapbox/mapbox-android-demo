@@ -7,13 +7,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import com.crashlytics.android.Crashlytics;
-import com.google.common.base.Strings;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -150,7 +150,7 @@ public class MainActivity extends ActionBarActivity {
 
     protected void replaceMapView(String layer) {
 
-		if (Strings.isNullOrEmpty(layer) || Strings.isNullOrEmpty(currentMap) || currentMap.equalsIgnoreCase(layer)) {
+		if (TextUtils.isEmpty(layer) || TextUtils.isEmpty(currentMap) || currentMap.equalsIgnoreCase(layer)) {
 			return;
 		}
 
