@@ -52,7 +52,7 @@ android {
 dependencies {
     compile 'com.android.support:gridlayout-v7:20.0.0'
     compile 'com.android.support:appcompat-v7:20.0.0'
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.4.0@aar'){
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:0.5.0@aar'){
         transitive=true
     }
     compile ('com.cocoahero.android:geojson:1.0.0@aar'){
