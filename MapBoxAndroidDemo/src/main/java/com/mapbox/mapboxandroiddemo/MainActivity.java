@@ -17,7 +17,6 @@ import com.crashlytics.android.Crashlytics;
 import com.mapbox.mapboxsdk.api.ILatLng;
 import com.mapbox.mapboxsdk.geometry.BoundingBox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.overlay.GpsLocationProvider;
 import com.mapbox.mapboxsdk.overlay.Icon;
 import com.mapbox.mapboxsdk.overlay.Marker;
 import com.mapbox.mapboxsdk.overlay.UserLocationOverlay;
@@ -45,10 +44,8 @@ public class MainActivity extends ActionBarActivity {
 		mv.setZoom(0);
 		currentMap = getString(R.string.streetMapId);
 
-		// Adds an icon that shows location
-		myLocationOverlay = new UserLocationOverlay(new GpsLocationProvider(this), mv);
-		myLocationOverlay.setDrawAccuracyEnabled(true);
-		mv.getOverlays().add(myLocationOverlay);
+		// Show user location (purposely not in follow mode)
+        mv.setUserLocationEnabled(true);
 
 		mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/10307131/raw/21c0a20312a2833afeee3b46028c3ed0e9756d4c/map.geojson");
 //        setButtonListeners();
@@ -94,20 +91,6 @@ public class MainActivity extends ActionBarActivity {
 				startActivity(i);
 			}
 		});
-	}
-
-	@Override
-	protected void onResume()
-	{
-		super.onResume();
-		myLocationOverlay.enableMyLocation();
-	}
-
-	@Override
-	protected void onPause()
-	{
-		super.onPause();
-		myLocationOverlay.disableMyLocation();
 	}
 
 	@Override
