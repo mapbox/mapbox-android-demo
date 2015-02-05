@@ -54,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
         mv.addMarker(m);
 
         m = new Marker(mv, "Stockholm", "Sweden", new LatLng(59.32995, 18.06461));
-        m.setIcon(new Icon(this, Icon.Size.MEDIUM, "city", "FFFF00"));
+        m.setIcon(new Icon(this, Icon.Size.MEDIUM, "city", "3887be"));
         mv.addMarker(m);
 
         m = new Marker(mv, "Prague", "Czech Republic", new LatLng(50.08734, 14.42112));
@@ -66,6 +66,22 @@ public class MainActivity extends ActionBarActivity {
         mv.addMarker(m);
 
         m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
+        mv.addMarker(m);
+
+        m = new Marker(mv, "Tokyo", "Japan", new LatLng(35.70247, 139.71588));
+        m.setIcon(new Icon(this, Icon.Size.LARGE, "city", "3887be"));
+        mv.addMarker(m);
+
+        m = new Marker(mv, "Ayacucho", "Peru", new LatLng(-13.16658, -74.21608));
+        m.setIcon(new Icon(this, Icon.Size.LARGE, "city", "3887be"));
+        mv.addMarker(m);
+
+        m = new Marker(mv, "Nairobi", "Kenya", new LatLng(-1.26676, 36.83372));
+        m.setIcon(new Icon(this, Icon.Size.LARGE, "city", "3887be"));
+        mv.addMarker(m);
+
+        m = new Marker(mv, "Canberra", "Australia", new LatLng(-35.30952, 149.12430));
+        m.setIcon(new Icon(this, Icon.Size.LARGE, "city", "3887be"));
         mv.addMarker(m);
 
         mv.setOnTilesLoadedListener(new TilesLoadedListener() {
