@@ -50,19 +50,15 @@ public class MainActivity extends ActionBarActivity {
 		mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/10307131/raw/21c0a20312a2833afeee3b46028c3ed0e9756d4c/map.geojson");
 //        setButtonListeners();
         Marker m = new Marker(mv, "Edinburgh", "Scotland", new LatLng(55.94629, -3.20777));
-        m.setIcon(new Icon(this, Icon.Size.SMALL, "marker-stroked", "FF0000"));
+        m.setIcon(new Icon(this, Icon.Size.SMALL, "marker-stroked", "ee8a65"));
         mv.addMarker(m);
 
         m = new Marker(mv, "Stockholm", "Sweden", new LatLng(59.32995, 18.06461));
-        m.setIcon(new Icon(this, Icon.Size.MEDIUM, "city", "3887be"));
+        m.setIcon(new Icon(this, Icon.Size.LARGE, "city", "3887be"));
         mv.addMarker(m);
 
         m = new Marker(mv, "Prague", "Czech Republic", new LatLng(50.08734, 14.42112));
-        m.setIcon(new Icon(this, Icon.Size.LARGE, "land-use", "00FFFF"));
-        mv.addMarker(m);
-
-        m = new Marker(mv, "Prague2", "Czech Republic", new LatLng(50.0875, 14.42112));
-        m.setIcon(new Icon(getBaseContext(), Icon.Size.LARGE, "land-use", "00FF00"));
+        m.setIcon(new Icon(this, Icon.Size.MEDIUM, "land-use", "3bb2d0"));
         mv.addMarker(m);
 
         m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
