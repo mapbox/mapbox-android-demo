@@ -24,4 +24,7 @@
 	<string name="pencilMapId">examples.a4c252ab</string>
 	<string name="spaceShipMapId">examples.3hqcl3di</string>
 
+    <!-- Access Token -->
+    <string name="testAccessToken">pk.eyJ1IjoiYmxlZWdlIiwiYSI6IkRGLTFPU00ifQ.qJpq3jytAL9A-z_tkNypqg</string>
+
 </resources>
