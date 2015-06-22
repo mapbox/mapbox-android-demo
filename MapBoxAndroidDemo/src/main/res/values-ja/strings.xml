@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="menu_examplemaps">マップ一覧</string>
+    <string name="reportBugs">バグを報告</string>
+
+    <!-- Map Labels -->
+    <string name="satellite">航空写真</string>
+    <string name="terrain">地形</string>
+    <string name="street">ストリート</string>
+    <string name="outdoors">アウトドア</string>
+    <string name="woodcut">木版画</string>
+    <string name="pencil">鉛筆タッチ</string>
+    <string name="spaceShip">宇宙船</string>
+
+</resources>
