@@ -16,12 +16,12 @@
 	<string name="spaceShip">Space Ship</string>
 
 	<!-- Map Ids -->
-	<string name="satelliteMapId">brunosan.map-cyglrrfu</string>
-	<string name="terrainMapId">examples.map-zgrqqx0w</string>
-	<string name="streetMapId">examples.map-i87786ca</string>
-	<string name="outdoorsMapId">examples.ik7djhcc</string>
+	<string name="satelliteMapId">mapbox.satellite</string>
+	<string name="terrainMapId">mapbox.run-bike-hike</string>
+	<string name="streetMapId">mapbox.streets</string>
+	<string name="outdoorsMapId">mapbox.outdoors</string>
 	<string name="woodcutMapId">examples.xqwfusor</string>
-	<string name="pencilMapId">examples.a4c252ab</string>
+	<string name="pencilMapId">mapbox.pencil</string>
 	<string name="spaceShipMapId">examples.3hqcl3di</string>
 
     <!-- Access Token -->
