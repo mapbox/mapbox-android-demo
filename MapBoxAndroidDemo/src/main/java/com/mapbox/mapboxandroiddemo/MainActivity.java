@@ -62,6 +62,7 @@ public class MainActivity extends ActionBarActivity {
         mv.addMarker(m);
 
         m = new Marker(mv, "Athens", "Greece", new LatLng(37.97885, 23.71399));
+        m.setIcon(new Icon(this, Icon.Size.LARGE, "city", "3887be"));
         mv.addMarker(m);
 
         m = new Marker(mv, "Tokyo", "Japan", new LatLng(35.70247, 139.71588));
