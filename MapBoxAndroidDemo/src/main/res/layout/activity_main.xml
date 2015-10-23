@@ -6,20 +6,10 @@
 
 
     <com.mapbox.mapboxsdk.views.MapView
-            android:id="@+id/mapview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-			mapbox:mapid="@string/streetMapId"
-            mapbox:accessToken="@string/testAccessToken"/>
-
-    <ImageView android:layout_width="100dp"
-			   android:layout_height="65dp"
-			   android:layout_alignParentTop="true"
-               android:layout_alignParentRight="true"
-			   android:src="@drawable/mblogo"
-			   android:layout_marginTop="-10dp"
-			   android:contentDescription="@string/mapbox"
-               android:id="@+id/imageView"/>
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:accessToken="@string/testAccessToken"/>
 
     <Button
             style="?android:attr/buttonStyleSmall"
