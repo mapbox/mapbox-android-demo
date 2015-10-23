@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,7 +38,6 @@ public class MainActivity extends ActionBarActivity {
         mv.setMyLocationEnabled(true);
 
 //		mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/10307131/raw/21c0a20312a2833afeee3b46028c3ed0e9756d4c/map.geojson");
-//        setButtonListeners();
         mv.addMarker(new MarkerOptions().title("Edinburgh").snippet("Scotland").position(new LatLng(55.94629, -3.20777)));
         mv.addMarker(new MarkerOptions().title("Stockholm").snippet("Sweden").position(new LatLng(59.32995, 18.06461)));
         mv.addMarker(new MarkerOptions().title("Prague").snippet("Czech Republic").position(new LatLng(50.08734, 14.42112)));
@@ -120,23 +118,15 @@ public class MainActivity extends ActionBarActivity {
 			case R.id.menuItemSatellite:
                 mv.setStyle(Style.SATELLITE);
 				return true;
-/*
-			case R.id.menuItemTerrain:
-				replaceMapView(getString(R.string.terrainMapId));
+			case R.id.menuItemEmerald:
+                mv.setStyle(Style.EMERALD);
 				return true;
-			case R.id.menuItemOutdoors:
-				replaceMapView(getString(R.string.outdoorsMapId));
+			case R.id.menuItemDark:
+                mv.setStyle(Style.DARK);
 				return true;
-			case R.id.menuItemWoodcut:
-				replaceMapView(getString(R.string.woodcutMapId));
-				return true;
-			case R.id.menuItemPencil:
-				replaceMapView(getString(R.string.pencilMapId));
-				return true;
-			case R.id.menuItemSpaceship:
-				replaceMapView(getString(R.string.spaceShipMapId));
-				return true;
-*/
+            case R.id.menuItemLight:
+                mv.setStyle(Style.LIGHT);
+                return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
@@ -156,7 +146,7 @@ public class MainActivity extends ActionBarActivity {
 
     /**
      * Method to show settings  in alert dialog
-     * On pressing Settings button will lauch Settings Options - GPS
+     * On pressing Settings button will launch Settings Options - GPS
      */
     public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
