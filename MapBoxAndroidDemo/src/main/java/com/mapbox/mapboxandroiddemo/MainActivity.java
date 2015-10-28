@@ -71,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        mv.onStop();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mv.onDestroy();
@@ -98,6 +104,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         mv.onPause();
+    }
+
+    /**
+     * Save all appropriate fragment state.
+     *
+     * @param outState outState
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mv.onSaveInstanceState(outState);
     }
 
     @Override
