@@ -9,7 +9,7 @@
         android:id="@+id/mapview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:accessToken="@string/testAccessToken"/>
+        mapbox:access_token="@string/testAccessToken"/>
 
     <Button
             style="?android:attr/buttonStyleSmall"
