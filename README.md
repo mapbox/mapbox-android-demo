@@ -1,5 +1,3 @@
-# DEPRECATED: consult [Mapbox GL Native](https://github.com/mapbox/mapbox-gl-native) instead
-
 #### MapboxAndroidDemo
 
 This is a public demo of the Mapbox Android SDK that's [available now in the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo).
