@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Mapbox Dev Preview</string>
-	<string name="mapbox">Mapbox</string>
+    <string name="app_name" translatable="false">Mapbox Dev Preview</string>
+	<string name="mapbox" translatable="false">Mapbox</string>
     <string name="menu_examplemaps">Map Styles</string>
 	<string name="reportBugs">Report Bugs</string>
 
@@ -14,6 +14,6 @@
 	<string name="street">Street</string>
 
     <!-- Access Token -->
-    <string name="testAccessToken">pk.eyJ1IjoiYmxlZWdlIiwiYSI6IkRGLTFPU00ifQ.qJpq3jytAL9A-z_tkNypqg</string>
+    <string name="testAccessToken" translatable="false">pk.eyJ1IjoiYmxlZWdlIiwiYSI6IkRGLTFPU00ifQ.qJpq3jytAL9A-z_tkNypqg</string>
 
 </resources>

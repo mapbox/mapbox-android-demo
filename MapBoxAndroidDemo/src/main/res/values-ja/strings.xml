@@ -6,11 +6,9 @@
 
     <!-- Map Labels -->
     <string name="satellite">航空写真</string>
-    <string name="terrain">地形</string>
     <string name="street">ストリート</string>
-    <string name="outdoors">アウトドア</string>
-    <string name="woodcut">木版画</string>
-    <string name="pencil">鉛筆タッチ</string>
-    <string name="spaceShip">宇宙船</string>
+    <string name="dark">ダーク</string>
+    <string name="light">ライト</string>
+    <string name="emerald">エメラルド</string>
 
 </resources>
