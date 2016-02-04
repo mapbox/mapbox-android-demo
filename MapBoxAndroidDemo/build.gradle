@@ -24,8 +24,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 18
-        versionName "3.0.0"
+        versionCode 19
+        versionName "3.2.0"
     }
 
 /*
@@ -52,7 +52,7 @@ android {
 dependencies {
     compile 'com.android.support:gridlayout-v7:23.1.1'
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:3.0.0@aar'){
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:3.2.0@aar'){
         transitive=true
     }
     compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
