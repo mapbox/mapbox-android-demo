@@ -18,14 +18,18 @@ import android.view.View;
 import android.widget.Button;
 import com.crashlytics.android.Crashlytics;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.views.MapView;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import io.fabric.sdk.android.Fabric;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private MapView mv;
+    private MapboxMap mapboxMap;
 
     private static final int PERMISSIONS_LOCATION = 0;
 
@@ -37,39 +41,45 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mv = (MapView) findViewById(R.id.mapview);
-        mv.setStyle(Style.MAPBOX_STREETS);
-        mv.setCenterCoordinate(new LatLng(0, 0));
+        mv.onCreate(savedInstanceState);
+        mv.getMapAsync(this);
 
-		// Show user location (purposely not in follow mode)
+		Button bugsBut = changeButtonTypeface((Button) findViewById(R.id.bugsButton));
+		bugsBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://github.com/mapbox/mapbox-gl-native/issues?state=open";
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(i);
+            }
+        });
+	}
+
+
+    @Override
+    public void onMapReady(MapboxMap map) {
+        mapboxMap = map;
+        mapboxMap.setStyle(Style.MAPBOX_STREETS);
+        mapboxMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(0, 0)));
+
+        // Show user location (purposely not in follow mode)
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) ||
                 (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
         } else {
-            mv.setMyLocationEnabled(true);
+            mapboxMap.setMyLocationEnabled(true);
         }
 
-//		mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/10307131/raw/21c0a20312a2833afeee3b46028c3ed0e9756d4c/map.geojson");
-        mv.addMarker(new MarkerOptions().title("Edinburgh").snippet("Scotland").position(new LatLng(55.94629, -3.20777)));
-        mv.addMarker(new MarkerOptions().title("Stockholm").snippet("Sweden").position(new LatLng(59.32995, 18.06461)));
-        mv.addMarker(new MarkerOptions().title("Prague").snippet("Czech Republic").position(new LatLng(50.08734, 14.42112)));
-        mv.addMarker(new MarkerOptions().title("Athens").snippet("Greece").position(new LatLng(37.97885, 23.71399)));
-        mv.addMarker(new MarkerOptions().title("Tokyo").snippet("Japan").position(new LatLng(35.70247, 139.71588)));
-        mv.addMarker(new MarkerOptions().title("Ayacucho").snippet("Peru").position(new LatLng(-13.16658, -74.21608)));
-        mv.addMarker(new MarkerOptions().title("Nairobi").snippet("Kenya").position(new LatLng(-1.26676, 36.83372)));
-        mv.addMarker(new MarkerOptions().title("Canberra").snippet("Australia").position(new LatLng(-35.30952, 149.12430)));
-
-		Button bugsBut = changeButtonTypeface((Button) findViewById(R.id.bugsButton));
-		bugsBut.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				String url = "https://github.com/mapbox/mapbox-gl-native/issues?state=open";
-				Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-				startActivity(i);
-			}
-		});
-        mv.onCreate(savedInstanceState);
-	}
-
+        // TODO - mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/10307131/raw/21c0a20312a2833afeee3b46028c3ed0e9756d4c/map.geojson");
+        mapboxMap.addMarker(new MarkerOptions().title("Edinburgh").snippet("Scotland").position(new LatLng(55.94629, -3.20777)));
+        mapboxMap.addMarker(new MarkerOptions().title("Stockholm").snippet("Sweden").position(new LatLng(59.32995, 18.06461)));
+        mapboxMap.addMarker(new MarkerOptions().title("Prague").snippet("Czech Republic").position(new LatLng(50.08734, 14.42112)));
+        mapboxMap.addMarker(new MarkerOptions().title("Athens").snippet("Greece").position(new LatLng(37.97885, 23.71399)));
+        mapboxMap.addMarker(new MarkerOptions().title("Tokyo").snippet("Japan").position(new LatLng(35.70247, 139.71588)));
+        mapboxMap.addMarker(new MarkerOptions().title("Ayacucho").snippet("Peru").position(new LatLng(-13.16658, -74.21608)));
+        mapboxMap.addMarker(new MarkerOptions().title("Nairobi").snippet("Kenya").position(new LatLng(-1.26676, 36.83372)));
+        mapboxMap.addMarker(new MarkerOptions().title("Canberra").snippet("Australia").position(new LatLng(-35.30952, 149.12430)));
+    }
 
     /**
      * Dispatch onStart() to all fragments.  Ensure any created loaders are
@@ -164,14 +174,6 @@ public class MainActivity extends AppCompatActivity {
         return button;
     }
 
-    public LatLng getMapCenter() {
-        return mv.getCenterCoordinate();
-    }
-
-    public void setMapCenter(LatLng center) {
-        mv.setCenterCoordinate(center);
-    }
-
     /**
      * Method to show settings  in alert dialog
      * On pressing Settings button will launch Settings Options - GPS
@@ -209,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case PERMISSIONS_LOCATION: {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mv.setMyLocationEnabled(true);
+                    mapboxMap.setMyLocationEnabled(true);
                 }
             }
         }
