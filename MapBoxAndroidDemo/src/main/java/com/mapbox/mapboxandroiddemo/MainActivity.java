@@ -81,22 +81,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapboxMap.addMarker(new MarkerOptions().title("Canberra").snippet("Australia").position(new LatLng(-35.30952, 149.12430)));
     }
 
-    /**
-     * Dispatch onStart() to all fragments.  Ensure any created loaders are
-     * now started.
-     */
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mv.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mv.onStop();
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
