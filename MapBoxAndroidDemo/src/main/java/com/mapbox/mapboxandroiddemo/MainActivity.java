@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
-
+        if (BuildConfig.REPORT_CRASHES) {
+            Fabric.with(this, new Crashlytics());
+        }
         setContentView(R.layout.activity_main);
 
         mv = (MapView) findViewById(R.id.mapview);

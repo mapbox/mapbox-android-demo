@@ -43,7 +43,11 @@ android {
     }
 */
     buildTypes {
+        debug {
+            buildConfigField "boolean", "REPORT_CRASHES", "false"
+        }
         release {
+            buildConfigField "boolean", "REPORT_CRASHES", "true"
             minifyEnabled false
 //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
 //            signingConfig signingConfigs.release
