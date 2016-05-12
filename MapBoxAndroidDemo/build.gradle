@@ -18,7 +18,7 @@ repositories {
 }
 
 ext {
-    supportLibVersion = '23.3.0'
+    supportLibVersion = '23.4.0'
 }
 
 android {
@@ -28,8 +28,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 23
-        versionName "4.0.0"
+        versionCode 24
+        versionName "4.0.1"
     }
 
 /*
@@ -60,7 +60,7 @@ android {
 dependencies {
     compile "com.android.support:gridlayout-v7:${supportLibVersion}"
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:4.0.0@aar'){
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:4.0.1@aar'){
         transitive=true
     }
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
