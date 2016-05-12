@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import com.crashlytics.android.Crashlytics;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -60,8 +59,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(MapboxMap map) {
         mapboxMap = map;
-        mapboxMap.setStyle(Style.MAPBOX_STREETS);
-        mapboxMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(0, 0)));
 
         // Show user location (purposely not in follow mode)
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) ||
