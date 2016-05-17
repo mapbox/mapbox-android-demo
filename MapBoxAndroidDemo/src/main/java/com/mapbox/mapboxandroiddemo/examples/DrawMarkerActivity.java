@@ -1,7 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -10,7 +10,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
-public class DrawMarkerActivity extends Activity {
+public class DrawMarkerActivity extends AppCompatActivity {
 
     private MapView mapView;
 

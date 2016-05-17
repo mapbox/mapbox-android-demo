@@ -1,8 +1,8 @@
 package com.mapbox.mapboxandroiddemo.examples;
 
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DirectionsActivity extends Activity {
+public class DirectionsActivity extends AppCompatActivity {
 
     private final static String TAG = "MainActivity";
 
@@ -99,7 +99,7 @@ public class DirectionsActivity extends Activity {
                 // Print some info about the route
                 currentRoute = response.body().getRoutes().get(0);
                 Log.d(TAG, "Distance: " + currentRoute.getDistance());
-                Toast.makeText(DirectionsActivity.this, "Route is " +  currentRoute.getDistance() + " meters long.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DirectionsActivity.this, "Route is " + currentRoute.getDistance() + " meters long.", Toast.LENGTH_SHORT).show();
 
                 // Draw the route on the map
                 drawRoute(currentRoute);

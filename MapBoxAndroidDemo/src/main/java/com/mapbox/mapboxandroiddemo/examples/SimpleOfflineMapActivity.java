@@ -1,7 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -20,7 +20,7 @@ import com.mapbox.mapboxsdk.offline.OfflineTilePyramidRegionDefinition;
 
 import org.json.JSONObject;
 
-public class SimpleOfflineMapActivity extends Activity {
+public class SimpleOfflineMapActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 

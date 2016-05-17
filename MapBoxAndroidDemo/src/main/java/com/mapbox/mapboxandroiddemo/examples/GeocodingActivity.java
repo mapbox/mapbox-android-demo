@@ -1,7 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.MapboxAccountManager;
@@ -17,7 +17,7 @@ import com.mapbox.services.commons.models.Position;
 import com.mapbox.services.geocoding.v5.GeocodingCriteria;
 import com.mapbox.services.geocoding.v5.models.GeocodingFeature;
 
-public class GeocodingActivity extends Activity {
+public class GeocodingActivity extends AppCompatActivity {
 
     private final static String TAG = "MainActivity";
 
