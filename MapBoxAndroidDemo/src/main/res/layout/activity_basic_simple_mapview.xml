@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".examples.SimpleMapViewActivity">
@@ -11,10 +11,9 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:access_token="@string/access_token"
-        mapbox:style_url="mapbox://styles/mapbox/streets-v9"
         mapbox:center_latitude="40.73581"
         mapbox:center_longitude="-73.99155"
-        mapbox:zoom="11"/>
+        mapbox:style_url="mapbox://styles/mapbox/streets-v9"
+        mapbox:zoom="11" />
 
 </RelativeLayout>

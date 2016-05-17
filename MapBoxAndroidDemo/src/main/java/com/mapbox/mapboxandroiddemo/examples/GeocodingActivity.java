@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -41,7 +42,7 @@ public class GeocodingActivity extends Activity {
 
         // Set up autocomplete widget
         GeocoderAutoCompleteView autocomplete = (GeocoderAutoCompleteView) findViewById(R.id.query);
-        autocomplete.setAccessToken(getString(R.string.access_token));
+        autocomplete.setAccessToken(MapboxAccountManager.getInstance().getAccessToken());
         autocomplete.setType(GeocodingCriteria.TYPE_POI);
         autocomplete.setOnFeatureListener(new GeocoderAutoCompleteView.OnFeatureListener() {
             @Override

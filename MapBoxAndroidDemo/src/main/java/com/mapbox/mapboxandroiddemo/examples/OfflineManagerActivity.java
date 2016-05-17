@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
@@ -71,7 +72,7 @@ public class OfflineManagerActivity extends Activity {
 
         // Set up the offlineManager
         offlineManager = OfflineManager.getInstance(this);
-        offlineManager.setAccessToken(getString(R.string.access_token));
+        offlineManager.setAccessToken(MapboxAccountManager.getInstance().getAccessToken());
 
         // Bottom navigation bar button clicks are handled here.
         // Download offline button

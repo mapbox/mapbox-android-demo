@@ -11,7 +11,6 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:access_token="@string/access_token"
         mapbox:style_url="mapbox://styles/mapbox/streets-v9"
         mapbox:center_latitude="48.13726"
         mapbox:center_longitude="11.57555"

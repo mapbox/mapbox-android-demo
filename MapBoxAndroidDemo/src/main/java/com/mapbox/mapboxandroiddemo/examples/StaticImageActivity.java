@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.services.commons.ServicesException;
 import com.mapbox.services.staticimage.v1.MapboxStaticImage;
 
@@ -32,7 +33,7 @@ public class StaticImageActivity extends AppCompatActivity {
         MapboxStaticImage staticImage = null;
         try {
             staticImage = new MapboxStaticImage.Builder()
-                    .setAccessToken(getString(R.string.access_token))
+                    .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
                     .setUsername("mapbox")
                     .setStyleId("mapbox://styles/mapbox/streets-v9")
                     .setLon(12.3378) // Image center longitude

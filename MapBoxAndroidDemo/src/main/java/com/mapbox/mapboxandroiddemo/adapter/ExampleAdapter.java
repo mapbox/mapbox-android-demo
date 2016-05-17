@@ -42,6 +42,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ViewHold
             Picasso.with(mContext)
                     .load(detailItem.getImageUrl())
                     .into(holder.imageView);
+        } else{
+            holder.imageView.setImageDrawable(null);
         }
 
         holder.titleTextView.setText(detailItem.getTitle());

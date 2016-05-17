@@ -6,11 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.annotations.Annotation;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.annotations.PolylineOptions;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
@@ -33,13 +30,10 @@ public class BoundingBoxCameraActivity extends AppCompatActivity {
             @Override
             public void onMapReady(final MapboxMap mapboxMap) {
 
-                mapboxMap.addPolyline(new PolylineOptions()
-                        .add(new LatLng(-36.848502, 174.762054),
-                                new LatLng(-36.848112, 174.762058),
-                                new LatLng(-36.847642, 174.760116)));
-
                 final Marker marker1 = mapboxMap.addMarker(new MarkerOptions().position(new LatLng(-36.848380, 174.762275)).title("Sky Tower"));
-                final Marker marker2 = mapboxMap.addMarker(new MarkerOptions().position(new LatLng(-36.779376, 174.734400)));
+                final Marker marker2 = mapboxMap.addMarker(new MarkerOptions().position(new LatLng(-36.847179, 174.777072)).title("Vector Arena"));
+                final Marker marker3 = mapboxMap.addMarker(new MarkerOptions().position(new LatLng(-36.801887, 175.108709)).title("Waiheke Island"));
+                final Marker marker4 = mapboxMap.addMarker(new MarkerOptions().position(new LatLng(-36.835059, 174.691237)).title("Waitemata Harbour"));
 
                 // When user clicks the map, animate to new camera location
                 mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
@@ -48,6 +42,8 @@ public class BoundingBoxCameraActivity extends AppCompatActivity {
                         LatLngBounds latLngBounds = new LatLngBounds.Builder()
                                 .include(marker1.getPosition())
                                 .include(marker2.getPosition())
+                                .include(marker3.getPosition())
+                                .include(marker4.getPosition())
                                 .build();
 
                         mapboxMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50));

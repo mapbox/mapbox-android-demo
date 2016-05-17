@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.PolylineOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -82,7 +83,7 @@ public class DirectionsActivity extends Activity {
                 .setOrigin(origin)
                 .setDestination(destination)
                 .setProfile(DirectionsCriteria.PROFILE_CYCLING)
-                .setAccessToken(getString(R.string.access_token))
+                .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
                 .build();
 
         client.enqueueCall(new Callback<DirectionsResponse>() {

@@ -39,6 +39,7 @@ import com.mapbox.mapboxandroiddemo.examples.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
+import com.mapbox.mapboxsdk.MapboxAccountManager;
 
 import java.util.ArrayList;
 
@@ -55,6 +56,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Mapbox access token is configured here.
+        MapboxAccountManager.start(this, getString(R.string.access_token));
 
         exampleItemModel = new ArrayList<>();
 
