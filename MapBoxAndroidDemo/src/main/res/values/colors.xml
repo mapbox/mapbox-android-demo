@@ -5,6 +5,7 @@
     <color name="colorAccent">@color/mapboxMustard</color>
     
     <color name="materialGrey">#F5F5F5</color>
+    <color name="materialDarkGrey">#DFDFDF</color>
 
     <color name="mapboxCyan">#3BB2D0</color>
     <color name="mapboxGreen">#56B881</color>

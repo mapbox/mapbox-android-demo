@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ViewHold
             Picasso.with(mContext)
                     .load(detailItem.getImageUrl())
                     .into(holder.imageView);
-        } else{
+        } else {
             holder.imageView.setImageDrawable(null);
         }
 
