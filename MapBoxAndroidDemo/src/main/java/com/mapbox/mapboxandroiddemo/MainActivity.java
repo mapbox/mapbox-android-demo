@@ -1,201 +1,230 @@
 package com.mapbox.mapboxandroiddemo;
 
-import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import com.crashlytics.android.Crashlytics;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.constants.Style;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.maps.MapView;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import io.fabric.sdk.android.Fabric;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
+import com.mapbox.mapboxandroiddemo.examples.AnimateMapCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.BoundingBoxCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.CustomRasterStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.DirectionsActivity;
+import com.mapbox.mapboxandroiddemo.examples.DrawCustomMarkerActivity;
+import com.mapbox.mapboxandroiddemo.examples.DrawGeojsonLineActivity;
+import com.mapbox.mapboxandroiddemo.examples.DrawMarkerActivity;
+import com.mapbox.mapboxandroiddemo.examples.DrawPolygonActivity;
+import com.mapbox.mapboxandroiddemo.examples.GeocodingActivity;
+import com.mapbox.mapboxandroiddemo.examples.MapboxStudioStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.OfflineManagerActivity;
+import com.mapbox.mapboxandroiddemo.examples.SatelliteStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.SimpleMapViewActivity;
+import com.mapbox.mapboxandroiddemo.examples.SimpleOfflineMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.StaticImageActivity;
+import com.mapbox.mapboxandroiddemo.examples.SupportMapFragmentActivity;
+import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
+import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
+import com.mapbox.mapboxsdk.MapboxAccountManager;
 
-    private MapView mv;
-    private MapboxMap mapboxMap;
+import java.util.ArrayList;
 
-    private static final int PERMISSIONS_LOCATION = 0;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ArrayList<ExampleItemModel> exampleItemModel;
+    private ExampleAdapter adapter;
+    private int currentCategory = R.id.nav_basics;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (BuildConfig.REPORT_CRASHES) {
-            Fabric.with(this, new Crashlytics());
-        }
         setContentView(R.layout.activity_main);
 
-        mv = (MapView) findViewById(R.id.mapview);
-        mv.onCreate(savedInstanceState);
-        mv.getMapAsync(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-		Button bugsBut = changeButtonTypeface((Button) findViewById(R.id.bugsButton));
-		bugsBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String url = "https://github.com/mapbox/mapbox-gl-native/issues?state=open";
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(i);
-            }
-        });
-	}
+        // Mapbox access token is configured here.
+        MapboxAccountManager.start(this, getString(R.string.access_token));
+
+        exampleItemModel = new ArrayList<>();
 
 
-    @Override
-    public void onMapReady(MapboxMap map) {
-        mapboxMap = map;
-
-        // Show user location (purposely not in follow mode)
-        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) ||
-                (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
+        // Create the adapter to convert the array to views
+        adapter = new ExampleAdapter(this, exampleItemModel);
+        // Attach the adapter to a ListView
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.details_list);
+        if (recyclerView != null) {
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
+        }
+        if (savedInstanceState == null) {
+            listItems(R.id.nav_basics);
         } else {
-            mapboxMap.setMyLocationEnabled(true);
+            currentCategory = savedInstanceState.getInt("CURRENT_CATEGORY");
+            listItems(currentCategory);
         }
 
-        // TODO - mv.loadFromGeoJSONURL("https://gist.githubusercontent.com/tmcw/10307131/raw/21c0a20312a2833afeee3b46028c3ed0e9756d4c/map.geojson");
-        mapboxMap.addMarker(new MarkerOptions().title("Edinburgh").snippet("Scotland").position(new LatLng(55.94629, -3.20777)));
-        mapboxMap.addMarker(new MarkerOptions().title("Stockholm").snippet("Sweden").position(new LatLng(59.32995, 18.06461)));
-        mapboxMap.addMarker(new MarkerOptions().title("Prague").snippet("Czech Republic").position(new LatLng(50.08734, 14.42112)));
-        mapboxMap.addMarker(new MarkerOptions().title("Athens").snippet("Greece").position(new LatLng(37.97885, 23.71399)));
-        mapboxMap.addMarker(new MarkerOptions().title("Tokyo").snippet("Japan").position(new LatLng(35.70247, 139.71588)));
-        mapboxMap.addMarker(new MarkerOptions().title("Ayacucho").snippet("Peru").position(new LatLng(-13.16658, -74.21608)));
-        mapboxMap.addMarker(new MarkerOptions().title("Nairobi").snippet("Kenya").position(new LatLng(-1.26676, 36.83372)));
-        mapboxMap.addMarker(new MarkerOptions().title("Canberra").snippet("Australia").position(new LatLng(-35.30952, 149.12430)));
+        ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+
+                startActivity(exampleItemModel.get(position).getActivity());
+
+            }
+        });
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        if (drawer != null) {
+            drawer.addDrawerListener(toggle);
+        }
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(this);
+            navigationView.setCheckedItem(R.id.nav_basics);
+        }
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mv.onDestroy();
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer != null) {
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
+        }
     }
 
-    /**
-     * Dispatch onResume() to fragments.  Note that for better inter-operation
-     * with older versions of the platform, at the point of this call the
-     * fragments attached to the activity are <em>not</em> resumed.  This means
-     * that in some cases the previous state may still be saved, not allowing
-     * fragment transactions that modify the state.  To correctly interact
-     * with fragments in their proper state, you should instead override
-     * {@link #onResumeFragments()}.
-     */
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    protected void onResume() {
-        super.onResume();
-        mv.onResume();
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id != currentCategory) {
+
+            listItems(id);
+
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer != null) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
+        return true;
     }
 
-    /**
-     * Dispatch onPause() to fragments.
-     */
+    private void listItems(int id) {
+        exampleItemModel.clear();
+        switch (id) {
+            case R.id.nav_basics:
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_basic_simple_mapview_title), getString(R.string.activity_basic_simple_mapview_description), new Intent(MainActivity.this, SimpleMapViewActivity.class), getString(R.string.activity_basic_simple_mapview_url)));
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_basic_support_map_frag_title), getString(R.string.activity_basic_support_map_frag_description), new Intent(MainActivity.this, SupportMapFragmentActivity.class), getString(R.string.activity_basic_support_map_frag_url)));
+                currentCategory = R.id.nav_basics;
+                break;
+
+            case R.id.nav_styles:
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_style_mapbox_studio_title), getString(R.string.activity_style_mapbox_studio_description), new Intent(MainActivity.this, MapboxStudioStyleActivity.class), getString(R.string.activity_style_mapbox_studio_url)));
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_style_satellite_title), getString(R.string.activity_style_satellite_description), new Intent(MainActivity.this, SatelliteStyleActivity.class), getString(R.string.activity_style_satellite_url)));
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_style_raster_title), getString(R.string.activity_style_raster_description), new Intent(MainActivity.this, CustomRasterStyleActivity.class), getString(R.string.activity_style_raster_url)));
+                currentCategory = R.id.nav_styles;
+                break;
+            case R.id.nav_annotations:
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_annotation_marker_title), getString(R.string.activity_annotation_custom_marker_description), new Intent(MainActivity.this, DrawMarkerActivity.class), getString(R.string.activity_annotation_marker_url)));
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_annotation_custom_marker_title), getString(R.string.activity_annotation_custom_marker_description), new Intent(MainActivity.this, DrawCustomMarkerActivity.class), getString(R.string.activity_annotation_custom_marker_url)));
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_annotation_geojson_line_title), getString(R.string.activity_annotation_geojson_line_description), new Intent(MainActivity.this, DrawGeojsonLineActivity.class), getString(R.string.activity_annotation_geojson_line_url)));
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_annotation_polygon_title), getString(R.string.activity_annotation_polygon_description), new Intent(MainActivity.this, DrawPolygonActivity.class), getString(R.string.activity_annotation_polygon_url)));
+                currentCategory = R.id.nav_annotations;
+                break;
+
+            case R.id.nav_camera:
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_camera_animate_title), getString(R.string.activity_camera_animate_description), new Intent(MainActivity.this, AnimateMapCameraActivity.class), getString(R.string.activity_camera_animate_url)));
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_camera_bounding_box_title), getString(R.string.activity_camera_bounding_box_description), new Intent(MainActivity.this, BoundingBoxCameraActivity.class), null));
+                currentCategory = R.id.nav_camera;
+                break;
+            case R.id.nav_offline:
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_offline_simple_title), getString(R.string.activity_offline_simple_description), new Intent(MainActivity.this, SimpleOfflineMapActivity.class), getString(R.string.activity_offline_simple_url)));
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_offline_manager_title), getString(R.string.activity_offline_manager_description), new Intent(MainActivity.this, OfflineManagerActivity.class), getString(R.string.activity_offline_manager_url)));
+                currentCategory = R.id.nav_offline;
+                break;
+            case R.id.nav_mas:
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_mas_directions_title), getString(R.string.activity_mas_directions_description), new Intent(MainActivity.this, DirectionsActivity.class), getString(R.string.activity_mas_directions_url)));
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_mas_geocoding_title), getString(R.string.activity_mas_geocoding_description), new Intent(MainActivity.this, GeocodingActivity.class), getString(R.string.activity_mas_geocoding_url)));
+                exampleItemModel.add(new ExampleItemModel(getString(R.string.activity_mas_static_image_title), getString(R.string.activity_mas_static_image_description), new Intent(MainActivity.this, StaticImageActivity.class), getString(R.string.activity_mas_static_image_url)));
+                currentCategory = R.id.nav_mas;
+                break;
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+
     @Override
-    protected void onPause() {
-        super.onPause();
-        mv.onPause();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate toolbar items
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        return true;
     }
 
-    /**
-     * Save all appropriate fragment state.
-     *
-     * @param outState outState
-     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_info) {
+            new MaterialStyledDialog(MainActivity.this)
+                    .setTitle("Awesome maps?")
+                    .setDescription("Do you like this library? Learn how to include it in your app!")
+                    .setIcon(R.mipmap.ic_launcher)
+                    .setHeaderColor(R.color.mapboxDenim)
+                    .withDivider(true)
+                    .setPositive("Mapbox", new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse("https://mapbox.com/android-sdk"));
+                            startActivity(i);
+                        }
+                    })
+                    .setNegative("Not now", new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+                        }
+                    })
+
+                    .show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mv.onSaveInstanceState(outState);
-    }
-
-    @Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		MenuInflater menuInflater = getMenuInflater();
-		menuInflater.inflate(R.menu.menu_activity_main, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item)
-	{
-		switch (item.getItemId()) {
-			case R.id.menuItemStreets:
-                mv.setStyle(Style.MAPBOX_STREETS);
-				return true;
-			case R.id.menuItemSatellite:
-                mv.setStyle(Style.SATELLITE);
-				return true;
-			case R.id.menuItemEmerald:
-                mv.setStyle(Style.EMERALD);
-				return true;
-			case R.id.menuItemDark:
-                mv.setStyle(Style.DARK);
-				return true;
-            case R.id.menuItemLight:
-                mv.setStyle(Style.LIGHT);
-                return true;
-			default:
-				return super.onOptionsItemSelected(item);
-		}
-	}
-
-    private Button changeButtonTypeface(Button button) {
-        return button;
-    }
-
-    /**
-     * Method to show settings  in alert dialog
-     * On pressing Settings button will launch Settings Options - GPS
-     */
-    public void showSettingsAlert() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getBaseContext());
-
-        // Setting Dialog Title
-        alertDialog.setTitle("GPS settings");
-
-        // Setting Dialog Message
-        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
-
-        // On pressing Settings button
-        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                getBaseContext().startActivity(intent);
-            }
-        });
-
-        // on pressing cancel button
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        // Showing Alert Message
-        alertDialog.show();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case PERMISSIONS_LOCATION: {
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mapboxMap.setMyLocationEnabled(true);
-                }
-            }
-        }
+        outState.putInt("CURRENT_CATEGORY", currentCategory);
     }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/cameron/Mapbox/mapbox-android-demo/MapBoxAndroidDemo/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="3a27590e53befbcc57f9836e9fc936f2c117374b">
+        <dex dex="/Users/cameron/Mapbox/mapbox-android-demo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a19f9780efb48432941c74caf2632df97aff00df/classes.dex" />
+    </item>
+
+</items>

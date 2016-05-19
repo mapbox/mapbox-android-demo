@@ -2,18 +2,77 @@
 <resources>
 
     <string name="app_name" translatable="false">Mapbox Dev Preview</string>
-	<string name="mapbox" translatable="false">Mapbox</string>
-    <string name="menu_examplemaps">Map Styles</string>
-	<string name="reportBugs">Report Bugs</string>
-
-	<!-- Map Labels -->
-	<string name="dark">Dark</string>
-	<string name="light">Light</string>
-	<string name="emerald">Emerald</string>
-	<string name="satellite">Satellite</string>
-	<string name="street">Street</string>
+    <string name="mapbox" translatable="false">Mapbox</string>
+    <string name="examples">Android examples</string>
 
     <!-- Access Token -->
-    <string name="testAccessToken" translatable="false">pk.eyJ1IjoiYmxlZWdlIiwiYSI6IkRGLTFPU00ifQ.qJpq3jytAL9A-z_tkNypqg</string>
+    <string name="access_token" translatable="false">pk.eyJ1IjoiY2FtbWFjZSIsImEiOiI5OGQxZjRmZGQ2YjU3Mzk1YjJmZTQ5ZDY2MTg1NDJiOCJ9.hIFoCKGAGOwQkKyVPvrxvQ</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- toolbar items -->
+    <string name="info">Info</string>
+
+    <!-- nav drawer categories -->
+    <string name="getting_started_category">Getting started</string>
+    <string name="styles_category">Styles</string>
+    <string name="annotations_category">Annotations</string>
+    <string name="camera_category">Camera</string>
+    <string name="offline_category">Offline</string>
+    <string name="android_services_category">Android Services</string>
+
+    <!-- example titles -->
+    <string name="activity_basic_simple_mapview_title">A simple map view</string>
+    <string name="activity_basic_support_map_frag_title">Support map fragment</string>
+    <string name="activity_style_mapbox_studio_title">Mapbox Studio style</string>
+    <string name="activity_style_satellite_title">Satellite style</string>
+    <string name="activity_style_raster_title">Custom raster style</string>
+    <string name="activity_annotation_marker_title">Draw a marker</string>
+    <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
+    <string name="activity_annotation_geojson_line_title">Draw a GeoJSON line</string>
+    <string name="activity_annotation_polygon_title">Draw a polygon</string>
+    <string name="activity_camera_animate_title">Animate the map camera</string>
+    <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
+    <string name="activity_offline_simple_title">A simple offline map</string>
+    <string name="activity_offline_manager_title">Offline manager</string>
+    <string name="activity_mas_directions_title">Show directions on map</string>
+    <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
+    <string name="activity_mas_static_image_title">Download a static map</string>
+
+    <!-- example descriptions-->
+    <string name="activity_basic_simple_mapview_description">Show a map in your app using the Mapbox Android SDK.</string>
+    <string name="activity_basic_support_map_frag_description">Include a map fragment within your app using Android support library.</string>
+    <string name="activity_style_mapbox_studio_description">Use a custom Mapbox-hosted style.</string>
+    <string name="activity_style_satellite_description">Show a satellite style in your app.</string>
+    <string name="activity_style_raster_description">Use legacy raster tiles in your app.</string>
+    <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
+    <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
+    <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
+    <string name="activity_annotation_polygon_description">Draw a vector polygon on a map with the Mapbox Android SDK.</string>
+    <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
+    <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
+    <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Android SDK.</string>
+    <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
+    <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
+    <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
+    <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map</string>
+
+    <!-- example urls-->
+    <string name="activity_basic_simple_mapview_url">https://www.mapbox.com/android-sdk/images/examples.png</string>
+    <string name="activity_basic_support_map_frag_url">https://www.mapbox.com/android-sdk/images/support-fragment.png</string>
+    <string name="activity_style_mapbox_studio_url">https://www.mapbox.com/android-sdk/images/custom-studio-style.png</string>
+    <string name="activity_style_satellite_url">https://www.mapbox.com/android-sdk/images/satellite.png</string>
+    <string name="activity_style_raster_url">https://www.mapbox.com/android-sdk/images/custom-raster.png</string>
+    <string name="activity_annotation_marker_url">https://www.mapbox.com/android-sdk/images/marker.png</string>
+    <string name="activity_annotation_custom_marker_url">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
+    <string name="activity_annotation_geojson_line_url">https://www.mapbox.com/android-sdk/images/geojson.png</string>
+    <string name="activity_annotation_polygon_url">https://www.mapbox.com/android-sdk/images/polygon.png</string>
+    <string name="activity_camera_animate_url">https://www.mapbox.com/android-sdk/images/animate-camera.gif</string>
+    <string name="activity_offline_simple_url">https://www.mapbox.com/android-sdk/images/offline-map.png</string>
+    <string name="activity_offline_manager_url">https://www.mapbox.com/android-sdk/images/offline-manager.gif</string>
+    <string name="activity_mas_directions_url">https://www.mapbox.com/android-sdk/images/directions.png</string>
+    <string name="activity_mas_geocoding_url">https://www.mapbox.com/android-sdk/images/geocoding.gif</string>
+    <string name="activity_mas_static_image_url">https://www.mapbox.com/android-sdk/images/static-image.png</string>
+	
 </resources>
