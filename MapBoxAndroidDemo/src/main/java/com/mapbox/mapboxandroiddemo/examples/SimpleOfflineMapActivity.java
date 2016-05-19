@@ -27,6 +27,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
     private boolean isEndNotified;
     private ProgressBar progressBar;
     private MapView mapView;
+    private OfflineManager offlineManager;
 
     // JSON encoding/decoding
     public final static String JSON_CHARSET = "UTF-8";
@@ -41,7 +42,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
         mapView.onCreate(savedInstanceState);
 
         // Set up the OfflineManager
-        OfflineManager offlineManager = OfflineManager.getInstance(this);
+        offlineManager = OfflineManager.getInstance(this);
         offlineManager.setAccessToken(MapboxAccountManager.getInstance().getAccessToken());
 
         // Create a bounding box for the offline region
@@ -131,6 +132,29 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         mapView.onPause();
+        offlineManager.listOfflineRegions(new OfflineManager.ListOfflineRegionsCallback() {
+            @Override
+            public void onList(OfflineRegion[] offlineRegions) {
+
+                // delete the last item in the offlineRegions list which will be yosemite offline map
+                offlineRegions[(offlineRegions.length - 1)].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
+                    @Override
+                    public void onDelete() {
+                        Toast.makeText(SimpleOfflineMapActivity.this, "Yosemite offline map deleted", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        Log.e(TAG, "On Delete error: " + error);
+                    }
+                });
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e(TAG, "onListError: " + error);
+            }
+        });
     }
 
     @Override
