@@ -10,7 +10,7 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:style_url="mapbox://styles/mapbox/streets-v9"
+        mapbox:style_url="@string/style_mapbox_streets"
         mapbox:center_latitude="45.520486"
         mapbox:center_longitude="-122.673541"
         mapbox:zoom="11"/>

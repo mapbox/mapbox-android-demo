@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.MapboxAccountManager;
+import com.mapbox.services.Constants;
 import com.mapbox.services.commons.ServicesException;
 import com.mapbox.services.staticimage.v1.MapboxStaticImage;
 
@@ -21,7 +22,7 @@ import okhttp3.Response;
 
 public class StaticImageActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG = "StaticImageActivity";
+    private static final String TAG = "StaticImageActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +31,12 @@ public class StaticImageActivity extends AppCompatActivity {
 
         ImageView imageView = (ImageView) findViewById(R.id.mapImage);
 
-        MapboxStaticImage staticImage = null;
+        MapboxStaticImage staticImage;
         try {
             staticImage = new MapboxStaticImage.Builder()
                     .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
-                    .setUsername("mapbox")
-                    .setStyleId("mapbox://styles/mapbox/streets-v9")
+                    .setUsername(Constants.MAPBOX_USER)
+                    .setStyleId(Constants.MAPBOX_STYLE_SATELLITE)
                     .setLon(12.3378) // Image center longitude
                     .setLat(45.4338) // Image center Latitude
                     .setZoom(13)
@@ -43,14 +44,13 @@ public class StaticImageActivity extends AppCompatActivity {
                     .setHeight(360) // Image height
                     .setRetina(true) // Retina 2x image will be returned
                     .build();
+
+            new DownloadImageTask(imageView).execute(staticImage.getUrl().toString());
+
         } catch (ServicesException e) {
-            Log.e(LOG_TAG, "MapboxStaticImage error: " + e.getMessage());
+            Log.e(TAG, "MapboxStaticImage error: " + e.getMessage());
             e.printStackTrace();
         }
-
-        new DownloadImageTask(imageView)
-                .execute(staticImage.getUrl().toString());
-
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

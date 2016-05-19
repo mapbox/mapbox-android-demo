@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.annotations.PolygonOptions;
+import com.mapbox.mapboxsdk.annotations.Polyline;
+import com.mapbox.mapboxsdk.annotations.PolylineOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -28,6 +31,7 @@ public class DrawMarkerActivity extends AppCompatActivity {
                         .position(new LatLng(48.13863, 11.57603))
                         .title("Hello World!")
                         .snippet("Welcome to my marker."));
+
             }
         });
     }

@@ -5,12 +5,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.SupportMapFragment;
+import com.mapbox.services.Constants;
 
 public class SupportMapFragmentActivity extends AppCompatActivity {
 
@@ -30,8 +32,8 @@ public class SupportMapFragmentActivity extends AppCompatActivity {
 
             // Build mapboxMap
             MapboxMapOptions options = new MapboxMapOptions();
-            options.accessToken(getString(R.string.access_token));
-            options.styleUrl("mapbox://styles/mapbox/satellite-v9");
+            options.accessToken(MapboxAccountManager.getInstance().getAccessToken());
+            options.styleUrl(Constants.MAPBOX_STYLE_STREETS);
             options.camera(new CameraPosition.Builder()
                     .target(patagonia)
                     .zoom(9)
