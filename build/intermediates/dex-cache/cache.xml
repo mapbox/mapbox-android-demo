@@ -2,11 +2,200 @@
 <items version="2" >
 
     <item
-        jar="/Users/cameron/Mapbox/mapbox-android-demo/MapBoxAndroidDemo/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/jars/classes.jar"
         jumboMode="true"
         revision="23.0.3"
-        sha1="3a27590e53befbcc57f9836e9fc936f2c117374b">
-        <dex dex="/Users/cameron/Mapbox/mapbox-android-demo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_a19f9780efb48432941c74caf2632df97aff00df/classes.dex" />
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.4.0_ce11bf8c126b8ffe08616ed22624c45143f1296a/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.android.support/gridlayout-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="7c4c1fcc34aca536e3389c31527fb3c941b80266">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-gridlayout-v7-23.4.0_c5a650731da2e85c8b3bf7da2847a912fb22a25d/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/adapter-rxjava/2.0.1/cabf146d220dcd70a2972166cd1bfae200b97eff/adapter-rxjava-2.0.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="cabf146d220dcd70a2972166cd1bfae200b97eff">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/adapter-rxjava-2.0.1_e44bff626128940547622d71c558b2571541d100/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_e523994118a44aa4e2cd50ae0a60c3ed8f96209d/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.github.javiersantos/MaterialStyledDialogs/1.4.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="bcb830ad5a471a8b82d712228b8b1647e3118b92">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.github.javiersantos-MaterialStyledDialogs-1.4.1_96d434d387a71f47b1f399f8746686d9e9e2dd2f/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/18.0/cce0823396aa693798f8882e64213b1772032b09/guava-18.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="cce0823396aa693798f8882e64213b1772032b09">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/guava-18.0_a86682c32428cb91caa67be07f25205caeb390f1/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/picasso-2.5.2_4ebc611e23085e480debef43ee2641372fe496b4/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_cd550deaab4a57695c3313089fb2b0700e72b3c3/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_65634be7d5a2b55a0f9a7d5735adb926ea1c6ff7/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.0.1/2780d858273ce1bb90f6b12e1ef0d40f7741fca/converter-gson-2.0.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="02780d858273ce1bb90f6b12e1ef0d40f7741fca">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/converter-gson-2.0.1_c63cafc13888ecf0bff5a35090fa81c2284f9a76/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/me.zhanghai.android.materialprogressbar/library/1.1.5/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4a9f97c742d058ca55948643c06f447895a9af76">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/me.zhanghai.android.materialprogressbar-library-1.1.5_5b77f927ccb8f7bc9f6a332a176e8bceba52eb8c/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_6ce4161fa15feda4c236f23291b3649191508309/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="031d5f25f4b675147e9aa0b07ebaad4290e1acab">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_97f8f39f4ab8ed7c9f4dcbf4f65ad7a1fbc9a2df/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.mapbox.mapboxsdk/mapbox-android-sdk/4.1.0-beta.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="86525a344949f02c052cf306828589c1b6d4d23e">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.mapbox.mapboxsdk-mapbox-android-sdk-4.1.0-beta.1_ba8bbd0addfa9b30eb689cc30346578ee45f701e/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.0.1/27293c440d2085cde1d859528aff6e7d3b6ae40/retrofit-2.0.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="027293c440d2085cde1d859528aff6e7d3b6ae40">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/retrofit-2.0.1_cb214137d1de48b4ff5e665a729f220953b2ba07/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.3.0/2b802460eea20f8f2ad9c08c74e0f14718e88aa9/okhttp-3.3.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="2b802460eea20f8f2ad9c08c74e0f14718e88aa9">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.3.0_e1d36ca3045ebd118d4d00bd9ef96f353ce5e5c9/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.github.afollestad.material-dialogs/core/0.8.5.8/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4f7e1ce5942093c77105c86ef11b782f75aff0c3">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.github.afollestad.material-dialogs-core-0.8.5.8_38579845b0f35e8f3c7cfcdce8e4d577847d6624/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="fd1a24e03ddf35e9f0ba0bec4e9e4ce4ba854b06">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1113f93b5a84516f573125a9626704fa917716eb/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.mapbox.mapboxsdk/mapbox-android-services/1.1.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="39940030c8d2579cc60422f9de96adfbb7766721">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.mapbox.mapboxsdk-mapbox-android-services-1.1.0_e2a2f516ca51da9cad69485873a3f2d4242db6c3/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.mapzen.android/lost/1.1.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="59ed82eec8faf4e2b742531bbe49c30ad56649c3">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.mapzen.android-lost-1.1.0_7a2c25296bfbe1e683e1095a67c9fdbc7952dfb0/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.1.1/b494968f6050d494de55dc3ce005e59c7eb40012/rxjava-1.1.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="b494968f6050d494de55dc3ce005e59c7eb40012">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/rxjava-1.1.1_c1ad80e5593a811ba4e7507b4b4840b7285137c8/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/.gradle/caches/modules-2/files-2.1/com.mapbox.mapboxsdk/mapbox-java-services/1.1.0/8c8a8621b383cf95ff71659bc1fdea2af2102749/mapbox-java-services-1.1.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="8c8a8621b383cf95ff71659bc1fdea2af2102749">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/mapbox-java-services-1.1.0_6d2f613b31d0a19ef7298e0711051829bea174c3/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.1/b9d63507329a7178e026fc334f87587ee5070ac5/gson-2.6.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="b9d63507329a7178e026fc334f87587ee5070ac5">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.6.1_f484e14dbfb66d3e285884c24f97f0b154922275/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_75399d5cdccf8a3c4d3f2dfa05c83e5ada7b5afd/classes.dex" />
+    </item>
+    <item
+        jar="/usr/local/android/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_04a2370ef5dcf6f091064d539cf534927f05a927/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.android.support/design/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.4.0_c3dae9942a1b7543549ec1431fabb2dae8b7d80f/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.8.0/5ea7af56cc7c567ed9856d99efb30740e9b17ff/okio-1.8.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.8.0_c5baa29f5fae5888a8665cf3edb4917ce0358d25/classes.dex" />
+    </item>
+    <item
+        jar="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/exploded-aar/com.android.support/cardview-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
+        <dex dex="/Users/brad/development/MapboxAndroidDemo/MapBoxAndroidDemo/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-cardview-v7-23.4.0_2b474c0af03d4769a53ab33e653a043755ec8722/classes.dex" />
     </item>
 
 </items>
