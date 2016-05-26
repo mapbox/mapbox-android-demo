@@ -17,20 +17,14 @@
         <item
             android:id="@+id/nav_offline"
             android:title="@string/offline_category" />
+
+        <item
+            android:id="@+id/nav_location"
+            android:title="@string/location_category" />
+
         <item
             android:id="@+id/nav_mas"
             android:title="@string/android_services_category" />
-    </group>
 
-    <!--
-        <item android:title="Mapbox Android Services">
-            <menu>
-                <item
-                    android:id="@+id/nav"
-                    android:title="Share" />
-                <item
-                    android:id="@+id/nav_send"
-                    android:title="Send" />
-            </menu>
-        </item>-->
+    </group>
 </menu>

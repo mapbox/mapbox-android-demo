@@ -66,13 +66,10 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
     compile 'com.github.javiersantos:MaterialStyledDialogs:1.4.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:4.1.0-SNAPSHOT@aar'){
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:4.1.0-beta.1@aar'){
         transitive=true
     }
     compile ('com.mapbox.mapboxsdk:mapbox-android-services:1.1.0@aar'){
         transitive=true
-    }
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
-        transitive = true;
     }
 }

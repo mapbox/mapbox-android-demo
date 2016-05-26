@@ -24,6 +24,7 @@ public class SimpleMapViewActivity extends AppCompatActivity {
             public void onMapReady(MapboxMap mapboxMap) {
 
                 // Customize map with markers, polylines, etc.
+
             }
         });
     }

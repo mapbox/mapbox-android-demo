@@ -36,7 +36,7 @@ public class StaticImageActivity extends AppCompatActivity {
             staticImage = new MapboxStaticImage.Builder()
                     .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
                     .setUsername(Constants.MAPBOX_USER)
-                    .setStyleId(Constants.MAPBOX_STYLE_SATELLITE)
+                    .setStyleId("satellite-v9")
                     .setLon(12.3378) // Image center longitude
                     .setLat(45.4338) // Image center Latitude
                     .setZoom(13)
@@ -45,6 +45,7 @@ public class StaticImageActivity extends AppCompatActivity {
                     .setRetina(true) // Retina 2x image will be returned
                     .build();
 
+            System.out.println(staticImage.getUrl().toString());
             new DownloadImageTask(imageView).execute(staticImage.getUrl().toString());
 
         } catch (ServicesException e) {
@@ -79,8 +80,7 @@ public class StaticImageActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            // If the response is successful,
-            // create the static map image
+            // If the response is successful, create the static map image
             if (response.isSuccessful()) {
                 try {
                     bitmap = BitmapFactory.decodeStream(response.body().byteStream());

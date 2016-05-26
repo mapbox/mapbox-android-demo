@@ -23,7 +23,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ViewHold
     public ExampleAdapter(Context context, List<ExampleItemModel> dataSource) {
         this.dataSource = dataSource;
         this.mContext = context;
-
     }
 
     @Override
@@ -39,16 +38,18 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ViewHold
     public void onBindViewHolder(ViewHolder holder, int position) {
         ExampleItemModel detailItem = dataSource.get(position);
 
-        if (detailItem.getImageUrl() != null) {
+        String imageUrl = mContext.getString(detailItem.getImageUrl());
+
+        if (!imageUrl.isEmpty()) {
             Picasso.with(mContext)
-                    .load(detailItem.getImageUrl())
+                    .load(imageUrl)
                     .into(holder.imageView);
         } else {
             holder.imageView.setImageDrawable(null);
         }
 
-        holder.titleTextView.setText(detailItem.getTitle());
-        holder.descriptionTextView.setText(detailItem.getDescription());
+        holder.titleTextView.setText(mContext.getString(detailItem.getTitle()));
+        holder.descriptionTextView.setText(mContext.getString(detailItem.getDescription()));
 
     }
 
