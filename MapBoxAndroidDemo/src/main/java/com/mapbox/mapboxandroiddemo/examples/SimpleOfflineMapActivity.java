@@ -8,7 +8,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -43,7 +42,6 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
         // Set up the OfflineManager
         offlineManager = OfflineManager.getInstance(this);
-        offlineManager.setAccessToken(MapboxAccountManager.getInstance().getAccessToken());
 
         // Create a bounding box for the offline region
         LatLngBounds latLngBounds = new LatLngBounds.Builder()

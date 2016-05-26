@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">@color/mapboxBlue</color>
     <color name="colorPrimaryDark">@color/mapboxBlueDark</color>
-    <color name="colorAccent">@color/mapboxMustard</color>
+    <color name="colorAccent">@color/mapboxRed</color>
     
     <color name="materialGrey">#F5F5F5</color>
     <color name="materialDarkGrey">#DFDFDF</color>
