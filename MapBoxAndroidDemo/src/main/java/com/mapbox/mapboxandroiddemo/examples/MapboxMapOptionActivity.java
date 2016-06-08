@@ -27,7 +27,7 @@ public class MapboxMapOptionActivity extends AppCompatActivity {
                 LinearLayoutCompat.LayoutParams.MATCH_PARENT);
 
         MapboxMapOptions options = new MapboxMapOptions()
-                .styleUrl(Style.getOutdoorsStyleUrl(9))
+                .styleUrl(Style.OUTDOORS)
                 .camera(new CameraPosition.Builder()
                         .target(new LatLng(43.7383, 7.4094))
                         .zoom(12)

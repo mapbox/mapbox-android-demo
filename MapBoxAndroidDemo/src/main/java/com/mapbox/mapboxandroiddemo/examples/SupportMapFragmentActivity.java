@@ -31,7 +31,7 @@ public class SupportMapFragmentActivity extends AppCompatActivity {
 
             // Build mapboxMap
             MapboxMapOptions options = new MapboxMapOptions();
-            options.styleUrl(Style.getSatelliteStyleUrl(9));
+            options.styleUrl(Style.SATELLITE);
             options.camera(new CameraPosition.Builder()
                     .target(patagonia)
                     .zoom(9)
