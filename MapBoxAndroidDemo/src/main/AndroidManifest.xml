@@ -66,6 +66,14 @@
         </activity>
 
         <activity
+            android:name=".examples.DefaultStyleActivity"
+            android:label="@string/activity_style_default_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
             android:name=".examples.DrawMarkerActivity"
             android:label="@string/activity_annotation_marker_title">
             <meta-data
