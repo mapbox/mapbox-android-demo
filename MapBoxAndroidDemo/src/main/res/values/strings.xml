@@ -34,6 +34,7 @@
     <string name="activity_style_mapbox_studio_title">Mapbox Studio style</string>
     <string name="activity_style_satellite_title">Satellite style</string>
     <string name="activity_style_raster_title">Custom raster style</string>
+    <string name="activity_style_default_title">Default styles</string>
     <string name="activity_annotation_marker_title">Draw a marker</string>
     <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
     <string name="activity_annotation_geojson_line_title">Draw a GeoJSON line</string>
@@ -55,6 +56,7 @@
     <string name="activity_style_mapbox_studio_description">Use a custom Mapbox-hosted style.</string>
     <string name="activity_style_satellite_description">Show a satellite style in your app.</string>
     <string name="activity_style_raster_description">Use legacy raster tiles in your app.</string>
+    <string name="activity_style_default_description">Use a variety of professionally designed styles with the Mapbox Android SDK.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
@@ -77,6 +79,7 @@
     <string name="activity_style_mapbox_studio_url">https://www.mapbox.com/android-sdk/images/custom-studio-style.png</string>
     <string name="activity_style_satellite_url">https://www.mapbox.com/android-sdk/images/satellite.png</string>
     <string name="activity_style_raster_url">https://www.mapbox.com/android-sdk/images/custom-raster.png</string>
+    <string name="activity_style_default_url">https://www.mapbox.com/android-sdk/images/default-styles.png</string>
     <string name="activity_annotation_marker_url">https://www.mapbox.com/android-sdk/images/marker.png</string>
     <string name="activity_annotation_custom_marker_url">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
     <string name="activity_annotation_geojson_line_url">https://www.mapbox.com/android-sdk/images/geojson.png</string>

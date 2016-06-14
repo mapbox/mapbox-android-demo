@@ -24,6 +24,7 @@ import com.mapbox.mapboxandroiddemo.examples.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.BasicUserLocation;
 import com.mapbox.mapboxandroiddemo.examples.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.CustomRasterStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawCustomMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawGeojsonLineActivity;
@@ -151,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_style_mapbox_studio_title, R.string.activity_style_mapbox_studio_description, new Intent(MainActivity.this, MapboxStudioStyleActivity.class), R.string.activity_style_mapbox_studio_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_style_satellite_title, R.string.activity_style_satellite_description, new Intent(MainActivity.this, SatelliteStyleActivity.class), R.string.activity_style_satellite_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_style_raster_title, R.string.activity_style_raster_description, new Intent(MainActivity.this, CustomRasterStyleActivity.class), R.string.activity_style_raster_url));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_style_default_title, R.string.activity_style_default_description, new Intent(MainActivity.this, DefaultStyleActivity.class), R.string.activity_style_default_url));
                 currentCategory = R.id.nav_styles;
                 break;
             case R.id.nav_annotations:
