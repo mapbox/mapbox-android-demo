@@ -98,6 +98,14 @@
         </activity>
 
         <activity
+            android:name=".examples.BasicViewAnnotationActivity"
+            android:label="@string/activity_annotation_view_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
             android:name=".examples.AnimateMapCameraActivity"
             android:label="@string/activity_camera_animate_title">
             <meta-data
