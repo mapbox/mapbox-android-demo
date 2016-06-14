@@ -38,7 +38,7 @@
     <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
     <string name="activity_annotation_geojson_line_title">Draw a GeoJSON line</string>
     <string name="activity_annotation_polygon_title">Draw a polygon</string>
-    <string name="activity_annotation_marker_view_title">Draw a marker view</string>
+    <string name="activity_annotation_view_title">View annotation marker</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
     <string name="activity_offline_simple_title">A simple offline map</string>
@@ -59,7 +59,7 @@
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
     <string name="activity_annotation_polygon_description">Draw a vector polygon on a map with the Mapbox Android SDK.</string>
-    <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
+    <string name="activity_annotation_view_description">A view annotation marker behaves like a marker with more capabilities</string>
     <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Android SDK.</string>
@@ -74,6 +74,7 @@
 
     <string name="activity_basic_simple_mapview_url">https://www.mapbox.com/android-sdk/images/examples.png</string>
     <string name="activity_basic_support_map_frag_url">https://www.mapbox.com/android-sdk/images/support-fragment.png</string>
+    <string name="activity_basic_mapbox_options_url">https://www.mapbox.com/android-sdk/images/dynamically-add-map.png</string>
     <string name="activity_style_mapbox_studio_url">https://www.mapbox.com/android-sdk/images/custom-studio-style.png</string>
     <string name="activity_style_satellite_url">https://www.mapbox.com/android-sdk/images/satellite.png</string>
     <string name="activity_style_raster_url">https://www.mapbox.com/android-sdk/images/custom-raster.png</string>
