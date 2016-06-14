@@ -30,6 +30,7 @@ import com.mapbox.mapboxandroiddemo.examples.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.GeocodingActivity;
+import com.mapbox.mapboxandroiddemo.examples.LocationTrackingActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.OfflineManagerActivity;
@@ -179,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_location:
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_location_basic_title, R.string.activity_location_basic_description, new Intent(MainActivity.this, BasicUserLocation.class), R.string.activity_location_basic_image_url));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_location_tracking_title, R.string.activity_location_tracking_description, new Intent(MainActivity.this, LocationTrackingActivity.class), R.string.empty_image));
                 currentCategory = R.id.nav_location;
                 break;
         }
