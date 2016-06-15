@@ -24,8 +24,8 @@ public class BasicUserLocation extends AppCompatActivity {
 
     private MapView mapView;
     private MapboxMap map;
-    FloatingActionButton floatingActionButton;
-    LocationServices locationServices;
+    private FloatingActionButton floatingActionButton;
+    private LocationServices locationServices;
 
     private static final int PERMISSIONS_LOCATION = 0;
 
