@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList<ExampleItemModel> exampleItemModel;
     private ExampleAdapter adapter;
     private int currentCategory = R.id.nav_basics;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Create the adapter to convert the array to views
         adapter = new ExampleAdapter(this, exampleItemModel);
         // Attach the adapter to a ListView
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.details_list);
+        recyclerView = (RecyclerView) findViewById(R.id.details_list);
         if (recyclerView != null) {
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -144,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_basic_simple_mapview_title, R.string.activity_basic_simple_mapview_description, new Intent(MainActivity.this, SimpleMapViewActivity.class), R.string.activity_basic_simple_mapview_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_basic_support_map_frag_title, R.string.activity_basic_support_map_frag_description, new Intent(MainActivity.this, SupportMapFragmentActivity.class), R.string.activity_basic_support_map_frag_url));
-                exampleItemModel.add(new ExampleItemModel(R.string.activity_basic_mapbox_options_title, R.string.activity_basic_mapbox_options_description, new Intent(MainActivity.this, MapboxMapOptionActivity.class), R.string.empty_image));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_basic_mapbox_options_title, R.string.activity_basic_mapbox_options_description, new Intent(MainActivity.this, MapboxMapOptionActivity.class), R.string.activity_basic_mapbox_options_url));
                 currentCategory = R.id.nav_basics;
                 break;
 
@@ -185,6 +186,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
         adapter.notifyDataSetChanged();
+
+        // Scrolls recycler view back to top.
+        LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        layoutManager.scrollToPositionWithOffset(0, 0);
     }
 
 
