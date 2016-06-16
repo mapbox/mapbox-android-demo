@@ -31,6 +31,7 @@ import com.mapbox.mapboxandroiddemo.examples.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.GeocodingActivity;
+import com.mapbox.mapboxandroiddemo.examples.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.OfflineManagerActivity;
@@ -183,8 +184,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_location_basic_title, R.string.activity_location_basic_description, new Intent(MainActivity.this, BasicUserLocation.class), R.string.activity_location_basic_image_url));
                 currentCategory = R.id.nav_location;
                 break;
+            case R.id.nav_lab:
+                exampleItemModel.add(null);
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_location_picker_title, R.string.activity_lab_location_picker_description, new Intent(MainActivity.this, LocationPickerActivity.class), R.string.activity_lab_location_picker_url));
+                currentCategory = R.id.nav_lab;
+                break;
         }
         adapter.notifyDataSetChanged();
+    }
+
+    public int getCurrentCategory(){
+        return currentCategory;
     }
 
 
