@@ -27,8 +27,8 @@
             android:title="@string/android_services_category" />
 
         <item
-            android:id="@+id/nav_playground"
-            android:title="@string/playground_category" />
+            android:id="@+id/nav_lab"
+            android:title="@string/lab_category" />
 
     </group>
 </menu>

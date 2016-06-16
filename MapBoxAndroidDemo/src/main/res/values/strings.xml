@@ -15,6 +15,8 @@
     <string name="info_dialog_title">Getting started</string>
     <string name="info_dialog_description">Do you like this library? Learn how to include it in your app!</string>
 
+    <string name="description_labs">While other categories in this app present examples doing one specific thing, the lab category combines examples to show the power of the SDK.</string>
+
     <!-- toolbar items -->
     <string name="info">Info</string>
 
@@ -26,7 +28,7 @@
     <string name="offline_category">Offline</string>
     <string name="android_services_category">Android Services</string>
     <string name="location_category">User location</string>
-    <string name="playground_category">Playground</string>
+    <string name="lab_category">Lab</string>
 
     <!-- example titles -->
     <string name="activity_basic_simple_mapview_title">A simple map view</string>
@@ -49,7 +51,7 @@
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
-    <string name="activity_navigation_location_picker_title">Location Picker</string>
+    <string name="activity_lab_location_picker_title">Location Picker</string>
 
     <!-- example descriptions-->
     <string name="activity_basic_simple_mapview_description">Show a map in your app using the Mapbox Android SDK.</string>
@@ -72,7 +74,7 @@
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
     <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
-    <string name="activity_navigation_location_picker_description">Drop a marker at a specific location.</string>
+    <string name="activity_lab_location_picker_description">Drop a marker at a specific location.</string>
 
     <!-- example urls-->
     <string name="empty_image"> </string>
@@ -95,5 +97,6 @@
     <string name="activity_mas_directions_url">https://www.mapbox.com/android-sdk/images/directions.png</string>
     <string name="activity_mas_geocoding_url">https://www.mapbox.com/android-sdk/images/geocoding.gif</string>
     <string name="activity_mas_static_image_url">https://www.mapbox.com/android-sdk/images/static-image.png</string>
+    <string name="activity_lab_location_picker_url">http://i.imgur.com/0JTVwaa.png</string>
 
 </resources>
