@@ -23,6 +23,7 @@ import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.examples.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.BasicUserLocation;
 import com.mapbox.mapboxandroiddemo.examples.BoundingBoxCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.CustomLocationIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.CustomRasterStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.DirectionsActivity;
@@ -181,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_location:
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_location_basic_title, R.string.activity_location_basic_description, new Intent(MainActivity.this, BasicUserLocation.class), R.string.activity_location_basic_image_url));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_location_custom_icon_title, R.string.activity_location_custom_icon_description, new Intent(MainActivity.this, CustomLocationIconActivity.class), R.string.empty_image));
                 currentCategory = R.id.nav_location;
                 break;
         }
