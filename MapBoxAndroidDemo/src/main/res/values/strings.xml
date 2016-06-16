@@ -26,6 +26,7 @@
     <string name="offline_category">Offline</string>
     <string name="android_services_category">Android Services</string>
     <string name="location_category">User location</string>
+    <string name="playground_category">Playground</string>
 
     <!-- example titles -->
     <string name="activity_basic_simple_mapview_title">A simple map view</string>
@@ -48,11 +49,12 @@
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
+    <string name="activity_navigation_location_picker_title">Location Picker</string>
 
     <!-- example descriptions-->
     <string name="activity_basic_simple_mapview_description">Show a map in your app using the Mapbox Android SDK.</string>
     <string name="activity_basic_support_map_frag_description">Include a map fragment within your app using Android support library.</string>
-    <string name="activity_basic_mapbox_options_description">Add a mapview in a dynamically created layout</string>
+    <string name="activity_basic_mapbox_options_description">Add a mapview in a dynamically created layout.</string>
     <string name="activity_style_mapbox_studio_description">Use a custom Mapbox-hosted style.</string>
     <string name="activity_style_satellite_description">Show a satellite style in your app.</string>
     <string name="activity_style_raster_description">Use legacy raster tiles in your app.</string>
@@ -69,7 +71,8 @@
     <string name="activity_location_basic_description">Toggle the users current location on the map.</string>
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
     <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
-    <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map</string>
+    <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
+    <string name="activity_navigation_location_picker_description">Drop a marker at a specific location.</string>
 
     <!-- example urls-->
     <string name="empty_image"> </string>

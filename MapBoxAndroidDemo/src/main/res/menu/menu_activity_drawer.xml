@@ -26,5 +26,9 @@
             android:id="@+id/nav_mas"
             android:title="@string/android_services_category" />
 
+        <item
+            android:id="@+id/nav_playground"
+            android:title="@string/playground_category" />
+
     </group>
 </menu>
