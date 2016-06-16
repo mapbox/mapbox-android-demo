@@ -74,7 +74,7 @@
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
     <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
-    <string name="activity_lab_location_picker_description">Drop a marker at a specific location.</string>
+    <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding</string>
 
     <!-- example urls-->
     <string name="empty_image"> </string>
