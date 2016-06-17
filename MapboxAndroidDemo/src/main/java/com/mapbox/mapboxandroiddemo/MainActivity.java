@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-
+                if(currentCategory == R.id.nav_lab && position == 0) return;
                 startActivity(exampleItemModel.get(position).getActivity());
 
             }
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
             } else {
-                super.onBackPressed();
+                moveTaskToBack(true);
             }
         }
     }
