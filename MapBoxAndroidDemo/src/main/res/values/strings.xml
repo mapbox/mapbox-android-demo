@@ -48,6 +48,7 @@
     <string name="activity_offline_simple_title">A simple offline map</string>
     <string name="activity_offline_manager_title">Offline manager</string>
     <string name="activity_location_basic_title">Show user location</string>
+    <string name="activity_location_tracking_title">Track user location</string>
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
@@ -71,6 +72,7 @@
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Android SDK.</string>
     <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
     <string name="activity_location_basic_description">Toggle the users current location on the map.</string>
+    <string name="activity_location_tracking_description">Lock the camera centered above the user location</string>
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
     <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
@@ -95,6 +97,7 @@
     <string name="activity_offline_simple_url">https://www.mapbox.com/android-sdk/images/offline-map.png</string>
     <string name="activity_offline_manager_url">https://www.mapbox.com/android-sdk/images/offline-manager.gif</string>
     <string name="activity_location_basic_image_url">http://i.imgur.com/5BzH5YF.png</string> <!--https://www.mapbox.com/android-sdk/images/user-location.png-->
+    <string name="activity_location_tracking_url">http://i.imgur.com/U3uc32F.png</string>
     <string name="activity_mas_directions_url">https://www.mapbox.com/android-sdk/images/directions.png</string>
     <string name="activity_mas_geocoding_url">https://www.mapbox.com/android-sdk/images/geocoding.gif</string>
     <string name="activity_mas_static_image_url">https://www.mapbox.com/android-sdk/images/static-image.png</string>

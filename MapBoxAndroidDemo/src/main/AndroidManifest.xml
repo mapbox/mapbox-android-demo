@@ -180,6 +180,14 @@
         </activity>
 
         <activity
+            android:name=".examples.LocationTrackingActivity"
+            android:label="@string/activity_location_tracking_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
             android:name=".examples.LocationPickerActivity"
             android:label="@string/activity_lab_location_picker_title">
             <meta-data
