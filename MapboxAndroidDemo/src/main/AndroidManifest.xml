@@ -195,5 +195,13 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <activity
+            android:name=".examples.CustomInfoWindowActivity"
+            android:label="@string/activity_annotation_custom_info_window_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
     </application>
 </manifest>
