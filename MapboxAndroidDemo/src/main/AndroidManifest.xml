@@ -203,5 +203,13 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <activity
+            android:name=".examples.AnimatedMarkerActivity"
+            android:label="@string/activity_annotation_animated_marker_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
     </application>
 </manifest>
