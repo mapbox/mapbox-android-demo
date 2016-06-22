@@ -53,7 +53,8 @@
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
-    <string name="activity_lab_location_picker_title">Location Picker</string>
+    <string name="activity_lab_location_picker_title">Location picker</string>
+    <string name="activity_lab_marker_following_route_title">Marker following route</string>
 
     <!-- example descriptions-->
     <string name="activity_basic_simple_mapview_description">Show a map in your app using the Mapbox Android SDK.</string>
@@ -79,6 +80,7 @@
     <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
     <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding</string>
+    <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>
 
     <!-- example urls-->
     <string name="empty_image"> </string>
@@ -106,5 +108,6 @@
     <string name="activity_mas_geocoding_url">https://www.mapbox.com/android-sdk/images/geocoding.gif</string>
     <string name="activity_mas_static_image_url">https://www.mapbox.com/android-sdk/images/static-image.png</string>
     <string name="activity_lab_location_picker_url">http://i.imgur.com/0JTVwaa.png</string>
+    <string name="activity_lab_marker_following_route_url">http://i.imgur.com/spsZu9X.png</string>
 
 </resources>
