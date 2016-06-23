@@ -176,14 +176,15 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
                             markerAnimator.setDuration(distance);
                             markerAnimator.setInterpolator(new LinearInterpolator());
                             markerAnimator.start();
+
+                            map.getMarkerViewManager().scheduleViewMarkerInvalidation();
+
                             count++;
                             handler.postDelayed(this, distance);
                         }
                     }
                 };
                 handler.post(runnable);
-
-
             }
         }
     }
