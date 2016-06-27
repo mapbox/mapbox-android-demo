@@ -32,9 +32,10 @@ import com.mapbox.mapboxandroiddemo.examples.DrawCustomMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawPolygonActivity;
+import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.LocationTrackingActivity;
-import com.mapbox.mapboxandroiddemo.examples.LocationPickerActivity;
+import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.OfflineManagerActivity;
@@ -194,6 +195,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_lab:
                 exampleItemModel.add(null);
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_location_picker_title, R.string.activity_lab_location_picker_description, new Intent(MainActivity.this, LocationPickerActivity.class), R.string.activity_lab_location_picker_url));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_marker_following_route_title, R.string.activity_lab_marker_following_route_description, new Intent(MainActivity.this, MarkerFollowingRouteActivity.class), R.string.activity_lab_marker_following_route_url));
                 currentCategory = R.id.nav_lab;
                 break;
         }
