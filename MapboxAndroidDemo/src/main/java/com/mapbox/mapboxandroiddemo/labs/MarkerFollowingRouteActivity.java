@@ -71,6 +71,10 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        // When the activity is resumed we restart the marker animating.
+        if (handler != null && runnable != null) {
+            handler.post(runnable);
+        }
     }
 
     @Override
