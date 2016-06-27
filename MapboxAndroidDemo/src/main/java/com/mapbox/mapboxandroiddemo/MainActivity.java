@@ -21,6 +21,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.examples.AnimateMapCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.AnimatedMarkerActivity;
+import com.mapbox.mapboxandroiddemo.examples.BasicMarkerViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.BasicUserLocation;
 import com.mapbox.mapboxandroiddemo.examples.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.CustomInfoWindowActivity;
@@ -31,9 +33,10 @@ import com.mapbox.mapboxandroiddemo.examples.DrawCustomMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawPolygonActivity;
+import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.LocationTrackingActivity;
-import com.mapbox.mapboxandroiddemo.examples.LocationPickerActivity;
+import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.OfflineManagerActivity;
@@ -165,6 +168,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_geojson_line_title, R.string.activity_annotation_geojson_line_description, new Intent(MainActivity.this, DrawGeojsonLineActivity.class), R.string.activity_annotation_geojson_line_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_polygon_title, R.string.activity_annotation_polygon_description, new Intent(MainActivity.this, DrawPolygonActivity.class), R.string.activity_annotation_polygon_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_custom_info_window_title, R.string.activity_annotation_custom_info_window_description, new Intent(MainActivity.this, CustomInfoWindowActivity.class), R.string.empty_image));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_marker_view_title, R.string.activity_annotation_marker_view_description, new Intent(MainActivity.this, BasicMarkerViewActivity.class), R.string.activity_annotation_basic_marker_view_url));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_animated_marker_title, R.string.activity_annotation_animated_marker_description, new Intent(MainActivity.this, AnimatedMarkerActivity.class), R.string.activity_annotation_animated_marker_url));
                 currentCategory = R.id.nav_annotations;
                 break;
 
@@ -192,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_lab:
                 exampleItemModel.add(null);
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_location_picker_title, R.string.activity_lab_location_picker_description, new Intent(MainActivity.this, LocationPickerActivity.class), R.string.activity_lab_location_picker_url));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_marker_following_route_title, R.string.activity_lab_marker_following_route_description, new Intent(MainActivity.this, MarkerFollowingRouteActivity.class), R.string.activity_lab_marker_following_route_url));
                 currentCategory = R.id.nav_lab;
                 break;
         }

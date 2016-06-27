@@ -44,6 +44,7 @@
     <string name="activity_annotation_polygon_title">Draw a polygon</string>
     <string name="activity_annotation_marker_view_title">Draw a marker view</string>
     <string name="activity_annotation_custom_info_window_title">Custom info window</string>
+    <string name="activity_annotation_animated_marker_title">Animate marker position</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
     <string name="activity_offline_simple_title">A simple offline map</string>
@@ -53,7 +54,8 @@
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
-    <string name="activity_lab_location_picker_title">Location Picker</string>
+    <string name="activity_lab_location_picker_title">Location picker</string>
+    <string name="activity_lab_marker_following_route_title">Marker following route</string>
 
     <!-- example descriptions-->
     <string name="activity_basic_simple_mapview_description">Show a map in your app using the Mapbox Android SDK.</string>
@@ -69,6 +71,7 @@
     <string name="activity_annotation_polygon_description">Draw a vector polygon on a map with the Mapbox Android SDK.</string>
     <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
     <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize info window.</string>
+    <string name="activity_annotation_animated_marker_description">Animate the marker to a new position on the map.</string>
     <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Android SDK.</string>
@@ -79,6 +82,7 @@
     <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
     <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding</string>
+    <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>
 
     <!-- example urls-->
     <string name="empty_image"> </string>
@@ -94,6 +98,8 @@
     <string name="activity_annotation_custom_marker_url">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
     <string name="activity_annotation_geojson_line_url">https://www.mapbox.com/android-sdk/images/geojson.png</string>
     <string name="activity_annotation_polygon_url">https://www.mapbox.com/android-sdk/images/polygon.png</string>
+    <string name="activity_annotation_basic_marker_view_url">http://i.imgur.com/vbWTLIE.png</string>
+    <string name="activity_annotation_animated_marker_url">http://i.imgur.com/XegvIKr.png</string>
     <string name="activity_camera_animate_url">https://www.mapbox.com/android-sdk/images/animate-camera.gif</string>
     <string name="activity_camera_bounding_box_url">http://i.imgur.com/A0JL21Q.png</string> <!-- https://www.mapbox.com/android-sdk/images/fit-bound-camera.gif -->
     <string name="activity_offline_simple_url">https://www.mapbox.com/android-sdk/images/offline-map.png</string>
@@ -104,5 +110,6 @@
     <string name="activity_mas_geocoding_url">https://www.mapbox.com/android-sdk/images/geocoding.gif</string>
     <string name="activity_mas_static_image_url">https://www.mapbox.com/android-sdk/images/static-image.png</string>
     <string name="activity_lab_location_picker_url">http://i.imgur.com/0JTVwaa.png</string>
+    <string name="activity_lab_marker_following_route_url">http://i.imgur.com/spsZu9X.png</string>
 
 </resources>
