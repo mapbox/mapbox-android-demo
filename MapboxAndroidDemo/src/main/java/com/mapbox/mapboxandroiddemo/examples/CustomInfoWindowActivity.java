@@ -41,14 +41,20 @@ public class CustomInfoWindowActivity extends AppCompatActivity {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
 
-                IconFactory iconFactory = IconFactory.getInstance(CustomInfoWindowActivity.this);
-                Drawable iconDrawable = ContextCompat.getDrawable(CustomInfoWindowActivity.this, R.drawable.purple_marker);
-                Icon icon = iconFactory.fromDrawable(iconDrawable);
+                mapboxMap.addMarker(new MarkerViewOptions()
+                        .position(new LatLng(40.416717, -3.703771))
+                        .anchor(0.5f, 0.5f)
+                        .title("spain"));
 
-                Marker marker = mapboxMap.addMarker(new MarkerViewOptions()
-                        .position(new LatLng(40.73581, -73.99155))
-                        .title("Tonga")
-                        .icon(icon));
+                mapboxMap.addMarker(new MarkerViewOptions()
+                        .position(new LatLng(26.794531, 29.781524))
+                        .anchor(0.5f, 0.5f)
+                        .title("egypt"));
+
+                mapboxMap.addMarker(new MarkerViewOptions()
+                        .position(new LatLng(50.981488, 10.384677))
+                        .anchor(0.5f, 0.5f)
+                        .title("germany"));
 
                 mapboxMap.setInfoWindowAdapter(new MapboxMap.InfoWindowAdapter() {
                     @Nullable
@@ -60,20 +66,22 @@ public class CustomInfoWindowActivity extends AppCompatActivity {
                         parent.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
                         parent.setOrientation(LinearLayout.VERTICAL);
 
-                        TextView textView = new TextView(CustomInfoWindowActivity.this);
-                        textView.setText(marker.getTitle());
-                        textView.setTextColor(Color.BLACK);
-                        textView.setBackgroundColor(Color.WHITE);
-                        textView.setPadding(10, 10, 10, 10);
-
                         ImageView countryFlagImage = new ImageView(CustomInfoWindowActivity.this);
-                        countryFlagImage.setImageDrawable(ContextCompat.getDrawable(CustomInfoWindowActivity.this, R.drawable.flag_of_tonga));
+                        switch(marker.getTitle()){
+                            case "spain":
+                                countryFlagImage.setImageDrawable(ContextCompat.getDrawable(CustomInfoWindowActivity.this, R.drawable.flag_of_spain));
+                                break;
+                            case "egypt":
+                                countryFlagImage.setImageDrawable(ContextCompat.getDrawable(CustomInfoWindowActivity.this, R.drawable.flag_of_egypt));
+                                break;
+                            default:
+                                countryFlagImage.setImageDrawable(ContextCompat.getDrawable(CustomInfoWindowActivity.this, R.drawable.flag_of_germany));
+                                break;
+                        }
+
                         countryFlagImage.setLayoutParams(new android.view.ViewGroup.LayoutParams(150, 100));
-                        countryFlagImage.setBackgroundColor(Color.WHITE);
-                        countryFlagImage.setPadding(10, 10, 10, 10);
 
                         parent.addView(countryFlagImage);
-                        parent.addView(textView);
 
                         return parent;
                     }
