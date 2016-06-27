@@ -44,7 +44,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
     private Handler handler;
     private Runnable runnable;
 
-    private int count = 0;
+    private static int count = 0;
     private long distance;
 
     @Override
