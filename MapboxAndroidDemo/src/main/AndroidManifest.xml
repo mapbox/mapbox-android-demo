@@ -15,7 +15,6 @@
 
         <activity
             android:name=".MainActivity"
-            android:configChanges="orientation|screenSize|uiMode"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
