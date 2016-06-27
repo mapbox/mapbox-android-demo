@@ -52,6 +52,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lab_marker_following_route);
 
+        // Initialize the map view
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
@@ -59,12 +60,12 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
             public void onMapReady(MapboxMap mapboxMap) {
                 map = mapboxMap;
 
-                // Load and Draw the GeoJSON
+                // Load and Draw the GeoJSON. The marker animation is also handled here.
                 new DrawGeoJSON().execute();
 
             }
         });
-    }
+    }// End onCreate
 
     @Override
     public void onResume() {
@@ -76,6 +77,8 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         mapView.onPause();
+        // Check if the marker is currently animating and if so, we pause the animation so we aren't
+        // using resources when the activities not in view.
         if (handler != null && runnable != null) {
             handler.removeCallbacks(runnable);
         }
@@ -99,14 +102,18 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
         mapView.onSaveInstanceState(outState);
     }
 
+    // We want to load in the GeoJSON file asynchronous so the UI thread isn't handling the file
+    // loading. The GeoJSON file we are using is stored in the assets folder, you could also get
+    // this information from the Mapbox map matching API during runtime.
     private class DrawGeoJSON extends AsyncTask<Void, Void, List<LatLng>> {
         @Override
         protected List<LatLng> doInBackground(Void... voids) {
 
-            ArrayList<LatLng> points = new ArrayList<>();
+            // Store the route LatLng points in a list so we can query them.
+            List<LatLng> points = new ArrayList<>();
 
             try {
-                // Load GeoJSON file
+                // Load GeoJSON file from the assets folder.
                 InputStream inputStream = getAssets().open("matched_route.geojson");
                 BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
                 StringBuilder sb = new StringBuilder();
@@ -125,10 +132,10 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
                 if (geometry != null) {
                     String type = geometry.getString("type");
 
-                    // Our GeoJSON only has one feature: a line string
+                    // Our GeoJSON only has one feature: a line string.
                     if (!TextUtils.isEmpty(type) && type.equalsIgnoreCase("LineString")) {
 
-                        // Get the Coordinates
+                        // Get the Coordinates and add them to the points list we created above.
                         JSONArray coords = geometry.getJSONArray("coordinates");
                         for (int lc = 0; lc < coords.length(); lc++) {
                             JSONArray coord = coords.getJSONArray(lc);
@@ -138,56 +145,87 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
                     }
                 }
             } catch (Exception e) {
+                // If an error occurs loading in the GeoJSON file or adding the points to the list,
+                // we log the error.
                 Log.e(TAG, "Exception Loading GeoJSON: " + e.toString());
             }
 
+            // Lastly we return the list containing the route points.
             return points;
-        }
+        }// End doInBackground
 
         @Override
         protected void onPostExecute(final List<LatLng> points) {
             super.onPostExecute(points);
 
+            // Make sure our list isn't empty.
             if (points.size() > 0) {
                 LatLng[] pointsArray = points.toArray(new LatLng[points.size()]);
 
-                // Draw Points on MapView
+                // Draw a polyline showing the route the marker will be taking.
                 map.addPolyline(new PolylineOptions()
                         .add(pointsArray)
                         .color(Color.parseColor("#F13C6E"))
                         .width(4));
 
+                // We are using a custom marker icon.
                 IconFactory iconFactory = IconFactory.getInstance(MarkerFollowingRouteActivity.this);
                 Drawable iconDrawable = ContextCompat.getDrawable(MarkerFollowingRouteActivity.this, R.drawable.pink_dot);
                 Icon icon = iconFactory.fromDrawable(iconDrawable);
 
-                final Marker marker = map.addMarker(new MarkerViewOptions().position(points.get(count)).icon(icon).anchor(0.5f, 0.5f).flat(true));
+                // Using a view marker, we place it at the first point in the points list.
+                final Marker marker = map.addMarker(new MarkerViewOptions()
+                        .position(points.get(count))
+                        .icon(icon)
+                        .anchor(0.5f, 0.5f)
+                        .flat(true));
 
+                // Animating the marker requires the use of both the ValueAnimator and a handler.
+                // The ValueAnimator is used to move the marker between the GeoJSON points, this is
+                // done linearly. The handler is used to move the marker along the GeoJSON points.
                 handler = new Handler();
                 runnable = new Runnable() {
                     @Override
                     public void run() {
 
+                        // Check if we are at the end of the points list, if so we want to stop using
+                        // the handler.
                         if ((points.size() - 1) > count) {
+
+                            // Calculating the distance is done between the current point and next.
+                            // This gives us the duration we will need to execute the ValueAnimator.
+                            // Multiplying by ten is done to slow down the marker speed. Adjusting
+                            // this value will result in the marker traversing faster or slower along
+                            // the line
                             distance = (long) marker.getPosition().distanceTo(points.get(count)) * 10;
 
+                            // animate the marker from it's current position to the next point in the
+                            // points list.
                             ValueAnimator markerAnimator = ObjectAnimator.ofObject(marker, "position",
                                     new LatLngEvaluator(), marker.getPosition(), points.get(count));
                             markerAnimator.setDuration(distance);
                             markerAnimator.setInterpolator(new LinearInterpolator());
                             markerAnimator.start();
 
+                            // This line will make sure the marker appears when it is being animated
+                            // and starts outside the current user view. Without this, the user must
+                            // intentionally execute a gesture before the view marker reappears on
+                            // the map.
                             map.getMarkerViewManager().scheduleViewMarkerInvalidation();
 
+                            // Keeping the current point count we are on.
                             count++;
+
+                            // Once we finish we need to repeat the entire process by executing the
+                            // handler again once the ValueAnimator is finished.
                             handler.postDelayed(this, distance);
                         }
                     }
                 };
                 handler.post(runnable);
             }
-        }
-    }
+        }// End onPostExecute
+    }// End DrawGeoJSON
 
     private static class LatLngEvaluator implements TypeEvaluator<LatLng> {
         // Method is used to interpolate the marker animation.
