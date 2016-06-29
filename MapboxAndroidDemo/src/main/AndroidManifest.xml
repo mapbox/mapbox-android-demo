@@ -195,6 +195,14 @@
         </activity>
 
         <activity
+            android:name=".examples.CustomInfoWindowActivity"
+            android:label="@string/activity_annotation_custom_info_window_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
             android:name=".examples.BasicMarkerViewActivity"
             android:label="@string/activity_annotation_marker_view_title">
             <meta-data
@@ -213,6 +221,7 @@
         <activity
             android:name=".labs.MarkerFollowingRouteActivity"
             android:label="@string/activity_lab_marker_following_route_title">
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
