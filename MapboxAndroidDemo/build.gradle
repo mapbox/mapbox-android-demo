@@ -26,8 +26,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 27
-        versionName "4.1.0-beta.3"
+        versionCode 28
+        versionName "4.1.0"
     }
 
 /*
@@ -58,7 +58,7 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
     compile 'com.github.javiersantos:MaterialStyledDialogs:1.5.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:4.1.0-beta.3@aar'){
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:4.1.0@aar'){
         transitive=true
     }
     compile ('com.mapbox.mapboxsdk:mapbox-android-services:1.1.0@aar'){
