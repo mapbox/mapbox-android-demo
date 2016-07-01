@@ -45,6 +45,7 @@ import com.mapbox.mapboxandroiddemo.examples.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
+import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 import com.mapbox.mapboxsdk.MapboxAccountManager;
@@ -198,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 exampleItemModel.add(null);
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_location_picker_title, R.string.activity_lab_location_picker_description, new Intent(MainActivity.this, LocationPickerActivity.class), R.string.activity_lab_location_picker_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_marker_following_route_title, R.string.activity_lab_marker_following_route_description, new Intent(MainActivity.this, MarkerFollowingRouteActivity.class), R.string.activity_lab_marker_following_route_url));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_space_station_location_title, R.string.activity_lab_space_station_location_description, new Intent(MainActivity.this, SpaceStationLocationActivity.class), R.string.activity_lab_space_station_location_url));
                 currentCategory = R.id.nav_lab;
                 break;
         }
