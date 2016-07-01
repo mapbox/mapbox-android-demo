@@ -84,7 +84,7 @@
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
     <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding</string>
     <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>
-    <string name="activity_lab_space_station_location_description">TODO</string>
+    <string name="activity_lab_space_station_location_description">See the International Space Station location in real time.</string>
 
     <!-- example urls-->
     <string name="empty_image"> </string>
@@ -114,5 +114,6 @@
     <string name="activity_mas_static_image_url">https://www.mapbox.com/android-sdk/images/static-image.png</string>
     <string name="activity_lab_location_picker_url">http://i.imgur.com/0JTVwaa.png</string>
     <string name="activity_lab_marker_following_route_url">http://i.imgur.com/spsZu9X.png</string>
+    <string name="activity_lab_space_station_location_url">http://i.imgur.com/PxuB1T8.png</string>
 
 </resources>
