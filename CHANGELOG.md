@@ -2,9 +2,12 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
-## 4.1.0-beta.3
+## Current
+* Marker following route
 
-* Lab category has been added giving a section to more complex code examples
+## 4.1.0
+
+* Lab category has been added giving a section for more complex code examples
 * Location picker example
 * Track user location example
 * Basic marker view example
