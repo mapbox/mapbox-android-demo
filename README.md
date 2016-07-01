@@ -1,17 +1,22 @@
 # Mapbox Android Demo app
 
+![](https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/splash.png)
 
+This is a public demo of the Mapbox Android SDK that's [available now in the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo). It shows off all the examples found on [mapbox.com/android-sdk/examples](https://www.mapbox.com/android-sdk/examples/) using the same code. In addition, the app also includes a section called labs which combines the examples to create more complex demos. To get started using Mapbox in your Android application check out [the overview page](https://www.mapbox.com/android-sdk/).
 
-This is a public demo of the Mapbox Android SDK that's [available now in the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo). It shows off all the examples found on [mapbox.com/android-sdk/examples](https://www.mapbox.com/android-sdk/examples/) using the same code. To get started using Mapbox in your Android application read [the overview page](https://www.mapbox.com/android-sdk/)
-
-<!--
-| Example | Java | XML |
-| --- | --- | --- |
-| [A simple map view](https://www.mapbox.com/android-sdk/examples/) | [java](https://raw.githubusercontent.com/mapbox/mapbox-android-demo/readme-update/MapBoxAndroidDemo/src/main/java/com/mapbox/mapboxandroiddemo/examples/SimpleMapViewActivity.java) | [XML](https://raw.githubusercontent.com/mapbox/mapbox-android-demo/readme-update/MapBoxAndroidDemo/src/main/res/layout/activity_basic_simple_mapview.xml) |-->
 ### Screenshots
-<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/main-activity.png" width="360">
-<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/navigation-drawer.png" width="360">
-<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/custom-marker-example.png" width="360">
+<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/phone/main-activity.png" width="360">
+<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/phone/navigation-drawer.png" width="360">
+<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/phone/custom-marker-example.png" width="360">
+<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/phone/following-route.png" width="360">
+<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/phone/user-location.png" width="360">
 
 ### Steps to adding a new example
-<!--TODO-->
+Feedback and contribution is encouraged in this repo, if you'd like to see a new example added in the app either [open an issue](https://github.com/mapbox/mapbox-android-demo/issues) or create it yourself and open a pull request following these steps:
+
+* Create a new java file and place in the acceptable folder (`examples` or `labs`) giving it a descriptive name and ending the title with `*Activity`. It's important that all activities extend `AppCompat`.
+* If the activity needs a layout, add one with the naming convention `activity_*`.
+* Add the activity to the `AndroidManifest.xml` file.
+* Open the `MainActivity.java` file and scroll down to the `listItems` method. You'll notice a switch statement, pick one of the cases (categories) and add the new example so it matches the others.
+* Code your example and test to make sure it works properly.
+* Open a pull request with the new example.
