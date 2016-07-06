@@ -15,7 +15,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.geocoder.ui.GeocoderAutoCompleteView;
 import com.mapbox.services.commons.models.Position;
 import com.mapbox.services.geocoding.v5.GeocodingCriteria;
-import com.mapbox.services.geocoding.v5.models.GeocodingFeature;
+import com.mapbox.services.geocoding.v5.models.CarmenFeature;
 
 public class GeocodingActivity extends AppCompatActivity {
 
@@ -39,18 +39,18 @@ public class GeocodingActivity extends AppCompatActivity {
 
             }
         });
-
+/*
         // Set up autocomplete widget
         GeocoderAutoCompleteView autocomplete = (GeocoderAutoCompleteView) findViewById(R.id.query);
         autocomplete.setAccessToken(MapboxAccountManager.getInstance().getAccessToken());
         autocomplete.setType(GeocodingCriteria.TYPE_POI);
         autocomplete.setOnFeatureListener(new GeocoderAutoCompleteView.OnFeatureListener() {
             @Override
-            public void OnFeatureClick(GeocodingFeature feature) {
+            public void OnFeatureClick(CarmenFeature feature) {
                 Position position = feature.asPosition();
                 updateMap(position.getLatitude(), position.getLongitude());
             }
-        });
+        });*/
 
     }
 

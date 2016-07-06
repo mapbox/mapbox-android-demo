@@ -35,12 +35,14 @@ import com.mapbox.mapboxandroiddemo.examples.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.LocationTrackingActivity;
+import com.mapbox.mapboxandroiddemo.examples.MapMatchingActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.SatelliteStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.SimpleOfflineMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
@@ -93,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 if(currentCategory == R.id.nav_lab && position == 0) return;
+                else if(currentCategory == R.id.nav_mas && position == 0) return;
                 startActivity(exampleItemModel.get(position).getActivity());
 
             }
@@ -185,6 +188,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 currentCategory = R.id.nav_offline;
                 break;
             case R.id.nav_mas:
+                exampleItemModel.add(null);
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_simplify_polyline_title, R.string.activity_mas_simplify_polyline_description, new Intent(MainActivity.this, SimplifyPolylineActivity.class), R.string.activity_mas_simplify_polyline_url, true));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_map_matching_title, R.string.activity_mas_map_matching_description, new Intent(MainActivity.this, MapMatchingActivity.class), R.string.empty_image, true));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_directions_title, R.string.activity_mas_directions_description, new Intent(MainActivity.this, DirectionsActivity.class), R.string.activity_mas_directions_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_geocoding_title, R.string.activity_mas_geocoding_description, new Intent(MainActivity.this, GeocodingActivity.class), R.string.activity_mas_geocoding_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_static_image_title, R.string.activity_mas_static_image_description, new Intent(MainActivity.this, StaticImageActivity.class), R.string.activity_mas_static_image_url));
@@ -198,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_lab:
                 exampleItemModel.add(null);
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_location_picker_title, R.string.activity_lab_location_picker_description, new Intent(MainActivity.this, LocationPickerActivity.class), R.string.activity_lab_location_picker_url));
-                exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_marker_following_route_title, R.string.activity_lab_marker_following_route_description, new Intent(MainActivity.this, MarkerFollowingRouteActivity.class), R.string.activity_lab_marker_following_route_url));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_marker_following_route_title, R.string.activity_lab_marker_following_route_description, new Intent(MainActivity.this, MarkerFollowingRouteActivity.class), R.string.activity_lab_marker_following_route_url, true));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_space_station_location_title, R.string.activity_lab_space_station_location_description, new Intent(MainActivity.this, SpaceStationLocationActivity.class), R.string.activity_lab_space_station_location_url));
                 currentCategory = R.id.nav_lab;
                 break;

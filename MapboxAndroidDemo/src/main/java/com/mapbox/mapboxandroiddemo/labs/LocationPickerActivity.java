@@ -36,7 +36,7 @@ import com.mapbox.services.commons.ServicesException;
 import com.mapbox.services.commons.models.Position;
 import com.mapbox.services.geocoding.v5.GeocodingCriteria;
 import com.mapbox.services.geocoding.v5.MapboxGeocoding;
-import com.mapbox.services.geocoding.v5.models.GeocodingFeature;
+import com.mapbox.services.geocoding.v5.models.CarmenFeature;
 import com.mapbox.services.geocoding.v5.models.GeocodingResponse;
 
 import java.util.List;
@@ -214,16 +214,16 @@ public class LocationPickerActivity extends AppCompatActivity {
             MapboxGeocoding client = new MapboxGeocoding.Builder()
                     .setAccessToken(getString(R.string.access_token))
                     .setCoordinates(Position.fromCoordinates(point.getLongitude(), point.getLatitude()))
-                    .setType(GeocodingCriteria.TYPE_ADDRESS)
+                    .setGeocodingType(GeocodingCriteria.TYPE_ADDRESS)
                     .build();
 
             client.enqueueCall(new Callback<GeocodingResponse>() {
                 @Override
                 public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
 
-                    List<GeocodingFeature> results = response.body().getFeatures();
+                    List<CarmenFeature> results = response.body().getFeatures();
                     if (results.size() > 0) {
-                        GeocodingFeature feature = results.get(0);
+                        CarmenFeature feature = results.get(0);
                         // If the geocoder returns a result, we take the first in the list and update
                         // the dropped marker snippet with the information. Lastly we open the info
                         // window.

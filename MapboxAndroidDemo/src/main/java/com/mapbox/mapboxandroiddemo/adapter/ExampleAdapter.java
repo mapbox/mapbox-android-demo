@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,10 +33,12 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         // create a new view
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
         View view1 = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_description_item, parent, false);
+        View view2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_mas_description_card, parent, false);
 
         switch (viewType) {
             case 0: return new ViewHolder(view);
             case 1: return new ViewHolderDescription(view1);
+            case 2: return new ViewHolderDescription(view2);
         }
 
         return new ViewHolder(view);
@@ -45,6 +48,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public int getItemViewType(int position) {
         if(((MainActivity)mContext).getCurrentCategory() == R.id.nav_lab && position == 0){
             return 1;
+        }else if(((MainActivity)mContext).getCurrentCategory() == R.id.nav_mas && position == 0){
+            return 2;
         }
         return 0;
     }
@@ -66,6 +71,12 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     viewHolder.imageView.setImageDrawable(null);
                 }
 
+                if(detailItem.getShowNewIcon()){
+                    viewHolder.newIconImageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.new_icon));
+                }else{
+                    viewHolder.newIconImageView.setImageDrawable(null);
+                }
+
                 viewHolder.titleTextView.setText(mContext.getString(detailItem.getTitle()));
                 viewHolder.descriptionTextView.setText(mContext.getString(detailItem.getDescription()));
         }
@@ -81,6 +92,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public TextView titleTextView;
         public TextView descriptionTextView;
         public ImageView imageView;
+        public ImageView newIconImageView;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -88,6 +100,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             imageView = (ImageView) itemView.findViewById(R.id.example_image);
             titleTextView = (TextView) itemView.findViewById(R.id.example_title);
             descriptionTextView = (TextView) itemView.findViewById(R.id.example_description);
+            newIconImageView = (ImageView) itemView.findViewById(R.id.new_icon_image_view);
         }
     }
 

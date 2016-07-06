@@ -16,6 +16,7 @@
     <string name="info_dialog_description">Do you like this library? Learn how to include it in your app!</string>
 
     <string name="description_labs">While other categories in this app present examples doing one specific thing, the lab category combines examples to show the power of the SDK.</string>
+    <string name="description_mas">Mapbox Android Services bundles many of the Mapbox APIs into a single SDK such as directions, geocoding, and many of the other utilities offered.</string>
 
     <!-- toolbar items -->
     <string name="info">Info</string>
@@ -54,6 +55,8 @@
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
+    <string name="activity_mas_simplify_polyline_title">Simplify a polyline</string>
+    <string name="activity_mas_map_matching_title">Map Matching</string>
     <string name="activity_lab_location_picker_title">Location picker</string>
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
     <string name="activity_lab_space_station_location_title">Space station current location</string>
@@ -82,7 +85,9 @@
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
     <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
-    <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding</string>
+    <string name="activity_mas_simplify_polyline_description">Using the polylines utility, simplify a polyline which reduces the amount of coordinates making up the polyline depending on tolerance.</string>
+    <string name="activity_mas_map_matching_description">Match raw GPS points to the map so they aligns with the roads/pathways.</string>
+    <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding.</string>
     <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>
     <string name="activity_lab_space_station_location_description">See the International Space Station location in real time.</string>
 
@@ -112,6 +117,7 @@
     <string name="activity_mas_directions_url">https://www.mapbox.com/android-sdk/images/directions.png</string>
     <string name="activity_mas_geocoding_url">https://www.mapbox.com/android-sdk/images/geocoding.gif</string>
     <string name="activity_mas_static_image_url">https://www.mapbox.com/android-sdk/images/static-image.png</string>
+    <string name="activity_mas_simplify_polyline_url">http://i.imgur.com/uATgul1.png</string>
     <string name="activity_lab_location_picker_url">http://i.imgur.com/0JTVwaa.png</string>
     <string name="activity_lab_marker_following_route_url">http://i.imgur.com/spsZu9X.png</string>
     <string name="activity_lab_space_station_location_url">http://i.imgur.com/PxuB1T8.png</string>
