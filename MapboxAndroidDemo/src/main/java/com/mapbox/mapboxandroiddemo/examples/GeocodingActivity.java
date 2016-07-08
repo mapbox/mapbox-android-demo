@@ -39,7 +39,7 @@ public class GeocodingActivity extends AppCompatActivity {
 
             }
         });
-/*
+
         // Set up autocomplete widget
         GeocoderAutoCompleteView autocomplete = (GeocoderAutoCompleteView) findViewById(R.id.query);
         autocomplete.setAccessToken(MapboxAccountManager.getInstance().getAccessToken());
@@ -50,7 +50,7 @@ public class GeocodingActivity extends AppCompatActivity {
                 Position position = feature.asPosition();
                 updateMap(position.getLatitude(), position.getLongitude());
             }
-        });*/
+        });
 
     }
 

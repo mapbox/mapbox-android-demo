@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_mas:
                 exampleItemModel.add(null);
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_simplify_polyline_title, R.string.activity_mas_simplify_polyline_description, new Intent(MainActivity.this, SimplifyPolylineActivity.class), R.string.activity_mas_simplify_polyline_url, true));
-                exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_map_matching_title, R.string.activity_mas_map_matching_description, new Intent(MainActivity.this, MapMatchingActivity.class), R.string.empty_image, true));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_map_matching_title, R.string.activity_mas_map_matching_description, new Intent(MainActivity.this, MapMatchingActivity.class), R.string.activity_mas_map_matching_url, true));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_directions_title, R.string.activity_mas_directions_description, new Intent(MainActivity.this, DirectionsActivity.class), R.string.activity_mas_directions_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_geocoding_title, R.string.activity_mas_geocoding_description, new Intent(MainActivity.this, GeocodingActivity.class), R.string.activity_mas_geocoding_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_static_image_title, R.string.activity_mas_static_image_description, new Intent(MainActivity.this, StaticImageActivity.class), R.string.activity_mas_static_image_url));
