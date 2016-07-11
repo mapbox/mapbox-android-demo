@@ -91,7 +91,7 @@ public class LocationPickerActivity extends AppCompatActivity {
         // This is done by using an image view with the default marker found in the SDK. You can
         // swap out for your own marker image, just make sure it matches up with the dropped marker.
         hoveringMarker = new ImageView(this);
-        hoveringMarker.setImageResource(R.drawable.default_marker);
+        hoveringMarker.setImageResource(R.drawable.red_marker);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
@@ -119,7 +119,7 @@ public class LocationPickerActivity extends AppCompatActivity {
 
                         // Create the marker icon the dropped marker will be using.
                         IconFactory iconFactory = IconFactory.getInstance(LocationPickerActivity.this);
-                        Drawable iconDrawable = ContextCompat.getDrawable(LocationPickerActivity.this, R.drawable.default_marker);
+                        Drawable iconDrawable = ContextCompat.getDrawable(LocationPickerActivity.this, R.drawable.red_marker);
                         Icon icon = iconFactory.fromDrawable(iconDrawable);
 
                         // Placing the marker on the map as soon as possible causes the illusion
