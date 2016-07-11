@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-            android:name=".examples.SimpleMapViewActivity"
+            android:name=".examples.basics.SimpleMapViewActivity"
             android:label="@string/activity_basic_simple_mapview_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-            android:name=".examples.SupportMapFragmentActivity"
+            android:name=".examples.annotations.SupportMapFragmentActivity"
             android:label="@string/activity_basic_support_map_frag_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -41,7 +41,7 @@
         </activity>
 
         <activity
-            android:name=".examples.MapboxStudioStyleActivity"
+            android:name=".examples.styles.MapboxStudioStyleActivity"
             android:label="@string/activity_style_mapbox_studio_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -49,7 +49,7 @@
         </activity>
 
         <activity
-            android:name=".examples.SatelliteStyleActivity"
+            android:name=".examples.styles.SatelliteStyleActivity"
             android:label="@string/activity_style_satellite_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -57,7 +57,7 @@
         </activity>
 
         <activity
-            android:name=".examples.CustomRasterStyleActivity"
+            android:name=".examples.styles.CustomRasterStyleActivity"
             android:label="@string/activity_style_raster_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -65,7 +65,7 @@
         </activity>
 
         <activity
-            android:name=".examples.DefaultStyleActivity"
+            android:name=".examples.styles.DefaultStyleActivity"
             android:label="@string/activity_style_default_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -73,7 +73,7 @@
         </activity>
 
         <activity
-            android:name=".examples.DrawMarkerActivity"
+            android:name=".examples.annotations.DrawMarkerActivity"
             android:label="@string/activity_annotation_marker_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -81,7 +81,7 @@
         </activity>
 
         <activity
-            android:name=".examples.DrawCustomMarkerActivity"
+            android:name=".examples.annotations.DrawCustomMarkerActivity"
             android:label="@string/activity_annotation_custom_marker_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -89,7 +89,7 @@
         </activity>
 
         <activity
-            android:name=".examples.DrawGeojsonLineActivity"
+            android:name=".examples.annotations.DrawGeojsonLineActivity"
             android:label="@string/activity_annotation_geojson_line_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -97,7 +97,7 @@
         </activity>
 
         <activity
-            android:name=".examples.DrawPolygonActivity"
+            android:name=".examples.annotations.DrawPolygonActivity"
             android:label="@string/activity_annotation_polygon_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -105,7 +105,7 @@
         </activity>
 
         <activity
-            android:name=".examples.AnimateMapCameraActivity"
+            android:name=".examples.camera.AnimateMapCameraActivity"
             android:label="@string/activity_camera_animate_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -113,7 +113,7 @@
         </activity>
 
         <activity
-            android:name=".examples.SimpleOfflineMapActivity"
+            android:name=".examples.offline.SimpleOfflineMapActivity"
             android:label="@string/activity_offline_simple_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -121,7 +121,7 @@
         </activity>
 
         <activity
-            android:name=".examples.OfflineManagerActivity"
+            android:name=".examples.offline.OfflineManagerActivity"
             android:label="@string/activity_offline_manager_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -129,7 +129,7 @@
         </activity>
 
         <activity
-            android:name=".examples.DirectionsActivity"
+            android:name=".examples.mas.DirectionsActivity"
             android:label="@string/activity_mas_directions_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -137,7 +137,7 @@
         </activity>
 
         <activity
-            android:name=".examples.GeocodingActivity"
+            android:name=".examples.mas.GeocodingActivity"
             android:label="@string/activity_mas_geocoding_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -145,7 +145,7 @@
         </activity>
 
         <activity
-            android:name=".examples.StaticImageActivity"
+            android:name=".examples.mas.StaticImageActivity"
             android:label="@string/activity_mas_static_image_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -153,7 +153,7 @@
         </activity>
 
         <activity
-            android:name=".examples.BoundingBoxCameraActivity"
+            android:name=".examples.camera.BoundingBoxCameraActivity"
             android:label="@string/activity_camera_bounding_box_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -163,7 +163,7 @@
         <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService" />
 
         <activity
-            android:name=".examples.MapboxMapOptionActivity"
+            android:name=".examples.basics.MapboxMapOptionActivity"
             android:label="@string/activity_basic_mapbox_options_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -171,7 +171,7 @@
         </activity>
 
         <activity
-            android:name=".examples.BasicUserLocation"
+            android:name=".examples.location.BasicUserLocation"
             android:label="@string/activity_location_basic_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -179,7 +179,7 @@
         </activity>
 
         <activity
-            android:name=".examples.LocationTrackingActivity"
+            android:name=".examples.location.LocationTrackingActivity"
             android:label="@string/activity_location_tracking_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -195,7 +195,7 @@
         </activity>
 
         <activity
-            android:name=".examples.CustomInfoWindowActivity"
+            android:name=".examples.annotations.CustomInfoWindowActivity"
             android:label="@string/activity_annotation_custom_info_window_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -203,7 +203,7 @@
         </activity>
 
         <activity
-            android:name=".examples.BasicMarkerViewActivity"
+            android:name=".examples.annotations.BasicMarkerViewActivity"
             android:label="@string/activity_annotation_marker_view_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -211,7 +211,7 @@
         </activity>
 
         <activity
-            android:name=".examples.AnimatedMarkerActivity"
+            android:name=".examples.annotations.AnimatedMarkerActivity"
             android:label="@string/activity_annotation_animated_marker_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -236,7 +236,7 @@
         </activity>
 
         <activity
-            android:name=".examples.SimplifyPolylineActivity"
+            android:name=".examples.mas.SimplifyPolylineActivity"
             android:label="@string/activity_mas_simplify_polyline_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -244,7 +244,7 @@
         </activity>
 
         <activity
-            android:name=".examples.MapMatchingActivity"
+            android:name=".examples.mas.MapMatchingActivity"
             android:label="@string/activity_mas_map_matching_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

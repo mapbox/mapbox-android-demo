@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples;
+package com.mapbox.mapboxandroiddemo.examples.offline;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

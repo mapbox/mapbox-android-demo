@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples;
+package com.mapbox.mapboxandroiddemo.examples.location;
 
 import android.Manifest;
 import android.content.pm.PackageManager;

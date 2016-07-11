@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples;
+package com.mapbox.mapboxandroiddemo.examples.annotations;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;

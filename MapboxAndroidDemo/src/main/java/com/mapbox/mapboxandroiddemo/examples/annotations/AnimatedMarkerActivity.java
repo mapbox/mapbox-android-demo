@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples;
+package com.mapbox.mapboxandroiddemo.examples.annotations;
 
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;

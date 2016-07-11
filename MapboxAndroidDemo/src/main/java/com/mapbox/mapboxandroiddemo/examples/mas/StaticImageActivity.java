@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples;
+package com.mapbox.mapboxandroiddemo.examples.mas;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

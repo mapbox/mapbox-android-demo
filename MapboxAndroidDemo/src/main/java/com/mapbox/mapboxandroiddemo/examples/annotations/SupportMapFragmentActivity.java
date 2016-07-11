@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples;
+package com.mapbox.mapboxandroiddemo.examples.annotations;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
