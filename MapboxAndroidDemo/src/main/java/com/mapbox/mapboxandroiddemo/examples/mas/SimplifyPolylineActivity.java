@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples;
+package com.mapbox.mapboxandroiddemo.examples.mas;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -8,18 +8,13 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.annotations.PolylineOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.commons.ServicesException;
-import com.mapbox.services.commons.geojson.LineString;
 import com.mapbox.services.commons.models.Position;
-import com.mapbox.services.directions.v4.DirectionsCriteria;
-import com.mapbox.services.mapmatching.v4.MapboxMapMatching;
-import com.mapbox.services.mapmatching.v4.models.MapMatchingResponse;
+import com.mapbox.services.commons.utils.PolylineUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,13 +26,9 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+public class SimplifyPolylineActivity extends AppCompatActivity {
 
-public class MapMatchingActivity extends AppCompatActivity {
-
-    private static final String TAG = "MapMatchingActivity";
+    private static final String TAG = "SimplifyLineActivity";
 
     private MapView mapView;
     private MapboxMap map;
@@ -45,14 +36,13 @@ public class MapMatchingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mas_map_matching);
+        setContentView(R.layout.activity_simplify_polyline);
 
-        mapView = (MapView) findViewById(R.id.mapView);
+        mapView = (MapView) findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
-
                 map = mapboxMap;
 
                 new DrawGeoJSON().execute();
@@ -99,7 +89,7 @@ public class MapMatchingActivity extends AppCompatActivity {
 
             try {
                 // Load GeoJSON file
-                InputStream inputStream = getAssets().open("trace.geojson");
+                InputStream inputStream = getAssets().open("matched_route.geojson");
                 BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
                 StringBuilder sb = new StringBuilder();
                 int cp;
@@ -140,16 +130,13 @@ public class MapMatchingActivity extends AppCompatActivity {
         protected void onPostExecute(List<Position> points) {
             super.onPostExecute(points);
 
-            drawBeforeMapMatching(points);
-
-            // Convert the route to a linestring
-            LineString lineString = LineString.fromCoordinates(points);
-            drawMapMatched(lineString, 8);
+            drawBeforeSimplify(points);
+            drawSimplify(points);
 
         }
     }
 
-    private void drawBeforeMapMatching(List<Position> points) {
+    private void drawBeforeSimplify(List<Position> points) {
 
         LatLng[] pointsArray = new LatLng[points.size()];
         for (int i = 0; i < points.size(); i++)
@@ -161,52 +148,21 @@ public class MapMatchingActivity extends AppCompatActivity {
                 .width(4));
     }
 
-    private void drawMapMatched(LineString lineString, int precision) {
-        try {
-            // Setup the request using a client.
-            MapboxMapMatching client = new MapboxMapMatching.Builder()
-                    .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
-                    .setProfile(DirectionsCriteria.PROFILE_DRIVING)
-                    .setGpsPrecison(precision)
-                    .setTrace(lineString)
-                    .build();
+    private void drawSimplify(List<Position> points) {
 
-            // Execute the API call and handle the response.
-            client.enqueueCall(new Callback<MapMatchingResponse>() {
-                @Override
-                public void onResponse(Call<MapMatchingResponse> call, Response<MapMatchingResponse> response) {
+        Position[] before = new Position[points.size()];
+        for (int i = 0; i < points.size(); i++) before[i] = points.get(i);
 
-                    // Create a new list to store the map matched coordinates.
-                    List<LatLng> mapMatchedPoints = new ArrayList<>();
+        Position[] after = PolylineUtils.simplify(before, 0.001);
 
-                    // Check that the map matching API response is "OK".
-                    if (response.code() == 200) {
-                        // Convert the map matched response list from position to latlng coordinates.
-                        for (int i = 0; i < response.body().getMatchedPoints().length; i++) {
-                            mapMatchedPoints.add(new LatLng(
-                                    response.body().getMatchedPoints()[i].getLatitude(),
-                                    response.body().getMatchedPoints()[i].getLongitude()));
-                        }
+        LatLng[] result = new LatLng[after.length];
+        for (int i = 0; i < after.length; i++)
+            result[i] = new LatLng(after[i].getLatitude(), after[i].getLongitude());
 
-                        // Add the map matched route to the Mapbox map.
-                        map.addPolyline(new PolylineOptions()
-                                .addAll(mapMatchedPoints)
-                                .color(Color.parseColor("#3bb2d0"))
-                                .width(4));
-                    } else {
-                        // If the response code does not response "OK" an error has occurred.
-                        Log.e(TAG, "Too many coordinates, Profile not found, invalid input, or no match");
-                    }
-                }
+        map.addPolyline(new PolylineOptions()
+                .add(result)
+                .color(Color.parseColor("#3bb2d0"))
+                .width(4));
 
-                @Override
-                public void onFailure(Call<MapMatchingResponse> call, Throwable t) {
-                    Log.e(TAG, "MapboxMapMatching error: " + t.getMessage());
-                }
-            });
-        } catch (ServicesException e) {
-            Log.e(TAG, "MapboxMapMatching error: " + e.getMessage());
-            e.printStackTrace();
-        }
     }
 }

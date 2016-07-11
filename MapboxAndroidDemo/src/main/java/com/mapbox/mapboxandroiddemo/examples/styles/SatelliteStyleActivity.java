@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples;
+package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,14 +8,14 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
-public class MapboxStudioStyleActivity extends AppCompatActivity {
+public class SatelliteStyleActivity extends AppCompatActivity {
 
     private MapView mapView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_style_mapbox_studio);
+        setContentView(R.layout.activity_style_satellite);
 
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -23,7 +23,7 @@ public class MapboxStudioStyleActivity extends AppCompatActivity {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
 
-                // Customize map with markers, polylines, etc.
+                // customize map with markers, polylines, etc
 
             }
         });
@@ -42,20 +42,20 @@ public class MapboxStudioStyleActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
     }
 }

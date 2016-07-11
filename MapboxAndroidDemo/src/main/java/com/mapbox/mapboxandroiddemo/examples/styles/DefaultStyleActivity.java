@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples;
+package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
