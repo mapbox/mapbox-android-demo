@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.labs;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,7 +30,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 
-public class SpaceStationLocationActivity extends Activity {
+public class SpaceStationLocationActivity extends AppCompatActivity {
 
     private static final String TAG = "SpaceStationActivity";
 
