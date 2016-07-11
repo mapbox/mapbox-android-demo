@@ -234,5 +234,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+        <activity
+            android:name=".examples.SimplifyPolylineActivity"
+            android:label="@string/activity_mas_simplify_polyline_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".examples.MapMatchingActivity"
+            android:label="@string/activity_mas_map_matching_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
     </application>
 </manifest>

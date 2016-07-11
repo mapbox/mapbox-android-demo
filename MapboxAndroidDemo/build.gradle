@@ -13,6 +13,7 @@ apply plugin: 'com.android.application'
 repositories {
     mavenCentral()
     maven { url "https://jitpack.io" }
+    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 ext {
@@ -61,8 +62,8 @@ dependencies {
     compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:4.1.0@aar'){
         transitive=true
     }
-    compile ('com.mapbox.mapboxsdk:mapbox-android-services:1.1.0@aar'){
-        transitive=true
+    compile('com.mapbox.mapboxsdk:mapbox-android-services:1.2.0@aar') {
+        transitive = true
     }
 
     compile 'com.google.code.gson:gson:2.6.2'

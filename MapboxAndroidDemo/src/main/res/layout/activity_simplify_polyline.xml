@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:center_latitude="37.692465"
+        mapbox:center_longitude="-122.410413"
+        mapbox:style_url="mapbox://styles/mapbox/light-v9"
+        mapbox:tilt="45"
+        mapbox:zoom="10.5" />
+
+</LinearLayout>

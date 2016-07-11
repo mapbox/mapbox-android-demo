@@ -9,6 +9,7 @@ public class ExampleItemModel {
     public int description;
     public int imageUrl;
     public Intent activity;
+    public boolean showNewIcon;
 
 
     public int getTitle() {
@@ -43,10 +44,27 @@ public class ExampleItemModel {
         this.activity = activity;
     }
 
+    public boolean getShowNewIcon(){
+        return showNewIcon;
+    }
+
+    public void setShowNewIcon(boolean showNewIcon){
+        this.showNewIcon = showNewIcon;
+    }
+
+    public ExampleItemModel(int title, int description, Intent activity, int imageUrl, boolean showNewIcon) {
+        this.title = title;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.activity = activity;
+        this.showNewIcon = showNewIcon;
+    }
+
     public ExampleItemModel(int title, int description, Intent activity, int imageUrl) {
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
         this.activity = activity;
+        this.showNewIcon = false;
     }
 }
