@@ -2,8 +2,9 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
-## Current
-* Marker following route
+## 4.1.1
+* Mapbox Android SDK v4.1.1
+* Mapbox Android Service v1.2.1
 
 ## 4.1.0
 
