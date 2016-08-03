@@ -17,12 +17,12 @@ repositories {
 }
 
 ext {
-    supportLibVersion = '24.0.0'
+    supportLibVersion = '24.1.1'
 }
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.0"
+    buildToolsVersion "24.0.1"
 
     defaultConfig {
         minSdkVersion 15
@@ -59,7 +59,7 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
     compile 'com.github.javiersantos:MaterialStyledDialogs:1.5.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:4.1.1@aar'){
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-SNAPSHOT@aar'){
         transitive=true
     }
     compile('com.mapbox.mapboxsdk:mapbox-android-services:1.2.1@aar') {

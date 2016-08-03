@@ -250,5 +250,69 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+        <activity
+            android:name=".examples.styles.ShowHideLayersActivity"
+            android:label="@string/activity_styles_show_hide_layer_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".examples.styles.LanguageSwitchActivity"
+            android:label="@string/activity_styles_langauge_switch_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".examples.styles.ColorSwitcherActivity"
+            android:label="@string/activity_styles_color_switcher_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".examples.styles.AdjustLayerOpacityActivity"
+            android:label="@string/activity_styles_adjust_layer_opacity_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".examples.styles.GeojsonLayerInStackActivity"
+            android:label="@string/activity_styles_geojson_layer_in_stack_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".examples.styles.VectorSourceActivity"
+            android:label="@string/activity_styles_vector_source_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".examples.annotations.AnimatedCircleMarkerActivity"
+            android:label="@string/activity_annotation_animated_circle_marker_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".examples.styles.ZoomDependentFillColorActivity"
+            android:label="@string/activity_style_zoom_dependent_fill_color_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
     </application>
 </manifest>
