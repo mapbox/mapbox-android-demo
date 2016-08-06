@@ -2,6 +2,9 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 4.2.0-beta.1 - August 6, 2016
+* Mapbox Android SDK v4.2.0-beta.1
+
 ## 4.1.1
 * Mapbox Android SDK v4.1.1
 * Mapbox Android Service v1.2.1
