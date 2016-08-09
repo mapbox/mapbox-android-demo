@@ -140,19 +140,20 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
         offlineManager.listOfflineRegions(new OfflineManager.ListOfflineRegionsCallback() {
             @Override
             public void onList(OfflineRegion[] offlineRegions) {
+                if (offlineRegions.length > 0) {
+                    // delete the last item in the offlineRegions list which will be yosemite offline map
+                    offlineRegions[(offlineRegions.length - 1)].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
+                        @Override
+                        public void onDelete() {
+                            Toast.makeText(SimpleOfflineMapActivity.this, "Yosemite offline map deleted", Toast.LENGTH_LONG).show();
+                        }
 
-                // delete the last item in the offlineRegions list which will be yosemite offline map
-                offlineRegions[(offlineRegions.length - 1)].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
-                    @Override
-                    public void onDelete() {
-                        Toast.makeText(SimpleOfflineMapActivity.this, "Yosemite offline map deleted", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onError(String error) {
-                        Log.e(TAG, "On Delete error: " + error);
-                    }
-                });
+                        @Override
+                        public void onError(String error) {
+                            Log.e(TAG, "On Delete error: " + error);
+                        }
+                    });
+                }
             }
 
             @Override
