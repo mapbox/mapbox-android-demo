@@ -123,6 +123,13 @@
     <string name="activity_style_satellite_url">https://www.mapbox.com/android-sdk/images/satellite.png</string>
     <string name="activity_style_raster_url">https://www.mapbox.com/android-sdk/images/custom-raster.png</string>
     <string name="activity_style_default_url">https://www.mapbox.com/android-sdk/images/default-styles.png</string>
+    <string name="activity_style_zoom_dependent_fill_color_url">http://i.imgur.com/rHl1pmC.png</string>
+    <string name="activity_styles_color_switcher_url">http://i.imgur.com/a0ZaKHG.png</string>
+    <string name="activity_styles_langauge_switch_url">http://i.imgur.com/bu7GV5T.png</string>
+    <string name="activity_styles_show_hide_layer_url">http://i.imgur.com/amDMa1M.png</string>
+    <string name="activity_styles_geojson_layer_in_stack_url">http://i.imgur.com/mngiJUj.png</string>
+    <string name="activity_styles_adjust_layer_opacity_url">http://i.imgur.com/0Av8kWD.png</string>
+    <string name="activity_styles_vector_source_url">http://i.imgur.com/N0altyP.png</string>
     <string name="activity_annotation_marker_url">https://www.mapbox.com/android-sdk/images/marker.png</string>
     <string name="activity_annotation_custom_marker_url">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
     <string name="activity_annotation_geojson_line_url">https://www.mapbox.com/android-sdk/images/geojson.png</string>
