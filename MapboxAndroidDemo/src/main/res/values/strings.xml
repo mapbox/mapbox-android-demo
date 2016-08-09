@@ -31,6 +31,12 @@
     <string name="location_category">User location</string>
     <string name="lab_category">Lab</string>
 
+    <!-- Spinner for color picker example-->
+    <string-array name="layer_spinner_array">
+        <item>Water</item>
+        <item>Building</item>
+    </string-array>
+
     <!-- example titles -->
     <string name="activity_basic_simple_mapview_title">A simple map view</string>
     <string name="activity_basic_support_map_frag_title">Support map fragment</string>
@@ -39,6 +45,13 @@
     <string name="activity_style_satellite_title">Satellite style</string>
     <string name="activity_style_raster_title">Custom raster style</string>
     <string name="activity_style_default_title">Default styles</string>
+    <string name="activity_styles_show_hide_layer_title">Show and hide layers</string>
+    <string name="activity_styles_langauge_switch_title">"Change a map's language"</string>
+    <string name="activity_styles_color_switcher_title">"Change a layer's color"</string>
+    <string name="activity_styles_adjust_layer_opacity_title">"Adjust a layer's opacity"</string>
+    <string name="activity_styles_geojson_layer_in_stack_title">Add a new layer below labels</string>
+    <string name="activity_styles_vector_source_title">Add a vector tile source</string>
+    <string name="activity_style_zoom_dependent_fill_color_title">Color dependent on zoom level</string>
     <string name="activity_annotation_marker_title">Draw a marker</string>
     <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
     <string name="activity_annotation_geojson_line_title">Draw a GeoJSON line</string>
@@ -46,6 +59,7 @@
     <string name="activity_annotation_marker_view_title">Draw a marker view</string>
     <string name="activity_annotation_custom_info_window_title">Custom info window</string>
     <string name="activity_annotation_animated_marker_title">Animate marker position</string>
+    <string name="activity_annotation_animated_circle_marker_title">Pulsing marker view icon</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
     <string name="activity_offline_simple_title">A simple offline map</string>
@@ -69,6 +83,13 @@
     <string name="activity_style_satellite_description">Show a satellite style in your app.</string>
     <string name="activity_style_raster_description">Use legacy raster tiles in your app.</string>
     <string name="activity_style_default_description">Use a variety of professionally designed styles with the Mapbox Android SDK.</string>
+    <string name="activity_styles_show_hide_layer_description">Create a custom layer switcher to display different datasets.</string>
+    <string name="activity_styles_langauge_switch_description">Switch the maps language dynamically</string>
+    <string name="activity_styles_color_switcher_description">"Using layer set to change a layer's fill color"</string>
+    <string name="activity_styles_adjust_layer_opacity_description">Drag the seek bar to adjust the opacity of a raster layer on top of a map.</string>
+    <string name="activity_styles_geojson_layer_in_stack_description">Using the second argument of addLayer, you can be more precise</string>
+    <string name="activity_styles_vector_source_description">Add a vector source to a map and display it as a layer.</string>
+    <string name="activity_style_zoom_dependent_fill_color_description">Make a property depend on the map zoom level, in this case, the water layers fill color.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
@@ -76,6 +97,7 @@
     <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
     <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize info window.</string>
     <string name="activity_annotation_animated_marker_description">Animate the marker to a new position on the map.</string>
+    <string name="activity_annotation_animated_circle_marker_description">Animate a marker view icon to appear to pulse.</string>
     <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Android SDK.</string>
@@ -101,6 +123,13 @@
     <string name="activity_style_satellite_url">https://www.mapbox.com/android-sdk/images/satellite.png</string>
     <string name="activity_style_raster_url">https://www.mapbox.com/android-sdk/images/custom-raster.png</string>
     <string name="activity_style_default_url">https://www.mapbox.com/android-sdk/images/default-styles.png</string>
+    <string name="activity_style_zoom_dependent_fill_color_url">http://i.imgur.com/rHl1pmC.png</string>
+    <string name="activity_styles_color_switcher_url">http://i.imgur.com/a0ZaKHG.png</string>
+    <string name="activity_styles_langauge_switch_url">http://i.imgur.com/bu7GV5T.png</string>
+    <string name="activity_styles_show_hide_layer_url">http://i.imgur.com/amDMa1M.png</string>
+    <string name="activity_styles_geojson_layer_in_stack_url">http://i.imgur.com/mngiJUj.png</string>
+    <string name="activity_styles_adjust_layer_opacity_url">http://i.imgur.com/0Av8kWD.png</string>
+    <string name="activity_styles_vector_source_url">http://i.imgur.com/N0altyP.png</string>
     <string name="activity_annotation_marker_url">https://www.mapbox.com/android-sdk/images/marker.png</string>
     <string name="activity_annotation_custom_marker_url">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
     <string name="activity_annotation_geojson_line_url">https://www.mapbox.com/android-sdk/images/geojson.png</string>
@@ -108,6 +137,7 @@
     <string name="activity_annotation_basic_marker_view_url">http://i.imgur.com/vbWTLIE.png</string>
     <string name="activity_annotation_custom_info_window_url">http://i.imgur.com/mCWbosy.png</string>
     <string name="activity_annotation_animated_marker_url">http://i.imgur.com/XegvIKr.png</string>
+    <string name="activity_annotation_animated_circle_marker_url">http://i.imgur.com/OtRqtOi.png</string>
     <string name="activity_camera_animate_url">https://www.mapbox.com/android-sdk/images/animate-camera.gif</string>
     <string name="activity_camera_bounding_box_url">http://i.imgur.com/A0JL21Q.png</string> <!-- https://www.mapbox.com/android-sdk/images/fit-bound-camera.gif -->
     <string name="activity_offline_simple_url">https://www.mapbox.com/android-sdk/images/offline-map.png</string>
