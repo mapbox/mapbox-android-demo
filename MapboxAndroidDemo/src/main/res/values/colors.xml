@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Mapbox colors -->
     <color name="colorPrimary">@color/mapboxBlue</color>
     <color name="colorPrimaryDark">@color/mapboxBlueDark</color>
     <color name="colorAccent">@color/mapboxRed</color>
-    
+
     <color name="materialGrey">#F5F5F5</color>
     <color name="materialDarkGrey">#DFDFDF</color>
 
@@ -15,7 +16,7 @@
     <color name="mapboxPurple">#8A8ACB</color>
     <color name="mapboxPurpleDark">#7171b2</color>
     <color name="mapboxPurpleLight">#A4A4E5</color>
-    
+
     <color name="mapboxDenim">#50667F</color>
     <color name="mapboxTeal">#41AFA5</color>
     <color name="mapboxOrange">#F9886C</color>
@@ -25,4 +26,8 @@
     <color name="mapboxNavy">#28353D</color>
     <color name="mapboxNavyDark">#222B30</color>
 
+    <!-- FAB menu colors -->
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="half_black">#808080</color>
+    <color name="white_pressed">#f1f1f1</color>
 </resources>
