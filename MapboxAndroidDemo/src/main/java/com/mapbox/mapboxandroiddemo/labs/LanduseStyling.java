@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -12,11 +13,14 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
+import com.mapbox.mapboxsdk.style.layers.Filter;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
+import static com.mapbox.mapboxsdk.style.layers.Filter.*;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
 public class LandUseStyling extends AppCompatActivity {
+    private static final String TAG = LandUseStyling.class.getSimpleName();
 
     private MapView mapView;
 
@@ -30,15 +34,13 @@ public class LandUseStyling extends AppCompatActivity {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(final MapboxMap mapboxMap) {
-
-                VectorSource schoolSource = new VectorSource("school-source", "mapbox://mapbox.mapbox-streets-v7");
-                mapboxMap.addSource(schoolSource);
-
-                FillLayer schoolLayer = new FillLayer("school-layer", "school-source");
+                
+                FillLayer schoolLayer = new FillLayer("school-layer", "composite");
                 schoolLayer.setSourceLayer("landuse");
                 schoolLayer.setProperties(
                         fillColor(Color.parseColor("#f6f6f4"))
                 );
+                schoolLayer.setFilter(eq("class", "school"));
                 mapboxMap.addLayer(schoolLayer);
 
                 FloatingActionButton toggleParks = (FloatingActionButton) findViewById(R.id.fab_toggle_parks);
@@ -114,6 +116,7 @@ public class LandUseStyling extends AppCompatActivity {
     }
 
     private boolean colorsEqual(int a, int b) {
-        return Math.abs(a - b) == 1;
+        Log.i(TAG, String.format("Comparing colors: %s, %s (%s, %s > %s)", a, b, a / 10, b / 10, a / 10 == b / 10));
+        return a / 10 == b / 10;
     }
 }
