@@ -23,17 +23,17 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        fab:fab_addButtonColorNormal="@color/mapboxWhite"
-        fab:fab_addButtonColorPressed="@color/white_pressed"
-        fab:fab_addButtonPlusIconColor="@color/half_black"
+        fab:fab_addButtonColorNormal="@color/mapboxRed"
+        fab:fab_addButtonColorPressed="@color/mapboxWhite"
+        fab:fab_addButtonPlusIconColor="@color/mapboxWhite"
         fab:fab_labelStyle="@style/menu_labels_style">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_toggle_schools"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/mapboxBlue"
-            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_colorNormal="@color/mapboxRed"
+            fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
             fab:fab_title="Schools"/>
 
@@ -41,10 +41,19 @@
             android:id="@+id/fab_toggle_parks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/mapboxBlue"
-            fab:fab_colorPressed="@color/white_pressed"
+            fab:fab_colorNormal="@color/mapboxRed"
+            fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
             fab:fab_title="Parks"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_toggle_industry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/mapboxRed"
+            fab:fab_colorPressed="@color/mapboxWhite"
+            fab:fab_size="mini"
+            fab:fab_title="Industrial"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

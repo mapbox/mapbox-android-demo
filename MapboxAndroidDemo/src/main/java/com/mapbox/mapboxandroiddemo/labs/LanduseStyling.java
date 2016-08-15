@@ -13,10 +13,8 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
-import com.mapbox.mapboxsdk.style.layers.Filter;
-import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
-import static com.mapbox.mapboxsdk.style.layers.Filter.*;
+import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
 public class LandUseStyling extends AppCompatActivity {
@@ -34,7 +32,7 @@ public class LandUseStyling extends AppCompatActivity {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(final MapboxMap mapboxMap) {
-                
+
                 FillLayer schoolLayer = new FillLayer("school-layer", "composite");
                 schoolLayer.setSourceLayer("landuse");
                 schoolLayer.setProperties(
@@ -43,12 +41,21 @@ public class LandUseStyling extends AppCompatActivity {
                 schoolLayer.setFilter(eq("class", "school"));
                 mapboxMap.addLayer(schoolLayer);
 
+                FillLayer industrialLayer = new FillLayer("industrial-layer", "composite");
+                industrialLayer.setSourceLayer("landuse");
+                industrialLayer.setProperties(
+                        fillColor(Color.parseColor("#eceeed"))
+                );
+                industrialLayer.setFilter(eq("class", "industrial"));
+                mapboxMap.addLayer(industrialLayer);
+
                 FloatingActionButton toggleParks = (FloatingActionButton) findViewById(R.id.fab_toggle_parks);
                 toggleParks.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         FillLayer parks = mapboxMap.getLayerAs("parks");
                         if (parks != null) {
+
                             if (!colorsEqual(parks.getFillColorAsInt(), ContextCompat.getColor(LandUseStyling.this, R.color.mapboxGreen))) {
                                 parks.setProperties(
                                         fillColor(ContextCompat.getColor(LandUseStyling.this, R.color.mapboxGreen))
@@ -68,13 +75,32 @@ public class LandUseStyling extends AppCompatActivity {
                     public void onClick(View v) {
                         FillLayer schools = mapboxMap.getLayerAs("school-layer");
                         if (schools != null) {
-                            if (!colorsEqual(schools.getFillColorAsInt(), ContextCompat.getColor(LandUseStyling.this, R.color.mapboxBlue))) {
+                            if (!colorsEqual(schools.getFillColorAsInt(), ContextCompat.getColor(LandUseStyling.this, R.color.mapboxYellow))) {
                                 schools.setProperties(
-                                        fillColor(ContextCompat.getColor(LandUseStyling.this, R.color.mapboxBlue))
+                                        fillColor(ContextCompat.getColor(LandUseStyling.this, R.color.mapboxYellow))
                                 );
                             } else {
                                 schools.setProperties(
                                         fillColor(Color.parseColor("#f6f6f4"))
+                                );
+                            }
+                        }
+                    }
+                });
+
+                FloatingActionButton toggleIndustrial = (FloatingActionButton) findViewById(R.id.fab_toggle_industry);
+                toggleIndustrial.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        FillLayer industrial = mapboxMap.getLayerAs("industrial-layer");
+                        if (industrial != null) {
+                            if (!colorsEqual(industrial.getFillColorAsInt(), ContextCompat.getColor(LandUseStyling.this, R.color.mapboxPurple))) {
+                                industrial.setProperties(
+                                        fillColor(ContextCompat.getColor(LandUseStyling.this, R.color.mapboxPurple))
+                                );
+                            } else {
+                                industrial.setProperties(
+                                        fillColor(Color.parseColor("#eceeed"))
                                 );
                             }
                         }
