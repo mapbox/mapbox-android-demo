@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_location:
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_location_animated_icon_title, R.string.activity_location_animated_icon_description, new Intent(MainActivity.this, AnimatedLocationIconActivity.class), R.string.activity_location_animated_icon_url, true));
-                exampleItemModel.add(new ExampleItemModel(R.string.activity_location_customize_user_title, R.string.activity_location_customize_user_description, new Intent(MainActivity.this, CustomizeUserLocationActivity.class), R.string.empty_image, true));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_location_customize_user_title, R.string.activity_location_customize_user_description, new Intent(MainActivity.this, CustomizeUserLocationActivity.class), R.string.activity_location_customize_user_url, true));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_location_basic_title, R.string.activity_location_basic_description, new Intent(MainActivity.this, BasicUserLocation.class), R.string.activity_location_basic_image_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_location_tracking_title, R.string.activity_location_tracking_description, new Intent(MainActivity.this, LocationTrackingActivity.class), R.string.activity_location_tracking_url));
                 currentCategory = R.id.nav_location;

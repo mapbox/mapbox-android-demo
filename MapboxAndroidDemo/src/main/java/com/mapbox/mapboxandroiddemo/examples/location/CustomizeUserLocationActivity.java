@@ -10,9 +10,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.annotations.MarkerView;
-import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.constants.MyLocationTracking;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationListener;
 import com.mapbox.mapboxsdk.location.LocationServices;
@@ -25,7 +24,6 @@ public class CustomizeUserLocationActivity extends AppCompatActivity {
     private MapView mapView;
     private MapboxMap map;
     private LocationServices locationServices;
-    private MarkerView marker;
 
     private static final int PERMISSIONS_LOCATION = 0;
 
@@ -45,13 +43,15 @@ public class CustomizeUserLocationActivity extends AppCompatActivity {
 
                 enableGps();
 
-                // Set
-                //map.getMyLocationViewSettings().setPadding(0, 0, 0, 0);
+                // Enable user tracking to show the padding affect.
+                map.getTrackingSettings().setMyLocationTrackingMode(MyLocationTracking.TRACKING_FOLLOW);
+                map.getTrackingSettings().setDismissAllTrackingOnGesture(false);
+
+                // Customize the user location icon using the getMyLocationViewSettings object.
+                map.getMyLocationViewSettings().setPadding(0, 500, 0, 0);
                 map.getMyLocationViewSettings().setForegroundTintColor(Color.parseColor("#56B881"));
                 map.getMyLocationViewSettings().setAccuracyTintColor(Color.parseColor("#FBB03B"));
 
-
-                System.out.println(map.getMyLocationViewSettings().getPadding()[3]);
             }
         });
     }
@@ -113,13 +113,7 @@ public class CustomizeUserLocationActivity extends AppCompatActivity {
                     // changes. When the user disables and then enables the location again, this
                     // listener is registered again and will adjust the camera once again.
                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 16));
-                    if(marker == null) {
-                        marker = map.addMarker(new MarkerViewOptions().position(new LatLng(location)));
-                    }else {
-
-                        marker.setPosition(new LatLng(location));
-                    }
-                    //locationServices.removeLocationListener(this);
+                    locationServices.removeLocationListener(this);
                 }
             }
         });
