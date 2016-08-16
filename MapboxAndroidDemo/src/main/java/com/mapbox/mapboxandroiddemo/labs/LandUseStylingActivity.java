@@ -17,8 +17,8 @@ import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
-public class LandUseStyling extends AppCompatActivity {
-    private static final String TAG = LandUseStyling.class.getSimpleName();
+public class LandUseStylingActivity extends AppCompatActivity {
+    private static final String TAG = LandUseStylingActivity.class.getSimpleName();
 
     private MapView mapView;
 
@@ -56,9 +56,9 @@ public class LandUseStyling extends AppCompatActivity {
                         FillLayer parks = mapboxMap.getLayerAs("parks");
                         if (parks != null) {
 
-                            if (!colorsEqual(parks.getFillColorAsInt(), ContextCompat.getColor(LandUseStyling.this, R.color.mapboxGreen))) {
+                            if (!colorsEqual(parks.getFillColorAsInt(), ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxGreen))) {
                                 parks.setProperties(
-                                        fillColor(ContextCompat.getColor(LandUseStyling.this, R.color.mapboxGreen))
+                                        fillColor(ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxGreen))
                                 );
                             } else {
                                 parks.setProperties(
@@ -75,9 +75,10 @@ public class LandUseStyling extends AppCompatActivity {
                     public void onClick(View v) {
                         FillLayer schools = mapboxMap.getLayerAs("school-layer");
                         if (schools != null) {
-                            if (!colorsEqual(schools.getFillColorAsInt(), ContextCompat.getColor(LandUseStyling.this, R.color.mapboxYellow))) {
+                            if (schools.getFillColor().isValue() &&
+                                    !colorsEqual(schools.getFillColorAsInt(), ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxYellow))) {
                                 schools.setProperties(
-                                        fillColor(ContextCompat.getColor(LandUseStyling.this, R.color.mapboxYellow))
+                                        fillColor(ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxYellow))
                                 );
                             } else {
                                 schools.setProperties(
@@ -94,9 +95,10 @@ public class LandUseStyling extends AppCompatActivity {
                     public void onClick(View v) {
                         FillLayer industrial = mapboxMap.getLayerAs("industrial-layer");
                         if (industrial != null) {
-                            if (!colorsEqual(industrial.getFillColorAsInt(), ContextCompat.getColor(LandUseStyling.this, R.color.mapboxPurple))) {
+                            if (industrial.getFillColor().isValue() &&
+                                    !colorsEqual(industrial.getFillColorAsInt(), ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxPurple))) {
                                 industrial.setProperties(
-                                        fillColor(ContextCompat.getColor(LandUseStyling.this, R.color.mapboxPurple))
+                                        fillColor(ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxPurple))
                                 );
                             } else {
                                 industrial.setProperties(
@@ -142,7 +144,18 @@ public class LandUseStyling extends AppCompatActivity {
     }
 
     private boolean colorsEqual(int a, int b) {
-        Log.i(TAG, String.format("Comparing colors: %s, %s (%s, %s > %s)", a, b, a / 10, b / 10, a / 10 == b / 10));
-        return a / 10 == b / 10;
+        boolean equal = Math.abs(Color.red(a) - Color.red(b)) <= 10 &&
+                Math.abs(Color.green(a) - Color.green(b)) <= 10 &&
+                Math.abs(Color.blue(a) - Color.blue(b)) <= 10;
+
+        Log.i(TAG, String.format("Comparing colors: %s, %s (%s, %s ,%s => %s)",
+                a,
+                b,
+                Math.abs(Color.red(a) - Color.red(b)),
+                Math.abs(Color.green(a) - Color.green(b)),
+                Math.abs(Color.blue(a) - Color.blue(b)),
+                equal)
+        );
+        return equal;
     }
 }
