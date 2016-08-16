@@ -42,8 +42,10 @@ import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
@@ -167,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_styles:
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_styles_color_switcher_title, R.string.activity_style_create_heatmap_points_description, new Intent(MainActivity.this, CreateHeatmapPointsActivity.class), R.string.empty_image, true));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_styles_color_switcher_title, R.string.activity_styles_color_switcher_description, new Intent(MainActivity.this, ColorSwitcherActivity.class), R.string.activity_styles_color_switcher_url, true));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_styles_vector_source_title, R.string.activity_styles_vector_source_description, new Intent(MainActivity.this, VectorSourceActivity.class), R.string.activity_styles_vector_source_url, true));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_styles_geojson_layer_in_stack_title, R.string.activity_styles_geojson_layer_in_stack_description, new Intent(MainActivity.this, GeojsonLayerInStackActivity.class), R.string.activity_styles_geojson_layer_in_stack_url, true));
@@ -201,6 +204,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_offline_simple_title, R.string.activity_offline_simple_description, new Intent(MainActivity.this, SimpleOfflineMapActivity.class), R.string.activity_offline_simple_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_offline_manager_title, R.string.activity_offline_manager_description, new Intent(MainActivity.this, OfflineManagerActivity.class), R.string.activity_offline_manager_url));
                 currentCategory = R.id.nav_offline;
+                break;
+            case R.id.nav_query_map:
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_query_feature_title, R.string.activity_query_feature_description, new Intent(MainActivity.this, QueryFeatureActivity.class), R.string.empty_image));
+                currentCategory = R.id.nav_query_map;
                 break;
             case R.id.nav_mas:
                 exampleItemModel.add(null);

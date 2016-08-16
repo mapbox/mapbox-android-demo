@@ -314,5 +314,21 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+        <activity
+            android:name=".examples.query.QueryFeatureActivity"
+            android:label="@string/activity_query_feature_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".examples.styles.CreateHeatmapPointsActivity"
+            android:label="@string/activity_style_create_heatmap_points_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
     </application>
 </manifest>

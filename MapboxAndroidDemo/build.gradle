@@ -47,7 +47,7 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
     compile 'com.github.javiersantos:MaterialStyledDialogs:1.5.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-beta.1@aar'){
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-SNAPSHOT@aar'){
         transitive=true
     }
     compile('com.mapbox.mapboxsdk:mapbox-android-services:1.2.1@aar') {
