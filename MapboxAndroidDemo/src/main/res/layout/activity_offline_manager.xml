@@ -25,7 +25,7 @@
         android:layout_centerHorizontal="true"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        style="@android:style/Widget.Material.ProgressBar.Horizontal" />
+        style="?android:attr/progressBarStyleHorizontal" />
 
     <LinearLayout
         android:layout_width="match_parent"
