@@ -67,6 +67,7 @@
     <string name="activity_offline_simple_title">A simple offline map</string>
     <string name="activity_offline_manager_title">Offline manager</string>
     <string name="activity_query_feature_title">Query a map feature</string>
+    <string name="activity_query_select_building_title">Select a building</string>
     <string name="activity_location_basic_title">Show user location</string>
     <string name="activity_location_tracking_title">Track user location</string>
     <string name="activity_mas_directions_title">Show directions on map</string>
@@ -107,6 +108,7 @@
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Android SDK.</string>
     <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
     <string name="activity_query_feature_description">TODO</string>
+    <string name="activity_query_select_building_description">TODO</string>
     <string name="activity_location_basic_description">Toggle the users current location on the map.</string>
     <string name="activity_location_tracking_description">Lock the camera centered above the user location</string>
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
@@ -135,6 +137,7 @@
     <string name="activity_styles_geojson_layer_in_stack_url">http://i.imgur.com/mngiJUj.png</string>
     <string name="activity_styles_adjust_layer_opacity_url">http://i.imgur.com/0Av8kWD.png</string>
     <string name="activity_styles_vector_source_url">http://i.imgur.com/N0altyP.png</string>
+    <string name="activity_style_create_heatmap_points_url">http://i.imgur.com/pAejKLH.png</string>
     <string name="activity_annotation_marker_url">https://www.mapbox.com/android-sdk/images/marker.png</string>
     <string name="activity_annotation_custom_marker_url">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
     <string name="activity_annotation_geojson_line_url">https://www.mapbox.com/android-sdk/images/geojson.png</string>
@@ -147,6 +150,7 @@
     <string name="activity_camera_bounding_box_url">http://i.imgur.com/A0JL21Q.png</string> <!-- https://www.mapbox.com/android-sdk/images/fit-bound-camera.gif -->
     <string name="activity_offline_simple_url">https://www.mapbox.com/android-sdk/images/offline-map.png</string>
     <string name="activity_offline_manager_url">https://www.mapbox.com/android-sdk/images/offline-manager.gif</string>
+    <string name="activity_query_select_building_url">http://i.imgur.com/bImud7u.png</string>
     <string name="activity_location_basic_image_url">http://i.imgur.com/5BzH5YF.png</string> <!--https://www.mapbox.com/android-sdk/images/user-location.png-->
     <string name="activity_location_tracking_url">http://i.imgur.com/U3uc32F.png</string>
     <string name="activity_mas_directions_url">https://www.mapbox.com/android-sdk/images/directions.png</string>

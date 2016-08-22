@@ -1,26 +1,25 @@
 package com.mapbox.mapboxandroiddemo.examples.query;
 
-import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.annotations.PolygonOptions;
+import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.commons.geojson.Feature;
-import com.mapbox.services.commons.geojson.Polygon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QueryFeatureActivity extends AppCompatActivity {
 
     private MapView mapView;
+    private Marker featureMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,46 +32,25 @@ public class QueryFeatureActivity extends AppCompatActivity {
             @Override
             public void onMapReady(final MapboxMap mapboxMap) {
 
-                mapboxMap.cycleDebugOptions();
-                mapboxMap.cycleDebugOptions();
-                mapboxMap.cycleDebugOptions();
-
                 mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
                     @Override
-                    public void onMapClick(@NonNull LatLng latLng) {
+                    public void onMapClick(@NonNull LatLng point) {
 
-                        final PointF point = mapboxMap.getProjection().toScreenLocation(latLng);
-                        List<Feature> features = mapboxMap.queryRenderedFeatures(point, "building");
+                        final PointF pixel = mapboxMap.getProjection().toScreenLocation(point);
+                        List<Feature> features = mapboxMap.queryRenderedFeatures(pixel);
 
                         if (features.size() > 0) {
-                            String featureID = features.get(0).getId();
 
-                            for (int a = 0; a < features.size(); a++) {
-                                if(featureID.equals(features.get(a).getId()))
+                            Feature feature = features.get(0);
 
-                                if (features.get(a).getGeometry() instanceof Polygon) {
+                            featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
+                                    .position(point)
+                                    //.snippet(feature.getProperties())
+                            );
 
-                                    List<LatLng> list = new ArrayList<>();
-                                    for (int i = 0; i < ((Polygon) features.get(a).getGeometry()).getCoordinates().size(); i++) {
-                                        for (int j = 0; j < ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).size(); j++) {
-                                            list.add(new LatLng(
-                                                    ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLatitude(),
-                                                    ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLongitude()
-                                            ));
-                                        }
-                                    }
-
-                                    mapboxMap.addPolygon(new PolygonOptions().addAll(list).fillColor(Color.parseColor("#8A8ACB")));
-                                }
-                            }
                         }
-
-                        
-
-
                     }
                 });
-
             }
         });
     }
