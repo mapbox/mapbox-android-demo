@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationListener;
 import com.mapbox.mapboxsdk.location.LocationServices;
@@ -24,8 +25,9 @@ public class BasicUserLocation extends AppCompatActivity {
 
     private MapView mapView;
     private MapboxMap map;
-    FloatingActionButton floatingActionButton;
-    LocationServices locationServices;
+    private FloatingActionButton floatingActionButton;
+    private LocationServices locationServices;
+
 
     private static final int PERMISSIONS_LOCATION = 0;
 
@@ -86,8 +88,7 @@ public class BasicUserLocation extends AppCompatActivity {
         mapView.onLowMemory();
     }
 
-    @UiThread
-    public void toggleGps(boolean enableGps) {
+    private void toggleGps(boolean enableGps) {
         if (enableGps) {
             // Check if user has granted location permission
             if (!locationServices.areLocationPermissionsGranted()) {
@@ -104,15 +105,22 @@ public class BasicUserLocation extends AppCompatActivity {
 
     private void enableLocation(boolean enabled) {
         if (enabled) {
+            // If we have the last location of the user, we can move the camera to that position.
+            Location lastLocation = locationServices.getLastLocation();
+            if (lastLocation != null) {
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
+            }
+
             locationServices.addLocationListener(new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
                     if (location != null) {
-                        // Move the map camera to where the user location is
-                        map.setCameraPosition(new CameraPosition.Builder()
-                                .target(new LatLng(location))
-                                .zoom(16)
-                                .build());
+                        // Move the map camera to where the user location is and then remove the
+                        // listener so the camera isn't constantly updating when the user location
+                        // changes. When the user disables and then enables the location again, this
+                        // listener is registered again and will adjust the camera once again.
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 16));
+                        locationServices.removeLocationListener(this);
                     }
                 }
             });

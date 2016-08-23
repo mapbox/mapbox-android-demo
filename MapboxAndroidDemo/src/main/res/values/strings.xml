@@ -71,6 +71,8 @@
     <string name="activity_query_bounding_box_feature_count_title">Feature count inside bounding box</string>
     <string name="activity_location_basic_title">Show user location</string>
     <string name="activity_location_tracking_title">Track user location</string>
+    <string name="activity_location_animated_icon_title">Animate the user icon</string>
+    <string name="activity_location_customize_user_title">Customize user location icon</string>
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
@@ -112,7 +114,9 @@
     <string name="activity_query_select_building_description">Use the query feature to select a building, get its geometry and draw a polygon highlighting it.</string>
     <string name="activity_query_bounding_box_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
     <string name="activity_location_basic_description">Toggle the users current location on the map.</string>
-    <string name="activity_location_tracking_description">Lock the camera centered above the user location</string>
+    <string name="activity_location_tracking_description">Lock the camera centered above the user location.</string>
+    <string name="activity_location_animated_icon_description">Use a marker view to mark the users location and add a pulsing animation to it.</string>
+    <string name="activity_location_customize_user_description">"Adjust the user location icon's colors and padding so it appears lower on the screen."</string>
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
     <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
@@ -157,6 +161,8 @@
     <string name="activity_query_bounding_box_feature_count_url">http://i.imgur.com/RHpFNas.png</string>
     <string name="activity_location_basic_image_url">http://i.imgur.com/5BzH5YF.png</string> <!--https://www.mapbox.com/android-sdk/images/user-location.png-->
     <string name="activity_location_tracking_url">http://i.imgur.com/U3uc32F.png</string>
+    <string name="activity_location_animated_icon_url">http://i.imgur.com/dsUKM2i.png</string>
+    <string name="activity_location_customize_user_url">http://i.imgur.com/Q6O82JJ.png</string>
     <string name="activity_mas_directions_url">https://www.mapbox.com/android-sdk/images/directions.png</string>
     <string name="activity_mas_geocoding_url">https://www.mapbox.com/android-sdk/images/geocoding.gif</string>
     <string name="activity_mas_static_image_url">https://www.mapbox.com/android-sdk/images/static-image.png</string>

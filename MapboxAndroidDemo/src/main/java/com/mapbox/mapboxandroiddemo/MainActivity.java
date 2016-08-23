@@ -33,7 +33,9 @@ import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.AnimatedLocationIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.BasicUserLocation;
+import com.mapbox.mapboxandroiddemo.examples.location.CustomizeUserLocationActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationTrackingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
@@ -223,6 +225,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 currentCategory = R.id.nav_mas;
                 break;
             case R.id.nav_location:
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_location_animated_icon_title, R.string.activity_location_animated_icon_description, new Intent(MainActivity.this, AnimatedLocationIconActivity.class), R.string.activity_location_animated_icon_url, true));
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_location_customize_user_title, R.string.activity_location_customize_user_description, new Intent(MainActivity.this, CustomizeUserLocationActivity.class), R.string.activity_location_customize_user_url, true));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_location_basic_title, R.string.activity_location_basic_description, new Intent(MainActivity.this, BasicUserLocation.class), R.string.activity_location_basic_image_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_location_tracking_title, R.string.activity_location_tracking_description, new Intent(MainActivity.this, LocationTrackingActivity.class), R.string.activity_location_tracking_url));
                 currentCategory = R.id.nav_location;
