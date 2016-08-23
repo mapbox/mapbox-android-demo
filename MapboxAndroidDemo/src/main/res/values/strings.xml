@@ -27,6 +27,7 @@
     <string name="annotations_category">Annotations</string>
     <string name="camera_category">Camera</string>
     <string name="offline_category">Offline</string>
+    <string name="query_map_category">Query map</string>
     <string name="android_services_category">Android Services</string>
     <string name="location_category">User location</string>
     <string name="lab_category">Lab</string>
@@ -52,6 +53,7 @@
     <string name="activity_styles_geojson_layer_in_stack_title">Add a new layer below labels</string>
     <string name="activity_styles_vector_source_title">Add a vector tile source</string>
     <string name="activity_style_zoom_dependent_fill_color_title">Color dependent on zoom level</string>
+    <string name="activity_style_create_heatmap_points_title">Create a heatmap from points</string>
     <string name="activity_annotation_marker_title">Draw a marker</string>
     <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
     <string name="activity_annotation_geojson_line_title">Draw a GeoJSON line</string>
@@ -64,6 +66,9 @@
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
     <string name="activity_offline_simple_title">A simple offline map</string>
     <string name="activity_offline_manager_title">Offline manager</string>
+    <string name="activity_query_feature_title">Query a map feature</string>
+    <string name="activity_query_select_building_title">Select a building</string>
+    <string name="activity_query_bounding_box_feature_count_title">Feature count inside bounding box</string>
     <string name="activity_location_basic_title">Show user location</string>
     <string name="activity_location_tracking_title">Track user location</string>
     <string name="activity_location_animated_icon_title">Animate the user icon</string>
@@ -92,6 +97,7 @@
     <string name="activity_styles_geojson_layer_in_stack_description">Using the second argument of addLayer, you can be more precise</string>
     <string name="activity_styles_vector_source_description">Add a vector source to a map and display it as a layer.</string>
     <string name="activity_style_zoom_dependent_fill_color_description">Make a property depend on the map zoom level, in this case, the water layers fill color.</string>
+    <string name="activity_style_create_heatmap_points_description">Use the Mapbox Android SDK to visualize point data as a heatmap.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
@@ -104,6 +110,9 @@
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Android SDK.</string>
     <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
+    <string name="activity_query_feature_description">Click the map to add a marker at the location and display the maps property information for that feature.</string>
+    <string name="activity_query_select_building_description">Use the query feature to select a building, get its geometry and draw a polygon highlighting it.</string>
+    <string name="activity_query_bounding_box_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
     <string name="activity_location_basic_description">Toggle the users current location on the map.</string>
     <string name="activity_location_tracking_description">Lock the camera centered above the user location.</string>
     <string name="activity_location_animated_icon_description">Use a marker view to mark the users location and add a pulsing animation to it.</string>
@@ -134,6 +143,7 @@
     <string name="activity_styles_geojson_layer_in_stack_url">http://i.imgur.com/mngiJUj.png</string>
     <string name="activity_styles_adjust_layer_opacity_url">http://i.imgur.com/0Av8kWD.png</string>
     <string name="activity_styles_vector_source_url">http://i.imgur.com/N0altyP.png</string>
+    <string name="activity_style_create_heatmap_points_url">http://i.imgur.com/pAejKLH.png</string>
     <string name="activity_annotation_marker_url">https://www.mapbox.com/android-sdk/images/marker.png</string>
     <string name="activity_annotation_custom_marker_url">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
     <string name="activity_annotation_geojson_line_url">https://www.mapbox.com/android-sdk/images/geojson.png</string>
@@ -146,6 +156,9 @@
     <string name="activity_camera_bounding_box_url">http://i.imgur.com/A0JL21Q.png</string> <!-- https://www.mapbox.com/android-sdk/images/fit-bound-camera.gif -->
     <string name="activity_offline_simple_url">https://www.mapbox.com/android-sdk/images/offline-map.png</string>
     <string name="activity_offline_manager_url">https://www.mapbox.com/android-sdk/images/offline-manager.gif</string>
+    <string name="activity_query_select_building_url">http://i.imgur.com/bImud7u.png</string>
+    <string name="activity_query_feature_url">http://i.imgur.com/HXxRBAF.png</string>
+    <string name="activity_query_bounding_box_feature_count_url">http://i.imgur.com/RHpFNas.png</string>
     <string name="activity_location_basic_image_url">http://i.imgur.com/5BzH5YF.png</string> <!--https://www.mapbox.com/android-sdk/images/user-location.png-->
     <string name="activity_location_tracking_url">http://i.imgur.com/U3uc32F.png</string>
     <string name="activity_location_animated_icon_url">http://i.imgur.com/dsUKM2i.png</string>
