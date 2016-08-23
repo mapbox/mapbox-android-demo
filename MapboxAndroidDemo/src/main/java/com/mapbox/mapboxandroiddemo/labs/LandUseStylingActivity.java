@@ -41,13 +41,13 @@ public class LandUseStylingActivity extends AppCompatActivity {
                 schoolLayer.setFilter(eq("class", "school"));
                 mapboxMap.addLayer(schoolLayer);
 
-                FillLayer industrialLayer = new FillLayer("industrial-layer", "composite");
-                industrialLayer.setSourceLayer("landuse");
-                industrialLayer.setProperties(
+                FillLayer hospitalLayer = new FillLayer("hospital-layer", "composite");
+                hospitalLayer.setSourceLayer("landuse");
+                hospitalLayer.setProperties(
                         fillColor(Color.parseColor("#eceeed"))
                 );
-                industrialLayer.setFilter(eq("class", "industrial"));
-                mapboxMap.addLayer(industrialLayer);
+                hospitalLayer.setFilter(eq("class", "hospital"));
+                mapboxMap.addLayer(hospitalLayer);
 
                 FloatingActionButton toggleParks = (FloatingActionButton) findViewById(R.id.fab_toggle_parks);
                 toggleParks.setOnClickListener(new View.OnClickListener() {
@@ -89,19 +89,19 @@ public class LandUseStylingActivity extends AppCompatActivity {
                     }
                 });
 
-                FloatingActionButton toggleIndustrial = (FloatingActionButton) findViewById(R.id.fab_toggle_industry);
-                toggleIndustrial.setOnClickListener(new View.OnClickListener() {
+                FloatingActionButton toggleHospital = (FloatingActionButton) findViewById(R.id.fab_toggle_hospital);
+                toggleHospital.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        FillLayer industrial = mapboxMap.getLayerAs("industrial-layer");
-                        if (industrial != null) {
-                            if (industrial.getFillColor().isValue() &&
-                                    !colorsEqual(industrial.getFillColorAsInt(), ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxPurple))) {
-                                industrial.setProperties(
+                        FillLayer hospital = mapboxMap.getLayerAs("hospital-layer");
+                        if (hospital != null) {
+                            if (hospital.getFillColor().isValue() &&
+                                    !colorsEqual(hospital.getFillColorAsInt(), ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxPurple))) {
+                                hospital.setProperties(
                                         fillColor(ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxPurple))
                                 );
                             } else {
-                                industrial.setProperties(
+                                hospital.setProperties(
                                         fillColor(Color.parseColor("#eceeed"))
                                 );
                             }

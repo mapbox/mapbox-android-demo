@@ -219,10 +219,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_lab:
                 exampleItemModel.add(null);
+                exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_land_use_stying_title, R.string.activity_lab_land_use_stying_description, new Intent(MainActivity.this, LandUseStylingActivity.class), R.string.activity_lab_land_use_stying_url, true));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_location_picker_title, R.string.activity_lab_location_picker_description, new Intent(MainActivity.this, LocationPickerActivity.class), R.string.activity_lab_location_picker_url));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_marker_following_route_title, R.string.activity_lab_marker_following_route_description, new Intent(MainActivity.this, MarkerFollowingRouteActivity.class), R.string.activity_lab_marker_following_route_url, true));
                 exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_space_station_location_title, R.string.activity_lab_space_station_location_description, new Intent(MainActivity.this, SpaceStationLocationActivity.class), R.string.activity_lab_space_station_location_url));
-                exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_land_use_stying_title, R.string.activity_lab_land_use_stying_description, new Intent(MainActivity.this, LandUseStylingActivity.class), R.string.empty_image));
                 currentCategory = R.id.nav_lab;
                 break;
         }
