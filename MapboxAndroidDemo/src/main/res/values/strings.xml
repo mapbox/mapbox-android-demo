@@ -81,6 +81,7 @@
     <string name="activity_lab_location_picker_title">Location picker</string>
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
     <string name="activity_lab_space_station_location_title">Space station current location</string>
+    <string name="activity_lab_land_use_stying_title">Land use styling</string>
 
     <!-- example descriptions-->
     <string name="activity_basic_simple_mapview_description">Show a map in your app using the Mapbox Android SDK.</string>
@@ -125,6 +126,7 @@
     <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding.</string>
     <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>
     <string name="activity_lab_space_station_location_description">See the International Space Station location in real time.</string>
+    <string name="activity_lab_land_use_stying_description">Use the style api to allow toggleable highlighting of parks, hospitals, and schools.</string>
 
     <!-- example urls-->
     <string name="empty_image"> </string>
@@ -171,5 +173,6 @@
     <string name="activity_lab_location_picker_url">http://i.imgur.com/0JTVwaa.png</string>
     <string name="activity_lab_marker_following_route_url">http://i.imgur.com/spsZu9X.png</string>
     <string name="activity_lab_space_station_location_url">http://i.imgur.com/PxuB1T8.png</string>
+    <string name="activity_lab_land_use_stying_url">http://i.imgur.com/x1i4qEw.png</string>
 
 </resources>

@@ -51,7 +51,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_space_station_location);
+        setContentView(R.layout.activity_lab_space_station_location);
 
         // Initialize the map view
         mapView = (MapView) findViewById(R.id.mapView);
