@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
+import com.google.gson.JsonElement;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
@@ -15,6 +16,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.commons.geojson.Feature;
 
 import java.util.List;
+import java.util.Map;
 
 public class QueryFeatureActivity extends AppCompatActivity {
 
@@ -36,19 +38,47 @@ public class QueryFeatureActivity extends AppCompatActivity {
                     @Override
                     public void onMapClick(@NonNull LatLng point) {
 
+                        if(featureMarker != null){
+                            mapboxMap.removeMarker(featureMarker);
+                        }
+
                         final PointF pixel = mapboxMap.getProjection().toScreenLocation(point);
                         List<Feature> features = mapboxMap.queryRenderedFeatures(pixel);
 
-                        if (features.size() > 0) {
-
+                        if(features.size() > 0) {
                             Feature feature = features.get(0);
 
+                            String property;
+
+                            StringBuilder stringBuilder = new StringBuilder();
+                            if (feature.getProperties() != null) {
+                                for (Map.Entry<String, JsonElement> entry : feature.getProperties().entrySet()) {
+                                    stringBuilder.append(String.format("%s - %s", entry.getKey(), entry.getValue()));
+                                    stringBuilder.append(System.getProperty("line.separator"));
+                                }
+
+                                featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
+                                        .position(point)
+                                        .title("Properties:")
+                                        .snippet(stringBuilder.toString())
+                                );
+
+                            } else {
+                                property = "No feature properties found";
+                                featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
+                                        .position(point)
+                                        .snippet(property)
+                                );
+                            }
+                        } else {
                             featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
                                     .position(point)
-                                    //.snippet(feature.getProperties())
+                                    .snippet("No feature properties found")
                             );
-
                         }
+
+                        mapboxMap.selectMarker(featureMarker);
+
                     }
                 });
             }

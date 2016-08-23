@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/query_bbox_feature_count_map_container"
+    tools:context=".examples.query.BoundingBoxFeatureCountActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            mapbox:center_latitude="40.73581"
+            mapbox:center_longitude="-73.99155"
+            mapbox:style_url="@string/style_light"
+            mapbox:zoom="16"/>
+
+        <FrameLayout
+            android:id="@+id/selection_box"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:alpha="0.3"
+            android:background="#A4A4E5"/>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
