@@ -16,61 +16,61 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 public class DrawCustomMarkerActivity extends AppCompatActivity {
 
-    private MapView mapView;
+  private MapView mapView;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_annotation_custom_marker);
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_annotation_custom_marker);
 
-        mapView = (MapView) findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
+    mapView = (MapView) findViewById(R.id.mapView);
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(MapboxMap mapboxMap) {
 
-                // Create an Icon object for the marker to use
-                IconFactory iconFactory = IconFactory.getInstance(DrawCustomMarkerActivity.this);
-                Drawable iconDrawable = ContextCompat.getDrawable(DrawCustomMarkerActivity.this, R.drawable.purple_marker);
-                Icon icon = iconFactory.fromDrawable(iconDrawable);
+        // Create an Icon object for the marker to use
+        IconFactory iconFactory = IconFactory.getInstance(DrawCustomMarkerActivity.this);
+        Drawable iconDrawable = ContextCompat.getDrawable(DrawCustomMarkerActivity.this, R.drawable.purple_marker);
+        Icon icon = iconFactory.fromDrawable(iconDrawable);
 
-                // Add the custom icon marker to the map
-                mapboxMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(-33.8500000, 18.4158234))
-                        .title("Cape Town Harbour")
-                        .snippet("One of the busiest ports in South Africa")
-                        .icon(icon));
-            }
-        });
-    }
+        // Add the custom icon marker to the map
+        mapboxMap.addMarker(new MarkerOptions()
+            .position(new LatLng(-33.8500000, 18.4158234))
+            .title("Cape Town Harbour")
+            .snippet("One of the busiest ports in South Africa")
+            .icon(icon));
+      }
+    });
+  }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
+  @Override
+  public void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
+  @Override
+  public void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
 
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
+  @Override
+  public void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
+  }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
 }

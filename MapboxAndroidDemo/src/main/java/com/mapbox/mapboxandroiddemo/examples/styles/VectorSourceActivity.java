@@ -19,64 +19,64 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 public class VectorSourceActivity extends AppCompatActivity {
 
-    private MapView mapView;
+  private MapView mapView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_style_vector_style);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_style_vector_style);
 
-        mapView = (MapView) findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
+    mapView = (MapView) findViewById(R.id.mapView);
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(MapboxMap mapboxMap) {
 
-                VectorSource vectorSource = new VectorSource("terrain-data", "mapbox://mapbox.mapbox-terrain-v2");
-                mapboxMap.addSource(vectorSource);
+        VectorSource vectorSource = new VectorSource("terrain-data", "mapbox://mapbox.mapbox-terrain-v2");
+        mapboxMap.addSource(vectorSource);
 
-                LineLayer terrainData = new LineLayer("terrain-data", "terrain-data");
-                terrainData.setSourceLayer("contour");
-                terrainData.setProperties(
-                        lineJoin(Property.LINE_JOIN_ROUND),
-                        lineCap(Property.LINE_CAP_ROUND),
-                        lineColor(Color.parseColor("#ff69b4")),
-                        lineWidth(1f)
-                );
+        LineLayer terrainData = new LineLayer("terrain-data", "terrain-data");
+        terrainData.setSourceLayer("contour");
+        terrainData.setProperties(
+            lineJoin(Property.LINE_JOIN_ROUND),
+            lineCap(Property.LINE_CAP_ROUND),
+            lineColor(Color.parseColor("#ff69b4")),
+            lineWidth(1f)
+        );
 
-                mapboxMap.addLayer(terrainData);
+        mapboxMap.addLayer(terrainData);
 
-            }
-        });
-    }
+      }
+    });
+  }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
+  @Override
+  public void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
+  @Override
+  public void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
 
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
+  }
 }

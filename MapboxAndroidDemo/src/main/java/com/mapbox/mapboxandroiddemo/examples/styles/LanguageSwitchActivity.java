@@ -15,83 +15,83 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 
 public class LanguageSwitchActivity extends AppCompatActivity {
 
-    private MapView mapView;
-    private MapboxMap map;
+  private MapView mapView;
+  private MapboxMap map;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_style_language_switch);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_style_language_switch);
 
-        mapView = (MapView) findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                map = mapboxMap;
+    mapView = (MapView) findViewById(R.id.mapView);
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(MapboxMap mapboxMap) {
+        map = mapboxMap;
 
-            }
-        });
+      }
+    });
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
+
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
+
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_map_langauge, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    Layer mapText = map.getLayer("country-label-lg");
+    if (mapText != null) {
+      switch (item.getItemId()) {
+        case R.id.english:
+          mapText.setProperties(textField("{name_en}"));
+          return true;
+        case R.id.french:
+          mapText.setProperties(textField("{name_fr}"));
+          return true;
+        case R.id.russian:
+          mapText.setProperties(textField("{name_ru}"));
+          return true;
+        case R.id.german:
+          mapText.setProperties(textField("{name_de}"));
+          return true;
+        case R.id.spanish:
+          mapText.setProperties(textField("{name_es}"));
+          return true;
+      }
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_map_langauge, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Layer mapText = map.getLayer("country-label-lg");
-        if (mapText != null) {
-            switch (item.getItemId()) {
-                case R.id.english:
-                    mapText.setProperties(textField("{name_en}"));
-                    return true;
-                case R.id.french:
-                    mapText.setProperties(textField("{name_fr}"));
-                    return true;
-                case R.id.russian:
-                    mapText.setProperties(textField("{name_ru}"));
-                    return true;
-                case R.id.german:
-                    mapText.setProperties(textField("{name_de}"));
-                    return true;
-                case R.id.spanish:
-                    mapText.setProperties(textField("{name_es}"));
-                    return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    return super.onOptionsItemSelected(item);
+  }
 }

@@ -17,6 +17,7 @@
 
     <string name="description_labs">While other categories in this app present examples doing one specific thing, the lab category combines examples to show the power of the SDK.</string>
     <string name="description_mas">Mapbox Android Services bundles many of the Mapbox APIs into a single SDK such as directions, geocoding, and many of the other utilities offered.</string>
+    <string name="description_query">Examples here show how to query the map data to obtain information such as a features geometry or properties.</string>
 
     <!-- toolbar items -->
     <string name="info">Info</string>
@@ -68,7 +69,7 @@
     <string name="activity_offline_manager_title">Offline manager</string>
     <string name="activity_query_feature_title">Query a map feature</string>
     <string name="activity_query_select_building_title">Select a building</string>
-    <string name="activity_query_bounding_box_feature_count_title">Feature count inside bounding box</string>
+    <string name="activity_query_feature_count_title">Feature count</string>
     <string name="activity_location_basic_title">Show user location</string>
     <string name="activity_location_tracking_title">Track user location</string>
     <string name="activity_location_animated_icon_title">Animate the user icon</string>
@@ -82,6 +83,7 @@
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
     <string name="activity_lab_space_station_location_title">Space station current location</string>
     <string name="activity_lab_land_use_stying_title">Land use styling</string>
+    <string name="activity_lab_off_route_title">Off route detection</string>
 
     <!-- example descriptions-->
     <string name="activity_basic_simple_mapview_description">Show a map in your app using the Mapbox Android SDK.</string>
@@ -104,7 +106,7 @@
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
     <string name="activity_annotation_polygon_description">Draw a vector polygon on a map with the Mapbox Android SDK.</string>
     <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
-    <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize info window.</string>
+    <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize the info window.</string>
     <string name="activity_annotation_animated_marker_description">Animate the marker to a new position on the map.</string>
     <string name="activity_annotation_animated_circle_marker_description">Animate a marker view icon to appear to pulse.</string>
     <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
@@ -113,7 +115,7 @@
     <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
     <string name="activity_query_feature_description">Click the map to add a marker at the location and display the maps property information for that feature.</string>
     <string name="activity_query_select_building_description">Use the query feature to select a building, get its geometry and draw a polygon highlighting it.</string>
-    <string name="activity_query_bounding_box_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
+    <string name="activity_query_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
     <string name="activity_location_basic_description">Toggle the users current location on the map.</string>
     <string name="activity_location_tracking_description">Lock the camera centered above the user location.</string>
     <string name="activity_location_animated_icon_description">Use a marker view to mark the users location and add a pulsing animation to it.</string>
@@ -127,6 +129,7 @@
     <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>
     <string name="activity_lab_space_station_location_description">See the International Space Station location in real time.</string>
     <string name="activity_lab_land_use_stying_description">Use the style api to allow toggleable highlighting of parks, hospitals, and schools.</string>
+    <string name="activity_lab_off_route_description">Detect when the car is off route and reroute them.</string>
 
     <!-- example urls-->
     <string name="empty_image"> </string>
@@ -160,7 +163,7 @@
     <string name="activity_offline_manager_url">https://www.mapbox.com/android-sdk/images/offline-manager.gif</string>
     <string name="activity_query_select_building_url">http://i.imgur.com/bImud7u.png</string>
     <string name="activity_query_feature_url">http://i.imgur.com/HXxRBAF.png</string>
-    <string name="activity_query_bounding_box_feature_count_url">http://i.imgur.com/RHpFNas.png</string>
+    <string name="activity_query_feature_count_url">http://i.imgur.com/RHpFNas.png</string>
     <string name="activity_location_basic_image_url">http://i.imgur.com/5BzH5YF.png</string> <!--https://www.mapbox.com/android-sdk/images/user-location.png-->
     <string name="activity_location_tracking_url">http://i.imgur.com/U3uc32F.png</string>
     <string name="activity_location_animated_icon_url">http://i.imgur.com/dsUKM2i.png</string>
@@ -174,5 +177,6 @@
     <string name="activity_lab_marker_following_route_url">http://i.imgur.com/spsZu9X.png</string>
     <string name="activity_lab_space_station_location_url">http://i.imgur.com/PxuB1T8.png</string>
     <string name="activity_lab_land_use_stying_url">http://i.imgur.com/x1i4qEw.png</string>
+    <string name="activity_lab_off_route_url">http://i.imgur.com/lx1LdkA.png</string>
 
 </resources>

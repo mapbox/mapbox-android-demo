@@ -17,87 +17,87 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.rasterOpacity;
 
 public class AdjustLayerOpacityActivity extends AppCompatActivity {
 
-    private MapView mapView;
-    private MapboxMap map;
-    private Layer chicago;
+  private MapView mapView;
+  private MapboxMap map;
+  private Layer chicago;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_style_adjust_layer_opacity);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_style_adjust_layer_opacity);
 
-        final SeekBar opacitySeekBar = (SeekBar) findViewById(R.id.seek_bar_layer_opacity);
-        final TextView percentTextView = (TextView) findViewById(R.id.textview_opacity_value);
+    final SeekBar opacitySeekBar = (SeekBar) findViewById(R.id.seek_bar_layer_opacity);
+    final TextView percentTextView = (TextView) findViewById(R.id.textview_opacity_value);
 
-        opacitySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if (chicago != null) {
-                    chicago.setProperties(
-                            rasterOpacity((float) i / 100)
-                    );
-                }
-                String s = i + "%";
-                percentTextView.setText(s);
-            }
+    opacitySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+      @Override
+      public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        if (chicago != null) {
+          chicago.setProperties(
+              rasterOpacity((float) i / 100)
+          );
+        }
+        String s = i + "%";
+        percentTextView.setText(s);
+      }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+      @Override
+      public void onStartTrackingTouch(SeekBar seekBar) {
 
-            }
+      }
 
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+      @Override
+      public void onStopTrackingTouch(SeekBar seekBar) {
 
-            }
-        });
+      }
+    });
 
-        mapView = (MapView) findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                map = mapboxMap;
+    mapView = (MapView) findViewById(R.id.mapView);
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(MapboxMap mapboxMap) {
+        map = mapboxMap;
 
-                RasterSource chicagoSource = new RasterSource("chicago-source", "mapbox://mapbox.u8yyzaor");
-                map.addSource(chicagoSource);
+        RasterSource chicagoSource = new RasterSource("chicago-source", "mapbox://mapbox.u8yyzaor");
+        map.addSource(chicagoSource);
 
-                RasterLayer chicagoLayer = new RasterLayer("chicago", "chicago-source");
-                map.addLayer(chicagoLayer);
+        RasterLayer chicagoLayer = new RasterLayer("chicago", "chicago-source");
+        map.addLayer(chicagoLayer);
 
-                chicago = map.getLayer("chicago");
+        chicago = map.getLayer("chicago");
 
-            }
-        });
-    }
+      }
+    });
+  }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
+  @Override
+  public void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
+  @Override
+  public void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
 
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
+  }
 }

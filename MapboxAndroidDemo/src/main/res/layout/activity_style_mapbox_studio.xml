@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,6 +18,6 @@
         mapbox:center_latitude="41.89010"
         mapbox:center_longitude="12.49200"
         mapbox:style_url="mapbox://styles/mapbox/outdoors-v9"
-        mapbox:zoom="15" />
+        mapbox:zoom="15"/>
 
 </RelativeLayout>

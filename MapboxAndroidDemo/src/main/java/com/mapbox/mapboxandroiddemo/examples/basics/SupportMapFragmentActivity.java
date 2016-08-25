@@ -15,45 +15,45 @@ import com.mapbox.mapboxsdk.maps.SupportMapFragment;
 
 public class SupportMapFragmentActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_basic_support_map_frag);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_basic_support_map_frag);
 
-        // Create supportMapFragment
-        SupportMapFragment mapFragment;
-        if (savedInstanceState == null) {
+    // Create supportMapFragment
+    SupportMapFragment mapFragment;
+    if (savedInstanceState == null) {
 
-            // Create fragment
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+      // Create fragment
+      FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-            LatLng patagonia = new LatLng(-52.6885, -70.1395);
+      LatLng patagonia = new LatLng(-52.6885, -70.1395);
 
-            // Build mapboxMap
-            MapboxMapOptions options = new MapboxMapOptions();
-            options.styleUrl(Style.SATELLITE);
-            options.camera(new CameraPosition.Builder()
-                    .target(patagonia)
-                    .zoom(9)
-                    .build());
+      // Build mapboxMap
+      MapboxMapOptions options = new MapboxMapOptions();
+      options.styleUrl(Style.SATELLITE);
+      options.camera(new CameraPosition.Builder()
+          .target(patagonia)
+          .zoom(9)
+          .build());
 
-            // Create map fragment
-            mapFragment = SupportMapFragment.newInstance(options);
+      // Create map fragment
+      mapFragment = SupportMapFragment.newInstance(options);
 
-            // Add map fragment to parent container
-            transaction.add(R.id.container, mapFragment, "com.mapbox.map");
-            transaction.commit();
-        } else {
-            mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
-        }
-
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-
-                // Customize map with markers, polylines, etc.
-
-            }
-        });
+      // Add map fragment to parent container
+      transaction.add(R.id.container, mapFragment, "com.mapbox.map");
+      transaction.commit();
+    } else {
+      mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
     }
+
+    mapFragment.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(MapboxMap mapboxMap) {
+
+        // Customize map with markers, polylines, etc.
+
+      }
+    });
+  }
 }

@@ -19,66 +19,66 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 
 public class GeojsonLayerInStackActivity extends AppCompatActivity {
 
-    private MapView mapView;
+  private MapView mapView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_style_geojson_layer_in_stack);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_style_geojson_layer_in_stack);
 
-        mapView = (MapView) findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(final MapboxMap mapboxMap) {
+    mapView = (MapView) findViewById(R.id.mapView);
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(final MapboxMap mapboxMap) {
 
-                try {
-                    URL geoJsonUrl = new URL("https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_urban_areas.geojson");
-                    GeoJsonSource urbanAreasSource = new GeoJsonSource("urban-areas", geoJsonUrl);
-                    mapboxMap.addSource(urbanAreasSource);
+        try {
+          URL geoJsonUrl = new URL("https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_urban_areas.geojson");
+          GeoJsonSource urbanAreasSource = new GeoJsonSource("urban-areas", geoJsonUrl);
+          mapboxMap.addSource(urbanAreasSource);
 
-                    FillLayer urbanArea = new FillLayer("urban-areas-fill", "urban-areas");
+          FillLayer urbanArea = new FillLayer("urban-areas-fill", "urban-areas");
 
-                    urbanArea.setProperties(
-                            fillColor(Color.parseColor("#ff0088")),
-                            fillOpacity(0.4f)
-                    );
+          urbanArea.setProperties(
+              fillColor(Color.parseColor("#ff0088")),
+              fillOpacity(0.4f)
+          );
 
-                    mapboxMap.addLayer(urbanArea, "water");
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+          mapboxMap.addLayer(urbanArea, "water");
+        } catch (MalformedURLException e) {
+          e.printStackTrace();
+        }
+      }
+    });
+  }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
+  @Override
+  public void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
+  @Override
+  public void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
 
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
+  }
 }

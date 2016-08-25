@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,13 +14,13 @@
         android:id="@+id/details_list"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:paddingEnd="110dp"
-        android:paddingLeft="110dp"
-        android:paddingStart="110dp"
-        android:paddingRight="110dp"
         android:layout_weight="0.4"
         android:clipToPadding="false"
         android:paddingBottom="6dp"
-        android:paddingTop="6dp" />
+        android:paddingEnd="110dp"
+        android:paddingLeft="110dp"
+        android:paddingRight="110dp"
+        android:paddingStart="110dp"
+        android:paddingTop="6dp"/>
 
 </LinearLayout>
