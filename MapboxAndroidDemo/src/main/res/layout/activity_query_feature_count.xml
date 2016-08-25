@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/query_bbox_feature_count_map_container"
-    tools:context=".examples.query.BoundingBoxFeatureCountActivity">
+    android:id="@+id/query_feature_count_map_container"
+    tools:context=".examples.query.FeatureCountActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

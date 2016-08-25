@@ -11,14 +11,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/mapboxGreen"
+        android:background="@color/mapboxRed"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="bottom"
-            android:src="@drawable/astronaut17"/>
+            android:src="@drawable/astronaut14"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="@string/description_mas"
+                android:text="@string/description_query"
                 android:textColor="@color/mapboxWhite"/>
         </LinearLayout>
 

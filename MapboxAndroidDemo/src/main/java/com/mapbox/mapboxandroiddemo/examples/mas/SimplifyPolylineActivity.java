@@ -28,141 +28,141 @@ import java.util.List;
 
 public class SimplifyPolylineActivity extends AppCompatActivity {
 
-    private static final String TAG = "SimplifyLineActivity";
+  private static final String TAG = "SimplifyLineActivity";
 
-    private MapView mapView;
-    private MapboxMap map;
+  private MapView mapView;
+  private MapboxMap map;
 
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_simplify_polyline);
+
+    mapView = (MapView) findViewById(R.id.mapview);
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(MapboxMap mapboxMap) {
+        map = mapboxMap;
+
+        new DrawGeoJSON().execute();
+
+      }
+    });
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
+
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
+
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
+  }
+
+  private class DrawGeoJSON extends AsyncTask<Void, Void, List<Position>> {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simplify_polyline);
+    protected List<Position> doInBackground(Void... voids) {
 
-        mapView = (MapView) findViewById(R.id.mapview);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                map = mapboxMap;
+      List<Position> points = new ArrayList<>();
 
-                new DrawGeoJSON().execute();
-
-            }
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    private class DrawGeoJSON extends AsyncTask<Void, Void, List<Position>> {
-        @Override
-        protected List<Position> doInBackground(Void... voids) {
-
-            List<Position> points = new ArrayList<>();
-
-            try {
-                // Load GeoJSON file
-                InputStream inputStream = getAssets().open("matched_route.geojson");
-                BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-                StringBuilder sb = new StringBuilder();
-                int cp;
-                while ((cp = rd.read()) != -1) {
-                    sb.append((char) cp);
-                }
-
-                inputStream.close();
-
-                // Parse JSON
-                JSONObject json = new JSONObject(sb.toString());
-                JSONArray features = json.getJSONArray("features");
-                JSONObject feature = features.getJSONObject(0);
-                JSONObject geometry = feature.getJSONObject("geometry");
-                if (geometry != null) {
-                    String type = geometry.getString("type");
-
-                    // Our GeoJSON only has one feature: a line string
-                    if (!TextUtils.isEmpty(type) && type.equalsIgnoreCase("LineString")) {
-
-                        // Get the Coordinates
-                        JSONArray coords = geometry.getJSONArray("coordinates");
-                        for (int lc = 0; lc < coords.length(); lc++) {
-                            JSONArray coord = coords.getJSONArray(lc);
-                            Position position = Position.fromCoordinates(coord.getDouble(0), coord.getDouble(1));
-                            points.add(position);
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "Exception Loading GeoJSON: " + e.toString());
-            }
-
-            return points;
+      try {
+        // Load GeoJSON file
+        InputStream inputStream = getAssets().open("matched_route.geojson");
+        BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+          sb.append((char) cp);
         }
 
-        @Override
-        protected void onPostExecute(List<Position> points) {
-            super.onPostExecute(points);
+        inputStream.close();
 
-            drawBeforeSimplify(points);
-            drawSimplify(points);
+        // Parse JSON
+        JSONObject json = new JSONObject(sb.toString());
+        JSONArray features = json.getJSONArray("features");
+        JSONObject feature = features.getJSONObject(0);
+        JSONObject geometry = feature.getJSONObject("geometry");
+        if (geometry != null) {
+          String type = geometry.getString("type");
 
+          // Our GeoJSON only has one feature: a line string
+          if (!TextUtils.isEmpty(type) && type.equalsIgnoreCase("LineString")) {
+
+            // Get the Coordinates
+            JSONArray coords = geometry.getJSONArray("coordinates");
+            for (int lc = 0; lc < coords.length(); lc++) {
+              JSONArray coord = coords.getJSONArray(lc);
+              Position position = Position.fromCoordinates(coord.getDouble(0), coord.getDouble(1));
+              points.add(position);
+            }
+          }
         }
+      } catch (Exception e) {
+        Log.e(TAG, "Exception Loading GeoJSON: " + e.toString());
+      }
+
+      return points;
     }
 
-    private void drawBeforeSimplify(List<Position> points) {
+    @Override
+    protected void onPostExecute(List<Position> points) {
+      super.onPostExecute(points);
 
-        LatLng[] pointsArray = new LatLng[points.size()];
-        for (int i = 0; i < points.size(); i++)
-            pointsArray[i] = new LatLng(points.get(i).getLatitude(), points.get(i).getLongitude());
-
-        map.addPolyline(new PolylineOptions()
-                .add(pointsArray)
-                .color(Color.parseColor("#8a8acb"))
-                .width(4));
-    }
-
-    private void drawSimplify(List<Position> points) {
-
-        Position[] before = new Position[points.size()];
-        for (int i = 0; i < points.size(); i++) before[i] = points.get(i);
-
-        Position[] after = PolylineUtils.simplify(before, 0.001);
-
-        LatLng[] result = new LatLng[after.length];
-        for (int i = 0; i < after.length; i++)
-            result[i] = new LatLng(after[i].getLatitude(), after[i].getLongitude());
-
-        map.addPolyline(new PolylineOptions()
-                .add(result)
-                .color(Color.parseColor("#3bb2d0"))
-                .width(4));
+      drawBeforeSimplify(points);
+      drawSimplify(points);
 
     }
+  }
+
+  private void drawBeforeSimplify(List<Position> points) {
+
+    LatLng[] pointsArray = new LatLng[points.size()];
+    for (int i = 0; i < points.size(); i++)
+      pointsArray[i] = new LatLng(points.get(i).getLatitude(), points.get(i).getLongitude());
+
+    map.addPolyline(new PolylineOptions()
+        .add(pointsArray)
+        .color(Color.parseColor("#8a8acb"))
+        .width(4));
+  }
+
+  private void drawSimplify(List<Position> points) {
+
+    Position[] before = new Position[points.size()];
+    for (int i = 0; i < points.size(); i++) before[i] = points.get(i);
+
+    Position[] after = PolylineUtils.simplify(before, 0.001);
+
+    LatLng[] result = new LatLng[after.length];
+    for (int i = 0; i < after.length; i++)
+      result[i] = new LatLng(after[i].getLatitude(), after[i].getLongitude());
+
+    map.addPolyline(new PolylineOptions()
+        .add(result)
+        .color(Color.parseColor("#3bb2d0"))
+        .width(4));
+
+  }
 }

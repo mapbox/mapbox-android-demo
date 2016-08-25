@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/english"
         android:orderInCategory="100"
         android:title="English"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/french"
         android:orderInCategory="100"
         android:title="French"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/russian"
         android:orderInCategory="100"
         android:title="Russian"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/german"
         android:orderInCategory="100"
         android:title="German"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
 
     <item
         android:id="@+id/spanish"
         android:orderInCategory="100"
         android:title="Spanish"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
 </menu>
