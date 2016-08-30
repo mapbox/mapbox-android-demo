@@ -109,9 +109,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
       @Override
-      public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-        if (currentCategory == R.id.nav_lab && position == 0) return;
-        else if (currentCategory == R.id.nav_mas && position == 0) return;
+      public void onItemClicked(RecyclerView recyclerView, int position, View view) {
+        if (currentCategory == R.id.nav_lab && position == 0) {
+          return;
+        } else if (currentCategory == R.id.nav_mas && position == 0) {
+          return;
+        }
         startActivity(exampleItemModel.get(position).getActivity());
 
       }
@@ -120,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-        this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+      this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     if (drawer != null) {
       drawer.addDrawerListener(toggle);
     }
@@ -167,81 +170,316 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private void listItems(int id) {
     exampleItemModel.clear();
     switch (id) {
-      case R.id.nav_basics:
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_basic_simple_mapview_title, R.string.activity_basic_simple_mapview_description, new Intent(MainActivity.this, SimpleMapViewActivity.class), R.string.activity_basic_simple_mapview_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_basic_support_map_frag_title, R.string.activity_basic_support_map_frag_description, new Intent(MainActivity.this, SupportMapFragmentActivity.class), R.string.activity_basic_support_map_frag_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_basic_mapbox_options_title, R.string.activity_basic_mapbox_options_description, new Intent(MainActivity.this, MapboxMapOptionActivity.class), R.string.activity_basic_mapbox_options_url));
-        currentCategory = R.id.nav_basics;
-        break;
-
       case R.id.nav_styles:
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_style_create_heatmap_points_title, R.string.activity_style_create_heatmap_points_description, new Intent(MainActivity.this, CreateHeatmapPointsActivity.class), R.string.activity_style_create_heatmap_points_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_styles_color_switcher_title, R.string.activity_styles_color_switcher_description, new Intent(MainActivity.this, ColorSwitcherActivity.class), R.string.activity_styles_color_switcher_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_styles_vector_source_title, R.string.activity_styles_vector_source_description, new Intent(MainActivity.this, VectorSourceActivity.class), R.string.activity_styles_vector_source_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_styles_geojson_layer_in_stack_title, R.string.activity_styles_geojson_layer_in_stack_description, new Intent(MainActivity.this, GeojsonLayerInStackActivity.class), R.string.activity_styles_geojson_layer_in_stack_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_style_zoom_dependent_fill_color_title, R.string.activity_style_zoom_dependent_fill_color_description, new Intent(MainActivity.this, ZoomDependentFillColorActivity.class), R.string.activity_style_zoom_dependent_fill_color_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_styles_adjust_layer_opacity_title, R.string.activity_styles_adjust_layer_opacity_description, new Intent(MainActivity.this, AdjustLayerOpacityActivity.class), R.string.activity_styles_adjust_layer_opacity_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_styles_langauge_switch_title, R.string.activity_styles_langauge_switch_description, new Intent(MainActivity.this, LanguageSwitchActivity.class), R.string.activity_styles_langauge_switch_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_styles_show_hide_layer_title, R.string.activity_styles_show_hide_layer_description, new Intent(MainActivity.this, ShowHideLayersActivity.class), R.string.activity_styles_show_hide_layer_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_style_mapbox_studio_title, R.string.activity_style_mapbox_studio_description, new Intent(MainActivity.this, MapboxStudioStyleActivity.class), R.string.activity_style_mapbox_studio_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_style_satellite_title, R.string.activity_style_satellite_description, new Intent(MainActivity.this, SatelliteStyleActivity.class), R.string.activity_style_satellite_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_style_raster_title, R.string.activity_style_raster_description, new Intent(MainActivity.this, CustomRasterStyleActivity.class), R.string.activity_style_raster_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_style_default_title, R.string.activity_style_default_description, new Intent(MainActivity.this, DefaultStyleActivity.class), R.string.activity_style_default_url));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_create_heatmap_points_title,
+          R.string.activity_style_create_heatmap_points_description,
+          new Intent(MainActivity.this, CreateHeatmapPointsActivity.class),
+          R.string.activity_style_create_heatmap_points_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_styles_color_switcher_title,
+          R.string.activity_styles_color_switcher_description,
+          new Intent(MainActivity.this, ColorSwitcherActivity.class),
+          R.string.activity_styles_color_switcher_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_styles_vector_source_title,
+          R.string.activity_styles_vector_source_description,
+          new Intent(MainActivity.this, VectorSourceActivity.class),
+          R.string.activity_styles_vector_source_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_styles_geojson_layer_in_stack_title,
+          R.string.activity_styles_geojson_layer_in_stack_description,
+          new Intent(MainActivity.this, GeojsonLayerInStackActivity.class),
+          R.string.activity_styles_geojson_layer_in_stack_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_zoom_dependent_fill_color_title,
+          R.string.activity_style_zoom_dependent_fill_color_description,
+          new Intent(MainActivity.this, ZoomDependentFillColorActivity.class),
+          R.string.activity_style_zoom_dependent_fill_color_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_styles_adjust_layer_opacity_title,
+          R.string.activity_styles_adjust_layer_opacity_description,
+          new Intent(MainActivity.this, AdjustLayerOpacityActivity.class),
+          R.string.activity_styles_adjust_layer_opacity_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_styles_langauge_switch_title,
+          R.string.activity_styles_langauge_switch_description,
+          new Intent(MainActivity.this, LanguageSwitchActivity.class),
+          R.string.activity_styles_langauge_switch_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_styles_show_hide_layer_title,
+          R.string.activity_styles_show_hide_layer_description,
+          new Intent(MainActivity.this, ShowHideLayersActivity.class),
+          R.string.activity_styles_show_hide_layer_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_mapbox_studio_title,
+          R.string.activity_style_mapbox_studio_description,
+          new Intent(MainActivity.this, MapboxStudioStyleActivity.class),
+          R.string.activity_style_mapbox_studio_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_satellite_title,
+          R.string.activity_style_satellite_description,
+          new Intent(MainActivity.this, SatelliteStyleActivity.class),
+          R.string.activity_style_satellite_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_raster_title,
+          R.string.activity_style_raster_description,
+          new Intent(MainActivity.this, CustomRasterStyleActivity.class),
+          R.string.activity_style_raster_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_default_title,
+          R.string.activity_style_default_description,
+          new Intent(MainActivity.this, DefaultStyleActivity.class),
+          R.string.activity_style_default_url
+        ));
         currentCategory = R.id.nav_styles;
         break;
       case R.id.nav_annotations:
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_animated_circle_marker_title, R.string.activity_annotation_animated_circle_marker_description, new Intent(MainActivity.this, AnimatedCircleMarkerActivity.class), R.string.activity_annotation_animated_circle_marker_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_marker_title, R.string.activity_annotation_custom_marker_description, new Intent(MainActivity.this, DrawMarkerActivity.class), R.string.activity_annotation_marker_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_custom_marker_title, R.string.activity_annotation_custom_marker_description, new Intent(MainActivity.this, DrawCustomMarkerActivity.class), R.string.activity_annotation_custom_marker_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_geojson_line_title, R.string.activity_annotation_geojson_line_description, new Intent(MainActivity.this, DrawGeojsonLineActivity.class), R.string.activity_annotation_geojson_line_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_polygon_title, R.string.activity_annotation_polygon_description, new Intent(MainActivity.this, DrawPolygonActivity.class), R.string.activity_annotation_polygon_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_custom_info_window_title, R.string.activity_annotation_custom_info_window_description, new Intent(MainActivity.this, CustomInfoWindowActivity.class), R.string.activity_annotation_custom_info_window_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_marker_view_title, R.string.activity_annotation_marker_view_description, new Intent(MainActivity.this, BasicMarkerViewActivity.class), R.string.activity_annotation_basic_marker_view_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_annotation_animated_marker_title, R.string.activity_annotation_animated_marker_description, new Intent(MainActivity.this, AnimatedMarkerActivity.class), R.string.activity_annotation_animated_marker_url));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_annotation_animated_circle_marker_title,
+          R.string.activity_annotation_animated_circle_marker_description,
+          new Intent(MainActivity.this, AnimatedCircleMarkerActivity.class),
+          R.string.activity_annotation_animated_circle_marker_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_annotation_marker_title,
+          R.string.activity_annotation_custom_marker_description,
+          new Intent(MainActivity.this, DrawMarkerActivity.class),
+          R.string.activity_annotation_marker_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_annotation_custom_marker_title,
+          R.string.activity_annotation_custom_marker_description,
+          new Intent(MainActivity.this, DrawCustomMarkerActivity.class),
+          R.string.activity_annotation_custom_marker_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_annotation_geojson_line_title,
+          R.string.activity_annotation_geojson_line_description,
+          new Intent(MainActivity.this, DrawGeojsonLineActivity.class),
+          R.string.activity_annotation_geojson_line_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_annotation_polygon_title,
+          R.string.activity_annotation_polygon_description,
+          new Intent(MainActivity.this, DrawPolygonActivity.class),
+          R.string.activity_annotation_polygon_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_annotation_custom_info_window_title,
+          R.string.activity_annotation_custom_info_window_description,
+          new Intent(MainActivity.this, CustomInfoWindowActivity.class),
+          R.string.activity_annotation_custom_info_window_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_annotation_marker_view_title,
+          R.string.activity_annotation_marker_view_description,
+          new Intent(MainActivity.this, BasicMarkerViewActivity.class),
+          R.string.activity_annotation_basic_marker_view_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_annotation_animated_marker_title,
+          R.string.activity_annotation_animated_marker_description,
+          new Intent(MainActivity.this, AnimatedMarkerActivity.class),
+          R.string.activity_annotation_animated_marker_url
+        ));
         currentCategory = R.id.nav_annotations;
         break;
 
       case R.id.nav_camera:
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_camera_animate_title, R.string.activity_camera_animate_description, new Intent(MainActivity.this, AnimateMapCameraActivity.class), R.string.activity_camera_animate_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_camera_bounding_box_title, R.string.activity_camera_bounding_box_description, new Intent(MainActivity.this, BoundingBoxCameraActivity.class), R.string.activity_camera_bounding_box_url));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_camera_animate_title,
+          R.string.activity_camera_animate_description,
+          new Intent(MainActivity.this, AnimateMapCameraActivity.class),
+          R.string.activity_camera_animate_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_camera_bounding_box_title,
+          R.string.activity_camera_bounding_box_description,
+          new Intent(MainActivity.this, BoundingBoxCameraActivity.class),
+          R.string.activity_camera_bounding_box_url
+        ));
         currentCategory = R.id.nav_camera;
         break;
       case R.id.nav_offline:
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_offline_simple_title, R.string.activity_offline_simple_description, new Intent(MainActivity.this, SimpleOfflineMapActivity.class), R.string.activity_offline_simple_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_offline_manager_title, R.string.activity_offline_manager_description, new Intent(MainActivity.this, OfflineManagerActivity.class), R.string.activity_offline_manager_url));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_offline_simple_title,
+          R.string.activity_offline_simple_description,
+          new Intent(MainActivity.this, SimpleOfflineMapActivity.class),
+          R.string.activity_offline_simple_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_offline_manager_title,
+          R.string.activity_offline_manager_description,
+          new Intent(MainActivity.this, OfflineManagerActivity.class),
+          R.string.activity_offline_manager_url
+        ));
         currentCategory = R.id.nav_offline;
         break;
       case R.id.nav_query_map:
         exampleItemModel.add(null);
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_query_select_building_title, R.string.activity_query_select_building_description, new Intent(MainActivity.this, SelectBuildingActivity.class), R.string.activity_query_select_building_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_query_feature_count_title, R.string.activity_query_feature_count_description, new Intent(MainActivity.this, FeatureCountActivity.class), R.string.activity_query_feature_count_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_query_feature_title, R.string.activity_query_feature_description, new Intent(MainActivity.this, QueryFeatureActivity.class), R.string.activity_query_feature_url, true));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_query_select_building_title,
+          R.string.activity_query_select_building_description,
+          new Intent(MainActivity.this, SelectBuildingActivity.class),
+          R.string.activity_query_select_building_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_query_feature_count_title,
+          R.string.activity_query_feature_count_description,
+          new Intent(MainActivity.this, FeatureCountActivity.class),
+          R.string.activity_query_feature_count_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_query_feature_title,
+          R.string.activity_query_feature_description,
+          new Intent(MainActivity.this, QueryFeatureActivity.class),
+          R.string.activity_query_feature_url,
+          true
+        ));
         currentCategory = R.id.nav_query_map;
         break;
       case R.id.nav_mas:
         exampleItemModel.add(null);
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_simplify_polyline_title, R.string.activity_mas_simplify_polyline_description, new Intent(MainActivity.this, SimplifyPolylineActivity.class), R.string.activity_mas_simplify_polyline_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_map_matching_title, R.string.activity_mas_map_matching_description, new Intent(MainActivity.this, MapMatchingActivity.class), R.string.activity_mas_map_matching_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_directions_title, R.string.activity_mas_directions_description, new Intent(MainActivity.this, DirectionsActivity.class), R.string.activity_mas_directions_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_geocoding_title, R.string.activity_mas_geocoding_description, new Intent(MainActivity.this, GeocodingActivity.class), R.string.activity_mas_geocoding_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_mas_static_image_title, R.string.activity_mas_static_image_description, new Intent(MainActivity.this, StaticImageActivity.class), R.string.activity_mas_static_image_url));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_mas_simplify_polyline_title,
+          R.string.activity_mas_simplify_polyline_description,
+          new Intent(MainActivity.this, SimplifyPolylineActivity.class),
+          R.string.activity_mas_simplify_polyline_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_mas_map_matching_title,
+          R.string.activity_mas_map_matching_description,
+          new Intent(MainActivity.this, MapMatchingActivity.class),
+          R.string.activity_mas_map_matching_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_mas_directions_title,
+          R.string.activity_mas_directions_description,
+          new Intent(MainActivity.this, DirectionsActivity.class),
+          R.string.activity_mas_directions_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_mas_geocoding_title,
+          R.string.activity_mas_geocoding_description,
+          new Intent(MainActivity.this, GeocodingActivity.class),
+          R.string.activity_mas_geocoding_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_mas_static_image_title,
+          R.string.activity_mas_static_image_description,
+          new Intent(MainActivity.this, StaticImageActivity.class),
+          R.string.activity_mas_static_image_url
+        ));
         currentCategory = R.id.nav_mas;
         break;
       case R.id.nav_location:
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_location_animated_icon_title, R.string.activity_location_animated_icon_description, new Intent(MainActivity.this, AnimatedLocationIconActivity.class), R.string.activity_location_animated_icon_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_location_customize_user_title, R.string.activity_location_customize_user_description, new Intent(MainActivity.this, CustomizeUserLocationActivity.class), R.string.activity_location_customize_user_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_location_basic_title, R.string.activity_location_basic_description, new Intent(MainActivity.this, BasicUserLocation.class), R.string.activity_location_basic_image_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_location_tracking_title, R.string.activity_location_tracking_description, new Intent(MainActivity.this, LocationTrackingActivity.class), R.string.activity_location_tracking_url));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_location_animated_icon_title,
+          R.string.activity_location_animated_icon_description,
+          new Intent(MainActivity.this, AnimatedLocationIconActivity.class),
+          R.string.activity_location_animated_icon_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_location_customize_user_title,
+          R.string.activity_location_customize_user_description,
+          new Intent(MainActivity.this, CustomizeUserLocationActivity.class),
+          R.string.activity_location_customize_user_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_location_basic_title,
+          R.string.activity_location_basic_description,
+          new Intent(MainActivity.this, BasicUserLocation.class),
+          R.string.activity_location_basic_image_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_location_tracking_title,
+          R.string.activity_location_tracking_description,
+          new Intent(MainActivity.this, LocationTrackingActivity.class),
+          R.string.activity_location_tracking_url
+        ));
         currentCategory = R.id.nav_location;
         break;
       case R.id.nav_lab:
         exampleItemModel.add(null);
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_land_use_stying_title, R.string.activity_lab_land_use_stying_description, new Intent(MainActivity.this, LandUseStylingActivity.class), R.string.activity_lab_land_use_stying_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_off_route_title, R.string.activity_lab_off_route_description, new Intent(MainActivity.this, OffRouteActivity.class), R.string.activity_lab_off_route_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_location_picker_title, R.string.activity_lab_location_picker_description, new Intent(MainActivity.this, LocationPickerActivity.class), R.string.activity_lab_location_picker_url));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_marker_following_route_title, R.string.activity_lab_marker_following_route_description, new Intent(MainActivity.this, MarkerFollowingRouteActivity.class), R.string.activity_lab_marker_following_route_url, true));
-        exampleItemModel.add(new ExampleItemModel(R.string.activity_lab_space_station_location_title, R.string.activity_lab_space_station_location_description, new Intent(MainActivity.this, SpaceStationLocationActivity.class), R.string.activity_lab_space_station_location_url));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_land_use_stying_title,
+          R.string.activity_lab_land_use_stying_description,
+          new Intent(MainActivity.this, LandUseStylingActivity.class),
+          R.string.activity_lab_land_use_stying_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_off_route_title,
+          R.string.activity_lab_off_route_description,
+          new Intent(MainActivity.this, OffRouteActivity.class),
+          R.string.activity_lab_off_route_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_location_picker_title,
+          R.string.activity_lab_location_picker_description,
+          new Intent(MainActivity.this, LocationPickerActivity.class),
+          R.string.activity_lab_location_picker_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_marker_following_route_title,
+          R.string.activity_lab_marker_following_route_description,
+          new Intent(MainActivity.this, MarkerFollowingRouteActivity.class),
+          R.string.activity_lab_marker_following_route_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_space_station_location_title,
+          R.string.activity_lab_space_station_location_description,
+          new Intent(MainActivity.this, SpaceStationLocationActivity.class),
+          R.string.activity_lab_space_station_location_url
+        ));
         currentCategory = R.id.nav_lab;
+        break;
+      default:
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_basic_simple_mapview_title,
+          R.string.activity_basic_simple_mapview_description,
+          new Intent(MainActivity.this, SimpleMapViewActivity.class),
+          R.string.activity_basic_simple_mapview_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_basic_support_map_frag_title,
+          R.string.activity_basic_support_map_frag_description,
+          new Intent(MainActivity.this, SupportMapFragmentActivity.class),
+          R.string.activity_basic_support_map_frag_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_basic_mapbox_options_title,
+          R.string.activity_basic_mapbox_options_description,
+          new Intent(MainActivity.this, MapboxMapOptionActivity.class),
+          R.string.activity_basic_mapbox_options_url
+        ));
+        currentCategory = R.id.nav_basics;
         break;
     }
     adapter.notifyDataSetChanged();
@@ -270,28 +508,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_info) {
       new MaterialStyledDialog(MainActivity.this)
-          .setTitle(getString(R.string.info_dialog_title))
-          .setDescription(getString(R.string.info_dialog_description))
-          .setIcon(R.mipmap.ic_launcher)
-          .setHeaderColor(R.color.mapboxDenim)
-          .withDivider(true)
-          .setPositive("Mapbox", new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+        .setTitle(getString(R.string.info_dialog_title))
+        .setDescription(getString(R.string.info_dialog_description))
+        .setIcon(R.mipmap.ic_launcher)
+        .setHeaderColor(R.color.mapboxDenim)
+        .withDivider(true)
+        .setPositive("Mapbox", new MaterialDialog.SingleButtonCallback() {
+          @Override
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
-              Intent i = new Intent(Intent.ACTION_VIEW);
-              i.setData(Uri.parse("https://mapbox.com/android-sdk"));
-              startActivity(i);
-            }
-          })
-          .setNegative("Not now", new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://mapbox.com/android-sdk"));
+            startActivity(intent);
+          }
+        })
+        .setNegative("Not now", new MaterialDialog.SingleButtonCallback() {
+          @Override
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
-            }
-          })
+          }
+        })
 
-          .show();
+        .show();
       return true;
     }
 

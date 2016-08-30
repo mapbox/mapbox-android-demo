@@ -46,7 +46,7 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
     this.mapboxMap = mapboxMap;
 
     // Load and Draw the GeoJSON
-    new DrawGeoJSON().execute();
+    new DrawGeoJson().execute();
   }
 
   @Override
@@ -79,7 +79,7 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
     mapView.onDestroy();
   }
 
-  private class DrawGeoJSON extends AsyncTask<Void, Void, List<LatLng>> {
+  private class DrawGeoJson extends AsyncTask<Void, Void, List<LatLng>> {
     @Override
     protected List<LatLng> doInBackground(Void... voids) {
 
@@ -117,8 +117,8 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
             }
           }
         }
-      } catch (Exception e) {
-        Log.e(TAG, "Exception Loading GeoJSON: " + e.toString());
+      } catch (Exception exception) {
+        Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
       }
 
       return points;
@@ -132,9 +132,9 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
 
         // Draw polyline on map
         mapboxMap.addPolyline(new PolylineOptions()
-            .addAll(points)
-            .color(Color.parseColor("#3bb2d0"))
-            .width(2));
+          .addAll(points)
+          .color(Color.parseColor("#3bb2d0"))
+          .width(2));
       }
     }
   }

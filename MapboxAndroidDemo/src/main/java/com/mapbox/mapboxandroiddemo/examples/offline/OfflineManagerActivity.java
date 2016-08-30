@@ -30,11 +30,11 @@ import java.util.ArrayList;
 
 public class OfflineManagerActivity extends AppCompatActivity {
 
-  private final static String TAG = "MainActivity";
+  private static final String TAG = "MainActivity";
 
   // JSON encoding/decoding
-  public final static String JSON_CHARSET = "UTF-8";
-  public final static String JSON_FIELD_REGION_NAME = "FIELD_REGION_NAME";
+  public static final String JSON_CHARSET = "UTF-8";
+  public static final String JSON_FIELD_REGION_NAME = "FIELD_REGION_NAME";
 
   // UI elements
   private MapView mapView;
@@ -77,7 +77,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
     downloadButton = (Button) findViewById(R.id.download_button);
     downloadButton.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick(View view) {
         downloadRegionDialog();
       }
     });
@@ -86,7 +86,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
     listButton = (Button) findViewById(R.id.list_button);
     listButton.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick(View view) {
         downloadedRegionList();
       }
     });
@@ -134,29 +134,29 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
     // Build the dialog box
     builder.setTitle("Name new region")
-        .setView(regionNameEdit)
-        .setMessage("Downloads the map region you currently are viewing")
-        .setPositiveButton("Download", new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            String regionName = regionNameEdit.getText().toString();
-            // Require a region name to begin the download.
-            // If the user-provided string is empty, display
-            // a toast message and do not begin download.
-            if (regionName.length() == 0) {
-              Toast.makeText(OfflineManagerActivity.this, "Region name cannot be empty.", Toast.LENGTH_SHORT).show();
-            } else {
-              // Begin download process
-              downloadRegion(regionName);
-            }
+      .setView(regionNameEdit)
+      .setMessage("Downloads the map region you currently are viewing")
+      .setPositiveButton("Download", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+          String regionName = regionNameEdit.getText().toString();
+          // Require a region name to begin the download.
+          // If the user-provided string is empty, display
+          // a toast message and do not begin download.
+          if (regionName.length() == 0) {
+            Toast.makeText(OfflineManagerActivity.this, "Region name cannot be empty.", Toast.LENGTH_SHORT).show();
+          } else {
+            // Begin download process
+            downloadRegion(regionName);
           }
-        })
-        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-            dialog.cancel();
-          }
-        });
+        }
+      })
+      .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+          dialog.cancel();
+        }
+      });
 
     // Display the dialog
     builder.show();
@@ -171,13 +171,13 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
     // Create offline definition using the current
     // style and boundaries of visible map area
-    String styleURL = map.getStyleUrl();
+    String styleUrl = map.getStyleUrl();
     LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
     double minZoom = map.getCameraPosition().zoom;
     double maxZoom = map.getMaxZoom();
     float pixelRatio = this.getResources().getDisplayMetrics().density;
     OfflineTilePyramidRegionDefinition definition = new OfflineTilePyramidRegionDefinition(
-        styleURL, bounds, minZoom, maxZoom, pixelRatio);
+      styleUrl, bounds, minZoom, maxZoom, pixelRatio);
 
     // Build a JSONObject using the user-defined offline region title,
     // convert it into string, and use it to create a metadata variable.
@@ -188,8 +188,8 @@ public class OfflineManagerActivity extends AppCompatActivity {
       jsonObject.put(JSON_FIELD_REGION_NAME, regionName);
       String json = jsonObject.toString();
       metadata = json.getBytes(JSON_CHARSET);
-    } catch (Exception e) {
-      Log.e(TAG, "Failed to encode metadata: " + e.getMessage());
+    } catch (Exception exception) {
+      Log.e(TAG, "Failed to encode metadata: " + exception.getMessage());
       metadata = null;
     }
 
@@ -216,9 +216,9 @@ public class OfflineManagerActivity extends AppCompatActivity {
       @Override
       public void onStatusChanged(OfflineRegionStatus status) {
         // Compute a percentage
-        double percentage = status.getRequiredResourceCount() >= 0 ?
-            (100.0 * status.getCompletedResourceCount() / status.getRequiredResourceCount()) :
-            0.0;
+        double percentage = status.getRequiredResourceCount() >= 0
+          ? (100.0 * status.getCompletedResourceCount() / status.getRequiredResourceCount()) :
+          0.0;
 
         if (status.isComplete()) {
           // Download complete
@@ -231,9 +231,9 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
         // Log what is being currently downloaded
         Log.d(TAG, String.format("%s/%s resources; %s bytes downloaded.",
-            String.valueOf(status.getCompletedResourceCount()),
-            String.valueOf(status.getRequiredResourceCount()),
-            String.valueOf(status.getCompletedResourceSize())));
+          String.valueOf(status.getCompletedResourceCount()),
+          String.valueOf(status.getRequiredResourceCount()),
+          String.valueOf(status.getCompletedResourceSize())));
       }
 
       @Override
@@ -278,71 +278,73 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
         // Build a dialog containing the list of regions
         AlertDialog dialog = new AlertDialog.Builder(OfflineManagerActivity.this)
-            .setTitle("List")
-            .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int which) {
-                // Track which region the user selects
-                regionSelected = which;
-              }
-            })
-            .setPositiveButton("Navigate to", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int id) {
+          .setTitle("List")
+          .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+              // Track which region the user selects
+              regionSelected = which;
+            }
+          })
+          .setPositiveButton("Navigate to", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
 
-                Toast.makeText(OfflineManagerActivity.this, items[regionSelected], Toast.LENGTH_LONG).show();
+              Toast.makeText(OfflineManagerActivity.this, items[regionSelected], Toast.LENGTH_LONG).show();
 
-                // Get the region bounds and zoom
-                LatLngBounds bounds = ((OfflineTilePyramidRegionDefinition) offlineRegions[regionSelected].getDefinition()).getBounds();
-                double regionZoom = ((OfflineTilePyramidRegionDefinition) offlineRegions[regionSelected].getDefinition()).getMinZoom();
+              // Get the region bounds and zoom
+              LatLngBounds bounds = ((OfflineTilePyramidRegionDefinition)
+                offlineRegions[regionSelected].getDefinition()).getBounds();
+              double regionZoom = ((OfflineTilePyramidRegionDefinition)
+                offlineRegions[regionSelected].getDefinition()).getMinZoom();
 
-                // Create new camera position
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(bounds.getCenter())
-                    .zoom(regionZoom)
-                    .build();
+              // Create new camera position
+              CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(bounds.getCenter())
+                .zoom(regionZoom)
+                .build();
 
-                // Move camera to new position
-                map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+              // Move camera to new position
+              map.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
-              }
-            })
-            .setNeutralButton("Delete", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int id) {
-                // Make progressBar indeterminate and
-                // set it to visible to signal that
-                // the deletion process has begun
-                progressBar.setIndeterminate(true);
-                progressBar.setVisibility(View.VISIBLE);
+            }
+          })
+          .setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+              // Make progressBar indeterminate and
+              // set it to visible to signal that
+              // the deletion process has begun
+              progressBar.setIndeterminate(true);
+              progressBar.setVisibility(View.VISIBLE);
 
-                // Begin the deletion process
-                offlineRegions[regionSelected].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
-                  @Override
-                  public void onDelete() {
-                    // Once the region is deleted, remove the
-                    // progressBar and display a toast
-                    progressBar.setVisibility(View.INVISIBLE);
-                    progressBar.setIndeterminate(false);
-                    Toast.makeText(OfflineManagerActivity.this, "Region deleted", Toast.LENGTH_LONG).show();
-                  }
+              // Begin the deletion process
+              offlineRegions[regionSelected].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
+                @Override
+                public void onDelete() {
+                  // Once the region is deleted, remove the
+                  // progressBar and display a toast
+                  progressBar.setVisibility(View.INVISIBLE);
+                  progressBar.setIndeterminate(false);
+                  Toast.makeText(OfflineManagerActivity.this, "Region deleted", Toast.LENGTH_LONG).show();
+                }
 
-                  @Override
-                  public void onError(String error) {
-                    progressBar.setVisibility(View.INVISIBLE);
-                    progressBar.setIndeterminate(false);
-                    Log.e(TAG, "Error: " + error);
-                  }
-                });
-              }
-            })
-            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialog, int id) {
-                // When the user cancels, don't do anything.
-                // The dialog will automatically close
-              }
-            }).create();
+                @Override
+                public void onError(String error) {
+                  progressBar.setVisibility(View.INVISIBLE);
+                  progressBar.setIndeterminate(false);
+                  Log.e(TAG, "Error: " + error);
+                }
+              });
+            }
+          })
+          .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+              // When the user cancels, don't do anything.
+              // The dialog will automatically close
+            }
+          }).create();
         dialog.show();
 
       }
@@ -363,8 +365,8 @@ public class OfflineManagerActivity extends AppCompatActivity {
       String json = new String(metadata, JSON_CHARSET);
       JSONObject jsonObject = new JSONObject(json);
       regionName = jsonObject.getString(JSON_FIELD_REGION_NAME);
-    } catch (Exception e) {
-      Log.e(TAG, "Failed to decode metadata: " + e.getMessage());
+    } catch (Exception exception) {
+      Log.e(TAG, "Failed to decode metadata: " + exception.getMessage());
       regionName = "Region " + offlineRegion.getID();
     }
     return regionName;
@@ -389,7 +391,9 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
   private void endProgress(final String message) {
     // Don't notify more than once
-    if (isEndNotified) return;
+    if (isEndNotified) {
+      return;
+    }
 
     // Enable buttons
     downloadButton.setEnabled(true);

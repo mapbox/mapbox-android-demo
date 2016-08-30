@@ -61,11 +61,11 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
         map = mapboxMap;
 
         // Load and Draw the GeoJSON. The marker animation is also handled here.
-        new DrawGeoJSON().execute();
+        new DrawGeoJson().execute();
 
       }
     });
-  }// End onCreate
+  } // End onCreate
 
   @Override
   public void onResume() {
@@ -109,7 +109,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
   // We want to load in the GeoJSON file asynchronous so the UI thread isn't handling the file
   // loading. The GeoJSON file we are using is stored in the assets folder, you could also get
   // this information from the Mapbox map matching API during runtime.
-  private class DrawGeoJSON extends AsyncTask<Void, Void, List<LatLng>> {
+  private class DrawGeoJson extends AsyncTask<Void, Void, List<LatLng>> {
     @Override
     protected List<LatLng> doInBackground(Void... voids) {
 
@@ -148,15 +148,15 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
             }
           }
         }
-      } catch (Exception e) {
+      } catch (Exception exception) {
         // If an error occurs loading in the GeoJSON file or adding the points to the list,
         // we log the error.
-        Log.e(TAG, "Exception Loading GeoJSON: " + e.toString());
+        Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
       }
 
       // Lastly we return the list containing the route points.
       return points;
-    }// End doInBackground
+    } // End doInBackground
 
     @Override
     protected void onPostExecute(final List<LatLng> points) {
@@ -228,8 +228,8 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
         };
         handler.post(runnable);
       }
-    }// End onPostExecute
-  }// End DrawGeoJSON
+    } // End onPostExecute
+  } // End DrawGeoJson
 
   private static class LatLngEvaluator implements TypeEvaluator<LatLng> {
     // Method is used to interpolate the marker animation.
@@ -238,8 +238,10 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
 
     @Override
     public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
-      latLng.setLatitude(startValue.getLatitude() + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
-      latLng.setLongitude(startValue.getLongitude() + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
+      latLng.setLatitude(startValue.getLatitude()
+          + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
+      latLng.setLongitude(startValue.getLongitude()
+          + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
       return latLng;
     }
   }

@@ -1,7 +1,6 @@
 package com.mapbox.mapboxandroiddemo.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,11 +19,11 @@ import java.util.List;
 public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   private List<ExampleItemModel> dataSource;
-  private Context mContext;
+  private Context context;
 
   public ExampleAdapter(Context context, List<ExampleItemModel> dataSource) {
     this.dataSource = dataSource;
-    this.mContext = context;
+    this.context = context;
   }
 
   @Override
@@ -32,31 +31,32 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     // create a new view
     View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
-    View view1 = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_description_item, parent, false);
-    View view2 = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_mas_description_card, parent, false);
-    View view3 = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_query_description_card, parent, false);
+    View view1 = LayoutInflater.from(parent.getContext()).inflate(
+      R.layout.layout_description_item, parent, false);
+    View view2 = LayoutInflater.from(parent.getContext()).inflate(
+      R.layout.layout_mas_description_card, parent, false);
+    View view3 = LayoutInflater.from(parent.getContext()).inflate(
+      R.layout.layout_query_description_card, parent, false);
 
     switch (viewType) {
-      case 0:
-        return new ViewHolder(view);
       case 1:
         return new ViewHolderDescription(view1);
       case 2:
         return new ViewHolderDescription(view2);
       case 3:
         return new ViewHolderDescription(view3);
+      default:
+        return new ViewHolder(view);
     }
-
-    return new ViewHolder(view);
   }
 
   @Override
   public int getItemViewType(int position) {
-    if (((MainActivity) mContext).getCurrentCategory() == R.id.nav_lab && position == 0) {
+    if (((MainActivity) context).getCurrentCategory() == R.id.nav_lab && position == 0) {
       return 1;
-    } else if (((MainActivity) mContext).getCurrentCategory() == R.id.nav_mas && position == 0) {
+    } else if (((MainActivity) context).getCurrentCategory() == R.id.nav_mas && position == 0) {
       return 2;
-    } else if (((MainActivity) mContext).getCurrentCategory() == R.id.nav_query_map && position == 0) {
+    } else if (((MainActivity) context).getCurrentCategory() == R.id.nav_query_map && position == 0) {
       return 3;
     }
     return 0;
@@ -64,29 +64,28 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
   @Override
   public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-    switch (holder.getItemViewType()) {
-      case 0:
-        ExampleItemModel detailItem = dataSource.get(position);
-        ViewHolder viewHolder = (ViewHolder) holder;
+    if (holder.getItemViewType() == 0) {
+      ExampleItemModel detailItem = dataSource.get(position);
+      ViewHolder viewHolder = (ViewHolder) holder;
 
-        String imageUrl = mContext.getString(detailItem.getImageUrl());
+      String imageUrl = context.getString(detailItem.getImageUrl());
 
-        if (!imageUrl.isEmpty()) {
-          Picasso.with(mContext)
-              .load(imageUrl)
-              .into(viewHolder.imageView);
-        } else {
-          viewHolder.imageView.setImageDrawable(null);
-        }
+      if (!imageUrl.isEmpty()) {
+        Picasso.with(context)
+          .load(imageUrl)
+          .into(viewHolder.imageView);
+      } else {
+        viewHolder.imageView.setImageDrawable(null);
+      }
 
-        if (detailItem.getShowNewIcon()) {
-          viewHolder.newIconImageView.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.new_icon));
-        } else {
-          viewHolder.newIconImageView.setImageDrawable(null);
-        }
+      if (detailItem.getShowNewIcon()) {
+        viewHolder.newIconImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.new_icon));
+      } else {
+        viewHolder.newIconImageView.setImageDrawable(null);
+      }
 
-        viewHolder.titleTextView.setText(mContext.getString(detailItem.getTitle()));
-        viewHolder.descriptionTextView.setText(mContext.getString(detailItem.getDescription()));
+      viewHolder.titleTextView.setText(context.getString(detailItem.getTitle()));
+      viewHolder.descriptionTextView.setText(context.getString(detailItem.getDescription()));
     }
   }
 

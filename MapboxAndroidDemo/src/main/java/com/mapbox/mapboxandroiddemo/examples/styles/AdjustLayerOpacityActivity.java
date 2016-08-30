@@ -31,14 +31,14 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
 
     opacitySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
       @Override
-      public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+      public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (chicago != null) {
           chicago.setProperties(
-              rasterOpacity((float) i / 100)
+              rasterOpacity((float) progress / 100)
           );
         }
-        String s = i + "%";
-        percentTextView.setText(s);
+        String progressPrecentage = progress + "%";
+        percentTextView.setText(progressPrecentage);
       }
 
       @Override

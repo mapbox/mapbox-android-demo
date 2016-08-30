@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 public class DirectionsActivity extends AppCompatActivity {
 
-  private final static String TAG = "DirectionsActivity";
+  private static final String TAG = "DirectionsActivity";
 
   private MapView mapView;
   private MapboxMap map;
@@ -59,19 +59,19 @@ public class DirectionsActivity extends AppCompatActivity {
 
         // Add origin and destination to the map
         mapboxMap.addMarker(new MarkerOptions()
-            .position(new LatLng(origin.getLatitude(), origin.getLongitude()))
-            .title("Origin")
-            .snippet("Alhambra"));
+          .position(new LatLng(origin.getLatitude(), origin.getLongitude()))
+          .title("Origin")
+          .snippet("Alhambra"));
         mapboxMap.addMarker(new MarkerOptions()
-            .position(new LatLng(destination.getLatitude(), destination.getLongitude()))
-            .title("Destination")
-            .snippet("Plaza del Triunfo"));
+          .position(new LatLng(destination.getLatitude(), destination.getLongitude()))
+          .title("Destination")
+          .snippet("Plaza del Triunfo"));
 
         // Get route from API
         try {
           getRoute(origin, destination);
-        } catch (ServicesException e) {
-          e.printStackTrace();
+        } catch (ServicesException servicesException) {
+          servicesException.printStackTrace();
         }
       }
     });
@@ -80,11 +80,11 @@ public class DirectionsActivity extends AppCompatActivity {
   private void getRoute(Position origin, Position destination) throws ServicesException {
 
     MapboxDirections client = new MapboxDirections.Builder()
-        .setOrigin(origin)
-        .setDestination(destination)
-        .setProfile(DirectionsCriteria.PROFILE_CYCLING)
-        .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
-        .build();
+      .setOrigin(origin)
+      .setDestination(destination)
+      .setProfile(DirectionsCriteria.PROFILE_CYCLING)
+      .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
+      .build();
 
     client.enqueueCall(new Callback<DirectionsResponse>() {
       @Override
@@ -94,7 +94,7 @@ public class DirectionsActivity extends AppCompatActivity {
         if (response.body() == null) {
           Log.e(TAG, "No routes found, make sure you set the right user and access token.");
           return;
-        } else if(response.body().getRoutes().size() < 1){
+        } else if (response.body().getRoutes().size() < 1) {
           Log.e(TAG, "No routes found");
           return;
         }
@@ -102,16 +102,19 @@ public class DirectionsActivity extends AppCompatActivity {
         // Print some info about the route
         currentRoute = response.body().getRoutes().get(0);
         Log.d(TAG, "Distance: " + currentRoute.getDistance());
-        Toast.makeText(DirectionsActivity.this, "Route is " + currentRoute.getDistance() + " meters long.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(
+          DirectionsActivity.this,
+          "Route is " + currentRoute.getDistance() + " meters long.",
+          Toast.LENGTH_SHORT).show();
 
         // Draw the route on the map
         drawRoute(currentRoute);
       }
 
       @Override
-      public void onFailure(Call<DirectionsResponse> call, Throwable t) {
-        Log.e(TAG, "Error: " + t.getMessage());
-        Toast.makeText(DirectionsActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+      public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
+        Log.e(TAG, "Error: " + throwable.getMessage());
+        Toast.makeText(DirectionsActivity.this, "Error: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
       }
     });
   }
@@ -123,15 +126,15 @@ public class DirectionsActivity extends AppCompatActivity {
     LatLng[] points = new LatLng[coordinates.size()];
     for (int i = 0; i < coordinates.size(); i++) {
       points[i] = new LatLng(
-          coordinates.get(i).getLatitude(),
-          coordinates.get(i).getLongitude());
+        coordinates.get(i).getLatitude(),
+        coordinates.get(i).getLongitude());
     }
 
     // Draw Points on MapView
     map.addPolyline(new PolylineOptions()
-        .add(points)
-        .color(Color.parseColor("#009688"))
-        .width(5));
+      .add(points)
+      .color(Color.parseColor("#009688"))
+      .width(5));
   }
 
   @Override

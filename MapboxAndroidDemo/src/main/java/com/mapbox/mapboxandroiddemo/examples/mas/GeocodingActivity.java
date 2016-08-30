@@ -55,14 +55,14 @@ public class GeocodingActivity extends AppCompatActivity {
   private void updateMap(double latitude, double longitude) {
     // Build marker
     map.addMarker(new MarkerOptions()
-        .position(new LatLng(latitude, longitude))
-        .title("Geocoder result"));
+      .position(new LatLng(latitude, longitude))
+      .title("Geocoder result"));
 
     // Animate camera to geocoder result location
     CameraPosition cameraPosition = new CameraPosition.Builder()
-        .target(new LatLng(latitude, longitude))
-        .zoom(15)
-        .build();
+      .target(new LatLng(latitude, longitude))
+      .zoom(15)
+      .build();
     map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 5000, null);
   }
 

@@ -6,6 +6,7 @@
 <module name = "Checker">
     <property name="charset" value="UTF-8"/>
 
+    <!-- <property name="severity" value="error"/> -->
     <property name="severity" value="error"/>
 
     <property name="fileExtensions" value="java, properties, xml"/>
@@ -43,7 +44,6 @@
             <property name="max" value="120"/>
             <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
         </module>
-        <module name="AvoidStarImport"/>
         <module name="OneTopLevelClass"/>
         <module name="NoLineWrap"/>
         <module name="EmptyBlock">
@@ -146,11 +146,12 @@
         </module>
         <module name="Indentation">
             <property name="basicOffset" value="2"/>
-            <!-- <property name="braceAdjustment" value="0"/>
+            <property name="braceAdjustment" value="0"/>
             <property name="caseIndent" value="2"/>
             <property name="throwsIndent" value="2"/>
             <property name="lineWrappingIndentation" value="2"/>
-            <property name="arrayInitIndent" value="2"/> -->
+            <property name="arrayInitIndent" value="2"/>
+            <!-- <property name="forceStrictCondition" value="true"/> -->
         </module>
         <module name="AbbreviationAsWordInName">
             <property name="ignoreFinal" value="false"/>
@@ -158,11 +159,17 @@
         </module>
         <module name="OverloadMethodsDeclarationOrder"/>
         <module name="VariableDeclarationUsageDistance"/>
-        <module name="CustomImportOrder">
+        <module name="AvoidStarImport"/>
+        <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
+        <module name="RedundantImport"/>
+        <module name="UnusedImports">
+          <property name="processJavadoc" value="true"/>
+        </module>
+        <!-- <module name="CustomImportOrder">
             <property name="specialImportsRegExp" value="com.google"/>
             <property name="sortImportsInGroupAlphabetically" value="true"/>
             <property name="customImportOrderRules" value="STATIC###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE###STANDARD_JAVA_PACKAGE"/>
-        </module>
+        </module> -->
         <module name="MethodParamPad"/>
         <module name="OperatorWrap">
             <property name="option" value="NL"/>

@@ -63,7 +63,6 @@ public class OffRouteActivity extends AppCompatActivity {
   // Direction variables
   private DirectionsRoute currentRoute;
   private List<LatLng> routePoints;
-  private List<LatLng> newRoutePoints;
   private int count = 0;
   private long distance;
   private Handler handler;
@@ -111,17 +110,17 @@ public class OffRouteActivity extends AppCompatActivity {
                   Position.fromCoordinates(car.getPosition().getLongitude(), car.getPosition().getLatitude()),
                   Position.fromCoordinates(point.getLongitude(), point.getLatitude())
               );
-            } catch (ServicesException e) {
-              e.printStackTrace();
-              Log.e(TAG, "onMapReady: " + e.getMessage());
+            } catch (ServicesException servicesException) {
+              servicesException.printStackTrace();
+              Log.e(TAG, "onMapReady: " + servicesException.getMessage());
             }
 
           }
         });
 
-      }// End onMapReady
+      } // End onMapReady
     });
-  }// End onCreate
+  } // End onCreate
 
   @Override
   public void onResume() {
@@ -166,9 +165,6 @@ public class OffRouteActivity extends AppCompatActivity {
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
-      case R.id.action_default:
-        routeUtils = new RouteUtils(0.1);
-        break;
       case R.id.action_1:
         routeUtils = new RouteUtils(0.05);
         break;
@@ -177,6 +173,9 @@ public class OffRouteActivity extends AppCompatActivity {
         break;
       case R.id.action_3:
         routeUtils = new RouteUtils(1);
+        break;
+      default:
+        routeUtils = new RouteUtils(0.1);
         break;
     }
 
@@ -231,8 +230,8 @@ public class OffRouteActivity extends AppCompatActivity {
       }
 
       @Override
-      public void onFailure(Call<DirectionsResponse> call, Throwable t) {
-        Log.e(TAG, "Error: " + t.getMessage());
+      public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
+        Log.e(TAG, "Error: " + throwable.getMessage());
       }
     });
   }
@@ -243,7 +242,7 @@ public class OffRouteActivity extends AppCompatActivity {
     // Convert the route to latlng values and add to list.
     LineString lineString = LineString.fromPolyline(route.getGeometry(), Constants.OSRM_PRECISION_V5);
     List<Position> coordinates = lineString.getCoordinates();
-    newRoutePoints = new ArrayList<>();
+    List<LatLng> newRoutePoints = new ArrayList<>();
     for (int j = 0; j < coordinates.size(); j++) {
       newRoutePoints.add(new LatLng(
           coordinates.get(j).getLatitude(),
@@ -340,9 +339,9 @@ public class OffRouteActivity extends AppCompatActivity {
           // should go in a locationListener.
           try {
             checkIfOffRoute();
-          } catch (ServicesException | TurfException e) {
-            e.printStackTrace();
-            Log.e(TAG, "check if off route error: " + e.getMessage());
+          } catch (ServicesException | TurfException turfException) {
+            turfException.printStackTrace();
+            Log.e(TAG, "check if off route error: " + turfException.getMessage());
           }
 
           // Keeping the current point count we are on.
@@ -358,11 +357,13 @@ public class OffRouteActivity extends AppCompatActivity {
       }
     };
     handler.post(runnable);
-  }// End startSimulation
+  } // End startSimulation
 
   private void stopSimulation() {
-    if (handler != null || runnable != null) {
-      handler.removeCallbacks(runnable);
+    if (handler != null) {
+      if (runnable != null) {
+        handler.removeCallbacks(runnable);
+      }
     }
   }
 
@@ -380,8 +381,10 @@ public class OffRouteActivity extends AppCompatActivity {
 
     @Override
     public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
-      latLng.setLatitude(startValue.getLatitude() + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
-      latLng.setLongitude(startValue.getLongitude() + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
+      latLng.setLatitude(startValue.getLatitude()
+          + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
+      latLng.setLongitude(startValue.getLongitude()
+          + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
       return latLng;
     }
   }

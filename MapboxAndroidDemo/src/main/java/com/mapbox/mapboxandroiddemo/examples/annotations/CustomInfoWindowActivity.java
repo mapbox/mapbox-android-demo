@@ -34,19 +34,19 @@ public class CustomInfoWindowActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
 
         mapboxMap.addMarker(new MarkerViewOptions()
-            .position(new LatLng(40.416717, -3.703771))
-            .anchor(0.5f, 0.5f)
-            .title("spain"));
+          .position(new LatLng(40.416717, -3.703771))
+          .anchor(0.5f, 0.5f)
+          .title("spain"));
 
         mapboxMap.addMarker(new MarkerViewOptions()
-            .position(new LatLng(26.794531, 29.781524))
-            .anchor(0.5f, 0.5f)
-            .title("egypt"));
+          .position(new LatLng(26.794531, 29.781524))
+          .anchor(0.5f, 0.5f)
+          .title("egypt"));
 
         mapboxMap.addMarker(new MarkerViewOptions()
-            .position(new LatLng(50.981488, 10.384677))
-            .anchor(0.5f, 0.5f)
-            .title("germany"));
+          .position(new LatLng(50.981488, 10.384677))
+          .anchor(0.5f, 0.5f)
+          .title("germany"));
 
         mapboxMap.setInfoWindowAdapter(new MapboxMap.InfoWindowAdapter() {
           @Nullable
@@ -57,7 +57,7 @@ public class CustomInfoWindowActivity extends AppCompatActivity {
             // container
             LinearLayout parent = new LinearLayout(CustomInfoWindowActivity.this);
             parent.setLayoutParams(new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+              ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             parent.setOrientation(LinearLayout.VERTICAL);
 
             // Depending on the marker title, the correct image source is used. If you
@@ -68,17 +68,17 @@ public class CustomInfoWindowActivity extends AppCompatActivity {
             switch (marker.getTitle()) {
               case "spain":
                 countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
-                    CustomInfoWindowActivity.this, R.drawable.flag_of_spain));
+                  CustomInfoWindowActivity.this, R.drawable.flag_of_spain));
                 break;
               case "egypt":
                 countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
-                    CustomInfoWindowActivity.this, R.drawable.flag_of_egypt));
+                  CustomInfoWindowActivity.this, R.drawable.flag_of_egypt));
                 break;
               default:
                 // By default all markers without a matching title will use the
                 // Germany flag
                 countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
-                    CustomInfoWindowActivity.this, R.drawable.flag_of_germany));
+                  CustomInfoWindowActivity.this, R.drawable.flag_of_germany));
                 break;
             }
 

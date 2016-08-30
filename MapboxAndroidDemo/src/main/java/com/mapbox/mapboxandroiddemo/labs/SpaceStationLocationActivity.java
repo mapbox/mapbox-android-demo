@@ -22,6 +22,8 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.services.commons.models.Position;
+import com.mapbox.services.commons.turf.TurfMeasurement;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,10 +40,10 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
   private Runnable runnable;
   private Call<IssModel> call;
 
-  // APICallTime is the time interval when we call the API in milliseconds, by default this is set
+  // apiCallTime is the time interval when we call the API in milliseconds, by default this is set
   // to 2000 and you should only increase the value, reducing the interval will only cause server
   // traffic, the latitude and longitude values aren't updated that frequently.
-  private int APICallTime = 2000;
+  private int apiCallTime = 2000;
 
   // Map variables
   private MapView mapView;
@@ -62,11 +64,11 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
 
         map = mapboxMap;
 
-        callAPI();
+        callApi();
 
       }
     });
-  }// End onCreate
+  } // End onCreate
 
   @Override
   public void onResume() {
@@ -107,7 +109,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  private void callAPI() {
+  private void callApi() {
 
     // Build our client, The API we are using is very basic only returning a handful of
     // information, mainly, the current latitude and longitude of the International Space Station.
@@ -116,7 +118,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
         .addConverterFactory(GsonConverterFactory.create())
         .build();
 
-    final IssAPIService service = client.create(IssAPIService.class);
+    final IssApiService service = client.create(IssApiService.class);
 
     // A handler is needed to called the API every x amount of seconds.
     handler = new Handler();
@@ -137,13 +139,13 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
           }
 
           @Override
-          public void onFailure(Call<IssModel> call, Throwable t) {
+          public void onFailure(Call<IssModel> call, Throwable throwable) {
             // If retrofit fails or the API was unreachable, an error will be called.
-            Log.e(TAG, t.getMessage());
+            Log.e(TAG, throwable.getMessage());
           }
         });
         // Schedule the next execution time for this runnable.
-        handler.postDelayed(this, APICallTime);
+        handler.postDelayed(this, apiCallTime);
       }
     };
 
@@ -170,7 +172,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
 
       // Lastly, animate the camera to the new position so the user
       // wont have to search for the marker and then return.
-      map.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 8), APICallTime);
+      map.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 8), apiCallTime);
       return;
     }
 
@@ -180,7 +182,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
 
     ValueAnimator markerAnimator = ObjectAnimator.ofObject(marker, "position",
         new LatLngEvaluator(), marker.getPosition(), position);
-    markerAnimator.setDuration(APICallTime);
+    markerAnimator.setDuration(apiCallTime);
     markerAnimator.setInterpolator(new LinearInterpolator());
     markerAnimator.start();
   }
@@ -192,32 +194,24 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
 
     @Override
     public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
-      latLng.setLatitude(startValue.getLatitude() +
-          ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
-      latLng.setLongitude(startValue.getLongitude() +
-          ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
+      latLng.setLatitude(startValue.getLatitude()
+          + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
+      latLng.setLongitude(startValue.getLongitude()
+          + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
       return latLng;
     }
   }
 
-
-  // Returns the heading from one LatLng to another LatLng. Headings are. Expressed in degrees
-  // clockwise from North within the range [-180,180). The math for this method came from
-  // http://williams.best.vwh.net/avform.htm#Crs I only converted it to Java.
   public static double computeHeading(LatLng from, LatLng to) {
-    double fromLat = Math.toRadians(from.getLatitude());
-    double fromLng = Math.toRadians(from.getLongitude());
-    double toLat = Math.toRadians(to.getLatitude());
-    double toLng = Math.toRadians(to.getLongitude());
-    double dLng = toLng - fromLng;
-    double heading = Math.atan2(Math.sin(dLng) * Math.cos(toLat),
-        Math.cos(fromLat) * Math.sin(toLat) - Math.sin(fromLat) * Math.cos(toLat) * Math.cos(dLng));
-    return (Math.toDegrees(heading) >= -180 && Math.toDegrees(heading) < 180) ?
-        Math.toDegrees(heading) : ((((Math.toDegrees(heading) + 180) % 360) + 360) % 360 + -180);
+    // Compute bearing/heading using Turf and return the value.
+    return TurfMeasurement.bearing(
+        Position.fromCoordinates(from.getLongitude(), from.getLatitude()),
+        Position.fromCoordinates(to.getLongitude(), to.getLatitude())
+    );
   }
 
   // Interface used for Retrofit.
-  public interface IssAPIService {
+  public interface IssApiService {
     @GET("iss-now")
     Call<IssModel> loadLocation();
   }

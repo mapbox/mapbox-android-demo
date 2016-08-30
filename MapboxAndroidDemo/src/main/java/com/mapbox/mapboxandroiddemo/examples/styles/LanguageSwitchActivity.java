@@ -75,9 +75,6 @@ public class LanguageSwitchActivity extends AppCompatActivity {
     Layer mapText = map.getLayer("country-label-lg");
     if (mapText != null) {
       switch (item.getItemId()) {
-        case R.id.english:
-          mapText.setProperties(textField("{name_en}"));
-          return true;
         case R.id.french:
           mapText.setProperties(textField("{name_fr}"));
           return true;
@@ -89,6 +86,9 @@ public class LanguageSwitchActivity extends AppCompatActivity {
           return true;
         case R.id.spanish:
           mapText.setProperties(textField("{name_es}"));
+          return true;
+        default:
+          mapText.setProperties(textField("{name_en}"));
           return true;
       }
     }

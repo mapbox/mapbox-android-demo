@@ -49,8 +49,8 @@ public class DrawPolygonActivity extends AppCompatActivity {
     polygon.add(new LatLng(45.506346, -122.702007));
     polygon.add(new LatLng(45.522585, -122.685699));
     mapboxMap.addPolygon(new PolygonOptions()
-        .addAll(polygon)
-        .fillColor(Color.parseColor("#3bb2d0")));
+      .addAll(polygon)
+      .fillColor(Color.parseColor("#3bb2d0")));
   }
 
   @Override

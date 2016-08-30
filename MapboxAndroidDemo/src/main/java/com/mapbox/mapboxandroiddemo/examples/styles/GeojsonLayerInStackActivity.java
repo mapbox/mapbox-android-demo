@@ -45,8 +45,8 @@ public class GeojsonLayerInStackActivity extends AppCompatActivity {
           );
 
           mapboxMap.addLayer(urbanArea, "water");
-        } catch (MalformedURLException e) {
-          e.printStackTrace();
+        } catch (MalformedURLException malformedUrlException) {
+          malformedUrlException.printStackTrace();
         }
       }
     });
