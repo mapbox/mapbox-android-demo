@@ -67,7 +67,8 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
 
-        mapboxMap.getMarkerViewManager().addMarkerViewAdapter(new PulseMarkerViewAdapter(AnimatedLocationIconActivity.this));
+        mapboxMap.getMarkerViewManager().addMarkerViewAdapter(
+          new PulseMarkerViewAdapter(AnimatedLocationIconActivity.this));
 
         userMarker = mapboxMap.addMarker(new PulseMarkerViewOptions().position(new LatLng(0, 0)));
 
@@ -77,7 +78,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
           setInitialMapPosition();
         }
 
-        enableGPS();
+        enableGps();
       }
     });
   }
@@ -133,12 +134,12 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
     }
   }
 
-  private void enableGPS() {
+  private void enableGps() {
     // Check if user has granted location permission
     if (!locationServices.areLocationPermissionsGranted()) {
       ActivityCompat.requestPermissions(this, new String[]{
-          Manifest.permission.ACCESS_COARSE_LOCATION,
-          Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
     } else {
       enableLocation();
     }
@@ -171,17 +172,14 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
 
   @Override
   public void onRequestPermissionsResult(
-      int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-    switch (requestCode) {
-      case PERMISSIONS_LOCATION: {
-        if (grantResults.length > 0 &&
-            grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-          enableLocation();
-        } else {
-          // User denied location permission, user marker won't be shown.
-          Toast.makeText(AnimatedLocationIconActivity.this,
-              "Enable location for example to work properly", Toast.LENGTH_LONG).show();
-        }
+    int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    if (requestCode == PERMISSIONS_LOCATION) {
+      if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        enableLocation();
+      } else {
+        // User denied location permission, user marker won't be shown.
+        Toast.makeText(AnimatedLocationIconActivity.this,
+          "Enable location for example to work properly", Toast.LENGTH_LONG).show();
       }
     }
   }

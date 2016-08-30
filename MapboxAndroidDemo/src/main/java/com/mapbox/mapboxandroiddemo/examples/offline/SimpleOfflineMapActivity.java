@@ -31,8 +31,8 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
   private OfflineManager offlineManager;
 
   // JSON encoding/decoding
-  public final static String JSON_CHARSET = "UTF-8";
-  public final static String JSON_FIELD_REGION_NAME = "FIELD_REGION_NAME";
+  public static final String JSON_CHARSET = "UTF-8";
+  public static final String JSON_FIELD_REGION_NAME = "FIELD_REGION_NAME";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +49,17 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
         // Create a bounding box for the offline region
         LatLngBounds latLngBounds = new LatLngBounds.Builder()
-            .include(new LatLng(37.7897, -119.5073)) // Northeast
-            .include(new LatLng(37.6744, -119.6815)) // Southwest
-            .build();
+          .include(new LatLng(37.7897, -119.5073)) // Northeast
+          .include(new LatLng(37.6744, -119.6815)) // Southwest
+          .build();
 
         // Define the offline region
         OfflineTilePyramidRegionDefinition definition = new OfflineTilePyramidRegionDefinition(
-            mapView.getStyleUrl(),
-            latLngBounds,
-            10,
-            20,
-            SimpleOfflineMapActivity.this.getResources().getDisplayMetrics().density);
+          mapView.getStyleUrl(),
+          latLngBounds,
+          10,
+          20,
+          SimpleOfflineMapActivity.this.getResources().getDisplayMetrics().density);
 
         // Set the metadata
         byte[] metadata;
@@ -68,63 +68,63 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
           jsonObject.put(JSON_FIELD_REGION_NAME, "Yosemite National Park");
           String json = jsonObject.toString();
           metadata = json.getBytes(JSON_CHARSET);
-        } catch (Exception e) {
-          Log.e(TAG, "Failed to encode metadata: " + e.getMessage());
+        } catch (Exception exception) {
+          Log.e(TAG, "Failed to encode metadata: " + exception.getMessage());
           metadata = null;
         }
 
         // Create the region asynchronously
         offlineManager.createOfflineRegion(
-            definition,
-            metadata,
-            new OfflineManager.CreateOfflineRegionCallback() {
-          @Override
-          public void onCreate(OfflineRegion offlineRegion) {
-            offlineRegion.setDownloadState(OfflineRegion.STATE_ACTIVE);
+          definition,
+          metadata,
+          new OfflineManager.CreateOfflineRegionCallback() {
+            @Override
+            public void onCreate(OfflineRegion offlineRegion) {
+              offlineRegion.setDownloadState(OfflineRegion.STATE_ACTIVE);
 
-            // Display the download progress bar
-            progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-            startProgress();
+              // Display the download progress bar
+              progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+              startProgress();
 
-            // Monitor the download progress using setObserver
-            offlineRegion.setObserver(new OfflineRegion.OfflineRegionObserver() {
-              @Override
-              public void onStatusChanged(OfflineRegionStatus status) {
+              // Monitor the download progress using setObserver
+              offlineRegion.setObserver(new OfflineRegion.OfflineRegionObserver() {
+                @Override
+                public void onStatusChanged(OfflineRegionStatus status) {
 
-                // Calculate the download percentage and update the progress bar
-                double percentage = status.getRequiredResourceCount() >= 0 ?
-                    (100.0 * status.getCompletedResourceCount() / status.getRequiredResourceCount()) :
+                  // Calculate the download percentage and update the progress bar
+                  double percentage = status.getRequiredResourceCount() >= 0
+                    ? (100.0 * status.getCompletedResourceCount() / status.getRequiredResourceCount()) :
                     0.0;
 
-                if (status.isComplete()) {
-                  // Download complete
-                  endProgress("Region downloaded successfully.");
-                } else if (status.isRequiredResourceCountPrecise()) {
-                  // Switch to determinate state
-                  setPercentage((int) Math.round(percentage));
+                  if (status.isComplete()) {
+                    // Download complete
+                    endProgress("Region downloaded successfully.");
+                  } else if (status.isRequiredResourceCountPrecise()) {
+                    // Switch to determinate state
+                    setPercentage((int) Math.round(percentage));
+                  }
                 }
-              }
 
-              @Override
-              public void onError(OfflineRegionError error) {
-                // If an error occurs, print to logcat
-                Log.e(TAG, "onError reason: " + error.getReason());
-                Log.e(TAG, "onError message: " + error.getMessage());
-              }
+                @Override
+                public void onError(OfflineRegionError error) {
+                  // If an error occurs, print to logcat
+                  Log.e(TAG, "onError reason: " + error.getReason());
+                  Log.e(TAG, "onError message: " + error.getMessage());
+                }
 
-              @Override
-              public void mapboxTileCountLimitExceeded(long limit) {
-                // Notify if offline region exceeds maximum tile count
-                Log.e(TAG, "Mapbox tile count limit exceeded: " + limit);
-              }
-            });
-          }
+                @Override
+                public void mapboxTileCountLimitExceeded(long limit) {
+                  // Notify if offline region exceeds maximum tile count
+                  Log.e(TAG, "Mapbox tile count limit exceeded: " + limit);
+                }
+              });
+            }
 
-          @Override
-          public void onError(String error) {
-            Log.e(TAG, "Error: " + error);
-          }
-        });
+            @Override
+            public void onError(String error) {
+              Log.e(TAG, "Error: " + error);
+            }
+          });
       }
     });
   }
@@ -199,7 +199,9 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
   private void endProgress(final String message) {
     // Don't notify more than once
-    if (isEndNotified) return;
+    if (isEndNotified) {
+      return;
+    }
 
     // Stop and hide the progress bar
     isEndNotified = true;

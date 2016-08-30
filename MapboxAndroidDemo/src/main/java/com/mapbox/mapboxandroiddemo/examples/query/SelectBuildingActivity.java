@@ -48,23 +48,27 @@ public class SelectBuildingActivity extends AppCompatActivity {
             List<Feature> features = mapboxMap.queryRenderedFeatures(point, "building");
 
             if (features.size() > 0) {
-              String featureID = features.get(0).getId();
+              String featureId = features.get(0).getId();
 
               for (int a = 0; a < features.size(); a++) {
-                if (featureID.equals(features.get(a).getId())) {
+                if (featureId.equals(features.get(a).getId())) {
                   if (features.get(a).getGeometry() instanceof Polygon) {
 
                     List<LatLng> list = new ArrayList<>();
                     for (int i = 0; i < ((Polygon) features.get(a).getGeometry()).getCoordinates().size(); i++) {
-                      for (int j = 0; j < ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).size(); j++) {
+                      for (int j = 0;
+                           j < ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).size(); j++) {
                         list.add(new LatLng(
-                            ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLatitude(),
-                            ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLongitude()
+                          ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLatitude(),
+                          ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLongitude()
                         ));
                       }
                     }
 
-                    selectedBuilding = mapboxMap.addPolygon(new PolygonOptions().addAll(list).fillColor(Color.parseColor("#8A8ACB")));
+                    selectedBuilding = mapboxMap.addPolygon(new PolygonOptions()
+                      .addAll(list)
+                      .fillColor(Color.parseColor("#8A8ACB"))
+                    );
                   }
                 }
               }

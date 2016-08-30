@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -41,9 +40,9 @@ public class AnimatedCircleMarkerActivity extends Activity {
         Icon icon = iconFactory.fromDrawable(iconDrawable);
 
         circle = mapboxMap.addMarker(new MarkerViewOptions()
-            .position(new LatLng(40.73581, -73.99155))
-            .anchor(0.5f, 0.5f)
-            .icon(icon));
+          .position(new LatLng(40.73581, -73.99155))
+          .anchor(0.5f, 0.5f)
+          .icon(icon));
 
         View view = mapboxMap.getMarkerViewManager().getView(circle);
 

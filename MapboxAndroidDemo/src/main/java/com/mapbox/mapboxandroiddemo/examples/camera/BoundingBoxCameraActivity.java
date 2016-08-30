@@ -32,9 +32,9 @@ public class BoundingBoxCameraActivity extends AppCompatActivity {
           @Override
           public void onMapClick(@NonNull LatLng point) {
             LatLngBounds latLngBounds = new LatLngBounds.Builder()
-                .include(new LatLng(36.532128, -93.489121)) // Northeast
-                .include(new LatLng(25.837058, -106.646234)) // Southwest
-                .build();
+              .include(new LatLng(36.532128, -93.489121)) // Northeast
+              .include(new LatLng(25.837058, -106.646234)) // Southwest
+              .build();
 
             mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50), 5000);
 

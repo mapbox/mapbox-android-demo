@@ -55,7 +55,7 @@ public class MapMatchingActivity extends AppCompatActivity {
 
         map = mapboxMap;
 
-        new DrawGeoJSON().execute();
+        new DrawGeoJson().execute();
 
       }
     });
@@ -91,7 +91,7 @@ public class MapMatchingActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  private class DrawGeoJSON extends AsyncTask<Void, Void, List<Position>> {
+  private class DrawGeoJson extends AsyncTask<Void, Void, List<Position>> {
     @Override
     protected List<Position> doInBackground(Void... voids) {
 
@@ -129,8 +129,8 @@ public class MapMatchingActivity extends AppCompatActivity {
             }
           }
         }
-      } catch (Exception e) {
-        Log.e(TAG, "Exception Loading GeoJSON: " + e.toString());
+      } catch (Exception exception) {
+        Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
       }
 
       return points;
@@ -152,24 +152,25 @@ public class MapMatchingActivity extends AppCompatActivity {
   private void drawBeforeMapMatching(List<Position> points) {
 
     LatLng[] pointsArray = new LatLng[points.size()];
-    for (int i = 0; i < points.size(); i++)
+    for (int i = 0; i < points.size(); i++) {
       pointsArray[i] = new LatLng(points.get(i).getLatitude(), points.get(i).getLongitude());
+    }
 
     map.addPolyline(new PolylineOptions()
-        .add(pointsArray)
-        .color(Color.parseColor("#8a8acb"))
-        .width(4));
+      .add(pointsArray)
+      .color(Color.parseColor("#8a8acb"))
+      .width(4));
   }
 
   private void drawMapMatched(LineString lineString, int precision) {
     try {
       // Setup the request using a client.
       MapboxMapMatching client = new MapboxMapMatching.Builder()
-          .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
-          .setProfile(DirectionsCriteria.PROFILE_DRIVING)
-          .setGpsPrecison(precision)
-          .setTrace(lineString)
-          .build();
+        .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
+        .setProfile(DirectionsCriteria.PROFILE_DRIVING)
+        .setGpsPrecison(precision)
+        .setTrace(lineString)
+        .build();
 
       // Execute the API call and handle the response.
       client.enqueueCall(new Callback<MapMatchingResponse>() {
@@ -184,15 +185,15 @@ public class MapMatchingActivity extends AppCompatActivity {
             // Convert the map matched response list from position to latlng coordinates.
             for (int i = 0; i < response.body().getMatchedPoints().length; i++) {
               mapMatchedPoints.add(new LatLng(
-                  response.body().getMatchedPoints()[i].getLatitude(),
-                  response.body().getMatchedPoints()[i].getLongitude()));
+                response.body().getMatchedPoints()[i].getLatitude(),
+                response.body().getMatchedPoints()[i].getLongitude()));
             }
 
             // Add the map matched route to the Mapbox map.
             map.addPolyline(new PolylineOptions()
-                .addAll(mapMatchedPoints)
-                .color(Color.parseColor("#3bb2d0"))
-                .width(4));
+              .addAll(mapMatchedPoints)
+              .color(Color.parseColor("#3bb2d0"))
+              .width(4));
           } else {
             // If the response code does not response "OK" an error has occurred.
             Log.e(TAG, "Too many coordinates, Profile not found, invalid input, or no match");
@@ -200,13 +201,13 @@ public class MapMatchingActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onFailure(Call<MapMatchingResponse> call, Throwable t) {
-          Log.e(TAG, "MapboxMapMatching error: " + t.getMessage());
+        public void onFailure(Call<MapMatchingResponse> call, Throwable throwable) {
+          Log.e(TAG, "MapboxMapMatching error: " + throwable.getMessage());
         }
       });
-    } catch (ServicesException e) {
-      Log.e(TAG, "MapboxMapMatching error: " + e.getMessage());
-      e.printStackTrace();
+    } catch (ServicesException servicesException) {
+      Log.e(TAG, "MapboxMapMatching error: " + servicesException.getMessage());
+      servicesException.printStackTrace();
     }
   }
 }

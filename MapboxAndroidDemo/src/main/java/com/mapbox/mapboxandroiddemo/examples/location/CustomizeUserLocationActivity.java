@@ -90,8 +90,8 @@ public class CustomizeUserLocationActivity extends AppCompatActivity {
     // Check if user has granted location permission
     if (!locationServices.areLocationPermissionsGranted()) {
       ActivityCompat.requestPermissions(this, new String[]{
-          Manifest.permission.ACCESS_COARSE_LOCATION,
-          Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
+        Manifest.permission.ACCESS_COARSE_LOCATION,
+        Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
     } else {
       enableLocation();
     }
@@ -123,13 +123,10 @@ public class CustomizeUserLocationActivity extends AppCompatActivity {
 
   @Override
   public void onRequestPermissionsResult(
-      int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-    switch (requestCode) {
-      case PERMISSIONS_LOCATION: {
-        if (grantResults.length > 0 &&
-            grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-          enableLocation();
-        }
+    int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    if (requestCode == PERMISSIONS_LOCATION) {
+      if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        enableLocation();
       }
     }
   }

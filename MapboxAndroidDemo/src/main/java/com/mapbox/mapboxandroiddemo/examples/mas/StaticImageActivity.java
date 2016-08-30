@@ -34,23 +34,23 @@ public class StaticImageActivity extends AppCompatActivity {
     MapboxStaticImage staticImage;
     try {
       staticImage = new MapboxStaticImage.Builder()
-          .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
-          .setUsername(Constants.MAPBOX_USER)
-          .setStyleId("satellite-v9")
-          .setLon(12.3378) // Image center longitude
-          .setLat(45.4338) // Image center Latitude
-          .setZoom(13)
-          .setWidth(640) // Image width
-          .setHeight(360) // Image height
-          .setRetina(true) // Retina 2x image will be returned
-          .build();
+        .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
+        .setUsername(Constants.MAPBOX_USER)
+        .setStyleId("satellite-v9")
+        .setLon(12.3378) // Image center longitude
+        .setLat(45.4338) // Image center Latitude
+        .setZoom(13)
+        .setWidth(640) // Image width
+        .setHeight(360) // Image height
+        .setRetina(true) // Retina 2x image will be returned
+        .build();
 
       System.out.println(staticImage.getUrl().toString());
       new DownloadImageTask(imageView).execute(staticImage.getUrl().toString());
 
-    } catch (ServicesException e) {
-      Log.e(TAG, "MapboxStaticImage error: " + e.getMessage());
-      e.printStackTrace();
+    } catch (ServicesException servicesException) {
+      Log.e(TAG, "MapboxStaticImage error: " + servicesException.getMessage());
+      servicesException.printStackTrace();
     }
   }
 
@@ -68,25 +68,27 @@ public class StaticImageActivity extends AppCompatActivity {
 
       // Build request
       Request request = new Request.Builder()
-          .url(urls[0])
-          .build();
+        .url(urls[0])
+        .build();
 
       Response response = null;
       Bitmap bitmap = null;
       try {
         // Make request
         response = client.newCall(request).execute();
-      } catch (IOException e) {
-        e.printStackTrace();
+      } catch (IOException ioException) {
+        ioException.printStackTrace();
       }
 
       // If the response is successful, create the static map image
-      if (response.isSuccessful()) {
-        try {
-          bitmap = BitmapFactory.decodeStream(response.body().byteStream());
-        } catch (Exception e) {
-          Log.e("Error", e.getMessage());
-          e.printStackTrace();
+      if (response != null) {
+        if (response.isSuccessful()) {
+          try {
+            bitmap = BitmapFactory.decodeStream(response.body().byteStream());
+          } catch (Exception exception) {
+            Log.e("Error", exception.getMessage());
+            exception.printStackTrace();
+          }
         }
       }
       return bitmap;

@@ -52,19 +52,25 @@ public class FeatureCountActivity extends AppCompatActivity {
             List<Feature> features = mapboxMap.queryRenderedFeatures(box, "building");
 
             // Show the features count
-            Snackbar.make(viewContainer, String.format("%s features in box", features.size()), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(
+              viewContainer,
+              String.format("%s features in box", features.size()),
+              Snackbar.LENGTH_LONG).show();
 
             // Remove the previous building highlighted layer if it exist.
             try {
               mapboxMap.removeSource("highlighted-shapes-source");
               mapboxMap.removeLayer("highlighted-shapes-layer");
-            } catch (Exception e) {
+            } catch (Exception exception) {
               // building layer doesn't exist yet.
             }
 
             // add a layer to the map that highlights the maps buildings inside the bounding box.
-            mapboxMap.addSource(new GeoJsonSource("highlighted-shapes-source", FeatureCollection.fromFeatures(features)));
-            mapboxMap.addLayer(new FillLayer("highlighted-shapes-layer", "highlighted-shapes-source").withProperties(fillColor(Color.parseColor("#50667F"))));
+            mapboxMap.addSource(
+              new GeoJsonSource("highlighted-shapes-source", FeatureCollection.fromFeatures(features)));
+            mapboxMap.addLayer(
+              new FillLayer("highlighted-shapes-layer", "highlighted-shapes-source")
+                .withProperties(fillColor(Color.parseColor("#50667F"))));
           }
         });
       }

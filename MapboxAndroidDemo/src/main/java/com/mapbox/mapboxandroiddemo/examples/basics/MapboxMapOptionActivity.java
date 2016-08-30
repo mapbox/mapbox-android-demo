@@ -20,11 +20,11 @@ public class MapboxMapOptionActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
 
     MapboxMapOptions options = new MapboxMapOptions()
-        .styleUrl(Style.OUTDOORS)
-        .camera(new CameraPosition.Builder()
-            .target(new LatLng(43.7383, 7.4094))
-            .zoom(12)
-            .build());
+      .styleUrl(Style.OUTDOORS)
+      .camera(new CameraPosition.Builder()
+        .target(new LatLng(43.7383, 7.4094))
+        .zoom(12)
+        .build());
 
     // create map
     mapView = new MapView(this, options);

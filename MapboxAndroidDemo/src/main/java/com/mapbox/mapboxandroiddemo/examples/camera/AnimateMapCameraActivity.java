@@ -32,14 +32,14 @@ public class AnimateMapCameraActivity extends AppCompatActivity {
           @Override
           public void onMapClick(@NonNull LatLng point) {
             CameraPosition position = new CameraPosition.Builder()
-                .target(new LatLng(51.50550, -0.07520)) // Sets the new camera position
-                .zoom(17) // Sets the zoom
-                .bearing(180) // Rotate the camera
-                .tilt(30) // Set the camera tilt
-                .build(); // Creates a CameraPosition from the builder
+              .target(new LatLng(51.50550, -0.07520)) // Sets the new camera position
+              .zoom(17) // Sets the zoom
+              .bearing(180) // Rotate the camera
+              .tilt(30) // Set the camera tilt
+              .build(); // Creates a CameraPosition from the builder
 
             mapboxMap.animateCamera(CameraUpdateFactory
-                .newCameraPosition(position), 7000);
+              .newCameraPosition(position), 7000);
           }
         });
       }

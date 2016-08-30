@@ -48,7 +48,7 @@ public class BasicUserLocation extends AppCompatActivity {
     floatingActionButton = (FloatingActionButton) findViewById(R.id.location_toggle_fab);
     floatingActionButton.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick(View view) {
         if (map != null) {
           toggleGps(!map.isMyLocationEnabled());
         }
@@ -91,8 +91,8 @@ public class BasicUserLocation extends AppCompatActivity {
       // Check if user has granted location permission
       if (!locationServices.areLocationPermissionsGranted()) {
         ActivityCompat.requestPermissions(this, new String[]{
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
+          Manifest.permission.ACCESS_COARSE_LOCATION,
+          Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
       } else {
         enableLocation(true);
       }
@@ -132,13 +132,10 @@ public class BasicUserLocation extends AppCompatActivity {
 
   @Override
   public void onRequestPermissionsResult(
-      int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-    switch (requestCode) {
-      case PERMISSIONS_LOCATION: {
-        if (grantResults.length > 0 &&
-            grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-          enableLocation(true);
-        }
+    int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    if (requestCode == PERMISSIONS_LOCATION) {
+      if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        enableLocation(true);
       }
     }
   }

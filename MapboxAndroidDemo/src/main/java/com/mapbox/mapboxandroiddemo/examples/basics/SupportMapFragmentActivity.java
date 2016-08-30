@@ -25,7 +25,7 @@ public class SupportMapFragmentActivity extends AppCompatActivity {
     if (savedInstanceState == null) {
 
       // Create fragment
-      FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+      final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
       LatLng patagonia = new LatLng(-52.6885, -70.1395);
 
@@ -33,9 +33,9 @@ public class SupportMapFragmentActivity extends AppCompatActivity {
       MapboxMapOptions options = new MapboxMapOptions();
       options.styleUrl(Style.SATELLITE);
       options.camera(new CameraPosition.Builder()
-          .target(patagonia)
-          .zoom(9)
-          .build());
+        .target(patagonia)
+        .zoom(9)
+        .build());
 
       // Create map fragment
       mapFragment = SupportMapFragment.newInstance(options);

@@ -36,7 +36,7 @@ public class LandUseStylingActivity extends AppCompatActivity {
         FillLayer schoolLayer = new FillLayer("school-layer", "composite");
         schoolLayer.setSourceLayer("landuse");
         schoolLayer.setProperties(
-            fillColor(Color.parseColor("#f6f6f4"))
+          fillColor(Color.parseColor("#f6f6f4"))
         );
         schoolLayer.setFilter(eq("class", "school"));
         mapboxMap.addLayer(schoolLayer);
@@ -44,7 +44,7 @@ public class LandUseStylingActivity extends AppCompatActivity {
         FillLayer hospitalLayer = new FillLayer("hospital-layer", "composite");
         hospitalLayer.setSourceLayer("landuse");
         hospitalLayer.setProperties(
-            fillColor(Color.parseColor("#eceeed"))
+          fillColor(Color.parseColor("#eceeed"))
         );
         hospitalLayer.setFilter(eq("class", "hospital"));
         mapboxMap.addLayer(hospitalLayer);
@@ -52,17 +52,18 @@ public class LandUseStylingActivity extends AppCompatActivity {
         FloatingActionButton toggleParks = (FloatingActionButton) findViewById(R.id.fab_toggle_parks);
         toggleParks.setOnClickListener(new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(View view) {
             FillLayer parks = mapboxMap.getLayerAs("parks");
             if (parks != null) {
 
-              if (!colorsEqual(parks.getFillColorAsInt(), ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxGreen))) {
+              if (!colorsEqual(parks.getFillColorAsInt(),
+                ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxGreen))) {
                 parks.setProperties(
-                    fillColor(ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxGreen))
+                  fillColor(ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxGreen))
                 );
               } else {
                 parks.setProperties(
-                    fillColor(Color.parseColor("#eceeed"))
+                  fillColor(Color.parseColor("#eceeed"))
                 );
               }
             }
@@ -72,17 +73,18 @@ public class LandUseStylingActivity extends AppCompatActivity {
         FloatingActionButton toggleSchools = (FloatingActionButton) findViewById(R.id.fab_toggle_schools);
         toggleSchools.setOnClickListener(new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(View view) {
             FillLayer schools = mapboxMap.getLayerAs("school-layer");
             if (schools != null) {
-              if (schools.getFillColor().isValue() &&
-                  !colorsEqual(schools.getFillColorAsInt(), ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxYellow))) {
+              if (schools.getFillColor().isValue()
+                && !colorsEqual(schools.getFillColorAsInt(),
+                ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxYellow))) {
                 schools.setProperties(
-                    fillColor(ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxYellow))
+                  fillColor(ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxYellow))
                 );
               } else {
                 schools.setProperties(
-                    fillColor(Color.parseColor("#f6f6f4"))
+                  fillColor(Color.parseColor("#f6f6f4"))
                 );
               }
             }
@@ -92,17 +94,18 @@ public class LandUseStylingActivity extends AppCompatActivity {
         FloatingActionButton toggleHospital = (FloatingActionButton) findViewById(R.id.fab_toggle_hospital);
         toggleHospital.setOnClickListener(new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(View view) {
             FillLayer hospital = mapboxMap.getLayerAs("hospital-layer");
             if (hospital != null) {
-              if (hospital.getFillColor().isValue() &&
-                  !colorsEqual(hospital.getFillColorAsInt(), ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxPurple))) {
+              if (hospital.getFillColor().isValue()
+                && !colorsEqual(hospital.getFillColorAsInt(),
+                ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxPurple))) {
                 hospital.setProperties(
-                    fillColor(ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxPurple))
+                  fillColor(ContextCompat.getColor(LandUseStylingActivity.this, R.color.mapboxPurple))
                 );
               } else {
                 hospital.setProperties(
-                    fillColor(Color.parseColor("#eceeed"))
+                  fillColor(Color.parseColor("#eceeed"))
                 );
               }
             }
@@ -143,18 +146,18 @@ public class LandUseStylingActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  private boolean colorsEqual(int a, int b) {
-    boolean equal = Math.abs(Color.red(a) - Color.red(b)) <= 10 &&
-        Math.abs(Color.green(a) - Color.green(b)) <= 10 &&
-        Math.abs(Color.blue(a) - Color.blue(b)) <= 10;
+  private boolean colorsEqual(int firstColor, int secondColor) {
+    boolean equal = Math.abs(Color.red(firstColor) - Color.red(secondColor)) <= 10
+      && Math.abs(Color.green(firstColor) - Color.green(secondColor)) <= 10
+      && Math.abs(Color.blue(firstColor) - Color.blue(secondColor)) <= 10;
 
     Log.i(TAG, String.format("Comparing colors: %s, %s (%s, %s ,%s => %s)",
-        a,
-        b,
-        Math.abs(Color.red(a) - Color.red(b)),
-        Math.abs(Color.green(a) - Color.green(b)),
-        Math.abs(Color.blue(a) - Color.blue(b)),
-        equal)
+      firstColor,
+      secondColor,
+      Math.abs(Color.red(firstColor) - Color.red(secondColor)),
+      Math.abs(Color.green(firstColor) - Color.green(secondColor)),
+      Math.abs(Color.blue(firstColor) - Color.blue(secondColor)),
+      equal)
     );
     return equal;
   }

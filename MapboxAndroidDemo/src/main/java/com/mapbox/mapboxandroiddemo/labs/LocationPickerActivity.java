@@ -79,8 +79,8 @@ public class LocationPickerActivity extends AppCompatActivity {
         // setInitialCamera.
         if (!locationServices.areLocationPermissionsGranted()) {
           ActivityCompat.requestPermissions(LocationPickerActivity.this, new String[]{
-              Manifest.permission.ACCESS_COARSE_LOCATION,
-              Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
         } else {
           setInitialCamera();
         }
@@ -93,8 +93,8 @@ public class LocationPickerActivity extends AppCompatActivity {
     hoveringMarker = new ImageView(this);
     hoveringMarker.setImageResource(R.drawable.red_marker);
     FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-        ViewGroup.LayoutParams.WRAP_CONTENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+      ViewGroup.LayoutParams.WRAP_CONTENT,
+      ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
     hoveringMarker.setLayoutParams(params);
     mapView.addView(hoveringMarker);
 
@@ -102,19 +102,20 @@ public class LocationPickerActivity extends AppCompatActivity {
     selectLocationButton = (Button) findViewById(R.id.select_location_button);
     selectLocationButton.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick(View view) {
         if (map != null) {
           if (droppedMarker == null) {
             // We first find where the hovering marker position is relative to the map.
             // Then we set the visibility to gone.
-            float x = hoveringMarker.getLeft() + (hoveringMarker.getWidth() / 2);
-            float y = hoveringMarker.getBottom();
-            float[] coords = new float[]{x, y};
-            LatLng latLng = map.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
+            float coordinateX = hoveringMarker.getLeft() + (hoveringMarker.getWidth() / 2);
+            float coordinateY = hoveringMarker.getBottom();
+            float[] coords = new float[]{coordinateX, coordinateY};
+            final LatLng latLng = map.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
             hoveringMarker.setVisibility(View.GONE);
 
             // Transform the appearance of the button to become the cancel button
-            selectLocationButton.setBackgroundColor(ContextCompat.getColor(LocationPickerActivity.this, R.color.colorAccent));
+            selectLocationButton.setBackgroundColor(
+              ContextCompat.getColor(LocationPickerActivity.this, R.color.colorAccent));
             selectLocationButton.setText("Cancel");
 
             // Create the marker icon the dropped marker will be using.
@@ -134,7 +135,8 @@ public class LocationPickerActivity extends AppCompatActivity {
             map.removeMarker(droppedMarker);
 
             // Switch the button apperance back to select a location.
-            selectLocationButton.setBackgroundColor(ContextCompat.getColor(LocationPickerActivity.this, R.color.colorPrimary));
+            selectLocationButton.setBackgroundColor(
+              ContextCompat.getColor(LocationPickerActivity.this, R.color.colorPrimary));
             selectLocationButton.setText("Select a location");
 
             // Lastly, set the hovering marker back to visible.
@@ -144,7 +146,7 @@ public class LocationPickerActivity extends AppCompatActivity {
         }
       }
     });
-  }// End onCreate
+  } // End onCreate
 
   @Override
   public void onResume() {
@@ -193,9 +195,9 @@ public class LocationPickerActivity extends AppCompatActivity {
         if (location != null && !initialCameraPositonSet) {
           // Move the map camera to where the user location is
           map.setCameraPosition(new CameraPosition.Builder()
-              .target(new LatLng(location))
-              .zoom(16)
-              .build());
+            .target(new LatLng(location))
+            .zoom(16)
+            .build());
 
           // Set to true so we aren't setting the camera every time location is updated
           initialCameraPositonSet = true;
@@ -206,16 +208,16 @@ public class LocationPickerActivity extends AppCompatActivity {
     // map gesture.
     map.setMyLocationEnabled(true);
     map.getTrackingSettings().setMyLocationTrackingMode(MyLocationTracking.TRACKING_FOLLOW);
-  }// End setInitialCamera
+  } // End setInitialCamera
 
   private void reverseGeocode(final LatLng point) {
     // This method is used to reverse geocode where the user has dropped the marker.
     try {
       MapboxGeocoding client = new MapboxGeocoding.Builder()
-          .setAccessToken(getString(R.string.access_token))
-          .setCoordinates(Position.fromCoordinates(point.getLongitude(), point.getLatitude()))
-          .setGeocodingType(GeocodingCriteria.TYPE_ADDRESS)
-          .build();
+        .setAccessToken(getString(R.string.access_token))
+        .setCoordinates(Position.fromCoordinates(point.getLongitude(), point.getLatitude()))
+        .setGeocodingType(GeocodingCriteria.TYPE_ADDRESS)
+        .build();
 
       client.enqueueCall(new Callback<GeocodingResponse>() {
         @Override
@@ -241,25 +243,23 @@ public class LocationPickerActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onFailure(Call<GeocodingResponse> call, Throwable t) {
-          Log.e(TAG, "Geocoding Failure: " + t.getMessage());
+        public void onFailure(Call<GeocodingResponse> call, Throwable throwable) {
+          Log.e(TAG, "Geocoding Failure: " + throwable.getMessage());
         }
       });
-    } catch (ServicesException e) {
-      Log.e(TAG, "Error geocoding: " + e.toString());
-      e.printStackTrace();
+    } catch (ServicesException servicesException) {
+      Log.e(TAG, "Error geocoding: " + servicesException.toString());
+      servicesException.printStackTrace();
     }
-  }// reverseGeocode
+  } // reverseGeocode
 
   @Override
   public void onRequestPermissionsResult(
-      int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-    switch (requestCode) {
-      case PERMISSIONS_LOCATION: {
-        if (grantResults.length > 0 &&
-            grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-          setInitialCamera();
-        }
+    int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    if (requestCode == PERMISSIONS_LOCATION) {
+      if (grantResults.length > 0
+        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        setInitialCamera();
       }
     }
   }

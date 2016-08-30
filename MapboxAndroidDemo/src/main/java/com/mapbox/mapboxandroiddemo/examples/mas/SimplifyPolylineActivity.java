@@ -45,7 +45,7 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
 
-        new DrawGeoJSON().execute();
+        new DrawGeoJson().execute();
 
       }
     });
@@ -81,7 +81,7 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  private class DrawGeoJSON extends AsyncTask<Void, Void, List<Position>> {
+  private class DrawGeoJson extends AsyncTask<Void, Void, List<Position>> {
     @Override
     protected List<Position> doInBackground(Void... voids) {
 
@@ -119,8 +119,8 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
             }
           }
         }
-      } catch (Exception e) {
-        Log.e(TAG, "Exception Loading GeoJSON: " + e.toString());
+      } catch (Exception exception) {
+        Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
       }
 
       return points;
@@ -139,30 +139,34 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
   private void drawBeforeSimplify(List<Position> points) {
 
     LatLng[] pointsArray = new LatLng[points.size()];
-    for (int i = 0; i < points.size(); i++)
+    for (int i = 0; i < points.size(); i++) {
       pointsArray[i] = new LatLng(points.get(i).getLatitude(), points.get(i).getLongitude());
+    }
 
     map.addPolyline(new PolylineOptions()
-        .add(pointsArray)
-        .color(Color.parseColor("#8a8acb"))
-        .width(4));
+      .add(pointsArray)
+      .color(Color.parseColor("#8a8acb"))
+      .width(4));
   }
 
   private void drawSimplify(List<Position> points) {
 
     Position[] before = new Position[points.size()];
-    for (int i = 0; i < points.size(); i++) before[i] = points.get(i);
+    for (int i = 0; i < points.size(); i++) {
+      before[i] = points.get(i);
+    }
 
     Position[] after = PolylineUtils.simplify(before, 0.001);
 
     LatLng[] result = new LatLng[after.length];
-    for (int i = 0; i < after.length; i++)
+    for (int i = 0; i < after.length; i++) {
       result[i] = new LatLng(after[i].getLatitude(), after[i].getLongitude());
+    }
 
     map.addPolyline(new PolylineOptions()
-        .add(result)
-        .color(Color.parseColor("#3bb2d0"))
-        .width(4));
+      .add(result)
+      .color(Color.parseColor("#3bb2d0"))
+      .width(4));
 
   }
 }

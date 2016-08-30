@@ -1,55 +1,56 @@
 package com.mapbox.mapboxandroiddemo.utils;
 
+import static android.support.v7.widget.RecyclerView.OnChildAttachStateChangeListener;
+import static android.support.v7.widget.RecyclerView.ViewHolder;
+
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
 
 public class ItemClickSupport {
-  private final RecyclerView mRecyclerView;
-  private OnItemClickListener mOnItemClickListener;
-  private OnItemLongClickListener mOnItemLongClickListener;
-  private View.OnClickListener mOnClickListener = new View.OnClickListener() {
+  private final RecyclerView recyclerView;
+  private OnItemClickListener onItemClickListener;
+  private OnItemLongClickListener onItemLongClickListener;
+  private View.OnClickListener onClickListener = new View.OnClickListener() {
     @Override
-    public void onClick(View v) {
-      if (mOnItemClickListener != null) {
-        RecyclerView.ViewHolder holder = mRecyclerView.getChildViewHolder(v);
-        mOnItemClickListener.onItemClicked(mRecyclerView, holder.getAdapterPosition(), v);
+    public void onClick(View view) {
+      if (onItemClickListener != null) {
+        ViewHolder holder = recyclerView.getChildViewHolder(view);
+        onItemClickListener.onItemClicked(recyclerView, holder.getAdapterPosition(), view);
       }
     }
   };
-  private View.OnLongClickListener mOnLongClickListener = new View.OnLongClickListener() {
+  private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
     @Override
-    public boolean onLongClick(View v) {
-      if (mOnItemLongClickListener != null) {
-        RecyclerView.ViewHolder holder = mRecyclerView.getChildViewHolder(v);
-        return mOnItemLongClickListener.onItemLongClicked(mRecyclerView, holder.getAdapterPosition(), v);
+    public boolean onLongClick(View view) {
+      if (onItemLongClickListener != null) {
+        ViewHolder holder = recyclerView.getChildViewHolder(view);
+        return onItemLongClickListener.onItemLongClicked(recyclerView, holder.getAdapterPosition(), view);
       }
       return false;
     }
   };
-  private RecyclerView.OnChildAttachStateChangeListener mAttachListener
-      = new RecyclerView.OnChildAttachStateChangeListener() {
+  private OnChildAttachStateChangeListener attachListener = new OnChildAttachStateChangeListener() {
     @Override
     public void onChildViewAttachedToWindow(View view) {
-      if (mOnItemClickListener != null) {
-        view.setOnClickListener(mOnClickListener);
+      if (onItemClickListener != null) {
+        view.setOnClickListener(onClickListener);
       }
-      if (mOnItemLongClickListener != null) {
-        view.setOnLongClickListener(mOnLongClickListener);
+      if (onItemLongClickListener != null) {
+        view.setOnLongClickListener(onLongClickListener);
       }
     }
 
     @Override
     public void onChildViewDetachedFromWindow(View view) {
-
     }
   };
 
   private ItemClickSupport(RecyclerView recyclerView) {
-    mRecyclerView = recyclerView;
-    mRecyclerView.setTag(R.id.item_click_support, this);
-    mRecyclerView.addOnChildAttachStateChangeListener(mAttachListener);
+    this.recyclerView = recyclerView;
+    this.recyclerView.setTag(R.id.item_click_support, this);
+    this.recyclerView.addOnChildAttachStateChangeListener(attachListener);
   }
 
   public static ItemClickSupport addTo(RecyclerView view) {
@@ -69,17 +70,17 @@ public class ItemClickSupport {
   }
 
   public ItemClickSupport setOnItemClickListener(OnItemClickListener listener) {
-    mOnItemClickListener = listener;
+    onItemClickListener = listener;
     return this;
   }
 
   public ItemClickSupport setOnItemLongClickListener(OnItemLongClickListener listener) {
-    mOnItemLongClickListener = listener;
+    onItemLongClickListener = listener;
     return this;
   }
 
   private void detach(RecyclerView view) {
-    view.removeOnChildAttachStateChangeListener(mAttachListener);
+    view.removeOnChildAttachStateChangeListener(attachListener);
     view.setTag(R.id.item_click_support, null);
   }
 

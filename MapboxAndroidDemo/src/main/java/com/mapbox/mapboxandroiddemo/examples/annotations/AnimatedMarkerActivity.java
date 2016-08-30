@@ -31,7 +31,7 @@ public class AnimatedMarkerActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
 
         final Marker marker = mapboxMap.addMarker(new MarkerViewOptions()
-            .position(new LatLng(64.900932, -18.167040)));
+          .position(new LatLng(64.900932, -18.167040)));
 
         mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override
@@ -40,7 +40,7 @@ public class AnimatedMarkerActivity extends AppCompatActivity {
             // When the user clicks on the map, we want to animate the marker to that
             // location.
             ValueAnimator markerAnimator = ObjectAnimator.ofObject(marker, "position",
-                new LatLngEvaluator(), marker.getPosition(), point);
+              new LatLngEvaluator(), marker.getPosition(), point);
             markerAnimator.setDuration(2000);
             markerAnimator.start();
           }
@@ -87,10 +87,10 @@ public class AnimatedMarkerActivity extends AppCompatActivity {
 
     @Override
     public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
-      latLng.setLatitude(startValue.getLatitude() +
-          ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
-      latLng.setLongitude(startValue.getLongitude() +
-          ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
+      latLng.setLatitude(startValue.getLatitude()
+        + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
+      latLng.setLongitude(startValue.getLongitude()
+        + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
       return latLng;
     }
   }

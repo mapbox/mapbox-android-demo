@@ -42,8 +42,8 @@ public class LocationTrackingActivity extends AppCompatActivity {
         // otherwise we enable location tracking.
         if (!locationServices.areLocationPermissionsGranted()) {
           ActivityCompat.requestPermissions(LocationTrackingActivity.this, new String[]{
-              Manifest.permission.ACCESS_COARSE_LOCATION,
-              Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
         } else {
           enableLocationTracking();
         }
@@ -94,13 +94,10 @@ public class LocationTrackingActivity extends AppCompatActivity {
 
   @Override
   public void onRequestPermissionsResult(
-      int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-    switch (requestCode) {
-      case PERMISSIONS_LOCATION: {
-        if (grantResults.length > 0 &&
-            grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-          enableLocationTracking();
-        }
+    int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    if (requestCode == PERMISSIONS_LOCATION) {
+      if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        enableLocationTracking();
       }
     }
   }

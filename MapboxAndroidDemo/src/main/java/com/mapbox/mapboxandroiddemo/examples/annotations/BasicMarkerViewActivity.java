@@ -35,19 +35,19 @@ public class BasicMarkerViewActivity extends AppCompatActivity {
 
         // The easiest way to add a marker view
         mapboxMap.addMarker(new MarkerViewOptions()
-            .position(new LatLng(-37.821629, 144.978535)));
+          .position(new LatLng(-37.821629, 144.978535)));
 
         // marker view using all the different options available
         mapboxMap.addMarker(new MarkerViewOptions()
-            .position(new LatLng(-37.822829, 144.981842))
-            .icon(icon)
-            .rotation(90)
-            .anchor(0.5f, 0.5f)
-            .alpha(0.5f)
-            .title("Hisense Arena")
-            .snippet("Olympic Blvd, Melbourne VIC 3001, Australia")
-            .infoWindowAnchor(0.5f, 0.5f)
-            .flat(true));
+          .position(new LatLng(-37.822829, 144.981842))
+          .icon(icon)
+          .rotation(90)
+          .anchor(0.5f, 0.5f)
+          .alpha(0.5f)
+          .title("Hisense Arena")
+          .snippet("Olympic Blvd, Melbourne VIC 3001, Australia")
+          .infoWindowAnchor(0.5f, 0.5f)
+          .flat(true));
       }
     });
   }

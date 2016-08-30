@@ -25,9 +25,9 @@ public class DrawMarkerActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         mapboxMap.addMarker(new MarkerOptions()
-            .position(new LatLng(48.13863, 11.57603))
-            .title("Hello World!")
-            .snippet("Welcome to my marker."));
+          .position(new LatLng(48.13863, 11.57603))
+          .title("Hello World!")
+          .snippet("Welcome to my marker."));
 
       }
     });
