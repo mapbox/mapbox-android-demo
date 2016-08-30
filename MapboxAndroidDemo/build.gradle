@@ -1,22 +1,5 @@
 apply plugin: 'com.android.application'
 
-buildscript {
-  repositories {
-    mavenCentral()
-    maven { url 'https://maven.fabric.io/public' }
-    jcenter()
-  }
-  dependencies {
-    classpath 'com.android.tools.build:gradle:2.1.3'
-  }
-}
-
-repositories {
-  mavenCentral()
-  maven { url "https://jitpack.io" }
-  maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
 ext {
   supportLibVersion = '24.2.0'
 }
@@ -35,9 +18,15 @@ android {
   buildTypes {
     release {
       minifyEnabled false
-//    proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
+}
+
+repositories {
+  mavenCentral()
+  maven { url "https://jitpack.io" }
+  maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 dependencies {
@@ -45,9 +34,11 @@ dependencies {
   compile "com.android.support:appcompat-v7:${supportLibVersion}"
   compile "com.android.support:cardview-v7:${supportLibVersion}"
   compile "com.android.support:recyclerview-v7:${supportLibVersion}"
-  compile 'com.github.javiersantos:MaterialStyledDialogs:1.5.1'
+  compile 'com.github.javiersantos:MaterialStyledDialogs:1.5.5'
   compile 'com.getbase:floatingactionbutton:1.10.1'
   compile 'com.squareup.picasso:picasso:2.5.2'
+
+  // Mapbox dependencies
   compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-beta.2@aar') {
     transitive = true
   }
