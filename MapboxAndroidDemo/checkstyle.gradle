@@ -1,0 +1,14 @@
+apply plugin: 'checkstyle'
+
+task checkstyle(type: Checkstyle) {
+  description 'Checks if the code adheres to coding standards'
+  group 'verification'
+
+  configFile = new File(rootDir, "checkstyle.xml")
+  source 'src'
+  include '**/*.java'
+  exclude '**/gen/**'
+
+  classpath = files()
+  ignoreFailures = false
+}
