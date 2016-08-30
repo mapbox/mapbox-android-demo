@@ -1,61 +1,52 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven { url 'https://maven.fabric.io/public' }
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.3'
-    }
-}
-
 apply plugin: 'com.android.application'
 
-repositories {
-    mavenCentral()
-    maven { url "https://jitpack.io" }
-    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
 ext {
-    supportLibVersion = '24.1.1'
+  supportLibVersion = '24.2.0'
 }
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+  compileSdkVersion 24
+  buildToolsVersion "24.0.1"
 
-    defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 24
-        versionCode 30
-        versionName "4.2.0-beta.2"
-    }
+  defaultConfig {
+    minSdkVersion 15
+    targetSdkVersion 24
+    versionCode 30
+    versionName "4.2.0-beta.2"
+  }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-        }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+  }
+}
+
+repositories {
+  mavenCentral()
+  maven { url "https://jitpack.io" }
+  maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
 }
 
 dependencies {
-    compile "com.android.support:gridlayout-v7:${supportLibVersion}"
-    compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile "com.android.support:cardview-v7:${supportLibVersion}"
-    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
-    compile 'com.github.javiersantos:MaterialStyledDialogs:1.5.1'
-    compile 'com.getbase:floatingactionbutton:1.10.1'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-beta.2@aar'){
-        transitive=true
-    }
-    compile('com.mapbox.mapboxsdk:mapbox-android-services:2.0.0-SNAPSHOT@aar') {
-        transitive = true
-    }
+  compile "com.android.support:gridlayout-v7:${supportLibVersion}"
+  compile "com.android.support:appcompat-v7:${supportLibVersion}"
+  compile "com.android.support:cardview-v7:${supportLibVersion}"
+  compile "com.android.support:recyclerview-v7:${supportLibVersion}"
+  compile 'com.github.javiersantos:MaterialStyledDialogs:1.5.5'
+  compile 'com.getbase:floatingactionbutton:1.10.1'
+  compile 'com.squareup.picasso:picasso:2.5.2'
 
-    compile 'com.google.code.gson:gson:2.6.2'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+  // Mapbox dependencies
+  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-beta.2@aar') {
+    transitive = true
+  }
+  compile('com.mapbox.mapboxsdk:mapbox-android-services:2.0.0-SNAPSHOT@aar') {
+    transitive = true
+  }
+
+  compile 'com.google.code.gson:gson:2.6.2'
+  compile 'com.squareup.retrofit2:retrofit:2.1.0'
+  compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 }
