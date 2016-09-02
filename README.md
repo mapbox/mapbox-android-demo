@@ -2,10 +2,14 @@
 
 ![](https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/splash.png)
 
+[![Build Status](https://www.bitrise.io/app/9778f1e5f744661f.svg?token=bNy-zoctPHivmB6e8inudA&branch=master)](https://www.bitrise.io/app/9778f1e5f744661f)
+
 This is a public demo of the Mapbox Android SDK that's [available now in the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo). It shows off all the examples found on [mapbox.com/android-sdk/examples](https://www.mapbox.com/android-sdk/examples/) using the same code. In addition, the app also includes a section called labs which combines the examples to create more complex demos. To get started using Mapbox in your Android application check out [the overview page](https://www.mapbox.com/android-sdk/).
 
 ### Steps to adding a new example
 Feedback and contribution is encouraged in this repo, if you'd like to see a new example added in the app either [open an issue](https://github.com/mapbox/mapbox-android-demo/issues) or create it yourself and open a pull request following these steps:
+
+**Note:** This repo uses checkstyle to make sure code contributed follows the Mapbox Style standards. When a pull request is opened, Bitrise will check that no style issues occur in the code. To setup Checkstyle in Android Studio read this [wiki entry](https://github.com/mapbox/mapbox-android-demo/wiki/Setting-up-Mapbox-checkstyle).
 
 * Create a new java file and place in the acceptable folder (`examples` or `labs`) giving it a descriptive name and ending the title with `*Activity`. It's important that all activities extend `AppCompat`.
 * If the activity needs a layout, add one with the naming convention `activity_*`.
