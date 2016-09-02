@@ -3,10 +3,10 @@ package com.mapbox.mapboxandroiddemo.examples.annotations;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -19,7 +19,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
-public class AnimatedCircleMarkerActivity extends Activity {
+public class AnimatedCircleMarkerActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MarkerView circle;
