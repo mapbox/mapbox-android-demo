@@ -38,7 +38,7 @@ dependencies {
   compile 'com.squareup.picasso:picasso:2.5.2'
 
   // Mapbox dependencies
-  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-beta.2@aar') {
+  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-SNAPSHOT@aar') {
     transitive = true
   }
   compile('com.mapbox.mapboxsdk:mapbox-android-services:2.0.0-SNAPSHOT@aar') {
