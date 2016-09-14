@@ -47,6 +47,7 @@ import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
@@ -190,6 +191,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_vector_source_description,
           new Intent(MainActivity.this, VectorSourceActivity.class),
           R.string.activity_styles_vector_source_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_add_wms_source_title,
+          R.string.activity_style_add_wms_source_description,
+          new Intent(MainActivity.this, AddWmsSourceActivity.class),
+          R.string.activity_style_add_wms_source_url,
           true
         ));
         exampleItemModel.add(new ExampleItemModel(
