@@ -10,6 +10,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.RasterSource;
+import com.mapbox.mapboxsdk.style.sources.TileSet;
 
 public class AddWmsSourceActivity extends AppCompatActivity {
 
@@ -28,9 +29,9 @@ public class AddWmsSourceActivity extends AppCompatActivity {
 
         RasterSource webMapSource = new RasterSource(
           "web-map-source",
-          "https://geodata.state.nj.us/imagerywms/Natural2015?bbox={bbox-epsg-3857}&format=image/"
-            + "png&service=WMS&version=1.1.1&request=GetMap&srs=EPSG:3857&width=256&height=256&"
-            + "layers=Natural2015")
+          new TileSet("tileset", "https://geodata.state.nj.us/imagerywms/Natural2015?bbox={"
+            + "bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&"
+            + "srs=EPSG:3857&width=256&height=256&layers=Natural2015"))
           .withTileSize(256);
 
         mapboxMap.addSource(webMapSource);
