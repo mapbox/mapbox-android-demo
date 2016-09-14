@@ -36,7 +36,7 @@ public class AddWmsSourceActivity extends AppCompatActivity {
         mapboxMap.addSource(webMapSource);
 
         // Add the web map source to the map.
-        RasterLayer webMapLayer = new RasterLayer("web-map-source", "web-map-layer");
+        RasterLayer webMapLayer = new RasterLayer("web-map-layer", "web-map-source");
         mapboxMap.addLayer(webMapLayer, "aeroway-taxiway");
 
       }
