@@ -13,11 +13,9 @@ import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.Source;
-import com.mapbox.services.commons.geojson.BaseFeatureCollection;
 import com.mapbox.services.commons.geojson.Feature;
 import com.mapbox.services.commons.geojson.FeatureCollection;
 import com.mapbox.services.commons.geojson.LineString;
-import com.mapbox.services.commons.geojson.Point;
 import com.mapbox.services.commons.models.Position;
 
 import java.util.ArrayList;
