@@ -87,9 +87,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
-    // Mapbox access token is configured here.
-    MapboxAccountManager.start(this, getString(R.string.access_token));
-
     exampleItemModel = new ArrayList<>();
 
 

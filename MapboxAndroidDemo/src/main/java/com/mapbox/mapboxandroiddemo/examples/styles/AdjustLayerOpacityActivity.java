@@ -6,6 +6,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -24,6 +25,12 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    // Mapbox access token is configured here. This needs to be called either in your application
+    // object or in the same activity which contains the mapview.
+    MapboxAccountManager.start(this, getString(R.string.access_token));
+
+    // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_style_adjust_layer_opacity);
 
     final SeekBar opacitySeekBar = (SeekBar) findViewById(R.id.seek_bar_layer_opacity);
