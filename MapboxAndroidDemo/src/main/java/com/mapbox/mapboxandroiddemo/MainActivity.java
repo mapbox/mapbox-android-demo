@@ -60,6 +60,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.SatelliteStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
+import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LandUseStylingActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
@@ -446,6 +447,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, OffRouteActivity.class),
           R.string.activity_lab_off_route_url,
           true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_indoor_map_title,
+          R.string.activity_lab_indoor_map_description,
+          new Intent(MainActivity.this, IndoorMapActivity.class),
+          R.string.activity_lab_indoor_map_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_location_picker_title,

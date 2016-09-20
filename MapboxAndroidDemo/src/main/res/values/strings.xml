@@ -85,6 +85,7 @@
     <string name="activity_lab_space_station_location_title">Space station current location</string>
     <string name="activity_lab_land_use_stying_title">Land use styling</string>
     <string name="activity_lab_off_route_title">Off route detection</string>
+    <string name="activity_lab_indoor_map_title">Indoor Map</string>
 
     <!-- example descriptions-->
     <string name="activity_basic_simple_mapview_description">Show a map in your app using the Mapbox Android SDK.</string>
@@ -132,6 +133,7 @@
     <string name="activity_lab_space_station_location_description">See the International Space Station location in real time.</string>
     <string name="activity_lab_land_use_stying_description">Use the style api to allow toggleable highlighting of parks, hospitals, and schools.</string>
     <string name="activity_lab_off_route_description">Detect when the car is off route and reroute them.</string>
+    <string name="activity_lab_indoor_map_description">TODO</string>
 
     <!-- example urls-->
     <string name="empty_image"> </string>
@@ -181,5 +183,6 @@
     <string name="activity_lab_space_station_location_url">http://i.imgur.com/PxuB1T8.png</string>
     <string name="activity_lab_land_use_stying_url">http://i.imgur.com/x1i4qEw.png</string>
     <string name="activity_lab_off_route_url">http://i.imgur.com/lx1LdkA.png</string>
+    <string name="activity_lab_indoor_map_url"> </string>
 
 </resources>
