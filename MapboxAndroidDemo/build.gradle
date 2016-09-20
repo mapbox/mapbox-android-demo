@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 ext {
-  supportLibVersion = '24.2.0'
+  supportLibVersion = '24.2.1'
 }
 
 android {
@@ -11,8 +11,8 @@ android {
   defaultConfig {
     minSdkVersion 15
     targetSdkVersion 24
-    versionCode 30
-    versionName "4.2.0-beta.2"
+    versionCode 31
+    versionName "4.2.0-beta.3"
   }
 
   buildTypes {
@@ -42,7 +42,7 @@ dependencies {
   compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-SNAPSHOT@aar') {
     transitive = true
   }
-  compile('com.mapbox.mapboxsdk:mapbox-android-services:2.0.0-SNAPSHOT@aar') {
+  compile('com.mapbox.mapboxsdk:mapbox-android-services:1.3.1@aar') {
     transitive = true
   }
 
