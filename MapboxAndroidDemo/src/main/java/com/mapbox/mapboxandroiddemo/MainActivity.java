@@ -55,6 +55,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SatelliteStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
@@ -177,6 +178,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_create_heatmap_points_description,
           new Intent(MainActivity.this, CreateHeatmapPointsActivity.class),
           R.string.activity_style_create_heatmap_points_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_line_layer_title,
+          R.string.activity_style_line_layer_description,
+          new Intent(MainActivity.this, LineLayerActivity.class),
+          R.string.activity_style_line_layer_url,
           true
         ));
         exampleItemModel.add(new ExampleItemModel(
