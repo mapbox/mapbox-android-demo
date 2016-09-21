@@ -11,6 +11,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.net.MalformedURLException;
@@ -88,10 +89,13 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
       mapboxMap.addSource(
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
         // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        new GeoJsonSource("earthquakes", new URL("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"))
-          .withCluster(true)
-          .withClusterMaxZoom(15) // Max zoom to cluster points on
-          .withClusterRadius(20) // Use small cluster radius for the heatmap look
+        new GeoJsonSource("earthquakes",
+          new URL("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"),
+          new GeoJsonOptions()
+            .withCluster(true)
+            .withClusterMaxZoom(15) // Max zoom to cluster points on
+            .withClusterRadius(20) // Use small cluster radius for the heatmap look
+        )
       );
     } catch (MalformedURLException malformedUrlException) {
       Log.e("heatmapActivity", "Check the URL " + malformedUrlException.getMessage());
