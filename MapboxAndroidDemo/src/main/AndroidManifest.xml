@@ -380,6 +380,14 @@
         </activity>
 
         <activity
+            android:name=".examples.styles.LineLayerActivity"
+            android:label="@string/activity_style_line_layer_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
+        <activity
             android:name=".examples.styles.AddWmsSourceActivity"
             android:label="@string/activity_style_add_wms_source_title">
             <meta-data
