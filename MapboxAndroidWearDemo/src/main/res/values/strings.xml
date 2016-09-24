@@ -1,0 +1,7 @@
+<resources>
+
+    <!-- Access Token -->
+    <string name="access_token" translatable="false"></string>
+
+    <string name="app_name">Mapbox Dev Preview</string>
+</resources>
