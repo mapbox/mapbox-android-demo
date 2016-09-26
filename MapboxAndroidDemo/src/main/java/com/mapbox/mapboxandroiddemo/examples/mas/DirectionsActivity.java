@@ -40,6 +40,12 @@ public class DirectionsActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    // Mapbox access token is configured here. This needs to be called either in your application
+    // object or in the same activity which contains the mapview.
+    MapboxAccountManager.start(this, getString(R.string.access_token));
+
+    // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_mas_directions);
 
     // Alhambra landmark in Granada, Spain.

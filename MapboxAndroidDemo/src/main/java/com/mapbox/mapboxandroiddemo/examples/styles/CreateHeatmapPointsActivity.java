@@ -6,10 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.net.MalformedURLException;
@@ -30,6 +32,12 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    // Mapbox access token is configured here. This needs to be called either in your application
+    // object or in the same activity which contains the mapview.
+    MapboxAccountManager.start(this, getString(R.string.access_token));
+
+    // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_style_create_heatmap_points);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -81,10 +89,13 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
       mapboxMap.addSource(
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
         // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        new GeoJsonSource("earthquakes", new URL("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"))
-          .withCluster(true)
-          .withClusterMaxZoom(15) // Max zoom to cluster points on
-          .withClusterRadius(20) // Use small cluster radius for the heatmap look
+        new GeoJsonSource("earthquakes",
+          new URL("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"),
+          new GeoJsonOptions()
+            .withCluster(true)
+            .withClusterMaxZoom(15) // Max zoom to cluster points on
+            .withClusterRadius(20) // Use small cluster radius for the heatmap look
+        )
       );
     } catch (MalformedURLException malformedUrlException) {
       Log.e("heatmapActivity", "Check the URL " + malformedUrlException.getMessage());
