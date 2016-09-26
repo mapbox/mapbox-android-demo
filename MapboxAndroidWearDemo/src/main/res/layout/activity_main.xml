@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.wearable.view.WatchViewStub
+<android.support.wearable.view.BoxInsetLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:id="@+id/watch_view_stub"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    app:rectLayout="@layout/rect_activity_main" app:roundLayout="@layout/round_activity_main"
-    tools:context="com.mapbox.mapboxandroidweardemo.MainActivity"
-    tools:deviceIds="wear"></android.support.wearable.view.WatchViewStub>
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:deviceIds="wear">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:center_latitude="40.73581"
+        app:center_longitude="-73.99155"
+        app:style_url="mapbox://styles/mapbox/streets-v9"
+        app:zoom="11"
+        app:zoom_controls_enabled="false"/>
+
+</android.support.wearable.view.BoxInsetLayout>
