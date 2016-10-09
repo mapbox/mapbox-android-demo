@@ -1,67 +1,50 @@
 package com.mapbox.mapboxandroidweardemo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.wearable.activity.WearableActivity;
+import android.support.wearable.view.WearableRecyclerView;
 
-import com.mapbox.mapboxsdk.MapboxAccountManager;
-import com.mapbox.mapboxsdk.maps.MapView;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxandroidweardemo.Utils.MyOffsettingHelper;
+import com.mapbox.mapboxandroidweardemo.adapter.ExampleAdapter;
+import com.mapbox.mapboxandroidweardemo.examples.SimpleMapViewActivity;
+import com.mapbox.mapboxandroidweardemo.model.ExampleItemModel;
 
-public class MainActivity extends WearableActivity {
+import java.util.ArrayList;
 
-  private MapView mapView;
+public class MainActivity extends WearableActivity implements ExampleAdapter.ItemSelectedListener {
+
+  private static final String TAG = "MainActivity";
+  private WearableRecyclerView wearableRecyclerView;
+  private ArrayList<ExampleItemModel> exampleItemModels;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    // Mapbox access token is configured here. This needs to be called either in your application
-    // object or in the same activity which contains the mapview.
-    MapboxAccountManager.start(this, getString(R.string.access_token));
-
-    // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_main);
 
-    mapView = (MapView) findViewById(R.id.mapView);
-    mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+    wearableRecyclerView = (WearableRecyclerView) findViewById(R.id.recycler_launcher_view);
+    wearableRecyclerView.setHasFixedSize(true);
+    wearableRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Customize map with markers, polylines, etc.
-      }
-    });
+    MyOffsettingHelper myOffsettingHelper = new MyOffsettingHelper();
+
+    wearableRecyclerView.setOffsettingHelper(myOffsettingHelper);
+
+    exampleItemModels = new ArrayList<>();
+    exampleItemModels.add(new ExampleItemModel(R.string.activity_simple_mapview_title, R.drawable.simple_map_view_screen, new Intent(MainActivity.this, SimpleMapViewActivity.class)));
+    //exampleItemModels.add("Show user location");
+
+    ExampleAdapter exampleAdapter = new ExampleAdapter(MainActivity.this, exampleItemModels);
+    wearableRecyclerView.setAdapter(exampleAdapter);
+
+    exampleAdapter.setListener(this);
 
   }
 
   @Override
-  public void onResume() {
-    super.onResume();
-    mapView.onResume();
-  }
-
-  @Override
-  public void onPause() {
-    super.onPause();
-    mapView.onPause();
-  }
-
-  @Override
-  public void onLowMemory() {
-    super.onLowMemory();
-    mapView.onLowMemory();
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    mapView.onDestroy();
-  }
-
-  @Override
-  protected void onSaveInstanceState(Bundle outState) {
-    super.onSaveInstanceState(outState);
-    mapView.onSaveInstanceState(outState);
+  public void onItemSelected(int position) {
+    startActivity(exampleItemModels.get(position).getActivity());
   }
 }

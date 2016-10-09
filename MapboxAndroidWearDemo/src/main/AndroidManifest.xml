@@ -23,6 +23,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".examples.SimpleMapViewActivity"
+            android:label="@string/activity_simple_mapview_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
         <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService"/>
 
     </application>

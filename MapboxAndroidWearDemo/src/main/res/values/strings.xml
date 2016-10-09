@@ -4,4 +4,8 @@
     <string name="access_token" translatable="false">pk.eyJ1IjoiY2FtbWFjZSIsImEiOiJjaW9vbGtydnQwMDAwdmRrcWlpdDVoM3pjIn0.Oy_gHelWnV12kJxHQWV7XQ</string>
 
     <string name="app_name">Mapbox Dev Preview</string>
+
+    <!-- Titles -->
+    <string name="activity_simple_mapview_title">A simple map view</string>
+
 </resources>
