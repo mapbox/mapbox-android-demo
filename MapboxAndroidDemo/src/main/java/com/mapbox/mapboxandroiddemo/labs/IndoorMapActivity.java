@@ -9,20 +9,27 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.annotations.PolylineOptions;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
+import com.mapbox.mapboxsdk.style.layers.Function;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.NoSuchLayerException;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.services.commons.geojson.Feature;
+import com.mapbox.services.commons.geojson.FeatureCollection;
+import com.mapbox.services.commons.geojson.LineString;
 import com.mapbox.services.commons.geojson.Polygon;
 
 import org.json.JSONArray;
@@ -39,23 +46,27 @@ import java.util.Random;
 
 import static com.mapbox.mapboxsdk.style.layers.Filter.all;
 import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
+import static com.mapbox.mapboxsdk.style.layers.Function.stop;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillAntialias;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOutlineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.symbolPlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 
 public class IndoorMapActivity extends AppCompatActivity {
 
+  private static final String TAG = "IndoorMapActivity";
   private MapView mapView;
-  private com.mapbox.mapboxsdk.annotations.Polygon selectedBuilding;
+  private MapboxMap map;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    MapboxAccountManager.start(this, getString(R.string.access_token));
     setContentView(R.layout.activity_lab_indoor_map);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -63,89 +74,67 @@ public class IndoorMapActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
+        map = mapboxMap;
 
-        GeoJsonSource indoorBuildingSource = new GeoJsonSource("indoor-building", loadJSONFromAsset());
+        GeoJsonSource indoorBuildingSource = new GeoJsonSource("indoor-building", loadJSONFromAsset("tech_annex.geojson"));
         mapboxMap.addSource(indoorBuildingSource);
 
+        GeoJsonSource mainBuildingSource = new GeoJsonSource("main-building-source", loadJSONFromAsset("college_of_tech.geojson"));
+        mapboxMap.addSource(mainBuildingSource);
+
+        GeoJsonSource mainBuildingSourceLvlTwo = new GeoJsonSource("main-building-source-lvl-two", loadJSONFromAsset("college_of_tech_lvl_one.geojson"));
+        mapboxMap.addSource(mainBuildingSourceLvlTwo);
+
+        // Add the building layers since we know zoom levels in range
+        loadBuildingLayers();
+        loadMainBuildingLvlOneLayer();
+
+        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
+          @Override
+          public void onMapClick(@NonNull LatLng latLng) {
 
 
+            try {
+              mapboxMap.removeLayer("main-building-level-two-fill-layer");
+              mapboxMap.removeLayer("main-building-level-two-line-layer");
+              loadMainBuildingLvlOneLayer();
+            } catch (NoSuchLayerException noSuchLayerException) {
+              noSuchLayerException.printStackTrace();
+            }
 
-        FillLayer indoorBuildingLayer = new FillLayer("indoor-building-fill", "indoor-building");
+            try {
+              mapboxMap.removeLayer("main-building-level-one-fill-layer");
+              mapboxMap.removeLayer("main-building-level-one-line-layer");
+              loadMainBuildingLvlTwoLayer();
+            } catch (NoSuchLayerException noSuchLayerException) {
+              noSuchLayerException.printStackTrace();
+            }
 
-        //indoorBuildingLayer.setFilter(eq("type", "room"));
+            final PointF point = mapboxMap.getProjection().toScreenLocation(latLng);
+            List<Feature> features = mapboxMap.queryRenderedFeatures(point, "indoor-building-fill");
 
-        indoorBuildingLayer.setProperties(
-          fillColor(Color.parseColor("#f8f8f8")),
-          fillOpacity(0.6f)
+            //remove layer / source if already added
+            try {
+              mapboxMap.removeSource("highlighted-shapes-source");
+              mapboxMap.removeLayer("highlighted-shapes-layer");
+            } catch (Exception exception) {
+              //that's ok
+            }
 
-        );
+            if (mapboxMap.getCameraPosition().zoom > 17) {
+              //Add layer / source
+              mapboxMap.addSource(new GeoJsonSource("highlighted-shapes-source", FeatureCollection.fromFeatures(features)));
+              mapboxMap.addLayer(new FillLayer("highlighted-shapes-layer", "highlighted-shapes-source")
+                .withProperties(fillColor(Color.parseColor("#50667f"))));
 
-        mapboxMap.addLayer(indoorBuildingLayer);
-
-        LineLayer indoorBuildingLineLayer = new LineLayer("indoor-building-line", "indoor-building");
-
-        indoorBuildingLineLayer.setProperties(
-
-          lineColor(Color.BLACK),
-          lineWidth(2f)
-
-        );
-
-        mapboxMap.addLayer(indoorBuildingLineLayer);
-
-//        SymbolLayer indoorBuildingSymbolLayer = new SymbolLayer("indoor-building-labels", "indoor-building");
-//        indoorBuildingSymbolLayer.setProperties(
-//          symbolPlacement(Property.SYMBOL_PLACEMENT_POINT),
-//          textField("101")
-//        );
-//
-//
-//
-//        mapboxMap.addLayer(indoorBuildingSymbolLayer);
-
-//        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
-//          @Override
-//          public void onMapClick(@NonNull LatLng latLng) {
-//
-//            if (selectedBuilding != null) {
-//              mapboxMap.removePolygon(selectedBuilding);
-//            }
-//
-//            final PointF point = mapboxMap.getProjection().toScreenLocation(latLng);
-//            List<Feature> features = mapboxMap.queryRenderedFeatures(point, "indoor-building-fill");
-//
-//            if (features.size() > 0) {
-//              String featureId = features.get(0).getId();
-//
-//              for (int a = 0; a < features.size(); a++) {
-//                if (featureId.equals(features.get(a).getId())) {
-//                  if (features.get(a).getGeometry() instanceof Polygon) {
-//
-//                    List<LatLng> list = new ArrayList<>();
-//                    for (int i = 0; i < ((Polygon) features.get(a).getGeometry()).getCoordinates().size(); i++) {
-//                      for (int j = 0;
-//                           j < ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).size(); j++) {
-//                        list.add(new LatLng(
-//                          ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLatitude(),
-//                          ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLongitude()
-//                        ));
-//                      }
-//                    }
-//
-//                    Random rnd = new Random();
-//                    int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-//
-//                    selectedBuilding = mapboxMap.addPolygon(new PolygonOptions()
-//                      .addAll(list)
-//                      .fillColor(color)
-//                    );
-//                  }
-//                }
-//              }
-//            }
-//          }
-//        });
-
+              if (features.size() > 0) {
+                if (features.get(0).getProperty("tags").getAsJsonObject().has("ref")) {
+                  Toast.makeText(IndoorMapActivity.this, features.get(0).getProperty("tags").getAsJsonObject().get("ref").toString(), Toast.LENGTH_LONG).show();
+                }
+              }
+            }
+          }
+        });
       }
     });
 
@@ -182,11 +171,119 @@ public class IndoorMapActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  public String loadJSONFromAsset() {
+  private void loadMainBuildingLvlOneLayer() {
+    FillLayer mainBuildingLevelOneFillLayer = new FillLayer("main-building-level-one-fill-layer", "main-building-source");
+
+//    mainBuildingLevelOneFillLayer.setFilter(eq("type", "room"));
+
+    mainBuildingLevelOneFillLayer.setProperties(
+      fillColor(Color.parseColor("#eeeeee")),
+      fillOpacity(Function.zoom(0.8f,
+        stop(18, fillOpacity(1f)),
+        stop(17.5f, fillOpacity(0.5f)),
+        stop(17, fillOpacity(0f))
+      ))
+
+    );
+
+    map.addLayer(mainBuildingLevelOneFillLayer);
+
+    LineLayer mainBuildingLevelOneLineLayer = new LineLayer("main-building-level-one-line-layer", "main-building-source");
+
+    mainBuildingLevelOneLineLayer.setProperties(
+      lineColor(Color.parseColor("#50667f")),
+      lineWidth(0.5f),
+      lineOpacity(Function.zoom(0.8f,
+        stop(18, lineOpacity(1f)),
+        stop(17.5f, lineOpacity(0.5f)),
+        stop(17, lineOpacity(0f))
+      ))
+    );
+
+    map.addLayer(mainBuildingLevelOneLineLayer);
+  }
+
+  private void loadMainBuildingLvlTwoLayer() {
+    FillLayer mainBuildingLevelTwoFillLayer = new FillLayer("main-building-level-two-fill-layer", "main-building-source-lvl-two");
+
+    mainBuildingLevelTwoFillLayer.setProperties(
+      fillColor(Color.parseColor("#eeeeee")),
+      fillOpacity(Function.zoom(0.8f,
+        stop(18, fillOpacity(1f)),
+        stop(17.5f, fillOpacity(0.5f)),
+        stop(17, fillOpacity(0f))
+      ))
+
+    );
+
+    map.addLayer(mainBuildingLevelTwoFillLayer);
+
+    LineLayer mainBuildingLevelTwoLineLayer = new LineLayer("main-building-level-two-line-layer", "main-building-source-lvl-two");
+
+    mainBuildingLevelTwoLineLayer.setProperties(
+      lineColor(Color.parseColor("#50667f")),
+      lineWidth(0.5f),
+      lineOpacity(Function.zoom(0.8f,
+        stop(18, lineOpacity(1f)),
+        stop(17.5f, lineOpacity(0.5f)),
+        stop(17, lineOpacity(0f))
+      ))
+    );
+
+    map.addLayer(mainBuildingLevelTwoLineLayer);
+  }
+
+  private void loadBuildingLayers() {
+    FillLayer indoorBuildingLayer = new FillLayer("indoor-building-fill", "indoor-building");
+
+    //indoorBuildingLayer.setFilter(eq("type", "room"));
+
+    indoorBuildingLayer.setProperties(
+      fillColor(Color.parseColor("#eeeeee")),
+      fillOpacity(Function.zoom(0.8f,
+        stop(18, fillOpacity(1f)),
+        stop(17.5f, fillOpacity(0.5f)),
+        stop(17, fillOpacity(0f))
+      ))
+
+    );
+
+    map.addLayer(indoorBuildingLayer);
+
+    LineLayer indoorBuildingLineLayer = new LineLayer("indoor-building-line", "indoor-building");
+
+    indoorBuildingLineLayer.setProperties(
+
+      lineColor(Color.parseColor("#50667f")),
+      lineWidth(0.5f),
+      lineOpacity(Function.zoom(0.8f,
+        stop(18, lineOpacity(1f)),
+        stop(17.5f, lineOpacity(0.5f)),
+        stop(17, lineOpacity(0f))
+      ))
+
+    );
+
+    map.addLayer(indoorBuildingLineLayer);
+
+
+//    SymbolLayer indoorBuildingSymbolLayer = new SymbolLayer("indoor-building-labels", "indoor-building");
+//
+//    indoorBuildingSymbolLayer.setFilter(eq("type", "way"));
+//
+//    indoorBuildingSymbolLayer.setProperties(
+//      symbolPlacement(Property.SYMBOL_PLACEMENT_POINT),
+//      textField("101")
+//    );
+//
+//    map.addLayer(indoorBuildingSymbolLayer);
+  }
+
+  private String loadJSONFromAsset(String filename) {
     String json = null;
     try {
 
-      InputStream is = getAssets().open("indoor.geojson");
+      InputStream is = getAssets().open(filename);
 
       int size = is.available();
 
@@ -206,56 +303,4 @@ public class IndoorMapActivity extends AppCompatActivity {
     return json;
 
   }
-
-//  private class DrawGeoJson extends AsyncTask<Void, Void, String> {
-//    @Override
-//    protected String doInBackground(Void... voids) {
-//
-//      ArrayList<LatLng> points = new ArrayList<>();
-//
-//      try {
-//        // Load GeoJSON file
-//        InputStream inputStream = getAssets().open("indoor.geojson");
-//        BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-//        StringBuilder sb = new StringBuilder();
-//        int cp;
-//        while ((cp = rd.read()) != -1) {
-//          sb.append((char) cp);
-//        }
-//
-//        inputStream.close();
-//
-//        // Parse JSON
-//        JSONObject json = new JSONObject(sb.toString());
-//        JSONArray features = json.getJSONArray("features");
-//        JSONObject feature = features.getJSONObject(0);
-//        JSONObject geometry = feature.getJSONObject("geometry");
-//        if (geometry != null) {
-//          String type = geometry.getString("type");
-//
-//          // Our GeoJSON only has one feature: a line string
-//          if (!TextUtils.isEmpty(type) && type.equalsIgnoreCase("LineString")) {
-//
-//            // Get the Coordinates
-//            JSONArray coords = geometry.getJSONArray("coordinates");
-//            for (int lc = 0; lc < coords.length(); lc++) {
-//              JSONArray coord = coords.getJSONArray(lc);
-//              LatLng latLng = new LatLng(coord.getDouble(1), coord.getDouble(0));
-//              points.add(latLng);
-//            }
-//          }
-//        }
-//      } catch (Exception exception) {
-//        Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
-//      }
-//
-//      return points;
-//    }
-//
-//    @Override
-//    protected void onPostExecute(String geojson) {
-//      super.onPostExecute(geojson);
-//
-//    }
-//  }
 }
