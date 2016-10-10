@@ -394,5 +394,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>
+
+        <activity
+            android:name=".examples.styles.DataDrivenCircleActivity"
+            android:label="@string/activity_style_data_driven_circle_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
     </application>
 </manifest>

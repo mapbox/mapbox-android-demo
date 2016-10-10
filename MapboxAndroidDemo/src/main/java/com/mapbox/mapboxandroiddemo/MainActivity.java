@@ -52,6 +52,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.DataDrivenCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
@@ -202,6 +203,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_add_wms_source_description,
           new Intent(MainActivity.this, AddWmsSourceActivity.class),
           R.string.activity_style_add_wms_source_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_data_driven_circle_title,
+          R.string.activity_style_data_driven_circle_description,
+          new Intent(MainActivity.this, DataDrivenCircleActivity.class),
+          R.string.activity_style_data_driven_circle_url,
           true
         ));
         exampleItemModel.add(new ExampleItemModel(
