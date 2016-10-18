@@ -31,6 +31,14 @@
                 android:value=".MainActivity"/>
         </activity>
 
+        <activity
+            android:name=".examples.AlwaysOnMapActivity"
+            android:label="@string/activity_always_on_map_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
         <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService"/>
 
     </application>
