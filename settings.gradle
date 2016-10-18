@@ -1,1 +1,1 @@
-include ':MapboxAndroidDemo'
+include ':MapboxAndroidDemo', ':MapboxAndroidWearDemo'
