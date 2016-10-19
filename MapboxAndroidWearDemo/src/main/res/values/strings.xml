@@ -7,5 +7,6 @@
 
     <!-- Titles -->
     <string name="activity_simple_mapview_title">A simple map view</string>
+    <string name="activity_always_on_map_title">Always on map</string>
 
 </resources>
