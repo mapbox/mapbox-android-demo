@@ -22,6 +22,9 @@ public class AlwaysOnMapActivity extends WearableActivity {
     // object or in the same activity which contains the mapview.
     MapboxAccountManager.start(this, getString(R.string.access_token));
 
+    // Enable ambient mode
+    setAmbientEnabled();
+
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_always_on_map);
 
@@ -82,8 +85,8 @@ public class AlwaysOnMapActivity extends WearableActivity {
 
   @Override
   public void onExitAmbient() {
-    updateDisplay();
     super.onExitAmbient();
+    updateDisplay();
   }
 
   private void updateDisplay() {
