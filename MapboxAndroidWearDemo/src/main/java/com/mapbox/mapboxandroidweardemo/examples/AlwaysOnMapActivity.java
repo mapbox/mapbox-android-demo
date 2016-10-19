@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroidweardemo.examples;
 
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
+import android.util.Log;
 
 import com.mapbox.mapboxandroidweardemo.R;
 import com.mapbox.mapboxsdk.MapboxAccountManager;
@@ -10,6 +11,8 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 public class AlwaysOnMapActivity extends WearableActivity {
+
+  private final static String LOG_TAG = "AlwaysOnMapActivity";
 
   private MapView mapView;
   private MapboxMap map;
@@ -23,6 +26,7 @@ public class AlwaysOnMapActivity extends WearableActivity {
     MapboxAccountManager.start(this, getString(R.string.access_token));
 
     // Enable ambient mode
+    Log.i(LOG_TAG, "setAmbientEnabled");
     setAmbientEnabled();
 
     // This contains the MapView in XML and needs to be called after the account manager
@@ -73,18 +77,21 @@ public class AlwaysOnMapActivity extends WearableActivity {
 
   @Override
   public void onEnterAmbient(Bundle ambientDetails) {
+    Log.i(LOG_TAG, "onEnterAmbient");
     super.onEnterAmbient(ambientDetails);
     updateDisplay();
   }
 
   @Override
   public void onUpdateAmbient() {
+    Log.i(LOG_TAG, "onUpdateAmbient");
     super.onUpdateAmbient();
     updateDisplay();
   }
 
   @Override
   public void onExitAmbient() {
+    Log.i(LOG_TAG, "onExitAmbient");
     super.onExitAmbient();
     updateDisplay();
   }
@@ -92,8 +99,10 @@ public class AlwaysOnMapActivity extends WearableActivity {
   private void updateDisplay() {
     System.out.println(isAmbient());
     if (isAmbient()) {
+      Log.i(LOG_TAG, "isAmbient true");
       map.setStyleUrl("mapbox://styles/mapbox/dark-v9");
     } else {
+      Log.i(LOG_TAG, "isAmbient false");
       map.setStyleUrl("mapbox://styles/mapbox/streets-v9");
     }
   }
