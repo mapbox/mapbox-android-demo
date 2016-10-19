@@ -10,9 +10,14 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * The watch will need to have "Always-on screen" enabled in the settings for this example to work
+ * properly. see https://developer.android.com/training/wearables/apps/always-on.html to learn more
+ * about ambient mode.
+ */
 public class AlwaysOnMapActivity extends WearableActivity {
 
-  private final static String LOG_TAG = "AlwaysOnMapActivity";
+  private static final String LOG_TAG = "AlwaysOnMapActivity";
 
   private MapView mapView;
   private MapboxMap map;
@@ -103,7 +108,7 @@ public class AlwaysOnMapActivity extends WearableActivity {
       map.setStyleUrl("mapbox://styles/mapbox/dark-v9");
     } else {
       Log.i(LOG_TAG, "isAmbient false");
-      map.setStyleUrl("mapbox://styles/mapbox/streets-v9");
+      map.setStyleUrl("mapbox://styles/mapbox/light-v9");
     }
   }
 }
