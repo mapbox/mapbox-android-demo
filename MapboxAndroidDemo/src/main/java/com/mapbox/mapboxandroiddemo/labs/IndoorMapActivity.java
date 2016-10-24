@@ -31,6 +31,8 @@ import com.mapbox.services.commons.geojson.Feature;
 import com.mapbox.services.commons.geojson.FeatureCollection;
 import com.mapbox.services.commons.geojson.LineString;
 import com.mapbox.services.commons.geojson.Polygon;
+import com.mapbox.services.commons.turf.TurfGrids;
+import com.mapbox.services.navigation.v5.RouteUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -76,18 +78,18 @@ public class IndoorMapActivity extends AppCompatActivity {
       public void onMapReady(final MapboxMap mapboxMap) {
         map = mapboxMap;
 
-        GeoJsonSource indoorBuildingSource = new GeoJsonSource("indoor-building", loadJSONFromAsset("tech_annex.geojson"));
+        GeoJsonSource indoorBuildingSource = new GeoJsonSource("indoor-building", loadJSONFromAsset("white_house_lvl_0.geojson"));
         mapboxMap.addSource(indoorBuildingSource);
 
-        GeoJsonSource mainBuildingSource = new GeoJsonSource("main-building-source", loadJSONFromAsset("college_of_tech.geojson"));
-        mapboxMap.addSource(mainBuildingSource);
-
-        GeoJsonSource mainBuildingSourceLvlTwo = new GeoJsonSource("main-building-source-lvl-two", loadJSONFromAsset("college_of_tech_lvl_one.geojson"));
-        mapboxMap.addSource(mainBuildingSourceLvlTwo);
+//        GeoJsonSource mainBuildingSource = new GeoJsonSource("main-building-source", loadJSONFromAsset("college_of_tech.geojson"));
+//        mapboxMap.addSource(mainBuildingSource);
+//
+//        GeoJsonSource mainBuildingSourceLvlTwo = new GeoJsonSource("main-building-source-lvl-two", loadJSONFromAsset("college_of_tech_lvl_one.geojson"));
+//        mapboxMap.addSource(mainBuildingSourceLvlTwo);
 
         // Add the building layers since we know zoom levels in range
         loadBuildingLayers();
-        loadMainBuildingLvlOneLayer();
+        //loadMainBuildingLvlOneLayer();
 
         mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override

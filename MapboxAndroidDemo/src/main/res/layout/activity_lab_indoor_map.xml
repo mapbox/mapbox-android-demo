@@ -9,42 +9,42 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:center_latitude="29.72255"
-        mapbox:center_longitude="-95.34298"
+        mapbox:center_latitude="38.89770"
+        mapbox:center_longitude="-77.03655"
         mapbox:zoom="18"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:orientation="vertical"
-        android:layout_margin="16dp"
-        android:background="@color/mapboxNavyDark">
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_margin="16dp"-->
+        <!--android:background="@color/mapboxNavyDark">-->
 
-        <Button
-            android:id="@+id/ground_level_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/mapboxRed"
-            android:layout_margin="1dp"
-            android:text="G"/>
+        <!--<Button-->
+            <!--android:id="@+id/ground_level_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/mapboxRed"-->
+            <!--android:layout_margin="1dp"-->
+            <!--android:text="G"/>-->
 
-        <Button
-            android:id="@+id/second_level_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/mapboxRed"
-            android:layout_margin="1dp"
-            android:text="2"/>
+        <!--<Button-->
+            <!--android:id="@+id/second_level_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/mapboxRed"-->
+            <!--android:layout_margin="1dp"-->
+            <!--android:text="2"/>-->
 
-        <Button
-            android:id="@+id/third_level_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/mapboxRed"
-            android:layout_margin="1dp"
-            android:text="3"/>
+        <!--<Button-->
+            <!--android:id="@+id/third_level_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/mapboxRed"-->
+            <!--android:layout_margin="1dp"-->
+            <!--android:text="3"/>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
 </android.support.design.widget.CoordinatorLayout>
