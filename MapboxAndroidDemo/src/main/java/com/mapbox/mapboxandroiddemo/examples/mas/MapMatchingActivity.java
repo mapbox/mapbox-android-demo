@@ -41,6 +41,7 @@ public class MapMatchingActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap map;
+  private MapboxMapMatching client;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,10 @@ public class MapMatchingActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    // Cancel the MapMatching API request
+    if (client != null) {
+      client.cancelCall();
+    }
     mapView.onDestroy();
   }
 
@@ -171,7 +176,7 @@ public class MapMatchingActivity extends AppCompatActivity {
   private void drawMapMatched(LineString lineString, int precision) {
     try {
       // Setup the request using a client.
-      MapboxMapMatching client = new MapboxMapMatching.Builder()
+      client = new MapboxMapMatching.Builder()
         .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
         .setProfile(DirectionsCriteria.PROFILE_DRIVING)
         .setGpsPrecison(precision)

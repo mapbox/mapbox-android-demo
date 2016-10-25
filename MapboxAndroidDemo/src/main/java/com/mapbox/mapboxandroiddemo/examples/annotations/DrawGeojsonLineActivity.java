@@ -27,7 +27,7 @@ import java.util.List;
 
 public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-  private static final String TAG = "MainActivity";
+  private static final String TAG = "DrawGeojsonLineActivity";
 
   private MapView mapView;
   private MapboxMap mapboxMap;

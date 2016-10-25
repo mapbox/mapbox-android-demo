@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".examples.location.BasicUserLocation">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
