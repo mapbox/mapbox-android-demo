@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.mas;
 
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
