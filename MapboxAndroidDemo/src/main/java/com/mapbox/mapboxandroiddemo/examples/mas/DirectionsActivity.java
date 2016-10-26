@@ -36,6 +36,7 @@ public class DirectionsActivity extends AppCompatActivity {
   private MapView mapView;
   private MapboxMap map;
   private DirectionsRoute currentRoute;
+  private MapboxDirections client;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +86,7 @@ public class DirectionsActivity extends AppCompatActivity {
 
   private void getRoute(Position origin, Position destination) throws ServicesException {
 
-    MapboxDirections client = new MapboxDirections.Builder()
+    client = new MapboxDirections.Builder()
       .setOrigin(origin)
       .setDestination(destination)
       .setProfile(DirectionsCriteria.PROFILE_CYCLING)
@@ -164,6 +165,10 @@ public class DirectionsActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    // Cancel the directions API request
+    if (client != null) {
+      client.cancelCall();
+    }
     mapView.onDestroy();
   }
 
