@@ -37,7 +37,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 public class IndoorMapActivity extends AppCompatActivity {
 
   private GeoJsonSource indoorBuildingSource;
-  private boolean levelButtonsShowing = true;
   private List<Position> boundingBox;
   private View levelButtons;
   private MapView mapView;
@@ -74,31 +73,28 @@ public class IndoorMapActivity extends AppCompatActivity {
                   position.target.getLongitude(),
                   position.target.getLatitude()),
                   boundingBox)) {
-                  if (!levelButtonsShowing) {
+                  if (levelButtons.getVisibility() != View.VISIBLE) {
                     showLevelButton();
                   }
                 } else {
-                  if (levelButtonsShowing) {
+                  if (levelButtons.getVisibility() == View.VISIBLE) {
                     hideLevelButton();
                   }
                 }
               } catch (TurfException turfException) {
                 turfException.printStackTrace();
               }
-            } else if (levelButtonsShowing) {
+            } else if (levelButtons.getVisibility() == View.VISIBLE) {
               hideLevelButton();
             }
           }
         });
 
-        String geojsonString = loadJsonFromAsset("white_house_lvl_0.geojson");
-        if (geojsonString != null) {
-          indoorBuildingSource = new GeoJsonSource("indoor-building", geojsonString);
-          mapboxMap.addSource(indoorBuildingSource);
+        indoorBuildingSource = new GeoJsonSource("indoor-building", loadJsonFromAsset("white_house_lvl_0.geojson"));
+        mapboxMap.addSource(indoorBuildingSource);
 
-          // Add the building layers since we know zoom levels in range
-          loadBuildingLayer();
-        }
+        // Add the building layers since we know zoom levels in range
+        loadBuildingLayer();
       }
     });
 
@@ -152,7 +148,6 @@ public class IndoorMapActivity extends AppCompatActivity {
   private void hideLevelButton() {
     // When the user moves away from our bounding box region or zooms out far enough the floor level
     // buttons are faded out and hidden.
-    levelButtonsShowing = false;
     AlphaAnimation animation = new AlphaAnimation(1.0f, 0.0f);
     animation.setDuration(500);
     levelButtons.startAnimation(animation);
@@ -162,7 +157,6 @@ public class IndoorMapActivity extends AppCompatActivity {
   private void showLevelButton() {
     // When the user moves inside our bounding box region or zooms in to a high enough zoom level,
     // the floor level buttons are faded out and hidden.
-    levelButtonsShowing = true;
     AlphaAnimation animation = new AlphaAnimation(0.0f, 1.0f);
     animation.setDuration(500);
     levelButtons.startAnimation(animation);
@@ -173,9 +167,7 @@ public class IndoorMapActivity extends AppCompatActivity {
     // Method used to load the indoor layer on the map. First the fill layer is drawn and then the
     // line layer is added.
 
-    FillLayer indoorBuildingLayer = new FillLayer("indoor-building-fill", "indoor-building");
-
-    indoorBuildingLayer.setProperties(
+    FillLayer indoorBuildingLayer = new FillLayer("indoor-building-fill", "indoor-building").withProperties(
       fillColor(Color.parseColor("#eeeeee")),
       // Function.zoom is used here to fade out the indoor layer if zoom level is beyond 16. Only
       // necessary to show the indoor map at high zoom levels.
@@ -189,9 +181,7 @@ public class IndoorMapActivity extends AppCompatActivity {
 
     map.addLayer(indoorBuildingLayer);
 
-    LineLayer indoorBuildingLineLayer = new LineLayer("indoor-building-line", "indoor-building");
-
-    indoorBuildingLineLayer.setProperties(
+    LineLayer indoorBuildingLineLayer = new LineLayer("indoor-building-line", "indoor-building").withProperties(
       lineColor(Color.parseColor("#50667f")),
       lineWidth(0.5f),
       lineOpacity(Function.zoom(0.8f,
@@ -208,20 +198,17 @@ public class IndoorMapActivity extends AppCompatActivity {
   private String loadJsonFromAsset(String filename) {
     // Using this method to load in GeoJSON files from the assets folder.
 
-    String json;
-
     try {
       InputStream is = getAssets().open(filename);
       int size = is.available();
       byte[] buffer = new byte[size];
       is.read(buffer);
       is.close();
-      json = new String(buffer, "UTF-8");
+      return new String(buffer, "UTF-8");
 
     } catch (IOException ex) {
       ex.printStackTrace();
       return null;
     }
-    return json;
   }
 }
