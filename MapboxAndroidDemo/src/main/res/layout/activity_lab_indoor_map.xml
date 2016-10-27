@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:mapbox="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
@@ -13,38 +13,31 @@
         mapbox:center_longitude="-77.03655"
         mapbox:zoom="18"/>
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|end"-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_margin="16dp"-->
-        <!--android:background="@color/mapboxNavyDark">-->
+    <LinearLayout
+        android:id="@+id/floor_level_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:background="@color/mapboxBlue"
+        android:orientation="vertical">
 
-        <!--<Button-->
-            <!--android:id="@+id/ground_level_button"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/mapboxRed"-->
-            <!--android:layout_margin="1dp"-->
-            <!--android:text="G"/>-->
+        <Button
+            android:id="@+id/second_level_button"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="2"
+            android:textColor="@color/mapboxWhite"/>
 
-        <!--<Button-->
-            <!--android:id="@+id/second_level_button"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/mapboxRed"-->
-            <!--android:layout_margin="1dp"-->
-            <!--android:text="2"/>-->
+        <Button
+            android:id="@+id/ground_level_button"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="G"
+            android:textColor="@color/mapboxWhite"/>
 
-        <!--<Button-->
-            <!--android:id="@+id/third_level_button"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:background="@color/mapboxRed"-->
-            <!--android:layout_margin="1dp"-->
-            <!--android:text="3"/>-->
-
-    <!--</LinearLayout>-->
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
