@@ -397,5 +397,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>
+
+        <activity
+            android:name=".examples.styles.SymbolLayerActivity"
+            android:label="@string/activity_style_symbol_layer_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
     </application>
 </manifest>
