@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -14,16 +13,15 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
-import com.mapbox.mapboxsdk.style.layers.Layer;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import static com.mapbox.mapboxandroiddemo.R.id.textView;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
-public class LasVegasTourismActivity extends AppCompatActivity {
+public class LasAngelesTourismActivity extends AppCompatActivity {
 
   private MapView mapView;
   private GeoJsonSource hotelSource;
@@ -41,7 +39,7 @@ public class LasVegasTourismActivity extends AppCompatActivity {
     MapboxAccountManager.start(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the account manager
-    setContentView(R.layout.activity_lab_las_vegas_tourisim);
+    setContentView(R.layout.activity_lab_las_angeles_tourisim);
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -49,7 +47,7 @@ public class LasVegasTourismActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
 
-        hotelSource = new GeoJsonSource("hotels", loadJsonFromAsset("lv_hotels.geojson"));
+        hotelSource = new GeoJsonSource("hotels", loadJsonFromAsset("la_hotels.geojson"));
         mapboxMap.addSource(hotelSource);
 
         FillLayer hotelLayer = new FillLayer("hotels-layer", "hotels").withProperties(
@@ -77,28 +75,32 @@ public class LasVegasTourismActivity extends AppCompatActivity {
         });
         hotelColorAnimator.start();
 
+        SymbolLayer hotelLabelsLayer = new SymbolLayer("hotels-label", "hotels");
+
+        mapboxMap.addLayer(hotelLabelsLayer);
 
 
 
 
-        final FillLayer parks = (FillLayer) mapboxMap.getLayer("parks");
 
-        parkColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), Color.parseColor("#20C73D"), Color.parseColor("#147725"));
-        parkColorAnimator.setDuration(1000); // milliseconds
-        parkColorAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        parkColorAnimator.setRepeatMode(ValueAnimator.REVERSE);
-        parkColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-          @Override
-          public void onAnimationUpdate(ValueAnimator animator) {
-
-            parks.setProperties(
-              fillColor((int) animator.getAnimatedValue())
-            );
-          }
-
-        });
-        parkColorAnimator.start();
+//        final FillLayer parks = (FillLayer) mapboxMap.getLayer("parks");
+//
+//        parkColorAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), Color.parseColor("#20C73D"), Color.parseColor("#147725"));
+//        parkColorAnimator.setDuration(1000); // milliseconds
+//        parkColorAnimator.setRepeatCount(ValueAnimator.INFINITE);
+//        parkColorAnimator.setRepeatMode(ValueAnimator.REVERSE);
+//        parkColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//
+//          @Override
+//          public void onAnimationUpdate(ValueAnimator animator) {
+//
+//            parks.setProperties(
+//              fillColor((int) animator.getAnimatedValue())
+//            );
+//          }
+//
+//        });
+//        parkColorAnimator.start();
 
 
 
