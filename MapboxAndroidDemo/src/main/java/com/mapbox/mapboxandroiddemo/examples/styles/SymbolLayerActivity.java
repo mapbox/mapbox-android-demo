@@ -64,16 +64,18 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
     mapboxMap.addLayer(selectedMarker);
 
     Bitmap infoWindowBackground = BitmapFactory.decodeResource(SymbolLayerActivity.this.getResources(), R.drawable.mapbox_infowindow_icon_bg);
+    Bitmap infoWindowTip = BitmapFactory.decodeResource(SymbolLayerActivity.this.getResources(), R.drawable.info_window_tip);
 
     // Add the marker image to map
     mapboxMap.addImage("info-window-bg", infoWindowBackground);
+    mapboxMap.addImage("info-window-tip", infoWindowTip);
 
     Source infoWindow = new GeoJsonSource("info-window", emptySource);
     mapboxMap.addSource(infoWindow);
 
     SymbolLayer infoWindowLayer = new SymbolLayer("info-window", "info-window")
       .withProperties(
-        PropertyFactory.textLineHeight(1f),
+        //PropertyFactory.textLineHeight(1f),
         PropertyFactory.textSize(16f),
         PropertyFactory.iconTextFit("both"),
         PropertyFactory.iconImage("info-window-bg"),
@@ -82,12 +84,21 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
         PropertyFactory.textPadding(0f),
         PropertyFactory.textAnchor("top"),
         PropertyFactory.textField("My info window :)"),
-//        PropertyFactory.textMaxWidth(8f),
+        PropertyFactory.textMaxWidth(8f),
         PropertyFactory.iconIgnorePlacement(true),
-        PropertyFactory.textOffset(new Float[]{0f, -2f})
+        PropertyFactory.textOffset(new Float[]{0f, -2.25f}) // TODO calculate size of icon and place info window ontop of tip
       );
     mapboxMap.addLayer(infoWindowLayer);
 
+    SymbolLayer infoWindowTipLayer = new SymbolLayer("info-window-tip", "info-window")
+      .withProperties(
+        PropertyFactory.iconIgnorePlacement(true),
+        PropertyFactory.textAnchor("top"),
+        PropertyFactory.iconImage("info-window-tip"),
+        PropertyFactory.textOffset(new Float[]{0f, -2f})
+      );
+
+    mapboxMap.addLayer(infoWindowTipLayer);
 
     routeCoordinates = new ArrayList<>();
     routeCoordinates.add(Feature.fromGeometry(Point.fromCoordinates(Position.fromCoordinates(-71.0566, 42.3597))));
@@ -117,13 +128,14 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
 
     SymbolLayer marker = (SymbolLayer) mapboxMap.getLayer("selected-marker-layer");
     SymbolLayer infoWindow = (SymbolLayer) mapboxMap.getLayer("info-window");
+    SymbolLayer infoWindowTip = (SymbolLayer) mapboxMap.getLayer("info-window-tip");
 
     final PointF pixel = mapboxMap.getProjection().toScreenLocation(point);
     List<Feature> features = mapboxMap.queryRenderedFeatures(pixel, "marker-layer");
 
     if (features.size() <= 0) {
       if (markerSelected) {
-        deselectMarker(marker, infoWindow);
+        deselectMarker(marker, infoWindow, infoWindowTip);
       }
       return;
     }
@@ -153,17 +165,18 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
     if (markerSelected) {
       // TODO Fix animation when a markers currently selected and another one is clicked on
 
-      deselectMarker(marker, infoWindow);
+      deselectMarker(marker, infoWindow, infoWindowTip);
       Toast.makeText(SymbolLayerActivity.this, "Deselected", Toast.LENGTH_LONG).show();
     }
     if (features.size() > 0) {
-      selectMarker(marker, infoWindow);
+      selectMarker(marker, infoWindow, infoWindowTip);
       Toast.makeText(SymbolLayerActivity.this, "Selected", Toast.LENGTH_LONG).show();
     }
   }
 
-  private void selectMarker(final SymbolLayer marker, SymbolLayer infoWindow) {
+  private void selectMarker(final SymbolLayer marker, SymbolLayer infoWindow, SymbolLayer infoWindowTip) {
     infoWindow.setProperties(PropertyFactory.visibility("visible"));
+    infoWindowTip.setProperties(PropertyFactory.visibility("visible"));
 
     ValueAnimator markerAnimator = new ValueAnimator();
     markerAnimator.setObjectValues(1f, 180f);
@@ -183,8 +196,9 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
     markerSelected = true;
   }
 
-  private void deselectMarker(final SymbolLayer marker, SymbolLayer infoWindow) {
+  private void deselectMarker(final SymbolLayer marker, SymbolLayer infoWindow, SymbolLayer infoWindowTip) {
     infoWindow.setProperties(PropertyFactory.visibility("none"));
+    infoWindowTip.setProperties(PropertyFactory.visibility("none"));
 
     ValueAnimator markerAnimator = new ValueAnimator();
     markerAnimator.setObjectValues(180f, 1f);
