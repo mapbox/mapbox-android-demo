@@ -400,7 +400,7 @@
 
         <activity
             android:name=".labs.LasAngelesTourismActivity"
-            android:label="@string/activity_lab_las_vegas_tourism_title">
+            android:label="@string/activity_lab_las_angeles_tourism_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>

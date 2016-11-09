@@ -439,10 +439,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       case R.id.nav_lab:
         exampleItemModel.add(null);
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_las_vegas_tourism_title,
-          R.string.activity_lab_las_vegas_tourism_description,
+          R.string.activity_lab_las_angeles_tourism_title,
+          R.string.activity_lab_las_angeles_tourism_description,
           new Intent(MainActivity.this, LasAngelesTourismActivity.class),
-          R.string.activity_lab_las_vegas_tourism_url,
+          R.string.activity_lab_las_angeles_tourism_url,
           true
         ));
         exampleItemModel.add(new ExampleItemModel(
