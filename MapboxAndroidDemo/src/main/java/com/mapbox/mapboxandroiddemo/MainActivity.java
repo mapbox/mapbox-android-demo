@@ -63,6 +63,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LandUseStylingActivity;
+import com.mapbox.mapboxandroiddemo.labs.LasAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.OffRouteActivity;
@@ -438,6 +439,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         break;
       case R.id.nav_lab:
         exampleItemModel.add(null);
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_las_angeles_tourism_title,
+          R.string.activity_lab_las_angeles_tourism_description,
+          new Intent(MainActivity.this, LasAngelesTourismActivity.class),
+          R.string.activity_lab_las_angeles_tourism_url,
+          true
+        ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_land_use_stying_title,
           R.string.activity_lab_land_use_stying_description,
