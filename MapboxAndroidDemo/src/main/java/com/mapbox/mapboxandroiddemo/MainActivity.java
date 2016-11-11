@@ -447,10 +447,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           true
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_land_use_stying_title,
-          R.string.activity_lab_land_use_stying_description,
-          new Intent(MainActivity.this, LandUseStylingActivity.class),
-          R.string.activity_lab_land_use_stying_url,
+          R.string.activity_lab_indoor_map_title,
+          R.string.activity_lab_indoor_map_description,
+          new Intent(MainActivity.this, IndoorMapActivity.class),
+          R.string.activity_lab_indoor_map_url,
           true
         ));
         exampleItemModel.add(new ExampleItemModel(
@@ -458,13 +458,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_off_route_description,
           new Intent(MainActivity.this, OffRouteActivity.class),
           R.string.activity_lab_off_route_url,
-          true
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_indoor_map_title,
-          R.string.activity_lab_indoor_map_description,
-          new Intent(MainActivity.this, IndoorMapActivity.class),
-          R.string.activity_lab_indoor_map_url,
           true
         ));
         exampleItemModel.add(new ExampleItemModel(
@@ -485,6 +478,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_space_station_location_description,
           new Intent(MainActivity.this, SpaceStationLocationActivity.class),
           R.string.activity_lab_space_station_location_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_land_use_stying_title,
+          R.string.activity_lab_land_use_stying_description,
+          new Intent(MainActivity.this, LandUseStylingActivity.class),
+          R.string.activity_lab_land_use_stying_url,
+          true
         ));
         currentCategory = R.id.nav_lab;
         break;
@@ -535,13 +535,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_info) {
-      new MaterialStyledDialog(MainActivity.this)
+      new MaterialStyledDialog.Builder(MainActivity.this)
         .setTitle(getString(R.string.info_dialog_title))
         .setDescription(getString(R.string.info_dialog_description))
         .setIcon(R.mipmap.ic_launcher)
         .setHeaderColor(R.color.mapboxDenim)
         .withDivider(true)
-        .setPositive("Mapbox", new MaterialDialog.SingleButtonCallback() {
+        .setPositiveText("Mapbox")
+        .onPositive(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
@@ -550,7 +551,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
           }
         })
-        .setNegative("Not now", new MaterialDialog.SingleButtonCallback() {
+        .setNegativeText("Not now")
+        .onNegative(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
