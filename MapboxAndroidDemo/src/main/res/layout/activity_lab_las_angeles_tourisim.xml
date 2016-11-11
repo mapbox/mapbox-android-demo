@@ -32,7 +32,7 @@
             android:id="@+id/fab_toggle_hotels"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/mapboxRed"
+            fab:fab_colorNormal="@color/mapboxBlue"
             fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
             fab:fab_title="Hotels"/>
@@ -41,7 +41,7 @@
             android:id="@+id/fab_toggle_parks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/mapboxRed"
+            fab:fab_colorNormal="@color/mapboxGreen"
             fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
             fab:fab_title="Parks"/>
