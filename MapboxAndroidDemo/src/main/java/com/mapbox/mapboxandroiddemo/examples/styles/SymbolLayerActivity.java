@@ -54,9 +54,15 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
     this.mapboxMap = mapboxMap;
 
     List<Feature> markerCoordinates = new ArrayList<>();
-    markerCoordinates.add(Feature.fromGeometry(Point.fromCoordinates(Position.fromCoordinates(-71.065634, 42.354950)))); // Boston Common Park
-    markerCoordinates.add(Feature.fromGeometry(Point.fromCoordinates(Position.fromCoordinates(-71.097293, 42.346645)))); // Fenway Park
-    markerCoordinates.add(Feature.fromGeometry(Point.fromCoordinates(Position.fromCoordinates(-71.053694, 42.363725)))); // The Paul Revere House
+    markerCoordinates.add(Feature.fromGeometry(
+      Point.fromCoordinates(Position.fromCoordinates(-71.065634, 42.354950))) // Boston Common Park
+    );
+    markerCoordinates.add(Feature.fromGeometry(
+      Point.fromCoordinates(Position.fromCoordinates(-71.097293, 42.346645))) // Fenway Park
+    );
+    markerCoordinates.add(Feature.fromGeometry(
+      Point.fromCoordinates(Position.fromCoordinates(-71.053694, 42.363725))) // The Paul Revere House
+    );
     FeatureCollection featureCollection = FeatureCollection.fromFeatures(markerCoordinates);
 
     Source geoJsonSource = new GeoJsonSource("marker-source", featureCollection);
@@ -106,7 +112,9 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
     FeatureCollection featureCollection = FeatureCollection.fromFeatures(
       new Feature[]{Feature.fromGeometry(features.get(0).getGeometry())});
     GeoJsonSource source = mapboxMap.getSourceAs("selected-marker");
-    source.setGeoJson(featureCollection);
+    if (source != null) {
+      source.setGeoJson(featureCollection);
+    }
 
     if (markerSelected) {
       deselectMarker(marker);
