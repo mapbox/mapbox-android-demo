@@ -108,7 +108,7 @@
     <string name="activity_style_zoom_dependent_fill_color_description">Make a property depend on the map zoom level, in this case, the water layers fill color.</string>
     <string name="activity_style_create_heatmap_points_description">Use the Mapbox Android SDK to visualize point data as a heatmap.</string>
     <string name="activity_style_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
-    <string name="activity_style_symbol_layer_description">TODO</string>
+    <string name="activity_style_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
@@ -161,7 +161,7 @@
     <string name="activity_style_add_wms_source_url">http://i.imgur.com/k14WdRG.png</string>
     <string name="activity_style_create_heatmap_points_url">http://i.imgur.com/pAejKLH.png</string>
     <string name="activity_style_line_layer_url">http://i.imgur.com/Iqxoing.png</string>
-    <string name="activity_style_symbol_layer_url"> </string>
+    <string name="activity_style_symbol_layer_url">http://i.imgur.com/TQ4iA0L.png</string>
     <string name="activity_annotation_marker_url">https://www.mapbox.com/android-sdk/images/marker.png</string>
     <string name="activity_annotation_custom_marker_url">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
     <string name="activity_annotation_geojson_line_url">https://www.mapbox.com/android-sdk/images/geojson.png</string>

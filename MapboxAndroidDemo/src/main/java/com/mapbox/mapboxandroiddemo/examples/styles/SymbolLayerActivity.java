@@ -7,7 +7,6 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.MapboxAccountManager;
@@ -30,9 +29,8 @@ import java.util.List;
 public class SymbolLayerActivity extends AppCompatActivity implements OnMapReadyCallback, MapboxMap.OnMapClickListener {
 
   private MapView mapView;
-  private List<Feature> routeCoordinates;
-  private boolean markerSelected = false;
   private MapboxMap mapboxMap;
+  private boolean markerSelected = false;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -55,61 +53,16 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
 
     this.mapboxMap = mapboxMap;
 
-    FeatureCollection emptySource = FeatureCollection.fromFeatures(new Feature[]{});
-    Source selectedMarkerSource = new GeoJsonSource("selected-marker", emptySource);
-    mapboxMap.addSource(selectedMarkerSource);
-
-    SymbolLayer selectedMarker = new SymbolLayer("selected-marker-layer", "selected-marker")
-      .withProperties(PropertyFactory.iconImage("my-marker-image"));
-    mapboxMap.addLayer(selectedMarker);
-
-    Bitmap infoWindowBackground = BitmapFactory.decodeResource(SymbolLayerActivity.this.getResources(), R.drawable.mapbox_infowindow_icon_bg);
-    Bitmap infoWindowTip = BitmapFactory.decodeResource(SymbolLayerActivity.this.getResources(), R.drawable.info_window_tip);
-
-    // Add the marker image to map
-    mapboxMap.addImage("info-window-bg", infoWindowBackground);
-    mapboxMap.addImage("info-window-tip", infoWindowTip);
-
-    Source infoWindow = new GeoJsonSource("info-window", emptySource);
-    mapboxMap.addSource(infoWindow);
-
-    SymbolLayer infoWindowLayer = new SymbolLayer("info-window", "info-window")
-      .withProperties(
-        //PropertyFactory.textLineHeight(1f),
-        PropertyFactory.textSize(16f),
-        PropertyFactory.iconTextFit("both"),
-        PropertyFactory.iconImage("info-window-bg"),
-        PropertyFactory.iconTextFitPadding(new Float[]{16f, 20f, 20f, 20f}),
-        PropertyFactory.textIgnorePlacement(true),
-        PropertyFactory.textPadding(0f),
-        PropertyFactory.textAnchor("top"),
-        PropertyFactory.textField("My info window :)"),
-        PropertyFactory.textMaxWidth(8f),
-        PropertyFactory.iconIgnorePlacement(true),
-        PropertyFactory.textOffset(new Float[]{0f, -2.25f}) // TODO calculate size of icon and place info window ontop of tip
-      );
-    mapboxMap.addLayer(infoWindowLayer);
-
-    SymbolLayer infoWindowTipLayer = new SymbolLayer("info-window-tip", "info-window")
-      .withProperties(
-        PropertyFactory.iconIgnorePlacement(true),
-        PropertyFactory.textAnchor("top"),
-        PropertyFactory.iconImage("info-window-tip"),
-        PropertyFactory.textOffset(new Float[]{0f, -2f})
-      );
-
-    mapboxMap.addLayer(infoWindowTipLayer);
-
-    routeCoordinates = new ArrayList<>();
-    routeCoordinates.add(Feature.fromGeometry(Point.fromCoordinates(Position.fromCoordinates(-71.0566, 42.3597))));
-    routeCoordinates.add(Feature.fromGeometry(Point.fromCoordinates(Position.fromCoordinates(-71.0796, 42.3668))));
-    routeCoordinates.add(Feature.fromGeometry(Point.fromCoordinates(Position.fromCoordinates(-71.0358, 42.3675))));
-    FeatureCollection featureCollection = FeatureCollection.fromFeatures(routeCoordinates);
+    List<Feature> markerCoordinates = new ArrayList<>();
+    markerCoordinates.add(Feature.fromGeometry(Point.fromCoordinates(Position.fromCoordinates(-71.065634, 42.354950)))); // Boston Common Park
+    markerCoordinates.add(Feature.fromGeometry(Point.fromCoordinates(Position.fromCoordinates(-71.097293, 42.346645)))); // Fenway Park
+    markerCoordinates.add(Feature.fromGeometry(Point.fromCoordinates(Position.fromCoordinates(-71.053694, 42.363725)))); // The Paul Revere House
+    FeatureCollection featureCollection = FeatureCollection.fromFeatures(markerCoordinates);
 
     Source geoJsonSource = new GeoJsonSource("marker-source", featureCollection);
     mapboxMap.addSource(geoJsonSource);
 
-    Bitmap icon = BitmapFactory.decodeResource(SymbolLayerActivity.this.getResources(), R.drawable.blue_marker);
+    Bitmap icon = BitmapFactory.decodeResource(SymbolLayerActivity.this.getResources(), R.drawable.blue_marker_view);
 
     // Add the marker image to map
     mapboxMap.addImage("my-marker-image", icon);
@@ -118,24 +71,34 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
       .withProperties(PropertyFactory.iconImage("my-marker-image"));
     mapboxMap.addLayer(markers);
 
+    // Add the selected marker source and layer
+    FeatureCollection emptySource = FeatureCollection.fromFeatures(new Feature[]{});
+    Source selectedMarkerSource = new GeoJsonSource("selected-marker", emptySource);
+    mapboxMap.addSource(selectedMarkerSource);
+
+    SymbolLayer selectedMarker = new SymbolLayer("selected-marker-layer", "selected-marker")
+      .withProperties(PropertyFactory.iconImage("my-marker-image"));
+    mapboxMap.addLayer(selectedMarker);
+
     mapboxMap.setOnMapClickListener(this);
   }
-
 
   @Override
   public void onMapClick(@NonNull LatLng point) {
 
-
-    SymbolLayer marker = (SymbolLayer) mapboxMap.getLayer("selected-marker-layer");
-    SymbolLayer infoWindow = (SymbolLayer) mapboxMap.getLayer("info-window");
-    SymbolLayer infoWindowTip = (SymbolLayer) mapboxMap.getLayer("info-window-tip");
+    final SymbolLayer marker = (SymbolLayer) mapboxMap.getLayer("selected-marker-layer");
 
     final PointF pixel = mapboxMap.getProjection().toScreenLocation(point);
     List<Feature> features = mapboxMap.queryRenderedFeatures(pixel, "marker-layer");
+    List<Feature> selectedFeature = mapboxMap.queryRenderedFeatures(pixel, "selected-marker-layer");
+
+    if (selectedFeature.size() > 0 && markerSelected) {
+      return;
+    }
 
     if (features.size() <= 0) {
       if (markerSelected) {
-        deselectMarker(marker, infoWindow, infoWindowTip);
+        deselectMarker(marker);
       }
       return;
     }
@@ -145,50 +108,25 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
     GeoJsonSource source = mapboxMap.getSourceAs("selected-marker");
     source.setGeoJson(featureCollection);
 
-    GeoJsonSource infoWindowSource = mapboxMap.getSourceAs("info-window");
-    infoWindowSource.setGeoJson(featureCollection);
-
-    List<Feature> temporaryMarkers = new ArrayList<>();
-
-    for (Feature feature : routeCoordinates) {
-      // Check whether the coordinates match up and if not add them to a temporary list.
-      if ((Math.abs(((Point) feature.getGeometry()).getCoordinates().getLongitude()
-        - ((Point) features.get(0).getGeometry()).getCoordinates().getLongitude()) >= 0.0001)) {
-        temporaryMarkers.add(feature);
-      }
-    }
-
-    FeatureCollection markerCollection = FeatureCollection.fromFeatures(temporaryMarkers);
-    GeoJsonSource markers = mapboxMap.getSourceAs("marker-source");
-    markers.setGeoJson(markerCollection);
-
     if (markerSelected) {
-      // TODO Fix animation when a markers currently selected and another one is clicked on
-
-      deselectMarker(marker, infoWindow, infoWindowTip);
-      Toast.makeText(SymbolLayerActivity.this, "Deselected", Toast.LENGTH_LONG).show();
+      deselectMarker(marker);
     }
     if (features.size() > 0) {
-      selectMarker(marker, infoWindow, infoWindowTip);
-      Toast.makeText(SymbolLayerActivity.this, "Selected", Toast.LENGTH_LONG).show();
+      selectMarker(marker);
     }
   }
 
-  private void selectMarker(final SymbolLayer marker, SymbolLayer infoWindow, SymbolLayer infoWindowTip) {
-    infoWindow.setProperties(PropertyFactory.visibility("visible"));
-    infoWindowTip.setProperties(PropertyFactory.visibility("visible"));
-
+  private void selectMarker(final SymbolLayer marker) {
     ValueAnimator markerAnimator = new ValueAnimator();
-    markerAnimator.setObjectValues(1f, 180f);
-    markerAnimator.setDuration(500);
+    markerAnimator.setObjectValues(1f, 2f);
+    markerAnimator.setDuration(300);
     markerAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
       @Override
       public void onAnimationUpdate(ValueAnimator animator) {
 
         marker.setProperties(
-//          PropertyFactory.iconSize((float) animator.getAnimatedValue()),
-          PropertyFactory.iconRotate((float) animator.getAnimatedValue())
+          PropertyFactory.iconSize((float) animator.getAnimatedValue())
         );
       }
     });
@@ -196,21 +134,17 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
     markerSelected = true;
   }
 
-  private void deselectMarker(final SymbolLayer marker, SymbolLayer infoWindow, SymbolLayer infoWindowTip) {
-    infoWindow.setProperties(PropertyFactory.visibility("none"));
-    infoWindowTip.setProperties(PropertyFactory.visibility("none"));
-
+  private void deselectMarker(final SymbolLayer marker) {
     ValueAnimator markerAnimator = new ValueAnimator();
-    markerAnimator.setObjectValues(180f, 1f);
-    markerAnimator.setDuration(500);
+    markerAnimator.setObjectValues(2f, 1f);
+    markerAnimator.setDuration(300);
     markerAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
       @Override
       public void onAnimationUpdate(ValueAnimator animator) {
 
         marker.setProperties(
-//          PropertyFactory.iconSize((float) animator.getAnimatedValue()),
-          PropertyFactory.iconRotate((float) animator.getAnimatedValue())
+          PropertyFactory.iconSize((float) animator.getAnimatedValue())
         );
       }
     });
