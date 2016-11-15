@@ -102,7 +102,7 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
       return;
     }
 
-    if (features.size() <= 0) {
+    if (features.isEmpty()) {
       if (markerSelected) {
         deselectMarker(marker);
       }
@@ -132,7 +132,6 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
 
       @Override
       public void onAnimationUpdate(ValueAnimator animator) {
-
         marker.setProperties(
           PropertyFactory.iconSize((float) animator.getAnimatedValue())
         );
@@ -150,7 +149,6 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
 
       @Override
       public void onAnimationUpdate(ValueAnimator animator) {
-
         marker.setProperties(
           PropertyFactory.iconSize((float) animator.getAnimatedValue())
         );
