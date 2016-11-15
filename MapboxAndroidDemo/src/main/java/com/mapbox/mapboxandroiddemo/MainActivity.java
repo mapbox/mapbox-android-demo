@@ -59,6 +59,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SatelliteStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
@@ -171,6 +172,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     exampleItemModel.clear();
     switch (id) {
       case R.id.nav_styles:
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_symbol_layer_title,
+          R.string.activity_style_symbol_layer_description,
+          new Intent(MainActivity.this, SymbolLayerActivity.class),
+          R.string.activity_style_symbol_layer_url,
+          true
+        ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_create_heatmap_points_title,
           R.string.activity_style_create_heatmap_points_description,
