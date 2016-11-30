@@ -23,6 +23,7 @@ import com.mapbox.mapboxandroiddemo.model.PulseMarkerView;
 import com.mapbox.mapboxandroiddemo.model.PulseMarkerViewOptions;
 import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.annotations.MarkerView;
+import com.mapbox.mapboxsdk.annotations.MarkerViewManager;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationListener;
@@ -77,9 +78,14 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
         mapboxMap.getMarkerViewManager().addMarkerViewAdapter(
           new PulseMarkerViewAdapter(AnimatedLocationIconActivity.this));
 
-        userMarker = mapboxMap.addMarker(new PulseMarkerViewOptions().position(new LatLng(0, 0)));
-
-        animateMarker(userMarker);
+        userMarker = mapboxMap.addMarker(
+          new PulseMarkerViewOptions().position(new LatLng(0, 0)),
+          new MarkerViewManager.OnMarkerViewAddedListener() {
+          @Override
+          public void onViewAdded(@NonNull MarkerView markerView) {
+            animateMarker(userMarker);
+          }
+        });
 
         if (locationServices.areLocationPermissionsGranted()) {
           setInitialMapPosition();

@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.MarkerView;
+import com.mapbox.mapboxsdk.annotations.MarkerViewManager;
 import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -49,23 +51,25 @@ public class AnimatedCircleMarkerActivity extends AppCompatActivity {
         circle = mapboxMap.addMarker(new MarkerViewOptions()
           .position(new LatLng(40.73581, -73.99155))
           .anchor(0.5f, 0.5f)
-          .icon(icon));
+          .icon(icon), new MarkerViewManager.OnMarkerViewAddedListener() {
+          @Override
+          public void onViewAdded(@NonNull MarkerView markerView) {
+            View view = mapboxMap.getMarkerViewManager().getView(circle);
 
-        View view = mapboxMap.getMarkerViewManager().getView(circle);
+            ValueAnimator scaleCircleX = ObjectAnimator.ofFloat(view, "scaleX", 1.5f);
+            ValueAnimator scaleCircleY = ObjectAnimator.ofFloat(view, "scaleY", 1.5f);
+            scaleCircleX.setDuration(3000);
+            scaleCircleY.setDuration(3000);
+            scaleCircleX.setRepeatCount(ValueAnimator.INFINITE);
+            scaleCircleY.setRepeatCount(ValueAnimator.INFINITE);
+            scaleCircleX.setRepeatMode(ObjectAnimator.REVERSE);
+            scaleCircleY.setRepeatMode(ObjectAnimator.REVERSE);
 
-        ValueAnimator scaleCircleX = ObjectAnimator.ofFloat(view, "scaleX", 1.5f);
-        ValueAnimator scaleCircleY = ObjectAnimator.ofFloat(view, "scaleY", 1.5f);
-        scaleCircleX.setDuration(3000);
-        scaleCircleY.setDuration(3000);
-        scaleCircleX.setRepeatCount(ValueAnimator.INFINITE);
-        scaleCircleY.setRepeatCount(ValueAnimator.INFINITE);
-        scaleCircleX.setRepeatMode(ObjectAnimator.REVERSE);
-        scaleCircleY.setRepeatMode(ObjectAnimator.REVERSE);
-
-        AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.play(scaleCircleX).with(scaleCircleY);
-        animatorSet.start();
-
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.play(scaleCircleX).with(scaleCircleY);
+            animatorSet.start();
+          }
+        });
       }
     });
   }
