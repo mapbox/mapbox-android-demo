@@ -23,6 +23,7 @@ import com.mapbox.mapboxandroiddemo.model.PulseMarkerView;
 import com.mapbox.mapboxandroiddemo.model.PulseMarkerViewOptions;
 import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.mapboxsdk.annotations.MarkerView;
+import com.mapbox.mapboxsdk.annotations.MarkerViewManager;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationListener;
@@ -39,7 +40,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
  * @see PulseMarkerViewOptions
  * @see PulseMarkerView
  * @see ~/drawable/ic_circle.png
- *
+ * <p>
  * If you are just getting started with adding user location to your map, it's recommended to start
  * with this example instead:
  * @see BasicUserLocation
@@ -77,9 +78,14 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
         mapboxMap.getMarkerViewManager().addMarkerViewAdapter(
           new PulseMarkerViewAdapter(AnimatedLocationIconActivity.this));
 
-        userMarker = mapboxMap.addMarker(new PulseMarkerViewOptions().position(new LatLng(0, 0)));
-
-        animateMarker(userMarker);
+        userMarker = mapboxMap.addMarker(
+          new PulseMarkerViewOptions().position(new LatLng(0, 0)),
+          new MarkerViewManager.OnMarkerViewAddedListener() {
+            @Override
+            public void onViewAdded(@NonNull MarkerView markerView) {
+              animateMarker(userMarker);
+            }
+          });
 
         if (locationServices.areLocationPermissionsGranted()) {
           setInitialMapPosition();
@@ -144,7 +150,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
   private void enableGps() {
     // Check if user has granted location permission
     if (!locationServices.areLocationPermissionsGranted()) {
-      ActivityCompat.requestPermissions(this, new String[]{
+      ActivityCompat.requestPermissions(this, new String[] {
         Manifest.permission.ACCESS_COARSE_LOCATION,
         Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
     } else {
