@@ -52,24 +52,25 @@ public class AnimatedCircleMarkerActivity extends AppCompatActivity {
           .position(new LatLng(40.73581, -73.99155))
           .anchor(0.5f, 0.5f)
           .icon(icon), new MarkerViewManager.OnMarkerViewAddedListener() {
-          @Override
-          public void onViewAdded(@NonNull MarkerView markerView) {
-            View view = mapboxMap.getMarkerViewManager().getView(circle);
+            @Override
+            public void onViewAdded(@NonNull MarkerView markerView) {
+              View view = mapboxMap.getMarkerViewManager().getView(circle);
 
-            ValueAnimator scaleCircleX = ObjectAnimator.ofFloat(view, "scaleX", 1.5f);
-            ValueAnimator scaleCircleY = ObjectAnimator.ofFloat(view, "scaleY", 1.5f);
-            scaleCircleX.setDuration(3000);
-            scaleCircleY.setDuration(3000);
-            scaleCircleX.setRepeatCount(ValueAnimator.INFINITE);
-            scaleCircleY.setRepeatCount(ValueAnimator.INFINITE);
-            scaleCircleX.setRepeatMode(ObjectAnimator.REVERSE);
-            scaleCircleY.setRepeatMode(ObjectAnimator.REVERSE);
+              ValueAnimator scaleCircleX = ObjectAnimator.ofFloat(view, "scaleX", 1.5f);
+              ValueAnimator scaleCircleY = ObjectAnimator.ofFloat(view, "scaleY", 1.5f);
+              scaleCircleX.setDuration(3000);
+              scaleCircleY.setDuration(3000);
+              scaleCircleX.setRepeatCount(ValueAnimator.INFINITE);
+              scaleCircleY.setRepeatCount(ValueAnimator.INFINITE);
+              scaleCircleX.setRepeatMode(ObjectAnimator.REVERSE);
+              scaleCircleY.setRepeatMode(ObjectAnimator.REVERSE);
 
-            AnimatorSet animatorSet = new AnimatorSet();
-            animatorSet.play(scaleCircleX).with(scaleCircleY);
-            animatorSet.start();
+              AnimatorSet animatorSet = new AnimatorSet();
+              animatorSet.play(scaleCircleX).with(scaleCircleY);
+              animatorSet.start();
+            }
           }
-        });
+        );
       }
     });
   }
