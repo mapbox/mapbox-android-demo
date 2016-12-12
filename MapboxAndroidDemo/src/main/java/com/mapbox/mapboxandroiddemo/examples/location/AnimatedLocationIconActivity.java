@@ -51,6 +51,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
   private MapboxMap map;
   private MarkerView userMarker;
   private LocationServices locationServices;
+  private LocationListener locationListener;
   private boolean initialLocationSet = false;
 
   private static final int PERMISSIONS_LOCATION = 0;
@@ -118,6 +119,11 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
+    // Ensure no memory leak occurs if we register the location listener but the call hasn't
+    // been made yet.
+    if (locationListener != null) {
+      locationServices.removeLocationListener(locationListener);
+    }
   }
 
   @Override
@@ -167,20 +173,23 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
   }
 
   private void enableLocation() {
-    locationServices.addLocationListener(new LocationListener() {
+    // If we have the last location of the user, we can move the camera to that position.
+    Location lastLocation = locationServices.getLastLocation();
+    if (lastLocation != null) {
+      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
+    }
+
+    locationListener = new LocationListener() {
       @Override
       public void onLocationChanged(Location location) {
         if (location != null) {
-          if (!initialLocationSet) {
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 16));
-            initialLocationSet = true;
-          }
+          map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 16));
+          locationServices.removeLocationListener(this);
           userMarker.setPosition(new LatLng(location));
         }
       }
-    });
-    // Enable GPS location tracking.
-    locationServices.toggleGPS(true);
+    };
+    locationServices.addLocationListener(locationListener);
   }
 
   @Override

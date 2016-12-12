@@ -54,7 +54,7 @@ public class LocationPickerActivity extends AppCompatActivity {
   private Marker droppedMarker;
   private ImageView hoveringMarker;
   private Button selectLocationButton;
-  private boolean initialCameraPositonSet = false;
+  private LocationListener locationListener;
 
   private static final int PERMISSIONS_LOCATION = 0;
   private static final String TAG = "LocationPickerActivity";
@@ -85,7 +85,7 @@ public class LocationPickerActivity extends AppCompatActivity {
         // first check that the user has granted the location permission, then we call
         // setInitialCamera.
         if (!locationServices.areLocationPermissionsGranted()) {
-          ActivityCompat.requestPermissions(LocationPickerActivity.this, new String[]{
+          ActivityCompat.requestPermissions(LocationPickerActivity.this, new String[] {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
         } else {
@@ -116,7 +116,7 @@ public class LocationPickerActivity extends AppCompatActivity {
             // Then we set the visibility to gone.
             float coordinateX = hoveringMarker.getLeft() + (hoveringMarker.getWidth() / 2);
             float coordinateY = hoveringMarker.getBottom();
-            float[] coords = new float[]{coordinateX, coordinateY};
+            float[] coords = new float[] {coordinateX, coordinateY};
             final LatLng latLng = map.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
             hoveringMarker.setVisibility(View.GONE);
 
@@ -177,6 +177,9 @@ public class LocationPickerActivity extends AppCompatActivity {
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
+    if (locationListener != null) {
+      locationServices.removeLocationListener(locationListener);
+    }
   }
 
   @Override
@@ -191,26 +194,24 @@ public class LocationPickerActivity extends AppCompatActivity {
     // camera as fast as possible.
     if (locationServices.getLastLocation() != null) {
       map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locationServices.getLastLocation()), 16));
-      initialCameraPositonSet = true;
     }
 
     // This location listener is used in a very specific use case. If the users last location is
     // unknown we wait till the GPS locates them and position the camera above.
-    locationServices.addLocationListener(new LocationListener() {
+    locationListener = new LocationListener() {
       @Override
       public void onLocationChanged(Location location) {
-        if (location != null && !initialCameraPositonSet) {
+        if (location != null) {
           // Move the map camera to where the user location is
           map.setCameraPosition(new CameraPosition.Builder()
             .target(new LatLng(location))
             .zoom(16)
             .build());
-
-          // Set to true so we aren't setting the camera every time location is updated
-          initialCameraPositonSet = true;
+          locationServices.removeLocationListener(this);
         }
       }
-    });
+    };
+    locationServices.addLocationListener(locationListener);
     // Enable the location layer on the map and track the user location until they perform a
     // map gesture.
     map.setMyLocationEnabled(true);

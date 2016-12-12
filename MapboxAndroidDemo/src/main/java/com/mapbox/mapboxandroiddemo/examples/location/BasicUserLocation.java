@@ -26,7 +26,7 @@ public class BasicUserLocation extends AppCompatActivity {
   private MapboxMap map;
   private FloatingActionButton floatingActionButton;
   private LocationServices locationServices;
-
+  private LocationListener locationListener;
 
   private static final int PERMISSIONS_LOCATION = 0;
 
@@ -85,6 +85,11 @@ public class BasicUserLocation extends AppCompatActivity {
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
+    // Ensure no memory leak occurs if we register the location listener but the call hasn't
+    // been made yet.
+    if (locationListener != null) {
+      locationServices.removeLocationListener(locationListener);
+    }
   }
 
   @Override
@@ -116,7 +121,7 @@ public class BasicUserLocation extends AppCompatActivity {
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
       }
 
-      locationServices.addLocationListener(new LocationListener() {
+      locationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
           if (location != null) {
@@ -128,7 +133,8 @@ public class BasicUserLocation extends AppCompatActivity {
             locationServices.removeLocationListener(this);
           }
         }
-      });
+      };
+      locationServices.addLocationListener(locationListener);
       floatingActionButton.setImageResource(R.drawable.ic_location_disabled_24dp);
     } else {
       floatingActionButton.setImageResource(R.drawable.ic_my_location_24dp);

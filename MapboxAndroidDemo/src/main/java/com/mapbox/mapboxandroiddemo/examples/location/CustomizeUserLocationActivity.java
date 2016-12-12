@@ -50,10 +50,6 @@ public class CustomizeUserLocationActivity extends AppCompatActivity {
 
         enableGps();
 
-        // Enable user tracking to show the padding affect.
-        map.getTrackingSettings().setMyLocationTrackingMode(MyLocationTracking.TRACKING_FOLLOW);
-        map.getTrackingSettings().setDismissAllTrackingOnGesture(false);
-
         // Customize the user location icon using the getMyLocationViewSettings object.
         map.getMyLocationViewSettings().setPadding(0, 500, 0, 0);
         map.getMyLocationViewSettings().setForegroundTintColor(Color.parseColor("#56B881"));
@@ -96,7 +92,7 @@ public class CustomizeUserLocationActivity extends AppCompatActivity {
   private void enableGps() {
     // Check if user has granted location permission
     if (!locationServices.areLocationPermissionsGranted()) {
-      ActivityCompat.requestPermissions(this, new String[]{
+      ActivityCompat.requestPermissions(this, new String[] {
         Manifest.permission.ACCESS_COARSE_LOCATION,
         Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
     } else {
@@ -105,27 +101,9 @@ public class CustomizeUserLocationActivity extends AppCompatActivity {
   }
 
   private void enableLocation() {
-    // If we have the last location of the user, we can move the camera to that position.
-    Location lastLocation = locationServices.getLastLocation();
-    if (lastLocation != null) {
-      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
-    }
-
-    locationServices.addLocationListener(new LocationListener() {
-      @Override
-      public void onLocationChanged(Location location) {
-        if (location != null) {
-          // Move the map camera to where the user location is and then remove the
-          // listener so the camera isn't constantly updating when the user location
-          // changes. When the user disables and then enables the location again, this
-          // listener is registered again and will adjust the camera once again.
-          map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 16));
-          locationServices.removeLocationListener(this);
-        }
-      }
-    });
-    // Enable or disable the location layer on the map
-    map.setMyLocationEnabled(true);
+    // Enable user tracking to show the padding affect.
+    map.getTrackingSettings().setMyLocationTrackingMode(MyLocationTracking.TRACKING_FOLLOW);
+    map.getTrackingSettings().setDismissAllTrackingOnGesture(false);
   }
 
   @Override
