@@ -2,6 +2,12 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 4.2.0
+* Indoor map example
+* Los Angeles tourism example
+* Symbol layer example
+* Location memory leaks resolved
+
 ## 4.2.0-beta.3 - September 21, 2016
 * Mapbox Android SDK v4.2.0-beta.3
 * Landuse Styling - lab example
