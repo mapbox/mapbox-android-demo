@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModel = new ArrayList<>();
 
-
     // Create the adapter to convert the array to views
     adapter = new ExampleAdapter(this, exampleItemModel);
     // Attach the adapter to a ListView

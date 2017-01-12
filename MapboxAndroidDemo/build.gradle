@@ -44,6 +44,10 @@ dependencies {
   compile 'com.getbase:floatingactionbutton:1.10.1'
   compile 'com.squareup.picasso:picasso:2.5.2'
 
+  // todo: add google-services.json created on a firebase console
+  //       to associate a reporting account
+  compile 'com.google.android.gms:play-services:10.0.1'
+
   // Mapbox dependencies
   compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.1@aar') {
 //  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-SNAPSHOT@aar') {
@@ -61,3 +65,4 @@ dependencies {
 }
 
 apply from: 'checkstyle.gradle'
+apply plugin: 'com.google.gms.google-services'
