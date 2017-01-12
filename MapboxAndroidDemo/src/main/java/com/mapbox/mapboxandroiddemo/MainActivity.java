@@ -19,7 +19,6 @@ import android.view.View;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
-import com.google.firebase.crash.FirebaseCrash;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedCircleMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
@@ -86,10 +85,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
-    // todo: After adding google-services.json, add package name on the firebase account
-    //       Account will get updated for below crash, may take upto a half of an hour.
-    FirebaseCrash.report(new Exception("My first Android non-fatal error"));
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);

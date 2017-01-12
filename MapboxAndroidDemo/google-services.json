@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "557332920931",
+    "firebase_url": "https://mapbox-android-demo.firebaseio.com",
+    "project_id": "mapbox-android-demo",
+    "storage_bucket": "mapbox-android-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557332920931:android:e0e602f5bdef30b0",
+        "android_client_info": {
+          "package_name": "com.mapbox.mapboxandroiddemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557332920931-jobr1becn6feo5l8vurrctnd79h8ir5p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
