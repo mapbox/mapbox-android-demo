@@ -18,9 +18,9 @@ import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.Function;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.services.api.utils.turf.TurfException;
+import com.mapbox.services.api.utils.turf.TurfJoins;
 import com.mapbox.services.commons.models.Position;
-import com.mapbox.services.commons.turf.TurfException;
-import com.mapbox.services.commons.turf.TurfJoins;
 
 import java.io.IOException;
 import java.io.InputStream;
