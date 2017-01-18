@@ -44,7 +44,9 @@ dependencies {
   compile 'com.getbase:floatingactionbutton:1.10.1'
   compile 'com.squareup.picasso:picasso:2.5.2'
 
-  compile 'com.google.android.gms:play-services:10.0.1'
+  // firebase crash report
+  // todo: validate release compile!
+  releaseCompile 'com.google.firebase:firebase-crash:10.0.1'
 
   // Mapbox dependencies
   compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.1@aar') {
