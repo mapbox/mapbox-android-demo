@@ -194,4 +194,6 @@
     <string name="activity_lab_las_angeles_tourism_url">http://i.imgur.com/FUIFkIm.png</string>
     <string name="activity_lab_indoor_map_url">http://i.imgur.com/ItqdTiG.png</string>
 
+    <!-- Firebase Crash -->
+    <string name="firebase_api_key">AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8</string>
 </resources>
