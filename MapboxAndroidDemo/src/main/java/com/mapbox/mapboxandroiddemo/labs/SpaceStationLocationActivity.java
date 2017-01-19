@@ -23,8 +23,8 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.services.api.utils.turf.TurfMeasurement;
 import com.mapbox.services.commons.models.Position;
-import com.mapbox.services.commons.turf.TurfMeasurement;
 
 import retrofit2.Call;
 import retrofit2.Callback;

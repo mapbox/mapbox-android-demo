@@ -11,8 +11,8 @@ import android.widget.ImageView;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.MapboxAccountManager;
 import com.mapbox.services.Constants;
-import com.mapbox.services.commons.ServicesException;
-import com.mapbox.services.staticimage.v1.MapboxStaticImage;
+import com.mapbox.services.api.ServicesException;
+import com.mapbox.services.api.staticimage.v1.MapboxStaticImage;
 
 import java.io.IOException;
 

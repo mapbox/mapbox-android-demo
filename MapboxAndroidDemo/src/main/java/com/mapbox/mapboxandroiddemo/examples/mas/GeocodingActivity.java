@@ -12,10 +12,10 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.android.geocoder.ui.GeocoderAutoCompleteView;
+import com.mapbox.services.android.ui.geocoder.GeocoderAutoCompleteView;
+import com.mapbox.services.api.geocoding.v5.GeocodingCriteria;
+import com.mapbox.services.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.services.commons.models.Position;
-import com.mapbox.services.geocoding.v5.GeocodingCriteria;
-import com.mapbox.services.geocoding.v5.models.CarmenFeature;
 
 public class GeocodingActivity extends AppCompatActivity {
 
@@ -50,12 +50,11 @@ public class GeocodingActivity extends AppCompatActivity {
     autocomplete.setType(GeocodingCriteria.TYPE_POI);
     autocomplete.setOnFeatureListener(new GeocoderAutoCompleteView.OnFeatureListener() {
       @Override
-      public void OnFeatureClick(CarmenFeature feature) {
+      public void onFeatureClick(CarmenFeature feature) {
         Position position = feature.asPosition();
         updateMap(position.getLatitude(), position.getLongitude());
       }
     });
-
   }
 
   private void updateMap(double latitude, double longitude) {
