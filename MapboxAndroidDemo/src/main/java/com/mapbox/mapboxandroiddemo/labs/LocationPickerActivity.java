@@ -68,7 +68,7 @@ public class LocationPickerActivity extends AppCompatActivity {
     MapboxAccountManager.start(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the account manager
-    setContentView(R.layout.activity_navigation_location_picker);
+    setContentView(R.layout.activity_lab_location_picker);
 
     // Get the location services object for later use.
     locationServices = LocationServices.getLocationServices(LocationPickerActivity.this);
