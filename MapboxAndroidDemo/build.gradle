@@ -17,12 +17,17 @@ android {
 
   buildTypes {
     debug {
+      applicationIdSuffix '.debug'
+      versionNameSuffix '-Debug'
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      resValue "string", "firebase_app_id", "1:557332920931:android:bdf11618ae45dd61"
     }
+
     release {
       minifyEnabled true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      resValue "string", "firebase_app_id", "1:557332920931:android:e0e602f5bdef30b0"
     }
   }
   return void;
@@ -42,6 +47,9 @@ dependencies {
   compile 'com.github.javiersantos:MaterialStyledDialogs:2.0'
   compile 'com.getbase:floatingactionbutton:1.10.1'
   compile 'com.squareup.picasso:picasso:2.5.2'
+
+  // firebase crash report
+  compile 'com.google.firebase:firebase-crash:10.0.1'
 
   // Mapbox dependencies
   compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.1@aar') {
