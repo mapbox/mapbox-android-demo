@@ -31,7 +31,8 @@ public class MainActivity extends WearableActivity implements ExampleAdapter.Ite
     wearableRecyclerView.setOffsettingHelper(offsettingHelper);
 
     exampleItemModels = new ArrayList<>();
-    exampleItemModels.add(new ExampleItemModel(R.string.activity_simple_mapview_title, R.drawable.simple_map_view_screen, new Intent(MainActivity.this, SimpleMapViewActivity.class)));
+    exampleItemModels.add(new ExampleItemModel(R.string.activity_simple_mapview_title,
+      R.drawable.simple_map_view_screen, new Intent(MainActivity.this, SimpleMapViewActivity.class)));
     //exampleItemModels.add("Show user location");
 
     ExampleAdapter exampleAdapter = new ExampleAdapter(MainActivity.this, exampleItemModels);
