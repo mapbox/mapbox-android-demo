@@ -44,15 +44,10 @@ dependencies {
   compile 'com.squareup.picasso:picasso:2.5.2'
 
   // Mapbox dependencies
-  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.1@aar') {
+  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.2-SNAPSHOT@aar') {
 //  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-SNAPSHOT@aar') {
     transitive = true
     exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-java-services'
-  }
-
-  // Mapbox Java Services
-  compile('com.mapbox.mapboxsdk:mapbox-java-services:2.0.0-SNAPSHOT@jar') {
-    transitive = true
   }
 
   // Mapbox Android UI

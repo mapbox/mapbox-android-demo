@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".examples.mas.GeocodingActivity">
 
     <com.mapbox.mapboxsdk.maps.MapView
@@ -17,7 +16,7 @@
         mapbox:style_url="@string/style_mapbox_streets"
         mapbox:zoom="8"/>
 
-    <com.mapbox.services.android.geocoder.ui.GeocoderAutoCompleteView
+    <com.mapbox.services.android.ui.geocoder.GeocoderAutoCompleteView
         android:id="@+id/query"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,7 +30,7 @@
         android:elevation="12dp"
         android:hint="Search Location"
         android:padding="10dp"
-        android:singleLine="true"
+        android:maxLines="1"
         android:textColor="@android:color/black"/>
 
 </RelativeLayout>
