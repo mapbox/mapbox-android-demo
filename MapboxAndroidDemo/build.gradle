@@ -11,8 +11,8 @@ android {
   defaultConfig {
     minSdkVersion 15
     targetSdkVersion 25
-    versionCode 36
-    versionName "4.2.1"
+    versionCode 37
+    versionName "4.2.2"
   }
 
   buildTypes {
@@ -52,7 +52,7 @@ dependencies {
   compile 'com.google.firebase:firebase-crash:10.0.1'
 
   // Mapbox dependencies
-  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.2-SNAPSHOT@aar') {
+  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.2@aar') {
 //  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-SNAPSHOT@aar') {
     transitive = true
     exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-java-services'
