@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.MapboxAccountManager;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
@@ -58,7 +58,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
-    MapboxAccountManager.start(this, getString(R.string.access_token));
+    Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_offline_manager);
@@ -104,6 +104,18 @@ public class OfflineManagerActivity extends AppCompatActivity {
   public void onResume() {
     super.onResume();
     mapView.onResume();
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
   }
 
   @Override
@@ -181,7 +193,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
     String styleUrl = map.getStyleUrl();
     LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
     double minZoom = map.getCameraPosition().zoom;
-    double maxZoom = map.getMaxZoom();
+    double maxZoom = map.getMaxZoomLevel();
     float pixelRatio = this.getResources().getDisplayMetrics().density;
     OfflineTilePyramidRegionDefinition definition = new OfflineTilePyramidRegionDefinition(
       styleUrl, bounds, minZoom, maxZoom, pixelRatio);

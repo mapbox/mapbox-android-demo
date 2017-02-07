@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 ext {
-  supportLibVersion = '25.1.0'
+  supportLibVersion = '25.1.1'
 }
 
 android {
@@ -52,10 +52,10 @@ dependencies {
   compile 'com.google.firebase:firebase-crash:10.0.1'
 
   // Mapbox dependencies
-  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.2@aar') {
-//  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-SNAPSHOT@aar') {
+//  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.2@aar') {
+  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.0-SNAPSHOT@aar') {
     transitive = true
-    exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-java-services'
+//    exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-java-geojson'
   }
 
   // Mapbox Android UI

@@ -9,7 +9,7 @@ import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.MapboxAccountManager;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -45,7 +45,7 @@ public class IndoorMapActivity extends AppCompatActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    MapboxAccountManager.start(this, getString(R.string.access_token));
+    Mapbox.getInstance(this, getString(R.string.access_token));
     setContentView(R.layout.activity_lab_indoor_map);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -119,6 +119,18 @@ public class IndoorMapActivity extends AppCompatActivity {
   protected void onResume() {
     super.onResume();
     mapView.onResume();
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
   }
 
   @Override

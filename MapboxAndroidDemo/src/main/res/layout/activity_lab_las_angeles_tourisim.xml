@@ -12,10 +12,10 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:center_latitude="34.0444"
-        mapbox:center_longitude="-118.2536"
-        mapbox:style_url="@string/style_light"
-        mapbox:zoom="15"/>
+        mapbox:mapbox_cameraTargetLat="34.0444"
+        mapbox:mapbox_cameraTargetLng="-118.2536"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_light"
+        mapbox:mapbox_cameraZoom="15"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_actions"

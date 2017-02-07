@@ -11,11 +11,11 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:center_latitude="40.7359"
-        mapbox:center_longitude="-74.0151"
-        mapbox:style_url="@string/style_light"
-        mapbox:zoom="10"
-        mapbox:zoom_min="10"/>
+        mapbox:mapbox_cameraTargetLat="40.7359"
+        mapbox:mapbox_cameraTargetLng="-74.0151"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_light"
+        mapbox:mapbox_cameraZoom="10"
+        mapbox:mapbox_cameraZoomMin="10"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"

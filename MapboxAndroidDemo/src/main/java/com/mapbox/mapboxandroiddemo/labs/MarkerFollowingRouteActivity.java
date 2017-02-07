@@ -15,7 +15,7 @@ import android.util.Log;
 import android.view.animation.LinearInterpolator;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.MapboxAccountManager;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -54,7 +54,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
 
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
-    MapboxAccountManager.start(this, getString(R.string.access_token));
+    Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_lab_marker_following_route);
@@ -82,6 +82,18 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
     if (handler != null && runnable != null) {
       handler.post(runnable);
     }
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
   }
 
   @Override
@@ -222,7 +234,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
               // and starts outside the current user view. Without this, the user must
               // intentionally execute a gesture before the view marker reappears on
               // the map.
-              map.getMarkerViewManager().scheduleViewMarkerInvalidation();
+              map.getMarkerViewManager().update();
 
               // Keeping the current point count we are on.
               count++;

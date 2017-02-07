@@ -9,7 +9,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.MapboxAccountManager;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.services.Constants;
 import com.mapbox.services.api.ServicesException;
 import com.mapbox.services.api.staticimage.v1.MapboxStaticImage;
@@ -30,7 +30,7 @@ public class StaticImageActivity extends AppCompatActivity {
 
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
-    MapboxAccountManager.start(this, getString(R.string.access_token));
+    Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_mas_static_image);
@@ -40,7 +40,7 @@ public class StaticImageActivity extends AppCompatActivity {
     MapboxStaticImage staticImage;
     try {
       staticImage = new MapboxStaticImage.Builder()
-        .setAccessToken(MapboxAccountManager.getInstance().getAccessToken())
+        .setAccessToken(Mapbox.getAccessToken())
         .setUsername(Constants.MAPBOX_USER)
         .setStyleId("satellite-v9")
         .setLon(12.3378) // Image center longitude
