@@ -8,7 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.MapboxAccountManager;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.constants.MyBearingTracking;
 import com.mapbox.mapboxsdk.constants.MyLocationTracking;
 import com.mapbox.mapboxsdk.location.LocationServices;
@@ -30,7 +30,7 @@ public class LocationTrackingActivity extends AppCompatActivity {
 
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
-    MapboxAccountManager.start(this, getString(R.string.access_token));
+    Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_location_tracking);
@@ -63,6 +63,18 @@ public class LocationTrackingActivity extends AppCompatActivity {
   public void onResume() {
     super.onResume();
     mapView.onResume();
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
   }
 
   @Override

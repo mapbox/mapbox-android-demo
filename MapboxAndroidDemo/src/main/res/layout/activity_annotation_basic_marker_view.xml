@@ -11,10 +11,10 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:center_latitude="-37.82259"
-        mapbox:center_longitude="144.98107"
-        mapbox:style_url="mapbox://styles/mapbox/streets-v9"
-        mapbox:tilt="45"
-        mapbox:zoom="15.5"/>
+        mapbox:mapbox_cameraTargetLat="-37.82259"
+        mapbox:mapbox_cameraTargetLng="144.98107"
+        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/streets-v9"
+        mapbox:mapbox_cameraTilt="45"
+        mapbox:mapbox_cameraZoom="15.5"/>
 
 </RelativeLayout>

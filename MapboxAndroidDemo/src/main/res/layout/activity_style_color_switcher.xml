@@ -91,9 +91,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/color_picker_content"
-        mapbox:center_latitude="45.4385"
-        mapbox:center_longitude="12.338"
-        mapbox:style_url="@string/style_light"
-        mapbox:zoom="17.4"/>
+        mapbox:mapbox_cameraTargetLat="45.4385"
+        mapbox:mapbox_cameraTargetLng="12.338"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_light"
+        mapbox:mapbox_cameraZoom="17.4"/>
 
 </RelativeLayout>

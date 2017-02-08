@@ -12,10 +12,10 @@
         android:id="@+id/mapview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        mapbox:style_url="@string/style_light"
-        mapbox:center_latitude="48.8552"
-        mapbox:center_longitude="2.3474"
-        mapbox:zoom="12"
-        mapbox:rotate_enabled="false"/>
+        mapbox:mapbox_styleUrl="@string/mapbox_style_light"
+        mapbox:mapbox_cameraTargetLat="48.8552"
+        mapbox:mapbox_cameraTargetLng="2.3474"
+        mapbox:mapbox_cameraZoom="12"
+        mapbox:mapbox_uiRotateGestures="false"/>
 
 </android.support.design.widget.CoordinatorLayout>

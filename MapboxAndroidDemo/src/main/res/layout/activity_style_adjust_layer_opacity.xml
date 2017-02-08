@@ -11,13 +11,13 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:center_latitude="41.8362"
-        mapbox:center_longitude="-87.6321"
-        mapbox:compass_margin_top="75dp"
-        mapbox:style_url="@string/style_light"
-        mapbox:zoom="9.5"
-        mapbox:zoom_max="13"
-        mapbox:zoom_min="7"/>
+        mapbox:mapbox_cameraTargetLat="41.8362"
+        mapbox:mapbox_cameraTargetLng="-87.6321"
+        mapbox:mapbox_uiCompassMarginTop="75dp"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_light"
+        mapbox:mapbox_cameraZoom="9.5"
+        mapbox:mapbox_cameraZoomMax="13"
+        mapbox:mapbox_cameraZoomMin="7"/>
 
     <LinearLayout
         android:layout_width="match_parent"
