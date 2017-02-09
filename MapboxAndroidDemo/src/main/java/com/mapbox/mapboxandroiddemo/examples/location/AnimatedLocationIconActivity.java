@@ -26,11 +26,15 @@ import com.mapbox.mapboxsdk.annotations.MarkerView;
 import com.mapbox.mapboxsdk.annotations.MarkerViewManager;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.location.LocationListener;
-import com.mapbox.mapboxsdk.location.LocationServices;
+import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.services.android.telemetry.location.AndroidLocationEngine;
+import com.mapbox.services.android.telemetry.location.LocationEngine;
+import com.mapbox.services.android.telemetry.location.LocationEngineListener;
+import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
+import com.mapzen.android.lost.api.LocationServices;
 
 /**
  * This example shows how to create your own marker and update its location so that we follow the
@@ -47,204 +51,215 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
  */
 public class AnimatedLocationIconActivity extends AppCompatActivity {
 
-  private MapView mapView;
-  private MapboxMap map;
-  private MarkerView userMarker;
-  private LocationServices locationServices;
-  private LocationListener locationListener;
-  private boolean initialLocationSet = false;
+    private MapView mapView;
+    private MapboxMap map;
+    private MarkerView userMarker;
+    private LocationEngine locationEngine;
+    private LocationEngineListener locationListener;
+    private boolean initialLocationSet = false;
 
-  private static final int PERMISSIONS_LOCATION = 0;
+    private static final int PERMISSIONS_LOCATION = 0;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    // Mapbox access token is configured here. This needs to be called either in your application
-    // object or in the same activity which contains the mapview.
-    Mapbox.getInstance(this, getString(R.string.access_token));
-
-    // This contains the MapView in XML and needs to be called after the account manager
-    setContentView(R.layout.activity_location_animated_icon);
-
-    locationServices = LocationServices.getLocationServices(AnimatedLocationIconActivity.this);
-
-    mapView = (MapView) findViewById(R.id.mapView);
-    mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-        map = mapboxMap;
-
-        mapboxMap.getMarkerViewManager().addMarkerViewAdapter(
-          new PulseMarkerViewAdapter(AnimatedLocationIconActivity.this));
-
-        userMarker = mapboxMap.addMarker(
-          new PulseMarkerViewOptions().position(new LatLng(0, 0)),
-          new MarkerViewManager.OnMarkerViewAddedListener() {
-            @Override
-            public void onViewAdded(@NonNull MarkerView markerView) {
-              animateMarker(userMarker);
-            }
-          });
-
-        if (locationServices.areLocationPermissionsGranted()) {
-          setInitialMapPosition();
-        }
-
-        enableGps();
-      }
-    });
-  }
-
-  @Override
-  public void onResume() {
-    super.onResume();
-    mapView.onResume();
-  }
-
-  @Override
-  protected void onStart() {
-    super.onStart();
-    mapView.onStart();
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-    mapView.onStop();
-  }
-
-  @Override
-  public void onPause() {
-    super.onPause();
-    mapView.onPause();
-  }
-
-  @Override
-  public void onLowMemory() {
-    super.onLowMemory();
-    mapView.onLowMemory();
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    mapView.onDestroy();
-    // Ensure no memory leak occurs if we register the location listener but the call hasn't
-    // been made yet.
-    if (locationListener != null) {
-      locationServices.removeLocationListener(locationListener);
-    }
-  }
-
-  @Override
-  protected void onSaveInstanceState(Bundle outState) {
-    super.onSaveInstanceState(outState);
-    mapView.onSaveInstanceState(outState);
-  }
-
-  private void animateMarker(MarkerView marker) {
-
-    View view = map.getMarkerViewManager().getView(marker);
-    if (view != null) {
-      View backgroundView = view.findViewById(R.id.background_imageview);
-
-      ValueAnimator scaleCircleX = ObjectAnimator.ofFloat(backgroundView, "scaleX", 1.8f);
-      ValueAnimator scaleCircleY = ObjectAnimator.ofFloat(backgroundView, "scaleY", 1.8f);
-      ObjectAnimator fadeOut = ObjectAnimator.ofFloat(backgroundView, "alpha", 1f, 0f);
-
-      scaleCircleX.setRepeatCount(ValueAnimator.INFINITE);
-      scaleCircleY.setRepeatCount(ValueAnimator.INFINITE);
-      fadeOut.setRepeatCount(ObjectAnimator.INFINITE);
-
-      AnimatorSet animatorSet = new AnimatorSet();
-      animatorSet.play(scaleCircleX).with(scaleCircleY).with(fadeOut);
-      animatorSet.setDuration(1000);
-      animatorSet.start();
-    }
-  }
-
-  private void enableGps() {
-    // Check if user has granted location permission
-    if (!locationServices.areLocationPermissionsGranted()) {
-      ActivityCompat.requestPermissions(this, new String[] {
-        Manifest.permission.ACCESS_COARSE_LOCATION,
-        Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
-    } else {
-      enableLocation();
-    }
-  }
-
-  private void setInitialMapPosition() {
-    Location lastLocation = LocationServices.getLocationServices(this).getLastLocation();
-    if (lastLocation != null && userMarker != null) {
-      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
-      userMarker.setPosition(new LatLng(lastLocation));
-    }
-  }
-
-  private void enableLocation() {
-    // If we have the last location of the user, we can move the camera to that position.
-    Location lastLocation = locationServices.getLastLocation();
-    if (lastLocation != null) {
-      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
-    }
-
-    locationListener = new LocationListener() {
-      @Override
-      public void onLocationChanged(Location location) {
-        if (location != null) {
-          map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 16));
-          locationServices.removeLocationListener(this);
-          userMarker.setPosition(new LatLng(location));
-        }
-      }
-    };
-    locationServices.addLocationListener(locationListener);
-  }
-
-  @Override
-  public void onRequestPermissionsResult(
-    int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    if (requestCode == PERMISSIONS_LOCATION) {
-      if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        enableLocation();
-      } else {
-        // User denied location permission, user marker won't be shown.
-        Toast.makeText(AnimatedLocationIconActivity.this,
-          "Enable location for example to work properly", Toast.LENGTH_LONG).show();
-      }
-    }
-  }
-
-  // Custom marker view used for pulsing the background view of marker.
-  private static class PulseMarkerViewAdapter extends MapboxMap.MarkerViewAdapter<PulseMarkerView> {
-
-    private LayoutInflater inflater;
-
-    public PulseMarkerViewAdapter(@NonNull Context context) {
-      super(context);
-      this.inflater = LayoutInflater.from(context);
-    }
-
-    @Nullable
     @Override
-    public View getView(@NonNull PulseMarkerView marker, @Nullable View convertView, @NonNull ViewGroup parent) {
-      ViewHolder viewHolder;
-      if (convertView == null) {
-        viewHolder = new ViewHolder();
-        convertView = inflater.inflate(R.layout.view_pulse_marker, parent, false);
-        viewHolder.foregroundImageView = (ImageView) convertView.findViewById(R.id.foreground_imageView);
-        viewHolder.backgroundImageView = (ImageView) convertView.findViewById(R.id.background_imageview);
-        convertView.setTag(viewHolder);
-      }
-      return convertView;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Mapbox access token is configured here. This needs to be called either in your application
+        // object or in the same activity which contains the mapview.
+        Mapbox.getInstance(this, getString(R.string.access_token));
+
+        // This contains the MapView in XML and needs to be called after the account manager
+        setContentView(R.layout.activity_location_animated_icon);
+
+        // Get the location engine object for later use.
+        LocationEngine locationEngine = LocationSource.getLocationEngine(this);
+
+
+        mapView = (MapView) findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(MapboxMap mapboxMap) {
+                map = mapboxMap;
+
+                mapboxMap.getMarkerViewManager().addMarkerViewAdapter(
+                        new PulseMarkerViewAdapter(AnimatedLocationIconActivity.this));
+
+                userMarker = mapboxMap.addMarker(
+                        new PulseMarkerViewOptions().position(new LatLng(0, 0)),
+                        new MarkerViewManager.OnMarkerViewAddedListener() {
+                            @Override
+                            public void onViewAdded(@NonNull MarkerView markerView) {
+                                animateMarker(userMarker);
+                            }
+                        });
+
+                if (PermissionsManager.areLocationPermissionsGranted(AnimatedLocationIconActivity.this)) {
+                    setInitialMapPosition();
+                }
+
+                enableGps();
+            }
+        });
     }
 
-    private static class ViewHolder {
-      ImageView foregroundImageView;
-      ImageView backgroundImageView;
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
     }
-  }
-}
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+        // Ensure no memory leak occurs if we register the location listener but the call hasn't
+        // been made yet.
+        if (locationListener != null) {
+            locationEngine.removeLocationEngineListener(locationListener);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    private void animateMarker(MarkerView marker) {
+
+        View view = map.getMarkerViewManager().getView(marker);
+        if (view != null) {
+            View backgroundView = view.findViewById(R.id.background_imageview);
+
+            ValueAnimator scaleCircleX = ObjectAnimator.ofFloat(backgroundView, "scaleX", 1.8f);
+            ValueAnimator scaleCircleY = ObjectAnimator.ofFloat(backgroundView, "scaleY", 1.8f);
+            ObjectAnimator fadeOut = ObjectAnimator.ofFloat(backgroundView, "alpha", 1f, 0f);
+
+            scaleCircleX.setRepeatCount(ValueAnimator.INFINITE);
+            scaleCircleY.setRepeatCount(ValueAnimator.INFINITE);
+            fadeOut.setRepeatCount(ObjectAnimator.INFINITE);
+
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.play(scaleCircleX).with(scaleCircleY).with(fadeOut);
+            animatorSet.setDuration(1000);
+            animatorSet.start();
+        }
+    }
+
+    private void enableGps() {
+        // Check if user has granted location permission
+        if (!PermissionsManager.areLocationPermissionsGranted(AnimatedLocationIconActivity.this)) {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
+        } else {
+            enableLocation();
+        }
+    }
+
+    private void setInitialMapPosition() {
+        Location lastLocation = locationEngine.getLastLocation();
+        if (lastLocation != null && userMarker != null) {
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
+            userMarker.setPosition(new LatLng(lastLocation));
+        }
+    }
+
+    private void enableLocation() {
+        // If we have the last location of the user, we can move the camera to that position.
+        Location lastLocation = locationEngine.getLastLocation();
+        if (lastLocation != null) {
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
+        }
+
+        locationListener = new LocationEngineListener() {
+            @Override
+            public void onConnected() {
+
+                locationEngine.requestLocationUpdates();
+
+
+            }
+
+            @Override
+            public void onLocationChanged(Location location) {
+                if (location != null) {
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 16));
+                    locationEngine.removeLocationEngineListener(this);
+                    userMarker.setPosition(new LatLng(location));
+                }
+            }
+
+
+        };
+
+    }
+        @Override
+        public void onRequestPermissionsResult (
+        int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+            if (requestCode == PERMISSIONS_LOCATION) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    enableLocation();
+                } else {
+                    // User denied location permission, user marker won't be shown.
+                    Toast.makeText(AnimatedLocationIconActivity.this,
+                            "Enable location for example to work properly", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+        // Custom marker view used for pulsing the background view of marker.
+        private static class PulseMarkerViewAdapter extends MapboxMap.MarkerViewAdapter<PulseMarkerView> {
+
+            private LayoutInflater inflater;
+
+            public PulseMarkerViewAdapter(@NonNull Context context) {
+                super(context);
+                this.inflater = LayoutInflater.from(context);
+            }
+
+            @Nullable
+            @Override
+            public View getView(@NonNull PulseMarkerView marker, @Nullable View convertView, @NonNull ViewGroup parent) {
+                ViewHolder viewHolder;
+                if (convertView == null) {
+                    viewHolder = new ViewHolder();
+                    convertView = inflater.inflate(R.layout.view_pulse_marker, parent, false);
+                    viewHolder.foregroundImageView = (ImageView) convertView.findViewById(R.id.foreground_imageView);
+                    viewHolder.backgroundImageView = (ImageView) convertView.findViewById(R.id.background_imageview);
+                    convertView.setTag(viewHolder);
+                }
+                return convertView;
+            }
+
+            private static class ViewHolder {
+                ImageView foregroundImageView;
+                ImageView backgroundImageView;
+            }
+        }
+    }

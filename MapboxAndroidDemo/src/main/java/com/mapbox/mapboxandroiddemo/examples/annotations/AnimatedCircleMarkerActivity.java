@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxandroiddemo.Utilities;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -44,9 +45,8 @@ public class AnimatedCircleMarkerActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
 
-        IconFactory iconFactory = IconFactory.getInstance(AnimatedCircleMarkerActivity.this);
-        Drawable iconDrawable = ContextCompat.getDrawable(AnimatedCircleMarkerActivity.this, R.drawable.circle_icon);
-        Icon icon = iconFactory.fromDrawable(iconDrawable);
+        Icon icon = Utilities.drawableToIcon(AnimatedCircleMarkerActivity.this, R.drawable.circle_icon);
+
 
         circle = mapboxMap.addMarker(new MarkerViewOptions()
           .position(new LatLng(40.73581, -73.99155))

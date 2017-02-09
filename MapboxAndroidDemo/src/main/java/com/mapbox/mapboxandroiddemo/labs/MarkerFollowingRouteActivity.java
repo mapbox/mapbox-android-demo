@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.animation.LinearInterpolator;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxandroiddemo.Utilities;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -192,9 +193,8 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
             .width(4));
 
         // We are using a custom marker icon.
-        IconFactory iconFactory = IconFactory.getInstance(MarkerFollowingRouteActivity.this);
-        Drawable iconDrawable = ContextCompat.getDrawable(MarkerFollowingRouteActivity.this, R.drawable.pink_dot);
-        Icon icon = iconFactory.fromDrawable(iconDrawable);
+        Icon icon = Utilities.drawableToIcon(MarkerFollowingRouteActivity.this, R.drawable.pink_dot);
+
 
         // Using a view marker, we place it at the first point in the points list.
         final Marker marker = map.addMarker(new MarkerViewOptions()
