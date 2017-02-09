@@ -72,7 +72,7 @@ public class LocationPickerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lab_location_picker);
 
         // Get the location engine object for later use.
-        LocationEngine locationEngine = LocationSource.getLocationEngine(this);
+        locationEngine = LocationSource.getLocationEngine(this);
 
         // Initialize the map view
         mapView = (MapView) findViewById(R.id.mapView);

@@ -15,7 +15,6 @@ import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.android.telemetry.location.LocationEngine;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
 public class LocationTrackingActivity extends AppCompatActivity {
@@ -35,10 +34,6 @@ public class LocationTrackingActivity extends AppCompatActivity {
 
         // This contains the MapView in XML and needs to be called after the account manager
         setContentView(R.layout.activity_location_tracking);
-
-        // Get the location engine object for later use.
-        LocationEngine locationEngine = LocationSource.getLocationEngine(this);
-
 
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);

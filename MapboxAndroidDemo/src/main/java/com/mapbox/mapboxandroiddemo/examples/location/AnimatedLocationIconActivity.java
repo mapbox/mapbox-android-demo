@@ -70,7 +70,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
         setContentView(R.layout.activity_location_animated_icon);
 
         // Get the location engine object for later use.
-        LocationEngine locationEngine = LocationSource.getLocationEngine(this);
+        locationEngine = LocationSource.getLocationEngine(this);
 
 
         mapView = (MapView) findViewById(R.id.mapView);
