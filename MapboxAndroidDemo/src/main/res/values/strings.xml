@@ -196,4 +196,8 @@
 
     <!-- Firebase Crash -->
     <string name="firebase_api_key">AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8</string>
+
+    <!--Textview for other fragment in support mag fragment-->
+
+    <string name="other_fragment_text">Swipe left to view\nmap in other fragment</string>
 </resources>
