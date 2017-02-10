@@ -199,5 +199,4 @@
 
     <!--Textview for other fragment in support mag fragment-->
 
-    <string name="other_fragment_text">Swipe left to view\nmap in other fragment</string>
 </resources>
