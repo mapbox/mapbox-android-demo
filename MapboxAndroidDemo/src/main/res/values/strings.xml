@@ -208,4 +208,7 @@
     <!--Tap on map instruction-->
     <string name="tap_on_map_instruction">Tap anywhere on the map</string>
 
+    <!--Tap on feature box instruction-->
+
+    <string name="tap_on_feature_box_instruction">Tap on bounding box</string>
 </resources>
