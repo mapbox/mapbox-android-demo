@@ -14,8 +14,10 @@ import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.functions.Function;
+import com.mapbox.mapboxsdk.style.functions.stops.Stop;
+import com.mapbox.mapboxsdk.style.functions.stops.Stops;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
-import com.mapbox.mapboxsdk.style.layers.Function;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.services.api.utils.turf.TurfException;
@@ -27,11 +29,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mapbox.mapboxsdk.style.layers.Function.stop;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 public class IndoorMapActivity extends AppCompatActivity {
@@ -183,11 +183,11 @@ public class IndoorMapActivity extends AppCompatActivity {
       fillColor(Color.parseColor("#eeeeee")),
       // Function.zoom is used here to fade out the indoor layer if zoom level is beyond 16. Only
       // necessary to show the indoor map at high zoom levels.
-      fillOpacity(Function.zoom(0.8f,
-        stop(17, fillOpacity(1f)),
-        stop(16.5f, fillOpacity(0.5f)),
-        stop(16, fillOpacity(0f))
-      ))
+      fillOpacity(Function.zoom(Stops.exponential(
+        Stop.stop(17f, fillOpacity(1f)),
+        Stop.stop(16.5f, fillOpacity(0.5f)),
+        Stop.stop(16f, fillOpacity(0f))
+      )))
 
     );
 
@@ -196,14 +196,13 @@ public class IndoorMapActivity extends AppCompatActivity {
     LineLayer indoorBuildingLineLayer = new LineLayer("indoor-building-line", "indoor-building").withProperties(
       lineColor(Color.parseColor("#50667f")),
       lineWidth(0.5f),
-      lineOpacity(Function.zoom(0.8f,
-        stop(17, lineOpacity(1f)),
-        stop(16.5f, lineOpacity(0.5f)),
-        stop(16, lineOpacity(0f))
-      ))
+      fillOpacity(Function.zoom(Stops.exponential(
+        Stop.stop(17f, fillOpacity(1f)),
+        Stop.stop(16.5f, fillOpacity(0.5f)),
+        Stop.stop(16f, fillOpacity(0f))
+      )))
 
     );
-
     map.addLayer(indoorBuildingLineLayer);
   }
 

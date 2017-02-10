@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -46,6 +47,12 @@ public class FeatureCountActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
+
+
+        // Toast instructing user to tap on the box
+        Toast.makeText(FeatureCountActivity.this,getString(R.string.tap_on_feature_box_instruction),
+          Toast.LENGTH_SHORT).show();
+
 
         selectionBox.setOnClickListener(new View.OnClickListener() {
           @Override

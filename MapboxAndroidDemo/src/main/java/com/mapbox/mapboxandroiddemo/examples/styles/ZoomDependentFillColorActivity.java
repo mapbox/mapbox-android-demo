@@ -11,10 +11,11 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.functions.Function;
+import com.mapbox.mapboxsdk.style.functions.stops.Stop;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 
-import static com.mapbox.mapboxsdk.style.layers.Function.stop;
-import static com.mapbox.mapboxsdk.style.layers.Function.zoom;
+import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
 public class ZoomDependentFillColorActivity extends AppCompatActivity {
@@ -45,12 +46,12 @@ public class ZoomDependentFillColorActivity extends AppCompatActivity {
         }
 
         //Set a zoom function to update the color of the water
-        layer.setProperties(fillColor(zoom(0.8f,
-            stop(1, fillColor(Color.GREEN)),
-            stop(4, fillColor(Color.BLUE)),
-            stop(12, fillColor(Color.RED)),
-            stop(20, fillColor(Color.YELLOW))
-        )));
+        layer.setProperties(fillColor(Function.zoom(exponential(
+                Stop.stop(1f, fillColor(Color.GREEN)),
+                Stop.stop(8.5f, fillColor(Color.BLUE)),
+                Stop.stop(10f, fillColor(Color.RED)),
+                Stop.stop(18f, fillColor(Color.YELLOW))
+        ))));
 
         mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(40.73581, -73.99155), 12), 12000);
 

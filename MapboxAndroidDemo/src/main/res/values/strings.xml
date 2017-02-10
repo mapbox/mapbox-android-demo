@@ -196,4 +196,23 @@
 
     <!-- Firebase Crash -->
     <string name="firebase_api_key">AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8</string>
+
+    <!--Default style names-->
+    <string name="menu_map_style_streets">Streets</string>
+    <string name="menu_map_style_dark">Dark</string>
+    <string name="menu_map_style_light">Light</string>
+    <string name="menu_map_style_outdoors">Outdoors</string>
+    <string name="menu_map_style_satellite">Satellite</string>
+    <string name="menu_map_style_satellite_streets">Satellite streets</string>
+
+    <!--Tap on map instruction-->
+    <string name="tap_on_map_instruction">Tap anywhere on the map</string>
+
+    <!--Tap on feature box instruction-->
+
+    <string name="tap_on_feature_box_instruction">Tap on bounding box</string>
+
+    <!--Fragment below textview in support fragment activity-->
+
+    <string name="fragment_in_card_below">Map fragment container in card below</string>
 </resources>

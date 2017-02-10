@@ -28,7 +28,7 @@ import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
-public class LasAngelesTourismActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class LosAngelesTourismActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
   private MapboxMap mapboxMap;

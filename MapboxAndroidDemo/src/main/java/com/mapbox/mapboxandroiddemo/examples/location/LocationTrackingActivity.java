@@ -11,16 +11,15 @@ import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.constants.MyBearingTracking;
 import com.mapbox.mapboxsdk.constants.MyLocationTracking;
-import com.mapbox.mapboxsdk.location.LocationServices;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
 public class LocationTrackingActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap map;
-  private LocationServices locationServices;
 
   private static final int PERMISSIONS_LOCATION = 0;
 
@@ -35,7 +34,6 @@ public class LocationTrackingActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_location_tracking);
 
-    locationServices = LocationServices.getLocationServices(LocationTrackingActivity.this);
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -47,8 +45,8 @@ public class LocationTrackingActivity extends AppCompatActivity {
 
         // Check if user has granted location permission. If they haven't, we request it
         // otherwise we enable location tracking.
-        if (!locationServices.areLocationPermissionsGranted()) {
-          ActivityCompat.requestPermissions(LocationTrackingActivity.this, new String[]{
+        if (!PermissionsManager.areLocationPermissionsGranted(LocationTrackingActivity.this)) {
+          ActivityCompat.requestPermissions(LocationTrackingActivity.this, new String[] {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
         } else {

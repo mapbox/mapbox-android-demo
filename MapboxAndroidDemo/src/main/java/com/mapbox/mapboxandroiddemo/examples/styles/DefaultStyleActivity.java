@@ -2,9 +2,12 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -12,6 +15,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 public class DefaultStyleActivity extends AppCompatActivity {
 
   private MapView mapView;
+  private MapboxMap map;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,7 @@ public class DefaultStyleActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
-
-        // customize map with markers, polylines, etc
+        map = mapboxMap;
 
       }
     });
@@ -77,4 +80,43 @@ public class DefaultStyleActivity extends AppCompatActivity {
     super.onDestroy();
     mapView.onDestroy();
   }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_map_style, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    // Handle item selection
+    switch (item.getItemId()) {
+      case R.id.menu_streets:
+        map.setStyleUrl(Style.MAPBOX_STREETS);
+        return true;
+      case R.id.menu_dark:
+        map.setStyleUrl(Style.DARK);
+        return true;
+      case R.id.menu_light:
+        map.setStyleUrl(Style.LIGHT);
+        return true;
+      case R.id.menu_outdoors:
+        map.setStyleUrl(Style.OUTDOORS);
+        return true;
+      case R.id.menu_satellite:
+        map.setStyleUrl(Style.SATELLITE);
+        return true;
+      case R.id.menu_satellite_streets:
+        map.setStyleUrl(Style.SATELLITE_STREETS);
+        return true;
+      case android.R.id.home:
+        onBackPressed();
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
+    }
+
+
+  }
+
 }
