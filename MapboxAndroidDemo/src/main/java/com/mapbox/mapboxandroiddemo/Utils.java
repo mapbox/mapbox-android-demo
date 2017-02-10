@@ -13,21 +13,18 @@ import com.mapbox.mapboxsdk.annotations.IconFactory;
 
 public class Utils {
 
-    /**
-     * Demonstrates converting any Drawable to an Icon, for use as a marker icon.
-     */
-    public static Icon drawableToIcon(@NonNull Context context, @DrawableRes int id) {
-        Drawable vectorDrawable = ResourcesCompat.getDrawable(context.getResources(), id, context.getTheme());
-        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
-                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        vectorDrawable.draw(canvas);
-        return IconFactory.getInstance(context).fromBitmap(bitmap);
-    }
-
-
-
+  /**
+   * Demonstrates converting any Drawable to an Icon, for use as a marker icon.
+   */
+  public static Icon drawableToIcon(@NonNull Context context, @DrawableRes int id) {
+    Drawable vectorDrawable = ResourcesCompat.getDrawable(context.getResources(), id, context.getTheme());
+    Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
+      vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+    Canvas canvas = new Canvas(bitmap);
+    vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+    vectorDrawable.draw(canvas);
+    return IconFactory.getInstance(context).fromBitmap(bitmap);
+  }
 
 
 }

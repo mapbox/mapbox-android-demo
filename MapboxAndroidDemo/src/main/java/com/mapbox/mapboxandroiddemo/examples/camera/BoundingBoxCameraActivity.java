@@ -16,84 +16,85 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 public class BoundingBoxCameraActivity extends AppCompatActivity {
 
-    private MapView mapView;
+  private MapView mapView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-        // Mapbox access token is configured here. This needs to be called either in your application
-        // object or in the same activity which contains the mapview.
-        Mapbox.getInstance(this, getString(R.string.access_token));
+    // Mapbox access token is configured here. This needs to be called either in your application
+    // object or in the same activity which contains the mapview.
+    Mapbox.getInstance(this, getString(R.string.access_token));
 
-        // This contains the MapView in XML and needs to be called after the account manager
-        setContentView(R.layout.activity_camera_bounding_box);
+    // This contains the MapView in XML and needs to be called after the account manager
+    setContentView(R.layout.activity_camera_bounding_box);
 
-        mapView = (MapView) findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(final MapboxMap mapboxMap) {
+    mapView = (MapView) findViewById(R.id.mapView);
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(final MapboxMap mapboxMap) {
 
-                // Toast instructing user to tap on the map to start animation and set bounds
-                Toast.makeText(BoundingBoxCameraActivity.this, getString(R.string.tap_on_map_instruction), Toast.LENGTH_SHORT).show();
+        // Toast instructing user to tap on the map to start animation and set bounds
+        Toast.makeText(BoundingBoxCameraActivity.this,getString(R.string.tap_on_map_instruction),
+          Toast.LENGTH_SHORT).show();
 
-                // When user clicks the map, fit the camera to the bounding box
-                mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(@NonNull LatLng point) {
-                        LatLngBounds latLngBounds = new LatLngBounds.Builder()
-                                .include(new LatLng(36.532128, -93.489121)) // Northeast
-                                .include(new LatLng(25.837058, -106.646234)) // Southwest
-                                .build();
+        // When user clicks the map, fit the camera to the bounding box
+        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
+          @Override
+          public void onMapClick(@NonNull LatLng point) {
+            LatLngBounds latLngBounds = new LatLngBounds.Builder()
+              .include(new LatLng(36.532128, -93.489121)) // Northeast
+              .include(new LatLng(25.837058, -106.646234)) // Southwest
+              .build();
 
-                        mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50), 5000);
+            mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50), 5000);
 
-                    }
-                });
-            }
+          }
         });
-    }
+      }
+    });
+  }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
+  @Override
+  public void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
+  }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
+  @Override
+  public void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
+  @Override
+  public void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
+  }
 
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
 }

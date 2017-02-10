@@ -49,240 +49,240 @@ import retrofit2.Response;
 
 public class LocationPickerActivity extends AppCompatActivity {
 
-    private MapView mapView;
-    private MapboxMap map;
-    private LocationEngine locationEngine;
-    private Marker droppedMarker;
-    private ImageView hoveringMarker;
-    private Button selectLocationButton;
-    private LocationEngineListener locationEngineListener;
+  private MapView mapView;
+  private MapboxMap map;
+  private LocationEngine locationEngine;
+  private Marker droppedMarker;
+  private ImageView hoveringMarker;
+  private Button selectLocationButton;
+  private LocationEngineListener locationEngineListener;
 
-    private static final int PERMISSIONS_LOCATION = 0;
-    private static final String TAG = "LocationPickerActivity";
+  private static final int PERMISSIONS_LOCATION = 0;
+  private static final String TAG = "LocationPickerActivity";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-        // Mapbox access token is configured here. This needs to be called either in your application
-        // object or in the same activity which contains the mapview.
-        Mapbox.getInstance(this, getString(R.string.access_token));
+    // Mapbox access token is configured here. This needs to be called either in your application
+    // object or in the same activity which contains the mapview.
+    Mapbox.getInstance(this, getString(R.string.access_token));
 
-        // This contains the MapView in XML and needs to be called after the account manager
-        setContentView(R.layout.activity_lab_location_picker);
+    // This contains the MapView in XML and needs to be called after the account manager
+    setContentView(R.layout.activity_lab_location_picker);
 
-        // Get the location engine object for later use.
-        locationEngine = LocationSource.getLocationEngine(this);
+    // Get the location engine object for later use.
+    locationEngine = LocationSource.getLocationEngine(this);
 
-        // Initialize the map view
-        mapView = (MapView) findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(MapboxMap mapboxMap) {
-                map = mapboxMap;
+    // Initialize the map view
+    mapView = (MapView) findViewById(R.id.mapView);
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(MapboxMap mapboxMap) {
+        map = mapboxMap;
 
-                // Once map is ready, we want to position the camera above the user location. We
-                // first check that the user has granted the location permission, then we call
-                // setInitialCamera.
-                if (!PermissionsManager.areLocationPermissionsGranted(LocationPickerActivity.this)) {
-                    ActivityCompat.requestPermissions(LocationPickerActivity.this, new String[]{
-                            Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
-                } else {
-                    setInitialCamera();
-                }
+        // Once map is ready, we want to position the camera above the user location. We
+        // first check that the user has granted the location permission, then we call
+        // setInitialCamera.
+        if (!PermissionsManager.areLocationPermissionsGranted(LocationPickerActivity.this)) {
+          ActivityCompat.requestPermissions(LocationPickerActivity.this, new String[] {
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
+        } else {
+          setInitialCamera();
+        }
+      }
+    });
+
+    // When user is still picking a location, we hover a marker above the map in the center.
+    // This is done by using an image view with the default marker found in the SDK. You can
+    // swap out for your own marker image, just make sure it matches up with the dropped marker.
+    hoveringMarker = new ImageView(this);
+    hoveringMarker.setImageResource(R.drawable.red_marker);
+    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+      ViewGroup.LayoutParams.WRAP_CONTENT,
+      ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+    hoveringMarker.setLayoutParams(params);
+    mapView.addView(hoveringMarker);
+
+    // Button for user to drop marker or to pick marker back up.
+    selectLocationButton = (Button) findViewById(R.id.select_location_button);
+    selectLocationButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if (map != null) {
+          if (droppedMarker == null) {
+            // We first find where the hovering marker position is relative to the map.
+            // Then we set the visibility to gone.
+            float coordinateX = hoveringMarker.getLeft() + (hoveringMarker.getWidth() / 2);
+            float coordinateY = hoveringMarker.getBottom();
+            float[] coords = new float[] {coordinateX, coordinateY};
+            final LatLng latLng = map.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
+            hoveringMarker.setVisibility(View.GONE);
+
+            // Transform the appearance of the button to become the cancel button
+            selectLocationButton.setBackgroundColor(
+              ContextCompat.getColor(LocationPickerActivity.this, R.color.colorAccent));
+            selectLocationButton.setText("Cancel");
+
+            // Create the marker icon the dropped marker will be using.
+            Icon icon = Utils.drawableToIcon(LocationPickerActivity.this, R.drawable.red_marker);
+
+
+            // Placing the marker on the map as soon as possible causes the illusion
+            // that the hovering marker and dropped marker are the same.
+            droppedMarker = map.addMarker(new MarkerViewOptions().position(latLng).icon(icon));
+
+            // Finally we get the geocoding information
+            reverseGeocode(latLng);
+          } else {
+            // When the marker is dropped, the user has clicked the button to cancel.
+            // Therefore, we pick the marker back up.
+            map.removeMarker(droppedMarker);
+
+            // Switch the button apperance back to select a location.
+            selectLocationButton.setBackgroundColor(
+              ContextCompat.getColor(LocationPickerActivity.this, R.color.colorPrimary));
+            selectLocationButton.setText("Select a location");
+
+            // Lastly, set the hovering marker back to visible.
+            hoveringMarker.setVisibility(View.VISIBLE);
+            droppedMarker = null;
+          }
+        }
+      }
+    });
+  } // End onCreate
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
+
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
+
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
+
+  private void setInitialCamera() {
+    // Method is used to set the initial map camera position. Should only be called once when
+    // the map is ready. We first try using the users last location so we can quickly set the
+    // camera as fast as possible.
+    if (locationEngine.getLastLocation() != null) {
+      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locationEngine.getLastLocation()), 16));
+    }
+
+    // This location listener is used in a very specific use case. If the users last location is
+    // unknown we wait till the GPS locates them and position the camera above.
+    locationEngineListener = new LocationEngineListener() {
+      @Override
+      public void onConnected() {
+        locationEngine.requestLocationUpdates();
+      }
+
+      @Override
+      public void onLocationChanged(Location location) {
+        if (location != null) {
+          // Move the map camera to where the user location is
+          map.setCameraPosition(new CameraPosition.Builder()
+            .target(new LatLng(location))
+            .zoom(16)
+            .build());
+          locationEngine.removeLocationEngineListener(this);
+        }
+      }
+    };
+    locationEngine.addLocationEngineListener(locationEngineListener);
+    // Enable the location layer on the map and track the user location until they perform a
+    // map gesture.
+    map.setMyLocationEnabled(true);
+    map.getTrackingSettings().setMyLocationTrackingMode(MyLocationTracking.TRACKING_FOLLOW);
+  } // End setInitialCamera
+
+  private void reverseGeocode(final LatLng point) {
+    // This method is used to reverse geocode where the user has dropped the marker.
+    try {
+      MapboxGeocoding client = new MapboxGeocoding.Builder()
+        .setAccessToken(getString(R.string.access_token))
+        .setCoordinates(Position.fromCoordinates(point.getLongitude(), point.getLatitude()))
+        .setGeocodingType(GeocodingCriteria.TYPE_ADDRESS)
+        .build();
+
+      client.enqueueCall(new Callback<GeocodingResponse>() {
+        @Override
+        public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
+
+          List<CarmenFeature> results = response.body().getFeatures();
+          if (results.size() > 0) {
+            CarmenFeature feature = results.get(0);
+            // If the geocoder returns a result, we take the first in the list and update
+            // the dropped marker snippet with the information. Lastly we open the info
+            // window.
+            if (droppedMarker != null) {
+              droppedMarker.setSnippet(feature.getPlaceName());
+              map.selectMarker(droppedMarker);
             }
-        });
 
-        // When user is still picking a location, we hover a marker above the map in the center.
-        // This is done by using an image view with the default marker found in the SDK. You can
-        // swap out for your own marker image, just make sure it matches up with the dropped marker.
-        hoveringMarker = new ImageView(this);
-        hoveringMarker.setImageResource(R.drawable.red_marker);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-        hoveringMarker.setLayoutParams(params);
-        mapView.addView(hoveringMarker);
-
-        // Button for user to drop marker or to pick marker back up.
-        selectLocationButton = (Button) findViewById(R.id.select_location_button);
-        selectLocationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (map != null) {
-                    if (droppedMarker == null) {
-                        // We first find where the hovering marker position is relative to the map.
-                        // Then we set the visibility to gone.
-                        float coordinateX = hoveringMarker.getLeft() + (hoveringMarker.getWidth() / 2);
-                        float coordinateY = hoveringMarker.getBottom();
-                        float[] coords = new float[]{coordinateX, coordinateY};
-                        final LatLng latLng = map.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
-                        hoveringMarker.setVisibility(View.GONE);
-
-                        // Transform the appearance of the button to become the cancel button
-                        selectLocationButton.setBackgroundColor(
-                                ContextCompat.getColor(LocationPickerActivity.this, R.color.colorAccent));
-                        selectLocationButton.setText("Cancel");
-
-                        // Create the marker icon the dropped marker will be using.
-                        Icon icon = Utils.drawableToIcon(LocationPickerActivity.this, R.drawable.red_marker);
-
-
-                        // Placing the marker on the map as soon as possible causes the illusion
-                        // that the hovering marker and dropped marker are the same.
-                        droppedMarker = map.addMarker(new MarkerViewOptions().position(latLng).icon(icon));
-
-                        // Finally we get the geocoding information
-                        reverseGeocode(latLng);
-                    } else {
-                        // When the marker is dropped, the user has clicked the button to cancel.
-                        // Therefore, we pick the marker back up.
-                        map.removeMarker(droppedMarker);
-
-                        // Switch the button apperance back to select a location.
-                        selectLocationButton.setBackgroundColor(
-                                ContextCompat.getColor(LocationPickerActivity.this, R.color.colorPrimary));
-                        selectLocationButton.setText("Select a location");
-
-                        // Lastly, set the hovering marker back to visible.
-                        hoveringMarker.setVisibility(View.VISIBLE);
-                        droppedMarker = null;
-                    }
-                }
+          } else {
+            if (droppedMarker != null) {
+              droppedMarker.setSnippet("No results");
+              map.selectMarker(droppedMarker);
             }
-        });
-    } // End onCreate
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mapView.onLowMemory();
-    }
-
-    private void setInitialCamera() {
-        // Method is used to set the initial map camera position. Should only be called once when
-        // the map is ready. We first try using the users last location so we can quickly set the
-        // camera as fast as possible.
-        if (locationEngine.getLastLocation() != null) {
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locationEngine.getLastLocation()), 16));
+          }
         }
 
-        // This location listener is used in a very specific use case. If the users last location is
-        // unknown we wait till the GPS locates them and position the camera above.
-        locationEngineListener = new LocationEngineListener() {
-            @Override
-            public void onConnected() {
-                locationEngine.requestLocationUpdates();
-            }
-
-            @Override
-            public void onLocationChanged(Location location) {
-                if (location != null) {
-                    // Move the map camera to where the user location is
-                    map.setCameraPosition(new CameraPosition.Builder()
-                            .target(new LatLng(location))
-                            .zoom(16)
-                            .build());
-                    locationEngine.removeLocationEngineListener(this);
-                }
-            }
-        };
-        locationEngine.addLocationEngineListener(locationEngineListener);
-        // Enable the location layer on the map and track the user location until they perform a
-        // map gesture.
-        map.setMyLocationEnabled(true);
-        map.getTrackingSettings().setMyLocationTrackingMode(MyLocationTracking.TRACKING_FOLLOW);
-    } // End setInitialCamera
-
-    private void reverseGeocode(final LatLng point) {
-        // This method is used to reverse geocode where the user has dropped the marker.
-        try {
-            MapboxGeocoding client = new MapboxGeocoding.Builder()
-                    .setAccessToken(getString(R.string.access_token))
-                    .setCoordinates(Position.fromCoordinates(point.getLongitude(), point.getLatitude()))
-                    .setGeocodingType(GeocodingCriteria.TYPE_ADDRESS)
-                    .build();
-
-            client.enqueueCall(new Callback<GeocodingResponse>() {
-                @Override
-                public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
-
-                    List<CarmenFeature> results = response.body().getFeatures();
-                    if (results.size() > 0) {
-                        CarmenFeature feature = results.get(0);
-                        // If the geocoder returns a result, we take the first in the list and update
-                        // the dropped marker snippet with the information. Lastly we open the info
-                        // window.
-                        if (droppedMarker != null) {
-                            droppedMarker.setSnippet(feature.getPlaceName());
-                            map.selectMarker(droppedMarker);
-                        }
-
-                    } else {
-                        if (droppedMarker != null) {
-                            droppedMarker.setSnippet("No results");
-                            map.selectMarker(droppedMarker);
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<GeocodingResponse> call, Throwable throwable) {
-                    Log.e(TAG, "Geocoding Failure: " + throwable.getMessage());
-                }
-            });
-        } catch (ServicesException servicesException) {
-            Log.e(TAG, "Error geocoding: " + servicesException.toString());
-            servicesException.printStackTrace();
+        @Override
+        public void onFailure(Call<GeocodingResponse> call, Throwable throwable) {
+          Log.e(TAG, "Geocoding Failure: " + throwable.getMessage());
         }
-    } // reverseGeocode
-
-    @Override
-    public void onRequestPermissionsResult(
-            int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == PERMISSIONS_LOCATION) {
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                setInitialCamera();
-            }
-        }
+      });
+    } catch (ServicesException servicesException) {
+      Log.e(TAG, "Error geocoding: " + servicesException.toString());
+      servicesException.printStackTrace();
     }
+  } // reverseGeocode
+
+  @Override
+  public void onRequestPermissionsResult(
+    int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    if (requestCode == PERMISSIONS_LOCATION) {
+      if (grantResults.length > 0
+        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        setInitialCamera();
+      }
+    }
+  }
 }
