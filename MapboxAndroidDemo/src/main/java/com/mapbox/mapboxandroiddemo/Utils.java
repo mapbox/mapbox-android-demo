@@ -11,7 +11,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 
-public class Utilities {
+public class Utils {
 
     /**
      * Demonstrates converting any Drawable to an Icon, for use as a marker icon.

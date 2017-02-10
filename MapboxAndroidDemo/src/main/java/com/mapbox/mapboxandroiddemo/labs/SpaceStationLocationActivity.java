@@ -3,21 +3,17 @@ package com.mapbox.mapboxandroiddemo.labs;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.animation.LinearInterpolator;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxandroiddemo.Utilities;
-import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedCircleMarkerActivity;
+import com.mapbox.mapboxandroiddemo.Utils;
 import com.mapbox.mapboxandroiddemo.model.IssModel;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.MarkerView;
 import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -181,7 +177,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     if (marker == null) {
 
       // Create the icon for the marker
-      Icon icon = Utilities.drawableToIcon(SpaceStationLocationActivity.this, R.drawable.iss);
+      Icon icon = Utils.drawableToIcon(SpaceStationLocationActivity.this, R.drawable.iss);
 
 
       // Add the marker to the map using the API's latitude and longitude.

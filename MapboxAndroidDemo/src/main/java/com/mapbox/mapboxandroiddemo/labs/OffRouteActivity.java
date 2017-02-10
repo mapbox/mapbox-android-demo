@@ -4,11 +4,9 @@ import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -17,10 +15,9 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxandroiddemo.Utilities;
+import com.mapbox.mapboxandroiddemo.Utils;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerView;
 import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
@@ -204,7 +201,7 @@ public class OffRouteActivity extends AppCompatActivity {
 
   private void addCar(LatLng position) {
     // Using a custom car icon for marker.
-    Icon icon = Utilities.drawableToIcon(OffRouteActivity.this, R.drawable.ic_car_top);
+    Icon icon = Utils.drawableToIcon(OffRouteActivity.this, R.drawable.ic_car_top);
 
 
     // Add the car marker to the map.

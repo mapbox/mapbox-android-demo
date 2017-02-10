@@ -18,7 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxandroiddemo.Utilities;
+import com.mapbox.mapboxandroiddemo.Utils;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -127,7 +127,7 @@ public class LocationPickerActivity extends AppCompatActivity {
                         selectLocationButton.setText("Cancel");
 
                         // Create the marker icon the dropped marker will be using.
-                        Icon icon = Utilities.drawableToIcon(LocationPickerActivity.this, R.drawable.red_marker);
+                        Icon icon = Utils.drawableToIcon(LocationPickerActivity.this, R.drawable.red_marker);
 
 
                         // Placing the marker on the map as soon as possible causes the illusion
