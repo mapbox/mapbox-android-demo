@@ -173,6 +173,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     switch (id) {
       case R.id.nav_styles:
         exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_default_title,
+          R.string.activity_style_default_description,
+          new Intent(MainActivity.this, DefaultStyleActivity.class),
+          R.string.activity_style_default_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_symbol_layer_title,
           R.string.activity_style_symbol_layer_description,
           new Intent(MainActivity.this, SymbolLayerActivity.class),
@@ -266,12 +272,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, CustomRasterStyleActivity.class),
           R.string.activity_style_raster_url
         ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_default_title,
-          R.string.activity_style_default_description,
-          new Intent(MainActivity.this, DefaultStyleActivity.class),
-          R.string.activity_style_default_url
-        ));
+
         currentCategory = R.id.nav_styles;
         break;
       case R.id.nav_annotations:
