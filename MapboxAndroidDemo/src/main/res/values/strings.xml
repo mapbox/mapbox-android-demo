@@ -211,4 +211,8 @@
     <!--Tap on feature box instruction-->
 
     <string name="tap_on_feature_box_instruction">Tap on bounding box</string>
+
+    <!--Fragment below textview in support fragment activity-->
+
+    <string name="fragment_in_card_below">Map fragment in card below</string>
 </resources>
