@@ -42,7 +42,7 @@ public class StaticImageActivity extends AppCompatActivity {
       staticImage = new MapboxStaticImage.Builder()
         .setAccessToken(Mapbox.getAccessToken())
         .setUsername(Constants.MAPBOX_USER)
-        .setStyleId("satellite-v9")
+        .setStyleId("outdoors-v9")
         .setLon(12.3378) // Image center longitude
         .setLat(45.4338) // Image center Latitude
         .setZoom(13)
