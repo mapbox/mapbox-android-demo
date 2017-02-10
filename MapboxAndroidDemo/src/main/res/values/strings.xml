@@ -197,6 +197,15 @@
     <!-- Firebase Crash -->
     <string name="firebase_api_key">AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8</string>
 
-    <!--Textview for other fragment in support mag fragment-->
+    <!--Default style names-->
+    <string name="menu_map_style_streets">Streets</string>
+    <string name="menu_map_style_dark">Dark</string>
+    <string name="menu_map_style_light">Light</string>
+    <string name="menu_map_style_outdoors">Outdoors</string>
+    <string name="menu_map_style_satellite">Satellite</string>
+    <string name="menu_map_style_satellite_streets">Satellite streets</string>
+
+    <!--Tap on map instruction-->
+    <string name="tap_on_map_instruction">Tap anywhere on the map</string>
 
 </resources>
