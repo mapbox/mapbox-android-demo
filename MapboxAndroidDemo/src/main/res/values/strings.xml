@@ -214,5 +214,5 @@
 
     <!--Fragment below textview in support fragment activity-->
 
-    <string name="fragment_in_card_below">Map fragment in card below</string>
+    <string name="fragment_in_card_below">Map fragment container in card below</string>
 </resources>
