@@ -20,7 +20,6 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
-import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedCircleMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.BasicMarkerViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.CustomInfoWindowActivity;
@@ -57,15 +56,13 @@ import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.SatelliteStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
-import com.mapbox.mapboxandroiddemo.labs.LandUseStylingActivity;
-import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
+import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.OffRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
@@ -262,12 +259,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_mapbox_studio_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_satellite_title,
-          R.string.activity_style_satellite_description,
-          new Intent(MainActivity.this, SatelliteStyleActivity.class),
-          R.string.activity_style_satellite_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_raster_title,
           R.string.activity_style_raster_description,
           new Intent(MainActivity.this, CustomRasterStyleActivity.class),
@@ -275,13 +266,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ));
         break;
       case R.id.nav_annotations:
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_annotation_animated_circle_marker_title,
-          R.string.activity_annotation_animated_circle_marker_description,
-          new Intent(MainActivity.this, AnimatedCircleMarkerActivity.class),
-          R.string.activity_annotation_animated_circle_marker_url,
-          true
-        ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_annotation_marker_title,
           R.string.activity_annotation_custom_marker_description,
@@ -486,13 +470,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_space_station_location_description,
           new Intent(MainActivity.this, SpaceStationLocationActivity.class),
           R.string.activity_lab_space_station_location_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_land_use_stying_title,
-          R.string.activity_lab_land_use_stying_description,
-          new Intent(MainActivity.this, LandUseStylingActivity.class),
-          R.string.activity_lab_land_use_stying_url,
-          true
         ));
         currentCategory = R.id.nav_lab;
         break;

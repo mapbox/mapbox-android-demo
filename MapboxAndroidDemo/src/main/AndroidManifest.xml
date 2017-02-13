@@ -53,14 +53,6 @@
         </activity>
 
         <activity
-            android:name=".examples.styles.SatelliteStyleActivity"
-            android:label="@string/activity_style_satellite_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
-        </activity>
-
-        <activity
             android:name=".examples.styles.CustomRasterStyleActivity"
             android:label="@string/activity_style_raster_title">
             <meta-data
@@ -312,14 +304,6 @@
         </activity>
 
         <activity
-            android:name=".examples.annotations.AnimatedCircleMarkerActivity"
-            android:label="@string/activity_annotation_animated_circle_marker_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
-        </activity>
-
-        <activity
             android:name=".examples.location.AnimatedLocationIconActivity"
             android:label="@string/activity_location_animated_icon_title">
             <meta-data
@@ -362,14 +346,6 @@
         <activity
             android:name=".examples.query.FeatureCountActivity"
             android:label="@string/activity_query_feature_count_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".labs.LandUseStylingActivity"
-            android:label="@string/activity_lab_land_use_stying_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
