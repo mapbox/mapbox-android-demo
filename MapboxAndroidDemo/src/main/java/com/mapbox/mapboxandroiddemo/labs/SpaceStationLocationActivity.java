@@ -3,17 +3,13 @@ package com.mapbox.mapboxandroiddemo.labs;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.animation.LinearInterpolator;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxandroiddemo.Utilities;
-import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedCircleMarkerActivity;
 import com.mapbox.mapboxandroiddemo.model.IssModel;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
@@ -135,9 +131,9 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     // Build our client, The API we are using is very basic only returning a handful of
     // information, mainly, the current latitude and longitude of the International Space Station.
     Retrofit client = new Retrofit.Builder()
-        .baseUrl("http://api.open-notify.org/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build();
+      .baseUrl("http://api.open-notify.org/")
+      .addConverterFactory(GsonConverterFactory.create())
+      .build();
 
     final IssApiService service = client.create(IssApiService.class);
 
@@ -181,14 +177,13 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     if (marker == null) {
 
       // Create the icon for the marker
-      Icon icon = Utilities.drawableToIcon(SpaceStationLocationActivity.this, R.drawable.iss);
-
+      Icon icon = IconFactory.getInstance(this).fromResource(R.drawable.iss);
 
       // Add the marker to the map using the API's latitude and longitude.
       marker = map.addMarker(new MarkerViewOptions()
-          .position(position)
-          .anchor(0.5f, 0.5f)
-          .icon(icon));
+        .position(position)
+        .anchor(0.5f, 0.5f)
+        .icon(icon));
 
       // Lastly, animate the camera to the new position so the user
       // wont have to search for the marker and then return.
@@ -201,7 +196,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     marker.setRotation((float) computeHeading(marker.getPosition(), position));
 
     ValueAnimator markerAnimator = ObjectAnimator.ofObject(marker, "position",
-        new LatLngEvaluator(), marker.getPosition(), position);
+      new LatLngEvaluator(), marker.getPosition(), position);
     markerAnimator.setDuration(apiCallTime);
     markerAnimator.setInterpolator(new LinearInterpolator());
     markerAnimator.start();
@@ -215,9 +210,9 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     @Override
     public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
       latLng.setLatitude(startValue.getLatitude()
-          + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
+        + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
       latLng.setLongitude(startValue.getLongitude()
-          + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
+        + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
       return latLng;
     }
   }
@@ -225,8 +220,8 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
   public static double computeHeading(LatLng from, LatLng to) {
     // Compute bearing/heading using Turf and return the value.
     return TurfMeasurement.bearing(
-        Position.fromCoordinates(from.getLongitude(), from.getLatitude()),
-        Position.fromCoordinates(to.getLongitude(), to.getLatitude())
+      Position.fromCoordinates(from.getLongitude(), from.getLatitude()),
+      Position.fromCoordinates(to.getLongitude(), to.getLatitude())
     );
   }
 
