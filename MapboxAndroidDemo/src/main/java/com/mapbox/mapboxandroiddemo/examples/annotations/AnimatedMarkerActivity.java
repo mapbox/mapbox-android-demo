@@ -6,6 +6,7 @@ import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -39,6 +40,12 @@ public class AnimatedMarkerActivity extends AppCompatActivity {
 
         final Marker marker = mapboxMap.addMarker(new MarkerViewOptions()
           .position(new LatLng(64.900932, -18.167040)));
+
+        Toast.makeText(
+          AnimatedMarkerActivity.this,
+          getString(R.string.tap_on_map_instruction),
+          Toast.LENGTH_LONG
+        ).show();
 
         mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override

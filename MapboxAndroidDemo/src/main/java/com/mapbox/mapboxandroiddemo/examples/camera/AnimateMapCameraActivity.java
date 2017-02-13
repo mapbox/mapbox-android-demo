@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.camera;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -33,6 +34,14 @@ public class AnimateMapCameraActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
+
+        // Toast instructing user to tap on the map
+        Toast.makeText(
+          AnimateMapCameraActivity.this,
+          getString(R.string.tap_on_map_instruction),
+          Toast.LENGTH_LONG
+        ).show();
+
 
         // When user clicks the map, animate to new camera location
         mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
