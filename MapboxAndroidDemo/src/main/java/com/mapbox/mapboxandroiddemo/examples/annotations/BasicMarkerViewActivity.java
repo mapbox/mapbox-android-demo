@@ -1,8 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.annotations;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -36,9 +34,7 @@ public class BasicMarkerViewActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
-        IconFactory iconFactory = IconFactory.getInstance(BasicMarkerViewActivity.this);
-        Drawable iconDrawable = ContextCompat.getDrawable(BasicMarkerViewActivity.this, R.drawable.purple_marker);
-        Icon icon = iconFactory.fromDrawable(iconDrawable);
+        Icon icon = IconFactory.getInstance(BasicMarkerViewActivity.this).fromResource(R.drawable.purple_marker);
 
         // The easiest way to add a marker view
         mapboxMap.addMarker(new MarkerViewOptions()

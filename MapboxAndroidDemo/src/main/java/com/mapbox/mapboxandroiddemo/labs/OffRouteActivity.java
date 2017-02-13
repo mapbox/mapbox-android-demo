@@ -4,11 +4,9 @@ import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -29,7 +27,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.Constants;
 import com.mapbox.services.api.ServicesException;
 import com.mapbox.services.api.directions.v5.DirectionsCriteria;
 import com.mapbox.services.api.directions.v5.MapboxDirections;
@@ -47,6 +44,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.mapbox.services.Constants.PRECISION_6;
 
 public class OffRouteActivity extends AppCompatActivity {
 
@@ -113,8 +112,8 @@ public class OffRouteActivity extends AppCompatActivity {
 
             try {
               getRoute(
-                  Position.fromCoordinates(car.getPosition().getLongitude(), car.getPosition().getLatitude()),
-                  Position.fromCoordinates(point.getLongitude(), point.getLatitude())
+                Position.fromCoordinates(car.getPosition().getLongitude(), car.getPosition().getLatitude()),
+                Position.fromCoordinates(point.getLongitude(), point.getLatitude())
               );
             } catch (ServicesException servicesException) {
               servicesException.printStackTrace();
@@ -203,16 +202,14 @@ public class OffRouteActivity extends AppCompatActivity {
 
   private void addCar(LatLng position) {
     // Using a custom car icon for marker.
-    IconFactory iconFactory = IconFactory.getInstance(OffRouteActivity.this);
-    Drawable iconDrawable = ContextCompat.getDrawable(OffRouteActivity.this, R.drawable.ic_car_top);
-    Icon icon = iconFactory.fromDrawable(iconDrawable);
+    Icon icon = IconFactory.getInstance(this).fromResource(R.drawable.ic_car_top);
 
     // Add the car marker to the map.
     car = map.addMarker(new MarkerViewOptions()
-        .position(position)
-        .anchor(0.5f, 0.5f)
-        .flat(true)
-        .icon(icon)
+      .position(position)
+      .anchor(0.5f, 0.5f)
+      .flat(true)
+      .icon(icon)
     );
   }
 
@@ -222,12 +219,12 @@ public class OffRouteActivity extends AppCompatActivity {
     positions.add(destination);
 
     MapboxDirections client = new MapboxDirections.Builder()
-        .setAccessToken(Mapbox.getAccessToken())
-        .setCoordinates(positions)
-        .setProfile(DirectionsCriteria.PROFILE_DRIVING)
-        .setSteps(true)
-        .setOverview(DirectionsCriteria.OVERVIEW_FULL)
-        .build();
+      .setAccessToken(Mapbox.getAccessToken())
+      .setCoordinates(positions)
+      .setProfile(DirectionsCriteria.PROFILE_DRIVING)
+      .setSteps(true)
+      .setOverview(DirectionsCriteria.OVERVIEW_FULL)
+      .build();
 
     client.enqueueCall(new Callback<DirectionsResponse>() {
       @Override
@@ -258,13 +255,13 @@ public class OffRouteActivity extends AppCompatActivity {
   private void drawRoute(DirectionsRoute route) {
 
     // Convert the route to latlng values and add to list.
-    LineString lineString = LineString.fromPolyline(route.getGeometry(), Constants.OSRM_PRECISION_V5);
+    LineString lineString = LineString.fromPolyline(route.getGeometry(), PRECISION_6);
     List<Position> coordinates = lineString.getCoordinates();
     List<LatLng> newRoutePoints = new ArrayList<>();
     for (int j = 0; j < coordinates.size(); j++) {
       newRoutePoints.add(new LatLng(
-          coordinates.get(j).getLatitude(),
-          coordinates.get(j).getLongitude()));
+        coordinates.get(j).getLatitude(),
+        coordinates.get(j).getLongitude()));
     }
 
     // Remove the route line if it exist on map.
@@ -274,9 +271,9 @@ public class OffRouteActivity extends AppCompatActivity {
 
     // Draw Points on map
     routePolyline = map.addPolyline(new PolylineOptions()
-        .addAll(newRoutePoints)
-        .color(Color.parseColor("#56b881"))
-        .width(5));
+      .addAll(newRoutePoints)
+      .color(Color.parseColor("#56b881"))
+      .width(5));
 
     // If car's already at the routes end, we need to start our runnable back up.
     if (routeFinished) {
@@ -295,8 +292,8 @@ public class OffRouteActivity extends AppCompatActivity {
   private void checkIfOffRoute() throws ServicesException, TurfException {
 
     Position carCurrentPosition = Position.fromCoordinates(
-        car.getPosition().getLongitude(),
-        car.getPosition().getLatitude()
+      car.getPosition().getLongitude(),
+      car.getPosition().getLatitude()
     );
 
     // TODO currently making the assumption that only 1 leg in route exist.
@@ -338,7 +335,7 @@ public class OffRouteActivity extends AppCompatActivity {
           // animate the marker from it's current position to the next point in the
           // points list.
           ValueAnimator markerAnimator = ObjectAnimator.ofObject(car, "position",
-              new LatLngEvaluator(), car.getPosition(), routePoints.get(count));
+            new LatLngEvaluator(), car.getPosition(), routePoints.get(count));
           markerAnimator.setDuration(distance);
           markerAnimator.setInterpolator(new LinearInterpolator());
           markerAnimator.start();
@@ -388,8 +385,8 @@ public class OffRouteActivity extends AppCompatActivity {
   public static double computeHeading(LatLng from, LatLng to) {
     // Compute bearing/heading using Turf and return the value.
     return TurfMeasurement.bearing(
-        Position.fromCoordinates(from.getLongitude(), from.getLatitude()),
-        Position.fromCoordinates(to.getLongitude(), to.getLatitude())
+      Position.fromCoordinates(from.getLongitude(), from.getLatitude()),
+      Position.fromCoordinates(to.getLongitude(), to.getLatitude())
     );
   }
 
@@ -400,9 +397,9 @@ public class OffRouteActivity extends AppCompatActivity {
     @Override
     public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
       latLng.setLatitude(startValue.getLatitude()
-          + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
+        + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
       latLng.setLongitude(startValue.getLongitude()
-          + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
+        + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
       return latLng;
     }
   }

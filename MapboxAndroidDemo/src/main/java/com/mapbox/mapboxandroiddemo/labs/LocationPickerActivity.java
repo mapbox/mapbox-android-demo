@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.labs;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.PointF;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,11 +27,13 @@ import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.MyLocationTracking;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.location.LocationListener;
-import com.mapbox.mapboxsdk.location.LocationServices;
+import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.services.android.telemetry.location.LocationEngine;
+import com.mapbox.services.android.telemetry.location.LocationEngineListener;
+import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 import com.mapbox.services.api.ServicesException;
 import com.mapbox.services.api.geocoding.v5.GeocodingCriteria;
 import com.mapbox.services.api.geocoding.v5.MapboxGeocoding;
@@ -50,11 +51,11 @@ public class LocationPickerActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap map;
-  private LocationServices locationServices;
+  private LocationEngine locationEngine;
   private Marker droppedMarker;
   private ImageView hoveringMarker;
   private Button selectLocationButton;
-  private LocationListener locationListener;
+  private LocationEngineListener locationEngineListener;
 
   private static final int PERMISSIONS_LOCATION = 0;
   private static final String TAG = "LocationPickerActivity";
@@ -70,8 +71,8 @@ public class LocationPickerActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_lab_location_picker);
 
-    // Get the location services object for later use.
-    locationServices = LocationServices.getLocationServices(LocationPickerActivity.this);
+    // Get the location engine object for later use.
+    locationEngine = LocationSource.getLocationEngine(this);
 
     // Initialize the map view
     mapView = (MapView) findViewById(R.id.mapView);
@@ -84,7 +85,7 @@ public class LocationPickerActivity extends AppCompatActivity {
         // Once map is ready, we want to position the camera above the user location. We
         // first check that the user has granted the location permission, then we call
         // setInitialCamera.
-        if (!locationServices.areLocationPermissionsGranted()) {
+        if (!PermissionsManager.areLocationPermissionsGranted(LocationPickerActivity.this)) {
           ActivityCompat.requestPermissions(LocationPickerActivity.this, new String[] {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
@@ -126,9 +127,7 @@ public class LocationPickerActivity extends AppCompatActivity {
             selectLocationButton.setText("Cancel");
 
             // Create the marker icon the dropped marker will be using.
-            IconFactory iconFactory = IconFactory.getInstance(LocationPickerActivity.this);
-            Drawable iconDrawable = ContextCompat.getDrawable(LocationPickerActivity.this, R.drawable.red_marker);
-            Icon icon = iconFactory.fromDrawable(iconDrawable);
+            Icon icon = IconFactory.getInstance(LocationPickerActivity.this).fromResource(R.drawable.red_marker);
 
             // Placing the marker on the map as soon as possible causes the illusion
             // that the hovering marker and dropped marker are the same.
@@ -189,9 +188,6 @@ public class LocationPickerActivity extends AppCompatActivity {
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
-    if (locationListener != null) {
-      locationServices.removeLocationListener(locationListener);
-    }
   }
 
   @Override
@@ -204,13 +200,18 @@ public class LocationPickerActivity extends AppCompatActivity {
     // Method is used to set the initial map camera position. Should only be called once when
     // the map is ready. We first try using the users last location so we can quickly set the
     // camera as fast as possible.
-    if (locationServices.getLastLocation() != null) {
-      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locationServices.getLastLocation()), 16));
+    if (locationEngine.getLastLocation() != null) {
+      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locationEngine.getLastLocation()), 16));
     }
 
     // This location listener is used in a very specific use case. If the users last location is
     // unknown we wait till the GPS locates them and position the camera above.
-    locationListener = new LocationListener() {
+    locationEngineListener = new LocationEngineListener() {
+      @Override
+      public void onConnected() {
+        locationEngine.requestLocationUpdates();
+      }
+
       @Override
       public void onLocationChanged(Location location) {
         if (location != null) {
@@ -219,11 +220,11 @@ public class LocationPickerActivity extends AppCompatActivity {
             .target(new LatLng(location))
             .zoom(16)
             .build());
-          locationServices.removeLocationListener(this);
+          locationEngine.removeLocationEngineListener(this);
         }
       }
     };
-    locationServices.addLocationListener(locationListener);
+    locationEngine.addLocationEngineListener(locationEngineListener);
     // Enable the location layer on the map and track the user location until they perform a
     // map gesture.
     map.setMyLocationEnabled(true);

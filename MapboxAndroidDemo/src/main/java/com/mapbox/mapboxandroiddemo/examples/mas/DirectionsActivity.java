@@ -14,7 +14,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.Constants;
 import com.mapbox.services.api.ServicesException;
 import com.mapbox.services.api.directions.v5.DirectionsCriteria;
 import com.mapbox.services.api.directions.v5.MapboxDirections;
@@ -28,6 +27,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.mapbox.services.Constants.PRECISION_6;
 
 public class DirectionsActivity extends AppCompatActivity {
 
@@ -128,7 +129,7 @@ public class DirectionsActivity extends AppCompatActivity {
 
   private void drawRoute(DirectionsRoute route) {
     // Convert LineString coordinates into LatLng[]
-    LineString lineString = LineString.fromPolyline(route.getGeometry(), Constants.OSRM_PRECISION_V5);
+    LineString lineString = LineString.fromPolyline(route.getGeometry(), PRECISION_6);
     List<Position> coordinates = lineString.getCoordinates();
     LatLng[] points = new LatLng[coordinates.size()];
     for (int i = 0; i < coordinates.size(); i++) {

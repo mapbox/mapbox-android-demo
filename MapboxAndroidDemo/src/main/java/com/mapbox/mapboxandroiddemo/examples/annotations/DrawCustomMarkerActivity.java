@@ -1,8 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.annotations;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -37,9 +35,7 @@ public class DrawCustomMarkerActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
 
         // Create an Icon object for the marker to use
-        IconFactory iconFactory = IconFactory.getInstance(DrawCustomMarkerActivity.this);
-        Drawable iconDrawable = ContextCompat.getDrawable(DrawCustomMarkerActivity.this, R.drawable.purple_marker);
-        Icon icon = iconFactory.fromDrawable(iconDrawable);
+        Icon icon = IconFactory.getInstance(DrawCustomMarkerActivity.this).fromResource(R.drawable.purple_marker);
 
         // Add the custom icon marker to the map
         mapboxMap.addMarker(new MarkerOptions()

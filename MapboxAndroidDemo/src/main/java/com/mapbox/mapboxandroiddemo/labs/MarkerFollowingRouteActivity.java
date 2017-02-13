@@ -4,11 +4,9 @@ import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -192,9 +190,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
             .width(4));
 
         // We are using a custom marker icon.
-        IconFactory iconFactory = IconFactory.getInstance(MarkerFollowingRouteActivity.this);
-        Drawable iconDrawable = ContextCompat.getDrawable(MarkerFollowingRouteActivity.this, R.drawable.pink_dot);
-        Icon icon = iconFactory.fromDrawable(iconDrawable);
+        Icon icon = IconFactory.getInstance(MarkerFollowingRouteActivity.this).fromResource(R.drawable.pink_dot);
 
         // Using a view marker, we place it at the first point in the points list.
         final Marker marker = map.addMarker(new MarkerViewOptions()

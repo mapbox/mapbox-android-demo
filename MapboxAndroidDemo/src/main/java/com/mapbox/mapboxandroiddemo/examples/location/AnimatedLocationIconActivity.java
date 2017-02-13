@@ -26,11 +26,13 @@ import com.mapbox.mapboxsdk.annotations.MarkerView;
 import com.mapbox.mapboxsdk.annotations.MarkerViewManager;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.location.LocationListener;
-import com.mapbox.mapboxsdk.location.LocationServices;
+import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.services.android.telemetry.location.LocationEngine;
+import com.mapbox.services.android.telemetry.location.LocationEngineListener;
+import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
 /**
  * This example shows how to create your own marker and update its location so that we follow the
@@ -50,8 +52,8 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
   private MapView mapView;
   private MapboxMap map;
   private MarkerView userMarker;
-  private LocationServices locationServices;
-  private LocationListener locationListener;
+  private LocationEngine locationEngine;
+  private LocationEngineListener locationListener;
   private boolean initialLocationSet = false;
 
   private static final int PERMISSIONS_LOCATION = 0;
@@ -67,7 +69,9 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_location_animated_icon);
 
-    locationServices = LocationServices.getLocationServices(AnimatedLocationIconActivity.this);
+    // Get the location engine object for later use.
+    locationEngine = LocationSource.getLocationEngine(this);
+
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -88,7 +92,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
             }
           });
 
-        if (locationServices.areLocationPermissionsGranted()) {
+        if (PermissionsManager.areLocationPermissionsGranted(AnimatedLocationIconActivity.this)) {
           setInitialMapPosition();
         }
 
@@ -134,7 +138,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
     // Ensure no memory leak occurs if we register the location listener but the call hasn't
     // been made yet.
     if (locationListener != null) {
-      locationServices.removeLocationListener(locationListener);
+      locationEngine.removeLocationEngineListener(locationListener);
     }
   }
 
@@ -167,7 +171,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
 
   private void enableGps() {
     // Check if user has granted location permission
-    if (!locationServices.areLocationPermissionsGranted()) {
+    if (!PermissionsManager.areLocationPermissionsGranted(AnimatedLocationIconActivity.this)) {
       ActivityCompat.requestPermissions(this, new String[] {
         Manifest.permission.ACCESS_COARSE_LOCATION,
         Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
@@ -177,7 +181,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
   }
 
   private void setInitialMapPosition() {
-    Location lastLocation = LocationServices.getLocationServices(this).getLastLocation();
+    Location lastLocation = locationEngine.getLastLocation();
     if (lastLocation != null && userMarker != null) {
       map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
       userMarker.setPosition(new LatLng(lastLocation));
@@ -186,22 +190,32 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
 
   private void enableLocation() {
     // If we have the last location of the user, we can move the camera to that position.
-    Location lastLocation = locationServices.getLastLocation();
+    Location lastLocation = locationEngine.getLastLocation();
     if (lastLocation != null) {
       map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
     }
 
-    locationListener = new LocationListener() {
+    locationListener = new LocationEngineListener() {
+      @Override
+      public void onConnected() {
+
+        locationEngine.requestLocationUpdates();
+
+
+      }
+
       @Override
       public void onLocationChanged(Location location) {
         if (location != null) {
           map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 16));
-          locationServices.removeLocationListener(this);
+          locationEngine.removeLocationEngineListener(this);
           userMarker.setPosition(new LatLng(location));
         }
       }
+
+
     };
-    locationServices.addLocationListener(locationListener);
+
   }
 
   @Override
