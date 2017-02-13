@@ -32,6 +32,7 @@ import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategorically;
 import com.mapbox.mapboxandroiddemo.examples.location.AnimatedLocationIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.BasicUserLocation;
 import com.mapbox.mapboxandroiddemo.examples.location.CustomizeUserLocationActivity;
@@ -473,6 +474,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ));
         currentCategory = R.id.nav_lab;
         break;
+
+      case R.id.nav_dds:
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_dds_style_circle_categorically_title,
+          R.string.activity_dds_style_circle_categorically_description,
+          new Intent(MainActivity.this, StyleCirclesCategorically.class),
+          R.string.activity_dds_style_circle_categorically_url
+        ));
+        currentCategory = R.id.nav_dds;
+        break;
+
       default:
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_basic_simple_mapview_title,
