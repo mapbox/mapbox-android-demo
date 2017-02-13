@@ -188,6 +188,9 @@ public class LocationPickerActivity extends AppCompatActivity {
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
+    if (locationEngine != null) {
+      locationEngine.removeLocationEngineListener(locationEngineListener);
+    }
   }
 
   @Override

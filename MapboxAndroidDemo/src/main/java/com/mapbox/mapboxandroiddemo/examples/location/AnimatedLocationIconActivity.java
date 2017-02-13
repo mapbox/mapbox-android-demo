@@ -198,10 +198,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
     locationListener = new LocationEngineListener() {
       @Override
       public void onConnected() {
-
         locationEngine.requestLocationUpdates();
-
-
       }
 
       @Override
@@ -212,8 +209,6 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
           userMarker.setPosition(new LatLng(location));
         }
       }
-
-
     };
 
   }

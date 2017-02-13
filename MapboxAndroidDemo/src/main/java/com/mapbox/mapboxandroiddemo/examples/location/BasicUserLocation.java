@@ -140,7 +140,6 @@ public class BasicUserLocation extends AppCompatActivity {
         @Override
         public void onConnected() {
           locationEngine.requestLocationUpdates();
-
         }
 
         @Override

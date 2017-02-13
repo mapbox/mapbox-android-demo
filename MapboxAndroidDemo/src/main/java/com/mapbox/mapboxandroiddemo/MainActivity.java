@@ -64,7 +64,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LandUseStylingActivity;
-import com.mapbox.mapboxandroiddemo.labs.LasAngelesTourismActivity;
+import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.OffRouteActivity;
@@ -173,6 +173,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     switch (id) {
       case R.id.nav_styles:
         exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_default_title,
+          R.string.activity_style_default_description,
+          new Intent(MainActivity.this, DefaultStyleActivity.class),
+          R.string.activity_style_default_url
+        ));
+        currentCategory = R.id.nav_styles;
+        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_symbol_layer_title,
           R.string.activity_style_symbol_layer_description,
           new Intent(MainActivity.this, SymbolLayerActivity.class),
@@ -266,13 +273,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, CustomRasterStyleActivity.class),
           R.string.activity_style_raster_url
         ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_default_title,
-          R.string.activity_style_default_description,
-          new Intent(MainActivity.this, DefaultStyleActivity.class),
-          R.string.activity_style_default_url
-        ));
-        currentCategory = R.id.nav_styles;
         break;
       case R.id.nav_annotations:
         exampleItemModel.add(new ExampleItemModel(
@@ -450,7 +450,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_las_angeles_tourism_title,
           R.string.activity_lab_las_angeles_tourism_description,
-          new Intent(MainActivity.this, LasAngelesTourismActivity.class),
+          new Intent(MainActivity.this, LosAngelesTourismActivity.class),
           R.string.activity_lab_las_angeles_tourism_url,
           true
         ));
