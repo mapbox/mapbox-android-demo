@@ -9,11 +9,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.Stop;
-import com.mapbox.mapboxsdk.style.functions.stops.Stops;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
 import static com.mapbox.mapboxsdk.style.functions.Function.property;
@@ -44,8 +40,11 @@ public class StyleCirclesCategorically extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
-        
-        VectorSource vectorSource = new VectorSource("ethnicity-source", "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken());
+
+        VectorSource vectorSource = new VectorSource(
+          "ethnicity-source",
+          "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken()
+        );
         mapboxMap.addSource(vectorSource);
 
         CircleLayer circleLayer = new CircleLayer("population", "ethnicity-source");
