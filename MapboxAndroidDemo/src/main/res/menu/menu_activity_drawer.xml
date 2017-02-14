@@ -10,6 +10,9 @@
             android:id="@+id/nav_styles"
             android:title="@string/styles_category"/>
         <item
+            android:id="@+id/nav_dds"
+            android:title="@string/dds_category"/>
+        <item
             android:id="@+id/nav_annotations"
             android:title="@string/annotations_category"/>
         <item
