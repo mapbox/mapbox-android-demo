@@ -20,7 +20,7 @@ import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 
-public class StyleCirclesCategorically extends AppCompatActivity {
+public class StyleCirclesCategoricallyActivity extends AppCompatActivity {
 
   private MapView mapView;
 
