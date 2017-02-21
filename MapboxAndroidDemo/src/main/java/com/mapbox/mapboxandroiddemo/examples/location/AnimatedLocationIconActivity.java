@@ -86,7 +86,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
           new MarkerViewManager.OnMarkerViewAddedListener() {
             @Override
             public void onViewAdded(@NonNull MarkerView markerView) {
-              animateMarker(userMarker);
+              animateMarker(markerView);
             }
           });
 
