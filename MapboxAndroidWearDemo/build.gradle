@@ -10,7 +10,7 @@ android {
     minSdkVersion 21
     targetSdkVersion 25
     versionCode 2
-    versionName "4.2.1"
+    versionName "5.0.0"
   }
   buildTypes {
     release {
@@ -22,11 +22,11 @@ android {
 
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
-  compile 'com.google.android.support:wearable:2.0.0-alpha3'
-  compile 'com.google.android.gms:play-services-wearable:10.0.1'
+  compile 'com.google.android.support:wearable:2.0.0'
+  compile 'com.google.android.gms:play-services-wearable:10.2.0'
 
   // Mapbox dependencies
-  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.1@aar') {
+  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.0-beta.1@aar') {
     transitive = true
   }
 }
