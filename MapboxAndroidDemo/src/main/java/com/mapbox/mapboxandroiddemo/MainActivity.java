@@ -182,50 +182,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_symbol_layer_title,
           R.string.activity_style_symbol_layer_description,
           new Intent(MainActivity.this, SymbolLayerActivity.class),
-          R.string.activity_style_symbol_layer_url,
-          true
+          R.string.activity_style_symbol_layer_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_create_heatmap_points_title,
           R.string.activity_style_create_heatmap_points_description,
           new Intent(MainActivity.this, CreateHeatmapPointsActivity.class),
-          R.string.activity_style_create_heatmap_points_url,
-          true
+          R.string.activity_style_create_heatmap_points_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_line_layer_title,
           R.string.activity_style_line_layer_description,
           new Intent(MainActivity.this, LineLayerActivity.class),
-          R.string.activity_style_line_layer_url,
-          true
+          R.string.activity_style_line_layer_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_styles_color_switcher_title,
           R.string.activity_styles_color_switcher_description,
           new Intent(MainActivity.this, ColorSwitcherActivity.class),
-          R.string.activity_styles_color_switcher_url,
-          true
+          R.string.activity_styles_color_switcher_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_styles_vector_source_title,
           R.string.activity_styles_vector_source_description,
           new Intent(MainActivity.this, VectorSourceActivity.class),
-          R.string.activity_styles_vector_source_url,
-          true
+          R.string.activity_styles_vector_source_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_add_wms_source_title,
           R.string.activity_style_add_wms_source_description,
           new Intent(MainActivity.this, AddWmsSourceActivity.class),
-          R.string.activity_style_add_wms_source_url,
-          true
+          R.string.activity_style_add_wms_source_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_styles_geojson_layer_in_stack_title,
           R.string.activity_styles_geojson_layer_in_stack_description,
           new Intent(MainActivity.this, GeojsonLayerInStackActivity.class),
-          R.string.activity_styles_geojson_layer_in_stack_url,
-          true
+          R.string.activity_styles_geojson_layer_in_stack_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_zoom_dependent_fill_color_title,
@@ -237,22 +230,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_adjust_layer_opacity_title,
           R.string.activity_styles_adjust_layer_opacity_description,
           new Intent(MainActivity.this, AdjustLayerOpacityActivity.class),
-          R.string.activity_styles_adjust_layer_opacity_url,
-          true
+          R.string.activity_styles_adjust_layer_opacity_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_styles_langauge_switch_title,
           R.string.activity_styles_langauge_switch_description,
           new Intent(MainActivity.this, LanguageSwitchActivity.class),
-          R.string.activity_styles_langauge_switch_url,
-          true
+          R.string.activity_styles_langauge_switch_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_styles_show_hide_layer_title,
           R.string.activity_styles_show_hide_layer_description,
           new Intent(MainActivity.this, ShowHideLayersActivity.class),
-          R.string.activity_styles_show_hide_layer_url,
-          true
+          R.string.activity_styles_show_hide_layer_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_mapbox_studio_title,
@@ -349,22 +339,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_query_select_building_title,
           R.string.activity_query_select_building_description,
           new Intent(MainActivity.this, SelectBuildingActivity.class),
-          R.string.activity_query_select_building_url,
-          true
+          R.string.activity_query_select_building_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_query_feature_count_title,
           R.string.activity_query_feature_count_description,
           new Intent(MainActivity.this, FeatureCountActivity.class),
-          R.string.activity_query_feature_count_url,
-          true
+          R.string.activity_query_feature_count_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_query_feature_title,
           R.string.activity_query_feature_description,
           new Intent(MainActivity.this, QueryFeatureActivity.class),
-          R.string.activity_query_feature_url,
-          true
+          R.string.activity_query_feature_url
         ));
         currentCategory = R.id.nav_query_map;
         break;
@@ -407,15 +394,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_location_animated_icon_title,
           R.string.activity_location_animated_icon_description,
           new Intent(MainActivity.this, AnimatedLocationIconActivity.class),
-          R.string.activity_location_animated_icon_url,
-          true
+          R.string.activity_location_animated_icon_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_location_customize_user_title,
           R.string.activity_location_customize_user_description,
           new Intent(MainActivity.this, CustomizeUserLocationActivity.class),
-          R.string.activity_location_customize_user_url,
-          true
+          R.string.activity_location_customize_user_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_location_basic_title,
@@ -437,22 +422,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_las_angeles_tourism_title,
           R.string.activity_lab_las_angeles_tourism_description,
           new Intent(MainActivity.this, LosAngelesTourismActivity.class),
-          R.string.activity_lab_las_angeles_tourism_url,
-          true
+          R.string.activity_lab_las_angeles_tourism_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_indoor_map_title,
           R.string.activity_lab_indoor_map_description,
           new Intent(MainActivity.this, IndoorMapActivity.class),
-          R.string.activity_lab_indoor_map_url,
-          true
+          R.string.activity_lab_indoor_map_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_off_route_title,
           R.string.activity_lab_off_route_description,
           new Intent(MainActivity.this, OffRouteActivity.class),
-          R.string.activity_lab_off_route_url,
-          true
+          R.string.activity_lab_off_route_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_location_picker_title,
@@ -464,8 +446,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_marker_following_route_title,
           R.string.activity_lab_marker_following_route_description,
           new Intent(MainActivity.this, MarkerFollowingRouteActivity.class),
-          R.string.activity_lab_marker_following_route_url,
-          true
+          R.string.activity_lab_marker_following_route_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_space_station_location_title,
@@ -481,13 +462,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_style_circle_categorically_title,
           R.string.activity_dds_style_circle_categorically_description,
           new Intent(MainActivity.this, StyleCirclesCategoricallyActivity.class),
-          R.string.activity_dds_style_circle_categorically_url
+          R.string.activity_dds_style_circle_categorically_url,
+          true
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_dds_choropleth_zoom_change_title,
           R.string.activity_dds_choropleth_zoom_change_description,
           new Intent(MainActivity.this, ChoroplethZoomChangeActivity.class),
-          R.string.activity_dds_choropleth_zoom_change_url
+          R.string.activity_dds_choropleth_zoom_change_url,
+          true
         ));
         currentCategory = R.id.nav_dds;
         break;

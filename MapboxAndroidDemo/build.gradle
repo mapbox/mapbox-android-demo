@@ -53,13 +53,12 @@ dependencies {
 
   // Mapbox dependencies
 //  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.2@aar') {
-  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.0-SNAPSHOT@aar') {
+  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.0-beta.1@aar') {
     transitive = true
-//    exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-java-geojson'
   }
 
   // Mapbox Android UI
-  compile('com.mapbox.mapboxsdk:mapbox-android-ui:2.0.0-SNAPSHOT@aar') {
+  compile('com.mapbox.mapboxsdk:mapbox-android-ui:2.0.0-beta.1@aar') {
     transitive = true
   }
 
