@@ -46,7 +46,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.mapbox.services.Constants.PRECISION_5;
-import static com.mapbox.services.Constants.PRECISION_6;
 
 public class OffRouteActivity extends AppCompatActivity {
 
