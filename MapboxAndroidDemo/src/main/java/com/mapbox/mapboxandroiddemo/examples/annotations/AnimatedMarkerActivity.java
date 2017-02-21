@@ -39,7 +39,7 @@ public class AnimatedMarkerActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
-        final Marker marker = mapboxMap.addMarker(new MarkerOptions()
+        final Marker marker = mapboxMap.addMarker(new MarkerViewOptions()
           .position(new LatLng(64.900932, -18.167040)));
 
         Toast.makeText(
