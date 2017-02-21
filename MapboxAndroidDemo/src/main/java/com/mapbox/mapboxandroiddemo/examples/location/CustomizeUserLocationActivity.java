@@ -1,30 +1,27 @@
 package com.mapbox.mapboxandroiddemo.examples.location;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.constants.MyLocationTracking;
-import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.android.telemetry.location.LocationEngine;
+import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
-public class CustomizeUserLocationActivity extends AppCompatActivity {
+import java.util.List;
 
+public class CustomizeUserLocationActivity extends AppCompatActivity implements PermissionsListener {
+
+  private PermissionsManager permissionsManager;
   private MapView mapView;
   private MapboxMap map;
-  private LocationEngine locationEngine;
-
-  private static final int PERMISSIONS_LOCATION = 0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +34,6 @@ public class CustomizeUserLocationActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_location_customize_user);
 
-    // Get the location engine object for later use.
-    locationEngine = LocationSource.getLocationEngine(this);
-
-
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
@@ -48,7 +41,12 @@ public class CustomizeUserLocationActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
 
-        enableGps();
+        permissionsManager = new PermissionsManager(CustomizeUserLocationActivity.this);
+        if (!PermissionsManager.areLocationPermissionsGranted(CustomizeUserLocationActivity.this)) {
+          permissionsManager.requestLocationPermissions(CustomizeUserLocationActivity.this);
+        } else {
+          enableGps();
+        }
 
         // Customize the user location icon using the getMyLocationViewSettings object.
         map.getMyLocationViewSettings().setPadding(0, 500, 0, 0);
@@ -102,29 +100,30 @@ public class CustomizeUserLocationActivity extends AppCompatActivity {
   }
 
   private void enableGps() {
-    // Check if user has granted location permission
-    if (!PermissionsManager.areLocationPermissionsGranted(CustomizeUserLocationActivity.this)) {
-      ActivityCompat.requestPermissions(this, new String[] {
-        Manifest.permission.ACCESS_COARSE_LOCATION,
-        Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
-    } else {
-      enableLocation();
-    }
-  }
-
-  private void enableLocation() {
     // Enable user tracking to show the padding affect.
     map.getTrackingSettings().setMyLocationTrackingMode(MyLocationTracking.TRACKING_FOLLOW);
     map.getTrackingSettings().setDismissAllTrackingOnGesture(false);
   }
 
   @Override
-  public void onRequestPermissionsResult(
-    int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    if (requestCode == PERMISSIONS_LOCATION) {
-      if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        enableLocation();
-      }
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+  }
+
+  @Override
+  public void onExplanationNeeded(List<String> permissionsToExplain) {
+    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+      Toast.LENGTH_LONG).show();
+  }
+
+  @Override
+  public void onPermissionResult(boolean granted) {
+    if (granted) {
+      enableGps();
+    } else {
+      Toast.makeText(this, "You didn't grant location permissions.",
+        Toast.LENGTH_LONG).show();
+      finish();
     }
   }
 }

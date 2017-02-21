@@ -1,14 +1,12 @@
 package com.mapbox.mapboxandroiddemo.examples.location;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -20,17 +18,19 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.location.LocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngineListener;
+import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
-public class BasicUserLocation extends AppCompatActivity {
+import java.util.List;
+
+public class BasicUserLocation extends AppCompatActivity implements PermissionsListener {
 
   private MapView mapView;
   private MapboxMap map;
   private FloatingActionButton floatingActionButton;
   private LocationEngine locationEngine;
   private LocationEngineListener locationEngineListener;
-
-  private static final int PERMISSIONS_LOCATION = 0;
+  private PermissionsManager permissionsManager;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -116,10 +116,9 @@ public class BasicUserLocation extends AppCompatActivity {
   private void toggleGps(boolean enableGps) {
     if (enableGps) {
       // Check if user has granted location permission
-      if (!PermissionsManager.areLocationPermissionsGranted(BasicUserLocation.this)) {
-        ActivityCompat.requestPermissions(this, new String[] {
-          Manifest.permission.ACCESS_COARSE_LOCATION,
-          Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
+      permissionsManager = new PermissionsManager(this);
+      if (!PermissionsManager.areLocationPermissionsGranted(this)) {
+        permissionsManager.requestLocationPermissions(this);
       } else {
         enableLocation(true);
       }
@@ -131,7 +130,7 @@ public class BasicUserLocation extends AppCompatActivity {
   private void enableLocation(boolean enabled) {
     if (enabled) {
       // If we have the last location of the user, we can move the camera to that position.
-      Location lastLocation = locationEngine.getLastLocation();
+      Location lastLocation = LocationSource.getLocationEngine(this).getLastLocation();
       if (lastLocation != null) {
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
       }
@@ -139,7 +138,7 @@ public class BasicUserLocation extends AppCompatActivity {
       locationEngineListener = new LocationEngineListener() {
         @Override
         public void onConnected() {
-          locationEngine.requestLocationUpdates();
+//          locationEngine.requestLocationUpdates();
         }
 
         @Override
@@ -164,12 +163,24 @@ public class BasicUserLocation extends AppCompatActivity {
   }
 
   @Override
-  public void onRequestPermissionsResult(
-    int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    if (requestCode == PERMISSIONS_LOCATION) {
-      if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        enableLocation(true);
-      }
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+  }
+
+  @Override
+  public void onExplanationNeeded(List<String> permissionsToExplain) {
+    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+      Toast.LENGTH_LONG).show();
+  }
+
+  @Override
+  public void onPermissionResult(boolean granted) {
+    if (granted) {
+      enableLocation(true);
+    } else {
+      Toast.makeText(this, "You didn't grant location permissions.",
+        Toast.LENGTH_LONG).show();
+      finish();
     }
   }
 }
