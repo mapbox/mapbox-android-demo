@@ -90,6 +90,7 @@ public class DirectionsActivity extends AppCompatActivity {
     client = new MapboxDirections.Builder()
       .setOrigin(origin)
       .setDestination(destination)
+      .setOverview(DirectionsCriteria.OVERVIEW_FULL)
       .setProfile(DirectionsCriteria.PROFILE_CYCLING)
       .setAccessToken(Mapbox.getAccessToken())
       .build();

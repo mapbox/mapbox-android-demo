@@ -1,12 +1,9 @@
 package com.mapbox.mapboxandroiddemo.labs;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.graphics.PointF;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -33,6 +31,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.location.LocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngineListener;
+import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 import com.mapbox.services.api.ServicesException;
 import com.mapbox.services.api.geocoding.v5.GeocodingCriteria;
@@ -47,7 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LocationPickerActivity extends AppCompatActivity {
+public class LocationPickerActivity extends AppCompatActivity implements PermissionsListener {
 
   private MapView mapView;
   private MapboxMap map;
@@ -56,8 +55,8 @@ public class LocationPickerActivity extends AppCompatActivity {
   private ImageView hoveringMarker;
   private Button selectLocationButton;
   private LocationEngineListener locationEngineListener;
+  private PermissionsManager permissionsManager;
 
-  private static final int PERMISSIONS_LOCATION = 0;
   private static final String TAG = "LocationPickerActivity";
 
   @Override
@@ -73,6 +72,7 @@ public class LocationPickerActivity extends AppCompatActivity {
 
     // Get the location engine object for later use.
     locationEngine = LocationSource.getLocationEngine(this);
+    locationEngine.activate();
 
     // Initialize the map view
     mapView = (MapView) findViewById(R.id.mapView);
@@ -85,10 +85,9 @@ public class LocationPickerActivity extends AppCompatActivity {
         // Once map is ready, we want to position the camera above the user location. We
         // first check that the user has granted the location permission, then we call
         // setInitialCamera.
+        permissionsManager = new PermissionsManager(LocationPickerActivity.this);
         if (!PermissionsManager.areLocationPermissionsGranted(LocationPickerActivity.this)) {
-          ActivityCompat.requestPermissions(LocationPickerActivity.this, new String[] {
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
+          permissionsManager.requestLocationPermissions(LocationPickerActivity.this);
         } else {
           setInitialCamera();
         }
@@ -164,12 +163,22 @@ public class LocationPickerActivity extends AppCompatActivity {
   protected void onStart() {
     super.onStart();
     mapView.onStart();
+    if (locationEngine != null && locationEngineListener != null) {
+      locationEngine.activate();
+      locationEngine.addLocationEngineListener(locationEngineListener);
+      locationEngine.requestLocationUpdates();
+    }
   }
 
   @Override
   protected void onStop() {
     super.onStop();
     mapView.onStop();
+    if (locationEngine != null && locationEngineListener != null) {
+      locationEngine.removeLocationUpdates();
+      locationEngine.removeLocationEngineListener(locationEngineListener);
+      locationEngine.deactivate();
+    }
   }
 
   @Override
@@ -188,9 +197,6 @@ public class LocationPickerActivity extends AppCompatActivity {
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
-    if (locationEngine != null) {
-      locationEngine.removeLocationEngineListener(locationEngineListener);
-    }
   }
 
   @Override
@@ -278,13 +284,24 @@ public class LocationPickerActivity extends AppCompatActivity {
   } // reverseGeocode
 
   @Override
-  public void onRequestPermissionsResult(
-    int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    if (requestCode == PERMISSIONS_LOCATION) {
-      if (grantResults.length > 0
-        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        setInitialCamera();
-      }
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+  }
+
+  @Override
+  public void onExplanationNeeded(List<String> permissionsToExplain) {
+    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+      Toast.LENGTH_LONG).show();
+  }
+
+  @Override
+  public void onPermissionResult(boolean granted) {
+    if (granted) {
+      setInitialCamera();
+    } else {
+      Toast.makeText(this, "You didn't grant location permissions.",
+        Toast.LENGTH_LONG).show();
+      finish();
     }
   }
 }

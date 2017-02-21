@@ -9,9 +9,11 @@ import android.widget.Toast;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.constants.MyLocationTracking;
+import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.services.android.telemetry.location.LocationEngine;
 import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
@@ -33,6 +35,11 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
 
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_location_customize_user);
+
+    // Get the location engine object for later use.
+    LocationEngine locationEngine = LocationSource.getLocationEngine(this);
+    locationEngine.activate();
+    locationEngine.requestLocationUpdates();
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);

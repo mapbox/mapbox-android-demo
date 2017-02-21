@@ -69,7 +69,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
 
     // Get the location engine object for later use.
     locationEngine = LocationSource.getLocationEngine(this);
-
+    locationEngine.activate();
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -112,12 +112,22 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
   protected void onStart() {
     super.onStart();
     mapView.onStart();
+    if (locationEngine != null && locationListener != null) {
+      locationEngine.activate();
+      locationEngine.requestLocationUpdates();
+      locationEngine.addLocationEngineListener(locationListener);
+    }
   }
 
   @Override
   protected void onStop() {
     super.onStop();
     mapView.onStop();
+    if (locationEngine != null && locationListener != null) {
+      locationEngine.removeLocationEngineListener(locationListener);
+      locationEngine.removeLocationUpdates();
+      locationEngine.deactivate();
+    }
   }
 
   @Override
@@ -136,11 +146,6 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
-    // Ensure no memory leak occurs if we register the location listener but the call hasn't
-    // been made yet.
-    if (locationListener != null) {
-      locationEngine.removeLocationEngineListener(locationListener);
-    }
   }
 
   @Override
@@ -200,7 +205,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
         }
       }
     };
-
+    locationEngine.addLocationEngineListener(locationListener);
   }
 
   // Custom marker view used for pulsing the background view of marker.
@@ -248,6 +253,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
   public void onPermissionResult(boolean granted) {
     if (granted) {
       setInitialMapPosition();
+      enableLocation();
     } else {
       Toast.makeText(this, "You didn't grant location permissions.",
         Toast.LENGTH_LONG).show();

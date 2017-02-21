@@ -45,6 +45,7 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
 
     // Get the location engine object for later use.
     locationEngine = LocationSource.getLocationEngine(this);
+    locationEngine.activate();
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -130,7 +131,7 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
   private void enableLocation(boolean enabled) {
     if (enabled) {
       // If we have the last location of the user, we can move the camera to that position.
-      Location lastLocation = LocationSource.getLocationEngine(this).getLastLocation();
+      Location lastLocation = locationEngine.getLastLocation();
       if (lastLocation != null) {
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
       }
@@ -138,7 +139,7 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
       locationEngineListener = new LocationEngineListener() {
         @Override
         public void onConnected() {
-//          locationEngine.requestLocationUpdates();
+          // No action needed here.
         }
 
         @Override
