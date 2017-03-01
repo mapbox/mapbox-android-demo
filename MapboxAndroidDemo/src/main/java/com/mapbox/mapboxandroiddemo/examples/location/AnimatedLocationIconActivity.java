@@ -1,16 +1,13 @@
 package com.mapbox.mapboxandroiddemo.examples.location;
 
-import android.Manifest;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +29,10 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.location.LocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngineListener;
+import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
+
+import java.util.List;
 
 /**
  * This example shows how to create your own marker and update its location so that we follow the
@@ -47,16 +47,14 @@ import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
  * with this example instead:
  * @see BasicUserLocation
  */
-public class AnimatedLocationIconActivity extends AppCompatActivity {
+public class AnimatedLocationIconActivity extends AppCompatActivity implements PermissionsListener {
 
   private MapView mapView;
   private MapboxMap map;
   private MarkerView userMarker;
   private LocationEngine locationEngine;
   private LocationEngineListener locationListener;
-  private boolean initialLocationSet = false;
-
-  private static final int PERMISSIONS_LOCATION = 0;
+  private PermissionsManager permissionsManager;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +69,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
 
     // Get the location engine object for later use.
     locationEngine = LocationSource.getLocationEngine(this);
-
+    locationEngine.activate();
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -88,15 +86,18 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
           new MarkerViewManager.OnMarkerViewAddedListener() {
             @Override
             public void onViewAdded(@NonNull MarkerView markerView) {
-              animateMarker(userMarker);
+              animateMarker(markerView);
             }
           });
 
-        if (PermissionsManager.areLocationPermissionsGranted(AnimatedLocationIconActivity.this)) {
+        // Check if user has granted location permission
+        permissionsManager = new PermissionsManager(AnimatedLocationIconActivity.this);
+        if (!PermissionsManager.areLocationPermissionsGranted(AnimatedLocationIconActivity.this)) {
+          permissionsManager.requestLocationPermissions(AnimatedLocationIconActivity.this);
+        } else {
           setInitialMapPosition();
+          enableLocation();
         }
-
-        enableGps();
       }
     });
   }
@@ -111,12 +112,22 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
   protected void onStart() {
     super.onStart();
     mapView.onStart();
+    if (locationEngine != null && locationListener != null) {
+      locationEngine.activate();
+      locationEngine.requestLocationUpdates();
+      locationEngine.addLocationEngineListener(locationListener);
+    }
   }
 
   @Override
   protected void onStop() {
     super.onStop();
     mapView.onStop();
+    if (locationEngine != null && locationListener != null) {
+      locationEngine.removeLocationEngineListener(locationListener);
+      locationEngine.removeLocationUpdates();
+      locationEngine.deactivate();
+    }
   }
 
   @Override
@@ -135,11 +146,6 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
-    // Ensure no memory leak occurs if we register the location listener but the call hasn't
-    // been made yet.
-    if (locationListener != null) {
-      locationEngine.removeLocationEngineListener(locationListener);
-    }
   }
 
   @Override
@@ -166,17 +172,6 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
       animatorSet.play(scaleCircleX).with(scaleCircleY).with(fadeOut);
       animatorSet.setDuration(1000);
       animatorSet.start();
-    }
-  }
-
-  private void enableGps() {
-    // Check if user has granted location permission
-    if (!PermissionsManager.areLocationPermissionsGranted(AnimatedLocationIconActivity.this)) {
-      ActivityCompat.requestPermissions(this, new String[] {
-        Manifest.permission.ACCESS_COARSE_LOCATION,
-        Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
-    } else {
-      enableLocation();
     }
   }
 
@@ -210,21 +205,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
         }
       }
     };
-
-  }
-
-  @Override
-  public void onRequestPermissionsResult(
-    int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    if (requestCode == PERMISSIONS_LOCATION) {
-      if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        enableLocation();
-      } else {
-        // User denied location permission, user marker won't be shown.
-        Toast.makeText(AnimatedLocationIconActivity.this,
-          "Enable location for example to work properly", Toast.LENGTH_LONG).show();
-      }
-    }
+    locationEngine.addLocationEngineListener(locationListener);
   }
 
   // Custom marker view used for pulsing the background view of marker.
@@ -232,7 +213,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
 
     private LayoutInflater inflater;
 
-    public PulseMarkerViewAdapter(@NonNull Context context) {
+    PulseMarkerViewAdapter(@NonNull Context context) {
       super(context);
       this.inflater = LayoutInflater.from(context);
     }
@@ -254,6 +235,29 @@ public class AnimatedLocationIconActivity extends AppCompatActivity {
     private static class ViewHolder {
       ImageView foregroundImageView;
       ImageView backgroundImageView;
+    }
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+  }
+
+  @Override
+  public void onExplanationNeeded(List<String> permissionsToExplain) {
+    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+      Toast.LENGTH_LONG).show();
+  }
+
+  @Override
+  public void onPermissionResult(boolean granted) {
+    if (granted) {
+      setInitialMapPosition();
+      enableLocation();
+    } else {
+      Toast.makeText(this, "You didn't grant location permissions.",
+        Toast.LENGTH_LONG).show();
+      finish();
     }
   }
 }

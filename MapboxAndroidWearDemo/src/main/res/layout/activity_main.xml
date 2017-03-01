@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.wearable.view.BoxInsetLayout
+<android.support.wearable.view.WearableRecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/recycler_launcher_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical"
     tools:context=".MainActivity"
-    tools:deviceIds="wear">
+    tools:deviceIds="wear"/>
 
-    <android.support.wearable.view.WearableRecyclerView
-        android:id="@+id/recycler_launcher_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical" />
-
-</android.support.wearable.view.BoxInsetLayout>

@@ -1,11 +1,9 @@
 package com.mapbox.mapboxandroiddemo.examples.location;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -14,14 +12,16 @@ import com.mapbox.mapboxsdk.constants.MyLocationTracking;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
-public class LocationTrackingActivity extends AppCompatActivity {
+import java.util.List;
 
+public class LocationTrackingActivity extends AppCompatActivity implements PermissionsListener {
+
+  private PermissionsManager permissionsManager;
   private MapView mapView;
   private MapboxMap map;
-
-  private static final int PERMISSIONS_LOCATION = 0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -42,16 +42,12 @@ public class LocationTrackingActivity extends AppCompatActivity {
 
         map = mapboxMap;
 
-        // Check if user has granted location permission. If they haven't, we request it
-        // otherwise we enable location tracking.
+        permissionsManager = new PermissionsManager(LocationTrackingActivity.this);
         if (!PermissionsManager.areLocationPermissionsGranted(LocationTrackingActivity.this)) {
-          ActivityCompat.requestPermissions(LocationTrackingActivity.this, new String[] {
-            Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
+          permissionsManager.requestLocationPermissions(LocationTrackingActivity.this);
         } else {
           enableLocationTracking();
         }
-
       }
     });
   }
@@ -109,12 +105,24 @@ public class LocationTrackingActivity extends AppCompatActivity {
   }
 
   @Override
-  public void onRequestPermissionsResult(
-    int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    if (requestCode == PERMISSIONS_LOCATION) {
-      if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        enableLocationTracking();
-      }
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+  }
+
+  @Override
+  public void onExplanationNeeded(List<String> permissionsToExplain) {
+    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+      Toast.LENGTH_LONG).show();
+  }
+
+  @Override
+  public void onPermissionResult(boolean granted) {
+    if (granted) {
+      enableLocationTracking();
+    } else {
+      Toast.makeText(this, "You didn't grant location permissions.",
+        Toast.LENGTH_LONG).show();
+      finish();
     }
   }
 }

@@ -14,8 +14,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends WearableActivity implements ExampleAdapter.ItemSelectedListener {
 
-  private static final String TAG = "MainActivity";
-  private WearableRecyclerView wearableRecyclerView;
   private ArrayList<ExampleItemModel> exampleItemModels;
 
   @Override
@@ -23,11 +21,12 @@ public class MainActivity extends WearableActivity implements ExampleAdapter.Ite
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    wearableRecyclerView = (WearableRecyclerView) findViewById(R.id.recycler_launcher_view);
+    WearableRecyclerView wearableRecyclerView = (WearableRecyclerView) findViewById(R.id.recycler_launcher_view);
     wearableRecyclerView.setHasFixedSize(true);
 
     OffsettingHelper offsettingHelper = new OffsettingHelper();
 
+    wearableRecyclerView.setCenterEdgeItems(true);
     wearableRecyclerView.setOffsettingHelper(offsettingHelper);
 
     exampleItemModels = new ArrayList<>();
@@ -39,7 +38,6 @@ public class MainActivity extends WearableActivity implements ExampleAdapter.Ite
     wearableRecyclerView.setAdapter(exampleAdapter);
 
     exampleAdapter.setListener(this);
-
   }
 
   @Override

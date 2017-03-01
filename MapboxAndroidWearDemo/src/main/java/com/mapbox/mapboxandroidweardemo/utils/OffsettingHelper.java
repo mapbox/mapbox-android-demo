@@ -22,20 +22,36 @@ public class OffsettingHelper extends DefaultOffsettingHelper {
 
 
     // Figure out % progress from top to bottom
-    float centerOffset = ((float) child.getHeight() / 2.0f) / (float) parent.getHeight();
-    float yRelativeToCenterOffset = (child.getY() / parent.getHeight()) + centerOffset;
+    float centerOffset = ((float) child.getHeight() / 2.0f) /  (float) parent.getHeight();
+    float verticalRelativeToCenterOffset = (child.getY() / parent.getHeight()) + centerOffset;
 
     // Normalize for center
-    progressToCenter = Math.abs(0.5f - yRelativeToCenterOffset);
+    progressToCenter = Math.abs(0.5f - verticalRelativeToCenterOffset);
     // Adjust to the maximum scale
     progressToCenter = Math.min(progressToCenter, MAX_ICON_PROGRESS);
 
     child.setScaleX(1 - progressToCenter);
     child.setScaleY(1 - progressToCenter);
+
+
+//    super.updateChild(child, parent);
+//
+//    // Figure out % progress from top to bottom
+//    float centerOffset = ((float) child.getHeight() / 2.0f) / (float) parent.getHeight();
+//    float verticalRelativeToCenterOffset = (child.getY() / parent.getHeight()) + centerOffset;
+//
+//    // Normalize for center
+//    float progressToCenter = Math.abs(0.5f - verticalRelativeToCenterOffset);
+//    // Adjust to the maximum scale
+//    progressToCenter = Math.min(progressToCenter, MAX_ICON_PROGRESS);
+//
+//    child.setScaleX(1 - progressToCenter);
+//    child.setScaleY(1 - progressToCenter);
   }
 
+  @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
   @Override
-  protected void adjustAnchorOffsetXY(View child, float[] anchorOffsetXY) {
+  public void adjustAnchorOffsetXY(View child, float[] anchorOffsetXY) {
     anchorOffsetXY[0] = child.getHeight() / 2.0f;
   }
 }
