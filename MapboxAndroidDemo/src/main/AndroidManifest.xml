@@ -414,5 +414,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
+
+        <!-- This moves the offline storage to the SD-card -->
+        <meta-data
+            android:name="com.mapbox.SetStorageExternal"
+            android:value="true" />
+
     </application>
 </manifest>
