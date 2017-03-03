@@ -39,6 +39,7 @@ repositories {
 }
 
 dependencies {
+  compile "com.android.support:design:${supportLibVersion}"
   compile "com.android.support:gridlayout-v7:${supportLibVersion}"
   compile "com.android.support:appcompat-v7:${supportLibVersion}"
   compile "com.android.support:cardview-v7:${supportLibVersion}"
