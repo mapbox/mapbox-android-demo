@@ -205,8 +205,11 @@
     <string name="menu_map_style_satellite">Satellite</string>
     <string name="menu_map_style_satellite_streets">Satellite streets</string>
 
-    <!--Tap on map instruction-->
+    <!--Tap on map instruction for toast-->
     <string name="tap_on_map_instruction">Tap anywhere on the map</string>
+
+    <!--Move map instruction for toast-->
+    <string name="move_map_instruction">Move map to place\nmarker at desired location</string>
 
     <!--Tap on feature box instruction-->
     <string name="tap_on_feature_box_instruction">Tap on bounding box</string>

@@ -91,6 +91,14 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
         } else {
           setInitialCamera();
         }
+
+        // Toast instructing user to tap on the map
+        Toast.makeText(
+          LocationPickerActivity.this,
+          getString(R.string.move_map_instruction),
+          Toast.LENGTH_LONG
+        ).show();
+
       }
     });
 
