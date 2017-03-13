@@ -211,4 +211,9 @@
 
     <!--Fragment below textview in support fragment activity-->
     <string name="fragment_in_card_below">Map fragment container in card below</string>
+
+    <!--Geocoding autocomplete activity-->
+    <string name="hint_text_in_geocode_widget">Search Location</string>
+
+
 </resources>
