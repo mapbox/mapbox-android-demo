@@ -14,6 +14,8 @@
 
     <string name="info_dialog_title">Getting started</string>
     <string name="info_dialog_description">Do you like this library? Learn how to include it in your app!</string>
+    <string name="info_dialog_positive_button_text">Start Learning</string>
+    <string name="info_dialog_negative_button_text">Not now</string>
 
     <string name="description_labs">While other categories in this app present examples doing one specific thing, the lab category combines examples to show the power of the SDK.</string>
     <string name="description_mas">Mapbox Android Services bundles many of the Mapbox APIs into a single SDK such as directions, geocoding, and many of the other utilities offered.</string>
