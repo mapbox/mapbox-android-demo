@@ -528,7 +528,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .setIcon(R.mipmap.ic_launcher)
         .setHeaderColor(R.color.mapboxDenim)
         .withDivider(true)
-        .setPositiveText("Mapbox")
+        .setPositiveText(getString(R.string.info_dialog_positive_button_text))
         .onPositive(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -538,7 +538,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
           }
         })
-        .setNegativeText("Not now")
+        .setNegativeText(getString(R.string.info_dialog_negative_button_text))
         .onNegative(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
@@ -547,6 +547,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         })
 
         .show();
+
       return true;
     }
 
