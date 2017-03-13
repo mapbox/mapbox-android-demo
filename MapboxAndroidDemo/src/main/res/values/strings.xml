@@ -183,7 +183,7 @@
     <string name="activity_location_animated_icon_url">http://i.imgur.com/dsUKM2i.png</string>
     <string name="activity_location_customize_user_url">http://i.imgur.com/Q6O82JJ.png</string>
     <string name="activity_mas_directions_url">https://www.mapbox.com/android-sdk/images/directions.png</string>
-    <string name="activity_mas_geocoding_url">https://www.mapbox.com/android-sdk/images/geocoding.gif</string>
+    <string name="activity_mas_geocoding_url">http://i.imgur.com/mBJGh3P.png</string>
     <string name="activity_mas_static_image_url">https://www.mapbox.com/android-sdk/images/static-image.png</string>
     <string name="activity_mas_simplify_polyline_url">http://i.imgur.com/uATgul1.png</string>
     <string name="activity_mas_map_matching_url">http://i.imgur.com/bWvVbwC.png</string>
