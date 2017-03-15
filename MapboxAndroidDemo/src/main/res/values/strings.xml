@@ -58,6 +58,7 @@
     <string name="activity_style_add_wms_source_title">Add a WMS source</string>
     <string name="activity_style_zoom_dependent_fill_color_title">Color dependent on zoom level</string>
     <string name="activity_style_create_heatmap_points_title">Create a heatmap from points</string>
+    <string name="activity_style_data_clusters_title">Create and style data clusters</string>
     <string name="activity_style_line_layer_title">Create a line layer</string>
     <string name="activity_style_symbol_layer_title">Marker symbol layer</string>
     <string name="activity_dds_style_circle_categorically_title">Style circles categorically</string>
@@ -108,6 +109,7 @@
     <string name="activity_style_add_wms_source_description">Adding an external Web Map Service layer to the map</string>
     <string name="activity_style_zoom_dependent_fill_color_description">Make a property depend on the map zoom level, in this case, the water layers fill color.</string>
     <string name="activity_style_create_heatmap_points_description">Use the Mapbox Android SDK to visualize point data as a heatmap.</string>
+    <string name="activity_style_create_data_cluster_description">Use GeoJSON to visualize point data in clusters.</string>
     <string name="activity_style_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
     <string name="activity_style_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
     <string name="activity_dds_style_circle_categorically_description">Using a categorical circle-color property function for a visualization.</string>
@@ -160,6 +162,7 @@
     <string name="activity_styles_vector_source_url">http://i.imgur.com/N0altyP.png</string>
     <string name="activity_style_add_wms_source_url">http://i.imgur.com/k14WdRG.png</string>
     <string name="activity_style_create_heatmap_points_url">http://i.imgur.com/pAejKLH.png</string>
+    <string name="activity_style_create_cluster_data_points_url">http://i.imgur.com/fGeZhcD.png</string>
     <string name="activity_style_line_layer_url">http://i.imgur.com/Iqxoing.png</string>
     <string name="activity_style_symbol_layer_url">http://i.imgur.com/TQ4iA0L.png</string>
     <string name="activity_dds_style_circle_categorically_url">http://i.imgur.com/C3mtfgF.png</string>
@@ -210,6 +213,10 @@
 
     <!--Move map instruction for toast-->
     <string name="move_map_instruction">Move map to place\nmarker at desired location</string>
+
+    <!--Zoom in and out map instruction for toast-->
+    <string name="zoom_map_in_and_out_instruction">Zoom in and out to see cluster numbers change</string>
+
 
     <!--Tap on feature box instruction-->
     <string name="tap_on_feature_box_instruction">Tap on bounding box</string>
