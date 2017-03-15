@@ -17,19 +17,30 @@ android {
     versionName gitVersionName
   }
 
+  productFlavors {
+    gpservices {
+      applicationIdSuffix ".gpservices"
+      resValue "string", "app_name", "Mapbox Dev Preview (Google Play services)"
+      resValue "string", "firebase_app_id", "1:557332920931:android:bdf11618ae45dd61"
+      resValue "string", "firebase_api_key", "AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8"
+    }
+
+    nogpservices {
+      resValue "string", "app_name", "Mapbox Dev Preview"
+    }
+  }
+
   buildTypes {
     debug {
       applicationIdSuffix '.debug'
       versionNameSuffix '-Debug'
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-      resValue "string", "firebase_app_id", "1:557332920931:android:bdf11618ae45dd61"
     }
 
     release {
       minifyEnabled true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-      resValue "string", "firebase_app_id", "1:557332920931:android:e0e602f5bdef30b0"
     }
   }
   return void;
@@ -55,7 +66,7 @@ dependencies {
   compile 'com.squareup.picasso:picasso:2.5.2'
 
   // firebase crash report
-  compile 'com.google.firebase:firebase-crash:10.0.1'
+  gpservicesCompile 'com.google.firebase:firebase-crash:10.0.1'
 
   // Mapbox dependencies
   compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.0-beta.3@aar') {

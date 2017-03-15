@@ -1,9 +1,10 @@
-package com.mapbox.mapboxandroiddemo;
+package com.mapbox.mapboxandroiddemo.gpservices;
 
 import android.app.Application;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.mapbox.mapboxandroiddemo.R;
 
 public class MapboxApplication extends Application {
 
