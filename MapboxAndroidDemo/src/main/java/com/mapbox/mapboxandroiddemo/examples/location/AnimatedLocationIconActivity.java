@@ -194,7 +194,6 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
     locationListener = new LocationEngineListener() {
       @Override
       public void onConnected() {
-
         locationEngine.requestLocationUpdates();
       }
 

@@ -28,9 +28,6 @@ public class MapFragmentActivity extends WearableActivity {
     LocationEngine locationEngine = LocationSource.getLocationEngine(this);
     locationEngine.activate();
 
-
-
-
     locationEngine.addLocationEngineListener(new LocationEngineListener() {
       @Override
       public void onConnected() {

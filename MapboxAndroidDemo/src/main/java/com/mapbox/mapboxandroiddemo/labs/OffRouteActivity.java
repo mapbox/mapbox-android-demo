@@ -45,7 +45,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.mapbox.services.Constants.PRECISION_5;
 import static com.mapbox.services.Constants.PRECISION_6;
 
 public class OffRouteActivity extends AppCompatActivity {
@@ -254,6 +253,13 @@ public class OffRouteActivity extends AppCompatActivity {
   }
 
   private void drawRoute(DirectionsRoute route) {
+
+    map.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+      @Override
+      public boolean onMarkerClick(@NonNull Marker marker) {
+        return false;
+      }
+    });
 
     // Convert the route to latlng values and add to list.
     LineString lineString = LineString.fromPolyline(route.getGeometry(), PRECISION_6);
