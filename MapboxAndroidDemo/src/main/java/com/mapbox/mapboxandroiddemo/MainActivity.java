@@ -53,7 +53,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.DataPointClustersActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_data_clusters_title,
           R.string.activity_style_create_data_cluster_description,
-          new Intent(MainActivity.this, DataPointClustersActivity.class),
+          new Intent(MainActivity.this, GeoJsonClusteringActivity.class),
           R.string.activity_style_create_cluster_data_points_url
         ));
         exampleItemModel.add(new ExampleItemModel(

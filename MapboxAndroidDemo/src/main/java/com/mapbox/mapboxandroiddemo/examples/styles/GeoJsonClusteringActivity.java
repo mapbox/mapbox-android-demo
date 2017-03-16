@@ -32,7 +32,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
-public class DataPointClustersActivity extends AppCompatActivity {
+public class GeoJsonClusteringActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -46,7 +46,7 @@ public class DataPointClustersActivity extends AppCompatActivity {
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the account manager
-    setContentView(R.layout.activity_style_data_point_clusters);
+    setContentView(R.layout.activity_geojson_clustering);
 
     mapView = (MapView) findViewById(R.id.mapView);
 
@@ -61,7 +61,7 @@ public class DataPointClustersActivity extends AppCompatActivity {
 
         addClusteredGeoJsonSource();
 
-        Toast.makeText(DataPointClustersActivity.this, R.string.zoom_map_in_and_out_instruction,
+        Toast.makeText(GeoJsonClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
           Toast.LENGTH_SHORT).show();
       }
     });

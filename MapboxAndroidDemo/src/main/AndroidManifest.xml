@@ -367,7 +367,7 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
-            android:name=".examples.styles.DataPointClustersActivity"
+            android:name=".examples.styles.GeoJsonClusteringActivity"
             android:label="@string/activity_style_data_clusters_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
