@@ -45,9 +45,7 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
-
         addClusteredGeoJsonSource(mapboxMap);
-
       }
     });
   }
@@ -134,7 +132,6 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
     mapboxMap.addLayerBelow(unclustered, "building");
 
     for (int i = 0; i < layers.length; i++) {
-
       CircleLayer circles = new CircleLayer("cluster-" + i, "earthquakes");
       circles.setProperties(
         circleColor(layers[i][1]),
