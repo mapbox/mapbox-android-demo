@@ -112,7 +112,7 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
 
   private void addClusteredGeoJsonSource() {
 
-    // Add a new source from our GeoJSON data and set the 'cluster' option to true.
+    // Add a new source from the GeoJSON data and set the 'cluster' option to true.
     try {
       mapboxMap.addSource(
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
