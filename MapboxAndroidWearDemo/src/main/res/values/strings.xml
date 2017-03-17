@@ -8,5 +8,8 @@
     <!-- Titles -->
     <string name="activity_simple_mapview_title">A simple map view</string>
     <string name="activity_map_fragment_title">Map fragment</string>
+    <string name="activity_map_offline_title">Offline map</string>
+    <string name="download">Download</string>
+    <string name="list">List</string>
 
 </resources>
