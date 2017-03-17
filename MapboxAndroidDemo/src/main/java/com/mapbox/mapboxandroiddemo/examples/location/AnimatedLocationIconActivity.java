@@ -47,6 +47,7 @@ import java.util.List;
  * with this example instead:
  * @see BasicUserLocation
  */
+@SuppressWarnings( {"MissingPermission"})
 public class AnimatedLocationIconActivity extends AppCompatActivity implements PermissionsListener {
 
   private MapView mapView;
@@ -193,6 +194,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
     locationListener = new LocationEngineListener() {
       @Override
       public void onConnected() {
+
         locationEngine.requestLocationUpdates();
       }
 

@@ -131,7 +131,7 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
     unclustered.setFilter(
       neq("cluster", true)
     );
-    mapboxMap.addLayer(unclustered, "building");
+    mapboxMap.addLayerBelow(unclustered, "building");
 
     for (int i = 0; i < layers.length; i++) {
 
@@ -146,7 +146,7 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
           ? gte("point_count", layers[i][0]) :
           all(gte("point_count", layers[i][0]), lt("point_count", layers[i - 1][0]))
       );
-      mapboxMap.addLayer(circles, "building");
+      mapboxMap.addLayerBelow(circles, "building");
     }
   }
 }

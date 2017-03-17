@@ -70,7 +70,7 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
           fillOpacity(0.75f)
         );
 
-        mapboxMap.addLayer(statePopulationLayer, "waterway-label");
+        mapboxMap.addLayerBelow(statePopulationLayer, "waterway-label");
 
         FillLayer countyPopulationLayer = new FillLayer("county-population", "population");
         countyPopulationLayer.withSourceLayer("state_county_population_2014_cen");
@@ -91,7 +91,7 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
           visibility(NONE)
         );
 
-        mapboxMap.addLayer(countyPopulationLayer, "waterway-label");
+        mapboxMap.addLayerBelow(countyPopulationLayer, "waterway-label");
 
         mapboxMap.setOnCameraChangeListener(new MapboxMap.OnCameraChangeListener() {
           @Override
