@@ -47,6 +47,7 @@ import java.util.List;
  * with this example instead:
  * @see BasicUserLocation
  */
+@SuppressWarnings( {"MissingPermission"})
 public class AnimatedLocationIconActivity extends AppCompatActivity implements PermissionsListener {
 
   private MapView mapView;

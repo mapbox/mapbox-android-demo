@@ -45,9 +45,7 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
-
         addClusteredGeoJsonSource(mapboxMap);
-
       }
     });
   }
@@ -131,10 +129,9 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
     unclustered.setFilter(
       neq("cluster", true)
     );
-    mapboxMap.addLayer(unclustered, "building");
+    mapboxMap.addLayerBelow(unclustered, "building");
 
     for (int i = 0; i < layers.length; i++) {
-
       CircleLayer circles = new CircleLayer("cluster-" + i, "earthquakes");
       circles.setProperties(
         circleColor(layers[i][1]),
@@ -146,7 +143,7 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
           ? gte("point_count", layers[i][0]) :
           all(gte("point_count", layers[i][0]), lt("point_count", layers[i - 1][0]))
       );
-      mapboxMap.addLayer(circles, "building");
+      mapboxMap.addLayerBelow(circles, "building");
     }
   }
 }

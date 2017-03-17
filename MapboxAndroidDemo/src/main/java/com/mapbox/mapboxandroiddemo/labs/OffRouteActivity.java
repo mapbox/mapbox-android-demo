@@ -45,7 +45,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.mapbox.services.Constants.PRECISION_5;
+import static com.mapbox.services.Constants.PRECISION_6;
 
 public class OffRouteActivity extends AppCompatActivity {
 
@@ -222,7 +222,7 @@ public class OffRouteActivity extends AppCompatActivity {
       .setAccessToken(Mapbox.getAccessToken())
       .setCoordinates(positions)
       .setProfile(DirectionsCriteria.PROFILE_DRIVING)
-      .setGeometry(DirectionsCriteria.GEOMETRY_POLYLINE)
+      .setGeometry(DirectionsCriteria.GEOMETRY_POLYLINE6)
       .setSteps(true)
       .setOverview(DirectionsCriteria.OVERVIEW_FULL)
       .build();
@@ -252,11 +252,17 @@ public class OffRouteActivity extends AppCompatActivity {
     });
   }
 
-
   private void drawRoute(DirectionsRoute route) {
 
+    map.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+      @Override
+      public boolean onMarkerClick(@NonNull Marker marker) {
+        return false;
+      }
+    });
+
     // Convert the route to latlng values and add to list.
-    LineString lineString = LineString.fromPolyline(route.getGeometry(), PRECISION_5);
+    LineString lineString = LineString.fromPolyline(route.getGeometry(), PRECISION_6);
     List<Position> coordinates = lineString.getCoordinates();
     List<LatLng> newRoutePoints = new ArrayList<>();
     for (int j = 0; j < coordinates.size(); j++) {

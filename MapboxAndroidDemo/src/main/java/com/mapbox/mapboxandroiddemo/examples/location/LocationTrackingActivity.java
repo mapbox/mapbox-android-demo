@@ -96,6 +96,8 @@ public class LocationTrackingActivity extends AppCompatActivity implements Permi
 
   private void enableLocationTracking() {
 
+    map.setMyLocationEnabled(true);
+
     // Disable tracking dismiss on map gesture
     map.getTrackingSettings().setDismissAllTrackingOnGesture(false);
 
