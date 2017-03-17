@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.mas;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.inputmethod.InputMethodManager;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -51,6 +52,7 @@ public class GeocodingActivity extends AppCompatActivity {
     autocomplete.setOnFeatureListener(new GeocoderAutoCompleteView.OnFeatureListener() {
       @Override
       public void onFeatureClick(CarmenFeature feature) {
+        hideOnScreenKeyboard();
         Position position = feature.asPosition();
         updateMap(position.getLatitude(), position.getLongitude());
       }
@@ -112,4 +114,18 @@ public class GeocodingActivity extends AppCompatActivity {
     super.onLowMemory();
     mapView.onLowMemory();
   }
+
+  private void hideOnScreenKeyboard() {
+    try {
+      InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+      if (getCurrentFocus() != null) {
+        imm.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+      }
+    } catch (Exception exception) {
+      throw new RuntimeException(exception);
+    }
+
+  }
+
+
 }

@@ -187,7 +187,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
 
       // Lastly, animate the camera to the new position so the user
       // wont have to search for the marker and then return.
-      map.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 8), apiCallTime);
+      map.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 1), apiCallTime);
       return;
     }
 
