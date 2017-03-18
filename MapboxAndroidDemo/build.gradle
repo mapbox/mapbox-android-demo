@@ -12,8 +12,8 @@ android {
     applicationId "com.mapbox.mapboxandroiddemo"
     minSdkVersion 15
     targetSdkVersion 25
-    versionCode 38
-    versionName "5.0.0-beta.3"
+    versionCode 39
+    versionName "5.0.0"
   }
 
   buildTypes {
@@ -57,7 +57,7 @@ dependencies {
   compile 'com.google.firebase:firebase-crash:10.0.1'
 
   // Mapbox dependencies
-  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.0-beta.3@aar') {
+  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.0@aar') {
     transitive = true
   }
 
