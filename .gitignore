@@ -1,10 +1,9 @@
 .idea/
 *.iml
-.gradle
+settings.gradle
 local.properties
 build
 .DS_Store
+.gradle/
 
 *.properties
-
-*.gradle

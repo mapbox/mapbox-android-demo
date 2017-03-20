@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply from: "$project.rootDir/script-git-version.gradle"
 
 ext {
   supportLibVersion = '25.3.0'
@@ -12,8 +13,8 @@ android {
     applicationId "com.mapbox.mapboxandroiddemo"
     minSdkVersion 15
     targetSdkVersion 25
-    versionCode 38
-    versionName "5.0.0-beta.3"
+    versionCode gitVersionCode
+    versionName gitVersionName
   }
 
   buildTypes {
