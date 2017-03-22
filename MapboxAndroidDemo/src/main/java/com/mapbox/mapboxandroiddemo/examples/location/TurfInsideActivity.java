@@ -64,18 +64,8 @@ public class TurfInsideActivity extends AppCompatActivity {
 
         map = mapboxMap;
 
-
-        //Drawing and display geofence on map
+        // Draw and display GeoJSON polygon on map
         new DrawGeoJson().execute();
-
-        map.setOnCameraChangeListener(new MapboxMap.OnCameraChangeListener() {
-          @Override
-          public void onCameraChange(CameraPosition position) {
-
-
-
-          }
-        });
 
         onMapClick();
 
@@ -136,7 +126,7 @@ public class TurfInsideActivity extends AppCompatActivity {
       public void onMapClick(@NonNull LatLng point) {
 
 
-        //remove marker if already on map
+        // Remove marker if already on map
         if (withinMarker != null) {
           map.removeMarker(withinMarker);
         }
@@ -144,22 +134,22 @@ public class TurfInsideActivity extends AppCompatActivity {
         if (polygon != null) {
 
 
-          //draw marker wherever map was clicked
+          // Draw marker where map was clicked on
           withinMarker = map.addMarker(new MarkerViewOptions().position(point));
 
 
-          //check whether marker is within geofence polygon area
           List<Position> polygonPositions = new ArrayList<>();
           for (LatLng latLng : polygon.getPoints()) {
             polygonPositions.add(Position.fromCoordinates(latLng.getLongitude(), latLng.getLatitude()));
           }
 
-          //create true/false actions depending on whether marker is inside polygon area
+          // Use TurfJoins.inside() to check whether marker is inside of polygon area
           boolean pointWithin = TurfJoins.inside(Position.fromCoordinates(
             withinMarker.getPosition().getLongitude(), withinMarker.getPosition().getLatitude()), polygonPositions);
 
-          if (pointWithin) {
 
+          // Create actions depending on whether the marker is inside polygon area
+          if (pointWithin) {
 
             Snackbar.make(findViewById(android.R.id.content), "Inside", Snackbar.LENGTH_SHORT).show();
 
@@ -179,7 +169,7 @@ public class TurfInsideActivity extends AppCompatActivity {
 
   }
 
-
+  // Async task which uses GeoJSON file to draw polygon on map
   private class DrawGeoJson extends AsyncTask<Void, Void, List<LatLng>> {
     @Override
     protected List<LatLng> doInBackground(Void... voids) {
