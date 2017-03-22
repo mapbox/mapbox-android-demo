@@ -43,6 +43,7 @@ import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
+import com.mapbox.mapboxandroiddemo.examples.mas.TurfInsideActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
@@ -393,6 +394,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_mas_static_image_description,
           new Intent(MainActivity.this, StaticImageActivity.class),
           R.string.activity_mas_static_image_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_location_turf_inside_title,
+          R.string.activity_location_turf_inside_description,
+          new Intent(MainActivity.this, TurfInsideActivity.class),
+          R.string.activity_location_turf_inside_url
         ));
         currentCategory = R.id.nav_mas;
         break;
