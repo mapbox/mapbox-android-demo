@@ -35,7 +35,7 @@ workflows:
         - content: |-
             #!/bin/bash
             echo "Build seperate test apk:"
-            ./gradlew :MapboxAndroidDemo:assembleDebug --continue
+            ./gradlew :MapboxAndroidDemo:assembleGpservicesDebug --continue
 
             # Get authentication secret
             echo "Downloading Google Cloud authentication:"
@@ -61,6 +61,15 @@ workflows:
         - whatsnews_dir: whatsnew
         - service_account_email: ''
         - key_file_path: ''
+    - deploy-to-bitrise-io:
+        inputs:
+        - notify_user_groups: android
+  nogpservices:
+    steps:
+    - gradle-runner:
+        inputs:
+        - gradle_task: "$NO_GPS_GRADLE_TASK"
+    - sign-apk: {}
     - deploy-to-bitrise-io:
         inputs:
         - notify_user_groups: android
