@@ -1,9 +1,9 @@
-package com.mapbox.mapboxandroiddemo.examples;
+package com.mapbox.mapboxandroidweardemo.examples;
 
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 
-import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxandroidweardemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;

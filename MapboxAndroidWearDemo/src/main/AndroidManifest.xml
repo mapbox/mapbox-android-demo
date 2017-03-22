@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.mapbox.mapboxandroiddemo">
+          package="com.mapbox.mapboxandroidweardemo">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-
-    <uses-feature
-        android:name="android.hardware.location.gps"
-        tools:node="remove"/>
-    <uses-feature
-        android:name="android.hardware.wifi"
-        tools:node="remove"/>
 
     <uses-feature android:name="android.hardware.type.watch"/>
 
@@ -26,10 +17,6 @@
         android:theme="@android:style/Theme.DeviceDefault">
 
         <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
-
-        <meta-data
             android:name="com.google.android.wearable.standalone"
             android:value="true"/>
 
@@ -38,7 +25,7 @@
             android:required="false"/>
 
         <activity
-            android:name="com.mapbox.mapboxandroiddemo.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -47,27 +34,27 @@
         </activity>
 
         <activity
-            android:name="com.mapbox.mapboxandroiddemo.examples.SimpleMapViewActivity"
+            android:name=".examples.SimpleMapViewActivity"
             android:label="@string/activity_simple_mapview_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+                android:value=".MainActivity"/>
         </activity>
 
         <activity
-            android:name="com.mapbox.mapboxandroiddemo.examples.MapFragmentActivity"
+            android:name=".examples.MapFragmentActivity"
             android:label="@string/activity_map_fragment_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+                android:value=".MainActivity"/>
         </activity>
 
         <activity
-            android:name="com.mapbox.mapboxandroiddemo.examples.OfflineMapActivity"
+            android:name=".examples.OfflineMapActivity"
             android:label="@string/activity_map_offline_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+                android:value=".MainActivity"/>
         </activity>
 
         <service android:name="com.mapbox.services.android.telemetry.service.TelemetryService"/>

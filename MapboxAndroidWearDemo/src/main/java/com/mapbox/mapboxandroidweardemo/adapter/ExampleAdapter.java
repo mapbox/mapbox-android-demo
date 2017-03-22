@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.adapter;
+package com.mapbox.mapboxandroidweardemo.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
+import com.mapbox.mapboxandroidweardemo.R;
+import com.mapbox.mapboxandroidweardemo.model.ExampleItemModel;
 
 import java.util.ArrayList;
 

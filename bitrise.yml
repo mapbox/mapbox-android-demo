@@ -2,8 +2,6 @@
 format_version: 1.2.0
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 trigger_map:
-- push_branch: nogpservices
-  workflow: nogpservices
 - push_branch: publish
   workflow: publish
 - push_branch: "*"
@@ -37,7 +35,7 @@ workflows:
         - content: |-
             #!/bin/bash
             echo "Build seperate test apk:"
-            ./gradlew :MapboxAndroidDemo:assembleGpservicesDebug --continue
+            ./gradlew :MapboxAndroidDemo:assembleDebug --continue
 
             # Get authentication secret
             echo "Downloading Google Cloud authentication:"
@@ -45,7 +43,7 @@ workflows:
 
             echo "Run tests on firebase:"
             gcloud auth activate-service-account --key-file secret.json --project mapbox-android-demo
-            gcloud beta test android run --type robo --app MapboxAndroidDemo/build/outputs/apk/MapboxAndroidDemo-gpservices-debug.apk --device-ids shamu --os-version-ids 22 --locales en --orientations portrait --timeout 10m
+            gcloud beta test android run --type robo --app MapboxAndroidDemo/build/outputs/apk/MapboxAndroidDemo-debug.apk --device-ids shamu --os-version-ids 22 --locales en --orientations portrait --timeout 10m
     - deploy-to-bitrise-io:
         inputs:
         - notify_user_groups: none
@@ -63,15 +61,6 @@ workflows:
         - whatsnews_dir: whatsnew
         - service_account_email: ''
         - key_file_path: ''
-    - deploy-to-bitrise-io:
-        inputs:
-        - notify_user_groups: android
-  nogpservices:
-    steps:
-    - gradle-runner:
-        inputs:
-        - gradle_task: "$NO_GPS_GRADLE_TASK"
-    - sign-apk: {}
     - deploy-to-bitrise-io:
         inputs:
         - notify_user_groups: android
