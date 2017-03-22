@@ -7,8 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -17,7 +15,6 @@ import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
 import com.mapbox.mapboxsdk.annotations.Polygon;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -72,7 +69,7 @@ public class TurfInsideActivity extends AppCompatActivity {
       }
     });
 
-    Toast.makeText(this, getString(R.string.tap_on_map_geofence_instruction), Toast.LENGTH_SHORT).show();
+    Toast.makeText(this, getString(R.string.tap_on_map_turf_inside_instruction), Toast.LENGTH_SHORT).show();
 
   }
 
@@ -151,11 +148,11 @@ public class TurfInsideActivity extends AppCompatActivity {
           // Create actions depending on whether the marker is inside polygon area
           if (pointWithin) {
 
-            Snackbar.make(findViewById(android.R.id.content), "Inside", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_inside), Snackbar.LENGTH_SHORT).show();
 
           } else {
 
-            Snackbar.make(findViewById(android.R.id.content), "Outside", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_outside), Snackbar.LENGTH_SHORT).show();
 
           }
 
