@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mapbox.mapboxandroiddemo.examples.mas.TurfInsideActivity">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="42.34660109"
+        mapbox:mapbox_cameraTargetLng="-71.0969159"
+        mapbox:mapbox_cameraZoom="16.5"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
+
+
+</RelativeLayout>
