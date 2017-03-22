@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mapbox.mapboxandroiddemo.examples.location.GeoFenceActivity">
-
+    tools:context="com.mapbox.mapboxandroiddemo.examples.location.GeofenceActivity">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
@@ -15,18 +14,8 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="42.34649"
         mapbox:mapbox_cameraTargetLng="-71.09731"
-        mapbox:mapbox_cameraZoom="17"
+        mapbox:mapbox_cameraZoom="16.5"
         mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
 
-    <TextView
-        android:id="@+id/geofenced_marker_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"/>
 
-
-</FrameLayout>
+</RelativeLayout>
