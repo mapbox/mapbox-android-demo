@@ -37,6 +37,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivi
 import com.mapbox.mapboxandroiddemo.examples.location.AnimatedLocationIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.BasicUserLocation;
 import com.mapbox.mapboxandroiddemo.examples.location.CustomizeUserLocationActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.GeoFenceActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationTrackingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
@@ -420,6 +421,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_location_tracking_description,
           new Intent(MainActivity.this, LocationTrackingActivity.class),
           R.string.activity_location_tracking_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_location_geofence_title,
+          R.string.activity_location_geofencing_description,
+          new Intent(MainActivity.this, GeoFenceActivity.class),
+          R.string.activity_location_geofence_url
         ));
         currentCategory = R.id.nav_location;
         break;
