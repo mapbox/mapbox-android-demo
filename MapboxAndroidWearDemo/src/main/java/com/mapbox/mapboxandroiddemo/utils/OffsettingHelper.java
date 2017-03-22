@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroidweardemo.utils;
+package com.mapbox.mapboxandroiddemo.utils;
 
 import android.support.wearable.view.DefaultOffsettingHelper;
 import android.support.wearable.view.WearableRecyclerView;

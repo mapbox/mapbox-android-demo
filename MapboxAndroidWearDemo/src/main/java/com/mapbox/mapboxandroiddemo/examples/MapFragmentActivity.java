@@ -1,11 +1,11 @@
-package com.mapbox.mapboxandroidweardemo.examples;
+package com.mapbox.mapboxandroiddemo.examples;
 
 import android.app.FragmentTransaction;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 
-import com.mapbox.mapboxandroidweardemo.R;
+import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.constants.Style;
