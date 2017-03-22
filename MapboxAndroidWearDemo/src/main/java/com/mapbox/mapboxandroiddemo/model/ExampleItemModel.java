@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroidweardemo.model;
+package com.mapbox.mapboxandroiddemo.model;
 
 import android.content.Intent;
 

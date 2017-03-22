@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply from: "$project.rootDir/script-git-version.gradle"
 
 android {
   compileSdkVersion 25
@@ -9,8 +9,8 @@ android {
     applicationId "com.mapbox.mapboxandroiddemo"
     minSdkVersion 23
     targetSdkVersion 25
-    versionCode 1
-    versionName "5.0.0-beta.3"
+    versionCode gitVersionCode
+    versionName gitVersionName
   }
   buildTypes {
     release {
@@ -28,7 +28,7 @@ dependencies {
   compile 'com.google.android.gms:play-services-wearable:10.2.0'
 
   // Mapbox dependencies
-  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.0-beta.3@aar') {
+  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.0@aar') {
     transitive = true
   }
 }

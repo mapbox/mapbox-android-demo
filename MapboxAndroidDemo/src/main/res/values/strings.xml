@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name" translatable="false">Mapbox Dev Preview</string>
+    <string name="app_name">Mapbox Dev Preview</string>
     <string name="mapbox" translatable="false">Mapbox</string>
     <string name="examples">Android examples</string>
 
@@ -199,9 +199,6 @@
     <string name="activity_lab_off_route_url">http://i.imgur.com/lx1LdkA.png</string>
     <string name="activity_lab_las_angeles_tourism_url">http://i.imgur.com/FUIFkIm.png</string>
     <string name="activity_lab_indoor_map_url">http://i.imgur.com/ItqdTiG.png</string>
-
-    <!-- Firebase Crash -->
-    <string name="firebase_api_key">AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8</string>
 
     <!--Default style names-->
     <string name="menu_map_style_streets">Streets</string>
