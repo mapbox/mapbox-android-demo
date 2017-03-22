@@ -19,13 +19,11 @@ android {
 
   productFlavors {
     gpservices {
-      resValue "string", "app_name", "Mapbox Dev Preview (Google Play services)"
       resValue "string", "firebase_app_id", "1:557332920931:android:bdf11618ae45dd61"
       resValue "string", "firebase_api_key", "AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8"
     }
 
     nogpservices {
-      resValue "string", "app_name", "Mapbox Dev Preview"
     }
   }
 
