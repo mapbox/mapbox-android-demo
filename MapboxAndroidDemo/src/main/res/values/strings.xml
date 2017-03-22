@@ -213,7 +213,7 @@
 
     <!--Tap on map instruction for toast-->
     <string name="tap_on_map_instruction">Tap anywhere on the map</string>
-    <string name="tap_on_map_geofence_instruction">Tap inside of blue geofence area</string>
+    <string name="tap_on_map_geofence_instruction">Tap inside of blue polygon area</string>
 
     <!--Move map instruction for toast-->
     <string name="move_map_instruction">Move map to place\nmarker at desired location</string>
