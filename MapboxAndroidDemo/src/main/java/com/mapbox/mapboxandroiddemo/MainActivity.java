@@ -34,6 +34,7 @@ import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.AnimatedLocationIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.BasicUserLocation;
 import com.mapbox.mapboxandroiddemo.examples.location.CustomizeUserLocationActivity;
@@ -477,6 +478,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_choropleth_zoom_change_description,
           new Intent(MainActivity.this, ChoroplethZoomChangeActivity.class),
           R.string.activity_dds_choropleth_zoom_change_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_dds_style_line_identity_property_title,
+          R.string.activity_dds_style_line_identity_property_description,
+          new Intent(MainActivity.this, StyleLineIdentityPropertyActivity.class),
+          R.string.activity_dds_style_line_identity_property_url,
           true
         ));
         currentCategory = R.id.nav_dds;
