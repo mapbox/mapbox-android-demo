@@ -81,11 +81,12 @@
     <string name="activity_location_tracking_title">Track user location</string>
     <string name="activity_location_animated_icon_title">Animate the user icon</string>
     <string name="activity_location_customize_user_title">Customize user location icon</string>
+    <string name="activity_location_geofence_title">Create a geofence</string>
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
     <string name="activity_mas_simplify_polyline_title">Simplify a polyline</string>
-    <string name="activity_mas_map_matching_title">Map Matching</string>
+    <string name="activity_mas_map_matching_title">Map matching</string>
     <string name="activity_lab_location_picker_title">Location picker</string>
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
     <string name="activity_lab_space_station_location_title">Space station current location</string>
@@ -132,6 +133,7 @@
     <string name="activity_location_tracking_description">Lock the camera centered above the user location.</string>
     <string name="activity_location_animated_icon_description">Use a marker view to mark the users location and add a pulsing animation to it.</string>
     <string name="activity_location_customize_user_description">"Adjust the user location icon's colors and padding so it appears lower on the screen."</string>
+    <string name="activity_location_geofencing_description">Use GeoJSON to create geofences and restrict/enable actions</string>
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
     <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
@@ -185,6 +187,7 @@
     <string name="activity_location_tracking_url">http://i.imgur.com/U3uc32F.png</string>
     <string name="activity_location_animated_icon_url">http://i.imgur.com/dsUKM2i.png</string>
     <string name="activity_location_customize_user_url">http://i.imgur.com/Q6O82JJ.png</string>
+    <string name="activity_location_geofence_url">http://i.imgur.com/G0dxXaI.png</string>
     <string name="activity_mas_directions_url">https://www.mapbox.com/android-sdk/images/directions.png</string>
     <string name="activity_mas_geocoding_url">http://i.imgur.com/mBJGh3P.png</string>
     <string name="activity_mas_static_image_url">https://www.mapbox.com/android-sdk/images/static-image.png</string>
@@ -210,12 +213,19 @@
 
     <!--Tap on map instruction for toast-->
     <string name="tap_on_map_instruction">Tap anywhere on the map</string>
+    <string name="tap_on_map_geofence_instruction">Tap inside of blue geofence area</string>
 
     <!--Move map instruction for toast-->
     <string name="move_map_instruction">Move map to place\nmarker at desired location</string>
 
     <!--Zoom in and out map instruction for toast-->
     <string name="zoom_map_in_and_out_instruction">Zoom in and out to see cluster numbers change</string>
+
+    <!--Geofence textview-->
+    <string name="geofence_marker_status">Marker is inside geofence: %1$s</string>
+    <string name="geofence_marker_status_true">True</string>
+    <string name="geofence_marker_status_false">False</string>
+
 
 
     <!--Tap on feature box instruction-->
@@ -227,5 +237,8 @@
     <!--Geocoding autocomplete activity-->
     <string name="hint_text_in_geocode_widget">Search Location</string>
 
+    <!--Text for buttons that lay on top of map-->
+
+    <string name="button_text_select_a_location">Select A Location</string>
 
 </resources>
