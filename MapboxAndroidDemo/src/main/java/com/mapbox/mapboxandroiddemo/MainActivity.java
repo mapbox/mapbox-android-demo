@@ -37,7 +37,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivi
 import com.mapbox.mapboxandroiddemo.examples.location.AnimatedLocationIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.BasicUserLocation;
 import com.mapbox.mapboxandroiddemo.examples.location.CustomizeUserLocationActivity;
-import com.mapbox.mapboxandroiddemo.examples.location.GeofenceActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.TurfInsideActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationTrackingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
@@ -395,6 +395,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, StaticImageActivity.class),
           R.string.activity_mas_static_image_url
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_location_turf_inside_title,
+          R.string.activity_location_turf_inside_description,
+          new Intent(MainActivity.this, TurfInsideActivity.class),
+          R.string.activity_location_turf_inside_url
+        ));
         currentCategory = R.id.nav_mas;
         break;
       case R.id.nav_location:
@@ -421,12 +427,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_location_tracking_description,
           new Intent(MainActivity.this, LocationTrackingActivity.class),
           R.string.activity_location_tracking_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_location_geofence_title,
-          R.string.activity_location_geofencing_description,
-          new Intent(MainActivity.this, GeofenceActivity.class),
-          R.string.activity_location_geofence_url
         ));
         currentCategory = R.id.nav_location;
         break;

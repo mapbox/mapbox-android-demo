@@ -81,7 +81,7 @@
     <string name="activity_location_tracking_title">Track user location</string>
     <string name="activity_location_animated_icon_title">Animate the user icon</string>
     <string name="activity_location_customize_user_title">Customize user location icon</string>
-    <string name="activity_location_geofence_title">Create a geofence</string>
+    <string name="activity_location_turf_inside_title">Use Java Turf</string>
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
@@ -133,7 +133,7 @@
     <string name="activity_location_tracking_description">Lock the camera centered above the user location.</string>
     <string name="activity_location_animated_icon_description">Use a marker view to mark the users location and add a pulsing animation to it.</string>
     <string name="activity_location_customize_user_description">"Adjust the user location icon's colors and padding so it appears lower on the screen."</string>
-    <string name="activity_location_geofencing_description">Use GeoJSON to create geofences and restrict/enable actions</string>
+    <string name="activity_location_turf_inside_description">Use the Mapbox Turf Java library to determine whether marker/location is within a GeoJSON polygon</string>
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
     <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
@@ -187,7 +187,7 @@
     <string name="activity_location_tracking_url">http://i.imgur.com/U3uc32F.png</string>
     <string name="activity_location_animated_icon_url">http://i.imgur.com/dsUKM2i.png</string>
     <string name="activity_location_customize_user_url">http://i.imgur.com/Q6O82JJ.png</string>
-    <string name="activity_location_geofence_url">http://i.imgur.com/p1KTWpn.png</string>
+    <string name="activity_location_turf_inside_url">http://i.imgur.com/p1KTWpn.png</string>
     <string name="activity_mas_directions_url">https://www.mapbox.com/android-sdk/images/directions.png</string>
     <string name="activity_mas_geocoding_url">http://i.imgur.com/mBJGh3P.png</string>
     <string name="activity_mas_static_image_url">https://www.mapbox.com/android-sdk/images/static-image.png</string>

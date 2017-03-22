@@ -17,6 +17,7 @@ import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
 import com.mapbox.mapboxsdk.annotations.Polygon;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -35,13 +36,12 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GeofenceActivity extends AppCompatActivity {
+public class TurfInsideActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap map;
   private Polygon polygon;
   private Marker withinMarker;
-  private String TAG = "GeofenceActivity";
 
 
   @Override
@@ -68,6 +68,14 @@ public class GeofenceActivity extends AppCompatActivity {
         //Drawing and display geofence on map
         new DrawGeoJson().execute();
 
+        map.setOnCameraChangeListener(new MapboxMap.OnCameraChangeListener() {
+          @Override
+          public void onCameraChange(CameraPosition position) {
+
+
+
+          }
+        });
 
         onMapClick();
 
@@ -218,7 +226,7 @@ public class GeofenceActivity extends AppCompatActivity {
         }
 
       } catch (Exception exception) {
-        Log.e("GeofenceActivity", "Exception Loading GeoJSON: " + exception.toString());
+        Log.e("TurfInsideActivity", "Exception Loading GeoJSON: " + exception.toString());
       }
 
       return points;

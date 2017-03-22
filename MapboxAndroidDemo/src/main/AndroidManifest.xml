@@ -377,8 +377,8 @@
         </activity>
 
         <activity
-            android:name=".examples.location.GeofenceActivity"
-            android:label="@string/activity_location_geofence_title">
+            android:name=".examples.location.TurfInsideActivity"
+            android:label="@string/activity_location_turf_inside_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
