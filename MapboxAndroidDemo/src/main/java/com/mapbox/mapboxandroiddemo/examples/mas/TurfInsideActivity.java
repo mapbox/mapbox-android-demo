@@ -2,10 +2,10 @@ package com.mapbox.mapboxandroiddemo.examples.mas;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -33,7 +33,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TurfInsideActivity extends AppCompatActivity {
+public class TurfInsideActivity extends AppCompatActivity implements MapboxMap.OnMapClickListener {
 
   private MapView mapView;
   private MapboxMap map;
@@ -64,10 +64,12 @@ public class TurfInsideActivity extends AppCompatActivity {
         // Draw and display GeoJSON polygon on map
         new DrawGeoJson().execute();
 
-        onMapClick();
+        map.setOnMapClickListener(TurfInsideActivity.this);
+
 
       }
     });
+
 
     Toast.makeText(this, getString(R.string.tap_on_map_turf_inside_instruction), Toast.LENGTH_SHORT).show();
 
@@ -116,55 +118,48 @@ public class TurfInsideActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  public void onMapClick() {
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
 
-    map.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
-      @Override
-      public void onMapClick(@NonNull LatLng point) {
+    // Remove marker if already on map
+    if (withinMarker != null) {
+      map.removeMarker(withinMarker);
+    }
 
-
-        // Remove marker if already on map
-        if (withinMarker != null) {
-          map.removeMarker(withinMarker);
-        }
-
-        if (polygon != null) {
+    if (polygon != null) {
 
 
-          // Draw marker where map was clicked on
-          withinMarker = map.addMarker(new MarkerViewOptions().position(point));
+      // Draw marker where map was clicked on
+      withinMarker = map.addMarker(new MarkerViewOptions().position(point));
 
 
-          List<Position> polygonPositions = new ArrayList<>();
-          for (LatLng latLng : polygon.getPoints()) {
-            polygonPositions.add(Position.fromCoordinates(latLng.getLongitude(), latLng.getLatitude()));
-          }
+      List<Position> polygonPositions = new ArrayList<>();
+      for (LatLng latLng : polygon.getPoints()) {
+        polygonPositions.add(Position.fromCoordinates(latLng.getLongitude(), latLng.getLatitude()));
+      }
 
-          // Use TurfJoins.inside() to check whether marker is inside of polygon area
-          boolean pointWithin = TurfJoins.inside(Position.fromCoordinates(
-            withinMarker.getPosition().getLongitude(), withinMarker.getPosition().getLatitude()), polygonPositions);
-
-
-          // Create actions depending on whether the marker is inside polygon area
-          if (pointWithin) {
-
-            Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_inside), Snackbar.LENGTH_SHORT).show();
-
-          } else {
-
-            Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_outside), Snackbar.LENGTH_SHORT).show();
-
-          }
+      // Use TurfJoins.inside() to check whether marker is inside of polygon area
+      boolean pointWithin = TurfJoins.inside(Position.fromCoordinates(
+        withinMarker.getPosition().getLongitude(), withinMarker.getPosition().getLatitude()), polygonPositions);
 
 
-        }
+      // Create actions depending on whether the marker is inside polygon area
+      if (pointWithin) {
 
+        Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_inside), Snackbar.LENGTH_SHORT).show();
+
+      } else {
+
+        Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_outside), Snackbar.LENGTH_SHORT).show();
 
       }
-    });
+
+
+    }
 
 
   }
+
 
   // Async task which uses GeoJSON file to draw polygon on map
   private class DrawGeoJson extends AsyncTask<Void, Void, List<LatLng>> {
