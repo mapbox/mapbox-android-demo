@@ -28,7 +28,7 @@ dependencies {
   compile 'com.google.android.gms:play-services-wearable:10.2.0'
 
   // Mapbox dependencies
-  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.0@aar') {
+  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.1@aar') {
     transitive = true
   }
 }
