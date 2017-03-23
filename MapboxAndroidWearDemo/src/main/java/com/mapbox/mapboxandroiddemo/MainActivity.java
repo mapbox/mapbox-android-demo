@@ -6,6 +6,7 @@ import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.WearableRecyclerView;
 
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
+import com.mapbox.mapboxandroiddemo.examples.LocationTrackingActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.OfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.SimpleMapViewActivity;
@@ -38,6 +39,8 @@ public class MainActivity extends WearableActivity implements ExampleAdapter.Ite
       R.drawable.simple_map_view_screen, new Intent(MainActivity.this, MapFragmentActivity.class)));
     exampleItemModels.add(new ExampleItemModel(R.string.activity_map_offline_title,
       R.drawable.simple_map_view_screen, new Intent(MainActivity.this, OfflineMapActivity.class)));
+    exampleItemModels.add(new ExampleItemModel(R.string.activity_location_tracking_title,
+      R.drawable.simple_map_view_screen, new Intent(MainActivity.this, LocationTrackingActivity.class)));
 
     ExampleAdapter exampleAdapter = new ExampleAdapter(MainActivity.this, exampleItemModels);
     wearableRecyclerView.setAdapter(exampleAdapter);
