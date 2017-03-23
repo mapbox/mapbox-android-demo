@@ -183,7 +183,7 @@
     <string name="activity_offline_manager_url">https://www.mapbox.com/android-sdk/images/offline-manager.gif</string>
     <string name="activity_query_select_building_url">http://i.imgur.com/bImud7u.png</string>
     <string name="activity_query_feature_url">http://i.imgur.com/HXxRBAF.png</string>
-    <string name="activity_query_feature_count_url">http://i.imgur.com/RHpFNas.png</string>
+    <string name="activity_query_feature_count_url">http://i.imgur.com/phzOt81.png</string>
     <string name="activity_location_basic_image_url">http://i.imgur.com/5BzH5YF.png</string> <!--https://www.mapbox.com/android-sdk/images/user-location.png-->
     <string name="activity_location_tracking_url">http://i.imgur.com/U3uc32F.png</string>
     <string name="activity_location_animated_icon_url">http://i.imgur.com/dsUKM2i.png</string>
