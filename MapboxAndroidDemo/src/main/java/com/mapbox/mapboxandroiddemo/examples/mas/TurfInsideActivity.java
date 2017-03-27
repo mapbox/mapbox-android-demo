@@ -146,11 +146,13 @@ public class TurfInsideActivity extends AppCompatActivity implements MapboxMap.O
       // Create actions depending on whether the marker is inside polygon area
       if (pointWithin) {
 
-        Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_inside), Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_inside),
+          Snackbar.LENGTH_SHORT).show();
 
       } else {
 
-        Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_outside), Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_outside),
+          Snackbar.LENGTH_SHORT).show();
 
       }
 
