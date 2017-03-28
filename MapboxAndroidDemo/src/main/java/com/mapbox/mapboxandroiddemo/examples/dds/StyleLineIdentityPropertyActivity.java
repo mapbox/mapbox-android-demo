@@ -1,28 +1,25 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
-import com.mapbox.services.commons.geojson.FeatureCollection;
-import com.mapbox.services.commons.geojson.LineString;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.services.commons.models.Position;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
 public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
 
@@ -49,8 +46,43 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
 
         map = mapboxMap;
 
-        // Draw lines on the map
-        new loadJsonFromAsset().execute();
+        // Add GeoJSON from file and add to map
+
+        GeoJsonSource linesSource = new GeoJsonSource("lines", loadJsonFromAsset("golden_gate_lines.geojson"));
+        mapboxMap.addSource(linesSource);
+
+        // Draw red and blue lines on map
+//        drawLines();
+
+       /* LineLayer redLine = new LineLayer("redLine", "line-source");
+
+        redLine.setProperties(
+          PropertyFactory.lineColor(Color.parseColor("#FFDE3030")),
+          PropertyFactory.visibility(Property.VISIBLE),
+          PropertyFactory.lineWidth(3f)
+        );
+
+        LineLayer blueLine = new LineLayer("blueLine", "line-source");
+
+        blueLine.setProperties(
+          PropertyFactory.lineColor(Color.parseColor("#FF3FA3E8")),
+          PropertyFactory.visibility(Property.VISIBLE),
+          PropertyFactory.lineWidth(3f)
+
+        );
+
+        map.addLayer(redLine);
+        map.addLayer(blueLine);
+*/
+
+        LineLayer linesLayer = new LineLayer("finalLines", "lines").withProperties(
+          fillColor(Color.parseColor("#FFDE3030")),
+          PropertyFactory.visibility(Property.VISIBLE),
+          PropertyFactory.lineWidth(3f)
+        );
+
+        mapboxMap.addLayer(linesLayer);
+
 
       }
     });
@@ -98,69 +130,33 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  private class loadJsonFromAsset extends AsyncTask<Void, Void, List<LatLng>> {
-    @Override
-    protected List<LatLng> doInBackground(Void... voids) {
-
-      ArrayList<LatLng> points = new ArrayList<>();
-
-      try {
-        // Load GeoJSON file
-        InputStream inputStream = getAssets().open("golden_gate_lines.geojson");
-        BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-          sb.append((char) cp);
-        }
-
-        inputStream.close();
-
-        Log.d(TAG, "doInBackground: sb.toString() = "+ sb.toString());
-
-        FeatureCollection featureCollection = FeatureCollection.fromJson(sb.toString());
-        Log.d(TAG, "doInBackground: featureCollection = " + featureCollection);
+  private String loadJsonFromAsset(String filename) {
 
 
-        LineString lineString = (LineString) featureCollection.getFeatures().get(0).getGeometry();
-        Log.d(TAG, "doInBackground: lineString = " + lineString);
+    try {
+      // Load GeoJSON file
+      InputStream is = getAssets().open(filename);
+      int size = is.available();
+      byte[] buffer = new byte[size];
+      is.read(buffer);
+      is.close();
 
-      } catch (Exception exception) {
-        Log.e("StyleLineActivity", "Exception Loading GeoJSON: " + exception.toString());
-      }
+      return new String(buffer, "UTF-8");
 
-      return points;
+    } catch (Exception exception) {
+      Log.e("StyleLineActivity", "Exception Loading GeoJSON: " + exception.toString());
+      exception.printStackTrace();
+      return null;
     }
 
-    @Override
-    protected void onPostExecute(List<LatLng> points) {
-      super.onPostExecute(points);
-
-
-      LineLayer redLine = new LineLayer("redLine", "line-source");
-
-      redLine.setProperties(
-        PropertyFactory.lineColor(Color.parseColor("#FFDE3030")),
-        PropertyFactory.lineWidth(3f)
-
-      );
-
-      LineLayer blueLine = new LineLayer("blueLine", "line-source");
-
-      blueLine.setProperties(
-        PropertyFactory.lineColor(Color.parseColor("#FF3FA3E8")),
-        PropertyFactory.lineWidth(3f)
-
-      );
-
-      map.addLayer(redLine);
-      map.addLayer(blueLine);
-
-
-
-
-
-    }
   }
+
+
+  private void drawLines() {
+
+
+  }
+
+
 }
 
