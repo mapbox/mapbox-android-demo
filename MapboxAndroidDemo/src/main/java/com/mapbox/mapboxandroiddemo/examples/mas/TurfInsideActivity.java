@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.Polygon;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -33,13 +33,12 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TurfInsideActivity extends AppCompatActivity implements MapboxMap.OnMapClickListener {
+public class TurfInsideActivity extends AppCompatActivity implements MapboxMap.OnMapClickListener, OnMapReadyCallback {
 
   private MapView mapView;
   private MapboxMap map;
   private Polygon polygon;
   private Marker withinMarker;
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -52,30 +51,55 @@ public class TurfInsideActivity extends AppCompatActivity implements MapboxMap.O
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_turf_inside);
 
-
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-
-        map = mapboxMap;
-
-        // Draw and display GeoJSON polygon on map
-        new DrawGeoJson().execute();
-
-        map.setOnMapClickListener(TurfInsideActivity.this);
-
-
-      }
-    });
-
+    mapView.getMapAsync(this);
 
     Toast.makeText(this, getString(R.string.tap_on_map_turf_inside_instruction), Toast.LENGTH_SHORT).show();
-
   }
 
-  // Add the mapView lifecycle to the activity's lifecycle methods
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    map = mapboxMap;
+    map.setOnMapClickListener(TurfInsideActivity.this);
+
+    // Draw and display GeoJSON polygon on map
+    new DrawGeoJson().execute();
+  }
+
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
+
+    // Remove marker if already on map
+    if (withinMarker != null) {
+      map.removeMarker(withinMarker);
+    }
+
+    if (polygon != null) {
+      // Draw marker where map was clicked on
+      withinMarker = map.addMarker(new MarkerOptions().position(point));
+
+      List<Position> polygonPositions = new ArrayList<>();
+      for (LatLng latLng : polygon.getPoints()) {
+        polygonPositions.add(Position.fromCoordinates(latLng.getLongitude(), latLng.getLatitude()));
+      }
+
+      // Use TurfJoins.inside() to check whether marker is inside of polygon area
+      boolean pointWithin = TurfJoins.inside(Position.fromCoordinates(
+        withinMarker.getPosition().getLongitude(), withinMarker.getPosition().getLatitude()), polygonPositions);
+
+      // Create actions depending on whether the marker is inside polygon area
+      if (pointWithin) {
+        Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_inside),
+          Snackbar.LENGTH_SHORT).show();
+
+      } else {
+        Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_outside),
+          Snackbar.LENGTH_SHORT).show();
+      }
+    }
+  }
+
   @Override
   protected void onStart() {
     super.onStart();
@@ -118,51 +142,6 @@ public class TurfInsideActivity extends AppCompatActivity implements MapboxMap.O
     mapView.onSaveInstanceState(outState);
   }
 
-  @Override
-  public void onMapClick(@NonNull LatLng point) {
-
-    // Remove marker if already on map
-    if (withinMarker != null) {
-      map.removeMarker(withinMarker);
-    }
-
-    if (polygon != null) {
-
-
-      // Draw marker where map was clicked on
-      withinMarker = map.addMarker(new MarkerViewOptions().position(point));
-
-
-      List<Position> polygonPositions = new ArrayList<>();
-      for (LatLng latLng : polygon.getPoints()) {
-        polygonPositions.add(Position.fromCoordinates(latLng.getLongitude(), latLng.getLatitude()));
-      }
-
-      // Use TurfJoins.inside() to check whether marker is inside of polygon area
-      boolean pointWithin = TurfJoins.inside(Position.fromCoordinates(
-        withinMarker.getPosition().getLongitude(), withinMarker.getPosition().getLatitude()), polygonPositions);
-
-
-      // Create actions depending on whether the marker is inside polygon area
-      if (pointWithin) {
-
-        Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_inside),
-          Snackbar.LENGTH_SHORT).show();
-
-      } else {
-
-        Snackbar.make(findViewById(android.R.id.content), getString(R.string.turf_inside_marker_status_outside),
-          Snackbar.LENGTH_SHORT).show();
-
-      }
-
-
-    }
-
-
-  }
-
-
   // Async task which uses GeoJSON file to draw polygon on map
   private class DrawGeoJson extends AsyncTask<Void, Void, List<LatLng>> {
     @Override
@@ -171,7 +150,6 @@ public class TurfInsideActivity extends AppCompatActivity implements MapboxMap.O
       ArrayList<LatLng> points = new ArrayList<>();
 
       try {
-
 
         // Load GeoJSON file
         InputStream inputStream = getAssets().open("fenway_park_geofence.geojson");
@@ -212,7 +190,6 @@ public class TurfInsideActivity extends AppCompatActivity implements MapboxMap.O
       } catch (Exception exception) {
         Log.e("TurfInsideActivity", "Exception Loading GeoJSON: " + exception.toString());
       }
-
       return points;
     }
 
@@ -231,5 +208,4 @@ public class TurfInsideActivity extends AppCompatActivity implements MapboxMap.O
       }
     }
   }
-
 }
