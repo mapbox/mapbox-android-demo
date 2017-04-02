@@ -22,6 +22,7 @@ import com.mapbox.services.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.services.commons.geojson.LineString;
 import com.mapbox.services.commons.models.Position;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -76,16 +77,12 @@ public class DirectionsActivity extends AppCompatActivity {
           .snippet("Plaza del Triunfo"));
 
         // Get route from API
-        try {
-          getRoute(origin, destination);
-        } catch (ServicesException servicesException) {
-          servicesException.printStackTrace();
-        }
+        getRoute(origin, destination);
       }
     });
   }
 
-  private void getRoute(Position origin, Position destination) throws ServicesException {
+  private void getRoute(Position origin, Position destination) {
 
     client = new MapboxDirections.Builder()
       .setOrigin(origin)
@@ -98,6 +95,8 @@ public class DirectionsActivity extends AppCompatActivity {
     client.enqueueCall(new Callback<DirectionsResponse>() {
       @Override
       public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
+        System.out.println(call.request().url().toString());
+
         // You can get the generic HTTP info about the response
         Log.d(TAG, "Response code: " + response.code());
         if (response.body() == null) {
