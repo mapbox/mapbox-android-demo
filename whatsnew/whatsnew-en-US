@@ -1,1 +1,1 @@
-Update Mapbox GL Android SDK to 5.0.0
+This a minor release that fixes a shader precision issue that created a rendering problem on some devices.

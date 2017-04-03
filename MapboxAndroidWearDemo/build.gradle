@@ -14,7 +14,7 @@ android {
   }
   buildTypes {
     release {
-      minifyEnabled false
+      minifyEnabled true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
@@ -26,9 +26,9 @@ dependencies {
   provided 'com.google.android.wearable:wearable:2.0.0'
   compile 'com.google.android.support:wearable:2.0.0'
   compile 'com.google.android.gms:play-services-wearable:10.2.0'
-
+  compile 'com.google.android.gms:play-services-location:10.2.0'
   // Mapbox dependencies
-  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.0@aar') {
+  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.1@aar') {
     transitive = true
   }
 }
