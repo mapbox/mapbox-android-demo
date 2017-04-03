@@ -14,10 +14,8 @@ import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.services.commons.models.Position;
 
 import java.io.InputStream;
-import java.util.List;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
@@ -50,15 +48,15 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
 
         GeoJsonSource linesSource = new GeoJsonSource("lines", loadJsonFromAsset("golden_gate_lines.geojson"));
 
-//        TODO: Figure out how to filter for red and blue lines
-//        linesSource.querySourceFeatures()
+        //   TODO: Figure out how to filter for red and blue lines
+        // linesSource.querySourceFeatures()
 
         mapboxMap.addSource(linesSource);
 
         // Draw red and blue lines on map
-//        drawLines();
+        //   drawLines();
 
-       /* LineLayer redLine = new LineLayer("redLine", "line-source");
+        /* LineLayer redLine = new LineLayer("redLine", "line-source");
 
         redLine.setProperties(
           PropertyFactory.lineColor(Color.parseColor("#FFDE3030")),
