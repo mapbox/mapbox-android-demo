@@ -10,10 +10,6 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.CategoricalStops;
-import com.mapbox.mapboxsdk.style.functions.stops.IntervalStops;
-import com.mapbox.mapboxsdk.style.layers.Filter;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
@@ -21,11 +17,7 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.InputStream;
 
-import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 
 public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
 
@@ -57,35 +49,42 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
         GeoJsonSource linesSource = new GeoJsonSource("lines", loadJsonFromAsset("golden_gate_lines.geojson"));
 
         //   TODO: Figure out how to filter for red and blue lines
+        // linesSource.querySourceFeatures()
 
         mapboxMap.addSource(linesSource);
 
         // Draw red and blue lines on map
+        //   drawLines();
 
-        // Draw red line
-        LineLayer redLine = new LineLayer("finalLines", "lines");
+        /* LineLayer redLine = new LineLayer("redLine", "line-source");
 
-        redLine.setFilter(Filter.eq("color", "red"));
-        redLine.withProperties(
+        redLine.setProperties(
+          PropertyFactory.lineColor(Color.parseColor("#FFDE3030")),
+          PropertyFactory.visibility(Property.VISIBLE),
+          PropertyFactory.lineWidth(3f)
+        );
+
+        LineLayer blueLine = new LineLayer("blueLine", "line-source");
+
+        blueLine.setProperties(
+          PropertyFactory.lineColor(Color.parseColor("#FF3FA3E8")),
+          PropertyFactory.visibility(Property.VISIBLE),
+          PropertyFactory.lineWidth(3f)
+
+        );
+
+        map.addLayer(redLine);
+        map.addLayer(blueLine);
+*/
+
+        LineLayer linesLayer = new LineLayer("finalLines", "lines").withProperties(
           fillColor(Color.parseColor("#FFDE3030")),
           PropertyFactory.visibility(Property.VISIBLE),
           PropertyFactory.lineWidth(3f)
         );
 
-        mapboxMap.addLayer(redLine);
+        mapboxMap.addLayer(linesLayer);
 
-        // Draw blue line
-
-        LineLayer blueLine = new LineLayer("finalLines", "lines");
-
-        blueLine.setFilter(Filter.eq("color", "blue"));
-        blueLine.withProperties(
-          fillColor(Color.parseColor("#FFDE3030")),
-          PropertyFactory.visibility(Property.VISIBLE),
-          PropertyFactory.lineWidth(3f)
-        );
-
-        mapboxMap.addLayer(blueLine);
 
       }
     });
