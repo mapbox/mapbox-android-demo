@@ -10,7 +10,6 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.layers.Filter;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
@@ -18,13 +17,13 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.InputStream;
 
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
+import static com.mapbox.mapboxsdk.style.functions.Function.property;
+import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
+import static com.mapbox.mapboxsdk.style.functions.stops.Stops.categorical;
 
 public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
 
   private MapView mapView;
-  private MapboxMap map;
-  private String TAG = "StyleLineActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +42,8 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
 
-        map = mapboxMap;
 
-        // Add GeoJSON from file and add to map
+        // Retrerive GeoJSON from file and add to map
 
         GeoJsonSource linesSource = new GeoJsonSource("lines", loadJsonFromAsset("golden_gate_lines.geojson"));
 
@@ -55,32 +53,20 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
 
         // Draw red and blue lines on map
 
-        // Draw red line
-        LineLayer redLine = new LineLayer("redLine", "lines");
-
-        redLine.setFilter(Filter.eq("color", "red"));
-        redLine.withProperties(
-          fillColor("#FFFFFF"),
+        LineLayer linesLayer = new LineLayer("finalLines", "lines").withProperties(
+          PropertyFactory.lineColor(
+            property(
+              "color",
+              categorical(
+                stop("red", PropertyFactory.lineColor(Color.parseColor("#F7455D"))),
+                stop("blue", PropertyFactory.lineColor(Color.parseColor("#33C9EB")))
+              ))
+          ),
           PropertyFactory.visibility(Property.VISIBLE),
           PropertyFactory.lineWidth(3f)
         );
 
-        mapboxMap.addLayer(redLine);
-
-
-        LineLayer blueLine = new LineLayer("blueLine", "lines");
-
-        blueLine.setFilter(Filter.eq("color", "blue"));
-        blueLine.withProperties(
-          fillColor("#000000"),
-          PropertyFactory.visibility(Property.VISIBLE),
-          PropertyFactory.lineWidth(3f)
-        );
-
-
-        mapboxMap.addLayer(blueLine);
-
-
+        mapboxMap.addLayer(linesLayer);
       }
     });
   }
