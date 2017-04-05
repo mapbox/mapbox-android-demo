@@ -43,15 +43,13 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
       public void onMapReady(final MapboxMap mapboxMap) {
 
 
-        // Retrerive GeoJSON from file and add to map
+        // Retrieve GeoJSON from local file and add it to the map
 
-        GeoJsonSource linesSource = new GeoJsonSource("lines", loadJsonFromAsset("golden_gate_lines.geojson"));
-
-        //   TODO: Figure out how to filter for red and blue lines
+        GeoJsonSource linesSource = new GeoJsonSource("lines", loadGeoJsonFromAsset("golden_gate_lines.geojson"));
 
         mapboxMap.addSource(linesSource);
 
-        // Draw red and blue lines on map
+        // Create LineLayer, use lineColor, and stop to draw red and blue lines on map
 
         LineLayer linesLayer = new LineLayer("finalLines", "lines").withProperties(
           PropertyFactory.lineColor(
@@ -65,6 +63,8 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
           PropertyFactory.visibility(Property.VISIBLE),
           PropertyFactory.lineWidth(3f)
         );
+
+        // Add LineLayer to map
 
         mapboxMap.addLayer(linesLayer);
       }
@@ -113,7 +113,7 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  private String loadJsonFromAsset(String filename) {
+  private String loadGeoJsonFromAsset(String filename) {
 
     try {
       // Load GeoJSON file
