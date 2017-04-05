@@ -238,14 +238,14 @@ public class OffRouteActivity extends AppCompatActivity {
         }
 
         // check if the route is found, else display a message saying no routes found.
-        if(response.body().getRoutes().size()>0) {
+        if (response.body().getRoutes().size() > 0) {
           // Print some info about the route
           currentRoute = response.body().getRoutes().get(0);
           Log.d(TAG, "Distance: " + currentRoute.getDistance());
 
           // Draw the route on the map
           drawRoute(currentRoute);
-        }else{
+        } else {
           Toast.makeText(OffRouteActivity.this, "No routes found", Toast.LENGTH_LONG).show();
           return;
         }
