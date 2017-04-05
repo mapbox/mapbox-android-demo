@@ -32,6 +32,7 @@ import java.util.List;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 public class IndoorMapActivity extends AppCompatActivity {
@@ -196,10 +197,10 @@ public class IndoorMapActivity extends AppCompatActivity {
     LineLayer indoorBuildingLineLayer = new LineLayer("indoor-building-line", "indoor-building").withProperties(
       lineColor(Color.parseColor("#50667f")),
       lineWidth(0.5f),
-      fillOpacity(Function.zoom(Stops.exponential(
-        Stop.stop(17f, fillOpacity(1f)),
-        Stop.stop(16.5f, fillOpacity(0.5f)),
-        Stop.stop(16f, fillOpacity(0f))
+      lineOpacity(Function.zoom(Stops.exponential(
+        Stop.stop(17f, lineOpacity(1f)),
+        Stop.stop(16.5f, lineOpacity(0.5f)),
+        Stop.stop(16f, lineOpacity(0f))
       )))
 
     );
