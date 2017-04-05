@@ -10,6 +10,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.layers.Filter;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
@@ -49,41 +50,35 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
         GeoJsonSource linesSource = new GeoJsonSource("lines", loadJsonFromAsset("golden_gate_lines.geojson"));
 
         //   TODO: Figure out how to filter for red and blue lines
-        // linesSource.querySourceFeatures()
 
         mapboxMap.addSource(linesSource);
 
         // Draw red and blue lines on map
-        //   drawLines();
 
-        /* LineLayer redLine = new LineLayer("redLine", "line-source");
+        // Draw red line
+        LineLayer redLine = new LineLayer("redLine", "lines");
 
-        redLine.setProperties(
-          PropertyFactory.lineColor(Color.parseColor("#FFDE3030")),
+        redLine.setFilter(Filter.eq("color", "red"));
+        redLine.withProperties(
+          fillColor("#FFFFFF"),
           PropertyFactory.visibility(Property.VISIBLE),
           PropertyFactory.lineWidth(3f)
         );
 
-        LineLayer blueLine = new LineLayer("blueLine", "line-source");
+        mapboxMap.addLayer(redLine);
 
-        blueLine.setProperties(
-          PropertyFactory.lineColor(Color.parseColor("#FF3FA3E8")),
-          PropertyFactory.visibility(Property.VISIBLE),
-          PropertyFactory.lineWidth(3f)
 
-        );
+        LineLayer blueLine = new LineLayer("blueLine", "lines");
 
-        map.addLayer(redLine);
-        map.addLayer(blueLine);
-*/
-
-        LineLayer linesLayer = new LineLayer("finalLines", "lines").withProperties(
-          fillColor(Color.parseColor("#FFDE3030")),
+        blueLine.setFilter(Filter.eq("color", "blue"));
+        blueLine.withProperties(
+          fillColor("#000000"),
           PropertyFactory.visibility(Property.VISIBLE),
           PropertyFactory.lineWidth(3f)
         );
 
-        mapboxMap.addLayer(linesLayer);
+
+        mapboxMap.addLayer(blueLine);
 
 
       }
