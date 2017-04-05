@@ -159,9 +159,9 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
           public void onFailure(Call<IssModel> call, Throwable throwable) {
             // If retrofit fails or the API was unreachable, an error will be called.
             //to check if throwable is null, then give a custom message.
-            if (throwable.getMessage() == null){
+            if (throwable.getMessage() == null) {
               Log.e(TAG, "Http connection failed");
-            }else{
+            } else {
               Log.e(TAG, throwable.getMessage());
             }
 
