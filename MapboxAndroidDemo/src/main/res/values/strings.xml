@@ -63,6 +63,7 @@
     <string name="activity_style_symbol_layer_title">Marker symbol layer</string>
     <string name="activity_dds_style_circle_categorically_title">Style circles categorically</string>
     <string name="activity_dds_choropleth_zoom_change_title">Update a choropleth layer by zoom level</string>
+    <string name="activity_dds_json_vector_mix__title">Join local JSON data with vector tile geometries</string>
     <string name="activity_annotation_marker_title">Draw a marker</string>
     <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
     <string name="activity_annotation_geojson_line_title">Draw a GeoJSON line</string>
@@ -114,7 +115,8 @@
     <string name="activity_style_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
     <string name="activity_style_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
     <string name="activity_dds_style_circle_categorically_description">Using a categorical circle-color property function for a visualization.</string>
-    <string name="activity_dds_choropleth_zoom_change_description">Using 2014 census data, display state or county population depending on zoom level.</string>
+    <string name="activity_dds_choropleth_zoom_change_description">Style a choropleth by merging local JSON data with vector tile geometries.</string>
+    <string name="activity_dds_json_vector_mix__description">Using 2014 census data, display state or county population depending on zoom level.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
@@ -157,7 +159,7 @@
     <string name="activity_style_default_url">http://i.imgur.com/ZuUhFHw.jpg</string>
     <string name="activity_style_zoom_dependent_fill_color_url">http://i.imgur.com/rHl1pmC.png</string>
     <string name="activity_styles_color_switcher_url">http://i.imgur.com/a0ZaKHG.png</string>
-    <string name="activity_styles_langauge_switch_url">http://i.imgur.com/bu7GV5T.png</string>
+    <string name="activity_styles_language_switch_url">http://i.imgur.com/bu7GV5T.png</string>
     <string name="activity_styles_show_hide_layer_url">http://i.imgur.com/amDMa1M.png</string>
     <string name="activity_styles_geojson_layer_in_stack_url">http://i.imgur.com/mngiJUj.png</string>
     <string name="activity_styles_adjust_layer_opacity_url">http://i.imgur.com/0Av8kWD.png</string>
@@ -169,6 +171,7 @@
     <string name="activity_style_symbol_layer_url">http://i.imgur.com/TQ4iA0L.png</string>
     <string name="activity_dds_style_circle_categorically_url">http://i.imgur.com/C3mtfgF.png</string>
     <string name="activity_dds_choropleth_zoom_change_url">http://i.imgur.com/sPNpLEP.png</string>
+    <string name="activity_dds_json_vector_mix_url">http://i.imgur.com/0hq5SY6.png</string>
     <string name="activity_annotation_marker_url">https://www.mapbox.com/android-sdk/images/marker.png</string>
     <string name="activity_annotation_custom_marker_url">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
     <string name="activity_annotation_geojson_line_url">https://www.mapbox.com/android-sdk/images/geojson.png</string>
