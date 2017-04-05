@@ -32,6 +32,7 @@ import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.AnimatedLocationIconActivity;
@@ -244,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_langauge_switch_title,
           R.string.activity_styles_langauge_switch_description,
           new Intent(MainActivity.this, LanguageSwitchActivity.class),
-          R.string.activity_styles_langauge_switch_url
+          R.string.activity_styles_language_switch_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_styles_show_hide_layer_title,
@@ -486,9 +487,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_choropleth_zoom_change_url,
           true
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_dds_json_vector_mix__title,
+          R.string.activity_dds_json_vector_mix__description,
+          new Intent(MainActivity.this, ChoroplethJsonVectorMixActivity.class),
+          R.string.activity_dds_json_vector_mix_url,
+          true
+        ));
         currentCategory = R.id.nav_dds;
         break;
-
       default:
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_basic_simple_mapview_title,
