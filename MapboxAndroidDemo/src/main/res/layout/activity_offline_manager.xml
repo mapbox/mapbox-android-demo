@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorAccent"
         android:elevation="8dp"
         android:orientation="horizontal"
         android:paddingTop="8dp">
@@ -50,7 +50,7 @@
             android:drawableTop="@drawable/ic_get_app_24dp"
             android:text="Download"
             android:textAllCaps="false"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/mapboxWhite"
             android:textSize="12sp"/>
 
         <Button
@@ -63,7 +63,7 @@
             android:drawableTop="@drawable/ic_list_24dp"
             android:text="List"
             android:textAllCaps="false"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/mapboxWhite"
             android:textSize="12sp"/>
 
     </LinearLayout>
