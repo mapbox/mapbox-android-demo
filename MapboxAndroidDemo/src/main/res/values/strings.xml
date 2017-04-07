@@ -233,5 +233,10 @@
     <string name="turf_inside_marker_status_inside">Inside</string>
     <string name="turf_inside_marker_status_outside">Outside</string>
 
+    <!--Offline manager button text-->
+    <string name="offline_manager_download_button_text">Download</string>
+    <string name="offline_manager_list_button_text">List</string>
+
+
 
 </resources>

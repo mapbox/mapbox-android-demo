@@ -48,7 +48,7 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:drawableTop="@drawable/ic_get_app_24dp"
-            android:text="Download"
+            android:text="@string/offline_manager_download_button_text"
             android:textAllCaps="false"
             android:textColor="@color/mapboxWhite"
             android:textSize="12sp"/>
@@ -61,7 +61,7 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_list_24dp"
-            android:text="List"
+            android:text="@string/offline_manager_list_button_text"
             android:textAllCaps="false"
             android:textColor="@color/mapboxWhite"
             android:textSize="12sp"/>
