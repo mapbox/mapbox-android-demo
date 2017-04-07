@@ -54,8 +54,8 @@ import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
@@ -72,6 +72,7 @@ import com.mapbox.mapboxandroiddemo.labs.OffRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -136,6 +137,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       navigationView.setNavigationItemSelectedListener(this);
       navigationView.setCheckedItem(R.id.nav_basics);
     }
+
+
+    Picasso.with(this).setIndicatorsEnabled(true);
+    Picasso.with(this).setLoggingEnabled(true);
+
   }
 
   @Override
