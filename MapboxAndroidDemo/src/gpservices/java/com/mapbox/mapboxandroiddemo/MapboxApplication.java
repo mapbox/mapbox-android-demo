@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo;
 
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 
@@ -15,5 +16,8 @@ public class MapboxApplication extends Application {
       .setApplicationId(getString(R.string.firebase_app_id))
       .build()
     );
+
+    Fresco.initialize(this);
+
   }
 }
