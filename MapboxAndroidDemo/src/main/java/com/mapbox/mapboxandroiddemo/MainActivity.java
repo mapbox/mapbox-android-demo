@@ -72,7 +72,6 @@ import com.mapbox.mapboxandroiddemo.labs.OffRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
