@@ -5,47 +5,47 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_basics"
-            android:icon="@drawable/ic_getting_started_48dp"
+            android:icon="@drawable/ic_getting_started_24dp"
             android:title="@string/getting_started_category"/>
         <item
             android:id="@+id/nav_styles"
-            android:icon="@drawable/ic_style_48dp"
+            android:icon="@drawable/ic_styles_24dp"
             android:title="@string/styles_category"/>
         <item
             android:id="@+id/nav_dds"
-            android:icon="@drawable/ic_dds_48dp"
+            android:icon="@drawable/ic_dds_24dp"
             android:title="@string/dds_category"/>
         <item
             android:id="@+id/nav_annotations"
-            android:icon="@drawable/ic_annotations_48dp"
+            android:icon="@drawable/ic_annotations_24dp"
             android:title="@string/annotations_category"/>
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_camera_48dp"
+            android:icon="@drawable/ic_camera_24dp"
             android:title="@string/camera_category"/>
         <item
             android:id="@+id/nav_offline"
-            android:icon="@drawable/ic_offline_48dp"
+            android:icon="@drawable/ic_offline_24dp"
             android:title="@string/offline_category"/>
 
         <item
             android:id="@+id/nav_query_map"
-            android:icon="@drawable/ic_query_48dp"
+            android:icon="@drawable/ic_query_24dp"
             android:title="@string/query_map_category"/>
 
         <item
             android:id="@+id/nav_location"
-            android:icon="@drawable/ic_location_48dp"
+            android:icon="@drawable/ic_my_location_black_24dp"
             android:title="@string/location_category"/>
 
         <item
             android:id="@+id/nav_mas"
-            android:icon="@drawable/ic_mas_48dp"
+            android:icon="@drawable/ic_mas_24dp"
             android:title="@string/android_services_category"/>
 
         <item
             android:id="@+id/nav_lab"
-            android:icon="@drawable/ic_labs_lightbulb_48dp"
+            android:icon="@drawable/ic_labs_24dp"
             android:title="@string/lab_category"/>
 
     </group>
