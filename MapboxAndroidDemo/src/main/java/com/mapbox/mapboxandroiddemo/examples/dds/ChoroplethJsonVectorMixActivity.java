@@ -10,7 +10,6 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.Stop;
 import com.mapbox.mapboxsdk.style.functions.stops.Stops;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
@@ -25,7 +24,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 
 public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -34,11 +32,12 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
 
   private int maxValue = 13;
 
-  private String mapId = "mapbox.us_census_states_2015";
-  private String layerName = "states";
+  private String mapId = "mapbox://mapbox.us_census_states_2015";
+  private String vectorLayerName = "states";
   private String vectorMatchProp = "STATEFP";
   private String dataMatchProp = "STATE_ID";
   private String dataStyleUnemploymentProp = "unemployment";
+  private String fillLayerId = "states-join";
 
   private String TAG = "JSOnVectorMix";
   private JSONArray statesArray;
@@ -66,26 +65,22 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
 
 
     // Add source for state polygons hosted on Mapbox
-    VectorSource vectorSource = new VectorSource("states", "mapbox://" + mapId);
-    Log.d(TAG, "onMapReady: vectorSource  = " + vectorSource);
+    VectorSource vectorSource = new VectorSource(vectorLayerName, mapId);
     map.addSource(vectorSource);
 
     loadJSON();
 
     try {
       statesArray = new JSONArray(sb.toString());
-      Log.d(TAG, "onMapReady: statesArray = " + statesArray);
 
     } catch (Exception exception) {
       Log.e("JSONVectorMix", "Exception Loading GeoJSON: " + exception.toString());
     }
 
 
+    String[][] stops = new String[1][statesArray.length()];
 
-
-    String[] stops = new String[statesArray.length()];
-
-
+//    stops[0][1] = new String()["dakfdsa", "dakdfa"];
 
 
     for (int statesArrayIndex = 0; statesArrayIndex < statesArray.length(); statesArrayIndex++) {
@@ -102,7 +97,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
 
         Log.d(TAG, "onMapReady: color = " + color);
 
-        stops[statesArrayIndex] = color
+//        stops[1][statesArrayIndex] = singleState.getString(dataMatchProp)),color;
 
 
       } catch (JSONException e) {
@@ -114,9 +109,10 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
 
 
     // Add layer from the vector tile source with data-driven style
-    map.addLayer(new FillLayer("states-join", "states").withProperties(
+
+    map.addLayer(new FillLayer(fillLayerId, vectorLayerName).withProperties(
       PropertyFactory.fillColor(Function.property(vectorMatchProp, Stops.categorical(
-        Stop.stop()))))),
+        stops))))),
 
       PropertyFactory.visibility(Property.VISIBLE));
 
