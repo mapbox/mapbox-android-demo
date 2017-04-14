@@ -10,11 +10,17 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.functions.Function;
+import com.mapbox.mapboxsdk.style.functions.stops.CategoricalStops;
+import com.mapbox.mapboxsdk.style.functions.stops.Stop;
 import com.mapbox.mapboxsdk.style.functions.stops.Stops;
+import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
+
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,9 +84,10 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     }
 
 
-    String[][] stops = new String[1][statesArray.length()];
+    Stop[] stops = new Stop[statesArray.length()];
 
-//    stops[0][1] = new String()["dakfdsa", "dakdfa"];
+
+    stops[0] = 
 
 
     for (int statesArrayIndex = 0; statesArrayIndex < statesArray.length(); statesArrayIndex++) {
@@ -97,7 +104,6 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
 
         Log.d(TAG, "onMapReady: color = " + color);
 
-//        stops[1][statesArrayIndex] = singleState.getString(dataMatchProp)),color;
 
 
       } catch (JSONException e) {
@@ -110,11 +116,11 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
 
     // Add layer from the vector tile source with data-driven style
 
-    map.addLayer(new FillLayer(fillLayerId, vectorLayerName).withProperties(
-      PropertyFactory.fillColor(Function.property(vectorMatchProp, Stops.categorical(
-        stops))))),
 
-      PropertyFactory.visibility(Property.VISIBLE));
+    map.addLayer(new CircleLayer(fillLayerId, vectorLayerName).withProperties(
+      fillColor(
+        Function.property(
+          vectorMatchProp, Stops.categorical(stops)))));
 
 
   }
