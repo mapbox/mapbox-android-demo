@@ -14,9 +14,13 @@ import com.mapbox.mapboxsdk.style.functions.stops.CategoricalStops;
 import com.mapbox.mapboxsdk.style.functions.stops.Stop;
 import com.mapbox.mapboxsdk.style.functions.stops.Stops;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
+
+import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
+
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
+import com.mapbox.mapboxsdk.style.layers.PropertyValue;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
@@ -87,7 +91,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     Stop[] stops = new Stop[statesArray.length()];
 
 
-    stops[0] = 
+    stops[0] = stop("0", PropertyFactory.fillColor("rgba(0,0,0,0)"));
 
 
     for (int statesArrayIndex = 0; statesArrayIndex < statesArray.length(); statesArrayIndex++) {
@@ -104,7 +108,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
 
         Log.d(TAG, "onMapReady: color = " + color);
 
-
+        stops[statesArrayIndex] = stop(singleState.getString(dataMatchProp), PropertyFactory.fillColor(color));
 
       } catch (JSONException e) {
 
