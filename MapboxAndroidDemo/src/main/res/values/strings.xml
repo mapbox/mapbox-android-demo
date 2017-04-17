@@ -151,57 +151,57 @@
     <!-- example urls-->
     <string name="empty_image"> </string>
 
-    <string name="activity_basic_simple_mapview_url">https://www.mapbox.com/android-sdk/images/examples.png</string>
-    <string name="activity_basic_support_map_frag_url">https://www.mapbox.com/android-sdk/images/support-fragment.png</string>
-    <string name="activity_basic_mapbox_options_url">http://i.imgur.com/IhuviRz.png</string>
-    <string name="activity_style_mapbox_studio_url">https://www.mapbox.com/android-sdk/images/custom-studio-style.png</string>
-    <string name="activity_style_raster_url">https://www.mapbox.com/android-sdk/images/custom-raster.png</string>
-    <string name="activity_style_default_url">http://i.imgur.com/ZuUhFHw.jpg</string>
-    <string name="activity_style_zoom_dependent_fill_color_url">http://i.imgur.com/rHl1pmC.png</string>
-    <string name="activity_styles_color_switcher_url">http://i.imgur.com/a0ZaKHG.png</string>
-    <string name="activity_styles_langauge_switch_url">http://i.imgur.com/bu7GV5T.png</string>
-    <string name="activity_styles_show_hide_layer_url">http://i.imgur.com/amDMa1M.png</string>
-    <string name="activity_styles_geojson_layer_in_stack_url">http://i.imgur.com/mngiJUj.png</string>
-    <string name="activity_styles_adjust_layer_opacity_url">http://i.imgur.com/0Av8kWD.png</string>
-    <string name="activity_styles_vector_source_url">http://i.imgur.com/N0altyP.png</string>
-    <string name="activity_style_add_wms_source_url">http://i.imgur.com/k14WdRG.png</string>
-    <string name="activity_style_create_heatmap_points_url">http://i.imgur.com/pAejKLH.png</string>
-    <string name="activity_style_create_cluster_data_points_url">http://i.imgur.com/fGeZhcD.png</string>
-    <string name="activity_style_line_layer_url">http://i.imgur.com/Iqxoing.png</string>
-    <string name="activity_style_symbol_layer_url">http://i.imgur.com/TQ4iA0L.png</string>
-    <string name="activity_dds_style_circle_categorically_url">http://i.imgur.com/C3mtfgF.png</string>
-    <string name="activity_dds_choropleth_zoom_change_url">http://i.imgur.com/sPNpLEP.png</string>
-    <string name="activity_dds_style_line_identity_property_url">http://i.imgur.com/wgpKvZM.png</string>
-    <string name="activity_annotation_marker_url">https://www.mapbox.com/android-sdk/images/marker.png</string>
-    <string name="activity_annotation_custom_marker_url">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
-    <string name="activity_annotation_geojson_line_url">https://www.mapbox.com/android-sdk/images/geojson.png</string>
-    <string name="activity_annotation_polygon_url">https://www.mapbox.com/android-sdk/images/polygon.png</string>
-    <string name="activity_annotation_basic_marker_view_url">http://i.imgur.com/vbWTLIE.png</string>
-    <string name="activity_annotation_custom_info_window_url">http://i.imgur.com/mCWbosy.png</string>
-    <string name="activity_annotation_animated_marker_url">http://i.imgur.com/XegvIKr.png</string>
-    <string name="activity_camera_animate_url">https://www.mapbox.com/android-sdk/images/animate-camera.gif</string>
-    <string name="activity_camera_bounding_box_url">http://i.imgur.com/A0JL21Q.png</string> <!-- https://www.mapbox.com/android-sdk/images/fit-bound-camera.gif -->
-    <string name="activity_offline_simple_url">https://www.mapbox.com/android-sdk/images/offline-map.png</string>
-    <string name="activity_offline_manager_url">http://i.imgur.com/tDlcNIg.png</string>
-    <string name="activity_query_select_building_url">http://i.imgur.com/bImud7u.png</string>
-    <string name="activity_query_feature_url">http://i.imgur.com/HXxRBAF.png</string>
-    <string name="activity_query_feature_count_url">http://i.imgur.com/phzOt81.png</string>
-    <string name="activity_location_basic_image_url">http://i.imgur.com/5BzH5YF.png</string> <!--https://www.mapbox.com/android-sdk/images/user-location.png-->
-    <string name="activity_location_tracking_url">http://i.imgur.com/U3uc32F.png</string>
-    <string name="activity_location_animated_icon_url">http://i.imgur.com/dsUKM2i.png</string>
-    <string name="activity_location_customize_user_url">http://i.imgur.com/Q6O82JJ.png</string>
-    <string name="activity_location_turf_inside_url">http://i.imgur.com/p1KTWpn.png</string>
-    <string name="activity_mas_directions_url">https://www.mapbox.com/android-sdk/images/directions.png</string>
-    <string name="activity_mas_geocoding_url">http://i.imgur.com/mBJGh3P.png</string>
-    <string name="activity_mas_static_image_url">https://www.mapbox.com/android-sdk/images/static-image.png</string>
-    <string name="activity_mas_simplify_polyline_url">http://i.imgur.com/uATgul1.png</string>
-    <string name="activity_mas_map_matching_url">http://i.imgur.com/bWvVbwC.png</string>
-    <string name="activity_lab_location_picker_url">http://i.imgur.com/0JTVwaa.png</string>
-    <string name="activity_lab_marker_following_route_url">http://i.imgur.com/spsZu9X.png</string>
-    <string name="activity_lab_space_station_location_url">http://i.imgur.com/PxuB1T8.png</string>
-    <string name="activity_lab_off_route_url">http://i.imgur.com/lx1LdkA.png</string>
-    <string name="activity_lab_las_angeles_tourism_url">http://i.imgur.com/FUIFkIm.png</string>
-    <string name="activity_lab_indoor_map_url">http://i.imgur.com/ItqdTiG.png</string>
+    <string name="activity_basic_simple_mapview_url" translatable="false">https://www.mapbox.com/android-sdk/images/examples.png</string>
+    <string name="activity_basic_support_map_frag_url" translatable="false">https://www.mapbox.com/android-sdk/images/support-fragment.png</string>
+    <string name="activity_basic_mapbox_options_url" translatable="false">http://i.imgur.com/IhuviRz.png</string>
+    <string name="activity_style_mapbox_studio_url" translatable="false">https://www.mapbox.com/android-sdk/images/custom-studio-style.png</string>
+    <string name="activity_style_raster_url" translatable="false">https://www.mapbox.com/android-sdk/images/custom-raster.png</string>
+    <string name="activity_style_default_url" translatable="false">http://i.imgur.com/ZuUhFHw.jpg</string>
+    <string name="activity_style_zoom_dependent_fill_color_url" translatable="false">http://i.imgur.com/rHl1pmC.png</string>
+    <string name="activity_styles_color_switcher_url" translatable="false">http://i.imgur.com/a0ZaKHG.png</string>
+    <string name="activity_styles_langauge_switch_url" translatable="false">http://i.imgur.com/bu7GV5T.png</string>
+    <string name="activity_styles_show_hide_layer_url" translatable="false">http://i.imgur.com/amDMa1M.png</string>
+    <string name="activity_styles_geojson_layer_in_stack_url" translatable="false">http://i.imgur.com/mngiJUj.png</string>
+    <string name="activity_styles_adjust_layer_opacity_url" translatable="false">http://i.imgur.com/0Av8kWD.png</string>
+    <string name="activity_styles_vector_source_url" translatable="false">http://i.imgur.com/N0altyP.png</string>
+    <string name="activity_style_add_wms_source_url" translatable="false">http://i.imgur.com/k14WdRG.png</string>
+    <string name="activity_style_create_heatmap_points_url" translatable="false">http://i.imgur.com/pAejKLH.png</string>
+    <string name="activity_style_create_cluster_data_points_url" translatable="false">http://i.imgur.com/fGeZhcD.png</string>
+    <string name="activity_style_line_layer_url" translatable="false">http://i.imgur.com/Iqxoing.png</string>
+    <string name="activity_style_symbol_layer_url" translatable="false">http://i.imgur.com/TQ4iA0L.png</string>
+    <string name="activity_dds_style_circle_categorically_url" translatable="false">http://i.imgur.com/C3mtfgF.png</string>
+    <string name="activity_dds_choropleth_zoom_change_url" translatable="false">http://i.imgur.com/sPNpLEP.png</string>
+    <string name="activity_dds_style_line_identity_property_url" translatable="false">http://i.imgur.com/wgpKvZM.png</string>
+    <string name="activity_annotation_marker_url" translatable="false">https://www.mapbox.com/android-sdk/images/marker.png</string>
+    <string name="activity_annotation_custom_marker_url" translatable="false">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
+    <string name="activity_annotation_geojson_line_url" translatable="false">https://www.mapbox.com/android-sdk/images/geojson.png</string>
+    <string name="activity_annotation_polygon_url" translatable="false">https://www.mapbox.com/android-sdk/images/polygon.png</string>
+    <string name="activity_annotation_basic_marker_view_url" translatable="false">http://i.imgur.com/vbWTLIE.png</string>
+    <string name="activity_annotation_custom_info_window_url" translatable="false">http://i.imgur.com/mCWbosy.png</string>
+    <string name="activity_annotation_animated_marker_url" translatable="false">http://i.imgur.com/XegvIKr.png</string>
+    <string name="activity_camera_animate_url" translatable="false">https://www.mapbox.com/android-sdk/images/animate-camera.gif</string>
+    <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string> <!-- https://www.mapbox.com/android-sdk/images/fit-bound-camera.gif -->
+    <string name="activity_offline_simple_url" translatable="false">https://www.mapbox.com/android-sdk/images/offline-map.png</string>
+    <string name="activity_offline_manager_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
+    <string name="activity_query_select_building_url" translatable="false">http://i.imgur.com/bImud7u.png</string>
+    <string name="activity_query_feature_url" translatable="false">http://i.imgur.com/HXxRBAF.png</string>
+    <string name="activity_query_feature_count_url" translatable="false">http://i.imgur.com/phzOt81.png</string>
+    <string name="activity_location_basic_image_url" translatable="false">http://i.imgur.com/5BzH5YF.png</string> <!--https://www.mapbox.com/android-sdk/images/user-location.png-->
+    <string name="activity_location_tracking_url" translatable="false">http://i.imgur.com/U3uc32F.png</string>
+    <string name="activity_location_animated_icon_url" translatable="false">http://i.imgur.com/dsUKM2i.png</string>
+    <string name="activity_location_customize_user_url" translatable="false">http://i.imgur.com/Q6O82JJ.png</string>
+    <string name="activity_location_turf_inside_url" translatable="false">http://i.imgur.com/p1KTWpn.png</string>
+    <string name="activity_mas_directions_url" translatable="false">https://www.mapbox.com/android-sdk/images/directions.png</string>
+    <string name="activity_mas_geocoding_url" translatable="false">http://i.imgur.com/mBJGh3P.png</string>
+    <string name="activity_mas_static_image_url" translatable="false">https://www.mapbox.com/android-sdk/images/static-image.png</string>
+    <string name="activity_mas_simplify_polyline_url" translatable="false">http://i.imgur.com/uATgul1.png</string>
+    <string name="activity_mas_map_matching_url" translatable="false">http://i.imgur.com/bWvVbwC.png</string>
+    <string name="activity_lab_location_picker_url" translatable="false">http://i.imgur.com/0JTVwaa.png</string>
+    <string name="activity_lab_marker_following_route_url" translatable="false">http://i.imgur.com/spsZu9X.png</string>
+    <string name="activity_lab_space_station_location_url" translatable="false">http://i.imgur.com/PxuB1T8.png</string>
+    <string name="activity_lab_off_route_url" translatable="false">http://i.imgur.com/lx1LdkA.png</string>
+    <string name="activity_lab_las_angeles_tourism_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
+    <string name="activity_lab_indoor_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
 
     <!--Default style names-->
     <string name="menu_map_style_streets">Streets</string>
