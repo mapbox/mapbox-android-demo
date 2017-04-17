@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -56,12 +55,6 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
         map = mapboxMap;
 
         map.setStyleUrl("mapbox://styles/mapbox/streets-v9");
-
-
-
-
-
-
 
 
       }
