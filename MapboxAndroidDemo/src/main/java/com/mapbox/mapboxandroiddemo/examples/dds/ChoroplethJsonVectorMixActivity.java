@@ -102,13 +102,10 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
 
         double green = ((Double.parseDouble(singleState.getString(dataStyleUnemploymentProp)) / maxValue) * 255);
 
-        Log.d(TAG, "onMapReady: green = " + green);
-
         String color = "rgba(" + 0 + ", " + green + ", " + 0 + ", 1)";
 
-        Log.d(TAG, "onMapReady: color = " + color);
-
         stops[statesArrayIndex] = stop(singleState.getString(dataMatchProp), PropertyFactory.fillColor(color));
+
 
       } catch (JSONException e) {
 
@@ -121,7 +118,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     // Add layer from the vector tile source with data-driven style
 
 
-    map.addLayer(new CircleLayer(fillLayerId, vectorLayerName).withProperties(
+    map.addLayer(new FillLayer(fillLayerId, vectorLayerName).withProperties(
       fillColor(
         Function.property(
           vectorMatchProp, Stops.categorical(stops)))));
