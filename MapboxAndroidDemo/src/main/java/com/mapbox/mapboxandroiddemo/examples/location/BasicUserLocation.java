@@ -53,6 +53,10 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
+
+        map.setStyleUrl("mapbox://styles/mapbox/streets-v9");
+
+
       }
     });
 
@@ -170,7 +174,7 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
-    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+    Toast.makeText(this, R.string.user_location_permission_explanation,
       Toast.LENGTH_LONG).show();
   }
 
@@ -179,7 +183,7 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
     if (granted) {
       enableLocation(true);
     } else {
-      Toast.makeText(this, "You didn't grant location permissions.",
+      Toast.makeText(this, R.string.user_location_permission_not_granted,
         Toast.LENGTH_LONG).show();
       finish();
     }
