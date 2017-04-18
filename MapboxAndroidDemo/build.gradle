@@ -70,7 +70,7 @@ dependencies {
   }
 
   // Mapbox Android UI
-  compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.0-SNAPSHOT'
+  compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.0.0'
 
   // Other dependencies
   compile 'com.google.code.gson:gson:2.8'
