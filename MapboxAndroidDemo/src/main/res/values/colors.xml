@@ -9,10 +9,10 @@
     <color name="materialDarkGrey">#DFDFDF</color>
 
     <color name="mapboxWhite">#ffffff</color>
-    <color name="mapboxCyan">#3BB2D0</color>
-    <color name="mapboxGreen">#56B881</color>
-    <color name="mapboxBlue">#3887BE</color>
-    <color name="mapboxBlueDark">#1F6EA5</color>
+    <color name="mapboxCyan">#009cc6</color>
+    <color name="mapboxGreen">#00b35b</color>
+    <color name="mapboxBlue">#406787</color>
+    <color name="mapboxBlueDark">#112c43</color>
     <color name="mapboxPurple">#8A8ACB</color>
     <color name="mapboxPurpleDark">#7171b2</color>
     <color name="mapboxPurpleLight">#A4A4E5</color>
