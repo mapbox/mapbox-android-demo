@@ -63,13 +63,13 @@ public class OfflineMapActivity extends WearableActivity {
         offlineManager = OfflineManager.getInstance(OfflineMapActivity.this);
         downloadRegion.setOnClickListener(new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(View view) {
             downloadRegionDialog();
           }
         });
         listRegions.setOnClickListener(new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(View view) {
             downloadedRegionList();
           }
         });

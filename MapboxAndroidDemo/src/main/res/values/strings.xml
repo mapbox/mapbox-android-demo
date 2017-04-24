@@ -240,6 +240,12 @@
     <string name="offline_manager_download_button_text">Download</string>
     <string name="offline_manager_list_button_text">List</string>
 
+    <!--Basic user location permission toasts-->
+
+
+    <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
+    <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
+
 
 
 </resources>

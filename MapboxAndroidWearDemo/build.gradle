@@ -32,3 +32,5 @@ dependencies {
     transitive = true
   }
 }
+
+apply from: '../checkstyle.gradle'

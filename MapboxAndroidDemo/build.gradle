@@ -70,12 +70,11 @@ dependencies {
   }
 
   // Mapbox Android UI
+
   compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.0'
 
   // Mapbox Navigation SDK for Android
-  compile('com.mapbox.mapboxsdk:mapbox-android-navigation:0.1.0@aar') {
-    transitive = true
-  }
+  compile('com.mapbox.mapboxsdk:mapbox-android-navigation:0.1.0@aar')
 
   // Other dependencies
   compile 'com.google.code.gson:gson:2.8'
@@ -83,4 +82,4 @@ dependencies {
   compile 'com.squareup.retrofit2:converter-gson:2.2.0'
 }
 
-apply from: 'checkstyle.gradle'
+apply from: '../checkstyle.gradle'
