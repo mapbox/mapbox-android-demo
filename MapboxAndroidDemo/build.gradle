@@ -84,5 +84,6 @@ dependencies {
     gpservicesCompile 'com.google.firebase:firebase-crash:10.2.0'
 }
 
+apply from: '../gradle-config.gradle'
 apply from: '../checkstyle.gradle'
 apply from: './gradle-config.gradle'
