@@ -1,31 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Mapbox colors -->
-    <color name="colorPrimary">@color/mapboxBlue</color>
-    <color name="colorPrimaryDark">@color/mapboxBlueDark</color>
-    <color name="colorAccent">@color/mapboxRed</color>
+    <color name="colorPrimary">@color/mapboxGray</color>
+    <color name="colorPrimaryDark">@color/mapboxGrayDark10</color>
+    <color name="colorAccent">@color/mapboxPink</color>
 
     <color name="materialGrey">#F5F5F5</color>
     <color name="materialDarkGrey">#DFDFDF</color>
 
     <color name="mapboxWhite">#ffffff</color>
-    <color name="mapboxCyan">#3BB2D0</color>
-    <color name="mapboxGreen">#56B881</color>
-    <color name="mapboxBlue">#3887BE</color>
-    <color name="mapboxBlueDark">#1F6EA5</color>
-    <color name="mapboxPurple">#8A8ACB</color>
-    <color name="mapboxPurpleDark">#7171b2</color>
-    <color name="mapboxPurpleLight">#A4A4E5</color>
 
-    <color name="mapboxDenim">#50667F</color>
-    <color name="mapboxTeal">#41AFA5</color>
-    <color name="mapboxOrange">#F9886C</color>
-    <color name="mapboxRed">#E55E5E</color>
-    <color name="mapboxPink">#ED6498</color>
-    <color name="mapboxYellow">#f1f075</color>
-    <color name="mapboxMustard">#FBB03B</color>
-    <color name="mapboxNavy">#28353D</color>
-    <color name="mapboxNavyDark">#222B30</color>
+    <color name="mapboxGreenDark">#269561</color>
+    <color name="mapboxGreen">#33c377</color>
+    <color name="mapboxGreenLight">#afdec5</color>
+    <color name="mapboxGreenFaint">#e8f5ee</color>
+
+    <color name="mapboxBlue">#4264fb</color>
+    <color name="mapboxBlueDark">#314ccd</color>
+    <color name="mapboxBlueLight">#aab7ef</color>
+    <color name="mapboxBlueFaint">#edf0fd</color>
+
+    <color name="mapboxGrayDark">#273d56</color>
+    <color name="mapboxGrayDark10">#476483</color>
+    <color name="mapboxGray">#607d9c</color>
+    <color name="mapboxGrayLight">#c6d2e1</color>
+    <color name="mapboxGrayFaint">#f4f7fb</color>
+
+    <color name="mapboxPinkDark">#b43b71</color>
+    <color name="mapboxPink">#ee4e8b</color>
+    <color name="mapboxPinkLight">#f8c8da</color>
+    <color name="mapboxPinkFaint">#fbe5ee</color>
+
+    <color name="mapboxPurpleDark">#5a3fc0</color>
+    <color name="mapboxPurpleDark10">#5E3AD2</color>
+    <color name="mapboxPurple">#7753eb</color>
+    <color name="mapboxPurpleLight">#c5b9eb</color>
+    <color name="mapboxPurpleLight10">#916DFF</color>
+    <color name="mapboxPurpleFaint">#f2effa</color>
+
+    <color name="mapboxTealDark">#136174</color>
+    <color name="mapboxTeal">#11b4da</color>
+    <color name="mapboxTealLight">#a4deeb</color>
+    <color name="mapboxTealFaint">#d7f1f6</color>
+
+    <color name="mapboxOrangeDark">#ba7334</color>
+    <color name="mapboxOrange">#f79640</color>
+    <color name="mapboxOrangeLight">#fbcea6</color>
+    <color name="mapboxOrangeFaint">#feefe2</color>
+
+    <color name="mapboxRedDark">#ba3b3f</color>
+    <color name="mapboxRed">#f74e4e</color>
+    <color name="mapboxRedLight">#f6b7b7</color>
+    <color name="mapboxRedFaint">#fbe5e5</color>
+
+    <color name="mapboxYellowDark">#a4a62d</color>
+    <color name="mapboxYellow">#d9d838</color>
+    <color name="mapboxYellowLight">#FFF5A0</color>
+    <color name="mapboxYellowFaint">#FCFCDF</color>
 
     <!-- FAB menu colors -->
     <color name="black_semi_transparent">#B2000000</color>
