@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModel = new ArrayList<>();
 
-
     // Create the adapter to convert the array to views
     adapter = new ExampleAdapter(this, exampleItemModel);
     // Attach the adapter to a ListView
@@ -119,10 +118,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           return;
         }
         startActivity(exampleItemModel.get(position).getActivity());
-
       }
     });
-
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -157,10 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     int id = item.getItemId();
 
     if (id != currentCategory) {
-
       listItems(id);
-
-
     }
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -228,12 +222,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_geojson_layer_in_stack_description,
           new Intent(MainActivity.this, GeojsonLayerInStackActivity.class),
           R.string.activity_styles_geojson_layer_in_stack_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_zoom_dependent_fill_color_title,
-          R.string.activity_style_zoom_dependent_fill_color_description,
-          new Intent(MainActivity.this, ZoomDependentFillColorActivity.class),
-          R.string.activity_style_zoom_dependent_fill_color_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_styles_adjust_layer_opacity_title,
@@ -477,22 +465,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_style_circle_categorically_title,
           R.string.activity_dds_style_circle_categorically_description,
           new Intent(MainActivity.this, StyleCirclesCategoricallyActivity.class),
-          R.string.activity_dds_style_circle_categorically_url,
-          true
+          R.string.activity_dds_style_circle_categorically_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_dds_choropleth_zoom_change_title,
           R.string.activity_dds_choropleth_zoom_change_description,
           new Intent(MainActivity.this, ChoroplethZoomChangeActivity.class),
-          R.string.activity_dds_choropleth_zoom_change_url,
-          true
+          R.string.activity_dds_choropleth_zoom_change_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_zoom_dependent_fill_color_title,
+          R.string.activity_style_zoom_dependent_fill_color_description,
+          new Intent(MainActivity.this, ZoomDependentFillColorActivity.class),
+          R.string.activity_style_zoom_dependent_fill_color_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_dds_style_line_identity_property_title,
           R.string.activity_dds_style_line_identity_property_description,
           new Intent(MainActivity.this, StyleLineIdentityPropertyActivity.class),
-          R.string.activity_dds_style_line_identity_property_url,
-          true
+          R.string.activity_dds_style_line_identity_property_url
         ));
         currentCategory = R.id.nav_dds;
         break;
@@ -530,7 +521,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     return currentCategory;
   }
 
-
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     // Inflate toolbar items
@@ -548,7 +538,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .setTitle(getString(R.string.info_dialog_title))
         .setDescription(getString(R.string.info_dialog_description))
         .setIcon(R.mipmap.ic_launcher)
-        .setHeaderColor(R.color.mapboxDenim)
+        .setHeaderColor(R.color.mapboxBlue)
         .withDivider(true)
         .setPositiveText(getString(R.string.info_dialog_positive_button_text))
         .onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -563,16 +553,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .setNegativeText(getString(R.string.info_dialog_negative_button_text))
         .onNegative(new MaterialDialog.SingleButtonCallback() {
           @Override
-          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
-          }
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {}
         })
-
         .show();
-
       return true;
     }
-
     return super.onOptionsItemSelected(item);
   }
 
