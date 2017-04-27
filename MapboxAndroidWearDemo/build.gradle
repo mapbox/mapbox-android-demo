@@ -23,10 +23,10 @@ android {
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
 
-  provided 'com.google.android.wearable:wearable:2.0.0'
-  compile 'com.google.android.support:wearable:2.0.0'
-  compile 'com.google.android.gms:play-services-wearable:10.2.0'
-  compile 'com.google.android.gms:play-services-location:10.2.0'
+  provided 'com.google.android.wearable:wearable:2.0.1'
+  compile 'com.google.android.support:wearable:2.0.1'
+  compile 'com.google.android.gms:play-services-wearable:10.2.1'
+  compile 'com.google.android.gms:play-services-location:10.2.1'
   // Mapbox dependencies
   compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.2@aar') {
     transitive = true
