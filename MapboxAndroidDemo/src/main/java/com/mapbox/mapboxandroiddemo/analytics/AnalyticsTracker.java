@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.analytics;
 
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 
 import com.segment.analytics.Analytics;
 import com.segment.analytics.messages.IdentifyMessage;
@@ -28,9 +27,12 @@ public class AnalyticsTracker {
   private String clickedOnIndividualExampleEventName = "Clicked on individual example";
   private String sectionNameMapKey = "section name";
   private String exampleNameMapKey = "example name";
+  private String isTabletMapValue = "tablet";
+  private String isPhoneMapValue = "phone";
 
 
   public static AnalyticsTracker get() {
+
     return INSTANCE;
   }
 
@@ -39,7 +41,7 @@ public class AnalyticsTracker {
   public String mapboxUsername = "LangstonSmithTestUsername";
 
 
-  public void openedAppForFirstTime(@NonNull String userID) {
+  public void openedAppForFirstTime(@NonNull String userID, boolean isTablet) {
 
     Map<String, String> properties = new HashMap<>();
 
@@ -48,8 +50,14 @@ public class AnalyticsTracker {
     properties.put("Device product", Build.PRODUCT);
     properties.put("Device manufacturer", Build.MANUFACTURER);
     properties.put("Device device", Build.DEVICE);
-    properties.put("Device serial", Build.SERIAL);
     properties.put("Device tags", Build.TAGS);
+
+    if (isTablet) {
+      properties.put("Device size", isTabletMapValue);
+    } else {
+      properties.put("Device size", isPhoneMapValue);
+    }
+
 
     analytics.enqueue(TrackMessage.builder("Opened App For First Time")
       .userId(mapboxUsername)
@@ -121,5 +129,6 @@ public class AnalyticsTracker {
     );
 
   }
+
 
 }
