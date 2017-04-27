@@ -47,7 +47,6 @@ public class AnalyticsTracker {
     properties.put("Device brand", Build.BRAND);
     properties.put("Device product", Build.PRODUCT);
     properties.put("Device manufacturer", Build.MANUFACTURER);
-    properties.put("User location", sendUserLocation());
 
     analytics.enqueue(TrackMessage.builder("Opened App For First Time")
       .userId(mapboxUsername)
