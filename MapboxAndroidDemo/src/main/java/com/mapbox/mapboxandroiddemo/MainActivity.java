@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -75,8 +75,6 @@ import com.mapbox.mapboxandroiddemo.labs.OffRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
-import com.segment.analytics.Analytics;
-import com.segment.analytics.messages.TrackMessage;
 
 import java.util.ArrayList;
 
@@ -86,6 +84,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private ExampleAdapter adapter;
   private int currentCategory = R.id.nav_basics;
   private RecyclerView recyclerView;
+
+  private String TAG = "MainActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +122,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           return;
         }
         startActivity(exampleItemModel.get(position).getActivity());
+
+        AnalyticsTracker.get().clickedOnIndividualExample(getString(exampleItemModel.get(position).getTitle()));
+        AnalyticsTracker.get().viewedScreen(getString(exampleItemModel.get(position).getTitle()));
+
       }
     });
 
@@ -139,8 +143,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       navigationView.setCheckedItem(R.id.nav_basics);
     }
 
-    runAnalytics();
-
+    checkWhetherFirstOpenOfApp();
+    
   }
 
   @Override
@@ -163,7 +167,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     if (id != currentCategory) {
       listItems(id);
+      AnalyticsTracker.get().clickedOnNavDrawerSection(item.getTitle().toString());
+
     }
+
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     if (drawer != null) {
@@ -542,6 +549,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_info) {
+
+      AnalyticsTracker.get().trackEvent("Clicked on info menu item", null, null);
+
       new MaterialStyledDialog.Builder(MainActivity.this)
         .setTitle(getString(R.string.info_dialog_title))
         .setDescription(getString(R.string.info_dialog_description))
@@ -553,6 +563,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
+            AnalyticsTracker.get().trackEvent("Clicked on info menu dialog start learning button", null, null);
+
+
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("https://mapbox.com/android-sdk"));
             startActivity(intent);
@@ -562,6 +575,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .onNegative(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+
+            AnalyticsTracker.get().trackEvent("Clicked on info menu dialog not now button", null, null);
+
           }
         })
         .show();
@@ -577,13 +593,52 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     outState.putInt("CURRENT_CATEGORY", currentCategory);
   }
 
-  private void runAnalytics() {
+  private void checkWhetherFirstOpenOfApp() {
+
+    final String PREFS_NAME = "MyPrefsFile";
+    final String PREF_VERSION_CODE_KEY = "version_code";
+    final int DOESNT_EXIST = -1;
+
+    // Get current version code
+    int currentVersionCode = BuildConfig.VERSION_CODE;
+
+    // Get saved version code
+    SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+    int savedVersionCode = prefs.getInt(PREF_VERSION_CODE_KEY, DOESNT_EXIST);
+
+    // Check for first run or upgrade
+    if (currentVersionCode == savedVersionCode) {
+
+      // Not a first-time run of the app
+
+      runStandardAnalytics();
+
+      return;
+
+    } else if (savedVersionCode == DOESNT_EXIST) {
+
+      // This is a new install (or the user cleared the shared preferences)
+
+      AnalyticsTracker.get().openedAppForFirstTime(AnalyticsTracker.get().mapboxUsername);
+      runStandardAnalytics();
+
+    } else if (currentVersionCode > savedVersionCode) {
+
+      // This is an upgrade
+
+      runStandardAnalytics();
+
+    }
+
+    // Update the shared preferences with the current version code
+    prefs.edit().putInt(PREF_VERSION_CODE_KEY, currentVersionCode).apply();
+
+  }
+
+  private void runStandardAnalytics() {
 
     AnalyticsTracker.get().openedApp();
-
-    AnalyticsTracker.get().viewedScreen(this);
-
-
+    AnalyticsTracker.get().identifyUser("LangstonSmithTestUsername", "langston.smith@mapbox.com");
   }
 
 
