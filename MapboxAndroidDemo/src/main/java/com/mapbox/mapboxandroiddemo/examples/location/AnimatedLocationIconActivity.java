@@ -83,22 +83,22 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
           new PulseMarkerViewAdapter(AnimatedLocationIconActivity.this));
 
         userMarker = mapboxMap.addMarker(
-          new PulseMarkerViewOptions().position(new LatLng(0, 0)),
+          new PulseMarkerViewOptions()
+            .position(new LatLng(0, 0))
+            .anchor(0.5f, 0.5f),
           new MarkerViewManager.OnMarkerViewAddedListener() {
             @Override
             public void onViewAdded(@NonNull MarkerView markerView) {
+              // Check if user has granted location permission
+              if (!PermissionsManager.areLocationPermissionsGranted(AnimatedLocationIconActivity.this)) {
+                permissionsManager = new PermissionsManager(AnimatedLocationIconActivity.this);
+                permissionsManager.requestLocationPermissions(AnimatedLocationIconActivity.this);
+              } else {
+                enableLocation();
+              }
               animateMarker(markerView);
             }
           });
-
-        // Check if user has granted location permission
-        permissionsManager = new PermissionsManager(AnimatedLocationIconActivity.this);
-        if (!PermissionsManager.areLocationPermissionsGranted(AnimatedLocationIconActivity.this)) {
-          permissionsManager.requestLocationPermissions(AnimatedLocationIconActivity.this);
-        } else {
-          setInitialMapPosition();
-          enableLocation();
-        }
       }
     });
   }
@@ -176,19 +176,12 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
     }
   }
 
-  private void setInitialMapPosition() {
-    Location lastLocation = locationEngine.getLastLocation();
-    if (lastLocation != null && userMarker != null) {
-      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
-      userMarker.setPosition(new LatLng(lastLocation));
-    }
-  }
-
   private void enableLocation() {
     // If we have the last location of the user, we can move the camera to that position.
     Location lastLocation = locationEngine.getLastLocation();
     if (lastLocation != null) {
       map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
+      userMarker.setPosition(new LatLng(lastLocation));
     }
 
     locationListener = new LocationEngineListener() {
@@ -253,7 +246,6 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
   @Override
   public void onPermissionResult(boolean granted) {
     if (granted) {
-      setInitialMapPosition();
       enableLocation();
     } else {
       Toast.makeText(this, "You didn't grant location permissions.",
