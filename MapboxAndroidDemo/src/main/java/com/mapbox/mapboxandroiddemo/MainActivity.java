@@ -139,8 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       navigationView.setCheckedItem(R.id.nav_basics);
     }
 
-    AnalyticsTracker.get().openedApp();
-    AnalyticsTracker.get().viewedScreen(this);
+    runAnalytics();
 
   }
 
@@ -577,4 +576,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     super.onSaveInstanceState(outState);
     outState.putInt("CURRENT_CATEGORY", currentCategory);
   }
+
+  private void runAnalytics() {
+
+    AnalyticsTracker.get().openedApp();
+
+    AnalyticsTracker.get().viewedScreen(this);
+
+
+  }
+
+
 }
