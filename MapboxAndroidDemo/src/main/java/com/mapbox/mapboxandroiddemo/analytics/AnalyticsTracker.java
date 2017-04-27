@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.messages.IdentifyMessage;
 import com.segment.analytics.messages.ScreenMessage;
@@ -22,23 +21,25 @@ public class AnalyticsTracker {
 
   private static final AnalyticsTracker INSTANCE = new AnalyticsTracker();
 
+  private String openedApp = "Opened App";
+  private String clickedOnSignInButtonEventName = "Clicked On Sign In Button";
+  private String clickedOnCreateAccountButtonEventName = "Clicked On Create Account Button";
+  private String clickedOnNavDrawerSectionEventName = "Clicked On Nav Drawer Section";
+  private String clickedOnIndividualExampleEventName = "Clicked On Individual Example";
+
+
   public static AnalyticsTracker get() {
 
     return INSTANCE;
   }
 
-  private Analytics analytics;
-  public String mapboxUsername;
+  private Analytics analytics = Analytics.builder("zFLtBpautarTslr61PUbvEKXXLIoLRmq").build();
 
-  public String getMapboxUsername() {
-    return mapboxUsername;
-  }
+  public String mapboxUsername = "LangstonSmithTestUsername";
 
-  public void setMapboxUsername(String mapboxUsername) {
-    this.mapboxUsername = mapboxUsername;
-  }
 
   public void openedAppForFirstTime(@NonNull String userID) {
+
 
     HashMap<String, String> properties = new HashMap<>();
 
@@ -55,26 +56,47 @@ public class AnalyticsTracker {
 
   }
 
-
   public void openedApp() {
-    trackEvent("Opened App");
+    trackEvent(openedApp, null, null);
   }
 
+
   public void clickedOnSignInButton() {
-    trackEvent("Clicked On Sign Up Button");
+    trackEvent(clickedOnSignInButtonEventName, null, null);
   }
 
   public void clickedOnCreateAccountButton() {
-    trackEvent("Clicked On Create Account Button");
+    trackEvent(clickedOnCreateAccountButtonEventName, null, null);
   }
 
 
-  public void clickedOnNavDrawerSection() {
-    trackEvent("Clicked On Nav Drawer Section");
+  public void clickedOnNavDrawerSection(@NonNull String sectionName) {
+    trackEvent(clickedOnNavDrawerSectionEventName, "Section name", sectionName);
+
   }
 
-  public void clickedOnIndividualExample() {
-    trackEvent("Clicked On Individual Example");
+  public void clickedOnIndividualExample(@NonNull String exampleName) {
+    trackEvent(clickedOnIndividualExampleEventName, "Example name", exampleName);
+  }
+
+  public void trackEvent(@NonNull String eventName, String keyForPropertiesHashMap, String valueForPropertiesHashMap) {
+
+
+    if (keyForPropertiesHashMap == null || valueForPropertiesHashMap == null) {
+      analytics.enqueue(TrackMessage.builder(eventName)
+        .userId(mapboxUsername));
+    }
+
+    if (keyForPropertiesHashMap != null) {
+
+      HashMap<String, String> properties = new HashMap<>();
+      properties.put(keyForPropertiesHashMap, valueForPropertiesHashMap);
+
+      analytics.enqueue(TrackMessage.builder(eventName)
+        .userId(mapboxUsername)
+        .properties(properties));
+    }
+
   }
 
   public void viewedScreen(AppCompatActivity activity) {
@@ -85,10 +107,10 @@ public class AnalyticsTracker {
 
   }
 
-  public void identifyUser(@NonNull String name, @NonNull String userEmailAddress) {
+  public void identifyUser(@NonNull String actualNameOfUser, @NonNull String userEmailAddress) {
 
     HashMap<String, String> traits = new HashMap<>();
-    traits.put("name", name);
+    traits.put("name", actualNameOfUser);
     traits.put("email", userEmailAddress);
 
     analytics.enqueue(IdentifyMessage.builder()
@@ -98,32 +120,11 @@ public class AnalyticsTracker {
 
   }
 
-
-  public void trackEvent(@NonNull String eventName, @) {
-
-    analytics.enqueue(TrackMessage.builder(eventName)
-      .userId(mapboxUsername));
-  }
-
   public String sendUserLocation() {
+//    TODO: Need to finish this method
 
-    LatLng location = new LatLng();
 
-//    TODO:Get user location
-    return location.toString();
+    return null;
   }
-
-
-  public Analytics getAnalytics() {
-    return getDefaultTracker();
-  }
-
-  private synchronized Analytics getDefaultTracker() {
-    if (analytics == null) {
-      analytics = Analytics.builder(Integer.toString(R.string.segment_analytics_write_key)).build();
-    }
-    return analytics;
-  }
-
 
 }

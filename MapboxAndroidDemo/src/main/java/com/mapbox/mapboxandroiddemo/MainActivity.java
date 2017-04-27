@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
+import com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.BasicMarkerViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.CustomInfoWindowActivity;
@@ -55,8 +57,8 @@ import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
@@ -73,6 +75,8 @@ import com.mapbox.mapboxandroiddemo.labs.OffRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
+import com.segment.analytics.Analytics;
+import com.segment.analytics.messages.TrackMessage;
 
 import java.util.ArrayList;
 
@@ -134,6 +138,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       navigationView.setNavigationItemSelectedListener(this);
       navigationView.setCheckedItem(R.id.nav_basics);
     }
+
+    AnalyticsTracker.get().openedApp();
+    AnalyticsTracker.get().viewedScreen(this);
+
   }
 
   @Override
@@ -150,7 +158,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
   @Override
   public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-    // Handle navigation view item clicks here.
+    // Handle navigation view g
+    // item clicks here.
     int id = item.getItemId();
 
     if (id != currentCategory) {
@@ -553,9 +562,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .setNegativeText(getString(R.string.info_dialog_negative_button_text))
         .onNegative(new MaterialDialog.SingleButtonCallback() {
           @Override
-          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {}
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+          }
         })
         .show();
+
       return true;
     }
     return super.onOptionsItemSelected(item);
