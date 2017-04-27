@@ -27,7 +27,7 @@ public class AnalyticsTracker {
   private String clickedOnNavDrawerSectionEventName = "Clicked on nav drawer section";
   private String clickedOnIndividualExampleEventName = "Clicked on individual example";
   private String sectionNameMapKey = "section name";
-  private String exampleNameMapKey = "section name";
+  private String exampleNameMapKey = "example name";
 
 
   public static AnalyticsTracker get() {
@@ -41,13 +41,15 @@ public class AnalyticsTracker {
 
   public void openedAppForFirstTime(@NonNull String userID) {
 
-
     Map<String, String> properties = new HashMap<>();
 
     properties.put("Device model", Build.MODEL);
     properties.put("Device brand", Build.BRAND);
     properties.put("Device product", Build.PRODUCT);
     properties.put("Device manufacturer", Build.MANUFACTURER);
+    properties.put("Device device", Build.DEVICE);
+    properties.put("Device serial", Build.SERIAL);
+    properties.put("Device tags", Build.TAGS);
 
     analytics.enqueue(TrackMessage.builder("Opened App For First Time")
       .userId(mapboxUsername)
@@ -99,9 +101,9 @@ public class AnalyticsTracker {
 
   }
 
-  public void viewedScreen(AppCompatActivity activity) {
+  public void viewedScreen(String nameOfScreen) {
 
-    analytics.enqueue(ScreenMessage.builder(activity.getClass().getSimpleName())
+    analytics.enqueue(ScreenMessage.builder(nameOfScreen)
       .userId(mapboxUsername)
     );
 
@@ -118,14 +120,6 @@ public class AnalyticsTracker {
       .traits(traits)
     );
 
-  }
-
-
-  public String sendUserLocation() {
-//    TODO: Need to finish this method
-
-
-    return null;
   }
 
 }
