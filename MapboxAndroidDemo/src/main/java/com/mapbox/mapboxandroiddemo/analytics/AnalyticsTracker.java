@@ -5,13 +5,13 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
-import com.mapbox.mapboxandroiddemo.R;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.messages.IdentifyMessage;
 import com.segment.analytics.messages.ScreenMessage;
 import com.segment.analytics.messages.TrackMessage;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by langstonsmith on 4/25/17.
@@ -41,7 +41,7 @@ public class AnalyticsTracker {
   public void openedAppForFirstTime(@NonNull String userID) {
 
 
-    HashMap<String, String> properties = new HashMap<>();
+    Map<String, String> properties = new HashMap<>();
 
     properties.put("Device model", Build.MODEL);
     properties.put("Device brand", Build.BRAND);
@@ -78,18 +78,18 @@ public class AnalyticsTracker {
     trackEvent(clickedOnIndividualExampleEventName, "Example name", exampleName);
   }
 
-  public void trackEvent(@NonNull String eventName, String keyForPropertiesHashMap, String valueForPropertiesHashMap) {
+  public void trackEvent(@NonNull String eventName, String keyForPropertiesMap, String valueForPropertiesMap) {
 
 
-    if (keyForPropertiesHashMap == null || valueForPropertiesHashMap == null) {
+    if (keyForPropertiesMap == null || valueForPropertiesMap == null) {
       analytics.enqueue(TrackMessage.builder(eventName)
         .userId(mapboxUsername));
     }
 
-    if (keyForPropertiesHashMap != null) {
+    if (keyForPropertiesMap != null) {
 
-      HashMap<String, String> properties = new HashMap<>();
-      properties.put(keyForPropertiesHashMap, valueForPropertiesHashMap);
+      Map<String, String> properties = new HashMap<>();
+      properties.put(keyForPropertiesMap, valueForPropertiesMap);
 
       analytics.enqueue(TrackMessage.builder(eventName)
         .userId(mapboxUsername)
@@ -108,7 +108,7 @@ public class AnalyticsTracker {
 
   public void identifyUser(@NonNull String actualNameOfUser, @NonNull String userEmailAddress) {
 
-    HashMap<String, String> traits = new HashMap<>();
+    Map<String, String> traits = new HashMap<>();
     traits.put("name", actualNameOfUser);
     traits.put("email", userEmailAddress);
 
@@ -118,6 +118,8 @@ public class AnalyticsTracker {
     );
 
   }
+
+
 
   public String sendUserLocation() {
 //    TODO: Need to finish this method
