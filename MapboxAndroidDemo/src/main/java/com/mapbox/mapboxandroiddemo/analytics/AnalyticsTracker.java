@@ -21,15 +21,16 @@ public class AnalyticsTracker {
 
   private static final AnalyticsTracker INSTANCE = new AnalyticsTracker();
 
-  private String openedApp = "Opened App";
-  private String clickedOnSignInButtonEventName = "Clicked On Sign In Button";
-  private String clickedOnCreateAccountButtonEventName = "Clicked On Create Account Button";
-  private String clickedOnNavDrawerSectionEventName = "Clicked On Nav Drawer Section";
-  private String clickedOnIndividualExampleEventName = "Clicked On Individual Example";
+  private String openedApp = "Opened app";
+  private String clickedOnSignInButtonEventName = "Clicked on sign in button";
+  private String clickedOnCreateAccountButtonEventName = "Clicked on create account button";
+  private String clickedOnNavDrawerSectionEventName = "Clicked on nav drawer section";
+  private String clickedOnIndividualExampleEventName = "Clicked on individual example";
+  private String sectionNameMapKey = "section name";
+  private String exampleNameMapKey = "section name";
 
 
   public static AnalyticsTracker get() {
-
     return INSTANCE;
   }
 
@@ -70,12 +71,12 @@ public class AnalyticsTracker {
 
 
   public void clickedOnNavDrawerSection(@NonNull String sectionName) {
-    trackEvent(clickedOnNavDrawerSectionEventName, "Section name", sectionName);
+    trackEvent(clickedOnNavDrawerSectionEventName, sectionNameMapKey, sectionName);
 
   }
 
   public void clickedOnIndividualExample(@NonNull String exampleName) {
-    trackEvent(clickedOnIndividualExampleEventName, "Example name", exampleName);
+    trackEvent(clickedOnIndividualExampleEventName, exampleNameMapKey, exampleName);
   }
 
   public void trackEvent(@NonNull String eventName, String keyForPropertiesMap, String valueForPropertiesMap) {
@@ -86,7 +87,7 @@ public class AnalyticsTracker {
         .userId(mapboxUsername));
     }
 
-    if (keyForPropertiesMap != null) {
+    if (keyForPropertiesMap != null && valueForPropertiesMap != null) {
 
       Map<String, String> properties = new HashMap<>();
       properties.put(keyForPropertiesMap, valueForPropertiesMap);
@@ -118,7 +119,6 @@ public class AnalyticsTracker {
     );
 
   }
-
 
 
   public String sendUserLocation() {
