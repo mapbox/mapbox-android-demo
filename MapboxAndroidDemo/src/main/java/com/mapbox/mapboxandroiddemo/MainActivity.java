@@ -85,8 +85,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private int currentCategory = R.id.nav_basics;
   private RecyclerView recyclerView;
 
-  private String TAG = "MainActivity";
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -144,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     checkWhetherFirstOpenOfApp();
-    
+
   }
 
   @Override
@@ -618,8 +616,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     } else if (savedVersionCode == DOESNT_EXIST) {
 
       // This is a new install (or the user cleared the shared preferences)
+      boolean deviceIsTabletScreen = getResources().getBoolean(R.bool.isTablet);
 
-      AnalyticsTracker.get().openedAppForFirstTime(AnalyticsTracker.get().mapboxUsername);
+      if (deviceIsTabletScreen) {
+        AnalyticsTracker.get().openedAppForFirstTime(AnalyticsTracker.get().mapboxUsername, true);
+      } else {
+        AnalyticsTracker.get().openedAppForFirstTime(AnalyticsTracker.get().mapboxUsername, false);
+      }
+
       runStandardAnalytics();
 
     } else if (currentVersionCode > savedVersionCode) {
@@ -640,6 +644,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     AnalyticsTracker.get().openedApp();
     AnalyticsTracker.get().identifyUser("LangstonSmithTestUsername", "langston.smith@mapbox.com");
   }
-
 
 }
