@@ -593,16 +593,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
   private void checkWhetherFirstOpenOfApp() {
 
-    final String PREFS_NAME = "MyPrefsFile";
-    final String PREF_VERSION_CODE_KEY = "version_code";
-    final int DOESNT_EXIST = -1;
+    final String prefsName = "MyPrefsFile";
+    final String prefVersionCodeKey = "version_code";
+    final int doesntExist = -1;
 
     // Get current version code
     int currentVersionCode = BuildConfig.VERSION_CODE;
 
     // Get saved version code
-    SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-    int savedVersionCode = prefs.getInt(PREF_VERSION_CODE_KEY, DOESNT_EXIST);
+    SharedPreferences prefs = getSharedPreferences(prefsName, MODE_PRIVATE);
+    int savedVersionCode = prefs.getInt(prefVersionCodeKey, doesntExist);
 
     // Check for first run or upgrade
     if (currentVersionCode == savedVersionCode) {
@@ -613,7 +613,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
       return;
 
-    } else if (savedVersionCode == DOESNT_EXIST) {
+    } else if (savedVersionCode == doesntExist) {
 
       // This is a new install (or the user cleared the shared preferences)
       boolean deviceIsTabletScreen = getResources().getBoolean(R.bool.isTablet);
@@ -635,7 +635,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     // Update the shared preferences with the current version code
-    prefs.edit().putInt(PREF_VERSION_CODE_KEY, currentVersionCode).apply();
+    prefs.edit().putInt(prefVersionCodeKey, currentVersionCode).apply();
 
   }
 
