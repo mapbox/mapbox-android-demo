@@ -167,7 +167,11 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
             offlineRegions[(offlineRegions.length - 1)].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
               @Override
               public void onDelete() {
-                Toast.makeText(SimpleOfflineMapActivity.this, "Yosemite offline map deleted", Toast.LENGTH_LONG).show();
+                Toast.makeText(
+                  SimpleOfflineMapActivity.this,
+                  getString(R.string.basic_offline_deleted_toast),
+                  Toast.LENGTH_LONG
+                ).show();
               }
 
               @Override
