@@ -41,7 +41,7 @@ public class AnalyticsTracker {
   public String mapboxUsername = "LangstonSmithTestUsername";
 
 
-  public void openedAppForFirstTime(@NonNull String userID, boolean isTablet) {
+  public void openedAppForFirstTime(@NonNull String userId, boolean isTablet) {
 
     Map<String, String> properties = new HashMap<>();
 
