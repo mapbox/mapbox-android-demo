@@ -52,12 +52,8 @@ public class AnalyticsTracker {
     properties.put("Device manufacturer", Build.MANUFACTURER);
     properties.put("Device device", Build.DEVICE);
     properties.put("Device tags", Build.TAGS);
-
-    if (isTablet) {
-      properties.put("Device size", IS_TABLET_MAP_VALUE);
-    } else {
-      properties.put("Device size", IS_PHONE_MAP_VALUE);
-    }
+    String deviceSize = isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE;
+    properties.put("Device size", deviceSize);
 
     analytics.enqueue(TrackMessage.builder("Opened App For First Time")
       .userId(MAPBOX_USERNAME)
@@ -87,8 +83,7 @@ public class AnalyticsTracker {
   }
 
   public void trackEvent(@NonNull String eventName, String keyForPropertiesMap, String valueForPropertiesMap) {
-
-
+    
     if (keyForPropertiesMap == null || valueForPropertiesMap == null) {
       analytics.enqueue(TrackMessage.builder(eventName)
         .userId(MAPBOX_USERNAME));
