@@ -13,10 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *  A class which abstracts the various analytics calls for Segment analytics' Java library.
- *
- *  
- *
+ * This class abstracts the various analytics calls to Segment analytics' Java library.
  */
 
 public class AnalyticsTracker {
@@ -34,15 +31,16 @@ public class AnalyticsTracker {
   private static final String IS_PHONE_MAP_VALUE = "phone";
 
 
-  public static AnalyticsTracker get() {
+  public static AnalyticsTracker getInstance() {
     return INSTANCE;
   }
 
   private Analytics analytics = Analytics.builder("zFLtBpautarTslr61PUbvEKXXLIoLRmq").build();
 
   public static final String MAPBOX_USERNAME = "LangstonSmithTestUsername";
+  public static final String MAPBOX_EMAIL = "langston.smith@mapbox.com";
 
-  public void openedAppForFirstTime(@NonNull String userId, boolean isTablet) {
+  public void openedAppForFirstTime(boolean isTablet) {
 
     Map<String, String> properties = new HashMap<>();
 
@@ -63,27 +61,31 @@ public class AnalyticsTracker {
   }
 
   public void openedApp() {
-    trackEvent(OPENED, null, null);
+    trackEvent(OPENED);
   }
 
   public void clickedOnSignInButton() {
-    trackEvent(CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME, null, null);
+    trackEvent(CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME);
   }
 
   public void clickedOnCreateAccountButton() {
-    trackEvent(CLICKED_ON_CREATE_ACCOUNT_BUTTON_EVENT_NAME, null, null);
+    trackEvent(CLICKED_ON_CREATE_ACCOUNT_BUTTON_EVENT_NAME);
   }
 
   public void clickedOnNavDrawerSection(@NonNull String sectionName) {
-    trackEvent(CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME, SECTION_NAME_MAP_KEY, sectionName);
+    trackEventWithProperties(CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME, SECTION_NAME_MAP_KEY, sectionName);
   }
 
   public void clickedOnIndividualExample(@NonNull String exampleName) {
-    trackEvent(CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME, EXAMPLE_NAME_MAP_KEY, exampleName);
+    trackEventWithProperties(CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME, EXAMPLE_NAME_MAP_KEY, exampleName);
   }
 
-  public void trackEvent(@NonNull String eventName, String keyForPropertiesMap, String valueForPropertiesMap) {
-    
+  public void trackEvent(@NonNull String eventName) {
+    trackEventWithProperties(eventName, null, null);
+  }
+
+  public void trackEventWithProperties(@NonNull String eventName, String keyForPropertiesMap, String valueForPropertiesMap) {
+
     if (keyForPropertiesMap == null || valueForPropertiesMap == null) {
       analytics.enqueue(TrackMessage.builder(eventName)
         .userId(MAPBOX_USERNAME));

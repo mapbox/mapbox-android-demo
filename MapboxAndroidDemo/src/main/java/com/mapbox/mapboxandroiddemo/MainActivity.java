@@ -548,7 +548,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_info) {
 
-      AnalyticsTracker.getInstance().trackEvent("Clicked on info menu item", null, null);
+      AnalyticsTracker.getInstance().trackEvent("Clicked on info menu item");
 
       new MaterialStyledDialog.Builder(MainActivity.this)
         .setTitle(getString(R.string.info_dialog_title))
@@ -560,7 +560,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .onPositive(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            AnalyticsTracker.getInstance().trackEvent("Clicked on info menu dialog start learning button", null, null);
+            AnalyticsTracker.getInstance().trackEvent("Clicked on info menu dialog start learning button");
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("https://mapbox.com/android-sdk"));
             startActivity(intent);
@@ -570,7 +570,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .onNegative(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            AnalyticsTracker.getInstance().trackEvent("Clicked on info menu dialog not now button", null, null);
+            AnalyticsTracker.getInstance().trackEvent("Clicked on info menu dialog not now button");
           }
         })
         .show();
