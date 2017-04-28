@@ -3,10 +3,16 @@ package com.mapbox.mapboxandroiddemo.examples.camera;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -15,13 +21,14 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 public class RestrictCameraActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-  private static final LatLngBounds ICELAND_BOUNDS = new LatLngBounds.Builder()
-    .include(new LatLng(66.852863, -25.985652))
-    .include(new LatLng(62.985661, -12.626277))
+  private static final LatLngBounds AUSTRALIA_BOUNDS = new LatLngBounds.Builder()
+    .include(new LatLng(-9.136343, 109.372126))
+    .include(new LatLng(-44.640488, 158.590484))
     .build();
 
   private MapView mapView;
   private MapboxMap mapboxMap;
+  private Marker marker;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -44,23 +51,34 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
     this.mapboxMap = mapboxMap;
 
     // Set bounds to Iceland
-    mapboxMap.setLatLngBoundsForCameraTarget(ICELAND_BOUNDS);
+    mapboxMap.setLatLngBoundsForCameraTarget(AUSTRALIA_BOUNDS);
     mapboxMap.setMinZoomPreference(2);
 
     // Visualise bounds area
     showBoundsArea();
+
+    showCrosshair();
+
   }
 
   private void showBoundsArea() {
     PolygonOptions boundsArea = new PolygonOptions()
-      .add(ICELAND_BOUNDS.getNorthWest())
-      .add(ICELAND_BOUNDS.getNorthEast())
-      .add(ICELAND_BOUNDS.getSouthEast())
-      .add(ICELAND_BOUNDS.getSouthWest());
+      .add(AUSTRALIA_BOUNDS.getNorthWest())
+      .add(AUSTRALIA_BOUNDS.getNorthEast())
+      .add(AUSTRALIA_BOUNDS.getSouthEast())
+      .add(AUSTRALIA_BOUNDS.getSouthWest());
     boundsArea.alpha(0.25f);
     boundsArea.fillColor(Color.RED);
     mapboxMap.addPolygon(boundsArea);
   }
+
+  private void showCrosshair() {
+    View crosshair = new View(this);
+    crosshair.setLayoutParams(new FrameLayout.LayoutParams(15, 15, Gravity.CENTER));
+    crosshair.setBackgroundColor(Color.GREEN);
+    mapView.addView(crosshair);
+  }
+
 
   @Override
   protected void onStart() {
