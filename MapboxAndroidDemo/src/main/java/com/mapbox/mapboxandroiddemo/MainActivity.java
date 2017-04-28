@@ -604,9 +604,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // This is a new install (or the user cleared the shared preferences)
             boolean deviceIsTabletScreen = getResources().getBoolean(R.bool.isTablet);
             if (deviceIsTabletScreen) {
-                AnalyticsTracker.get().openedAppForFirstTime(AnalyticsTracker.get().mapboxUsername, true);
+                AnalyticsTracker.get().openedAppForFirstTime(AnalyticsTracker.get().MAPBOX_USERNAME, true);
             } else {
-                AnalyticsTracker.get().openedAppForFirstTime(AnalyticsTracker.get().mapboxUsername, false);
+                AnalyticsTracker.get().openedAppForFirstTime(AnalyticsTracker.get().MAPBOX_USERNAME, false);
             }
             runStandardAnalytics();
         } else if (currentVersionCode > savedVersionCode) {
