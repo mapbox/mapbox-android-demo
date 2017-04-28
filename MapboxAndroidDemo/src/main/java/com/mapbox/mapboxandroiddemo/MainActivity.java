@@ -32,6 +32,7 @@ import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
@@ -312,6 +313,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_camera_bounding_box_description,
           new Intent(MainActivity.this, BoundingBoxCameraActivity.class),
           R.string.activity_camera_bounding_box_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_camera_restrict_title,
+          R.string.activity_camera_restrict_description,
+          new Intent(MainActivity.this, RestrictCameraActivity.class),
+          R.string.activity_camera_restrict_url
         ));
         currentCategory = R.id.nav_camera;
         break;
