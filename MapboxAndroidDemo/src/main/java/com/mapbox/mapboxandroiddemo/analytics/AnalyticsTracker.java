@@ -19,6 +19,7 @@ import java.util.Map;
 public class AnalyticsTracker {
 
   private static final AnalyticsTracker INSTANCE = new AnalyticsTracker();
+  private Analytics analytics = Analytics.builder("zFLtBpautarTslr61PUbvEKXXLIoLRmq").build();
 
   private static final String OPENED = "Opened app";
   private static final String CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME = "Clicked on sign in button";
@@ -30,16 +31,14 @@ public class AnalyticsTracker {
   private static final String IS_TABLET_MAP_VALUE = "tablet";
   private static final String IS_PHONE_MAP_VALUE = "phone";
   private static final String FIRST_NAME = "Langston";
+  public static final String MAPBOX_USERNAME = "LangstonSmithTestUsername";
+  public static final String MAPBOX_EMAIL = "langston.smith@mapbox.com";
 
 
   public static AnalyticsTracker getInstance() {
     return INSTANCE;
   }
 
-  private Analytics analytics = Analytics.builder("zFLtBpautarTslr61PUbvEKXXLIoLRmq").build();
-
-  public static final String MAPBOX_USERNAME = "LangstonSmithTestUsername";
-  public static final String MAPBOX_EMAIL = "langston.smith@mapbox.com";
 
   public void openedAppForFirstTime(boolean isTablet) {
 
@@ -85,7 +84,8 @@ public class AnalyticsTracker {
     trackEventWithProperties(eventName, null, null);
   }
 
-  public void trackEventWithProperties(@NonNull String eventName, String keyForPropertiesMap, String valueForPropertiesMap) {
+  public void trackEventWithProperties(@NonNull String eventName, String keyForPropertiesMap,
+                                       String valueForPropertiesMap) {
 
     if (keyForPropertiesMap == null || valueForPropertiesMap == null) {
       analytics.enqueue(TrackMessage.builder(eventName)
@@ -97,9 +97,7 @@ public class AnalyticsTracker {
       Map<String, String> properties = new HashMap<>();
       properties.put(keyForPropertiesMap, valueForPropertiesMap);
 
-      analytics.enqueue(TrackMessage.builder(eventName)
-        .userId(MAPBOX_USERNAME)
-        .properties(properties));
+      analytics.enqueue(TrackMessage.builder(eventName).userId(MAPBOX_USERNAME).properties(properties));
     }
   }
 
