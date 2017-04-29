@@ -2,10 +2,8 @@ package com.mapbox.mapboxandroiddemo.analytics;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.BuildConfig;
-import com.mapbox.mapboxandroiddemo.R;
 
 import static android.content.Context.MODE_PRIVATE;
 
