@@ -106,6 +106,11 @@ public class AnalyticsTracker {
     analytics.enqueue(ScreenMessage.builder(nameOfScreen).userId(MAPBOX_USERNAME));
   }
 
+  public void runStandardAnalytics() {
+    openedApp();
+    identifyUser(MAPBOX_USERNAME, MAPBOX_EMAIL);
+  }
+
   public void identifyUser(@NonNull String actualNameOfUser, @NonNull String userEmailAddress) {
 
     Map<String, String> traits = new HashMap<>();
