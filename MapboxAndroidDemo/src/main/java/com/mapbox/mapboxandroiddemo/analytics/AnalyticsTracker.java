@@ -50,8 +50,7 @@ public class AnalyticsTracker {
     properties.put("Device manufacturer", Build.MANUFACTURER);
     properties.put("Device device", Build.DEVICE);
     properties.put("Device tags", Build.TAGS);
-    String deviceSize = isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE;
-    properties.put("Device size", deviceSize);
+    properties.put("Device size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
 
     analytics.enqueue(TrackMessage.builder("Opened App For First Time")
       .userId(MAPBOX_USERNAME)
