@@ -30,7 +30,7 @@ public class AnalyticsTracker {
   private static final String EXAMPLE_NAME_MAP_KEY = "example name";
   private static final String IS_TABLET_MAP_VALUE = "tablet";
   private static final String IS_PHONE_MAP_VALUE = "phone";
-  private static final String FIRST_NAME = "Langston";
+  private static final String ORGANIZATION_NAME = "LangstonCompany";
   public static final String MAPBOX_USERNAME = "LangstonSmithTestUsername";
   public static final String MAPBOX_EMAIL = "langston.smith@mapbox.com";
 
@@ -106,7 +106,7 @@ public class AnalyticsTracker {
 
   public void runStandardAnalytics() {
     openedApp();
-    identifyUser(FIRST_NAME, MAPBOX_EMAIL);
+    identifyUser(ORGANIZATION_NAME, MAPBOX_EMAIL);
   }
 
   public void identifyUser(@NonNull String actualNameOfUser, @NonNull String userEmailAddress) {
