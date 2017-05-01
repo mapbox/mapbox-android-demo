@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="40.6892"
         mapbox:mapbox_cameraTargetLng="-74.5447"
-        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/light-v10"
+        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/light-v9"
         mapbox:mapbox_cameraZoom="8"/>
 
 </LinearLayout>
