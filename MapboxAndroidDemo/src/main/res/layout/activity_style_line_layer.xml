@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="33.39243835"
         mapbox:mapbox_cameraTargetLng="-118.38265415000001"
-        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/outdoors-v9"
+        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/outdoors-v10"
         mapbox:mapbox_cameraZoom="13.448986053466797"/>
 
 </RelativeLayout>
