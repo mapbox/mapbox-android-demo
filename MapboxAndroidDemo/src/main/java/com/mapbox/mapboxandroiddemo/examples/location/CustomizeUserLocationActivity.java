@@ -33,7 +33,6 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
   private LocationEngineListener locationEngineListener;
 
 
-
   private static final int PERMISSIONS_LOCATION = 0;
 
 
@@ -143,37 +142,36 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
 
   private void enableLocation() {
 
-      // If we have the last location of the user, we can move the camera to that position.
-      Location lastLocation = locationEngine.getLastLocation();
-      if (lastLocation != null) {
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
+    // If we have the last location of the user, we can move the camera to that position.
+    Location lastLocation = locationEngine.getLastLocation();
+    if (lastLocation != null) {
+      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
+    }
+
+    locationEngineListener = new LocationEngineListener() {
+      @Override
+      public void onConnected() {
+        // No action needed here.
       }
 
-      locationEngineListener = new LocationEngineListener() {
-        @Override
-        public void onConnected() {
-          // No action needed here.
+      @Override
+      public void onLocationChanged(Location location) {
+        if (location != null) {
+          // Move the map camera to where the user location is and then remove the
+          // listener so the camera isn't constantly updating when the user location
+          // changes. When the user disables and then enables the location again, this
+          // listener is registered again and will adjust the camera once again.
+          map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 16));
+          locationEngine.removeLocationEngineListener(this);
         }
+      }
+    };
 
-        @Override
-        public void onLocationChanged(Location location) {
-          if (location != null) {
-            // Move the map camera to where the user location is and then remove the
-            // listener so the camera isn't constantly updating when the user location
-            // changes. When the user disables and then enables the location again, this
-            // listener is registered again and will adjust the camera once again.
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 16));
-            locationEngine.removeLocationEngineListener(this);
-          }
-        }
-      };
+    locationEngine.addLocationEngineListener(locationEngineListener);
 
-      locationEngine.addLocationEngineListener(locationEngineListener);
-
-      // Enable or disable the location layer on the map
+    // Enable or disable the location layer on the map
     map.setMyLocationEnabled(true);
   }
-
 
 
   @Override
