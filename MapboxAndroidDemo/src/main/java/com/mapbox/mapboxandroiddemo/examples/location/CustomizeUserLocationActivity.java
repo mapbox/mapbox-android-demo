@@ -169,7 +169,8 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
 
     locationEngine.addLocationEngineListener(locationEngineListener);
 
-    // Enable or disable the location layer on the map
+
+    //Enable or disable the location layer on the map
     map.setMyLocationEnabled(true);
   }
 
