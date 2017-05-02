@@ -150,7 +150,7 @@
     <string name="activity_lab_off_route_description">Detect when the car is off route and reroute them.</string>
     <string name="activity_lab_las_angeles_tourism_description">Use the style API to highlight parks, hotels, and attractions. A pulsing animation is also added to the colors.</string>
     <string name="activity_lab_indoor_map_description">Display an indoor map of a building with toggles to switch between floor levels.</string>
-    <string name="activity_lab_basic_extrusions_description">Display buildings\' heights in a 3d view for an interactive map experience.</string>
+    <string name="activity_lab_basic_extrusions_description">Display heights for a 3D view of the world\'s buildings.</string>
 
     <!-- example urls-->
     <string name="empty_image"> </string>
