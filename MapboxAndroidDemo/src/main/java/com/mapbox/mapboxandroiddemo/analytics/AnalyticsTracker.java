@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class AnalyticsTracker {
 
-  private static final AnalyticsTracker INSTANCE = new AnalyticsTracker();
+  private static volatile AnalyticsTracker analyticsInstance;
   private Analytics analytics = Analytics.builder("zFLtBpautarTslr61PUbvEKXXLIoLRmq").build();
 
   private static final String OPENED = "Opened app";
@@ -30,15 +30,20 @@ public class AnalyticsTracker {
   private static final String EXAMPLE_NAME_MAP_KEY = "example name";
   private static final String IS_TABLET_MAP_VALUE = "tablet";
   private static final String IS_PHONE_MAP_VALUE = "phone";
-  private static final String ORGANIZATION_NAME = "LangstonCompany";
+  public static final String ORGANIZATION_NAME = "LangstonCompany";
   public static final String MAPBOX_USERNAME = "LangstonSmithTestUsername";
   public static final String MAPBOX_EMAIL = "langston.smith@mapbox.com";
 
-
   public static AnalyticsTracker getInstance() {
-    return INSTANCE;
+    if (analyticsInstance == null) {  // Single check
+      synchronized (AnalyticsTracker.class) {
+        if (analyticsInstance == null) {  // Double check
+          analyticsInstance = new AnalyticsTracker();
+        }
+      }
+    }
+    return analyticsInstance;
   }
-
 
   public void openedAppForFirstTime(boolean isTablet) {
 
@@ -104,15 +109,10 @@ public class AnalyticsTracker {
     analytics.enqueue(ScreenMessage.builder(nameOfScreen).userId(MAPBOX_USERNAME));
   }
 
-  public void runStandardAnalytics() {
-    openedApp();
-    identifyUser(ORGANIZATION_NAME, MAPBOX_EMAIL);
-  }
-
-  public void identifyUser(@NonNull String actualNameOfUser, @NonNull String userEmailAddress) {
+  public void identifyUser(@NonNull String organizationName, @NonNull String userEmailAddress) {
 
     Map<String, String> traits = new HashMap<>();
-    traits.put("name", actualNameOfUser);
+    traits.put("organizationName", organizationName);
     traits.put("email", userEmailAddress);
 
     analytics.enqueue(IdentifyMessage.builder()

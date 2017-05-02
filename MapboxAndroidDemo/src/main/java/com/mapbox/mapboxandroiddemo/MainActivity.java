@@ -78,6 +78,9 @@ import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 
 import java.util.ArrayList;
 
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.MAPBOX_EMAIL;
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.ORGANIZATION_NAME;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
   private ArrayList<ExampleItemModel> exampleItemModel;
@@ -143,7 +146,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     checkForFirstTimeOpen();
 
-    AnalyticsTracker.getInstance().runStandardAnalytics();
+    AnalyticsTracker.getInstance().openedApp();
+    AnalyticsTracker.getInstance().identifyUser(ORGANIZATION_NAME, MAPBOX_EMAIL);
+
 
 
   }
