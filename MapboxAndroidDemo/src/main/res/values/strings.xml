@@ -75,7 +75,7 @@
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
     <string name="activity_camera_restrict_title">Restrict map panning</string>
     <string name="activity_offline_simple_title">A simple offline map</string>
-    <string name="activity_offline_manager_title">Offline manager</string>
+    <string name="activity_title">Offline manager</string>
     <string name="activity_query_feature_title">Query a map feature</string>
     <string name="activity_query_select_building_title">Select a building</string>
     <string name="activity_query_feature_count_title">Feature count</string>
@@ -129,7 +129,7 @@
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
     <string name="activity_camera_restrict_description">Prevent a map from being panned to a different place.</string>
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Android SDK.</string>
-    <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
+    <string name="activity_description">Download, view, navigate to, and delete an offline region.</string>
     <string name="activity_query_feature_description">Click the map to add a marker at the location and display the maps property information for that feature.</string>
     <string name="activity_query_select_building_description">Use the query feature to select a building, get its geometry and draw a polygon highlighting it.</string>
     <string name="activity_query_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
@@ -185,7 +185,7 @@
     <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string> <!-- https://www.mapbox.com/android-sdk/images/fit-bound-camera.gif -->
     <string name="activity_camera_restrict_url" translatable="false">http://i.imgur.com/A227BEs.jpg</string>
     <string name="activity_offline_simple_url" translatable="false">https://www.mapbox.com/android-sdk/images/offline-map.png</string>
-    <string name="activity_offline_manager_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
+    <string name="activity_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
     <string name="activity_query_select_building_url" translatable="false">http://i.imgur.com/bImud7u.png</string>
     <string name="activity_query_feature_url" translatable="false">http://i.imgur.com/HXxRBAF.png</string>
     <string name="activity_query_feature_count_url" translatable="false">http://i.imgur.com/phzOt81.png</string>
@@ -240,8 +240,8 @@
     <string name="turf_inside_marker_status_outside">Outside</string>
 
     <!--Offline manager button text-->
-    <string name="offline_manager_download_button_text">Download</string>
-    <string name="offline_manager_list_button_text">List</string>
+    <string name="download_button_text">Download</string>
+    <string name="list_button_text">List</string>
 
     <!--Basic user location permission toasts-->
     <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
@@ -274,20 +274,20 @@
     <string name="directions_activity_toast_message">Route is %1$f meters long.</string>
 
     <!--Strings for OfflineManager activity-->
-    <string name="offline_manager_dialog_title">Name new region</string>
-    <string name="offline_manager_dialog_message">Downloads the map region you currently are viewing</string>
-    <string name="offline_manager_dialog_positive_button">Download</string>
-    <string name="offline_manager_dialog_negative_button">Cancel</string>
-    <string name="offline_manager_dialog_toast">Region name cannot be empty.</string>
-    <string name="offline_manager_end_progress_success">Region downloaded successfully.</string>
-    <string name="offline_manager_toast_no_regions_yet">You have no regions yet.</string>
-    <string name="offline_manager_toast_region_deleted">Region deleted</string>
-    <string name="offline_manager_dialog_region_list_navigate_positive_button">Navigate to</string>
-    <string name="offline_manager_dialog_region_list_navigate_neutral_button_title">Delete</string>
-    <string name="offline_manager_dialog_region_list_navigate_negative_button_title">Cancel</string>
-    <string name="offline_manager_dialog_region_list_navigate_title">List</string>
-    <string name="offline_manager_region_name">Region %1$d</string>
-    <string name="offline_manager_set_region_name_hint">Enter name</string>
+    <string name="dialog_title">Name new region</string>
+    <string name="dialog_message">Downloads the map region you currently are viewing</string>
+    <string name="dialog_positive_button">Download</string>
+    <string name="dialog_negative_button">Cancel</string>
+    <string name="dialog_toast">Region name cannot be empty.</string>
+    <string name="end_progress_success">Region downloaded successfully.</string>
+    <string name="toast_no_regions_yet">You have no regions yet.</string>
+    <string name="toast_region_deleted">Region deleted</string>
+    <string name="navigate_positive_button">Navigate to</string>
+    <string name="navigate_neutral_button_title">Delete</string>
+    <string name="navigate_negative_button_title">Cancel</string>
+    <string name="navigate_title">List</string>
+    <string name="region_name">Region %1$d</string>
+    <string name="set_region_name_hint">Enter name</string>
 
     <!--SimpleOfflineMapActivity activity-->
 

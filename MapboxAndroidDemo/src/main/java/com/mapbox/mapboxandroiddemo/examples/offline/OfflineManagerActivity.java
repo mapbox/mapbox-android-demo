@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class OfflineManagerActivity extends AppCompatActivity {
 
-  private static final String TAG = "MainActivity";
+  private static final String TAG = "OffManActivity";
 
   // JSON encoding/decoding
   public static final String JSON_CHARSET = "UTF-8";
@@ -149,13 +149,13 @@ public class OfflineManagerActivity extends AppCompatActivity {
     AlertDialog.Builder builder = new AlertDialog.Builder(OfflineManagerActivity.this);
 
     final EditText regionNameEdit = new EditText(OfflineManagerActivity.this);
-    regionNameEdit.setHint(getString(R.string.offline_manager_set_region_name_hint));
+    regionNameEdit.setHint(getString(R.string.set_region_name_hint));
 
     // Build the dialog box
-    builder.setTitle(getString(R.string.offline_manager_dialog_title))
+    builder.setTitle(getString(R.string.dialog_title))
       .setView(regionNameEdit)
-      .setMessage(getString(R.string.offline_manager_dialog_message))
-      .setPositiveButton(getString(R.string.offline_manager_dialog_positive_button), new DialogInterface.OnClickListener() {
+      .setMessage(getString(R.string.dialog_message))
+      .setPositiveButton(getString(R.string.dialog_positive_button), new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
           String regionName = regionNameEdit.getText().toString();
@@ -163,14 +163,14 @@ public class OfflineManagerActivity extends AppCompatActivity {
           // If the user-provided string is empty, display
           // a toast message and do not begin download.
           if (regionName.length() == 0) {
-            Toast.makeText(OfflineManagerActivity.this, getString(R.string.offline_manager_dialog_toast), Toast.LENGTH_SHORT).show();
+            Toast.makeText(OfflineManagerActivity.this, getString(R.string.dialog_toast), Toast.LENGTH_SHORT).show();
           } else {
             // Begin download process
             downloadRegion(regionName);
           }
         }
       })
-      .setNegativeButton(getString(R.string.offline_manager_dialog_negative_button), new DialogInterface.OnClickListener() {
+      .setNegativeButton(getString(R.string.dialog_negative_button), new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
           dialog.cancel();
@@ -241,7 +241,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
         if (status.isComplete()) {
           // Download complete
-          endProgress(getString(R.string.offline_manager_end_progress_success));
+          endProgress(getString(R.string.end_progress_success));
           return;
         } else if (status.isRequiredResourceCountPrecise()) {
           // Switch to determinate state
@@ -284,7 +284,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
         // Check result. If no regions have been
         // downloaded yet, notify user and return
         if (offlineRegions == null || offlineRegions.length == 0) {
-          Toast.makeText(OfflineManagerActivity.this, getString(R.string.offline_manager_toast_no_regions_yet), Toast.LENGTH_SHORT).show();
+          Toast.makeText(getApplicationContext(), getString(R.string.toast_no_regions_yet), Toast.LENGTH_SHORT).show();
           return;
         }
 
@@ -297,7 +297,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
         // Build a dialog containing the list of regions
         AlertDialog dialog = new AlertDialog.Builder(OfflineManagerActivity.this)
-          .setTitle(getString(R.string.offline_manager_dialog_region_list_navigate_title))
+          .setTitle(getString(R.string.navigate_title))
           .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -305,7 +305,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
               regionSelected = which;
             }
           })
-          .setPositiveButton(getString(R.string.offline_manager_dialog_region_list_navigate_positive_button), new DialogInterface.OnClickListener() {
+          .setPositiveButton(getString(R.string.navigate_positive_button), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
 
@@ -328,7 +328,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
             }
           })
-          .setNeutralButton(getString(R.string.offline_manager_dialog_region_list_navigate_neutral_button_title), new DialogInterface.OnClickListener() {
+          .setNeutralButton(getString(R.string.navigate_neutral_button_title), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
               // Make progressBar indeterminate and
@@ -345,7 +345,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
                   // progressBar and display a toast
                   progressBar.setVisibility(View.INVISIBLE);
                   progressBar.setIndeterminate(false);
-                  Toast.makeText(OfflineManagerActivity.this, getString(R.string.offline_manager_toast_region_deleted), Toast.LENGTH_LONG).show();
+                  Toast.makeText(getApplicationContext(), getString(R.string.toast_region_deleted), Toast.LENGTH_LONG).show();
                 }
 
                 @Override
@@ -357,7 +357,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
               });
             }
           })
-          .setNegativeButton(getString(R.string.offline_manager_dialog_region_list_navigate_negative_button_title), new DialogInterface.OnClickListener() {
+          .setNegativeButton(getString(R.string.navigate_negative_button_title), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
               // When the user cancels, don't do anything.
@@ -386,7 +386,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
       regionName = jsonObject.getString(JSON_FIELD_REGION_NAME);
     } catch (Exception exception) {
       Log.e(TAG, "Failed to decode metadata: " + exception.getMessage());
-      regionName = String.format(getString(R.string.offline_manager_region_name), offlineRegion.getID());
+      regionName = String.format(getString(R.string.region_name), offlineRegion.getID());
     }
     return regionName;
   }
