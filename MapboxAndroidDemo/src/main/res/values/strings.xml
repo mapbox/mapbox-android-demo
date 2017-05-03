@@ -61,6 +61,7 @@
     <string name="activity_style_data_clusters_title">Create and style data clusters</string>
     <string name="activity_style_line_layer_title">Create a line layer</string>
     <string name="activity_style_symbol_layer_title">Marker symbol layer</string>
+    <string name="activity_style_basic_extrusions_title">Display buildings in 3D</string>
     <string name="activity_dds_style_circle_categorically_title">Style circles categorically</string>
     <string name="activity_dds_choropleth_zoom_change_title">Update a choropleth layer by zoom level</string>
     <string name="activity_dds_style_line_identity_property_title">Style lines using an identity property function</string>
@@ -96,6 +97,7 @@
     <string name="activity_lab_las_angeles_tourism_title">Los Angeles for tourists</string>
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
 
+
     <!-- example descriptions-->
     <string name="activity_basic_simple_mapview_description">Show a map in your app using the Mapbox Android SDK.</string>
     <string name="activity_basic_support_map_frag_description">Include a map fragment within your app using Android support library.</string>
@@ -115,6 +117,7 @@
     <string name="activity_style_create_data_cluster_description">Use GeoJSON to visualize point data in clusters.</string>
     <string name="activity_style_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
     <string name="activity_style_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
+    <string name="activity_style_basic_extrusions_description">Use extrusions to display buildings\' height in 3D</string>
     <string name="activity_dds_style_circle_categorically_description">Using a categorical circle-color property function for a visualization.</string>
     <string name="activity_dds_choropleth_zoom_change_description">Using 2014 census data, display state or county population depending on zoom level.</string>
     <string name="activity_dds_style_line_identity_property_description">Using an identity line-color property function for a visualization.</string>
@@ -171,6 +174,7 @@
     <string name="activity_style_create_cluster_data_points_url" translatable="false">http://i.imgur.com/fGeZhcD.png</string>
     <string name="activity_style_line_layer_url" translatable="false">http://i.imgur.com/Iqxoing.png</string>
     <string name="activity_style_symbol_layer_url" translatable="false">http://i.imgur.com/TQ4iA0L.png</string>
+    <string name="activity_style_basic_extrusions_url" translatable="false">http://i.imgur.com/SXn5NJK.png</string>
     <string name="activity_dds_style_circle_categorically_url" translatable="false">http://i.imgur.com/C3mtfgF.png</string>
     <string name="activity_dds_choropleth_zoom_change_url" translatable="false">http://i.imgur.com/sPNpLEP.png</string>
     <string name="activity_dds_style_line_identity_property_url" translatable="false">http://i.imgur.com/wgpKvZM.png</string>
