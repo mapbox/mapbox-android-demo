@@ -38,7 +38,6 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
 
     // Get the location engine object for later use.
     LocationEngine locationEngine = LocationSource.getLocationEngine(this);
-    locationEngine.activate();
     locationEngine.requestLocationUpdates();
 
     mapView = (MapView) findViewById(R.id.mapView);
