@@ -18,6 +18,7 @@ public class MapboxApplication extends Application {
     );
 
     AnalyticsTracker.getInstance().trackEvent("Application onCreate()");
+    AnalyticsTracker.getInstance().openedApp();
 
   }
 }

@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.analytics;
 
-
 import android.os.Build;
 import android.support.annotation.NonNull;
 
@@ -10,10 +9,11 @@ import com.segment.analytics.messages.ScreenMessage;
 import com.segment.analytics.messages.TrackMessage;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
- * This class abstracts the various analytics calls to Segment analytics' Java library.
+ * This class abstracts various analytics calls to Segment analytics' Java library.
  */
 
 public class AnalyticsTracker {
@@ -34,6 +34,7 @@ public class AnalyticsTracker {
   public static final String MAPBOX_USERNAME = "LangstonSmithTestUsername";
   public static final String MAPBOX_EMAIL = "langston.smith@mapbox.com";
 
+  // Returns instance of this class for making analytics calls throughout the app
   public static AnalyticsTracker getInstance() {
     if (analyticsInstance == null) {  // Single check
       synchronized (AnalyticsTracker.class) {
@@ -45,49 +46,94 @@ public class AnalyticsTracker {
     return analyticsInstance;
   }
 
+  /**
+   * Gets and adds device information to analytics call. Ideally, this method is called
+   * when app is opened for the first time or if shared preferences is cleared.
+   **/
+
   public void openedAppForFirstTime(boolean isTablet) {
 
     Map<String, String> properties = new HashMap<>();
-
-    properties.put("Device model", Build.MODEL);
-    properties.put("Device brand", Build.BRAND);
-    properties.put("Device product", Build.PRODUCT);
-    properties.put("Device manufacturer", Build.MANUFACTURER);
-    properties.put("Device device", Build.DEVICE);
-    properties.put("Device tags", Build.TAGS);
-    properties.put("Device size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
+    properties.put("model", Build.MODEL);
+    properties.put("brand", Build.BRAND);
+    properties.put("product", Build.PRODUCT);
+    properties.put("manufacturer", Build.MANUFACTURER);
+    properties.put("device", Build.DEVICE);
+    properties.put("tags", Build.TAGS);
+    properties.put("ISO03 language", Locale.getDefault().getISO3Language());
+    properties.put("language", Locale.getDefault().getLanguage());
+    properties.put("ISO03 country", Locale.getDefault().getISO3Country());
+    properties.put("country", Locale.getDefault().getCountry());
+    properties.put("display country", Locale.getDefault().getDisplayCountry());
+    properties.put("display name", Locale.getDefault().getDisplayName());
+    properties.put("display language", Locale.getDefault().getDisplayLanguage());
+    properties.put("size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
 
     analytics.enqueue(TrackMessage.builder("Opened App For First Time")
       .userId(MAPBOX_USERNAME)
       .properties(properties)
     );
-
   }
 
+  /**
+   * Makes an analytics call telling Segment that the app was opened. Ideally used
+   * in the MapboxApplication class' onCreate(). Could also be called in the MainActivity's onCreate()
+   */
   public void openedApp() {
     trackEvent(OPENED);
   }
 
+  /**
+   * Makes an analytics call telling Segment that the Sign In button has been clicked.
+   */
   public void clickedOnSignInButton() {
     trackEvent(CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME);
   }
 
+  /**
+   * Makes an analytics call telling Segment that the Create Account button has been clicked.
+   */
   public void clickedOnCreateAccountButton() {
     trackEvent(CLICKED_ON_CREATE_ACCOUNT_BUTTON_EVENT_NAME);
   }
 
+  /**
+   * Makes an analytics call telling Segment which particular navigation drawer section has been selected.
+   *
+   * @param sectionName
+   */
   public void clickedOnNavDrawerSection(@NonNull String sectionName) {
     trackEventWithProperties(CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME, SECTION_NAME_MAP_KEY, sectionName);
   }
 
+  /**
+   * Makes an analytics call telling Segment which particular example has selected
+   *
+   * @param exampleName
+   */
   public void clickedOnIndividualExample(@NonNull String exampleName) {
     trackEventWithProperties(CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME, EXAMPLE_NAME_MAP_KEY, exampleName);
   }
 
+  /**
+   * Makes an analytics call telling Segment what custom-named event has happened. Because there are no
+   * custom parameters involved with the call, this method is the most "basic" analytics call that's
+   * available in this class.
+   *
+   * @param eventName
+   */
   public void trackEvent(@NonNull String eventName) {
     trackEventWithProperties(eventName, null, null);
   }
 
+  /**
+   * Makes an analytics call telling Segment what custom-named event has happened. Custom parameters provided
+   * are also included in the call.
+   *
+   * @param eventName
+   * @param keyForPropertiesMap
+   * @param valueForPropertiesMap
+   */
   public void trackEventWithProperties(@NonNull String eventName, String keyForPropertiesMap,
                                        String valueForPropertiesMap) {
 
@@ -105,12 +151,22 @@ public class AnalyticsTracker {
     }
   }
 
+  /**
+   * Makes an analytics call telling Segment that a certain screen has been viewed via a "ScreenMessage" call
+   *
+   * @param nameOfScreen
+   */
   public void viewedScreen(String nameOfScreen) {
     analytics.enqueue(ScreenMessage.builder(nameOfScreen).userId(MAPBOX_USERNAME));
   }
 
+  /**
+   * Makes an analytics call telling Segment the user's identity via a "IdentifyMessage" call.
+   *
+   * @param organizationName
+   * @param userEmailAddress
+   */
   public void identifyUser(@NonNull String organizationName, @NonNull String userEmailAddress) {
-
     Map<String, String> traits = new HashMap<>();
     traits.put("organizationName", organizationName);
     traits.put("email", userEmailAddress);
@@ -120,6 +176,4 @@ public class AnalyticsTracker {
       .traits(traits)
     );
   }
-
-
 }

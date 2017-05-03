@@ -145,12 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     checkForFirstTimeOpen();
-
-    AnalyticsTracker.getInstance().openedApp();
     AnalyticsTracker.getInstance().identifyUser(ORGANIZATION_NAME, MAPBOX_EMAIL);
-
-
-
   }
 
   @Override
@@ -600,6 +595,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     firstTimeRunChecker.updateSharedPrefWithCurrentVersion();
   }
-
-
 }
