@@ -97,7 +97,6 @@
     <string name="activity_lab_las_angeles_tourism_title">Los Angeles for tourists</string>
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
 
-
     <!-- example descriptions-->
     <string name="activity_basic_simple_mapview_description">Show a map in your app using the Mapbox Android SDK.</string>
     <string name="activity_basic_support_map_frag_description">Include a map fragment within your app using Android support library.</string>
@@ -228,9 +227,7 @@
     <!--Zoom in and out map instruction for toast-->
     <string name="zoom_map_in_and_out_instruction">Zoom in and out to see cluster numbers change</string>
 
-
     <!--Geocode widget hint text-->
-
     <string name="hint_text_in_geocode_widget">Select Location</string>
 
     <!--Tap on feature box instruction-->
@@ -248,8 +245,6 @@
     <string name="offline_manager_list_button_text">List</string>
 
     <!--Basic user location permission toasts-->
-
-
     <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
     <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
 

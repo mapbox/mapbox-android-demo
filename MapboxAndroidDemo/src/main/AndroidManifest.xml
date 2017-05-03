@@ -393,7 +393,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
-        <activity android:name=".examples.styles.BasicExtrusionActivity">
+        <activity
+            android:name=".examples.styles.BasicExtrusionActivity"
+            android:label="@string/activity_style_basic_extrusions_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>

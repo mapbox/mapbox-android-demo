@@ -20,7 +20,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionCol
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
 
-
 public class BasicExtrusionActivity extends AppCompatActivity {
 
   private MapView mapView;
