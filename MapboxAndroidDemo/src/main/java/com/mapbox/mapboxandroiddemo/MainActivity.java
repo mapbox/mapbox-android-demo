@@ -53,11 +53,12 @@ import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.BasicExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
@@ -66,7 +67,6 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
-import com.mapbox.mapboxandroiddemo.labs.BasicExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
@@ -255,6 +255,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, CustomRasterStyleActivity.class),
           R.string.activity_style_raster_url
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_basic_extrusions_title,
+          R.string.activity_lab_basic_extrusions_description,
+          new Intent(MainActivity.this, BasicExtrusionActivity.class),
+          R.string.activity_lab_basic_extrusions_url
+        ));
         break;
       case R.id.nav_annotations:
         exampleItemModel.add(new ExampleItemModel(
@@ -429,12 +435,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         break;
       case R.id.nav_lab:
         exampleItemModel.add(null);
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_basic_extrusions_title,
-          R.string.activity_lab_basic_extrusions_description,
-          new Intent(MainActivity.this, BasicExtrusionActivity.class),
-          R.string.activity_lab_basic_extrusions_url
-        ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_las_angeles_tourism_title,
           R.string.activity_lab_las_angeles_tourism_description,

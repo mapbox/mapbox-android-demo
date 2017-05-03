@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.labs;
+package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -56,7 +56,6 @@ public class BasicExtrusionActivity extends AppCompatActivity {
         map.addLayer(fillExtrusionLayer);
       }
     });
-
   }
 
   @Override
@@ -100,6 +99,4 @@ public class BasicExtrusionActivity extends AppCompatActivity {
     super.onDestroy();
     mapView.onDestroy();
   }
-
-
 }

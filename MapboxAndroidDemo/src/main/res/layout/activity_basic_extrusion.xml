@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mapbox.mapboxandroiddemo.labs.BasicExtrusionActivity">
+    tools:context="com.mapbox.mapboxandroiddemo.examples.styles.BasicExtrusionActivity">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
@@ -19,4 +18,4 @@
         mapbox:mapbox_cameraZoom="15.903808"
         mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
