@@ -207,6 +207,7 @@
     <string name="activity_lab_off_route_url" translatable="false">http://i.imgur.com/lx1LdkA.png</string>
     <string name="activity_lab_las_angeles_tourism_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
     <string name="activity_lab_indoor_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
+    <string name="activity_lab_basic_extrusions_url" translatable="false">http://i.imgur.com/4MkKbVi.jpg</string>
 
     <!--Default style names-->
     <string name="menu_map_style_streets">Streets</string>
