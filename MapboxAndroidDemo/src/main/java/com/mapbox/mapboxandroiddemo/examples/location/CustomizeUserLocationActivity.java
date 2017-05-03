@@ -31,8 +31,6 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
   private MapboxMap map;
   private LocationEngine locationEngine;
   private LocationEngineListener locationEngineListener;
-
-
   private static final int PERMISSIONS_LOCATION = 0;
 
 
@@ -69,8 +67,6 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
         map.getMyLocationViewSettings().setPadding(0, 500, 0, 0);
         map.getMyLocationViewSettings().setForegroundTintColor(Color.parseColor("#56B881"));
         map.getMyLocationViewSettings().setAccuracyTintColor(Color.parseColor("#FBB03B"));
-
-
       }
     });
   }
@@ -169,11 +165,9 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
 
     locationEngine.addLocationEngineListener(locationEngineListener);
 
-
     //Enable or disable the location layer on the map
     map.setMyLocationEnabled(true);
   }
-
 
   @Override
   public void onPermissionResult(boolean granted) {
