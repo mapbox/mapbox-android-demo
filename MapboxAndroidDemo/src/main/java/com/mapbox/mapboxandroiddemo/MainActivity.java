@@ -567,8 +567,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .setNegativeText(getString(R.string.info_dialog_negative_button_text))
         .onNegative(new MaterialDialog.SingleButtonCallback() {
           @Override
-          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-          }
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {}
         })
         .show();
       return true;
