@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.location;
 
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
