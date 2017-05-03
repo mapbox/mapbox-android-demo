@@ -345,7 +345,8 @@ public class OfflineManagerActivity extends AppCompatActivity {
                   // progressBar and display a toast
                   progressBar.setVisibility(View.INVISIBLE);
                   progressBar.setIndeterminate(false);
-                  Toast.makeText(getApplicationContext(), getString(R.string.toast_region_deleted), Toast.LENGTH_LONG).show();
+                  Toast.makeText(getApplicationContext(), getString(R.string.toast_region_deleted),
+                    Toast.LENGTH_LONG).show();
                 }
 
                 @Override
