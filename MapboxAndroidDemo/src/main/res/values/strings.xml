@@ -314,8 +314,8 @@
     <string name="fab_title_attractions">Attractions</string>
 
     <!--OffRouteActivity activity-->
-    <string name="off_route_toast_press_map_to_add_destination">Press map to add destination</string>
-    <string name="off_route_toast_no_routes_found">No routes found</string>
+    <string name="off_route_toast_press_map">Press map to add destination</string>
+    <string name="toast_no_routes_found">No routes found</string>
     <string name="off_route_toast_off_route">Off route</string>
 
     <!--LanguageSwitchActivity activity-->

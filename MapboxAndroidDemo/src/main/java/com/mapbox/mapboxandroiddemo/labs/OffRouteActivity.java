@@ -88,7 +88,7 @@ public class OffRouteActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
 
-        Toast.makeText(OffRouteActivity.this, getString(R.string.off_route_toast_press_map_to_add_destination), Toast.LENGTH_LONG).show();
+        Toast.makeText(OffRouteActivity.this, getString(R.string.off_route_toast_press_map), Toast.LENGTH_LONG).show();
 
         // origin used for starting point of car.
         Position origin = Position.fromCoordinates(2.35166, 48.84659);
@@ -246,7 +246,7 @@ public class OffRouteActivity extends AppCompatActivity {
           // Draw the route on the map
           drawRoute(currentRoute);
         } else {
-          Toast.makeText(OffRouteActivity.this, getString(R.string.off_route_toast_no_routes_found), Toast.LENGTH_LONG).show();
+          Toast.makeText(OffRouteActivity.this, getString(R.string.toast_no_routes_found), Toast.LENGTH_LONG).show();
           return;
         }
       }
