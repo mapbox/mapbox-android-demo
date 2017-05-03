@@ -54,9 +54,7 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
 
-        map.setStyleUrl("mapbox://styles/mapbox/streets-v9");
-
-
+        map.setStyleUrl("mapbox://styles/mapbox/streets-v10");
       }
     });
 
