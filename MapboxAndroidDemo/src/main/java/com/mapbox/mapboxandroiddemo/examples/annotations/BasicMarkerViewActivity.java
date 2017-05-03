@@ -47,8 +47,8 @@ public class BasicMarkerViewActivity extends AppCompatActivity {
           .rotation(90)
           .anchor(0.5f, 0.5f)
           .alpha(0.5f)
-          .title("Hisense Arena")
-          .snippet("Olympic Blvd, Melbourne VIC 3001, Australia")
+          .title(getString(R.string.activity_basic_mapbox_options_title))
+          .snippet(getString(R.string.basic_marker_activity_marker_options_snippet))
           .infoWindowAnchor(0.5f, 0.5f)
           .flat(true));
       }

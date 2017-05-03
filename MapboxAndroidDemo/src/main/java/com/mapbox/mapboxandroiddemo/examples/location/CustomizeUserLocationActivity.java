@@ -119,7 +119,7 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
-    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+    Toast.makeText(this, R.string.user_location_permission_explanation,
       Toast.LENGTH_LONG).show();
   }
 
@@ -128,7 +128,7 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
     if (granted) {
       enableGps();
     } else {
-      Toast.makeText(this, "You didn't grant location permissions.",
+      Toast.makeText(this, R.string.user_location_permission_not_granted,
         Toast.LENGTH_LONG).show();
       finish();
     }

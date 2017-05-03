@@ -43,17 +43,17 @@ public class CustomInfoWindowActivity extends AppCompatActivity {
         mapboxMap.addMarker(new MarkerViewOptions()
           .position(new LatLng(40.416717, -3.703771))
           .anchor(0.5f, 0.5f)
-          .title("spain"));
+          .title("Spain"));
 
         mapboxMap.addMarker(new MarkerViewOptions()
           .position(new LatLng(26.794531, 29.781524))
           .anchor(0.5f, 0.5f)
-          .title("egypt"));
+          .title("Egypt"));
 
         mapboxMap.addMarker(new MarkerViewOptions()
           .position(new LatLng(50.981488, 10.384677))
           .anchor(0.5f, 0.5f)
-          .title("germany"));
+          .title("Germany"));
 
         mapboxMap.setInfoWindowAdapter(new MapboxMap.InfoWindowAdapter() {
           @Nullable
@@ -73,11 +73,11 @@ public class CustomInfoWindowActivity extends AppCompatActivity {
             // a better choice.
             ImageView countryFlagImage = new ImageView(CustomInfoWindowActivity.this);
             switch (marker.getTitle()) {
-              case "spain":
+              case "Spain":
                 countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
                   CustomInfoWindowActivity.this, R.drawable.flag_of_spain));
                 break;
-              case "egypt":
+              case "Egypt":
                 countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
                   CustomInfoWindowActivity.this, R.drawable.flag_of_egypt));
                 break;
