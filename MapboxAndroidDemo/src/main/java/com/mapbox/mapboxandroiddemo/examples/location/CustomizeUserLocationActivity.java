@@ -31,7 +31,6 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
   private MapboxMap map;
   private LocationEngine locationEngine;
   private LocationEngineListener locationEngineListener;
-  private static final int PERMISSIONS_LOCATION = 0;
 
 
   @Override
