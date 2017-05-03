@@ -66,7 +66,6 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
-import com.mapbox.mapboxandroiddemo.labs.BasicExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
@@ -430,12 +429,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       case R.id.nav_lab:
         exampleItemModel.add(null);
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_basic_extrusions_title,
-          R.string.activity_lab_basic_extrusions_description,
-          new Intent(MainActivity.this, BasicExtrusionActivity.class),
-          R.string.activity_lab_basic_extrusions_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_las_angeles_tourism_title,
           R.string.activity_lab_las_angeles_tourism_description,
           new Intent(MainActivity.this, LosAngelesTourismActivity.class),
@@ -567,8 +560,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .setNegativeText(getString(R.string.info_dialog_negative_button_text))
         .onNegative(new MaterialDialog.SingleButtonCallback() {
           @Override
-          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-          }
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {}
         })
         .show();
       return true;
