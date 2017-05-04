@@ -100,7 +100,7 @@ public class AnalyticsTracker {
   /**
    * Makes an analytics call telling Segment which particular navigation drawer section has been selected.
    *
-   * @param sectionName
+   * @param sectionName Name of the selected navigation drawer category
    */
   public void clickedOnNavDrawerSection(@NonNull String sectionName) {
     trackEventWithProperties(CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME, SECTION_NAME_MAP_KEY, sectionName);
@@ -109,7 +109,7 @@ public class AnalyticsTracker {
   /**
    * Makes an analytics call telling Segment which particular example has selected
    *
-   * @param exampleName
+   * @param exampleName Name of the selected example
    */
   public void clickedOnIndividualExample(@NonNull String exampleName) {
     trackEventWithProperties(CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME, EXAMPLE_NAME_MAP_KEY, exampleName);
@@ -120,7 +120,7 @@ public class AnalyticsTracker {
    * custom parameters involved with the call, this method is the most "basic" analytics call that's
    * available in this class.
    *
-   * @param eventName
+   * @param eventName Name of the event that's being recorded
    */
   public void trackEvent(@NonNull String eventName) {
     trackEventWithProperties(eventName, null, null);
@@ -130,9 +130,9 @@ public class AnalyticsTracker {
    * Makes an analytics call telling Segment what custom-named event has happened. Custom parameters provided
    * are also included in the call.
    *
-   * @param eventName
-   * @param keyForPropertiesMap
-   * @param valueForPropertiesMap
+   * @param eventName Name of the event that's being recorded
+   * @param keyForPropertiesMap Key to the property being attached to the event that's being called
+   * @param valueForPropertiesMap Value of the property being attached to the event that's being called
    */
   public void trackEventWithProperties(@NonNull String eventName, String keyForPropertiesMap,
                                        String valueForPropertiesMap) {
@@ -152,9 +152,10 @@ public class AnalyticsTracker {
   }
 
   /**
-   * Makes an analytics call telling Segment that a certain screen has been viewed via a "ScreenMessage" call
+   * Makes an analytics call telling Segment that a certain screen has been viewed via a "ScreenMessage" call.
+   * Ideally called in onCreate(), onCreateView(), etc.
    *
-   * @param nameOfScreen
+   * @param nameOfScreen Name of the screen/activity that's being viewed
    */
   public void viewedScreen(String nameOfScreen) {
     analytics.enqueue(ScreenMessage.builder(nameOfScreen).userId(MAPBOX_USERNAME));
@@ -163,8 +164,8 @@ public class AnalyticsTracker {
   /**
    * Makes an analytics call telling Segment the user's identity via a "IdentifyMessage" call.
    *
-   * @param organizationName
-   * @param userEmailAddress
+   * @param organizationName Organization name associated with user's Mapbox account
+   * @param userEmailAddress Email address associated with user's Mapbox account
    */
   public void identifyUser(@NonNull String organizationName, @NonNull String userEmailAddress) {
     Map<String, String> traits = new HashMap<>();
