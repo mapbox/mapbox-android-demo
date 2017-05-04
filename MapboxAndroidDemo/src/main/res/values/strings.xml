@@ -84,7 +84,6 @@
     <string name="activity_location_tracking_title">Track user location</string>
     <string name="activity_location_animated_icon_title">Animate the user icon</string>
     <string name="activity_location_customize_user_title">Customize user location icon</string>
-    <string name="activity_location_turf_inside_title">Use Turf Inside</string>
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
@@ -139,7 +138,6 @@
     <string name="activity_location_tracking_description">Lock the camera centered above the user location.</string>
     <string name="activity_location_animated_icon_description">Use a marker view to mark the users location and add a pulsing animation to it.</string>
     <string name="activity_location_customize_user_description">"Adjust the user location icon's colors and padding so it appears lower on the screen."</string>
-    <string name="activity_location_turf_inside_description">Use Mapbox\'s geospatial analysis library to determine whether a LatLng point is within a GeoJSON polygon.</string>
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
     <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
@@ -196,7 +194,6 @@
     <string name="activity_location_tracking_url" translatable="false">http://i.imgur.com/U3uc32F.png</string>
     <string name="activity_location_animated_icon_url" translatable="false">http://i.imgur.com/dsUKM2i.png</string>
     <string name="activity_location_customize_user_url" translatable="false">http://i.imgur.com/Q6O82JJ.png</string>
-    <string name="activity_location_turf_inside_url" translatable="false">http://i.imgur.com/p1KTWpn.png</string>
     <string name="activity_mas_directions_url" translatable="false">https://www.mapbox.com/android-sdk/images/directions.png</string>
     <string name="activity_mas_geocoding_url" translatable="false">http://i.imgur.com/mBJGh3P.png</string>
     <string name="activity_mas_static_image_url" translatable="false">https://www.mapbox.com/android-sdk/images/static-image.png</string>
@@ -217,10 +214,6 @@
     <string name="menu_map_style_satellite">Satellite</string>
     <string name="menu_map_style_satellite_streets">Satellite streets</string>
 
-    <!--Tap on map instruction for toast-->
-    <string name="tap_on_map_instruction">Tap anywhere on the map</string>
-    <string name="tap_on_map_turf_inside_instruction">Tap inside of blue polygon area</string>
-
     <!--Move map instruction for toast-->
     <string name="move_map_instruction">Move map to place\nmarker at desired location</string>
 
@@ -235,10 +228,6 @@
 
     <!--Fragment below textview in support fragment activity-->
     <string name="fragment_in_card_below">Map fragment container in card below</string>
-
-    <!--TurfInside snackbar messages-->
-    <string name="turf_inside_marker_status_inside">Inside</string>
-    <string name="turf_inside_marker_status_outside">Outside</string>
 
     <!--Offline manager button text-->
     <string name="offline_manager_download_button_text">Download</string>
