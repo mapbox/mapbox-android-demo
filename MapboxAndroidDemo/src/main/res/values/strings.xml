@@ -327,4 +327,9 @@
     <string name="language_switch_options_menu_language_german">Deutsche</string>
     <string name="language_switch_options_menu_language_spanish">Español</string>
 
+    <!--LanguageSwitchActivity activity-->
+    <string name="custom_window_marker_title_spain">Spain</string>
+    <string name="custom_window_marker_title_egypt">Egypt</string>
+    <string name="custom_window_marker_title_germany">Germany</string>
+
 </resources>
