@@ -239,7 +239,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
-    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+    Toast.makeText(this, getString(R.string.user_location_permission_explanation),
       Toast.LENGTH_LONG).show();
   }
 
@@ -248,7 +248,7 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
     if (granted) {
       enableLocation();
     } else {
-      Toast.makeText(this, "You didn't grant location permissions.",
+      Toast.makeText(this, getString(R.string.user_location_permission_not_granted),
         Toast.LENGTH_LONG).show();
       finish();
     }
