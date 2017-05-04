@@ -53,6 +53,7 @@ import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.BasicExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
@@ -253,6 +254,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_raster_description,
           new Intent(MainActivity.this, CustomRasterStyleActivity.class),
           R.string.activity_style_raster_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_basic_extrusions_title,
+          R.string.activity_style_basic_extrusions_description,
+          new Intent(MainActivity.this, BasicExtrusionActivity.class),
+          R.string.activity_style_basic_extrusions_url
         ));
         break;
       case R.id.nav_annotations:
@@ -560,7 +567,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .setNegativeText(getString(R.string.info_dialog_negative_button_text))
         .onNegative(new MaterialDialog.SingleButtonCallback() {
           @Override
-          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {}
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+          }
         })
         .show();
       return true;
