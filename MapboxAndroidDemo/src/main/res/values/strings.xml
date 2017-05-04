@@ -240,5 +240,8 @@
     <!--Basic offline map-->
     <string name="basic_offline_deleted_toast">Yosemite offline map deleted</string>
 
+    <!--Tap on map instruction for toast-->
+    <string name="tap_on_map_instruction">Tap anywhere on the map</string>
+    <string name="tap_on_map_turf_inside_instruction">Tap inside of blue polygon area</string>
 
 </resources>
