@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_annotation_polygon_holes_title,
           R.string.activity_annotation_polygon_holes_description,
           new Intent(MainActivity.this, PolygonHolesActivity.class),
-          R.string.activity_annotation_polygon_holes_url
+          R.string.activity_annotation_polygon_holes_url,true
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_annotation_custom_info_window_title,
