@@ -60,6 +60,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.HexabinExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
@@ -260,6 +261,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_basic_extrusions_description,
           new Intent(MainActivity.this, BasicExtrusionActivity.class),
           R.string.activity_style_basic_extrusions_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_basic_hexabin_extrusions_title,
+          R.string.activity_style_basic_hexabin_extrusions_description,
+          new Intent(MainActivity.this, HexabinExtrusionActivity.class),
+          R.string.activity_style_basic_hexabin_extrusions_url
         ));
         break;
       case R.id.nav_annotations:
