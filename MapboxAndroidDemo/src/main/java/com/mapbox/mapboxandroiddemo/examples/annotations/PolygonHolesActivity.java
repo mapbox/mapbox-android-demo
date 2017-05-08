@@ -43,9 +43,9 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
       .compassFadesWhenFacingNorth(false)
       .styleUrl(Style.MAPBOX_STREETS)
       .camera(new CameraPosition.Builder()
-        .target(new LatLng(45.520486, -122.673541))
-        .zoom(12)
-        .tilt(40)
+        .target(new LatLng(25.255377,55.3089185))
+        .zoom(11.86)
+        .tilt(10)
         .build());
 
     mapView = new MapView(this, options);
@@ -112,19 +112,18 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
 
     static final List<LatLng> STAR_SHAPE_POINTS = new ArrayList<LatLng>() {
       {
-        add(new LatLng(45.522585, -122.685699));
-        add(new LatLng(45.534611, -122.708873));
-        add(new LatLng(45.530883, -122.678833));
-        add(new LatLng(45.547115, -122.667503));
-        add(new LatLng(45.530643, -122.660121));
-        add(new LatLng(45.533529, -122.636260));
-        add(new LatLng(45.521743, -122.659091));
-        add(new LatLng(45.510677, -122.648792));
-        add(new LatLng(45.515008, -122.664070));
-        add(new LatLng(45.502496, -122.669048));
-        add(new LatLng(45.515369, -122.678489));
-        add(new LatLng(45.506346, -122.702007));
-        add(new LatLng(45.522585, -122.685699));
+        add(new LatLng(25.2593949852332, 55.29405310619586));
+        add(new LatLng(25.274581868369467, 55.304514658616824));
+        add(new LatLng(25.26221673563208, 55.30561587467446));
+        add(new LatLng(25.276075557512, 55.33397218784205));
+        add(new LatLng(25.257984085427992, 55.32653897955248));
+        add(new LatLng(25.24951834246839, 55.342690148204895));
+        add(new LatLng(25.23922586039734, 55.2987332743956));
+        add(new LatLng(25.247111307836562, 55.300660402469305));
+        add(new LatLng(25.245700265346272, 55.28414216178564));
+        add(new LatLng(25.255826206983926, 55.286619897906235));
+        add(new LatLng(25.251012339983248, 55.2946954822325));
+        add(new LatLng(25.259146004097133, 55.29405310619586));
       }
     };
 
@@ -132,19 +131,19 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
       {
         add(new ArrayList<>(new ArrayList<LatLng>() {
           {
-            add(new LatLng(45.521743, -122.669091));
-            add(new LatLng(45.530483, -122.676833));
-            add(new LatLng(45.520483, -122.676833));
-            add(new LatLng(45.521743, -122.669091));
+            add(new LatLng(25.25879232126489, 55.301700903466696));
+            add(new LatLng(25.259029515191017, 55.31184200511552));
+            add(new LatLng(25.254759953545147, 55.30353679255319));
+            add(new LatLng(25.258080736691085, 55.29942789792764));
+            add(new LatLng(25.258871385948012, 55.30161348015554));
           }
         }));
         add(new ArrayList<>(new ArrayList<LatLng>() {
           {
-            add(new LatLng(45.529743, -122.662791));
-            add(new LatLng(45.525543, -122.662791));
-            add(new LatLng(45.525543, -122.660));
-            add(new LatLng(45.527743, -122.660));
-            add(new LatLng(45.529743, -122.662791));
+            add(new LatLng(25.261638617862275, 55.32084660399491));
+            add(new LatLng(25.24922511321995, 55.310705502345996));
+            add(new LatLng(25.249699537976696, 55.32626684797782));
+            add(new LatLng(25.26179674348606, 55.32084660399491));
           }
         }));
       }
