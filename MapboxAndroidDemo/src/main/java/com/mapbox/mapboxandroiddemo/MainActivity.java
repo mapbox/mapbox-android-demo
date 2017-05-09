@@ -46,7 +46,6 @@ import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
-import com.mapbox.mapboxandroiddemo.examples.mas.TurfInsideActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
@@ -58,8 +57,8 @@ import com.mapbox.mapboxandroiddemo.examples.styles.BasicExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
@@ -260,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_basic_extrusions_title,
           R.string.activity_style_basic_extrusions_description,
           new Intent(MainActivity.this, BasicExtrusionActivity.class),
-          R.string.activity_style_basic_extrusions_url
+          R.string.activity_style_basic_extrusions_url, true
         ));
         break;
       case R.id.nav_annotations:
@@ -332,7 +331,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_camera_restrict_title,
           R.string.activity_camera_restrict_description,
           new Intent(MainActivity.this, RestrictCameraActivity.class),
-          R.string.activity_camera_restrict_url
+          R.string.activity_camera_restrict_url, true
         ));
         currentCategory = R.id.nav_camera;
         break;
@@ -404,12 +403,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_mas_static_image_description,
           new Intent(MainActivity.this, StaticImageActivity.class),
           R.string.activity_mas_static_image_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_location_turf_inside_title,
-          R.string.activity_location_turf_inside_description,
-          new Intent(MainActivity.this, TurfInsideActivity.class),
-          R.string.activity_location_turf_inside_url
         ));
         currentCategory = R.id.nav_mas;
         break;
@@ -504,7 +497,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_style_line_identity_property_title,
           R.string.activity_dds_style_line_identity_property_description,
           new Intent(MainActivity.this, StyleLineIdentityPropertyActivity.class),
-          R.string.activity_dds_style_line_identity_property_url
+          R.string.activity_dds_style_line_identity_property_url, true
         ));
         currentCategory = R.id.nav_dds;
         break;
