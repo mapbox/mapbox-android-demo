@@ -251,5 +251,14 @@
     <!--Basic offline map-->
     <string name="basic_offline_deleted_toast">Yosemite offline map deleted</string>
 
+    <!--Landing activity-->
+    <string name="tv_create_account_button">Create Mapbox account</string>
+    <string name="tv_sign_in_to_account_button">Sign in to Mapbox account</string>
+    <string name="skip_for_now_dialog_title">Are you sure?</string>
+    <string name="skip_for_now_dialog_description">If you create an account or sign in to your account, you\'ll receive:\n
+    •Personalized push messages\n•An extra 50,000 mobile users credited to your account</string>
+    <string name="skip_for_now_dialog_go_back_button">Go back</string>
+    <string name="skip_for_now_dialog_skip_button">Skip for now</string>
+    <string name="skip_for_now_bottom_button">Skip for now</string>
 
 </resources>
