@@ -45,7 +45,6 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
 
     // Get the location engine object for later use.
     locationEngine = LocationSource.getLocationEngine(this);
-    locationEngine.activate();
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -55,8 +54,6 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
         map = mapboxMap;
 
         map.setStyleUrl("mapbox://styles/mapbox/streets-v10");
-
-
       }
     });
 
