@@ -21,8 +21,8 @@ import java.util.List;
 
 import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.BLUE_COLOR;
 import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.RED_COLOR;
-import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.STAR_SHAPE_HOLES;
-import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.STAR_SHAPE_POINTS;
+import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.HOLE_COORDINATES;
+import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.POLYGON_COORDINATES;
 
 public class PolygonHolesActivity extends AppCompatActivity implements OnMapReadyCallback {
   private MapView mapView;
@@ -43,7 +43,7 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
       .compassFadesWhenFacingNorth(false)
       .styleUrl(Style.MAPBOX_STREETS)
       .camera(new CameraPosition.Builder()
-        .target(new LatLng(25.255377,55.3089185))
+        .target(new LatLng(25.255377, 55.3089185))
         .zoom(11.86)
         .tilt(10)
         .build());
@@ -59,8 +59,8 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
   public void onMapReady(MapboxMap map) {
     mapboxMap = map;
     polygon = mapboxMap.addPolygon(new PolygonOptions()
-      .addAll(STAR_SHAPE_POINTS)
-      .addAllHoles(STAR_SHAPE_HOLES)
+      .addAll(POLYGON_COORDINATES)
+      .addAllHoles(HOLE_COORDINATES)
       .fillColor(BLUE_COLOR));
   }
 
@@ -110,40 +110,37 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
     static final int BLUE_COLOR = Color.parseColor("#3bb2d0");
     static final int RED_COLOR = Color.parseColor("#AF0000");
 
-    static final List<LatLng> STAR_SHAPE_POINTS = new ArrayList<LatLng>() {
+    static final List<LatLng> POLYGON_COORDINATES = new ArrayList<LatLng>() {
       {
-        add(new LatLng(25.2593949852332, 55.29405310619586));
-        add(new LatLng(25.274581868369467, 55.304514658616824));
-        add(new LatLng(25.26221673563208, 55.30561587467446));
-        add(new LatLng(25.276075557512, 55.33397218784205));
-        add(new LatLng(25.257984085427992, 55.32653897955248));
-        add(new LatLng(25.24951834246839, 55.342690148204895));
-        add(new LatLng(25.23922586039734, 55.2987332743956));
-        add(new LatLng(25.247111307836562, 55.300660402469305));
-        add(new LatLng(25.245700265346272, 55.28414216178564));
-        add(new LatLng(25.255826206983926, 55.286619897906235));
-        add(new LatLng(25.251012339983248, 55.2946954822325));
-        add(new LatLng(25.259146004097133, 55.29405310619586));
+        add(new LatLng(25.26476622289597, 55.30122473231012));
+        add(new LatLng(25.25827212207261, 55.29743486255916));
+        add(new LatLng(25.251356725509737, 55.28978863411328));
+        add(new LatLng(25.246425506635504, 55.300027931336984));
+        add(new LatLng(25.244200378933655, 55.307474692951274));
+        add(new LatLng(25.256408010450187, 55.31212891895635));
+        add(new LatLng(25.26266169122738, 55.30774064871093));
+        add(new LatLng(25.264946609615492, 55.301357710197806));
       }
     };
 
-    static final List<List<LatLng>> STAR_SHAPE_HOLES = new ArrayList<List<LatLng>>() {
+    static final List<List<LatLng>> HOLE_COORDINATES = new ArrayList<List<LatLng>>() {
       {
         add(new ArrayList<>(new ArrayList<LatLng>() {
           {
-            add(new LatLng(25.25879232126489, 55.301700903466696));
-            add(new LatLng(25.259029515191017, 55.31184200511552));
-            add(new LatLng(25.254759953545147, 55.30353679255319));
-            add(new LatLng(25.258080736691085, 55.29942789792764));
-            add(new LatLng(25.258871385948012, 55.30161348015554));
+            add(new LatLng(25.256531695820797, 55.30084858315658));
+            add(new LatLng(25.252243254705405, 55.298280197635705));
+            add(new LatLng(25.250501032248863, 55.30163885563897));
+            add(new LatLng(25.254700192612702, 55.304059065092645));
+            add(new LatLng(25.256531695820797, 55.30084858315658));
           }
         }));
         add(new ArrayList<>(new ArrayList<LatLng>() {
           {
-            add(new LatLng(25.261638617862275, 55.32084660399491));
-            add(new LatLng(25.24922511321995, 55.310705502345996));
-            add(new LatLng(25.249699537976696, 55.32626684797782));
-            add(new LatLng(25.26179674348606, 55.32084660399491));
+            add(new LatLng(25.262517391695198, 55.30173763969924));
+            add(new LatLng(25.26122200491396, 55.301095543307355));
+            add(new LatLng(25.259479911263526, 55.30396028103232));
+            add(new LatLng(25.261132667394975, 55.30489872958182));
+            add(new LatLng(25.262517391695198, 55.30173763969924));
           }
         }));
       }
