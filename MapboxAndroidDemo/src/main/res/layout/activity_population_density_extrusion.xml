@@ -1,60 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".examples.basics.SimpleMapViewActivity">
+    tools:context="com.mapbox.mapboxandroiddemo.examples.styles.PopulationDensityExtrusionActivity">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="34.0444"
-        mapbox:mapbox_cameraTargetLng="-118.2536"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light"
-        mapbox:mapbox_cameraZoom="15"/>
+        mapbox:mapbox_cameraTargetLat="37.775569"
+        mapbox:mapbox_cameraTargetLng="-122.410973"
+        mapbox:mapbox_cameraZoom="12"
+        mapbox:mapbox_cameraZoomMax="16"
+        mapbox:mapbox_cameraZoomMin="12"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions_parent_fab"
+        android:id="@+id/multiple_map_actions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
         fab:fab_addButtonColorNormal="@color/mapboxRed"
         fab:fab_addButtonColorPressed="@color/mapboxWhite"
         fab:fab_addButtonPlusIconColor="@color/mapboxWhite"
         fab:fab_labelStyle="@style/menu_labels_style">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_toggle_hotels"
+            android:id="@+id/fab_tilt_toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/mapboxBlue"
             fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
-            fab:fab_title="Hotels"/>
+            fab:fab_title="@string/toggle_map_tilt_map_toggle_fab_text"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_toggle_parks"
+            android:id="@+id/fab_road_toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/mapboxGreen"
             fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
-            fab:fab_title="Parks"/>
+            fab:fab_title="@string/toggle_map_road_toggle_fab_text"/>
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_toggle_attractions"
+            android:id="@+id/fab_label_toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/mapboxRed"
+            fab:fab_colorNormal="@color/mapboxOrange"
             fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
-            fab:fab_title="Attractions"/>
+            fab:fab_title="@string/toggle_map_label_toggle_fab_text"/>
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline4"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="vertical"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline5"
+        app:layout_constraintGuide_begin="20dp"
+        android:orientation="vertical"/>
 
 </android.support.design.widget.CoordinatorLayout>
