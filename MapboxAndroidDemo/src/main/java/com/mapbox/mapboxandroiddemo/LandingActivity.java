@@ -50,7 +50,7 @@ public class LandingActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         // TODO: Haven't tested this flow yet
-//        openChromeCustomTab(view);
+        // openChromeCustomTab(view);
       }
     });
 
@@ -61,7 +61,7 @@ public class LandingActivity extends AppCompatActivity {
       }
     });
 
-    skipForNowDialog();
+    setUpSkipDialog();
   }
 
   @Override
@@ -87,7 +87,7 @@ public class LandingActivity extends AppCompatActivity {
       Base64.NO_WRAP);
 
     Request request = new Request.Builder()
-      .addHeader("User-Agent", "Sample App")
+      .addHeader("User-Agent", "Android Dev Preview")
       .addHeader("Authorization", "Basic " + encodedAuthString)
       .url(ACCESS_TOKEN_URL)
       .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
@@ -98,7 +98,6 @@ public class LandingActivity extends AppCompatActivity {
     Log.d("LandingActivity", "getAccessToken: " + RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
       "grant_type=authorization_code&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET
         + "&redirect_uri=" + REDIRECT_URI + "&code=" + code));
-
 
     client.newCall(request).enqueue(new Callback() {
       @Override
@@ -139,7 +138,7 @@ public class LandingActivity extends AppCompatActivity {
     Log.d("LandingActivity", "openChromeCustomTab: Uri.parse(url) = " + Uri.parse(url));
   }
 
-  private void skipForNowDialog() {
+  private void setUpSkipDialog() {
     Button skipForNowButton = (Button) findViewById(R.id.button_skip_for_now);
     skipForNowButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -171,5 +170,4 @@ public class LandingActivity extends AppCompatActivity {
     });
 
   }
-
 }
