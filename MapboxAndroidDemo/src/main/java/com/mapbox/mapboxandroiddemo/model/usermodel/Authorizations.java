@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.usermodel;
+package com.mapbox.mapboxandroiddemo.model.usermodel;
 
 /**
  * Created by LangstonSmith on 5/9/17.
