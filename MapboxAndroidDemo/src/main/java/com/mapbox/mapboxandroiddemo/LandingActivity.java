@@ -31,15 +31,16 @@ import okhttp3.Response;
 
 public class LandingActivity extends AppCompatActivity {
 
+  private String TAG = "LandingActivity";
   private static final String CREATE_ACCOUNT_URL = "https://www.mapbox.com/signup/";
   private static final String SIGN_IN_URL = "https://www.mapbox.com/signin/";
 
   private static final String AUTH_URL =
-    "https://api.mapbox.com/oauth/authorize?client_id=%s&redirect_uri=%s";
+    "https://api.mapbox.com/oauth/authorize?client_id=%s&redirect_uri=%s&response_type=code";
 
   private static final String CLIENT_ID = "7bb34a0cf68455d33ec0d994af2330a3f60ee636";
 
-//  TODO: Fill in clientSecret
+  //  TODO: Fill in clientSecret
   private String clientSecret = "";
   private String authCode;
 
@@ -63,7 +64,6 @@ public class LandingActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         openChromeCustomTab(view);
-        /*startSignIn(view);*/
       }
     });
 
@@ -71,7 +71,6 @@ public class LandingActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         openChromeCustomTab(view);
-        /*startSignIn(view);*/
       }
     });
 
@@ -116,6 +115,7 @@ public class LandingActivity extends AppCompatActivity {
         Log.e("LandingActivity", "An error has occurred : " + error);
       } else {
         authCode = uri.getQueryParameter("code");
+        Log.d(TAG, "onResume: authCode = " + authCode);
         getAccessToken(authCode);
       }
     }
@@ -135,6 +135,11 @@ public class LandingActivity extends AppCompatActivity {
         "grant_type=authorization_code&client_id=" + CLIENT_ID + "&client_secret=" + clientSecret
           + "&redirect_uri=" + REDIRECT_URI + "&code=" + code))
       .build();
+
+    Log.d(TAG, "getAccessToken: " + RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
+      "grant_type=authorization_code&client_id=" + CLIENT_ID + "&client_secret=" + clientSecret
+        + "&redirect_uri=" + REDIRECT_URI + "&code=" + code));
+
 
     client.newCall(request).enqueue(new Callback() {
       @Override
@@ -165,20 +170,14 @@ public class LandingActivity extends AppCompatActivity {
   private void openChromeCustomTab(View view) {
     String url = String.format(AUTH_URL, CLIENT_ID, REDIRECT_URI);
 
+    Log.d("LandingActivity", "openChromeCustomTab: url = " + url);
+
     CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
     intentBuilder.setToolbarColor(ContextCompat.getColor(this, R.color.mapboxGrayDark10));
     intentBuilder.setShowTitle(true);
-
     CustomTabsIntent customTabsIntent = intentBuilder.build();
-
     customTabsIntent.launchUrl(this, Uri.parse(url));
+    Log.d("LandingActivity", "openChromeCustomTab: Uri.parse(url) = " + Uri.parse(url));
   }
-
-  public void startSignIn(View view) {
-    String url = String.format(AUTH_URL, CLIENT_ID, REDIRECT_URI);
-    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-    startActivity(intent);
-  }
-
 
 }

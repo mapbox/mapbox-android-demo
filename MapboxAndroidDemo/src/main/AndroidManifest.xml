@@ -402,9 +402,13 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
                 <action android:name="android.intent.action.VIEW"/>
+
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="mapbox-android-dev-preview" android:host="authorize"/>
+
+                <data
+                    android:host="authorize"
+                    android:scheme="mapbox-android-dev-preview"/>
             </intent-filter>
         </activity>
     </application>
