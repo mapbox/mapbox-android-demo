@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -10,24 +9,8 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.IdentityStops;
-import com.mapbox.mapboxsdk.style.layers.CircleLayer;
-import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-
-import static com.mapbox.mapboxsdk.style.functions.Function.property;
-import static com.mapbox.mapboxsdk.style.functions.Function.zoom;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stops.categorical;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
-import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
+import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
 public class HexabinExtrusionActivity extends AppCompatActivity {
 
@@ -53,51 +36,10 @@ public class HexabinExtrusionActivity extends AppCompatActivity {
         mapboxMap = map;
 
         // Add grids GeoJSON source
-        GeoJsonSource gridSource = new GeoJsonSource("grids","grids");
-
-
-
-
-
-
-
-        // Create grid-3d extrusion layer
-        FillExtrusionLayer fillExtrusionLayer = new FillExtrusionLayer("3d-grids", "grids");
-        fillExtrusionLayer.setSourceLayer("building");
-        fillExtrusionLayer.setFilter(eq("extrude", "true"));
-        fillExtrusionLayer.setMinZoom(4);
-
-        // Set data-driven styling properties
-        fillExtrusionLayer.setProperties(
-          fillExtrusionColor(Function.property(stop())),
-          fillExtrusionHeight(Function.property("height", new IdentityStops<Float>())),
-          fillExtrusionBase(Function.property("min_height", new IdentityStops<Float>())),
-          fillExtrusionOpacity(0.6f)
-        );
-        map.addLayer(fillExtrusionLayer);
-
-        CircleLayer circleLayer = new CircleLayer("population", "ethnicity-source");
-        circleLayer.withProperties(
-          circleRadius(
-            zoom(
-              exponential(
-                stop(12, circleRadius(2f)),
-                stop(22, circleRadius(180f))
-              ).withBase(1.75f)
-            )
-          ),
-          circleColor(
-            property("ethnicity", categorical(
-              stop("white", circleColor(Color.parseColor("#fbb03b"))),
-              stop("Black", circleColor(Color.parseColor("#223b53"))),
-              stop("Hispanic", circleColor(Color.parseColor("#e55e5e"))),
-              stop("Asian", circleColor(Color.parseColor("#3bb2d0"))),
-              stop("Other", circleColor(Color.parseColor("#cccccc")))
-              )
-            )
-          )
-        );
-        mapboxMap.addLayer(circleLayer);
+        GeoJsonSource gridSource = new GeoJsonSource("grids", "grids");
+        GeoJsonSource activePointSource = new GeoJsonSource("point-active", "pointActive");
+        VectorSource complaintsSource = new VectorSource("complaints", "mapbox://yunjieli.7l1fqjio");
+        VectorSource businessesSource = new VectorSource("businesses", "mapbox://yunjieli.3i12h479");
 
       }
     });
