@@ -31,27 +31,13 @@ import okhttp3.Response;
 
 public class LandingActivity extends AppCompatActivity {
 
-  private String TAG = "LandingActivity";
-  private static final String CREATE_ACCOUNT_URL = "https://www.mapbox.com/signup/";
-  private static final String SIGN_IN_URL = "https://www.mapbox.com/signin/";
-
-  private static final String AUTH_URL =
-    "https://api.mapbox.com/oauth/authorize?client_id=%s&redirect_uri=%s&response_type=code";
-
+  private static final String AUTH_URL = "https://api.mapbox.com/oauth/authorize?client_id=%s&redirect_uri=%s&response_type=code";
   private static final String CLIENT_ID = "7bb34a0cf68455d33ec0d994af2330a3f60ee636";
+  private static final String REDIRECT_URI = "mapbox-android-dev-preview://authorize";
+  private static final String ACCESS_TOKEN_URL = "https://api.mapbox.com/oauth/access_token";
 
-  //  TODO: Fill in clientSecret
-  private String clientSecret = "";
-  private String authCode;
-
-  private static final String REDIRECT_URI =
-    "mapbox-android-dev-preview://authorize";
-
-  private static final String STATE = "randomString";
-
-  private static final String ACCESS_TOKEN_URL =
-    "https://api.mapbox.com/oauth/access_token";
-
+  //  TODO: Fill in CLIENT_SECRET
+  private static final String CLIENT_SECRET = "";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +49,8 @@ public class LandingActivity extends AppCompatActivity {
     createAccountButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        openChromeCustomTab(view);
+        // TODO: Haven't tested this flow yet
+//        openChromeCustomTab(view);
       }
     });
 
@@ -74,35 +61,7 @@ public class LandingActivity extends AppCompatActivity {
       }
     });
 
-    Button skipForNowButton = (Button) findViewById(R.id.button_skip_for_now);
-    skipForNowButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
-        new MaterialStyledDialog.Builder(LandingActivity.this)
-          .setTitle(getString(R.string.skip_for_now_dialog_title))
-          .setDescription(getString(R.string.skip_for_now_dialog_description))
-          .withDivider(true)
-          .setIcon(R.mipmap.ic_launcher)
-          .setHeaderColor(R.color.mapboxGrayLight)
-          .setPositiveText(getString(R.string.skip_for_now_dialog_go_back_button))
-          .onPositive(new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-              dialog.dismiss();
-            }
-          })
-          .setNegativeText(getString(R.string.skip_for_now_dialog_skip_button))
-          .onNegative(new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-              Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-              startActivity(intent);
-            }
-          })
-          .show();
-      }
-    });
+    skipForNowDialog();
   }
 
   @Override
@@ -114,12 +73,12 @@ public class LandingActivity extends AppCompatActivity {
         String error = uri.getQueryParameter("error");
         Log.e("LandingActivity", "An error has occurred : " + error);
       } else {
-        authCode = uri.getQueryParameter("code");
-        Log.d(TAG, "onResume: authCode = " + authCode);
-        getAccessToken(authCode);
+        String code = uri.getQueryParameter("code");
+        getAccessToken(code);
       }
     }
   }
+
 
   private void getAccessToken(String code) {
     OkHttpClient client = new OkHttpClient();
@@ -132,12 +91,12 @@ public class LandingActivity extends AppCompatActivity {
       .addHeader("Authorization", "Basic " + encodedAuthString)
       .url(ACCESS_TOKEN_URL)
       .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
-        "grant_type=authorization_code&client_id=" + CLIENT_ID + "&client_secret=" + clientSecret
+        "grant_type=authorization_code&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET
           + "&redirect_uri=" + REDIRECT_URI + "&code=" + code))
       .build();
 
-    Log.d(TAG, "getAccessToken: " + RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
-      "grant_type=authorization_code&client_id=" + CLIENT_ID + "&client_secret=" + clientSecret
+    Log.d("LandingActivity", "getAccessToken: " + RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
+      "grant_type=authorization_code&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET
         + "&redirect_uri=" + REDIRECT_URI + "&code=" + code));
 
 
@@ -178,6 +137,39 @@ public class LandingActivity extends AppCompatActivity {
     CustomTabsIntent customTabsIntent = intentBuilder.build();
     customTabsIntent.launchUrl(this, Uri.parse(url));
     Log.d("LandingActivity", "openChromeCustomTab: Uri.parse(url) = " + Uri.parse(url));
+  }
+
+  private void skipForNowDialog() {
+    Button skipForNowButton = (Button) findViewById(R.id.button_skip_for_now);
+    skipForNowButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+        new MaterialStyledDialog.Builder(LandingActivity.this)
+          .setTitle(getString(R.string.skip_for_now_dialog_title))
+          .setDescription(getString(R.string.skip_for_now_dialog_description))
+          .withDivider(true)
+          .setIcon(R.mipmap.ic_launcher)
+          .setHeaderColor(R.color.mapboxGrayLight)
+          .setPositiveText(getString(R.string.skip_for_now_dialog_go_back_button))
+          .onPositive(new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+              dialog.dismiss();
+            }
+          })
+          .setNegativeText(getString(R.string.skip_for_now_dialog_skip_button))
+          .onNegative(new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+              Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+              startActivity(intent);
+            }
+          })
+          .show();
+      }
+    });
+
   }
 
 }
