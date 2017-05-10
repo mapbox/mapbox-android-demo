@@ -261,4 +261,9 @@
     <string name="skip_for_now_dialog_skip_button">Skip for now</string>
     <string name="skip_for_now_bottom_button">Skip for now</string>
 
+    <!--Main Activity welcome toast-->
+
+    <string name="welcome_toast_message">Hello and welcome %1$s!</string>
+
+
 </resources>

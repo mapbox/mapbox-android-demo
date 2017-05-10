@@ -38,31 +38,31 @@ public class LandingActivity extends AppCompatActivity {
   private static final String ACCESS_TOKEN_URL = "https://api.mapbox.com/oauth/access_token";
 
   //  TODO: Fill in CLIENT_SECRET
-  private static final String CLIENT_SECRET = "c9098a2cbe6d79fde25fd35121ba4e8da4ffb8a1e7e1a77f894b94b4df6b6f29";
+  private static final String CLIENT_SECRET = "";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_landing);
 
-    Button createAccountButton = (Button) findViewById(R.id.create_account_button);
-    Button signInButton = (Button) findViewById(R.id.sign_in_button);
-    createAccountButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        // TODO: Haven't tested this flow yet
-        // openChromeCustomTab(view);
-      }
-    });
+      Button createAccountButton = (Button) findViewById(R.id.create_account_button);
+      Button signInButton = (Button) findViewById(R.id.sign_in_button);
+      createAccountButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          // TODO: Haven't tested this flow yet
+          // openChromeCustomTab(view);
+        }
+      });
 
-    signInButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        openChromeCustomTab(view);
-      }
-    });
+      signInButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          openChromeCustomTab(view);
+        }
+      });
 
-    setUpSkipDialog();
+      setUpSkipDialog();
   }
 
   @Override
@@ -72,7 +72,7 @@ public class LandingActivity extends AppCompatActivity {
       Uri uri = getIntent().getData();
       if (uri.getQueryParameter("error") != null) {
         String error = uri.getQueryParameter("error");
-        Log.e("LandingActivity", "An error has occurred : " + error);
+        Log.d("LandingActivity", "An error has occurred : " + error);
       } else {
         String authCode = uri.getQueryParameter("code");
         getAccessToken(authCode);
@@ -108,7 +108,6 @@ public class LandingActivity extends AppCompatActivity {
         try {
           data = new JSONObject(json);
           String accessToken = data.optString("access_token");
-          String refreshToken = data.optString("refresh_token");
           getUserInfo(accessToken);
 
         } catch (JSONException exception) {
@@ -118,7 +117,7 @@ public class LandingActivity extends AppCompatActivity {
     });
   }
 
-  private void getUserInfo(String token) {
+  private void getUserInfo(final String token) {
     MapboxAccountService service = MapboxAccountClient.getClient().create(MapboxAccountService.class);
 
     retrofit2.Call<UserResponse> request = service.getUserAccount("langsmith", token);
@@ -127,11 +126,10 @@ public class LandingActivity extends AppCompatActivity {
       @Override
       public void onResponse(retrofit2.Call<UserResponse> call, retrofit2.Response<UserResponse> response) {
 
-        UserResponse userResponse = response.body();
-
-        Log.d("LandingActivity", "onResponse: user ID =" + userResponse.getId());
-        Log.d("LandingActivity", "onResponse: user email = " + userResponse.getEmail());
-
+        String userId = response.body().getId();
+        String emailAddress = response.body().getId();
+        String avatarUrl = response.body().getId();
+        saveUserInfoToSharedPref(userId, emailAddress, avatarUrl, token);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
       }
@@ -139,19 +137,19 @@ public class LandingActivity extends AppCompatActivity {
       @Override
       public void onFailure(retrofit2.Call<UserResponse> call, Throwable throwable) {
         // Log error here since request failed
+        Log.d("LandingActivity", "onFailure: throwable = " + throwable);
       }
     });
   }
 
-  private void saveUserInfoToSharedPref(String userName, String emailAddress, ) {
+  private void saveUserInfoToSharedPref(String userID, String emailAddress, String avatarURL, String token) {
     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-      .putString("MYLABEL", "myStringToSave")
-      .putString("MYLABEL", "myStringToSave")
-      .putString("MYLABEL", "myStringToSave")
-      .putString("MYLABEL", "myStringToSave")
-      .putString("MYLABEL", "myStringToSave")
+      .putBoolean("TOKEN_SAVED", true)
+      .putString("USERNAME", userID)
+      .putString("EMAIL", emailAddress)
+      .putString("AVATAR_IMAGE_URL", avatarURL)
+      .putString("TOKEN", token)
       .apply();
-
   }
 
   private void openChromeCustomTab(View view) {
