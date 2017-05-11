@@ -265,8 +265,8 @@
 
     <string name="welcome_toast_message">Hello and welcome %1$s!</string>
 
-
-
+    <!--Loading activity-->
+    <string name="loading_textview">Loading&#8230;</string>
 
 
 </resources>

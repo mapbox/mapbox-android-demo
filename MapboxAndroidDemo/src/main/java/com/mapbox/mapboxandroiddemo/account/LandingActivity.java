@@ -67,6 +67,10 @@ public class LandingActivity extends AppCompatActivity {
         intent.putExtra("REDIRECT_URI", REDIRECT_URI);
         intent.putExtra("CLIENT_ID", CLIENT_ID);
         startService(intent);
+
+        Intent loadingActivityIntent = new Intent(this, LoadingActivity.class);
+        startActivity(loadingActivityIntent);
+
       }
     }
   }

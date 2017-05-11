@@ -59,7 +59,6 @@ dependencies {
     compile "com.android.support:design:${supportLibVersion}"
 
     // Firebase crash report
-    gpservicesCompile 'com.google.firebase:firebase-crash:10.2.0'
 
     // Mapbox dependencies
     compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-SNAPSHOT@aar') {
@@ -67,9 +66,11 @@ dependencies {
     }
 
 // Mapbox Android UI
+
     compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.0'
 
 // Mapbox Navigation SDK for Android
+
     compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.1.0'
 
 // Other dependencies
@@ -83,6 +84,8 @@ dependencies {
     compile 'com.android.support:customtabs:25.3.1'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.github.Cutta:GifView:1.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    gpservicesCompile 'com.google.firebase:firebase-crash:10.2.0'
 }
 
 apply from: '../checkstyle.gradle'
