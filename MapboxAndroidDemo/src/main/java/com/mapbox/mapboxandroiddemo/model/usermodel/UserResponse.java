@@ -52,8 +52,8 @@ public class UserResponse {
   @SerializedName("accountLevel")
   private String accountLevel;
 
-  @SerializedName("customerID")
-  private String customerID;
+  @SerializedName("customerId")
+  private String customerId;
 
   @SerializedName("disabled")
   private String disabled;
@@ -170,12 +170,12 @@ public class UserResponse {
     this.accountLevel = accountLevel;
   }
 
-  public String getCustomerID() {
-    return customerID;
+  public String getCustomerId() {
+    return customerId;
   }
 
-  public void setCustomerID(String customerID) {
-    this.customerID = customerID;
+  public void setCustomerId(String customerId) {
+    this.customerId = customerId;
   }
 
   public String getDisabled() {
