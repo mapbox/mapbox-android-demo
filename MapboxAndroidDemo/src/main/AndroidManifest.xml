@@ -371,7 +371,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-
         </activity>
         <activity
             android:name=".examples.dds.StyleLineIdentityPropertyActivity"
@@ -381,12 +380,25 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
-            android:name=".examples.mas.TurfInsideActivity"
-            android:label="@string/activity_location_turf_inside_title">
+            android:name=".examples.camera.RestrictCameraActivity"
+            android:label="@string/activity_camera_restrict_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".examples.styles.BasicExtrusionActivity"
+            android:label="@string/activity_style_basic_extrusions_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".examples.annotations.PolygonHolesActivity"
+            android:label="@string/activity_annotation_polygon_holes_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
     </application>
-
 </manifest>
