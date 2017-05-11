@@ -95,10 +95,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
-    Toast.makeText(this, String.format(getString(R.string.welcome_toast_message),
-      PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-        .getString("USERNAME", "")), Toast.LENGTH_SHORT).show();
-
     exampleItemModel = new ArrayList<>();
 
     // Create the adapter to convert the array to views

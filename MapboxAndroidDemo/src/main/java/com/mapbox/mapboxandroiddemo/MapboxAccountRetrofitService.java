@@ -11,7 +11,7 @@ import retrofit2.http.Query;
  * Service for making call to Mapbox API for account information
  */
 
-public interface MapboxAccountService {
+public interface MapboxAccountRetrofitService {
   @GET("User/{username}")
   Call<UserResponse> getUserAccount(@Path("username") String userName, @Query("access_token") String accessToken);
 }
