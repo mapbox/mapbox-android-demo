@@ -82,7 +82,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:customtabs:25.3.1'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
-
+    compile 'com.auth0.android:jwtdecode:1.1.1'
 }
 
 apply from: '../checkstyle.gradle'

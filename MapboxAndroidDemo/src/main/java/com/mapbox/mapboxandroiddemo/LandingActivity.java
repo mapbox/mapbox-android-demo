@@ -23,16 +23,26 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class LandingActivity extends AppCompatActivity {
 
-  private static final String AUTH_URL = "https://api.mapbox.com/oauth/authorize?response_type=code&client_id=%s&redirect_uri=%s";
+  private String TAG = "LandingActivity";
+
+  private static final String SIGN_IN_AUTH_URL = "https://api.mapbox.com/oauth/authorize?response_type=code&client_id=%s&redirect_uri=%s";
+
+  private static final String CREATE_ACCOUNT_AUTH_URL = "https://www.mapbox.com/signup/?route-to=https%3A%2F%2Fwww.mapbox"
+    + ".com%2Fauthorize%2F%3Fclient_id%3D7bb34a0cf68455d33ec0d994af2330a3f60ee636%26redirect_uri%3Dmapbox-android-dev-"
+    + "preview%3A%2F%2Fauthorize%26response_type%3Dcode";
+
   private static final String CLIENT_ID = "7bb34a0cf68455d33ec0d994af2330a3f60ee636";
   private static final String REDIRECT_URI = "mapbox-android-dev-preview://authorize";
   private static final String ACCESS_TOKEN_URL = "https://api.mapbox.com/oauth/access_token";
@@ -40,29 +50,50 @@ public class LandingActivity extends AppCompatActivity {
   //  TODO: Fill in CLIENT_SECRET
   private static final String CLIENT_SECRET = "";
 
+  public static final String BASE_URL = "https://api.mapbox.com/api/";
+  private String username;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_landing);
 
-      Button createAccountButton = (Button) findViewById(R.id.create_account_button);
-      Button signInButton = (Button) findViewById(R.id.sign_in_button);
-      createAccountButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          // TODO: Haven't tested this flow yet
-          // openChromeCustomTab(view);
-        }
-      });
+    Button createAccountButton = (Button) findViewById(R.id.create_account_button);
+    Button signInButton = (Button) findViewById(R.id.sign_in_button);
+    createAccountButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        openChromeCustomTab(true);
+      }
+    });
 
-      signInButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          openChromeCustomTab(view);
-        }
-      });
+    signInButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        openChromeCustomTab(false);
+      }
+    });
 
-      setUpSkipDialog();
+    setUpSkipDialog();
+  }
+
+  private void openChromeCustomTab(boolean creatingAccount) {
+
+    final String urlToVisit;
+
+    if (creatingAccount) {
+      urlToVisit = CREATE_ACCOUNT_AUTH_URL;
+    } else {
+      urlToVisit = String.format(SIGN_IN_AUTH_URL, CLIENT_ID, REDIRECT_URI);
+    }
+
+    Log.d("LandingActivity", "openChromeCustomTab: url = " + urlToVisit);
+
+    CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
+    intentBuilder.setToolbarColor(ContextCompat.getColor(this, R.color.mapboxGrayDark10));
+    intentBuilder.setShowTitle(true);
+    CustomTabsIntent customTabsIntent = intentBuilder.build();
+    customTabsIntent.launchUrl(this, Uri.parse(urlToVisit));
   }
 
   @Override
@@ -75,6 +106,7 @@ public class LandingActivity extends AppCompatActivity {
         Log.d("LandingActivity", "An error has occurred : " + error);
       } else {
         String authCode = uri.getQueryParameter("code");
+        Log.d("LandingActivity", "onResume: authCode = " + authCode);
         getAccessToken(authCode);
       }
     }
@@ -82,13 +114,10 @@ public class LandingActivity extends AppCompatActivity {
 
   private void getAccessToken(String code) {
     OkHttpClient client = new OkHttpClient();
-    String authString = CLIENT_ID + ":";
-    String encodedAuthString = Base64.encodeToString(authString.getBytes(),
-      Base64.NO_WRAP);
 
     Request request = new Request.Builder()
       .addHeader("User-Agent", "Android Dev Preview")
-      .addHeader("Authorization", "Basic " + encodedAuthString)
+      .addHeader("Content-Type", "application/x-www-form-urlencoded")
       .url(ACCESS_TOKEN_URL)
       .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
         "grant_type=authorization_code&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET
@@ -98,18 +127,26 @@ public class LandingActivity extends AppCompatActivity {
     client.newCall(request).enqueue(new okhttp3.Callback() {
       @Override
       public void onFailure(okhttp3.Call call, IOException exception) {
+        Log.d("LandingActivity", "onFailure: " + exception);
+
       }
 
       @Override
       public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
+
         String json = response.body().string();
 
         JSONObject data = null;
         try {
           data = new JSONObject(json);
           String accessToken = data.optString("access_token");
-          getUserInfo(accessToken);
-
+          Log.d("LandingActivity", "onResponse: accessToken = " + accessToken);
+          try {
+            getUsernameFromJwt(accessToken);
+          } catch (Exception exception) {
+            exception.printStackTrace();
+          }
+          getUserInfo(username, accessToken);
         } catch (JSONException exception) {
           exception.printStackTrace();
         }
@@ -117,10 +154,16 @@ public class LandingActivity extends AppCompatActivity {
     });
   }
 
-  private void getUserInfo(final String token) {
-    MapboxAccountService service = MapboxAccountClient.getClient().create(MapboxAccountService.class);
+  private void getUserInfo(final String userName, final String token) {
 
-    retrofit2.Call<UserResponse> request = service.getUserAccount("langsmith", token);
+    Retrofit retrofit = new Retrofit.Builder()
+      .baseUrl(BASE_URL)
+      .addConverterFactory(GsonConverterFactory.create())
+      .build();
+
+    MapboxAccountService service = retrofit.create(MapboxAccountService.class);
+
+    retrofit2.Call<UserResponse> request = service.getUserAccount(userName, token);
 
     request.enqueue(new retrofit2.Callback<UserResponse>() {
       @Override
@@ -129,7 +172,9 @@ public class LandingActivity extends AppCompatActivity {
         String userId = response.body().getId();
         String emailAddress = response.body().getId();
         String avatarUrl = response.body().getId();
+
         saveUserInfoToSharedPref(userId, emailAddress, avatarUrl, token);
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
       }
@@ -142,24 +187,16 @@ public class LandingActivity extends AppCompatActivity {
     });
   }
 
-  private void saveUserInfoToSharedPref(String userID, String emailAddress, String avatarURL, String token) {
+  private void saveUserInfoToSharedPref(String userId, String emailAddress, String avatarUrl, String token) {
     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
       .putBoolean("TOKEN_SAVED", true)
-      .putString("USERNAME", userID)
+      .putString("USERNAME", userId)
       .putString("EMAIL", emailAddress)
-      .putString("AVATAR_IMAGE_URL", avatarURL)
+      .putString("AVATAR_IMAGE_URL", avatarUrl)
       .putString("TOKEN", token)
       .apply();
   }
 
-  private void openChromeCustomTab(View view) {
-    String url = String.format(AUTH_URL, CLIENT_ID, REDIRECT_URI);
-    CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
-    intentBuilder.setToolbarColor(ContextCompat.getColor(this, R.color.mapboxGrayDark10));
-    intentBuilder.setShowTitle(true);
-    CustomTabsIntent customTabsIntent = intentBuilder.build();
-    customTabsIntent.launchUrl(this, Uri.parse(url));
-  }
 
   private void setUpSkipDialog() {
     Button skipForNowButton = (Button) findViewById(R.id.button_skip_for_now);
@@ -191,4 +228,29 @@ public class LandingActivity extends AppCompatActivity {
       }
     });
   }
+
+  private void getUsernameFromJwt(String jwtEncoded) throws Exception {
+
+    try {
+      String[] split = jwtEncoded.split("\\.");
+      Log.d("JWT_DECODED", "Body: " + getJson(split[1]));
+
+      String jwtBody = getJson(split[1]);
+      Log.d(TAG, "getUsernameFromJwt: jwtBody = " + jwtBody);
+
+      username = jwtBody.substring(6, jwtBody.length() - 34);
+      Log.d(TAG, "getUsernameFromJwt: username = " + username);
+
+    } catch (UnsupportedEncodingException exception) {
+      //Error
+      exception.printStackTrace();
+
+    }
+  }
+
+  private static String getJson(String strEncoded) throws UnsupportedEncodingException {
+    byte[] decodedBytes = Base64.decode(strEncoded, Base64.URL_SAFE);
+    return new String(decodedBytes, "UTF-8");
+  }
+
 }
