@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mapboxWhite"
-    tools:context="com.mapbox.mapboxandroiddemo.Landing"
+    tools:context="com.mapbox.mapboxandroiddemo.account.LandingActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 
@@ -34,7 +35,7 @@
         android:clickable="true"
         android:text="@string/skip_for_now_bottom_button"
         android:textAllCaps="false"
-        android:textColor="@color/mapboxBlue"
+        android:textColor="@color/mapboxGray"
         android:textStyle="italic"
         mapbox:layout_constraintBottom_toBottomOf="parent"
         mapbox:layout_constraintHorizontal_bias="0.501"
@@ -85,16 +86,17 @@
         mapbox:layout_constraintGuide_percent="0.2"
         />
 
-    <ImageView
+    <com.cunoraz.gifview.library.GifView
         android:id="@+id/imageView3"
         android:layout_width="0dp"
         android:layout_height="131dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
         android:layout_marginTop="24dp"
+        custom:gif="@mipmap/mapbox_changing_hands_astronaut"
         mapbox:layout_constraintHorizontal_bias="0.0"
         mapbox:layout_constraintLeft_toLeftOf="parent"
         mapbox:layout_constraintRight_toRightOf="parent"
-        mapbox:layout_constraintTop_toTopOf="@+id/guideline"
-        mapbox:srcCompat="@drawable/astronaut"/>
+        mapbox:layout_constraintTop_toTopOf="@+id/guideline"/>
+
 </android.support.constraint.ConstraintLayout>
