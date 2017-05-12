@@ -20,6 +20,8 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
+import com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker;
+import com.mapbox.mapboxandroiddemo.analytics.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.BasicMarkerViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.CustomInfoWindowActivity;
@@ -78,6 +80,9 @@ import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 
 import java.util.ArrayList;
 
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.MAPBOX_EMAIL;
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.ORGANIZATION_NAME;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
   private ArrayList<ExampleItemModel> exampleItemModel;
@@ -120,6 +125,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           return;
         }
         startActivity(exampleItemModel.get(position).getActivity());
+
+        AnalyticsTracker.getInstance().clickedOnIndividualExample(getString(exampleItemModel.get(position).getTitle()));
+        AnalyticsTracker.getInstance().viewedScreen(getString(exampleItemModel.get(position).getTitle()));
+
       }
     });
 
@@ -136,6 +145,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       navigationView.setNavigationItemSelectedListener(this);
       navigationView.setCheckedItem(R.id.nav_basics);
     }
+
+    checkForFirstTimeOpen();
+    AnalyticsTracker.getInstance().identifyUser(ORGANIZATION_NAME, MAPBOX_EMAIL);
   }
 
   @Override
@@ -157,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     if (id != currentCategory) {
       listItems(id);
+      AnalyticsTracker.getInstance().clickedOnNavDrawerSection(item.getTitle().toString());
     }
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -548,6 +561,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //noinspection SimplifiableIfStatement
     if (id == R.id.action_info) {
+
+      AnalyticsTracker.getInstance().trackEvent("Clicked on info menu item");
+
       new MaterialStyledDialog.Builder(MainActivity.this)
         .setTitle(getString(R.string.info_dialog_title))
         .setDescription(getString(R.string.info_dialog_description))
@@ -558,7 +574,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .onPositive(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
+            AnalyticsTracker.getInstance().trackEvent("Clicked on info menu dialog start learning button");
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("https://mapbox.com/android-sdk"));
             startActivity(intent);
@@ -568,6 +584,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .onNegative(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            AnalyticsTracker.getInstance().trackEvent("Clicked on info menu dialog not now button");
           }
         })
         .show();
@@ -580,5 +597,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putInt("CURRENT_CATEGORY", currentCategory);
+  }
+
+  private void checkForFirstTimeOpen() {
+
+    FirstTimeRunChecker firstTimeRunChecker = new FirstTimeRunChecker(this);
+
+    if (firstTimeRunChecker.firstEverOpen()) {
+      AnalyticsTracker.getInstance().openedAppForFirstTime(getResources().getBoolean(R.bool.isTablet));
+    }
+
+    firstTimeRunChecker.updateSharedPrefWithCurrentVersion();
   }
 }
