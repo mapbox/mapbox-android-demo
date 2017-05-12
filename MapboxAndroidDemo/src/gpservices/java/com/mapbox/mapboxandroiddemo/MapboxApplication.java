@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker;
 
 public class MapboxApplication extends Application {
 
@@ -16,9 +15,5 @@ public class MapboxApplication extends Application {
       .setApplicationId(getString(R.string.firebase_app_id))
       .build()
     );
-
-    AnalyticsTracker.getInstance().trackEvent("Application onCreate()");
-    AnalyticsTracker.getInstance().openedApp();
-
   }
 }
