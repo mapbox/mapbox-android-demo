@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxandroiddemo.R;
@@ -14,17 +13,15 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 
 public class PopulationDensityExtrusionActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
   private boolean mapIsTilted = false;
-  private FloatingActionButton tiltMapToggleButton;
-  private FloatingActionButton roadsToggleButton;
-  private FloatingActionButton labelsToggleButton;
-  private FloatingActionButton parentFab;
+  private boolean roadsDisplayed = true;
+  private boolean labelsDisplayed = true;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -33,57 +30,16 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
-
     setContentView(R.layout.activity_population_density_extrusion);
-
-    tiltMapToggleButton = (FloatingActionButton) findViewById(R.id.fab_tilt_toggle);
-    roadsToggleButton = (FloatingActionButton) findViewById(R.id.fab_road_toggle);
-    labelsToggleButton = (FloatingActionButton) findViewById(R.id.fab_label_toggle);
-    parentFab = (FloatingActionButton) findViewById(R.id.multiple_actions_parent_fab);
-    
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
-
         mapboxMap = map;
-
-
+        setUpFabs();
       }
     });
-
-    tiltMapToggleButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-
-        if (mapboxMap != null) {
-          toggleMapTilt();
-        }
-      }
-    });
-
-    roadsToggleButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-
-        Toast.makeText(PopulationDensityExtrusionActivity.this, "Clicked roadsToggleButton", Toast.LENGTH_SHORT).show();
-
-
-      }
-    });
-
-    labelsToggleButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-
-        Toast.makeText(PopulationDensityExtrusionActivity.this, "Clicked labelsToggleButton", Toast.LENGTH_SHORT).show();
-
-
-      }
-    });
-
-
   }
 
   @Override
@@ -128,15 +84,49 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
     mapView.onDestroy();
   }
 
-  private void toggleMapTilt() {
+  private void setUpFabs() {
 
+    FloatingActionButton tiltMapToggleButton = (FloatingActionButton) findViewById(R.id.fab_tilt_toggle);
+    tiltMapToggleButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+        if (mapboxMap != null) {
+          toggleMapTilt();
+        }
+      }
+    });
+
+    FloatingActionButton roadsToggleButton = (FloatingActionButton) findViewById(R.id.fab_road_toggle);
+    roadsToggleButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if (mapboxMap != null) {
+          roadsAreVisible();
+        }
+      }
+    });
+
+    FloatingActionButton labelsToggleButton = (FloatingActionButton) findViewById(R.id.fab_label_toggle);
+    labelsToggleButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+        if (mapboxMap != null) {
+          labelsAreVisible();
+        }
+      }
+    });
+  }
+
+  private void toggleMapTilt() {
     if (!mapIsTilted) {
       CameraPosition position = new CameraPosition.Builder()
         .tilt(50) // Set the camera tilt
         .build(); // Creates a CameraPosition from the builder
 
       mapboxMap.animateCamera(CameraUpdateFactory
-        .newCameraPosition(position), 1000);
+        .newCameraPosition(position), 500);
       mapIsTilted = true;
 
     } else {
@@ -145,10 +135,48 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
         .build(); // Creates a CameraPosition from the builder
 
       mapboxMap.animateCamera(CameraUpdateFactory
-        .newCameraPosition(position), 1000);
-
+        .newCameraPosition(position), 500);
       mapIsTilted = false;
+    }
+  }
 
+  private void roadsAreVisible() {
+    if (!roadsDisplayed) {
+      for (int x = 0; x < mapboxMap.getLayers().size(); x++) {
+        if (mapboxMap.getLayers().get(x).getId().contains("road")) {
+          mapboxMap.getLayers().get(x).setProperties(PropertyFactory.visibility("visible"));
+        }
+      }
+      roadsDisplayed = true;
+    } else {
+      for (int x = 0; x < mapboxMap.getLayers().size(); x++) {
+        if (mapboxMap.getLayers().get(x).getId().contains("road")) {
+          mapboxMap.getLayers().get(x).setProperties(PropertyFactory.visibility("none"));
+        }
+      }
+      roadsDisplayed = false;
+    }
+  }
+
+  private void labelsAreVisible() {
+    if (!labelsDisplayed) {
+      for (int x = 0; x < mapboxMap.getLayers().size(); x++) {
+        if (mapboxMap.getLayers().get(x).getId().contains("label")
+          || mapboxMap.getLayers().get(x).getId().contains("poi_label_3")
+          || mapboxMap.getLayers().get(x).getId().contains("place")) {
+          mapboxMap.getLayers().get(x).setProperties(PropertyFactory.visibility("visible"));
+        }
+      }
+      labelsDisplayed = true;
+    } else {
+      for (int x = 0; x < mapboxMap.getLayers().size(); x++) {
+        if (mapboxMap.getLayers().get(x).getId().contains("label")
+          || mapboxMap.getLayers().get(x).getId().contains("poi_label_3")
+          || mapboxMap.getLayers().get(x).getId().contains("place")) {
+          mapboxMap.getLayers().get(x).setProperties(PropertyFactory.visibility("none"));
+        }
+      }
+      labelsDisplayed = false;
     }
   }
 }

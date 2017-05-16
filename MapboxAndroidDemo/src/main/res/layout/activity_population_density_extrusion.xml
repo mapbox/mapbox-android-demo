@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_marginBottom="16dp"
+        fab:fab_icon="@drawable/ic_edit"
         android:layout_marginRight="16dp"
         fab:fab_addButtonColorNormal="@color/mapboxRed"
         fab:fab_addButtonColorPressed="@color/mapboxWhite"
@@ -62,17 +63,17 @@
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
     <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline4"
-        app:layout_constraintGuide_begin="20dp"
-        android:orientation="vertical"/>
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"/>
 
     <android.support.constraint.Guideline
+        android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/guideline5"
-        app:layout_constraintGuide_begin="20dp"
-        android:orientation="vertical"/>
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp"/>
 
 </android.support.design.widget.CoordinatorLayout>
