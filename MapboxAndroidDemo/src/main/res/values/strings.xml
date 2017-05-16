@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Mapbox Dev Preview</string>
-    <string name="app_launcher_label">Mapbox Demo</string>
+    <string name="app_name">Mapbox Demo</string>
     <string name="mapbox" translatable="false">Mapbox</string>
     <string name="examples">Android examples</string>
 
