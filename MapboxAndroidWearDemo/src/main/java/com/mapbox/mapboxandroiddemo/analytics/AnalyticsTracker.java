@@ -19,7 +19,7 @@ import java.util.Map;
 public class AnalyticsTracker {
 
   private static volatile AnalyticsTracker analyticsInstance;
-  private Analytics analytics = Analytics.builder("zFLtBpautarTslr61PUbvEKXXLIoLRmq").build();
+  private Analytics analytics = Analytics.builder("W72jV8mXRPrOkNPFh8Z9tfarSDTYIof4").build();
 
   private static final String OPENED = "Opened app";
   private static final String CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME = "Clicked on sign in button";
