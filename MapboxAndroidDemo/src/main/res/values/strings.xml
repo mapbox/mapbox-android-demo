@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Mapbox Dev Preview</string>
+    <string name="app_launcher_label">Mapbox Demo</string>
     <string name="mapbox" translatable="false">Mapbox</string>
     <string name="examples">Android examples</string>
 
