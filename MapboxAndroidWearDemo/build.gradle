@@ -31,6 +31,7 @@ dependencies {
   compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.2@aar') {
     transitive = true
   }
+  compile 'com.segment.analytics.java:analytics:+'
 }
 
 apply from: '../checkstyle.gradle'
