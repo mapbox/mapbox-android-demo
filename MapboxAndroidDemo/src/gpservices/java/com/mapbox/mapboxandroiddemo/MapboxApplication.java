@@ -17,8 +17,8 @@ public class MapboxApplication extends Application {
       .build()
     );
 
-    AnalyticsTracker.getInstance().trackEvent("Application onCreate()");
-    AnalyticsTracker.getInstance().openedApp();
+    AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Application onCreate()");
+    AnalyticsTracker.getInstance(getApplicationContext()).openedApp();
 
   }
 }

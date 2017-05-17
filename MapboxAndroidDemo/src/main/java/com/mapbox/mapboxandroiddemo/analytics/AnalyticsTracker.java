@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.analytics;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 
@@ -18,6 +20,9 @@ import java.util.Map;
 
 public class AnalyticsTracker {
 
+  private Context appContext = null;
+
+
   private static volatile AnalyticsTracker analyticsInstance;
   private Analytics analytics = Analytics.builder("zFLtBpautarTslr61PUbvEKXXLIoLRmq").build();
 
@@ -33,13 +38,21 @@ public class AnalyticsTracker {
   public static final String ORGANIZATION_NAME = "LangstonCompany";
   public static final String MAPBOX_USERNAME = "LangstonSmithTestUsername";
   public static final String MAPBOX_EMAIL = "langston.smith@mapbox.com";
+  public static final String MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED = "mapboxAnalyticsEnabled";
+  public static final String MAPBOX_SHARED_PREFERENCES_FILE = "MapboxSharedPreferences";
 
-  // Returns instance of this class for making analytics calls throughout the app
-  public static AnalyticsTracker getInstance() {
+  private Boolean analyticsEnabled = null;
+
+  /**
+   * Initializes instance of AnalyticsTracker class
+   **/
+
+  public static AnalyticsTracker getInstance(@NonNull Context context) {
     if (analyticsInstance == null) {  // Single check
       synchronized (AnalyticsTracker.class) {
         if (analyticsInstance == null) {  // Double check
           analyticsInstance = new AnalyticsTracker();
+          analyticsInstance.appContext = context;
         }
       }
     }
@@ -52,27 +65,28 @@ public class AnalyticsTracker {
    **/
 
   public void openedAppForFirstTime(boolean isTablet) {
+    if (isAnalyticsEnabled()) {
+      Map<String, String> properties = new HashMap<>();
+      properties.put("model", Build.MODEL);
+      properties.put("brand", Build.BRAND);
+      properties.put("product", Build.PRODUCT);
+      properties.put("manufacturer", Build.MANUFACTURER);
+      properties.put("device", Build.DEVICE);
+      properties.put("tags", Build.TAGS);
+      properties.put("ISO03 language", Locale.getDefault().getISO3Language());
+      properties.put("language", Locale.getDefault().getLanguage());
+      properties.put("ISO03 country", Locale.getDefault().getISO3Country());
+      properties.put("country", Locale.getDefault().getCountry());
+      properties.put("display country", Locale.getDefault().getDisplayCountry());
+      properties.put("display name", Locale.getDefault().getDisplayName());
+      properties.put("display language", Locale.getDefault().getDisplayLanguage());
+      properties.put("size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
 
-    Map<String, String> properties = new HashMap<>();
-    properties.put("model", Build.MODEL);
-    properties.put("brand", Build.BRAND);
-    properties.put("product", Build.PRODUCT);
-    properties.put("manufacturer", Build.MANUFACTURER);
-    properties.put("device", Build.DEVICE);
-    properties.put("tags", Build.TAGS);
-    properties.put("ISO03 language", Locale.getDefault().getISO3Language());
-    properties.put("language", Locale.getDefault().getLanguage());
-    properties.put("ISO03 country", Locale.getDefault().getISO3Country());
-    properties.put("country", Locale.getDefault().getCountry());
-    properties.put("display country", Locale.getDefault().getDisplayCountry());
-    properties.put("display name", Locale.getDefault().getDisplayName());
-    properties.put("display language", Locale.getDefault().getDisplayLanguage());
-    properties.put("size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
-
-    analytics.enqueue(TrackMessage.builder("Opened App For First Time")
-      .userId(MAPBOX_USERNAME)
-      .properties(properties)
-    );
+      analytics.enqueue(TrackMessage.builder("Opened App For First Time")
+        .userId(MAPBOX_USERNAME)
+        .properties(properties)
+      );
+    }
   }
 
   /**
@@ -80,21 +94,27 @@ public class AnalyticsTracker {
    * in the MapboxApplication class' onCreate(). Could also be called in the MainActivity's onCreate()
    */
   public void openedApp() {
-    trackEvent(OPENED);
+    if (isAnalyticsEnabled()) {
+      trackEvent(OPENED);
+    }
   }
 
   /**
    * Makes an analytics call telling Segment that the Sign In button has been clicked.
    */
   public void clickedOnSignInButton() {
-    trackEvent(CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME);
+    if (isAnalyticsEnabled()) {
+      trackEvent(CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME);
+    }
   }
 
   /**
    * Makes an analytics call telling Segment that the Create Account button has been clicked.
    */
   public void clickedOnCreateAccountButton() {
-    trackEvent(CLICKED_ON_CREATE_ACCOUNT_BUTTON_EVENT_NAME);
+    if (isAnalyticsEnabled()) {
+      trackEvent(CLICKED_ON_CREATE_ACCOUNT_BUTTON_EVENT_NAME);
+    }
   }
 
   /**
@@ -103,7 +123,9 @@ public class AnalyticsTracker {
    * @param sectionName Name of the selected navigation drawer category
    */
   public void clickedOnNavDrawerSection(@NonNull String sectionName) {
-    trackEventWithProperties(CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME, SECTION_NAME_MAP_KEY, sectionName);
+    if (isAnalyticsEnabled()) {
+      trackEventWithProperties(CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME, SECTION_NAME_MAP_KEY, sectionName);
+    }
   }
 
   /**
@@ -112,7 +134,9 @@ public class AnalyticsTracker {
    * @param exampleName Name of the selected example
    */
   public void clickedOnIndividualExample(@NonNull String exampleName) {
-    trackEventWithProperties(CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME, EXAMPLE_NAME_MAP_KEY, exampleName);
+    if (isAnalyticsEnabled()) {
+      trackEventWithProperties(CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME, EXAMPLE_NAME_MAP_KEY, exampleName);
+    }
   }
 
   /**
@@ -123,31 +147,36 @@ public class AnalyticsTracker {
    * @param eventName Name of the event that's being recorded
    */
   public void trackEvent(@NonNull String eventName) {
-    trackEventWithProperties(eventName, null, null);
+    if (isAnalyticsEnabled()) {
+      trackEventWithProperties(eventName, null, null);
+    }
   }
 
   /**
    * Makes an analytics call telling Segment what custom-named event has happened. Custom parameters provided
    * are also included in the call.
    *
-   * @param eventName Name of the event that's being recorded
-   * @param keyForPropertiesMap Key to the property being attached to the event that's being called
+   * @param eventName             Name of the event that's being recorded
+   * @param keyForPropertiesMap   Key to the property being attached to the event that's being called
    * @param valueForPropertiesMap Value of the property being attached to the event that's being called
    */
   public void trackEventWithProperties(@NonNull String eventName, String keyForPropertiesMap,
                                        String valueForPropertiesMap) {
 
-    if (keyForPropertiesMap == null || valueForPropertiesMap == null) {
-      analytics.enqueue(TrackMessage.builder(eventName)
-        .userId(MAPBOX_USERNAME));
-    }
+    if (isAnalyticsEnabled()) {
+      if (keyForPropertiesMap == null || valueForPropertiesMap == null) {
+        analytics.enqueue(TrackMessage.builder(eventName)
+          .userId(MAPBOX_USERNAME));
+      }
 
-    if (keyForPropertiesMap != null && valueForPropertiesMap != null) {
+      if (keyForPropertiesMap != null && valueForPropertiesMap != null) {
 
-      Map<String, String> properties = new HashMap<>();
-      properties.put(keyForPropertiesMap, valueForPropertiesMap);
+        Map<String, String> properties = new HashMap<>();
+        properties.put(keyForPropertiesMap, valueForPropertiesMap);
 
-      analytics.enqueue(TrackMessage.builder(eventName).userId(MAPBOX_USERNAME).properties(properties));
+        analytics.enqueue(TrackMessage.builder(eventName).userId(MAPBOX_USERNAME).properties(properties));
+      }
+
     }
   }
 
@@ -158,7 +187,9 @@ public class AnalyticsTracker {
    * @param nameOfScreen Name of the screen/activity that's being viewed
    */
   public void viewedScreen(String nameOfScreen) {
-    analytics.enqueue(ScreenMessage.builder(nameOfScreen).userId(MAPBOX_USERNAME));
+    if (isAnalyticsEnabled()) {
+      analytics.enqueue(ScreenMessage.builder(nameOfScreen).userId(MAPBOX_USERNAME));
+    }
   }
 
   /**
@@ -168,13 +199,49 @@ public class AnalyticsTracker {
    * @param userEmailAddress Email address associated with user's Mapbox account
    */
   public void identifyUser(@NonNull String organizationName, @NonNull String userEmailAddress) {
-    Map<String, String> traits = new HashMap<>();
-    traits.put("organizationName", organizationName);
-    traits.put("email", userEmailAddress);
+    if (isAnalyticsEnabled()) {
+      Map<String, String> traits = new HashMap<>();
+      traits.put("organizationName", organizationName);
+      traits.put("email", userEmailAddress);
 
-    analytics.enqueue(IdentifyMessage.builder()
-      .userId(MAPBOX_USERNAME)
-      .traits(traits)
-    );
+      analytics.enqueue(IdentifyMessage.builder()
+        .userId(MAPBOX_USERNAME)
+        .traits(traits)
+      );
+    }
   }
+
+  /**
+   * Returns the opt-out status for the current device and analytics client combination.
+   */
+  public boolean isAnalyticsEnabled() {
+    if (analyticsEnabled == null) {
+      // Cache value
+      analyticsEnabled = AnalyticsTracker.getSharedPreferences(appContext)
+        .getBoolean(AnalyticsTracker.MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED, true);
+    }
+    return analyticsEnabled;
+  }
+
+  /**
+   * Saves the current device's analytics opt-out status to shared preferences.
+   *
+   * @param analyticsEnabled true to enable analytics tracking, false to disable
+   */
+  public void optUserIntoAnalytics(boolean analyticsEnabled) {
+    this.analyticsEnabled = analyticsEnabled;
+    SharedPreferences prefs = AnalyticsTracker.getSharedPreferences(appContext);
+    SharedPreferences.Editor editor = prefs.edit();
+    editor.putBoolean(AnalyticsTracker.MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED, analyticsEnabled);
+    editor.apply();
+  }
+
+  /**
+   * Returns the device's shared preferences file.
+   */
+  public static SharedPreferences getSharedPreferences(Context context) {
+    return context.getSharedPreferences(
+      AnalyticsTracker.MAPBOX_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
+  }
+
 }

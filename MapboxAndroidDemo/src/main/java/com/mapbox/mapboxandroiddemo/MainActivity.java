@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,13 +10,17 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -87,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private ExampleAdapter adapter;
   private int currentCategory = R.id.nav_basics;
   private RecyclerView recyclerView;
+  private Switch analyticsOptOutSwitch;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -124,8 +131,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         startActivity(exampleItemModel.get(position).getActivity());
 
-        AnalyticsTracker.getInstance().clickedOnIndividualExample(getString(exampleItemModel.get(position).getTitle()));
-        AnalyticsTracker.getInstance().viewedScreen(getString(exampleItemModel.get(position).getTitle()));
+        AnalyticsTracker.getInstance(getApplicationContext()).clickedOnIndividualExample(getString(exampleItemModel.get(position).getTitle()));
+        AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen(getString(exampleItemModel.get(position).getTitle()));
 
       }
     });
@@ -145,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     checkForFirstTimeOpen();
-    AnalyticsTracker.getInstance().identifyUser(ORGANIZATION_NAME, MAPBOX_EMAIL);
+    AnalyticsTracker.getInstance(getApplicationContext()).identifyUser(ORGANIZATION_NAME, MAPBOX_EMAIL);
   }
 
   @Override
@@ -165,9 +172,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // Handle navigation view item clicks here.
     int id = item.getItemId();
 
-    if (id != currentCategory) {
+    if (id == R.id.settings_in_nav_drawer) {
+      buildSettingsDialog();
+    } else if (id != currentCategory) {
       listItems(id);
-      AnalyticsTracker.getInstance().clickedOnNavDrawerSection(item.getTitle().toString());
+      AnalyticsTracker.getInstance(getApplicationContext()).clickedOnNavDrawerSection(item.getTitle().toString());
     }
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -544,12 +553,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     int id = item.getItemId();
-
-    //noinspection SimplifiableIfStatement
     if (id == R.id.action_info) {
-
-      AnalyticsTracker.getInstance().trackEvent("Clicked on info menu item");
-
+      AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Clicked on info menu item");
       new MaterialStyledDialog.Builder(MainActivity.this)
         .setTitle(getString(R.string.info_dialog_title))
         .setDescription(getString(R.string.info_dialog_description))
@@ -560,7 +565,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .onPositive(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            AnalyticsTracker.getInstance().trackEvent("Clicked on info menu dialog start learning button");
+            AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Clicked on info dialog start learning button");
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("https://mapbox.com/android-sdk"));
             startActivity(intent);
@@ -570,7 +575,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .onNegative(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            AnalyticsTracker.getInstance().trackEvent("Clicked on info menu dialog not now button");
+            AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Clicked on info dialog not now button");
           }
         })
         .show();
@@ -586,13 +591,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   }
 
   private void checkForFirstTimeOpen() {
-
     FirstTimeRunChecker firstTimeRunChecker = new FirstTimeRunChecker(this);
-
     if (firstTimeRunChecker.firstEverOpen()) {
-      AnalyticsTracker.getInstance().openedAppForFirstTime(getResources().getBoolean(R.bool.isTablet));
+      AnalyticsTracker.getInstance(getApplicationContext()).openedAppForFirstTime(getResources().getBoolean(R.bool.isTablet));
     }
-
     firstTimeRunChecker.updateSharedPrefWithCurrentVersion();
+  }
+
+  private void buildSettingsDialog() {
+    AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Clicked on settings in nav drawer");
+    LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    View customView = inflater.inflate(R.layout.settings_dialog_layout, null);
+    analyticsOptOutSwitch = (Switch) customView.findViewById(R.id.analytics_opt_out_switch);
+    analyticsOptOutSwitch.setChecked(!AnalyticsTracker.getInstance(getApplicationContext()).isAnalyticsEnabled());
+    new AlertDialog.Builder(this)
+      .setView(customView)
+      .setTitle(R.string.settings_dialog_title)
+      .setPositiveButton(R.string.settings_dialog_positive_button_text, new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+          if (analyticsOptOutSwitch.isChecked()) {
+            changeAnalyticsSettings(false, getString(R.string.settings_status_toast_analytics_opt_out));
+          } else {
+            changeAnalyticsSettings(true, getString(R.string.settings_status_toast_analytics_opt_in));
+          }
+        }
+      })
+      .setNegativeButton(R.string.settings_dialog_negative_button_text, new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+          dialog.dismiss();
+        }
+      })
+      .show();
+  }
+
+  private void changeAnalyticsSettings(boolean optedIn, String toastMessage) {
+    AnalyticsTracker.getInstance(getApplicationContext()).trackEvent(optedIn ? "Opted in to analytics" : "Opted out of analytics");
+    AnalyticsTracker.getInstance(getApplicationContext()).optUserIntoAnalytics(optedIn);
+    Toast.makeText(MainActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
   }
 }
