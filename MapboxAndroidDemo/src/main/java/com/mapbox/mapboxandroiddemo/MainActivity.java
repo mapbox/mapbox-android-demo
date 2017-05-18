@@ -131,8 +131,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         startActivity(exampleItemModel.get(position).getActivity());
 
-        AnalyticsTracker.getInstance(getApplicationContext()).clickedOnIndividualExample(getString(exampleItemModel.get(position).getTitle()));
-        AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen(getString(exampleItemModel.get(position).getTitle()));
+        AnalyticsTracker.getInstance(getApplicationContext()).clickedOnIndividualExample(
+          getString(exampleItemModel.get(position).getTitle()));
+        AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen(
+          getString(exampleItemModel.get(position).getTitle()));
 
       }
     });
@@ -565,7 +567,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .onPositive(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Clicked on info dialog start learning button");
+            AnalyticsTracker.getInstance(getApplicationContext()).trackEvent(
+              "Clicked on info dialog start learning button");
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("https://mapbox.com/android-sdk"));
             startActivity(intent);
@@ -575,7 +578,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .onNegative(new MaterialDialog.SingleButtonCallback() {
           @Override
           public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Clicked on info dialog not now button");
+            AnalyticsTracker.getInstance(getApplicationContext()).trackEvent(
+              "Clicked on info dialog not now button");
           }
         })
         .show();
@@ -593,7 +597,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private void checkForFirstTimeOpen() {
     FirstTimeRunChecker firstTimeRunChecker = new FirstTimeRunChecker(this);
     if (firstTimeRunChecker.firstEverOpen()) {
-      AnalyticsTracker.getInstance(getApplicationContext()).openedAppForFirstTime(getResources().getBoolean(R.bool.isTablet));
+      AnalyticsTracker.getInstance(getApplicationContext()).openedAppForFirstTime(
+        getResources().getBoolean(R.bool.isTablet));
     }
     firstTimeRunChecker.updateSharedPrefWithCurrentVersion();
   }
