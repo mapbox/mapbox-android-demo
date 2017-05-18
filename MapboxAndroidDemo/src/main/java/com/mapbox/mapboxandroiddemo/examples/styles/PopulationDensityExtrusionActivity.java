@@ -102,7 +102,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         if (mapboxMap != null) {
-          roadsAreVisible();
+          toggleRoads();
         }
       }
     });
@@ -113,7 +113,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
       public void onClick(View view) {
 
         if (mapboxMap != null) {
-          labelsAreVisible();
+          toggleLabels();
         }
       }
     });
@@ -140,7 +140,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
     }
   }
 
-  private void roadsAreVisible() {
+  private void toggleRoads() {
     if (!roadsDisplayed) {
       for (int x = 0; x < mapboxMap.getLayers().size(); x++) {
         if (mapboxMap.getLayers().get(x).getId().contains("road")) {
@@ -158,7 +158,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
     }
   }
 
-  private void labelsAreVisible() {
+  private void toggleLabels() {
     if (!labelsDisplayed) {
       for (int x = 0; x < mapboxMap.getLayers().size(); x++) {
         if (mapboxMap.getLayers().get(x).getId().contains("label")
