@@ -46,10 +46,8 @@ public class AnalyticsTracker {
   }
 
   /**
-   * Gets and adds device information to analytics call. Ideally, this method is called
-   * when app is opened for the first time or if shared preferences is cleared.
+   * Initializes instance of AnalyticsTracker class
    **/
-
   public void openedAppForFirstTime() {
 
     Map<String, String> properties = new HashMap<>();
