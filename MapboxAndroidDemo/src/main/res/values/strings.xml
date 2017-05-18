@@ -250,9 +250,8 @@
     <!--Population density extrusion -->
 
     <string name="toggle_map_tilt_map">Toggle tilt</string>
-    <string name="toggle_map_tilt_map_toggle_fab_text">Toggle map tilt</string>
+    <string name="toggle_map_tilt_map_toggle_fab_text">Toggle tilt</string>
     <string name="toggle_map_road_toggle_fab_text">Toggle roads</string>
-    <string name="toggle_map_label_toggle_fab_text">Toggle map labels</string>
-
+    <string name="toggle_map_label_toggle_fab_text">Toggle labels</string>
 
 </resources>
