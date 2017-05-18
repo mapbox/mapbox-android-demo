@@ -627,8 +627,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   }
 
   private void changeAnalyticsSettings(boolean optedIn, String toastMessage) {
-    AnalyticsTracker.getInstance(getApplicationContext()).trackEvent(optedIn ? "Opted in to analytics" : "Opted out of analytics");
-    AnalyticsTracker.getInstance(getApplicationContext()).optUserIntoAnalytics(optedIn);
+    if (optedIn) {
+      AnalyticsTracker.getInstance(getApplicationContext()).optUserIntoAnalytics(optedIn);
+      AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Opted in to analytics");
+    } else {
+      AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Opted out of analytics");
+      AnalyticsTracker.getInstance(getApplicationContext()).optUserIntoAnalytics(optedIn);
+    }
     Toast.makeText(MainActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
   }
 }
