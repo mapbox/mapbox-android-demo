@@ -6,11 +6,8 @@ package com.mapbox.mapboxandroiddemo.model.usermodel;
 
 public class Mapviews {
   private String id;
-
   private String price;
-
   private String included;
-
   private String step;
 
   public String getId() {

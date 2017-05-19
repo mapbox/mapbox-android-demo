@@ -7,8 +7,10 @@ import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -30,9 +32,12 @@ public class LandingActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
     setContentView(R.layout.activity_landing);
+    setUpButtons();
+    setUpSkipDialog();
+  }
 
+  private void setUpButtons() {
     Button createAccountButton = (Button) findViewById(R.id.create_account_button);
     createAccountButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -48,9 +53,8 @@ public class LandingActivity extends AppCompatActivity {
         openChromeCustomTab(false);
       }
     });
-
-    setUpSkipDialog();
   }
+
 
   @Override
   protected void onResume() {
@@ -59,7 +63,8 @@ public class LandingActivity extends AppCompatActivity {
     if (getIntent() != null && getIntent().getAction().equals(Intent.ACTION_VIEW)) {
       Uri uri = getIntent().getData();
       if (uri.getQueryParameter("error") != null) {
-        String error = uri.getQueryParameter("error");
+        Toast.makeText(this, R.string.whoops_error_message_on_app_return, Toast.LENGTH_SHORT).show();
+        Log.d("LandingActivity", "onResume: error = " + uri.getQueryParameter("error"));
       } else {
         String authCode = uri.getQueryParameter("code");
         Intent intent = new Intent(this, AccountRetrievalService.class);
@@ -70,7 +75,6 @@ public class LandingActivity extends AppCompatActivity {
 
         Intent loadingActivityIntent = new Intent(this, LoadingActivity.class);
         startActivity(loadingActivityIntent);
-
       }
     }
   }

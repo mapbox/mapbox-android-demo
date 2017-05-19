@@ -1,26 +1,14 @@
 package com.mapbox.mapboxandroiddemo.model.usermodel;
 
-/**
- * Created by LangstonSmith on 5/9/17.
- */
-
 public class Authorizations {
   private String id;
-
   private String[] scopes;
-
   private String defaultS;
-
   private String client;
-
   private String token;
-
   private String created;
-
   private String usage;
-
   private String note;
-
   private String modified;
 
   public String getId() {

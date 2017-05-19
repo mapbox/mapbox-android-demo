@@ -260,6 +260,7 @@
     <string name="skip_for_now_dialog_go_back_button">Go back</string>
     <string name="skip_for_now_dialog_skip_button">Skip for now</string>
     <string name="skip_for_now_bottom_button">Skip for now</string>
+    <string name="whoops_error_message_on_app_return">Whoops. Looks like something went wrong with the log in process!</string>
 
     <!--Main Activity welcome toast-->
 

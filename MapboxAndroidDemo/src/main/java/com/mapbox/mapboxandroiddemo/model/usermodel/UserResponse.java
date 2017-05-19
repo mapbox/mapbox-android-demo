@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.model.usermodel;
 
-import com.google.gson.annotations.SerializedName;
-
 import org.json.JSONObject;
 
 /**
@@ -9,53 +7,21 @@ import org.json.JSONObject;
  */
 
 public class UserResponse {
-
-  @SerializedName("authorizations")
   private Authorizations[] authorizations;
-
-  @SerializedName("flags")
   private JSONObject flags;
-
-  @SerializedName("mfa")
   private String mfa;
-
-  @SerializedName("extraStorage")
   private String extraStorage;
-
-  @SerializedName("mfaRecover")
   private String mfaRecover;
-
-  @SerializedName("passmod")
   private String passmod;
-
-  @SerializedName("avatar")
   private String avatar;
-
-  @SerializedName("id")
   private String id;
-
-  @SerializedName("lastLogin")
   private String lastLogin;
-
-  @SerializedName("an")
   private Plan plan;
-
-  @SerializedName("email")
   private String email;
-
-  @SerializedName("created")
   private String created;
-
-  @SerializedName("extraTm2z")
   private String extraTm2z;
-
-  @SerializedName("accountLevel")
   private String accountLevel;
-
-  @SerializedName("customerId")
   private String customerId;
-
-  @SerializedName("disabled")
   private String disabled;
 
   public Authorizations[] getAuthorizations() {

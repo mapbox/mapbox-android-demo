@@ -1,16 +1,9 @@
 package com.mapbox.mapboxandroiddemo.model.usermodel;
 
-/**
- * Created by LangstonSmith on 5/9/17.
- */
-
 public class Geocodes {
   private String id;
-
   private String price;
-
   private String included;
-
   private String step;
 
   public String getId() {

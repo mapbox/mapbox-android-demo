@@ -6,9 +6,7 @@ package com.mapbox.mapboxandroiddemo.model.usermodel;
 
 public class Services {
   private UserDirections directions;
-
   private Mapviews mapviews;
-
   private Geocodes geocodes;
 
   public UserDirections getDirections() {

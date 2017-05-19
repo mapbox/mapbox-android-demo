@@ -6,43 +6,24 @@ package com.mapbox.mapboxandroiddemo.model.usermodel;
 
 public class Plan {
   private String satellite;
-
   private Services services;
-
   private String datasetStorage;
-
   private String support;
-
   private String geometries;
-
   private String rawData;
-
   private String restricted;
-
   private String styles;
-
   private String period;
-
   private String tm2z;
-
   private String id;
-
   private String watermark;
-
   private String price;
-
   private String hidden;
-
   private String views;
-
   private String name;
-
   private String privateTilesets;
-
   private String wmts;
-
   private String paywall;
-
   private String storage;
 
   public String getSatellite() {

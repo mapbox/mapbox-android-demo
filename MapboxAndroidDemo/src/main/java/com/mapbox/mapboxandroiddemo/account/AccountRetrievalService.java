@@ -33,11 +33,11 @@ public class AccountRetrievalService extends IntentService {
   private static final String BASE_URL = "https://api.mapbox.com/api/";
   private static final String ACCESS_TOKEN_URL = "https://api.mapbox.com/oauth/access_token";
 
-  //  TODO: Fill in CLIENT_SECRET
+  //  TODO: Fill in CLIENT_SECRET and before running app. Never commit changes to Github with CLIENT_SECRET filled in!
   private static final String CLIENT_SECRET = "";
 
-  private static String CLIENT_ID;
-  private static String REDIRECT_URI;
+  private String clientId;
+  private String redirectUri;
   private String username;
 
   public AccountRetrievalService() {
@@ -53,8 +53,8 @@ public class AccountRetrievalService extends IntentService {
   protected void onHandleIntent(@Nullable Intent intent) {
     if (intent != null) {
       String authCode = intent.getStringExtra("AUTHCODE");
-      CLIENT_ID = intent.getStringExtra("CLIENT_ID");
-      REDIRECT_URI = intent.getStringExtra("REDIRECT_URI");
+      clientId = intent.getStringExtra("clientId");
+      redirectUri = intent.getStringExtra("redirectUri");
       getAccessToken(authCode);
     } else {
       Log.d("AccountRetrievalService", "onHandleIntent: intent == null");
@@ -69,8 +69,8 @@ public class AccountRetrievalService extends IntentService {
       .addHeader("Content-Type", "application/x-www-form-urlencoded")
       .url(ACCESS_TOKEN_URL)
       .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
-        "grant_type=authorization_code&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET
-          + "&redirect_uri=" + REDIRECT_URI + "&code=" + code))
+        "grant_type=authorization_code&client_id=" + clientId + "&client_secret=" + CLIENT_SECRET
+          + "&redirect_uri=" + redirectUri + "&code=" + code))
       .build();
 
     client.newCall(request).enqueue(new okhttp3.Callback() {
@@ -122,9 +122,7 @@ public class AccountRetrievalService extends IntentService {
       .baseUrl(BASE_URL)
       .addConverterFactory(GsonConverterFactory.create())
       .build();
-
     MapboxAccountRetrofitService service = retrofit.create(MapboxAccountRetrofitService.class);
-
     retrofit2.Call<UserResponse> request = service.getUserAccount(userName, token);
 
     request.enqueue(new retrofit2.Callback<UserResponse>() {

@@ -5,13 +5,9 @@ package com.mapbox.mapboxandroiddemo.model.usermodel;
  */
 
 public class UserDirections {
-
   private String id;
-
   private String price;
-
   private String included;
-
   private String step;
 
   public String getId() {
