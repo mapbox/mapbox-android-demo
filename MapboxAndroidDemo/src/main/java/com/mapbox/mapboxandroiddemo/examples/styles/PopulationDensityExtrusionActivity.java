@@ -19,6 +19,7 @@ import com.mapbox.mapboxsdk.style.functions.stops.IntervalStops;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.Filter;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
+import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
@@ -48,6 +49,9 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
             @Override
             public void onMapReady(@NonNull final MapboxMap map) {
                 mapboxMap = map;
+                VectorSource populationVectorSource = new VectorSource("population", "mapbox://peterqliu.d0vin3el");
+                mapboxMap.addSource(populationVectorSource);
+
                 setUpFabs();
                 setUpFillsLayer();
                 setUpExtrusionsLayer();
