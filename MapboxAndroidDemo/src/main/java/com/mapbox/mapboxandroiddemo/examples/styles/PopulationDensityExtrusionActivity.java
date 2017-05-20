@@ -61,7 +61,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
 
     private void setUpFillsLayer() {
         FillLayer fillsLayer = new FillLayer("fills", "population");
-        fillsLayer.withSourceLayer("outgeojson");
+        fillsLayer.setSourceLayer("outgeojson");
         fillsLayer.setFilter(Filter.lt("pkm2", 300000));
         fillsLayer.withProperties(
                 fillColor(Function.property("pkm2", IntervalStops.interval(
@@ -76,7 +76,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
 
     private void setUpExtrusionsLayer() {
         FillLayer fillExtrusionLayer = new FillLayer("extrusions", "population");
-        fillExtrusionLayer.withSourceLayer("outgeojson");
+        fillExtrusionLayer.setSourceLayer("outgeojson");
         fillExtrusionLayer.setFilter(Filter.gt("p", 1));
         fillExtrusionLayer.setFilter(Filter.lt("pkm2", 300000));
         fillExtrusionLayer.withProperties(
