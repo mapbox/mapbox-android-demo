@@ -62,7 +62,7 @@ dependencies {
     gpservicesCompile 'com.google.firebase:firebase-crash:10.2.0'
 
     // Mapbox dependencies
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.1@aar') {
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.2@aar') {
         transitive = true
     }
 
