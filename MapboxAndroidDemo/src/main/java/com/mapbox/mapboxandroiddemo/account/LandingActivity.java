@@ -33,28 +33,9 @@ public class LandingActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_landing);
-    setUpButtons();
     setUpSkipDialog();
+    setUpButtons();
   }
-
-  private void setUpButtons() {
-    Button createAccountButton = (Button) findViewById(R.id.create_account_button);
-    createAccountButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        openChromeCustomTab(true);
-      }
-    });
-
-    Button signInButton = (Button) findViewById(R.id.sign_in_button);
-    signInButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        openChromeCustomTab(false);
-      }
-    });
-  }
-
 
   @Override
   protected void onResume() {
@@ -64,7 +45,8 @@ public class LandingActivity extends AppCompatActivity {
       Uri uri = getIntent().getData();
       if (uri.getQueryParameter("error") != null) {
         Toast.makeText(this, R.string.whoops_error_message_on_app_return, Toast.LENGTH_SHORT).show();
-        Log.d("LandingActivity", "onResume: error = " + uri.getQueryParameter("error"));
+        String error = uri.getQueryParameter("error");
+        Log.d("LandingActivity", "onResume: error = " + error);
       } else {
         String authCode = uri.getQueryParameter("code");
         Intent intent = new Intent(this, AccountRetrievalService.class);
@@ -80,11 +62,8 @@ public class LandingActivity extends AppCompatActivity {
   }
 
   private void openChromeCustomTab(boolean creatingAccount) {
-
     final String urlToVisit;
-
     urlToVisit = creatingAccount ? CREATE_ACCOUNT_AUTH_URL : String.format(SIGN_IN_AUTH_URL, CLIENT_ID, REDIRECT_URI);
-
     CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
     intentBuilder.setToolbarColor(ContextCompat.getColor(this, R.color.mapboxGrayDark10));
     intentBuilder.setShowTitle(true);
@@ -93,12 +72,10 @@ public class LandingActivity extends AppCompatActivity {
   }
 
   private void setUpSkipDialog() {
-
     Button skipForNowButton = (Button) findViewById(R.id.button_skip_for_now);
     skipForNowButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-
         new MaterialStyledDialog.Builder(LandingActivity.this)
           .setTitle(getString(R.string.skip_for_now_dialog_title))
           .setDescription(getString(R.string.skip_for_now_dialog_description))
@@ -120,6 +97,24 @@ public class LandingActivity extends AppCompatActivity {
             }
           })
           .show();
+      }
+    });
+  }
+
+  private void setUpButtons() {
+    Button createAccountButton = (Button) findViewById(R.id.create_account_button);
+    createAccountButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        openChromeCustomTab(true);
+      }
+    });
+
+    Button signInButton = (Button) findViewById(R.id.sign_in_button);
+    signInButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        openChromeCustomTab(false);
       }
     });
   }

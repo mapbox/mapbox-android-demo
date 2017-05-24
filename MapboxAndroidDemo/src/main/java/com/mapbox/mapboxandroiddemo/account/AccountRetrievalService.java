@@ -39,9 +39,10 @@ public class AccountRetrievalService extends IntentService {
   private String clientId;
   private String redirectUri;
   private String username;
+  private static final String serviceName = "AccountRetrievalService";
 
   public AccountRetrievalService() {
-    super("AccountRetrievalService");
+    super(serviceName);
   }
 
   @Override
@@ -76,17 +77,14 @@ public class AccountRetrievalService extends IntentService {
     client.newCall(request).enqueue(new okhttp3.Callback() {
       @Override
       public void onFailure(okhttp3.Call call, IOException exception) {
-
+        Log.d("AccountRetrievalService", "onFailure: " + exception);
       }
 
       @Override
       public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
-
         String json = response.body().string();
-
-        JSONObject data = null;
         try {
-          data = new JSONObject(json);
+          JSONObject data = new JSONObject(json);
           String accessToken = data.optString("access_token");
           try {
             getUsernameFromJwt(accessToken);
@@ -102,17 +100,12 @@ public class AccountRetrievalService extends IntentService {
   }
 
   private void getUsernameFromJwt(String jwtEncoded) throws Exception {
-
     try {
       String[] split = jwtEncoded.split("\\.");
       String jwtBody = getJson(split[1]);
-
       username = jwtBody.substring(6, jwtBody.length() - 34);
-
     } catch (UnsupportedEncodingException exception) {
-      //Error
       exception.printStackTrace();
-
     }
   }
 
@@ -128,13 +121,10 @@ public class AccountRetrievalService extends IntentService {
     request.enqueue(new retrofit2.Callback<UserResponse>() {
       @Override
       public void onResponse(retrofit2.Call<UserResponse> call, retrofit2.Response<UserResponse> response) {
-
         String userId = response.body().getId();
         String emailAddress = response.body().getId();
         String avatarUrl = response.body().getId();
-
         saveUserInfoToSharedPref(userId, emailAddress, avatarUrl, token);
-
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
       }
