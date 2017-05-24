@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".examples.styles.LineLayerActivity">
+    tools:context="com.mapbox.mapboxandroiddemo.examples.styles.BasicExtrusionActivity">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="33.39243835"
-        mapbox:mapbox_cameraTargetLng="-118.38265415000001"
-        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/outdoors-v10"
-        mapbox:mapbox_cameraZoom="13.448986053466797"/>
+        mapbox:mapbox_cameraBearing="82.104001"
+        mapbox:mapbox_cameraTargetLat="52.516318"
+        mapbox:mapbox_cameraTargetLng="13.378105"
+        mapbox:mapbox_cameraTilt="60.00"
+        mapbox:mapbox_cameraZoom="16.922091"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
 
 </RelativeLayout>

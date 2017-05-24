@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Mapbox Dev Preview</string>
+    <string name="app_name">Mapbox Demo</string>
     <string name="mapbox" translatable="false">Mapbox</string>
     <string name="examples">Android examples</string>
 
@@ -62,6 +62,7 @@
     <string name="activity_style_data_clusters_title">Create and style data clusters</string>
     <string name="activity_style_line_layer_title">Create a line layer</string>
     <string name="activity_style_symbol_layer_title">Marker symbol layer</string>
+    <string name="activity_style_basic_extrusions_title">Display buildings in 3D</string>
     <string name="activity_dds_style_circle_categorically_title">Style circles categorically</string>
     <string name="activity_dds_choropleth_zoom_change_title">Update a choropleth layer by zoom level</string>
     <string name="activity_dds_style_line_identity_property_title">Style lines using an identity property function</string>
@@ -69,11 +70,13 @@
     <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
     <string name="activity_annotation_geojson_line_title">Draw a GeoJSON line</string>
     <string name="activity_annotation_polygon_title">Draw a polygon</string>
+    <string name="activity_annotation_polygon_holes_title">Draw a polygon with holes</string>
     <string name="activity_annotation_marker_view_title">Draw a marker view</string>
     <string name="activity_annotation_custom_info_window_title">Custom info window</string>
     <string name="activity_annotation_animated_marker_title">Animate marker position</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
+    <string name="activity_camera_restrict_title">Restrict map panning</string>
     <string name="activity_offline_simple_title">A simple offline map</string>
     <string name="activity_offline_manager_title">Offline manager</string>
     <string name="activity_query_feature_title">Query a map feature</string>
@@ -83,7 +86,6 @@
     <string name="activity_location_tracking_title">Track user location</string>
     <string name="activity_location_animated_icon_title">Animate the user icon</string>
     <string name="activity_location_customize_user_title">Customize user location icon</string>
-    <string name="activity_location_turf_inside_title">Use Turf Inside</string>
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
@@ -115,6 +117,7 @@
     <string name="activity_style_create_data_cluster_description">Use GeoJSON to visualize point data in clusters.</string>
     <string name="activity_style_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
     <string name="activity_style_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
+    <string name="activity_style_basic_extrusions_description">Use extrusions to display buildings\' height in 3D</string>
     <string name="activity_dds_style_circle_categorically_description">Using a categorical circle-color property function for a visualization.</string>
     <string name="activity_dds_choropleth_zoom_change_description">Using 2014 census data, display state or county population depending on zoom level.</string>
     <string name="activity_dds_style_line_identity_property_description">Using an identity line-color property function for a visualization.</string>
@@ -122,11 +125,13 @@
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
     <string name="activity_annotation_polygon_description">Draw a vector polygon on a map with the Mapbox Android SDK.</string>
+    <string name="activity_annotation_polygon_holes_description">Draw a vector polygon with holes on a map using the Mapbox Android SDK.</string>
     <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
     <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize the info window.</string>
     <string name="activity_annotation_animated_marker_description">Animate the marker to a new position on the map.</string>
     <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
+    <string name="activity_camera_restrict_description">Prevent a map from being panned to a different place.</string>
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Android SDK.</string>
     <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
     <string name="activity_query_feature_description">Click the map to add a marker at the location and display the maps property information for that feature.</string>
@@ -136,7 +141,6 @@
     <string name="activity_location_tracking_description">Lock the camera centered above the user location.</string>
     <string name="activity_location_animated_icon_description">Use a marker view to mark the users location and add a pulsing animation to it.</string>
     <string name="activity_location_customize_user_description">"Adjust the user location icon's colors and padding so it appears lower on the screen."</string>
-    <string name="activity_location_turf_inside_description">Use Mapbox\'s geospatial analysis library to determine whether a LatLng point is within a GeoJSON polygon.</string>
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
     <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
@@ -170,6 +174,7 @@
     <string name="activity_style_create_cluster_data_points_url" translatable="false">http://i.imgur.com/fGeZhcD.png</string>
     <string name="activity_style_line_layer_url" translatable="false">http://i.imgur.com/Iqxoing.png</string>
     <string name="activity_style_symbol_layer_url" translatable="false">http://i.imgur.com/TQ4iA0L.png</string>
+    <string name="activity_style_basic_extrusions_url" translatable="false">http://i.imgur.com/SXn5NJK.png</string>
     <string name="activity_dds_style_circle_categorically_url" translatable="false">http://i.imgur.com/C3mtfgF.png</string>
     <string name="activity_dds_choropleth_zoom_change_url" translatable="false">http://i.imgur.com/sPNpLEP.png</string>
     <string name="activity_dds_style_line_identity_property_url" translatable="false">http://i.imgur.com/wgpKvZM.png</string>
@@ -177,11 +182,13 @@
     <string name="activity_annotation_custom_marker_url" translatable="false">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
     <string name="activity_annotation_geojson_line_url" translatable="false">https://www.mapbox.com/android-sdk/images/geojson.png</string>
     <string name="activity_annotation_polygon_url" translatable="false">https://www.mapbox.com/android-sdk/images/polygon.png</string>
+    <string name="activity_annotation_polygon_holes_url" translatable="false">http://i.imgur.com/uJ9ftZk.jpg</string>
     <string name="activity_annotation_basic_marker_view_url" translatable="false">http://i.imgur.com/vbWTLIE.png</string>
     <string name="activity_annotation_custom_info_window_url" translatable="false">http://i.imgur.com/mCWbosy.png</string>
     <string name="activity_annotation_animated_marker_url" translatable="false">http://i.imgur.com/XegvIKr.png</string>
     <string name="activity_camera_animate_url" translatable="false">https://www.mapbox.com/android-sdk/images/animate-camera.gif</string>
     <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string> <!-- https://www.mapbox.com/android-sdk/images/fit-bound-camera.gif -->
+    <string name="activity_camera_restrict_url" translatable="false">http://i.imgur.com/A227BEs.jpg</string>
     <string name="activity_offline_simple_url" translatable="false">https://www.mapbox.com/android-sdk/images/offline-map.png</string>
     <string name="activity_offline_manager_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
     <string name="activity_query_select_building_url" translatable="false">http://i.imgur.com/bImud7u.png</string>
@@ -191,7 +198,6 @@
     <string name="activity_location_tracking_url" translatable="false">http://i.imgur.com/U3uc32F.png</string>
     <string name="activity_location_animated_icon_url" translatable="false">http://i.imgur.com/dsUKM2i.png</string>
     <string name="activity_location_customize_user_url" translatable="false">http://i.imgur.com/Q6O82JJ.png</string>
-    <string name="activity_location_turf_inside_url" translatable="false">http://i.imgur.com/p1KTWpn.png</string>
     <string name="activity_mas_directions_url" translatable="false">https://www.mapbox.com/android-sdk/images/directions.png</string>
     <string name="activity_mas_geocoding_url" translatable="false">http://i.imgur.com/mBJGh3P.png</string>
     <string name="activity_mas_static_image_url" translatable="false">https://www.mapbox.com/android-sdk/images/static-image.png</string>
@@ -212,10 +218,6 @@
     <string name="menu_map_style_satellite">Satellite</string>
     <string name="menu_map_style_satellite_streets">Satellite streets</string>
 
-    <!--Tap on map instruction for toast-->
-    <string name="tap_on_map_instruction">Tap anywhere on the map</string>
-    <string name="tap_on_map_turf_inside_instruction">Tap inside of blue polygon area</string>
-
     <!--Move map instruction for toast-->
     <string name="move_map_instruction">Move map to place\nmarker at desired location</string>
 
@@ -230,10 +232,6 @@
 
     <!--Fragment below textview in support fragment activity-->
     <string name="fragment_in_card_below">Map fragment container in card below</string>
-
-    <!--TurfInside snackbar messages-->
-    <string name="turf_inside_marker_status_inside">Inside</string>
-    <string name="turf_inside_marker_status_outside">Outside</string>
 
     <!--Offline manager button text-->
     <string name="offline_manager_download_button_text">Download</string>
@@ -252,4 +250,11 @@
     <string name="analytics_opt_out_textview">Opt out of analytics tracking</string>
     <string name="log_out_of_account_button">Log out of Mapbox account</string>
 
+    <!--Basic offline map-->
+    <string name="basic_offline_deleted_toast">Yosemite offline map deleted</string>
+
+    <!--Tap on map instruction for toast-->
+    <string name="tap_on_map_instruction">Tap anywhere on the map</string>
+    <string name="tap_on_map_turf_inside_instruction">Tap inside of blue polygon area</string>
+  
 </resources>
