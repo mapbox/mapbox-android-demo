@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -629,6 +630,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
       })
       .show();
+    Button logOutButton = (Button) findViewById(R.id.log_out_of_account_button);
+    logOutButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Logged out of account");
+        AnalyticsTracker.getInstance(getApplicationContext()).optUserIntoAnalytics(true);
+      }
+    });
   }
 
   private void changeAnalyticsSettings(boolean optedIn, String toastMessage) {

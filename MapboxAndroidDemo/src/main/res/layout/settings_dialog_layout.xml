@@ -11,4 +11,15 @@
         android:padding="20dp"
         android:text="@string/analytics_opt_out_textview"/>
 
+    <Button
+        android:id="@+id/log_out_of_account_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/mapboxTealFaint"
+        android:text="@string/log_out_of_account_button"
+        android:textAllCaps="false"/>
+
 </LinearLayout>

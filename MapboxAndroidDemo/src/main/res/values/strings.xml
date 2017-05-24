@@ -250,5 +250,6 @@
     <string name="settings_status_toast_analytics_opt_out">Opt out setting saved</string>
     <string name="settings_dialog_negative_button_text">Cancel</string>
     <string name="analytics_opt_out_textview">Opt out of analytics tracking</string>
+    <string name="log_out_of_account_button">Log out of Mapbox account</string>
 
 </resources>
