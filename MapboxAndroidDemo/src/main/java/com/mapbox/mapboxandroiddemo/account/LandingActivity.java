@@ -1,8 +1,10 @@
 package com.mapbox.mapboxandroiddemo.account;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
@@ -32,9 +34,16 @@ public class LandingActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_landing);
-    setUpSkipDialog();
-    setUpButtons();
+    if (!PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("TOKEN_SAVED", false)) {
+      Log.d("LandingActivity", "onCreate: no token");
+      setContentView(R.layout.activity_landing);
+      setUpSkipDialog();
+      setUpButtons();
+    } else {
+      Log.d("LandingActivity", "onCreate: token present");
+      Intent intent = new Intent(this, MainActivity.class);
+      startActivity(intent);
+    }
   }
 
   @Override

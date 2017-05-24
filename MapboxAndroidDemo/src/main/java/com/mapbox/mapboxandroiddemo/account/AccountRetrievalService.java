@@ -54,8 +54,8 @@ public class AccountRetrievalService extends IntentService {
   protected void onHandleIntent(@Nullable Intent intent) {
     if (intent != null) {
       String authCode = intent.getStringExtra("AUTHCODE");
-      clientId = intent.getStringExtra("clientId");
-      redirectUri = intent.getStringExtra("redirectUri");
+      clientId = intent.getStringExtra("CLIENT_ID");
+      redirectUri = intent.getStringExtra("REDIRECT_URI");
       getAccessToken(authCode);
     } else {
       Log.d("AccountRetrievalService", "onHandleIntent: intent == null");
