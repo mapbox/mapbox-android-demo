@@ -34,12 +34,10 @@ public class LandingActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     if (!PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("TOKEN_SAVED", false)) {
-      Log.d("LandingActivity", "onCreate: no token");
       setContentView(R.layout.activity_landing);
       setUpSkipDialog();
       setUpButtons();
     } else {
-      Log.d("LandingActivity", "onCreate: token present");
       Intent intent = new Intent(this, MainActivity.class);
       startActivity(intent);
     }
