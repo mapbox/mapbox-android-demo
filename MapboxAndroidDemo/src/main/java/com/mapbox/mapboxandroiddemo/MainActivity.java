@@ -316,7 +316,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_annotation_polygon_holes_title,
           R.string.activity_annotation_polygon_holes_description,
           new Intent(MainActivity.this, PolygonHolesActivity.class),
-          R.string.activity_annotation_polygon_holes_url,true
+          R.string.activity_annotation_polygon_holes_url, true
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_annotation_custom_info_window_title,
@@ -644,14 +644,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
       })
       .show();
-    Button logOutButton = (Button) findViewById(R.id.log_out_of_account_button);
-    logOutButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Logged out of account");
-        AnalyticsTracker.getInstance(getApplicationContext()).optUserIntoAnalytics(true);
-      }
-    });
   }
 
   private void changeAnalyticsSettings(boolean optedIn, String toastMessage) {
