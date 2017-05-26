@@ -1,6 +1,6 @@
 package com.mapbox.mapboxandroiddemo.model.usermodel;
 
-public class Authorizations {
+class Authorizations {
   private String id;
   private String[] scopes;
   private String defaultS;

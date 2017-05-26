@@ -49,9 +49,9 @@ public class LandingActivity extends AppCompatActivity {
 
     if (getIntent() != null && getIntent().getAction().equals(Intent.ACTION_VIEW)) {
       Uri uri = getIntent().getData();
-      if (uri.getQueryParameter("error") != null) {
+      String error = uri.getQueryParameter("error");
+      if (error != null) {
         Toast.makeText(this, R.string.whoops_error_message_on_app_return, Toast.LENGTH_SHORT).show();
-        String error = uri.getQueryParameter("error");
         Log.d("LandingActivity", "onResume: error = " + error);
       } else {
         String authCode = uri.getQueryParameter("code");

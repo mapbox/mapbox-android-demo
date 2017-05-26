@@ -2,11 +2,7 @@ package com.mapbox.mapboxandroiddemo.model.usermodel;
 
 import org.json.JSONObject;
 
-/**
- * Created by LangstonSmith on 5/9/17.
- */
-
-public class UserResponse {
+class UserResponse {
   private Authorizations[] authorizations;
   private JSONObject flags;
   private String mfa;

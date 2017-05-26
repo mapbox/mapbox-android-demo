@@ -1,6 +1,6 @@
 package com.mapbox.mapboxandroiddemo.model.usermodel;
 
-public class Geocodes {
+class Geocodes {
   private String id;
   private String price;
   private String included;

@@ -1,10 +1,6 @@
 package com.mapbox.mapboxandroiddemo.model.usermodel;
 
-/**
- * Created by LangstonSmith on 5/9/17.
- */
-
-public class Services {
+class Services {
   private UserDirections directions;
   private Mapviews mapviews;
   private Geocodes geocodes;
