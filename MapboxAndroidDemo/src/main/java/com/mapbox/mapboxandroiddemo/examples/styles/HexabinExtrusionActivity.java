@@ -89,19 +89,49 @@ public class HexabinExtrusionActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
-
         mapboxMap = map;
-
-        addGrids3dLayer();
-        setUpActiveGrid();
-
-        // Add grids GeoJSON source
-        GeoJsonSource activePointSource = new GeoJsonSource("point-active", "pointActive");
-        VectorSource complaintsSource = new VectorSource("complaints", "mapbox://yunjieli.7l1fqjio");
-        VectorSource businessesSource = new VectorSource("businesses", "mapbox://yunjieli.3i12h479");
-
+        addLayers();
       }
     });
+  }
+
+  private void addLayers() {
+    addGrids3dLayer();
+    setUpActiveGrid();
+    setUpComplaints();
+    setUpBusinesses();
+    setUpGridsCountLayer();
+    setUpPointsActiveLayer();
+  }
+
+  private void setLayers() {
+    if (activeCamera.equals("hexbin")) {
+      mapboxMap.getLayer("points-complaints").setProperties(circleOpacity(0f));
+      mapboxMap.getLayer("points-businesses").setProperties(circleOpacity(0f));
+      mapboxMap.getLayer("grids-3d").setProperties(fillExtrusionOpacity(0.6f));
+      mapboxMap.getLayer("grids-active").setProperties(fillExtrusionOpacity(0.6f));
+      mapboxMap.getLayer("grids-count").setProperties(textOpacity(0f));
+      mapboxMap.getSource("point-active");
+    } else {
+      if (activeCamera.equals("dotted")) {
+        mapboxMap.getLayer("points-complaints").setProperties(circleOpacity(0.3f));
+        mapboxMap.getLayer("points-businesses").setProperties(circleOpacity(0.2f));
+        mapboxMap.getLayer("grids-3d").setProperties(fillExtrusionOpacity(0f));
+        mapboxMap.getLayer("grids-active").setProperties(fillExtrusionOpacity(0f));
+        mapboxMap.getLayer("grids-count").setProperties(textOpacity(0.8f));
+        mapboxMap.getSource("grid-active");
+
+      } else {
+        if (activeCamera.equals("inspector")) {
+          mapboxMap.getLayer("points-complaints").setProperties(circleOpacity(0.3f));
+          mapboxMap.getLayer("points-businesses").setProperties(circleOpacity(0.2f));
+          mapboxMap.getLayer("grids-3d").setProperties(fillExtrusionOpacity(0.0f));
+          mapboxMap.getLayer("grids-active").setProperties(fillExtrusionOpacity(0.2f));
+          mapboxMap.getLayer("grids-active").setProperties(fillExtrusionHeight(0f));
+          mapboxMap.getLayer("grids-count").setProperties(textOpacity(0.8f));
+        }
+      }
+    }
   }
 
   private void addGrids3dLayer() {
