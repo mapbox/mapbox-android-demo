@@ -15,12 +15,14 @@ import com.mapbox.mapboxsdk.style.functions.stops.IntervalStops;
 import com.mapbox.mapboxsdk.style.functions.stops.Stops;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
 import static com.mapbox.mapboxsdk.style.functions.Function.zoom;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleBlur;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
@@ -28,6 +30,10 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textOpacity;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
 public class HexabinExtrusionActivity extends AppCompatActivity {
 
@@ -38,7 +44,14 @@ public class HexabinExtrusionActivity extends AppCompatActivity {
   private int heightStop = 5000;
   private String colorActive = "#3cc";
   private String[] typeList = {"total", "noise", "establishment", "poisoning", "drinking", "smoking", "others"};
-
+  // active filter for each of the filter session
+  private String activeCamera = "hexbin";
+  private String activeType = "total";
+  // result data field of camera, type, method combined
+  private String activeDDS = "totalDensity";
+  /*private maxColor =max[activeDDS];
+  private maxHeight =max["totalDensity"];
+*/
   // for DDS threshholds, [total, density]
   /*private max =
 
@@ -147,8 +160,51 @@ public class HexabinExtrusionActivity extends AppCompatActivity {
     mapboxMap.addLayerAbove(complaintCirclesLayer, "admin-2-boundaries-dispute");
   }
 
-  private 
+  private void setUpBusinesses() {
+    VectorSource businessVector = new VectorSource("points-businesses", "mapbox://yunjieli.3i12h479");
+    mapboxMap.addSource(businessVector);
 
+    CircleLayer businessCircleLayer = new CircleLayer("points-businesses", "points-businesses");
+    businessCircleLayer.setSourceLayer("data_businesses-0lvzk6");
+    businessCircleLayer.withProperties(
+      circleRadius(
+        zoom(
+          exponential(
+            stop(12, circleRadius(3f)),
+            stop(15, circleRadius(8f))
+          )
+        )
+      ),
+      circleColor(colorStops[5]),
+      circleOpacity(0f)
+    );
+    mapboxMap.addLayerAbove(businessCircleLayer, "admin-2-boundaries-dispute");
+  }
+
+  private void setUpGridsCountLayer() {
+    SymbolLayer gridsCountLayer = new SymbolLayer("grids-count", "grids");
+    gridsCountLayer.withProperties(
+      textOpacity(0f),
+      textSize(14f),
+      textField("{" + activeDDS + "}"),
+      textColor(colorStops[2])
+    );
+  }
+
+  private void setUpPointsActiveLayer() {
+    GeoJsonSource pointActiveSource = new GeoJsonSource("point-active", "pointActive");
+    mapboxMap.addSource(pointActiveSource);
+
+    CircleLayer activePointCircleLayer = new CircleLayer("point-active", "point-active");
+    activePointCircleLayer.withProperties(
+      circleRadius(15f),
+      circleColor(colorStops[2]),
+      circleOpacity(.3f),
+      circleBlur(1f)
+    );
+
+    mapboxMap.addLayerAbove(activePointCircleLayer, "points-businesses");
+  }
 
   @Override
   protected void onStart() {
