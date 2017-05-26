@@ -13,11 +13,17 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.functions.Function;
 import com.mapbox.mapboxsdk.style.functions.stops.IntervalStops;
 import com.mapbox.mapboxsdk.style.functions.stops.Stops;
+import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
+import static com.mapbox.mapboxsdk.style.functions.Function.zoom;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
+import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
@@ -74,6 +80,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity {
         mapboxMap = map;
 
         addGrids3dLayer();
+        setUpActiveGrid();
 
         // Add grids GeoJSON source
         GeoJsonSource activePointSource = new GeoJsonSource("point-active", "pointActive");
@@ -114,11 +121,33 @@ public class HexabinExtrusionActivity extends AppCompatActivity {
       fillExtrusionColor(colorActive),
       fillExtrusionHeight(Function.property("activeDDS", IntervalStops.interval(
         stop(0, fillExtrusionHeight(0f))))),
-      fillExtrusionOpacity(0.6f))
+      fillExtrusionOpacity(0.6f));
 
     mapboxMap.addLayerAbove(fillExtrusionLayerActiveGridLayer, "admin-2-boundaries-dispute");
-
   }
+
+  private void setUpComplaints() {
+    VectorSource complaintVector = new VectorSource("points-complaints", "mapbox://yunjieli.7l1fqjio");
+    mapboxMap.addSource(complaintVector);
+
+    CircleLayer complaintCirclesLayer = new CircleLayer("points-complaints", "points-complaints");
+    complaintCirclesLayer.setSourceLayer("data_complaints-1emuz6");
+    complaintCirclesLayer.withProperties(
+      circleRadius(
+        zoom(
+          exponential(
+            stop(12, circleRadius(1f)),
+            stop(15, circleRadius(5f))
+          )
+        )
+      ),
+      circleColor(colorStops[2]),
+      circleOpacity(0f)
+    );
+    mapboxMap.addLayerAbove(complaintCirclesLayer, "admin-2-boundaries-dispute");
+  }
+
+  private 
 
 
   @Override
