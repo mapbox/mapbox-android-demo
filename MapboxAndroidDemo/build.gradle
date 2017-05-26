@@ -58,8 +58,11 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
     compile "com.android.support:design:${supportLibVersion}"
 
+    // Firebase crash report
+    gpservicesCompile 'com.google.firebase:firebase-crash:10.2.0'
+
     // Mapbox dependencies
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.1@aar') {
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.2@aar') {
         transitive = true
     }
 
@@ -77,7 +80,6 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    gpservicesCompile 'com.google.firebase:firebase-crash:10.2.0'
 }
 
 apply from: '../checkstyle.gradle'
