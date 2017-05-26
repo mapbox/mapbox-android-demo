@@ -254,5 +254,9 @@
     <!--Basic offline map-->
     <string name="basic_offline_deleted_toast">Yosemite offline map deleted</string>
 
+    <!--Hexabin legend -->
+    <string name="legend_card_title">Legend</string>
+    <string name="num_of_complaints"># of Complaints</string>
+
 
 </resources>
