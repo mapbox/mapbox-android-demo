@@ -19,18 +19,18 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.IdentityStops;
-import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
+import com.mapbox.mapboxsdk.style.functions.stops.IntervalStops;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
-import com.mapbox.mapboxsdk.style.layers.Layer;
+import com.mapbox.mapboxsdk.style.layers.Filter;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
-import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
+import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 
 public class PopDensityExtrusionActivity extends AppCompatActivity {
 
@@ -56,6 +56,8 @@ public class PopDensityExtrusionActivity extends AppCompatActivity {
       public void onMapReady(@NonNull final MapboxMap map) {
         mapboxMap = map;
         setUpFabs();
+        setUpFillsLayer();
+        setUpExtrusionsLayer();
 
         VectorSource vectorSource = new VectorSource("population-data", "mapbox://peterqliu.d0vin3el");
         mapboxMap.addSource(vectorSource);
@@ -182,39 +184,19 @@ public class PopDensityExtrusionActivity extends AppCompatActivity {
       .newCameraPosition(position));
   }
 
-  private void setUpFabs() {
+  private void setUpFillsLayer() {
+    FillLayer fillsLayer = new FillLayer("fills", "population");
+    fillsLayer.setSourceLayer("outgeojson");
+    fillsLayer.setFilter(Filter.lt("pkm2", 300000));
+    fillsLayer.withProperties(
+      fillColor(Function.property("pkm2", IntervalStops.interval(
+        stop(0, fillColor(Color.parseColor("#160e23"))),
+        stop(14500, fillColor(Color.parseColor("#00617f"))),
+        stop(145000, fillColor(Color.parseColor("#55e9ff")))))),
+      fillOpacity(1f)
+    );
 
-    FloatingActionButton tiltMapToggleButton = (FloatingActionButton) findViewById(R.id.fab_tilt_toggle);
-    tiltMapToggleButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
-        if (mapboxMap != null) {
-          toggleMapTilt();
-        }
-      }
-    });
-
-    FloatingActionButton roadsToggleButton = (FloatingActionButton) findViewById(R.id.fab_road_toggle);
-    roadsToggleButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        if (mapboxMap != null) {
-          toggleRoads();
-        }
-      }
-    });
-
-    FloatingActionButton labelsToggleButton = (FloatingActionButton) findViewById(R.id.fab_label_toggle);
-    labelsToggleButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-
-        if (mapboxMap != null) {
-          toggleLabels();
-        }
-      }
-    });
+    mapboxMap.addLayer(fillsLayer);
   }
 
   private void toggleMapTilt() {
@@ -238,7 +220,79 @@ public class PopDensityExtrusionActivity extends AppCompatActivity {
     }
   }
 
+  private void setUpExtrusionsLayer() {
+    FillLayer fillExtrusionLayer = new FillLayer("extrusions", "population");
+    fillExtrusionLayer.setSourceLayer("outgeojson");
+    fillExtrusionLayer.setFilter(Filter.gt("p", 1));
+    fillExtrusionLayer.setFilter(Filter.lt("pkm2", 300000));
+    fillExtrusionLayer.withProperties(
+      fillColor(Function.property("population", IntervalStops.interval(
+        stop(0, fillColor(Color.parseColor("#160e23"))),
+        stop(14500, fillColor(Color.parseColor("#00617f"))),
+        stop(145000, fillColor(Color.parseColor("#55e9ff")))))),
+      fillExtrusionBase(0f),
+      // TODO: Finish height stops below
+      fillExtrusionHeight(Function.property("pkm2", IntervalStops.interval(
+        stop(0, fillExtrusionHeight(0f)),
+        stop(1450000, fillExtrusionHeight(20000f))))),
+      fillOpacity(0f));
+    mapboxMap.addLayer(fillExtrusionLayer);
+  }
+
   private void toggleRoads() {
+    if (!roadsDisplayed) {
+      for (int x = 0; x < mapboxMap.getLayers().size(); x++) {
+        if (mapboxMap.getLayers().get(x).getId().contains("road")) {
+          mapboxMap.getLayers().get(x).setProperties(PropertyFactory.visibility("visible"));
+        }
+      }
+      roadsDisplayed = true;
+    } else {
+      for (int x = 0; x < mapboxMap.getLayers().size(); x++) {
+        if (mapboxMap.getLayers().get(x).getId().contains("road")) {
+          mapboxMap.getLayers().get(x).setProperties(PropertyFactory.visibility("none"));
+
+        }
+      }
+    }
+  }
+
+  private void setUpFabs() {
+
+    FloatingActionButton tiltMapToggleButton = (FloatingActionButton) findViewById(R.id.fab_tilt_toggle);
+    tiltMapToggleButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+        if (mapboxMap != null) {
+          toggleMapTilt();
+        }
+      }
+    });
+
+    FloatingActionButton roadsToggleButton = (FloatingActionButton) findViewById(R.id.fab_road_toggle);
+    roadsToggleButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if (mapboxMap != null) {
+          roadsAreVisible();
+        }
+      }
+    });
+
+    FloatingActionButton labelsToggleButton = (FloatingActionButton) findViewById(R.id.fab_label_toggle);
+    labelsToggleButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+        if (mapboxMap != null) {
+          labelsAreVisible();
+        }
+      }
+    });
+  }
+
+  private void roadsAreVisible() {
     if (!roadsDisplayed) {
       for (int x = 0; x < mapboxMap.getLayers().size(); x++) {
         if (mapboxMap.getLayers().get(x).getId().contains("road")) {
@@ -256,7 +310,7 @@ public class PopDensityExtrusionActivity extends AppCompatActivity {
     }
   }
 
-  private void toggleLabels() {
+  private void labelsAreVisible() {
     if (!labelsDisplayed) {
       for (int x = 0; x < mapboxMap.getLayers().size(); x++) {
         if (mapboxMap.getLayers().get(x).getId().contains("label")
@@ -278,3 +332,4 @@ public class PopDensityExtrusionActivity extends AppCompatActivity {
     }
   }
 }
+

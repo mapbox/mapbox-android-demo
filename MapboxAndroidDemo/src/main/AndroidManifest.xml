@@ -400,6 +400,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
+        <activity
+            android:name=".examples.annotations.PolygonHolesActivity"
+            android:label="@string/activity_annotation_polygon_holes_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
     </application>
-
 </manifest>

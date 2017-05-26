@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Mapbox Dev Preview</string>
+    <string name="app_name">Mapbox Demo</string>
     <string name="mapbox" translatable="false">Mapbox</string>
     <string name="examples">Android examples</string>
 
@@ -70,6 +70,7 @@
     <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
     <string name="activity_annotation_geojson_line_title">Draw a GeoJSON line</string>
     <string name="activity_annotation_polygon_title">Draw a polygon</string>
+    <string name="activity_annotation_polygon_holes_title">Draw a polygon with holes</string>
     <string name="activity_annotation_marker_view_title">Draw a marker view</string>
     <string name="activity_annotation_custom_info_window_title">Custom info window</string>
     <string name="activity_annotation_animated_marker_title">Animate marker position</string>
@@ -125,6 +126,7 @@
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
     <string name="activity_annotation_polygon_description">Draw a vector polygon on a map with the Mapbox Android SDK.</string>
+    <string name="activity_annotation_polygon_holes_description">Draw a vector polygon with holes on a map using the Mapbox Android SDK.</string>
     <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
     <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize the info window.</string>
     <string name="activity_annotation_animated_marker_description">Animate the marker to a new position on the map.</string>
@@ -182,6 +184,7 @@
     <string name="activity_annotation_custom_marker_url" translatable="false">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
     <string name="activity_annotation_geojson_line_url" translatable="false">https://www.mapbox.com/android-sdk/images/geojson.png</string>
     <string name="activity_annotation_polygon_url" translatable="false">https://www.mapbox.com/android-sdk/images/polygon.png</string>
+    <string name="activity_annotation_polygon_holes_url" translatable="false">http://i.imgur.com/uJ9ftZk.jpg</string>
     <string name="activity_annotation_basic_marker_view_url" translatable="false">http://i.imgur.com/vbWTLIE.png</string>
     <string name="activity_annotation_custom_info_window_url" translatable="false">http://i.imgur.com/mCWbosy.png</string>
     <string name="activity_annotation_animated_marker_url" translatable="false">http://i.imgur.com/XegvIKr.png</string>
@@ -253,5 +256,18 @@
     <string name="toggle_map_tilt_map_toggle_fab_text">Toggle tilt</string>
     <string name="toggle_map_road_toggle_fab_text">Toggle roads</string>
     <string name="toggle_map_label_toggle_fab_text">Toggle labels</string>
+
+    <string name="san_francisco">San Francisco</string>
+    <string name="los_angeles">Los Angeles</string>
+    <string name="seattle">Seattle</string>
+    <string name="new_orleans">New Orleans</string>
+    <string name="chicago">Chicago</string>
+    <string name="philadelphia">Philadelphia</string>
+    <string name="new_york">New York</string>
+    <string name="atlanta">Atlanta</string>
+    <string name="portland">Portland</string>
+    <string name="denver">Denver</string>
+    <string name="minneapolis">Minneapolis</string>
+    <string name="miami">Miami</string>
 
 </resources>

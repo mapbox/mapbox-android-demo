@@ -13,18 +13,18 @@
         android:id="@+id/mapView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         mapbox:mapbox_cameraTargetLat="37.775569"
         mapbox:mapbox_cameraTargetLng="-122.410973"
         mapbox:mapbox_cameraZoom="12"
         mapbox:mapbox_cameraZoomMax="16"
         mapbox:mapbox_cameraZoomMin="5"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0">
+        mapbox:mapbox_styleUrl="@string/mapbox_style_dark">
 
     </com.mapbox.mapboxsdk.maps.MapView>
 
@@ -33,15 +33,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         fab:fab_addButtonColorNormal="@color/mapboxRed"
         fab:fab_addButtonColorPressed="@color/mapboxWhite"
         fab:fab_addButtonPlusIconColor="@color/mapboxWhite"
-        fab:fab_labelStyle="@style/menu_labels_style"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginEnd="16dp">
+        fab:fab_labelStyle="@style/menu_labels_style">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_tilt_toggle"

@@ -58,8 +58,6 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
     compile "com.android.support:design:${supportLibVersion}"
 
-    // firebase crash report
-
     // Mapbox dependencies
     compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.1@aar') {
         transitive = true
