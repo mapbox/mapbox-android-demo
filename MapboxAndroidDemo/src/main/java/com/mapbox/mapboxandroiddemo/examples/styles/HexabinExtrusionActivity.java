@@ -111,17 +111,10 @@ public class HexabinExtrusionActivity extends AppCompatActivity {
 
     FillExtrusionLayer fillExtrusionLayerActiveGridLayer = new FillExtrusionLayer("grid-active", "grid-active");
     fillExtrusionLayerActiveGridLayer.withProperties(
-      fillExtrusionColor(Function.property("population",
-        IntervalStops.interval(
-          stop(0, fillColor(Color.parseColor(colorStops[1])),
-            stop(maxColor * .2, fillColor(Color.parseColor(colorStops[1])),
-              stop(maxColor * .5, fillColor(Color.parseColor(colorStops[2])),
-                stop(maxColor * .8, fillColor(Color.parseColor(colorStops[3])),
-                  stop(maxColor * .2, fillColor(Color.parseColor(colorStops[4])),
-                    stop(maxColor, fillColor(Color.parseColor(colorStops[5])),
-                      fillExtrusionHeight(Function.property("activeDDS", IntervalStops.interval(
-                        stop(0, fillExtrusionHeight(0f))))),
-                      fillExtrusionOpacity(0.9f)))))))))));
+      fillExtrusionColor(colorActive),
+      fillExtrusionHeight(Function.property("activeDDS", IntervalStops.interval(
+        stop(0, fillExtrusionHeight(0f))))),
+      fillExtrusionOpacity(0.6f))
 
     mapboxMap.addLayerAbove(fillExtrusionLayerActiveGridLayer, "admin-2-boundaries-dispute");
 
