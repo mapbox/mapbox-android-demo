@@ -7,3 +7,4 @@ file_filter = mapbox-android-demo/MapboxAndroidDemo/src/main/res/values-<lang>/s
 source_file = mapbox-android-demo/MapboxAndroidDemo/src/main/res/values/strings.xml
 source_lang = en
 type = ANDROID
+
