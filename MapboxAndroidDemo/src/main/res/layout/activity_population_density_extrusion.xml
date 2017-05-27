@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
@@ -11,6 +10,7 @@
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
+        mapbox_uiTiltGestures="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="37.775569"
@@ -18,7 +18,7 @@
         mapbox:mapbox_cameraZoom="12"
         mapbox:mapbox_cameraZoomMax="16"
         mapbox:mapbox_cameraZoomMin="12"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"/>
+        mapbox:mapbox_styleUrl="@string/mapbox_style_dark" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_map_actions"
@@ -33,13 +33,13 @@
         fab:fab_labelStyle="@style/menu_labels_style">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_tilt_toggle"
+            android:id="@+id/fab_visualization_toggle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/mapboxBlue"
             fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
-            fab:fab_title="@string/toggle_map_tilt_map_toggle_fab_text"/>
+            fab:fab_title="@string/toggle_map_tilt_map_toggle_fab_text" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_road_toggle"
@@ -48,7 +48,7 @@
             fab:fab_colorNormal="@color/mapboxGreen"
             fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
-            fab:fab_title="@string/toggle_map_road_toggle_fab_text"/>
+            fab:fab_title="@string/toggle_map_road_toggle_fab_text" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_label_toggle"
@@ -57,7 +57,7 @@
             fab:fab_colorNormal="@color/mapboxOrange"
             fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
-            fab:fab_title="@string/toggle_map_label_toggle_fab_text"/>
+            fab:fab_title="@string/toggle_map_label_toggle_fab_text" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
@@ -66,13 +66,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp"/>
+        app:layout_constraintGuide_begin="20dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp"/>
+        app:layout_constraintGuide_begin="20dp" />
 
 </android.support.design.widget.CoordinatorLayout>

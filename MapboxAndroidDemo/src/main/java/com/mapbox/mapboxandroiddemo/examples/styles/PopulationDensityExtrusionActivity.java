@@ -85,7 +85,6 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
                         stop(14500, fillColor(Color.parseColor("#00617f"))),
                         stop(145000, fillColor(Color.parseColor("#55e9ff")))))),
                 fillExtrusionBase(0f),
-                // TODO: Finish height stops below
                 fillExtrusionHeight(Function.property("pkm2", IntervalStops.interval(
                         stop(0, fillExtrusionHeight(0f)),
                         stop(1450000, fillExtrusionHeight(20000f))))),
@@ -139,13 +138,13 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
 
     private void setUpFabs() {
 
-        FloatingActionButton tiltMapToggleButton = (FloatingActionButton) findViewById(R.id.fab_tilt_toggle);
-        tiltMapToggleButton.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton visualizationToggleButton = (FloatingActionButton) findViewById(R.id.fab_visualization_toggle);
+        visualizationToggleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (mapboxMap != null) {
-                    toggleMapTilt();
+                    toggleMapVisualization();
                 }
             }
         });
@@ -172,7 +171,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity {
         });
     }
 
-    private void toggleMapTilt() {
+    private void toggleMapVisualization() {
         if (!mapIsTilted) {
             CameraPosition position = new CameraPosition.Builder()
                     .tilt(50) // Set the camera tilt
