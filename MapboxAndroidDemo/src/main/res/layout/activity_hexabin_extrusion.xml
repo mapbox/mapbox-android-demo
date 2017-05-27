@@ -54,7 +54,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/legend_image"
                 android:layout_width="210dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="8dp"
@@ -74,7 +74,7 @@
                 android:layout_marginTop="0dp"
                 android:text="0"
                 android:textColor="@color/mapboxWhite"
-                app:layout_constraintLeft_toLeftOf="@+id/imageView2"
+                app:layout_constraintLeft_toLeftOf="@+id/legend_image"
                 app:layout_constraintTop_toTopOf="@+id/num_of_complaints"/>
 
             <TextView
@@ -89,7 +89,7 @@
                 app:layout_constraintHorizontal_bias="0.509"
                 app:layout_constraintLeft_toRightOf="@+id/zero_on_scale"
                 app:layout_constraintRight_toLeftOf="@+id/adjustable_high_end_of_scale"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
+                app:layout_constraintTop_toBottomOf="@+id/legend_image"/>
 
             <TextView
                 android:id="@+id/adjustable_high_end_of_scale"
@@ -99,7 +99,7 @@
                 android:layout_marginTop="0dp"
                 android:text="10"
                 android:textColor="@color/mapboxWhite"
-                app:layout_constraintRight_toRightOf="@+id/imageView2"
+                app:layout_constraintRight_toRightOf="@+id/legend_image"
                 app:layout_constraintTop_toTopOf="@+id/num_of_complaints"/>
 
 

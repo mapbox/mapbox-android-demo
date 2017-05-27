@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -18,6 +22,7 @@ import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
+import com.mapbox.services.commons.geojson.FeatureCollection;
 
 import static com.mapbox.mapboxsdk.style.functions.Function.zoom;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
@@ -35,7 +40,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
-public class HexabinExtrusionActivity extends AppCompatActivity {
+public class HexabinExtrusionActivity extends AppCompatActivity implements MapView.OnMapChangedListener, OnMap{
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -49,6 +54,13 @@ public class HexabinExtrusionActivity extends AppCompatActivity {
   private String activeType = "total";
   // result data field of camera, type, method combined
   private String activeDDS = "totalDensity";
+  private CameraPosition previousCamera;
+  private FeatureCollection empty;
+  private FeatureCollection gridActive;
+  private FeatureCollection pointActive;
+
+
+
   /*private maxColor =max[activeDDS];
   private maxHeight =max["totalDensity"];
 */
@@ -90,9 +102,26 @@ public class HexabinExtrusionActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
         mapboxMap = map;
+        fitCameraBounds();
         addLayers();
       }
     });
+  }
+
+  @Override
+  public void onMapChanged(int change) {
+    if (!activeCamera.equals("inspector")) {
+      activeCamera = mapboxMap.getCameraPosition().zoom > 14 ? "dotted" : "hexbin";
+      setLayers();
+    };
+  }
+
+  private void fitCameraBounds() {
+    LatLngBounds latLngBounds = new LatLngBounds.Builder()
+      .include(new LatLng(40.609614478818855, -74.09692544272578)) // Northeast
+      .include(new LatLng(-73.77487016324935, 40.846999364699144)) // Southwest
+      .build();
+    mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50), 2000);
   }
 
   private void addLayers() {
@@ -278,4 +307,15 @@ public class HexabinExtrusionActivity extends AppCompatActivity {
     mapView.onDestroy();
   }
 
+/*
+  private void getCamera() {
+    // if pitch==0, don't update Camera
+    if (mapboxMap.getCameraPosition().tilt == 0) {
+      previousCamera.target = mapboxMap.getCameraPosition().target;
+      previousCamera.zoom = mapboxMap.getCameraPosition().zoom;
+      previousCamera.tilt = mapboxMap.getCameraPosition().tilt;
+      previousCamera.bearing = mapboxMap.getCameraPosition().bearing;
+    }
+  }
+*/
 }
