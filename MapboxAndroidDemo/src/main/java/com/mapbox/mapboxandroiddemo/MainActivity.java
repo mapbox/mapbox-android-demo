@@ -63,7 +63,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.PopulationDensityExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.PopDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_population_density_extrusions_title,
           R.string.activity_style_population_density_extrusions_description,
-          new Intent(MainActivity.this, PopulationDensityExtrusionActivity.class),
+          new Intent(MainActivity.this, PopDensityExtrusionActivity.class),
           R.string.activity_style_population_density_extrusions_url, true
         ));
         break;

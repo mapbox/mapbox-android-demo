@@ -255,7 +255,19 @@
     <string name="toggle_map_tilt_map">Toggle tilt</string>
     <string name="toggle_map_tilt_map_toggle_fab_text">Toggle visualization</string>
     <string name="toggle_map_road_toggle_fab_text">Toggle roads</string>
-    <string name="toggle_map_label_toggle_fab_text">Toggle map labels</string>
+    <string name="toggle_map_label_toggle_fab_text">Toggle labels</string>
 
+    <string name="san_francisco">San Francisco</string>
+    <string name="los_angeles">Los Angeles</string>
+    <string name="seattle">Seattle</string>
+    <string name="new_orleans">New Orleans</string>
+    <string name="chicago">Chicago</string>
+    <string name="philadelphia">Philadelphia</string>
+    <string name="new_york">New York</string>
+    <string name="atlanta">Atlanta</string>
+    <string name="portland">Portland</string>
+    <string name="denver">Denver</string>
+    <string name="minneapolis">Minneapolis</string>
+    <string name="miami">Miami</string>
 
 </resources>
