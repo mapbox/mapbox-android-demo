@@ -9,6 +9,7 @@ import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -19,10 +20,14 @@ import com.mapbox.mapboxsdk.style.functions.stops.IntervalStops;
 import com.mapbox.mapboxsdk.style.functions.stops.Stops;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
+import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
+import com.mapbox.services.commons.geojson.Feature;
 import com.mapbox.services.commons.geojson.FeatureCollection;
+
+import java.util.List;
 
 import static com.mapbox.mapboxsdk.style.functions.Function.zoom;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
@@ -40,7 +45,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
-public class HexabinExtrusionActivity extends AppCompatActivity implements MapView.OnMapChangedListener, OnMap{
+public class HexabinExtrusionActivity extends AppCompatActivity implements
+  MapView.OnMapChangedListener/*, MapboxMap.OnMapLongClickListener */ {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -102,8 +108,8 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements MapVi
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
         mapboxMap = map;
-        fitCameraBounds();
         addLayers();
+
       }
     });
   }
@@ -113,16 +119,65 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements MapVi
     if (!activeCamera.equals("inspector")) {
       activeCamera = mapboxMap.getCameraPosition().zoom > 14 ? "dotted" : "hexbin";
       setLayers();
-    };
+    }
+    ;
   }
 
-  private void fitCameraBounds() {
-    LatLngBounds latLngBounds = new LatLngBounds.Builder()
-      .include(new LatLng(40.609614478818855, -74.09692544272578)) // Northeast
-      .include(new LatLng(-73.77487016324935, 40.846999364699144)) // Southwest
-      .build();
-    mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50), 2000);
-  }
+  /*@Override
+  public void onMapLongClick(@NonNull LatLng point) {
+    LatLng coordinates = new LatLng(point.getLatitude(), point.getLongitude());
+    String html = "";
+    Feature[] queryComplaints;
+    if (activeCamera.equals("hexbin")) {
+      Feature[] query = mapboxMap.queryRenderedFeatures(point., "grids-3d");
+      if (query.) {
+        html = query[0].properties.total + " complaints here with " + query[0].properties.businesses + " restaurants/cafes/bars. ";
+        html = activeType == = "total" ? html : html + query[0].properties[activeType] + " of them are about " + activeType + ". ";
+        html += "Click to see the incidents.";
+
+        gridActive.features = query[0]];
+        mapboxMap.getSource("grid-active").setData(gridActive);
+      } else {
+        mapboxMap.getSource("grid-active").setData(gridActive);
+      }
+      // else: "dotted" or "inspector"
+    } else {
+      queryComplaints = mapboxMap.queryRenderedFeatures(point., "points-complaints");
+
+    }
+    if (queryComplaints.length()) {
+      html += "<h2>" + queryComplaints.length + " complaint(s):</h2>";
+
+      // show top 5 and hide the others
+      int max = 3;
+      int length = queryComplaints.length() <= max ? queryComplaints.length : max;
+      for (int index = 0; index < length; index++) {
+        String complaint = "<p>" + queryComplaints[0].getStringProperty("Complaint Type")
+          + " : " + queryComplaints[0].getStringProperty("Descriptor") + "</p>";
+        html += complaint;
+      }
+      ;
+      if (queryComplaints.length > max) {
+        html += "<p>...</p>";
+      }
+      pointActive.getFeatures() = queryComplaints;
+      mapboxMap.getSource("point-active").setData(pointActive);
+    } else {
+      mapboxMap.getSource("point-active").setData(empty);
+    }
+
+    if (html.equals("")) {
+      popup.remove();
+      $(".mapboxgl-canvas-container").css("cursor", "-webkit-grab");
+    } else {
+      $(".mapboxgl-canvas-container").css("cursor", "none");
+      popup.setLngLat(coordinates)
+        .setHTML(html)
+        .addTo(map);
+    }
+  }*/
+
+
 
   private void addLayers() {
     addGrids3dLayer();
@@ -167,7 +222,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements MapVi
     GeoJsonSource gridSource = new GeoJsonSource("grids", "grids");
     mapboxMap.addSource(gridSource);
 
-    FillExtrusionLayer fillExtrusionLayer3dGrid = new FillExtrusionLayer("grids-3d", "grids");
+    /*FillExtrusionLayer fillExtrusionLayer3dGrid = new FillExtrusionLayer("grids-3d", "grids");
     fillExtrusionLayer3dGrid.withProperties(
       fillExtrusionColor(Function.property("population",
         IntervalStops.interval(
@@ -181,7 +236,22 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements MapVi
                       stop(0, fillExtrusionHeight(0f),
                         fillExtrusionOpacity(0.9f));
 
-    mapboxMap.addLayerAbove(fillExtrusionLayer3dGrid, "admin-2-boundaries-dispute");
+    FillExtrusionLayer fillExtrusionLayer3dGrid = new FillExtrusionLayer("grids-3d", "grids");
+    fillExtrusionLayer3dGrid.withProperties(
+      fillExtrusionOpacity(0.9f),
+      fillExtrusionHeight(Function.property("activeDDS", IntervalStops.interval(
+        stop(0, fillExtrusionHeight(0f)))
+      ))),
+      fillExtrusionColor(Function.property("population",
+        IntervalStops.interval(
+          stop(0, fillColor(Color.parseColor(colorStops[1])),
+            stop(maxColor * .2, fillColor(Color.parseColor(colorStops[2]),
+              stop(maxColor * .5, fillColor(Color.parseColor(colorStops[3])),
+                stop(maxColor * .8, fillColor(Color.parseColor(colorStops[4]),
+                  stop(maxColor, fillColor(Color.parseColor(colorStops[5]))))))))))))))))
+
+    mapboxMap.addLayerAbove(fillExtrusionLayer3dGrid, "admin-2-boundaries-dispute");*/
+
   }
 
   private void setUpActiveGrid() {

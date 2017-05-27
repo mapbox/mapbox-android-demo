@@ -12,12 +12,12 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraBearing="26.385747"
-        mapbox:mapbox_cameraTargetLat="40.7144674"
-        mapbox:mapbox_cameraTargetLng="-73.989206"
+        mapbox:mapbox_cameraBearing="18.656"
+        mapbox:mapbox_cameraTargetLat="40.723945"
+        mapbox:mapbox_cameraTargetLng="-73.979093"
         mapbox:mapbox_cameraTilt="60"
-        mapbox:mapbox_cameraZoom="11.829069"
-        mapbox:mapbox_styleUrl="mapbox://styles/yunjieli/ciu7h63gy00052inrtutrxnfp"
+        mapbox:mapbox_cameraZoom="11.285744"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"
         />
 
     <android.support.v7.widget.CardView
