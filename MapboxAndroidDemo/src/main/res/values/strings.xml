@@ -248,13 +248,9 @@
     <string name="tap_on_map_turf_inside_instruction">Tap inside of blue polygon area</string>
 
     <!--Landing activity-->
-    <string name="tv_create_account_button">Create Mapbox account</string>
-    <string name="tv_sign_in_to_account_button">Sign in to Mapbox account</string>
-    <string name="skip_for_now_dialog_title">Are you sure?</string>
-    <string name="skip_for_now_dialog_description">If you create an account or sign in to your account, you\'ll receive:
-        \n•Personalized push messages\n•An extra 50,000 mobile users credited to your account</string>
-    <string name="skip_for_now_dialog_go_back_button">Go back</string>
-    <string name="skip_for_now_dialog_skip_button">Skip for now</string>
+    <string name="tv_create_account_button">Create account</string>
+    <string name="tv_sign_in_to_account_button">Sign in</string>
+    <string name="landing_cta_tv_text">Create or sign in to your Mapbox account to view the latest Mapbox demos</string>
     <string name="skip_for_now_bottom_button">Skip for now</string>
     <string name="whoops_error_message_on_app_return">Whoops. Looks like something went wrong with the log in process!</string>
 

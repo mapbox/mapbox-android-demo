@@ -9,94 +9,107 @@
     android:background="@color/mapboxWhite"
     tools:context="com.mapbox.mapboxandroiddemo.account.LandingActivity"
     tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="0dp">
 
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        mapbox:layout_constraintBottom_toTopOf="@+id/guideline"
-        mapbox:layout_constraintHorizontal_bias="0.0"
-        mapbox:layout_constraintLeft_toLeftOf="parent"
-        mapbox:layout_constraintRight_toRightOf="parent"
-        mapbox:srcCompat="@drawable/mapbox_logo_color"/>
 
     <Button
         android:id="@+id/button_skip_for_now"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="14dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:text="@string/skip_for_now_bottom_button"
         android:textAllCaps="false"
         android:textColor="@color/mapboxGray"
         android:textStyle="italic"
-        mapbox:layout_constraintBottom_toBottomOf="parent"
-        mapbox:layout_constraintHorizontal_bias="0.501"
-        mapbox:layout_constraintLeft_toLeftOf="parent"
-        mapbox:layout_constraintRight_toRightOf="parent"/>
+        custom:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
+        custom:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        custom:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/create_account_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
         android:background="@color/colorAccent"
         android:padding="24dp"
         android:text="@string/tv_create_account_button"
         android:textAllCaps="false"
         android:textColor="@color/mapboxWhite"
         android:textSize="16sp"
-        mapbox:layout_constraintHorizontal_bias="0.0"
-        mapbox:layout_constraintLeft_toLeftOf="parent"
-        mapbox:layout_constraintRight_toRightOf="parent"
-        mapbox:layout_constraintTop_toBottomOf="@+id/imageView3"/>
+        custom:layout_constraintBottom_toBottomOf="@+id/sign_in_button"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="8dp"
+        custom:layout_constraintRight_toRightOf="parent"
+        custom:layout_constraintTop_toTopOf="@+id/sign_in_button"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="8dp"
+        custom:layout_constraintLeft_toLeftOf="@+id/guideline6"
+        custom:layout_constraintHorizontal_bias="0.0"
+        custom:layout_constraintVertical_bias="0.0"/>
 
     <Button
         android:id="@+id/sign_in_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:background="@color/mapboxGreen"
         android:padding="24dp"
         android:text="@string/tv_sign_in_to_account_button"
         android:textAllCaps="false"
         android:textColor="@color/mapboxWhite"
         android:textSize="16sp"
-        mapbox:layout_constraintHorizontal_bias="0.0"
-        mapbox:layout_constraintLeft_toLeftOf="@+id/create_account_button"
-        mapbox:layout_constraintRight_toRightOf="@+id/create_account_button"
-        mapbox:layout_constraintTop_toBottomOf="@+id/create_account_button"/>
+        android:layout_marginLeft="8dp"
+        custom:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="64dp"
+        custom:layout_constraintTop_toBottomOf="@+id/sign_in_instructions"
+        custom:layout_constraintRight_toLeftOf="@+id/guideline6"
+        android:layout_marginRight="0dp"
+        custom:layout_constraintHorizontal_bias="0.0"/>
+
+
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        mapbox:layout_constraintGuide_percent="0.2"
+        custom:layout_constraintGuide_percent="0.4"
         />
 
-    <ImageView
-        android:id="@+id/imageView3"
+    <TextView
+        android:id="@+id/sign_in_instructions"
         android:layout_width="0dp"
-        android:layout_height="131dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/astronaut"
-        mapbox:layout_constraintHorizontal_bias="0.0"
-        mapbox:layout_constraintLeft_toLeftOf="parent"
-        mapbox:layout_constraintRight_toRightOf="parent"
-        mapbox:layout_constraintTop_toTopOf="@+id/guideline"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:gravity="center_horizontal"
+        android:text="@string/landing_cta_tv_text"
+        android:textColor="@color/mapboxGrayDark"
+        android:textSize="16sp"
+        custom:layout_constraintTop_toTopOf="@+id/guideline"
+        android:layout_marginRight="8dp"
+        custom:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        custom:layout_constraintLeft_toLeftOf="parent"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideline6"
+        android:orientation="vertical"
+        custom:layout_constraintGuide_percent="0.5"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        custom:srcCompat="@drawable/astronaut"
+        android:layout_marginBottom="8dp"
+        custom:layout_constraintBottom_toTopOf="@+id/guideline"
+        android:layout_marginRight="8dp"
+        custom:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        custom:layout_constraintLeft_toLeftOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

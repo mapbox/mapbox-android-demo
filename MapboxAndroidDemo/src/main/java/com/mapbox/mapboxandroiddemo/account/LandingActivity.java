@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
 
@@ -35,6 +31,7 @@ public class LandingActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     if (!PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("TOKEN_SAVED", false)) {
       setContentView(R.layout.activity_landing);
+      getSupportActionBar().hide();
       setUpSkipDialog();
       setUpButtons();
     } else {
@@ -82,27 +79,8 @@ public class LandingActivity extends AppCompatActivity {
     skipForNowButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        new MaterialStyledDialog.Builder(LandingActivity.this)
-          .setTitle(getString(R.string.skip_for_now_dialog_title))
-          .setDescription(getString(R.string.skip_for_now_dialog_description))
-          .withDivider(true)
-          .setIcon(R.mipmap.ic_launcher)
-          .setHeaderColor(R.color.mapboxGrayLight)
-          .setPositiveText(getString(R.string.skip_for_now_dialog_go_back_button))
-          .onPositive(new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            }
-          })
-          .setNegativeText(getString(R.string.skip_for_now_dialog_skip_button))
-          .onNegative(new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-              Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-              startActivity(intent);
-            }
-          })
-          .show();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
       }
     });
   }
