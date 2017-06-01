@@ -63,6 +63,7 @@ public class AccountRetrievalService extends IntentService {
   private void getAccessToken(String code) {
 
     String clientSecret = getString(R.string.mapbox_auth_flow_secret);
+    Log.d("AccountRetrievalService", "getAccessToken: clientSecret = " + clientSecret);
 
     OkHttpClient client = new OkHttpClient();
 
