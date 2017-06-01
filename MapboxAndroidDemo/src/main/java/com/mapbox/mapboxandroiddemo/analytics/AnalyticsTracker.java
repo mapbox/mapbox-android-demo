@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 
+import com.mapbox.mapboxandroiddemo.R;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.messages.IdentifyMessage;
 import com.segment.analytics.messages.ScreenMessage;
@@ -24,7 +25,7 @@ public class AnalyticsTracker {
 
 
   private static volatile AnalyticsTracker analyticsInstance;
-  private Analytics analytics = Analytics.builder("zFLtBpautarTslr61PUbvEKXXLIoLRmq").build();
+  private Analytics analytics = Analytics.builder(appContext.getString(R.string.segmentWriteKey)).build();
 
   private static final String OPENED = "Opened app";
   private static final String CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME = "Clicked on sign in button";
