@@ -8,6 +8,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.MainActivity;
+import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.model.usermodel.UserResponse;
 
 import org.json.JSONException;
@@ -32,9 +33,6 @@ public class AccountRetrievalService extends IntentService {
 
   private static final String BASE_URL = "https://api.mapbox.com/api/";
   private static final String ACCESS_TOKEN_URL = "https://api.mapbox.com/oauth/access_token";
-
-  //  TODO: Fill in CLIENT_SECRET and before running app. Never commit changes to Github with CLIENT_SECRET filled in!
-  private static final String CLIENT_SECRET = "";
 
   private String clientId;
   private String redirectUri;
@@ -63,6 +61,9 @@ public class AccountRetrievalService extends IntentService {
   }
 
   private void getAccessToken(String code) {
+
+    String clientSecret = getString(R.string.mapbox_auth_flow_secret);
+
     OkHttpClient client = new OkHttpClient();
 
     Request request = new Request.Builder()
@@ -70,7 +71,7 @@ public class AccountRetrievalService extends IntentService {
       .addHeader("Content-Type", "application/x-www-form-urlencoded")
       .url(ACCESS_TOKEN_URL)
       .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
-        "grant_type=authorization_code&client_id=" + clientId + "&client_secret=" + CLIENT_SECRET
+        "grant_type=authorization_code&client_id=" + clientId + "&client_secret=" + clientSecret
           + "&redirect_uri=" + redirectUri + "&code=" + code))
       .build();
 

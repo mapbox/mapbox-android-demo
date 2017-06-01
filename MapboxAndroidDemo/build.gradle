@@ -85,3 +85,4 @@ dependencies {
 }
 
 apply from: '../checkstyle.gradle'
+apply from: '../MapboxAndroidWearDemo/gradle-config.gradle'
