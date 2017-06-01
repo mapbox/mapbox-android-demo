@@ -70,7 +70,6 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
 
     // Get the location engine object for later use.
     locationEngine = LocationSource.getLocationEngine(this);
-    locationEngine.activate();
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);

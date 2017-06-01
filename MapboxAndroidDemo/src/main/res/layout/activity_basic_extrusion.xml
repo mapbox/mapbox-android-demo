@@ -6,16 +6,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mapbox.mapboxandroiddemo.examples.mas.TurfInsideActivity">
+    tools:context="com.mapbox.mapboxandroiddemo.examples.styles.BasicExtrusionActivity">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="42.34660109"
-        mapbox:mapbox_cameraTargetLng="-71.0969159"
-        mapbox:mapbox_cameraZoom="16.5"
+        mapbox:mapbox_cameraBearing="82.104001"
+        mapbox:mapbox_cameraTargetLat="52.516318"
+        mapbox:mapbox_cameraTargetLng="13.378105"
+        mapbox:mapbox_cameraTilt="60.00"
+        mapbox:mapbox_cameraZoom="16.922091"
         mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
-
 
 </RelativeLayout>
