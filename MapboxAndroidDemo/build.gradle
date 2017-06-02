@@ -63,12 +63,12 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8'
 
     // Mapbox dependencies
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.2@aar') {
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.3@aar') {
         transitive = true
     }
 
-// Mapbox Android UI
-    compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.0'
+    // Mapbox Android UI
+    compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.1'
 
 // Mapbox Navigation SDK for Android
     compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.1.0'
