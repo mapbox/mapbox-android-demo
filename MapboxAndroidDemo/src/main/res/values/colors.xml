@@ -22,6 +22,7 @@
 
     <color name="mapboxGrayDark">#273d56</color>
     <color name="mapboxGrayDark10">#476483</color>
+    <color name="mapboxGrayExtraDark">#2d3c4f</color>
     <color name="mapboxGray">#607d9c</color>
     <color name="mapboxGrayLight">#c6d2e1</color>
     <color name="mapboxGrayFaint">#f4f7fb</color>
