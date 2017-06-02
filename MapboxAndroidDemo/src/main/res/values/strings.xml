@@ -253,8 +253,21 @@
     <!--Basic offline map-->
     <string name="basic_offline_deleted_toast">Yosemite offline map deleted</string>
 
-    <!--Tap on map instruction for toast-->
+  <!--Tap on map instruction for toast-->
     <string name="tap_on_map_instruction">Tap anywhere on the map</string>
     <string name="tap_on_map_turf_inside_instruction">Tap inside of blue polygon area</string>
-  
+
+    <!--Landing activity-->
+    <string name="tv_create_account_button">Create account</string>
+    <string name="tv_sign_in_to_account_button">Sign in</string>
+    <string name="landing_cta_tv_text">Create or sign in to your Mapbox account to view the latest Mapbox demos</string>
+    <string name="skip_for_now_bottom_button">Skip for now</string>
+    <string name="whoops_error_message_on_app_return">Whoops. Looks like something went wrong with the log in process!</string>
+
+    <!--Main Activity welcome toast-->
+    <string name="welcome_toast_message">Hello and welcome %1$s!</string>
+
+    <!--Loading activity-->
+    <string name="loading_textview">Loading&#8230;</string>
+
 </resources>
