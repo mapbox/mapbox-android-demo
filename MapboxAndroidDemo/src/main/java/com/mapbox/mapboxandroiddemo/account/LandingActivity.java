@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker;
 
 
 public class LandingActivity extends AppCompatActivity {
@@ -35,6 +36,7 @@ public class LandingActivity extends AppCompatActivity {
       setUpSkipDialog();
       setUpButtons();
     } else {
+      AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Went straight to MainActivity");
       Intent intent = new Intent(this, MainActivity.class);
       startActivity(intent);
     }
@@ -51,6 +53,7 @@ public class LandingActivity extends AppCompatActivity {
       if (error != null) {
         Toast.makeText(this, R.string.whoops_error_message_on_app_return, Toast.LENGTH_SHORT).show();
         Log.d("LandingActivity", "onResume: error = " + error);
+        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Error in LandingActivity onResume()");
       } else {
         String authCode = uri.getQueryParameter("code");
         Intent intent = new Intent(this, AccountRetrievalService.class);
@@ -80,6 +83,7 @@ public class LandingActivity extends AppCompatActivity {
     skipForNowButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Skipped create/login");
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
       }
@@ -92,6 +96,7 @@ public class LandingActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         openChromeCustomTab(true);
+        AnalyticsTracker.getInstance(getApplicationContext()).clickedOnCreateAccountButton();
       }
     });
 
@@ -100,6 +105,7 @@ public class LandingActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         openChromeCustomTab(false);
+        AnalyticsTracker.getInstance(getApplicationContext()).clickedOnSignInButton();
       }
     });
   }

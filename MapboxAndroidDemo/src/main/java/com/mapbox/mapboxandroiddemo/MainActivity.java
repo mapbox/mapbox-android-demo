@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -86,9 +87,6 @@ import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 
 import java.util.ArrayList;
 
-import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.MAPBOX_EMAIL;
-import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.ORGANIZATION_NAME;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
   private ArrayList<ExampleItemModel> exampleItemModel;
@@ -156,7 +154,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     checkForFirstTimeOpen();
-    AnalyticsTracker.getInstance(getApplicationContext()).identifyUser(ORGANIZATION_NAME, MAPBOX_EMAIL);
+
+    AnalyticsTracker.getInstance(getApplicationContext()).identifyUser(
+      PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("EMAIL", "null"));
   }
 
   @Override

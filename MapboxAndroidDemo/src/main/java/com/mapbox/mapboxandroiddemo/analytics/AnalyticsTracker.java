@@ -36,24 +36,28 @@ public class AnalyticsTracker {
   private static final String EXAMPLE_NAME_MAP_KEY = "example name";
   private static final String IS_TABLET_MAP_VALUE = "tablet";
   private static final String IS_PHONE_MAP_VALUE = "phone";
-  public static final String ORGANIZATION_NAME = "LangstonCompany";
-  public static final String MAPBOX_USERNAME = "LangstonSmithTestUsername";
-  public static final String MAPBOX_EMAIL = "langston.smith@mapbox.com";
-  public static final String MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED = "mapboxAnalyticsEnabled";
-  public static final String MAPBOX_SHARED_PREFERENCES_FILE = "MapboxSharedPreferences";
+  private static String MAPBOX_USERNAME;
+  private static String MAPBOX_USERNAME_SHARED_PREF_KEY = "USERNAME";
+  private static String MAPBOX_EMAIL;
+  private static String MAPBOX_EMAIL_SHARED_PREF_KEY = "EMAIL";
+  private static final String MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED = "mapboxAnalyticsEnabled";
+  private static final String MAPBOX_SHARED_PREFERENCES_FILE = "MapboxSharedPreferences";
 
   private Boolean analyticsEnabled = null;
 
   /**
    * Initializes instance of AnalyticsTracker class
    **/
-
   public static AnalyticsTracker getInstance(@NonNull Context context) {
     if (analyticsInstance == null) {  // Single check
       synchronized (AnalyticsTracker.class) {
         if (analyticsInstance == null) {  // Double check
           analyticsInstance = new AnalyticsTracker();
           analyticsInstance.appContext = context;
+          MAPBOX_USERNAME = getSharedPreferences(context)
+            .getString(AnalyticsTracker.MAPBOX_USERNAME_SHARED_PREF_KEY, "null");
+          MAPBOX_EMAIL = getSharedPreferences(context)
+            .getString(AnalyticsTracker.MAPBOX_EMAIL_SHARED_PREF_KEY, "null");
         }
       }
     }
@@ -68,6 +72,7 @@ public class AnalyticsTracker {
   public void openedAppForFirstTime(boolean isTablet) {
     if (isAnalyticsEnabled()) {
       Map<String, String> properties = new HashMap<>();
+      properties.put("email", MAPBOX_EMAIL);
       properties.put("model", Build.MODEL);
       properties.put("brand", Build.BRAND);
       properties.put("product", Build.PRODUCT);
@@ -196,13 +201,11 @@ public class AnalyticsTracker {
   /**
    * Makes an analytics call telling Segment the user's identity via a "IdentifyMessage" call.
    *
-   * @param organizationName Organization name associated with user's Mapbox account
    * @param userEmailAddress Email address associated with user's Mapbox account
    */
-  public void identifyUser(@NonNull String organizationName, @NonNull String userEmailAddress) {
+  public void identifyUser(@NonNull String userEmailAddress) {
     if (isAnalyticsEnabled()) {
       Map<String, String> traits = new HashMap<>();
-      traits.put("organizationName", organizationName);
       traits.put("email", userEmailAddress);
 
       analytics.enqueue(IdentifyMessage.builder()
