@@ -249,6 +249,7 @@
     <string name="settings_dialog_negative_button_text">Cancel</string>
     <string name="analytics_opt_out_textview">Opt out of analytics tracking</string>
     <string name="log_out_of_account_button">Log out of Mapbox account</string>
+    <string name="log_out_toast_confirm">Successfully logged out</string>
 
     <!--Basic offline map-->
     <string name="basic_offline_deleted_toast">Yosemite offline map deleted</string>

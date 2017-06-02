@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -20,12 +21,14 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+import com.mapbox.mapboxandroiddemo.account.LandingActivity;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.analytics.FirstTimeRunChecker;
@@ -154,6 +157,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     checkForFirstTimeOpen();
+
+    AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("MainActivity");
 
     AnalyticsTracker.getInstance(getApplicationContext()).identifyUser(
       PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("EMAIL", "null"));
@@ -643,6 +648,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
       })
       .show();
+
+    Button logOutOfMapboxAccountButton = (Button) customView.findViewById(R.id.log_out_of_account_button);
+    logOutOfMapboxAccountButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Logged out of Mapbox account");
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor sharePrefEditor = sharedPref.edit();
+        sharePrefEditor.remove("USERNAME");
+        sharePrefEditor.remove("TOKEN_SAVED");
+        sharePrefEditor.remove("EMAIL");
+        sharePrefEditor.remove("AVATAR_IMAGE_URL");
+        sharePrefEditor.remove("TOKEN");
+        sharePrefEditor.apply();
+        Toast.makeText(getApplicationContext(), R.string.log_out_toast_confirm, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), LandingActivity.class);
+        startActivity(intent);
+      }
+    });
   }
 
   private void changeAnalyticsSettings(boolean optedIn, String toastMessage) {

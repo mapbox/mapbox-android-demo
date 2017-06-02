@@ -23,9 +23,8 @@ public class AnalyticsTracker {
 
   private Context appContext = null;
 
-
   private static volatile AnalyticsTracker analyticsInstance;
-  private Analytics analytics = Analytics.builder(appContext.getString(R.string.mapbox_segment_write_key)).build();
+  private static volatile Analytics analytics;
 
   private static final String OPENED = "Opened app";
   private static final String CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME = "Clicked on sign in button";
@@ -54,10 +53,11 @@ public class AnalyticsTracker {
         if (analyticsInstance == null) {  // Double check
           analyticsInstance = new AnalyticsTracker();
           analyticsInstance.appContext = context;
+          analytics = Analytics.builder(context.getString(R.string.mapbox_segment_write_key)).build();
           MAPBOX_USERNAME = getSharedPreferences(context)
-            .getString(AnalyticsTracker.MAPBOX_USERNAME_SHARED_PREF_KEY, "null");
+            .getString(AnalyticsTracker.MAPBOX_USERNAME_SHARED_PREF_KEY, "user not logged in");
           MAPBOX_EMAIL = getSharedPreferences(context)
-            .getString(AnalyticsTracker.MAPBOX_EMAIL_SHARED_PREF_KEY, "null");
+            .getString(AnalyticsTracker.MAPBOX_EMAIL_SHARED_PREF_KEY, "user not logged in");
         }
       }
     }
@@ -88,7 +88,7 @@ public class AnalyticsTracker {
       properties.put("display language", Locale.getDefault().getDisplayLanguage());
       properties.put("size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
 
-      analytics.enqueue(TrackMessage.builder("Opened App For First Time")
+      analytics.enqueue(TrackMessage.builder("New install")
         .userId(MAPBOX_USERNAME)
         .properties(properties)
       );
@@ -168,7 +168,6 @@ public class AnalyticsTracker {
    */
   public void trackEventWithProperties(@NonNull String eventName, String keyForPropertiesMap,
                                        String valueForPropertiesMap) {
-
     if (isAnalyticsEnabled()) {
       if (keyForPropertiesMap == null || valueForPropertiesMap == null) {
         analytics.enqueue(TrackMessage.builder(eventName)
@@ -182,7 +181,6 @@ public class AnalyticsTracker {
 
         analytics.enqueue(TrackMessage.builder(eventName).userId(MAPBOX_USERNAME).properties(properties));
       }
-
     }
   }
 

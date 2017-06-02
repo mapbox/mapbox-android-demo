@@ -16,9 +16,5 @@ public class MapboxApplication extends Application {
       .setApplicationId(getString(R.string.firebase_app_id))
       .build()
     );
-
-    AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Application onCreate()");
-    AnalyticsTracker.getInstance(getApplicationContext()).openedApp();
-
   }
 }

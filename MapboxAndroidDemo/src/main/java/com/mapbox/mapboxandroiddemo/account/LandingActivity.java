@@ -36,7 +36,7 @@ public class LandingActivity extends AppCompatActivity {
       setUpSkipDialog();
       setUpButtons();
     } else {
-      AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Went straight to MainActivity");
+      AnalyticsTracker.getInstance(getApplicationContext()).openedApp();
       Intent intent = new Intent(this, MainActivity.class);
       startActivity(intent);
     }

@@ -14,7 +14,7 @@ task secretKeysSetup {
           String segmentWriteKey = "$System.env.SEGMENT_API_WRITE_KEY"
           if (segmentWriteKey == "null") {
               System.out.println("You should set the SEGMENT_API_WRITE_KEY environment variable." +
-                      "You will only have potential access to this if you're part of the Mapbox team)")
+                      " You will only have potential access to this if you're part of the Mapbox team)")
               segmentWriteKey = "THE_SEGMENT_API_WRITE_KEY_GOES_HERE"
           }
         String tokenFileContents = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +

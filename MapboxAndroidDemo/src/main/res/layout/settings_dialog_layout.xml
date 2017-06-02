@@ -18,6 +18,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="50dp"
         android:background="@color/mapboxBlue"
         android:textColor="@color/mapboxWhite"
         android:text="@string/log_out_of_account_button"

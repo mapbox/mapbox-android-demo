@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.model.usermodel.UserResponse;
 
 import org.json.JSONException;
@@ -124,9 +125,11 @@ public class AccountRetrievalService extends IntentService {
       @Override
       public void onResponse(retrofit2.Call<UserResponse> call, retrofit2.Response<UserResponse> response) {
         String userId = response.body().getId();
-        String emailAddress = response.body().getId();
-        String avatarUrl = response.body().getId();
+        String emailAddress = response.body().getEmail();
+        String avatarUrl = response.body().getAvatar();
         saveUserInfoToSharedPref(userId, emailAddress, avatarUrl, token);
+        AnalyticsTracker.getInstance(getApplicationContext()).openedApp();
+        AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("Account gate");
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
       }
