@@ -263,7 +263,9 @@
     <string name="tv_sign_in_to_account_button">Sign in</string>
     <string name="landing_cta_tv_text">Create or sign in to your Mapbox account to view the latest Mapbox demos</string>
     <string name="skip_for_now_bottom_button">Skip for now</string>
-    <string name="whoops_error_message_on_app_return">Whoops. Looks like something went wrong with the log in process!</string>
+    <string name="whoops_error_dialog_title">Whoops!</string>
+    <string name="whoops_error_dialog_message">Looks like something went wrong with the log in process!\nPlease try clearing your browser\'s cache/cookies.</string>
+    <string name="whoops_error_dialog_ok_positive_button">Ok</string>
 
     <!--Main Activity welcome toast-->
     <string name="welcome_toast_message">Hello and welcome %1$s!</string>

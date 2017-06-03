@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker;
@@ -31,11 +34,13 @@ public class LandingActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     if (!PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("TOKEN_SAVED", false)) {
+      Log.d("LandingActivity", "onCreate: Token not saved");
       setContentView(R.layout.activity_landing);
       getSupportActionBar().hide();
       setUpSkipDialog();
       setUpButtons();
     } else {
+      Log.d("LandingActivity", "onCreate: Token saved");
       AnalyticsTracker.getInstance(getApplicationContext()).openedApp();
       Intent intent = new Intent(this, MainActivity.class);
       startActivity(intent);
@@ -46,12 +51,16 @@ public class LandingActivity extends AppCompatActivity {
   protected void onResume() {
     super.onResume();
 
-    if (getIntent() != null && getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+    if (getIntent().getBooleanExtra("FROM_LOG_OUT_BUTTON", false)) {
+      Log.d("LandingActivity", "onResume: FROM_LOG_OUT_BUTTON == false");
+    } else if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+      Log.d("LandingActivity", "onResume: getIntent().getAction().equals(Intent.ACTION_VIEW");
+
       Uri uri = getIntent().getData();
       Log.d("LandingActivity", "onResume: uri = " + uri);
       String error = uri.getQueryParameter("error");
       if (error != null) {
-        Toast.makeText(this, R.string.whoops_error_message_on_app_return, Toast.LENGTH_SHORT).show();
+        showErrorDialog();
         Log.d("LandingActivity", "onResume: error = " + error);
         AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Error in LandingActivity onResume()");
       } else {
@@ -61,7 +70,6 @@ public class LandingActivity extends AppCompatActivity {
         intent.putExtra("REDIRECT_URI", REDIRECT_URI);
         intent.putExtra("CLIENT_ID", CLIENT_ID);
         startService(intent);
-
         Intent loadingActivityIntent = new Intent(this, LoadingActivity.class);
         startActivity(loadingActivityIntent);
       }
@@ -69,6 +77,7 @@ public class LandingActivity extends AppCompatActivity {
   }
 
   private void openChromeCustomTab(boolean creatingAccount) {
+    Log.d("LandingActivity", "openChromeCustomTab");
     final String urlToVisit;
     urlToVisit = creatingAccount ? CREATE_ACCOUNT_AUTH_URL : String.format(SIGN_IN_AUTH_URL, CLIENT_ID, REDIRECT_URI);
     CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
@@ -83,7 +92,7 @@ public class LandingActivity extends AppCompatActivity {
     skipForNowButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Skipped create/login");
+        AnalyticsTracker.getInstance(getApplicationContext()).skippedForNow();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
       }
@@ -108,5 +117,22 @@ public class LandingActivity extends AppCompatActivity {
         AnalyticsTracker.getInstance(getApplicationContext()).clickedOnSignInButton();
       }
     });
+  }
+
+  private void showErrorDialog() {
+    new MaterialStyledDialog.Builder(this)
+      .setTitle(getString(R.string.whoops_error_dialog_title))
+      .setDescription(getString(R.string.whoops_error_dialog_message))
+      .setIcon(R.mipmap.ic_launcher)
+      .setHeaderColor(R.color.mapboxRedDark)
+      .withDivider(true)
+      .setPositiveText(getString(R.string.whoops_error_dialog_ok_positive_button))
+      .onPositive(new MaterialDialog.SingleButtonCallback() {
+        @Override
+        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+          dialog.dismiss();
+        }
+      })
+      .show();
   }
 }

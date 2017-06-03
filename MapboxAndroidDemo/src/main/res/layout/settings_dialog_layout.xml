@@ -8,6 +8,7 @@
         android:id="@+id/analytics_opt_out_switch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:padding="20dp"
         android:text="@string/analytics_opt_out_textview"/>
 
@@ -17,8 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
         android:background="@color/mapboxBlue"
         android:textColor="@color/mapboxWhite"
         android:text="@string/log_out_of_account_button"

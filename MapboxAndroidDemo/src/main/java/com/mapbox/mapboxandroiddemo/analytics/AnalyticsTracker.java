@@ -29,6 +29,7 @@ public class AnalyticsTracker {
   private static final String OPENED = "Opened app";
   private static final String CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME = "Clicked on sign in button";
   private static final String CLICKED_ON_CREATE_ACCOUNT_BUTTON_EVENT_NAME = "Clicked on create account button";
+  private static final String SKIPPED_ACCOUNT_BUTTON_EVENT_NAME = "Skipped account creation/login";
   private static final String CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME = "Clicked on nav drawer section";
   private static final String CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME = "Clicked on individual example";
   private static final String SECTION_NAME_MAP_KEY = "section name";
@@ -37,7 +38,6 @@ public class AnalyticsTracker {
   private static final String IS_PHONE_MAP_VALUE = "phone";
   private static String MAPBOX_USERNAME;
   private static String MAPBOX_USERNAME_SHARED_PREF_KEY = "USERNAME";
-  private static String MAPBOX_EMAIL;
   private static String MAPBOX_EMAIL_SHARED_PREF_KEY = "EMAIL";
   private static final String MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED = "mapboxAnalyticsEnabled";
   private static final String MAPBOX_SHARED_PREFERENCES_FILE = "MapboxSharedPreferences";
@@ -54,15 +54,13 @@ public class AnalyticsTracker {
           analyticsInstance = new AnalyticsTracker();
           analyticsInstance.appContext = context;
           analytics = Analytics.builder(context.getString(R.string.mapbox_segment_write_key)).build();
-          MAPBOX_USERNAME = getSharedPreferences(context)
-            .getString(AnalyticsTracker.MAPBOX_USERNAME_SHARED_PREF_KEY, "user not logged in");
-          MAPBOX_EMAIL = getSharedPreferences(context)
-            .getString(AnalyticsTracker.MAPBOX_EMAIL_SHARED_PREF_KEY, "user not logged in");
+//          MAPBOX_USERNAME = getSharedPreferences(context).getString(AnalyticsTracker.MAPBOX_USERNAME_SHARED_PREF_KEY, "is this it?");
         }
       }
     }
     return analyticsInstance;
   }
+
 
   /**
    * Gets and adds device information to analytics call. Ideally, this method is called
@@ -72,7 +70,8 @@ public class AnalyticsTracker {
   public void openedAppForFirstTime(boolean isTablet) {
     if (isAnalyticsEnabled()) {
       Map<String, String> properties = new HashMap<>();
-      properties.put("email", MAPBOX_EMAIL);
+      properties.put("email", getSharedPreferences(appContext)
+        .getString(AnalyticsTracker.MAPBOX_EMAIL_SHARED_PREF_KEY, "null"));
       properties.put("model", Build.MODEL);
       properties.put("brand", Build.BRAND);
       properties.put("product", Build.PRODUCT);
@@ -110,7 +109,8 @@ public class AnalyticsTracker {
    */
   public void clickedOnSignInButton() {
     if (isAnalyticsEnabled()) {
-      trackEvent(CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME);
+      analytics.enqueue(TrackMessage.builder(CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME)
+        .userId("null"));
     }
   }
 
@@ -119,7 +119,18 @@ public class AnalyticsTracker {
    */
   public void clickedOnCreateAccountButton() {
     if (isAnalyticsEnabled()) {
-      trackEvent(CLICKED_ON_CREATE_ACCOUNT_BUTTON_EVENT_NAME);
+      analytics.enqueue(TrackMessage.builder(CLICKED_ON_CREATE_ACCOUNT_BUTTON_EVENT_NAME)
+        .userId("null"));
+    }
+  }
+
+  /**
+   * Makes an analytics call telling Segment that the user has skipped account creation or log in for now.
+   */
+  public void skippedForNow() {
+    if (isAnalyticsEnabled()) {
+      analytics.enqueue(TrackMessage.builder(SKIPPED_ACCOUNT_BUTTON_EVENT_NAME)
+        .userId("null"));
     }
   }
 

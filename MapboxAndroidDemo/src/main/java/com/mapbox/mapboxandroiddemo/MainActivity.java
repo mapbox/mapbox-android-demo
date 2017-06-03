@@ -138,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           getString(exampleItemModel.get(position).getTitle()));
         AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen(
           getString(exampleItemModel.get(position).getTitle()));
-
       }
     });
 
@@ -156,12 +155,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       navigationView.setCheckedItem(R.id.nav_basics);
     }
 
-    checkForFirstTimeOpen();
+    AnalyticsTracker.getInstance(getApplicationContext()).identifyUser(
+      PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("EMAIL", "null"));
 
     AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("MainActivity");
 
-    AnalyticsTracker.getInstance(getApplicationContext()).identifyUser(
-      PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString("EMAIL", "null"));
+    checkForFirstTimeOpen();
   }
 
   @Override
@@ -648,25 +647,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
       })
       .show();
-
     Button logOutOfMapboxAccountButton = (Button) customView.findViewById(R.id.log_out_of_account_button);
-    logOutOfMapboxAccountButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Logged out of Mapbox account");
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor sharePrefEditor = sharedPref.edit();
-        sharePrefEditor.remove("USERNAME");
-        sharePrefEditor.remove("TOKEN_SAVED");
-        sharePrefEditor.remove("EMAIL");
-        sharePrefEditor.remove("AVATAR_IMAGE_URL");
-        sharePrefEditor.remove("TOKEN");
-        sharePrefEditor.apply();
-        Toast.makeText(getApplicationContext(), R.string.log_out_toast_confirm, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getApplicationContext(), LandingActivity.class);
-        startActivity(intent);
-      }
-    });
+    if (!PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean("TOKEN_SAVED", false)) {
+      logOutOfMapboxAccountButton.setVisibility(View.GONE);
+    } else {
+      logOutOfMapboxAccountButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Logged out of Mapbox account");
+          SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+          SharedPreferences.Editor sharePrefEditor = sharedPref.edit();
+          sharePrefEditor.remove("USERNAME");
+          sharePrefEditor.putBoolean("TOKEN_SAVED", false);
+          sharePrefEditor.remove("EMAIL");
+          sharePrefEditor.remove("AVATAR_IMAGE_URL");
+          sharePrefEditor.remove("TOKEN");
+          sharePrefEditor.apply();
+          Toast.makeText(getApplicationContext(), R.string.log_out_toast_confirm, Toast.LENGTH_LONG).show();
+          Intent intent = new Intent(getApplicationContext(), LandingActivity.class);
+          intent.putExtra("FROM_LOG_OUT_BUTTON", true);
+          startActivity(intent);
+        }
+      });
+    }
   }
 
   private void changeAnalyticsSettings(boolean optedIn, String toastMessage) {

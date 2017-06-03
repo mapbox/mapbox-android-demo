@@ -154,5 +154,7 @@ public class AccountRetrievalService extends IntentService {
       .putString("AVATAR_IMAGE_URL", avatarUrl)
       .putString("TOKEN", token)
       .apply();
+
+    Log.d("AccountRetrievalService", "saveUserInfoToSharedPref: userId = " + userId);
   }
 }
