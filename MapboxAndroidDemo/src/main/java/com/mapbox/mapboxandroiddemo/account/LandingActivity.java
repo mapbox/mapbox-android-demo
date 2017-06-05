@@ -77,7 +77,8 @@ public class LandingActivity extends AppCompatActivity {
   }
 
   private void openChromeCustomTab(boolean creatingAccount) {
-    final String urlToVisit = creatingAccount ? CREATE_ACCOUNT_AUTH_URL : String.format(SIGN_IN_AUTH_URL, CLIENT_ID, REDIRECT_URI);
+    final String urlToVisit = creatingAccount ? CREATE_ACCOUNT_AUTH_URL
+        : String.format(SIGN_IN_AUTH_URL, CLIENT_ID, REDIRECT_URI);
     CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
     intentBuilder.setToolbarColor(ContextCompat.getColor(this, R.color.mapboxGrayDark10));
     intentBuilder.setShowTitle(true);
