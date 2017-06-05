@@ -62,20 +62,16 @@ public class AccountRetrievalService extends IntentService {
   }
 
   private void getAccessToken(String code) {
-
     String clientSecret = getString(R.string.mapbox_auth_flow_secret);
-    Log.d("AccountRetrievalService", "getAccessToken: clientSecret = " + clientSecret);
-
     OkHttpClient client = new OkHttpClient();
-
     Request request = new Request.Builder()
-      .addHeader("User-Agent", "Android Dev Preview")
-      .addHeader("Content-Type", "application/x-www-form-urlencoded")
-      .url(ACCESS_TOKEN_URL)
-      .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
-        "grant_type=authorization_code&client_id=" + clientId + "&client_secret=" + clientSecret
-          + "&redirect_uri=" + redirectUri + "&code=" + code))
-      .build();
+        .addHeader("User-Agent", "Android Dev Preview")
+        .addHeader("Content-Type", "application/x-www-form-urlencoded")
+        .url(ACCESS_TOKEN_URL)
+        .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
+            "grant_type=authorization_code&client_id=" + clientId + "&client_secret=" + clientSecret
+                + "&redirect_uri=" + redirectUri + "&code=" + code))
+        .build();
 
     client.newCall(request).enqueue(new okhttp3.Callback() {
       @Override
@@ -115,9 +111,9 @@ public class AccountRetrievalService extends IntentService {
   private void getUserInfo(final String userName, final String token) {
 
     Retrofit retrofit = new Retrofit.Builder()
-      .baseUrl(BASE_URL)
-      .addConverterFactory(GsonConverterFactory.create())
-      .build();
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build();
     MapboxAccountRetrofitService service = retrofit.create(MapboxAccountRetrofitService.class);
     retrofit2.Call<UserResponse> request = service.getUserAccount(userName, token);
 
@@ -128,8 +124,15 @@ public class AccountRetrievalService extends IntentService {
         String emailAddress = response.body().getEmail();
         String avatarUrl = response.body().getAvatar();
         saveUserInfoToSharedPref(userId, emailAddress, avatarUrl, token);
-        AnalyticsTracker.getInstance(getApplicationContext()).openedApp();
-        AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("Account gate");
+
+        boolean loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+            .getBoolean("TOKEN_SAVED", false);
+
+        AnalyticsTracker.getInstance(getApplicationContext()).setMapboxUsername();
+        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Opened app", loggedIn);
+        AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("Account gate", loggedIn);
+        AnalyticsTracker.getInstance(getApplicationContext()).identifyUser(emailAddress);
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
       }
@@ -148,13 +151,11 @@ public class AccountRetrievalService extends IntentService {
 
   private void saveUserInfoToSharedPref(String userId, String emailAddress, String avatarUrl, String token) {
     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-      .putBoolean("TOKEN_SAVED", true)
-      .putString("USERNAME", userId)
-      .putString("EMAIL", emailAddress)
-      .putString("AVATAR_IMAGE_URL", avatarUrl)
-      .putString("TOKEN", token)
-      .apply();
-
-    Log.d("AccountRetrievalService", "saveUserInfoToSharedPref: userId = " + userId);
+        .putBoolean("TOKEN_SAVED", true)
+        .putString("USERNAME", userId)
+        .putString("EMAIL", emailAddress)
+        .putString("AVATAR_IMAGE_URL", avatarUrl)
+        .putString("TOKEN", token)
+        .apply();
   }
 }

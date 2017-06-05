@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.analytics;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -27,8 +28,7 @@ public class AnalyticsTracker {
   private static volatile Analytics analytics;
 
   private static final String OPENED = "Opened app";
-  private static final String CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME = "Clicked on sign in button";
-  private static final String CLICKED_ON_CREATE_ACCOUNT_BUTTON_EVENT_NAME = "Clicked on create account button";
+
   private static final String SKIPPED_ACCOUNT_BUTTON_EVENT_NAME = "Skipped account creation/login";
   private static final String CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME = "Clicked on nav drawer section";
   private static final String CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME = "Clicked on individual example";
@@ -36,11 +36,11 @@ public class AnalyticsTracker {
   private static final String EXAMPLE_NAME_MAP_KEY = "example name";
   private static final String IS_TABLET_MAP_VALUE = "tablet";
   private static final String IS_PHONE_MAP_VALUE = "phone";
-  private static String MAPBOX_USERNAME;
-  private static String MAPBOX_USERNAME_SHARED_PREF_KEY = "USERNAME";
-  private static String MAPBOX_EMAIL_SHARED_PREF_KEY = "EMAIL";
+  public static final String CLICKED_ON_CREATE_ACCOUNT_BUTTON_SHARED_PREF_KEY = "CLICKED_ON_CREATE_BUTTON";
+  public static final String CLICKED_ON_SIGN_IN_BUTTON_SHARED_PREF_KEY = "CLICKED_ON_SIGN_IN_BUTTON";
   private static final String MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED = "mapboxAnalyticsEnabled";
   private static final String MAPBOX_SHARED_PREFERENCES_FILE = "MapboxSharedPreferences";
+  public static String MAPBOX_USERNAME;
 
   private Boolean analyticsEnabled = null;
 
@@ -54,13 +54,16 @@ public class AnalyticsTracker {
           analyticsInstance = new AnalyticsTracker();
           analyticsInstance.appContext = context;
           analytics = Analytics.builder(context.getString(R.string.mapbox_segment_write_key)).build();
-//          MAPBOX_USERNAME = getSharedPreferences(context).getString(AnalyticsTracker.MAPBOX_USERNAME_SHARED_PREF_KEY, "is this it?");
         }
       }
     }
     return analyticsInstance;
   }
 
+  public void setMapboxUsername() {
+    MAPBOX_USERNAME = PreferenceManager.getDefaultSharedPreferences(
+        analyticsInstance.appContext).getString("USERNAME", "not logged in");
+  }
 
   /**
    * Gets and adds device information to analytics call. Ideally, this method is called
@@ -71,7 +74,7 @@ public class AnalyticsTracker {
     if (isAnalyticsEnabled()) {
       Map<String, String> properties = new HashMap<>();
       properties.put("email", getSharedPreferences(appContext)
-        .getString(AnalyticsTracker.MAPBOX_EMAIL_SHARED_PREF_KEY, "null"));
+          .getString("EMAIL", "not logged in"));
       properties.put("model", Build.MODEL);
       properties.put("brand", Build.BRAND);
       properties.put("product", Build.PRODUCT);
@@ -88,8 +91,8 @@ public class AnalyticsTracker {
       properties.put("size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
 
       analytics.enqueue(TrackMessage.builder("New install")
-        .userId(MAPBOX_USERNAME)
-        .properties(properties)
+          .userId(MAPBOX_USERNAME)
+          .properties(properties)
       );
     }
   }
@@ -100,38 +103,30 @@ public class AnalyticsTracker {
    */
   public void openedApp() {
     if (isAnalyticsEnabled()) {
-      trackEvent(OPENED);
+      trackEvent(OPENED, true);
     }
   }
 
   /**
-   * Makes an analytics call telling Segment that the Sign In button has been clicked.
+   * Saves button click status to shared preferences because the clickedOnSignInButton()
+   * method above needs to be called after the user signs in so that "null" isn't
+   * sent for the userId field.
    */
-  public void clickedOnSignInButton() {
-    if (isAnalyticsEnabled()) {
-      analytics.enqueue(TrackMessage.builder(CLICKED_ON_SIGN_IN_BUTTON_EVENT_NAME)
-        .userId("null"));
-    }
+  public void adjustClickedSignInToStatusSharedPref(boolean currentStatus) {
+    PreferenceManager.getDefaultSharedPreferences(appContext).edit()
+        .putBoolean(CLICKED_ON_SIGN_IN_BUTTON_SHARED_PREF_KEY, currentStatus)
+        .apply();
   }
 
   /**
-   * Makes an analytics call telling Segment that the Create Account button has been clicked.
+   * Saves button click status to shared preferences because the clickedOnCreateAccountButton()
+   * method above needs to be called after the user signs in so that "null" isn't
+   * sent for the userId field.
    */
-  public void clickedOnCreateAccountButton() {
-    if (isAnalyticsEnabled()) {
-      analytics.enqueue(TrackMessage.builder(CLICKED_ON_CREATE_ACCOUNT_BUTTON_EVENT_NAME)
-        .userId("null"));
-    }
-  }
-
-  /**
-   * Makes an analytics call telling Segment that the user has skipped account creation or log in for now.
-   */
-  public void skippedForNow() {
-    if (isAnalyticsEnabled()) {
-      analytics.enqueue(TrackMessage.builder(SKIPPED_ACCOUNT_BUTTON_EVENT_NAME)
-        .userId("null"));
-    }
+  public void adjustClickedCreateAccountStatusSharedPref(boolean currentStatus) {
+    PreferenceManager.getDefaultSharedPreferences(appContext).edit()
+        .putBoolean(CLICKED_ON_CREATE_ACCOUNT_BUTTON_SHARED_PREF_KEY, currentStatus)
+        .apply();
   }
 
   /**
@@ -139,9 +134,10 @@ public class AnalyticsTracker {
    *
    * @param sectionName Name of the selected navigation drawer category
    */
-  public void clickedOnNavDrawerSection(@NonNull String sectionName) {
+  public void clickedOnNavDrawerSection(@NonNull String sectionName, boolean loggedIn) {
     if (isAnalyticsEnabled()) {
-      trackEventWithProperties(CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME, SECTION_NAME_MAP_KEY, sectionName);
+      trackEventWithProperties(CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME, SECTION_NAME_MAP_KEY,
+          sectionName, loggedIn);
     }
   }
 
@@ -150,9 +146,9 @@ public class AnalyticsTracker {
    *
    * @param exampleName Name of the selected example
    */
-  public void clickedOnIndividualExample(@NonNull String exampleName) {
+  public void clickedOnIndividualExample(@NonNull String exampleName, boolean loggedIn) {
     if (isAnalyticsEnabled()) {
-      trackEventWithProperties(CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME, EXAMPLE_NAME_MAP_KEY, exampleName);
+      trackEventWithProperties(CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME, EXAMPLE_NAME_MAP_KEY, exampleName, loggedIn);
     }
   }
 
@@ -163,9 +159,9 @@ public class AnalyticsTracker {
    *
    * @param eventName Name of the event that's being recorded
    */
-  public void trackEvent(@NonNull String eventName) {
+  public void trackEvent(@NonNull String eventName, boolean loggedIn) {
     if (isAnalyticsEnabled()) {
-      trackEventWithProperties(eventName, null, null);
+      trackEventWithProperties(eventName, null, null, loggedIn);
     }
   }
 
@@ -178,19 +174,18 @@ public class AnalyticsTracker {
    * @param valueForPropertiesMap Value of the property being attached to the event that's being called
    */
   public void trackEventWithProperties(@NonNull String eventName, String keyForPropertiesMap,
-                                       String valueForPropertiesMap) {
+                                       String valueForPropertiesMap, boolean loggedIn) {
     if (isAnalyticsEnabled()) {
       if (keyForPropertiesMap == null || valueForPropertiesMap == null) {
         analytics.enqueue(TrackMessage.builder(eventName)
-          .userId(MAPBOX_USERNAME));
+            .userId(loggedIn ? MAPBOX_USERNAME : "not logged in"));
       }
-
       if (keyForPropertiesMap != null && valueForPropertiesMap != null) {
-
         Map<String, String> properties = new HashMap<>();
         properties.put(keyForPropertiesMap, valueForPropertiesMap);
 
-        analytics.enqueue(TrackMessage.builder(eventName).userId(MAPBOX_USERNAME).properties(properties));
+        analytics.enqueue(TrackMessage.builder(eventName).userId(loggedIn ? MAPBOX_USERNAME : "not logged in")
+            .properties(properties));
       }
     }
   }
@@ -201,9 +196,9 @@ public class AnalyticsTracker {
    *
    * @param nameOfScreen Name of the screen/activity that's being viewed
    */
-  public void viewedScreen(String nameOfScreen) {
+  public void viewedScreen(String nameOfScreen, boolean loggedIn) {
     if (isAnalyticsEnabled()) {
-      analytics.enqueue(ScreenMessage.builder(nameOfScreen).userId(MAPBOX_USERNAME));
+      analytics.enqueue(ScreenMessage.builder(nameOfScreen).userId(loggedIn ? MAPBOX_USERNAME : "not logged in"));
     }
   }
 
@@ -218,8 +213,8 @@ public class AnalyticsTracker {
       traits.put("email", userEmailAddress);
 
       analytics.enqueue(IdentifyMessage.builder()
-        .userId(MAPBOX_USERNAME)
-        .traits(traits)
+          .userId(MAPBOX_USERNAME)
+          .traits(traits)
       );
     }
   }
@@ -231,7 +226,7 @@ public class AnalyticsTracker {
     if (analyticsEnabled == null) {
       // Cache value
       analyticsEnabled = AnalyticsTracker.getSharedPreferences(appContext)
-        .getBoolean(AnalyticsTracker.MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED, true);
+          .getBoolean(AnalyticsTracker.MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED, true);
     }
     return analyticsEnabled;
   }
@@ -254,7 +249,6 @@ public class AnalyticsTracker {
    */
   public static SharedPreferences getSharedPreferences(Context context) {
     return context.getSharedPreferences(
-      AnalyticsTracker.MAPBOX_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
+        AnalyticsTracker.MAPBOX_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
   }
-
 }
