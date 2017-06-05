@@ -261,4 +261,7 @@
     <!--Loading activity-->
     <string name="loading_textview">Loading&#8230;</string>
 
+    <!--Space station toast-->
+    <string name="space_station_toast">Zoom in closely on space station to see it moving</string>
+
 </resources>
