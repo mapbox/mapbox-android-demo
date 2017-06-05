@@ -693,6 +693,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           sharePrefEditor.apply();
           Toast.makeText(getApplicationContext(), R.string.log_out_toast_confirm, Toast.LENGTH_LONG).show();
           Intent intent = new Intent(getApplicationContext(), LandingActivity.class);
+          intent.putExtra("FROM_LOG_OUT_BUTTON", true);
           startActivity(intent);
         }
       });

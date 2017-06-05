@@ -55,7 +55,10 @@ public class LandingActivity extends AppCompatActivity {
   @Override
   protected void onResume() {
     super.onResume();
-    if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+   if (getIntent().getBooleanExtra("FROM_LOG_OUT_BUTTON", false)) {
+      Log.d("LandingActivity", "onResume: FROM_LOG_OUT_BUTTON == false");
+    } else if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+      Log.d("LandingActivity", "onResume: getIntent().getAction().equals(Intent.ACTION_VIEW");
       Uri uri = getIntent().getData();
       String error = uri.getQueryParameter("error");
       if (error != null) {
