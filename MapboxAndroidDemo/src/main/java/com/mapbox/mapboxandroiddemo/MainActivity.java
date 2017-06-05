@@ -164,19 +164,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
       .getBoolean("TOKEN_SAVED", false);
 
-    if (getIntent().getBooleanExtra("SKIPPED", true)) {
-      AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Skipped account creation/login",
-        loggedIn);
-      PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-        .putBoolean("SKIPPED", false)
-        .apply();
-    } else {
+    if (loggedIn) {
       AnalyticsTracker.getInstance(getApplicationContext()).setMapboxUsername();
     }
-
+    checkForFirstTimeOpen();
     AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("MainActivity",
       loggedIn);
-    checkForFirstTimeOpen();
   }
 
   @Override
@@ -200,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       buildSettingsDialog();
     }
 
-    if (id != currentCategory) {
+    if (id != currentCategory && id != R.id.settings_in_nav_drawer) {
       listItems(id);
       AnalyticsTracker.getInstance(getApplicationContext()).clickedOnNavDrawerSection(
         item.getTitle().toString(), loggedIn);
@@ -637,7 +630,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirstTimeRunChecker firstTimeRunChecker = new FirstTimeRunChecker(this);
     if (firstTimeRunChecker.firstEverOpen()) {
       AnalyticsTracker.getInstance(getApplicationContext()).openedAppForFirstTime(
-        getResources().getBoolean(R.bool.isTablet));
+        getResources().getBoolean(R.bool.isTablet), loggedIn);
     }
     firstTimeRunChecker.updateSharedPrefWithCurrentVersion();
   }

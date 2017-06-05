@@ -63,7 +63,7 @@ public class AnalyticsTracker {
    * when app is opened for the first time or if shared preferences is cleared.
    **/
 
-  public void openedAppForFirstTime(boolean isTablet) {
+  public void openedAppForFirstTime(boolean isTablet, boolean loggedIn) {
     if (isAnalyticsEnabled()) {
       Map<String, String> properties = new HashMap<>();
       properties.put("email", getSharedPreferences(appContext)
@@ -84,7 +84,7 @@ public class AnalyticsTracker {
       properties.put("size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
 
       analytics.enqueue(TrackMessage.builder("New install")
-          .userId(MAPBOX_USERNAME)
+          .userId(loggedIn ? MAPBOX_USERNAME : "not logged in")
           .properties(properties)
       );
     }

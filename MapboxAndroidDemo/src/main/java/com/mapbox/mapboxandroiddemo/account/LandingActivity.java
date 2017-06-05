@@ -41,14 +41,13 @@ public class LandingActivity extends AppCompatActivity {
         getApplicationContext())
         .getBoolean("TOKEN_SAVED", false);
 
-    AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Opened app",
-      loggedIn);
-
     if (!loggedIn) {
       setContentView(R.layout.activity_landing);
       getSupportActionBar().hide();
       setUpSkipDialog();
       setUpButtons();
+      AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("Create/login screen",
+        loggedIn);
     } else {
       Intent intent = new Intent(this, MainActivity.class);
       startActivity(intent);
@@ -101,8 +100,11 @@ public class LandingActivity extends AppCompatActivity {
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
             .putBoolean("SKIPPED", true)
             .apply();
+
+        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Skipped account creation/login",
+          loggedIn);
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("SKIPPED", true);
         startActivity(intent);
       }
     });
