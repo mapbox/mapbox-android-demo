@@ -124,8 +124,6 @@ public class AccountRetrievalService extends IntentService {
         boolean loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
             .getBoolean("TOKEN_SAVED", false);
         AnalyticsTracker.getInstance(getApplicationContext()).setMapboxUsername();
-        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Opened app", loggedIn);
-        AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("Account gate", loggedIn);
         AnalyticsTracker.getInstance(getApplicationContext()).identifyUser(emailAddress);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);

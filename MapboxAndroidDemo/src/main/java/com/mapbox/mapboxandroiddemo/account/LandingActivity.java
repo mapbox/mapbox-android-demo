@@ -41,6 +41,9 @@ public class LandingActivity extends AppCompatActivity {
         getApplicationContext())
         .getBoolean("TOKEN_SAVED", false);
 
+    AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Opened app",
+      loggedIn);
+
     if (!loggedIn) {
       setContentView(R.layout.activity_landing);
       getSupportActionBar().hide();
@@ -50,6 +53,7 @@ public class LandingActivity extends AppCompatActivity {
       Intent intent = new Intent(this, MainActivity.class);
       startActivity(intent);
     }
+
   }
 
   @Override
