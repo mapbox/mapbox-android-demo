@@ -18,7 +18,6 @@ import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker;
-/*import com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker;*/
 
 
 public class LandingActivity extends AppCompatActivity {
@@ -41,6 +40,7 @@ public class LandingActivity extends AppCompatActivity {
     loggedIn = PreferenceManager.getDefaultSharedPreferences(
         getApplicationContext())
         .getBoolean("TOKEN_SAVED", false);
+
     if (!loggedIn) {
       setContentView(R.layout.activity_landing);
       getSupportActionBar().hide();
@@ -55,13 +55,7 @@ public class LandingActivity extends AppCompatActivity {
   @Override
   protected void onResume() {
     super.onResume();
-
-    /*if (getIntent().getBooleanExtra("FROM_LOG_OUT_BUTTON", false)) {
-      Log.d("LandingActivity", "onResume: FROM_LOG_OUT_BUTTON == false");
-    } else */
     if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
-      Log.d("LandingActivity", "onResume: getIntent().getAction().equals(Intent.ACTION_VIEW");
-
       Uri uri = getIntent().getData();
       String error = uri.getQueryParameter("error");
       if (error != null) {
@@ -83,9 +77,7 @@ public class LandingActivity extends AppCompatActivity {
   }
 
   private void openChromeCustomTab(boolean creatingAccount) {
-    Log.d("LandingActivity", "openChromeCustomTab");
-    final String urlToVisit;
-    urlToVisit = creatingAccount ? CREATE_ACCOUNT_AUTH_URL : String.format(SIGN_IN_AUTH_URL, CLIENT_ID, REDIRECT_URI);
+    final String urlToVisit = creatingAccount ? CREATE_ACCOUNT_AUTH_URL : String.format(SIGN_IN_AUTH_URL, CLIENT_ID, REDIRECT_URI);
     CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
     intentBuilder.setToolbarColor(ContextCompat.getColor(this, R.color.mapboxGrayDark10));
     intentBuilder.setShowTitle(true);
@@ -98,6 +90,9 @@ public class LandingActivity extends AppCompatActivity {
     skipForNowButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
+            .putBoolean("SKIPPED", true)
+            .apply();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("SKIPPED", true);
         startActivity(intent);
@@ -121,7 +116,6 @@ public class LandingActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         openChromeCustomTab(false);
-        AnalyticsTracker.getInstance(getApplicationContext()).adjustClickedSignInToStatusSharedPref(true);
         AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Clicked on sign in button",
             loggedIn)
         ;

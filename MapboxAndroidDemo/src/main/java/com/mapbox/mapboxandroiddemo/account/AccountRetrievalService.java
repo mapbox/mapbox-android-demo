@@ -34,14 +34,13 @@ public class AccountRetrievalService extends IntentService {
 
   private static final String BASE_URL = "https://api.mapbox.com/api/";
   private static final String ACCESS_TOKEN_URL = "https://api.mapbox.com/oauth/access_token";
-
+  private static final String SERVICE_NAME = "AccountRetrievalService";
   private String clientId;
   private String redirectUri;
   private String username;
-  private static final String serviceName = "AccountRetrievalService";
 
   public AccountRetrievalService() {
-    super(serviceName);
+    super(SERVICE_NAME);
   }
 
   @Override
@@ -109,14 +108,12 @@ public class AccountRetrievalService extends IntentService {
   }
 
   private void getUserInfo(final String userName, final String token) {
-
     Retrofit retrofit = new Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build();
     MapboxAccountRetrofitService service = retrofit.create(MapboxAccountRetrofitService.class);
     retrofit2.Call<UserResponse> request = service.getUserAccount(userName, token);
-
     request.enqueue(new retrofit2.Callback<UserResponse>() {
       @Override
       public void onResponse(retrofit2.Call<UserResponse> call, retrofit2.Response<UserResponse> response) {
@@ -124,15 +121,12 @@ public class AccountRetrievalService extends IntentService {
         String emailAddress = response.body().getEmail();
         String avatarUrl = response.body().getAvatar();
         saveUserInfoToSharedPref(userId, emailAddress, avatarUrl, token);
-
         boolean loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
             .getBoolean("TOKEN_SAVED", false);
-
         AnalyticsTracker.getInstance(getApplicationContext()).setMapboxUsername();
         AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Opened app", loggedIn);
         AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("Account gate", loggedIn);
         AnalyticsTracker.getInstance(getApplicationContext()).identifyUser(emailAddress);
-
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
       }

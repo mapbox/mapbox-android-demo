@@ -26,22 +26,15 @@ public class AnalyticsTracker {
 
   private static volatile AnalyticsTracker analyticsInstance;
   private static volatile Analytics analytics;
-
-  private static final String OPENED = "Opened app";
-
-  private static final String SKIPPED_ACCOUNT_BUTTON_EVENT_NAME = "Skipped account creation/login";
   private static final String CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME = "Clicked on nav drawer section";
   private static final String CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME = "Clicked on individual example";
   private static final String SECTION_NAME_MAP_KEY = "section name";
   private static final String EXAMPLE_NAME_MAP_KEY = "example name";
   private static final String IS_TABLET_MAP_VALUE = "tablet";
   private static final String IS_PHONE_MAP_VALUE = "phone";
-  public static final String CLICKED_ON_CREATE_ACCOUNT_BUTTON_SHARED_PREF_KEY = "CLICKED_ON_CREATE_BUTTON";
-  public static final String CLICKED_ON_SIGN_IN_BUTTON_SHARED_PREF_KEY = "CLICKED_ON_SIGN_IN_BUTTON";
   private static final String MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED = "mapboxAnalyticsEnabled";
   private static final String MAPBOX_SHARED_PREFERENCES_FILE = "MapboxSharedPreferences";
-  public static String MAPBOX_USERNAME;
-
+  private static String MAPBOX_USERNAME;
   private Boolean analyticsEnabled = null;
 
   /**
@@ -95,38 +88,6 @@ public class AnalyticsTracker {
           .properties(properties)
       );
     }
-  }
-
-  /**
-   * Makes an analytics call telling Segment that the app was opened. Ideally used
-   * in the MapboxApplication class' onCreate(). Could also be called in the MainActivity's onCreate()
-   */
-  public void openedApp() {
-    if (isAnalyticsEnabled()) {
-      trackEvent(OPENED, true);
-    }
-  }
-
-  /**
-   * Saves button click status to shared preferences because the clickedOnSignInButton()
-   * method above needs to be called after the user signs in so that "null" isn't
-   * sent for the userId field.
-   */
-  public void adjustClickedSignInToStatusSharedPref(boolean currentStatus) {
-    PreferenceManager.getDefaultSharedPreferences(appContext).edit()
-        .putBoolean(CLICKED_ON_SIGN_IN_BUTTON_SHARED_PREF_KEY, currentStatus)
-        .apply();
-  }
-
-  /**
-   * Saves button click status to shared preferences because the clickedOnCreateAccountButton()
-   * method above needs to be called after the user signs in so that "null" isn't
-   * sent for the userId field.
-   */
-  public void adjustClickedCreateAccountStatusSharedPref(boolean currentStatus) {
-    PreferenceManager.getDefaultSharedPreferences(appContext).edit()
-        .putBoolean(CLICKED_ON_CREATE_ACCOUNT_BUTTON_SHARED_PREF_KEY, currentStatus)
-        .apply();
   }
 
   /**

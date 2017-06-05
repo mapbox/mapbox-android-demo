@@ -167,12 +167,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     if (getIntent().getBooleanExtra("SKIPPED", true)) {
       AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Skipped account creation/login",
           loggedInOrNot);
+      PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
+          .putBoolean("SKIPPED", false)
+          .apply();
     } else {
       AnalyticsTracker.getInstance(getApplicationContext()).setMapboxUsername();
       AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("MainActivity",
           loggedInOrNot);
       checkForFirstTimeOpen();
     }
+    AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Opened app",
+        loggedInOrNot);
   }
 
   @Override
@@ -194,7 +199,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     if (id == R.id.settings_in_nav_drawer) {
       buildSettingsDialog();
-    } else if (id != currentCategory) {
+    }
+
+    if (id != currentCategory) {
       listItems(id);
       AnalyticsTracker.getInstance(getApplicationContext()).clickedOnNavDrawerSection(
           item.getTitle().toString(), loggedInOrNot);
@@ -686,7 +693,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           sharePrefEditor.apply();
           Toast.makeText(getApplicationContext(), R.string.log_out_toast_confirm, Toast.LENGTH_LONG).show();
           Intent intent = new Intent(getApplicationContext(), LandingActivity.class);
-//          intent.putExtra("FROM_LOG_OUT_BUTTON", true);
           startActivity(intent);
         }
       });
