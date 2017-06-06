@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -72,21 +73,17 @@ public class CustomInfoWindowActivity extends AppCompatActivity {
             // a better choice.
             ImageView countryFlagImage = new ImageView(CustomInfoWindowActivity.this);
 
-            switch (String.valueOf(marker.getPosition().getLatitude())) {
-              case "40.416717":
-                countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
-                  CustomInfoWindowActivity.this, R.drawable.flag_of_spain));
-                break;
-              case "26.794531":
-                countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
-                  CustomInfoWindowActivity.this, R.drawable.flag_of_egypt));
-                break;
-              default:
-                // By default all markers without a matching latitude will use the
-                // Germany flag
-                countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
-                  CustomInfoWindowActivity.this, R.drawable.flag_of_germany));
-                break;
+            if (TextUtils.equals(marker.getTitle(), getString(R.string.custom_window_marker_title_spain))) {
+              countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
+                CustomInfoWindowActivity.this, R.drawable.flag_of_spain));
+            } else if (TextUtils.equals(marker.getTitle(), getString(R.string.custom_window_marker_title_egypt))) {
+              countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
+                CustomInfoWindowActivity.this, R.drawable.flag_of_egypt));
+            } else {
+              // By default all markers without a matching latitude will use the
+              // Germany flag
+              countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
+                CustomInfoWindowActivity.this, R.drawable.flag_of_germany));
             }
 
             // Set the size of the image
