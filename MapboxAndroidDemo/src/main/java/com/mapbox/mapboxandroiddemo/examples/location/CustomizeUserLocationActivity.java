@@ -122,7 +122,7 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
-    Toast.makeText(this, getString(R.string.user_location_permission_explanation),
+    Toast.makeText(this, R.string.user_location_permission_explanation,
       Toast.LENGTH_LONG).show();
   }
 
@@ -165,8 +165,7 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
     if (granted) {
       enableLocation();
     } else {
-      Toast.makeText(this, getString(R.string.user_location_permission_not_granted),
-        Toast.LENGTH_LONG).show();
+      Toast.makeText(this, R.string.user_location_permission_not_granted,Toast.LENGTH_LONG).show();
       finish();
     }
   }

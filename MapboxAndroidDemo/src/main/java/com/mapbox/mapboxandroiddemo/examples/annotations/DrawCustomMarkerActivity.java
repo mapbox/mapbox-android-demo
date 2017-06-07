@@ -40,8 +40,8 @@ public class DrawCustomMarkerActivity extends AppCompatActivity {
         // Add the custom icon marker to the map
         mapboxMap.addMarker(new MarkerOptions()
           .position(new LatLng(-33.8500000, 18.4158234))
-          .title("Cape Town Harbour")
-          .snippet("One of the busiest ports in South Africa")
+          .title(getString(R.string.draw_custom_marker_options_title))
+          .snippet(getString(R.string.draw_custom_marker_options_snippet))
           .icon(icon));
       }
     });

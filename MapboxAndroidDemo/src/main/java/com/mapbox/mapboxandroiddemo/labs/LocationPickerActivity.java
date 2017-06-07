@@ -131,7 +131,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
             // Transform the appearance of the button to become the cancel button
             selectLocationButton.setBackgroundColor(
               ContextCompat.getColor(LocationPickerActivity.this, R.color.colorAccent));
-            selectLocationButton.setText("Cancel");
+            selectLocationButton.setText(getString(R.string.location_picker_select_location_button_cancel));
 
             // Create the marker icon the dropped marker will be using.
             Icon icon = IconFactory.getInstance(LocationPickerActivity.this).fromResource(R.drawable.red_marker);
@@ -150,7 +150,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
             // Switch the button apperance back to select a location.
             selectLocationButton.setBackgroundColor(
               ContextCompat.getColor(LocationPickerActivity.this, R.color.colorPrimary));
-            selectLocationButton.setText("Select a location");
+            selectLocationButton.setText(getString(R.string.location_picker_select_location_button_select));
 
             // Lastly, set the hovering marker back to visible.
             hoveringMarker.setVisibility(View.VISIBLE);
@@ -274,7 +274,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
 
           } else {
             if (droppedMarker != null) {
-              droppedMarker.setSnippet("No results");
+              droppedMarker.setSnippet(getString(R.string.location_picker_dropped_marker_snippet_no_results));
               map.selectMarker(droppedMarker);
             }
           }
@@ -298,7 +298,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
-    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+    Toast.makeText(this, R.string.user_location_permission_explanation,
       Toast.LENGTH_LONG).show();
   }
 
@@ -307,7 +307,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
     if (granted) {
       setInitialCamera();
     } else {
-      Toast.makeText(this, "You didn't grant location permissions.",
+      Toast.makeText(this, R.string.user_location_permission_not_granted,
         Toast.LENGTH_LONG).show();
       finish();
     }
