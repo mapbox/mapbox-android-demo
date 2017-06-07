@@ -63,7 +63,7 @@ public class GeocodingActivity extends AppCompatActivity {
     // Build marker
     map.addMarker(new MarkerOptions()
       .position(new LatLng(latitude, longitude))
-      .title("Geocoder result"));
+      .title(getString(R.string.geocode_activity_marker_options_title)));
 
     // Animate camera to geocoder result location
     CameraPosition cameraPosition = new CameraPosition.Builder()

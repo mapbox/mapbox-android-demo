@@ -33,8 +33,8 @@ public class DrawMarkerActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
         mapboxMap.addMarker(new MarkerOptions()
           .position(new LatLng(48.13863, 11.57603))
-          .title("Hello World!")
-          .snippet("Welcome to my marker."));
+          .title(getString(R.string.draw_marker_options_title))
+          .snippet(getString(R.string.draw_marker_options_snippet)));
 
       }
     });

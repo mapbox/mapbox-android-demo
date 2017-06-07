@@ -69,7 +69,7 @@ public class FeatureCountActivity extends AppCompatActivity {
             // Show the features count
             Snackbar.make(
               viewContainer,
-              String.format("%s features in box", features.size()),
+              String.format(getString(R.string.feature_count_snackbar_feature_size), features.size()),
               Snackbar.LENGTH_LONG).show();
 
             // Remove the previous building highlighted layer if it exist.
