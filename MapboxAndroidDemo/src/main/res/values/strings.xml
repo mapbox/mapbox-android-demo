@@ -63,7 +63,6 @@
     <string name="activity_style_symbol_layer_title">Marker symbol layer</string>
     <string name="activity_style_basic_extrusions_title">Display buildings in 3D</string>
     <string name="activity_style_population_density_extrusions_title">Display 3D building height based on data</string>
-    <string name="activity_style_catalina_marathon_extrusions_title">Display elevation and location data</string>
     <string name="activity_dds_style_circle_categorically_title">Style circles categorically</string>
     <string name="activity_dds_choropleth_zoom_change_title">Update a choropleth layer by zoom level</string>
     <string name="activity_dds_style_line_identity_property_title">Style lines using an identity property function</string>
@@ -118,9 +117,8 @@
     <string name="activity_style_create_data_cluster_description">Use GeoJSON to visualize point data in clusters.</string>
     <string name="activity_style_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
     <string name="activity_style_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
-    <string name="activity_style_basic_extrusions_description">Use extrusions to display 3D building height</string>
-    <string name="activity_style_population_density_extrusions_description">Use extrusions to display 3D building height based on imported data</string>
-    <string name="activity_style_catalina_marathon_extrusions_description">Use extrusions to display elevation data along a route</string>
+    <string name="activity_style_basic_extrusions_description">Use extrusions to display buildings\' height in 3D</string>
+    <string name="activity_style_population_density_extrusions_description">Use extrusions to display 3D building height based on data</string>
     <string name="activity_dds_style_circle_categorically_description">Using a categorical circle-color property function for a visualization.</string>
     <string name="activity_dds_choropleth_zoom_change_description">Using 2014 census data, display state or county population depending on zoom level.</string>
     <string name="activity_dds_style_line_identity_property_description">Using an identity line-color property function for a visualization.</string>
@@ -178,9 +176,8 @@
     <string name="activity_style_create_cluster_data_points_url" translatable="false">http://i.imgur.com/fGeZhcD.png</string>
     <string name="activity_style_line_layer_url" translatable="false">http://i.imgur.com/Iqxoing.png</string>
     <string name="activity_style_symbol_layer_url" translatable="false">http://i.imgur.com/TQ4iA0L.png</string>
-    <string name="activity_style_basic_extrusions_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
+    <string name="activity_style_basic_extrusions_url" translatable="false">http://i.imgur.com/SXn5NJK.png</string>
     <string name="activity_style_population_density_extrusions_url" translatable="false">http://i.imgur.com/se1z8Wb.png</string>
-    <string name="activity_style_catalina_marathon_extrusions_url" translatable="false">http://i.imgur.com/6j848JL.jpg</string>
     <string name="activity_dds_style_circle_categorically_url" translatable="false">http://i.imgur.com/C3mtfgF.png</string>
     <string name="activity_dds_choropleth_zoom_change_url" translatable="false">http://i.imgur.com/sPNpLEP.png</string>
     <string name="activity_dds_style_line_identity_property_url" translatable="false">http://i.imgur.com/wgpKvZM.png</string>
@@ -343,7 +340,7 @@
     <string name="minneapolis">Minneapolis</string>
     <string name="miami">Miami</string>
     <string name="extrusions_category">3D Extrusions</string>
-
+  
     <!--Landing activity-->
     <string name="tv_create_account_button">Create account</string>
     <string name="tv_sign_in_to_account_button">Sign in</string>
