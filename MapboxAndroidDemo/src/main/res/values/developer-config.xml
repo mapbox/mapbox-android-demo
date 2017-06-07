@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="mapbox_auth_flow_secret">YOUR_MAPBOX_AUTH_FLOW_SECRET_GOES_HERE</string>
-    <string name="mapbox_segment_write_key">THE_SEGMENT_API_WRITE_KEY_GOES_HERE</string>
-</resources>
