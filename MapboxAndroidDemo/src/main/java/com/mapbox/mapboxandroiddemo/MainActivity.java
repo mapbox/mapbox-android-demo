@@ -53,7 +53,7 @@ import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.BasicExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.BasicExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
@@ -63,7 +63,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.PopDensityExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
@@ -256,6 +256,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, CustomRasterStyleActivity.class),
           R.string.activity_style_raster_url
         ));
+        break;
+
+      case R.id.nav_extrusions:
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_basic_extrusions_title,
           R.string.activity_style_basic_extrusions_description,
@@ -265,10 +268,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_population_density_extrusions_title,
           R.string.activity_style_population_density_extrusions_description,
-          new Intent(MainActivity.this, PopDensityExtrusionActivity.class),
+          new Intent(MainActivity.this, PopulationDensityExtrusionActivity.class),
           R.string.activity_style_population_density_extrusions_url, true
         ));
         break;
+
       case R.id.nav_annotations:
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_annotation_marker_title,

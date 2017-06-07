@@ -269,5 +269,6 @@
     <string name="denver">Denver</string>
     <string name="minneapolis">Minneapolis</string>
     <string name="miami">Miami</string>
+    <string name="extrusions_category">3D Extrusions</string>
 
 </resources>

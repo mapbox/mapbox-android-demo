@@ -387,22 +387,15 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
-            android:name=".examples.styles.BasicExtrusionActivity"
+            android:name=".examples.extrusions.BasicExtrusionActivity"
             android:label="@string/activity_style_basic_extrusions_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
-            android:name=".examples.styles.PopulationDensityExtrusionActivity"
+            android:name=".examples.extrusions.PopulationDensityExtrusionActivity"
             android:label="3D population">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-        <activity
-            android:name=".examples.styles.PopDensityExtrusionActivity"
-            android:label="Population extrusions">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
