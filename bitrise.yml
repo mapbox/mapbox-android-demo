@@ -45,7 +45,7 @@ workflows:
 
             echo "Run tests on firebase:"
             gcloud auth activate-service-account --key-file secret.json --project mapbox-android-demo
-            gcloud beta test android run --type robo --app MapboxAndroidDemo/build/outputs/apk/MapboxAndroidDemo-gpservices-debug.apk --device-ids shamu --os-version-ids 22 --locales en --orientations portrait --timeout 10m
+            gcloud beta test android run --type robo --app MapboxAndroidDemo/build/outputs/apk/MapboxAndroidDemo-gpservices-armeabi-v7a-debug.apk --device-ids shamu --os-version-ids 22 --locales en --orientations portrait --timeout 10m
     - deploy-to-bitrise-io:
         inputs:
         - notify_user_groups: none
@@ -54,9 +54,13 @@ workflows:
     - gradle-runner:
         inputs:
         - gradle_task: "$GRADLE_TASK"
-    - sign-apk: {}
+    - sign-apk:
+        inputs:
+        - apk_path: "$BITRISE_APK_PATH_LIST"
+        - apk_file_exclude_filter: "*-unsigned.apk"
     - google-play-deploy:
         inputs:
+        - apk_path: "$BITRISE_SIGNED_APK_PATH_LIST"
         - service_account_json_key_path: "$BITRISEIO_SERVICE_ACCOUNT_JSON_URL"
         - package_name: com.mapbox.mapboxandroiddemo
         - track: beta
