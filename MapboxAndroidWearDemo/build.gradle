@@ -33,7 +33,7 @@ compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.3@aar') {
         transitive = true
     }
     
-    compile 'com.segment.analytics.java:analytics:+'
+    compile 'com.segment.analytics.java:analytics:2.0.0'
 }
 
 apply from: '../checkstyle.gradle'

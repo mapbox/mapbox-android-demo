@@ -25,6 +25,12 @@ import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.AVATAR_IMAGE_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.EMAIL_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.TOKEN_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.TOKEN_SAVED_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.USERNAME_KEY;
+
 
 /**
  * Background service which retrieves Mapbox Account information
@@ -122,10 +128,10 @@ public class AccountRetrievalService extends IntentService {
         String avatarUrl = response.body().getAvatar();
         saveUserInfoToSharedPref(userId, emailAddress, avatarUrl, token);
         boolean loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-            .getBoolean("TOKEN_SAVED", false);
+            .getBoolean(TOKEN_SAVED_KEY, false);
         AnalyticsTracker.getInstance(getApplicationContext()).setMapboxUsername();
-        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Opened app", loggedIn);
-        AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("Account gate", loggedIn);
+        AnalyticsTracker.getInstance(getApplicationContext())
+            .viewedScreen(MainActivity.class.getSimpleName(), loggedIn);
         AnalyticsTracker.getInstance(getApplicationContext()).identifyUser(emailAddress);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
@@ -145,11 +151,11 @@ public class AccountRetrievalService extends IntentService {
 
   private void saveUserInfoToSharedPref(String userId, String emailAddress, String avatarUrl, String token) {
     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-        .putBoolean("TOKEN_SAVED", true)
-        .putString("USERNAME", userId)
-        .putString("EMAIL", emailAddress)
-        .putString("AVATAR_IMAGE_URL", avatarUrl)
-        .putString("TOKEN", token)
+        .putBoolean(TOKEN_SAVED_KEY, true)
+        .putString(USERNAME_KEY, userId)
+        .putString(EMAIL_KEY, emailAddress)
+        .putString(AVATAR_IMAGE_KEY, avatarUrl)
+        .putString(TOKEN_KEY, token)
         .apply();
   }
 }

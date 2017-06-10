@@ -93,6 +93,22 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.CLICKED_ON_INFO_DIALOG_NOT_NOW;
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.CLICKED_ON_INFO_DIALOG_START_LEARNING;
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.CLICKED_ON_INFO_MENU_ITEM;
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.CLICKED_ON_SETTINGS_IN_NAV_DRAWER;
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.LOGGED_OUT_OF_MAPBOX_ACCOUNT;
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.OPENED_APP;
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.OPTED_IN_TO_ANALYTICS;
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.OPTED_OUT_OF_ANALYTICS;
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.SKIPPED_ACCOUNT_CREATION;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.AVATAR_IMAGE_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.EMAIL_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.SKIPPED_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.TOKEN_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.TOKEN_SAVED_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.USERNAME_KEY;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
   private ArrayList<ExampleItemModel> exampleItemModel;
@@ -102,6 +118,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private Switch analyticsOptOutSwitch;
   private boolean loggedInOrNot;
 
+  private AnalyticsTracker analytics;
+
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -109,6 +128,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
+
+    analytics = AnalyticsTracker.getInstance(this);
 
     exampleItemModel = new ArrayList<>();
 
@@ -138,10 +159,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         startActivity(exampleItemModel.get(position).getActivity());
 
-        AnalyticsTracker.getInstance(getApplicationContext()).clickedOnIndividualExample(
+        analytics.clickedOnIndividualExample(
             getString(exampleItemModel.get(position).getTitle()),
             loggedInOrNot);
-        AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen(
+        analytics.viewedScreen(
             getString(exampleItemModel.get(position).getTitle()),
             loggedInOrNot);
       }
@@ -161,23 +182,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       navigationView.setCheckedItem(R.id.nav_basics);
     }
 
-    loggedInOrNot = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-        .getBoolean("TOKEN_SAVED", false);
 
-    if (getIntent().getBooleanExtra("SKIPPED", true)) {
-      AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Skipped account creation/login",
-          loggedInOrNot);
+    loggedInOrNot = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+        .getBoolean(TOKEN_SAVED_KEY, false);
+
+    if (getIntent().getBooleanExtra(SKIPPED_KEY, true)) {
+      analytics.trackEvent(SKIPPED_ACCOUNT_CREATION, loggedInOrNot);
       PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-          .putBoolean("SKIPPED", false)
+          .putBoolean(SKIPPED_KEY, false)
           .apply();
     } else {
-      AnalyticsTracker.getInstance(getApplicationContext()).setMapboxUsername();
-      AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("MainActivity",
-          loggedInOrNot);
+      analytics.setMapboxUsername();
+      analytics.viewedScreen(MainActivity.class.getSimpleName(), loggedInOrNot);
       checkForFirstTimeOpen();
     }
-    AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Opened app",
-        loggedInOrNot);
+    analytics.trackEvent(OPENED_APP, loggedInOrNot);
   }
 
   @Override
@@ -203,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     if (id != currentCategory) {
       listItems(id);
-      AnalyticsTracker.getInstance(getApplicationContext()).clickedOnNavDrawerSection(
+      analytics.clickedOnNavDrawerSection(
           item.getTitle().toString(), loggedInOrNot);
     }
 
@@ -594,7 +613,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   public boolean onOptionsItemSelected(MenuItem item) {
     int id = item.getItemId();
     if (id == R.id.action_info) {
-      AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Clicked on info menu item",
+      analytics.trackEvent(CLICKED_ON_INFO_MENU_ITEM,
           loggedInOrNot);
       new MaterialStyledDialog.Builder(MainActivity.this)
           .setTitle(getString(R.string.info_dialog_title))
@@ -606,8 +625,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           .onPositive(new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-              AnalyticsTracker.getInstance(getApplicationContext()).trackEvent(
-                  "Clicked on info dialog start learning button", false);
+              analytics.trackEvent(CLICKED_ON_INFO_DIALOG_START_LEARNING, false);
               Intent intent = new Intent(Intent.ACTION_VIEW);
               intent.setData(Uri.parse("https://mapbox.com/android-sdk"));
               startActivity(intent);
@@ -617,9 +635,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           .onNegative(new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-              AnalyticsTracker.getInstance(getApplicationContext()).trackEvent(
-                  "Clicked on info dialog not now button",
-                  loggedInOrNot);
+              analytics.trackEvent(CLICKED_ON_INFO_DIALOG_NOT_NOW, loggedInOrNot);
             }
           })
           .show();
@@ -637,19 +653,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private void checkForFirstTimeOpen() {
     FirstTimeRunChecker firstTimeRunChecker = new FirstTimeRunChecker(this);
     if (firstTimeRunChecker.firstEverOpen()) {
-      AnalyticsTracker.getInstance(getApplicationContext()).openedAppForFirstTime(
+      analytics.openedAppForFirstTime(
           getResources().getBoolean(R.bool.isTablet));
     }
     firstTimeRunChecker.updateSharedPrefWithCurrentVersion();
   }
 
   private void buildSettingsDialog() {
-    AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Clicked on settings in nav drawer",
-        loggedInOrNot);
+    analytics.trackEvent(CLICKED_ON_SETTINGS_IN_NAV_DRAWER, loggedInOrNot);
     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    View customView = inflater.inflate(R.layout.settings_dialog_layout, null);
+    final View customView = inflater.inflate(R.layout.settings_dialog_layout, null);
     analyticsOptOutSwitch = (Switch) customView.findViewById(R.id.analytics_opt_out_switch);
-    analyticsOptOutSwitch.setChecked(!AnalyticsTracker.getInstance(getApplicationContext()).isAnalyticsEnabled());
+    analyticsOptOutSwitch.setChecked(!analytics.isAnalyticsEnabled());
     new AlertDialog.Builder(this)
         .setView(customView)
         .setTitle(R.string.settings_dialog_title)
@@ -681,15 +696,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       logOutOfMapboxAccountButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          AnalyticsTracker.getInstance(getApplicationContext()).trackEvent(
-              "Logged out of Mapbox account", loggedInOrNot);
+          analytics.trackEvent(LOGGED_OUT_OF_MAPBOX_ACCOUNT, loggedInOrNot);
           SharedPreferences.Editor sharePrefEditor = PreferenceManager
               .getDefaultSharedPreferences(getApplicationContext()).edit();
-          sharePrefEditor.putBoolean("TOKEN_SAVED", false);
-          sharePrefEditor.putString("USERNAME", "");
-          sharePrefEditor.putString("EMAIL", "");
-          sharePrefEditor.putString("AVATAR_IMAGE_URL", "");
-          sharePrefEditor.putString("TOKEN", "");
+          sharePrefEditor.putBoolean(TOKEN_SAVED_KEY, false);
+          sharePrefEditor.putString(USERNAME_KEY, "");
+          sharePrefEditor.putString(EMAIL_KEY, "");
+          sharePrefEditor.putString(AVATAR_IMAGE_KEY, "");
+          sharePrefEditor.putString(TOKEN_KEY, "");
           sharePrefEditor.apply();
           Toast.makeText(getApplicationContext(), R.string.log_out_toast_confirm, Toast.LENGTH_LONG).show();
           Intent intent = new Intent(getApplicationContext(), LandingActivity.class);
@@ -698,23 +712,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       });
 
       Picasso.with(getApplicationContext()).load(PreferenceManager.getDefaultSharedPreferences(
-          getApplicationContext()).getString("AVATAR_IMAGE_URL", "")).into(accountGravatarImage);
+          getApplicationContext()).getString(AVATAR_IMAGE_KEY, "")).into(accountGravatarImage);
 
       accountUserName.setText(getResources().getString(R.string.logged_in_username,
           PreferenceManager.getDefaultSharedPreferences(
-              getApplicationContext()).getString("USERNAME", "")));
+              getApplicationContext()).getString(USERNAME_KEY, "")));
     }
   }
 
-  private void changeAnalyticsSettings(boolean optedIn, String toastMessage) {
+  public void changeAnalyticsSettings(boolean optedIn, String toastMessage) {
     if (optedIn) {
-      AnalyticsTracker.getInstance(getApplicationContext()).optUserIntoAnalytics(optedIn);
-      AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Opted in to analytics",
-          loggedInOrNot);
+      analytics.optUserIntoAnalytics(optedIn);
+      analytics.trackEvent(OPTED_IN_TO_ANALYTICS, loggedInOrNot);
     } else {
-      AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Opted out of analytics",
-          loggedInOrNot);
-      AnalyticsTracker.getInstance(getApplicationContext()).optUserIntoAnalytics(optedIn);
+      analytics.trackEvent(OPTED_OUT_OF_ANALYTICS, loggedInOrNot);
+      analytics.optUserIntoAnalytics(optedIn);
     }
     Toast.makeText(MainActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
   }

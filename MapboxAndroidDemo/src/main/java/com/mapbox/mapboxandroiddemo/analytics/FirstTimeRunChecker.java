@@ -2,10 +2,9 @@ package com.mapbox.mapboxandroiddemo.analytics;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.mapbox.mapboxandroiddemo.BuildConfig;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * This class checks whether the app is being opened for the first time or not and adjusts shared preferences
@@ -27,7 +26,7 @@ public class FirstTimeRunChecker {
 
   public FirstTimeRunChecker(Context context) {
     this.context = context;
-    prefs = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+    prefs = PreferenceManager.getDefaultSharedPreferences(context);
     savedVersionCode = prefs.getInt(PREF_VERSION_CODE_KEY, DOESNT_EXIST);
   }
 

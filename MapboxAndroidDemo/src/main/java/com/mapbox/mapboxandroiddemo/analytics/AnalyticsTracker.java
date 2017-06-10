@@ -16,14 +16,28 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.EMAIL_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.USERNAME_KEY;
+
 /**
  * This class abstracts various analytics calls to Segment analytics' Java library.
  */
 
 public class AnalyticsTracker {
 
-  private Context appContext = null;
+  public static final String CLICKED_ON_INFO_MENU_ITEM = "Clicked on info menu item";
+  public static final String CLICKED_ON_INFO_DIALOG_START_LEARNING = "Clicked on info dialog start learning button";
+  public static final String CLICKED_ON_INFO_DIALOG_NOT_NOW = "Clicked on info dialog not now button";
+  public static final String CLICKED_ON_SETTINGS_IN_NAV_DRAWER = "Clicked on settings in nav drawer";
+  public static final String OPTED_IN_TO_ANALYTICS = "Opted in to analytics";
+  public static final String OPTED_OUT_OF_ANALYTICS = "Opted out of analytics";
+  public static final String SKIPPED_ACCOUNT_CREATION = "Skipped account creation/login";
+  public static final String OPENED_APP = "Opened app";
+  public static final String LOGGED_OUT_OF_MAPBOX_ACCOUNT = "Logged out of Mapbox account";
+  public static final String CLICKED_ON_CREATE_ACCOUNT_BUTTON = "Clicked on create account";
+  public static final String CLICKED_ON_SIGN_IN_BUTTON = "Clicked on sign in button";
 
+  private Context appContext = null;
   private static volatile AnalyticsTracker analyticsInstance;
   private static volatile Analytics analytics;
   private static final String CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME = "Clicked on nav drawer section";
@@ -55,7 +69,7 @@ public class AnalyticsTracker {
 
   public void setMapboxUsername() {
     MAPBOX_USERNAME = PreferenceManager.getDefaultSharedPreferences(
-        analyticsInstance.appContext).getString("USERNAME", "not logged in");
+        analyticsInstance.appContext).getString(USERNAME_KEY, "not logged in");
   }
 
   /**
@@ -67,16 +81,16 @@ public class AnalyticsTracker {
     if (isAnalyticsEnabled()) {
       Map<String, String> properties = new HashMap<>();
       properties.put("email", getSharedPreferences(appContext)
-          .getString("EMAIL", "not logged in"));
+          .getString(EMAIL_KEY, "not logged in"));
       properties.put("model", Build.MODEL);
       properties.put("brand", Build.BRAND);
       properties.put("product", Build.PRODUCT);
       properties.put("manufacturer", Build.MANUFACTURER);
       properties.put("device", Build.DEVICE);
       properties.put("tags", Build.TAGS);
-      properties.put("ISO03 language", Locale.getDefault().getISO3Language());
+      properties.put("iso3 language", Locale.getDefault().getISO3Language());
       properties.put("language", Locale.getDefault().getLanguage());
-      properties.put("ISO03 country", Locale.getDefault().getISO3Country());
+      properties.put("iso3 country", Locale.getDefault().getISO3Country());
       properties.put("country", Locale.getDefault().getCountry());
       properties.put("display country", Locale.getDefault().getDisplayCountry());
       properties.put("display name", Locale.getDefault().getDisplayName());
@@ -144,7 +158,6 @@ public class AnalyticsTracker {
       if (keyForPropertiesMap != null && valueForPropertiesMap != null) {
         Map<String, String> properties = new HashMap<>();
         properties.put(keyForPropertiesMap, valueForPropertiesMap);
-
         analytics.enqueue(TrackMessage.builder(eventName).userId(loggedIn ? MAPBOX_USERNAME : "not logged in")
             .properties(properties));
       }

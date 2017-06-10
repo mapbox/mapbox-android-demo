@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,6 +17,14 @@ import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker;
+
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.CLICKED_ON_CREATE_ACCOUNT_BUTTON;
+import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.CLICKED_ON_SIGN_IN_BUTTON;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.AUTHCODE_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.CLIENT_ID_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.REDIRECT_URI_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.SKIPPED_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.TOKEN_SAVED_KEY;
 
 
 public class LandingActivity extends AppCompatActivity {
@@ -39,7 +46,7 @@ public class LandingActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     loggedIn = PreferenceManager.getDefaultSharedPreferences(
         getApplicationContext())
-        .getBoolean("TOKEN_SAVED", false);
+        .getBoolean(TOKEN_SAVED_KEY, false);
 
     if (!loggedIn) {
       setContentView(R.layout.activity_landing);
@@ -60,15 +67,12 @@ public class LandingActivity extends AppCompatActivity {
       String error = uri.getQueryParameter("error");
       if (error != null) {
         showErrorDialog();
-        Log.d("LandingActivity", "onResume: error = " + error);
-        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent(
-            "Error in LandingActivity onResume()", loggedIn);
       } else {
         String authCode = uri.getQueryParameter("code");
         Intent intent = new Intent(this, AccountRetrievalService.class);
-        intent.putExtra("AUTHCODE", authCode);
-        intent.putExtra("REDIRECT_URI", REDIRECT_URI);
-        intent.putExtra("CLIENT_ID", CLIENT_ID);
+        intent.putExtra(AUTHCODE_KEY, authCode);
+        intent.putExtra(REDIRECT_URI_KEY, REDIRECT_URI);
+        intent.putExtra(CLIENT_ID_KEY, CLIENT_ID);
         startService(intent);
         Intent loadingActivityIntent = new Intent(this, LoadingActivity.class);
         startActivity(loadingActivityIntent);
@@ -92,10 +96,10 @@ public class LandingActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-            .putBoolean("SKIPPED", true)
+            .putBoolean(SKIPPED_KEY, true)
             .apply();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("SKIPPED", true);
+        intent.putExtra(SKIPPED_KEY, true);
         startActivity(intent);
       }
     });
@@ -107,8 +111,8 @@ public class LandingActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         openChromeCustomTab(true);
-        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Clicked on create account "
-            + "button", loggedIn);
+        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent(CLICKED_ON_CREATE_ACCOUNT_BUTTON,
+            loggedIn);
       }
     });
 
@@ -117,7 +121,7 @@ public class LandingActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         openChromeCustomTab(false);
-        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent("Clicked on sign in button",
+        AnalyticsTracker.getInstance(getApplicationContext()).trackEvent(CLICKED_ON_SIGN_IN_BUTTON,
             loggedIn)
         ;
       }
