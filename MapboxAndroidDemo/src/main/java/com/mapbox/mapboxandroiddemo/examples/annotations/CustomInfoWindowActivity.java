@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,7 +24,6 @@ public class CustomInfoWindowActivity extends AppCompatActivity {
 
   private MapView mapView;
 
-  @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
@@ -43,17 +43,17 @@ public class CustomInfoWindowActivity extends AppCompatActivity {
         mapboxMap.addMarker(new MarkerViewOptions()
           .position(new LatLng(40.416717, -3.703771))
           .anchor(0.5f, 0.5f)
-          .title("spain"));
+          .title(getString(R.string.custom_window_marker_title_spain)));
 
         mapboxMap.addMarker(new MarkerViewOptions()
           .position(new LatLng(26.794531, 29.781524))
           .anchor(0.5f, 0.5f)
-          .title("egypt"));
+          .title(getString(R.string.custom_window_marker_title_egypt)));
 
         mapboxMap.addMarker(new MarkerViewOptions()
           .position(new LatLng(50.981488, 10.384677))
           .anchor(0.5f, 0.5f)
-          .title("germany"));
+          .title(getString(R.string.custom_window_marker_title_germany)));
 
         mapboxMap.setInfoWindowAdapter(new MapboxMap.InfoWindowAdapter() {
           @Nullable
@@ -67,26 +67,23 @@ public class CustomInfoWindowActivity extends AppCompatActivity {
               ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             parent.setOrientation(LinearLayout.VERTICAL);
 
-            // Depending on the marker title, the correct image source is used. If you
+            // Depending on the marker latitude, the correct image source is used. If you
             // have many markers using different images, extending Marker and
             // baseMarkerOptions, adding additional options such as the image, might be
             // a better choice.
             ImageView countryFlagImage = new ImageView(CustomInfoWindowActivity.this);
-            switch (marker.getTitle()) {
-              case "spain":
-                countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
-                  CustomInfoWindowActivity.this, R.drawable.flag_of_spain));
-                break;
-              case "egypt":
-                countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
-                  CustomInfoWindowActivity.this, R.drawable.flag_of_egypt));
-                break;
-              default:
-                // By default all markers without a matching title will use the
-                // Germany flag
-                countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
-                  CustomInfoWindowActivity.this, R.drawable.flag_of_germany));
-                break;
+
+            if (TextUtils.equals(marker.getTitle(), getString(R.string.custom_window_marker_title_spain))) {
+              countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
+                CustomInfoWindowActivity.this, R.drawable.flag_of_spain));
+            } else if (TextUtils.equals(marker.getTitle(), getString(R.string.custom_window_marker_title_egypt))) {
+              countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
+                CustomInfoWindowActivity.this, R.drawable.flag_of_egypt));
+            } else {
+              // By default all markers without a matching latitude will use the
+              // Germany flag
+              countryFlagImage.setImageDrawable(ContextCompat.getDrawable(
+                CustomInfoWindowActivity.this, R.drawable.flag_of_germany));
             }
 
             // Set the size of the image

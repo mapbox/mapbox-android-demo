@@ -24,7 +24,7 @@ import org.json.JSONObject;
 
 public class SimpleOfflineMapActivity extends AppCompatActivity {
 
-  private static final String TAG = "MainActivity";
+  private static final String TAG = "SimpOfflineMapActivity";
 
   private boolean isEndNotified;
   private ProgressBar progressBar;
@@ -105,7 +105,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
                   if (status.isComplete()) {
                     // Download complete
-                    endProgress("Region downloaded successfully.");
+                    endProgress(getString(R.string.simple_offline_end_progress_success));
                   } else if (status.isRequiredResourceCountPrecise()) {
                     // Switch to determinate state
                     setPercentage((int) Math.round(percentage));
