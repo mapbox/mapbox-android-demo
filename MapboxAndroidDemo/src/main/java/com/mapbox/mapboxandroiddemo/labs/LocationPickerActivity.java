@@ -71,7 +71,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
     setContentView(R.layout.activity_lab_location_picker);
 
     // Get the location engine object for later use.
-    locationEngine = LocationSource.getLocationEngine(this);
+    locationEngine = new LocationSource(this);
     locationEngine.activate();
 
     // Initialize the map view

@@ -25,7 +25,7 @@ public class MapFragmentActivity extends WearableActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_basic_support_map_frag);
 
-    LocationEngine locationEngine = LocationSource.getLocationEngine(this);
+    LocationEngine locationEngine = new LocationSource(this);
     locationEngine.activate();
 
     locationEngine.addLocationEngineListener(new LocationEngineListener() {
