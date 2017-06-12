@@ -113,7 +113,7 @@ public class LocationTrackingActivity extends AppCompatActivity implements Permi
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
-    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+    Toast.makeText(this, R.string.user_location_permission_explanation,
       Toast.LENGTH_LONG).show();
   }
 
@@ -122,7 +122,7 @@ public class LocationTrackingActivity extends AppCompatActivity implements Permi
     if (granted) {
       enableLocationTracking();
     } else {
-      Toast.makeText(this, "You didn't grant location permissions.",
+      Toast.makeText(this, R.string.user_location_permission_not_granted,
         Toast.LENGTH_LONG).show();
       finish();
     }

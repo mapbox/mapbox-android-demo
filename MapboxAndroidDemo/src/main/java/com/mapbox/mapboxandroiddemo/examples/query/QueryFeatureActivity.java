@@ -66,12 +66,12 @@ public class QueryFeatureActivity extends AppCompatActivity {
 
                 featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
                   .position(point)
-                  .title("Properties:")
+                  .title(getString(R.string.query_feature_marker_title))
                   .snippet(stringBuilder.toString())
                 );
 
               } else {
-                property = "No feature properties found";
+                property = getString(R.string.query_feature_marker_snippet);
                 featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
                   .position(point)
                   .snippet(property)
@@ -80,7 +80,7 @@ public class QueryFeatureActivity extends AppCompatActivity {
             } else {
               featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
                 .position(point)
-                .snippet("No feature properties found")
+                .snippet(getString(R.string.query_feature_marker_snippet))
               );
             }
 
