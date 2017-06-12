@@ -34,7 +34,7 @@ public class AnalyticsTracker {
   public static final String SKIPPED_ACCOUNT_CREATION = "Skipped account creation/login";
   public static final String OPENED_APP = "Opened app";
   public static final String LOGGED_OUT_OF_MAPBOX_ACCOUNT = "Logged out of Mapbox account";
-  public static final String CLICKED_ON_CREATE_ACCOUNT_BUTTON = "Clicked on create account";
+  public static final String CLICKED_ON_CREATE_ACCOUNT_BUTTON = "Clicked on create account button";
   public static final String CLICKED_ON_SIGN_IN_BUTTON = "Clicked on sign in button";
 
   private Context appContext = null;
@@ -77,7 +77,7 @@ public class AnalyticsTracker {
    * when app is opened for the first time or if shared preferences is cleared.
    **/
 
-  public void openedAppForFirstTime(boolean isTablet) {
+  public void openedAppForFirstTime(boolean isTablet, boolean loggedIn) {
     if (isAnalyticsEnabled()) {
       Map<String, String> properties = new HashMap<>();
       properties.put("email", getSharedPreferences(appContext)
@@ -98,7 +98,7 @@ public class AnalyticsTracker {
       properties.put("size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
 
       analytics.enqueue(TrackMessage.builder("New install")
-          .userId(MAPBOX_USERNAME)
+          .userId(loggedIn ? MAPBOX_USERNAME : "not logged in")
           .properties(properties)
       );
     }

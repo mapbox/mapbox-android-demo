@@ -32,11 +32,7 @@ public class LandingActivity extends AppCompatActivity {
   private static final String SIGN_IN_AUTH_URL = "https://api.mapbox.com/oauth/authorize?"
       + "response_type=code&client_id=%s&redirect_uri=%s";
 
-  private static final String CREATE_ACCOUNT_AUTH_URL = "https://www.mapbox.com"
-      + "/signup/?route-to=https%3A%2F%2Fwww.mapbox"
-      + ".com%2Fauthorize%2F%3Fclient_id%3D7bb34a0cf68455d33ec0d994af2330a3f60ee636%26"
-      + "redirect_uri%3Dmapbox-android-dev-"
-      + "preview%3A%2F%2Fauthorize%26response_type%3Dcode";
+  private static String CREATE_ACCOUNT_AUTH_URL;
   private static final String CLIENT_ID = "7bb34a0cf68455d33ec0d994af2330a3f60ee636";
   private static final String REDIRECT_URI = "mapbox-android-dev-preview://authorize";
   private boolean loggedIn;
@@ -48,15 +44,29 @@ public class LandingActivity extends AppCompatActivity {
         getApplicationContext())
         .getBoolean(TOKEN_SAVED_KEY, false);
 
+    Uri.Builder builder = new Uri.Builder();
+    builder.scheme("https")
+        .authority("www.mapbox.com")
+        .appendPath("signup")
+        .appendQueryParameter("route-to", "https%3A%2F%2Fwww.mapbox"
+            + ".com%2Fauthorize%2F%3Fclient_id%3D7bb34a0cf68455d33ec0d994af2330a3f60ee636%26"
+            + "redirect_uri%3Dmapbox-android-dev-"
+            + "preview%3A%2F%2Fauthorize%26response_type%3Dcode");
+    CREATE_ACCOUNT_AUTH_URL = builder.build().toString();
+
+
     if (!loggedIn) {
       setContentView(R.layout.activity_landing);
       getSupportActionBar().hide();
       setUpSkipDialog();
       setUpButtons();
+      AnalyticsTracker.getInstance(getApplicationContext()).viewedScreen("Create/login screen",
+          loggedIn);
     } else {
       Intent intent = new Intent(this, MainActivity.class);
       startActivity(intent);
     }
+
   }
 
   @Override

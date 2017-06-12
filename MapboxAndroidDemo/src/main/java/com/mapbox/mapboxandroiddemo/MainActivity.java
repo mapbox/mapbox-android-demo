@@ -104,6 +104,7 @@ import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.OPTED_OUT_
 import static com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker.SKIPPED_ACCOUNT_CREATION;
 import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.AVATAR_IMAGE_KEY;
 import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.EMAIL_KEY;
+import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.FROM_LOG_OUT_BUTTON_KEY;
 import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.SKIPPED_KEY;
 import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.TOKEN_KEY;
 import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.TOKEN_SAVED_KEY;
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private int currentCategory = R.id.nav_basics;
   private RecyclerView recyclerView;
   private Switch analyticsOptOutSwitch;
-  private boolean loggedInOrNot;
+  private boolean loggedIn;
 
   private AnalyticsTracker analytics;
 
@@ -161,10 +162,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         analytics.clickedOnIndividualExample(
             getString(exampleItemModel.get(position).getTitle()),
-            loggedInOrNot);
+            loggedIn);
         analytics.viewedScreen(
             getString(exampleItemModel.get(position).getTitle()),
-            loggedInOrNot);
+            loggedIn);
       }
     });
 
@@ -182,21 +183,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       navigationView.setCheckedItem(R.id.nav_basics);
     }
 
-
-    loggedInOrNot = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+    loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
         .getBoolean(TOKEN_SAVED_KEY, false);
 
     if (getIntent().getBooleanExtra(SKIPPED_KEY, true)) {
-      analytics.trackEvent(SKIPPED_ACCOUNT_CREATION, loggedInOrNot);
+      analytics.trackEvent(SKIPPED_ACCOUNT_CREATION, loggedIn);
       PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
           .putBoolean(SKIPPED_KEY, false)
           .apply();
     } else {
       analytics.setMapboxUsername();
-      analytics.viewedScreen(MainActivity.class.getSimpleName(), loggedInOrNot);
+      analytics.viewedScreen(MainActivity.class.getSimpleName(), loggedIn);
       checkForFirstTimeOpen();
     }
-    analytics.trackEvent(OPENED_APP, loggedInOrNot);
+    analytics.trackEvent(OPENED_APP, loggedIn);
   }
 
   @Override
@@ -220,10 +220,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       buildSettingsDialog();
     }
 
-    if (id != currentCategory) {
+    if (id != currentCategory && id != R.id.settings_in_nav_drawer) {
       listItems(id);
       analytics.clickedOnNavDrawerSection(
-          item.getTitle().toString(), loggedInOrNot);
+          item.getTitle().toString(), loggedIn);
     }
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -614,7 +614,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     int id = item.getItemId();
     if (id == R.id.action_info) {
       analytics.trackEvent(CLICKED_ON_INFO_MENU_ITEM,
-          loggedInOrNot);
+          loggedIn);
       new MaterialStyledDialog.Builder(MainActivity.this)
           .setTitle(getString(R.string.info_dialog_title))
           .setDescription(getString(R.string.info_dialog_description))
@@ -635,7 +635,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           .onNegative(new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-              analytics.trackEvent(CLICKED_ON_INFO_DIALOG_NOT_NOW, loggedInOrNot);
+              analytics.trackEvent(CLICKED_ON_INFO_DIALOG_NOT_NOW, loggedIn);
             }
           })
           .show();
@@ -654,13 +654,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirstTimeRunChecker firstTimeRunChecker = new FirstTimeRunChecker(this);
     if (firstTimeRunChecker.firstEverOpen()) {
       analytics.openedAppForFirstTime(
-          getResources().getBoolean(R.bool.isTablet));
+          getResources().getBoolean(R.bool.isTablet), loggedIn);
     }
     firstTimeRunChecker.updateSharedPrefWithCurrentVersion();
   }
 
   private void buildSettingsDialog() {
-    analytics.trackEvent(CLICKED_ON_SETTINGS_IN_NAV_DRAWER, loggedInOrNot);
+    analytics.trackEvent(CLICKED_ON_SETTINGS_IN_NAV_DRAWER, loggedIn);
     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     final View customView = inflater.inflate(R.layout.settings_dialog_layout, null);
     analyticsOptOutSwitch = (Switch) customView.findViewById(R.id.analytics_opt_out_switch);
@@ -689,14 +689,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageView accountGravatarImage = (ImageView) customView.findViewById(R.id.logged_in_user_gravatar_image);
     TextView accountUserName = (TextView) customView.findViewById(R.id.logged_in_user_username);
 
-    if (!loggedInOrNot) {
+    if (!loggedIn) {
       logOutOfMapboxAccountButton.setVisibility(View.GONE);
       accountGravatarImage.setVisibility(View.GONE);
     } else {
       logOutOfMapboxAccountButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-          analytics.trackEvent(LOGGED_OUT_OF_MAPBOX_ACCOUNT, loggedInOrNot);
+          analytics.trackEvent(LOGGED_OUT_OF_MAPBOX_ACCOUNT, loggedIn);
           SharedPreferences.Editor sharePrefEditor = PreferenceManager
               .getDefaultSharedPreferences(getApplicationContext()).edit();
           sharePrefEditor.putBoolean(TOKEN_SAVED_KEY, false);
@@ -707,6 +707,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           sharePrefEditor.apply();
           Toast.makeText(getApplicationContext(), R.string.log_out_toast_confirm, Toast.LENGTH_LONG).show();
           Intent intent = new Intent(getApplicationContext(), LandingActivity.class);
+          intent.putExtra(FROM_LOG_OUT_BUTTON_KEY, true);
           startActivity(intent);
         }
       });
@@ -723,9 +724,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   public void changeAnalyticsSettings(boolean optedIn, String toastMessage) {
     if (optedIn) {
       analytics.optUserIntoAnalytics(optedIn);
-      analytics.trackEvent(OPTED_IN_TO_ANALYTICS, loggedInOrNot);
+      analytics.trackEvent(OPTED_IN_TO_ANALYTICS, loggedIn);
     } else {
-      analytics.trackEvent(OPTED_OUT_OF_ANALYTICS, loggedInOrNot);
+      analytics.trackEvent(OPTED_OUT_OF_ANALYTICS, loggedIn);
       analytics.optUserIntoAnalytics(optedIn);
     }
     Toast.makeText(MainActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
