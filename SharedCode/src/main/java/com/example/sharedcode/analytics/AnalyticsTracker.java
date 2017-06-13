@@ -1,12 +1,14 @@
-package com.mapbox.mapboxandroiddemo.analytics;
+package com.example.sharedcode.analytics;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import com.mapbox.mapboxandroiddemo.R;
+
+import com.example.sharedcode.R;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.messages.IdentifyMessage;
 import com.segment.analytics.messages.ScreenMessage;
@@ -16,8 +18,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.EMAIL_KEY;
-import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.USERNAME_KEY;
+import static com.example.sharedcode.analytics.StringConstants.EMAIL_KEY;
+import static com.example.sharedcode.analytics.StringConstants.USERNAME_KEY;
 
 /**
  * This class abstracts various analytics calls to Segment analytics' Java library.
@@ -46,21 +48,28 @@ public class AnalyticsTracker {
   private static final String EXAMPLE_NAME_MAP_KEY = "example name";
   private static final String IS_TABLET_MAP_VALUE = "tablet";
   private static final String IS_PHONE_MAP_VALUE = "phone";
+  private static final String IS_WEARABLE_VALUE = "wearable";
   private static final String MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED = "mapboxAnalyticsEnabled";
   private static final String MAPBOX_SHARED_PREFERENCES_FILE = "MapboxSharedPreferences";
   private static String MAPBOX_USERNAME;
   private Boolean analyticsEnabled = null;
+  private Boolean deviceIsWearable;
 
   /**
    * Initializes instance of AnalyticsTracker class
    **/
-  public static AnalyticsTracker getInstance(@NonNull Context context) {
+  public static AnalyticsTracker getInstance(@NonNull Context context, boolean isWearable) {
     if (analyticsInstance == null) {  // Single check
       synchronized (AnalyticsTracker.class) {
         if (analyticsInstance == null) {  // Double check
           analyticsInstance = new AnalyticsTracker();
           analyticsInstance.appContext = context;
-          analytics = Analytics.builder(context.getString(R.string.mapbox_segment_write_key)).build();
+          analyticsInstance.deviceIsWearable = isWearable;
+          if (isWearable) {
+            analytics = Analytics.builder(context.getString(R.string.mapbox_segment_wearable_write_key)).build();
+          } else {
+            analytics = Analytics.builder(context.getString(R.string.mapbox_segment_write_key)).build();
+          }
         }
       }
     }
@@ -69,7 +78,7 @@ public class AnalyticsTracker {
 
   public void setMapboxUsername() {
     MAPBOX_USERNAME = PreferenceManager.getDefaultSharedPreferences(
-        analyticsInstance.appContext).getString(USERNAME_KEY, "not logged in");
+      analyticsInstance.appContext).getString(USERNAME_KEY, "not logged in");
   }
 
   /**
@@ -77,11 +86,11 @@ public class AnalyticsTracker {
    * when app is opened for the first time or if shared preferences is cleared.
    **/
 
-  public void openedAppForFirstTime(boolean isTablet, boolean loggedIn) {
+  public void openedAppForFirstTime(@Nullable boolean isTablet, boolean loggedIn) {
     if (isAnalyticsEnabled()) {
       Map<String, String> properties = new HashMap<>();
       properties.put("email", getSharedPreferences(appContext)
-          .getString(EMAIL_KEY, "not logged in"));
+        .getString(EMAIL_KEY, "not logged in"));
       properties.put("model", Build.MODEL);
       properties.put("brand", Build.BRAND);
       properties.put("product", Build.PRODUCT);
@@ -95,11 +104,15 @@ public class AnalyticsTracker {
       properties.put("display country", Locale.getDefault().getDisplayCountry());
       properties.put("display name", Locale.getDefault().getDisplayName());
       properties.put("display language", Locale.getDefault().getDisplayLanguage());
-      properties.put("size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
+      if (deviceIsWearable) {
+        properties.put("size", IS_WEARABLE_VALUE);
+      } else {
+        properties.put("size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
+      }
 
       analytics.enqueue(TrackMessage.builder("New install")
-          .userId(loggedIn ? MAPBOX_USERNAME : "not logged in")
-          .properties(properties)
+        .userId(loggedIn ? MAPBOX_USERNAME : "not logged in")
+        .properties(properties)
       );
     }
   }
@@ -112,7 +125,7 @@ public class AnalyticsTracker {
   public void clickedOnNavDrawerSection(@NonNull String sectionName, boolean loggedIn) {
     if (isAnalyticsEnabled()) {
       trackEventWithProperties(CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME, SECTION_NAME_MAP_KEY,
-          sectionName, loggedIn);
+        sectionName, loggedIn);
     }
   }
 
@@ -122,7 +135,9 @@ public class AnalyticsTracker {
    * @param exampleName Name of the selected example
    */
   public void clickedOnIndividualExample(@NonNull String exampleName, boolean loggedIn) {
-    if (isAnalyticsEnabled()) {
+    if (deviceIsWearable) {
+      trackEventWithProperties(CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME, EXAMPLE_NAME_MAP_KEY, exampleName, loggedIn);
+    } else if (isAnalyticsEnabled()) {
       trackEventWithProperties(CLICKED_ON_INDIVIDUAL_EXAMPLE_EVENT_NAME, EXAMPLE_NAME_MAP_KEY, exampleName, loggedIn);
     }
   }
@@ -148,18 +163,18 @@ public class AnalyticsTracker {
    * @param keyForPropertiesMap   Key to the property being attached to the event that's being called
    * @param valueForPropertiesMap Value of the property being attached to the event that's being called
    */
-  public void trackEventWithProperties(@NonNull String eventName, String keyForPropertiesMap,
-                                       String valueForPropertiesMap, boolean loggedIn) {
+  private void trackEventWithProperties(@NonNull String eventName, String keyForPropertiesMap,
+                                        String valueForPropertiesMap, boolean loggedIn) {
     if (isAnalyticsEnabled()) {
       if (keyForPropertiesMap == null || valueForPropertiesMap == null) {
         analytics.enqueue(TrackMessage.builder(eventName)
-            .userId(loggedIn ? MAPBOX_USERNAME : "not logged in"));
+          .userId(loggedIn ? MAPBOX_USERNAME : "not logged in"));
       }
       if (keyForPropertiesMap != null && valueForPropertiesMap != null) {
         Map<String, String> properties = new HashMap<>();
         properties.put(keyForPropertiesMap, valueForPropertiesMap);
         analytics.enqueue(TrackMessage.builder(eventName).userId(loggedIn ? MAPBOX_USERNAME : "not logged in")
-            .properties(properties));
+          .properties(properties));
       }
     }
   }
@@ -171,7 +186,10 @@ public class AnalyticsTracker {
    * @param nameOfScreen Name of the screen/activity that's being viewed
    */
   public void viewedScreen(String nameOfScreen, boolean loggedIn) {
-    if (isAnalyticsEnabled()) {
+
+    if (deviceIsWearable) {
+      analytics.enqueue(ScreenMessage.builder(nameOfScreen).userId(loggedIn ? MAPBOX_USERNAME : "not logged in"));
+    } else if (isAnalyticsEnabled()) {
       analytics.enqueue(ScreenMessage.builder(nameOfScreen).userId(loggedIn ? MAPBOX_USERNAME : "not logged in"));
     }
   }
@@ -187,8 +205,8 @@ public class AnalyticsTracker {
       traits.put("email", userEmailAddress);
 
       analytics.enqueue(IdentifyMessage.builder()
-          .userId(MAPBOX_USERNAME)
-          .traits(traits)
+        .userId(MAPBOX_USERNAME)
+        .traits(traits)
       );
     }
   }
@@ -199,8 +217,8 @@ public class AnalyticsTracker {
   public boolean isAnalyticsEnabled() {
     if (analyticsEnabled == null) {
       // Cache value
-      analyticsEnabled = AnalyticsTracker.getSharedPreferences(appContext)
-          .getBoolean(AnalyticsTracker.MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED, true);
+      analyticsEnabled = analyticsInstance.getSharedPreferences(appContext)
+        .getBoolean(AnalyticsTracker.MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED, true);
     }
     return analyticsEnabled;
   }
@@ -212,7 +230,7 @@ public class AnalyticsTracker {
    */
   public void optUserIntoAnalytics(boolean analyticsEnabled) {
     this.analyticsEnabled = analyticsEnabled;
-    SharedPreferences prefs = AnalyticsTracker.getSharedPreferences(appContext);
+    SharedPreferences prefs = analyticsInstance.getSharedPreferences(appContext);
     SharedPreferences.Editor editor = prefs.edit();
     editor.putBoolean(AnalyticsTracker.MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED, analyticsEnabled);
     editor.apply();
@@ -221,8 +239,8 @@ public class AnalyticsTracker {
   /**
    * Returns the device's shared preferences file.
    */
-  public static SharedPreferences getSharedPreferences(Context context) {
+  private SharedPreferences getSharedPreferences(Context context) {
     return context.getSharedPreferences(
-        AnalyticsTracker.MAPBOX_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
+      AnalyticsTracker.MAPBOX_SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
   }
 }

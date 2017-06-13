@@ -1,10 +1,11 @@
-package com.mapbox.mapboxandroiddemo.analytics;
+package com.example.sharedcode.analytics;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.mapbox.mapboxandroiddemo.BuildConfig;
+import com.example.sharedcode.BuildConfig;
+
 
 /**
  * This class checks whether the app is being opened for the first time or not and adjusts shared preferences
