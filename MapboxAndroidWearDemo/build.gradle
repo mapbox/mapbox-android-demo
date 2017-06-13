@@ -21,19 +21,16 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     provided 'com.google.android.wearable:wearable:2.0.2'
     compile 'com.google.android.support:wearable:2.0.2'
     compile 'com.google.android.gms:play-services-wearable:10.2.6'
     compile 'com.google.android.gms:play-services-location:10.2.6'
-
     // Mapbox dependencies
-compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.3@aar') {
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.3@aar') {
         transitive = true
     }
-    
-    compile 'com.segment.analytics.java:analytics:2.0.0'
+    compile project(':SharedCode')
 }
 
 apply from: '../checkstyle.gradle'

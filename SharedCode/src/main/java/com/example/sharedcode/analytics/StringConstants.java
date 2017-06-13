@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.analytics;
+package com.example.sharedcode.analytics;
 
 public class StringConstants {
 

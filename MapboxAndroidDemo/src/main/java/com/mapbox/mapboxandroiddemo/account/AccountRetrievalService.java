@@ -9,7 +9,7 @@ import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxandroiddemo.analytics.AnalyticsTracker;
+import com.example.sharedcode.analytics.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.model.usermodel.UserResponse;
 
 import org.json.JSONException;
@@ -25,11 +25,11 @@ import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.AVATAR_IMAGE_KEY;
-import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.EMAIL_KEY;
-import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.TOKEN_KEY;
-import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.TOKEN_SAVED_KEY;
-import static com.mapbox.mapboxandroiddemo.analytics.StringConstants.USERNAME_KEY;
+import static com.example.sharedcode.analytics.StringConstants.AVATAR_IMAGE_KEY;
+import static com.example.sharedcode.analytics.StringConstants.EMAIL_KEY;
+import static com.example.sharedcode.analytics.StringConstants.TOKEN_KEY;
+import static com.example.sharedcode.analytics.StringConstants.TOKEN_SAVED_KEY;
+import static com.example.sharedcode.analytics.StringConstants.USERNAME_KEY;
 
 
 /**
@@ -45,6 +45,9 @@ public class AccountRetrievalService extends IntentService {
   private String redirectUri;
   private String username;
 
+  private AnalyticsTracker analytics;
+
+
   public AccountRetrievalService() {
     super(SERVICE_NAME);
   }
@@ -52,6 +55,7 @@ public class AccountRetrievalService extends IntentService {
   @Override
   public void onCreate() {
     super.onCreate();
+    analytics = AnalyticsTracker.getInstance(this, false);
   }
 
   @Override
@@ -70,13 +74,14 @@ public class AccountRetrievalService extends IntentService {
     String clientSecret = getString(R.string.mapbox_auth_flow_secret);
     OkHttpClient client = new OkHttpClient();
     Request request = new Request.Builder()
-        .addHeader("User-Agent", "Android Dev Preview")
-        .addHeader("Content-Type", "application/x-www-form-urlencoded")
-        .url(ACCESS_TOKEN_URL)
-        .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
-            "grant_type=authorization_code&client_id=" + clientId + "&client_secret=" + clientSecret
-                + "&redirect_uri=" + redirectUri + "&code=" + code))
-        .build();
+      .addHeader("User-Agent", "Android Dev Preview")
+      .addHeader("Content-Type", "application/x-www-form-urlencoded")
+      .url(ACCESS_TOKEN_URL)
+      // TODO: Use Uri.Builder()
+      .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
+        "grant_type=authorization_code&client_id=" + clientId + "&client_secret=" + clientSecret
+          + "&redirect_uri=" + redirectUri + "&code=" + code))
+      .build();
 
     client.newCall(request).enqueue(new okhttp3.Callback() {
       @Override
@@ -115,9 +120,9 @@ public class AccountRetrievalService extends IntentService {
 
   private void getUserInfo(final String userName, final String token) {
     Retrofit retrofit = new Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build();
+      .baseUrl(BASE_URL)
+      .addConverterFactory(GsonConverterFactory.create())
+      .build();
     MapboxAccountRetrofitService service = retrofit.create(MapboxAccountRetrofitService.class);
     retrofit2.Call<UserResponse> request = service.getUserAccount(userName, token);
     request.enqueue(new retrofit2.Callback<UserResponse>() {
@@ -128,11 +133,10 @@ public class AccountRetrievalService extends IntentService {
         String avatarUrl = response.body().getAvatar();
         saveUserInfoToSharedPref(userId, emailAddress, avatarUrl, token);
         boolean loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-            .getBoolean(TOKEN_SAVED_KEY, false);
-        AnalyticsTracker.getInstance(getApplicationContext()).setMapboxUsername();
-        AnalyticsTracker.getInstance(getApplicationContext())
-            .viewedScreen(MainActivity.class.getSimpleName(), loggedIn);
-        AnalyticsTracker.getInstance(getApplicationContext()).identifyUser(emailAddress);
+          .getBoolean(TOKEN_SAVED_KEY, false);
+        analytics.setMapboxUsername();
+        analytics.viewedScreen(MainActivity.class.getSimpleName(), loggedIn);
+        analytics.identifyUser(emailAddress);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
       }
@@ -151,11 +155,11 @@ public class AccountRetrievalService extends IntentService {
 
   private void saveUserInfoToSharedPref(String userId, String emailAddress, String avatarUrl, String token) {
     PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-        .putBoolean(TOKEN_SAVED_KEY, true)
-        .putString(USERNAME_KEY, userId)
-        .putString(EMAIL_KEY, emailAddress)
-        .putString(AVATAR_IMAGE_KEY, avatarUrl)
-        .putString(TOKEN_KEY, token)
-        .apply();
+      .putBoolean(TOKEN_SAVED_KEY, true)
+      .putString(USERNAME_KEY, userId)
+      .putString(EMAIL_KEY, emailAddress)
+      .putString(AVATAR_IMAGE_KEY, avatarUrl)
+      .putString(TOKEN_KEY, token)
+      .apply();
   }
 }
