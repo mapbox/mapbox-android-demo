@@ -7,9 +7,8 @@ import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.util.Log;
 
-import com.mapbox.mapboxandroiddemo.MainActivity;
-import com.mapbox.mapboxandroiddemo.R;
 import com.example.sharedcode.analytics.AnalyticsTracker;
+import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.model.usermodel.UserResponse;
 
 import org.json.JSONException;
@@ -77,7 +76,6 @@ public class AccountRetrievalService extends IntentService {
       .addHeader("User-Agent", "Android Dev Preview")
       .addHeader("Content-Type", "application/x-www-form-urlencoded")
       .url(ACCESS_TOKEN_URL)
-      // TODO: Use Uri.Builder()
       .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
         "grant_type=authorization_code&client_id=" + clientId + "&client_secret=" + clientSecret
           + "&redirect_uri=" + redirectUri + "&code=" + code))
@@ -132,13 +130,8 @@ public class AccountRetrievalService extends IntentService {
         String emailAddress = response.body().getEmail();
         String avatarUrl = response.body().getAvatar();
         saveUserInfoToSharedPref(userId, emailAddress, avatarUrl, token);
-        boolean loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-          .getBoolean(TOKEN_SAVED_KEY, false);
         analytics.setMapboxUsername();
-        analytics.viewedScreen(MainActivity.class.getSimpleName(), loggedIn);
         analytics.identifyUser(emailAddress);
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
       }
 
       @Override

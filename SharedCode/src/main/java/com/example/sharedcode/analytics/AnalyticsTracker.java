@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-
 import com.example.sharedcode.R;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.messages.IdentifyMessage;
@@ -87,34 +86,31 @@ public class AnalyticsTracker {
    **/
 
   public void openedAppForFirstTime(@Nullable boolean isTablet, boolean loggedIn) {
-    if (isAnalyticsEnabled()) {
-      Map<String, String> properties = new HashMap<>();
-      properties.put("email", getSharedPreferences(appContext)
-        .getString(EMAIL_KEY, "not logged in"));
-      properties.put("model", Build.MODEL);
-      properties.put("brand", Build.BRAND);
-      properties.put("product", Build.PRODUCT);
-      properties.put("manufacturer", Build.MANUFACTURER);
-      properties.put("device", Build.DEVICE);
-      properties.put("tags", Build.TAGS);
-      properties.put("iso3 language", Locale.getDefault().getISO3Language());
-      properties.put("language", Locale.getDefault().getLanguage());
-      properties.put("iso3 country", Locale.getDefault().getISO3Country());
-      properties.put("country", Locale.getDefault().getCountry());
-      properties.put("display country", Locale.getDefault().getDisplayCountry());
-      properties.put("display name", Locale.getDefault().getDisplayName());
-      properties.put("display language", Locale.getDefault().getDisplayLanguage());
-      if (deviceIsWearable) {
-        properties.put("size", IS_WEARABLE_VALUE);
-      } else {
-        properties.put("size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
-      }
-
-      analytics.enqueue(TrackMessage.builder("New install")
-        .userId(loggedIn ? MAPBOX_USERNAME : "not logged in")
-        .properties(properties)
-      );
+    Map<String, String> properties = new HashMap<>();
+    properties.put("email", getSharedPreferences(appContext)
+      .getString(EMAIL_KEY, "not logged in"));
+    properties.put("model", Build.MODEL);
+    properties.put("brand", Build.BRAND);
+    properties.put("product", Build.PRODUCT);
+    properties.put("manufacturer", Build.MANUFACTURER);
+    properties.put("device", Build.DEVICE);
+    properties.put("tags", Build.TAGS);
+    properties.put("iso3 language", Locale.getDefault().getISO3Language());
+    properties.put("language", Locale.getDefault().getLanguage());
+    properties.put("iso3 country", Locale.getDefault().getISO3Country());
+    properties.put("country", Locale.getDefault().getCountry());
+    properties.put("display country", Locale.getDefault().getDisplayCountry());
+    properties.put("display name", Locale.getDefault().getDisplayName());
+    properties.put("display language", Locale.getDefault().getDisplayLanguage());
+    if (deviceIsWearable) {
+      properties.put("size", IS_WEARABLE_VALUE);
+    } else {
+      properties.put("size", isTablet ? IS_TABLET_MAP_VALUE : IS_PHONE_MAP_VALUE);
     }
+    analytics.enqueue(TrackMessage.builder("New install")
+      .userId(loggedIn ? MAPBOX_USERNAME : "not logged in")
+      .properties(properties)
+    );
   }
 
   /**
@@ -166,6 +162,7 @@ public class AnalyticsTracker {
   private void trackEventWithProperties(@NonNull String eventName, String keyForPropertiesMap,
                                         String valueForPropertiesMap, boolean loggedIn) {
     if (isAnalyticsEnabled()) {
+
       if (keyForPropertiesMap == null || valueForPropertiesMap == null) {
         analytics.enqueue(TrackMessage.builder(eventName)
           .userId(loggedIn ? MAPBOX_USERNAME : "not logged in"));

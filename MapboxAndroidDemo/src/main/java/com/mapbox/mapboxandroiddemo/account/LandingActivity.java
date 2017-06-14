@@ -8,23 +8,21 @@ import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.sharedcode.analytics.AnalyticsTracker;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
-import com.example.sharedcode.analytics.AnalyticsTracker;
 
 import static com.example.sharedcode.analytics.AnalyticsTracker.CLICKED_ON_CREATE_ACCOUNT_BUTTON;
 import static com.example.sharedcode.analytics.AnalyticsTracker.CLICKED_ON_SIGN_IN_BUTTON;
 import static com.example.sharedcode.analytics.StringConstants.AUTHCODE_KEY;
 import static com.example.sharedcode.analytics.StringConstants.CLIENT_ID_KEY;
 import static com.example.sharedcode.analytics.StringConstants.REDIRECT_URI_KEY;
-import static com.example.sharedcode.analytics.StringConstants.SKIPPED_KEY;
 import static com.example.sharedcode.analytics.StringConstants.TOKEN_SAVED_KEY;
 
 
@@ -49,18 +47,7 @@ public class LandingActivity extends AppCompatActivity {
 
     analytics = AnalyticsTracker.getInstance(this, false);
 
-    // TODO: Make sure this Uri.Builder works!
-    Uri.Builder builder = new Uri.Builder();
-    builder.scheme("https")
-      .authority("www.mapbox.com")
-      .appendPath("signup")
-      .appendQueryParameter("route-to", "https%3A%2F%2Fwww.mapbox"
-        + ".com%2Fauthorize%2F%3Fclient_id%3D7bb34a0cf68455d33ec0d994af2330a3f60ee636%26"
-        + "redirect_uri%3Dmapbox-android-dev-"
-        + "preview%3A%2F%2Fauthorize%26response_type%3Dcode");
-    CREATE_ACCOUNT_AUTH_URL = builder.build().toString();
-    Log.d("LandingActivity", "onCreate: CREATE_ACCOUNT_AUTH_URL = " + CREATE_ACCOUNT_AUTH_URL);
-
+    buildAccountAuthUrl();
 
     if (!loggedIn) {
       setContentView(R.layout.activity_landing);
@@ -78,7 +65,8 @@ public class LandingActivity extends AppCompatActivity {
   @Override
   protected void onResume() {
     super.onResume();
-    if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
+    if (getIntent().getBooleanExtra("FROM_LOG_OUT_BUTTON", false)) {
+    } else if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
       Uri uri = getIntent().getData();
       String error = uri.getQueryParameter("error");
       if (error != null) {
@@ -111,11 +99,7 @@ public class LandingActivity extends AppCompatActivity {
     skipForNowButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-          .putBoolean(SKIPPED_KEY, true)
-          .apply();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra(SKIPPED_KEY, true);
         startActivity(intent);
       }
     });
@@ -159,5 +143,17 @@ public class LandingActivity extends AppCompatActivity {
         }
       })
       .show();
+  }
+
+  private void buildAccountAuthUrl() {
+    Uri.Builder builder = new Uri.Builder();
+    builder.scheme("https")
+      .authority("www.mapbox.com")
+      .appendPath("signup")
+      .appendQueryParameter("route-to", "https%3A%2F%2Fwww.mapbox"
+        + ".com%2Fauthorize%2F%3Fclient_id%3D7bb34a0cf68455d33ec0d994af2330a3f60ee636%26"
+        + "redirect_uri%3Dmapbox-android-dev-"
+        + "preview%3A%2F%2Fauthorize%26response_type%3Dcode");
+    CREATE_ACCOUNT_AUTH_URL = builder.build().toString();
   }
 }

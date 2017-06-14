@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -173,17 +172,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-      .getBoolean(TOKEN_SAVED_KEY, false);
+      .getBoolean(TOKEN_SAVED_KEY, true);
 
-    if (getIntent().getBooleanExtra(SKIPPED_KEY, true)) {
-      analytics.trackEvent(SKIPPED_ACCOUNT_CREATION, loggedIn);
-      PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
-        .putBoolean(SKIPPED_KEY, false)
-        .apply();
-    } else {
+    if (loggedIn) {
       analytics.setMapboxUsername();
       analytics.viewedScreen(MainActivity.class.getSimpleName(), loggedIn);
       checkForFirstTimeOpen();
+    } else {
+      analytics.trackEvent(SKIPPED_ACCOUNT_CREATION, loggedIn);
+      PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
+        .putBoolean(SKIPPED_KEY, true)
+        .apply();
     }
     analytics.trackEvent(OPENED_APP, loggedIn);
   }
@@ -650,7 +649,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   }
 
   private void checkForFirstTimeOpen() {
-    Log.d("MainActivity", "checkForFirstTimeOpen: ");
     FirstTimeRunChecker firstTimeRunChecker = new FirstTimeRunChecker(this);
     if (firstTimeRunChecker.firstEverOpen()) {
       analytics.openedAppForFirstTime(getResources().getBoolean(R.bool.isTablet), loggedIn);
@@ -665,7 +663,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     analyticsOptOutSwitch = (Switch) customView.findViewById(R.id.analytics_opt_out_switch);
     analyticsOptOutSwitch.setChecked(!analytics.isAnalyticsEnabled());
 
-    final SettingsDialogView dialogView = new SettingsDialogView(customView, this, analyticsOptOutSwitch, analytics, loggedIn);
+    final SettingsDialogView dialogView = new SettingsDialogView(customView,
+      this, analyticsOptOutSwitch, analytics, loggedIn);
 
     dialogView.buildDialog();
 
