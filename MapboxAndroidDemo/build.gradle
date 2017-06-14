@@ -42,11 +42,6 @@ android {
     }
 }
 
-repositories {
-    maven { url "https://jitpack.io" }
-    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
-}
-
 dependencies {
 
     // Wearable application module
@@ -61,17 +56,21 @@ dependencies {
     compile "com.android.support:support-v4:${supportLibVersion}"
 
     // Mapbox dependencies
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.3@aar') {
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.4@aar') {
         transitive = true
     }
 
     // Mapbox Android UI
     compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.1'
     
-// Mapbox Navigation SDK for Android
+    // Mapbox Navigation SDK for Android
     compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.1.0'
 
-// Other dependencies
+    // Mapbox Navigation SDK for Android
+    compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.3.1'
+
+
+    // Other dependencies
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.code.gson:gson:2.8'
     compile 'com.github.javiersantos:MaterialStyledDialogs:2.1'
@@ -79,9 +78,9 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.retrofit2:retrofit:2.2.0'
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.github.Cutta:GifView:1.1'
-    gpservicesCompile 'com.google.firebase:firebase-crash:10.2.0'
+    gpservicesCompile 'com.google.firebase:firebase-crash:11.0.0'
 }
 
 apply from: '../checkstyle.gradle'

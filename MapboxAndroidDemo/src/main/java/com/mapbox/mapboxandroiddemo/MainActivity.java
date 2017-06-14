@@ -178,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, DefaultStyleActivity.class),
           R.string.activity_style_default_url
         ));
-        currentCategory = R.id.nav_styles;
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_symbol_layer_title,
           R.string.activity_style_symbol_layer_description,
@@ -257,6 +256,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, CustomRasterStyleActivity.class),
           R.string.activity_style_raster_url
         ));
+        currentCategory = R.id.nav_styles;
         break;
 
       case R.id.nav_extrusions:
@@ -278,6 +278,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, MarathonExtrusionActivity.class),
           R.string.activity_style_catalina_marathon_extrusions_url, true
         ));
+        currentCategory = R.id.nav_extrusions;
         break;
 
       case R.id.nav_annotations:

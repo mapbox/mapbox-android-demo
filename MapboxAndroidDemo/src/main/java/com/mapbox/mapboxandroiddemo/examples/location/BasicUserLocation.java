@@ -44,7 +44,7 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
     setContentView(R.layout.activity_location_basic);
 
     // Get the location engine object for later use.
-    locationEngine = LocationSource.getLocationEngine(this);
+    locationEngine = new LocationSource(this);
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);

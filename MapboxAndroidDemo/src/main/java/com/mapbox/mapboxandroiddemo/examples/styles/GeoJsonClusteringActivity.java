@@ -151,6 +151,8 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
         circleColor(layers[i][1]),
         circleRadius(18f)
       );
+
+      // Add a filter to the cluster layer that hides the circles based on "point_count"
       circles.setFilter(
         i == 0
           ? gte("point_count", layers[i][0]) :

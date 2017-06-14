@@ -44,7 +44,7 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
     setContentView(R.layout.activity_location_customize_user);
 
     // Get the location engine object for later use.
-    locationEngine = LocationSource.getLocationEngine(this);
+    locationEngine = new LocationSource(this);
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
