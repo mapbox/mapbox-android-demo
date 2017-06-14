@@ -2,14 +2,10 @@ package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -49,8 +45,8 @@ public class MarathonExtrusionActivity extends AppCompatActivity {
         MarathonExtrusionActivity.this.mapboxMap = mapboxMap;
 
         // Add the marathon route source to the map
-        GeoJsonSource courseRouteGeoJSON = new GeoJsonSource("coursedata", loadJsonFromAsset("marathon_route.geojson"));
-        mapboxMap.addSource(courseRouteGeoJSON);
+        GeoJsonSource courseRouteGeoJson = new GeoJsonSource("coursedata", loadJsonFromAsset("marathon_route.geojson"));
+        mapboxMap.addSource(courseRouteGeoJson);
         addExtrusionsLayerToMap();
       }
     });
