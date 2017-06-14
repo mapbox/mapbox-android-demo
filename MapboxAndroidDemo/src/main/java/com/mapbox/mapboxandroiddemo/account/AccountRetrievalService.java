@@ -8,6 +8,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import com.example.sharedcode.analytics.AnalyticsTracker;
+import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.model.usermodel.UserResponse;
 
@@ -132,6 +133,8 @@ public class AccountRetrievalService extends IntentService {
         saveUserInfoToSharedPref(userId, emailAddress, avatarUrl, token);
         analytics.setMapboxUsername();
         analytics.identifyUser(emailAddress);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
       }
 
       @Override

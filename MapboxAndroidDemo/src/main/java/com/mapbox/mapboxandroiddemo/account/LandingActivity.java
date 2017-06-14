@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -66,6 +67,8 @@ public class LandingActivity extends AppCompatActivity {
   protected void onResume() {
     super.onResume();
     if (getIntent().getBooleanExtra("FROM_LOG_OUT_BUTTON", false)) {
+      Toast.makeText(getApplicationContext(), R.string.log_out_toast_confirm, Toast.LENGTH_LONG).show();
+
     } else if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
       Uri uri = getIntent().getData();
       String error = uri.getQueryParameter("error");

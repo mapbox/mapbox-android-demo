@@ -89,7 +89,6 @@ public class SettingsDialogView {
     sharePrefEditor.putString(AVATAR_IMAGE_KEY, "");
     sharePrefEditor.putString(TOKEN_KEY, "");
     sharePrefEditor.apply();
-    Toast.makeText(context, R.string.log_out_toast_confirm, Toast.LENGTH_LONG).show();
     Intent intent = new Intent(context, LandingActivity.class);
     intent.putExtra(FROM_LOG_OUT_BUTTON_KEY, true);
     context.startActivity(intent);
