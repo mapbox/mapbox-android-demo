@@ -32,7 +32,7 @@ public class ColorSwitcherActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_color_switcher);
 
     final SeekBar redSeekBar = (SeekBar) findViewById(R.id.red_seek_bar);
