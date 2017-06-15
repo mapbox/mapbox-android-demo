@@ -40,7 +40,7 @@ public class SymbolLayerActivity extends AppCompatActivity implements OnMapReady
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_symbol_layer);
 
     mapView = (MapView) findViewById(R.id.mapView);

@@ -55,7 +55,6 @@ dependencies {
     compile "com.android.support:customtabs:${supportLibVersion}"
     compile "com.android.support:support-v4:${supportLibVersion}"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.code.gson:gson:2.8'
 
     // Mapbox dependencies
     compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.4@aar') {
@@ -69,6 +68,7 @@ dependencies {
     compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.3.1'
 
     // Other dependencies
+    compile 'com.google.code.gson:gson:2.8'
     compile 'com.github.javiersantos:MaterialStyledDialogs:2.1'
     compile 'com.getbase:floatingactionbutton:1.10.1'
     compile 'com.squareup.picasso:picasso:2.5.2'

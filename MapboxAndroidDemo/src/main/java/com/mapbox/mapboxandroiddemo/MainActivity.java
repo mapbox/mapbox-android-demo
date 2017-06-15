@@ -37,6 +37,7 @@ import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.AnimatedLocationIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.BasicUserLocation;
 import com.mapbox.mapboxandroiddemo.examples.location.CustomizeUserLocationActivity;
@@ -177,7 +178,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, DefaultStyleActivity.class),
           R.string.activity_style_default_url
         ));
-        currentCategory = R.id.nav_styles;
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_symbol_layer_title,
           R.string.activity_style_symbol_layer_description,
@@ -256,6 +256,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, CustomRasterStyleActivity.class),
           R.string.activity_style_raster_url
         ));
+        currentCategory = R.id.nav_styles;
         break;
 
       case R.id.nav_extrusions:
@@ -271,6 +272,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, PopulationDensityExtrusionActivity.class),
           R.string.activity_style_population_density_extrusions_url, true
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_catalina_marathon_extrusions_title,
+          R.string.activity_style_catalina_marathon_extrusions_description,
+          new Intent(MainActivity.this, MarathonExtrusionActivity.class),
+          R.string.activity_style_catalina_marathon_extrusions_url, true
+        ));
+        currentCategory = R.id.nav_extrusions;
         break;
 
       case R.id.nav_annotations:
@@ -302,7 +310,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_annotation_polygon_holes_title,
           R.string.activity_annotation_polygon_holes_description,
           new Intent(MainActivity.this, PolygonHolesActivity.class),
-          R.string.activity_annotation_polygon_holes_url,true
+          R.string.activity_annotation_polygon_holes_url, true
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_annotation_custom_info_window_title,
