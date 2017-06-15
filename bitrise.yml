@@ -63,7 +63,7 @@ workflows:
         - apk_path: "$BITRISE_SIGNED_APK_PATH"
         - service_account_json_key_path: "$BITRISEIO_SERVICE_ACCOUNT_JSON_URL"
         - package_name: com.mapbox.mapboxandroiddemo
-        - track: beta
+        - track: alpha
         - whatsnews_dir: whatsnew
         - service_account_email: ''
         - key_file_path: ''
