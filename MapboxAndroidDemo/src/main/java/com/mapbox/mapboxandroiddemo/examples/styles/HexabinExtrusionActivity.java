@@ -1,12 +1,14 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -22,6 +24,7 @@ import com.mapbox.services.commons.geojson.FeatureCollection;
 import static com.mapbox.mapboxsdk.style.functions.Function.zoom;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
+import static com.mapbox.mapboxsdk.style.functions.stops.Stops.interval;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleBlur;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
@@ -93,12 +96,28 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
+
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(@NonNull final MapboxMap map) {
-        mapboxMap = map;
-        addLayers();
+      public void onMapReady(MapboxMap mapboxMap) {
+       /* addGrids3dLayer();
+        setUpActiveGrid();*/
 
+        for (int x = 0; x < mapboxMap.getLayers().size(); x++) {
+          Log.d("HexabinActivity", "onMapReady: layer name = " + mapboxMap.getLayers().get(x).getId());
+        }
+
+        mapboxMap.setLatLngBoundsForCameraTarget(new LatLngBounds.Builder()
+          .include(new LatLng(40.609614478818855, -74.09692544272578))
+          .include(new LatLng(40.846999364699144, -73.77487016324935))
+          .build());
+
+        setUpComplaints();
+        setUpBusinesses();
+
+
+        /*setUpGridsCountLayer();
+        setUpPointsActiveLayer();*/
       }
     });
   }
@@ -111,7 +130,6 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
     }
     ;
   }
-
   /*@Override
   public void onMapLongClick(@NonNull LatLng point) {
     LatLng coordinates = new LatLng(point.getLatitude(), point.getLongitude());
@@ -166,16 +184,6 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
     }
   }*/
 
-
-
-  private void addLayers() {
-    addGrids3dLayer();
-    setUpActiveGrid();
-    setUpComplaints();
-    setUpBusinesses();
-    setUpGridsCountLayer();
-    setUpPointsActiveLayer();
-  }
 
   private void setLayers() {
     if (activeCamera.equals("hexbin")) {
@@ -266,7 +274,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
     complaintCirclesLayer.withProperties(
       circleRadius(
         zoom(
-          exponential(
+          interval(
             stop(12, circleRadius(1f)),
             stop(15, circleRadius(5f))
           )

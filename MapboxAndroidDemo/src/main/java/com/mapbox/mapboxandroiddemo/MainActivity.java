@@ -277,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_basic_hexabin_extrusions_title,
           R.string.activity_style_basic_hexabin_extrusions_description,
           new Intent(MainActivity.this, HexabinExtrusionActivity.class),
-          R.string.activity_style_basic_hexabin_extrusions_url
+          R.string.activity_style_basic_hexabin_extrusions_url, true
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_catalina_marathon_extrusions_title,
