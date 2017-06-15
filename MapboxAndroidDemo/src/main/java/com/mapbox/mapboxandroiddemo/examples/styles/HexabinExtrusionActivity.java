@@ -283,7 +283,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
       circleColor(colorStops[2]),
       circleOpacity(0f)
     );
-    mapboxMap.addLayerAbove(complaintCirclesLayer, "admin-2-boundaries-dispute");
+    mapboxMap.addLayer(complaintCirclesLayer);
   }
 
   private void setUpBusinesses() {
@@ -304,7 +304,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
       circleColor(colorStops[5]),
       circleOpacity(0f)
     );
-    mapboxMap.addLayerAbove(businessCircleLayer, "admin-2-boundaries-dispute");
+    mapboxMap.addLayer(businessCircleLayer);
   }
 
   private void setUpGridsCountLayer() {
