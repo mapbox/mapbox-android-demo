@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -8,26 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.constants.Style;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.functions.Function;
 import com.mapbox.mapboxsdk.style.functions.stops.IntervalStops;
-import com.mapbox.mapboxsdk.style.functions.stops.Stops;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
-import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
-import com.mapbox.services.commons.geojson.Feature;
 import com.mapbox.services.commons.geojson.FeatureCollection;
-
-import java.util.List;
 
 import static com.mapbox.mapboxsdk.style.functions.Function.zoom;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
@@ -36,7 +26,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleBlur;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
@@ -59,7 +48,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
   private String activeCamera = "hexbin";
   private String activeType = "total";
   // result data field of camera, type, method combined
-  private String activeDDS = "totalDensity";
+  private String activeDds = "totalDensity";
   private CameraPosition previousCamera;
   private FeatureCollection empty;
   private FeatureCollection gridActive;
@@ -67,7 +56,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
 
 
 
-  /*private maxColor =max[activeDDS];
+  /*private maxColor =max[activeDds];
   private maxHeight =max["totalDensity"];
 */
   // for DDS threshholds, [total, density]
@@ -232,14 +221,14 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
                 stop(maxColor * .8, fillColor(Color.parseColor(colorStops[3])),
                   stop(maxColor * .2, fillColor(Color.parseColor(colorStops[4])),
                     stop(maxColor, fillColor(Color.parseColor(colorStops[5]))),
-                    fillExtrusionHeight(Function.property("activeDDS", IntervalStops.interval(
+                    fillExtrusionHeight(Function.property("activeDds", IntervalStops.interval(
                       stop(0, fillExtrusionHeight(0f),
                         fillExtrusionOpacity(0.9f));
 
     FillExtrusionLayer fillExtrusionLayer3dGrid = new FillExtrusionLayer("grids-3d", "grids");
     fillExtrusionLayer3dGrid.withProperties(
       fillExtrusionOpacity(0.9f),
-      fillExtrusionHeight(Function.property("activeDDS", IntervalStops.interval(
+      fillExtrusionHeight(Function.property("activeDds", IntervalStops.interval(
         stop(0, fillExtrusionHeight(0f)))
       ))),
       fillExtrusionColor(Function.property("population",
@@ -261,7 +250,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
     FillExtrusionLayer fillExtrusionLayerActiveGridLayer = new FillExtrusionLayer("grid-active", "grid-active");
     fillExtrusionLayerActiveGridLayer.withProperties(
       fillExtrusionColor(colorActive),
-      fillExtrusionHeight(Function.property("activeDDS", IntervalStops.interval(
+      fillExtrusionHeight(Function.property("activeDds", IntervalStops.interval(
         stop(0, fillExtrusionHeight(0f))))),
       fillExtrusionOpacity(0.6f));
 
@@ -315,7 +304,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
     gridsCountLayer.withProperties(
       textOpacity(0f),
       textSize(14f),
-      textField("{" + activeDDS + "}"),
+      textField("{" + activeDds + "}"),
       textColor(colorStops[2])
     );
   }
