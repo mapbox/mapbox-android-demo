@@ -1,11 +1,15 @@
 # Release documentation
 
-This doc covers the steps required to release a new version of [Mapbox Dev Preview](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo) to Google Play:
+This doc covers the steps required to release a new version of [Mapbox Demo App](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo) to Google Play:
 
 ## Prepare code
 
 Standard workflow:
  - Update and integrate dependencies
+ - Pull in the latest string file translations from [Transifex](transifex.com):
+   - [Install the Transifex client](https://docs.transifex.com/client/installing-the-client)
+   - Navigate to this repo's root folder
+   - Run `tx pull -a` to update string files
  - Update `whatsnew/whatsnew-en-US`
  - Local test with proguard 
  - Merge PR with changes to master
