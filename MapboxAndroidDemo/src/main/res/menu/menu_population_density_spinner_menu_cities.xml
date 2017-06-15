@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/san_francisco"
+        android:orderInCategory="100"
+        android:title="@string/san_francisco"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/los_angeles"
+        android:orderInCategory="100"
+        android:title="@string/los_angeles"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/seattle"
+        android:orderInCategory="100"
+        android:title="@string/seattle"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/new_orleans"
+        android:orderInCategory="100"
+        android:title="@string/new_orleans"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/chicago"
+        android:orderInCategory="100"
+        android:title="@string/chicago"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/philadelphia"
+        android:orderInCategory="100"
+        android:title="@string/philadelphia"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/new_york"
+        android:orderInCategory="100"
+        android:title="@string/new_york"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/atlanta"
+        android:orderInCategory="100"
+        android:title="@string/atlanta"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/portland"
+        android:orderInCategory="100"
+        android:title="@string/portland"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/denver"
+        android:orderInCategory="100"
+        android:title="@string/denver"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/minneapolis"
+        android:orderInCategory="100"
+        android:title="@string/minneapolis"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/miami"
+        android:orderInCategory="100"
+        android:title="@string/miami"
+        app:showAsAction="never"/>
+
+</menu>
