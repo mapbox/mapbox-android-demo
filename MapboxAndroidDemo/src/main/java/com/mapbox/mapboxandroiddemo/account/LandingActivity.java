@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -45,30 +46,33 @@ public class LandingActivity extends AppCompatActivity {
     loggedIn = PreferenceManager.getDefaultSharedPreferences(
       getApplicationContext())
       .getBoolean(TOKEN_SAVED_KEY, false);
-
     analytics = AnalyticsTracker.getInstance(this, false);
 
-    buildAccountAuthUrl();
 
     if (!loggedIn) {
       setContentView(R.layout.activity_landing);
       getSupportActionBar().hide();
+      buildAccountAuthUrl();
       setUpSkipDialog();
       setUpButtons();
-      analytics.viewedScreen("Create/login screen", loggedIn);
     } else {
       Intent intent = new Intent(this, MainActivity.class);
       startActivity(intent);
     }
+  }
 
+  @Override
+  public void startActivityForResult(Intent intent, int requestCode) {
+    super.startActivityForResult(intent, requestCode);
+    Log.d(TAG, "startActivityForResult: ");
   }
 
   @Override
   protected void onResume() {
     super.onResume();
+    Log.d(TAG, "onResume: ");
     if (getIntent().getBooleanExtra("FROM_LOG_OUT_BUTTON", false)) {
       Toast.makeText(getApplicationContext(), R.string.log_out_toast_confirm, Toast.LENGTH_LONG).show();
-
     } else if (getIntent().getAction().equals(Intent.ACTION_VIEW)) {
       Uri uri = getIntent().getData();
       String error = uri.getQueryParameter("error");
