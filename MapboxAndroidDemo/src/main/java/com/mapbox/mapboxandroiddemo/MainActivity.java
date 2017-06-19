@@ -37,6 +37,7 @@ import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.AnimatedLocationIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.BasicUserLocation;
@@ -277,6 +278,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_catalina_marathon_extrusions_description,
           new Intent(MainActivity.this, MarathonExtrusionActivity.class),
           R.string.activity_style_catalina_marathon_extrusions_url, true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_adjust_extrusions_title,
+          R.string.activity_style_adjust_extrusions_description,
+          new Intent(MainActivity.this, AdjustExtrusionLightActivity.class),
+          R.string.activity_style_adjust_extrusions_url, true
         ));
         currentCategory = R.id.nav_extrusions;
         break;
