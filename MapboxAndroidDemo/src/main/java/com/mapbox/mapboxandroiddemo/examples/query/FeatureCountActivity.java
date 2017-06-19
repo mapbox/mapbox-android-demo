@@ -34,7 +34,7 @@ public class FeatureCountActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_query_feature_count);
 
     // Define our views, ones the center box and the others our view container used for the

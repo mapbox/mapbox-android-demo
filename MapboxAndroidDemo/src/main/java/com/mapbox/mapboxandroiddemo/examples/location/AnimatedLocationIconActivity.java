@@ -65,11 +65,11 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_location_animated_icon);
 
     // Get the location engine object for later use.
-    locationEngine = LocationSource.getLocationEngine(this);
+    locationEngine = new LocationSource(this);
     locationEngine.activate();
 
     mapView = (MapView) findViewById(R.id.mapView);

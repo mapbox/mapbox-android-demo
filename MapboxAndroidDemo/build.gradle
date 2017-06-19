@@ -40,11 +40,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
 
-repositories {
-    maven { url "https://jitpack.io" }
-    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+    splits {
+        abi {
+            enable true
+            universalApk false
+        }
+    }
 }
 
 dependencies {
@@ -59,14 +61,17 @@ dependencies {
     compile "com.android.support:support-v4:${supportLibVersion}"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.code.gson:gson:2.8'
+
     // Mapbox dependencies
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.3@aar') {
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.4@aar') {
         transitive = true
     }
     // Mapbox Android UI
     compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.1'
+
     // Mapbox Navigation SDK for Android
     compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.3.1'
+    
     // Other dependencies
     compile 'com.github.javiersantos:MaterialStyledDialogs:2.1'
     compile 'com.getbase:floatingactionbutton:1.10.1'

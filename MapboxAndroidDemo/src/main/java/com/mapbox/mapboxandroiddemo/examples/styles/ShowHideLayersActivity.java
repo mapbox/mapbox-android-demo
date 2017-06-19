@@ -35,7 +35,7 @@ public class ShowHideLayersActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_show_hide_layers);
 
     floatingActionButton = (FloatingActionButton) findViewById(R.id.fab_layer_toggle);
