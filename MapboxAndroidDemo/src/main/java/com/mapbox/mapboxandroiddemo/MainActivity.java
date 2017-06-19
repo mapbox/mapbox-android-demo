@@ -691,8 +691,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
       });
 
-      Picasso.with(getApplicationContext()).load(PreferenceManager.getDefaultSharedPreferences(
-        getApplicationContext()).getString(AVATAR_IMAGE_KEY, "")).into(accountGravatarImage);
+      String tester = PreferenceManager.getDefaultSharedPreferences(
+        getApplicationContext()).getString(AVATAR_IMAGE_KEY, "");
+
+      if (!tester.isEmpty()) {
+        Picasso.with(getApplicationContext()).load(PreferenceManager.getDefaultSharedPreferences(
+          getApplicationContext()).getString(AVATAR_IMAGE_KEY, "")).into(accountGravatarImage);
+      }
 
       accountUserName.setText(getResources().getString(R.string.logged_in_username,
         PreferenceManager.getDefaultSharedPreferences(
