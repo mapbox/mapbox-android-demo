@@ -62,8 +62,8 @@
     <string name="activity_style_line_layer_title">Create a line layer</string>
     <string name="activity_style_symbol_layer_title">Marker symbol layer</string>
     <string name="activity_style_basic_extrusions_title">Display buildings in 3D</string>
-    <string name="activity_style_population_density_extrusions_title">Display 3D building height based on data</string>
     <string name="activity_style_catalina_marathon_extrusions_title">Use GeoJSON data to set extrusion height</string>
+    <string name="activity_style_population_density_extrusions_title">Display 3D building height based on vector data</string>
     <string name="activity_style_adjust_extrusions_title">Adjust light location and color</string>
     <string name="activity_dds_style_circle_categorically_title">Style circles categorically</string>
     <string name="activity_dds_choropleth_zoom_change_title">Update a choropleth layer by zoom level</string>
@@ -120,8 +120,8 @@
     <string name="activity_style_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
     <string name="activity_style_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
     <string name="activity_style_basic_extrusions_description">Use extrusions to display 3D building height</string>
-    <string name="activity_style_population_density_extrusions_description">Use extrusions to display 3D building height based on imported data</string>
     <string name="activity_style_catalina_marathon_extrusions_description">Use data-driven styling and GeoJSON data to set extrusions\' heights</string>
+    <string name="activity_style_population_density_extrusions_description">Use extrusions to display 3D building height based on imported vector data</string>
     <string name="activity_style_adjust_extrusions_description">Change the location and color of the light shined on extrusions</string>
     <string name="activity_dds_style_circle_categorically_description">Using a categorical circle-color property function for a visualization.</string>
     <string name="activity_dds_choropleth_zoom_change_description">Using 2014 census data, display state or county population depending on zoom level.</string>
