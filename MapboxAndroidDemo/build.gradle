@@ -69,7 +69,7 @@ dependencies {
     }
 
     // Mapbox Android UI
-    compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.1'
+    compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.2'
 
     // Mapbox Navigation SDK for Android
     compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.3.1'
