@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.account;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Base64;
@@ -25,8 +26,11 @@ import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.sharedcode.analytics.StringConstants.AUTHCODE_KEY;
 import static com.example.sharedcode.analytics.StringConstants.AVATAR_IMAGE_KEY;
+import static com.example.sharedcode.analytics.StringConstants.CLIENT_ID_KEY;
 import static com.example.sharedcode.analytics.StringConstants.EMAIL_KEY;
+import static com.example.sharedcode.analytics.StringConstants.REDIRECT_URI_KEY;
 import static com.example.sharedcode.analytics.StringConstants.TOKEN_KEY;
 import static com.example.sharedcode.analytics.StringConstants.TOKEN_SAVED_KEY;
 import static com.example.sharedcode.analytics.StringConstants.USERNAME_KEY;
@@ -61,9 +65,9 @@ public class AccountRetrievalService extends IntentService {
   @Override
   protected void onHandleIntent(@Nullable Intent intent) {
     if (intent != null) {
-      String authCode = intent.getStringExtra("AUTHCODE");
-      clientId = intent.getStringExtra("CLIENT_ID");
-      redirectUri = intent.getStringExtra("REDIRECT_URI");
+      String authCode = intent.getStringExtra(AUTHCODE_KEY);
+      clientId = intent.getStringExtra(CLIENT_ID_KEY);
+      redirectUri = intent.getStringExtra(REDIRECT_URI_KEY);
       getAccessToken(authCode);
     } else {
       Log.d("AccountRetrievalService", "onHandleIntent: intent == null");
@@ -71,15 +75,23 @@ public class AccountRetrievalService extends IntentService {
   }
 
   private void getAccessToken(String code) {
+
     String clientSecret = getString(R.string.mapbox_auth_flow_secret);
+
+    String query = new Uri.Builder()
+      .appendQueryParameter("grant_type", "authorization_code")
+      .appendQueryParameter("client_id", clientId)
+      .appendQueryParameter("client_secret", clientSecret)
+      .appendQueryParameter("redirect_uri", redirectUri)
+      .appendQueryParameter("code", code)
+      .build().getQuery();
+
     OkHttpClient client = new OkHttpClient();
     Request request = new Request.Builder()
       .addHeader("User-Agent", "Android Dev Preview")
       .addHeader("Content-Type", "application/x-www-form-urlencoded")
       .url(ACCESS_TOKEN_URL)
-      .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"),
-        "grant_type=authorization_code&client_id=" + clientId + "&client_secret=" + clientSecret
-          + "&redirect_uri=" + redirectUri + "&code=" + code))
+      .post(RequestBody.create(MediaType.parse("application/x-www-form-urlencoded"), query))
       .build();
 
     client.newCall(request).enqueue(new okhttp3.Callback() {

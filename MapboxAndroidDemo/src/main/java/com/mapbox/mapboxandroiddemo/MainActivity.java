@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
   private AnalyticsTracker analytics;
 
+  private String TAG = "MainActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -174,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-      .getBoolean(TOKEN_SAVED_KEY, true);
+      .getBoolean(TOKEN_SAVED_KEY, false);
 
     if (loggedIn) {
       analytics.setMapboxUsername();
@@ -688,9 +690,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView accountUserName = (TextView) customView.findViewById(R.id.logged_in_user_username);
 
     if (!loggedIn) {
+      Log.d(TAG, "buildSettingsDialog: !loggedIn");
       logOutOfMapboxAccountButton.setVisibility(View.GONE);
       accountGravatarImage.setVisibility(View.GONE);
     } else {
+      Log.d(TAG, "buildSettingsDialog: loggedIn");
       logOutOfMapboxAccountButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
