@@ -115,8 +115,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
   private AnalyticsTracker analytics;
 
-  private String TAG = "MainActivity";
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -690,11 +688,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     TextView accountUserName = (TextView) customView.findViewById(R.id.logged_in_user_username);
 
     if (!loggedIn) {
-      Log.d(TAG, "buildSettingsDialog: !loggedIn");
       logOutOfMapboxAccountButton.setVisibility(View.GONE);
       accountGravatarImage.setVisibility(View.GONE);
     } else {
-      Log.d(TAG, "buildSettingsDialog: loggedIn");
       logOutOfMapboxAccountButton.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
