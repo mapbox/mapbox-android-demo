@@ -28,7 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Using the polylines utility, simplify a polyline at a given tolerance to reduce the number of coordinates in that polyline.
+ * Using the polylines utility, simplify a polyline at a
+ * given tolerance to reduce the number of coordinates in that polyline.
  */
 public class SimplifyPolylineActivity extends AppCompatActivity {
 
