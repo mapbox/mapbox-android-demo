@@ -9,6 +9,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Use legacy raster tiles in your app.
+ */
 public class CustomRasterStyleActivity extends AppCompatActivity {
 
   private MapView mapView;

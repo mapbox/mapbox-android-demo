@@ -14,6 +14,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Fit a map to a bounding box
+ */
 public class BoundingBoxCameraActivity extends AppCompatActivity {
 
   private MapView mapView;

@@ -35,6 +35,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Match raw GPS points to the map so they align with roads and pathways.
+ */
 public class MapMatchingActivity extends AppCompatActivity {
 
   private static final String TAG = "MapMatchingActivity";

@@ -17,6 +17,9 @@ import com.mapbox.mapboxsdk.style.layers.FillLayer;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
+/**
+ * Using setPaintProperty to change a layer's fill color.
+ */
 public class ColorSwitcherActivity extends AppCompatActivity {
 
   private MapView mapView;

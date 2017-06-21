@@ -13,6 +13,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Create a marker with a custom icon using the Mapbox Android SDK.
+ */
 public class DrawCustomMarkerActivity extends AppCompatActivity {
 
   private MapView mapView;

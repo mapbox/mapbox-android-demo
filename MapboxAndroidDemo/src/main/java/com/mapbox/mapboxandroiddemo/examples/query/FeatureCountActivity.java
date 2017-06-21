@@ -22,6 +22,9 @@ import java.util.List;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
+/**
+ * Get the feature count inside of a bounding box and highlight all of the buildings in the box.
+ */
 public class FeatureCountActivity extends AppCompatActivity {
 
   private MapView mapView;

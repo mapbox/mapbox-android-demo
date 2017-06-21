@@ -32,6 +32,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
+/**
+ * Use GeoJSON to visualize point data as a clusters.
+ */
 public class GeoJsonClusteringActivity extends AppCompatActivity {
 
   private MapView mapView;

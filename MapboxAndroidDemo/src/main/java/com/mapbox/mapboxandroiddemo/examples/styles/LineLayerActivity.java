@@ -22,6 +22,9 @@ import com.mapbox.services.commons.models.Position;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Add a GeoJSON line to a map.
+ */
 public class LineLayerActivity extends AppCompatActivity {
 
   private MapView mapView;

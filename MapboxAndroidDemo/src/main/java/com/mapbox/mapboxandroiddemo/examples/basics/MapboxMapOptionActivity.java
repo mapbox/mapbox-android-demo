@@ -13,6 +13,9 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Add a map view in a dynamically created layout
+ */
 public class MapboxMapOptionActivity extends AppCompatActivity {
 
   private MapView mapView;

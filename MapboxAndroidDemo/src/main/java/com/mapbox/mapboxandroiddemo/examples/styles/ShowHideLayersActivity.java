@@ -21,6 +21,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 
+/**
+ * Toggle visibility of a dataset with a Button.
+ */
 public class ShowHideLayersActivity extends AppCompatActivity {
 
   private MapView mapView;

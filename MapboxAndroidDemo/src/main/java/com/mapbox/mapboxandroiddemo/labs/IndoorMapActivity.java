@@ -35,6 +35,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
+/**
+ * Display an indoor map of a building with toggles to switch between floor levels
+ */
 public class IndoorMapActivity extends AppCompatActivity {
 
   private GeoJsonSource indoorBuildingSource;

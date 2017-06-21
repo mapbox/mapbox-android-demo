@@ -11,6 +11,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Create a default marker with an InfoWindow
+ */
 public class DrawMarkerActivity extends AppCompatActivity {
 
   private MapView mapView;

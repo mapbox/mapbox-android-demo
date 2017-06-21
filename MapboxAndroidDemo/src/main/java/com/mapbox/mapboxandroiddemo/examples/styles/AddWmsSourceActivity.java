@@ -13,6 +13,9 @@ import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.RasterSource;
 import com.mapbox.mapboxsdk.style.sources.TileSet;
 
+/**
+ * Adding an external Web Map Service layer to the map.
+ */
 public class AddWmsSourceActivity extends AppCompatActivity {
 
   MapView mapView;

@@ -17,6 +17,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Restrict the map camera to certain bounds.
+ */
 public class RestrictCameraActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private static final LatLngBounds AUSTRALIA_BOUNDS = new LatLngBounds.Builder()

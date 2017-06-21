@@ -21,6 +21,9 @@ import com.mapbox.services.commons.geojson.Polygon;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Use the query feature to select a building, get its geometry, and draw a polygon highlighting it.
+ */
 public class SelectBuildingActivity extends AppCompatActivity {
 
   private MapView mapView;

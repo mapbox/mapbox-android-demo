@@ -27,6 +27,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionCol
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
 
+/**
+ * Change the location and color of the light that's shined on extrusions
+ */
 public class AdjustExtrusionLightActivity extends AppCompatActivity {
 
   private MapView mapView;

@@ -9,6 +9,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Show a map in your app using the Mapbox Android SDK.
+ */
 public class SimpleMapViewActivity extends WearableActivity {
 
   private MapView mapView;

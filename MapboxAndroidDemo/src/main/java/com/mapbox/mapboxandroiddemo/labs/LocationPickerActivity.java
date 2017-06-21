@@ -46,6 +46,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Drop a marker at a specific location and then perform reverse geocoding to retrieve and display the location's address
+ */
 public class LocationPickerActivity extends AppCompatActivity implements PermissionsListener {
 
   private MapView mapView;

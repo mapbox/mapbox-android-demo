@@ -18,6 +18,9 @@ import com.mapbox.services.api.geocoding.v5.GeocodingCriteria;
 import com.mapbox.services.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.services.commons.models.Position;
 
+/**
+ * Use Mapbox Android Service's geocoder to convert location text into geographic coordinates.
+ */
 public class GeocodingActivity extends AppCompatActivity {
 
   private MapView mapView;

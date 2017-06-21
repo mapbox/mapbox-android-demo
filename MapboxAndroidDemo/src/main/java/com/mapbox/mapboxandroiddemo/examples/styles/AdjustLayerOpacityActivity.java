@@ -16,6 +16,9 @@ import com.mapbox.mapboxsdk.style.sources.RasterSource;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.rasterOpacity;
 
+/**
+ * Use a seekbar to adjust the opacity of a raster layer on top of a map.
+ */
 public class AdjustLayerOpacityActivity extends AppCompatActivity {
 
   private MapView mapView;

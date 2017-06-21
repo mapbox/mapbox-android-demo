@@ -24,6 +24,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 
+/**
+ * Display 2014 census data by state or county, depending on the map's zoom level.
+ */
 public class ChoroplethZoomChangeActivity extends AppCompatActivity {
 
   private static final int ZOOM_THRESHOLD = 4;

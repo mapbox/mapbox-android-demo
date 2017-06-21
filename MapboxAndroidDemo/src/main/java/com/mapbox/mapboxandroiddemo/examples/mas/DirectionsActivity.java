@@ -29,6 +29,9 @@ import retrofit2.Response;
 
 import static com.mapbox.services.Constants.PRECISION_6;
 
+/**
+ * Use Mapbox Android Services to request directions
+ */
 public class DirectionsActivity extends AppCompatActivity {
 
   private static final String TAG = "DirectionsActivity";

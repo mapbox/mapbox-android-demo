@@ -20,6 +20,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Use an info window adapter to customize the info window.
+ */
 public class CustomInfoWindowActivity extends AppCompatActivity {
 
   private MapView mapView;

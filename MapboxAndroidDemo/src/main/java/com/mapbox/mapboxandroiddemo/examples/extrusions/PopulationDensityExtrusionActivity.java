@@ -28,6 +28,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBas
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
 
+/**
+ * Use imported vector data to set the height of 3D building extrusions
+ */
 public class PopulationDensityExtrusionActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
