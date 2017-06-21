@@ -15,6 +15,9 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Draw a vector polygon on a map with the Mapbox Android SDK.
+ */
 public class DrawPolygonActivity extends AppCompatActivity {
 
   private MapView mapView;

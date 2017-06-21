@@ -19,6 +19,9 @@ import com.mapbox.services.commons.geojson.Feature;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Display map property information for a clicked map feature
+ */
 public class QueryFeatureActivity extends AppCompatActivity {
 
   private MapView mapView;

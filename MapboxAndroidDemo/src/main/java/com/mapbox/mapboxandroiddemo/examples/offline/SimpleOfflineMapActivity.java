@@ -22,6 +22,9 @@ import com.mapbox.mapboxsdk.offline.OfflineTilePyramidRegionDefinition;
 
 import org.json.JSONObject;
 
+/**
+ * Download and view an offline map using the Mapbox Android SDK.
+ */
 public class SimpleOfflineMapActivity extends AppCompatActivity {
 
   private static final String TAG = "SimpOfflineMapActivity";

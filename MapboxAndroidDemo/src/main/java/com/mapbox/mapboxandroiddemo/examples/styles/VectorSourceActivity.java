@@ -18,6 +18,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
+/**
+ * Add a vector source to a map.
+ */
 public class VectorSourceActivity extends AppCompatActivity {
 
   private MapView mapView;

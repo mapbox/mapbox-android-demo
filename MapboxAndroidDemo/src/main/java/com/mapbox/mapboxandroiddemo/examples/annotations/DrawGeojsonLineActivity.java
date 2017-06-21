@@ -25,6 +25,9 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.
+ */
 public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private static final String TAG = "DrawGeojsonLineActivity";

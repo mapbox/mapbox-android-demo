@@ -14,6 +14,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Animate the map's camera position, tilt, bearing, and zoom.
+ */
 public class AnimateMapCameraActivity extends AppCompatActivity {
 
   private MapView mapView;

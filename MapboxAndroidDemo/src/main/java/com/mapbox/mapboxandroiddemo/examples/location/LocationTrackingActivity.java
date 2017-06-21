@@ -17,6 +17,9 @@ import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
 import java.util.List;
 
+/**
+ * Lock the camera centered above the user's location.
+ */
 public class LocationTrackingActivity extends AppCompatActivity implements PermissionsListener {
 
   private PermissionsManager permissionsManager;

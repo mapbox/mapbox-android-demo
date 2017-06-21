@@ -21,6 +21,9 @@ import static com.mapbox.mapboxsdk.style.functions.Function.property;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stops.categorical;
 
+/**
+ * Use data-driven styling to set a line's color based on imported GeoJSON.
+ */
 public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
 
   private MapView mapView;

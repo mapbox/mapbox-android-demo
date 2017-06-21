@@ -18,6 +18,9 @@ import java.net.URL;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 
+/**
+ * Using the second argument of addLayer, you can add a layer below existing one
+ */
 public class GeojsonLayerInStackActivity extends AppCompatActivity {
 
   private MapView mapView;

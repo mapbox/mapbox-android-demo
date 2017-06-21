@@ -18,6 +18,9 @@ import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
+/**
+ * Use runtime styling to change the water layer's fill color based on the map zoom level
+ */
 public class ZoomDependentFillColorActivity extends AppCompatActivity {
 
   private MapView mapView;

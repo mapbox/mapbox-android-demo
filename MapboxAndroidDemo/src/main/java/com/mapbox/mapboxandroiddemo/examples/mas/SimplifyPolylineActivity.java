@@ -27,6 +27,10 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Using the polylines utility, simplify a polyline at a
+ * given tolerance to reduce the number of coordinates in that polyline.
+ */
 public class SimplifyPolylineActivity extends AppCompatActivity {
 
   private static final String TAG = "SimplifyLineActivity";

@@ -14,6 +14,9 @@ import com.mapbox.mapboxsdk.style.layers.Layer;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 
+/**
+ * Use runtime styling to change the language displayed on the map
+ */
 public class LanguageSwitchActivity extends AppCompatActivity {
 
   private MapView mapView;

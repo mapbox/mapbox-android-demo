@@ -23,6 +23,9 @@ import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
 import java.util.List;
 
+/**
+ * Toggle the user location on the map.
+ */
 public class BasicUserLocation extends AppCompatActivity implements PermissionsListener {
 
   private MapView mapView;

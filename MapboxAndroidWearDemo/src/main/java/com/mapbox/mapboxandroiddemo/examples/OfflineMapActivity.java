@@ -29,6 +29,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Download and view an offline map using the Mapbox Android SDK.
+ */
 public class OfflineMapActivity extends WearableActivity {
   private static final String TAG = "OfflineMapFragment";
   private boolean isEndNotified;

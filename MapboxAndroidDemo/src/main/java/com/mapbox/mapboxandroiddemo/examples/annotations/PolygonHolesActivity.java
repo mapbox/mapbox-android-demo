@@ -24,6 +24,9 @@ import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActi
 import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.HOLE_COORDINATES;
 import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.POLYGON_COORDINATES;
 
+/**
+ * Add holes to a polygon drawn on top of the map.
+ */
 public class PolygonHolesActivity extends AppCompatActivity implements OnMapReadyCallback {
   private MapView mapView;
   private MapboxMap mapboxMap;

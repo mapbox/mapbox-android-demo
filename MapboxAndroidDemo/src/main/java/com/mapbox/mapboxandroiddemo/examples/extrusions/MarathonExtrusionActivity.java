@@ -21,6 +21,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionCol
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
 
+/**
+ * Use data-driven styling and GeoJSON data to set extrusions' heights
+ */
 public class MarathonExtrusionActivity extends AppCompatActivity {
 
   private MapView mapView;
