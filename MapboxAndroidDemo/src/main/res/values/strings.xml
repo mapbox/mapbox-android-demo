@@ -13,7 +13,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="info_dialog_title">Getting started</string>
-    <string name="info_dialog_description">Do you like this library? Learn how to include it in your app!</string>
+    <string name="info_dialog_description">Like the maps and examples? Learn how to include them in your app!</string>
     <string name="info_dialog_positive_button_text">Start Learning</string>
     <string name="info_dialog_negative_button_text">Not now</string>
 
@@ -35,6 +35,7 @@
     <string name="android_services_category">Android Services</string>
     <string name="location_category">User location</string>
     <string name="lab_category">Lab</string>
+    <string name="settings">Settings</string>
 
     <!-- Spinner for color picker example-->
     <string-array name="layer_spinner_array">
@@ -251,6 +252,17 @@
     <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
     <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
 
+    <!-- Settings dialog -->
+    <string name="settings_dialog_title">Settings</string>
+    <string name="settings_dialog_positive_button_text">Save</string>
+    <string name="settings_status_toast_analytics_opt_in">Opt in setting saved</string>
+    <string name="settings_status_toast_analytics_opt_out">Opt out setting saved</string>
+    <string name="settings_dialog_negative_button_text">Cancel</string>
+    <string name="analytics_opt_out_textview">Opt out of analytics tracking</string>
+    <string name="log_out_of_account_button">Log out of Mapbox account</string>
+    <string name="log_out_toast_confirm">Successfully logged out</string>
+    <string name="logged_in_username">Account username: %1$s</string>
+
     <!--Basic offline map-->
     <string name="basic_offline_deleted_toast">Yosemite offline map deleted</string>
 
@@ -352,10 +364,11 @@
     <string name="tv_sign_in_to_account_button">Sign in</string>
     <string name="landing_cta_tv_text">Create or sign in to your Mapbox account to view the latest Mapbox demos</string>
     <string name="skip_for_now_bottom_button">Skip for now</string>
-    <string name="whoops_error_message_on_app_return">Whoops. Looks like something went wrong with the log in process!</string>
+    <string name="whoops_error_dialog_title">Whoops!</string>
+    <string name="whoops_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies.</string>
+    <string name="whoops_error_dialog_ok_positive_button">Ok</string>
 
     <!--Main Activity welcome toast-->
-
     <string name="welcome_toast_message">Hello and welcome %1$s!</string>
 
     <!--Loading activity-->
