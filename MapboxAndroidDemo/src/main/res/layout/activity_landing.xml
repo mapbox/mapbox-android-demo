@@ -16,9 +16,11 @@
         android:id="@+id/button_skip_for_now"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="8dp"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:text="@string/skip_for_now_bottom_button"
@@ -27,18 +29,12 @@
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_account_button"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <Button
         android:id="@+id/create_account_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
         android:background="@color/colorAccent"
         android:foreground="?attr/selectableItemBackground"
         android:padding="24dp"
@@ -50,15 +46,14 @@
         app:layout_constraintLeft_toLeftOf="@+id/guideline6"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"/>
 
     <Button
         android:id="@+id/sign_in_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:background="@color/mapboxGreen"
         android:foreground="?attr/selectableItemBackground"
         android:padding="24dp"
@@ -71,18 +66,11 @@
         app:layout_constraintRight_toLeftOf="@+id/guideline6"
         app:layout_constraintTop_toTopOf="@+id/create_account_button"
         app:layout_constraintVertical_bias="0.0"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"/>
 
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        custom:layout_constraintGuide_percent="0.4"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="205dp"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline6"
@@ -97,21 +85,21 @@
         android:id="@+id/cardView3"
         android:layout_width="0dp"
         android:layout_height="267dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        custom:cardElevation="2dp"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp">
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        custom:cardElevation="2dp">
 
         <com.cunoraz.gifview.library.GifView
             android:id="@+id/astronaut_gif"
             android:layout_width="match_parent"
-            android:layout_gravity="center"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             custom:gif="@mipmap/mapbox_changing_hands_astronaut"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="197dp"/>
@@ -146,6 +134,8 @@
             android:paddingTop="16dp"
             android:text="@string/landing_cta_tv_text"
             android:textColor="@color/mapboxGrayDark"
+
+
             android:textSize="16sp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="8dp"
