@@ -87,6 +87,7 @@
         android:text="@string/landing_cta_tv_text"
         android:textColor="@color/mapboxGrayDark"
         android:textSize="16sp"
+        android:lineSpacingExtra="18dp"
         custom:layout_constraintLeft_toLeftOf="parent"
         custom:layout_constraintRight_toRightOf="parent"
         custom:layout_constraintTop_toTopOf="@+id/guideline"/>
