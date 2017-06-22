@@ -16,7 +16,7 @@
         android:id="@+id/button_skip_for_now"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:background="?android:attr/selectableItemBackground"
@@ -27,7 +27,9 @@
         android:textStyle="italic"
         custom:layout_constraintBottom_toBottomOf="parent"
         custom:layout_constraintLeft_toLeftOf="parent"
-        custom:layout_constraintRight_toRightOf="parent"/>
+        custom:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        custom:layout_constraintTop_toBottomOf="@+id/sign_in_button"/>
 
     <Button
         android:id="@+id/create_account_button"
@@ -78,6 +80,7 @@
         android:orientation="horizontal"
         custom:layout_constraintGuide_percent="0.4"/>
 
+    
     <TextView
         android:id="@+id/sign_in_instructions"
         android:layout_width="0dp"
