@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private RecyclerView recyclerView;
   private Switch analyticsOptOutSwitch;
   private boolean loggedIn;
+  private Toolbar toolbar;
 
   private AnalyticsTracker analytics;
 
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
     analytics = AnalyticsTracker.getInstance(this, false);
@@ -211,10 +212,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     if (id != currentCategory && id != R.id.settings_in_nav_drawer) {
       listItems(id);
+      toolbar.setTitle(item.getTitle());
       analytics.clickedOnNavDrawerSection(
         item.getTitle().toString(), loggedIn);
     }
-
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     if (drawer != null) {
       drawer.closeDrawer(GravityCompat.START);
