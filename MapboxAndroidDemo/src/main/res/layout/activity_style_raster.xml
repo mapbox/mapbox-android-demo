@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="59.31"
         mapbox:mapbox_cameraTargetLng="18.06"
-        mapbox:mapbox_styleUrl="https://www.mapbox.com/android-sdk/files/mapbox-raster-v8.json"
+        mapbox:mapbox_styleUrl="https://www.mapbox.com/android-docs/files/mapbox-raster-v8.json"
         mapbox:mapbox_cameraZoom="9"/>
 
 </RelativeLayout>
