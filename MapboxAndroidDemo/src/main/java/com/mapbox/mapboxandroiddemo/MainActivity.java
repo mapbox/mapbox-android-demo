@@ -551,6 +551,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, SpaceStationLocationActivity.class),
           R.string.activity_lab_space_station_location_url
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_space_station_location_title,
+          R.string.activity_lab_space_station_location_description,
+          new Intent(MainActivity.this, SpaceStationLocationActivity.class),
+          R.string.activity_lab_space_station_location_url
+        ));
         currentCategory = R.id.nav_lab;
         break;
 
