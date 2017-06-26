@@ -9,6 +9,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * The most basic example of adding a map to an activity.
+ */
 public class SimpleMapViewActivity extends AppCompatActivity {
 
   private MapView mapView;

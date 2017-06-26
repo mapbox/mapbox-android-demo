@@ -28,6 +28,10 @@ import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
+/**
+ * Use the style API to highlight different types of data.
+ * In this example, parks, hotels, and attractions are displayed.
+ */
 public class LosAngelesTourismActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;

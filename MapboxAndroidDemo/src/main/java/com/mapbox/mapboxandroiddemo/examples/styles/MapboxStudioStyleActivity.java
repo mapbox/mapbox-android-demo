@@ -9,6 +9,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Use a custom Mapbox-hosted style.
+ */
 public class MapboxStudioStyleActivity extends AppCompatActivity {
 
   private MapView mapView;

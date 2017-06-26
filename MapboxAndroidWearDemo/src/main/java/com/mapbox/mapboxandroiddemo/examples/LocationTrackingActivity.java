@@ -15,6 +15,9 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.location.LocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngineListener;
 
+/**
+ * Lock the camera centered above the user location.
+ */
 public class LocationTrackingActivity extends WearableActivity {
 
   private MapView mapView;

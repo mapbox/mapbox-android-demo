@@ -13,7 +13,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="info_dialog_title">Getting started</string>
-    <string name="info_dialog_description">Do you like this library? Learn how to include it in your app!</string>
+    <string name="info_dialog_description">Like the maps and examples? Learn how to include them in your app!</string>
     <string name="info_dialog_positive_button_text">Start Learning</string>
     <string name="info_dialog_negative_button_text">Not now</string>
 
@@ -35,6 +35,7 @@
     <string name="android_services_category">Android Services</string>
     <string name="location_category">User location</string>
     <string name="lab_category">Lab</string>
+    <string name="settings">Settings</string>
 
     <!-- Spinner for color picker example-->
     <string-array name="layer_spinner_array">
@@ -63,8 +64,9 @@
     <string name="activity_style_symbol_layer_title">Marker symbol layer</string>
     <string name="activity_style_basic_extrusions_title">Display buildings in 3D</string>
     <string name="activity_style_basic_hexabin_extrusions_title">Display hexabin extrusions</string>
-    <string name="activity_style_population_density_extrusions_title">Display 3D building height based on data</string>
-    <string name="activity_style_catalina_marathon_extrusions_title">Display elevation and location data</string>
+    <string name="activity_style_catalina_marathon_extrusions_title">Use GeoJSON data to set extrusion height</string>
+    <string name="activity_style_population_density_extrusions_title">Display 3D building height based on vector data</string>
+    <string name="activity_style_adjust_extrusions_title">Adjust light location and color</string>
     <string name="activity_dds_style_circle_categorically_title">Style circles categorically</string>
     <string name="activity_dds_choropleth_zoom_change_title">Update a choropleth layer by zoom level</string>
     <string name="activity_dds_style_line_identity_property_title">Style lines using an identity property function</string>
@@ -120,9 +122,10 @@
     <string name="activity_style_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
     <string name="activity_style_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
     <string name="activity_style_basic_extrusions_description">Use extrusions to display 3D building height</string>
-    <string name="activity_style_population_density_extrusions_description">Use extrusions to display 3D building height based on imported data</string>
     <string name="activity_style_basic_hexabin_extrusions_description">Use extrusions to create hexabins to quickly visualize data</string>
-    <string name="activity_style_catalina_marathon_extrusions_description">Use extrusions to display elevation data along a route</string>
+    <string name="activity_style_catalina_marathon_extrusions_description">Use data-driven styling and GeoJSON data to set extrusions\' heights</string>
+    <string name="activity_style_population_density_extrusions_description">Use extrusions to display 3D building height based on imported vector data</string>
+    <string name="activity_style_adjust_extrusions_description">Change the location and color of the light shined on extrusions</string>
     <string name="activity_dds_style_circle_categorically_description">Using a categorical circle-color property function for a visualization.</string>
     <string name="activity_dds_choropleth_zoom_change_description">Using 2014 census data, display state or county population depending on zoom level.</string>
     <string name="activity_dds_style_line_identity_property_description">Using an identity line-color property function for a visualization.</string>
@@ -162,11 +165,11 @@
     <!-- example urls-->
     <string name="empty_image"> </string>
 
-    <string name="activity_basic_simple_mapview_url" translatable="false">https://www.mapbox.com/android-sdk/images/examples.png</string>
-    <string name="activity_basic_support_map_frag_url" translatable="false">https://www.mapbox.com/android-sdk/images/support-fragment.png</string>
+    <string name="activity_basic_simple_mapview_url" translatable="false">http://i.imgur.com/IIhIB4J.png</string>
+    <string name="activity_basic_support_map_frag_url" translatable="false">http://i.imgur.com/vNlHFjG.png</string>
     <string name="activity_basic_mapbox_options_url" translatable="false">http://i.imgur.com/IhuviRz.png</string>
-    <string name="activity_style_mapbox_studio_url" translatable="false">https://www.mapbox.com/android-sdk/images/custom-studio-style.png</string>
-    <string name="activity_style_raster_url" translatable="false">https://www.mapbox.com/android-sdk/images/custom-raster.png</string>
+    <string name="activity_style_mapbox_studio_url" translatable="false">http://i.imgur.com/MbR2zbD.png</string>
+    <string name="activity_style_raster_url" translatable="false">http://i.imgur.com/QpFmrdR.png</string>
     <string name="activity_style_default_url" translatable="false">http://i.imgur.com/ZuUhFHw.jpg</string>
     <string name="activity_style_zoom_dependent_fill_color_url" translatable="false">http://i.imgur.com/rHl1pmC.png</string>
     <string name="activity_styles_color_switcher_url" translatable="false">http://i.imgur.com/a0ZaKHG.png</string>
@@ -184,33 +187,34 @@
     <string name="activity_style_basic_extrusions_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
     <string name="activity_style_population_density_extrusions_url" translatable="false">http://i.imgur.com/se1z8Wb.png</string>
     <string name="activity_style_catalina_marathon_extrusions_url" translatable="false">http://i.imgur.com/6j848JL.jpg</string>
+    <string name="activity_style_adjust_extrusions_url" translatable="false">http://i.imgur.com/XNTyIO5.png</string>
     <string name="activity_dds_style_circle_categorically_url" translatable="false">http://i.imgur.com/C3mtfgF.png</string>
     <string name="activity_dds_choropleth_zoom_change_url" translatable="false">http://i.imgur.com/sPNpLEP.png</string>
     <string name="activity_dds_style_line_identity_property_url" translatable="false">http://i.imgur.com/wgpKvZM.png</string>
-    <string name="activity_annotation_marker_url" translatable="false">https://www.mapbox.com/android-sdk/images/marker.png</string>
-    <string name="activity_annotation_custom_marker_url" translatable="false">https://www.mapbox.com/android-sdk/images/custom-marker-icon.png</string>
-    <string name="activity_annotation_geojson_line_url" translatable="false">https://www.mapbox.com/android-sdk/images/geojson.png</string>
-    <string name="activity_annotation_polygon_url" translatable="false">https://www.mapbox.com/android-sdk/images/polygon.png</string>
+    <string name="activity_annotation_marker_url" translatable="false">http://i.imgur.com/X59UoaY.png</string>
+    <string name="activity_annotation_custom_marker_url" translatable="false">http://i.imgur.com/BIHtPwJ.png</string>
+    <string name="activity_annotation_geojson_line_url" translatable="false">http://i.imgur.com/rIFjsrH.png</string>
+    <string name="activity_annotation_polygon_url" translatable="false">http://i.imgur.com/v9X28id.png</string>
     <string name="activity_annotation_polygon_holes_url" translatable="false">http://i.imgur.com/uJ9ftZk.jpg</string>
     <string name="activity_annotation_basic_marker_view_url" translatable="false">http://i.imgur.com/vbWTLIE.png</string>
     <string name="activity_annotation_custom_info_window_url" translatable="false">http://i.imgur.com/mCWbosy.png</string>
     <string name="activity_annotation_animated_marker_url" translatable="false">http://i.imgur.com/XegvIKr.png</string>
-    <string name="activity_camera_animate_url" translatable="false">https://www.mapbox.com/android-sdk/images/animate-camera.gif</string>
-    <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string> <!-- https://www.mapbox.com/android-sdk/images/fit-bound-camera.gif -->
+    <string name="activity_camera_animate_url" translatable="false">http://i.imgur.com/PN3vyNJ.jpg</string>
+    <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string>
     <string name="activity_camera_restrict_url" translatable="false">http://i.imgur.com/A227BEs.jpg</string>
-    <string name="activity_offline_simple_url" translatable="false">https://www.mapbox.com/android-sdk/images/offline-map.png</string>
+    <string name="activity_offline_simple_url" translatable="false">http://i.imgur.com/dV4DgDT.png</string>
     <string name="activity_offline_manager_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
     <string name="activity_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
     <string name="activity_query_select_building_url" translatable="false">http://i.imgur.com/bImud7u.png</string>
     <string name="activity_query_feature_url" translatable="false">http://i.imgur.com/HXxRBAF.png</string>
     <string name="activity_query_feature_count_url" translatable="false">http://i.imgur.com/phzOt81.png</string>
-    <string name="activity_location_basic_image_url" translatable="false">http://i.imgur.com/5BzH5YF.png</string> <!--https://www.mapbox.com/android-sdk/images/user-location.png-->
+    <string name="activity_location_basic_image_url" translatable="false">http://i.imgur.com/5BzH5YF.png</string>
     <string name="activity_location_tracking_url" translatable="false">http://i.imgur.com/U3uc32F.png</string>
     <string name="activity_location_animated_icon_url" translatable="false">http://i.imgur.com/dsUKM2i.png</string>
     <string name="activity_location_customize_user_url" translatable="false">http://i.imgur.com/Q6O82JJ.png</string>
-    <string name="activity_mas_directions_url" translatable="false">https://www.mapbox.com/android-sdk/images/directions.png</string>
+    <string name="activity_mas_directions_url" translatable="false">http://i.imgur.com/DhQltqB.jpg</string>
     <string name="activity_mas_geocoding_url" translatable="false">http://i.imgur.com/mBJGh3P.png</string>
-    <string name="activity_mas_static_image_url" translatable="false">https://www.mapbox.com/android-sdk/images/static-image.png</string>
+    <string name="activity_mas_static_image_url" translatable="false">http://i.imgur.com/COdES0F.png</string>
     <string name="activity_mas_simplify_polyline_url" translatable="false">http://i.imgur.com/uATgul1.png</string>
     <string name="activity_mas_map_matching_url" translatable="false">http://i.imgur.com/bWvVbwC.png</string>
     <string name="activity_lab_location_picker_url" translatable="false">http://i.imgur.com/0JTVwaa.png</string>
@@ -250,6 +254,17 @@
     <!--Basic user location permission toasts-->
     <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
     <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
+
+    <!-- Settings dialog -->
+    <string name="settings_dialog_title">Settings</string>
+    <string name="settings_dialog_positive_button_text">Save</string>
+    <string name="settings_status_toast_analytics_opt_in">Opt in setting saved</string>
+    <string name="settings_status_toast_analytics_opt_out">Opt out setting saved</string>
+    <string name="settings_dialog_negative_button_text">Cancel</string>
+    <string name="analytics_opt_out_textview">Opt out of analytics tracking</string>
+    <string name="log_out_of_account_button">Log out of Mapbox account</string>
+    <string name="log_out_toast_confirm">Successfully logged out</string>
+    <string name="logged_in_username">Account username: %1$s</string>
 
     <!--Basic offline map-->
     <string name="basic_offline_deleted_toast">Yosemite offline map deleted</string>
@@ -357,10 +372,11 @@
     <string name="tv_sign_in_to_account_button">Sign in</string>
     <string name="landing_cta_tv_text">Create or sign in to your Mapbox account to view the latest Mapbox demos</string>
     <string name="skip_for_now_bottom_button">Skip for now</string>
-    <string name="whoops_error_message_on_app_return">Whoops. Looks like something went wrong with the log in process!</string>
+    <string name="whoops_error_dialog_title">Whoops!</string>
+    <string name="whoops_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies.</string>
+    <string name="whoops_error_dialog_ok_positive_button">Ok</string>
 
     <!--Main Activity welcome toast-->
-
     <string name="welcome_toast_message">Hello and welcome %1$s!</string>
 
     <!--Loading activity-->
@@ -368,6 +384,9 @@
 
     <!--Space station toast-->
     <string name="space_station_toast">Zoom in closely on space station to see it moving</string>
->>>>>>> master
 
+    <!-- Extrusion light activity menu -->
+
+    <string name="change_anchor">Change anchor</string>
+    <string name="change_intensity">Change intensity</string>
 </resources>

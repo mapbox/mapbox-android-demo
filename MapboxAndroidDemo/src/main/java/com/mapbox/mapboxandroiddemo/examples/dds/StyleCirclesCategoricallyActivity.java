@@ -20,6 +20,9 @@ import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 
+/**
+ * Use data-driven styling to set circles' colors based on imported vector data.
+ */
 public class StyleCirclesCategoricallyActivity extends AppCompatActivity {
 
   private MapView mapView;

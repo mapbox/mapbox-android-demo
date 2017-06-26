@@ -20,6 +20,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionCol
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
 
+/**
+ * Use extrusions to display buildings' heights in 3D.
+ */
 public class BasicExtrusionActivity extends AppCompatActivity {
 
   private MapView mapView;

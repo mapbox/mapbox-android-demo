@@ -9,6 +9,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Use legacy raster tiles in your app.
+ */
 public class CustomRasterStyleActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -29,7 +32,7 @@ public class CustomRasterStyleActivity extends AppCompatActivity {
 
     // To use a locally stored style instead of remote (as below),
     // use the URL scheme "asset://localStyle.json"
-    mapView.setStyleUrl("https://www.mapbox.com/android-sdk/files/mapbox-raster-v8.json");
+    mapView.setStyleUrl("https://www.mapbox.com/android-docs/files/mapbox-raster-v8.json");
 
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override

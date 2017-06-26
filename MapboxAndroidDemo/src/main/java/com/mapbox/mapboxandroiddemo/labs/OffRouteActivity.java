@@ -47,6 +47,7 @@ import retrofit2.Response;
 
 import static com.mapbox.services.Constants.PRECISION_6;
 
+
 public class OffRouteActivity extends AppCompatActivity {
 
   private static final String TAG = "OffRouteDetection";

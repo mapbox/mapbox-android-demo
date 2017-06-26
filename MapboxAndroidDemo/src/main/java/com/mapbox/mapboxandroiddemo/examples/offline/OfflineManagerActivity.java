@@ -29,6 +29,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Download, view, navigate to, and delete an offline region.
+ */
 public class OfflineManagerActivity extends AppCompatActivity {
 
   private static final String TAG = "OffManActivity";

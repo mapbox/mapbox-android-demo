@@ -12,6 +12,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Use a variety of professionally designed styles with the Mapbox Android SDK.
+ */
 public class DefaultStyleActivity extends AppCompatActivity {
 
   private MapView mapView;

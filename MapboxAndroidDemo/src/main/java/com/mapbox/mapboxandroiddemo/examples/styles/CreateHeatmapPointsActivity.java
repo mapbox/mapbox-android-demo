@@ -25,6 +25,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleBlur;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 
+/**
+ * Use Mapbox GL clustering to visualize point data as a heatmap.
+ */
 public class CreateHeatmapPointsActivity extends AppCompatActivity {
 
   private MapView mapView;

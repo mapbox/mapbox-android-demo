@@ -11,12 +11,19 @@ trigger_map:
 workflows:
   primary:
     steps:
+    - script:
+        title: Export secrets for developer-config.xml
+        inputs:
+        - content: |-
+            #!/bin/bash
+            export MAPBOX_AUTH_FLOW_SECRET="$MAPBOX_AUTH_FLOW_SECRET"
+            export SEGMENT_API_WRITE_KEY_DEMO="$SEGMENT_API_WRITE_KEY_DEMO"
+            export SEGMENT_API_WRITE_KEY_WEARABLE_DEMO="$SEGMENT_API_WRITE_KEY_WEARABLE_DEMO"
     - gradle-runner:
         inputs:
         - gradle_task: "$CHECKSTYLE_TASK"
     - script:
         title: Configure Google Cloud SDK
-        run_if: '{{enveq "SKIPCI" "false"}}'
         inputs:
         - content: |-
             #!/bin/bash
@@ -54,12 +61,16 @@ workflows:
     - gradle-runner:
         inputs:
         - gradle_task: "$GRADLE_TASK"
-    - sign-apk: {}
+    - sign-apk:
+        inputs:
+        - apk_path: "$BITRISE_APK_PATH_LIST"
+        - apk_file_exclude_filter: "*-unsigned.apk"
     - google-play-deploy:
         inputs:
+        - apk_path: "$BITRISE_SIGNED_APK_PATH"
         - service_account_json_key_path: "$BITRISEIO_SERVICE_ACCOUNT_JSON_URL"
         - package_name: com.mapbox.mapboxandroiddemo
-        - track: beta
+        - track: alpha
         - whatsnews_dir: whatsnew
         - service_account_email: ''
         - key_file_path: ''

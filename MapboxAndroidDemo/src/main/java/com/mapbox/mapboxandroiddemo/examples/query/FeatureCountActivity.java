@@ -22,6 +22,9 @@ import java.util.List;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
+/**
+ * Get the feature count inside of a bounding box and highlight all of the buildings in the box.
+ */
 public class FeatureCountActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -48,6 +51,14 @@ public class FeatureCountActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
 
+        mapboxMap.addSource(
+          new GeoJsonSource("highlighted-shapes-source"));
+
+        // add a layer to the map that highlights the maps buildings inside the bounding box.
+        mapboxMap.addLayer(
+          new FillLayer("highlighted-shapes-layer", "highlighted-shapes-source")
+            .withProperties(fillColor(Color.parseColor("#50667F"))));
+
         // Toast instructing user to tap on the box
         Toast.makeText(
           FeatureCountActivity.this,
@@ -72,20 +83,10 @@ public class FeatureCountActivity extends AppCompatActivity {
               String.format(getString(R.string.feature_count_snackbar_feature_size), features.size()),
               Snackbar.LENGTH_LONG).show();
 
-            // Remove the previous building highlighted layer if it exist.
-            try {
-              mapboxMap.removeSource("highlighted-shapes-source");
-              mapboxMap.removeLayer("highlighted-shapes-layer");
-            } catch (Exception exception) {
-              // building layer doesn't exist yet.
+            GeoJsonSource source = mapboxMap.getSourceAs("highlighted-shapes-source");
+            if (source != null) {
+              source.setGeoJson(FeatureCollection.fromFeatures(features));
             }
-
-            // add a layer to the map that highlights the maps buildings inside the bounding box.
-            mapboxMap.addSource(
-              new GeoJsonSource("highlighted-shapes-source", FeatureCollection.fromFeatures(features)));
-            mapboxMap.addLayer(
-              new FillLayer("highlighted-shapes-layer", "highlighted-shapes-source")
-                .withProperties(fillColor(Color.parseColor("#50667F"))));
           }
         });
       }

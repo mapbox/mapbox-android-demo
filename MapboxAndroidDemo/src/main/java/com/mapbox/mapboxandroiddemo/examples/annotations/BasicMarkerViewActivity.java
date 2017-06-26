@@ -13,6 +13,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Attach a view to a given position on the map.
+ */
 public class BasicMarkerViewActivity extends AppCompatActivity {
 
   private MapView mapView;

@@ -23,6 +23,9 @@ import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
 import java.util.List;
 
+/**
+ * Adjust the user location icon's colors and padding so it appears lower on the screen.
+ */
 public class CustomizeUserLocationActivity extends AppCompatActivity implements PermissionsListener {
 
   private PermissionsManager permissionsManager;

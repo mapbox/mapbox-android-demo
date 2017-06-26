@@ -24,6 +24,6 @@ import org.ajoberstar.grgit.Grgit
 ext {
     git = Grgit.open(currentDir: projectDir)
     gitVersionName = git.describe()
-    gitVersionCode = git.tag.list().size() + 51 // 51 = base version code
+    gitVersionCode = git.tag.list().size() + 52 // + base version code
     gitVersionCodeTime = git.head().time
 }

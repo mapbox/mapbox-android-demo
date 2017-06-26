@@ -17,6 +17,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Animate the marker to a new positiion on the map.
+ */
 public class AnimatedMarkerActivity extends AppCompatActivity {
 
   private MapView mapView;
