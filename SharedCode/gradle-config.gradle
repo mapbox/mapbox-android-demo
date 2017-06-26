@@ -5,6 +5,10 @@
 task secretKeysSetup {
     def secretFile = new File("${projectDir}/src/main/res/values/developer-config.xml")
     if (!secretFile.exists()) {
+        // create values folder if non existent
+        def folder = new File("${projectDir}/src/main/res/values")
+        folder.mkdirs()
+
         String mapboxFlowSecret = "$System.env.MAPBOX_AUTH_FLOW_SECRET"
         if (mapboxFlowSecret == "null") {
             System.out.println("You should set the MAPBOX_AUTH_FLOW_SECRET environment variable.")

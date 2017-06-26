@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.util.Log;
 
-import com.example.sharedcode.analytics.AnalyticsTracker;
+import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.model.usermodel.UserResponse;
@@ -26,14 +26,14 @@ import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.sharedcode.analytics.StringConstants.AUTHCODE_KEY;
-import static com.example.sharedcode.analytics.StringConstants.AVATAR_IMAGE_KEY;
-import static com.example.sharedcode.analytics.StringConstants.CLIENT_ID_KEY;
-import static com.example.sharedcode.analytics.StringConstants.EMAIL_KEY;
-import static com.example.sharedcode.analytics.StringConstants.REDIRECT_URI_KEY;
-import static com.example.sharedcode.analytics.StringConstants.TOKEN_KEY;
-import static com.example.sharedcode.analytics.StringConstants.TOKEN_SAVED_KEY;
-import static com.example.sharedcode.analytics.StringConstants.USERNAME_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.AUTHCODE_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.AVATAR_IMAGE_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.CLIENT_ID_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.EMAIL_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.REDIRECT_URI_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.USERNAME_KEY;
 
 
 /**
