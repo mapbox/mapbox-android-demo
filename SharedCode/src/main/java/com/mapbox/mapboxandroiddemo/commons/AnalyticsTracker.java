@@ -1,13 +1,11 @@
-package com.example.sharedcode.analytics;
+package com.mapbox.mapboxandroiddemo.commons;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-import com.example.sharedcode.R;
 import com.segment.analytics.Analytics;
 import com.segment.analytics.messages.IdentifyMessage;
 import com.segment.analytics.messages.ScreenMessage;
@@ -16,9 +14,6 @@ import com.segment.analytics.messages.TrackMessage;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import static com.example.sharedcode.analytics.StringConstants.EMAIL_KEY;
-import static com.example.sharedcode.analytics.StringConstants.USERNAME_KEY;
 
 /**
  * This class abstracts various analytics calls to Segment analytics' Java library.
@@ -38,7 +33,7 @@ public class AnalyticsTracker {
   public static final String CLICKED_ON_CREATE_ACCOUNT_BUTTON = "Clicked on create account button";
   public static final String CLICKED_ON_SIGN_IN_BUTTON = "Clicked on sign in button";
 
-  private Context appContext = null;
+  private Context appContext;
   private static volatile AnalyticsTracker analyticsInstance;
   private static volatile Analytics analytics;
   private static final String CLICKED_ON_NAV_DRAWER_SECTION_EVENT_NAME = "Clicked on nav drawer section";
@@ -51,7 +46,7 @@ public class AnalyticsTracker {
   private static final String MAPBOX_SHARED_PREFERENCE_KEY_ANALYTICS_ENABLED = "mapboxAnalyticsEnabled";
   private static final String MAPBOX_SHARED_PREFERENCES_FILE = "MapboxSharedPreferences";
   private static String MAPBOX_USERNAME;
-  private Boolean analyticsEnabled = null;
+  private Boolean analyticsEnabled;
   private Boolean deviceIsWearable;
 
   /**
@@ -77,7 +72,7 @@ public class AnalyticsTracker {
 
   public void setMapboxUsername() {
     MAPBOX_USERNAME = PreferenceManager.getDefaultSharedPreferences(
-      analyticsInstance.appContext).getString(USERNAME_KEY, "not logged in");
+      analyticsInstance.appContext).getString(StringConstants.USERNAME_KEY, "not logged in");
   }
 
   /**
@@ -85,10 +80,10 @@ public class AnalyticsTracker {
    * when app is opened for the first time or if shared preferences is cleared.
    **/
 
-  public void openedAppForFirstTime(@Nullable boolean isTablet, boolean loggedIn) {
+  public void openedAppForFirstTime(boolean isTablet, boolean loggedIn) {
     Map<String, String> properties = new HashMap<>();
     properties.put("email", getSharedPreferences(appContext)
-      .getString(EMAIL_KEY, "not logged in"));
+      .getString(StringConstants.EMAIL_KEY, "not logged in"));
     properties.put("model", Build.MODEL);
     properties.put("brand", Build.BRAND);
     properties.put("product", Build.PRODUCT);

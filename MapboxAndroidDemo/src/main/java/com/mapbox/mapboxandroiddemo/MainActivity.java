@@ -25,10 +25,10 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.example.sharedcode.analytics.AnalyticsTracker;
-import com.example.sharedcode.analytics.FirstTimeRunChecker;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
+import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
+import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.BasicMarkerViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.CustomInfoWindowActivity;
@@ -92,16 +92,16 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import static com.example.sharedcode.analytics.AnalyticsTracker.CLICKED_ON_INFO_DIALOG_NOT_NOW;
-import static com.example.sharedcode.analytics.AnalyticsTracker.CLICKED_ON_INFO_DIALOG_START_LEARNING;
-import static com.example.sharedcode.analytics.AnalyticsTracker.CLICKED_ON_INFO_MENU_ITEM;
-import static com.example.sharedcode.analytics.AnalyticsTracker.CLICKED_ON_SETTINGS_IN_NAV_DRAWER;
-import static com.example.sharedcode.analytics.AnalyticsTracker.OPENED_APP;
-import static com.example.sharedcode.analytics.AnalyticsTracker.SKIPPED_ACCOUNT_CREATION;
-import static com.example.sharedcode.analytics.StringConstants.AVATAR_IMAGE_KEY;
-import static com.example.sharedcode.analytics.StringConstants.SKIPPED_KEY;
-import static com.example.sharedcode.analytics.StringConstants.TOKEN_SAVED_KEY;
-import static com.example.sharedcode.analytics.StringConstants.USERNAME_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_INFO_DIALOG_NOT_NOW;
+import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_INFO_DIALOG_START_LEARNING;
+import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_INFO_MENU_ITEM;
+import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_SETTINGS_IN_NAV_DRAWER;
+import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.OPENED_APP;
+import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.SKIPPED_ACCOUNT_CREATION;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.AVATAR_IMAGE_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.SKIPPED_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.USERNAME_KEY;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
