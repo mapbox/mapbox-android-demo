@@ -18,6 +18,9 @@ import com.mapbox.services.api.geocoding.v5.GeocodingCriteria;
 import com.mapbox.services.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.services.commons.models.Position;
 
+/**
+ * Use Mapbox Android Service's geocoder to convert location text into geographic coordinates.
+ */
 public class GeocodingActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -31,7 +34,7 @@ public class GeocodingActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_mas_geocoding);
 
     // Set up the MapView
@@ -63,7 +66,7 @@ public class GeocodingActivity extends AppCompatActivity {
     // Build marker
     map.addMarker(new MarkerOptions()
       .position(new LatLng(latitude, longitude))
-      .title("Geocoder result"));
+      .title(getString(R.string.geocode_activity_marker_options_title)));
 
     // Animate camera to geocoder result location
     CameraPosition cameraPosition = new CameraPosition.Builder()

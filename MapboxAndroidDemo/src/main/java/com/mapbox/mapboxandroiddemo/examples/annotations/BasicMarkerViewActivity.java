@@ -13,6 +13,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Attach a view to a given position on the map.
+ */
 public class BasicMarkerViewActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -25,7 +28,7 @@ public class BasicMarkerViewActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_annotation_basic_marker_view);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -47,8 +50,8 @@ public class BasicMarkerViewActivity extends AppCompatActivity {
           .rotation(90)
           .anchor(0.5f, 0.5f)
           .alpha(0.5f)
-          .title("Hisense Arena")
-          .snippet("Olympic Blvd, Melbourne VIC 3001, Australia")
+          .title(getString(R.string.activity_basic_mapbox_options_title))
+          .snippet(getString(R.string.basic_marker_activity_marker_options_snippet))
           .infoWindowAnchor(0.5f, 0.5f)
           .flat(true));
       }

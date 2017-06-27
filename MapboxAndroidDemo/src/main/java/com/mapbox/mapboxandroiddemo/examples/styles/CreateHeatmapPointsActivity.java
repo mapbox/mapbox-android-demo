@@ -25,6 +25,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleBlur;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 
+/**
+ * Use Mapbox GL clustering to visualize point data as a heatmap.
+ */
 public class CreateHeatmapPointsActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -37,7 +40,7 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_create_heatmap_points);
 
     mapView = (MapView) findViewById(R.id.mapView);

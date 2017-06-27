@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.animation.LinearInterpolator;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.model.IssModel;
@@ -31,6 +32,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 
+/**
+ * Display the space station's real-time location
+ */
 public class SpaceStationLocationActivity extends AppCompatActivity {
 
   private static final String TAG = "SpaceStationActivity";
@@ -57,7 +61,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_lab_space_station_location);
 
     // Initialize the map view
@@ -71,6 +75,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
 
         callApi();
 
+        Toast.makeText(SpaceStationLocationActivity.this, R.string.space_station_toast, Toast.LENGTH_SHORT).show();
       }
     });
   } // End onCreate

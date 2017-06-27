@@ -19,6 +19,9 @@ import com.mapbox.services.commons.geojson.Feature;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Display map property information for a clicked map feature
+ */
 public class QueryFeatureActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -32,7 +35,7 @@ public class QueryFeatureActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_query_feature);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -66,12 +69,12 @@ public class QueryFeatureActivity extends AppCompatActivity {
 
                 featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
                   .position(point)
-                  .title("Properties:")
+                  .title(getString(R.string.query_feature_marker_title))
                   .snippet(stringBuilder.toString())
                 );
 
               } else {
-                property = "No feature properties found";
+                property = getString(R.string.query_feature_marker_snippet);
                 featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
                   .position(point)
                   .snippet(property)
@@ -80,7 +83,7 @@ public class QueryFeatureActivity extends AppCompatActivity {
             } else {
               featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
                 .position(point)
-                .snippet("No feature properties found")
+                .snippet(getString(R.string.query_feature_marker_snippet))
               );
             }
 

@@ -2,7 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
@@ -32,10 +32,14 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
+/**
+ * Use GeoJSON to visualize point data as a clusters.
+ */
 public class GeoJsonClusteringActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +49,7 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_geojson_clustering);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -68,27 +72,27 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
   }
 
   @Override
+  public void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
   public void onResume() {
     super.onResume();
     mapView.onResume();
   }
 
   @Override
-  protected void onStart() {
-    super.onStart();
-    mapView.onStart();
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-    mapView.onStop();
-  }
-
-  @Override
   public void onPause() {
     super.onPause();
     mapView.onPause();
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    mapView.onStop();
   }
 
   @Override
@@ -133,9 +137,9 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
     // Use the earthquakes GeoJSON source to create three layers: One layer for each cluster category.
     // Each point range gets a different fill color.
     int[][] layers = new int[][] {
-      new int[] {150, ResourcesCompat.getColor(getResources(), R.color.mapboxRed, getTheme())},
-      new int[] {20, ResourcesCompat.getColor(getResources(), R.color.mapboxGreen, getTheme())},
-      new int[] {0, ResourcesCompat.getColor(getResources(), R.color.mapbox_blue, getTheme())}
+      new int[] {150, ContextCompat.getColor(this, R.color.mapboxRed)},
+      new int[] {20, ContextCompat.getColor(this, R.color.mapboxGreen)},
+      new int[] {0, ContextCompat.getColor(this, R.color.mapbox_blue)}
     };
 
     //Creating a marker layer for single data points
@@ -150,6 +154,8 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
         circleColor(layers[i][1]),
         circleRadius(18f)
       );
+
+      // Add a filter to the cluster layer that hides the circles based on "point_count"
       circles.setFilter(
         i == 0
           ? gte("point_count", layers[i][0]) :

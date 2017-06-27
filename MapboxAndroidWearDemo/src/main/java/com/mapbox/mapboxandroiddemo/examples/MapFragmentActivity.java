@@ -18,6 +18,9 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.location.LocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngineListener;
 
+/**
+ * Include a map fragment within your app using Android support library.
+ */
 public class MapFragmentActivity extends WearableActivity {
 
   @Override
@@ -25,7 +28,7 @@ public class MapFragmentActivity extends WearableActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_basic_support_map_frag);
 
-    LocationEngine locationEngine = LocationSource.getLocationEngine(this);
+    LocationEngine locationEngine = new LocationSource(this);
     locationEngine.activate();
 
     locationEngine.addLocationEngineListener(new LocationEngineListener() {

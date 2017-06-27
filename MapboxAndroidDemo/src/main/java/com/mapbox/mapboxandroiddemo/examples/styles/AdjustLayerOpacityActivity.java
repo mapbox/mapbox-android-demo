@@ -16,6 +16,9 @@ import com.mapbox.mapboxsdk.style.sources.RasterSource;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.rasterOpacity;
 
+/**
+ * Use a seekbar to adjust the opacity of a raster layer on top of a map.
+ */
 public class AdjustLayerOpacityActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -30,7 +33,7 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_adjust_layer_opacity);
 
     final SeekBar opacitySeekBar = (SeekBar) findViewById(R.id.seek_bar_layer_opacity);

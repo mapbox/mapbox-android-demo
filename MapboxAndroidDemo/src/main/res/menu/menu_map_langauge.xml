@@ -6,30 +6,30 @@
     <item
         android:id="@+id/english"
         android:orderInCategory="100"
-        android:title="English"
+        android:title="@string/language_switch_options_menu_language_english"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/french"
         android:orderInCategory="100"
-        android:title="French"
+        android:title="@string/language_switch_options_menu_language_french"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/russian"
         android:orderInCategory="100"
-        android:title="Russian"
+        android:title="@string/language_switch_options_menu_language_russian"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/german"
         android:orderInCategory="100"
-        android:title="German"
+        android:title="@string/language_switch_options_menu_language_german"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/spanish"
         android:orderInCategory="100"
-        android:title="Spanish"
+        android:title="@string/language_switch_options_menu_language_spanish"
         app:showAsAction="never"/>
 </menu>

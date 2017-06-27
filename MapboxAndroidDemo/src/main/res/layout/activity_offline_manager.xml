@@ -11,10 +11,10 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="40.7359"
-        mapbox:mapbox_cameraTargetLng="-74.0151"
+        mapbox:mapbox_cameraTargetLat="29.720"
+        mapbox:mapbox_cameraTargetLng="-95.342"
         mapbox:mapbox_styleUrl="@string/mapbox_style_light"
-        mapbox:mapbox_cameraZoom="10"
+        mapbox:mapbox_cameraZoom="15.27"
         mapbox:mapbox_cameraZoomMin="10"/>
 
     <ProgressBar
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorAccent"
         android:elevation="8dp"
         android:orientation="horizontal"
         android:paddingTop="8dp">
@@ -48,9 +48,9 @@
             android:background="@android:color/transparent"
             android:clickable="true"
             android:drawableTop="@drawable/ic_get_app_24dp"
-            android:text="Download"
+            android:text="@string/download_button_text"
             android:textAllCaps="false"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/mapboxWhite"
             android:textSize="12sp"/>
 
         <Button
@@ -61,9 +61,9 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:drawableTop="@drawable/ic_list_24dp"
-            android:text="List"
+            android:text="@string/list_button_text"
             android:textAllCaps="false"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/mapboxWhite"
             android:textSize="12sp"/>
 
     </LinearLayout>

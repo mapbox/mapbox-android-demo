@@ -46,6 +46,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Drop a marker at a specific location and then perform
+ * reverse geocoding to retrieve and display the location's address
+ */
 public class LocationPickerActivity extends AppCompatActivity implements PermissionsListener {
 
   private MapView mapView;
@@ -67,11 +71,11 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_lab_location_picker);
 
     // Get the location engine object for later use.
-    locationEngine = LocationSource.getLocationEngine(this);
+    locationEngine = new LocationSource(this);
     locationEngine.activate();
 
     // Initialize the map view
@@ -131,7 +135,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
             // Transform the appearance of the button to become the cancel button
             selectLocationButton.setBackgroundColor(
               ContextCompat.getColor(LocationPickerActivity.this, R.color.colorAccent));
-            selectLocationButton.setText("Cancel");
+            selectLocationButton.setText(getString(R.string.location_picker_select_location_button_cancel));
 
             // Create the marker icon the dropped marker will be using.
             Icon icon = IconFactory.getInstance(LocationPickerActivity.this).fromResource(R.drawable.red_marker);
@@ -150,7 +154,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
             // Switch the button apperance back to select a location.
             selectLocationButton.setBackgroundColor(
               ContextCompat.getColor(LocationPickerActivity.this, R.color.colorPrimary));
-            selectLocationButton.setText("Select a location");
+            selectLocationButton.setText(getString(R.string.location_picker_select_location_button_select));
 
             // Lastly, set the hovering marker back to visible.
             hoveringMarker.setVisibility(View.VISIBLE);
@@ -274,7 +278,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
 
           } else {
             if (droppedMarker != null) {
-              droppedMarker.setSnippet("No results");
+              droppedMarker.setSnippet(getString(R.string.location_picker_dropped_marker_snippet_no_results));
               map.selectMarker(droppedMarker);
             }
           }
@@ -298,7 +302,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
-    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+    Toast.makeText(this, R.string.user_location_permission_explanation,
       Toast.LENGTH_LONG).show();
   }
 
@@ -307,7 +311,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
     if (granted) {
       setInitialCamera();
     } else {
-      Toast.makeText(this, "You didn't grant location permissions.",
+      Toast.makeText(this, R.string.user_location_permission_not_granted,
         Toast.LENGTH_LONG).show();
       finish();
     }

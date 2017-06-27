@@ -14,6 +14,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Animate the map's camera position, tilt, bearing, and zoom.
+ */
 public class AnimateMapCameraActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -26,7 +29,7 @@ public class AnimateMapCameraActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_camera_animate);
 
     mapView = (MapView) findViewById(R.id.mapView);

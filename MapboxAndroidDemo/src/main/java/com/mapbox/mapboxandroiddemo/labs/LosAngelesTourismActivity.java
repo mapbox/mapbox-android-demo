@@ -28,6 +28,10 @@ import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
+/**
+ * Use the style API to highlight different types of data.
+ * In this example, parks, hotels, and attractions are displayed.
+ */
 public class LosAngelesTourismActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
@@ -44,7 +48,7 @@ public class LosAngelesTourismActivity extends AppCompatActivity implements OnMa
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_lab_las_angeles_tourisim);
 
     mapView = (MapView) findViewById(R.id.mapView);

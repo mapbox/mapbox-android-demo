@@ -13,6 +13,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Create a marker with a custom icon using the Mapbox Android SDK.
+ */
 public class DrawCustomMarkerActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -25,7 +28,7 @@ public class DrawCustomMarkerActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_annotation_custom_marker);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -40,8 +43,8 @@ public class DrawCustomMarkerActivity extends AppCompatActivity {
         // Add the custom icon marker to the map
         mapboxMap.addMarker(new MarkerOptions()
           .position(new LatLng(-33.8500000, 18.4158234))
-          .title("Cape Town Harbour")
-          .snippet("One of the busiest ports in South Africa")
+          .title(getString(R.string.draw_custom_marker_options_title))
+          .snippet(getString(R.string.draw_custom_marker_options_snippet))
           .icon(icon));
       }
     });

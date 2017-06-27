@@ -23,6 +23,9 @@ import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
 import java.util.List;
 
+/**
+ * Toggle the user location on the map.
+ */
 public class BasicUserLocation extends AppCompatActivity implements PermissionsListener {
 
   private MapView mapView;
@@ -40,12 +43,11 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_location_basic);
 
     // Get the location engine object for later use.
-    locationEngine = LocationSource.getLocationEngine(this);
-    locationEngine.activate();
+    locationEngine = new LocationSource(this);
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -53,6 +55,8 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
+
+        map.setStyleUrl("mapbox://styles/mapbox/streets-v10");
       }
     });
 
@@ -170,7 +174,7 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
-    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+    Toast.makeText(this, R.string.user_location_permission_explanation,
       Toast.LENGTH_LONG).show();
   }
 
@@ -179,7 +183,7 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
     if (granted) {
       enableLocation(true);
     } else {
-      Toast.makeText(this, "You didn't grant location permissions.",
+      Toast.makeText(this, R.string.user_location_permission_not_granted,
         Toast.LENGTH_LONG).show();
       finish();
     }

@@ -17,6 +17,9 @@ import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
 import java.util.List;
 
+/**
+ * Lock the camera centered above the user's location.
+ */
 public class LocationTrackingActivity extends AppCompatActivity implements PermissionsListener {
 
   private PermissionsManager permissionsManager;
@@ -31,7 +34,7 @@ public class LocationTrackingActivity extends AppCompatActivity implements Permi
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_location_tracking);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -113,7 +116,7 @@ public class LocationTrackingActivity extends AppCompatActivity implements Permi
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
-    Toast.makeText(this, "This app needs location permissions in order to show its functionality.",
+    Toast.makeText(this, R.string.user_location_permission_explanation,
       Toast.LENGTH_LONG).show();
   }
 
@@ -122,7 +125,7 @@ public class LocationTrackingActivity extends AppCompatActivity implements Permi
     if (granted) {
       enableLocationTracking();
     } else {
-      Toast.makeText(this, "You didn't grant location permissions.",
+      Toast.makeText(this, R.string.user_location_permission_not_granted,
         Toast.LENGTH_LONG).show();
       finish();
     }

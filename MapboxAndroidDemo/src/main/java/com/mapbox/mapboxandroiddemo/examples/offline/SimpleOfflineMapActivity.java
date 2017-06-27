@@ -22,9 +22,12 @@ import com.mapbox.mapboxsdk.offline.OfflineTilePyramidRegionDefinition;
 
 import org.json.JSONObject;
 
+/**
+ * Download and view an offline map using the Mapbox Android SDK.
+ */
 public class SimpleOfflineMapActivity extends AppCompatActivity {
 
-  private static final String TAG = "MainActivity";
+  private static final String TAG = "SimpOfflineMapActivity";
 
   private boolean isEndNotified;
   private ProgressBar progressBar;
@@ -43,7 +46,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_offline_simple);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -105,7 +108,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
                   if (status.isComplete()) {
                     // Download complete
-                    endProgress("Region downloaded successfully.");
+                    endProgress(getString(R.string.simple_offline_end_progress_success));
                   } else if (status.isRequiredResourceCountPrecise()) {
                     // Switch to determinate state
                     setPercentage((int) Math.round(percentage));
@@ -158,30 +161,36 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
   public void onPause() {
     super.onPause();
     mapView.onPause();
-    offlineManager.listOfflineRegions(new OfflineManager.ListOfflineRegionsCallback() {
-      @Override
-      public void onList(OfflineRegion[] offlineRegions) {
-        if (offlineRegions.length > 0) {
-          // delete the last item in the offlineRegions list which will be yosemite offline map
-          offlineRegions[(offlineRegions.length - 1)].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
-            @Override
-            public void onDelete() {
-              Toast.makeText(SimpleOfflineMapActivity.this, "Yosemite offline map deleted", Toast.LENGTH_LONG).show();
-            }
+    if (offlineManager != null) {
+      offlineManager.listOfflineRegions(new OfflineManager.ListOfflineRegionsCallback() {
+        @Override
+        public void onList(OfflineRegion[] offlineRegions) {
+          if (offlineRegions.length > 0) {
+            // delete the last item in the offlineRegions list which will be yosemite offline map
+            offlineRegions[(offlineRegions.length - 1)].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
+              @Override
+              public void onDelete() {
+                Toast.makeText(
+                  SimpleOfflineMapActivity.this,
+                  getString(R.string.basic_offline_deleted_toast),
+                  Toast.LENGTH_LONG
+                ).show();
+              }
 
-            @Override
-            public void onError(String error) {
-              Log.e(TAG, "On Delete error: " + error);
-            }
-          });
+              @Override
+              public void onError(String error) {
+                Log.e(TAG, "On Delete error: " + error);
+              }
+            });
+          }
         }
-      }
 
-      @Override
-      public void onError(String error) {
-        Log.e(TAG, "onListError: " + error);
-      }
-    });
+        @Override
+        public void onError(String error) {
+          Log.e(TAG, "onListError: " + error);
+        }
+      });
+    }
   }
 
   @Override

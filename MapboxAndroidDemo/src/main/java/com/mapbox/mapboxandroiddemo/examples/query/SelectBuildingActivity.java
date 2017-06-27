@@ -21,6 +21,9 @@ import com.mapbox.services.commons.geojson.Polygon;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Use the query feature to select a building, get its geometry, and draw a polygon highlighting it.
+ */
 public class SelectBuildingActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -34,7 +37,7 @@ public class SelectBuildingActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_query_select_building);
 
     mapView = (MapView) findViewById(R.id.mapView);

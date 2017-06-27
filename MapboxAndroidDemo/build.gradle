@@ -2,80 +2,87 @@ apply plugin: 'com.android.application'
 apply from: "$project.rootDir/script-git-version.gradle"
 
 ext {
-  supportLibVersion = '25.3.1'
+    supportLibVersion = '25.3.1'
 }
 
 android {
-  compileSdkVersion 25
-  buildToolsVersion "25.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
 
-  defaultConfig {
-    applicationId "com.mapbox.mapboxandroiddemo"
-    minSdkVersion 15
-    targetSdkVersion 25
-    versionCode gitVersionCode
-    versionName gitVersionName
-  }
-
-  productFlavors {
-    gpservices {
-      resValue "string", "firebase_app_id", "1:557332920931:android:bdf11618ae45dd61"
-      resValue "string", "firebase_api_key", "AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8"
+    defaultConfig {
+        applicationId "com.mapbox.mapboxandroiddemo"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode gitVersionCode
+        versionName gitVersionName
     }
 
-    nogpservices {
-    }
-  }
+    productFlavors {
+        gpservices {
+            resValue "string", "firebase_app_id", "1:557332920931:android:bdf11618ae45dd61"
+            resValue "string", "firebase_api_key", "AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8"
+        }
 
-  buildTypes {
-    debug {
-      applicationIdSuffix '.debug'
-      versionNameSuffix '-Debug'
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        nogpservices {
+        }
     }
 
-    release {
-      minifyEnabled true
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-    }
-  }
-}
+    buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-Debug'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
 
-repositories {
-  maven { url "https://jitpack.io" }
-  maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    splits {
+        abi {
+            enable false
+            universalApk false
+        }
+    }
 }
 
 dependencies {
+    // Wearable application module
+    gpservicesWearApp project(':MapboxAndroidWearDemo')
+    compile "com.android.support:gridlayout-v7:${supportLibVersion}"
+    compile "com.android.support:appcompat-v7:${supportLibVersion}"
+    compile "com.android.support:cardview-v7:${supportLibVersion}"
+    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
+    compile "com.android.support:design:${supportLibVersion}"
+    compile "com.android.support:customtabs:${supportLibVersion}"
+    compile "com.android.support:support-v4:${supportLibVersion}"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.google.code.gson:gson:2.8'
 
-  // Wearable application module
-  gpservicesWearApp project(':MapboxAndroidWearDemo')
+    // Mapbox dependencies
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.5@aar') {
+        transitive = true
+    }
+    // Mapbox Android UI
+    compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.2'
 
-  compile "com.android.support:gridlayout-v7:${supportLibVersion}"
-  compile "com.android.support:appcompat-v7:${supportLibVersion}"
-  compile "com.android.support:cardview-v7:${supportLibVersion}"
-  compile "com.android.support:recyclerview-v7:${supportLibVersion}"
-  compile "com.android.support:design:${supportLibVersion}"
-  compile 'com.github.javiersantos:MaterialStyledDialogs:2.1'
-  compile 'com.getbase:floatingactionbutton:1.10.1'
-  compile 'com.squareup.picasso:picasso:2.5.2'
-
-  // firebase crash report
-  gpservicesCompile 'com.google.firebase:firebase-crash:10.2.0'
-
-  // Mapbox dependencies
-  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.0.2@aar') {
-    transitive = true
-  }
-
-  // Mapbox Android UI
-  compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.0-SNAPSHOT'
-
-  // Other dependencies
-  compile 'com.google.code.gson:gson:2.8'
-  compile 'com.squareup.retrofit2:retrofit:2.2.0'
-  compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    // Mapbox Navigation SDK for Android
+    compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.3.1'
+    
+    // Other dependencies
+    compile 'com.github.javiersantos:MaterialStyledDialogs:2.1'
+    compile 'com.getbase:floatingactionbutton:1.10.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.github.Cutta:GifView:1.1'
+    gpservicesCompile 'com.google.firebase:firebase-crash:10.2.0'
+    compile project(':SharedCode')
 }
 
-apply from: 'checkstyle.gradle'
+apply from: '../checkstyle.gradle'

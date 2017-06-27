@@ -11,6 +11,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Create a default marker with an InfoWindow
+ */
 public class DrawMarkerActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -23,7 +26,7 @@ public class DrawMarkerActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_annotation_marker);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -33,8 +36,8 @@ public class DrawMarkerActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
         mapboxMap.addMarker(new MarkerOptions()
           .position(new LatLng(48.13863, 11.57603))
-          .title("Hello World!")
-          .snippet("Welcome to my marker."));
+          .title(getString(R.string.draw_marker_options_title))
+          .snippet(getString(R.string.draw_marker_options_snippet)));
 
       }
     });

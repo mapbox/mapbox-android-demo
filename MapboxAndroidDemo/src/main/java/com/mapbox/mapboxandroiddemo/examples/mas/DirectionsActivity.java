@@ -29,6 +29,9 @@ import retrofit2.Response;
 
 import static com.mapbox.services.Constants.PRECISION_6;
 
+/**
+ * Use Mapbox Android Services to request directions
+ */
 public class DirectionsActivity extends AppCompatActivity {
 
   private static final String TAG = "DirectionsActivity";
@@ -46,7 +49,7 @@ public class DirectionsActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_mas_directions);
 
     // Alhambra landmark in Granada, Spain.
@@ -67,12 +70,12 @@ public class DirectionsActivity extends AppCompatActivity {
         // Add origin and destination to the map
         mapboxMap.addMarker(new MarkerOptions()
           .position(new LatLng(origin.getLatitude(), origin.getLongitude()))
-          .title("Origin")
-          .snippet("Alhambra"));
+          .title(getString(R.string.directions_activity_marker_options_origin_title))
+          .snippet(getString(R.string.directions_activity_marker_options_origin_snippet)));
         mapboxMap.addMarker(new MarkerOptions()
           .position(new LatLng(destination.getLatitude(), destination.getLongitude()))
-          .title("Destination")
-          .snippet("Plaza del Triunfo"));
+          .title(getString(R.string.directions_activity_marker_options_destination_title))
+          .snippet(getString(R.string.directions_activity_marker_options_destination_snippet)));
 
         // Get route from API
         getRoute(origin, destination);
@@ -108,10 +111,8 @@ public class DirectionsActivity extends AppCompatActivity {
         // Print some info about the route
         currentRoute = response.body().getRoutes().get(0);
         Log.d(TAG, "Distance: " + currentRoute.getDistance());
-        Toast.makeText(
-          DirectionsActivity.this,
-          "Route is " + currentRoute.getDistance() + " meters long.",
-          Toast.LENGTH_SHORT).show();
+        Toast.makeText(DirectionsActivity.this, String.format(getString(R.string.directions_activity_toast_message),
+          currentRoute.getDistance()), Toast.LENGTH_SHORT).show();
 
         // Draw the route on the map
         drawRoute(currentRoute);

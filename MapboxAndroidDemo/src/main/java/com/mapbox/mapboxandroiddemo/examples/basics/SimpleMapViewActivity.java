@@ -9,6 +9,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * The most basic example of adding a map to an activity.
+ */
 public class SimpleMapViewActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -21,7 +24,7 @@ public class SimpleMapViewActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_basic_simple_mapview);
 
     mapView = (MapView) findViewById(R.id.mapView);

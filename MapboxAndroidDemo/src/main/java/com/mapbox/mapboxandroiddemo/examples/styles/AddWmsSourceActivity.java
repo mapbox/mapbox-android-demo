@@ -13,6 +13,9 @@ import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.RasterSource;
 import com.mapbox.mapboxsdk.style.sources.TileSet;
 
+/**
+ * Adding an external Web Map Service layer to the map.
+ */
 public class AddWmsSourceActivity extends AppCompatActivity {
 
   MapView mapView;
@@ -25,7 +28,7 @@ public class AddWmsSourceActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_add_wms_source);
 
     mapView = (MapView) findViewById(R.id.mapView);

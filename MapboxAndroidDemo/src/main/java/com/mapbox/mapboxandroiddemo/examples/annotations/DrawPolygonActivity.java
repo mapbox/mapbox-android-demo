@@ -15,6 +15,9 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Draw a vector polygon on a map with the Mapbox Android SDK.
+ */
 public class DrawPolygonActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -27,7 +30,7 @@ public class DrawPolygonActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_annotation_polygon);
 
     mapView = (MapView) findViewById(R.id.mapView);

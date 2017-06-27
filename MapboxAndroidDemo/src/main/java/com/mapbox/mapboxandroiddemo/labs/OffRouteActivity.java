@@ -27,12 +27,12 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.services.android.navigation.v5.RouteUtils;
 import com.mapbox.services.api.ServicesException;
 import com.mapbox.services.api.directions.v5.DirectionsCriteria;
 import com.mapbox.services.api.directions.v5.MapboxDirections;
 import com.mapbox.services.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.services.api.directions.v5.models.DirectionsRoute;
-import com.mapbox.services.api.navigation.v5.RouteUtils;
 import com.mapbox.services.api.utils.turf.TurfException;
 import com.mapbox.services.api.utils.turf.TurfMeasurement;
 import com.mapbox.services.commons.geojson.LineString;
@@ -46,6 +46,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.mapbox.services.Constants.PRECISION_6;
+
 
 public class OffRouteActivity extends AppCompatActivity {
 
@@ -78,7 +79,7 @@ public class OffRouteActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_lab_off_route);
 
     mapView = (MapView) findViewById(R.id.mapview);
@@ -88,7 +89,7 @@ public class OffRouteActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
 
-        Toast.makeText(OffRouteActivity.this, "Press map to add destination", Toast.LENGTH_LONG).show();
+        Toast.makeText(OffRouteActivity.this, getString(R.string.off_route_toast_press_map), Toast.LENGTH_LONG).show();
 
         // origin used for starting point of car.
         Position origin = Position.fromCoordinates(2.35166, 48.84659);
@@ -246,7 +247,7 @@ public class OffRouteActivity extends AppCompatActivity {
           // Draw the route on the map
           drawRoute(currentRoute);
         } else {
-          Toast.makeText(OffRouteActivity.this, "No routes found", Toast.LENGTH_LONG).show();
+          Toast.makeText(OffRouteActivity.this, getString(R.string.toast_no_routes_found), Toast.LENGTH_LONG).show();
           return;
         }
       }
@@ -313,7 +314,7 @@ public class OffRouteActivity extends AppCompatActivity {
     if (routeUtils.isOffRoute(carCurrentPosition, currentRoute.getLegs().get(0))) {
 
       // Display message to user and stop simulation.
-      Toast.makeText(OffRouteActivity.this, "Off route", Toast.LENGTH_LONG).show();
+      Toast.makeText(OffRouteActivity.this, getString(R.string.off_route_toast_off_route), Toast.LENGTH_LONG).show();
       stopSimulation();
 
       // Reset our variables

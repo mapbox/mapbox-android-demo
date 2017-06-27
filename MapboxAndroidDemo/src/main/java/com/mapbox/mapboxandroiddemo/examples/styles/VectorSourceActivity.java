@@ -18,6 +18,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
+/**
+ * Add a vector source to a map.
+ */
 public class VectorSourceActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -30,7 +33,7 @@ public class VectorSourceActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_vector_style);
 
     mapView = (MapView) findViewById(R.id.mapView);
