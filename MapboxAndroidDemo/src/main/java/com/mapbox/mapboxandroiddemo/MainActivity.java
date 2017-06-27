@@ -59,9 +59,9 @@ import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
-import com.mapbox.mapboxandroiddemo.examples.mas.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
@@ -344,6 +344,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         currentCategory = R.id.nav_extrusions;
         break;
 
+      case R.id.nav_plugins:
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_mas_traffic_plugin_title,
+          R.string.activity_mas_traffic_plugin_description,
+          new Intent(MainActivity.this, TrafficPluginActivity.class),
+          R.string.activity_mas_traffic_plugin_url
+        ));
+        currentCategory = R.id.nav_plugins;
+        break;
+
       case R.id.nav_annotations:
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_annotation_marker_title,
@@ -485,12 +495,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_mas_static_image_description,
           new Intent(MainActivity.this, StaticImageActivity.class),
           R.string.activity_mas_static_image_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_mas_traffic_plugin_title,
-          R.string.activity_mas_traffic_plugin_description,
-          new Intent(MainActivity.this, TrafficPluginActivity.class),
-          R.string.activity_mas_traffic_plugin_url
         ));
         currentCategory = R.id.nav_mas;
         break;
