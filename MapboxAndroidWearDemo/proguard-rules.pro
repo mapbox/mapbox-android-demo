@@ -17,6 +17,8 @@
 
 -dontwarn okio.**
 -dontwarn okhttp3.**
+-keep class retrofit.**
+-dontwarn retrofit.**
 
 # Picasso
 -dontwarn com.squareup.okhttp.**
@@ -27,3 +29,4 @@
 -keep class com.google.**
 -dontwarn com.google.**
 -dontwarn java.nio.**
+-dontwarn javax.annotation.**
