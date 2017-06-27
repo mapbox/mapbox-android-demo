@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.plugins;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -13,7 +12,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.traffic.TrafficPlugin;
 
-public class TrafficPluginActivity extends AppCompatActivity implements MapboxMap.OnCameraMoveListener {
+public class TrafficPluginActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap map;
@@ -44,7 +43,7 @@ public class TrafficPluginActivity extends AppCompatActivity implements MapboxMa
     FloatingActionButton trafficToggleButton = (FloatingActionButton) findViewById(R.id.traffic_toggle_fab);
     trafficToggleButton.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick(View view) {
         if (map != null) {
           trafficPlugin.toggle();
         }
