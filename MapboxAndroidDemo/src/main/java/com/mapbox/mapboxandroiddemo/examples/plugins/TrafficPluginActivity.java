@@ -36,10 +36,8 @@ public class TrafficPluginActivity extends AppCompatActivity implements MapboxMa
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         TrafficPluginActivity.this.map = mapboxMap;
-
         TrafficPluginActivity.this.trafficPlugin = new TrafficPlugin(mapView, mapboxMap);
         TrafficPluginActivity.this.trafficPlugin.toggle(); // Enable the traffic view by default
-
       }
     });
 
@@ -52,11 +50,6 @@ public class TrafficPluginActivity extends AppCompatActivity implements MapboxMa
         }
       }
     });
-  }
-
-  @Override
-  public void onCameraMove() {
-    Log.d("Traffic plugin", "onCameraMove: zoom level = " + map.getCameraPosition().zoom);
   }
 
   @Override
@@ -100,6 +93,4 @@ public class TrafficPluginActivity extends AppCompatActivity implements MapboxMa
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
   }
-
-
 }
