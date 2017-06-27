@@ -12,6 +12,10 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.traffic.TrafficPlugin;
 
+/**
+ * Toggle the Mapbox Traffic plugin to display real-time traffic data on top
+ * of your map (not all regions supported at the moment).
+ */
 public class TrafficPluginActivity extends AppCompatActivity {
 
   private MapView mapView;
