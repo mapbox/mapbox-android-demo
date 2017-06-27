@@ -79,6 +79,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
+import com.mapbox.mapboxandroiddemo.labs.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
@@ -551,6 +552,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, SpaceStationLocationActivity.class),
           R.string.activity_lab_space_station_location_url
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_indoor_3d_title,
+          R.string.activity_lab_indoor_3d_description,
+          new Intent(MainActivity.this, Indoor3DMapActivity.class),
+          R.string.activity_lab_indoor_3d_url
+        ));
+
         currentCategory = R.id.nav_lab;
         break;
 

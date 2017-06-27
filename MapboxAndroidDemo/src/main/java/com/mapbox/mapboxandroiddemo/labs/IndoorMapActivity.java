@@ -49,7 +49,12 @@ public class IndoorMapActivity extends AppCompatActivity {
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    // Mapbox access token is configured here. This needs to be called either in your application
+    // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
+
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_lab_indoor_map);
 
     mapView = (MapView) findViewById(R.id.mapView);
