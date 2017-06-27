@@ -1,5 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -37,13 +38,13 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
-public class HexabinExtrusionActivity extends AppCompatActivity implements
-  MapView.OnMapChangedListener/*, MapboxMap.OnMapLongClickListener */ {
+public class HexabinExtrusionActivity extends AppCompatActivity /*implements
+  MapView.OnMapChangedListener, MapboxMap.OnMapLongClickListener */ {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
   private int maxColor;
-  private String[] colorStops = {"#151515", "#222", "#ffc300", "#ff8d19", "#ff5733", "#ff2e00"};
+  private String[] colorStops = {"#151515", "#bfff0f", "#ffc300", "#ff8d19", "#ff5733", "#ff2e00"};
   private int heightStop = 5000;
   private String colorActive = "#3cc";
   private String[] typeList = {"total", "noise", "establishment", "poisoning", "drinking", "smoking", "others"};
@@ -103,9 +104,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
        /* addGrids3dLayer();
         setUpActiveGrid();*/
 
-        for (int x = 0; x < mapboxMap.getLayers().size(); x++) {
-          Log.d("HexabinActivity", "onMapReady: layer name = " + mapboxMap.getLayers().get(x).getId());
-        }
+        HexabinExtrusionActivity.this.mapboxMap = mapboxMap;
 
         mapboxMap.setLatLngBoundsForCameraTarget(new LatLngBounds.Builder()
           .include(new LatLng(40.609614478818855, -74.09692544272578))
@@ -115,21 +114,20 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
         setUpComplaints();
         setUpBusinesses();
 
-
         /*setUpGridsCountLayer();
         setUpPointsActiveLayer();*/
       }
     });
   }
 
-  @Override
+/*  @Override
   public void onMapChanged(int change) {
     if (!activeCamera.equals("inspector")) {
       activeCamera = mapboxMap.getCameraPosition().zoom > 14 ? "dotted" : "hexbin";
       setLayers();
     }
-    ;
-  }
+
+  }*/
   /*@Override
   public void onMapLongClick(@NonNull LatLng point) {
     LatLng coordinates = new LatLng(point.getLatitude(), point.getLongitude());
@@ -270,7 +268,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
     mapboxMap.addSource(complaintVector);
 
     CircleLayer complaintCirclesLayer = new CircleLayer("points-complaints", "points-complaints");
-    complaintCirclesLayer.setSourceLayer("data_complaints-1emuz6");
+    complaintCirclesLayer.withSourceLayer("data_complaints-1emuz6");
     complaintCirclesLayer.withProperties(
       circleRadius(
         zoom(
@@ -280,10 +278,9 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
           )
         )
       ),
-      circleColor(colorStops[2]),
-      circleOpacity(0f)
+      circleColor(Color.parseColor("#bfff0f"))
     );
-    mapboxMap.addLayer(complaintCirclesLayer);
+    mapboxMap.addLayerBelow(complaintCirclesLayer, "admin-2-boundaries-dispute");
   }
 
   private void setUpBusinesses() {
@@ -304,7 +301,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity implements
       circleColor(colorStops[5]),
       circleOpacity(0f)
     );
-    mapboxMap.addLayer(businessCircleLayer);
+    mapboxMap.addLayerBelow(businessCircleLayer, "admin-2-boundaries-dispute");
   }
 
   private void setUpGridsCountLayer() {
