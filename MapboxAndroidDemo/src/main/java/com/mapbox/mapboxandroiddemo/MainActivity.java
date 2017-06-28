@@ -78,7 +78,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
-import com.mapbox.mapboxandroiddemo.labs.Indoor3DMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
