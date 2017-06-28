@@ -61,6 +61,7 @@ import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
@@ -341,6 +342,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_adjust_extrusions_url, true
         ));
         currentCategory = R.id.nav_extrusions;
+        break;
+
+      case R.id.nav_plugins:
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_plugins_traffic_plugin_title,
+          R.string.activity_plugins_traffic_plugin_description,
+          new Intent(MainActivity.this, TrafficPluginActivity.class),
+          R.string.activity_plugins_traffic_plugin_url
+        ));
+        currentCategory = R.id.nav_plugins;
         break;
 
       case R.id.nav_annotations:
