@@ -80,7 +80,6 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
 
     // Create stops array
     Stop[] stops = new Stop[statesArray.length()];
-    stops[0] = stop("0", PropertyFactory.fillColor("rgba(0,0,0,0)"));
 
     for (int x = 0; x < statesArray.length(); x++) {
       try {
@@ -103,7 +102,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     statesJoinLayer.withProperties(
       fillColor(
         Function.property(
-          vectorMatchProp, Stops.categorical(stops))));
+          vectorMatchProp, Stops.categorical(stops)).withDefaultValue(PropertyFactory.fillColor("rgba(0,0,0,0)"))));
 
     // Add layer to map below the "waterway-label" layer
     map.addLayerAbove(statesJoinLayer, "waterway-label");
