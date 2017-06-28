@@ -8,15 +8,13 @@
     android:layout_height="match_parent"
     tools:context="com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity">
 
-
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="41.5"
-        mapbox:mapbox_cameraTargetLng="-99.9"
-        mapbox:mapbox_cameraZoom="3"
+        mapbox:mapbox_cameraTargetLat="38.00312"
+        mapbox:mapbox_cameraTargetLng="-98.398423"
+        mapbox:mapbox_cameraZoom="1"
         mapbox:mapbox_styleUrl="@string/mapbox_style_light"/>
-
 
 </RelativeLayout>
