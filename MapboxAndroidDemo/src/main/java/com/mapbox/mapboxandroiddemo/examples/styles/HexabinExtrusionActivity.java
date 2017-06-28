@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -19,8 +18,10 @@ import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.mapboxsdk.style.sources.VectorSource;
 import com.mapbox.services.commons.geojson.FeatureCollection;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import static com.mapbox.mapboxsdk.style.functions.Function.zoom;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
@@ -42,9 +43,9 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
   MapView.OnMapChangedListener, MapboxMap.OnMapLongClickListener */ {
 
   private MapView mapView;
-  private MapboxMap mapboxMap;
+  private MapboxMap map;
   private int maxColor;
-  private String[] colorStops = {"#151515", "#bfff0f", "#ffc300", "#ff8d19", "#ff5733", "#ff2e00"};
+  private String[] colorStops = {"#151515", "#222", "#ffc300", "#ff8d19", "#ff5733", "#ff2e00"};
   private int heightStop = 5000;
   private String colorActive = "#3cc";
   private String[] typeList = {"total", "noise", "establishment", "poisoning", "drinking", "smoking", "others"};
@@ -104,7 +105,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
        /* addGrids3dLayer();
         setUpActiveGrid();*/
 
-        HexabinExtrusionActivity.this.mapboxMap = mapboxMap;
+        map = mapboxMap;
 
         mapboxMap.setLatLngBoundsForCameraTarget(new LatLngBounds.Builder()
           .include(new LatLng(40.609614478818855, -74.09692544272578))
@@ -113,6 +114,8 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
 
         setUpComplaints();
         setUpBusinesses();
+        addGrids3dLayer();
+        setUpActiveGrid();
 
         /*setUpGridsCountLayer();
         setUpPointsActiveLayer();*/
@@ -123,7 +126,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
 /*  @Override
   public void onMapChanged(int change) {
     if (!activeCamera.equals("inspector")) {
-      activeCamera = mapboxMap.getCameraPosition().zoom > 14 ? "dotted" : "hexbin";
+      activeCamera = map.getCameraPosition().zoom > 14 ? "dotted" : "hexbin";
       setLayers();
     }
 
@@ -134,20 +137,20 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
     String html = "";
     Feature[] queryComplaints;
     if (activeCamera.equals("hexbin")) {
-      Feature[] query = mapboxMap.queryRenderedFeatures(point., "grids-3d");
+      Feature[] query = map.queryRenderedFeatures(point., "grids-3d");
       if (query.) {
         html = query[0].properties.total + " complaints here with " + query[0].properties.businesses + " restaurants/cafes/bars. ";
         html = activeType == = "total" ? html : html + query[0].properties[activeType] + " of them are about " + activeType + ". ";
         html += "Click to see the incidents.";
 
         gridActive.features = query[0]];
-        mapboxMap.getSource("grid-active").setData(gridActive);
+        map.getSource("grid-active").setData(gridActive);
       } else {
-        mapboxMap.getSource("grid-active").setData(gridActive);
+        map.getSource("grid-active").setData(gridActive);
       }
       // else: "dotted" or "inspector"
     } else {
-      queryComplaints = mapboxMap.queryRenderedFeatures(point., "points-complaints");
+      queryComplaints = map.queryRenderedFeatures(point., "points-complaints");
 
     }
     if (queryComplaints.length()) {
@@ -166,9 +169,9 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
         html += "<p>...</p>";
       }
       pointActive.getFeatures() = queryComplaints;
-      mapboxMap.getSource("point-active").setData(pointActive);
+      map.getSource("point-active").setData(pointActive);
     } else {
-      mapboxMap.getSource("point-active").setData(empty);
+      map.getSource("point-active").setData(empty);
     }
 
     if (html.equals("")) {
@@ -185,39 +188,39 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
 
   private void setLayers() {
     if (activeCamera.equals("hexbin")) {
-      mapboxMap.getLayer("points-complaints").setProperties(circleOpacity(0f));
-      mapboxMap.getLayer("points-businesses").setProperties(circleOpacity(0f));
-      mapboxMap.getLayer("grids-3d").setProperties(fillExtrusionOpacity(0.6f));
-      mapboxMap.getLayer("grids-active").setProperties(fillExtrusionOpacity(0.6f));
-      mapboxMap.getLayer("grids-count").setProperties(textOpacity(0f));
-      mapboxMap.getSource("point-active");
+      map.getLayer("points-complaints").setProperties(circleOpacity(0f));
+      map.getLayer("points-businesses").setProperties(circleOpacity(0f));
+      map.getLayer("grids-3d").setProperties(fillExtrusionOpacity(0.6f));
+      map.getLayer("grids-active").setProperties(fillExtrusionOpacity(0.6f));
+      map.getLayer("grids-count").setProperties(textOpacity(0f));
+      map.getSource("point-active");
     } else {
       if (activeCamera.equals("dotted")) {
-        mapboxMap.getLayer("points-complaints").setProperties(circleOpacity(0.3f));
-        mapboxMap.getLayer("points-businesses").setProperties(circleOpacity(0.2f));
-        mapboxMap.getLayer("grids-3d").setProperties(fillExtrusionOpacity(0f));
-        mapboxMap.getLayer("grids-active").setProperties(fillExtrusionOpacity(0f));
-        mapboxMap.getLayer("grids-count").setProperties(textOpacity(0.8f));
-        mapboxMap.getSource("grid-active");
+        map.getLayer("points-complaints").setProperties(circleOpacity(0.3f));
+        map.getLayer("points-businesses").setProperties(circleOpacity(0.2f));
+        map.getLayer("grids-3d").setProperties(fillExtrusionOpacity(0f));
+        map.getLayer("grids-active").setProperties(fillExtrusionOpacity(0f));
+        map.getLayer("grids-count").setProperties(textOpacity(0.8f));
+        map.getSource("grid-active");
 
       } else {
         if (activeCamera.equals("inspector")) {
-          mapboxMap.getLayer("points-complaints").setProperties(circleOpacity(0.3f));
-          mapboxMap.getLayer("points-businesses").setProperties(circleOpacity(0.2f));
-          mapboxMap.getLayer("grids-3d").setProperties(fillExtrusionOpacity(0.0f));
-          mapboxMap.getLayer("grids-active").setProperties(fillExtrusionOpacity(0.2f));
-          mapboxMap.getLayer("grids-active").setProperties(fillExtrusionHeight(0f));
-          mapboxMap.getLayer("grids-count").setProperties(textOpacity(0.8f));
+          map.getLayer("points-complaints").setProperties(circleOpacity(0.3f));
+          map.getLayer("points-businesses").setProperties(circleOpacity(0.2f));
+          map.getLayer("grids-3d").setProperties(fillExtrusionOpacity(0.0f));
+          map.getLayer("grids-active").setProperties(fillExtrusionOpacity(0.2f));
+          map.getLayer("grids-active").setProperties(fillExtrusionHeight(0f));
+          map.getLayer("grids-count").setProperties(textOpacity(0.8f));
         }
       }
     }
   }
 
   private void addGrids3dLayer() {
-    GeoJsonSource gridSource = new GeoJsonSource("grids", "grids");
-    mapboxMap.addSource(gridSource);
+    GeoJsonSource gridSource = new GeoJsonSource("grids", loadJsonFromAsset("grids.geojson"));
+    map.addSource(gridSource);
 
-    /*FillExtrusionLayer fillExtrusionLayer3dGrid = new FillExtrusionLayer("grids-3d", "grids");
+    FillExtrusionLayer fillExtrusionLayer3dGrid = new FillExtrusionLayer("grids-3d", "grids");
     fillExtrusionLayer3dGrid.withProperties(
       fillExtrusionColor(Function.property("population",
         IntervalStops.interval(
@@ -245,13 +248,13 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
                 stop(maxColor * .8, fillColor(Color.parseColor(colorStops[4]),
                   stop(maxColor, fillColor(Color.parseColor(colorStops[5]))))))))))))))))
 
-    mapboxMap.addLayerAbove(fillExtrusionLayer3dGrid, "admin-2-boundaries-dispute");*/
+    map.addLayerAbove(fillExtrusionLayer3dGrid, "admin-2-boundaries-dispute");
 
   }
 
   private void setUpActiveGrid() {
-    GeoJsonSource gridActiveSource = new GeoJsonSource("grid-active", "gridActive");
-    mapboxMap.addSource(gridActiveSource);
+    GeoJsonSource gridActiveSource = new GeoJsonSource("grid-active", loadJsonFromAsset("grids.geojson"));
+    map.addSource(gridActiveSource);
 
     FillExtrusionLayer fillExtrusionLayerActiveGridLayer = new FillExtrusionLayer("grid-active", "grid-active");
     fillExtrusionLayerActiveGridLayer.withProperties(
@@ -260,15 +263,15 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
         stop(0, fillExtrusionHeight(0f))))),
       fillExtrusionOpacity(0.6f));
 
-    mapboxMap.addLayerAbove(fillExtrusionLayerActiveGridLayer, "admin-2-boundaries-dispute");
+    map.addLayerAbove(fillExtrusionLayerActiveGridLayer, "admin-2-boundaries-dispute");
   }
 
   private void setUpComplaints() {
-    VectorSource complaintVector = new VectorSource("points-complaints", "mapbox://yunjieli.7l1fqjio");
-    mapboxMap.addSource(complaintVector);
+
+    GeoJsonSource complaintSource = new GeoJsonSource("points-complaints", loadJsonFromAsset("data_complaints.geojson"));
+    map.addSource(complaintSource);
 
     CircleLayer complaintCirclesLayer = new CircleLayer("points-complaints", "points-complaints");
-    complaintCirclesLayer.withSourceLayer("data_complaints-1emuz6");
     complaintCirclesLayer.withProperties(
       circleRadius(
         zoom(
@@ -280,15 +283,15 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
       ),
       circleColor(Color.parseColor("#bfff0f"))
     );
-    mapboxMap.addLayerBelow(complaintCirclesLayer, "admin-2-boundaries-dispute");
+    map.addLayerBelow(complaintCirclesLayer, "admin-2-boundaries-dispute");
   }
 
   private void setUpBusinesses() {
-    VectorSource businessVector = new VectorSource("points-businesses", "mapbox://yunjieli.3i12h479");
-    mapboxMap.addSource(businessVector);
+
+    GeoJsonSource businessSource = new GeoJsonSource("points-businesses", loadJsonFromAsset("data_businesses.geojson"));
+    map.addSource(businessSource);
 
     CircleLayer businessCircleLayer = new CircleLayer("points-businesses", "points-businesses");
-    businessCircleLayer.setSourceLayer("data_businesses-0lvzk6");
     businessCircleLayer.withProperties(
       circleRadius(
         zoom(
@@ -298,10 +301,10 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
           )
         )
       ),
-      circleColor(colorStops[5]),
-      circleOpacity(0f)
+      circleColor(colorStops[5])
     );
-    mapboxMap.addLayerBelow(businessCircleLayer, "admin-2-boundaries-dispute");
+
+    map.addLayerBelow(businessCircleLayer, "admin-2-boundaries-dispute");
   }
 
   private void setUpGridsCountLayer() {
@@ -316,7 +319,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
 
   private void setUpPointsActiveLayer() {
     GeoJsonSource pointActiveSource = new GeoJsonSource("point-active", "pointActive");
-    mapboxMap.addSource(pointActiveSource);
+    map.addSource(pointActiveSource);
 
     CircleLayer activePointCircleLayer = new CircleLayer("point-active", "point-active");
     activePointCircleLayer.withProperties(
@@ -326,7 +329,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
       circleBlur(1f)
     );
 
-    mapboxMap.addLayerAbove(activePointCircleLayer, "points-businesses");
+    map.addLayerAbove(activePointCircleLayer, "points-businesses");
   }
 
   @Override
@@ -374,12 +377,31 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
 /*
   private void getCamera() {
     // if pitch==0, don't update Camera
-    if (mapboxMap.getCameraPosition().tilt == 0) {
-      previousCamera.target = mapboxMap.getCameraPosition().target;
-      previousCamera.zoom = mapboxMap.getCameraPosition().zoom;
-      previousCamera.tilt = mapboxMap.getCameraPosition().tilt;
-      previousCamera.bearing = mapboxMap.getCameraPosition().bearing;
+    if (map.getCameraPosition().tilt == 0) {
+      previousCamera.target = map.getCameraPosition().target;
+      previousCamera.zoom = map.getCameraPosition().zoom;
+      previousCamera.tilt = map.getCameraPosition().tilt;
+      previousCamera.bearing = map.getCameraPosition().bearing;
     }
   }
 */
+
+  private String loadJsonFromAsset(String filename) {
+    // Using this method to load in GeoJSON files from the assets folder.
+
+    try {
+      InputStream is = getAssets().open(filename);
+      int size = is.available();
+      byte[] buffer = new byte[size];
+      is.read(buffer);
+      is.close();
+      return new String(buffer, "UTF-8");
+
+    } catch (IOException ex) {
+      ex.printStackTrace();
+      return null;
+    }
+  }
+
+
 }
