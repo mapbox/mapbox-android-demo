@@ -44,8 +44,7 @@ public class TrafficPluginActivity extends AppCompatActivity {
       }
     });
 
-    FloatingActionButton trafficToggleButton = (FloatingActionButton) findViewById(R.id.traffic_toggle_fab);
-    trafficToggleButton.setOnClickListener(new View.OnClickListener() {
+    findViewById(R.id.traffic_toggle_fab).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         if (map != null) {
