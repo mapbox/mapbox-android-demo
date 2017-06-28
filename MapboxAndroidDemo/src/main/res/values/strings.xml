@@ -92,6 +92,7 @@
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
+    <string name="activity_plugins_traffic_plugin_title">Display real-time traffic</string>
     <string name="activity_mas_simplify_polyline_title">Simplify a polyline</string>
     <string name="activity_mas_map_matching_title">Map Matching</string>
     <string name="activity_lab_location_picker_title">Location picker</string>
@@ -150,8 +151,9 @@
     <string name="activity_location_animated_icon_description">Use a marker view to mark the users location and add a pulsing animation to it.</string>
     <string name="activity_location_customize_user_description">"Adjust the user location icon's colors and padding so it appears lower on the screen."</string>
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
-    <string name="activity_mas_geocoding_description">"Use Mapbox Android Service's geocoder to convert location text into geographic coordinates."</string>
+    <string name="activity_mas_geocoding_description">Use Mapbox Android Service\'s geocoder to convert location text into geographic coordinates.</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
+    <string name="activity_plugins_traffic_plugin_description">Use Mapbox\'s traffic plugin to display live car congestion data on top of a map.</string>
     <string name="activity_mas_simplify_polyline_description">Using the polylines utility, simplify a polyline which reduces the amount of coordinates making up the polyline depending on tolerance.</string>
     <string name="activity_mas_map_matching_description">Match raw GPS points to the map so they aligns with the roads/pathways.</string>
     <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding.</string>
@@ -214,6 +216,7 @@
     <string name="activity_mas_directions_url" translatable="false">http://i.imgur.com/DhQltqB.jpg</string>
     <string name="activity_mas_geocoding_url" translatable="false">http://i.imgur.com/mBJGh3P.png</string>
     <string name="activity_mas_static_image_url" translatable="false">http://i.imgur.com/COdES0F.png</string>
+    <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_mas_simplify_polyline_url" translatable="false">http://i.imgur.com/uATgul1.png</string>
     <string name="activity_mas_map_matching_url" translatable="false">http://i.imgur.com/bWvVbwC.png</string>
     <string name="activity_lab_location_picker_url" translatable="false">http://i.imgur.com/0JTVwaa.png</string>
@@ -361,6 +364,7 @@
     <string name="minneapolis">Minneapolis</string>
     <string name="miami">Miami</string>
     <string name="extrusions_category">3D Extrusions</string>
+    <string name="plugins_category">Plugins</string>
 
     <!--Landing activity-->
     <string name="tv_create_account_button">Create account</string>
