@@ -69,6 +69,7 @@
     <string name="activity_extrusions_indoor_3d_title">Extrude polygons for 3D indoor mapping</string>
     <string name="activity_dds_style_circle_categorically_title">Style circles categorically</string>
     <string name="activity_dds_choropleth_zoom_change_title">Update a choropleth layer by zoom level</string>
+    <string name="activity_dds_json_vector_mix_title">Join local JSON data with vector tile geometries</string>
     <string name="activity_dds_style_line_identity_property_title">Style lines using an identity property function</string>
     <string name="activity_annotation_marker_title">Draw a marker</string>
     <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
@@ -128,7 +129,8 @@
     <string name="activity_extrusions_adjust_extrusions_description">Change the location and color of the light shined on extrusions</string>
     <string name="activity_extrusions_indoor_3d_description">Create a 3D indoor map with the fill-extrude-height paint property.</string>
     <string name="activity_dds_style_circle_categorically_description">Using a categorical circle-color property function for a visualization.</string>
-    <string name="activity_dds_choropleth_zoom_change_description">Using 2014 census data, display state or county population depending on zoom level.</string>
+    <string name="activity_dds_choropleth_zoom_change_description">Style a choropleth map with data-driven styling, local JSON data, and vector tile geometries.</string>
+    <string name="activity_dds_json_vector_mix_description">Style a choropleth map by merging local JSON data with vector tile geometries.</string>
     <string name="activity_dds_style_line_identity_property_description">Using an identity line-color property function for a visualization.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
@@ -166,7 +168,6 @@
 
     <!-- example urls-->
     <string name="empty_image"> </string>
-
     <string name="activity_basic_simple_mapview_url" translatable="false">http://i.imgur.com/IIhIB4J.png</string>
     <string name="activity_basic_support_map_frag_url" translatable="false">http://i.imgur.com/vNlHFjG.png</string>
     <string name="activity_basic_mapbox_options_url" translatable="false">http://i.imgur.com/IhuviRz.png</string>
@@ -175,7 +176,7 @@
     <string name="activity_style_default_url" translatable="false">http://i.imgur.com/ZuUhFHw.jpg</string>
     <string name="activity_style_zoom_dependent_fill_color_url" translatable="false">http://i.imgur.com/rHl1pmC.png</string>
     <string name="activity_styles_color_switcher_url" translatable="false">http://i.imgur.com/a0ZaKHG.png</string>
-    <string name="activity_styles_langauge_switch_url" translatable="false">http://i.imgur.com/bu7GV5T.png</string>
+    <string name="activity_styles_language_switch_url" translatable="false">http://i.imgur.com/bu7GV5T.png</string>
     <string name="activity_styles_show_hide_layer_url" translatable="false">http://i.imgur.com/amDMa1M.png</string>
     <string name="activity_styles_geojson_layer_in_stack_url" translatable="false">http://i.imgur.com/mngiJUj.png</string>
     <string name="activity_styles_adjust_layer_opacity_url" translatable="false">http://i.imgur.com/0Av8kWD.png</string>
@@ -193,6 +194,7 @@
     <string name="activity_dds_style_circle_categorically_url" translatable="false">http://i.imgur.com/C3mtfgF.png</string>
     <string name="activity_dds_choropleth_zoom_change_url" translatable="false">http://i.imgur.com/sPNpLEP.png</string>
     <string name="activity_dds_style_line_identity_property_url" translatable="false">http://i.imgur.com/wgpKvZM.png</string>
+    <string name="activity_dds_json_vector_mix_url">http://i.imgur.com/1IXkw80.png</string>
     <string name="activity_annotation_marker_url" translatable="false">http://i.imgur.com/X59UoaY.png</string>
     <string name="activity_annotation_custom_marker_url" translatable="false">http://i.imgur.com/BIHtPwJ.png</string>
     <string name="activity_annotation_geojson_line_url" translatable="false">http://i.imgur.com/rIFjsrH.png</string>
