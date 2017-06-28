@@ -430,7 +430,7 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
-            android:name=".labs.Indoor3DMapActivity"
+            android:name=".examples.extrusions.Indoor3DMapActivity"
             android:label="@string/activity_extrusions_indoor_3d_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
