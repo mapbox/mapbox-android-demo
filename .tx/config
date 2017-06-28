@@ -3,8 +3,8 @@ host = https://www.transifex.com
 minimum_perc = 80
 
 [mapbox-android-demo.stringsxml]
-file_filter = mapbox-android-demo/MapboxAndroidDemo/src/main/res/values-<lang>/strings.xml
-source_file = mapbox-android-demo/MapboxAndroidDemo/src/main/res/values/strings.xml
+file_filter = MapboxAndroidDemo/src/main/res/values-<lang>/strings.xml
+source_file = MapboxAndroidDemo/src/main/res/values/strings.xml
 source_lang = en
 type = ANDROID
 
