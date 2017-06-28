@@ -20,9 +20,13 @@ import org.json.JSONObject;
 
 public class OfflineServiceActivity extends AppCompatActivity {
 
+  private static final String TAG = "OfflineServiceActivity";
+
   private MapView mapView;
   private MapboxMap mapboxMap;
   private OfflineManager offlineManager;
+  public static final String JSON_CHARSET = "UTF-8";
+  public static final String JSON_FIELD_REGION_NAME = "FIELD_REGION_NAME";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +59,7 @@ public class OfflineServiceActivity extends AppCompatActivity {
           latLngBounds,
           10,
           20,
-          SimpleOfflineMapActivity.this.getResources().getDisplayMetrics().density);
+          OfflineServiceActivity.this.getResources().getDisplayMetrics().density);
 
         // Set the metadata
         byte[] metadata;
@@ -75,8 +79,6 @@ public class OfflineServiceActivity extends AppCompatActivity {
 
     Intent startServiceIntent = new Intent(this, DownloadOfflineMapService.class);
     startService(startServiceIntent);
-
-
   }
 
 
