@@ -18,6 +18,9 @@
             android:id="@+id/nav_extrusions"
             android:title="@string/extrusions_category"/>
         <item
+            android:id="@+id/nav_plugins"
+            android:title="@string/plugins_category"/>
+        <item
             android:id="@+id/nav_camera"
             android:title="@string/camera_category"/>
         <item

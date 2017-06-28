@@ -61,6 +61,7 @@ import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
@@ -80,6 +81,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
+import com.mapbox.mapboxandroiddemo.labs.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
@@ -349,6 +351,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         currentCategory = R.id.nav_extrusions;
         break;
 
+      case R.id.nav_plugins:
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_plugins_traffic_plugin_title,
+          R.string.activity_plugins_traffic_plugin_description,
+          new Intent(MainActivity.this, TrafficPluginActivity.class),
+          R.string.activity_plugins_traffic_plugin_url
+        ));
+        currentCategory = R.id.nav_plugins;
+        break;
+
       case R.id.nav_annotations:
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_annotation_marker_title,
@@ -558,6 +570,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, SpaceStationLocationActivity.class),
           R.string.activity_lab_space_station_location_url
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_indoor_3d_title,
+          R.string.activity_lab_indoor_3d_description,
+          new Intent(MainActivity.this, Indoor3DMapActivity.class),
+          R.string.activity_lab_indoor_3d_url
+        ));
+
         currentCategory = R.id.nav_lab;
         break;
 

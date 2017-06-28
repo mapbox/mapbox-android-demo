@@ -72,6 +72,10 @@ dependencies {
     compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-SNAPSHOT@aar') {
         transitive = true
     }
+
+    // Mapbox traffic plugin
+    compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:0.1.0'
+
     // Mapbox Android UI
     compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.2'
 
