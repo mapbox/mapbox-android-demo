@@ -346,10 +346,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
       case R.id.nav_plugins:
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_mas_traffic_plugin_title,
-          R.string.activity_mas_traffic_plugin_description,
+          R.string.activity_plugins_traffic_plugin_title,
+          R.string.activity_plugins_traffic_plugin_description,
           new Intent(MainActivity.this, TrafficPluginActivity.class),
-          R.string.activity_mas_traffic_plugin_url
+          R.string.activity_plugins_traffic_plugin_url
         ));
         currentCategory = R.id.nav_plugins;
         break;

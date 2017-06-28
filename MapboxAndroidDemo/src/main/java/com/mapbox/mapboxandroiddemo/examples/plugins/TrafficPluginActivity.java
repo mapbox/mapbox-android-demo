@@ -38,8 +38,8 @@ public class TrafficPluginActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
-        TrafficPluginActivity.this.map = mapboxMap;
-        TrafficPluginActivity.this.trafficPlugin = new TrafficPlugin(mapView, mapboxMap);
+        map = mapboxMap;
+        trafficPlugin = new TrafficPlugin(mapView, mapboxMap);
         TrafficPluginActivity.this.trafficPlugin.toggle(); // Enable the traffic view by default
       }
     });

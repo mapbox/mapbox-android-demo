@@ -126,7 +126,7 @@
         </activity>
         <activity
             android:name=".examples.plugins.TrafficPluginActivity"
-            android:label="@string/activity_mas_traffic_plugin_title">
+            android:label="@string/activity_plugins_traffic_plugin_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
