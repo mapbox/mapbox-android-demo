@@ -43,6 +43,8 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
+
+
     setContentView(R.layout.activity_population_density_extrusion);
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);

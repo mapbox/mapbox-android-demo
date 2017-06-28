@@ -60,6 +60,7 @@ import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
+import com.mapbox.mapboxandroiddemo.examples.offline.OfflineServiceActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
@@ -428,6 +429,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_offline_manager_description,
           new Intent(MainActivity.this, OfflineManagerActivity.class),
           R.string.activity_offline_manager_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_offline_service_title,
+          R.string.activity_offline_service_description,
+          new Intent(MainActivity.this, OfflineServiceActivity.class),
+          R.string.activity_offline_service_url
         ));
         currentCategory = R.id.nav_offline;
         break;

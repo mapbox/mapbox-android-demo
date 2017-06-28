@@ -104,6 +104,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
+            android:name=".examples.offline.OfflineServiceActivity"
+            android:label="@string/activity_offline_service_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
             android:name=".examples.mas.DirectionsActivity"
             android:label="@string/activity_mas_directions_title">
             <meta-data
@@ -445,5 +452,8 @@
             android:name=".account.LoadingActivity"
             android:screenOrientation="portrait">
         </activity>
+        <service
+            android:name=".examples.offline.DownloadOfflineMapService"
+            android:exported="false"/>
     </application>
 </manifest>

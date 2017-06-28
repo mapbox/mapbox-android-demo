@@ -82,6 +82,7 @@
     <string name="activity_camera_restrict_title">Restrict map panning</string>
     <string name="activity_offline_simple_title">A simple offline map</string>
     <string name="activity_offline_manager_title">Offline manager</string>
+    <string name="activity_offline_service_title">Offline in background service</string>
     <string name="activity_query_feature_title">Query a map feature</string>
     <string name="activity_query_select_building_title">Select a building</string>
     <string name="activity_query_feature_count_title">Feature count</string>
@@ -141,6 +142,7 @@
     <string name="activity_camera_restrict_description">Prevent a map from being panned to a different place.</string>
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Android SDK.</string>
     <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
+    <string name="activity_offline_service_description">Download an offline map using an Android background service before viewing it</string>
     <string name="activity_description">Download, view, navigate to, and delete an offline region.</string>
     <string name="activity_query_feature_description">Click the map to add a marker at the location and display the maps property information for that feature.</string>
     <string name="activity_query_select_building_description">Use the query feature to select a building, get its geometry and draw a polygon highlighting it.</string>
@@ -203,6 +205,7 @@
     <string name="activity_camera_restrict_url" translatable="false">http://i.imgur.com/A227BEs.jpg</string>
     <string name="activity_offline_simple_url" translatable="false">http://i.imgur.com/dV4DgDT.png</string>
     <string name="activity_offline_manager_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
+    <string name="activity_offline_service_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
     <string name="activity_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
     <string name="activity_query_select_building_url" translatable="false">http://i.imgur.com/bImud7u.png</string>
     <string name="activity_query_feature_url" translatable="false">http://i.imgur.com/HXxRBAF.png</string>
