@@ -380,7 +380,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
   }
 
   private String getRegionName(OfflineRegion offlineRegion) {
-    // Get the retion name from the offline region metadata
+    // Get the region name from the offline region metadata
     String regionName;
 
     try {
