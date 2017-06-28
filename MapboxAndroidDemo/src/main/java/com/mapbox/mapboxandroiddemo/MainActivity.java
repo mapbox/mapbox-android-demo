@@ -692,12 +692,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     dialogView.buildDialog();
 
     Button logOutOfMapboxAccountButton = (Button) customView.findViewById(R.id.log_out_of_account_button);
-    ImageView accountGravatarImage = (ImageView) customView.findViewById(R.id.logged_in_user_gravatar_image);
-    TextView accountUserName = (TextView) customView.findViewById(R.id.logged_in_user_username);
 
     if (!loggedIn) {
       logOutOfMapboxAccountButton.setVisibility(View.GONE);
-      accountGravatarImage.setVisibility(View.GONE);
     } else {
       logOutOfMapboxAccountButton.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -705,19 +702,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           dialogView.logOut(loggedIn);
         }
       });
-
-      String tester = PreferenceManager.getDefaultSharedPreferences(
-        getApplicationContext()).getString(AVATAR_IMAGE_KEY, "");
-
-      if (!tester.isEmpty()) {
-        Picasso.with(getApplicationContext()).load(PreferenceManager.getDefaultSharedPreferences(
-          getApplicationContext()).getString(AVATAR_IMAGE_KEY, "")).into(accountGravatarImage);
-      }
-
-      accountUserName.setText(getResources().getString(R.string.logged_in_username,
-        PreferenceManager.getDefaultSharedPreferences(
-          getApplicationContext()).getString(USERNAME_KEY, "")));
     }
   }
-
 }
