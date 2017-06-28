@@ -19,9 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -90,7 +88,6 @@ import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 import com.mapbox.mapboxandroiddemo.utils.SettingsDialogView;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -100,10 +97,8 @@ import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_I
 import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_SETTINGS_IN_NAV_DRAWER;
 import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.OPENED_APP;
 import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.SKIPPED_ACCOUNT_CREATION;
-import static com.mapbox.mapboxandroiddemo.commons.StringConstants.AVATAR_IMAGE_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.SKIPPED_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
-import static com.mapbox.mapboxandroiddemo.commons.StringConstants.USERNAME_KEY;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -318,28 +313,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
       case R.id.nav_extrusions:
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_basic_extrusions_title,
-          R.string.activity_style_basic_extrusions_description,
+          R.string.activity_extrusions_basic_extrusions_title,
+          R.string.activity_extrusions_basic_extrusions_description,
           new Intent(MainActivity.this, BasicExtrusionActivity.class),
-          R.string.activity_style_basic_extrusions_url, true
+          R.string.activity_extrusions_basic_extrusions_url, true
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_population_density_extrusions_title,
-          R.string.activity_style_population_density_extrusions_description,
+          R.string.activity_extrusions_population_density_extrusions_title,
+          R.string.activity_extrusions_population_density_extrusions_description,
           new Intent(MainActivity.this, PopulationDensityExtrusionActivity.class),
-          R.string.activity_style_population_density_extrusions_url, true
+          R.string.activity_extrusions_population_density_extrusions_url, true
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_catalina_marathon_extrusions_title,
-          R.string.activity_style_catalina_marathon_extrusions_description,
+          R.string.activity_extrusions_catalina_marathon_extrusions_title,
+          R.string.activity_extrusions_catalina_marathon_extrusions_description,
           new Intent(MainActivity.this, MarathonExtrusionActivity.class),
-          R.string.activity_style_catalina_marathon_extrusions_url, true
+          R.string.activity_extrusions_catalina_marathon_extrusions_url, true
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_adjust_extrusions_title,
-          R.string.activity_style_adjust_extrusions_description,
+          R.string.activity_extrusions_adjust_extrusions_title,
+          R.string.activity_extrusions_adjust_extrusions_description,
           new Intent(MainActivity.this, AdjustExtrusionLightActivity.class),
-          R.string.activity_style_adjust_extrusions_url, true
+          R.string.activity_extrusions_adjust_extrusions_url, true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_extrusions_indoor_3d_title,
+          R.string.activity_extrusions_indoor_3d_description,
+          new Intent(MainActivity.this, Indoor3DMapActivity.class),
+          R.string.activity_extrusions_indoor_3d_url
         ));
         currentCategory = R.id.nav_extrusions;
         break;
@@ -563,13 +564,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, SpaceStationLocationActivity.class),
           R.string.activity_lab_space_station_location_url
         ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_indoor_3d_title,
-          R.string.activity_lab_indoor_3d_description,
-          new Intent(MainActivity.this, Indoor3DMapActivity.class),
-          R.string.activity_lab_indoor_3d_url
-        ));
-
         currentCategory = R.id.nav_lab;
         break;
 

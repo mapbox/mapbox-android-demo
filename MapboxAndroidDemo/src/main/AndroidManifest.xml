@@ -353,13 +353,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
-            android:name=".labs.Indoor3DMapActivity"
-            android:label="@string/activity_lab_indoor_3d_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-        <activity
             android:name=".examples.dds.StyleCirclesCategoricallyActivity"
             android:label="@string/activity_dds_style_circle_categorically_title">
             <meta-data
@@ -396,7 +389,7 @@
         </activity>
         <activity
             android:name=".examples.extrusions.BasicExtrusionActivity"
-            android:label="@string/activity_style_basic_extrusions_title">
+            android:label="@string/activity_extrusions_basic_extrusions_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -417,14 +410,21 @@
         </activity>
         <activity
             android:name=".examples.extrusions.MarathonExtrusionActivity"
-            android:label="@string/activity_style_catalina_marathon_extrusions_title">
+            android:label="@string/activity_extrusions_catalina_marathon_extrusions_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
             android:name=".examples.extrusions.AdjustExtrusionLightActivity"
-            android:label="@string/activity_style_adjust_extrusions_title">
+            android:label="@string/activity_extrusions_adjust_extrusions_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".labs.Indoor3DMapActivity"
+            android:label="@string/activity_extrusions_indoor_3d_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
