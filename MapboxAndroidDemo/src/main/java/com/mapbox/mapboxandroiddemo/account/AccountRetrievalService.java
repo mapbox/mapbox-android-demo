@@ -8,9 +8,9 @@ import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.util.Log;
 
-import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.model.usermodel.UserResponse;
 
 import org.json.JSONException;
@@ -51,12 +51,9 @@ public class AccountRetrievalService extends IntentService {
 
   private AnalyticsTracker analytics;
 
-
   public AccountRetrievalService() {
     super(SERVICE_NAME);
   }
-
-  private String TAG = "AccountRetrievalService";
 
   @Override
   public void onCreate() {
@@ -68,12 +65,8 @@ public class AccountRetrievalService extends IntentService {
   protected void onHandleIntent(@Nullable Intent intent) {
     if (intent != null) {
       String authCode = intent.getStringExtra(AUTHCODE_KEY);
-      Log.d(TAG, "onHandleIntent: authCode = " + authCode);
       clientId = intent.getStringExtra(CLIENT_ID_KEY);
-      Log.d(TAG, "onHandleIntent: clientId = " + clientId);
       redirectUri = intent.getStringExtra(REDIRECT_URI_KEY);
-      Log.d(TAG, "onHandleIntent: redirectUri = " + redirectUri);
-
       getAccessToken(authCode);
     } else {
       Log.d("AccountRetrievalService", "onHandleIntent: intent == null");
@@ -109,7 +102,6 @@ public class AccountRetrievalService extends IntentService {
       @Override
       public void onResponse(okhttp3.Call call, okhttp3.Response response) throws IOException {
         String json = response.body().string();
-        Log.d("AccountRetrievalService", "onResponse: json = " + json);
         try {
           JSONObject data = new JSONObject(json);
           String accessToken = data.optString("access_token");
