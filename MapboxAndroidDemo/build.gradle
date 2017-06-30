@@ -63,7 +63,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8'
 
     // Mapbox dependencies
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-SNAPSHOT@aar') {
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0@aar') {
         transitive = true
     }
 
