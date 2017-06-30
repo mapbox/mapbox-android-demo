@@ -1,6 +1,6 @@
 Update to 5.1.0-beta.5
 
-This release introduces more examples for:
+This release fixes a few bugs and introduces more examples for:
 
 • Extrusions (3D buildings)
 • Data-driven styling

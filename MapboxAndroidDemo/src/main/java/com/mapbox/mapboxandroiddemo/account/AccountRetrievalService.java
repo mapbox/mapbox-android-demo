@@ -8,9 +8,9 @@ import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.util.Log;
 
-import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.model.usermodel.UserResponse;
 
 import org.json.JSONException;
@@ -50,7 +50,6 @@ public class AccountRetrievalService extends IntentService {
   private String username;
 
   private AnalyticsTracker analytics;
-
 
   public AccountRetrievalService() {
     super(SERVICE_NAME);
