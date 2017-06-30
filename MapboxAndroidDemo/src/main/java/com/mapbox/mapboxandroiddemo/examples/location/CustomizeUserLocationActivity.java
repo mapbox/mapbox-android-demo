@@ -107,6 +107,7 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
+    Toast.makeText(this, R.string.user_location_permission_explanation,
       Toast.LENGTH_LONG).show();
   }
 
