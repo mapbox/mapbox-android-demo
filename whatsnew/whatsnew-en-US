@@ -1,9 +1,11 @@
-Update to 5.1.0-beta.5
+Update to 5.1.0
 
 This release fixes a few bugs and introduces more examples for:
 
 • Extrusions (3D buildings)
 • Data-driven styling
 • Annotations
+• Hotfixes for several examples
+
 
 Mapbox’s new branding and colors are integrated too.
