@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.constants.MyLocationTracking;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -34,7 +33,6 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
   private LocationEngine locationEngine;
   private LocationEngineListener locationEngineListener;
 
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -48,6 +46,8 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
 
     // Get the location engine object for later use.
     locationEngine = new LocationSource(this);
+    locationEngine.activate();
+
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
@@ -63,23 +63,11 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
         }
 
         // Customize the user location icon using the getMyLocationViewSettings object.
-        map.getMyLocationViewSettings().setPadding(0, 500, 0, 0);
+        map.getMyLocationViewSettings().setPadding(0, 200, 0, 0);
         map.getMyLocationViewSettings().setForegroundTintColor(Color.parseColor("#56B881"));
         map.getMyLocationViewSettings().setAccuracyTintColor(Color.parseColor("#FBB03B"));
       }
     });
-  }
-
-  @Override
-  public void onResume() {
-    super.onResume();
-    mapView.onResume();
-  }
-
-  @Override
-  protected void onStart() {
-    super.onStart();
-    mapView.onStart();
   }
 
   @Override
@@ -112,12 +100,6 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
     mapView.onSaveInstanceState(outState);
   }
 
-  private void enableGps() {
-    // Enable user tracking to show the padding affect.
-    map.getTrackingSettings().setMyLocationTrackingMode(MyLocationTracking.TRACKING_FOLLOW);
-    map.getTrackingSettings().setDismissAllTrackingOnGesture(false);
-  }
-
   @Override
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
     permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -125,7 +107,6 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
-    Toast.makeText(this, R.string.user_location_permission_explanation,
       Toast.LENGTH_LONG).show();
   }
 
@@ -135,7 +116,7 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
     // If we have the last location of the user, we can move the camera to that position.
     Location lastLocation = locationEngine.getLastLocation();
     if (lastLocation != null) {
-      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
+      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 4));
     }
 
     locationEngineListener = new LocationEngineListener() {
@@ -151,7 +132,7 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
           // listener so the camera isn't constantly updating when the user location
           // changes. When the user disables and then enables the location again, this
           // listener is registered again and will adjust the camera once again.
-          map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 16));
+          map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 4));
           locationEngine.removeLocationEngineListener(this);
         }
       }
@@ -168,7 +149,6 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
     if (granted) {
       enableLocation();
     } else {
-      Toast.makeText(this, R.string.user_location_permission_not_granted,Toast.LENGTH_LONG).show();
       finish();
     }
   }
