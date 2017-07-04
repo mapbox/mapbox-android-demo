@@ -145,6 +145,7 @@ public class AccountRetrievalService extends IntentService {
         analytics.setMapboxUsername();
         analytics.identifyUser(emailAddress);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
       }
 
