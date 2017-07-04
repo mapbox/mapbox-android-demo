@@ -23,7 +23,7 @@ task secretKeysSetup {
         }
 
         String segmentWearableWriteKey = "$System.env.SEGMENT_API_WRITE_KEY_WEARABLE_DEMO"
-        if (segmentWriteKey == "null") {
+        if (segmentWearableWriteKey == "null") {
             System.out.println("You should set the SEGMENT_API_WRITE_KEY_WEARABLE_DEMO environment variable." +
                     " You will only have potential access to this if you're part of the Mapbox team)")
             segmentWearableWriteKey = "THE_SEGMENT_API_WRITE_KEY_WEARABLE_DEMO_GOES_HERE"
