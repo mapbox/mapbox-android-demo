@@ -1,10 +1,12 @@
 package com.mapbox.mapboxandroiddemo.account;
 
 import android.app.IntentService;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.util.Base64;
 import android.util.Log;
 
@@ -152,6 +154,7 @@ public class AccountRetrievalService extends IntentService {
       @Override
       public void onFailure(retrofit2.Call<UserResponse> call, Throwable throwable) {
         throwable.printStackTrace();
+        showErrorDialog();
       }
     });
   }
@@ -169,5 +172,18 @@ public class AccountRetrievalService extends IntentService {
       .putString(AVATAR_IMAGE_KEY, avatarUrl)
       .putString(TOKEN_KEY, token)
       .apply();
+  }
+
+  private void showErrorDialog() {
+    new AlertDialog.Builder(getApplicationContext())
+      .setTitle(R.string.retrieval_error_dialog_title)
+      .setMessage(R.string.retrieval_error_dialog_message)
+      .setPositiveButton(R.string.retrieval_error_dialog_ok_button, new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+          dialog.dismiss();
+        }
+      })
+      .show();
   }
 }

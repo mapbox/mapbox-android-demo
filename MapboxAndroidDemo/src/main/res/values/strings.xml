@@ -374,7 +374,7 @@
     <string name="landing_cta_tv_text">Create or sign in to your Mapbox account to view the latest Mapbox demos</string>
     <string name="skip_for_now_bottom_button">Skip for now</string>
     <string name="whoops_error_dialog_title">Whoops!</string>
-    <string name="whoops_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies.</string>
+    <string name="whoops_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
     <string name="whoops_error_dialog_ok_positive_button">Ok</string>
 
     <!--Main Activity welcome toast-->
@@ -387,7 +387,12 @@
     <string name="space_station_toast">Zoom in closely on space station to see it moving</string>
 
     <!-- Extrusion light activity menu -->
-
     <string name="change_anchor">Change anchor</string>
     <string name="change_intensity">Change intensity</string>
+
+    <!-- Extrusion light activity menu -->
+    <string name="retrieval_error_dialog_title">Whoops!</string>
+    <string name="retrieval_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
+    <string name="retrieval_error_dialog_ok_button">Ok</string>
+
 </resources>
