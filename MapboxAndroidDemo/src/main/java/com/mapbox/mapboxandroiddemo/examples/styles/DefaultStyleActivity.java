@@ -115,7 +115,7 @@ public class DefaultStyleActivity extends AppCompatActivity {
         mapboxMap.setStyleUrl(Style.SATELLITE_STREETS);
         return true;
       case android.R.id.home:
-        onBackPressed();
+        finish();
         return true;
       default:
         return super.onOptionsItemSelected(item);

@@ -5,6 +5,7 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import com.mapbox.mapboxandroiddemo.R;
 
@@ -129,5 +130,14 @@ public class SelectBuildingActivity extends AppCompatActivity {
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
+  }
+
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        finish();
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 }

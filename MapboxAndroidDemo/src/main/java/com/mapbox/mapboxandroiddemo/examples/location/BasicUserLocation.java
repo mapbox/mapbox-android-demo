@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -187,5 +188,14 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
         Toast.LENGTH_LONG).show();
       finish();
     }
+  }
+
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        finish();
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 }

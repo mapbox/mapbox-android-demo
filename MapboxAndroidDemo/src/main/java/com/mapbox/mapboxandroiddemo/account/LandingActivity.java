@@ -136,7 +136,6 @@ public class LandingActivity extends AppCompatActivity {
     new MaterialStyledDialog.Builder(this)
       .setTitle(getString(R.string.whoops_error_dialog_title))
       .setDescription(getString(R.string.whoops_error_dialog_message))
-      .setIcon(R.mipmap.ic_launcher)
       .setHeaderColor(R.color.mapboxRedDark)
       .withDivider(true)
       .setPositiveText(getString(R.string.whoops_error_dialog_ok_positive_button))
