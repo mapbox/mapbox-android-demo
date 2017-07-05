@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.camera;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -105,5 +106,16 @@ public class AnimateMapCameraActivity extends AppCompatActivity {
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
+  }
+
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        finish();
+        return true;
+      default:
+        finish();
+    }
+    return super.onOptionsItemSelected(item);
   }
 }

@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -165,5 +166,16 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
       Log.e("JSONVectorMix", "Exception Loading GeoJSON: " + exception.toString());
     }
     return sb;
+  }
+
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        finish();
+        return true;
+      default:
+        finish();
+    }
+    return super.onOptionsItemSelected(item);
   }
 }

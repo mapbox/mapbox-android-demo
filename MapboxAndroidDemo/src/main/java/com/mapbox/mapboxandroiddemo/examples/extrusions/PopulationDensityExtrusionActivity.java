@@ -193,6 +193,9 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
         goToNewLocation(25.773846629676616, -80.19624710083008);
         Log.d("PopDensityExtrusion", "onOptionsItemSelected: miami");
         return true;
+      case android.R.id.home:
+        finish();
+        return true;
       default:
         return super.onOptionsItemSelected(item);
     }
@@ -208,4 +211,5 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     mapboxMap.moveCamera(CameraUpdateFactory
       .newCameraPosition(position));
   }
+
 }

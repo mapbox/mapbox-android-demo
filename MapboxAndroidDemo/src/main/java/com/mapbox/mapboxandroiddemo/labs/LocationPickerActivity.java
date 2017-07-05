@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -315,5 +316,16 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
         Toast.LENGTH_LONG).show();
       finish();
     }
+  }
+
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        finish();
+        return true;
+      default:
+        finish();
+    }
+    return super.onOptionsItemSelected(item);
   }
 }

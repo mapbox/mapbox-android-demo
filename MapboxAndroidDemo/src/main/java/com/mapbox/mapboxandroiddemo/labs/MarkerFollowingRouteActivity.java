@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.animation.LinearInterpolator;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -264,4 +265,14 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
     }
   }
 
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        finish();
+        return true;
+      default:
+        finish();
+    }
+    return super.onOptionsItemSelected(item);
+  }
 }

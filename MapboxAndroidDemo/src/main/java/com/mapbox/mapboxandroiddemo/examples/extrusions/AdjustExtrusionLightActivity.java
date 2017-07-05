@@ -116,6 +116,9 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
       } else if (id == R.id.menu_action_intensity) {
         isLowIntensityLight = !isLowIntensityLight;
         light.setIntensity(isLowIntensityLight ? 0.35f : 1.0f);
+      } else if (id == android.R.id.home) {
+        finish();
+        return true;
       }
     }
     return super.onOptionsItemSelected(item);
@@ -162,4 +165,5 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
     super.onDestroy();
     mapView.onDestroy();
   }
+
 }

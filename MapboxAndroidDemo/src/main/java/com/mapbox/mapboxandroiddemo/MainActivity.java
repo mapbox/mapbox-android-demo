@@ -651,7 +651,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new MaterialStyledDialog.Builder(MainActivity.this)
         .setTitle(getString(R.string.info_dialog_title))
         .setDescription(getString(R.string.info_dialog_description))
-        .setIcon(R.mipmap.ic_launcher)
         .setHeaderColor(R.color.mapboxBlue)
         .withDivider(true)
         .setPositiveText(getString(R.string.info_dialog_positive_button_text))
