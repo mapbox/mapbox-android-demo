@@ -11,9 +11,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
@@ -446,8 +445,10 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
+
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
+
                 <data
                     android:host="authorize"
                     android:scheme="mapbox-android-dev-preview"/>
