@@ -129,6 +129,8 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
       case android.R.id.home:
         finish();
         return true;
+      default:
+        finish();
     }
     return super.onOptionsItemSelected(item);
   }

@@ -141,6 +141,8 @@ public class FeatureCountActivity extends AppCompatActivity {
       case android.R.id.home:
         finish();
         return true;
+      default:
+        finish();
     }
     return super.onOptionsItemSelected(item);
   }

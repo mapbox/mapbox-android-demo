@@ -323,6 +323,8 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
       case android.R.id.home:
         finish();
         return true;
+      default:
+        finish();
     }
     return super.onOptionsItemSelected(item);
   }

@@ -278,6 +278,8 @@ public class LosAngelesTourismActivity extends AppCompatActivity implements OnMa
       case android.R.id.home:
         finish();
         return true;
+      default:
+        finish();
     }
     return super.onOptionsItemSelected(item);
   }

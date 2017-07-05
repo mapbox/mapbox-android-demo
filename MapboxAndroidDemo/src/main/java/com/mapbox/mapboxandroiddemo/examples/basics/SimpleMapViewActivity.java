@@ -6,7 +6,6 @@ import android.view.MenuItem;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -89,6 +88,8 @@ public class SimpleMapViewActivity extends AppCompatActivity {
       case android.R.id.home:
         finish();
         return true;
+      default:
+        finish();
     }
     return super.onOptionsItemSelected(item);
   }

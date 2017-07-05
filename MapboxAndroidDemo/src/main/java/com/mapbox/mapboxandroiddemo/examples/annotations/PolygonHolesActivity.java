@@ -156,6 +156,8 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
       case android.R.id.home:
         finish();
         return true;
+      default:
+        finish();
     }
     return super.onOptionsItemSelected(item);
   }

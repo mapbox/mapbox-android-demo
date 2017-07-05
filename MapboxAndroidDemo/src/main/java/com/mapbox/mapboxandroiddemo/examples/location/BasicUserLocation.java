@@ -195,6 +195,8 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
       case android.R.id.home:
         finish();
         return true;
+      default:
+        finish();
     }
     return super.onOptionsItemSelected(item);
   }

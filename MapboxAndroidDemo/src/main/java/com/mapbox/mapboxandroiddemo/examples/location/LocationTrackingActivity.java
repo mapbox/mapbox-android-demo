@@ -137,6 +137,8 @@ public class LocationTrackingActivity extends AppCompatActivity implements Permi
       case android.R.id.home:
         finish();
         return true;
+      default:
+        finish();
     }
     return super.onOptionsItemSelected(item);
   }

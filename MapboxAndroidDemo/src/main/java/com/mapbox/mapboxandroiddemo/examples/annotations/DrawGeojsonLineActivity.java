@@ -167,6 +167,8 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
       case android.R.id.home:
         finish();
         return true;
+      default:
+        finish();
     }
     return super.onOptionsItemSelected(item);
   }

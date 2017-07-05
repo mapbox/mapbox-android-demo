@@ -160,6 +160,8 @@ public class CustomizeUserLocationActivity extends AppCompatActivity implements 
       case android.R.id.home:
         finish();
         return true;
+      default:
+        finish();
     }
     return super.onOptionsItemSelected(item);
   }
