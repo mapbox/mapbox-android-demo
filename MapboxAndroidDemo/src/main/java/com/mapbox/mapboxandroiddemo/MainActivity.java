@@ -85,6 +85,7 @@ import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.OffRouteActivity;
+import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
@@ -565,6 +566,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, SpaceStationLocationActivity.class),
           R.string.activity_lab_space_station_location_url
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_rv_on_map_title,
+          R.string.activity_lab_rv_on_map_description,
+          new Intent(MainActivity.this, RecyclerViewOnMapActivity.class),
+          R.string.activity_lab_rv_on_map_url));
         currentCategory = R.id.nav_lab;
         break;
 
