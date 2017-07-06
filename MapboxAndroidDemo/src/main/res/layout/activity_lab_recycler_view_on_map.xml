@@ -9,15 +9,14 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="40.7135"
-        mapbox:mapbox_cameraTargetLng="-74.0066"
-        mapbox:mapbox_cameraTilt="45"
-        mapbox:mapbox_cameraZoom="15"
+        mapbox:mapbox_cameraTargetLat="-34.598172"
+        mapbox:mapbox_cameraTargetLng="-58.374867"
+        mapbox:mapbox_cameraZoom="13"
         mapbox:mapbox_styleUrl="@string/mapbox_style_dark"/>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
         android:id="@+id/rv_on_top_of_map"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginBottom="8dp"/>

@@ -2,9 +2,11 @@ package com.mapbox.mapboxandroiddemo.labs;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +28,7 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
   private MapView mapView;
   private MapboxMap map;
   private RecyclerView recyclerView;
-  private LocationAdapter locationAdapter;
+  private LocationRecyclerViewAdapter locationAdapter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
     setContentView(R.layout.activity_lab_recycler_view_on_map);
 
     recyclerView = (RecyclerView) findViewById(R.id.rv_on_top_of_map);
-    locationAdapter = new LocationAdapter(makeListOfLocations());
+    locationAdapter = new LocationRecyclerViewAdapter(makeListOfLocations());
     recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
     recyclerView.setItemAnimator(new DefaultItemAnimator());
     recyclerView.setAdapter(locationAdapter);
@@ -117,10 +119,17 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
 
     ArrayList<SingleRecyclerViewLocation> locationList = new ArrayList<>();
 
-    for (int x = 0; x < 14; x++) {
+    LatLng[] coordinates = new LatLng[] {new LatLng(-34.6054099, -58.363654800000006),
+      new LatLng(-34.6041508, -58.38555650000001), new LatLng(-34.6114412, -58.37808899999999),
+      new LatLng(-34.6097604, -58.382064000000014), new LatLng(-34.596636, -58.373077999999964),
+      new LatLng(-34.590548, -58.38256609999996),
+      new LatLng(-34.5982127, -58.38110440000003)};
+
+    for (int x = 0; x < 5; x++) {
       SingleRecyclerViewLocation singleLocation = new SingleRecyclerViewLocation();
       singleLocation.setName(String.format(getString(R.string.rv_card_name), x));
       singleLocation.setBedInfo(String.format(getString(R.string.rv_card_bed_info), x));
+      singleLocation.setLocationCoordinates(coordinates[x]);
       locationList.add(singleLocation);
     }
     return locationList;
@@ -161,23 +170,12 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
     }
   }
 
-  class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.MyViewHolder> {
+  static class LocationRecyclerViewAdapter extends
+    RecyclerView.Adapter<LocationRecyclerViewAdapter.MyViewHolder> {
 
     private List<SingleRecyclerViewLocation> locationList;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-      public TextView name;
-      public TextView numOfBeds;
-
-      public MyViewHolder(View view) {
-        super(view);
-        name = (TextView) view.findViewById(R.id.location_title_tv);
-        numOfBeds = (TextView) view.findViewById(R.id.location_num_of_beds_tv);
-      }
-    }
-
-
-    public LocationAdapter(List<SingleRecyclerViewLocation> locationList) {
+    public LocationRecyclerViewAdapter(List<SingleRecyclerViewLocation> locationList) {
       this.locationList = locationList;
     }
 
@@ -185,7 +183,6 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
       View itemView = LayoutInflater.from(parent.getContext())
         .inflate(R.layout.rv_on_top_of_map_card, parent, false);
-
       return new MyViewHolder(itemView);
     }
 
@@ -200,8 +197,34 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
     public int getItemCount() {
       return locationList.size();
     }
+
+    static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+      TextView name;
+      TextView numOfBeds;
+      CardView singleCard;
+
+
+      MyViewHolder(View view) {
+        super(view);
+        name = (TextView) view.findViewById(R.id.location_title_tv);
+        numOfBeds = (TextView) view.findViewById(R.id.location_num_of_beds_tv);
+        singleCard = (CardView) view.findViewById(R.id.single_location_cardview);
+
+        singleCard.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            Log.d("OnClick 1", "onClick 1: view = " + view);
+            Log.d("OnClick 1", "onClick 1: view id = " + view.getId());
+          }
+        });
+      }
+
+      @Override
+      public void onClick(View view) {
+
+        Log.d("onClick 2", ": view.getId() = " + view.getId());
+      }
+    }
   }
-
-
 }
 
