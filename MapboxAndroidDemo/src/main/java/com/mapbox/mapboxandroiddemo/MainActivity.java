@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -206,6 +207,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     if (id == R.id.settings_in_nav_drawer) {
       buildSettingsDialog();
+    }
+
+    if (id == R.id.share_app_in_nav_drawer) {
+      shareApp();
     }
 
     if (id != currentCategory && id != R.id.settings_in_nav_drawer) {
@@ -713,6 +718,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           dialogView.logOut(loggedIn);
         }
       });
+    }
+  }
+
+  private void shareApp() {
+    try {
+      Intent i = new Intent(Intent.ACTION_SEND);
+      i.setType("text/plain");
+      i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_app_subject));
+      i.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_app_text));
+      startActivity(Intent.createChooser(i, getString(R.string.share_app_choose_one_instruction)));
+    } catch (Exception exception) {
+      Log.d("MainActivity", "shareApp: exception = " + exception);
     }
   }
 }

@@ -45,8 +45,10 @@
     </group>
     <group android:id="@+id/settings_group" android:checkableBehavior="single">
         <item
+            android:id="@+id/share_app_in_nav_drawer"
+            android:title="@string/share"/>
+        <item
             android:id="@+id/settings_in_nav_drawer"
-            android:icon="@drawable/ic_settings_black_24dp"
             android:title="@string/settings"/>
     </group>
 </menu>

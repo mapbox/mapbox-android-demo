@@ -35,6 +35,7 @@
     <string name="android_services_category">Android Services</string>
     <string name="location_category">User location</string>
     <string name="lab_category">Lab</string>
+    <string name="share">Share</string>
     <string name="settings">Settings</string>
 
     <!-- Spinner for color picker example-->
@@ -394,5 +395,11 @@
     <string name="retrieval_error_dialog_title">Whoops!</string>
     <string name="retrieval_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
     <string name="retrieval_error_dialog_ok_button">Ok</string>
+
+    <!-- Share app intent -->
+    <string name="share_app_subject">Mapbox demo app for Android</string>
+    <string name="share_app_text">Hey, check out the great examples of what can be built with Mapbox:\n
+    http://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo</string>
+    <string name="share_app_choose_one_instruction">Share the app:</string>
 
 </resources>
