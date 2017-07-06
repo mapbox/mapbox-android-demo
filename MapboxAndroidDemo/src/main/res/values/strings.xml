@@ -398,7 +398,7 @@
 
     <!-- Share app intent -->
     <string name="share_app_subject">Mapbox demo app for Android</string>
-    <string name="share_app_text">Hey, check out the great examples of what can be built with Mapbox:\n
+    <string name="share_app_text">Hey, check out these great examples showing what can be built using Mapbox:\n
     http://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo</string>
     <string name="share_app_choose_one_instruction">Share the app:</string>
 
