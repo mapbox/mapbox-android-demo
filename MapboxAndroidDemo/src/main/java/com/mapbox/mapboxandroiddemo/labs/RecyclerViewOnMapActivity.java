@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -26,7 +27,6 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
   private MapboxMap map;
   private RecyclerView recyclerView;
   private LocationAdapter locationAdapter;
-  private List<SingleRecyclerViewLocation> locationList;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +40,8 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
     setContentView(R.layout.activity_lab_recycler_view_on_map);
 
     recyclerView = (RecyclerView) findViewById(R.id.rv_on_top_of_map);
-
     locationAdapter = new LocationAdapter(makeListOfLocations());
-    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-    recyclerView.setLayoutManager(layoutManager);
+    recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
     recyclerView.setItemAnimator(new DefaultItemAnimator());
     recyclerView.setAdapter(locationAdapter);
 
@@ -55,7 +53,6 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
-
 
       }
     });
@@ -134,6 +131,7 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
 
     private String name;
     private String bedInfo;
+    private LatLng locationCoordinates;
 
     public SingleRecyclerViewLocation() {
     }
@@ -152,6 +150,14 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
 
     public void setBedInfo(String bedInfo) {
       this.bedInfo = bedInfo;
+    }
+
+    public LatLng getLocationCoordinates() {
+      return locationCoordinates;
+    }
+
+    public void setLocationCoordinates(LatLng locationCoordinates) {
+      this.locationCoordinates = locationCoordinates;
     }
   }
 

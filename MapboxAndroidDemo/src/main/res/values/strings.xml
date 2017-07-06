@@ -396,6 +396,6 @@
     <string name="retrieval_error_dialog_ok_button">Ok</string>
 
     <!-- Recyclerview on map -->
-    <string name="rv_card_name">Jim\'s #%1$f Motel</string>
-    <string name="rv_card_bed_info">This location has %1$f beds</string>
+    <string name="rv_card_name">Jim\'s #%1$d Motel</string>
+    <string name="rv_card_bed_info">This location has %1$d beds</string>
 </resources>
