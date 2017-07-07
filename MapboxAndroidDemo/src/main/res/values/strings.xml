@@ -230,7 +230,7 @@
     <string name="activity_lab_off_route_url" translatable="false">http://i.imgur.com/lx1LdkA.png</string>
     <string name="activity_lab_las_angeles_tourism_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
     <string name="activity_lab_indoor_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
-    <string name="activity_lab_rv_on_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
+    <string name="activity_lab_rv_on_map_url" translatable="false">http://i.imgur.com/8mQQuMo.jpg</string>
 
     <!--Default style names-->
     <string name="menu_map_style_streets">Streets</string>
@@ -396,6 +396,6 @@
     <string name="retrieval_error_dialog_ok_button">Ok</string>
 
     <!-- Recyclerview on map -->
-    <string name="rv_card_name">Jim\'s #%1$d Motel</string>
+    <string name="rv_card_name">Location #%1$d</string>
     <string name="rv_card_bed_info">This location has %1$d beds</string>
 </resources>
