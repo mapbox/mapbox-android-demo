@@ -398,4 +398,5 @@
     <!-- Recyclerview on map -->
     <string name="rv_card_name">Location #%1$d</string>
     <string name="rv_card_bed_info">This location has %1$d beds</string>
+    <string name="toast_instruction">Click on cards below</string>
 </resources>

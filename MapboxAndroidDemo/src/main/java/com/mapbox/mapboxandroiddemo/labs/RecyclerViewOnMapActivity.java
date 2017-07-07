@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -48,6 +49,8 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
     setContentView(R.layout.activity_lab_recycler_view_on_map);
 
     recyclerView = (RecyclerView) findViewById(R.id.rv_on_top_of_map);
+
+    Toast.makeText(this, R.string.toast_instruction, Toast.LENGTH_SHORT).show();
 
     // Initialize the map view
     mapView = (MapView) findViewById(R.id.mapView);
