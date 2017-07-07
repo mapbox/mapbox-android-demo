@@ -61,7 +61,8 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
 
         // Set up the recyclerView
         locationAdapter = new LocationRecyclerViewAdapter(locationList, mapboxMap);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, true));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
+            LinearLayoutManager.HORIZONTAL, true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(locationAdapter);
       }
@@ -129,11 +130,13 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
 
     locationList = new ArrayList<>();
 
-    LatLng[] coordinates = new LatLng[] {new LatLng(-34.6054099, -58.363654800000006),
+    LatLng[] coordinates = new LatLng[]{
+      new LatLng(-34.6054099, -58.363654800000006),
       new LatLng(-34.6041508, -58.38555650000001), new LatLng(-34.6114412, -58.37808899999999),
       new LatLng(-34.6097604, -58.382064000000014), new LatLng(-34.596636, -58.373077999999964),
       new LatLng(-34.590548, -58.38256609999996),
-      new LatLng(-34.5982127, -58.38110440000003)};
+      new LatLng(-34.5982127, -58.38110440000003)
+    };
 
     for (int x = 0; x < 7; x++) {
       SingleRecyclerViewLocation singleLocation = new SingleRecyclerViewLocation();
@@ -143,9 +146,9 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
       locationList.add(singleLocation);
 
       mapboxMap.addMarker(new MarkerOptions()
-        .position(coordinates[x])
-        .title(String.format(getString(R.string.rv_card_name), x))
-        .snippet(String.format(getString(R.string.rv_card_bed_info), x)));
+          .position(coordinates[x])
+          .title(String.format(getString(R.string.rv_card_name), x))
+          .snippet(String.format(getString(R.string.rv_card_bed_info), x)));
     }
     return locationList;
   }
@@ -188,7 +191,7 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
   }
 
   static class LocationRecyclerViewAdapter extends
-    RecyclerView.Adapter<LocationRecyclerViewAdapter.MyViewHolder> {
+      RecyclerView.Adapter<LocationRecyclerViewAdapter.MyViewHolder> {
 
     private List<SingleRecyclerViewLocation> locationList;
     private MapboxMap map;
@@ -201,7 +204,7 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
       View itemView = LayoutInflater.from(parent.getContext())
-        .inflate(R.layout.rv_on_top_of_map_card, parent, false);
+          .inflate(R.layout.rv_on_top_of_map_card, parent, false);
       return new MyViewHolder(itemView);
     }
 
@@ -215,13 +218,13 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
         public void onClick(View view, int position) {
           LatLng selectedLocationLatLng = locationList.get(position).getLocationCoordinates();
           CameraPosition newCameraPosition = new CameraPosition.Builder()
-            .target(selectedLocationLatLng)
-            .build();
+              .target(selectedLocationLatLng)
+              .build();
 
           map.addMarker(new MarkerOptions()
-            .setPosition(selectedLocationLatLng)
-            .setTitle(locationList.get(position).getName()))
-            .setSnippet(locationList.get(position).getBedInfo());
+              .setPosition(selectedLocationLatLng)
+              .setTitle(locationList.get(position).getName()))
+              .setSnippet(locationList.get(position).getBedInfo());
 
           map.easeCamera(CameraUpdateFactory.newCameraPosition(newCameraPosition));
         }
