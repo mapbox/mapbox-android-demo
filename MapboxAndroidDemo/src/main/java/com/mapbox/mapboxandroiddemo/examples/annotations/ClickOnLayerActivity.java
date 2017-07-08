@@ -1,0 +1,138 @@
+package com.mapbox.mapboxandroiddemo.examples.annotations;
+
+import android.graphics.PointF;
+import android.graphics.RectF;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.MenuItem;
+
+import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.layers.FillLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.services.commons.geojson.Feature;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
+
+/**
+ * Detect click events on a polygon that was added as a GeoJsonSource.
+ */
+
+public class ClickOnLayerActivity extends AppCompatActivity {
+
+  private MapView mapView;
+  private MapboxMap mapboxMap;
+  private String ID_GEOJSON_SOURCE = "GeoJSON source";
+  private String ID_GEOJSON_LAYER = "GeoJSON layer";
+  private FillLayer layer;
+  private GeoJsonSource source;
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    // Mapbox access token is configured here. This needs to be called either in your application
+    // object or in the same activity which contains the mapview.
+    Mapbox.getInstance(this, getString(R.string.access_token));
+
+    // This contains the MapView in XML and needs to be called after the access token is configured.
+    setContentView(R.layout.activity_click_on_layer);
+
+    mapView = (MapView) findViewById(R.id.mapView);
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(final MapboxMap mapboxMap) {
+
+        ClickOnLayerActivity.this.mapboxMap = mapboxMap;
+
+        try {
+          source = new GeoJsonSource(ID_GEOJSON_SOURCE, new URL("https://gist.githubusercontent.com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303d58f20f4a1d8841e8/regions.geojson"));
+          mapboxMap.addSource(source);
+        } catch (MalformedURLException malformedUrlException) {
+          Log.d("Invalid URL", "malformedUrlException = " + malformedUrlException.toString());
+        }
+
+        layer = new FillLayer(ID_GEOJSON_LAYER, ID_GEOJSON_SOURCE);
+        layer.setProperties(fillOpacity(0.5f));
+        mapboxMap.addLayer(layer);
+
+        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
+          @Override
+          public void onMapClick(@NonNull LatLng point) {
+            PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
+            RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
+            List<Feature> featureList = mapboxMap.queryRenderedFeatures(rectF, ID_GEOJSON_LAYER);
+            for (com.mapbox.services.commons.geojson.Feature feature : featureList) {
+              Log.d("Feature found with %s", feature.toJson());
+            }
+          }
+        });
+
+      }
+    });
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
+
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
+
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
+  }
+
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case android.R.id.home:
+        finish();
+        return true;
+      default:
+        finish();
+    }
+    return super.onOptionsItemSelected(item);
+  }
+}

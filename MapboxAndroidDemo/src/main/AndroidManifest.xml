@@ -75,6 +75,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
+            android:name=".examples.annotations.ClickOnLayerActivity"
+            android:label="@string/activity_annotation_geojson_line_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
             android:name=".examples.annotations.DrawPolygonActivity"
             android:label="@string/activity_annotation_polygon_title">
             <meta-data

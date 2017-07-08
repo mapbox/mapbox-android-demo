@@ -29,6 +29,7 @@ import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.BasicMarkerViewActivity;
+import com.mapbox.mapboxandroiddemo.examples.annotations.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.CustomInfoWindowActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawGeojsonLineActivity;
@@ -404,6 +405,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_annotation_animated_marker_description,
           new Intent(MainActivity.this, AnimatedMarkerActivity.class),
           R.string.activity_annotation_animated_marker_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+            R.string.activity_annotation_click_on_layer_title,
+            R.string.activity_annotation_click_on_layer_description,
+            new Intent(MainActivity.this, ClickOnLayerActivity.class),
+            R.string.activity_annotation_click_on_layer_url
         ));
         currentCategory = R.id.nav_annotations;
         break;
