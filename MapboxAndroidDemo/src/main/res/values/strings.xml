@@ -398,4 +398,8 @@
     <string name="retrieval_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
     <string name="retrieval_error_dialog_ok_button">Ok</string>
 
+    <!-- Clicked on layer activity -->
+    <string name="click_on_polygon_toast_instruction">Click anywhere within polygon FillLayer</string>
+    <string name="click_on_polygon_toast">Clicked on FillLayer</string>
+
 </resources>

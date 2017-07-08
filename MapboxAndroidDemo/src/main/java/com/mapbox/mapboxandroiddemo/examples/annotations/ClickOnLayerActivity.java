@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -31,9 +32,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 public class ClickOnLayerActivity extends AppCompatActivity {
 
   private MapView mapView;
-  private MapboxMap mapboxMap;
-  private String ID_GEOJSON_SOURCE = "GeoJSON source";
-  private String ID_GEOJSON_LAYER = "GeoJSON layer";
+  private String geoJsonSourceId = "GeoJSON source";
+  private String geoJsonLayerId = "GeoJSON layer";
   private FillLayer layer;
   private GeoJsonSource source;
 
@@ -48,6 +48,9 @@ public class ClickOnLayerActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_click_on_layer);
 
+    Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast_instruction,
+        Toast.LENGTH_SHORT).show();
+
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
@@ -57,13 +60,21 @@ public class ClickOnLayerActivity extends AppCompatActivity {
         ClickOnLayerActivity.this.mapboxMap = mapboxMap;
 
         try {
-          source = new GeoJsonSource(ID_GEOJSON_SOURCE, new URL("https://gist.githubusercontent.com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303d58f20f4a1d8841e8/regions.geojson"));
+
+          // load GeoJSONSource
+          source = new GeoJsonSource(geoJsonSourceId, new URL("https://gist.githubusercontent"
+              + ".com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303"
+              + "d58f20f4a1d8841e8/regions.geojson"));
+
+          // Add GeoJsonSource to map
           mapboxMap.addSource(source);
+
         } catch (MalformedURLException malformedUrlException) {
           Log.d("Invalid URL", "malformedUrlException = " + malformedUrlException.toString());
         }
 
-        layer = new FillLayer(ID_GEOJSON_LAYER, ID_GEOJSON_SOURCE);
+        // Create FillLayer with GeoJSON source and add the FillLayer to the map
+        layer = new FillLayer(geoJsonLayerId, geoJsonSourceId);
         layer.setProperties(fillOpacity(0.5f));
         mapboxMap.addLayer(layer);
 
@@ -72,9 +83,15 @@ public class ClickOnLayerActivity extends AppCompatActivity {
           public void onMapClick(@NonNull LatLng point) {
             PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
             RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
-            List<Feature> featureList = mapboxMap.queryRenderedFeatures(rectF, ID_GEOJSON_LAYER);
+
+            List<Feature> featureList = mapboxMap.queryRenderedFeatures(rectF, geoJsonLayerId);
+
             for (com.mapbox.services.commons.geojson.Feature feature : featureList) {
-              Log.d("Feature found with %s", feature.toJson());
+              Log.d("Feature found with %1$s", feature.toJson());
+
+              Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast,
+                  Toast.LENGTH_SHORT).show();
+
             }
           }
         });
