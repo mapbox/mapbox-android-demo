@@ -57,11 +57,9 @@ public class ClickOnLayerActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
 
-        ClickOnLayerActivity.this.mapboxMap = mapboxMap;
-
         try {
 
-          // load GeoJSONSource
+          // Load GeoJSONSource
           source = new GeoJsonSource(geoJsonSourceId, new URL("https://gist.githubusercontent"
               + ".com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303"
               + "d58f20f4a1d8841e8/regions.geojson"));
