@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,9 +70,10 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
             LinearLayoutManager.HORIZONTAL, true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(locationAdapter);
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView);
       }
     });
-
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
@@ -165,9 +168,6 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
     private String bedInfo;
     private LatLng locationCoordinates;
 
-    public SingleRecyclerViewLocation() {
-    }
-
     public String getName() {
       return name;
     }
@@ -232,8 +232,6 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
           map.easeCamera(CameraUpdateFactory.newCameraPosition(newCameraPosition));
         }
       });
-
-
     }
 
     @Override
@@ -263,13 +261,11 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
       public void onClick(View view) {
         clickListener.onClick(view, getLayoutPosition());
       }
-
     }
   }
 
   public interface ItemClickListener {
     void onClick(View view, int position);
   }
-
 }
 
