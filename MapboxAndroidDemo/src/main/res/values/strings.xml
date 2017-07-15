@@ -79,7 +79,6 @@
     <string name="activity_annotation_marker_view_title">Draw a marker view</string>
     <string name="activity_annotation_custom_info_window_title">Custom info window</string>
     <string name="activity_annotation_animated_marker_title">Animate marker position</string>
-    <string name="activity_annotation_click_on_layer_title">Click on single layer</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
     <string name="activity_camera_restrict_title">Restrict map panning</string>
@@ -88,6 +87,7 @@
     <string name="activity_query_feature_title">Query a map feature</string>
     <string name="activity_query_select_building_title">Select a building</string>
     <string name="activity_query_feature_count_title">Feature count</string>
+    <string name="activity_query_click_on_layer_title">Click on single layer</string>
     <string name="activity_location_basic_title">Show user location</string>
     <string name="activity_location_tracking_title">Track user location</string>
     <string name="activity_location_animated_icon_title">Animate the user icon</string>
@@ -141,7 +141,6 @@
     <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
     <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize the info window.</string>
     <string name="activity_annotation_animated_marker_description">Animate the marker to a new position on the map.</string>
-    <string name="activity_annotation_click_on_layer_description">Click on and highlight a selected GeoJSON polygon</string>
     <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
     <string name="activity_camera_restrict_description">Prevent a map from being panned to a different place.</string>
@@ -151,6 +150,7 @@
     <string name="activity_query_feature_description">Click the map to add a marker at the location and display the maps property information for that feature.</string>
     <string name="activity_query_select_building_description">Use the query feature to select a building, get its geometry and draw a polygon highlighting it.</string>
     <string name="activity_query_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
+    <string name="activity_query_click_on_layer_description">Click on and highlight a selected GeoJSON polygon.</string>
     <string name="activity_location_basic_description">Toggle the users current location on the map.</string>
     <string name="activity_location_tracking_description">Lock the camera centered above the user location.</string>
     <string name="activity_location_animated_icon_description">Use a marker view to mark the users location and add a pulsing animation to it.</string>
@@ -205,7 +205,6 @@
     <string name="activity_annotation_basic_marker_view_url" translatable="false">http://i.imgur.com/vbWTLIE.png</string>
     <string name="activity_annotation_custom_info_window_url" translatable="false">http://i.imgur.com/mCWbosy.png</string>
     <string name="activity_annotation_animated_marker_url" translatable="false">http://i.imgur.com/XegvIKr.png</string>
-    <string name="activity_annotation_click_on_layer_url" translatable="false">https://i.imgur.com/z3aWAqM.png</string>
     <string name="activity_camera_animate_url" translatable="false">http://i.imgur.com/PN3vyNJ.jpg</string>
     <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string>
     <string name="activity_camera_restrict_url" translatable="false">http://i.imgur.com/A227BEs.jpg</string>
@@ -215,6 +214,7 @@
     <string name="activity_query_select_building_url" translatable="false">http://i.imgur.com/bImud7u.png</string>
     <string name="activity_query_feature_url" translatable="false">http://i.imgur.com/HXxRBAF.png</string>
     <string name="activity_query_feature_count_url" translatable="false">http://i.imgur.com/phzOt81.png</string>
+    <string name="activity_query_click_on_layer_url" translatable="false">https://i.imgur.com/z3aWAqM.png</string>
     <string name="activity_location_basic_image_url" translatable="false">http://i.imgur.com/5BzH5YF.png</string>
     <string name="activity_location_tracking_url" translatable="false">http://i.imgur.com/U3uc32F.png</string>
     <string name="activity_location_animated_icon_url" translatable="false">http://i.imgur.com/dsUKM2i.png</string>

@@ -28,7 +28,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 /**
  * Detect click events on a polygon that was added as a GeoJsonSource.
  */
-
 public class ClickOnLayerActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -58,7 +57,6 @@ public class ClickOnLayerActivity extends AppCompatActivity {
       public void onMapReady(final MapboxMap mapboxMap) {
 
         try {
-
           // Load GeoJSONSource
           source = new GeoJsonSource(geoJsonSourceId, new URL("https://gist.githubusercontent"
               + ".com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303"
@@ -89,11 +87,9 @@ public class ClickOnLayerActivity extends AppCompatActivity {
 
               Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast,
                   Toast.LENGTH_SHORT).show();
-
             }
           }
         });
-
       }
     });
   }
