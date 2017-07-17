@@ -27,9 +27,11 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 public class AddRainFallStyleActivity extends AppCompatActivity implements OnMapReadyCallback {
   public static final String MAPBOX_ACCESS_TOKEN =
     "pk.eyJ1Ijoic2hlbmhvbmdpc3NreSIsImEiOiJjaXlzanRtNGswMDB3MzNvNDh3NzJqNmNnIn0.8LvCg1s5Qb88lwItbSFOzg";
+
   public static final String ID_SOURCE = "moji-source";
   public static final String ID_LAYER = "moji-layer";
   public static final String SOURCE_URL = "mapbox://shenhongissky.6vm8ssjm";
+
   private MapView mapView;
   private MapboxMap mapboxMap;
   private Handler handler;
@@ -40,57 +42,18 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    // Mapbox access token is configured here. This needs to be called either in your application
+    // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, MAPBOX_ACCESS_TOKEN);
+
+    // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_style_rainfall);
+
     handler = new Handler();
-    mapView = (MapView) findViewById(R.id.mapview);
+    mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
-  }
-
-  @Override
-  protected void onStart() {
-    super.onStart();
-    mapView.onStart();
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
-    mapView.onResume();
-  }
-
-  @Override
-  protected void onPause() {
-    super.onPause();
-    mapView.onPause();
-  }
-
-  @Override
-  protected void onStop() {
-    super.onStop();
-    mapView.onStop();
-  }
-
-  @Override
-  public void onLowMemory() {
-    super.onLowMemory();
-    mapView.onLowMemory();
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    mapView.onDestroy();
-    handler.removeCallbacks(refreshGeoJsonRunnable);
-    refreshGeoJsonRunnable = null;
-    handler = null;
-  }
-
-  @Override
-  protected void onSaveInstanceState(Bundle outState) {
-    super.onSaveInstanceState(outState);
-    mapView.onSaveInstanceState(outState);
   }
 
   @Override
@@ -153,5 +116,50 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
         PropertyFactory.fillOpacity(0.7f));
       mapboxMap.addLayer(layer);
     }
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
+  }
+
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+    handler.removeCallbacks(refreshGeoJsonRunnable);
+    refreshGeoJsonRunnable = null;
+    handler = null;
+  }
+
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
   }
 }

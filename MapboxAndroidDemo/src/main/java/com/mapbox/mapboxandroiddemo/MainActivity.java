@@ -602,10 +602,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           true
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_rainfall_title,
-          R.string.activity_style_rainfall_points_description,
+          R.string.activity_dds_rainfall_points_title,
+          R.string.activity_dds_rainfall_points_description,
           new Intent(MainActivity.this, AddRainFallStyleActivity.class),
-          R.string.activity_style_rainfall_url,
+          R.string.activity_dds_rainfall_url,
           true
         ));
         currentCategory = R.id.nav_dds;
