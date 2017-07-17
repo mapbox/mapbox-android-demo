@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -24,21 +25,22 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
  * Style a rainfall map by get data from url
  */
 public class AddRainFallStyleActivity extends AppCompatActivity implements OnMapReadyCallback {
-
-  public static final String MAPBOX_ACCESS_TOKEN="pk.eyJ1Ijoic2hlbmhvbmdpc3NreSIsImEiOiJjaXlzanRtNGswMDB3MzNvNDh3NzJqNmNnIn0.8LvCg1s5Qb88lwItbSFOzg";
-  public  static final String ID_SOURCE="moji-source";
-  public  static final String ID_LAYER="moji-layer";
-  public static final String SOURCE_URL="mapbox://shenhongissky.6vm8ssjm";
-
+  public static final String MAPBOX_ACCESS_TOKEN =
+    "pk.eyJ1Ijoic2hlbmhvbmdpc3NreSIsImEiOiJjaXlzanRtNGswMDB3MzNvNDh3NzJqNmNnIn0.8LvCg1s5Qb88lwItbSFOzg";
+  public static final String ID_SOURCE = "moji-source";
+  public static final String ID_LAYER = "moji-layer";
+  public static final String SOURCE_URL = "mapbox://shenhongissky.6vm8ssjm";
   private MapView mapView;
   private MapboxMap mapboxMap;
   private Handler handler;
   private FillLayer layer;
-  private int index =1;
+  private int index = 1;
+  private RefreshGeoJsonRunnable refreshGeoJsonRunnable;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    Mapbox.getInstance(this, MAPBOX_ACCESS_TOKEN);
     setContentView(R.layout.activity_style_rainfall);
     handler = new Handler();
     mapView = (MapView) findViewById(R.id.mapview);
@@ -80,6 +82,9 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
+    handler.removeCallbacks(refreshGeoJsonRunnable);
+    refreshGeoJsonRunnable = null;
+    handler = null;
   }
 
   @Override
@@ -92,21 +97,19 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
     addRadar(mapboxMap);
-//    for (int i = 1; i < 40; i++) {
-    RefreshGeoJsonRunnable refreshGeoJsonRunnable = new RefreshGeoJsonRunnable();
+    refreshGeoJsonRunnable = new RefreshGeoJsonRunnable();
     do {
       handler.postDelayed(refreshGeoJsonRunnable, 1000);
-    }while (index==39);
+    }
+    while (index == 39);
   }
 
   private class RefreshGeoJsonRunnable implements Runnable {
-    RefreshGeoJsonRunnable() {
-    }
     @Override
     public void run() {
       layer.setFilter(Filter.eq("idx", index));
       index++;
-      if(index>39) {
+      if (index == 40) {
         index = 0;
       }
       handler.postDelayed(this, 1000);
@@ -119,10 +122,9 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
       SOURCE_URL
     );
     mapboxMap.addSource(vectorSource);
-    // add layer
-    layer = (FillLayer) mapboxMap.getLayer(ID_LAYER);
+    layer = mapboxMap.getLayerAs(ID_LAYER);
     if (layer == null) {
-      layer = new FillLayer(ID_LAYER,ID_SOURCE);
+      layer = new FillLayer(ID_LAYER, ID_SOURCE);
       layer.withSourceLayer("whole");
       layer.setFilter(Filter.eq("idx", 0));
       layer.setProperties(PropertyFactory.visibility(VISIBLE),

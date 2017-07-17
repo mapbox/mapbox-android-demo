@@ -605,7 +605,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_rainfall_title,
           R.string.activity_style_rainfall_points_description,
           new Intent(MainActivity.this, AddRainFallStyleActivity.class),
-          R.string.activity_style_create_heatmap_points_url,
+          R.string.activity_style_rainfall_url,
           true
         ));
         currentCategory = R.id.nav_dds;
