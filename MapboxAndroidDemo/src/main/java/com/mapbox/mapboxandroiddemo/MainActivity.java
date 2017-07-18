@@ -46,7 +46,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
-import com.mapbox.mapboxandroiddemo.examples.extrusions.BasicExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.BuildingExtrusionPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.AnimatedLocationIconActivity;
@@ -350,7 +350,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_plugins_building_plugin_title,
           R.string.activity_plugins_building_plugin_description,
-          new Intent(MainActivity.this, BasicExtrusionActivity.class),
+          new Intent(MainActivity.this, BuildingExtrusionPluginActivity.class),
           R.string.activity_plugins_building_plugin_url, true
         ));
         currentCategory = R.id.nav_plugins;

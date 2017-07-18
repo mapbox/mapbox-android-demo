@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mapbox.mapboxandroiddemo.examples.extrusions.BasicExtrusionActivity">
+    tools:context="com.mapbox.mapboxandroiddemo.examples.extrusions.BuildingExtrusionPluginActivity">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
@@ -15,7 +15,7 @@
         mapbox:mapbox_cameraTargetLat="41.87827"
         mapbox:mapbox_cameraTargetLng="-87.62877"
         mapbox:mapbox_cameraTilt="60"
-        mapbox:mapbox_cameraZoom="15"
+        mapbox:mapbox_cameraZoom="16"
         mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
 
 </RelativeLayout>

@@ -1,34 +1,24 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.mapbox.androidsdk.plugins.building.BuildingPlugin;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.IdentityStops;
-import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
-
-import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
 
 /**
- * Use extrusions to display buildings' heights in 3D.
+ * Use the buildings plugin to display buildings' heights (extrusions) in 3D.
  */
-public class BasicExtrusionActivity extends AppCompatActivity {
+public class BuildingExtrusionPluginActivity extends AppCompatActivity {
 
   private MapView mapView;
   private BuildingPlugin buildingPlugin;
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +28,7 @@ public class BasicExtrusionActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    setContentView(R.layout.activity_basic_extrusion);
+    setContentView(R.layout.activity_building_plugin);
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -46,8 +36,9 @@ public class BasicExtrusionActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
 
-        buildingPlugin = new BuildingPlugin(mapView, mapboxMap);
-        buildingPlugin.setMinZoomLevel(15);
+        buildingPlugin = new BuildingPlugin(mapView, map);
+        buildingPlugin.setMinZoomLevel(6);
+        buildingPlugin.setVisibility(true);
 
       }
     });
