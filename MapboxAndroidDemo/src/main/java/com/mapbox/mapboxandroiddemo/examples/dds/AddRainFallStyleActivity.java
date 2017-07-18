@@ -26,8 +26,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
  * Style a rainfall map by get data from url
  */
 public class AddRainFallStyleActivity extends AppCompatActivity implements OnMapReadyCallback {
-  public static final String MAPBOX_ACCESS_TOKEN =
-    "pk.eyJ1Ijoic2hlbmhvbmdpc3NreSIsImEiOiJjaXlzanRtNGswMDB3MzNvNDh3NzJqNmNnIn0.8LvCg1s5Qb88lwItbSFOzg";
   public static final String ID_SOURCE = "moji-source";
   public static final String ID_LAYER = "moji-layer";
   public static final String SOURCE_URL = "mapbox://shenhongissky.6vm8ssjm";
@@ -42,7 +40,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     super.onCreate(savedInstanceState);
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
-    Mapbox.getInstance(this, MAPBOX_ACCESS_TOKEN);
+    Mapbox.getInstance(this, Mapbox.getAccessToken());
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_style_rainfall);
     handler = new Handler();
