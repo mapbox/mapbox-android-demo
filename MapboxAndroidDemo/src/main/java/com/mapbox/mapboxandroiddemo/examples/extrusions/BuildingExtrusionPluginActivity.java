@@ -35,11 +35,9 @@ public class BuildingExtrusionPluginActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
-
         buildingPlugin = new BuildingPlugin(mapView, map);
         buildingPlugin.setMinZoomLevel(6);
         buildingPlugin.setVisibility(true);
-
       }
     });
   }
