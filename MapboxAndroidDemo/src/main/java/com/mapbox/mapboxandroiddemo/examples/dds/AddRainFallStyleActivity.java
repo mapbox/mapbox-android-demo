@@ -32,7 +32,6 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
   public static final String ID_LAYER = "moji-layer";
   public static final String SOURCE_URL = "mapbox://shenhongissky.6vm8ssjm";
   private MapView mapView;
-  private MapboxMap mapboxMap;
   private Handler handler;
   private FillLayer layer;
   private int index = 1;
@@ -41,10 +40,13 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    // Mapbox access token is configured here. This needs to be called either in your application
+    // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, MAPBOX_ACCESS_TOKEN);
+    // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_style_rainfall);
     handler = new Handler();
-    mapView = (MapView) findViewById(R.id.mapview);
+    mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
@@ -107,7 +109,6 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
-    this.mapboxMap = mapboxMap;
     addRadar(mapboxMap);
     refreshGeoJsonRunnable = new RefreshGeoJsonRunnable();
     do {
