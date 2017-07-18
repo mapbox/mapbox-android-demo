@@ -72,6 +72,7 @@
     <string name="activity_dds_choropleth_zoom_change_title">Update a choropleth layer by zoom level</string>
     <string name="activity_dds_json_vector_mix_title">Join local JSON data with vector tile geometries</string>
     <string name="activity_dds_style_line_identity_property_title">Style lines using an identity property function</string>
+    <string name="activity_dds_time_lapse_rainfall_points_title">Data time lapse</string>
     <string name="activity_annotation_marker_title">Draw a marker</string>
     <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
     <string name="activity_annotation_geojson_line_title">Draw a GeoJSON line</string>
@@ -133,6 +134,7 @@
     <string name="activity_dds_choropleth_zoom_change_description">Style a choropleth map with data-driven styling, local JSON data, and vector tile geometries.</string>
     <string name="activity_dds_json_vector_mix_description">Style a choropleth map by merging local JSON data with vector tile geometries.</string>
     <string name="activity_dds_style_line_identity_property_description">Using an identity line-color property function for a visualization.</string>
+    <string name="activity_dds_time_lapse_rainfall_points_description">Use data-driven styling to visualize point data with a time lapse effect; rainfall in China in this example.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
@@ -196,6 +198,7 @@
     <string name="activity_dds_choropleth_zoom_change_url" translatable="false">http://i.imgur.com/sPNpLEP.png</string>
     <string name="activity_dds_style_line_identity_property_url" translatable="false">http://i.imgur.com/wgpKvZM.png</string>
     <string name="activity_dds_json_vector_mix_url">http://i.imgur.com/1IXkw80.png</string>
+    <string name="activity_dds_time_lapse_rainfall_url" translatable="false">https://i.imgur.com/nWzW6mU.jpg</string>
     <string name="activity_annotation_marker_url" translatable="false">http://i.imgur.com/X59UoaY.png</string>
     <string name="activity_annotation_custom_marker_url" translatable="false">http://i.imgur.com/BIHtPwJ.png</string>
     <string name="activity_annotation_geojson_line_url" translatable="false">http://i.imgur.com/rIFjsrH.png</string>

@@ -42,6 +42,7 @@ import com.mapbox.mapboxandroiddemo.examples.basics.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
@@ -603,6 +604,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_json_vector_mix_description,
           new Intent(MainActivity.this, ChoroplethJsonVectorMixActivity.class),
           R.string.activity_dds_json_vector_mix_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_dds_time_lapse_rainfall_points_title,
+          R.string.activity_dds_time_lapse_rainfall_points_description,
+          new Intent(MainActivity.this, AddRainFallStyleActivity.class),
+          R.string.activity_dds_time_lapse_rainfall_url,
           true
         ));
         currentCategory = R.id.nav_dds;

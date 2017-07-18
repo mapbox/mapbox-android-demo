@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <uses-feature android:name="android.hardware.location.gps"/>
 
@@ -405,6 +406,14 @@
         <activity
             android:name=".examples.dds.ChoroplethZoomChangeActivity"
             android:label="@string/activity_dds_choropleth_zoom_change_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+
+        <activity
+            android:name=".examples.dds.AddRainFallStyleActivity"
+            android:label="@string/activity_dds_time_lapse_rainfall_points_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
