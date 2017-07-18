@@ -387,6 +387,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
+            android:name=".examples.dds.AddRainFallStyleActivity"
+            android:label="@string/activity_dds_time_lapse_rainfall_points_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
             android:name=".examples.camera.RestrictCameraActivity"
             android:label="@string/activity_camera_restrict_title">
             <meta-data
@@ -402,7 +409,7 @@
         </activity>
         <activity
             android:name=".examples.extrusions.PopulationDensityExtrusionActivity"
-            android:label="3D population">
+            android:label="@string/activity_extrusions_population_density_extrusions_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -435,6 +442,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
+
         <activity
             android:name=".account.LandingActivity"
             android:screenOrientation="portrait">
