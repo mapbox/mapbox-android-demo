@@ -27,6 +27,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpa
 public class BasicExtrusionActivity extends AppCompatActivity {
 
   private MapView mapView;
+  private BuildingPlugin buildingPlugin;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -44,20 +46,9 @@ public class BasicExtrusionActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
 
-        // Create fill extrusion layer
-        FillExtrusionLayer fillExtrusionLayer = new FillExtrusionLayer("3d-buildings", "composite");
-        fillExtrusionLayer.setSourceLayer("building");
-        fillExtrusionLayer.setFilter(eq("extrude", "true"));
-        fillExtrusionLayer.setMinZoom(15);
+        buildingPlugin = new BuildingPlugin(mapView, mapboxMap);
+        buildingPlugin.setMinZoomLevel(15);
 
-        // Set data-driven styling properties
-        fillExtrusionLayer.setProperties(
-          fillExtrusionColor(Color.LTGRAY),
-          fillExtrusionHeight(Function.property("height", new IdentityStops<Float>())),
-          fillExtrusionBase(Function.property("min_height", new IdentityStops<Float>())),
-          fillExtrusionOpacity(0.6f)
-        );
-        map.addLayer(fillExtrusionLayer);
       }
     });
   }
