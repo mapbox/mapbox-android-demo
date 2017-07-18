@@ -31,8 +31,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 public class ClickOnLayerActivity extends AppCompatActivity {
 
   private MapView mapView;
-  private String geoJsonSourceId = "GeoJSON source";
-  private String geoJsonLayerId = "GeoJSON layer";
+  private MapboxMap mapboxMap;
+  private static final String geoJsonSourceId = "geoJsonData";
+  private static final String geoJsonLayerId = "polygonFillLayer";
   private FillLayer layer;
   private GeoJsonSource source;
 
@@ -48,7 +49,7 @@ public class ClickOnLayerActivity extends AppCompatActivity {
     setContentView(R.layout.activity_click_on_layer);
 
     Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast_instruction,
-        Toast.LENGTH_SHORT).show();
+      Toast.LENGTH_SHORT).show();
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -56,18 +57,9 @@ public class ClickOnLayerActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
 
-        try {
-          // Load GeoJSONSource
-          source = new GeoJsonSource(geoJsonSourceId, new URL("https://gist.githubusercontent"
-              + ".com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303"
-              + "d58f20f4a1d8841e8/regions.geojson"));
+        ClickOnLayerActivity.this.mapboxMap = mapboxMap;
 
-          // Add GeoJsonSource to map
-          mapboxMap.addSource(source);
-
-        } catch (MalformedURLException malformedUrlException) {
-          Log.d("Invalid URL", "malformedUrlException = " + malformedUrlException.toString());
-        }
+        addGeoJsonSourceToMap();
 
         // Create FillLayer with GeoJSON source and add the FillLayer to the map
         layer = new FillLayer(geoJsonLayerId, geoJsonSourceId);
@@ -86,12 +78,27 @@ public class ClickOnLayerActivity extends AppCompatActivity {
               Log.d("Feature found with %1$s", feature.toJson());
 
               Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast,
-                  Toast.LENGTH_SHORT).show();
+                Toast.LENGTH_SHORT).show();
             }
           }
         });
       }
     });
+  }
+
+  private void addGeoJsonSourceToMap() {
+    try {
+      // Load GeoJSONSource
+      source = new GeoJsonSource(geoJsonSourceId, new URL("https://gist.githubusercontent"
+        + ".com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303"
+        + "d58f20f4a1d8841e8/regions.geojson"));
+
+      // Add GeoJsonSource to map
+      mapboxMap.addSource(source);
+
+    } catch (Throwable throwable) {
+      Log.e("ClickOnLayerActivity", "Couldn't add GeoJsonSource to map", throwable);
+    }
   }
 
   @Override
