@@ -5,5 +5,9 @@ local.properties
 build
 .DS_Store
 .gradle/
-
+/gradle
+/MapboxAndroidDemo/src/main/res/values/developer-config.xml
+/MapboxAndroidWearDemo/src/main/res/values/developer-config.xml
+gradlew.bat
 *.properties
+src/main/res/

@@ -41,13 +41,15 @@ import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
-import com.mapbox.mapboxandroiddemo.examples.extrusions.BasicExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.AnimatedLocationIconActivity;
@@ -61,6 +63,7 @@ import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
@@ -80,12 +83,12 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
-import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.OffRouteActivity;
+import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
@@ -315,12 +318,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
       case R.id.nav_extrusions:
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_extrusions_basic_extrusions_title,
-          R.string.activity_extrusions_basic_extrusions_description,
-          new Intent(MainActivity.this, BasicExtrusionActivity.class),
-          R.string.activity_extrusions_basic_extrusions_url, true
-        ));
-        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_extrusions_population_density_extrusions_title,
           R.string.activity_extrusions_population_density_extrusions_description,
           new Intent(MainActivity.this, PopulationDensityExtrusionActivity.class),
@@ -353,6 +350,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_plugins_traffic_plugin_description,
           new Intent(MainActivity.this, TrafficPluginActivity.class),
           R.string.activity_plugins_traffic_plugin_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_plugins_building_plugin_title,
+          R.string.activity_plugins_building_plugin_description,
+          new Intent(MainActivity.this, BuildingPluginActivity.class),
+          R.string.activity_plugins_building_plugin_url, true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_plugins_location_plugin_title,
+          R.string.activity_plugins_location_plugin_description,
+          new Intent(MainActivity.this, LocationPluginActivity.class),
+          R.string.activity_plugins_location_plugin_url, true
         ));
         currentCategory = R.id.nav_plugins;
         break;
@@ -572,6 +581,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, SpaceStationLocationActivity.class),
           R.string.activity_lab_space_station_location_url
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_rv_on_map_title,
+          R.string.activity_lab_rv_on_map_description,
+          new Intent(MainActivity.this, RecyclerViewOnMapActivity.class),
+          R.string.activity_lab_rv_on_map_url));
         currentCategory = R.id.nav_lab;
         break;
 
@@ -605,6 +619,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_json_vector_mix_description,
           new Intent(MainActivity.this, ChoroplethJsonVectorMixActivity.class),
           R.string.activity_dds_json_vector_mix_url,
+          true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_dds_time_lapse_rainfall_points_title,
+          R.string.activity_dds_time_lapse_rainfall_points_description,
+          new Intent(MainActivity.this, AddRainFallStyleActivity.class),
+          R.string.activity_dds_time_lapse_rainfall_url,
           true
         ));
         currentCategory = R.id.nav_dds;
