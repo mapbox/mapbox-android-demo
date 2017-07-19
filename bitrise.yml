@@ -61,13 +61,9 @@ workflows:
     - gradle-runner:
         inputs:
         - gradle_task: "$GRADLE_TASK"
-    - sign-apk:
-        inputs:
-        - apk_path: "$BITRISE_APK_PATH_LIST"
-        - apk_file_exclude_filter: "*-unsigned.apk"
     - google-play-deploy:
         inputs:
-        - apk_path: "$BITRISE_SIGNED_APK_PATH"
+        - apk_path: "$BITRISE_APK_PATH"
         - service_account_json_key_path: "$BITRISEIO_SERVICE_ACCOUNT_JSON_URL"
         - package_name: com.mapbox.mapboxandroiddemo
         - track: alpha
