@@ -1,9 +1,8 @@
-package com.mapbox.mapboxandroiddemo.examples.extrusions;
+package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import com.mapbox.androidsdk.plugins.building.BuildingPlugin;
 import com.mapbox.mapboxandroiddemo.R;
@@ -15,7 +14,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 /**
  * Use the buildings plugin to display buildings' heights (extrusions) in 3D.
  */
-public class BuildingExtrusionPluginActivity extends AppCompatActivity {
+public class BuildingPluginActivity extends AppCompatActivity {
 
   private MapView mapView;
   private BuildingPlugin buildingPlugin;
@@ -36,7 +35,6 @@ public class BuildingExtrusionPluginActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
         buildingPlugin = new BuildingPlugin(mapView, map);
-        buildingPlugin.setMinZoomLevel(6);
         buildingPlugin.setVisibility(true);
       }
     });
@@ -82,16 +80,5 @@ public class BuildingExtrusionPluginActivity extends AppCompatActivity {
   public void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
-  }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
   }
 }

@@ -4,7 +4,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -60,22 +59,27 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
       // Create an instance of LOST location engine
-      locationEngine = new LostLocationEngine(LocationPluginActivity.this);
-      locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
-      locationEngine.activate();
-
-      Location lastLocation = locationEngine.getLastLocation();
-      if (lastLocation != null) {
-        setCameraPosition(lastLocation);
-      } else {
-        locationEngine.addLocationEngineListener(this);
-      }
+      initializeLocationEngine();
 
       locationPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationEngine);
       locationPlugin.setLocationLayerEnabled(LocationLayerMode.TRACKING);
     } else {
       permissionsManager = new PermissionsManager(this);
       permissionsManager.requestLocationPermissions(this);
+    }
+  }
+
+  @SuppressWarnings( {"MissingPermission"})
+  private void initializeLocationEngine() {
+    locationEngine = new LostLocationEngine(LocationPluginActivity.this);
+    locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
+    locationEngine.activate();
+
+    Location lastLocation = locationEngine.getLastLocation();
+    if (lastLocation != null) {
+      setCameraPosition(lastLocation);
+    } else {
+      locationEngine.addLocationEngineListener(this);
     }
   }
 
@@ -101,6 +105,20 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
     } else {
       Toast.makeText(this, "You didn't grant location permissions.", Toast.LENGTH_LONG).show();
       finish();
+    }
+  }
+
+  @Override
+  @SuppressWarnings( {"MissingPermission"})
+  public void onConnected() {
+    locationEngine.requestLocationUpdates();
+  }
+
+  @Override
+  public void onLocationChanged(Location location) {
+    if (location != null) {
+      setCameraPosition(location);
+      locationEngine.removeLocationEngineListener(this);
     }
   }
 
@@ -157,30 +175,5 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
   public void onLowMemory() {
     super.onLowMemory();
     mapView.onLowMemory();
-  }
-
-  @Override
-  @SuppressWarnings( {"MissingPermission"})
-  public void onConnected() {
-    locationEngine.requestLocationUpdates();
-  }
-
-  @Override
-  public void onLocationChanged(Location location) {
-    if (location != null) {
-      setCameraPosition(location);
-      locationEngine.removeLocationEngineListener(this);
-    }
-  }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
   }
 }
