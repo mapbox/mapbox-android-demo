@@ -73,7 +73,7 @@ dependencies {
 
     // Mapbox plugins
     compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.1.0'
-    compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-building:0.2.0-SNAPSHOT'
+    compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-building:0.1.0'
     compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:0.3.0'
 
     // Mapbox Android UI
