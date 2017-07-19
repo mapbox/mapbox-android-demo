@@ -47,7 +47,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
-import com.mapbox.mapboxandroiddemo.examples.extrusions.BasicExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
@@ -62,6 +62,7 @@ import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
@@ -315,12 +316,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
       case R.id.nav_extrusions:
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_extrusions_basic_extrusions_title,
-          R.string.activity_extrusions_basic_extrusions_description,
-          new Intent(MainActivity.this, BasicExtrusionActivity.class),
-          R.string.activity_extrusions_basic_extrusions_url, true
-        ));
-        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_extrusions_population_density_extrusions_title,
           R.string.activity_extrusions_population_density_extrusions_description,
           new Intent(MainActivity.this, PopulationDensityExtrusionActivity.class),
@@ -353,6 +348,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_plugins_traffic_plugin_description,
           new Intent(MainActivity.this, TrafficPluginActivity.class),
           R.string.activity_plugins_traffic_plugin_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_plugins_building_plugin_title,
+          R.string.activity_plugins_building_plugin_description,
+          new Intent(MainActivity.this, BuildingPluginActivity.class),
+          R.string.activity_plugins_building_plugin_url, true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_plugins_location_plugin_title,
+          R.string.activity_plugins_location_plugin_description,
+          new Intent(MainActivity.this, LocationPluginActivity.class),
+          R.string.activity_plugins_location_plugin_url, true
         ));
         currentCategory = R.id.nav_plugins;
         break;

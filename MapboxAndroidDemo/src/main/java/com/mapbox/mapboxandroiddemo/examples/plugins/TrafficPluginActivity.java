@@ -2,7 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -40,7 +39,7 @@ public class TrafficPluginActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
         trafficPlugin = new TrafficPlugin(mapView, mapboxMap);
-        TrafficPluginActivity.this.trafficPlugin.toggle(); // Enable the traffic view by default
+        TrafficPluginActivity.this.trafficPlugin.setVisibility(true); // Enable the traffic view by default
       }
     });
 
@@ -48,7 +47,7 @@ public class TrafficPluginActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         if (map != null) {
-          trafficPlugin.toggle();
+          trafficPlugin.setVisibility(!trafficPlugin.isVisible());
         }
       }
     });
@@ -94,16 +93,5 @@ public class TrafficPluginActivity extends AppCompatActivity {
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
-  }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
   }
 }
