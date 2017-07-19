@@ -54,6 +54,7 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
     });
 
   }
+
   @Override
   protected void onStart() {
     super.onStart();
