@@ -21,6 +21,7 @@ public class TrafficPluginActivity extends AppCompatActivity {
   private MapView mapView;
   private MapboxMap map;
   private TrafficPlugin trafficPlugin;
+  private boolean trafficLayerVisible;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class TrafficPluginActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
         trafficPlugin = new TrafficPlugin(mapView, mapboxMap);
-        TrafficPluginActivity.this.trafficPlugin.toggle(); // Enable the traffic view by default
+        TrafficPluginActivity.this.trafficPlugin.setVisibility(true); // Enable the traffic view by default
       }
     });
 
@@ -48,7 +49,11 @@ public class TrafficPluginActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         if (map != null) {
-          trafficPlugin.toggle();
+          if (trafficPlugin.isVisible()) {
+            trafficPlugin.setVisibility(false);
+          } else {
+            trafficPlugin.setVisibility(true);
+          }
         }
       }
     });
