@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.annotations;
+package com.mapbox.mapboxandroiddemo.examples.query;
 
 import android.graphics.PointF;
 import android.graphics.RectF;

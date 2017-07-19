@@ -65,6 +65,7 @@ import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
@@ -475,10 +476,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_query_feature_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-            R.string.activity_query_click_on_layer_title,
-            R.string.activity_query_click_on_layer_description,
-            new Intent(MainActivity.this, ClickOnLayerActivity.class),
-            R.string.activity_query_click_on_layer_url
+          R.string.activity_query_click_on_layer_title,
+          R.string.activity_query_click_on_layer_description,
+          new Intent(MainActivity.this, ClickOnLayerActivity.class),
+          R.string.activity_query_click_on_layer_url
         ));
         currentCategory = R.id.nav_query_map;
         break;
