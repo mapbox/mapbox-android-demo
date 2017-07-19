@@ -189,15 +189,4 @@ public class BasicUserLocation extends AppCompatActivity implements PermissionsL
       finish();
     }
   }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
-  }
 }

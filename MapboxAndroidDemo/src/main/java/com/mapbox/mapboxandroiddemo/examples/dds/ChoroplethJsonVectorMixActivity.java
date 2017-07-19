@@ -167,15 +167,4 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     }
     return sb;
   }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
-  }
 }

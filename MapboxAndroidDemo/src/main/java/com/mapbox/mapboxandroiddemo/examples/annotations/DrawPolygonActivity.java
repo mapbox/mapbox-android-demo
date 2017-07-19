@@ -105,15 +105,4 @@ public class DrawPolygonActivity extends AppCompatActivity {
     super.onDestroy();
     mapView.onDestroy();
   }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
-  }
 }

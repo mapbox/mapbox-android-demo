@@ -190,15 +190,4 @@ public class DirectionsActivity extends AppCompatActivity {
     super.onLowMemory();
     mapView.onLowMemory();
   }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
-  }
 }

@@ -88,17 +88,6 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     handler = null;
   }
 
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
-  }
-
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);

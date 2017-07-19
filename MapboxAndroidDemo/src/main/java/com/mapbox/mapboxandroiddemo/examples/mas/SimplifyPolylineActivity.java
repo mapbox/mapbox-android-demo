@@ -192,15 +192,4 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
       .color(Color.parseColor("#3bb2d0"))
       .width(4));
   }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
-  }
 }

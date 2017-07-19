@@ -254,15 +254,4 @@ public class AnimatedLocationIconActivity extends AppCompatActivity implements P
       finish();
     }
   }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
-  }
 }

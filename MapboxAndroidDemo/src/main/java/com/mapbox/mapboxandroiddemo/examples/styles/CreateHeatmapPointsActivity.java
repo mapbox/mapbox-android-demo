@@ -150,15 +150,4 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
       mapboxMap.addLayerBelow(circles, "building");
     }
   }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
-  }
 }

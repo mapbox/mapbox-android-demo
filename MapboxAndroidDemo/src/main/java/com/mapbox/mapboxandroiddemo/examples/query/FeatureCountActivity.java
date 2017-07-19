@@ -135,15 +135,4 @@ public class FeatureCountActivity extends AppCompatActivity {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
   }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
-  }
 }

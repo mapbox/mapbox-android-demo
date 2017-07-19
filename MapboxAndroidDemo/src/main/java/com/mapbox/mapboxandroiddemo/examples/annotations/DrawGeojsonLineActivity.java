@@ -161,15 +161,4 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
       }
     }
   }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
-  }
 }
