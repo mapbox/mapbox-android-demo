@@ -119,17 +119,6 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
-  }
-
   private ArrayList<SingleRecyclerViewLocation> setUpLists() {
 
     // Set up markers on the map and the location list to feed to the recyclerview
