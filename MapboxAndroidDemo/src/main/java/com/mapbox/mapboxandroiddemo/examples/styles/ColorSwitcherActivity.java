@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SeekBar;

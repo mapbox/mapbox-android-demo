@@ -4,7 +4,6 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import com.google.gson.JsonElement;
 import com.mapbox.mapboxandroiddemo.R;

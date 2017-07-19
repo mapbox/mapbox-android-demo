@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.animation.LinearInterpolator;
 
 import com.mapbox.mapboxandroiddemo.R;
