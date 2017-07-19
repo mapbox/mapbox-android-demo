@@ -27,6 +27,15 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            keyAlias System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
+            keyPassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+            storeFile file("$project.rootDir/mapbox_demo.keystore")
+            storePassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
+        }
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix '.debug'
@@ -38,6 +47,7 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -75,7 +85,7 @@ dependencies {
 
     // Mapbox Navigation SDK for Android
     compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.3.1'
-    
+
     // Other dependencies
     compile 'com.github.javiersantos:MaterialStyledDialogs:2.1'
     compile 'com.getbase:floatingactionbutton:1.10.1'
