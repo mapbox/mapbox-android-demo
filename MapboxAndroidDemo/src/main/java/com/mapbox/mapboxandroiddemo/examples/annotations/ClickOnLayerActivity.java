@@ -19,7 +19,6 @@ import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.services.commons.geojson.Feature;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
