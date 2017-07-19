@@ -100,6 +100,7 @@
     <string name="activity_mas_simplify_polyline_title">Simplify a polyline</string>
     <string name="activity_mas_map_matching_title">Map Matching</string>
     <string name="activity_lab_location_picker_title">Location picker</string>
+    <string name="activity_lab_rv_on_map_title">Recyclerview interaction</string>
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
     <string name="activity_lab_space_station_location_title">Space station current location</string>
     <string name="activity_lab_off_route_title">Off route detection</string>
@@ -169,6 +170,7 @@
     <string name="activity_lab_off_route_description">Detect when the car is off route and reroute them.</string>
     <string name="activity_lab_las_angeles_tourism_description">Use the style API to highlight parks, hotels, and attractions. A pulsing animation is also added to the colors.</string>
     <string name="activity_lab_indoor_map_description">Display an indoor map of a building with toggles to switch between floor levels.</string>
+    <string name="activity_lab_rv_on_map_description">Manipulate the map based on recyclerview interactions.</string>
 
     <!-- example urls-->
     <string name="empty_image"> </string>
@@ -234,6 +236,7 @@
     <string name="activity_lab_off_route_url" translatable="false">http://i.imgur.com/lx1LdkA.png</string>
     <string name="activity_lab_las_angeles_tourism_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
     <string name="activity_lab_indoor_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
+    <string name="activity_lab_rv_on_map_url" translatable="false">http://i.imgur.com/8mQQuMo.jpg</string>
 
     <!--Default style names-->
     <string name="menu_map_style_streets">Streets</string>
@@ -383,9 +386,6 @@
     <string name="whoops_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
     <string name="whoops_error_dialog_ok_positive_button">Ok</string>
 
-    <!--Main Activity welcome toast-->
-    <string name="welcome_toast_message">Hello and welcome %1$s!</string>
-
     <!--Loading activity-->
     <string name="loading_textview">Loading&#8230;</string>
 
@@ -401,4 +401,8 @@
     <string name="retrieval_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
     <string name="retrieval_error_dialog_ok_button">Ok</string>
 
+    <!-- Recyclerview on map -->
+    <string name="rv_card_name">Location #%1$d</string>
+    <string name="rv_card_bed_info">This location has %1$d beds</string>
+    <string name="toast_instruction">Click on cards below</string>
 </resources>
