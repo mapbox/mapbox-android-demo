@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.offline;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -239,16 +238,5 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
     // Show a toast
     Toast.makeText(SimpleOfflineMapActivity.this, message, Toast.LENGTH_LONG).show();
-  }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
   }
 }
