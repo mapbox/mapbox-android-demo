@@ -87,6 +87,7 @@
     <string name="activity_query_feature_title">Query a map feature</string>
     <string name="activity_query_select_building_title">Select a building</string>
     <string name="activity_query_feature_count_title">Feature count</string>
+    <string name="activity_query_click_on_layer_title">Click on single layer</string>
     <string name="activity_location_basic_title">Show user location</string>
     <string name="activity_location_tracking_title">Track user location</string>
     <string name="activity_location_animated_icon_title">Animate the user icon</string>
@@ -152,6 +153,7 @@
     <string name="activity_query_feature_description">Click the map to add a marker at the location and display the maps property information for that feature.</string>
     <string name="activity_query_select_building_description">Use the query feature to select a building, get its geometry and draw a polygon highlighting it.</string>
     <string name="activity_query_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
+    <string name="activity_query_click_on_layer_description">Click on and highlight a selected GeoJSON polygon.</string>
     <string name="activity_location_basic_description">Toggle the users current location on the map.</string>
     <string name="activity_location_tracking_description">Lock the camera centered above the user location.</string>
     <string name="activity_location_animated_icon_description">Use a marker view to mark the users location and add a pulsing animation to it.</string>
@@ -218,6 +220,7 @@
     <string name="activity_query_select_building_url" translatable="false">http://i.imgur.com/bImud7u.png</string>
     <string name="activity_query_feature_url" translatable="false">http://i.imgur.com/HXxRBAF.png</string>
     <string name="activity_query_feature_count_url" translatable="false">http://i.imgur.com/phzOt81.png</string>
+    <string name="activity_query_click_on_layer_url" translatable="false">https://i.imgur.com/z3aWAqM.png</string>
     <string name="activity_location_basic_image_url" translatable="false">http://i.imgur.com/5BzH5YF.png</string>
     <string name="activity_location_tracking_url" translatable="false">http://i.imgur.com/U3uc32F.png</string>
     <string name="activity_location_animated_icon_url" translatable="false">http://i.imgur.com/dsUKM2i.png</string>
@@ -400,6 +403,10 @@
     <string name="retrieval_error_dialog_title">Whoops!</string>
     <string name="retrieval_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
     <string name="retrieval_error_dialog_ok_button">Ok</string>
+  
+    <!-- Clicked on layer activity -->
+    <string name="click_on_polygon_toast_instruction">Click anywhere within polygon FillLayer</string>
+    <string name="click_on_polygon_toast">Clicked on FillLayer</string>
 
     <!-- Recyclerview on map -->
     <string name="rv_card_name">Location #%1$d</string>
