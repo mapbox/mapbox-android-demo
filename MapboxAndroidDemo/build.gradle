@@ -87,7 +87,7 @@ dependencies {
     compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:0.3.0'
 
     // Mapbox Android UI
-    compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.1.3'
+    compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.2.0'
 
     // Mapbox Navigation SDK for Android
     compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.3.1'
