@@ -39,7 +39,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-wearable:11.0.1'
     compile 'com.google.android.gms:play-services-location:11.0.1'
     // Mapbox dependencies
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0@aar') {
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.1@aar') {
         transitive = true
     }
     compile project(':SharedCode')
