@@ -13,6 +13,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.functions.Function;
+import com.mapbox.mapboxsdk.style.functions.stops.IdentityStops;
 import com.mapbox.mapboxsdk.style.functions.stops.IntervalStops;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
@@ -31,6 +32,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleBlur;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
@@ -102,7 +105,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
-       /* addGrids3dLayer();
+        /* addGrids3dLayer();
         setUpActiveGrid();*/
 
         map = mapboxMap;
@@ -123,14 +126,14 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
     });
   }
 
-/*  @Override
-  public void onMapChanged(int change) {
-    if (!activeCamera.equals("inspector")) {
-      activeCamera = map.getCameraPosition().zoom > 14 ? "dotted" : "hexbin";
-      setLayers();
-    }
+  /*  @Override
+    public void onMapChanged(int change) {
+      if (!activeCamera.equals("inspector")) {
+        activeCamera = map.getCameraPosition().zoom > 14 ? "dotted" : "hexbin";
+        setLayers();
+      }
 
-  }*/
+    }*/
   /*@Override
   public void onMapLongClick(@NonNull LatLng point) {
     LatLng coordinates = new LatLng(point.getLatitude(), point.getLongitude());
@@ -185,7 +188,6 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
     }
   }*/
 
-
   private void setLayers() {
     if (activeCamera.equals("hexbin")) {
       map.getLayer("points-complaints").setProperties(circleOpacity(0f));
@@ -220,7 +222,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
     GeoJsonSource gridSource = new GeoJsonSource("grids", loadJsonFromAsset("grids.geojson"));
     map.addSource(gridSource);
 
-    FillExtrusionLayer fillExtrusionLayer3dGrid = new FillExtrusionLayer("grids-3d", "grids");
+    /*FillExtrusionLayer fillExtrusionLayer3dGrid = new FillExtrusionLayer("grids-3d", "grids");
     fillExtrusionLayer3dGrid.withProperties(
       fillExtrusionColor(Function.property("population",
         IntervalStops.interval(
@@ -228,25 +230,27 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
             stop(maxColor * .2, fillColor(Color.parseColor(colorStops[1])),
               stop(maxColor * .5, fillColor(Color.parseColor(colorStops[2])),
                 stop(maxColor * .8, fillColor(Color.parseColor(colorStops[3])),
-                  stop(maxColor * .2, fillColor(Color.parseColor(colorStops[4])),
+                  stop(maxColor * .2, fillColor(Color.parseColor(colorStops[4]))),
                     stop(maxColor, fillColor(Color.parseColor(colorStops[5]))),
                     fillExtrusionHeight(Function.property("activeDds", IntervalStops.interval(
                       stop(0, fillExtrusionHeight(0f),
-                        fillExtrusionOpacity(0.9f));
+                        fillExtrusionOpacity(0.9f))))))))))))));
+    */
 
     FillExtrusionLayer fillExtrusionLayer3dGrid = new FillExtrusionLayer("grids-3d", "grids");
-    fillExtrusionLayer3dGrid.withProperties(
-      fillExtrusionOpacity(0.9f),
-      fillExtrusionHeight(Function.property("activeDds", IntervalStops.interval(
-        stop(0, fillExtrusionHeight(0f)))
-      ))),
+    fillExtrusionLayer3dGrid.setProperties(
       fillExtrusionColor(Function.property("population",
         IntervalStops.interval(
           stop(0, fillColor(Color.parseColor(colorStops[1])),
-            stop(maxColor * .2, fillColor(Color.parseColor(colorStops[2]),
-              stop(maxColor * .5, fillColor(Color.parseColor(colorStops[3])),
-                stop(maxColor * .8, fillColor(Color.parseColor(colorStops[4]),
-                  stop(maxColor, fillColor(Color.parseColor(colorStops[5]))))))))))))))))
+            stop(maxColor * .2, fillColor(Color.parseColor(colorStops[1]),
+              stop(maxColor * .5, fillColor(Color.parseColor(colorStops[2]),
+                stop(maxColor * .8, fillColor(Color.parseColor(colorStops[3]),
+                  stop(maxColor * .2, fillColor(Color.parseColor(colorStops[4])),
+                    stop(maxColor, fillColor(Color.parseColor(colorStops[5])))),
+                  fillExtrusionHeight(Function.property("activeDds", IntervalStops.interval(
+                    stop(0, fillExtrusionHeight(0f),
+                      fillExtrusionOpacity(0.9f))))))));
+
 
     map.addLayerAbove(fillExtrusionLayer3dGrid, "admin-2-boundaries-dispute");
 
@@ -268,7 +272,8 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
 
   private void setUpComplaints() {
 
-    GeoJsonSource complaintSource = new GeoJsonSource("points-complaints", loadJsonFromAsset("data_complaints.geojson"));
+    GeoJsonSource complaintSource = new GeoJsonSource("points-complaints",
+      loadJsonFromAsset("data_complaints.geojson"));
     map.addSource(complaintSource);
 
     CircleLayer complaintCirclesLayer = new CircleLayer("points-complaints", "points-complaints");
@@ -374,17 +379,17 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
     mapView.onDestroy();
   }
 
-/*
-  private void getCamera() {
-    // if pitch==0, don't update Camera
-    if (map.getCameraPosition().tilt == 0) {
-      previousCamera.target = map.getCameraPosition().target;
-      previousCamera.zoom = map.getCameraPosition().zoom;
-      previousCamera.tilt = map.getCameraPosition().tilt;
-      previousCamera.bearing = map.getCameraPosition().bearing;
+  /*
+    private void getCamera() {
+      // if pitch==0, don't update Camera
+      if (map.getCameraPosition().tilt == 0) {
+        previousCamera.target = map.getCameraPosition().target;
+        previousCamera.zoom = map.getCameraPosition().zoom;
+        previousCamera.tilt = map.getCameraPosition().tilt;
+        previousCamera.bearing = map.getCameraPosition().bearing;
+      }
     }
-  }
-*/
+  */
 
   private String loadJsonFromAsset(String filename) {
     // Using this method to load in GeoJSON files from the assets folder.
