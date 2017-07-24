@@ -2,7 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.mas;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -129,16 +128,5 @@ public class GeocodingActivity extends AppCompatActivity {
       throw new RuntimeException(exception);
     }
 
-  }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
   }
 }

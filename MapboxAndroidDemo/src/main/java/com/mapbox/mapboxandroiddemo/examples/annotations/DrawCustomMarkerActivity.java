@@ -2,7 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.annotations;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -91,16 +90,5 @@ public class DrawCustomMarkerActivity extends AppCompatActivity {
   public void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
-  }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
   }
 }

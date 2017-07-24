@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.annotations;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -21,9 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.BLUE_COLOR;
-import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.RED_COLOR;
 import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.HOLE_COORDINATES;
 import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.POLYGON_COORDINATES;
+import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.RED_COLOR;
 
 /**
  * Add holes to a polygon drawn on top of the map.
@@ -149,16 +148,5 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
         }));
       }
     };
-  }
-
-  public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()) {
-      case android.R.id.home:
-        finish();
-        return true;
-      default:
-        finish();
-    }
-    return super.onOptionsItemSelected(item);
   }
 }
