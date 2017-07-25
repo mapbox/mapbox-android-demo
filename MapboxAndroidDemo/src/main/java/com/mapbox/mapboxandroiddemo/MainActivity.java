@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -152,6 +153,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           return;
         } else if (currentCategory == R.id.nav_mas && position == 0) {
           return;
+        } else if (currentCategory == R.id.nav_query_map && position == 0) {
+          return;
         }
         startActivity(exampleItemModel.get(position).getActivity());
 
@@ -210,6 +213,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     if (id == R.id.settings_in_nav_drawer) {
       buildSettingsDialog();
+    }
+
+    if (id == R.id.share_app_in_nav_drawer) {
+      shareApp();
     }
 
     if (id != currentCategory && id != R.id.settings_in_nav_drawer) {
@@ -741,6 +748,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           dialogView.logOut(loggedIn);
         }
       });
+    }
+  }
+
+  private void shareApp() {
+    try {
+      Intent intent = new Intent(Intent.ACTION_SEND);
+      intent.setType("text/plain");
+      intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_app_subject));
+      intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_app_text));
+      startActivity(Intent.createChooser(intent, getString(R.string.share_app_choose_one_instruction)));
+    } catch (Exception exception) {
+      Log.d("MainActivity", "shareApp: exception = " + exception);
     }
   }
 }
