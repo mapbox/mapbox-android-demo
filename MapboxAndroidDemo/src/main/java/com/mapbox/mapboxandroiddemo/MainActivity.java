@@ -153,6 +153,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           return;
         } else if (currentCategory == R.id.nav_mas && position == 0) {
           return;
+        } else if (currentCategory == R.id.nav_query_map && position == 0) {
+          return;
         }
         startActivity(exampleItemModel.get(position).getActivity());
 
