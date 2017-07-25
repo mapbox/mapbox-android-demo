@@ -9,10 +9,10 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="29.7565"
-        mapbox:mapbox_cameraTargetLng="-95.3625"
-        mapbox:mapbox_cameraZoom="4"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light"/>
+        mapbox:mapbox_cameraTargetLat="-7.79807"
+        mapbox:mapbox_cameraTargetLng="-59.0185"
+        mapbox:mapbox_cameraZoom="3"
+        mapbox:mapbox_styleUrl="mapbox://styles/cammace/cj5crfmjk0dmq2rmpg0fc8l7l"/>
 
     <ImageView
         android:id="@+id/placeholder_imageView"
