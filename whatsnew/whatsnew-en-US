@@ -1,9 +1,1 @@
-This update brings the demo app in line with the Mapbox Map SDK 5.1.0 version release.
-
-This release fixes a few bugs and introduces more examples for:
-
-• Extrusions (3D buildings)
-• Data-driven styling
-• Annotations
-
-Mapbox’s new branding and colors are integrated too.
+This update adds new examples in the labs and plugins sections. There’s also a hot fix for the wearable version of the app.
