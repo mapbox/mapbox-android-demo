@@ -108,7 +108,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
         /* addGrids3dLayer();
         setUpActiveGrid();*/
 
-        map = mapboxMap;
+        HexabinExtrusionActivity.this.map = mapboxMap;
 
         mapboxMap.setLatLngBoundsForCameraTarget(new LatLngBounds.Builder()
           .include(new LatLng(40.609614478818855, -74.09692544272578))
@@ -120,8 +120,8 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
         addGrids3dLayer();
         setUpActiveGrid();
 
-        /*setUpGridsCountLayer();
-        setUpPointsActiveLayer();*/
+        setUpGridsCountLayer();
+        setUpPointsActiveLayer();
       }
     });
   }
@@ -237,7 +237,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
                         fillExtrusionOpacity(0.9f))))))))))))));
     */
 
-    FillExtrusionLayer fillExtrusionLayer3dGrid = new FillExtrusionLayer("grids-3d", "grids");
+    /*FillExtrusionLayer fillExtrusionLayer3dGrid = new FillExtrusionLayer("grids-3d", "grids");
     fillExtrusionLayer3dGrid.setProperties(
       fillExtrusionColor(Function.property("population",
         IntervalStops.interval(
@@ -252,7 +252,7 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
                       fillExtrusionOpacity(0.9f))))))));
 
 
-    map.addLayerAbove(fillExtrusionLayer3dGrid, "admin-2-boundaries-dispute");
+    map.addLayerAbove(fillExtrusionLayer3dGrid, "admin-2-boundaries-dispute");*/
 
   }
 
@@ -320,6 +320,8 @@ public class HexabinExtrusionActivity extends AppCompatActivity /*implements
       textField("{" + activeDds + "}"),
       textColor(colorStops[2])
     );
+
+    map.addLayer(gridsCountLayer);
   }
 
   private void setUpPointsActiveLayer() {
