@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -11,9 +12,11 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
-import static android.R.attr.action;
-
+/**
+ * Enter picture-in-picture mode with a map being persisted
+ */
 public class PictureInPictureActivity extends AppCompatActivity {
+
   private MapView mapView;
 
   @Override
@@ -33,30 +36,23 @@ public class PictureInPictureActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
 
-
       }
     });
 
     FloatingActionButton addPictureFab = (FloatingActionButton) findViewById(R.id.add_window_fab);
     addPictureFab.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick(View view) {
 
-
+        try {
+          enterPictureInPictureMode();
+        } catch (Exception exception) {
+          Toast.makeText(PictureInPictureActivity.this, R.string.no_picture_in_picture_support,
+            Toast.LENGTH_SHORT).show();
+        }
       }
     });
-
   }
-
-  @Override
-  public void onActionClicked(Action action) {
-    if (action.getId() == R.id.add_window_fab) {
-      getApplicationContext().enterPictureInPictureMode();
-      return;
-    }
-
-  }
-
 
   @Override
   public void onResume() {
