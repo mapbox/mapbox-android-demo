@@ -101,8 +101,12 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.github.Cutta:GifView:1.1'
-    gpservicesCompile 'com.google.firebase:firebase-crash:10.2.0'
+    gpservicesCompile 'com.google.firebase:firebase-crash:11.0.4'
     compile project(':SharedCode')
-}
+    compile 'com.firebase:geofire-android:2.1.1'
+    compile 'com.google.firebase:firebase-database:11.0.4'
+    compile 'com.google.gms:google-services:3.1.0'
 
+}
+apply plugin: 'com.google.gms.google-services'
 apply from: '../checkstyle.gradle'
