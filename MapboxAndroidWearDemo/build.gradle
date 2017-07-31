@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.mapbox.mapboxandroiddemo"
         minSdkVersion 23
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode gitVersionCode
         versionName gitVersionName
     }
