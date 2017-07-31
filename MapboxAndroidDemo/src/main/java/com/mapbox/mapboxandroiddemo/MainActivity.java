@@ -84,6 +84,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
+import com.mapbox.mapboxandroiddemo.labs.GeofireActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
@@ -593,6 +594,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_rv_on_map_description,
           new Intent(MainActivity.this, RecyclerViewOnMapActivity.class),
           R.string.activity_lab_rv_on_map_url));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_geofire_title,
+          R.string.activity_lab_geofire_description,
+          new Intent(MainActivity.this, GeofireActivity.class),
+          R.string.activity_lab_geofire_url));
         currentCategory = R.id.nav_lab;
         break;
 
