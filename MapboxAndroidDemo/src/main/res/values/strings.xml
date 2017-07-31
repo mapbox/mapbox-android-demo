@@ -64,7 +64,7 @@
     <string name="activity_style_line_layer_title">Create a line layer</string>
     <string name="activity_style_symbol_layer_title">Marker symbol layer</string>
     <string name="activity_style_local_style_source_title">Local style source file</string>
-    <string name="activity_extrusions_catalina_marathon_extrusions_title">Use GeoJSON data to set 32 height</string>
+    <string name="activity_extrusions_catalina_marathon_extrusions_title">Use GeoJSON data to set building height</string>
     <string name="activity_extrusions_population_density_extrusions_title">Display 3D building height based on vector data</string>
     <string name="activity_extrusions_adjust_extrusions_title">Adjust light location and color</string>
     <string name="activity_extrusions_indoor_3d_title">Extrude polygons for 3D indoor mapping</string>
