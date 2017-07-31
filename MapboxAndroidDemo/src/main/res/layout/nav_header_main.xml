@@ -12,18 +12,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:paddingTop="16dp"
-        android:src="@mipmap/ic_launcher"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:text="@string/mapbox"
+        android:textSize="18sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     <TextView

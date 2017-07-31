@@ -3,7 +3,7 @@ apply from: "$project.rootDir/script-git-version.gradle"
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
         applicationId "com.mapbox.mapboxandroiddemo"
@@ -12,11 +12,23 @@ android {
         versionCode gitVersionCode
         versionName gitVersionName
     }
+    signingConfigs {
+        release {
+            keyAlias System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
+            keyPassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+            storeFile file("$project.rootDir/mapbox_demo.keystore")
+            storePassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
+        }
+    }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -24,10 +36,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     provided 'com.google.android.wearable:wearable:2.0.3'
     compile 'com.google.android.support:wearable:2.0.3'
-    compile 'com.google.android.gms:play-services-wearable:11.0.0'
-    compile 'com.google.android.gms:play-services-location:11.0.0'
+    compile 'com.google.android.gms:play-services-wearable:11.0.1'
+    compile 'com.google.android.gms:play-services-location:11.0.1'
     // Mapbox dependencies
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.0-beta.5@aar') {
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.1@aar') {
         transitive = true
     }
     compile project(':SharedCode')

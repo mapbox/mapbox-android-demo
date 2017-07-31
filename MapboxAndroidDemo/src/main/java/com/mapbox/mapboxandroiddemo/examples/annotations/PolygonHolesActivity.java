@@ -20,9 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.BLUE_COLOR;
-import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.RED_COLOR;
 import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.HOLE_COORDINATES;
 import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.POLYGON_COORDINATES;
+import static com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity.Config.RED_COLOR;
 
 /**
  * Add holes to a polygon drawn on top of the map.

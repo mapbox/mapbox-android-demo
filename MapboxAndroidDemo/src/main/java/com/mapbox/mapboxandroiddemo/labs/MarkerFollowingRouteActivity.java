@@ -263,5 +263,4 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
       return latLng;
     }
   }
-
 }

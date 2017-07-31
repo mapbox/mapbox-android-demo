@@ -10,19 +10,19 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.sharedcode.analytics.AnalyticsTracker;
+import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.account.LandingActivity;
 
-import static com.example.sharedcode.analytics.AnalyticsTracker.LOGGED_OUT_OF_MAPBOX_ACCOUNT;
-import static com.example.sharedcode.analytics.AnalyticsTracker.OPTED_IN_TO_ANALYTICS;
-import static com.example.sharedcode.analytics.AnalyticsTracker.OPTED_OUT_OF_ANALYTICS;
-import static com.example.sharedcode.analytics.StringConstants.AVATAR_IMAGE_KEY;
-import static com.example.sharedcode.analytics.StringConstants.EMAIL_KEY;
-import static com.example.sharedcode.analytics.StringConstants.FROM_LOG_OUT_BUTTON_KEY;
-import static com.example.sharedcode.analytics.StringConstants.TOKEN_KEY;
-import static com.example.sharedcode.analytics.StringConstants.TOKEN_SAVED_KEY;
-import static com.example.sharedcode.analytics.StringConstants.USERNAME_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.LOGGED_OUT_OF_MAPBOX_ACCOUNT;
+import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.OPTED_IN_TO_ANALYTICS;
+import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.OPTED_OUT_OF_ANALYTICS;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.AVATAR_IMAGE_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.EMAIL_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.FROM_LOG_OUT_BUTTON_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.USERNAME_KEY;
 
 
 public class SettingsDialogView {

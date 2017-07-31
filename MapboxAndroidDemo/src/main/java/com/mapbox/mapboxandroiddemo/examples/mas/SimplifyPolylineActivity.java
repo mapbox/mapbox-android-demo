@@ -190,6 +190,5 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
       .add(result)
       .color(Color.parseColor("#3bb2d0"))
       .width(4));
-
   }
 }

@@ -129,6 +129,4 @@ public class GeocodingActivity extends AppCompatActivity {
     }
 
   }
-
-
 }

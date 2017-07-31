@@ -113,7 +113,7 @@ public class LanguageSwitchActivity extends AppCompatActivity {
           mapText.setProperties(textField("{name_en}"));
           return true;
         case android.R.id.home:
-          onBackPressed();
+          finish();
           return true;
       }
     }

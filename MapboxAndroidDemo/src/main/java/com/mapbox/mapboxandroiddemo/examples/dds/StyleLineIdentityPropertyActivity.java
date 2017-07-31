@@ -134,7 +134,5 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
     }
 
   }
-
-
 }
 

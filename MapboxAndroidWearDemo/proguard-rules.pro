@@ -17,6 +17,11 @@
 
 -dontwarn okio.**
 -dontwarn okhttp3.**
+-keep class retrofit.** { *; }
+-keepclasseswithmembers class * {
+    @retrofit.http.* <methods>;
+}
+-dontwarn retrofit.**
 
 # Picasso
 -dontwarn com.squareup.okhttp.**
@@ -24,6 +29,9 @@
 -dontwarn android.support.**
 -dontwarn java.lang.**
 -dontwarn org.codehaus.**
--keep class com.google.**
+-keep class com.google.** { *; }
 -dontwarn com.google.**
 -dontwarn java.nio.**
+-dontwarn javax.annotation.**
+
+-keep class com.segment.analytics.** { *; }

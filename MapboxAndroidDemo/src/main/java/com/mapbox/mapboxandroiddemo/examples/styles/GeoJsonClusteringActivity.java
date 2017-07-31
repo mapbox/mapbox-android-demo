@@ -174,6 +174,4 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
     mapboxMap.addLayer(count);
 
   }
-
-
 }

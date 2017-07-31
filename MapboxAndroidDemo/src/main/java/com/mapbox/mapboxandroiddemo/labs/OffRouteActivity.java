@@ -192,12 +192,13 @@ public class OffRouteActivity extends AppCompatActivity {
       case R.id.action_3:
         routeUtils = new RouteUtils(1);
         break;
+      case android.R.id.home:
+        finish();
+        return true;
       default:
         routeUtils = new RouteUtils(0.1);
         break;
     }
-
-
     return super.onOptionsItemSelected(item);
   }
 

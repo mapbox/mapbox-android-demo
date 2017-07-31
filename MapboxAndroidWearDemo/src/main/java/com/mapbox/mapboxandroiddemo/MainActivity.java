@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.WearableRecyclerView;
 
-import com.example.sharedcode.analytics.AnalyticsTracker;
-import com.example.sharedcode.analytics.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 
+import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
+import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.LocationTrackingActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.OfflineMapActivity;

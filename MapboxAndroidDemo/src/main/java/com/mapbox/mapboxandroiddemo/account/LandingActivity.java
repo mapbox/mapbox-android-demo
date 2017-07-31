@@ -14,17 +14,17 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.example.sharedcode.analytics.AnalyticsTracker;
+import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
 
-import static com.example.sharedcode.analytics.AnalyticsTracker.CLICKED_ON_CREATE_ACCOUNT_BUTTON;
-import static com.example.sharedcode.analytics.AnalyticsTracker.CLICKED_ON_SIGN_IN_BUTTON;
-import static com.example.sharedcode.analytics.StringConstants.AUTHCODE_KEY;
-import static com.example.sharedcode.analytics.StringConstants.CLIENT_ID_KEY;
-import static com.example.sharedcode.analytics.StringConstants.REDIRECT_URI_KEY;
-import static com.example.sharedcode.analytics.StringConstants.TOKEN_SAVED_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_CREATE_ACCOUNT_BUTTON;
+import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_SIGN_IN_BUTTON;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.AUTHCODE_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.CLIENT_ID_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.REDIRECT_URI_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
 
 
 public class LandingActivity extends AppCompatActivity {
@@ -136,7 +136,6 @@ public class LandingActivity extends AppCompatActivity {
     new MaterialStyledDialog.Builder(this)
       .setTitle(getString(R.string.whoops_error_dialog_title))
       .setDescription(getString(R.string.whoops_error_dialog_message))
-      .setIcon(R.mipmap.ic_launcher)
       .setHeaderColor(R.color.mapboxRedDark)
       .withDivider(true)
       .setPositiveText(getString(R.string.whoops_error_dialog_ok_positive_button))
