@@ -79,6 +79,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
@@ -320,9 +321,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, CustomRasterStyleActivity.class),
           R.string.activity_style_raster_url
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_local_style_source_title,
+          R.string.activity_style_local_style_source_description,
+          new Intent(MainActivity.this, LocalStyleSourceActivity.class),
+          R.string.activity_style_local_style_source_url
+        ));
         currentCategory = R.id.nav_styles;
         break;
-
       case R.id.nav_extrusions:
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_extrusions_population_density_extrusions_title,

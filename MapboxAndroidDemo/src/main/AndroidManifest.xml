@@ -283,6 +283,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
+            android:name=".examples.styles.LocalStyleSourceActivity"
+            android:label="@string/activity_style_local_style_source_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
             android:name=".examples.location.AnimatedLocationIconActivity"
             android:label="@string/activity_location_animated_icon_title">
             <meta-data
