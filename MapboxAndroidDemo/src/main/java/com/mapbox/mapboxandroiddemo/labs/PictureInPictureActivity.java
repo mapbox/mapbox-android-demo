@@ -13,7 +13,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 /**
- * Enter picture-in-picture mode with a map being persisted
+ * Enter picture-in-picture mode with a map being persisted. Only works on devices running Android O and above.
  */
 public class PictureInPictureActivity extends AppCompatActivity {
 
