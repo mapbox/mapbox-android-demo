@@ -12,6 +12,6 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="43.653226"
         mapbox:mapbox_cameraTargetLng="-79.3831"
-        mapbox:mapbox_cameraZoom="12"
-        mapbox:mapbox_styleUrl="mapbox://styles/cammace/cj5crfmjk0dmq2rmpg0fc8l7l"/>
+        mapbox:mapbox_cameraZoom="12"/>
+
 </LinearLayout>

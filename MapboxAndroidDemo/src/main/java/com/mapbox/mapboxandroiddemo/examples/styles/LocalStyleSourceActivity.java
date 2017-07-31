@@ -10,7 +10,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 /**
- * Example loads the map style via a style JSON file that is stored locally
+ * Example loads the map style via a "locally" stored style JSON file
  */
 public class LocalStyleSourceActivity extends AppCompatActivity {
 
@@ -33,7 +33,8 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
-
+        // Reference the local json file in the assets folder and pass through as the string parameter
+        mapboxMap.setStyleUrl("asset://local_style_file.json");
 
       }
     });
@@ -81,6 +82,4 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
   }
-
-
 }
