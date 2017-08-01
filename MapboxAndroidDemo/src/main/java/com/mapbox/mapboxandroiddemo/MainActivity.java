@@ -350,8 +350,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_extrusions_indoor_3d_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-                R.string.activity_extrusions_adjust_extrusions_title,
-                R.string.activity_extrusions_adjust_extrusions_description,
+                R.string.activity_extrusions_rotate_extrusions_title,
+                R.string.activity_extrusions_rotate_extrusions_description,
                 new Intent(MainActivity.this, RotationExtrusionActivity.class),
                 R.string.activity_extrusions_adjust_extrusions_url, true
         ));
