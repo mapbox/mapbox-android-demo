@@ -37,8 +37,8 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     private SensorManager sensorManager;
     private Sensor gyro;
     private Sensor magnetic;
-    float[] mGravity;
-    float[] mGeomagnetic;
+    float[] gravArray;
+    float[] magneticArray;
     float azimut;
     float pitch;
     float roll;
@@ -52,6 +52,7 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
         // object or in the same activity which contains the mapview.
         Mapbox.getInstance(this, getString(R.string.access_token));
 
+        // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_extrusion_rotation);
 
         mapView = (MapView) findViewById(R.id.mapView);
@@ -144,13 +145,13 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     public void onSensorChanged(SensorEvent event) {
 
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
-            mGravity = event.values;
+            gravArray = event.values;
         if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
-            mGeomagnetic = event.values;
-        if (mGravity != null && mGeomagnetic != null) {
+            magneticArray = event.values;
+        if (gravArray != null && magneticArray != null) {
             float R[] = new float[9];
             float I[] = new float[9];
-            boolean success = SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic);
+            boolean success = SensorManager.getRotationMatrix(R, I, gravArray, magneticArray);
             if (success) {
                 float orientation[] = new float[3];
                 SensorManager.getOrientation(R, orientation);
