@@ -458,6 +458,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
+            android:name=".examples.extrusions.RotationExtrusionActivity"
+            android:label="@string/activity_extrusions_adjust_extrusions_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
             android:name=".examples.extrusions.Indoor3DMapActivity"
             android:label="@string/activity_extrusions_indoor_3d_title">
             <meta-data
