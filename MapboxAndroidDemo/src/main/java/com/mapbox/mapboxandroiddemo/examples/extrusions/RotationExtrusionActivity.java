@@ -1,6 +1,9 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +43,8 @@ public class RotationExtrusionActivity extends AppCompatActivity {
     private boolean isLowIntensityLight;
     private boolean isRedColor;
     private boolean isInitPosition;
+    private SensorManager sensorManager;
+    private Sensor gyro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +65,10 @@ public class RotationExtrusionActivity extends AppCompatActivity {
                 setupBuildings();
             }
         });
+
+        //initallize gyroscope
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
     }
 
     private void setupBuildings() {
