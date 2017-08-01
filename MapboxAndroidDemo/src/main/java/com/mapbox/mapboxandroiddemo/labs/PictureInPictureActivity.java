@@ -73,6 +73,7 @@ public class PictureInPictureActivity extends AppCompatActivity {
       // Restore the playback UI based on the playback status.
       Log.d(TAG, "onPictureInPictureModeChanged: !isInPictureInPictureMode");
       addPictureFab.setVisibility(View.VISIBLE);
+      getSupportActionBar().show();
 
       // TODO: Show toolbar here
     }
