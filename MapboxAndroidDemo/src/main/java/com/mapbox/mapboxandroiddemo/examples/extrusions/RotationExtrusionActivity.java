@@ -1,11 +1,14 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,9 +16,11 @@ import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
 import com.mapbox.mapboxsdk.style.functions.Function;
 import com.mapbox.mapboxsdk.style.functions.stops.IdentityStops;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
@@ -23,7 +28,9 @@ import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.light.Light;
 import com.mapbox.mapboxsdk.style.light.Position;
+import com.mapbox.services.android.telemetry.location.LocationEngine;
 
+import static com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerMode.COMPASS;
 import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
@@ -43,8 +50,8 @@ public class RotationExtrusionActivity extends AppCompatActivity {
     private boolean isLowIntensityLight;
     private boolean isRedColor;
     private boolean isInitPosition;
-    private SensorManager sensorManager;
-    private Sensor gyro;
+    private LocationEngine locationEngine;
+    private LocationLayerPlugin locationLayerPlugin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +70,10 @@ public class RotationExtrusionActivity extends AppCompatActivity {
             public void onMapReady(@NonNull final MapboxMap map) {
                 mapboxMap = map;
                 setupBuildings();
+                setupLocationPlugin();
             }
         });
 
-        //initallize gyroscope
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
     }
 
     private void setupBuildings() {
@@ -83,6 +88,15 @@ public class RotationExtrusionActivity extends AppCompatActivity {
                 fillExtrusionOpacity(0.9f)
         );
         mapboxMap.addLayer(fillExtrusionLayer);
+    }
+
+    private void setupLocationPlugin(){
+        locationEngine = new LocationSource(this);
+        locationLayerPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationEngine);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        locationLayerPlugin.setLocationLayerEnabled(COMPASS);
     }
 
     @Override
