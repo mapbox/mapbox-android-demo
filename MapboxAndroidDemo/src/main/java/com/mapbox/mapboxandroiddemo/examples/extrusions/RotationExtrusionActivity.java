@@ -49,10 +49,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionCol
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
 
-/**
- * Created by Anthony-Agby on 8/1/17.
- */
-
 public class RotationExtrusionActivity extends AppCompatActivity implements SensorEventListener{
 
     private MapView mapView;
@@ -95,9 +91,8 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
             }
         });
 
-        //initallize gyroscope
+        //initialize sensors
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
 
         gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
