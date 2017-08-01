@@ -23,13 +23,15 @@ import com.mapbox.mapboxsdk.style.functions.Function;
 import com.mapbox.mapboxsdk.style.functions.stops.IdentityStops;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 
-
 import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
 
+/**
+ * Change the bearing and tilt of camera when viewing extrusions to get full 3D effect
+ */
 public class RotationExtrusionActivity extends AppCompatActivity implements SensorEventListener{
 
     private MapView mapView;
