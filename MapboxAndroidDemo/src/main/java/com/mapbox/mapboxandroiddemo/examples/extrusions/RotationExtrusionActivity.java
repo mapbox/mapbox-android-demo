@@ -4,7 +4,11 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -12,12 +16,16 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -32,6 +40,8 @@ import com.mapbox.mapboxsdk.style.light.Light;
 import com.mapbox.mapboxsdk.style.light.Position;
 import com.mapbox.services.android.telemetry.location.LocationEngine;
 
+import java.util.List;
+
 import static com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerMode.COMPASS;
 import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
@@ -43,7 +53,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpa
  * Created by Anthony-Agby on 8/1/17.
  */
 
-public class RotationExtrusionActivity extends AppCompatActivity {
+public class RotationExtrusionActivity extends AppCompatActivity implements SensorEventListener{
 
     private MapView mapView;
     private MapboxMap mapboxMap;
@@ -56,6 +66,12 @@ public class RotationExtrusionActivity extends AppCompatActivity {
     private LocationLayerPlugin locationLayerPlugin;
     private SensorManager sensorManager;
     private Sensor gyro;
+    private Sensor magnetic;
+    float[] mGravity;
+    float[] mGeomagnetic;
+    float azimut;
+    float pitch;
+    float roll;
 
 
     @Override
@@ -81,7 +97,13 @@ public class RotationExtrusionActivity extends AppCompatActivity {
 
         //initallize gyroscope
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+
+
+        gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+
+        sensorManager.registerListener(this, gyro , SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, magnetic , SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     private void setupBuildings() {
@@ -171,5 +193,46 @@ public class RotationExtrusionActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
+            mGravity = event.values;
+        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
+            mGeomagnetic = event.values;
+        if (mGravity != null && mGeomagnetic != null) {
+            float R[] = new float[9];
+            float I[] = new float[9];
+            boolean success = SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic);
+            if (success) {
+                float orientation[] = new float[3];
+                SensorManager.getOrientation(R, orientation);
+                azimut = orientation[0]; // orientation contains: azimut, pitch and roll
+                pitch = orientation[1];
+                roll = orientation[2];
+
+//                CameraPosition cameraPosition = new CameraPosition();
+
+                CameraPosition position = new CameraPosition.Builder()
+//                        .target(new LatLng(51.50550, -0.07520)) // Sets the new camera position
+//                        .zoom(17) // Sets the zoom
+//                        .bearing(180) // Rotate the camera
+                        .tilt(pitch * 180) // Set the camera tilt
+                        .build(); // Creates a CameraPosition from the builder
+
+                mapboxMap.animateCamera(CameraUpdateFactory
+                        .newCameraPosition(position), 1000);
+
+                Log.e("Test", "azi: " + azimut + ", pitch: " + pitch + ", roll: " + roll);
+            }
+        }
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+        Log.e("Test", "accuracy Changed");
     }
 }
