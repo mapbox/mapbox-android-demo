@@ -564,12 +564,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_indoor_map_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_off_route_title,
-          R.string.activity_lab_off_route_description,
-          new Intent(MainActivity.this, OffRouteActivity.class),
-          R.string.activity_lab_off_route_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_location_picker_title,
           R.string.activity_lab_location_picker_description,
           new Intent(MainActivity.this, LocationPickerActivity.class),
