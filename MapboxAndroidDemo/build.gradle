@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply from: "$project.rootDir/script-git-version.gradle"
 
 ext {
-    supportLibVersion = '26.0.0'
+    supportLibVersion = '25.3.1'
 }
 
 android {
