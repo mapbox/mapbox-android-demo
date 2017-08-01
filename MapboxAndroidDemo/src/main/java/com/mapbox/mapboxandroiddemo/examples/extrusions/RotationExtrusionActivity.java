@@ -209,23 +209,17 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
             if (success) {
                 float orientation[] = new float[3];
                 SensorManager.getOrientation(R, orientation);
-                azimut = orientation[0]; // orientation contains: azimut, pitch and roll
+                azimut = orientation[0];
                 pitch = orientation[1];
                 roll = orientation[2];
 
-//                CameraPosition cameraPosition = new CameraPosition();
-
                 CameraPosition position = new CameraPosition.Builder()
-//                        .target(new LatLng(51.50550, -0.07520)) // Sets the new camera position
-//                        .zoom(17) // Sets the zoom
-//                        .bearing(180) // Rotate the camera
-                        .tilt(pitch * 180) // Set the camera tilt
-                        .build(); // Creates a CameraPosition from the builder
+                        .tilt(pitch * -90)
+                        .bearing(roll * 90)
+                        .build();
 
                 mapboxMap.animateCamera(CameraUpdateFactory
-                        .newCameraPosition(position), 1000);
-
-                Log.e("Test", "azi: " + azimut + ", pitch: " + pitch + ", roll: " + roll);
+                        .newCameraPosition(position), 300);
             }
         }
 
@@ -233,6 +227,6 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
-        Log.e("Test", "accuracy Changed");
+
     }
 }
