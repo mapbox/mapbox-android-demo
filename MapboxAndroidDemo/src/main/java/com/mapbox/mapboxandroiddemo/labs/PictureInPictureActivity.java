@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.labs;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,6 +19,8 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 public class PictureInPictureActivity extends AppCompatActivity {
 
   private MapView mapView;
+  private String TAG = "PictureInPicture";
+  private FloatingActionButton addPictureFab;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +42,40 @@ public class PictureInPictureActivity extends AppCompatActivity {
       }
     });
 
-    FloatingActionButton addPictureFab = (FloatingActionButton) findViewById(R.id.add_window_fab);
+    addPictureFab = (FloatingActionButton) findViewById(R.id.add_window_fab);
     addPictureFab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
 
         try {
           enterPictureInPictureMode();
+
         } catch (Exception exception) {
           Toast.makeText(PictureInPictureActivity.this, R.string.no_picture_in_picture_support,
             Toast.LENGTH_SHORT).show();
         }
       }
     });
+  }
+
+  @Override
+  public void onPictureInPictureModeChanged(boolean isInPictureInPictureMode) {
+    super.onPictureInPictureModeChanged(isInPictureInPictureMode);
+    if (isInPictureInPictureMode) {
+      // Hide the controls in picture-in-picture mode.
+      Log.d(TAG, "onPictureInPictureModeChanged: isInPictureInPictureMode");
+      addPictureFab.setVisibility(View.GONE);
+      // TODO: Remove toolbar here
+      getSupportActionBar().hide();
+
+
+    } else {
+      // Restore the playback UI based on the playback status.
+      Log.d(TAG, "onPictureInPictureModeChanged: !isInPictureInPictureMode");
+      addPictureFab.setVisibility(View.VISIBLE);
+
+      // TODO: Show toolbar here
+    }
   }
 
   @Override
@@ -76,6 +100,13 @@ public class PictureInPictureActivity extends AppCompatActivity {
   public void onPause() {
     super.onPause();
     mapView.onPause();
+    if (isInPictureInPictureMode()) {
+
+      Log.d(TAG, "onPause: isInPictureInPictureMode");
+    } else {
+      Log.d(TAG, "onPause: !isInPictureInPictureMode");
+
+    }
   }
 
   @Override
