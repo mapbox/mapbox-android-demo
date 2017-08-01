@@ -58,7 +58,6 @@ public class RotationExtrusionActivity extends AppCompatActivity {
             public void onMapReady(@NonNull final MapboxMap map) {
                 mapboxMap = map;
                 setupBuildings();
-                setupLight();
             }
         });
     }
@@ -75,30 +74,6 @@ public class RotationExtrusionActivity extends AppCompatActivity {
                 fillExtrusionOpacity(0.9f)
         );
         mapboxMap.addLayer(fillExtrusionLayer);
-    }
-
-    private void setupLight() {
-        light = mapboxMap.getLight();
-
-        findViewById(R.id.fabLightPosition).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isInitPosition = !isInitPosition;
-                if (isInitPosition) {
-                    light.setPosition(new Position(1.5f, 90, 80));
-                } else {
-                    light.setPosition(new Position(1.15f, 210, 30));
-                }
-            }
-        });
-
-        findViewById(R.id.fabLightColor).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                isRedColor = !isRedColor;
-                light.setColor(PropertyFactory.colorToRgbaString(isRedColor ? Color.RED : Color.BLUE));
-            }
-        });
     }
 
     @Override
