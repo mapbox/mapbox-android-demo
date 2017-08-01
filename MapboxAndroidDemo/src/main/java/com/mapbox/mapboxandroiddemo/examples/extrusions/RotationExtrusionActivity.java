@@ -7,9 +7,11 @@ import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,6 +54,9 @@ public class RotationExtrusionActivity extends AppCompatActivity {
     private boolean isInitPosition;
     private LocationEngine locationEngine;
     private LocationLayerPlugin locationLayerPlugin;
+    private SensorManager sensorManager;
+    private Sensor gyro;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +79,9 @@ public class RotationExtrusionActivity extends AppCompatActivity {
             }
         });
 
+        //initallize gyroscope
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
     }
 
     private void setupBuildings() {
@@ -91,12 +99,12 @@ public class RotationExtrusionActivity extends AppCompatActivity {
     }
 
     private void setupLocationPlugin(){
-        locationEngine = new LocationSource(this);
-        locationLayerPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationEngine);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        locationLayerPlugin.setLocationLayerEnabled(COMPASS);
+//        locationEngine = new LocationSource(this);
+//        locationLayerPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationEngine);
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            return;
+//        }
+//        locationLayerPlugin.setLocationLayerEnabled(COMPASS);
     }
 
     @Override
