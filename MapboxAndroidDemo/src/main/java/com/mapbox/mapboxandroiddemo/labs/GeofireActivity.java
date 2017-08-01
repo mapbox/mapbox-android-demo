@@ -26,11 +26,11 @@ import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -52,7 +52,7 @@ public class GeofireActivity extends AppCompatActivity implements GeoQueryEventL
   private String TAG = "GeofireActivity";
   private MapboxMap mapboxMap;
 
-  private SymbolLayer circleLayer;
+  private CircleLayer circleLayer;
   private GeoFire geoFire;
   private GeoQuery geoQuery;
   private Map<String, Marker> markers;
@@ -171,18 +171,23 @@ public class GeofireActivity extends AppCompatActivity implements GeoQueryEventL
   }
 
   private void addCircleLayer() {
+    Log.d(TAG, "addCircleLayer: starting to run");
     List<Feature> markerCoordinates = new ArrayList<>();
     markerCoordinates.add(Feature.fromGeometry(
-      Point.fromCoordinates(Position.fromCoordinates(-122.3998, 37.788339))) // Mapbox's SF office
+      Point.fromCoordinates(Position.fromCoordinates(-122.39989200000002, 37.788339))) // Mapbox's SF office
     );
     FeatureCollection featureCollection = FeatureCollection.fromFeatures(markerCoordinates);
     Source circleSource = new GeoJsonSource("circle-source", featureCollection);
     mapboxMap.addSource(circleSource);
 
-    circleLayer = new SymbolLayer("circleLayer", "circle-source");
-    circleLayer.setProperties(PropertyFactory.fillColor(Color.argb(66, 255, 0, 255)));
-    circleLayer.setProperties(PropertyFactory.circleStrokeColor(Color.argb(66, 0, 0, 0)));
+    circleLayer = new CircleLayer("circleLayer", "circle-source");
+    circleLayer.setProperties(PropertyFactory.circleColor(Color.parseColor("#ff00ff")));
+    circleLayer.setProperties(PropertyFactory.circleStrokeColor(Color.parseColor("#000000")));
+    circleLayer.setProperties(PropertyFactory.circleOpacity(.2f));
+    circleLayer.setProperties(PropertyFactory.circleRadius(100f));
     mapboxMap.addLayer(circleLayer);
+
+    Log.d(TAG, "addCircleLayer: finished running");
   }
 
   private void addMarkersToMapViaSymbolLayer() {
@@ -259,6 +264,7 @@ public class GeofireActivity extends AppCompatActivity implements GeoQueryEventL
     geoQuery.setCenter(new GeoLocation(center.getLatitude(), center.getLongitude()));
     // radius in km
     geoQuery.setRadius(radius / 1000);
+
   }
 
   private double zoomLevelToRadius(double zoomLevel) {
