@@ -102,8 +102,8 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
         gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
-        sensorManager.registerListener(this, gyro , SensorManager.SENSOR_DELAY_NORMAL);
-        sensorManager.registerListener(this, magnetic , SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, gyro , 200);
+        sensorManager.registerListener(this, magnetic , 200);
     }
 
     private void setupBuildings() {
@@ -218,8 +218,11 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
                         .bearing(roll * 90)
                         .build();
 
-                mapboxMap.animateCamera(CameraUpdateFactory
-                        .newCameraPosition(position), 300);
+                if(mapboxMap != null){
+                    mapboxMap.animateCamera(CameraUpdateFactory
+                            .newCameraPosition(position), 100
+                    );
+                }
             }
         }
 
