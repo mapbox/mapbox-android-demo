@@ -38,7 +38,7 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
         Button loadCustomRasterStyleButton = (Button) findViewById(R.id.load_custom_raster_button);
         loadCustomRasterStyleButton.setOnClickListener(new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(View view) {
             // Reference the custom raster file URL and pass through as the string parameter
             mapView.setStyleUrl("https://www.mapbox.com/android-docs/files/mapbox-raster-v8.json");
           }
@@ -47,7 +47,7 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
         Button loadLocalStyleButton = (Button) findViewById(R.id.load_local_style_button);
         loadLocalStyleButton.setOnClickListener(new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(View view) {
             // Reference the local JSON style file in the assets folder and pass through as the string parameter
             mapView.setStyleUrl("asset://local_style_file.json");
           }
