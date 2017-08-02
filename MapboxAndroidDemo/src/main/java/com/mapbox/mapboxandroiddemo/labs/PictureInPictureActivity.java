@@ -37,7 +37,6 @@ public class PictureInPictureActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
-
       }
     });
 
@@ -45,10 +44,8 @@ public class PictureInPictureActivity extends AppCompatActivity {
     addPictureFab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-
         try {
           enterPictureInPictureMode();
-
         } catch (Exception exception) {
           Toast.makeText(PictureInPictureActivity.this, R.string.no_picture_in_picture_support,
             Toast.LENGTH_SHORT).show();
@@ -62,19 +59,12 @@ public class PictureInPictureActivity extends AppCompatActivity {
     super.onPictureInPictureModeChanged(isInPictureInPictureMode);
     if (isInPictureInPictureMode) {
       // Hide the controls in picture-in-picture mode.
-      Log.d(TAG, "onPictureInPictureModeChanged: isInPictureInPictureMode");
       addPictureFab.setVisibility(View.GONE);
-      // TODO: Remove toolbar here
       getSupportActionBar().hide();
-
-
     } else {
       // Restore the playback UI based on the playback status.
-      Log.d(TAG, "onPictureInPictureModeChanged: !isInPictureInPictureMode");
       addPictureFab.setVisibility(View.VISIBLE);
       getSupportActionBar().show();
-
-      // TODO: Show toolbar here
     }
   }
 
@@ -100,13 +90,6 @@ public class PictureInPictureActivity extends AppCompatActivity {
   public void onPause() {
     super.onPause();
     mapView.onPause();
-    if (isInPictureInPictureMode()) {
-
-      Log.d(TAG, "onPause: isInPictureInPictureMode");
-    } else {
-      Log.d(TAG, "onPause: !isInPictureInPictureMode");
-
-    }
   }
 
   @Override
