@@ -73,7 +73,6 @@ import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
@@ -314,12 +313,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_mapbox_studio_description,
           new Intent(MainActivity.this, MapboxStudioStyleActivity.class),
           R.string.activity_style_mapbox_studio_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_raster_title,
-          R.string.activity_style_raster_description,
-          new Intent(MainActivity.this, CustomRasterStyleActivity.class),
-          R.string.activity_style_raster_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_style_local_style_source_title,

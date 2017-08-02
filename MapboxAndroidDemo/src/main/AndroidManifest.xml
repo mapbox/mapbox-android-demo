@@ -41,13 +41,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
-            android:name=".examples.styles.CustomRasterStyleActivity"
-            android:label="@string/activity_style_raster_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-        <activity
             android:name=".examples.styles.DefaultStyleActivity"
             android:label="@string/activity_style_default_title">
             <meta-data

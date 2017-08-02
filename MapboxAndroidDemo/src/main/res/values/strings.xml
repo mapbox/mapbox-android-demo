@@ -49,7 +49,6 @@
     <string name="activity_basic_support_map_frag_title">Support map fragment</string>
     <string name="activity_basic_mapbox_options_title">Dynamically build a map view</string>
     <string name="activity_style_mapbox_studio_title">Mapbox Studio style</string>
-    <string name="activity_style_raster_title">Custom raster style</string>
     <string name="activity_style_default_title">Default styles</string>
     <string name="activity_styles_show_hide_layer_title">Show and hide layers</string>
     <string name="activity_styles_langauge_switch_title">"Change a map's language"</string>
@@ -422,4 +421,9 @@
     <string name="rv_card_name">Location #%1$d</string>
     <string name="rv_card_bed_info">This location has %1$d beds</string>
     <string name="toast_instruction">Click on cards below</string>
+
+    <!-- Raster and local style source activity-->
+    <string name="load_raster_button_text">Load custom raster style</string>
+    <string name="load_local_style_button_text">Load local style</string>
+
 </resources>

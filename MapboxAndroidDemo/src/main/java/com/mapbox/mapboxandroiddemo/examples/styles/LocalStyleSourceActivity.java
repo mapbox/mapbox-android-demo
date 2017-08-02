@@ -2,6 +2,8 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -10,7 +12,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 /**
- * Example loads the map style via a "locally" stored style JSON file
+ * Example loads the map style via a locally stored style JSON file or custom raster style
  */
 public class LocalStyleSourceActivity extends AppCompatActivity {
 
@@ -33,9 +35,23 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
-        // Reference the local json file in the assets folder and pass through as the string parameter
-        mapboxMap.setStyleUrl("asset://local_style_file.json");
+        Button loadCustomRasterStyleButton = (Button) findViewById(R.id.load_custom_raster_button);
+        loadCustomRasterStyleButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            // Reference the custom raster file URL and pass through as the string parameter
+            mapView.setStyleUrl("https://www.mapbox.com/android-docs/files/mapbox-raster-v8.json");
+          }
+        });
 
+        Button loadLocalStyleButton = (Button) findViewById(R.id.load_local_style_button);
+        loadLocalStyleButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            // Reference the local JSON style file in the assets folder and pass through as the string parameter
+            mapView.setStyleUrl("asset://local_style_file.json");
+          }
+        });
       }
     });
   }
