@@ -79,6 +79,8 @@ public class OptimizationActivity extends AppCompatActivity {
         map.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override
           public void onMapClick(@NonNull LatLng point) {
+
+						//optimization api is limited to 12 coordinate sets
             if (stops.size() == 12) {
               Toast.makeText(OptimizationActivity.this, "Only 12 stops allowed on route", Toast.LENGTH_LONG).show();
             } else {
