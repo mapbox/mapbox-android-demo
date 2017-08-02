@@ -33,7 +33,7 @@ import retrofit2.Response;
 import static com.mapbox.services.Constants.PRECISION_6;
 
 /**
-* Use Mapbox Android Services to request and compare normal directions with time optimized directions
+ * Use Mapbox Android Services to request and compare normal directions with time optimized directions
  */
 public class OptimizationActivity extends AppCompatActivity {
   private static final String TAG = "DirectionsActivity";
@@ -80,7 +80,7 @@ public class OptimizationActivity extends AppCompatActivity {
           @Override
           public void onMapClick(@NonNull LatLng point) {
 
-						//optimization api is limited to 12 coordinate sets
+            // Optimization API is limited to 12 coordinate sets
             if (stops.size() == 12) {
               Toast.makeText(OptimizationActivity.this, "Only 12 stops allowed on route", Toast.LENGTH_LONG).show();
             } else {
