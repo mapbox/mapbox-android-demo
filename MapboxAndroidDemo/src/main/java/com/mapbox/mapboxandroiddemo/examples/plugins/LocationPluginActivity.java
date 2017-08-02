@@ -103,7 +103,7 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
     if (granted) {
       enableLocationPlugin();
     } else {
-      Toast.makeText(this, "You didn't grant location permissions.", Toast.LENGTH_LONG).show();
+      Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
       finish();
     }
   }
