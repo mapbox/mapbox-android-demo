@@ -19,7 +19,6 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 public class PictureInPictureActivity extends AppCompatActivity {
 
   private MapView mapView;
-  private String TAG = "PictureInPicture";
   private FloatingActionButton addPictureFab;
 
   @Override
