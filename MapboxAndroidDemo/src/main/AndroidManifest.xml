@@ -263,7 +263,7 @@
         </activity>
         <activity
             android:name=".examples.styles.LocalStyleSourceActivity"
-            android:label="@string/activity_style_local_style_source_title">
+            android:label="@string/activity_style_local_style_or_raster_source_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>

@@ -311,10 +311,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_mapbox_studio_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_local_style_source_title,
-          R.string.activity_style_local_style_source_description,
+          R.string.activity_style_local_style_or_raster_source_title,
+          R.string.activity_style_local_style_or_raster_source_description,
           new Intent(MainActivity.this, LocalStyleSourceActivity.class),
-          R.string.activity_style_local_style_source_url
+          R.string.activity_style_local_style_or_raster_source_url
         ));
         currentCategory = R.id.nav_styles;
         break;
