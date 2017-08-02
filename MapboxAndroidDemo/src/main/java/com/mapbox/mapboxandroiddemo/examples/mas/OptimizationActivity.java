@@ -10,14 +10,13 @@ import android.widget.Toast;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.annotations.Polyline;
 import com.mapbox.mapboxsdk.annotations.PolylineOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.api.directions.v5.DirectionsCriteria;
-import com.mapbox.services.api.directions.v5.MapboxDirections;
-import com.mapbox.services.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.services.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.services.api.optimizedtrips.v1.MapboxOptimizedTrips;
 import com.mapbox.services.api.optimizedtrips.v1.models.OptimizedTripsResponse;
@@ -41,10 +40,9 @@ public class OptimizationActivity extends AppCompatActivity {
 
 	private MapView mapView;
 	private MapboxMap map;
-	private DirectionsRoute currentRoute;
 	private DirectionsRoute optimizedRoute;
-	private MapboxDirections client;
 	private MapboxOptimizedTrips optimizedClient;
+	private Polyline optimizedPolyline;
 	private List <Position> stops;
 
 	@Override
@@ -82,29 +80,30 @@ public class OptimizationActivity extends AppCompatActivity {
 				map.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
 					@Override
 					public void onMapClick(@NonNull LatLng point) {
-						map.addMarker(new MarkerOptions()
-							.position(new LatLng(point.getLatitude(), point.getLongitude()))
-							.title("1"));
+						if(stops.size() == 12){
+							Toast.makeText(OptimizationActivity.this, "Only 12 stops allowed on route",
+								Toast.LENGTH_LONG).show();
 
-						stops.add(Position.fromCoordinates(point.getLongitude(), point.getLatitude()));
+						}else{
+							map.addMarker(new MarkerOptions()
+								.position(new LatLng(point.getLatitude(), point.getLongitude()))
+								.title("1"));
 
-						Log.d(TAG, "stops: " + stops.toString());
+							stops.add(Position.fromCoordinates(point.getLongitude(), point.getLatitude()));
 
-						getOptimized(stops);
+							getOptimized(stops);
+						}
 					}
 				});
 			}
 		});
-
-
-
 	}
 
 	private void getOptimized(List <Position> coordinates) {
 
 		optimizedClient = new MapboxOptimizedTrips.Builder()
 			.setSource("first")
-			.setDestination("last")
+			.setDestination("any")
 			.setCoordinates(coordinates)
 			.setOverview(DirectionsCriteria.OVERVIEW_FULL)
 			.setProfile(DirectionsCriteria.PROFILE_DRIVING)
@@ -130,9 +129,6 @@ public class OptimizationActivity extends AppCompatActivity {
 
 				// Print some info about the route
 				optimizedRoute = response.body().getTrips().get(0);
-				Log.d(TAG, "Distance: " + optimizedRoute.getDistance());
-				Toast.makeText(OptimizationActivity.this, String.format(getString(R.string.directions_activity_toast_message),
-					optimizedRoute.getDistance()), Toast.LENGTH_SHORT).show();
 
 				// Draw the route on the map
 				drawOptimized(optimizedRoute);
@@ -146,6 +142,11 @@ public class OptimizationActivity extends AppCompatActivity {
 	}
 
 	private void drawOptimized(DirectionsRoute route) {
+		//remove old polyline
+		if(optimizedPolyline != null){
+			map.removePolyline(optimizedPolyline);
+		}
+
 		// Convert LineString coordinates into LatLng[]
 		LineString lineString = LineString.fromPolyline(route.getGeometry(), PRECISION_6);
 		List<Position> coordinates = lineString.getCoordinates();
@@ -157,9 +158,9 @@ public class OptimizationActivity extends AppCompatActivity {
 		}
 
 		// Draw Points on MapView
-		map.addPolyline(new PolylineOptions()
+		optimizedPolyline = map.addPolyline(new PolylineOptions()
 			.add(points)
-			.color(Color.parseColor("#E67E22"))
+			.color(Color.parseColor("#23D2BE"))
 			.width(5));
 	}
 
@@ -197,8 +198,8 @@ public class OptimizationActivity extends AppCompatActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		// Cancel the directions API request
-		if (client != null) {
-			client.cancelCall();
+		if (optimizedClient != null) {
+			optimizedClient.cancelCall();
 		}
 		mapView.onDestroy();
 	}
