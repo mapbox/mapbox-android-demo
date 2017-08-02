@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.mas;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
@@ -41,8 +42,10 @@ public class OptimizationActivity extends AppCompatActivity {
 	private MapView mapView;
 	private MapboxMap map;
 	private DirectionsRoute currentRoute;
+	private DirectionsRoute optimizedRoute;
 	private MapboxDirections client;
 	private MapboxOptimizedTrips optimizedClient;
+	private List <Position> stops;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +58,12 @@ public class OptimizationActivity extends AppCompatActivity {
 		// This contains the MapView in XML and needs to be called after the access token is configured.
 		setContentView(R.layout.activity_mas_optimization);
 
-		// Alhambra landmark in Granada, Spain.
-		final Position origin = Position.fromCoordinates(-3.588098, 37.176164);
+		//Set up stop list
+		stops = new ArrayList<Position>();
 
-		// Plaza del Triunfo in Granada, Spain.
-		final Position destination = Position.fromCoordinates(-3.601845, 37.184080);
+		// Set First Stop
+		final Position origin = Position.fromCoordinates(-122.408818, 37.784015);
+		stops.add(origin);
 
 
 		// Setup the MapView
@@ -73,68 +77,30 @@ public class OptimizationActivity extends AppCompatActivity {
 				// Add origin and destination to the map
 				mapboxMap.addMarker(new MarkerOptions()
 					.position(new LatLng(origin.getLatitude(), origin.getLongitude()))
-					.title(getString(R.string.directions_activity_marker_options_origin_title))
-					.snippet(getString(R.string.directions_activity_marker_options_origin_snippet)));
-				mapboxMap.addMarker(new MarkerOptions()
-					.position(new LatLng(destination.getLatitude(), destination.getLongitude()))
-					.title(getString(R.string.directions_activity_marker_options_destination_title))
-					.snippet(getString(R.string.directions_activity_marker_options_destination_snippet)));
+					.title("1"));
 
-				// Get route from API
-				getRoute(origin, destination);
-				getOptimized(origin, destination);
+				map.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
+					@Override
+					public void onMapClick(@NonNull LatLng point) {
+						map.addMarker(new MarkerOptions()
+							.position(new LatLng(point.getLatitude(), point.getLongitude()))
+							.title("1"));
+
+						stops.add(Position.fromCoordinates(point.getLongitude(), point.getLatitude()));
+
+						Log.d(TAG, "stops: " + stops.toString());
+
+						getOptimized(stops);
+					}
+				});
 			}
 		});
+
+
+
 	}
 
-	private void getRoute(Position origin, Position destination) {
-
-		client = new MapboxDirections.Builder()
-			.setOrigin(origin)
-			.setDestination(destination)
-			.setOverview(DirectionsCriteria.OVERVIEW_FULL)
-			.setProfile(DirectionsCriteria.PROFILE_DRIVING)
-			.setAccessToken(Mapbox.getAccessToken())
-			.build();
-
-		client.enqueueCall(new Callback<DirectionsResponse>() {
-			@Override
-			public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
-				System.out.println(call.request().url().toString());
-
-				// You can get the generic HTTP info about the response
-				Log.d(TAG, "Response code: " + response.code());
-				if (response.body() == null) {
-					Log.e(TAG, "No routes found, make sure you set the right user and access token.");
-					return;
-				} else if (response.body().getRoutes().size() < 1) {
-					Log.e(TAG, "No routes found");
-					return;
-				}
-
-				// Print some info about the route
-				currentRoute = response.body().getRoutes().get(0);
-				Log.d(TAG, "Distance: " + currentRoute.getDistance());
-				Toast.makeText(OptimizationActivity.this, String.format(getString(R.string.directions_activity_toast_message),
-					currentRoute.getDistance()), Toast.LENGTH_SHORT).show();
-
-				// Draw the route on the map
-				drawRoute(currentRoute);
-			}
-
-			@Override
-			public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
-				Log.e(TAG, "Error: " + throwable.getMessage());
-				Toast.makeText(OptimizationActivity.this, "Error: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
-			}
-		});
-	}
-
-	private void getOptimized(Position origin, Position destination) {
-
-		List <Position> coordinates = new ArrayList<Position>();
-		coordinates.add(origin);
-		coordinates.add(destination);
+	private void getOptimized(List <Position> coordinates) {
 
 		optimizedClient = new MapboxOptimizedTrips.Builder()
 			.setSource("first")
@@ -142,7 +108,6 @@ public class OptimizationActivity extends AppCompatActivity {
 			.setCoordinates(coordinates)
 			.setOverview(DirectionsCriteria.OVERVIEW_FULL)
 			.setProfile(DirectionsCriteria.PROFILE_DRIVING)
-			.setRoundTrip(false)
 			.setAccessToken(Mapbox.getAccessToken())
 			.build();
 
@@ -164,13 +129,13 @@ public class OptimizationActivity extends AppCompatActivity {
 				}
 
 				// Print some info about the route
-				currentRoute = response.body().getTrips().get(0);
-				Log.d(TAG, "Distance: " + currentRoute.getDistance());
+				optimizedRoute = response.body().getTrips().get(0);
+				Log.d(TAG, "Distance: " + optimizedRoute.getDistance());
 				Toast.makeText(OptimizationActivity.this, String.format(getString(R.string.directions_activity_toast_message),
-					currentRoute.getDistance()), Toast.LENGTH_SHORT).show();
+					optimizedRoute.getDistance()), Toast.LENGTH_SHORT).show();
 
 				// Draw the route on the map
-				drawRoute(currentRoute);
+				drawOptimized(optimizedRoute);
 			}
 
 			@Override
@@ -180,7 +145,7 @@ public class OptimizationActivity extends AppCompatActivity {
 		});
 	}
 
-	private void drawRoute(DirectionsRoute route) {
+	private void drawOptimized(DirectionsRoute route) {
 		// Convert LineString coordinates into LatLng[]
 		LineString lineString = LineString.fromPolyline(route.getGeometry(), PRECISION_6);
 		List<Position> coordinates = lineString.getCoordinates();
@@ -194,7 +159,7 @@ public class OptimizationActivity extends AppCompatActivity {
 		// Draw Points on MapView
 		map.addPolyline(new PolylineOptions()
 			.add(points)
-			.color(Color.parseColor("#009688"))
+			.color(Color.parseColor("#E67E22"))
 			.width(5));
 	}
 
