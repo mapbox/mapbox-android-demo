@@ -18,9 +18,12 @@ import com.mapbox.services.api.directions.v5.DirectionsCriteria;
 import com.mapbox.services.api.directions.v5.MapboxDirections;
 import com.mapbox.services.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.services.api.directions.v5.models.DirectionsRoute;
+import com.mapbox.services.api.optimizedtrips.v1.MapboxOptimizedTrips;
+import com.mapbox.services.api.optimizedtrips.v1.models.OptimizedTripsResponse;
 import com.mapbox.services.commons.geojson.LineString;
 import com.mapbox.services.commons.models.Position;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,6 +42,7 @@ public class OptimizationActivity extends AppCompatActivity {
 	private MapboxMap map;
 	private DirectionsRoute currentRoute;
 	private MapboxDirections client;
+	private MapboxOptimizedTrips optimizedClient;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,7 @@ public class OptimizationActivity extends AppCompatActivity {
 
 				// Get route from API
 				getRoute(origin, destination);
+				getOptimized(origin, destination);
 			}
 		});
 	}
@@ -88,7 +93,7 @@ public class OptimizationActivity extends AppCompatActivity {
 			.setOrigin(origin)
 			.setDestination(destination)
 			.setOverview(DirectionsCriteria.OVERVIEW_FULL)
-			.setProfile(DirectionsCriteria.PROFILE_CYCLING)
+			.setProfile(DirectionsCriteria.PROFILE_DRIVING)
 			.setAccessToken(Mapbox.getAccessToken())
 			.build();
 
@@ -121,6 +126,56 @@ public class OptimizationActivity extends AppCompatActivity {
 			public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
 				Log.e(TAG, "Error: " + throwable.getMessage());
 				Toast.makeText(OptimizationActivity.this, "Error: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+
+	private void getOptimized(Position origin, Position destination) {
+
+		List <Position> coordinates = new ArrayList<Position>();
+		coordinates.add(origin);
+		coordinates.add(destination);
+
+		optimizedClient = new MapboxOptimizedTrips.Builder()
+			.setSource("first")
+			.setDestination("last")
+			.setCoordinates(coordinates)
+			.setOverview(DirectionsCriteria.OVERVIEW_FULL)
+			.setProfile(DirectionsCriteria.PROFILE_DRIVING)
+			.setRoundTrip(false)
+			.setAccessToken(Mapbox.getAccessToken())
+			.build();
+
+		optimizedClient.enqueueCall(new Callback<OptimizedTripsResponse>() {
+			@Override
+			public void onResponse(Call<OptimizedTripsResponse> call, Response<OptimizedTripsResponse> response) {
+				System.out.println(call.request().url().toString());
+
+				// You can get the generic HTTP info about the response
+				Log.d(TAG, "Response code: " + response.body().getTrips());
+				Log.d(TAG, "response: " + call.request().url().toString());
+
+				if (response.body() == null) {
+					Log.e(TAG, "No routes found, make sure you set the right user and access token.");
+					return;
+				} else if (response.body().getTrips().size() < 1) {
+					Log.e(TAG, "No routes found" + response.body().getTrips().size());
+					return;
+				}
+
+				// Print some info about the route
+				currentRoute = response.body().getTrips().get(0);
+				Log.d(TAG, "Distance: " + currentRoute.getDistance());
+				Toast.makeText(OptimizationActivity.this, String.format(getString(R.string.directions_activity_toast_message),
+					currentRoute.getDistance()), Toast.LENGTH_SHORT).show();
+
+				// Draw the route on the map
+				drawRoute(currentRoute);
+			}
+
+			@Override
+			public void onFailure(Call<OptimizedTripsResponse> call, Throwable throwable) {
+				Log.e(TAG, "Error: " + throwable.getMessage());
 			}
 		});
 	}
