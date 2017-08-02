@@ -9,8 +9,6 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -38,12 +36,19 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
   private SensorManager sensorManager;
   private Sensor gyro;
   private Sensor magnetic;
-  float[] gravArray;
-  float[] magneticArray;
-  float azimut;
-  float pitch;
-  float roll;
+  private float[] gravArray;
+  private float[] magneticArray;
+  private float azimut;
+  private float pitch;
+  private float roll;
+  private float[] inclinationMatrix;
+  private float[] rotationMatrix;
 
+  //amplifiers that translate small movements in phone orientation into larger viewable map changes
+  //pitch is negative to compensate for the negative readings from the device while face up
+  //90 is used based on the viewable angle when viewing the map (from phone being flat to facing you
+  private int pitchAmplifier = -90;
+  private int bearingAmplifier = 90;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +77,7 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
-    sensorManager.registerListener(this, gyro , 200);
-    sensorManager.registerListener(this, magnetic , 200);
+
   }
 
   private void setupBuildings() {
@@ -91,19 +95,11 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
   }
 
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    return true;
-  }
-
-  @Override
   protected void onStart() {
     super.onStart();
     mapView.onStart();
+    sensorManager.registerListener(this, gyro , 200);
+    sensorManager.registerListener(this, magnetic , 200);
   }
 
   @Override
@@ -122,6 +118,8 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
   protected void onStop() {
     super.onStop();
     mapView.onStop();
+    sensorManager.unregisterListener(this, gyro);
+    sensorManager.unregisterListener(this, magnetic);
   }
 
   @Override
@@ -144,7 +142,6 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
 
   @Override
   public void onSensorChanged(SensorEvent event) {
-
     if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
       gravArray = event.values;
     }
@@ -154,19 +151,19 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     }
 
     if (gravArray != null && magneticArray != null) {
-      float[] num1 = new float[9];
-      float[] num2 = new float[9];
-      boolean success = SensorManager.getRotationMatrix(num1, num2, gravArray, magneticArray);
+      rotationMatrix = new float[9];
+      inclinationMatrix = new float[9];
+      boolean success = SensorManager.getRotationMatrix(rotationMatrix, inclinationMatrix, gravArray, magneticArray);
       if (success) {
         float[] orientation = new float[3];
-        SensorManager.getOrientation(num1, orientation);
+        SensorManager.getOrientation(rotationMatrix, orientation);
         azimut = orientation[0];
         pitch = orientation[1];
         roll = orientation[2];
 
         CameraPosition position = new CameraPosition.Builder()
-                .tilt(pitch * -90)
-                .bearing(roll * 90)
+                .tilt(pitch * pitchAmplifier)
+                .bearing(roll * bearingAmplifier)
                 .build();
 
         if (mapboxMap != null) {
@@ -176,7 +173,6 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
         }
       }
     }
-
   }
 
   @Override
