@@ -506,6 +506,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_mas_directions_url
         ));
         exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_mas_optimization_title,
+          R.string.activity_mas_optimization_description,
+          new Intent(MainActivity.this, DirectionsActivity.class),
+          R.string.activity_mas_directions_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_mas_geocoding_title,
           R.string.activity_mas_geocoding_description,
           new Intent(MainActivity.this, GeocodingActivity.class),
