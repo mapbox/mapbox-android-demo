@@ -156,22 +156,6 @@
         </activity>
 
         <activity
-            android:name=".examples.location.BasicUserLocation"
-            android:label="@string/activity_location_basic_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".examples.location.LocationTrackingActivity"
-            android:label="@string/activity_location_tracking_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
             android:name=".labs.LocationPickerActivity"
             android:label="@string/activity_lab_location_picker_title">
             <meta-data
@@ -292,21 +276,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
 
-        <activity
-            android:name=".examples.location.AnimatedLocationIconActivity"
-            android:label="@string/activity_location_animated_icon_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".examples.location.CustomizeUserLocationActivity"
-            android:label="@string/activity_location_customize_user_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
 
         <activity
             android:name=".examples.query.QueryFeatureActivity"
