@@ -199,6 +199,17 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
+            android:name=".labs.PictureInPictureActivity"
+            android:configChanges=
+                "screenSize|smallestScreenSize|screenLayout|orientation"
+            android:label="@string/activity_lab_picture_in_picture_title"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
             android:name=".labs.SpaceStationLocationActivity"
             android:label="@string/activity_lab_space_station_location_title">
             <meta-data

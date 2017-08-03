@@ -100,6 +100,7 @@
     <string name="activity_lab_rv_on_map_title">Recyclerview interaction</string>
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
     <string name="activity_lab_space_station_location_title">Space station current location</string>
+    <string name="activity_lab_picture_in_picture_title">Picture in picture</string>
     <string name="activity_lab_off_route_title">Off route detection</string>
     <string name="activity_lab_las_angeles_tourism_title">Los Angeles for tourists</string>
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
@@ -161,6 +162,7 @@
     <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding.</string>
     <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>
     <string name="activity_lab_space_station_location_description">See the International Space Station location in real time.</string>
+    <string name="activity_lab_picture_in_picture_description">Use the Android O release of picture-in-picture to maintain a map in a separate window</string>
     <string name="activity_lab_off_route_description">Detect when the car is off route and reroute them.</string>
     <string name="activity_lab_las_angeles_tourism_description">Use the style API to highlight parks, hotels, and attractions. A pulsing animation is also added to the colors.</string>
     <string name="activity_lab_indoor_map_description">Display an indoor map of a building with toggles to switch between floor levels.</string>
@@ -224,6 +226,7 @@
     <string name="activity_lab_location_picker_url" translatable="false">http://i.imgur.com/0JTVwaa.png</string>
     <string name="activity_lab_marker_following_route_url" translatable="false">http://i.imgur.com/spsZu9X.png</string>
     <string name="activity_lab_space_station_location_url" translatable="false">http://i.imgur.com/PxuB1T8.png</string>
+    <string name="activity_lab_picture_in_picture_url" translatable="false">http://i.imgur.com/kascJEy.png</string>
     <string name="activity_lab_off_route_url" translatable="false">http://i.imgur.com/lx1LdkA.png</string>
     <string name="activity_lab_las_angeles_tourism_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
     <string name="activity_lab_indoor_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
@@ -381,13 +384,13 @@
     <string name="loading_textview">Loading&#8230;</string>
 
     <!--Space station toast-->
-    <string name="space_station_toast">Zoom in closely on space station to see it moving</string>
+    <string name="space_station_toast">Zoom in closely on the space station\nto see it moving across the map</string>
 
     <!-- Extrusion light activity menu -->
     <string name="change_anchor">Change anchor</string>
     <string name="change_intensity">Change intensity</string>
 
-    <!-- Extrusion light activity menu -->
+    <string name="no_picture_in_picture_support">This device\'s Android version does not\nsupport picture-in-picture mode</string>
     <string name="retrieval_error_dialog_title">Whoops!</string>
     <string name="retrieval_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
     <string name="retrieval_error_dialog_ok_button">Ok</string>
