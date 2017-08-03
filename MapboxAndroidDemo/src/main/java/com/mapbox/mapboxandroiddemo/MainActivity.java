@@ -51,10 +51,6 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActi
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
-import com.mapbox.mapboxandroiddemo.examples.location.AnimatedLocationIconActivity;
-import com.mapbox.mapboxandroiddemo.examples.location.BasicUserLocation;
-import com.mapbox.mapboxandroiddemo.examples.location.CustomizeUserLocationActivity;
-import com.mapbox.mapboxandroiddemo.examples.location.LocationTrackingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
@@ -88,6 +84,8 @@ import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
+import com.mapbox.mapboxandroiddemo.labs.OffRouteActivity;
+import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
@@ -522,33 +520,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ));
         currentCategory = R.id.nav_mas;
         break;
-      case R.id.nav_location:
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_location_animated_icon_title,
-          R.string.activity_location_animated_icon_description,
-          new Intent(MainActivity.this, AnimatedLocationIconActivity.class),
-          R.string.activity_location_animated_icon_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_location_customize_user_title,
-          R.string.activity_location_customize_user_description,
-          new Intent(MainActivity.this, CustomizeUserLocationActivity.class),
-          R.string.activity_location_customize_user_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_location_basic_title,
-          R.string.activity_location_basic_description,
-          new Intent(MainActivity.this, BasicUserLocation.class),
-          R.string.activity_location_basic_image_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_location_tracking_title,
-          R.string.activity_location_tracking_description,
-          new Intent(MainActivity.this, LocationTrackingActivity.class),
-          R.string.activity_location_tracking_url
-        ));
-        currentCategory = R.id.nav_location;
-        break;
       case R.id.nav_lab:
         exampleItemModel.add(null);
         exampleItemModel.add(new ExampleItemModel(
@@ -582,13 +553,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_space_station_location_url
         ));
         exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_picture_in_picture_title,
+          R.string.activity_lab_picture_in_picture_description,
+          new Intent(MainActivity.this, PictureInPictureActivity.class),
+          R.string.activity_lab_picture_in_picture_url, true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_rv_on_map_title,
           R.string.activity_lab_rv_on_map_description,
           new Intent(MainActivity.this, RecyclerViewOnMapActivity.class),
-          R.string.activity_lab_rv_on_map_url));
+          R.string.activity_lab_rv_on_map_url, true
+        ));
         currentCategory = R.id.nav_lab;
         break;
-
       case R.id.nav_dds:
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_dds_style_circle_categorically_title,

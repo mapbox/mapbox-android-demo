@@ -33,7 +33,6 @@
     <string name="offline_category">Offline</string>
     <string name="query_map_category">Query map</string>
     <string name="android_services_category">Android Services</string>
-    <string name="location_category">User location</string>
     <string name="lab_category">Lab</string>
     <string name="share">Share</string>
     <string name="settings">Settings</string>
@@ -89,10 +88,6 @@
     <string name="activity_query_select_building_title">Select a building</string>
     <string name="activity_query_feature_count_title">Feature count</string>
     <string name="activity_query_click_on_layer_title">Click on single layer</string>
-    <string name="activity_location_basic_title">Show user location</string>
-    <string name="activity_location_tracking_title">Track user location</string>
-    <string name="activity_location_animated_icon_title">Animate the user icon</string>
-    <string name="activity_location_customize_user_title">Customize user location icon</string>
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
@@ -105,6 +100,8 @@
     <string name="activity_lab_rv_on_map_title">Recyclerview interaction</string>
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
     <string name="activity_lab_space_station_location_title">Space station current location</string>
+    <string name="activity_lab_picture_in_picture_title">Picture in picture</string>
+    <string name="activity_lab_off_route_title">Off route detection</string>
     <string name="activity_lab_las_angeles_tourism_title">Los Angeles for tourists</string>
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
 
@@ -154,10 +151,6 @@
     <string name="activity_query_select_building_description">Use the query feature to select a building, get its geometry and draw a polygon highlighting it.</string>
     <string name="activity_query_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
     <string name="activity_query_click_on_layer_description">Click on and highlight a selected GeoJSON polygon.</string>
-    <string name="activity_location_basic_description">Toggle the users current location on the map.</string>
-    <string name="activity_location_tracking_description">Lock the camera centered above the user location.</string>
-    <string name="activity_location_animated_icon_description">Use a marker view to mark the users location and add a pulsing animation to it.</string>
-    <string name="activity_location_customize_user_description">"Adjust the user location icon's colors and padding so it appears lower on the screen."</string>
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
     <string name="activity_mas_geocoding_description">Use Mapbox Android Service\'s geocoder to convert location text into geographic coordinates.</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
@@ -169,6 +162,8 @@
     <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding.</string>
     <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>
     <string name="activity_lab_space_station_location_description">See the International Space Station location in real time.</string>
+    <string name="activity_lab_picture_in_picture_description">Use the Android O release of picture-in-picture to maintain a map in a separate window</string>
+    <string name="activity_lab_off_route_description">Detect when the car is off route and reroute them.</string>
     <string name="activity_lab_las_angeles_tourism_description">Use the style API to highlight parks, hotels, and attractions. A pulsing animation is also added to the colors.</string>
     <string name="activity_lab_indoor_map_description">Display an indoor map of a building with toggles to switch between floor levels.</string>
     <string name="activity_lab_rv_on_map_description">Manipulate the map based on recyclerview interactions.</string>
@@ -220,10 +215,6 @@
     <string name="activity_query_feature_url" translatable="false">http://i.imgur.com/HXxRBAF.png</string>
     <string name="activity_query_feature_count_url" translatable="false">http://i.imgur.com/phzOt81.png</string>
     <string name="activity_query_click_on_layer_url" translatable="false">https://i.imgur.com/z3aWAqM.png</string>
-    <string name="activity_location_basic_image_url" translatable="false">http://i.imgur.com/5BzH5YF.png</string>
-    <string name="activity_location_tracking_url" translatable="false">http://i.imgur.com/U3uc32F.png</string>
-    <string name="activity_location_animated_icon_url" translatable="false">http://i.imgur.com/dsUKM2i.png</string>
-    <string name="activity_location_customize_user_url" translatable="false">http://i.imgur.com/Q6O82JJ.png</string>
     <string name="activity_mas_directions_url" translatable="false">http://i.imgur.com/DhQltqB.jpg</string>
     <string name="activity_mas_geocoding_url" translatable="false">http://i.imgur.com/mBJGh3P.png</string>
     <string name="activity_mas_static_image_url" translatable="false">http://i.imgur.com/COdES0F.png</string>
@@ -235,6 +226,8 @@
     <string name="activity_lab_location_picker_url" translatable="false">http://i.imgur.com/0JTVwaa.png</string>
     <string name="activity_lab_marker_following_route_url" translatable="false">http://i.imgur.com/spsZu9X.png</string>
     <string name="activity_lab_space_station_location_url" translatable="false">http://i.imgur.com/PxuB1T8.png</string>
+    <string name="activity_lab_picture_in_picture_url" translatable="false">http://i.imgur.com/kascJEy.png</string>
+    <string name="activity_lab_off_route_url" translatable="false">http://i.imgur.com/lx1LdkA.png</string>
     <string name="activity_lab_las_angeles_tourism_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
     <string name="activity_lab_indoor_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
     <string name="activity_lab_rv_on_map_url" translatable="false">http://i.imgur.com/8mQQuMo.jpg</string>
@@ -391,13 +384,13 @@
     <string name="loading_textview">Loading&#8230;</string>
 
     <!--Space station toast-->
-    <string name="space_station_toast">Zoom in closely on space station to see it moving</string>
+    <string name="space_station_toast">Zoom in closely on the space station\nto see it moving across the map</string>
 
     <!-- Extrusion light activity menu -->
     <string name="change_anchor">Change anchor</string>
     <string name="change_intensity">Change intensity</string>
 
-    <!-- Extrusion light activity menu -->
+    <string name="no_picture_in_picture_support">This device\'s Android version does not\nsupport picture-in-picture mode</string>
     <string name="retrieval_error_dialog_title">Whoops!</string>
     <string name="retrieval_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
     <string name="retrieval_error_dialog_ok_button">Ok</string>
