@@ -1,1 +1,4 @@
-This update adds new examples in the labs and plugins sections. There’s also a hot fix for the wearable version of the app.
+This update is in line with the 5.1.2 release of the Mapbox Maps SDK. New examples to the app include: 
+•Picture-in-picture (for Android O)
+•Adaptive icons (for Android O)
+•Loading a map style via a local file
