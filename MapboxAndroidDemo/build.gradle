@@ -89,9 +89,6 @@ dependencies {
     // Mapbox Android UI
     compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.2.0'
 
-    // Mapbox Navigation SDK for Android
-    compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.3.1'
-
     // Other dependencies
     compile 'com.github.javiersantos:MaterialStyledDialogs:2.1'
     compile 'com.getbase:floatingactionbutton:1.10.1'
