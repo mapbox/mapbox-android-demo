@@ -45,6 +45,11 @@ public class OptimizationActivity extends AppCompatActivity {
   private Polyline optimizedPolyline;
   private List<Position> stops;
 
+  private static final String FIRST = "first";
+  private static final String ANY = "any";
+  private static final String TEAL_COLOR = "23D2BE";
+  private static final int POLYLINE_WIDTH = 5;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -57,7 +62,7 @@ public class OptimizationActivity extends AppCompatActivity {
     setContentView(R.layout.activity_mas_optimization);
 
     //Set up stop list
-    stops = new ArrayList<Position>();
+    stops = new ArrayList<>();
 
     // Set First Stop
     final Position origin = Position.fromCoordinates(-122.408818, 37.784015);
@@ -74,7 +79,7 @@ public class OptimizationActivity extends AppCompatActivity {
         // Add origin and destination to the map
         mapboxMap.addMarker(new MarkerOptions()
           .position(new LatLng(origin.getLatitude(), origin.getLongitude()))
-          .title("1"));
+          .title(getString(R.string.origin)));
 
         map.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override
@@ -82,11 +87,11 @@ public class OptimizationActivity extends AppCompatActivity {
 
             // Optimization API is limited to 12 coordinate sets
             if (stops.size() == 12) {
-              Toast.makeText(OptimizationActivity.this, "Only 12 stops allowed on route", Toast.LENGTH_LONG).show();
+              Toast.makeText(OptimizationActivity.this, R.string.only_twelve_stops_allowed, Toast.LENGTH_LONG).show();
             } else {
               map.addMarker(new MarkerOptions()
                 .position(new LatLng(point.getLatitude(), point.getLongitude()))
-                .title("1"));
+                .title(getString(R.string.destination)));
 
               stops.add(Position.fromCoordinates(point.getLongitude(), point.getLatitude()));
 
@@ -99,10 +104,9 @@ public class OptimizationActivity extends AppCompatActivity {
   }
 
   private void getOptimized(List<Position> coordinates) {
-
     optimizedClient = new MapboxOptimizedTrips.Builder()
-      .setSource("first")
-      .setDestination("any")
+      .setSource(FIRST)
+      .setDestination(ANY)
       .setCoordinates(coordinates)
       .setOverview(DirectionsCriteria.OVERVIEW_FULL)
       .setProfile(DirectionsCriteria.PROFILE_DRIVING)
@@ -112,7 +116,7 @@ public class OptimizationActivity extends AppCompatActivity {
     optimizedClient.enqueueCall(new Callback<OptimizedTripsResponse>() {
       @Override
       public void onResponse(Call<OptimizedTripsResponse> call, Response<OptimizedTripsResponse> response) {
-        System.out.println(call.request().url().toString());
+        Log.d(TAG, call.request().url().toString());
 
         // You can get the generic HTTP info about the response
         Log.d(TAG, "Response code: " + response.body().getTrips());
@@ -129,7 +133,6 @@ public class OptimizationActivity extends AppCompatActivity {
         // Print some info about the route
         optimizedRoute = response.body().getTrips().get(0);
 
-        // Draw the route on the map
         drawOptimized(optimizedRoute);
       }
 
@@ -159,8 +162,8 @@ public class OptimizationActivity extends AppCompatActivity {
     // Draw Points on MapView
     optimizedPolyline = map.addPolyline(new PolylineOptions()
       .add(points)
-      .color(Color.parseColor("#23D2BE"))
-      .width(5));
+      .color(Color.parseColor(TEAL_COLOR))
+      .width(POLYLINE_WIDTH));
   }
 
   @Override

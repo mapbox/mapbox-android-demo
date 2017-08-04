@@ -409,4 +409,10 @@
     <string name="rv_card_name">Location #%1$d</string>
     <string name="rv_card_bed_info">This location has %1$d beds</string>
     <string name="toast_instruction">Click on cards below</string>
+
+    <!-- Optimization API activity -->
+    <string name="origin">Origin</string>
+    <string name="destination">Destination</string>
+    <string name="only_twelve_stops_allowed">Only 12 stops allowed on route</string>
+
 </resources>
