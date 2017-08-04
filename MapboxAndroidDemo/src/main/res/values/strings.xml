@@ -222,7 +222,7 @@
     <string name="activity_mas_directions_url" translatable="false">http://i.imgur.com/DhQltqB.jpg</string>
     <string name="activity_mas_geocoding_url" translatable="false">http://i.imgur.com/mBJGh3P.png</string>
     <string name="activity_mas_static_image_url" translatable="false">http://i.imgur.com/COdES0F.png</string>
-    <string name="activity_mas_optimization_url" translatable="false">http://i.imgur.com/XyAJntW.png</string>
+    <string name="activity_mas_optimization_url" translatable="false">http://i.imgur.com/guEQtlP.jpg</string>
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
     <string name="activity_plugins_location_plugin_url" translatable="false">https://i.imgur.com/Opfwv6j.png</string>
@@ -399,7 +399,7 @@
     <string name="retrieval_error_dialog_title">Whoops!</string>
     <string name="retrieval_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
     <string name="retrieval_error_dialog_ok_button">Ok</string>
-  
+
     <!-- Share app intent -->
     <string name="share_app_subject">Mapbox demo app for Android</string>
     <string name="share_app_text">Hey, check out these great examples showing what can be built using Mapbox:\n
@@ -419,6 +419,9 @@
     <string name="origin">Origin</string>
     <string name="destination">Destination</string>
     <string name="only_twelve_stops_allowed">Only 12 stops allowed on route</string>
+    <string name="click_instructions">Tap on the map to select a maximum of 12 locations</string>
+    <string name="successful_but_no_routes">No routes found for that location</string>
+    <string name="no_success">No routes found, make sure you set the right user and access token.</string>
 
     <!-- Raster and local style source activity-->
     <string name="load_raster_button_text">Load custom raster style</string>

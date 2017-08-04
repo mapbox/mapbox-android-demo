@@ -91,6 +91,7 @@ public class OptimizationActivity extends AppCompatActivity {
             }
           }
         });
+        Toast.makeText(OptimizationActivity.this, R.string.click_instructions, Toast.LENGTH_SHORT).show();
       }
     });
   }
@@ -119,7 +120,7 @@ public class OptimizationActivity extends AppCompatActivity {
     //Set up stop list
     stops = new ArrayList<>();
     // Set first stop
-    origin = Position.fromCoordinates(-122.408818, 37.784015);
+    origin = Position.fromCoordinates(30.335098600000038, 59.9342802);
     stops.add(origin);
   }
 
@@ -138,11 +139,13 @@ public class OptimizationActivity extends AppCompatActivity {
       public void onResponse(Call<OptimizedTripsResponse> call, Response<OptimizedTripsResponse> response) {
 
         if (!response.isSuccessful()) {
-          Log.e(TAG, "No routes found, make sure you set the right user and access token.");
+          Log.e(TAG, getString(R.string.no_success));
+          Toast.makeText(OptimizationActivity.this, R.string.no_success, Toast.LENGTH_SHORT).show();
           return;
         } else {
           if (response.body().getTrips().isEmpty()) {
-            Log.e(TAG, "No routes found" + response.body().getTrips().size());
+            Log.e(TAG, getString(R.string.successful_but_no_routes) + " size = " + response.body().getTrips().size());
+            Toast.makeText(OptimizationActivity.this, R.string.successful_but_no_routes, Toast.LENGTH_SHORT).show();
             return;
           }
         }
