@@ -47,7 +47,7 @@ public class OptimizationActivity extends AppCompatActivity {
 
   private static final String FIRST = "first";
   private static final String ANY = "any";
-  private static final String TEAL_COLOR = "23D2BE";
+  private static final String TEAL_COLOR = "#23D2BE";
   private static final int POLYLINE_WIDTH = 5;
 
   private static final String TAG = "DirectionsActivity";
@@ -82,7 +82,7 @@ public class OptimizationActivity extends AppCompatActivity {
           @Override
           public void onMapClick(@NonNull LatLng point) {
             // Optimization API is limited to 12 coordinate sets
-            if (!apiResponseSetSizeIsCorrect(12)) {
+            if (alreadyTwelveMarkersOnMap()) {
               Toast.makeText(OptimizationActivity.this, R.string.only_twelve_stops_allowed, Toast.LENGTH_LONG).show();
             } else {
               addDestinationMarker(point);
@@ -95,8 +95,9 @@ public class OptimizationActivity extends AppCompatActivity {
     });
   }
 
-  private boolean apiResponseSetSizeIsCorrect(int maxNumberOfSets) {
-    if (stops.size() == maxNumberOfSets) {
+  private boolean alreadyTwelveMarkersOnMap() {
+    Log.d(TAG, "alreadyTwelveMarkersOnMap: stops.size()" + stops.size());
+    if (stops.size() == 12) {
       return true;
     } else {
       return false;
