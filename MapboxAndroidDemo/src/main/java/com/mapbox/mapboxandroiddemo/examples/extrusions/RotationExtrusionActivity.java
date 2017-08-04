@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mapbox.androidsdk.plugins.building.BuildingPlugin;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -17,15 +18,6 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.IdentityStops;
-import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
-
-import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
 
 /**
  * Change the bearing and tilt of camera when viewing extrusions to get full 3D effect
@@ -37,19 +29,16 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
   private Sensor gyro;
   private Sensor magnetic;
 
-  private float[] gravArray;
+  private float[] gravityArray;
   private float[] magneticArray;
-  private float azimut;
-  private float pitch;
-  private float roll;
-  private float[] inclinationMatrix;
-  private float[] rotationMatrix;
+  private float[] inclinationMatrix = new float[9];
+  private float[] rotationMatrix = new float[9];
 
-  // Amplifiers that translate small movements in phone orientation into larger viewable map changes
-  // pitch is negative to compensate for the negative readings from the device while face up
-  // 90 is used based on the viewable angle when viewing the map (from phone being flat to facing you
-  private int pitchAmplifier = -90;
-  private int bearingAmplifier = 90;
+  // Amplifiers that translate small phone orientation movements into larger viewable map changes.
+  // Pitch is negative to compensate for the negative readings from the device while face up
+  // 90 is used based on the viewable angle when viewing the map (from phone being flat to facing you).
+  private static final int PITCH_AMPLIFIER = -90;
+  private static final int BEARING_AMPLIFIER = 90;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -69,38 +58,31 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
         mapboxMap = map;
-        setupBuildings();
+        setupBuildingExtrusionPlugin();
       }
     });
 
-    //initialize sensors
+    // Initialize sensors
     sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
     gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-
   }
 
-  private void setupBuildings() {
-    FillExtrusionLayer fillExtrusionLayer = new FillExtrusionLayer("3d-buildings", "composite");
-    fillExtrusionLayer.setSourceLayer("building");
-    fillExtrusionLayer.setFilter(eq("extrude", "true"));
-    fillExtrusionLayer.setMinZoom(15);
-    fillExtrusionLayer.setProperties(
-      fillExtrusionColor(Color.LTGRAY),
-      fillExtrusionHeight(Function.property("height", new IdentityStops<Float>())),
-      fillExtrusionBase(Function.property("min_height", new IdentityStops<Float>())),
-      fillExtrusionOpacity(0.9f)
-    );
-    mapboxMap.addLayer(fillExtrusionLayer);
+  private void setupBuildingExtrusionPlugin() {
+    BuildingPlugin buildingPlugin = new BuildingPlugin(mapView, mapboxMap);
+    buildingPlugin.setColor(Color.LTGRAY);
+    buildingPlugin.setOpacity(0.6f);
+    buildingPlugin.setMinZoomLevel(15);
+    buildingPlugin.setVisibility(true);
   }
 
   @Override
   protected void onStart() {
     super.onStart();
     mapView.onStart();
-    sensorManager.registerListener(this, gyro, 200);
-    sensorManager.registerListener(this, magnetic, 200);
+    int sensorEventDeliveryRate = 200;
+    sensorManager.registerListener(this, gyro, sensorEventDeliveryRate);
+    sensorManager.registerListener(this, magnetic, sensorEventDeliveryRate);
   }
 
   @Override
@@ -144,32 +126,20 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
   @Override
   public void onSensorChanged(SensorEvent event) {
     if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-      gravArray = event.values;
+      gravityArray = event.values;
     }
 
     if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
       magneticArray = event.values;
     }
 
-    if (gravArray != null && magneticArray != null) {
-      rotationMatrix = new float[9];
-      inclinationMatrix = new float[9];
-      boolean success = SensorManager.getRotationMatrix(rotationMatrix, inclinationMatrix, gravArray, magneticArray);
+    if (gravityArray != null && magneticArray != null) {
+      boolean success = SensorManager.getRotationMatrix(rotationMatrix, inclinationMatrix, gravityArray, magneticArray);
       if (success) {
-        float[] orientation = new float[3];
-        SensorManager.getOrientation(rotationMatrix, orientation);
-        azimut = orientation[0];
-        pitch = orientation[1];
-        roll = orientation[2];
-
-        CameraPosition position = new CameraPosition.Builder()
-          .tilt(pitch * pitchAmplifier)
-          .bearing(roll * bearingAmplifier)
-          .build();
-
         if (mapboxMap != null) {
+          int mapCameraAnimationMillisecondsSpeed = 100;
           mapboxMap.animateCamera(CameraUpdateFactory
-            .newCameraPosition(position), 100
+            .newCameraPosition(createNewCameraPosition()), mapCameraAnimationMillisecondsSpeed
           );
         }
       }
@@ -178,7 +148,20 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
 
   @Override
   public void onAccuracyChanged(Sensor sensor, int accuracy) {
+  }
 
+  private CameraPosition createNewCameraPosition() {
+    float[] orientation = new float[3];
+    SensorManager.getOrientation(rotationMatrix, orientation);
+    float pitch = orientation[1];
+    float roll = orientation[2];
+
+    CameraPosition position = new CameraPosition.Builder()
+      .tilt(pitch * PITCH_AMPLIFIER)
+      .bearing(roll * BEARING_AMPLIFIER)
+      .build();
+
+    return position;
   }
 }
 

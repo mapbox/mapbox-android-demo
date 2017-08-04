@@ -96,7 +96,7 @@
     <string name="activity_plugins_building_plugin_title">Display buildings in 3D</string>
     <string name="activity_plugins_location_plugin_title">Show a user\'s location</string>
     <string name="activity_mas_simplify_polyline_title">Simplify a polyline</string>
-    <string name="activity_mas_map_matching_title">Map Matching</string>
+    <string name="activity_mas_map_matching_title">Map matching</string>
     <string name="activity_lab_location_picker_title">Location picker</string>
     <string name="activity_lab_rv_on_map_title">Recyclerview interaction</string>
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
@@ -192,6 +192,7 @@
     <string name="activity_extrusions_catalina_marathon_extrusions_url" translatable="false">http://i.imgur.com/6j848JL.jpg</string>
     <string name="activity_extrusions_adjust_extrusions_url" translatable="false">http://i.imgur.com/XNTyIO5.png</string>
     <string name="activity_extrusions_indoor_3d_url" translatable="false">http://i.imgur.com/1at7cMf.png</string>
+    <string name="activity_extrusions_rotate_extrusions_url" translatable="false">http://i.imgur.com/OzcCsB2.png</string>
     <string name="activity_dds_style_circle_categorically_url" translatable="false">http://i.imgur.com/C3mtfgF.png</string>
     <string name="activity_dds_choropleth_zoom_change_url" translatable="false">http://i.imgur.com/sPNpLEP.png</string>
     <string name="activity_dds_style_line_identity_property_url" translatable="false">http://i.imgur.com/wgpKvZM.png</string>
