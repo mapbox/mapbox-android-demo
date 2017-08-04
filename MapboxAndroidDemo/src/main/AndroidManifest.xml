@@ -3,7 +3,7 @@
           package="com.mapbox.mapboxandroiddemo">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <uses-feature android:name="android.hardware.location.gps"/>
@@ -36,13 +36,6 @@
         <activity
             android:name=".examples.styles.MapboxStudioStyleActivity"
             android:label="@string/activity_style_mapbox_studio_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-        <activity
-            android:name=".examples.styles.CustomRasterStyleActivity"
-            android:label="@string/activity_style_raster_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -206,6 +199,17 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
+            android:name=".labs.PictureInPictureActivity"
+            android:configChanges=
+                "screenSize|smallestScreenSize|screenLayout|orientation"
+            android:label="@string/activity_lab_picture_in_picture_title"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
             android:name=".labs.SpaceStationLocationActivity"
             android:label="@string/activity_lab_space_station_location_title">
             <meta-data
@@ -271,6 +275,13 @@
         <activity
             android:name=".examples.styles.ZoomDependentFillColorActivity"
             android:label="@string/activity_style_zoom_dependent_fill_color_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".examples.styles.LocalStyleSourceActivity"
+            android:label="@string/activity_style_local_style_or_raster_source_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -454,8 +465,10 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
+
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
+
                 <data
                     android:host="authorize"
                     android:scheme="mapbox-android-dev-preview"/>
