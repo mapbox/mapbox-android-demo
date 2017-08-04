@@ -36,7 +36,6 @@ import static com.mapbox.services.Constants.PRECISION_6;
  * Use Mapbox Android Services to request and compare normal directions with time optimized directions
  */
 public class OptimizationActivity extends AppCompatActivity {
-  private static final String TAG = "DirectionsActivity";
 
   private MapView mapView;
   private MapboxMap map;
@@ -44,11 +43,14 @@ public class OptimizationActivity extends AppCompatActivity {
   private MapboxOptimizedTrips optimizedClient;
   private Polyline optimizedPolyline;
   private List<Position> stops;
+  private Position origin;
 
   private static final String FIRST = "first";
   private static final String ANY = "any";
   private static final String TEAL_COLOR = "23D2BE";
   private static final int POLYLINE_WIDTH = 5;
+
+  private static final String TAG = "DirectionsActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +63,7 @@ public class OptimizationActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_mas_optimization);
 
-    //Set up stop list
-    stops = new ArrayList<>();
-
-    // Set First Stop
-    final Position origin = Position.fromCoordinates(-122.408818, 37.784015);
-    stops.add(origin);
+    initializeListOfStops();
 
     // Setup the MapView
     mapView = (MapView) findViewById(R.id.mapView);
@@ -84,18 +81,13 @@ public class OptimizationActivity extends AppCompatActivity {
         map.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override
           public void onMapClick(@NonNull LatLng point) {
-
             // Optimization API is limited to 12 coordinate sets
-            if (stops.size() == 12) {
+            if (!apiResponseSetSizeIsCorrect(12)) {
               Toast.makeText(OptimizationActivity.this, R.string.only_twelve_stops_allowed, Toast.LENGTH_LONG).show();
             } else {
-              map.addMarker(new MarkerOptions()
-                .position(new LatLng(point.getLatitude(), point.getLongitude()))
-                .title(getString(R.string.destination)));
-
-              stops.add(Position.fromCoordinates(point.getLongitude(), point.getLatitude()));
-
-              getOptimized(stops);
+              addDestinationMarker(point);
+              addPointToStopsList(point);
+              getOptimizedRoute(stops);
             }
           }
         });
@@ -103,7 +95,34 @@ public class OptimizationActivity extends AppCompatActivity {
     });
   }
 
-  private void getOptimized(List<Position> coordinates) {
+  private boolean apiResponseSetSizeIsCorrect(int maxNumberOfSets) {
+    if (stops.size() == maxNumberOfSets) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  private void addDestinationMarker(LatLng point) {
+    map.addMarker(new MarkerOptions()
+      .position(new LatLng(point.getLatitude(), point.getLongitude()))
+      .title(getString(R.string.destination)));
+  }
+
+  private void addPointToStopsList(LatLng point) {
+    stops.add(Position.fromCoordinates(point.getLongitude(), point.getLatitude()));
+  }
+
+
+  private void initializeListOfStops() {
+    //Set up stop list
+    stops = new ArrayList<>();
+    // Set first stop
+    origin = Position.fromCoordinates(-122.408818, 37.784015);
+    stops.add(origin);
+  }
+
+  private void getOptimizedRoute(List<Position> coordinates) {
     optimizedClient = new MapboxOptimizedTrips.Builder()
       .setSource(FIRST)
       .setDestination(ANY)
@@ -116,24 +135,21 @@ public class OptimizationActivity extends AppCompatActivity {
     optimizedClient.enqueueCall(new Callback<OptimizedTripsResponse>() {
       @Override
       public void onResponse(Call<OptimizedTripsResponse> call, Response<OptimizedTripsResponse> response) {
-        Log.d(TAG, call.request().url().toString());
 
-        // You can get the generic HTTP info about the response
-        Log.d(TAG, "Response code: " + response.body().getTrips());
-        Log.d(TAG, "response: " + call.request().url().toString());
-
-        if (response.body() == null) {
+        if (!response.isSuccessful()) {
           Log.e(TAG, "No routes found, make sure you set the right user and access token.");
           return;
-        } else if (response.body().getTrips().size() < 1) {
-          Log.e(TAG, "No routes found" + response.body().getTrips().size());
-          return;
+        } else {
+          if (response.body().getTrips().isEmpty()) {
+            Log.e(TAG, "No routes found" + response.body().getTrips().size());
+            return;
+          }
         }
 
-        // Print some info about the route
+        // Get most optimized route from API response
         optimizedRoute = response.body().getTrips().get(0);
 
-        drawOptimized(optimizedRoute);
+        drawOptimizedRoute(optimizedRoute);
       }
 
       @Override
@@ -143,12 +159,22 @@ public class OptimizationActivity extends AppCompatActivity {
     });
   }
 
-  private void drawOptimized(DirectionsRoute route) {
-    //remove old polyline
+  private void drawOptimizedRoute(DirectionsRoute route) {
+    // Remove old polyline
     if (optimizedPolyline != null) {
       map.removePolyline(optimizedPolyline);
     }
 
+    LatLng[] pointsToDraw = convertLineStringToLatLng(route);
+
+    // Draw points on MapView
+    optimizedPolyline = map.addPolyline(new PolylineOptions()
+      .add(pointsToDraw)
+      .color(Color.parseColor(TEAL_COLOR))
+      .width(POLYLINE_WIDTH));
+  }
+
+  private LatLng[] convertLineStringToLatLng(DirectionsRoute route) {
     // Convert LineString coordinates into LatLng[]
     LineString lineString = LineString.fromPolyline(route.getGeometry(), PRECISION_6);
     List<Position> coordinates = lineString.getCoordinates();
@@ -158,12 +184,7 @@ public class OptimizationActivity extends AppCompatActivity {
         coordinates.get(i).getLatitude(),
         coordinates.get(i).getLongitude());
     }
-
-    // Draw Points on MapView
-    optimizedPolyline = map.addPolyline(new PolylineOptions()
-      .add(points)
-      .color(Color.parseColor(TEAL_COLOR))
-      .width(POLYLINE_WIDTH));
+    return points;
   }
 
   @Override
