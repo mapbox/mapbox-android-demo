@@ -23,7 +23,6 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
   private static final String ID_IMAGE_LAYER = "animated_image_layer";
 
   private MapView mapView;
-  private MapboxMap mapboxMap;
 
   private Handler handler;
   private Runnable runnable;
@@ -46,8 +45,6 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
-    this.mapboxMap = mapboxMap;
-
     // Add source
     LatLngQuad quad = new LatLngQuad(
       new LatLng(46.437, -80.425),
@@ -60,14 +57,13 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
     RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
     mapboxMap.addLayer(layer);
 
-    // Loop refresh geojson
+    // Loop the GeoJSON refreshing
     handler = new Handler();
     runnable = new RefreshImageRunnable(mapboxMap, handler);
     handler.postDelayed(runnable, 100);
   }
 
   private static class RefreshImageRunnable implements Runnable {
-
     private MapboxMap mapboxMap;
     private Handler handler;
     private int[] drawables;
@@ -95,6 +91,7 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
+
   @Override
   public void onResume() {
     super.onResume();
