@@ -24,7 +24,7 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
   private Runnable runnable;
   private static final String ID_IMAGE_SOURCE = "animated_image_source";
   private static final String ID_IMAGE_LAYER = "animated_image_layer";
-  
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
