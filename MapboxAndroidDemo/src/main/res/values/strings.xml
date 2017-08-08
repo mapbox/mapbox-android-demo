@@ -409,4 +409,9 @@
     <string name="rv_card_name">Location #%1$d</string>
     <string name="rv_card_bed_info">This location has %1$d beds</string>
     <string name="toast_instruction">Click on cards below</string>
+
+    <!-- Rotation extrusion -->
+    <string name="no_accelerometer">This device doesn\'t support a accelerometer sensor</string>
+    <string name="no_magnetic">This device doesn\'t support a magnetic sensor</string>
+
 </resources>

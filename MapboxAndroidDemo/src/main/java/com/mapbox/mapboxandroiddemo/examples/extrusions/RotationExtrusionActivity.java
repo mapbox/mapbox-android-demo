@@ -9,6 +9,8 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.mapbox.androidsdk.plugins.building.BuildingPlugin;
 import com.mapbox.mapboxandroiddemo.R;
@@ -20,7 +22,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 /**
- * Change the bearing and tilt of camera when viewing extrusions to get full 3D effect
+ * Change the camera's bearing and tilt based on device movement while viewing building extrusions
  */
 public class RotationExtrusionActivity extends AppCompatActivity implements SensorEventListener {
   private MapView mapView;
@@ -61,11 +63,6 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
         setupBuildingExtrusionPlugin();
       }
     });
-
-    // Initialize sensors
-    sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-    gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-    magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
   }
 
   private void setupBuildingExtrusionPlugin() {
@@ -80,9 +77,8 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
   protected void onStart() {
     super.onStart();
     mapView.onStart();
-    int sensorEventDeliveryRate = 200;
-    sensorManager.registerListener(this, gyro, sensorEventDeliveryRate);
-    sensorManager.registerListener(this, magnetic, sensorEventDeliveryRate);
+    initializeSensors();
+    registerSensorListeners();
   }
 
   @Override
@@ -128,11 +124,9 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
       gravityArray = event.values;
     }
-
     if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
       magneticArray = event.values;
     }
-
     if (gravityArray != null && magneticArray != null) {
       boolean success = SensorManager.getRotationMatrix(rotationMatrix, inclinationMatrix, gravityArray, magneticArray);
       if (success) {
@@ -162,6 +156,28 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
       .build();
 
     return position;
+  }
+
+  private void initializeSensors() {
+    sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+    gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+    magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+  }
+
+  private void registerSensorListeners() {
+    int sensorEventDeliveryRate = 200;
+    if (gyro != null) {
+      sensorManager.registerListener(this, gyro, sensorEventDeliveryRate);
+    } else {
+      Log.d("RotationExtrusion", "Whoops, no accelerometer sensor");
+      Toast.makeText(this, R.string.no_accelerometer, Toast.LENGTH_SHORT).show();
+    }
+    if (magnetic != null) {
+      sensorManager.registerListener(this, magnetic, sensorEventDeliveryRate);
+    } else {
+      Log.d("RotationExtrusion", "Whoops, no magnetic sensor");
+      Toast.makeText(this, R.string.no_magnetic, Toast.LENGTH_SHORT).show();
+    }
   }
 }
 
