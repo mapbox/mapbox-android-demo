@@ -31,6 +31,8 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
   private Sensor gyro;
   private Sensor magnetic;
 
+  private SensorControl sensorControl;
+
   private float[] gravityArray;
   private float[] magneticArray;
   private float[] inclinationMatrix = new float[9];
@@ -77,7 +79,9 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
   protected void onStart() {
     super.onStart();
     mapView.onStart();
-    initializeSensors();
+    sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+    sensorControl = new SensorControl(this, sensorManager);
+
     registerSensorListeners();
   }
 
@@ -158,25 +162,61 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     return position;
   }
 
-  private void initializeSensors() {
-    sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-    gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-    magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-  }
 
   private void registerSensorListeners() {
     int sensorEventDeliveryRate = 200;
-    if (gyro != null) {
-      sensorManager.registerListener(this, gyro, sensorEventDeliveryRate);
+    if (sensorControl.getGyro() != null) {
+      sensorManager.registerListener(this, sensorControl.getGyro(), sensorEventDeliveryRate);
     } else {
       Log.d("RotationExtrusion", "Whoops, no accelerometer sensor");
       Toast.makeText(this, R.string.no_accelerometer, Toast.LENGTH_SHORT).show();
     }
-    if (magnetic != null) {
-      sensorManager.registerListener(this, magnetic, sensorEventDeliveryRate);
+    if (sensorControl.getMagnetic() != null) {
+      sensorManager.registerListener(this, sensorControl.getMagnetic(), sensorEventDeliveryRate);
     } else {
       Log.d("RotationExtrusion", "Whoops, no magnetic sensor");
       Toast.makeText(this, R.string.no_magnetic, Toast.LENGTH_SHORT).show();
+    }
+  }
+
+  private class SensorControl implements SensorEventListener {
+
+    private Context context;
+    private SensorManager sensorManager;
+    private Sensor gyro;
+    private Sensor magnetic;
+
+    SensorControl(Context context, SensorManager sensorManager) {
+      this.context = context;
+      this.gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+      this.magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+    }
+
+    private Sensor getGyro() {
+      return gyro;
+    }
+
+    private Sensor getMagnetic() {
+      return magnetic;
+    }
+
+    private SensorManager getSensorManager() {
+      return sensorManager;
+    }
+
+    private void unRegister()  {
+      sensorManager.unregisterListener(this, gyro);
+
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
   }
 }
