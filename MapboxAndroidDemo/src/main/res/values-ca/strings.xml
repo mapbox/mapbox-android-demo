@@ -29,7 +29,6 @@
     <string name="offline_category">Offline</string>
     <string name="query_map_category">Interrogar mapa</string>
     <string name="android_services_category">Serveis Android</string>
-    <string name="location_category">Localització de l\'usuari</string>
     <string name="lab_category">Laboratori</string>
     <string name="settings">Ajustos</string>
 

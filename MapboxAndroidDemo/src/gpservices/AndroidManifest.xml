@@ -13,7 +13,8 @@
     <application
         android:name=".MapboxApplication"
         android:allowBackup="true"
-        android:icon="@drawable/launcher_icon"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
@@ -43,14 +44,6 @@
         <activity
             android:name=".examples.styles.MapboxStudioStyleActivity"
             android:label="@string/activity_style_mapbox_studio_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".examples.styles.CustomRasterStyleActivity"
-            android:label="@string/activity_style_raster_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -158,22 +151,6 @@
         <activity
             android:name=".examples.basics.MapboxMapOptionActivity"
             android:label="@string/activity_basic_mapbox_options_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".examples.location.BasicUserLocation"
-            android:label="@string/activity_location_basic_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".examples.location.LocationTrackingActivity"
-            android:label="@string/activity_location_tracking_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -300,21 +277,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
 
-        <activity
-            android:name=".examples.location.AnimatedLocationIconActivity"
-            android:label="@string/activity_location_animated_icon_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".examples.location.CustomizeUserLocationActivity"
-            android:label="@string/activity_location_customize_user_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
 
         <activity
             android:name=".examples.query.QueryFeatureActivity"
@@ -343,14 +305,6 @@
         <activity
             android:name=".examples.query.FeatureCountActivity"
             android:label="@string/activity_query_feature_count_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".labs.OffRouteActivity"
-            android:label="@string/activity_lab_off_route_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>

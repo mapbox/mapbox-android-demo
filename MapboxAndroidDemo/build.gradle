@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId "com.mapbox.mapboxandroiddemo"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode gitVersionCode
         versionName gitVersionName
     }
@@ -77,7 +77,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8'
 
     // Mapbox dependencies
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.1@aar') {
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.2@aar') {
         transitive = true
     }
 
@@ -88,9 +88,6 @@ dependencies {
 
     // Mapbox Android UI
     compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.2.0'
-
-    // Mapbox Navigation SDK for Android
-    compile 'com.mapbox.mapboxsdk:mapbox-android-navigation:0.3.1'
 
     // Other dependencies
     compile 'com.github.javiersantos:MaterialStyledDialogs:2.1'

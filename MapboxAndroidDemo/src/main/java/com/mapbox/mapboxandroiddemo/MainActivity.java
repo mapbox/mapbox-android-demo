@@ -70,12 +70,12 @@ import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
@@ -85,7 +85,7 @@ import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
-import com.mapbox.mapboxandroiddemo.labs.OffRouteActivity;
+import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
@@ -312,14 +312,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_mapbox_studio_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_raster_title,
-          R.string.activity_style_raster_description,
-          new Intent(MainActivity.this, CustomRasterStyleActivity.class),
-          R.string.activity_style_raster_url
+          R.string.activity_style_local_style_or_raster_source_title,
+          R.string.activity_style_local_style_or_raster_source_description,
+          new Intent(MainActivity.this, LocalStyleSourceActivity.class),
+          R.string.activity_style_local_style_or_raster_source_url
         ));
         currentCategory = R.id.nav_styles;
         break;
-
       case R.id.nav_extrusions:
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_extrusions_population_density_extrusions_title,
@@ -541,12 +540,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_indoor_map_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_off_route_title,
-          R.string.activity_lab_off_route_description,
-          new Intent(MainActivity.this, OffRouteActivity.class),
-          R.string.activity_lab_off_route_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_location_picker_title,
           R.string.activity_lab_location_picker_description,
           new Intent(MainActivity.this, LocationPickerActivity.class),
@@ -565,13 +558,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_space_station_location_url
         ));
         exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_picture_in_picture_title,
+          R.string.activity_lab_picture_in_picture_description,
+          new Intent(MainActivity.this, PictureInPictureActivity.class),
+          R.string.activity_lab_picture_in_picture_url, true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_rv_on_map_title,
           R.string.activity_lab_rv_on_map_description,
           new Intent(MainActivity.this, RecyclerViewOnMapActivity.class),
-          R.string.activity_lab_rv_on_map_url));
+          R.string.activity_lab_rv_on_map_url, true
+        ));
         currentCategory = R.id.nav_lab;
         break;
-
       case R.id.nav_dds:
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_dds_style_circle_categorically_title,
