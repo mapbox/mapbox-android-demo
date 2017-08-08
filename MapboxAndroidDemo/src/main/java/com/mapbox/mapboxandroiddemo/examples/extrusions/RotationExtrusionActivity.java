@@ -80,7 +80,7 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     super.onStart();
     mapView.onStart();
     sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-    sensorControl = new SensorControl(this, sensorManager);
+    sensorControl = new SensorControl(sensorManager);
 
     registerSensorListeners();
   }
@@ -179,15 +179,12 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     }
   }
 
-  private class SensorControl implements SensorEventListener {
+  private class SensorControl {
 
-    private Context context;
-    private SensorManager sensorManager;
     private Sensor gyro;
     private Sensor magnetic;
 
-    SensorControl(Context context, SensorManager sensorManager) {
-      this.context = context;
+    SensorControl(SensorManager sensorManager) {
       this.gyro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
       this.magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
     }
@@ -198,25 +195,6 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
 
     private Sensor getMagnetic() {
       return magnetic;
-    }
-
-    private SensorManager getSensorManager() {
-      return sensorManager;
-    }
-
-    private void unRegister()  {
-      sensorManager.unregisterListener(this, gyro);
-
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
   }
 }
