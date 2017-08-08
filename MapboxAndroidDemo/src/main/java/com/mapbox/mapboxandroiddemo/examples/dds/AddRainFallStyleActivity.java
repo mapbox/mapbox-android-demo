@@ -37,11 +37,14 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
-    Mapbox.getInstance(this, Mapbox.getAccessToken());
+    Mapbox.getInstance(this, getString(R.string.access_token));
+
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_style_rainfall);
+
     handler = new Handler();
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
