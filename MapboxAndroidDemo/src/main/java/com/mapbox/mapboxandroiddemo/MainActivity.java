@@ -85,6 +85,7 @@ import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
+import com.mapbox.mapboxandroiddemo.labs.RadarCompassActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
@@ -561,6 +562,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_rv_on_map_description,
           new Intent(MainActivity.this, RecyclerViewOnMapActivity.class),
           R.string.activity_lab_rv_on_map_url, true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_radar_compass_title,
+          R.string.activity_lab_radar_compass_description,
+          new Intent(MainActivity.this, RadarCompassActivity.class),
+          R.string.activity_lab_radar_compass_url, true
         ));
         currentCategory = R.id.nav_lab;
         break;
