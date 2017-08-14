@@ -154,7 +154,7 @@
     <string name="activity_query_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
     <string name="activity_query_click_on_layer_description">Click on and highlight a selected GeoJSON polygon.</string>
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
-    <string name="activity_mas_optimization_description">Use Mapbox Android Services to get directions that are optimized for time.</string>
+    <string name="activity_mas_optimization_description">Use Mapbox\'s Optimization API to retrieve and display the quickest multi-stop route.</string>
     <string name="activity_mas_geocoding_description">Use Mapbox Android Service\'s geocoder to convert location text into geographic coordinates.</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
