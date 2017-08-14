@@ -50,8 +50,6 @@ public class OptimizationActivity extends AppCompatActivity {
   private static final String TEAL_COLOR = "#23D2BE";
   private static final int POLYLINE_WIDTH = 5;
 
-  private static final String TAG = "DirectionsActivity";
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -97,7 +95,6 @@ public class OptimizationActivity extends AppCompatActivity {
   }
 
   private boolean alreadyTwelveMarkersOnMap() {
-    Log.d(TAG, "alreadyTwelveMarkersOnMap: stops.size()" + stops.size());
     if (stops.size() == 12) {
       return true;
     } else {
@@ -139,12 +136,12 @@ public class OptimizationActivity extends AppCompatActivity {
       public void onResponse(Call<OptimizedTripsResponse> call, Response<OptimizedTripsResponse> response) {
 
         if (!response.isSuccessful()) {
-          Log.e(TAG, getString(R.string.no_success));
+          Log.d("DirectionsActivity", getString(R.string.no_success));
           Toast.makeText(OptimizationActivity.this, R.string.no_success, Toast.LENGTH_SHORT).show();
           return;
         } else {
           if (response.body().getTrips().isEmpty()) {
-            Log.e(TAG, getString(R.string.successful_but_no_routes) + " size = " + response.body().getTrips().size());
+            Log.d("DirectionsActivity", getString(R.string.successful_but_no_routes) + " size = " + response.body().getTrips().size());
             Toast.makeText(OptimizationActivity.this, R.string.successful_but_no_routes, Toast.LENGTH_SHORT).show();
             return;
           }
@@ -158,7 +155,7 @@ public class OptimizationActivity extends AppCompatActivity {
 
       @Override
       public void onFailure(Call<OptimizedTripsResponse> call, Throwable throwable) {
-        Log.e(TAG, "Error: " + throwable.getMessage());
+        Log.d("DirectionsActivity", "Error: " + throwable.getMessage());
       }
     });
   }
