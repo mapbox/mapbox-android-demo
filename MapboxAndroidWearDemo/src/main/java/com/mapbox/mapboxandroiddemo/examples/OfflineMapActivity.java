@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -48,6 +49,7 @@ public class OfflineMapActivity extends WearableActivity {
   private Button listRegions;
 
   @Override
+  @AddTrace(name = "onCreateOfflineMapActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     // Mapbox access token is configured here. This needs to be called either in your application
@@ -60,6 +62,7 @@ public class OfflineMapActivity extends WearableActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
+      @AddTrace(name = "onMapReadyOfflineMapActivity")
       public void onMapReady(final MapboxMap mapboxMap) {
         map = mapboxMap;
         // Set up the OfflineManager

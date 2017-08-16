@@ -5,6 +5,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 
+import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -26,6 +27,7 @@ public class LocationTrackingActivity extends WearableActivity {
   private LocationEngineListener locationEngineListener;
 
   @Override
+  @AddTrace(name = "onCreateLocationTrackingActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
@@ -54,6 +56,7 @@ public class LocationTrackingActivity extends WearableActivity {
     };
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
+      @AddTrace(name = "onMapReadyLocationTrackingActivity")
       public void onMapReady(MapboxMap mapboxMap) {
 
         // Customize map with markers, polylines, etc.

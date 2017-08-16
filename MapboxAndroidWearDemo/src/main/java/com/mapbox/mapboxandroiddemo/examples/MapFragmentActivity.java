@@ -5,6 +5,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 
+import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -24,6 +25,7 @@ import com.mapbox.services.android.telemetry.location.LocationEngineListener;
 public class MapFragmentActivity extends WearableActivity {
 
   @Override
+  @AddTrace(name = "onCreateMapFragmentActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_basic_support_map_frag);

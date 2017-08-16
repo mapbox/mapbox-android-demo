@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 
+import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -17,6 +18,7 @@ public class SimpleMapViewActivity extends WearableActivity {
   private MapView mapView;
 
   @Override
+  @AddTrace(name = "onCreateSimpleMapViewActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
@@ -31,6 +33,7 @@ public class SimpleMapViewActivity extends WearableActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
+      @AddTrace(name = "onMapReadySimpleMapViewActivity")
       public void onMapReady(MapboxMap mapboxMap) {
 
         // Customize map with markers, polylines, etc.
