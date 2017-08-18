@@ -10,7 +10,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/launcher_icon"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:launchMode="singleTop"
         android:theme="@style/AppTheme">
@@ -322,13 +323,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
-            android:name=".labs.OffRouteActivity"
-            android:label="@string/activity_lab_off_route_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-        <activity
             android:name=".examples.styles.LineLayerActivity"
             android:label="@string/activity_style_line_layer_title">
             <meta-data
@@ -443,6 +437,13 @@
         <activity
             android:name=".examples.extrusions.AdjustExtrusionLightActivity"
             android:label="@string/activity_extrusions_adjust_extrusions_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".examples.extrusions.RotationExtrusionActivity"
+            android:label="@string/activity_extrusions_rotate_extrusions_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>

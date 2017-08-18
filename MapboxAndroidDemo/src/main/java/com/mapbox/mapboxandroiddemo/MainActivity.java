@@ -51,6 +51,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActi
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
@@ -85,7 +86,6 @@ import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
-import com.mapbox.mapboxandroiddemo.labs.OffRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
@@ -345,6 +345,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, Indoor3DMapActivity.class),
           R.string.activity_extrusions_indoor_3d_url
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_extrusions_rotate_extrusions_title,
+          R.string.activity_extrusions_rotate_extrusions_description,
+          new Intent(MainActivity.this, RotationExtrusionActivity.class),
+          R.string.activity_extrusions_rotate_extrusions_url, true
+        ));
         currentCategory = R.id.nav_extrusions;
         break;
 
@@ -539,12 +545,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_indoor_map_description,
           new Intent(MainActivity.this, IndoorMapActivity.class),
           R.string.activity_lab_indoor_map_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_off_route_title,
-          R.string.activity_lab_off_route_description,
-          new Intent(MainActivity.this, OffRouteActivity.class),
-          R.string.activity_lab_off_route_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_location_picker_title,
