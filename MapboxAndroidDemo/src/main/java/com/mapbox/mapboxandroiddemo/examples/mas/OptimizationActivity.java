@@ -33,7 +33,7 @@ import retrofit2.Response;
 import static com.mapbox.services.Constants.PRECISION_6;
 
 /**
- * Use Mapbox Android Services to request and compare normal directions with time optimized directions
+ * Use Mapbox Android Services to request and compare normal directions with time optimized directions.
  */
 public class OptimizationActivity extends AppCompatActivity {
 
@@ -61,6 +61,7 @@ public class OptimizationActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_mas_optimization);
 
+    // Initialize list of Position objects and add the origin Position to the list
     initializeListOfStops();
 
     // Setup the MapView
@@ -112,9 +113,8 @@ public class OptimizationActivity extends AppCompatActivity {
     stops.add(Position.fromCoordinates(point.getLongitude(), point.getLatitude()));
   }
 
-
   private void initializeListOfStops() {
-    //Set up stop list
+    // Set up stop list
     stops = new ArrayList<>();
     // Set first stop
     origin = Position.fromCoordinates(30.335098600000038, 59.9342802);
@@ -134,7 +134,6 @@ public class OptimizationActivity extends AppCompatActivity {
     optimizedClient.enqueueCall(new Callback<OptimizedTripsResponse>() {
       @Override
       public void onResponse(Call<OptimizedTripsResponse> call, Response<OptimizedTripsResponse> response) {
-
         if (!response.isSuccessful()) {
           Log.d("DirectionsActivity", getString(R.string.no_success));
           Toast.makeText(OptimizationActivity.this, R.string.no_success, Toast.LENGTH_SHORT).show();
@@ -151,7 +150,6 @@ public class OptimizationActivity extends AppCompatActivity {
 
         // Get most optimized route from API response
         optimizedRoute = response.body().getTrips().get(0);
-
         drawOptimizedRoute(optimizedRoute);
       }
 
@@ -167,10 +165,8 @@ public class OptimizationActivity extends AppCompatActivity {
     if (optimizedPolyline != null) {
       map.removePolyline(optimizedPolyline);
     }
-
-    LatLng[] pointsToDraw = convertLineStringToLatLng(route);
-
     // Draw points on MapView
+    LatLng[] pointsToDraw = convertLineStringToLatLng(route);
     optimizedPolyline = map.addPolyline(new PolylineOptions()
       .add(pointsToDraw)
       .color(Color.parseColor(TEAL_COLOR))

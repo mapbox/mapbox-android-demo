@@ -421,7 +421,7 @@
     <string name="only_twelve_stops_allowed">Only 12 stops allowed on route</string>
     <string name="click_instructions">Tap on the map to select a maximum of 12 locations</string>
     <string name="successful_but_no_routes">No routes found for that location</string>
-    <string name="no_success">No routes found, make sure you set the right user and access token.</string>
+    <string name="no_success">No routes found, make sure you set the right user and access token</string>
 
     <!-- Raster and local style source activity-->
     <string name="load_raster_button_text">Load custom raster style</string>
