@@ -90,6 +90,7 @@
     <string name="activity_query_feature_count_title">Feature count</string>
     <string name="activity_query_click_on_layer_title">Click on single layer</string>
     <string name="activity_mas_directions_title">Show directions on map</string>
+    <string name="activity_mas_optimization_title">Show optimized directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
     <string name="activity_plugins_traffic_plugin_title">Display real-time traffic</string>
@@ -155,6 +156,7 @@
     <string name="activity_query_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
     <string name="activity_query_click_on_layer_description">Click on and highlight a selected GeoJSON polygon.</string>
     <string name="activity_mas_directions_description">Use Mapbox Android Services to request directions.</string>
+    <string name="activity_mas_optimization_description">Use Mapbox\'s Optimization API to retrieve and display the quickest multi-stop route.</string>
     <string name="activity_mas_geocoding_description">Use Mapbox Android Service\'s geocoder to convert location text into geographic coordinates.</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
@@ -223,6 +225,7 @@
     <string name="activity_mas_directions_url" translatable="false">http://i.imgur.com/DhQltqB.jpg</string>
     <string name="activity_mas_geocoding_url" translatable="false">http://i.imgur.com/mBJGh3P.png</string>
     <string name="activity_mas_static_image_url" translatable="false">http://i.imgur.com/COdES0F.png</string>
+    <string name="activity_mas_optimization_url" translatable="false">http://i.imgur.com/guEQtlP.jpg</string>
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
     <string name="activity_plugins_location_plugin_url" translatable="false">https://i.imgur.com/Opfwv6j.png</string>
@@ -399,7 +402,7 @@
     <string name="retrieval_error_dialog_title">Whoops!</string>
     <string name="retrieval_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
     <string name="retrieval_error_dialog_ok_button">Ok</string>
-  
+
     <!-- Share app intent -->
     <string name="share_app_subject">Mapbox demo app for Android</string>
     <string name="share_app_text">Hey, check out these great examples showing what can be built using Mapbox:\n
@@ -415,6 +418,14 @@
     <string name="rv_card_bed_info">This location has %1$d beds</string>
     <string name="toast_instruction">Click on cards below</string>
 
+    <!-- Optimization API activity -->
+    <string name="origin">Origin</string>
+    <string name="destination">Destination</string>
+    <string name="only_twelve_stops_allowed">Only 12 stops allowed on route</string>
+    <string name="click_instructions">Tap on the map to select a maximum of 12 locations</string>
+    <string name="successful_but_no_routes">No routes found for that location</string>
+    <string name="no_success">No routes found, make sure you set the right user and access token</string>
+  
     <!-- Rotation extrusion -->
     <string name="no_accelerometer">This device doesn\'t support an accelerometer sensor</string>
     <string name="no_magnetic">This device doesn\'t support a magnetic sensor</string>

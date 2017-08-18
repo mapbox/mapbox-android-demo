@@ -55,6 +55,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivit
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
+import com.mapbox.mapboxandroiddemo.examples.mas.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
@@ -510,6 +511,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_mas_directions_description,
           new Intent(MainActivity.this, DirectionsActivity.class),
           R.string.activity_mas_directions_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_mas_optimization_title,
+          R.string.activity_mas_optimization_description,
+          new Intent(MainActivity.this, OptimizationActivity.class),
+          R.string.activity_mas_optimization_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_mas_geocoding_title,
