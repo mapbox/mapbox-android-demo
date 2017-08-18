@@ -21,16 +21,18 @@ import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.constants.MyLocationTracking;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerMode;
+import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
+import com.mapbox.services.android.location.LostLocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngineListener;
+import com.mapbox.services.android.telemetry.location.LocationEnginePriority;
 import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 import com.mapbox.services.api.ServicesException;
@@ -50,16 +52,16 @@ import retrofit2.Response;
  * Drop a marker at a specific location and then perform
  * reverse geocoding to retrieve and display the location's address
  */
-public class LocationPickerActivity extends AppCompatActivity implements PermissionsListener {
+public class LocationPickerActivity extends AppCompatActivity implements LocationEngineListener, PermissionsListener {
 
   private MapView mapView;
-  private MapboxMap map;
+  private MapboxMap mapboxMap;
   private LocationEngine locationEngine;
   private Marker droppedMarker;
   private ImageView hoveringMarker;
   private Button selectLocationButton;
-  private LocationEngineListener locationEngineListener;
   private PermissionsManager permissionsManager;
+  private LocationLayerPlugin locationPlugin;
 
   private static final String TAG = "LocationPickerActivity";
 
@@ -78,25 +80,17 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
     locationEngine = new LocationSource(this);
     locationEngine.activate();
 
-    // Initialize the map view
+    // Initialize the mapboxMap view
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
-        map = mapboxMap;
 
-        // Once map is ready, we want to position the camera above the user location. We
-        // first check that the user has granted the location permission, then we call
-        // setInitialCamera.
-        permissionsManager = new PermissionsManager(LocationPickerActivity.this);
-        if (!PermissionsManager.areLocationPermissionsGranted(LocationPickerActivity.this)) {
-          permissionsManager.requestLocationPermissions(LocationPickerActivity.this);
-        } else {
-          setInitialCamera();
-        }
+        LocationPickerActivity.this.mapboxMap = mapboxMap;
+        enableLocationPlugin();
 
-        // Toast instructing user to tap on the map
+        // Toast instructing user to tap on the mapboxMap
         Toast.makeText(
           LocationPickerActivity.this,
           getString(R.string.move_map_instruction),
@@ -106,7 +100,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
       }
     });
 
-    // When user is still picking a location, we hover a marker above the map in the center.
+    // When user is still picking a location, we hover a marker above the mapboxMap in the center.
     // This is done by using an image view with the default marker found in the SDK. You can
     // swap out for your own marker image, just make sure it matches up with the dropped marker.
     hoveringMarker = new ImageView(this);
@@ -122,14 +116,14 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
     selectLocationButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if (map != null) {
+        if (mapboxMap != null) {
           if (droppedMarker == null) {
-            // We first find where the hovering marker position is relative to the map.
+            // We first find where the hovering marker position is relative to the mapboxMap.
             // Then we set the visibility to gone.
             float coordinateX = hoveringMarker.getLeft() + (hoveringMarker.getWidth() / 2);
             float coordinateY = hoveringMarker.getBottom();
             float[] coords = new float[] {coordinateX, coordinateY};
-            final LatLng latLng = map.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
+            final LatLng latLng = mapboxMap.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
             hoveringMarker.setVisibility(View.GONE);
 
             // Transform the appearance of the button to become the cancel button
@@ -140,16 +134,16 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
             // Create the marker icon the dropped marker will be using.
             Icon icon = IconFactory.getInstance(LocationPickerActivity.this).fromResource(R.drawable.red_marker);
 
-            // Placing the marker on the map as soon as possible causes the illusion
+            // Placing the marker on the mapboxMap as soon as possible causes the illusion
             // that the hovering marker and dropped marker are the same.
-            droppedMarker = map.addMarker(new MarkerViewOptions().position(latLng).icon(icon));
+            droppedMarker = mapboxMap.addMarker(new MarkerViewOptions().position(latLng).icon(icon));
 
             // Finally we get the geocoding information
             reverseGeocode(latLng);
           } else {
             // When the marker is dropped, the user has clicked the button to cancel.
             // Therefore, we pick the marker back up.
-            map.removeMarker(droppedMarker);
+            mapboxMap.removeMarker(droppedMarker);
 
             // Switch the button apperance back to select a location.
             selectLocationButton.setBackgroundColor(
@@ -163,7 +157,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
         }
       }
     });
-  } // End onCreate
+  }
 
   @Override
   public void onResume() {
@@ -174,23 +168,22 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
   @Override
   protected void onStart() {
     super.onStart();
-    mapView.onStart();
-    if (locationEngine != null && locationEngineListener != null) {
-      locationEngine.activate();
-      locationEngine.addLocationEngineListener(locationEngineListener);
-      locationEngine.requestLocationUpdates();
+    if (locationPlugin != null) {
+      locationPlugin.onStart();
     }
+    mapView.onStart();
   }
 
   @Override
   protected void onStop() {
     super.onStop();
-    mapView.onStop();
-    if (locationEngine != null && locationEngineListener != null) {
+    if (locationEngine != null) {
       locationEngine.removeLocationUpdates();
-      locationEngine.removeLocationEngineListener(locationEngineListener);
-      locationEngine.deactivate();
     }
+    if (locationPlugin != null) {
+      locationPlugin.onStop();
+    }
+    mapView.onStop();
   }
 
   @Override
@@ -209,6 +202,9 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
+    if (locationEngine != null) {
+      locationEngine.deactivate();
+    }
   }
 
   @Override
@@ -217,40 +213,39 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
     mapView.onLowMemory();
   }
 
-  private void setInitialCamera() {
-    // Method is used to set the initial map camera position. Should only be called once when
-    // the map is ready. We first try using the users last location so we can quickly set the
-    // camera as fast as possible.
-    if (locationEngine.getLastLocation() != null) {
-      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(locationEngine.getLastLocation()), 16));
+  @Override
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+  }
+
+  @Override
+  public void onExplanationNeeded(List<String> permissionsToExplain) {
+    Toast.makeText(this, R.string.user_location_permission_explanation,
+      Toast.LENGTH_LONG).show();
+  }
+
+  @Override
+  @SuppressWarnings( {"MissingPermission"})
+  public void onConnected() {
+    locationEngine.requestLocationUpdates();
+  }
+
+  @Override
+  public void onLocationChanged(Location location) {
+    if (location != null) {
+      locationEngine.removeLocationEngineListener(this);
     }
+  }
 
-    // This location listener is used in a very specific use case. If the users last location is
-    // unknown we wait till the GPS locates them and position the camera above.
-    locationEngineListener = new LocationEngineListener() {
-      @Override
-      public void onConnected() {
-        locationEngine.requestLocationUpdates();
-      }
-
-      @Override
-      public void onLocationChanged(Location location) {
-        if (location != null) {
-          // Move the map camera to where the user location is
-          map.setCameraPosition(new CameraPosition.Builder()
-            .target(new LatLng(location))
-            .zoom(16)
-            .build());
-          locationEngine.removeLocationEngineListener(this);
-        }
-      }
-    };
-    locationEngine.addLocationEngineListener(locationEngineListener);
-    // Enable the location layer on the map and track the user location until they perform a
-    // map gesture.
-    map.setMyLocationEnabled(true);
-    map.getTrackingSettings().setMyLocationTrackingMode(MyLocationTracking.TRACKING_FOLLOW);
-  } // End setInitialCamera
+  @Override
+  public void onPermissionResult(boolean granted) {
+    if (granted) {
+      enableLocationPlugin();
+    } else {
+      Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
+      finish();
+    }
+  }
 
   private void reverseGeocode(final LatLng point) {
     // This method is used to reverse geocode where the user has dropped the marker.
@@ -273,13 +268,13 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
             // window.
             if (droppedMarker != null) {
               droppedMarker.setSnippet(feature.getPlaceName());
-              map.selectMarker(droppedMarker);
+              mapboxMap.selectMarker(droppedMarker);
             }
 
           } else {
             if (droppedMarker != null) {
               droppedMarker.setSnippet(getString(R.string.location_picker_dropped_marker_snippet_no_results));
-              map.selectMarker(droppedMarker);
+              mapboxMap.selectMarker(droppedMarker);
             }
           }
         }
@@ -295,25 +290,37 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
     }
   } // reverseGeocode
 
-  @Override
-  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
-  }
+  @SuppressWarnings( {"MissingPermission"})
+  private void enableLocationPlugin() {
+    // Check if permissions are enabled and if not request
+    if (PermissionsManager.areLocationPermissionsGranted(this)) {
+      // Create an instance of LOST location engine
+      initializeLocationEngine();
 
-  @Override
-  public void onExplanationNeeded(List<String> permissionsToExplain) {
-    Toast.makeText(this, R.string.user_location_permission_explanation,
-      Toast.LENGTH_LONG).show();
-  }
-
-  @Override
-  public void onPermissionResult(boolean granted) {
-    if (granted) {
-      setInitialCamera();
+      locationPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationEngine);
+      locationPlugin.setLocationLayerEnabled(LocationLayerMode.TRACKING);
     } else {
-      Toast.makeText(this, R.string.user_location_permission_not_granted,
-        Toast.LENGTH_LONG).show();
-      finish();
+      permissionsManager = new PermissionsManager(this);
+      permissionsManager.requestLocationPermissions(this);
     }
+  }
+
+  @SuppressWarnings( {"MissingPermission"})
+  private void initializeLocationEngine() {
+    locationEngine = new LostLocationEngine(LocationPickerActivity.this);
+    locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
+    locationEngine.activate();
+
+    Location lastLocation = locationEngine.getLastLocation();
+    if (lastLocation != null) {
+      setCameraPosition(lastLocation);
+    } else {
+      locationEngine.addLocationEngineListener(this);
+    }
+  }
+
+  private void setCameraPosition(Location location) {
+    mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+      new LatLng(location.getLatitude(), location.getLongitude()), 16));
   }
 }
