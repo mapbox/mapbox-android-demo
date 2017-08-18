@@ -3,21 +3,21 @@ package com.mapbox.mapboxandroiddemo.labs;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.SurfaceTexture;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
-import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraDevice;
-import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CameraMetadata;
 import android.hardware.camera2.CaptureRequest;
-import android.hardware.camera2.params.StreamConfigurationMap;
 import android.location.Location;
 import android.media.ImageReader;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Size;
@@ -26,9 +26,9 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.widget.Toast;
 
-import com.mapbox.mapboxandroiddemo.Manifest;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -47,7 +47,8 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-public class RadarCompassActivity extends AppCompatActivity implements LocationEngineListener, PermissionsListener {
+public class RadarCompassActivity extends AppCompatActivity implements LocationEngineListener, PermissionsListener,
+  SensorEventListener {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -68,6 +69,18 @@ public class RadarCompassActivity extends AppCompatActivity implements LocationE
   private PermissionsManager permissionsManager;
   private LocationLayerPlugin locationPlugin;
   private LocationEngine locationEngine;
+
+  private SensorManager sensorManager;
+  private Sensor magnetic;
+
+  private SensorControl sensorControl;
+
+  private float[] gravityArray;
+  private float[] magneticArray;
+  private float[] inclinationMatrix = new float[9];
+  private float[] rotationMatrix = new float[9];
+  private static final int BEARING_AMPLIFIER = 90;
+
 
   static {
     ORIENTATIONS.append(Surface.ROTATION_0, 90);
@@ -90,8 +103,12 @@ public class RadarCompassActivity extends AppCompatActivity implements LocationE
 
     textureView = (TextureView) findViewById(R.id.camera_preview_textureview);
     assert textureView != null;
+
     textureView.setSurfaceTextureListener(textureListener);
 
+    if (!deviceHasCamera(this)) {
+      Toast.makeText(this, R.string.no_camera, Toast.LENGTH_LONG).show();
+    }
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -107,6 +124,68 @@ public class RadarCompassActivity extends AppCompatActivity implements LocationE
     });
   }
 
+
+  @Override
+  public void onSensorChanged(SensorEvent event) {
+    if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+      gravityArray = event.values;
+    }
+    if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+      magneticArray = event.values;
+    }
+    if (gravityArray != null && magneticArray != null) {
+      boolean success = SensorManager.getRotationMatrix(rotationMatrix, inclinationMatrix, gravityArray, magneticArray);
+      if (success) {
+        if (mapboxMap != null) {
+          int mapCameraAnimationMillisecondsSpeed = 100;
+          mapboxMap.animateCamera(CameraUpdateFactory
+            .newCameraPosition(createNewCameraPosition()), mapCameraAnimationMillisecondsSpeed
+          );
+        }
+      }
+    }
+  }
+
+  @Override
+  public void onAccuracyChanged(Sensor sensor, int accuracy) {
+  }
+
+  private CameraPosition createNewCameraPosition() {
+    float[] orientation = new float[3];
+    SensorManager.getOrientation(rotationMatrix, orientation);
+    float roll = orientation[2];
+
+    CameraPosition position = new CameraPosition.Builder()
+      .bearing(roll * BEARING_AMPLIFIER)
+      .build();
+
+    return position;
+  }
+
+
+  private void registerSensorListeners() {
+    int sensorEventDeliveryRate = 200;
+    if (sensorControl.getMagnetic() != null) {
+      sensorManager.registerListener(this, sensorControl.getMagnetic(), sensorEventDeliveryRate);
+    } else {
+      Log.d("RotationExtrusion", "Whoops, no magnetic sensor");
+      Toast.makeText(this, R.string.no_magnetic_sensor, Toast.LENGTH_LONG).show();
+    }
+  }
+
+  private class SensorControl {
+
+    private Sensor magnetic;
+
+    SensorControl(SensorManager sensorManager) {
+      this.magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+    }
+
+    private Sensor getMagnetic() {
+      return magnetic;
+    }
+  }
+
   // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
@@ -114,7 +193,7 @@ public class RadarCompassActivity extends AppCompatActivity implements LocationE
     mapView.onResume();
     startBackgroundThread();
     if (textureView.isAvailable()) {
-      openCamera();
+//      openCamera();
     } else {
       textureView.setSurfaceTextureListener(textureListener);
     }
@@ -126,8 +205,13 @@ public class RadarCompassActivity extends AppCompatActivity implements LocationE
     if (locationPlugin != null) {
       locationPlugin.onStart();
     }
+    sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+    sensorControl = new SensorControl(sensorManager);
+
+    registerSensorListeners();
     mapView.onStart();
   }
+
 
   @Override
   protected void onStop() {
@@ -138,6 +222,7 @@ public class RadarCompassActivity extends AppCompatActivity implements LocationE
     if (locationPlugin != null) {
       locationPlugin.onStop();
     }
+    sensorManager.unregisterListener(this, magnetic);
     mapView.onStop();
   }
 
@@ -238,6 +323,17 @@ public class RadarCompassActivity extends AppCompatActivity implements LocationE
     permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
 
+  private boolean deviceHasCamera(Context context) {
+    if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+      // this device has a camera
+      return true;
+    } else {
+      // no camera on this device
+      return false;
+    }
+  }
+
+
   private void setCameraPosition(Location location) {
     mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
       new LatLng(location.getLatitude(), location.getLongitude()), 16));
@@ -286,11 +382,11 @@ public class RadarCompassActivity extends AppCompatActivity implements LocationE
 
         @Override
         public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession) {
-          Toast.makeText(this, "Configuration change", Toast.LENGTH_SHORT).show();
+          Toast.makeText(RadarCompassActivity.this, "Configuration change", Toast.LENGTH_SHORT).show();
         }
       }, null);
-    } catch (CameraAccessException e) {
-      e.printStackTrace();
+    } catch (CameraAccessException exception) {
+      exception.printStackTrace();
     }
   }
 
@@ -306,12 +402,12 @@ public class RadarCompassActivity extends AppCompatActivity implements LocationE
       backgroundThread.join();
       backgroundThread = null;
       backgroundHandler = null;
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+    } catch (InterruptedException exception) {
+      exception.printStackTrace();
     }
   }
 
-  private void openCamera() {
+ /* private void openCamera() {
     CameraManager manager = (CameraManager) this.getSystemService(Context.CAMERA_SERVICE);
     Log.e(TAG, "is camera open");
     try {
@@ -321,22 +417,22 @@ public class RadarCompassActivity extends AppCompatActivity implements LocationE
       assert map != null;
       imageDimension = map.getOutputSizes(SurfaceTexture.class)[0];
       // Add permission for camera and let user grant the permission
-      if (ActivityCompat.checkSelfPermission(this, Manifest.permission.class) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+      if (ContextCompat.checkSelfPermission(this, Manifest.permission.class) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
         ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CAMERA_PERMISSION);
         return;
       }
       manager.openCamera(cameraId, stateCallback, null);
-    } catch (CameraAccessException e) {
-      e.printStackTrace();
+    } catch (CameraAccessException exception) {
+      exception.printStackTrace();
     }
     Log.e(TAG, "openCamera X");
-  }
+  }*/
 
   TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
       //open your camera here
-      openCamera();
+//      openCamera();
     }
 
     @Override
@@ -361,8 +457,8 @@ public class RadarCompassActivity extends AppCompatActivity implements LocationE
     captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
     try {
       cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, backgroundHandler);
-    } catch (CameraAccessException e) {
-      e.printStackTrace();
+    } catch (CameraAccessException exception) {
+      exception.printStackTrace();
     }
   }
 

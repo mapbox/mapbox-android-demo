@@ -419,4 +419,8 @@
     <string name="load_raster_button_text">Load custom raster style</string>
     <string name="load_local_style_button_text">Load local style</string>
 
+    <!-- Compass camera activity-->
+    <string name="no_magnetic_sensor">This device doesn\'t have a magnetic sensor, so the example might not work correctly!</string>
+    <string name="no_camera">This device doesn\'t have a camera, so the example might not work correctly!</string>
+
 </resources>
