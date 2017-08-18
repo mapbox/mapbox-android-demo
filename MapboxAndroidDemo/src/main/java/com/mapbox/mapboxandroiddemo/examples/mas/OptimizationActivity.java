@@ -141,8 +141,10 @@ public class OptimizationActivity extends AppCompatActivity {
           return;
         } else {
           if (response.body().getTrips().isEmpty()) {
-            Log.d("DirectionsActivity", getString(R.string.successful_but_no_routes) + " size = " + response.body().getTrips().size());
-            Toast.makeText(OptimizationActivity.this, R.string.successful_but_no_routes, Toast.LENGTH_SHORT).show();
+            Log.d("DirectionsActivity", getString(R.string.successful_but_no_routes) + " size = " +
+              response.body().getTrips().size());
+            Toast.makeText(OptimizationActivity.this, R.string.successful_but_no_routes,
+              Toast.LENGTH_SHORT).show();
             return;
           }
         }
