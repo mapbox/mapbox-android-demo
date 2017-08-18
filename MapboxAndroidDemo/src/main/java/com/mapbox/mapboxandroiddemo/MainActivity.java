@@ -51,6 +51,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActi
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
@@ -342,6 +343,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_extrusions_indoor_3d_description,
           new Intent(MainActivity.this, Indoor3DMapActivity.class),
           R.string.activity_extrusions_indoor_3d_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_extrusions_rotate_extrusions_title,
+          R.string.activity_extrusions_rotate_extrusions_description,
+          new Intent(MainActivity.this, RotationExtrusionActivity.class),
+          R.string.activity_extrusions_rotate_extrusions_url, true
         ));
         currentCategory = R.id.nav_extrusions;
         break;
