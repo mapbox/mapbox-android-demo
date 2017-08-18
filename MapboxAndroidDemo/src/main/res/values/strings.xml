@@ -96,7 +96,7 @@
     <string name="activity_plugins_building_plugin_title">Display buildings in 3D</string>
     <string name="activity_plugins_location_plugin_title">Show a user\'s location</string>
     <string name="activity_mas_simplify_polyline_title">Simplify a polyline</string>
-    <string name="activity_mas_map_matching_title">Map matching</string>
+    <string name="activity_mas_map_matching_title">Map Matching</string>
     <string name="activity_lab_location_picker_title">Location picker</string>
     <string name="activity_lab_rv_on_map_title">Recyclerview interaction</string>
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
@@ -416,7 +416,7 @@
     <string name="toast_instruction">Click on cards below</string>
 
     <!-- Rotation extrusion -->
-    <string name="no_accelerometer">This device doesn\'t support a accelerometer sensor</string>
+    <string name="no_accelerometer">This device doesn\'t support an accelerometer sensor</string>
     <string name="no_magnetic">This device doesn\'t support a magnetic sensor</string>
 
     <!-- Raster and local style source activity-->

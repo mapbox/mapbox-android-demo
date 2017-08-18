@@ -28,11 +28,7 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
   private MapView mapView;
   private MapboxMap mapboxMap;
   private SensorManager sensorManager;
-  private Sensor gyro;
-  private Sensor magnetic;
-
   private SensorControl sensorControl;
-
   private float[] gravityArray;
   private float[] magneticArray;
   private float[] inclinationMatrix = new float[9];
@@ -58,7 +54,6 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
-
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
         mapboxMap = map;
@@ -101,8 +96,8 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
   protected void onStop() {
     super.onStop();
     mapView.onStop();
-    sensorManager.unregisterListener(this, gyro);
-    sensorManager.unregisterListener(this, magnetic);
+    sensorManager.unregisterListener(this, sensorControl.getGyro());
+    sensorManager.unregisterListener(this, sensorControl.getMagnetic());
   }
 
   @Override
@@ -146,6 +141,7 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
 
   @Override
   public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    // Intentionally left empty
   }
 
   private CameraPosition createNewCameraPosition() {
@@ -161,7 +157,6 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
 
     return position;
   }
-
 
   private void registerSensorListeners() {
     int sensorEventDeliveryRate = 200;
@@ -180,7 +175,6 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
   }
 
   private class SensorControl {
-
     private Sensor gyro;
     private Sensor magnetic;
 
@@ -189,11 +183,11 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
       this.magnetic = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
     }
 
-    private Sensor getGyro() {
+    Sensor getGyro() {
       return gyro;
     }
 
-    private Sensor getMagnetic() {
+    Sensor getMagnetic() {
       return magnetic;
     }
   }
