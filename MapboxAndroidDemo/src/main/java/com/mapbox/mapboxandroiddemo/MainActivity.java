@@ -25,6 +25,7 @@ import android.widget.Switch;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private AnalyticsTracker analytics;
 
   @Override
+  @AddTrace(name = "onCreateMainActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
@@ -146,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
       @Override
+      @AddTrace(name = "onItemClicked")
       public void onItemClicked(RecyclerView recyclerView, int position, View view) {
         if (currentCategory == R.id.nav_lab && position == 0) {
           return;
@@ -230,6 +233,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     return true;
   }
 
+  @AddTrace(name = "listItems")
   private void listItems(int id) {
     exampleItemModel.clear();
     switch (id) {
