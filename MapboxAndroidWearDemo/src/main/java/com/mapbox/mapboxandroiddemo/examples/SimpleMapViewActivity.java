@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 
-import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
