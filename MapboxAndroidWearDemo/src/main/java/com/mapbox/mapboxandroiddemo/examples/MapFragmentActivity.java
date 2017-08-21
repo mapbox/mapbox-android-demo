@@ -25,7 +25,6 @@ import com.mapbox.services.android.telemetry.location.LocationEngineListener;
 public class MapFragmentActivity extends WearableActivity {
 
   @Override
-  @AddTrace(name = "onCreateMapFragmentActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_basic_support_map_frag);

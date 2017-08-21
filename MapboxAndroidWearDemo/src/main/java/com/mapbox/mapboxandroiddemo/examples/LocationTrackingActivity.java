@@ -27,7 +27,6 @@ public class LocationTrackingActivity extends WearableActivity {
   private LocationEngineListener locationEngineListener;
 
   @Override
-  @AddTrace(name = "onCreateLocationTrackingActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
@@ -56,7 +55,6 @@ public class LocationTrackingActivity extends WearableActivity {
     };
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      @AddTrace(name = "onMapReadyLocationTrackingActivity")
       public void onMapReady(MapboxMap mapboxMap) {
 
         // Customize map with markers, polylines, etc.

@@ -18,7 +18,6 @@ public class SimpleMapViewActivity extends WearableActivity {
   private MapView mapView;
 
   @Override
-  @AddTrace(name = "onCreateSimpleMapViewActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
@@ -33,7 +32,6 @@ public class SimpleMapViewActivity extends WearableActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      @AddTrace(name = "onMapReadySimpleMapViewActivity")
       public void onMapReady(MapboxMap mapboxMap) {
 
         // Customize map with markers, polylines, etc.
