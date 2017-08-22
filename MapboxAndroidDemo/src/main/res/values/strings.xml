@@ -93,6 +93,7 @@
     <string name="activity_mas_optimization_title">Show optimized directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
+    <string name="activity_mas_maxtrix_api_title">Directions Matrix API</string>
     <string name="activity_plugins_traffic_plugin_title">Display real-time traffic</string>
     <string name="activity_plugins_building_plugin_title">Display buildings in 3D</string>
     <string name="activity_plugins_location_plugin_title">Show a user\'s location</string>
@@ -159,6 +160,7 @@
     <string name="activity_mas_optimization_description">Use Mapbox\'s Optimization API to retrieve and display the quickest multi-stop route.</string>
     <string name="activity_mas_geocoding_description">Use Mapbox Android Service\'s geocoder to convert location text into geographic coordinates.</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
+    <string name="activity_mas_matrix_api_description">Use the Mapbox Directions Matrix API to receive driving, cycling, or walking travel times between multiple points.</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
     <string name="activity_plugins_location_plugin_description">Use the location plugin to easily show a user\'s location on the map</string>
@@ -225,6 +227,7 @@
     <string name="activity_mas_directions_url" translatable="false">http://i.imgur.com/DhQltqB.jpg</string>
     <string name="activity_mas_geocoding_url" translatable="false">http://i.imgur.com/mBJGh3P.png</string>
     <string name="activity_mas_static_image_url" translatable="false">http://i.imgur.com/COdES0F.png</string>
+    <string name="activity_mas_matrix_api_url" translatable="false">http://i.imgur.com/COdES0F.png</string>
     <string name="activity_mas_optimization_url" translatable="false">http://i.imgur.com/guEQtlP.jpg</string>
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
@@ -433,5 +436,8 @@
     <!-- Raster and local style source activity-->
     <string name="load_raster_button_text">Load custom raster style</string>
     <string name="load_local_style_button_text">Load local style</string>
+
+    <!-- Matrix API -->
+    <string name="call_error">Oh no! The call to the Directions Matrix API failed!</string>
 
 </resources>

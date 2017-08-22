@@ -56,6 +56,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivit
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
+import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsMatrixApiActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
@@ -532,6 +533,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_mas_static_image_title,
           R.string.activity_mas_static_image_description,
           new Intent(MainActivity.this, StaticImageActivity.class),
+          R.string.activity_mas_static_image_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_mas_static_image_title,
+          R.string.activity_mas_static_image_description,
+          new Intent(MainActivity.this, DirectionsMatrixApiActivity.class),
           R.string.activity_mas_static_image_url
         ));
         currentCategory = R.id.nav_mas;
