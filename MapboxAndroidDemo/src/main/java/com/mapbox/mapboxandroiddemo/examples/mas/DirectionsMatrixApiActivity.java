@@ -28,7 +28,6 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
   private MapboxMap mapboxMap;
   private List<Position> positionList;
   private FeatureCollection featureCollection;
-  private String stationSourceUrl = "langsmith.cj6nojy5i0akw2xmz8mvc1gxn-3w41i";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
