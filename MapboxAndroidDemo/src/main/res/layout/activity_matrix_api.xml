@@ -9,9 +9,10 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="40.73581"
-        mapbox:mapbox_cameraTargetLng="-73.99155"
-        mapbox:mapbox_cameraZoom="11"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
+        mapbox:mapbox_cameraTargetLat="42.347"
+        mapbox:mapbox_cameraTargetLng="-71.071"
+        mapbox:mapbox_cameraZoom="12.5"
+        mapbox:mapbox_styleUrl="mapbox://styles/langsmith/cj6nol5jc0vb52ro416kb59jo"
+        mapbox:mapbox_cameraZoomMin="12.5"/>
 
 </LinearLayout>

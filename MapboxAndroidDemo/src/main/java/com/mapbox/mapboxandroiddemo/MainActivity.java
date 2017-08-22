@@ -536,8 +536,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_mas_static_image_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_mas_static_image_title,
-          R.string.activity_mas_static_image_description,
+          R.string.activity_mas_maxtrix_api_title,
+          R.string.activity_mas_matrix_api_description,
           new Intent(MainActivity.this, DirectionsMatrixApiActivity.class),
           R.string.activity_mas_static_image_url
         ));

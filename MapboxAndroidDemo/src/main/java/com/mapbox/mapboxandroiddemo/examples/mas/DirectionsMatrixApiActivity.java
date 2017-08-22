@@ -1,27 +1,34 @@
 package com.mapbox.mapboxandroiddemo.examples.mas;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
+import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.api.directions.v5.DirectionsCriteria;
-import com.mapbox.services.api.directionsmatrix.v1.MapboxDirectionsMatrix;
-import com.mapbox.services.api.directionsmatrix.v1.models.DirectionsMatrixResponse;
-import com.mapbox.services.api.geocoding.v5.MapboxGeocoding;
+import com.mapbox.services.commons.geojson.Feature;
+import com.mapbox.services.commons.geojson.FeatureCollection;
+import com.mapbox.services.commons.models.Position;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import java.io.InputStream;
+import java.util.List;
 
 public class DirectionsMatrixApiActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
+  private List<Position> positionList;
+  private FeatureCollection featureCollection;
+  private String stationSourceUrl = "langsmith.cj6nojy5i0akw2xmz8mvc1gxn-3w41i";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +41,40 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_matrix_api);
 
+    featureCollection = FeatureCollection.fromJson(loadGeoJsonFromAsset("boston_charge_stations.geojson"));
+
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
-
         DirectionsMatrixApiActivity.this.mapboxMap = mapboxMap;
 
-        // Build the call to the Directions Matrix API
+        addMarkers();
+
+        mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+          @Override
+          public boolean onMarkerClick(@NonNull Marker clickedMarker) {
+
+            for (Marker eachMarker : mapboxMap.getMarkers()) {
+              if (clickedMarker != eachMarker) {
+                eachMarker.showInfoWindow(mapboxMap, mapView);
+              }
+            }
+
+            return false;
+          }
+        });
+
+
+        /*// Build the call to the Directions Matrix API
         MapboxDirectionsMatrix directionsMatrixClient = new MapboxDirectionsMatrix.Builder()
           .setAccessToken(getString(R.string.access_token))
           .setProfile(DirectionsCriteria.PROFILE_DRIVING)
-          .setCoordinates(positions)
+          .setCoordinates(positionList)
           .build();
 
+        // Handle the API response
         directionsMatrixClient.enqueueCall(new Callback<DirectionsMatrixResponse>() {
           @Override
           public void onResponse(Call<DirectionsMatrixResponse> call, Response<DirectionsMatrixResponse> response) {
@@ -60,18 +86,37 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
           public void onFailure(Call<DirectionsMatrixResponse> call, Throwable throwable) {
             Toast.makeText(DirectionsMatrixApiActivity.this, R.string.call_error, Toast.LENGTH_SHORT).show();
           }
-        });
+        });*/
 
       }
     });
   }
 
-  private void getMcDonaldsLocations() {
-    MapboxGeocoding mapboxGeocoding = new MapboxGeocoding.Builder()
-      .setAccessToken(Mapbox.getAccessToken())
-      .setLocation("1600 Pennsylvania Ave NW")
-      .build();
+  private void addMarkers() {
+    Icon icon = IconFactory.getInstance(DirectionsMatrixApiActivity.this).fromResource(R.drawable.fastcharge_icon);
+    for (Feature feature : featureCollection.getFeatures()) {
+      mapboxMap.addMarker(new MarkerViewOptions()
+        .position(new LatLng(feature.getProperty("Latitude").getAsDouble(),
+          feature.getProperty("Longitude").getAsDouble()))
+        .snippet(feature.getStringProperty("Station_Name"))
+        .icon(icon));
+    }
+  }
 
+  private String loadGeoJsonFromAsset(String filename) {
+    try {
+      // Load GeoJSON file from local asset folder
+      InputStream is = getAssets().open(filename);
+      int size = is.available();
+      byte[] buffer = new byte[size];
+      is.read(buffer);
+      is.close();
+      return new String(buffer, "UTF-8");
+    } catch (Exception exception) {
+      Log.e("MapActivity", "Exception Loading GeoJSON: " + exception.toString());
+      exception.printStackTrace();
+      return null;
+    }
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
