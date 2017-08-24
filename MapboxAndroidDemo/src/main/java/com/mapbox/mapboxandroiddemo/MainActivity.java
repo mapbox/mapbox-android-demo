@@ -299,8 +299,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_adjust_layer_opacity_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_styles_langauge_switch_title,
-          R.string.activity_styles_langauge_switch_description,
+          R.string.activity_styles_language_switch_title,
+          R.string.activity_styles_language_switch_description,
           new Intent(MainActivity.this, LanguageSwitchActivity.class),
           R.string.activity_styles_language_switch_url
         ));

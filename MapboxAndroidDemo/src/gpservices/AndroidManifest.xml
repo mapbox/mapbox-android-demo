@@ -231,7 +231,7 @@
 
         <activity
             android:name=".examples.styles.LanguageSwitchActivity"
-            android:label="@string/activity_styles_langauge_switch_title">
+            android:label="@string/activity_styles_language_switch_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
