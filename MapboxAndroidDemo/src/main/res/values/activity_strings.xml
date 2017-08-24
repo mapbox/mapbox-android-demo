@@ -121,10 +121,10 @@
 
     <!--LanguageSwitchActivity activity-->
     <string name="language_switch_options_menu_language_english">English</string>
-    <string name="language_switch_options_menu_language_french">Français</string>
-    <string name="language_switch_options_menu_language_russian">Pусский</string>
-    <string name="language_switch_options_menu_language_german">Deutsche</string>
-    <string name="language_switch_options_menu_language_spanish">Español</string>
+    <string name="language_switch_options_menu_language_french">French</string>
+    <string name="language_switch_options_menu_language_russian">Russian</string>
+    <string name="language_switch_options_menu_language_german">German</string>
+    <string name="language_switch_options_menu_language_spanish">Spanish</string>
 
     <!--LanguageSwitchActivity activity-->
     <string name="custom_window_marker_title_spain">Spain</string>
