@@ -15,7 +15,7 @@ import com.mapbox.mapboxandroiddemo.examples.MapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.OfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
-import com.mapbox.mapboxandroiddemo.utils.OffsettingHelper;
+import com.maPpbox.mapboxandroiddemo.utils.OffsettingHelper;
 
 import java.util.ArrayList;
 

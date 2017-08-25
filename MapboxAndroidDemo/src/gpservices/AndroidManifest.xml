@@ -14,8 +14,8 @@
         android:name=".MapboxApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
 
         <activity
@@ -399,6 +399,15 @@
                     android:host="authorize"
                     android:scheme="mapbox-android-dev-preview"/>
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".labs.MapillaryActivity"
+            android:label="@string/activity_labs_mapillary_title"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
 
     </application>

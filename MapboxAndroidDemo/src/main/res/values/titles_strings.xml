@@ -66,5 +66,6 @@
     <string name="activity_lab_off_route_title">Off route detection</string>
     <string name="activity_lab_las_angeles_tourism_title">Los Angeles for tourists</string>
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
+    <string name="activity_labs_mapillary_title">Mapillary</string>
 
 </resources>

@@ -69,5 +69,6 @@
     <string name="activity_lab_las_angeles_tourism_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
     <string name="activity_lab_indoor_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
     <string name="activity_lab_rv_on_map_url" translatable="false">http://i.imgur.com/8mQQuMo.jpg</string>
+    <string name="activity_lab_mapillary_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
 
 </resources>
