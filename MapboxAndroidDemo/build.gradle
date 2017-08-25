@@ -89,7 +89,7 @@ dependencies {
     compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:0.3.0'
 
     // Mapbox Android UI
-    compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.2.1'
+    compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.2.2'
 
     // Other dependencies
     compile 'com.google.firebase:firebase-crash:11.0.4'
