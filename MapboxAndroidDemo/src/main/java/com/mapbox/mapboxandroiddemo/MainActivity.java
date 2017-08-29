@@ -541,7 +541,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         exampleItemModel.add(null);
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_labs_mapillary_title,
-          R.string.activity_labs_mapillary_title,
+          R.string.activity_labs_mapillary_description,
           new Intent(MainActivity.this, MapillaryActivity.class),
           R.string.activity_lab_mapillary_url
         ));
