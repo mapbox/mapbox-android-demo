@@ -21,7 +21,7 @@ source_lang = en
 type = ANDROID
 
 [mapbox-android-demo.titles_stringsxml]
-file_filter = MapboxAndroidDemo/src/main/res/values-<lang>/titles_stringsxml.xml
+file_filter = MapboxAndroidDemo/src/main/res/values-<lang>/titles_strings.xml
 source_file = MapboxAndroidDemo/src/main/res/values/titles_strings.xml
 source_lang = en
 type = ANDROID
