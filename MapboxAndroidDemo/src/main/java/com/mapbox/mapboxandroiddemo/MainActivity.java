@@ -86,7 +86,6 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivi
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
-import com.mapbox.mapboxandroiddemo.labs.MapillaryActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
@@ -539,12 +538,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         break;
       case R.id.nav_lab:
         exampleItemModel.add(null);
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_labs_mapillary_title,
-          R.string.activity_lab_mapillary_description,
-          new Intent(MainActivity.this, MapillaryActivity.class),
-          R.string.activity_lab_mapillary_url
-        ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_las_angeles_tourism_title,
           R.string.activity_lab_las_angeles_tourism_description,
