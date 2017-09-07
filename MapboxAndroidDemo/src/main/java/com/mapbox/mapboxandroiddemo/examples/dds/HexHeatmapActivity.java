@@ -113,16 +113,10 @@ public class HexHeatmapActivity extends AppCompatActivity {
     private String addBefore;
     private String layername = "hexgrid-heatmap";
     private int intensity = 8;
-    private int spread = 0.1;
+    private double spread = 0.1;
     private int minCellIntensity = 0; // Drop out cells that have less than this intensity
     private int maxPointIntensity = 20; // Don't let a single point have a greater weight than this
     private int cellDensity = 1;
-
-    private checkUpdateCompleteClosure =
-
-    function(e) {
-      thisprivate checkUpdateComplete (e);
-    }
 
     private boolean calculatingGrid = false;
     private boolean recalcWhenReady = false;
