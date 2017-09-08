@@ -60,7 +60,7 @@ public class MiniWindowActivity extends AppCompatActivity {
       mapFragment = SupportMapFragment.newInstance(options);
 
       // Add map fragment to parent container
-      transaction.add(R.id.container, mapFragment, "com.mapbox.map");
+      transaction.add(R.id.mini_map_fragment_container, mapFragment, "com.mapbox.map");
       transaction.commit();
     } else {
       mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
