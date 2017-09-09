@@ -6,25 +6,27 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxandroiddemo.utils.CustomFragmentForExample;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.SupportMapFragment;
 
-public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.OnCameraMoveStartedListener {
+public class MiniWindowActivity extends AppCompatActivity {
 
-  MapCameraDataFromActivityToFragment mapCameraDataFromActivityToFragment;
   private MapView mapView;
   private MapboxMap mainLargeMapboxMap;
-  private LatLng panamaCanal = new LatLng(9.143803, -79.7285160);
-
+  //  private LatLng panamaCanal = new LatLng(9.143803, -79.7285160);
+  private static final LatLngBounds AUSTRALIA_BOUNDS = new LatLngBounds.Builder()
+    .include(new LatLng(-9.136343, 109.372126))
+    .include(new LatLng(-44.640488, 158.590484))
+    .build();
   private LatLng postionOfMainLargeMap;
 
   @Override
@@ -48,6 +50,7 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
       }
     });
 
+
     // Create supportMapFragment
     SupportMapFragment mapFragment;
     if (savedInstanceState == null) {
@@ -55,18 +58,16 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
       // Create fragment
       final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-
       // Build mapboxMap
       MapboxMapOptions options = new MapboxMapOptions();
       options.styleUrl(Style.MAPBOX_STREETS);
       options.camera(new CameraPosition.Builder()
-        .target(panamaCanal)
-        .zoom(9)
+        .target(new LatLng(-26.145, 134.312))
+        .zoom(1)
         .build());
 
       // Create map fragment
       mapFragment = SupportMapFragment.newInstance(options);
-
 
       // Add map fragment to parent container
       transaction.add(R.id.mini_map_fragment_container, mapFragment, "com.mapbox.map");
@@ -96,10 +97,6 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
       }
     });
 
-  }
-
-  public interface MapCameraDataFromActivityToFragment {
-    void sendCameraTargetPosition(LatLng latLng);
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

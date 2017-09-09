@@ -20,9 +20,9 @@
         android:id="@+id/main_mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="9.14380"
-        mapbox:mapbox_cameraTargetLng="-79.728"
-        mapbox:mapbox_cameraZoom="11"
+        mapbox:mapbox_cameraTargetLat="-26.145"
+        mapbox:mapbox_cameraTargetLng="134.312"
+        mapbox:mapbox_cameraZoom="1"
         mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
 
 
