@@ -5,15 +5,6 @@
              android:layout_height="match_parent"
              android:orientation="vertical">
 
-    <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/main_mapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="9.14380"
-        mapbox:mapbox_cameraTargetLng="-79.728"
-        mapbox:mapbox_cameraZoom="11"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
-
     <FrameLayout
         android:id="@+id/mini_map_fragment_container"
         android:layout_width="150dp"
@@ -23,5 +14,16 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:background="@color/mapbox_blue"/>
+
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/main_mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="9.14380"
+        mapbox:mapbox_cameraTargetLng="-79.728"
+        mapbox:mapbox_cameraZoom="11"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
+
 
 </FrameLayout>
