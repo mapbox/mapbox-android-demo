@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxandroiddemo.utils.CustomFragment;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -18,16 +19,17 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.SupportMapFragment;
 
-public class MiniWindowActivity extends AppCompatActivity {
+public class MiniWindowActivity extends AppCompatActivity implements CustomFragment.OnDataPass {
 
   private MapView mapView;
   private MapboxMap mainLargeMapboxMap;
   //  private LatLng panamaCanal = new LatLng(9.143803, -79.7285160);
   private static final LatLngBounds AUSTRALIA_BOUNDS = new LatLngBounds.Builder()
-    .include(new LatLng(-9.136343, 109.372126))
-    .include(new LatLng(-44.640488, 158.590484))
-    .build();
+      .include(new LatLng(-9.136343, 109.372126))
+      .include(new LatLng(-44.640488, 158.590484))
+      .build();
   private LatLng postionOfMainLargeMap;
+  private SelectedBundle selectedBundle;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +64,9 @@ public class MiniWindowActivity extends AppCompatActivity {
       MapboxMapOptions options = new MapboxMapOptions();
       options.styleUrl(Style.MAPBOX_STREETS);
       options.camera(new CameraPosition.Builder()
-        .target(new LatLng(-26.145, 134.312))
-        .zoom(1)
-        .build());
+          .target(new LatLng(-26.145, 134.312))
+          .zoom(1)
+          .build());
 
       // Create map fragment
       mapFragment = SupportMapFragment.newInstance(options);
@@ -85,10 +87,10 @@ public class MiniWindowActivity extends AppCompatActivity {
         // Customize map with markers, polylines, etc.
 
         PolygonOptions polygonArea = new PolygonOptions()
-          .add(AUSTRALIA_BOUNDS.getNorthWest())
-          .add(AUSTRALIA_BOUNDS.getNorthEast())
-          .add(AUSTRALIA_BOUNDS.getSouthEast())
-          .add(AUSTRALIA_BOUNDS.getSouthWest());
+            .add(AUSTRALIA_BOUNDS.getNorthWest())
+            .add(AUSTRALIA_BOUNDS.getNorthEast())
+            .add(AUSTRALIA_BOUNDS.getSouthEast())
+            .add(AUSTRALIA_BOUNDS.getSouthWest());
         polygonArea.alpha(0.25f);
         polygonArea.fillColor(Color.parseColor("#ff9a00"));
         mapboxMap.addPolygon(polygonArea);
@@ -97,6 +99,22 @@ public class MiniWindowActivity extends AppCompatActivity {
       }
     });
 
+  }
+
+  private void createBundle() {
+    Bundle bundle = new Bundle();
+    bundle.putDouble("LAT", postionOfMainLargeMap.getLatitude());
+    bundle.putDouble("LONG", postionOfMainLargeMap.getLongitude());
+    CustomFragment fragobj = new CustomFragment();
+    fragobj.setArguments(bundle);
+  }
+
+  public void setOnBundleSelected(SelectedBundle selectedBundle) {
+    this.selectedBundle = selectedBundle;
+  }
+
+  public interface SelectedBundle {
+    void onBundleSelect(Bundle bundle);
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
