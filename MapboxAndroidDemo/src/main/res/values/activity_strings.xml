@@ -203,10 +203,7 @@
 
     <!-- GeoJSON plugin activity-->
     <string name="find_file_instruction_toast">Select a GeoJSON file on your device</string>
-    <string name="building_footprints">Building footprints in the city of Champaign, IL, USA</string>
-    <string name="asset_fab_text">Load via asset file</string>
-    <string name="url_fab_text">Load via URL</string>
-    <string name="path_fab_text">Load via device path</string>
+    <string name="boston_police_stations">Boston police stations</string>
 
     <!-- Raster and local style source activity-->
     <string name="load_raster_button_text">Load custom raster style</string>

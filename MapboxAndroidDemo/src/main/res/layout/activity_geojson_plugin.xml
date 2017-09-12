@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:fab="http://schemas.android.com/tools"
-             xmlns:mapbox="http://schemas.android.com/apk/res-auto"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="vertical">
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -21,49 +23,44 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="40.73581"
         mapbox:mapbox_cameraTargetLng="-73.99155"
-        mapbox:mapbox_cameraZoom="11"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
+        mapbox:mapbox_cameraZoom="6"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"/>
 
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions_parent_fab"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabPath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="150dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_path"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/mapboxBlue"
+        app:layout_anchorGravity="top"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="82dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_url"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/colorAccent"
+        app:layout_anchorGravity="top"/>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabAssets"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        fab:fab_addButtonColorNormal="@color/mapboxRed"
-        fab:fab_addButtonColorPressed="@color/mapboxWhite"
-        fab:fab_addButtonPlusIconColor="@color/mapboxWhite"
-        fab:fab_labelStyle="@style/menu_labels_style">
+        android:src="@drawable/ic_file"
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/mapboxOrange"/>
 
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabPath"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/mapboxBlue"
-            fab:fab_colorPressed="@color/mapboxWhite"
-            fab:fab_size="mini"
-            fab:fab_title="@string/path_fab_text"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabURL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/mapboxGreen"
-            fab:fab_colorPressed="@color/mapboxWhite"
-            fab:fab_size="mini"
-            fab:fab_title="@string/url_fab_text"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabAssets"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab="@color/mapboxWhite"
-            fab:fab_colorNormal="@color/mapboxRed"
-            fab:fab_colorPressed="@color/mapboxWhite"
-            fab:fab_size="mini"
-            fab:fab_title="@string/asset_fab_text"/>
-
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
-
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

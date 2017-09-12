@@ -2,11 +2,10 @@ package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import com.getbase.floatingactionbutton.FloatingActionButton;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -91,9 +90,8 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
       public void onClick(View v) {
         if (mapboxMap != null && geoJsonPlugin != null) {
           mapboxMap.clear();
-          geoJsonPlugin.setUrl("https://data.illinois.gov/dataset/101823db-237b-4005-8737-f58" +
-            "79803dd59/resource/4eb5b1e7-4e5d-44bc-a478-277d5c5d0909/download/data.geojson");
-          Toast.makeText(GeoJSONPluginActivity.this, R.string.building_footprints, Toast.LENGTH_SHORT).show();
+          geoJsonPlugin.setUrl("langsmith.cj6y6va1e1xq32wpddkc7t0gr-2glm1");
+          Toast.makeText(GeoJSONPluginActivity.this, R.string.boston_police_stations, Toast.LENGTH_SHORT).show();
         }
       }
     });
@@ -105,7 +103,8 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
       public void onClick(View v) {
         if (mapboxMap != null && geoJsonPlugin != null) {
           mapboxMap.clear();
-          geoJsonPlugin.setAssetsName("west_africa_power_plants.geojson");
+          geoJsonPlugin.setAssetsName("boston_police_stations.geojson");
+          Toast.makeText(GeoJSONPluginActivity.this, R.string.boston_police_stations, Toast.LENGTH_SHORT).show();
         }
       }
     });
