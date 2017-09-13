@@ -131,7 +131,7 @@ public class HexHeatmapActivity extends AppCompatActivity {
 
     }
 
-    private void setUpGeoJSONSource() {
+    private void setUpGeoJsonSource() {
       GeoJsonSource geoJsonSource = new GeoJsonSource("GeoJSON data");
       mapboxMap.addSource(geoJsonSource);
     }
