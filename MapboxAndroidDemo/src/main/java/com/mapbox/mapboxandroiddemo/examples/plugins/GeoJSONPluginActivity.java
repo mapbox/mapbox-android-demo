@@ -54,9 +54,8 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_geojson_plugin);
     setUpFabButtons();
-    progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-    coordinatorLayout = (CoordinatorLayout) findViewById(R.id
-      .coordinatorLayout);
+    progressBar = (ProgressBar) findViewById(R.id.geoJSONLoadProgressBar);
+    coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
@@ -217,18 +216,18 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
 
   @Override
   public void onPreLoading() {
-//    progressBar.setVisibility(View.VISIBLE);
+    progressBar.setVisibility(View.VISIBLE);
   }
 
   @Override
   public void onLoaded() {
     Toast.makeText(this, "GeoJson data loaded", Toast.LENGTH_LONG).show();
-//    progressBar.setVisibility(View.INVISIBLE);
+    progressBar.setVisibility(View.INVISIBLE);
   }
 
   @Override
   public void onLoadFailed(Exception e) {
-//    progressBar.setVisibility(View.INVISIBLE);
+    progressBar.setVisibility(View.INVISIBLE);
     Toast.makeText(this, "Error occur during load GeoJson data. see logcat", Toast.LENGTH_LONG).show();
     e.printStackTrace();
   }
