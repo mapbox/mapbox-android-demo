@@ -75,7 +75,6 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
       .withOnLoadingFilePath(this)
       .withMarkerClickListener(this)
       .build();
-    mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(32.6546, 51.6680), 7));
   }
 
   private void setUpFabButtons() {
@@ -106,8 +105,6 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
         if (mapboxMap != null && geoJsonPlugin != null) {
           mapboxMap.clear();
           geoJsonPlugin.setAssetsName("boston_police_stations.geojson");
-          Toast.makeText(GeoJSONPluginActivity.this, R.string.boston_police_stations, Toast.LENGTH_SHORT).show();
-          Toast.makeText(GeoJSONPluginActivity.this, R.string.tap_on_markers, Toast.LENGTH_SHORT).show();
         }
       }
     });
