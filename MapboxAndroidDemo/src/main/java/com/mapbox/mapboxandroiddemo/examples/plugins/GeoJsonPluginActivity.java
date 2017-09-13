@@ -31,7 +31,7 @@ import java.io.File;
 
 import timber.log.Timber;
 
-public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapReadyCallback,
+public class GeoJsonPluginActivity extends AppCompatActivity implements OnMapReadyCallback,
   OnLoadingGeoJsonListener, OnMarkerEventListener, FileChooserDialog.FileCallback {
 
   private CoordinatorLayout coordinatorLayout;
@@ -63,7 +63,7 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
-    GeoJSONPluginActivity.this.mapboxMap = mapboxMap;
+    GeoJsonPluginActivity.this.mapboxMap = mapboxMap;
     geoJsonPlugin = new GeoJsonPluginBuilder()
       .withContext(this)
       .withMap(mapboxMap)
@@ -86,7 +86,7 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
   private void onUrlFabClick() {
     urlFab.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick(View view) {
         if (mapboxMap != null && geoJsonPlugin != null) {
           mapboxMap.clear();
           geoJsonPlugin.setUrl("https://raw.githubusercontent.com/johan/world.geo.json/master/countries/SEN.geo.json");
@@ -98,7 +98,7 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
   private void onAssetsFabClick() {
     assetsFab.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick(View view) {
         if (mapboxMap != null && geoJsonPlugin != null) {
           mapboxMap.clear();
           geoJsonPlugin.setAssetsName("boston_police_stations.geojson");
@@ -110,17 +110,17 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
   private void onPathFabClick() {
     pathFab.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick(View view) {
         if (Build.VERSION.SDK_INT >= 23) {
           if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
             == PackageManager.PERMISSION_GRANTED) {
             Timber.v("Permission is granted");
             showFileChooserDialog();
-            Toast.makeText(GeoJSONPluginActivity.this, R.string.find_file_instruction_toast,
+            Toast.makeText(GeoJsonPluginActivity.this, R.string.find_file_instruction_toast,
               Toast.LENGTH_SHORT).show();
           } else {
             Timber.v("Permission is revoked");
-            ActivityCompat.requestPermissions(GeoJSONPluginActivity.this,
+            ActivityCompat.requestPermissions(GeoJsonPluginActivity.this,
               new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
           }
         } else { //permission is automatically granted on sdk<23 upon installation
@@ -226,10 +226,10 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
   }
 
   @Override
-  public void onLoadFailed(Exception e) {
+  public void onLoadFailed(Exception exception) {
     progressBar.setVisibility(View.INVISIBLE);
     Toast.makeText(this, "Error occur during load GeoJson data. see logcat", Toast.LENGTH_LONG).show();
-    e.printStackTrace();
+    exception.printStackTrace();
   }
 
   @Override
