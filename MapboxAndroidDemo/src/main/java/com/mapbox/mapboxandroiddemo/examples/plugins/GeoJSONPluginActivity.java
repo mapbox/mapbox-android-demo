@@ -5,7 +5,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -34,6 +36,7 @@ import timber.log.Timber;
 public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapReadyCallback,
   OnLoadingGeoJsonListener, OnMarkerEventListener, FileChooserDialog.FileCallback {
 
+  private CoordinatorLayout coordinatorLayout;
   private MapView mapView;
   private MapboxMap mapboxMap;
   private GeoJsonPlugin geoJsonPlugin;
@@ -54,7 +57,8 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
     setContentView(R.layout.activity_geojson_plugin);
     setUpFabButtons();
     progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-
+    coordinatorLayout = (CoordinatorLayout) findViewById(R.id
+      .coordinatorLayout);
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
@@ -70,7 +74,6 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
       .withOnLoadingFileAssets(this)
       .withOnLoadingFilePath(this)
       .withMarkerClickListener(this)
-      .withRandomFillColor()
       .build();
     mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(32.6546, 51.6680), 7));
   }
@@ -90,8 +93,7 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
       public void onClick(View v) {
         if (mapboxMap != null && geoJsonPlugin != null) {
           mapboxMap.clear();
-          geoJsonPlugin.setUrl("langsmith.cj6y6va1e1xq32wpddkc7t0gr-2glm1");
-          Toast.makeText(GeoJSONPluginActivity.this, R.string.boston_police_stations, Toast.LENGTH_SHORT).show();
+          geoJsonPlugin.setUrl("https://raw.githubusercontent.com/johan/world.geo.json/master/countries/SEN.geo.json");
         }
       }
     });
@@ -105,6 +107,7 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
           mapboxMap.clear();
           geoJsonPlugin.setAssetsName("boston_police_stations.geojson");
           Toast.makeText(GeoJSONPluginActivity.this, R.string.boston_police_stations, Toast.LENGTH_SHORT).show();
+          Toast.makeText(GeoJSONPluginActivity.this, R.string.tap_on_markers, Toast.LENGTH_SHORT).show();
         }
       }
     });
@@ -237,7 +240,7 @@ public class GeoJSONPluginActivity extends AppCompatActivity implements OnMapRea
 
   @Override
   public void onMarkerClickListener(Marker marker, JsonObject properties) {
-    Toast.makeText(this, properties.get("title").getAsString(), Toast.LENGTH_SHORT).show();
+    Snackbar.make(coordinatorLayout, properties.get("NAME").getAsString(), Snackbar.LENGTH_SHORT).show();
   }
 }
 
