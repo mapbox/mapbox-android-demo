@@ -576,7 +576,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, SpaceStationLocationActivity.class),
           R.string.activity_lab_space_station_location_url
         ));
-        if (Build.VERSION.SDK_INT > 24) {
+        if (Build.VERSION.SDK_INT > 26) {
           exampleItemModel.add(new ExampleItemModel(
             R.string.activity_lab_picture_in_picture_title,
             R.string.activity_lab_picture_in_picture_description,
