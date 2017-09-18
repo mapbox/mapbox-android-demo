@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -575,12 +576,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, SpaceStationLocationActivity.class),
           R.string.activity_lab_space_station_location_url
         ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_picture_in_picture_title,
-          R.string.activity_lab_picture_in_picture_description,
-          new Intent(MainActivity.this, PictureInPictureActivity.class),
-          R.string.activity_lab_picture_in_picture_url, true
-        ));
+        if (Build.VERSION.SDK_INT > 24) {
+          exampleItemModel.add(new ExampleItemModel(
+            R.string.activity_lab_picture_in_picture_title,
+            R.string.activity_lab_picture_in_picture_description,
+            new Intent(MainActivity.this, PictureInPictureActivity.class),
+            R.string.activity_lab_picture_in_picture_url, true
+          ));
+        }
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_rv_on_map_title,
           R.string.activity_lab_rv_on_map_description,
