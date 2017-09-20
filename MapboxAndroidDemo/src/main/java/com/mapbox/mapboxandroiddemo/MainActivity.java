@@ -36,6 +36,7 @@ import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivit
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
+import com.mapbox.mapboxandroiddemo.examples.annotations.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
@@ -410,6 +411,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_annotation_polygon_holes_title,
           R.string.activity_annotation_polygon_holes_description,
           new Intent(MainActivity.this, PolygonHolesActivity.class),
+          R.string.activity_annotation_polygon_holes_url, false
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_annotation_multiple_geometries_title,
+          R.string.activity_annotation_multiple_geometries_description,
+          new Intent(MainActivity.this, MultipleGeometriesActivity.class),
           R.string.activity_annotation_polygon_holes_url, true
         ));
         exampleItemModel.add(new ExampleItemModel(
