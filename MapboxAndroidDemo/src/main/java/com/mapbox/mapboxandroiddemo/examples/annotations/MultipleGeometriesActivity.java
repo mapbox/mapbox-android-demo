@@ -52,9 +52,9 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
   private void createGeoJsonSource() {
     Log.d("here", "running createGeoJsonSource()");
     GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID,
-      loadJsonFromAsset("norway.geojson"));
+      loadJsonFromAsset("lassen_national_park.geojson"));
     mapboxMap.addSource(geoJsonSource);
-    Log.d("Here", loadJsonFromAsset("norway.geojson"));
+    Log.d("Here", loadJsonFromAsset("lassen_national_park.geojson"));
   }
 
   private void addPolygonLayer() {
@@ -63,7 +63,7 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
     borderOutlineLayer.setProperties(
       PropertyFactory.fillColor(Color.RED),
       PropertyFactory.fillOpacity(.4f));
-    borderOutlineLayer.setFilter(Filter.eq("type", "Polygon"));
+    borderOutlineLayer.setFilter(Filter.eq("{type}", "Point"));
     mapboxMap.addLayer(borderOutlineLayer);
   }
 
@@ -71,9 +71,9 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
     Log.d("here", "running addPointsLayer()");
     CircleLayer pointsLayer = new CircleLayer("points", GEOJSON_SOURCE_ID);
     pointsLayer.setProperties(
-      PropertyFactory.fillColor(Color.YELLOW),
+      PropertyFactory.circleColor(Color.YELLOW),
       PropertyFactory.circleRadius(6f));
-    pointsLayer.setFilter(Filter.eq("type", "Point"));
+    pointsLayer.setFilter(Filter.eq("{type}", "Point"));
     mapboxMap.addLayer(pointsLayer);
     Log.d("here", "running addPointsLayer()");
   }
@@ -136,6 +136,4 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
       return null;
     }
   }
-
-
 }

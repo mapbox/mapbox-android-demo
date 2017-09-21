@@ -257,7 +257,6 @@ public class LosAngelesTourismActivity extends AppCompatActivity implements OnMa
 
   private String loadJsonFromAsset(String filename) {
     // Using this method to load in GeoJSON files from the assets folder.
-
     try {
       InputStream is = getAssets().open(filename);
       int size = is.available();
