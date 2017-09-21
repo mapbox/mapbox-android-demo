@@ -179,6 +179,9 @@
     <string name="share_app_text">Hey, check out these great examples showing what can be built using Mapbox:\n
     http://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo</string>
     <string name="share_app_choose_one_instruction">Share the app:</string>
+    <string name="share_app_cta">Share the app:</string>
+    <string name="share_success_and_thanks">Successfully shared. Thanks!</string>
+    <string name="share_error">Error with sharing. Please try again.</string>
 
     <!-- Clicked on layer activity -->
     <string name="click_on_polygon_toast_instruction">Click anywhere within polygon FillLayer</string>

@@ -21,10 +21,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.appinvite.FirebaseAppInvite;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
@@ -108,6 +115,7 @@ import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_K
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+  private static final int REQUEST_INVITE = 2;
   private ArrayList<ExampleItemModel> exampleItemModel;
   private ExampleAdapter adapter;
   private int currentCategory = R.id.nav_basics;
@@ -130,6 +138,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     analytics = AnalyticsTracker.getInstance(this, false);
 
     exampleItemModel = new ArrayList<>();
+
+    checkForFirebaseInvite();
 
     // Create the adapter to convert the array to views
     adapter = new ExampleAdapter(this, exampleItemModel);
@@ -218,6 +228,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     if (id == R.id.share_app_in_nav_drawer) {
+      Log.d("MainActivity", "Clicked on share_app_in_nav_drawer");
       shareApp();
     }
 
@@ -744,13 +755,71 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
   }
 
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    Log.d("MainActivity", "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
+
+    if (requestCode == REQUEST_INVITE) {
+      if (resultCode == RESULT_OK) {
+        // Get the invitation IDs of all sent messages
+        String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
+        for (String id : ids) {
+          Log.d("MainActivity", "onActivityResult: sent invitation " + id);
+        }
+        Toast.makeText(this, R.string.share_success_and_thanks, Toast.LENGTH_SHORT).show();
+      } else {
+        Toast.makeText(this, R.string.share_error, Toast.LENGTH_SHORT).show();
+      }
+    }
+  }
+
+  private void checkForFirebaseInvite() {
+    FirebaseDynamicLinks.getInstance().getDynamicLink(getIntent())
+      .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+        @Override
+        public void onSuccess(PendingDynamicLinkData data) {
+          if (data == null) {
+            Log.d("MainActivity", "getInvitation: no data");
+            return;
+          }
+
+          // Get the deep link
+          Uri deepLink = data.getLink();
+
+          // Extract invite
+          FirebaseAppInvite invite = FirebaseAppInvite.getInvitation(data);
+          if (invite != null) {
+            Log.d("MainActivity", "invite != null");
+            String invitationId = invite.getInvitationId();
+          }
+
+        }
+      })
+      .addOnFailureListener(this, new OnFailureListener() {
+        @Override
+        public void onFailure(@NonNull Exception exception) {
+          Log.w("MainActivity", "getDynamicLink:onFailure", exception);
+        }
+      });
+  }
+
   private void shareApp() {
     try {
-      Intent intent = new Intent(Intent.ACTION_SEND);
+      /*Intent intent = new Intent(Intent.ACTION_SEND);
       intent.setType("text/plain");
       intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_app_subject));
       intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_app_text));
       startActivity(Intent.createChooser(intent, getString(R.string.share_app_choose_one_instruction)));
+*/
+      Intent firebaseShareIntent = new AppInviteInvitation.IntentBuilder(getString(R.string.share_app_choose_one_instruction))
+        .setMessage(getString(R.string.share_app_text))
+        .setCallToActionText(getString(R.string.share_app_cta))
+        .build();
+      startActivityForResult(firebaseShareIntent, REQUEST_INVITE);
+      Log.d("MainActivity", "startActivityForResult");
+
+
     } catch (Exception exception) {
       Log.d("MainActivity", "shareApp: exception = " + exception);
     }
