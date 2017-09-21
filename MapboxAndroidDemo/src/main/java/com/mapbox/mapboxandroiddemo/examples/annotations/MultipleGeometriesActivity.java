@@ -1,21 +1,29 @@
 package com.mapbox.mapboxandroiddemo.examples.annotations;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.plugins.geojson.GeoJsonPlugin;
-import com.mapbox.mapboxsdk.plugins.geojson.GeoJsonPluginBuilder;
+import com.mapbox.mapboxsdk.style.layers.CircleLayer;
+import com.mapbox.mapboxsdk.style.layers.FillLayer;
+import com.mapbox.mapboxsdk.style.layers.Filter;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MultipleGeometriesActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-
   private MapView mapView;
-  private GeoJsonPlugin geoJsonPlugin;
+  private MapboxMap mapboxMap;
+  private static final String GEOJSON_SOURCE_ID = "GEOJSON FILE";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +43,40 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
-    geoJsonPlugin = new GeoJsonPluginBuilder()
-      .withContext(this)
-      .withMap(mapboxMap)
-      .build();
-    geoJsonPlugin.setAssetsName("sample_norway_campsites.geojson");
+    MultipleGeometriesActivity.this.mapboxMap = mapboxMap;
+    createGeoJsonSource();
+    addPolygonLayer();
+//    addPointsLayer();
   }
+
+  private void createGeoJsonSource() {
+    Log.d("here", "running createGeoJsonSource()");
+    GeoJsonSource fakeNorwayCampingSites = new GeoJsonSource(GEOJSON_SOURCE_ID,
+      loadJsonFromAsset("lassen_national_park.geojson"));
+    mapboxMap.addSource(fakeNorwayCampingSites);
+  }
+
+  private void addPolygonLayer() {
+    Log.d("here", "running addPolygonLayer()");
+    FillLayer borderOutlineLayer = new FillLayer("norway border", GEOJSON_SOURCE_ID);
+    borderOutlineLayer.setProperties(
+      PropertyFactory.fillColor(Color.RED),
+      PropertyFactory.fillOpacity(.4f));
+//    borderOutlineLayer.setFilter(Filter.eq("type", "Polygon"));
+    mapboxMap.addLayer(borderOutlineLayer);
+  }
+
+  /*private void addPointsLayer() {
+    Log.d("here", "running addPointsLayer()");
+    CircleLayer pointsLayer = new CircleLayer("norwegian camp sites", GEOJSON_SOURCE_ID);
+    pointsLayer.setProperties(
+      PropertyFactory.fillColor(Color.YELLOW),
+      PropertyFactory.circleRadius(6f));
+    pointsLayer.setFilter(Filter.eq("type", "Point"));
+    mapboxMap.addLayer(pointsLayer);
+    Log.d("here", "running addPointsLayer()");
+
+  }*/
 
   // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
@@ -84,4 +120,22 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
   }
+
+  private String loadJsonFromAsset(String filename) {
+    // Using this method to load in GeoJSON files from the assets folder.
+    try {
+      InputStream is = getAssets().open(filename);
+      int size = is.available();
+      byte[] buffer = new byte[size];
+      is.read(buffer);
+      is.close();
+      return new String(buffer, "UTF-8");
+
+    } catch (IOException ex) {
+      ex.printStackTrace();
+      return null;
+    }
+  }
+
+
 }
