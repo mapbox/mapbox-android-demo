@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply from: "$project.rootDir/script-git-version.gradle"
 apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.google.gms.google-services'
 
 ext {
     supportLibVersion = '25.3.1'
