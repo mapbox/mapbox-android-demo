@@ -46,37 +46,37 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
     MultipleGeometriesActivity.this.mapboxMap = mapboxMap;
     createGeoJsonSource();
     addPolygonLayer();
-//    addPointsLayer();
+    addPointsLayer();
   }
 
   private void createGeoJsonSource() {
     Log.d("here", "running createGeoJsonSource()");
-    GeoJsonSource fakeNorwayCampingSites = new GeoJsonSource(GEOJSON_SOURCE_ID,
+    GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID,
       loadJsonFromAsset("lassen_national_park.geojson"));
-    mapboxMap.addSource(fakeNorwayCampingSites);
+    mapboxMap.addSource(geoJsonSource);
+    Log.d("Here", loadJsonFromAsset("lassen_national_park.geojson"));
   }
 
   private void addPolygonLayer() {
     Log.d("here", "running addPolygonLayer()");
-    FillLayer borderOutlineLayer = new FillLayer("norway border", GEOJSON_SOURCE_ID);
+    FillLayer borderOutlineLayer = new FillLayer("polygon", GEOJSON_SOURCE_ID);
     borderOutlineLayer.setProperties(
       PropertyFactory.fillColor(Color.RED),
       PropertyFactory.fillOpacity(.4f));
-//    borderOutlineLayer.setFilter(Filter.eq("type", "Polygon"));
+    borderOutlineLayer.setFilter(Filter.eq("type", "Polygon"));
     mapboxMap.addLayer(borderOutlineLayer);
   }
 
-  /*private void addPointsLayer() {
+  private void addPointsLayer() {
     Log.d("here", "running addPointsLayer()");
-    CircleLayer pointsLayer = new CircleLayer("norwegian camp sites", GEOJSON_SOURCE_ID);
+    CircleLayer pointsLayer = new CircleLayer("points", GEOJSON_SOURCE_ID);
     pointsLayer.setProperties(
       PropertyFactory.fillColor(Color.YELLOW),
       PropertyFactory.circleRadius(6f));
     pointsLayer.setFilter(Filter.eq("type", "Point"));
     mapboxMap.addLayer(pointsLayer);
     Log.d("here", "running addPointsLayer()");
-
-  }*/
+  }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
