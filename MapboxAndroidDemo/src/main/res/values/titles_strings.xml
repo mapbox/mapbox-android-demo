@@ -40,6 +40,7 @@
     <string name="activity_annotation_marker_view_title">Draw a marker view</string>
     <string name="activity_annotation_custom_info_window_title">Custom info window</string>
     <string name="activity_annotation_animated_marker_title">Animate marker position</string>
+    <string name="activity_annotation_location_and_markers_title">Device location with moving markers</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
     <string name="activity_camera_restrict_title">Restrict map panning</string>
