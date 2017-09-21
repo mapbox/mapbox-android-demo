@@ -812,7 +812,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_app_text));
       startActivity(Intent.createChooser(intent, getString(R.string.share_app_choose_one_instruction)));
 */
-      Intent firebaseShareIntent = new AppInviteInvitation.IntentBuilder(getString(R.string.share_app_choose_one_instruction))
+      Intent firebaseShareIntent = new AppInviteInvitation.IntentBuilder(
+        getString(R.string.share_app_choose_one_instruction))
         .setMessage(getString(R.string.share_app_text))
         .setCallToActionText(getString(R.string.share_app_cta))
         .build();
