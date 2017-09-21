@@ -52,9 +52,9 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
   private void createGeoJsonSource() {
     Log.d("here", "running createGeoJsonSource()");
     GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID,
-      loadJsonFromAsset("lassen_national_park.geojson"));
+      loadJsonFromAsset("norway.geojson"));
     mapboxMap.addSource(geoJsonSource);
-    Log.d("Here", loadJsonFromAsset("lassen_national_park.geojson"));
+    Log.d("Here", loadJsonFromAsset("norway.geojson"));
   }
 
   private void addPolygonLayer() {
