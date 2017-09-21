@@ -769,7 +769,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         Toast.makeText(this, R.string.share_success_and_thanks, Toast.LENGTH_SHORT).show();
       } else {
-        Toast.makeText(this, R.string.share_error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.no_share_message, Toast.LENGTH_SHORT).show();
       }
     }
   }
