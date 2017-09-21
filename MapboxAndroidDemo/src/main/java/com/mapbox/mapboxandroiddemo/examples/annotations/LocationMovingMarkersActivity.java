@@ -24,7 +24,8 @@ import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
 import java.util.List;
 
-public class LocationMovingMarkersActivity extends AppCompatActivity implements LocationEngineListener, PermissionsListener {
+public class LocationMovingMarkersActivity extends AppCompatActivity implements OnMapReadyCallback,
+  LocationEngineListener, PermissionsListener {
 
   private PermissionsManager permissionsManager;
   private LocationLayerPlugin locationPlugin;
@@ -45,13 +46,18 @@ public class LocationMovingMarkersActivity extends AppCompatActivity implements 
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-        LocationMovingMarkersActivity.this.mapboxMap = mapboxMap;
-        enableLocationPlugin();
-      }
-    });
+    mapView.getMapAsync(this);
+  }
+
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    LocationMovingMarkersActivity.this.mapboxMap = mapboxMap;
+    enableLocationPlugin();
+    addMarkers();
+  }
+
+  private void addMarkers() {
+
   }
 
   @SuppressWarnings( {"MissingPermission"})
