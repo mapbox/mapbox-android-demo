@@ -90,7 +90,7 @@ public class DirectionsActivity extends AppCompatActivity {
       .setDestination(destination)
       .setOverview(DirectionsCriteria.OVERVIEW_FULL)
       .setProfile(DirectionsCriteria.PROFILE_CYCLING)
-      .setAccessToken(Mapbox.getAccessToken())
+      .setAccessToken(getString(R.string.access_token))
       .build();
 
     client.enqueueCall(new Callback<DirectionsResponse>() {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ****** These strings are random ones that are for the Android system
+    and don't have to do with particular examples ****** -->
+
+    <string name="app_name">Giới thiệu Mapbox</string>
+    <string name="examples">Ví dụ Android</string>
+
+    <!-- UI Strings -->
+    <string name="navigation_drawer_open">Mở ngăn kéo điều hướng</string>
+    <string name="navigation_drawer_close">Đóng ngăn kéo điều hướng</string>
+
+    <string name="info_dialog_title">Bắt đầu</string>
+    <string name="info_dialog_description">Bạn có thích thư viện này không? Hãy tìm hiểu cách đưa nó vào ứng dụng của bạn!</string>
+    <string name="info_dialog_positive_button_text">Bắt đầu Tìm hiểu</string>
+    <string name="info_dialog_negative_button_text">Thôi</string>
+
+    <!-- toolbar items -->
+    <string name="info">Thông tin</string>
+
+    <!-- nav drawer categories -->
+    <string name="getting_started_category">Bắt đầu</string>
+    <string name="styles_category">Kiểu</string>
+    <string name="dds_category">Định kiểu theo dữ liệu</string>
+    <string name="annotations_category">Chú thích</string>
+    <string name="camera_category">Điểm nhìn</string>
+    <string name="offline_category">Ngoại tuyến</string>
+    <string name="query_map_category">Truy vấn bản đồ</string>
+    <string name="android_services_category">Dịch vụ Android</string>
+    <string name="lab_category">Phòng thí nghiệm</string>
+    <string name="share">Chia sẻ</string>
+    <string name="settings">Thiết lập</string>
+
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ****** These strings are random ones that are for the Android system
+    and don't have to do with particular examples ****** -->
+
+    <string name="app_name">Mapbox Demo</string>
+    <string name="mapbox" translatable="false">Mapbox</string>
+    <string name="examples">Android examples</string>
+
+    <!-- Access Token -->
+    <string name="access_token" translatable="false">pk.eyJ1IjoiY2FtbWFjZSIsImEiOiJjaW9vbGtydnQwMDAwdmRrcWlpdDVoM3pjIn0.Oy_gHelWnV12kJxHQWV7XQ</string>
+
+    <!-- UI Strings -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="info_dialog_title">Getting started</string>
+    <string name="info_dialog_description">Like the maps and examples? Learn how to include them in your app!</string>
+    <string name="info_dialog_positive_button_text">Start Learning</string>
+    <string name="info_dialog_negative_button_text">Not now</string>
+
+    <string name="description_labs">While other categories in this app present examples doing one specific thing, the lab category combines examples to show the power of the SDK.</string>
+    <string name="description_mas">Mapbox Android Services bundles many of the Mapbox APIs into a single SDK such as directions, geocoding, and many of the other utilities offered.</string>
+    <string name="description_query">Examples here show how to query the map data to obtain information such as a features geometry or properties.</string>
+
+    <!-- toolbar items -->
+    <string name="info">Info</string>
+
+    <!-- nav drawer categories -->
+    <string name="getting_started_category">Getting started</string>
+    <string name="styles_category">Styles</string>
+    <string name="dds_category">Data driven styling</string>
+    <string name="annotations_category">Annotations</string>
+    <string name="camera_category">Camera</string>
+    <string name="offline_category">Offline</string>
+    <string name="query_map_category">Query map</string>
+    <string name="android_services_category">Android Services</string>
+    <string name="lab_category">Lab</string>
+    <string name="share">Share</string>
+    <string name="settings">Settings</string>
+
+</resources>
