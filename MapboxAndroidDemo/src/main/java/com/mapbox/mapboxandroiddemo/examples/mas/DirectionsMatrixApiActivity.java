@@ -10,6 +10,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -92,9 +93,10 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
   }
 
   private void addMarkers() {
-    Icon icon = IconFactory.getInstance(DirectionsMatrixApiActivity.this).fromResource(R.drawable.fastcharge_icon);
+    Icon icon = IconFactory.getInstance(DirectionsMatrixApiActivity.this).fromResource(R.drawable.green_marker);
     for (Feature feature : featureCollection.getFeatures()) {
-      mapboxMap.addMarker(new MarkerViewOptions()
+
+      mapboxMap.addMarker(new MarkerOptions()
         .position(new LatLng(feature.getProperty("Latitude").getAsDouble(),
           feature.getProperty("Longitude").getAsDouble()))
         .snippet(feature.getStringProperty("Station_Name"))
