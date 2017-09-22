@@ -26,7 +26,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
 
-public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.OnCameraIdleListener {
+public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.OnCameraMoveListener {
 
   private MapView mapView;
   private MapboxMap mainLargeMapboxMap;
@@ -99,15 +99,8 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
         polygonArea.alpha(0.25f);
         polygonArea.fillColor(Color.parseColor("#ff9a00"));
         mapboxMap.addPolygon(polygonArea);
-
       }
     });
-
-  }
-
-  @Override
-  public void onAttachFragment(Fragment fragment) {
-    super.onAttachFragment(fragment);
 
   }
 
@@ -115,11 +108,10 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
     public void onMapMoved(CameraPosition cameraPosition);
   }
 
-
   @Override
-  public void onCameraIdle() {
+  public void onCameraMove() {
+    Log.d("MiniWindowActivity", "Camera moving");
     onMapMovedFragmentInterfaceListener.onMapMoved(mainLargeMapboxMap.getCameraPosition());
-
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
@@ -174,7 +166,7 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
    * @see #getMapAsync(OnMapReadyCallback)
    */
   public static class CustomSupportMapFragment extends Fragment implements
-    OnMapMovedFragmentInterface {
+    MiniWindowActivity.OnMapMovedFragmentInterface{
 
     private MapView map;
     private OnMapReadyCallback onMapReadyCallback;
@@ -202,7 +194,7 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
 
     @Override
     public void onMapMoved(CameraPosition cameraPosition) {
-      Log.d("In Fragment", "camera lat position = " + cameraPosition.target.getLatitude() + " and long = "
+      Log.d("MiniWindowActivity", "camera lat position = " + cameraPosition.target.getLatitude() + " and long = "
         + cameraPosition.target.getLongitude());
 
       // TODO: Move fragment map camera in this method?
