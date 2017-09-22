@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,16 +26,14 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
 
-public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.OnCameraMoveListener {
+public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.OnCameraIdleListener {
 
   private MapView mapView;
   private MapboxMap mainLargeMapboxMap;
-  //  private LatLng panamaCanal = new LatLng(9.143803, -79.7285160);
   private static final LatLngBounds AUSTRALIA_BOUNDS = new LatLngBounds.Builder()
     .include(new LatLng(-9.136343, 109.372126))
     .include(new LatLng(-44.640488, 158.590484))
     .build();
-  private LatLng postionOfMainLargeMap;
   private OnMapMovedFragmentInterface onMapMovedFragmentInterfaceListener;
 
   @Override
@@ -101,9 +100,14 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
         polygonArea.fillColor(Color.parseColor("#ff9a00"));
         mapboxMap.addPolygon(polygonArea);
 
-
       }
     });
+
+  }
+
+  @Override
+  public void onAttachFragment(Fragment fragment) {
+    super.onAttachFragment(fragment);
 
   }
 
@@ -111,9 +115,11 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
     public void onMapMoved(CameraPosition cameraPosition);
   }
 
+
   @Override
-  public void onCameraMove() {
+  public void onCameraIdle() {
     onMapMovedFragmentInterfaceListener.onMapMoved(mainLargeMapboxMap.getCameraPosition());
+
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
@@ -196,7 +202,10 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
 
     @Override
     public void onMapMoved(CameraPosition cameraPosition) {
+      Log.d("In Fragment", "camera lat position = " + cameraPosition.target.getLatitude() + " and long = "
+        + cameraPosition.target.getLongitude());
 
+      // TODO: Move fragment map camera in this method?
     }
 
     /**
