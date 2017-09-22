@@ -74,7 +74,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.CustomRasterStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.HexabinExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.HexabinExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
