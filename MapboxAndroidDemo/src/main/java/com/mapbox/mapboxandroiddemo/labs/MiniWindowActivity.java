@@ -53,6 +53,29 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         MiniWindowActivity.this.mainLargeMapboxMap = mapboxMap;
+
+        mainLargeMapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
+          @Override
+          public void onMapClick(@NonNull LatLng point) {
+            Log.d("MiniWindowActivity", "Clicked on map");
+          }
+        });
+
+        mainLargeMapboxMap.setOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+          @Override
+          public void onCameraMove() {
+            Log.d("MiniWindowActivity", "Camera moving");
+            onMapMovedFragmentInterfaceListener.onMapMoved(mainLargeMapboxMap.getCameraPosition());
+          }
+        });
+
+        mainLargeMapboxMap.setOnCameraIdleListener(new MapboxMap.OnCameraIdleListener() {
+          @Override
+          public void onCameraIdle() {
+            Log.d("MiniWindowActivity", "Camera stopped moving");
+
+          }
+        });
       }
     });
 
@@ -106,6 +129,7 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
 
   public interface OnMapMovedFragmentInterface {
     public void onMapMoved(CameraPosition cameraPosition);
+    void onMapMoved(CameraPosition cameraPosition);
   }
 
   @Override
@@ -167,6 +191,7 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
    */
   public static class CustomSupportMapFragment extends Fragment implements
     MiniWindowActivity.OnMapMovedFragmentInterface{
+    MiniWindowActivity.OnMapMovedFragmentInterface {
 
     private MapView map;
     private OnMapReadyCallback onMapReadyCallback;
