@@ -17,6 +17,7 @@ import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
@@ -37,6 +38,11 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
   private OnMapMovedFragmentInterface onMapMovedFragmentInterfaceListener;
 
   @Override
+  public void onAttachFragment(android.app.Fragment fragment) {
+    super.onAttachFragment(fragment);
+  }
+
+  @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
@@ -46,6 +52,9 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_mini_window);
+
+    onMapMovedFragmentInterfaceListener = (OnMapMovedFragmentInterface) this;
+
 
     mapView = (MapView) findViewById(R.id.main_mapView);
     mapView.onCreate(savedInstanceState);
@@ -66,6 +75,7 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
           public void onCameraMove() {
             Log.d("MiniWindowActivity", "Camera moving");
             onMapMovedFragmentInterfaceListener.onMapMoved(mainLargeMapboxMap.getCameraPosition());
+
           }
         });
 
@@ -128,7 +138,6 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
   }
 
   public interface OnMapMovedFragmentInterface {
-    public void onMapMoved(CameraPosition cameraPosition);
     void onMapMoved(CameraPosition cameraPosition);
   }
 
@@ -190,7 +199,6 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
    * @see #getMapAsync(OnMapReadyCallback)
    */
   public static class CustomSupportMapFragment extends Fragment implements
-    MiniWindowActivity.OnMapMovedFragmentInterface{
     MiniWindowActivity.OnMapMovedFragmentInterface {
 
     private MapView map;
@@ -201,8 +209,16 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
      *
      * @return MapFragment created
      */
+
     public static CustomSupportMapFragment newInstance() {
       return new CustomSupportMapFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+      super.onAttach(context);
+
+
     }
 
     /**
@@ -218,11 +234,15 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
     }
 
     @Override
-    public void onMapMoved(CameraPosition cameraPosition) {
+    public void onMapMoved(final CameraPosition cameraPosition) {
       Log.d("MiniWindowActivity", "camera lat position = " + cameraPosition.target.getLatitude() + " and long = "
         + cameraPosition.target.getLongitude());
-
-      // TODO: Move fragment map camera in this method?
+      map.getMapAsync(new OnMapReadyCallback() {
+        @Override
+        public void onMapReady(MapboxMap mapboxMap) {
+          mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
+      });
     }
 
     /**
