@@ -540,7 +540,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_mas_maxtrix_api_title,
           R.string.activity_mas_matrix_api_description,
           new Intent(MainActivity.this, DirectionsMatrixApiActivity.class),
-          R.string.activity_mas_static_image_url
+          R.string.activity_mas_matrix_url
         ));
         currentCategory = R.id.nav_mas;
         break;
