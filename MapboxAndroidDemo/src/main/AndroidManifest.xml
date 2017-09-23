@@ -11,9 +11,9 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:launchMode="singleTop"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
@@ -99,7 +99,7 @@
         </activity>
         <activity
             android:name=".examples.mas.DirectionsActivity"
-            android:label="@string/activity_mas_directions_title">
+            android:label="@string/activity_mas_matrix_api_description">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -233,7 +233,8 @@
         </activity>
         <activity
             android:name=".examples.mas.DirectionsMatrixApiActivity"
-            android:label="@string/activity_mas_map_matching_title">
+            android:label="@string/activity_mas_maxtrix_api_title">
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -241,6 +242,7 @@
         <activity
             android:name=".examples.styles.ShowHideLayersActivity"
             android:label="@string/activity_styles_show_hide_layer_title">
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -248,6 +250,7 @@
         <activity
             android:name=".examples.styles.LanguageSwitchActivity"
             android:label="@string/activity_styles_language_switch_title">
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -255,6 +258,7 @@
         <activity
             android:name=".examples.styles.ColorSwitcherActivity"
             android:label="@string/activity_styles_color_switcher_title">
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -262,6 +266,7 @@
         <activity
             android:name=".examples.styles.AdjustLayerOpacityActivity"
             android:label="@string/activity_styles_adjust_layer_opacity_title">
+            <m/>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -283,6 +288,7 @@
         <activity
             android:name=".examples.styles.ZoomDependentFillColorActivity"
             android:label="@string/activity_style_zoom_dependent_fill_color_title">
+            <met/>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>

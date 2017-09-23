@@ -18,6 +18,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.api.directions.v5.DirectionsCriteria;
 import com.mapbox.services.api.directions.v5.models.DirectionsRoute;
+import com.mapbox.services.api.directions.v5.models.DirectionsWaypoint;
 import com.mapbox.services.api.directionsmatrix.v1.MapboxDirectionsMatrix;
 import com.mapbox.services.api.directionsmatrix.v1.models.DirectionsMatrixResponse;
 import com.mapbox.services.commons.geojson.Feature;
@@ -76,11 +77,11 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
 
         addMarkers();
 
-        makeMatrixApiCall();
 
         mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
           @Override
           public boolean onMarkerClick(@NonNull Marker clickedMarker) {
+
 
             return false;
           }
@@ -91,11 +92,13 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     });
   }
 
-  private void makeMatrixApiCall() {
+  private void makeMatrixApiCall(Position positionOfClickedMarker) {
     MapboxDirectionsMatrix directionsMatrixClient = new MapboxDirectionsMatrix.Builder()
       .setAccessToken(getString(R.string.access_token))
       .setProfile(DirectionsCriteria.PROFILE_DRIVING)
       .setCoordinates(positionList)
+      .setOrigin(positionOfClickedMarker)
+//      .setDestinations(positionOfClickedMarker)
       .build();
 
     // Handle the API response
@@ -104,6 +107,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       public void onResponse(Call<DirectionsMatrixResponse> call, Response<DirectionsMatrixResponse> response) {
 
         Log.d("MatrixActivity", "onResponse");
+
 
       }
 
