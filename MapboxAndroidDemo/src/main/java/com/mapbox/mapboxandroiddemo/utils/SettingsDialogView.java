@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -44,6 +45,7 @@ public class SettingsDialogView {
   }
 
   public void buildDialog() {
+    analyticsOptOutSwitch.setChecked(!analytics.isAnalyticsEnabled());
     new AlertDialog.Builder(context)
       .setView(customDialogView)
       .setTitle(R.string.settings_dialog_title)
