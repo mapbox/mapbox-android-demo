@@ -98,8 +98,8 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
-            android:name=".examples.mas.DirectionsActivity"
-            android:label="@string/activity_mas_matrix_api_description">
+            android:name=".examples.mas.DirectionsMatrixApiActivity"
+            android:label="@string/activity_mas_maxtrix_api_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
