@@ -546,10 +546,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_mapillary_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_las_angeles_tourism_title,
-          R.string.activity_lab_las_angeles_tourism_description,
+          R.string.activity_lab_los_angeles_tourism_title,
+          R.string.activity_lab_los_angeles_tourism_description,
           new Intent(MainActivity.this, LosAngelesTourismActivity.class),
-          R.string.activity_lab_las_angeles_tourism_url
+          R.string.activity_lab_los_angeles_tourism_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_indoor_map_title,

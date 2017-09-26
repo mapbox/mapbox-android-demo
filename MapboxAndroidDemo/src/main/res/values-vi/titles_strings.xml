@@ -55,7 +55,7 @@
     <string name="activity_lab_marker_following_route_title">Ghim theo dõi tuyến đường</string>
     <string name="activity_lab_picture_in_picture_title">Hình trong hình</string>
     <string name="activity_lab_off_route_title">Nhận ra vụ lạc đường</string>
-    <string name="activity_lab_las_angeles_tourism_title">Los Angeles dành cho khách du lịch</string>
+    <string name="activity_lab_los_angeles_tourism_title">Los Angeles dành cho khách du lịch</string>
     <string name="activity_lab_indoor_map_title">Bản đồ trong nhà</string>
 
 </resources>

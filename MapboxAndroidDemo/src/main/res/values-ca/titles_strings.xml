@@ -58,7 +58,7 @@
     <string name="activity_lab_marker_following_route_title">Marcador seguint la ruta</string>
     <string name="activity_lab_space_station_location_title">Posició actual de l\'estació espacial</string>
     <string name="activity_lab_off_route_title">Detecció de fora ruta</string>
-    <string name="activity_lab_las_angeles_tourism_title">Los Angeles per a turistes</string>
+    <string name="activity_lab_los_angeles_tourism_title">Los Angeles per a turistes</string>
     <string name="activity_lab_indoor_map_title">Mapa d\'interior</string>
 
 
