@@ -1,4 +1,4 @@
-Hi and thanks for using Mapbox! We really appreciate it.
+<!-- Hi and thanks for using Mapbox! We really appreciate it.
 
 Before you post this ticket, please take a moment to make sure that its topic is:
 • an actual problem with this demo app
@@ -12,4 +12,4 @@ If you have a general question/issue about implementing Mapbox, please consider:
 
 • Contacting Mapbox support – https://www.mapbox.com/contact/support/
 
-• Opening a ticket in Mapbox's GL-native repository with the "Android" label – https://github.com/mapbox/mapbox-gl-native/issues/new
+• Opening a ticket in Mapbox's GL-native repository with the "Android" label – https://github.com/mapbox/mapbox-gl-native/issues/new -->
