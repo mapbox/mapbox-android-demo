@@ -68,12 +68,13 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
         mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
           @Override
           public boolean onMarkerClick(@NonNull Marker clickedMarker) {
-            for (Marker singleMarker : mapboxMap.getMarkers()) {
+            /*for (Marker singleMarker : mapboxMap.getMarkers()) {
               if (!singleMarker.getPosition().equals(clickedMarker.getPosition())) {
                 singleMarker.showInfoWindow(mapboxMap, mapView);
               }
-            }
-//            makeMatrixApiCall();
+            }*/
+            makeMatrixApiCall(Position.fromCoordinates(clickedMarker.getPosition().getLongitude(),
+              clickedMarker.getPosition().getLatitude()));
             return false;
           }
         });
@@ -85,9 +86,10 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     MapboxDirectionsMatrix directionsMatrixClient = new MapboxDirectionsMatrix.Builder()
       .setAccessToken(getString(R.string.access_token))
       .setProfile(DirectionsCriteria.PROFILE_DRIVING)
-      .setCoordinates(positionList)
-      .setOrigin(positionOfClickedMarker)
-      .setDestinations(positionList.size())
+//      .setCoordinates(positionList)
+      .setOrigin(positionList.get(0))
+      .setDestination(positionOfClickedMarker)
+//      .setDestinations(positionList.size())
       .build();
 
     // Handle the API response
@@ -96,7 +98,11 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       public void onResponse(Call<DirectionsMatrixResponse> call, Response<DirectionsMatrixResponse> response) {
 
         Log.d("MatrixActivity", "onResponse");
+        double[][] array = response.body().getDurations();
 
+        String finalDouble = String.valueOf(array[0][0]);
+
+        Toast.makeText(DirectionsMatrixApiActivity.this, finalDouble, Toast.LENGTH_SHORT).show();
 
       }
 
