@@ -43,7 +43,7 @@
 
         <activity
             android:name=".examples.styles.MapboxStudioStyleActivity"
-            android:label="@string/activity_style_mapbox_studio_title">
+            android:label="@string/activity_styles_mapbox_studio_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -51,7 +51,7 @@
 
         <activity
             android:name=".examples.styles.DefaultStyleActivity"
-            android:label="@string/activity_style_default_title">
+            android:label="@string/activity_styles_default_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -271,7 +271,7 @@
 
         <activity
             android:name=".examples.styles.ZoomDependentFillColorActivity"
-            android:label="@string/activity_style_zoom_dependent_fill_color_title">
+            android:label="@string/activity_styles_zoom_dependent_fill_color_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -287,8 +287,8 @@
         </activity>
 
         <activity
-            android:name=".examples.styles.CreateHeatmapPointsActivity"
-            android:label="@string/activity_style_create_heatmap_points_title">
+            android:name=".examples.dds.CreateHeatmapPointsActivity"
+            android:label="@string/activity_dds_create_heatmap_points_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -312,7 +312,7 @@
 
         <activity
             android:name=".examples.styles.LineLayerActivity"
-            android:label="@string/activity_style_line_layer_title">
+            android:label="@string/activity_styles_line_layer_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -320,7 +320,7 @@
 
         <activity
             android:name=".examples.styles.AddWmsSourceActivity"
-            android:label="@string/activity_style_add_wms_source_title">
+            android:label="@string/activity_styles_add_wms_source_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -328,7 +328,7 @@
 
         <activity
             android:name=".examples.styles.SymbolLayerActivity"
-            android:label="@string/activity_style_symbol_layer_title">
+            android:label="@string/activity_styles_symbol_layer_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
