@@ -71,7 +71,7 @@ import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.CreateHeatmapPointsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
@@ -240,34 +240,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     switch (id) {
       case R.id.nav_styles:
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_default_title,
-          R.string.activity_style_default_description,
+          R.string.activity_styles_default_title,
+          R.string.activity_styles_default_description,
           new Intent(MainActivity.this, DefaultStyleActivity.class),
-          R.string.activity_style_default_url
+          R.string.activity_styles_default_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_symbol_layer_title,
-          R.string.activity_style_symbol_layer_description,
+          R.string.activity_styles_symbol_layer_title,
+          R.string.activity_styles_symbol_layer_description,
           new Intent(MainActivity.this, SymbolLayerActivity.class),
-          R.string.activity_style_symbol_layer_url
+          R.string.activity_styles_symbol_layer_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_create_heatmap_points_title,
-          R.string.activity_style_create_heatmap_points_description,
-          new Intent(MainActivity.this, CreateHeatmapPointsActivity.class),
-          R.string.activity_style_create_heatmap_points_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_data_clusters_title,
-          R.string.activity_style_create_data_cluster_description,
+          R.string.activity_styles_data_clusters_title,
+          R.string.activity_styles_create_data_cluster_description,
           new Intent(MainActivity.this, GeoJsonClusteringActivity.class),
-          R.string.activity_style_create_cluster_data_points_url
+          R.string.activity_styles_create_cluster_data_points_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_line_layer_title,
-          R.string.activity_style_line_layer_description,
+          R.string.activity_styles_line_layer_title,
+          R.string.activity_styles_line_layer_description,
           new Intent(MainActivity.this, LineLayerActivity.class),
-          R.string.activity_style_line_layer_url
+          R.string.activity_styles_line_layer_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_styles_color_switcher_title,
@@ -282,10 +276,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_vector_source_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_add_wms_source_title,
-          R.string.activity_style_add_wms_source_description,
+          R.string.activity_styles_add_wms_source_title,
+          R.string.activity_styles_add_wms_source_description,
           new Intent(MainActivity.this, AddWmsSourceActivity.class),
-          R.string.activity_style_add_wms_source_url
+          R.string.activity_styles_add_wms_source_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_styles_geojson_layer_in_stack_title,
@@ -300,6 +294,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_adjust_layer_opacity_url
         ));
         exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_styles_zoom_dependent_fill_color_title,
+          R.string.activity_styles_zoom_dependent_fill_color_description,
+          new Intent(MainActivity.this, ZoomDependentFillColorActivity.class),
+          R.string.activity_styles_zoom_dependent_fill_color_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_styles_language_switch_title,
           R.string.activity_styles_language_switch_description,
           new Intent(MainActivity.this, LanguageSwitchActivity.class),
@@ -312,16 +312,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_show_hide_layer_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_mapbox_studio_title,
-          R.string.activity_style_mapbox_studio_description,
+          R.string.activity_styles_mapbox_studio_title,
+          R.string.activity_styles_mapbox_studio_description,
           new Intent(MainActivity.this, MapboxStudioStyleActivity.class),
-          R.string.activity_style_mapbox_studio_url
+          R.string.activity_styles_mapbox_studio_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_local_style_or_raster_source_title,
-          R.string.activity_style_local_style_or_raster_source_description,
+          R.string.activity_styles_local_style_or_raster_source_title,
+          R.string.activity_styles_local_style_or_raster_source_description,
           new Intent(MainActivity.this, LocalStyleSourceActivity.class),
-          R.string.activity_style_local_style_or_raster_source_url
+          R.string.activity_styles_local_style_or_raster_source_url
         ));
         currentCategory = R.id.nav_styles;
         break;
@@ -603,16 +603,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_choropleth_zoom_change_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_zoom_dependent_fill_color_title,
-          R.string.activity_style_zoom_dependent_fill_color_description,
-          new Intent(MainActivity.this, ZoomDependentFillColorActivity.class),
-          R.string.activity_style_zoom_dependent_fill_color_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_dds_style_line_identity_property_title,
           R.string.activity_dds_style_line_identity_property_description,
           new Intent(MainActivity.this, StyleLineIdentityPropertyActivity.class),
           R.string.activity_dds_style_line_identity_property_url, true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_dds_create_heatmap_points_title,
+          R.string.activity_dds_create_heatmap_points_description,
+          new Intent(MainActivity.this, CreateHeatmapPointsActivity.class),
+          R.string.activity_dds_create_heatmap_points_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_dds_json_vector_mix_title,
