@@ -1,22 +1,31 @@
 package com.mapbox.mapboxandroiddemo.examples.mas;
 
-import android.graphics.BitmapFactory;
-import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxandroiddemo.labs.
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Icon;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
+import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.services.api.directions.v5.DirectionsCriteria;
 import com.mapbox.services.api.directionsmatrix.v1.MapboxDirectionsMatrix;
 import com.mapbox.services.api.directionsmatrix.v1.models.DirectionsMatrixResponse;
@@ -32,11 +41,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
-
-public class DirectionsMatrixApiActivity extends AppCompatActivity implements MapboxMap.OnMapClickListener {
+public class DirectionsMatrixApiActivity extends AppCompatActivity {
 
   private static final LatLngBounds BOSTON_BOUNDS = new LatLngBounds.Builder()
     .include(new LatLng(42.363581, -71.097695))
@@ -73,6 +78,27 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity implements Ma
         DirectionsMatrixApiActivity.this.mapboxMap = mapboxMap;
         mapboxMap.setLatLngBoundsForCameraTarget(BOSTON_BOUNDS);
         addMarkers();
+
+        mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+          @Override
+          public boolean onMarkerClick(@NonNull Marker marker) {
+
+            Log.d(TAG, "onMarkerClick: Clicked on marker");
+
+            makeMatrixApiCall(Position.fromCoordinates(
+              marker.getPosition().getLongitude(),
+              marker.getPosition().getLatitude()));
+
+            for (Marker singleMarker : mapboxMap.getMarkers()) {
+              if (singleMarker != marker) {
+                singleMarker.showInfoWindow(mapboxMap, mapView);
+              }
+            }
+
+            return false;
+          }
+        });
+
       }
     });
   }
@@ -81,10 +107,8 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity implements Ma
     MapboxDirectionsMatrix directionsMatrixClient = new MapboxDirectionsMatrix.Builder()
       .setAccessToken(getString(R.string.access_token))
       .setProfile(DirectionsCriteria.PROFILE_DRIVING)
-//      .setCoordinates(positionList)
-      .setOrigin(positionList.get(0))
-      .setDestination(positionOfClickedMarker)
-//      .setDestinations(positionList.size())
+      .setOrigin(positionOfClickedMarker)
+      .setCoordinates(positionList)
       .build();
 
     // Handle the API response
@@ -94,67 +118,37 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity implements Ma
 
         double[][] array = response.body().getDurations();
 
-        String finalDouble = String.valueOf(String.valueOf(array[0][1]));
-
-        Toast.makeText(DirectionsMatrixApiActivity.this, finalDouble, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onResponse: String.valueOf(array[0][0]) = " + String.valueOf(array[0][0]));
+        Log.d(TAG, "onResponse: String.valueOf(array[0][1]) = " + String.valueOf(array[0][1]));
+        Log.d(TAG, "onResponse: String.valueOf(array[0][2]) = " + String.valueOf(array[0][2]));
+        Log.d(TAG, "onResponse: String.valueOf(array[0][3]) = " + String.valueOf(array[0][3]));
+        Log.d(TAG, "onResponse: String.valueOf(array[0][4]) = " + String.valueOf(array[0][4]));
+        Log.d(TAG, "onResponse: String.valueOf(array[0][5]) = " + String.valueOf(array[0][5]));
+        Log.d(TAG, "onResponse: String.valueOf(array[0][6]) = " + String.valueOf(array[0][6]));
+        Log.d(TAG, "onResponse: String.valueOf(array[0][7]) = " + String.valueOf(array[0][7]));
+        Log.d(TAG, "onResponse: String.valueOf(array[0][8]) = " + String.valueOf(array[0][8]));
 
       }
 
       @Override
       public void onFailure(Call<DirectionsMatrixResponse> call, Throwable throwable) {
         Toast.makeText(DirectionsMatrixApiActivity.this, R.string.call_error, Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "onResponse");
+        Log.d(TAG, "onResponse onFailure");
 
       }
     });
   }
 
   private void addMarkers() {
-
-    // Add lighting bolt marker image to map
-    mapboxMap.addImage(
-      LIGHTING_BOLT_IMAGE,
-      BitmapFactory.decodeResource(DirectionsMatrixApiActivity.this.getResources(),
-        R.drawable.lightning_bolt)
-    );
-
-    // Add a source
-    mapboxMap.addSource(new GeoJsonSource(MARKER_SOURCE, featureCollection));
-
-    // Add the symbol layer
-    mapboxMap.addLayer(
-      new SymbolLayer(MARKER_LAYER, MARKER_SOURCE)
-        .withProperties(
-          iconImage(LIGHTING_BOLT_IMAGE),
-          iconAllowOverlap(true)
-        )
-    );
-
-    // Set a click listener so we can manipulate the map
-    mapboxMap.setOnMapClickListener(this);
-  }
-
-  @Override
-  public void onMapClick(@NonNull LatLng point) {
-    // Query which features are clicked
-    PointF screenLoc = mapboxMap.getProjection().toScreenLocation(point);
-    List<Feature> features = mapboxMap.queryRenderedFeatures(screenLoc, MARKER_LAYER);
-
-    SymbolLayer layer = mapboxMap.getLayerAs(MARKER_LAYER);
-    if (features.size() == 0) {
-      // Reset marker bolts to regular size if map is clicked on
-      layer.setProperties(iconSize(1f));
-    } else {
-      // Increases size of marker bolts if a marker is clicked on
-      layer.setProperties(iconSize(1.5f));
-
-      // TODO: Figure out marker onclick
-      /*makeMatrixApiCall(Position.fromCoordinates(clickedMarker.getPosition().getLongitude(),
-        clickedMarker.getPosition().getLatitude()));*/
-
+    Icon icon = IconFactory.getInstance(DirectionsMatrixApiActivity.this).fromResource(R.drawable.lightning_bolt);
+    for (Feature feature : featureCollection.getFeatures()) {
+      mapboxMap.addMarker(new MarkerOptions()
+        .position(new LatLng(feature.getProperty("Latitude").getAsDouble(),
+          feature.getProperty("Longitude").getAsDouble()))
+        .snippet(feature.getStringProperty("Station_Name"))
+        .icon(icon));
     }
   }
-
 
   private String loadGeoJsonFromAsset(String filename) {
     try {
@@ -231,4 +225,111 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity implements Ma
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
   }
+
+  /**
+   * POJO model class for a single location in the recyclerview
+   */
+  class SingleRecyclerViewLocation {
+
+    private String name;
+    private String bedInfo;
+
+    public String getName() {
+      return name;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
+
+    public String getBedInfo() {
+      return bedInfo;
+    }
+
+    public void setBedInfo(String bedInfo) {
+      this.bedInfo = bedInfo;
+    }
+
+    public LatLng getLocationCoordinates() {
+      return locationCoordinates;
+    }
+
+    public void setLocationCoordinates(LatLng locationCoordinates) {
+      this.locationCoordinates = locationCoordinates;
+    }
+  }
+
+  static class MatrixApiLocationRecyclerViewAdapter extends
+    RecyclerView.Adapter<MatrixApiLocationRecyclerViewAdapter.MyViewHolder> {
+
+    private List<SingleRecyclerViewLocation> locationList;
+    private MapboxMap map;
+
+    public MatrixApiLocationRecyclerViewAdapter(List<SingleRecyclerViewLocation> locationList, MapboxMap mapBoxMap) {
+      this.locationList = locationList;
+      this.map = mapBoxMap;
+    }
+
+    @Override
+    public MatrixApiLocationRecyclerViewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+      View itemView = LayoutInflater.from(parent.getContext())
+        .inflate(R.layout.rv_on_top_of_map_card, parent, false);
+      return new MatrixApiLocationRecyclerViewAdapter.MyViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(MatrixApiLocationRecyclerViewAdapter.MyViewHolder holder, int position) {
+      SingleRecyclerViewLocation singleRecyclerViewLocation = locationList.get(position);
+      holder.name.setText(singleRecyclerViewLocation.getName());
+      holder.numOfBeds.setText(singleRecyclerViewLocation.getBedInfo());
+      holder.setClickListener(new RecyclerViewOnMapActivity.ItemClickListener() {
+        @Override
+        public void onClick(View view, int position) {
+          LatLng selectedLocationLatLng = locationList.get(position).getLocationCoordinates();
+          CameraPosition newCameraPosition = new CameraPosition.Builder()
+            .target(selectedLocationLatLng)
+            .build();
+
+          map.addMarker(new MarkerOptions()
+            .setPosition(selectedLocationLatLng)
+            .setTitle(locationList.get(position).getName()))
+            .setSnippet(locationList.get(position).getBedInfo());
+
+          map.easeCamera(CameraUpdateFactory.newCameraPosition(newCameraPosition));
+        }
+      });
+    }
+
+    @Override
+    public int getItemCount() {
+      return locationList.size();
+    }
+
+    static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+      TextView name;
+      TextView numOfBeds;
+      CardView singleCard;
+      ItemClickListener clickListener;
+
+      MyViewHolder(View view) {
+        super(view);
+        name = (TextView) view.findViewById(R.id.location_title_tv);
+        numOfBeds = (TextView) view.findViewById(R.id.location_num_of_beds_tv);
+        singleCard = (CardView) view.findViewById(R.id.single_location_cardview);
+        singleCard.setOnClickListener(this);
+      }
+
+      public void setClickListener(ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
+      }
+
+      @Override
+      public void onClick(View view) {
+        clickListener.onClick(view, getLayoutPosition());
+      }
+    }
+  }
+
+
+
 }
