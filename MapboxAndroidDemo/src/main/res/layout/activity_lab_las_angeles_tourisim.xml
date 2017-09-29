@@ -18,7 +18,7 @@
         mapbox:mapbox_styleUrl="@string/mapbox_style_light"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_actions"
+        android:id="@+id/multiple_actions_parent_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"

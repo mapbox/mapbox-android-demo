@@ -17,6 +17,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Restrict the map camera to certain bounds.
+ */
 public class RestrictCameraActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private static final LatLngBounds AUSTRALIA_BOUNDS = new LatLngBounds.Builder()
@@ -36,7 +39,7 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_camera_restrict);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -48,7 +51,7 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    // Set bounds to Iceland
+    // Set bounds to Australia
     mapboxMap.setLatLngBoundsForCameraTarget(AUSTRALIA_BOUNDS);
     mapboxMap.setMinZoomPreference(2);
 

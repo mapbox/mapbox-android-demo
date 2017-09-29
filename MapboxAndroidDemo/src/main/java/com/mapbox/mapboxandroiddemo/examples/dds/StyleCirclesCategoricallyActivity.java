@@ -20,6 +20,9 @@ import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 
+/**
+ * Use data-driven styling to set circles' colors based on imported vector data.
+ */
 public class StyleCirclesCategoricallyActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -32,7 +35,7 @@ public class StyleCirclesCategoricallyActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_dds_style_circles_categorically);
 
     mapView = (MapView) findViewById(R.id.mapView);

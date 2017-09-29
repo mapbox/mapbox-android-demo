@@ -27,6 +27,10 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Using the polylines utility, simplify a polyline at a
+ * given tolerance to reduce the number of coordinates in that polyline.
+ */
 public class SimplifyPolylineActivity extends AppCompatActivity {
 
   private static final String TAG = "SimplifyLineActivity";
@@ -42,7 +46,7 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_simplify_polyline);
 
     mapView = (MapView) findViewById(R.id.mapview);
@@ -186,6 +190,5 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
       .add(result)
       .color(Color.parseColor("#3bb2d0"))
       .width(4));
-
   }
 }

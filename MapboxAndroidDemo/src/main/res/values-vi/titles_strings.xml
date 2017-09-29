@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ****** These strings are of individual example titles which appear in
+    each example's recyclerview card ****** -->
+
+    <string name="activity_basic_simple_mapview_title">Bản đồ đơn giản</string>
+    <string name="activity_basic_support_map_frag_title">Hỗ trợ mảnh bản đồ</string>
+    <string name="activity_basic_mapbox_options_title">Xây dựng bản đồ một cách động</string>
+    <string name="activity_styles_mapbox_studio_title">Kiểu Mapbox Studio</string>
+    <string name="activity_styles_default_title">Kiểu mặc định</string>
+    <string name="activity_styles_show_hide_layer_title">Hiện ẩn lớp</string>
+    <string name="activity_styles_language_switch_title">Thay đổi ngôn ngữ bản đồ</string>
+    <string name="activity_styles_color_switcher_title">Thay đổi màu lớp</string>
+    <string name="activity_styles_adjust_layer_opacity_title">Chỉnh độ mờ của lớp</string>
+    <string name="activity_styles_geojson_layer_in_stack_title">Chèn lớp mới dưới các nhãn</string>
+    <string name="activity_styles_vector_source_title">Thêm nguồn mảnh vectơ</string>
+    <string name="activity_styles_add_wms_source_title">Thêm nguồn WMS</string>
+    <string name="activity_styles_zoom_dependent_fill_color_title">Màu sắc tùy mức thu phóng</string>
+    <string name="activity_dds_create_heatmap_points_title">Tạo bản đồ nhiệt từ các điểm</string>
+    <string name="activity_styles_data_clusters_title">Tạo và định kiểu các cụm dữ liệu</string>
+    <string name="activity_styles_line_layer_title">Tạo lớp đường kẻ</string>
+    <string name="activity_styles_symbol_layer_title">Lớp dấu ghim</string>
+    <string name="activity_styles_local_style_or_raster_source_title">Kiểu địa phương hoặc kiểu raster tùy biến</string>
+    <string name="activity_extrusions_catalina_marathon_extrusions_title">Đặt chiều cao của khối nhô ra theo dữ liệu GeoJSON</string>
+    <string name="activity_extrusions_population_density_extrusions_title">Hiển thị tòa nhà 3D có chiều cao theo dữ liệu vectơ</string>
+    <string name="activity_extrusions_adjust_extrusions_title">Điều chỉnh vị trí và màu sắc của ánh sáng</string>
+    <string name="activity_dds_style_circle_categorically_title">Định kiểu hình tròn tùy loại</string>
+    <string name="activity_dds_choropleth_zoom_change_title">Cập nhật lớp vùng giá trị theo mức thu phóng</string>
+    <string name="activity_dds_style_line_identity_property_title">Định vị tuyến dùng hàm thuộc tính đồng nhất thức</string>
+    <string name="activity_annotation_marker_title">Vẽ ghim</string>
+    <string name="activity_annotation_custom_marker_title">Vẽ hình ghim tùy biến</string>
+    <string name="activity_annotation_geojson_line_title">Kẻ đường GeoJSON</string>
+    <string name="activity_annotation_polygon_title">Vẽ hình đa giác</string>
+    <string name="activity_annotation_polygon_holes_title">Vẽ hình đa giác có lỗ</string>
+    <string name="activity_annotation_custom_info_window_title">Cửa sổ thông tin tùy biến</string>
+    <string name="activity_annotation_animated_marker_title">Làm động vị trí của ghim</string>
+    <string name="activity_camera_animate_title">Làm động điểm nhìn của bản đồ</string>
+    <string name="activity_camera_bounding_box_title">Làm điểm nhìn vừa hộp bao</string>
+    <string name="activity_camera_restrict_title">Hạn chế cuộn bản đồ</string>
+    <string name="activity_offline_simple_title">Bản đồ ngoại tuyến đơn giản</string>
+    <string name="activity_offline_manager_title">Trình quản lý ngoại tuyến</string>
+    <string name="activity_query_feature_title">Truy vấn đối tượng trên bản đồ</string>
+    <string name="activity_query_select_building_title">Chọn một tòa nhà</string>
+    <string name="activity_mas_directions_title">Xem tuyến đường trên bản đồ</string>
+    <string name="activity_mas_optimization_title">Xem tuyến đường tối ưu hóa trên bản đồ</string>
+    <string name="activity_mas_geocoding_title">Điều khiển tự động điền mã hóa địa lý</string>
+    <string name="activity_mas_static_image_title">Tải về bản đồ tĩnh</string>
+    <string name="activity_plugins_traffic_plugin_title">Hiển thị giao thông trực tiếp</string>
+    <string name="activity_plugins_building_plugin_title">Hiển thị tòa nhà 3D</string>
+    <string name="activity_plugins_location_plugin_title">Hiển thị vị trí của người dùng</string>
+    <string name="activity_mas_simplify_polyline_title">Đơn giản hóa hình nhiều đường</string>
+    <string name="activity_mas_map_matching_title">Khớp bản đồ</string>
+    <string name="activity_lab_location_picker_title">Trình chọn địa điểm</string>
+    <string name="activity_lab_marker_following_route_title">Ghim theo dõi tuyến đường</string>
+    <string name="activity_lab_picture_in_picture_title">Hình trong hình</string>
+    <string name="activity_lab_off_route_title">Nhận ra vụ lạc đường</string>
+    <string name="activity_lab_los_angeles_tourism_title">Los Angeles dành cho khách du lịch</string>
+    <string name="activity_lab_indoor_map_title">Bản đồ trong nhà</string>
+
+</resources>

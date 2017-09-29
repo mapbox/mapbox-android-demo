@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:mapbox_cameraTargetLat="36"
+        app:mapbox_cameraTargetLng="106"
+        app:mapbox_cameraZoom="3.6"
+        app:mapbox_styleUrl="@string/mapbox_style_light"
+        app:mapbox_uiAttribution="false"
+        app:mapbox_uiLogo="false"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -35,6 +35,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Match raw GPS points to the map so they align with roads and pathways.
+ */
 public class MapMatchingActivity extends AppCompatActivity {
 
   private static final String TAG = "MapMatchingActivity";
@@ -51,7 +54,7 @@ public class MapMatchingActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_mas_map_matching);
 
     mapView = (MapView) findViewById(R.id.mapView);

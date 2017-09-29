@@ -14,6 +14,9 @@ import com.mapbox.mapboxsdk.style.layers.Layer;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 
+/**
+ * Use runtime styling to change the language displayed on the map
+ */
 public class LanguageSwitchActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -27,7 +30,7 @@ public class LanguageSwitchActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_language_switch);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -110,7 +113,7 @@ public class LanguageSwitchActivity extends AppCompatActivity {
           mapText.setProperties(textField("{name_en}"));
           return true;
         case android.R.id.home:
-          onBackPressed();
+          finish();
           return true;
       }
     }

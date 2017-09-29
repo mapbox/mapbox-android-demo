@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
@@ -14,6 +15,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Fit a map to a bounding box
+ */
 public class BoundingBoxCameraActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -26,7 +30,7 @@ public class BoundingBoxCameraActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_camera_bounding_box);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -34,6 +38,17 @@ public class BoundingBoxCameraActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
+
+        // Declare two locations on map
+        final LatLng locationOne = new LatLng(36.532128, -93.489121);
+        final LatLng locationTwo = new LatLng(25.837058, -106.646234);
+
+        // Add markers to map
+        mapboxMap.addMarker(new MarkerViewOptions()
+          .position(locationOne));
+
+        mapboxMap.addMarker(new MarkerViewOptions()
+          .position(locationTwo));
 
         // Toast instructing user to tap on the map to start animation and set bounds
         Toast.makeText(
@@ -47,8 +62,8 @@ public class BoundingBoxCameraActivity extends AppCompatActivity {
           @Override
           public void onMapClick(@NonNull LatLng point) {
             LatLngBounds latLngBounds = new LatLngBounds.Builder()
-              .include(new LatLng(36.532128, -93.489121)) // Northeast
-              .include(new LatLng(25.837058, -106.646234)) // Southwest
+              .include(locationOne) // Northeast
+              .include(locationTwo) // Southwest
               .build();
 
             mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50), 5000);

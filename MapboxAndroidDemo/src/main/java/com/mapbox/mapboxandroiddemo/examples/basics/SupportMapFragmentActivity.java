@@ -14,6 +14,9 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.SupportMapFragment;
 
+/**
+ * Include a map fragment within your app using Android support library.
+ */
 public class SupportMapFragmentActivity extends AppCompatActivity {
 
   @Override

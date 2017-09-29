@@ -29,6 +29,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * Download, view, navigate to, and delete an offline region.
+ */
 public class OfflineManagerActivity extends AppCompatActivity {
 
   private static final String TAG = "OffManActivity";
@@ -60,7 +63,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_offline_manager);
 
     // Set up the MapView
@@ -377,7 +380,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
   }
 
   private String getRegionName(OfflineRegion offlineRegion) {
-    // Get the retion name from the offline region metadata
+    // Get the region name from the offline region metadata
     String regionName;
 
     try {

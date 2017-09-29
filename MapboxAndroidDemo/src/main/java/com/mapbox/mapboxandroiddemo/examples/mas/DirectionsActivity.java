@@ -29,6 +29,9 @@ import retrofit2.Response;
 
 import static com.mapbox.services.Constants.PRECISION_6;
 
+/**
+ * Use Mapbox Android Services to request directions
+ */
 public class DirectionsActivity extends AppCompatActivity {
 
   private static final String TAG = "DirectionsActivity";
@@ -46,7 +49,7 @@ public class DirectionsActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_mas_directions);
 
     // Alhambra landmark in Granada, Spain.
@@ -87,7 +90,7 @@ public class DirectionsActivity extends AppCompatActivity {
       .setDestination(destination)
       .setOverview(DirectionsCriteria.OVERVIEW_FULL)
       .setProfile(DirectionsCriteria.PROFILE_CYCLING)
-      .setAccessToken(Mapbox.getAccessToken())
+      .setAccessToken(getString(R.string.access_token))
       .build();
 
     client.enqueueCall(new Callback<DirectionsResponse>() {

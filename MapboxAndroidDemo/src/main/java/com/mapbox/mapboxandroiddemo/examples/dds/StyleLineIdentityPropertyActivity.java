@@ -21,6 +21,9 @@ import static com.mapbox.mapboxsdk.style.functions.Function.property;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stops.categorical;
 
+/**
+ * Use data-driven styling to set a line's color based on imported GeoJSON.
+ */
 public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -33,7 +36,7 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_line);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -131,7 +134,5 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
     }
 
   }
-
-
 }
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="activity_basic_simple_mapview_title">Vista simple de mapa</string>
+    <string name="activity_basic_support_map_frag_title">Fragment de mapa base</string>
+    <string name="activity_basic_mapbox_options_title">Genera vista de mapa dinàmicament</string>
+    <string name="activity_styles_mapbox_studio_title">Esti Mapbox Studio</string>
+    <string name="activity_style_raster_title">Estil ràster personalitzat</string>
+    <string name="activity_styles_default_title">Estils per defecte</string>
+    <string name="activity_styles_show_hide_layer_title">Mostra i amaga capes</string>
+    <string name="activity_styles_langauge_switch_title">Canvia l\'idioma del mapa</string>
+    <string name="activity_styles_color_switcher_title">Canvia el color de la capa</string>
+    <string name="activity_styles_adjust_layer_opacity_title">Ajusta la transparència de la capa</string>
+    <string name="activity_styles_geojson_layer_in_stack_title">Afegeix una capa per sota de les etiquetes</string>
+    <string name="activity_styles_vector_source_title">Afegeix una font de tessel·les vector</string>
+    <string name="activity_styles_add_wms_source_title">Afegeix una font WMS</string>
+    <string name="activity_styles_zoom_dependent_fill_color_title">El color en funció del nivell de zoom</string>
+    <string name="activity_dds_create_heatmap_points_title">Crea un mapa de calor a partir de punts</string>
+    <string name="activity_styles_data_clusters_title">Crea i dona estils a agrupacions de dades</string>
+    <string name="activity_styles_line_layer_title">Crea una capa de línies</string>
+    <string name="activity_styles_symbol_layer_title">Capa de símbols marcadors</string>
+    <string name="activity_extrusions_basic_extrusions_title">Mostra els edificis en 3D</string>
+    <string name="activity_extrusions_catalina_marathon_extrusions_title">Utilitza les dades GeoJSON per determinar l\'alçada de l\'extrusió</string>
+    <string name="activity_extrusions_population_density_extrusions_title">Mostra l\'alçada de l\'edifici en 3D segons les dades vector</string>
+    <string name="activity_extrusions_adjust_extrusions_title">Ajusta el lloc i el color de la il·luminació</string>
+    <string name="activity_extrusions_indoor_3d_title">Extruïr polígons en 3D per als mapes d\'interiors</string>
+    <string name="activity_dds_style_circle_categorically_title">Aplicar estil per categories als cercles</string>
+    <string name="activity_dds_choropleth_zoom_change_title">Actualitza un mapa coroplètic per nivell de zoom</string>
+    <string name="activity_dds_json_vector_mix_title">Unir dades JSON locals amb geometries de tessel·les vector</string>
+    <string name="activity_dds_style_line_identity_property_title">Aplicar estil a les línies utilitzant una funció de propietat d\'identitat</string>
+    <string name="activity_annotation_marker_title">Dibuixa un marcador</string>
+    <string name="activity_annotation_custom_marker_title">Dibuixa un marcador amb icona personalitzada</string>
+    <string name="activity_annotation_geojson_line_title">Dibuixa una línia GeoJSON</string>
+    <string name="activity_annotation_polygon_title">Dibuixa un polígon</string>
+    <string name="activity_annotation_polygon_holes_title">Dibuixa un polígon amb forats</string>
+    <string name="activity_annotation_marker_view_title">Dibuixa una vista de marcador</string>
+    <string name="activity_annotation_custom_info_window_title">Finestra d\'informació personalitzada</string>
+    <string name="activity_annotation_animated_marker_title">Afegeix animació a la posició del marcador</string>
+    <string name="activity_camera_animate_title">Afegeix animació a la càmera del mapa</string>
+    <string name="activity_camera_bounding_box_title">Encaixa la càmera en el requadre delimitador</string>
+    <string name="activity_camera_restrict_title">Restringeix desplaçar el mapa</string>
+    <string name="activity_offline_simple_title">Un mapa senzill offline</string>
+    <string name="activity_offline_manager_title">Gestor offline</string>
+    <string name="activity_query_feature_title">Interroga una propietat del mapa</string>
+    <string name="activity_query_select_building_title">Escull un edifici</string>
+    <string name="activity_query_feature_count_title">Compta el nombre d\'elements</string>
+    <string name="activity_location_basic_title">Mostra la posició de l\'usuari</string>
+    <string name="activity_location_tracking_title">Segueix la posició de l\'usuari</string>
+    <string name="activity_location_animated_icon_title">Afegeix animació a l\'icona d\'usuari</string>
+    <string name="activity_location_customize_user_title">Personalitza la icona de la posició de l\'usuari</string>
+    <string name="activity_mas_directions_title">Mostra indicacions al mapa</string>
+    <string name="activity_mas_geocoding_title">Giny per autocompletar la geocodificació</string>
+    <string name="activity_mas_static_image_title">Descarrega un mapa estàtic</string>
+    <string name="activity_plugins_traffic_plugin_title">Mostra el trànsit en temps real</string>
+    <string name="activity_mas_simplify_polyline_title">Simplifica una polilínia</string>
+    <string name="activity_mas_map_matching_title">Igualar mapes</string>
+    <string name="activity_lab_location_picker_title">Selector de posició</string>
+    <string name="activity_lab_marker_following_route_title">Marcador seguint la ruta</string>
+    <string name="activity_lab_space_station_location_title">Posició actual de l\'estació espacial</string>
+    <string name="activity_lab_off_route_title">Detecció de fora ruta</string>
+    <string name="activity_lab_los_angeles_tourism_title">Los Angeles per a turistes</string>
+    <string name="activity_lab_indoor_map_title">Mapa d\'interior</string>
+
+
+</resources>

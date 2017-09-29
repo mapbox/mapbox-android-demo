@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.WearableRecyclerView;
 
+import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
+
+import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
+import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.LocationTrackingActivity;
 import com.mapbox.mapboxandroiddemo.examples.MapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.OfflineMapActivity;
@@ -15,14 +19,19 @@ import com.mapbox.mapboxandroiddemo.utils.OffsettingHelper;
 
 import java.util.ArrayList;
 
+
 public class MainActivity extends WearableActivity implements ExampleAdapter.ItemSelectedListener {
 
   private ArrayList<ExampleItemModel> exampleItemModels;
+  private AnalyticsTracker analytics;
 
   @Override
+  @AddTrace(name = "onCreateMainActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    analytics = AnalyticsTracker.getInstance(this, true);
 
     WearableRecyclerView wearableRecyclerView = (WearableRecyclerView) findViewById(R.id.recycler_launcher_view);
     wearableRecyclerView.setHasFixedSize(true);
@@ -46,10 +55,22 @@ public class MainActivity extends WearableActivity implements ExampleAdapter.Ite
     wearableRecyclerView.setAdapter(exampleAdapter);
 
     exampleAdapter.setListener(this);
+    checkForFirstTimeOpen();
   }
 
   @Override
+  @AddTrace(name = "onItemSelected")
   public void onItemSelected(int position) {
     startActivity(exampleItemModels.get(position).getActivity());
+    analytics.clickedOnIndividualExample(getString(exampleItemModels.get(position).getTitle()), false);
+    analytics.viewedScreen(getString(exampleItemModels.get(position).getTitle()), false);
+  }
+
+  private void checkForFirstTimeOpen() {
+    FirstTimeRunChecker firstTimeRunChecker = new FirstTimeRunChecker(this);
+    if (firstTimeRunChecker.firstEverOpen()) {
+      analytics.openedAppForFirstTime(false, false);
+    }
+    firstTimeRunChecker.updateSharedPrefWithCurrentVersion();
   }
 }

@@ -1,0 +1,44 @@
+//
+// Configuration file for gradle build execution.
+//
+
+task secretKeysSetup {
+    def secretFile = new File("${projectDir}/src/main/res/values/developer-config.xml")
+    if (!secretFile.exists()) {
+        // create values folder if non existent
+        def folder = new File("${projectDir}/src/main/res/values")
+        folder.mkdirs()
+
+        String mapboxFlowSecret = "$System.env.MAPBOX_AUTH_FLOW_SECRET"
+        if (mapboxFlowSecret == "null") {
+            System.out.println("You should set the MAPBOX_AUTH_FLOW_SECRET environment variable.")
+            mapboxFlowSecret = "YOUR_MAPBOX_AUTH_FLOW_SECRET_GOES_HERE"
+        }
+
+        String segmentWriteKey = "$System.env.SEGMENT_API_WRITE_KEY_DEMO"
+        if (segmentWriteKey == "null") {
+            System.out.println("You should set the SEGMENT_API_WRITE_KEY environment variable." +
+                    " You will only have potential access to this if you're part of the Mapbox team)")
+            segmentWriteKey = "THE_SEGMENT_API_WRITE_KEY_GOES_HERE"
+        }
+
+        String segmentWearableWriteKey = "$System.env.SEGMENT_API_WRITE_KEY_WEARABLE_DEMO"
+        if (segmentWearableWriteKey == "null") {
+            System.out.println("You should set the SEGMENT_API_WRITE_KEY_WEARABLE_DEMO environment variable." +
+                    " You will only have potential access to this if you're part of the Mapbox team)")
+            segmentWearableWriteKey = "THE_SEGMENT_API_WRITE_KEY_WEARABLE_DEMO_GOES_HERE"
+        }
+
+        String tokenFileContents = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                "<resources>\n" +
+                "    <string name=\"mapbox_auth_flow_secret\">" + mapboxFlowSecret + "</string>\n" +
+                "    <string name=\"mapbox_segment_write_key\">" + segmentWriteKey + "</string>\n" +
+                "    <string name=\"mapbox_segment_wearable_write_key\">" + segmentWearableWriteKey + "</string>\n" +
+                "</resources>"
+        secretFile.write(tokenFileContents)
+    }
+}
+
+gradle.projectsEvaluated {
+    preBuild.dependsOn('secretKeysSetup')
+}

@@ -12,6 +12,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+/**
+ * Use a variety of professionally designed styles with the Mapbox Android SDK.
+ */
 public class DefaultStyleActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -25,7 +28,7 @@ public class DefaultStyleActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_default);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -112,7 +115,7 @@ public class DefaultStyleActivity extends AppCompatActivity {
         mapboxMap.setStyleUrl(Style.SATELLITE_STREETS);
         return true;
       case android.R.id.home:
-        onBackPressed();
+        finish();
         return true;
       default:
         return super.onOptionsItemSelected(item);

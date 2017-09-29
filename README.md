@@ -14,7 +14,7 @@ Feedback and contribution is encouraged in this repo, if you'd like to see a new
 * Create a new java file and place in the acceptable folder (`examples` or `labs`) giving it a descriptive name and ending the title with `*Activity`. It's important that all activities extend `AppCompat`.
 * If the activity needs a layout, add one with the naming convention `activity_*`.
 * Add the activity to the `AndroidManifest.xml` file.
-* Open the `MainActivity.java` file and scroll down to the `listItems` method. You'll notice a switch statement, pick one of the cases (categories) and add the new example so it matches the others.
+* Open the `MainActivity.java` file and scroll down to the `listItems` method. You'll notice a switch statement, pick one of the cases (categories) and add the new example so it matches the others. 
 * Code your example and test to make sure it works properly.
 * Open a pull request with the new example.
 

@@ -1,1 +1,3 @@
-This a minor release that fixes a shader precision issue that created a rendering problem on some devices.
+This update is in line with the 5.1.3 release of the Mapbox Maps SDK. This release also has several bug fixes and new examples:
+•Rotate and tilt the map based on device rotation
+•Example of using the Mapbox Optimization API
