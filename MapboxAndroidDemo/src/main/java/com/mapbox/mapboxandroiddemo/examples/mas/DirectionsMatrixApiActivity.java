@@ -1,5 +1,8 @@
 package com.mapbox.mapboxandroiddemo.examples.mas;
 
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,16 +15,20 @@ import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.services.api.directions.v5.DirectionsCriteria;
 import com.mapbox.services.api.directionsmatrix.v1.MapboxDirectionsMatrix;
 import com.mapbox.services.api.directionsmatrix.v1.models.DirectionsMatrixResponse;
 import com.mapbox.services.commons.geojson.Feature;
 import com.mapbox.services.commons.geojson.FeatureCollection;
+import com.mapbox.services.commons.geojson.Point;
 import com.mapbox.services.commons.models.Position;
 
 import java.io.InputStream;
@@ -32,7 +39,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DirectionsMatrixApiActivity extends AppCompatActivity {
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
+
+public class DirectionsMatrixApiActivity extends AppCompatActivity implements MapboxMap.OnMapClickListener {
 
   private static final LatLngBounds BOSTON_BOUNDS = new LatLngBounds.Builder()
     .include(new LatLng(42.363581, -71.097695))
@@ -43,6 +57,10 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
   private MapboxMap mapboxMap;
   private List<Position> positionList;
   private FeatureCollection featureCollection;
+  private String TAG = "DirectionsMatrixApiActivity";
+  public static final String MARKER_SOURCE = "marker-source";
+  public static final String MARKER_LAYER = "marker-layer";
+  public static final String LIGHTING_BOLT_IMAGE = "bolt-image";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -65,19 +83,6 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
         DirectionsMatrixApiActivity.this.mapboxMap = mapboxMap;
         mapboxMap.setLatLngBoundsForCameraTarget(BOSTON_BOUNDS);
         addMarkers();
-        mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
-          @Override
-          public boolean onMarkerClick(@NonNull Marker clickedMarker) {
-            /*for (Marker singleMarker : mapboxMap.getMarkers()) {
-              if (!singleMarker.getPosition().equals(clickedMarker.getPosition())) {
-                singleMarker.showInfoWindow(mapboxMap, mapView);
-              }
-            }*/
-            makeMatrixApiCall(Position.fromCoordinates(clickedMarker.getPosition().getLongitude(),
-              clickedMarker.getPosition().getLatitude()));
-            return false;
-          }
-        });
       }
     });
   }
@@ -97,10 +102,9 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       @Override
       public void onResponse(Call<DirectionsMatrixResponse> call, Response<DirectionsMatrixResponse> response) {
 
-        Log.d("MatrixActivity", "onResponse");
         double[][] array = response.body().getDurations();
 
-        String finalDouble = String.valueOf(array[0][0]);
+        String finalDouble = String.valueOf(String.valueOf(array[0][1]));
 
         Toast.makeText(DirectionsMatrixApiActivity.this, finalDouble, Toast.LENGTH_SHORT).show();
 
@@ -109,22 +113,58 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       @Override
       public void onFailure(Call<DirectionsMatrixResponse> call, Throwable throwable) {
         Toast.makeText(DirectionsMatrixApiActivity.this, R.string.call_error, Toast.LENGTH_SHORT).show();
-        Log.d("MatrixActivity", "onResponse");
+        Log.d(TAG, "onResponse");
 
       }
     });
   }
 
   private void addMarkers() {
-    Icon icon = IconFactory.getInstance(DirectionsMatrixApiActivity.this).fromResource(R.drawable.lightning_bolt);
-    for (Feature feature : featureCollection.getFeatures()) {
-      mapboxMap.addMarker(new MarkerOptions()
-        .position(new LatLng(feature.getProperty("Latitude").getAsDouble(),
-          feature.getProperty("Longitude").getAsDouble()))
-        .snippet(feature.getStringProperty("Station_Name"))
-        .icon(icon));
+
+    // Add lighting bolt marker image to map
+    mapboxMap.addImage(
+      LIGHTING_BOLT_IMAGE,
+      BitmapFactory.decodeResource(DirectionsMatrixApiActivity.this.getResources(),
+        R.drawable.lightning_bolt)
+    );
+
+    // Add a source
+    mapboxMap.addSource(new GeoJsonSource(MARKER_SOURCE, featureCollection));
+
+    // Add the symbol layer
+    mapboxMap.addLayer(
+      new SymbolLayer(MARKER_LAYER, MARKER_SOURCE)
+        .withProperties(
+          iconImage(LIGHTING_BOLT_IMAGE),
+          iconAllowOverlap(true)
+        )
+    );
+
+    // Set a click listener so we can manipulate the map
+    mapboxMap.setOnMapClickListener(this);
+  }
+
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
+    // Query which features are clicked
+    PointF screenLoc = mapboxMap.getProjection().toScreenLocation(point);
+    List<Feature> features = mapboxMap.queryRenderedFeatures(screenLoc, MARKER_LAYER);
+
+    SymbolLayer layer = mapboxMap.getLayerAs(MARKER_LAYER);
+    if (features.size() == 0) {
+      // Reset marker bolts to regular size if map is clicked on
+      layer.setProperties(iconSize(1f));
+    } else {
+      // Increases size of marker bolts if a marker is clicked on
+      layer.setProperties(iconSize(1.5f));
+
+      // TODO: Figure out marker onclick
+      /*makeMatrixApiCall(Position.fromCoordinates(clickedMarker.getPosition().getLongitude(),
+        clickedMarker.getPosition().getLatitude()));*/
+
     }
   }
+
 
   private String loadGeoJsonFromAsset(String filename) {
     try {
@@ -136,7 +176,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       is.close();
       return new String(buffer, "UTF-8");
     } catch (Exception exception) {
-      Log.e("MapActivity", "Exception Loading GeoJSON: " + exception.toString());
+      Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
       exception.printStackTrace();
       return null;
     }
