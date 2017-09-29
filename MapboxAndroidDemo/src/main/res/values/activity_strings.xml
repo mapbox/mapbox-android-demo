@@ -201,6 +201,11 @@
     <string name="no_accelerometer">This device doesn\'t support an accelerometer sensor</string>
     <string name="no_magnetic">This device doesn\'t support a magnetic sensor</string>
 
+    <!-- GeoJSON plugin activity-->
+    <string name="find_file_instruction_toast">Select a GeoJSON file on your device</string>
+    <string name="boston_police_stations">Boston police stations</string>
+    <string name="tap_on_markers">Tap on marker</string>
+
     <!-- Raster and local style source activity-->
     <string name="load_raster_button_text">Load custom raster style</string>
     <string name="load_local_style_button_text">Load local style</string>
