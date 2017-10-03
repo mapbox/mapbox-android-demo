@@ -14,17 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        mapbox:layout_constraintBottom_toTopOf="@id/guideline"/>
-
-    <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        mapbox:layout_constraintTop_toBottomOf="@id/guideline"
-        mapbox:mapbox_cameraTargetLat="42.347"
-        mapbox:mapbox_cameraTargetLng="-71.071"
-        mapbox:mapbox_cameraZoomMin="11.4"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light"/>
+        mapbox:layout_constraintBottom_toTopOf="@+id/guideline"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toTopOf="parent"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -33,5 +26,18 @@
         android:orientation="horizontal"
         mapbox:layout_constraintGuide_percent="0.20"/>
 
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        mapbox:layout_constraintBottom_toBottomOf="parent"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toTopOf="@+id/guideline"
+        mapbox:mapbox_cameraTargetLat="42.347"
+        mapbox:mapbox_cameraTargetLng="-71.071"
+        mapbox:mapbox_cameraZoomMin="11.4"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_light"/>
 
 </android.support.constraint.ConstraintLayout>

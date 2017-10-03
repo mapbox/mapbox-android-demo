@@ -93,6 +93,8 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
           @Override
           public boolean onMarkerClick(@NonNull Marker marker) {
 
+            Log.d(TAG, "onMarkerClick: marker clicked");
+
             makeMatrixApiCall(Position.fromCoordinates(
               marker.getPosition().getLongitude(),
               marker.getPosition().getLatitude()));
@@ -117,6 +119,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
   }
 
   private void makeMatrixApiCall(Position positionOfClickedMarker) {
+    Log.d(TAG, "makeMatrixApiCall: started");
     MapboxDirectionsMatrix directionsMatrixClient = new MapboxDirectionsMatrix.Builder()
       .setAccessToken(getString(R.string.access_token))
       .setProfile(DirectionsCriteria.PROFILE_DRIVING)
@@ -129,12 +132,15 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       @Override
       public void onResponse(Call<DirectionsMatrixResponse> call, Response<DirectionsMatrixResponse> response) {
 
+        Log.d(TAG, "onResponse: Matrix response");
+
         double[][] array = response.body().getDurations();
 
-        for (int x = 0; x < array.length; x++) {
+        for (int x = 1; x < array.length; x++) {
+          Log.d(TAG, "onResponse: x = " + x);
           matrixLocationList.get(x).setDistanceFromOrigin(array[0][x]);
+          matrixApiLocationRecyclerViewAdapter.notifyDataSetChanged();
         }
-        matrixApiLocationRecyclerViewAdapter.notifyDataSetChanged();
       }
 
       @Override
