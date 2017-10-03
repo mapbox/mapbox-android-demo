@@ -53,10 +53,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
   private MapboxMap mapboxMap;
   private List<Position> positionList;
   private FeatureCollection featureCollection;
-  private String Tag = "DirectionsMatrixApiActivity";
-  public static final String MARKER_SOURCE = "marker-source";
-  public static final String MARKER_LAYER = "marker-layer";
-  public static final String LIGHTING_BOLT_IMAGE = "bolt-image";
+  private String tag = "DirectionsMatrixApiActivity";
 
   private RecyclerView recyclerView;
   private MatrixApiLocationRecyclerViewAdapter matrixApiLocationRecyclerViewAdapter;
@@ -91,7 +88,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
           @Override
           public boolean onMarkerClick(@NonNull Marker marker) {
 
-            Log.d(Tag, "onMarkerClick: marker clicked");
+            Log.d(tag, "onMarkerClick: marker clicked");
 
             makeMatrixApiCall(Position.fromCoordinates(
               marker.getPosition().getLongitude(),
@@ -117,7 +114,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
   }
 
   private void makeMatrixApiCall(Position positionOfClickedMarker) {
-    Log.d(Tag, "makeMatrixApiCall: started");
+    Log.d(tag, "makeMatrixApiCall: started");
     MapboxDirectionsMatrix directionsMatrixClient = new MapboxDirectionsMatrix.Builder()
       .setAccessToken(getString(R.string.access_token))
       .setProfile(DirectionsCriteria.PROFILE_DRIVING)
@@ -130,12 +127,12 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       @Override
       public void onResponse(Call<DirectionsMatrixResponse> call, Response<DirectionsMatrixResponse> response) {
 
-        Log.d(Tag, "onResponse: Matrix response");
+        Log.d(tag, "onResponse: Matrix response");
 
         double[][] array = response.body().getDurations();
 
         for (int x = 1; x < array.length; x++) {
-          Log.d(Tag, "onResponse: x = " + x);
+          Log.d(tag, "onResponse: x = " + x);
           matrixLocationList.get(x).setDistanceFromOrigin(array[0][x]);
           matrixApiLocationRecyclerViewAdapter.notifyDataSetChanged();
         }
@@ -144,7 +141,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       @Override
       public void onFailure(Call<DirectionsMatrixResponse> call, Throwable throwable) {
         Toast.makeText(DirectionsMatrixApiActivity.this, R.string.call_error, Toast.LENGTH_SHORT).show();
-        Log.d(Tag, "onResponse onFailure");
+        Log.d(tag, "onResponse onFailure");
 
       }
     });
@@ -172,7 +169,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       is.close();
       return new String(buffer, "UTF-8");
     } catch (Exception exception) {
-      Log.e(Tag, "Exception Loading GeoJSON: " + exception.toString());
+      Log.e(tag, "Exception Loading GeoJSON: " + exception.toString());
       exception.printStackTrace();
       return null;
     }
