@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.styles;
+package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.graphics.Color;
 import android.os.Bundle;
