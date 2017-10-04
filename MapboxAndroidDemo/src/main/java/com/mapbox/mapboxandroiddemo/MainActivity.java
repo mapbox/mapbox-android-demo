@@ -417,7 +417,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_annotation_multiple_geometries_title,
           R.string.activity_annotation_multiple_geometries_description,
           new Intent(MainActivity.this, MultipleGeometriesActivity.class),
-          R.string.activity_annotation_polygon_holes_url, true
+          R.string.activity_annotation_multiple_geometries_url, true
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_annotation_custom_info_window_title,

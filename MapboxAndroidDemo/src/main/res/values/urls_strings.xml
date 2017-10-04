@@ -39,6 +39,7 @@
     <string name="activity_annotation_geojson_line_url" translatable="false">http://i.imgur.com/rIFjsrH.png</string>
     <string name="activity_annotation_polygon_url" translatable="false">http://i.imgur.com/v9X28id.png</string>
     <string name="activity_annotation_polygon_holes_url" translatable="false">http://i.imgur.com/uJ9ftZk.jpg</string>
+    <string name="activity_annotation_multiple_geometries_url" translatable="false">https://i.imgur.com/NvayvUd.png</string>
     <string name="activity_annotation_basic_marker_view_url" translatable="false">http://i.imgur.com/vbWTLIE.png</string>
     <string name="activity_annotation_custom_info_window_url" translatable="false">http://i.imgur.com/mCWbosy.png</string>
     <string name="activity_annotation_animated_marker_url" translatable="false">http://i.imgur.com/XegvIKr.png</string>

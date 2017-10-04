@@ -51,7 +51,7 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
   private void createGeoJsonSource() {
     // Load data from GeoJSON file in the assets folder
     GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID,
-      loadJsonFromAsset("lassen_national_park.geojson"));
+      loadJsonFromAsset("fake_norway_campsites.geojson"));
     mapboxMap.addSource(geoJsonSource);
   }
 
@@ -70,7 +70,7 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
     CircleLayer pointsLayer = new CircleLayer("points", GEOJSON_SOURCE_ID);
     pointsLayer.setProperties(
       PropertyFactory.circleColor(Color.YELLOW),
-      PropertyFactory.circleRadius(6f));
+      PropertyFactory.circleRadius(3f));
     pointsLayer.setFilter(Filter.eq("$type", "Point"));
     mapboxMap.addLayer(pointsLayer);
   }
