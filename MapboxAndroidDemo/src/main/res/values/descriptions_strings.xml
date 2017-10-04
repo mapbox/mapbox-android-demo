@@ -38,7 +38,7 @@
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
     <string name="activity_annotation_polygon_description">Draw a vector polygon on a map with the Mapbox Android SDK.</string>
     <string name="activity_annotation_polygon_holes_description">Draw a vector polygon with holes on a map using the Mapbox Android SDK.</string>
-    <string name="activity_annotation_multiple_geometries_description">Draw a multiple geometries from a single GeoJSON file.</string>
+    <string name="activity_annotation_multiple_geometries_description">Draw multiple geometries from a single GeoJSON file.</string>
     <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
     <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize the info window.</string>
     <string name="activity_annotation_animated_marker_description">Animate the marker to a new position on the map.</string>
