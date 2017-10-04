@@ -95,7 +95,8 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
         });
 
         // Set up the recyclerView
-        locationAdapter = new LocationRecyclerViewAdapter(locationList, mapboxMap, RecyclerViewSymbolLayerActivity.this);
+        locationAdapter = new LocationRecyclerViewAdapter(locationList, mapboxMap,
+          RecyclerViewSymbolLayerActivity.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
           LinearLayoutManager.HORIZONTAL, true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -223,7 +224,8 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     private MapboxMap map;
     private RecyclerViewSymbolLayerActivity activity;
 
-    public LocationRecyclerViewAdapter(List<SingleRecyclerViewLocation> locationList, MapboxMap mapBoxMap, RecyclerViewSymbolLayerActivity activity) {
+    public LocationRecyclerViewAdapter(List<SingleRecyclerViewLocation> locationList,
+                                       MapboxMap mapBoxMap, RecyclerViewSymbolLayerActivity activity) {
       this.locationList = locationList;
       this.map = mapBoxMap;
       this.activity = activity;
@@ -299,14 +301,14 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   private static final String SELECTED_SOURCE_ID = "selected-marker-source";
 
   private void addLayer(final MapboxMap mapboxMap) {
-    SymbolLayer selected_marker_layer;
-    GeoJsonSource selected_marker_source;
-    selected_marker_layer = new SymbolLayer(SELECTED_MARKER_LAYER_ID, SELECTED_SOURCE_ID)
+    SymbolLayer selectedMarkerLayer;
+    GeoJsonSource selectedMarkerSource;
+    selectedMarkerLayer = new SymbolLayer(SELECTED_MARKER_LAYER_ID, SELECTED_SOURCE_ID)
       .withProperties(PropertyFactory.iconImage("my-selected-marker-image"));
-    mapboxMap.addLayer(selected_marker_layer);
+    mapboxMap.addLayer(selectedMarkerLayer);
     FeatureCollection emptySource = FeatureCollection.fromFeatures(new Feature[] {});
-    selected_marker_source = new GeoJsonSource(SELECTED_SOURCE_ID, emptySource);
-    mapboxMap.addSource(selected_marker_source);
+    selectedMarkerSource = new GeoJsonSource(SELECTED_SOURCE_ID, emptySource);
+    mapboxMap.addSource(selectedMarkerSource);
   }
 
 
@@ -364,11 +366,11 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   public void onMarkerClickHandler(LatLng point) {
     final SymbolLayer marker = (SymbolLayer) mapboxMap.getLayer(SELECTED_MARKER_LAYER_ID);
 
-    Position p = Position.fromCoordinates(point.getLongitude(), point.getLatitude());
-    Feature f = Feature.fromGeometry(Point.fromCoordinates(p));
+    Position position = Position.fromCoordinates(point.getLongitude(), point.getLatitude());
+    Feature feature = Feature.fromGeometry(Point.fromCoordinates(position));
 
     FeatureCollection featureCollection = FeatureCollection.fromFeatures(
-      new Feature[] {f});
+      new Feature[] {feature});
     GeoJsonSource source = mapboxMap.getSourceAs(SELECTED_SOURCE_ID);
 
     if (source != null) {
