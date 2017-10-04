@@ -303,9 +303,14 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   private void addLayer(final MapboxMap mapboxMap) {
     SymbolLayer selectedMarkerLayer;
     GeoJsonSource selectedMarkerSource;
+
+    // Create and add SymbolLayer to the map
     selectedMarkerLayer = new SymbolLayer(SELECTED_MARKER_LAYER_ID, SELECTED_SOURCE_ID)
       .withProperties(PropertyFactory.iconImage("my-selected-marker-image"));
+
     mapboxMap.addLayer(selectedMarkerLayer);
+
+    // Create and add an empty GeoJSONSource to the map
     FeatureCollection emptySource = FeatureCollection.fromFeatures(new Feature[] {});
     selectedMarkerSource = new GeoJsonSource(SELECTED_SOURCE_ID, emptySource);
     mapboxMap.addSource(selectedMarkerSource);
