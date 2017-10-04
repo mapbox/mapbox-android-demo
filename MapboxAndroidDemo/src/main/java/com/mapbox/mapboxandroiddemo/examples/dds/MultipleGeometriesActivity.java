@@ -22,7 +22,7 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
 
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private static final String GEOJSON_SOURCE_ID = "GEOJSON FILE";
+  private static final String GEOJSON_SOURCE_ID = "GEOJSONFILE";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
