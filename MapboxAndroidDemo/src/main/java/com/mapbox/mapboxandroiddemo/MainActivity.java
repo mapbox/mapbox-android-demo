@@ -37,7 +37,7 @@ import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivit
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.MultipleGeometriesActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
@@ -422,12 +422,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_annotation_polygon_holes_url, false
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_annotation_multiple_geometries_title,
-          R.string.activity_annotation_multiple_geometries_description,
-          new Intent(MainActivity.this, MultipleGeometriesActivity.class),
-          R.string.activity_annotation_multiple_geometries_url, true
-        ));
-        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_annotation_custom_info_window_title,
           R.string.activity_annotation_custom_info_window_description,
           new Intent(MainActivity.this, CustomInfoWindowActivity.class),
@@ -644,6 +638,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, AddRainFallStyleActivity.class),
           R.string.activity_dds_time_lapse_rainfall_url,
           false
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+            R.string.activity_dds_multiple_geometries_title,
+            R.string.activity_dds_multiple_geometries_description,
+            new Intent(MainActivity.this, MultipleGeometriesActivity.class),
+            R.string.activity_dds_multiple_geometries_url, true
         ));
         currentCategory = R.id.nav_dds;
         break;

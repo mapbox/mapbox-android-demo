@@ -32,13 +32,13 @@
     <string name="activity_dds_json_vector_mix_title">Join local JSON data with vector tile geometries</string>
     <string name="activity_dds_style_line_identity_property_title">Style lines using an identity property function</string>
     <string name="activity_dds_time_lapse_rainfall_points_title">Data time lapse</string>
+    <string name="activity_dds_multiple_geometries_title">Draw multiple geometries</string>
     <string name="activity_annotation_marker_title">Draw a marker</string>
     <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
     <string name="activity_annotation_geojson_line_title">Draw a GeoJSON line</string>
     <string name="activity_annotation_polygon_title">Draw a polygon</string>
     <string name="activity_annotation_polygon_holes_title">Draw a polygon with holes</string>
     <string name="activity_annotation_marker_view_title">Draw a marker view</string>
-    <string name="activity_annotation_multiple_geometries_title">Draw multiple geometries</string>
     <string name="activity_annotation_custom_info_window_title">Custom info window</string>
     <string name="activity_annotation_animated_marker_title">Animate marker position</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
