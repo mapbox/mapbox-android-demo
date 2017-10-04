@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.annotations;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -50,32 +49,27 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
   }
 
   private void createGeoJsonSource() {
-    Log.d("here", "running createGeoJsonSource()");
-    GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID,
-      loadJsonFromAsset("lassen_national_park.geojson"));
+    String geoJsonString = loadJsonFromAsset("lassen_national_park.geojson");
+    GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID, geoJsonString);
     mapboxMap.addSource(geoJsonSource);
-    Log.d("Here", loadJsonFromAsset("lassen_national_park.geojson"));
   }
 
   private void addPolygonLayer() {
-    Log.d("here", "running addPolygonLayer()");
     FillLayer borderOutlineLayer = new FillLayer("polygon", GEOJSON_SOURCE_ID);
     borderOutlineLayer.setProperties(
       PropertyFactory.fillColor(Color.RED),
       PropertyFactory.fillOpacity(.4f));
-    borderOutlineLayer.setFilter(Filter.eq("{type}", "Point"));
+    borderOutlineLayer.setFilter(Filter.eq("$type", "Polygon"));
     mapboxMap.addLayer(borderOutlineLayer);
   }
 
   private void addPointsLayer() {
-    Log.d("here", "running addPointsLayer()");
     CircleLayer pointsLayer = new CircleLayer("points", GEOJSON_SOURCE_ID);
     pointsLayer.setProperties(
       PropertyFactory.circleColor(Color.YELLOW),
       PropertyFactory.circleRadius(6f));
-    pointsLayer.setFilter(Filter.eq("{type}", "Point"));
+    pointsLayer.setFilter(Filter.eq("$type", "Point"));
     mapboxMap.addLayer(pointsLayer);
-    Log.d("here", "running addPointsLayer()");
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
