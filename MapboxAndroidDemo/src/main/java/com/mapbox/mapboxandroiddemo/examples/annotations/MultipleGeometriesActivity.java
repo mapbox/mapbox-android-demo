@@ -49,12 +49,14 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
   }
 
   private void createGeoJsonSource() {
-    String geoJsonString = loadJsonFromAsset("lassen_national_park.geojson");
-    GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID, geoJsonString);
+    // Load data from GeoJSON file in the assets folder
+    GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID,
+      loadJsonFromAsset("lassen_national_park.geojson"));
     mapboxMap.addSource(geoJsonSource);
   }
 
   private void addPolygonLayer() {
+    // Create and style a FillLayer that uses the Polygon Feature's coordinates in the GeoJSON data
     FillLayer borderOutlineLayer = new FillLayer("polygon", GEOJSON_SOURCE_ID);
     borderOutlineLayer.setProperties(
       PropertyFactory.fillColor(Color.RED),
@@ -64,6 +66,7 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
   }
 
   private void addPointsLayer() {
+    // Create and style a CircleLayer that uses the Point Features' coordinates in the GeoJSON data
     CircleLayer pointsLayer = new CircleLayer("points", GEOJSON_SOURCE_ID);
     pointsLayer.setProperties(
       PropertyFactory.circleColor(Color.YELLOW),
@@ -116,7 +119,6 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
   }
 
   private String loadJsonFromAsset(String filename) {
-    // Using this method to load in GeoJSON files from the assets folder.
     try {
       InputStream is = getAssets().open(filename);
       int size = is.available();
