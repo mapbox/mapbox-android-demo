@@ -53,40 +53,21 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_mini_window);
 
-
     mapView = (MapView) findViewById(R.id.main_mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         MiniWindowActivity.this.mainLargeMapboxMap = mapboxMap;
-
-        mainLargeMapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
-          @Override
-          public void onMapClick(@NonNull LatLng point) {
-            Log.d("MiniWindowActivity", "Clicked on map");
-          }
-        });
-
         mainLargeMapboxMap.setOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
           @Override
           public void onCameraMove() {
             Log.d("MiniWindowActivity", "Camera moving");
             onMapMovedFragmentInterfaceListener.onMapMoved(mainLargeMapboxMap.getCameraPosition());
-
-          }
-        });
-
-        mainLargeMapboxMap.setOnCameraIdleListener(new MapboxMap.OnCameraIdleListener() {
-          @Override
-          public void onCameraIdle() {
-            Log.d("MiniWindowActivity", "Camera stopped moving");
-
           }
         });
       }
     });
-
 
     /* Custom version of the regular Mapbox SupportMapFragment class.A custom one is being built here
     so that the interface call backs can be used in the appropriate places so that the example eventually
@@ -101,8 +82,8 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
       MapboxMapOptions options = new MapboxMapOptions();
       options.styleUrl(Style.MAPBOX_STREETS);
       options.camera(new CameraPosition.Builder()
-          .target(new LatLng(-26.145, 134.312))
-          .zoom(1)
+          .target(new LatLng(6.526218, 3.77718))
+          .zoom(3)
           .build());
 
       // Create map fragment
@@ -205,6 +186,7 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
 
     private MapView map;
     private OnMapReadyCallback onMapReadyCallback;
+    private CameraPosition finalCameraPosition;
 
     /**
      * Creates a default CustomSupportMapFragment instance
@@ -231,12 +213,16 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
 
     @Override
     public void onMapMoved(final CameraPosition cameraPosition) {
-      Log.d("MiniWindowActivity", "camera lat position = " + cameraPosition.target.getLatitude() + " and long = "
-          + cameraPosition.target.getLongitude());
+
+      finalCameraPosition = new CameraPosition.Builder()
+          .target(cameraPosition.target)
+          .zoom(cameraPosition.zoom - 2)
+          .build();
+
       map.getMapAsync(new OnMapReadyCallback() {
         @Override
         public void onMapReady(MapboxMap mapboxMap) {
-          mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+          mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(finalCameraPosition));
         }
       });
     }
