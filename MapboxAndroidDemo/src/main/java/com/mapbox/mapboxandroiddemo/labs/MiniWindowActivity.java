@@ -72,6 +72,12 @@ public class MiniWindowActivity extends AppCompatActivity {
       // Build mapboxMap
       MapboxMapOptions options = new MapboxMapOptions();
       options.styleUrl(Style.MAPBOX_STREETS);
+      options.attributionEnabled(false);
+      options.logoEnabled(false);
+      options.compassEnabled(false);
+      options.scrollGesturesEnabled(false);
+      options.tiltGesturesEnabled(false);
+      options.rotateGesturesEnabled(false);
       options.camera(new CameraPosition.Builder()
         .target(new LatLng(11.302318, 106.025839))
         .zoom(2)
