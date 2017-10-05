@@ -7,21 +7,21 @@
     <string name="activity_basic_simple_mapview_title">Bản đồ đơn giản</string>
     <string name="activity_basic_support_map_frag_title">Hỗ trợ mảnh bản đồ</string>
     <string name="activity_basic_mapbox_options_title">Xây dựng bản đồ một cách động</string>
-    <string name="activity_style_mapbox_studio_title">Kiểu Mapbox Studio</string>
-    <string name="activity_style_default_title">Kiểu mặc định</string>
+    <string name="activity_styles_mapbox_studio_title">Kiểu Mapbox Studio</string>
+    <string name="activity_styles_default_title">Kiểu mặc định</string>
     <string name="activity_styles_show_hide_layer_title">Hiện ẩn lớp</string>
     <string name="activity_styles_language_switch_title">Thay đổi ngôn ngữ bản đồ</string>
     <string name="activity_styles_color_switcher_title">Thay đổi màu lớp</string>
     <string name="activity_styles_adjust_layer_opacity_title">Chỉnh độ mờ của lớp</string>
     <string name="activity_styles_geojson_layer_in_stack_title">Chèn lớp mới dưới các nhãn</string>
     <string name="activity_styles_vector_source_title">Thêm nguồn mảnh vectơ</string>
-    <string name="activity_style_add_wms_source_title">Thêm nguồn WMS</string>
-    <string name="activity_style_zoom_dependent_fill_color_title">Màu sắc tùy mức thu phóng</string>
-    <string name="activity_style_create_heatmap_points_title">Tạo bản đồ nhiệt từ các điểm</string>
-    <string name="activity_style_data_clusters_title">Tạo và định kiểu các cụm dữ liệu</string>
-    <string name="activity_style_line_layer_title">Tạo lớp đường kẻ</string>
-    <string name="activity_style_symbol_layer_title">Lớp dấu ghim</string>
-    <string name="activity_style_local_style_or_raster_source_title">Kiểu địa phương hoặc kiểu raster tùy biến</string>
+    <string name="activity_styles_add_wms_source_title">Thêm nguồn WMS</string>
+    <string name="activity_styles_zoom_dependent_fill_color_title">Màu sắc tùy mức thu phóng</string>
+    <string name="activity_dds_create_heatmap_points_title">Tạo bản đồ nhiệt từ các điểm</string>
+    <string name="activity_styles_data_clusters_title">Tạo và định kiểu các cụm dữ liệu</string>
+    <string name="activity_styles_line_layer_title">Tạo lớp đường kẻ</string>
+    <string name="activity_styles_symbol_layer_title">Lớp dấu ghim</string>
+    <string name="activity_styles_local_style_or_raster_source_title">Kiểu địa phương hoặc kiểu raster tùy biến</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_title">Đặt chiều cao của khối nhô ra theo dữ liệu GeoJSON</string>
     <string name="activity_extrusions_population_density_extrusions_title">Hiển thị tòa nhà 3D có chiều cao theo dữ liệu vectơ</string>
     <string name="activity_extrusions_adjust_extrusions_title">Điều chỉnh vị trí và màu sắc của ánh sáng</string>
@@ -55,7 +55,7 @@
     <string name="activity_lab_marker_following_route_title">Ghim theo dõi tuyến đường</string>
     <string name="activity_lab_picture_in_picture_title">Hình trong hình</string>
     <string name="activity_lab_off_route_title">Nhận ra vụ lạc đường</string>
-    <string name="activity_lab_las_angeles_tourism_title">Los Angeles dành cho khách du lịch</string>
+    <string name="activity_lab_los_angeles_tourism_title">Los Angeles dành cho khách du lịch</string>
     <string name="activity_lab_indoor_map_title">Bản đồ trong nhà</string>
 
 </resources>

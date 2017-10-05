@@ -6,13 +6,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-
-import android.view.View;
-
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -149,6 +147,8 @@ public class MapillaryActivity extends AppCompatActivity {
 
     static Source createSource() {
       TileSet mapillaryTileset = new TileSet("2.1.0", Mapillary.URL_TILESET);
+      mapillaryTileset.setMinZoom(0);
+      mapillaryTileset.setMaxZoom(14);
       return new VectorSource(Mapillary.ID_SOURCE, mapillaryTileset);
     }
 

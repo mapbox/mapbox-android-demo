@@ -8,22 +8,22 @@
     <string name="activity_basic_simple_mapview_url" translatable="false">http://i.imgur.com/IIhIB4J.png</string>
     <string name="activity_basic_support_map_frag_url" translatable="false">http://i.imgur.com/vNlHFjG.png</string>
     <string name="activity_basic_mapbox_options_url" translatable="false">http://i.imgur.com/IhuviRz.png</string>
-    <string name="activity_style_mapbox_studio_url" translatable="false">http://i.imgur.com/MbR2zbD.png</string>
+    <string name="activity_styles_mapbox_studio_url" translatable="false">http://i.imgur.com/MbR2zbD.png</string>
     <string name="activity_style_raster_url" translatable="false">http://i.imgur.com/QpFmrdR.png</string>
-    <string name="activity_style_default_url" translatable="false">http://i.imgur.com/ZuUhFHw.jpg</string>
-    <string name="activity_style_zoom_dependent_fill_color_url" translatable="false">http://i.imgur.com/rHl1pmC.png</string>
+    <string name="activity_styles_default_url" translatable="false">http://i.imgur.com/ZuUhFHw.jpg</string>
+    <string name="activity_styles_zoom_dependent_fill_color_url" translatable="false">http://i.imgur.com/rHl1pmC.png</string>
     <string name="activity_styles_color_switcher_url" translatable="false">http://i.imgur.com/a0ZaKHG.png</string>
     <string name="activity_styles_language_switch_url" translatable="false">http://i.imgur.com/bu7GV5T.png</string>
     <string name="activity_styles_show_hide_layer_url" translatable="false">http://i.imgur.com/amDMa1M.png</string>
     <string name="activity_styles_geojson_layer_in_stack_url" translatable="false">http://i.imgur.com/mngiJUj.png</string>
     <string name="activity_styles_adjust_layer_opacity_url" translatable="false">http://i.imgur.com/0Av8kWD.png</string>
     <string name="activity_styles_vector_source_url" translatable="false">http://i.imgur.com/N0altyP.png</string>
-    <string name="activity_style_add_wms_source_url" translatable="false">http://i.imgur.com/k14WdRG.png</string>
-    <string name="activity_style_create_heatmap_points_url" translatable="false">http://i.imgur.com/pAejKLH.png</string>
-    <string name="activity_style_create_cluster_data_points_url" translatable="false">http://i.imgur.com/fGeZhcD.png</string>
-    <string name="activity_style_line_layer_url" translatable="false">http://i.imgur.com/Iqxoing.png</string>
-    <string name="activity_style_symbol_layer_url" translatable="false">http://i.imgur.com/TQ4iA0L.png</string>
-    <string name="activity_style_local_style_or_raster_source_url" translatable="false">http://i.imgur.com/9w9m3On.jpg</string>
+    <string name="activity_styles_add_wms_source_url" translatable="false">http://i.imgur.com/k14WdRG.png</string>
+    <string name="activity_dds_create_heatmap_points_url" translatable="false">http://i.imgur.com/pAejKLH.png</string>
+    <string name="activity_styles_create_cluster_data_points_url" translatable="false">http://i.imgur.com/fGeZhcD.png</string>
+    <string name="activity_styles_line_layer_url" translatable="false">http://i.imgur.com/Iqxoing.png</string>
+    <string name="activity_styles_symbol_layer_url" translatable="false">http://i.imgur.com/TQ4iA0L.png</string>
+    <string name="activity_styles_local_style_or_raster_source_url" translatable="false">http://i.imgur.com/9w9m3On.jpg</string>
     <string name="activity_extrusions_population_density_extrusions_url" translatable="false">http://i.imgur.com/se1z8Wb.png</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_url" translatable="false">http://i.imgur.com/6j848JL.jpg</string>
     <string name="activity_extrusions_adjust_extrusions_url" translatable="false">http://i.imgur.com/XNTyIO5.png</string>
@@ -35,6 +35,7 @@
     <string name="activity_dds_json_vector_mix_url">http://i.imgur.com/1IXkw80.png</string>
     <string name="activity_dds_time_lapse_rainfall_url" translatable="false">https://i.imgur.com/nWzW6mU.jpg</string>
     <string name="activity_dds_mini_window_url" translatable="false">http://i.imgur.com/xrKbxsN.png</string>
+    <string name="activity_dds_multiple_geometries_url" translatable="false">https://i.imgur.com/NvayvUd.png</string>
     <string name="activity_annotation_marker_url" translatable="false">http://i.imgur.com/X59UoaY.png</string>
     <string name="activity_annotation_custom_marker_url" translatable="false">http://i.imgur.com/BIHtPwJ.png</string>
     <string name="activity_annotation_geojson_line_url" translatable="false">http://i.imgur.com/rIFjsrH.png</string>
@@ -60,6 +61,7 @@
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
     <string name="activity_plugins_location_plugin_url" translatable="false">https://i.imgur.com/Opfwv6j.png</string>
+    <string name="activity_plugins_geojson_plugin_url" translatable="false">http://i.imgur.com/kju0sKw.jpg</string>
     <string name="activity_mas_simplify_polyline_url" translatable="false">http://i.imgur.com/uATgul1.png</string>
     <string name="activity_mas_map_matching_url" translatable="false">http://i.imgur.com/bWvVbwC.png</string>
     <string name="activity_lab_location_picker_url" translatable="false">http://i.imgur.com/0JTVwaa.png</string>
@@ -67,7 +69,7 @@
     <string name="activity_lab_space_station_location_url" translatable="false">http://i.imgur.com/PxuB1T8.png</string>
     <string name="activity_lab_picture_in_picture_url" translatable="false">http://i.imgur.com/kascJEy.png</string>
     <string name="activity_lab_off_route_url" translatable="false">http://i.imgur.com/lx1LdkA.png</string>
-    <string name="activity_lab_las_angeles_tourism_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
+    <string name="activity_lab_los_angeles_tourism_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
     <string name="activity_lab_indoor_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
     <string name="activity_lab_rv_on_map_url" translatable="false">http://i.imgur.com/8mQQuMo.jpg</string>
     <string name="activity_lab_mapillary_url" translatable="false">http://i.imgur.com/w4SSif1.png</string>
