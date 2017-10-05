@@ -33,7 +33,6 @@
     <string name="activity_dds_json_vector_mix_description">Style a choropleth map by merging local JSON data with vector tile geometries.</string>
     <string name="activity_dds_style_line_identity_property_description">Using an identity line-color property function for a visualization.</string>
     <string name="activity_dds_time_lapse_rainfall_points_description">Use data-driven styling to visualize point data with a time lapse effect; rainfall in China in this example.</string>
-    <string name="activity_dds_mini_window_description">Show a smaller map fragment and link it to a larger map for bound map interaction.</string>
     <string name="activity_dds_multiple_geometries_description">Draw multiple geometries from a single GeoJSON file.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
@@ -72,5 +71,6 @@
     <string name="activity_lab_indoor_map_description">Display an indoor map of a building with toggles to switch between floor levels.</string>
     <string name="activity_lab_rv_on_map_description">Manipulate the map based on recyclerview interactions.</string>
     <string name="activity_lab_mapillary_description">Add Mapillary vector tiles to a map</string>
+    <string name="activity_labs_mini_window_description">Show a smaller map fragment and link it to a larger map for bound map interaction.</string>
 
 </resources>

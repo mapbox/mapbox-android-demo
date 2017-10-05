@@ -34,7 +34,6 @@
     <string name="activity_dds_style_line_identity_property_url" translatable="false">http://i.imgur.com/wgpKvZM.png</string>
     <string name="activity_dds_json_vector_mix_url">http://i.imgur.com/1IXkw80.png</string>
     <string name="activity_dds_time_lapse_rainfall_url" translatable="false">https://i.imgur.com/nWzW6mU.jpg</string>
-    <string name="activity_dds_mini_window_url" translatable="false">http://i.imgur.com/xrKbxsN.png</string>
     <string name="activity_dds_multiple_geometries_url" translatable="false">https://i.imgur.com/NvayvUd.png</string>
     <string name="activity_annotation_marker_url" translatable="false">http://i.imgur.com/X59UoaY.png</string>
     <string name="activity_annotation_custom_marker_url" translatable="false">http://i.imgur.com/BIHtPwJ.png</string>
@@ -73,5 +72,6 @@
     <string name="activity_lab_indoor_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
     <string name="activity_lab_rv_on_map_url" translatable="false">http://i.imgur.com/8mQQuMo.jpg</string>
     <string name="activity_lab_mapillary_url" translatable="false">http://i.imgur.com/w4SSif1.png</string>
+    <string name="activity_labs_mini_window_url" translatable="false">https://i.imgur.com/aEoBHo9.jpg</string>
 
 </resources>

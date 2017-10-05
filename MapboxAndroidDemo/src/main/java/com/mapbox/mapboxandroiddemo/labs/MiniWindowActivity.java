@@ -1,26 +1,22 @@
 package com.mapbox.mapboxandroiddemo.labs;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
@@ -29,7 +25,7 @@ import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
 
 public class MiniWindowActivity extends AppCompatActivity {
 
-  private MapView mapView;
+  private MapView mainMapMapView;
   private MapboxMap mainLargeMapboxMap;
   private OnMapMovedFragmentInterface onMapMovedFragmentInterfaceListener;
 
@@ -49,18 +45,16 @@ public class MiniWindowActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_mini_window);
 
-    mapView = (MapView) findViewById(R.id.main_mapView);
-    mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
+    mainMapMapView = (MapView) findViewById(R.id.main_mapView);
+    mainMapMapView.onCreate(savedInstanceState);
+    mainMapMapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         MiniWindowActivity.this.mainLargeMapboxMap = mapboxMap;
         mainLargeMapboxMap.setOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
           @Override
           public void onCameraMove() {
-
             onMapMovedFragmentInterfaceListener.onMapMoved(mainLargeMapboxMap.getCameraPosition());
-
           }
         });
       }
@@ -79,25 +73,26 @@ public class MiniWindowActivity extends AppCompatActivity {
       MapboxMapOptions options = new MapboxMapOptions();
       options.styleUrl(Style.MAPBOX_STREETS);
       options.camera(new CameraPosition.Builder()
-        .target(new LatLng(23.684994, 90.356330))
-        .zoom(6)
+        .target(new LatLng(11.302318, 106.025839))
+        .zoom(2)
         .build());
 
-      // Create map fragment
+      // Create fragmentMap fragment
       customSupportMapFragment = CustomSupportMapFragment.newInstance(options);
 
-      // Add map fragment to parent container
-      transaction.add(R.id.mini_map_fragment_container, customSupportMapFragment, "com.mapbox.map");
+      // Add fragmentMap fragment to parent container
+      transaction.add(R.id.mini_map_fragment_container, customSupportMapFragment, "com.mapbox.fragmentMap");
       transaction.commit();
 
     } else {
       customSupportMapFragment = (CustomSupportMapFragment)
-        getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
+        getSupportFragmentManager().findFragmentByTag("com.mapbox.fragmentMap");
     }
 
     customSupportMapFragment.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
+
       }
     });
   }
@@ -110,49 +105,48 @@ public class MiniWindowActivity extends AppCompatActivity {
     void onMapMoved(CameraPosition mainMapCameraPosition);
   }
 
-  // Add the mapView lifecycle to the activity's lifecycle methods
+  // Add the mainMapMapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();
-    mapView.onResume();
+    mainMapMapView.onResume();
   }
 
   @Override
   protected void onStart() {
     super.onStart();
-    mapView.onStart();
+    mainMapMapView.onStart();
   }
 
   @Override
   protected void onStop() {
     super.onStop();
-    mapView.onStop();
+    mainMapMapView.onStop();
   }
 
   @Override
   public void onPause() {
     super.onPause();
-    mapView.onPause();
+    mainMapMapView.onPause();
   }
 
   @Override
   public void onLowMemory() {
     super.onLowMemory();
-    mapView.onLowMemory();
+    mainMapMapView.onLowMemory();
   }
 
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    mapView.onDestroy();
+    mainMapMapView.onDestroy();
   }
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    mapView.onSaveInstanceState(outState);
+    mainMapMapView.onSaveInstanceState(outState);
   }
-
 
   /**
    * Custom version of the regular Mapbox SupportMapFragment class. A custom one is being built here
@@ -164,9 +158,9 @@ public class MiniWindowActivity extends AppCompatActivity {
   public static class CustomSupportMapFragment extends Fragment implements
     MiniWindowActivity.OnMapMovedFragmentInterface {
 
-    private MapView map;
+    private MapView fragmentMap;
     private OnMapReadyCallback onMapReadyCallback;
-    private CameraPosition finalCameraPosition;
+    private CameraPosition cameraPositionForFragmentMap;
     private static final int ZOOM_DISTANCE_BETWEEN_MAIN_AND_FRAGMENT_MAPS = 3;
 
     /**
@@ -181,32 +175,21 @@ public class MiniWindowActivity extends AppCompatActivity {
       return mapFragment;
     }
 
+    // Override method for OnMapMovedFragmentInterface
     @Override
     public void onMapMoved(final CameraPosition mainMapCameraPosition) {
 
-      finalCameraPosition = new CameraPosition.Builder()
+      cameraPositionForFragmentMap = new CameraPosition.Builder()
         .target(mainMapCameraPosition.target)
         .zoom(mainMapCameraPosition.zoom - ZOOM_DISTANCE_BETWEEN_MAIN_AND_FRAGMENT_MAPS)
         .bearing(mainMapCameraPosition.bearing)
         .tilt(mainMapCameraPosition.tilt)
         .build();
 
-      map.getMapAsync(new OnMapReadyCallback() {
+      fragmentMap.getMapAsync(new OnMapReadyCallback() {
         @Override
-        public void onMapReady(MapboxMap mapboxMap) {
-
-          mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(finalCameraPosition));
-
-          /*mapboxMap.clear();
-
-          PolygonOptions polygonArea = new PolygonOptions()
-            .add(latLngBounds.getNorthWest())
-            .add(latLngBounds.getNorthEast())
-            .add(latLngBounds.getSouthEast())
-            .add(latLngBounds.getSouthWest());
-          polygonArea.alpha(0.25f);
-          polygonArea.fillColor(Color.parseColor("#ff9a00"));
-          mapboxMap.addPolygon(polygonArea);*/
+        public void onMapReady(final MapboxMap mapInFragment) {
+          mapInFragment.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPositionForFragmentMap));
         }
       });
     }
@@ -221,15 +204,15 @@ public class MiniWindowActivity extends AppCompatActivity {
      * Creates the fragment view hierarchy.
      *
      * @param inflater           Inflater used to inflate content.
-     * @param container          The parent layout for the map fragment.
-     * @param savedInstanceState The saved instance state for the map fragment.
+     * @param container          The parent layout for the fragmentMap fragment.
+     * @param savedInstanceState The saved instance state for the fragmentMap fragment.
      * @return The view created
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       super.onCreateView(inflater, container, savedInstanceState);
       Context context = inflater.getContext();
-      return map = new MapView(context, MapFragmentUtils.resolveArgs(context, getArguments()));
+      return fragmentMap = new MapView(context, MapFragmentUtils.resolveArgs(context, getArguments()));
     }
 
     /**
@@ -241,7 +224,7 @@ public class MiniWindowActivity extends AppCompatActivity {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      map.onCreate(savedInstanceState);
+      fragmentMap.onCreate(savedInstanceState);
     }
 
     /**
@@ -250,8 +233,8 @@ public class MiniWindowActivity extends AppCompatActivity {
     @Override
     public void onStart() {
       super.onStart();
-      map.onStart();
-      map.getMapAsync(onMapReadyCallback);
+      fragmentMap.onStart();
+      fragmentMap.getMapAsync(onMapReadyCallback);
     }
 
     /**
@@ -260,7 +243,7 @@ public class MiniWindowActivity extends AppCompatActivity {
     @Override
     public void onResume() {
       super.onResume();
-      map.onResume();
+      fragmentMap.onResume();
     }
 
     /**
@@ -269,7 +252,7 @@ public class MiniWindowActivity extends AppCompatActivity {
     @Override
     public void onPause() {
       super.onPause();
-      map.onPause();
+      fragmentMap.onPause();
     }
 
     /**
@@ -280,7 +263,7 @@ public class MiniWindowActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
       super.onSaveInstanceState(outState);
-      map.onSaveInstanceState(outState);
+      fragmentMap.onSaveInstanceState(outState);
     }
 
     /**
@@ -289,7 +272,7 @@ public class MiniWindowActivity extends AppCompatActivity {
     @Override
     public void onStop() {
       super.onStop();
-      map.onStop();
+      fragmentMap.onStop();
     }
 
     /**
@@ -298,7 +281,7 @@ public class MiniWindowActivity extends AppCompatActivity {
     @Override
     public void onLowMemory() {
       super.onLowMemory();
-      map.onLowMemory();
+      fragmentMap.onLowMemory();
     }
 
     /**
@@ -307,7 +290,7 @@ public class MiniWindowActivity extends AppCompatActivity {
     @Override
     public void onDestroyView() {
       super.onDestroyView();
-      map.onDestroy();
+      fragmentMap.onDestroy();
     }
 
     /**
