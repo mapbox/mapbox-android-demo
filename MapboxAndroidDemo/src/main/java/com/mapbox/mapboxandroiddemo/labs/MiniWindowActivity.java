@@ -28,12 +28,7 @@ public class MiniWindowActivity extends AppCompatActivity {
   private MapView mainMapMapView;
   private MapboxMap mainLargeMapboxMap;
   private OnMapMovedFragmentInterface onMapMovedFragmentInterfaceListener;
-
-  @Override
-  public void onAttachFragment(android.app.Fragment fragment) {
-    super.onAttachFragment(fragment);
-  }
-
+  
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
