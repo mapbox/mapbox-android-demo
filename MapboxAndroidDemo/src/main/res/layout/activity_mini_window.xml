@@ -21,9 +21,9 @@
         android:id="@+id/main_mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="6.526218"
-        mapbox:mapbox_cameraTargetLng="3.77718"
-        mapbox:mapbox_cameraZoom="7"
+        mapbox:mapbox_cameraTargetLat="23.684994"
+        mapbox:mapbox_cameraTargetLng="90.356330"
+        mapbox:mapbox_cameraZoom="9"
         mapbox:mapbox_cameraZoomMin="5"
         mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"
         maps:mapbox_enableZMediaOverlay="true"/>

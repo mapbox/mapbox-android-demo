@@ -27,14 +27,10 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
 
-public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.OnCameraMoveListener {
+public class MiniWindowActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap mainLargeMapboxMap;
-  private static final LatLngBounds AUSTRALIA_BOUNDS = new LatLngBounds.Builder()
-      .include(new LatLng(-9.136343, 109.372126))
-      .include(new LatLng(-44.640488, 158.590484))
-      .build();
   private OnMapMovedFragmentInterface onMapMovedFragmentInterfaceListener;
 
   @Override
@@ -62,14 +58,15 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
         mainLargeMapboxMap.setOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
           @Override
           public void onCameraMove() {
-            Log.d("MiniWindowActivity", "Camera moving");
+
             onMapMovedFragmentInterfaceListener.onMapMoved(mainLargeMapboxMap.getCameraPosition());
+
           }
         });
       }
     });
 
-    /* Custom version of the regular Mapbox SupportMapFragment class.A custom one is being built here
+    /* Custom version of the regular Mapbox SupportMapFragment class. A custom one is being built here
     so that the interface call backs can be used in the appropriate places so that the example eventually
     works*/
     CustomSupportMapFragment customSupportMapFragment;
@@ -82,9 +79,9 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
       MapboxMapOptions options = new MapboxMapOptions();
       options.styleUrl(Style.MAPBOX_STREETS);
       options.camera(new CameraPosition.Builder()
-          .target(new LatLng(6.526218, 3.77718))
-          .zoom(3)
-          .build());
+        .target(new LatLng(23.684994, 90.356330))
+        .zoom(6)
+        .build());
 
       // Create map fragment
       customSupportMapFragment = CustomSupportMapFragment.newInstance(options);
@@ -94,26 +91,15 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
       transaction.commit();
 
     } else {
-      customSupportMapFragment = (CustomSupportMapFragment) getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
+      customSupportMapFragment = (CustomSupportMapFragment)
+        getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
     }
 
     customSupportMapFragment.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
-
-        // Customize map with markers, polylines, etc.
-
-        PolygonOptions polygonArea = new PolygonOptions()
-            .add(AUSTRALIA_BOUNDS.getNorthWest())
-            .add(AUSTRALIA_BOUNDS.getNorthEast())
-            .add(AUSTRALIA_BOUNDS.getSouthEast())
-            .add(AUSTRALIA_BOUNDS.getSouthWest());
-        polygonArea.alpha(0.25f);
-        polygonArea.fillColor(Color.parseColor("#ff9a00"));
-        mapboxMap.addPolygon(polygonArea);
       }
     });
-
   }
 
   private void setOnDataListener(OnMapMovedFragmentInterface onMapMovedFragmentInterface) {
@@ -121,13 +107,7 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
   }
 
   public interface OnMapMovedFragmentInterface {
-    void onMapMoved(CameraPosition cameraPosition);
-  }
-
-  @Override
-  public void onCameraMove() {
-    Log.d("MiniWindowActivity", "Camera moving");
-    onMapMovedFragmentInterfaceListener.onMapMoved(mainLargeMapboxMap.getCameraPosition());
+    void onMapMoved(CameraPosition mainMapCameraPosition);
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
@@ -182,22 +162,12 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
    * @see #getMapAsync(OnMapReadyCallback)
    */
   public static class CustomSupportMapFragment extends Fragment implements
-      MiniWindowActivity.OnMapMovedFragmentInterface {
+    MiniWindowActivity.OnMapMovedFragmentInterface {
 
     private MapView map;
     private OnMapReadyCallback onMapReadyCallback;
     private CameraPosition finalCameraPosition;
-
-    /**
-     * Creates a default CustomSupportMapFragment instance
-     *
-     * @return MapFragment created
-     */
-
-    public static CustomSupportMapFragment newInstance() {
-      return new CustomSupportMapFragment();
-    }
-
+    private static final int ZOOM_DISTANCE_BETWEEN_MAIN_AND_FRAGMENT_MAPS = 3;
 
     /**
      * Creates a CustomSupportMapFragment instance
@@ -212,17 +182,31 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
     }
 
     @Override
-    public void onMapMoved(final CameraPosition cameraPosition) {
+    public void onMapMoved(final CameraPosition mainMapCameraPosition) {
 
       finalCameraPosition = new CameraPosition.Builder()
-          .target(cameraPosition.target)
-          .zoom(cameraPosition.zoom - 2)
-          .build();
+        .target(mainMapCameraPosition.target)
+        .zoom(mainMapCameraPosition.zoom - ZOOM_DISTANCE_BETWEEN_MAIN_AND_FRAGMENT_MAPS)
+        .bearing(mainMapCameraPosition.bearing)
+        .tilt(mainMapCameraPosition.tilt)
+        .build();
 
       map.getMapAsync(new OnMapReadyCallback() {
         @Override
         public void onMapReady(MapboxMap mapboxMap) {
+
           mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(finalCameraPosition));
+
+          /*mapboxMap.clear();
+
+          PolygonOptions polygonArea = new PolygonOptions()
+            .add(latLngBounds.getNorthWest())
+            .add(latLngBounds.getNorthEast())
+            .add(latLngBounds.getSouthEast())
+            .add(latLngBounds.getSouthWest());
+          polygonArea.alpha(0.25f);
+          polygonArea.fillColor(Color.parseColor("#ff9a00"));
+          mapboxMap.addPolygon(polygonArea);*/
         }
       });
     }
