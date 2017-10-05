@@ -32,9 +32,9 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
   private MapView mapView;
   private MapboxMap mainLargeMapboxMap;
   private static final LatLngBounds AUSTRALIA_BOUNDS = new LatLngBounds.Builder()
-    .include(new LatLng(-9.136343, 109.372126))
-    .include(new LatLng(-44.640488, 158.590484))
-    .build();
+      .include(new LatLng(-9.136343, 109.372126))
+      .include(new LatLng(-44.640488, 158.590484))
+      .build();
   private OnMapMovedFragmentInterface onMapMovedFragmentInterfaceListener;
 
   @Override
@@ -52,8 +52,6 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_mini_window);
-
-    onMapMovedFragmentInterfaceListener = (OnMapMovedFragmentInterface) this;
 
 
     mapView = (MapView) findViewById(R.id.main_mapView);
@@ -103,9 +101,9 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
       MapboxMapOptions options = new MapboxMapOptions();
       options.styleUrl(Style.MAPBOX_STREETS);
       options.camera(new CameraPosition.Builder()
-        .target(new LatLng(-26.145, 134.312))
-        .zoom(1)
-        .build());
+          .target(new LatLng(-26.145, 134.312))
+          .zoom(1)
+          .build());
 
       // Create map fragment
       customSupportMapFragment = CustomSupportMapFragment.newInstance(options);
@@ -125,16 +123,20 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
         // Customize map with markers, polylines, etc.
 
         PolygonOptions polygonArea = new PolygonOptions()
-          .add(AUSTRALIA_BOUNDS.getNorthWest())
-          .add(AUSTRALIA_BOUNDS.getNorthEast())
-          .add(AUSTRALIA_BOUNDS.getSouthEast())
-          .add(AUSTRALIA_BOUNDS.getSouthWest());
+            .add(AUSTRALIA_BOUNDS.getNorthWest())
+            .add(AUSTRALIA_BOUNDS.getNorthEast())
+            .add(AUSTRALIA_BOUNDS.getSouthEast())
+            .add(AUSTRALIA_BOUNDS.getSouthWest());
         polygonArea.alpha(0.25f);
         polygonArea.fillColor(Color.parseColor("#ff9a00"));
         mapboxMap.addPolygon(polygonArea);
       }
     });
 
+  }
+
+  private void setOnDataListener(OnMapMovedFragmentInterface onMapMovedFragmentInterface) {
+    onMapMovedFragmentInterfaceListener = onMapMovedFragmentInterface;
   }
 
   public interface OnMapMovedFragmentInterface {
@@ -199,7 +201,7 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
    * @see #getMapAsync(OnMapReadyCallback)
    */
   public static class CustomSupportMapFragment extends Fragment implements
-    MiniWindowActivity.OnMapMovedFragmentInterface {
+      MiniWindowActivity.OnMapMovedFragmentInterface {
 
     private MapView map;
     private OnMapReadyCallback onMapReadyCallback;
@@ -214,12 +216,6 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
       return new CustomSupportMapFragment();
     }
 
-    @Override
-    public void onAttach(Context context) {
-      super.onAttach(context);
-
-
-    }
 
     /**
      * Creates a CustomSupportMapFragment instance
@@ -236,13 +232,19 @@ public class MiniWindowActivity extends AppCompatActivity implements MapboxMap.O
     @Override
     public void onMapMoved(final CameraPosition cameraPosition) {
       Log.d("MiniWindowActivity", "camera lat position = " + cameraPosition.target.getLatitude() + " and long = "
-        + cameraPosition.target.getLongitude());
+          + cameraPosition.target.getLongitude());
       map.getMapAsync(new OnMapReadyCallback() {
         @Override
         public void onMapReady(MapboxMap mapboxMap) {
           mapboxMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
       });
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      ((MiniWindowActivity) getActivity()).setOnDataListener(this);
     }
 
     /**
