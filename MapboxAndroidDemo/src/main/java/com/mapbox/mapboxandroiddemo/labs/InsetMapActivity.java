@@ -63,7 +63,7 @@ public class InsetMapActivity extends AppCompatActivity {
       // Create fragment
       final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-      // Build mapboxMap
+      // Build map fragment options
       MapboxMapOptions options = new MapboxMapOptions();
       options.styleUrl("mapbox://styles/mapbox/cj5l80zrp29942rmtg0zctjto");
       options.attributionEnabled(false);
@@ -77,7 +77,7 @@ public class InsetMapActivity extends AppCompatActivity {
         .zoom(2)
         .build());
 
-      // Create fragmentMap fragment
+      // Create map fragment and pass through map options
       customSupportMapFragment = CustomSupportMapFragment.newInstance(options);
 
       // Add fragmentMap fragment to parent container
@@ -88,13 +88,6 @@ public class InsetMapActivity extends AppCompatActivity {
       customSupportMapFragment = (CustomSupportMapFragment)
         getSupportFragmentManager().findFragmentByTag("com.mapbox.fragmentMap");
     }
-
-    customSupportMapFragment.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-
-      }
-    });
   }
 
   private void setOnDataListener(OnMapMovedFragmentInterface onMapMovedFragmentInterface) {
