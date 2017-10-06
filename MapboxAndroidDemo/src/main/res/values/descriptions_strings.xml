@@ -71,6 +71,6 @@
     <string name="activity_lab_indoor_map_description">Display an indoor map of a building with toggles to switch between floor levels.</string>
     <string name="activity_lab_rv_on_map_description">Manipulate the map based on recyclerview interactions.</string>
     <string name="activity_lab_mapillary_description">Add Mapillary vector tiles to a map</string>
-    <string name="activity_labs_mini_window_description">Show a smaller map fragment and link it to a larger map for bound map interaction.</string>
+    <string name="activity_labs_mini_window_description">Show a smaller inset map fragment and link it to a larger map for two map interaction.</string>
 
 </resources>

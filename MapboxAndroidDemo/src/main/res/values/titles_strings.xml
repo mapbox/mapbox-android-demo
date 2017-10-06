@@ -69,6 +69,6 @@
     <string name="activity_lab_los_angeles_tourism_title">Los Angeles for tourists</string>
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
     <string name="activity_labs_mapillary_title">Mapillary integration</string>
-    <string name="activity_labs_mini_window_title">Mini window map</string>
+    <string name="activity_labs_mini_window_title">Inset map</string>
 
 </resources>
