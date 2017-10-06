@@ -1,6 +1,8 @@
 package com.mapbox.mapboxandroiddemo.adapter;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -68,24 +70,26 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
       ExampleItemModel detailItem = dataSource.get(position);
       ViewHolder viewHolder = (ViewHolder) holder;
 
-      String imageUrl = context.getString(detailItem.getImageUrl());
+      if (Build.VERSION.SDK_INT >= detailItem.getMinSdkVersion()) {
+        String imageUrl = context.getString(detailItem.getImageUrl());
 
-      if (!imageUrl.isEmpty()) {
-        Picasso.with(context)
-          .load(imageUrl)
-          .into(viewHolder.imageView);
-      } else {
-        viewHolder.imageView.setImageDrawable(null);
+        if (!imageUrl.isEmpty()) {
+          Picasso.with(context)
+            .load(imageUrl)
+            .into(viewHolder.imageView);
+        } else {
+          viewHolder.imageView.setImageDrawable(null);
+        }
+
+        if (detailItem.getShowNewIcon()) {
+          viewHolder.newIconImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.new_icon));
+        } else {
+          viewHolder.newIconImageView.setImageDrawable(null);
+        }
+
+        viewHolder.titleTextView.setText(context.getString(detailItem.getTitle()));
+        viewHolder.descriptionTextView.setText(context.getString(detailItem.getDescription()));
       }
-
-      if (detailItem.getShowNewIcon()) {
-        viewHolder.newIconImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.new_icon));
-      } else {
-        viewHolder.newIconImageView.setImageDrawable(null);
-      }
-
-      viewHolder.titleTextView.setText(context.getString(detailItem.getTitle()));
-      viewHolder.descriptionTextView.setText(context.getString(detailItem.getDescription()));
     }
   }
 

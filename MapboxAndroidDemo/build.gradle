@@ -16,6 +16,7 @@ android {
         targetSdkVersion 26
         versionCode gitVersionCode
         versionName gitVersionName
+        buildConfigField "int", "MIN_SDK_VERSION", "$minSdkVersion.apiLevel"
     }
 
     productFlavors {

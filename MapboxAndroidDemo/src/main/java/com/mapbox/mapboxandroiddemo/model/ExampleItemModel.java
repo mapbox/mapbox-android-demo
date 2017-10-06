@@ -10,6 +10,7 @@ public class ExampleItemModel {
   public int imageUrl;
   public Intent activity;
   public boolean showNewIcon;
+  public int minSdkVersion;
 
 
   public int getTitle() {
@@ -52,12 +53,26 @@ public class ExampleItemModel {
     this.showNewIcon = showNewIcon;
   }
 
+  public int getMinSdkVersion() {
+    return minSdkVersion;
+  }
+
   public ExampleItemModel(int title, int description, Intent activity, int imageUrl, boolean showNewIcon) {
     this.title = title;
     this.description = description;
     this.imageUrl = imageUrl;
     this.activity = activity;
     this.showNewIcon = showNewIcon;
+  }
+
+  public ExampleItemModel(int title, int description, Intent activity, int imageUrl,
+                          boolean showNewIcon, int minSdkVersion) {
+    this.title = title;
+    this.description = description;
+    this.imageUrl = imageUrl;
+    this.activity = activity;
+    this.showNewIcon = showNewIcon;
+    this.minSdkVersion = minSdkVersion;
   }
 
   public ExampleItemModel(int title, int description, Intent activity, int imageUrl) {
