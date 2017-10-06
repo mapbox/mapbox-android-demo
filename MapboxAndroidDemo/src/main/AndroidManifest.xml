@@ -371,8 +371,8 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
-            android:name=".labs.MiniWindowActivity"
-            android:label="@string/activity_labs_mini_window_title">
+            android:name=".labs.InsetMapActivity"
+            android:label="@string/activity_labs_inset_map_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>

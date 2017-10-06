@@ -23,7 +23,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
 
-public class MiniWindowActivity extends AppCompatActivity {
+public class InsetMapActivity extends AppCompatActivity {
 
   private MapView mainMapMapView;
   private MapboxMap mainLargeMapboxMap;
@@ -45,7 +45,7 @@ public class MiniWindowActivity extends AppCompatActivity {
     mainMapMapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
-        MiniWindowActivity.this.mainLargeMapboxMap = mapboxMap;
+        InsetMapActivity.this.mainLargeMapboxMap = mapboxMap;
         mainLargeMapboxMap.setOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
           @Override
           public void onCameraMove() {
@@ -157,7 +157,7 @@ public class MiniWindowActivity extends AppCompatActivity {
    * @see #getMapAsync(OnMapReadyCallback)
    */
   public static class CustomSupportMapFragment extends Fragment implements
-    MiniWindowActivity.OnMapMovedFragmentInterface {
+    InsetMapActivity.OnMapMovedFragmentInterface {
 
     private MapView fragmentMap;
     private OnMapReadyCallback onMapReadyCallback;
@@ -198,7 +198,7 @@ public class MiniWindowActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-      ((MiniWindowActivity) getActivity()).setOnDataListener(this);
+      ((InsetMapActivity) getActivity()).setOnDataListener(this);
     }
 
     /**

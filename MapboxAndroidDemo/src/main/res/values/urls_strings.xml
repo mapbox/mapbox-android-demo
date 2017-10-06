@@ -72,6 +72,6 @@
     <string name="activity_lab_indoor_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
     <string name="activity_lab_rv_on_map_url" translatable="false">http://i.imgur.com/8mQQuMo.jpg</string>
     <string name="activity_lab_mapillary_url" translatable="false">http://i.imgur.com/w4SSif1.png</string>
-    <string name="activity_labs_mini_window_url" translatable="false">https://i.imgur.com/aEoBHo9.jpg</string>
+    <string name="activity_labs_inset_map_url" translatable="false">https://i.imgur.com/aEoBHo9.jpg</string>
 
 </resources>

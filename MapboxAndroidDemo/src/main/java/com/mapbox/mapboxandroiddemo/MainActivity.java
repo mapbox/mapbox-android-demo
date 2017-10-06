@@ -91,7 +91,7 @@ import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MapillaryActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
-import com.mapbox.mapboxandroiddemo.labs.MiniWindowActivity;
+import com.mapbox.mapboxandroiddemo.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
@@ -600,10 +600,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_rv_on_map_url, false
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_labs_mini_window_title,
-          R.string.activity_labs_mini_window_description,
-          new Intent(MainActivity.this, MiniWindowActivity.class),
-          R.string.activity_labs_mini_window_url,
+          R.string.activity_labs_inset_map_title,
+          R.string.activity_labs_inset_map_description,
+          new Intent(MainActivity.this, InsetMapActivity.class),
+          R.string.activity_labs_inset_map_url,
           true
         ));
         currentCategory = R.id.nav_lab;
