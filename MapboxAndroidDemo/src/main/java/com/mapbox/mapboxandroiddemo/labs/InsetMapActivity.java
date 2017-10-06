@@ -15,7 +15,6 @@ import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -28,7 +27,7 @@ public class InsetMapActivity extends AppCompatActivity {
   private MapView mainMapMapView;
   private MapboxMap mainLargeMapboxMap;
   private OnMapMovedFragmentInterface onMapMovedFragmentInterfaceListener;
-  
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -66,7 +65,7 @@ public class InsetMapActivity extends AppCompatActivity {
 
       // Build mapboxMap
       MapboxMapOptions options = new MapboxMapOptions();
-      options.styleUrl(Style.MAPBOX_STREETS);
+      options.styleUrl("mapbox://styles/mapbox/cj5l80zrp29942rmtg0zctjto");
       options.attributionEnabled(false);
       options.logoEnabled(false);
       options.compassEnabled(false);
