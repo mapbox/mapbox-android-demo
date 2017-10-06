@@ -37,7 +37,7 @@ public class InsetMapActivity extends AppCompatActivity {
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_mini_window);
+    setContentView(R.layout.activity_inset_map);
 
     mainMapMapView = (MapView) findViewById(R.id.main_mapView);
     mainMapMapView.onCreate(savedInstanceState);
