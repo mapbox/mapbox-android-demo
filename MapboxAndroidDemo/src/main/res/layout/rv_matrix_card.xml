@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/single_matrix_api_location_cardview"
-    android:layout_width="150dp"
+    android:layout_width="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -20,8 +22,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
+            android:textAllCaps="false"
             android:textColor="@color/mapboxPurpleDark10"
-            android:textSize="20sp"
+            android:textSize="16sp"
             tools:text="Name"/>
 
         <TextView
@@ -33,7 +36,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="5dp"
             android:textColor="@color/mapboxPurpleDark10"
-            android:textSize="20sp"
+            android:textSize="14sp"
             tools:text="12"/>
 
     </LinearLayout>

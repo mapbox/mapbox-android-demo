@@ -185,8 +185,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
 
     // Get the position of each GeoJSON feature and build the list of Position
     // objects for eventual use in the Matrix API call
-    for (int x = 0; x < featureCollection.getFeatures().size(); x++) {
-      Feature singleLocation = featureCollection.getFeatures().get(x);
+    for (Feature singleLocation : featureCollection.getFeatures()) {
       Position singleLocationPosition = (Position) singleLocation.getGeometry().getCoordinates();
       positionList.add(singleLocationPosition);
     }
@@ -300,7 +299,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     public void onBindViewHolder(MatrixApiLocationRecyclerViewAdapter.MyViewHolder holder, int position) {
       SingleRecyclerViewMatrixLocation singleRecyclerViewLocation = matrixLocationList.get(position);
       holder.name.setText(singleRecyclerViewLocation.getName());
-      holder.name.setText(String.valueOf(singleRecyclerViewLocation.getDistanceFromOrigin()));
+      holder.distance.setText(String.valueOf(singleRecyclerViewLocation.getDistanceFromOrigin()));
     }
 
     @Override
