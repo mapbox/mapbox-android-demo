@@ -30,11 +30,13 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.api.directions.v5.DirectionsCriteria;
 import com.mapbox.services.api.directionsmatrix.v1.MapboxDirectionsMatrix;
 import com.mapbox.services.api.directionsmatrix.v1.models.DirectionsMatrixResponse;
+import com.mapbox.services.api.utils.turf.TurfHelpers;
 import com.mapbox.services.commons.geojson.Feature;
 import com.mapbox.services.commons.geojson.FeatureCollection;
 import com.mapbox.services.commons.models.Position;
 
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +116,13 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
   }
 
   private void makeMatrixApiCall(Position positionOfClickedMarker) {
-    Log.d(tag, "makeMatrixApiCall: started");
+
+    for (Position singlePosition : positionList) {
+      if (singlePosition == positionOfClickedMarker) {
+        positionList.remove(singlePosition);
+      }
+    }
+
     MapboxDirectionsMatrix directionsMatrixClient = new MapboxDirectionsMatrix.Builder()
       .setAccessToken(getString(R.string.access_token))
       .setProfile(DirectionsCriteria.PROFILE_DRIVING)
@@ -133,7 +141,12 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
 
         for (int x = 1; x < array.length; x++) {
           Log.d(tag, "onResponse: x = " + x);
-          matrixLocationList.get(x).setDistanceFromOrigin(array[0][x]);
+
+          DecimalFormat df = new DecimalFormat("#.##");
+          String finalConvertedFormattedDistance = String.valueOf(df.format(TurfHelpers.convertDistance(
+            array[0][x], "meters", "miles")));
+
+          matrixLocationList.get(x).setDistanceFromOrigin(finalConvertedFormattedDistance);
           matrixApiLocationRecyclerViewAdapter.notifyDataSetChanged();
         }
       }
@@ -252,7 +265,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
 
     private String name;
     private LatLng locationLatLng;
-    private double distanceFromOrigin;
+    private String distanceFromOrigin;
 
     public String getName() {
       return name;
@@ -262,11 +275,11 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       this.name = name;
     }
 
-    public double getDistanceFromOrigin() {
+    public String getDistanceFromOrigin() {
       return distanceFromOrigin;
     }
 
-    public void setDistanceFromOrigin(double distanceFromOrigin) {
+    public void setDistanceFromOrigin(String distanceFromOrigin) {
       this.distanceFromOrigin = distanceFromOrigin;
     }
 
