@@ -24,7 +24,6 @@ import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -47,20 +46,15 @@ import retrofit2.Response;
 
 public class DirectionsMatrixApiActivity extends AppCompatActivity {
 
-  private static final LatLngBounds BOSTON_BOUNDS = new LatLngBounds.Builder()
-    .include(new LatLng(42.363581, -71.097695))
-    .include(new LatLng(42.350399, -71.040765))
-    .build();
 
   private MapView mapView;
   private MapboxMap mapboxMap;
   private List<Position> positionList;
   private FeatureCollection featureCollection;
-  private String tag = "DirectionsMatrixApiActivity";
-
   private RecyclerView recyclerView;
   private MatrixApiLocationRecyclerViewAdapter matrixApiLocationRecyclerViewAdapter;
   private ArrayList<SingleRecyclerViewMatrixLocation> matrixLocationList;
+  private String tag = "DirectionsMatrixApiActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -75,32 +69,23 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
 
     recyclerView = (RecyclerView) findViewById(R.id.matrix_api_recyclerview);
 
-    fillPositionListFromGeoJsonFile();
+    initPositionListFromGeoJsonFile();
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
-
         DirectionsMatrixApiActivity.this.mapboxMap = mapboxMap;
-
-        mapboxMap.setLatLngBoundsForCameraTarget(BOSTON_BOUNDS);
-
         addMarkers();
-
-        fillMatrixLocationList();
-        setUpRecyclerView();
+        initMatrixLocationListForRecyclerView();
+        initRecyclerView();
         mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
           @Override
           public boolean onMarkerClick(@NonNull Marker marker) {
-
-
-            makeMatrixApiCall(getMarkerNumInPositionList(marker), Position.fromCoordinates(
+            makeMapboxMatrixApiCall(getClickedMarkerNumInPositionList(marker), Position.fromCoordinates(
               marker.getPosition().getLongitude(),
               marker.getPosition().getLatitude()));
-
-
             return false;
           }
         });
@@ -109,7 +94,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     });
   }
 
-  private int getMarkerNumInPositionList(Marker clickedMarker) {
+  private int getClickedMarkerNumInPositionList(Marker clickedMarker) {
     int clickedMarkerIndexPositionInList = -1;
     if (clickedMarker != null) {
       for (Marker singleMarker : mapboxMap.getMarkers()) {
@@ -123,8 +108,9 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     }
   }
 
-  private void setUpRecyclerView() {
-    matrixApiLocationRecyclerViewAdapter = new MatrixApiLocationRecyclerViewAdapter(this, matrixLocationList);
+  private void initRecyclerView() {
+    matrixApiLocationRecyclerViewAdapter = new MatrixApiLocationRecyclerViewAdapter(this,
+      matrixLocationList);
     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
       LinearLayoutManager.HORIZONTAL, true));
     recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -133,8 +119,9 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     snapHelper.attachToRecyclerView(recyclerView);
   }
 
-  private void makeMatrixApiCall(final int markerPositionInList, Position positionOfClickedMarker) {
+  private void makeMapboxMatrixApiCall(final int markerPositionInList, Position positionOfClickedMarker) {
 
+    // Build Mapbox Matrix API parameters
     MapboxDirectionsMatrix directionsMatrixClient = new MapboxDirectionsMatrix.Builder()
       .setAccessToken(getString(R.string.access_token))
       .setProfile(DirectionsCriteria.PROFILE_DRIVING)
@@ -146,15 +133,11 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     directionsMatrixClient.enqueueCall(new Callback<DirectionsMatrixResponse>() {
       @Override
       public void onResponse(Call<DirectionsMatrixResponse> call, Response<DirectionsMatrixResponse> response) {
-
-
         double[][] array = response.body().getDurations();
-
         for (int x = 0; x < array.length; x++) {
-
-          DecimalFormat df = new DecimalFormat("#.##");
-          String finalConvertedFormattedDistance = String.valueOf(df.format(TurfHelpers.convertDistance(
-            array[markerPositionInList][x], "meters", "miles")));
+          String finalConvertedFormattedDistance = String.valueOf(new DecimalFormat("#.##")
+            .format(TurfHelpers.convertDistance(
+              array[markerPositionInList][x], "meters", "miles")));
 
           if (x == markerPositionInList) {
             matrixLocationList.get(x).setDistanceFromOrigin(finalConvertedFormattedDistance);
@@ -204,7 +187,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     }
   }
 
-  private void fillPositionListFromGeoJsonFile() {
+  private void initPositionListFromGeoJsonFile() {
 
     // Get GeoJSON features from GeoJSON file in the assets folder
     featureCollection = FeatureCollection.fromJson(loadGeoJsonFromAsset("boston_charge_stations.geojson"));
@@ -220,7 +203,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     }
   }
 
-  private void fillMatrixLocationList() {
+  private void initMatrixLocationListForRecyclerView() {
     matrixLocationList = new ArrayList<>();
     for (int x = 0; x < featureCollection.getFeatures().size(); x++) {
       SingleRecyclerViewMatrixLocation singleRecyclerViewLocation = new SingleRecyclerViewMatrixLocation();
@@ -314,7 +297,8 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     private List<SingleRecyclerViewMatrixLocation> matrixLocationList;
     private Context context;
 
-    public MatrixApiLocationRecyclerViewAdapter(Context context, List<SingleRecyclerViewMatrixLocation> matrixLocationList) {
+    public MatrixApiLocationRecyclerViewAdapter(Context context,
+                                                List<SingleRecyclerViewMatrixLocation> matrixLocationList) {
       this.matrixLocationList = matrixLocationList;
       this.context = context;
     }
@@ -330,7 +314,10 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     public void onBindViewHolder(MatrixApiLocationRecyclerViewAdapter.MyViewHolder holder, int position) {
       SingleRecyclerViewMatrixLocation singleRecyclerViewLocation = matrixLocationList.get(position);
       holder.name.setText(singleRecyclerViewLocation.getName());
-      holder.distance.setText(String.format(context.getString(R.string.miles_distance), singleRecyclerViewLocation.getDistanceFromOrigin()));
+
+      String finalDistance = singleRecyclerViewLocation.getDistanceFromOrigin() == null ? "" : String.format(context.getString(R.string.miles_distance),
+        singleRecyclerViewLocation.getDistanceFromOrigin());
+      holder.distance.setText(finalDistance);
     }
 
     @Override

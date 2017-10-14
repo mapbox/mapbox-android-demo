@@ -8,10 +8,10 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="42.347"
-        mapbox:mapbox_cameraTargetLng="-71.071"
-        mapbox:mapbox_cameraZoomMin="11.4"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light"/>
+        mapbox:mapbox_cameraTargetLat="42.3600825"
+        mapbox:mapbox_cameraTargetLng="-71.0588801"
+        mapbox:mapbox_cameraZoom="11.193"
+        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/cj8gg22et19ot2rnz65958fkn"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/matrix_api_recyclerview"
