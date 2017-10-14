@@ -45,8 +45,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DirectionsMatrixApiActivity extends AppCompatActivity {
-
-
+  
   private MapView mapView;
   private MapboxMap mapboxMap;
   private List<Position> positionList;
