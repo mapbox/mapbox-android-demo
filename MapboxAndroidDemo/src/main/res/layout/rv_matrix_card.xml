@@ -40,6 +40,4 @@
             tools:text="12"/>
 
     </LinearLayout>
-
-
 </android.support.v7.widget.CardView>
