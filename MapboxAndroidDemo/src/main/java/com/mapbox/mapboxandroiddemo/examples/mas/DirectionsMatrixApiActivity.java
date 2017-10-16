@@ -141,12 +141,14 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     // Handle the API response
     directionsMatrixClient.enqueueCall(new Callback<DirectionsMatrixResponse>() {
       @Override
-      public void onResponse(Call<DirectionsMatrixResponse> call, Response<DirectionsMatrixResponse> response) {
+      public void onResponse(Call<DirectionsMatrixResponse> call,
+                             Response<DirectionsMatrixResponse> response) {
         double[][] durationsToAllOfTheLocationsFromTheORigin = response.body().getDurations();
         for (int x = 0; x < durationsToAllOfTheLocationsFromTheORigin.length; x++) {
           String finalConvertedFormattedDistance = String.valueOf(new DecimalFormat("#.##")
             .format(TurfHelpers.convertDistance(
-              durationsToAllOfTheLocationsFromTheORigin[markerPositionInList][x], "meters", "miles")));
+              durationsToAllOfTheLocationsFromTheORigin[markerPositionInList][x],
+              "meters", "miles")));
           if (x == markerPositionInList) {
             matrixLocationList.get(x).setDistanceFromOrigin(finalConvertedFormattedDistance);
           }
@@ -159,7 +161,8 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
 
       @Override
       public void onFailure(Call<DirectionsMatrixResponse> call, Throwable throwable) {
-        Toast.makeText(DirectionsMatrixApiActivity.this, R.string.call_error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(DirectionsMatrixApiActivity.this, R.string.call_error,
+          Toast.LENGTH_SHORT).show();
         Log.d("MatrixApiActivity", "onResponse onFailure");
       }
     });
@@ -213,7 +216,8 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     matrixLocationList = new ArrayList<>();
     for (int x = 0; x < featureCollection.getFeatures().size(); x++) {
       SingleRecyclerViewMatrixLocation singleRecyclerViewLocation = new SingleRecyclerViewMatrixLocation();
-      singleRecyclerViewLocation.setName(featureCollection.getFeatures().get(x).getStringProperty("Station_Name"));
+      singleRecyclerViewLocation.setName(featureCollection.getFeatures().get(x)
+        .getStringProperty("Station_Name"));
       singleRecyclerViewLocation.setLocationLatLng(new LatLng(positionList.get(x).getLatitude(),
         positionList.get(x).getLongitude()));
       matrixLocationList.add(singleRecyclerViewLocation);
