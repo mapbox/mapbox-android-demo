@@ -321,7 +321,8 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       SingleRecyclerViewMatrixLocation singleRecyclerViewLocation = matrixLocationList.get(position);
       holder.name.setText(singleRecyclerViewLocation.getName());
 
-      String finalDistance = singleRecyclerViewLocation.getDistanceFromOrigin() == null ? "" : String.format(context.getString(R.string.miles_distance),
+      String finalDistance = singleRecyclerViewLocation.getDistanceFromOrigin()
+        == null ? "" : String.format(context.getString(R.string.miles_distance),
         singleRecyclerViewLocation.getDistanceFromOrigin());
       holder.distance.setText(finalDistance);
     }
