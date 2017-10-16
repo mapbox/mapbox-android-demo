@@ -1,0 +1,343 @@
+﻿{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02136",
+        "POINT_X": 757882.7161196,
+        "POINT_Y": 2918709.80817918,
+        "CITY": "Boston",
+        "NAME": "District E-18 Police Station",
+        "BLDG_ID": "Bos_1809107000_B0",
+        "NEIGHBORHOOD": "Hyde Park",
+        "PARCEL_ID": "1809107000",
+        "ADDRESS": "1249 Hyde Park Ave",
+        "STORY_HT": 2,
+        "OBJECTID": 1,
+        "FT_SQFT": 8585,
+        "BID": 100639
+      },
+      "geometry": {
+        "coordinates": [
+          -71.124269,
+          42.256481
+        ],
+        "type": "Point"
+      },
+      "id": "1d474296be7c3be312df0dd7831a7328"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02132",
+        "POINT_X": 751313.45596419,
+        "POINT_Y": 2929725.22742127,
+        "CITY": "Boston",
+        "NAME": "District E-5 Police Station",
+        "BLDG_ID": "Bos_2005719000_B0",
+        "NEIGHBORHOOD": "West Roxbury",
+        "PARCEL_ID": "2005719000",
+        "ADDRESS": "1708 Centre St",
+        "STORY_HT": 2,
+        "OBJECTID": 2,
+        "FT_SQFT": 7708,
+        "BID": 112112
+      },
+      "geometry": {
+        "coordinates": [
+          -71.148367,
+          42.286785
+        ],
+        "type": "Point"
+      },
+      "id": "3f59df98e2ea64a10031f0ba141cb091"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02129",
+        "POINT_X": 776123.77510986,
+        "POINT_Y": 2962523.04371527,
+        "CITY": "Boston",
+        "NAME": "District A-15 Police Station",
+        "BLDG_ID": "Bos_0202644020_B0",
+        "NEIGHBORHOOD": "Charlestown",
+        "PARCEL_ID": "0202644020",
+        "ADDRESS": "20 Vine St",
+        "STORY_HT": null,
+        "OBJECTID": 6,
+        "FT_SQFT": null,
+        "BID": 148316
+      },
+      "geometry": {
+        "coordinates": [
+          -71.056047,
+          42.376466
+        ],
+        "type": "Point"
+      },
+      "id": "479afeb1f28e107b4709e791fa138048"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02128",
+        "POINT_X": 780827.98945469,
+        "POINT_Y": 2960576.84813261,
+        "CITY": "Boston",
+        "NAME": "District A-7 Police Station",
+        "BLDG_ID": "Bos_0105699000_B0",
+        "NEIGHBORHOOD": "East Boston",
+        "PARCEL_ID": "0105699000",
+        "ADDRESS": "69 Paris St",
+        "STORY_HT": 2,
+        "OBJECTID": 3,
+        "FT_SQFT": 5063,
+        "BID": 131503
+      },
+      "geometry": {
+        "coordinates": [
+          -71.038676,
+          42.371057
+        ],
+        "type": "Point"
+      },
+      "id": "51fada1abe05a6436e363b030edde3b3"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02119",
+        "POINT_X": 768200.91759603,
+        "POINT_Y": 2944961.00797327,
+        "CITY": "Boston",
+        "NAME": "District B-2 Police Station",
+        "BLDG_ID": "Bos_1201261000_B0",
+        "NEIGHBORHOOD": "Roxbury",
+        "PARCEL_ID": "1201261000",
+        "ADDRESS": "2400 Washington St",
+        "STORY_HT": 3,
+        "OBJECTID": 10,
+        "FT_SQFT": 10809,
+        "BID": 176508
+      },
+      "geometry": {
+        "coordinates": [
+          -71.085684,
+          42.328385
+        ],
+        "type": "Point"
+      },
+      "id": "6675b1736f8ccd2a5bf79868978277bb"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02135",
+        "POINT_X": 750621.84612694,
+        "POINT_Y": 2952538.58205694,
+        "CITY": "Boston",
+        "NAME": "District D-14 Police Station",
+        "BLDG_ID": "Bos_2202387000_B0",
+        "NEIGHBORHOOD": "Brighton",
+        "PARCEL_ID": "2202387000",
+        "ADDRESS": "301 Washington St",
+        "STORY_HT": 2,
+        "OBJECTID": 5,
+        "FT_SQFT": 8712,
+        "BID": 145004
+      },
+      "geometry": {
+        "coordinates": [
+          -71.150578,
+          42.349394
+        ],
+        "type": "Point"
+      },
+      "id": "771c8e33fdd3cf9c00b365a64d9bfd55"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02124",
+        "POINT_X": 766649.86886086,
+        "POINT_Y": 2929044.05161826,
+        "CITY": "Boston",
+        "NAME": "District B-3 Police Station",
+        "BLDG_ID": "Bos_1404623000_B0",
+        "NEIGHBORHOOD": "Mattapan",
+        "PARCEL_ID": "1404623000",
+        "ADDRESS": "1165 Blue Hill Ave",
+        "STORY_HT": 1.5,
+        "OBJECTID": 12,
+        "FT_SQFT": 9740,
+        "BID": 186089
+      },
+      "geometry": {
+        "coordinates": [
+          -71.091701,
+          42.284728
+        ],
+        "type": "Point"
+      },
+      "id": "7736355ba46be2bc0512a0442364c126"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02130",
+        "POINT_X": 763106.94123544,
+        "POINT_Y": 2938135.58428818,
+        "CITY": "Boston",
+        "NAME": "District E-13 Police Station",
+        "BLDG_ID": "Bos_1102261000_B0",
+        "NEIGHBORHOOD": "Jamaica Plain",
+        "PARCEL_ID": "1102261000",
+        "ADDRESS": "3345 Washington St",
+        "STORY_HT": 2,
+        "OBJECTID": 11,
+        "FT_SQFT": 8312,
+        "BID": 180965
+      },
+      "geometry": {
+        "coordinates": [
+          -71.104639,
+          42.309722
+        ],
+        "type": "Point"
+      },
+      "id": "7edff31b2e9b9b39065e87f77ab8a855"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02120",
+        "POINT_X": 766821.65559077,
+        "POINT_Y": 2947070.55132635,
+        "CITY": "Boston",
+        "NAME": "Boston Police Headquarters",
+        "BLDG_ID": "Bos_0902771010_B0",
+        "NEIGHBORHOOD": "Roxbury",
+        "PARCEL_ID": "0902771010",
+        "ADDRESS": "One Schroeder Plz",
+        "STORY_HT": 4,
+        "OBJECTID": 9,
+        "FT_SQFT": 194000,
+        "BID": 163892
+      },
+      "geometry": {
+        "coordinates": [
+          -71.090747,
+          42.334192
+        ],
+        "type": "Point"
+      },
+      "id": "969a44cc6fc391137d5d3c4d773be1e1"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02118",
+        "POINT_X": 772627.27718161,
+        "POINT_Y": 2949011.41128977,
+        "CITY": "Boston",
+        "NAME": "District D-4 Police Station",
+        "BLDG_ID": "Bos_0801170010_B0",
+        "NEIGHBORHOOD": "Boston",
+        "PARCEL_ID": "0801170010",
+        "ADDRESS": "650 Harrison Ave",
+        "STORY_HT": 3,
+        "OBJECTID": 8,
+        "FT_SQFT": 12382,
+        "BID": 162100
+      },
+      "geometry": {
+        "coordinates": [
+          -71.069239,
+          42.339439
+        ],
+        "type": "Point"
+      },
+      "id": "cfa4b75d00b07590259ec4563d1cf064"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02127",
+        "POINT_X": 776491.05291861,
+        "POINT_Y": 2949659.65507202,
+        "CITY": "Boston",
+        "NAME": "District C-6 Police Station",
+        "BLDG_ID": "Bos_0600118000_B0",
+        "NEIGHBORHOOD": "South Boston",
+        "PARCEL_ID": "0600118000",
+        "ADDRESS": "101 W Broadway",
+        "STORY_HT": 2,
+        "OBJECTID": 7,
+        "FT_SQFT": 8528,
+        "BID": 154919
+      },
+      "geometry": {
+        "coordinates": [
+          -71.054936,
+          42.341164
+        ],
+        "type": "Point"
+      },
+      "id": "d2a559fe7435037bdf1f263e7f5f73fd"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02122",
+        "POINT_X": 775429.01239178,
+        "POINT_Y": 2933947.91156119,
+        "CITY": "Boston",
+        "NAME": "District C-11 Police Station",
+        "BLDG_ID": "Bos_1600673000_B0",
+        "NEIGHBORHOOD": "Dorchester",
+        "PARCEL_ID": "1600673000",
+        "ADDRESS": "40 Gibson St",
+        "STORY_HT": 2,
+        "OBJECTID": 13,
+        "FT_SQFT": 15338,
+        "BID": 189445
+      },
+      "geometry": {
+        "coordinates": [
+          -71.059164,
+          42.298065
+        ],
+        "type": "Point"
+      },
+      "id": "de9e0e0a7729a0490b8d9ec3e8bd86e3"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ZIP": "02114",
+        "POINT_X": 775000.19336753,
+        "POINT_Y": 2957181.41102585,
+        "CITY": "Boston",
+        "NAME": "District A-1 Police Station",
+        "BLDG_ID": "Bos_0302626000_B0",
+        "NEIGHBORHOOD": "Boston",
+        "PARCEL_ID": "0302626000",
+        "ADDRESS": "40 New Sudbury St",
+        "STORY_HT": 5,
+        "OBJECTID": 4,
+        "FT_SQFT": 6882,
+        "BID": 136171
+      },
+      "geometry": {
+        "coordinates": [
+          -71.060307,
+          42.361825
+        ],
+        "type": "Point"
+      },
+      "id": "ea566b7fbcff06448c6474112596278f"
+    }
+  ],
+  "type": "FeatureCollection"
+}
