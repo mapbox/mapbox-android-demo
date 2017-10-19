@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -593,7 +594,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_picture_in_picture_title,
           R.string.activity_lab_picture_in_picture_description,
           new Intent(MainActivity.this, PictureInPictureActivity.class),
-          R.string.activity_lab_picture_in_picture_url, false, 26));
+          R.string.activity_lab_picture_in_picture_url, false, Build.VERSION_CODES.O));
 
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_rv_on_map_title,
