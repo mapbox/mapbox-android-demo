@@ -65,30 +65,37 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
   @Override
   public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+    ExampleItemModel detailItem = dataSource.get(position);
+    ViewHolder viewHolder = (ViewHolder) holder;
+
     if (holder.getItemViewType() == 0) {
-      ExampleItemModel detailItem = dataSource.get(position);
-      ViewHolder viewHolder = (ViewHolder) holder;
+      return;
+    }
 
-      if (Build.VERSION.SDK_INT >= detailItem.getMinSdkVersion()) {
-        String imageUrl = context.getString(detailItem.getImageUrl());
+    if (Build.VERSION.SDK_INT < detailItem.getMinSdkVersion()) {
+      return;
+    }
 
-        if (!imageUrl.isEmpty()) {
-          Picasso.with(context)
-            .load(imageUrl)
-            .into(viewHolder.imageView);
-        } else {
-          viewHolder.imageView.setImageDrawable(null);
-        }
+    if (Build.VERSION.SDK_INT >= detailItem.getMinSdkVersion()) {
+      String imageUrl = context.getString(detailItem.getImageUrl());
 
-        if (detailItem.getShowNewIcon()) {
-          viewHolder.newIconImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.new_icon));
-        } else {
-          viewHolder.newIconImageView.setImageDrawable(null);
-        }
-
-        viewHolder.titleTextView.setText(context.getString(detailItem.getTitle()));
-        viewHolder.descriptionTextView.setText(context.getString(detailItem.getDescription()));
+      if (!imageUrl.isEmpty()) {
+        Picasso.with(context)
+          .load(imageUrl)
+          .into(viewHolder.imageView);
+      } else {
+        viewHolder.imageView.setImageDrawable(null);
       }
+
+      if (detailItem.getShowNewIcon()) {
+        viewHolder.newIconImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.new_icon));
+      } else {
+        viewHolder.newIconImageView.setImageDrawable(null);
+      }
+
+      viewHolder.titleTextView.setText(context.getString(detailItem.getTitle()));
+      viewHolder.descriptionTextView.setText(context.getString(detailItem.getDescription()));
     }
   }
 
