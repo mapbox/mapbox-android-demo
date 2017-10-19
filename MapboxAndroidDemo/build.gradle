@@ -79,7 +79,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8'
 
     // Mapbox dependencies
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.4@aar') {
+    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.2.0-beta.2@aar') {
         transitive = true
     }
 
@@ -90,7 +90,7 @@ dependencies {
     compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-geojson:0.1.0'
 
     // Mapbox Android UI
-    compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.2.5'
+    compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.2.6'
 
     // Other dependencies
     compile 'com.google.firebase:firebase-crash:11.0.4'

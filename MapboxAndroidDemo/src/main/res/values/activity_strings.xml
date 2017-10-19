@@ -210,4 +210,8 @@
     <string name="load_raster_button_text">Load custom raster style</string>
     <string name="load_local_style_button_text">Load local style</string>
 
+    <!-- Matrix API -->
+    <string name="call_error">Oh no! The call to the Directions Matrix API failed!</string>
+    <string name="miles_distance">%1$s miles</string>
+    <string name="click_on_marker_instruction_toast">Click on a bolt marker to get started</string>
 </resources>
