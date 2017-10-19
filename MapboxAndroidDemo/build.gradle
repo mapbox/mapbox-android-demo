@@ -3,12 +3,12 @@ apply from: "$project.rootDir/script-git-version.gradle"
 apply plugin: 'com.google.firebase.firebase-perf'
 
 ext {
-    supportLibVersion = '25.3.1'
+    supportLibVersion = '26.0.2'
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         applicationId "com.mapbox.mapboxandroiddemo"
