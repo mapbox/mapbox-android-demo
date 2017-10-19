@@ -92,6 +92,7 @@ import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MapillaryActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
+import com.mapbox.mapboxandroiddemo.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewSymbolLayerActivity;
@@ -597,7 +598,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             R.string.activity_lab_picture_in_picture_title,
             R.string.activity_lab_picture_in_picture_description,
             new Intent(MainActivity.this, PictureInPictureActivity.class),
-            R.string.activity_lab_picture_in_picture_url, true
+            R.string.activity_lab_picture_in_picture_url, false
           ));
         }
         exampleItemModel.add(new ExampleItemModel(
@@ -607,10 +608,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_rv_on_map_url, false
         ));
         exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_labs_inset_map_title,
+          R.string.activity_labs_inset_map_description,
+          new Intent(MainActivity.this, InsetMapActivity.class),
+          R.string.activity_labs_inset_map_url, true));
+        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_rv_symbol_layer_on_map_title,
           R.string.activity_lab_rv_symbol_layer_on_map_description,
           new Intent(MainActivity.this, RecyclerViewSymbolLayerActivity.class),
-          R.string.activity_lab_rv_symbol_layer_on_map_url, false
+          R.string.activity_lab_rv_symbol_layer_on_map_url, true
         ));
         currentCategory = R.id.nav_lab;
         break;
