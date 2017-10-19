@@ -94,6 +94,7 @@ import com.mapbox.mapboxandroiddemo.labs.MapillaryActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
+import com.mapbox.mapboxandroiddemo.labs.RecyclerViewSymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
@@ -604,6 +605,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_rv_on_map_description,
           new Intent(MainActivity.this, RecyclerViewOnMapActivity.class),
           R.string.activity_lab_rv_on_map_url, false
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_rv_symbol_layer_on_map_title,
+          R.string.activity_lab_rv_symbol_layer_on_map_description,
+          new Intent(MainActivity.this, RecyclerViewSymbolLayerActivity.class),
+          R.string.activity_lab_rv_symbol_layer_on_map_url, false
         ));
         currentCategory = R.id.nav_lab;
         break;

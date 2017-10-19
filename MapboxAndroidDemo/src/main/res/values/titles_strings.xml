@@ -63,6 +63,7 @@
     <string name="activity_mas_map_matching_title">Map Matching</string>
     <string name="activity_lab_location_picker_title">Location picker</string>
     <string name="activity_lab_rv_on_map_title">Recyclerview interaction</string>
+    <string name="activity_lab_rv_symbol_layer_on_map_title">Recyclerview + SymbolLayer markers</string>
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
     <string name="activity_lab_space_station_location_title">Space station current location</string>
     <string name="activity_lab_picture_in_picture_title">Picture in picture</string>
