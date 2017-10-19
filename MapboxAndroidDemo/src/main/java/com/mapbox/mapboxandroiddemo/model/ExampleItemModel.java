@@ -57,14 +57,6 @@ public class ExampleItemModel {
     return minSdkVersion;
   }
 
-  public ExampleItemModel(int title, int description, Intent activity, int imageUrl, boolean showNewIcon) {
-    this.title = title;
-    this.description = description;
-    this.imageUrl = imageUrl;
-    this.activity = activity;
-    this.showNewIcon = showNewIcon;
-  }
-
   public ExampleItemModel(int title, int description, Intent activity, int imageUrl,
                           boolean showNewIcon, int minSdkVersion) {
     this.title = title;
