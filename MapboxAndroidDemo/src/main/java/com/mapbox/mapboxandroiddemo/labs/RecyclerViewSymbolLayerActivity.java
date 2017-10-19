@@ -167,7 +167,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
       new LatLng(-34.5982127, -58.38110440000003)
     };
 
-    for (int x = 0; x < 7; x++) {
+    for (int x = 0; x < coordinates.length; x++) {
       SingleRecyclerViewLocation singleLocation = new SingleRecyclerViewLocation();
       singleLocation.setName(String.format(getString(R.string.rv_card_name), x));
       singleLocation.setBedInfo(String.format(getString(R.string.rv_card_bed_info), x));
