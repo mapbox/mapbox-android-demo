@@ -50,6 +50,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.TimeLapseDragActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
@@ -660,10 +661,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           false
         ));
         exampleItemModel.add(new ExampleItemModel(
-            R.string.activity_dds_multiple_geometries_title,
-            R.string.activity_dds_multiple_geometries_description,
-            new Intent(MainActivity.this, MultipleGeometriesActivity.class),
-            R.string.activity_dds_multiple_geometries_url, true
+          R.string.activity_dds_multiple_geometries_title,
+          R.string.activity_dds_multiple_geometries_description,
+          new Intent(MainActivity.this, MultipleGeometriesActivity.class),
+          R.string.activity_dds_multiple_geometries_url, true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_dds_time_lapse_drag_title,
+          R.string.activity_dds_time_lapse_drag_description,
+          new Intent(MainActivity.this, TimeLapseDragActivity.class),
+          R.string.activity_dds_time_lapse_drag_url, true
         ));
         currentCategory = R.id.nav_dds;
         break;

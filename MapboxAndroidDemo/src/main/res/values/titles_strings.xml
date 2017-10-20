@@ -33,6 +33,7 @@
     <string name="activity_dds_style_line_identity_property_title">Style lines using an identity property function</string>
     <string name="activity_dds_time_lapse_rainfall_points_title">Data time lapse</string>
     <string name="activity_dds_multiple_geometries_title">Draw multiple geometries</string>
+    <string name="activity_dds_time_lapse_drag_title">Change data with gestures</string>
     <string name="activity_annotation_marker_title">Draw a marker</string>
     <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
     <string name="activity_annotation_geojson_line_title">Draw a GeoJSON line</string>
