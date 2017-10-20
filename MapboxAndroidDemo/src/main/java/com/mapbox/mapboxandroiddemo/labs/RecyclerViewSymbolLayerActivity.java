@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   private RecyclerView recyclerView;
   private LocationRecyclerViewAdapter locationAdapter;
   private ArrayList<SingleRecyclerViewLocation> locationList;
+  private String TAG = "RecyclerViewSymbolLayerActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -320,11 +322,11 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   Boolean markerSelected = false;
 
   private void selectMarker(final SymbolLayer marker) {
+    Log.d(TAG, marker == null ? "selectMarker: marker is null " : "selectMarker: marker.getId() = " + marker.getId());
     ValueAnimator markerAnimator = new ValueAnimator();
     markerAnimator.setObjectValues(1f, 2f);
     markerAnimator.setDuration(300);
     markerAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
       @Override
       public void onAnimationUpdate(ValueAnimator animator) {
         marker.setProperties(
@@ -369,7 +371,11 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   }
 
   public void onMarkerClickHandler(LatLng point) {
+    Log.d(TAG, point == null ? "onMarkerClickHandler: point is null " : "point: point.getLongitude() = " + point.getLongitude());
+
     final SymbolLayer marker = (SymbolLayer) mapboxMap.getLayer(SELECTED_MARKER_LAYER_ID);
+
+    Log.d(TAG, point == null ? "onMarkerClickHandler: marker is null " : "marker: marker.getLongitude() = " + marker.getId());
 
     Position position = Position.fromCoordinates(point.getLongitude(), point.getLatitude());
     Feature feature = Feature.fromGeometry(Point.fromCoordinates(position));
