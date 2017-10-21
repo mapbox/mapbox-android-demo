@@ -29,6 +29,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -79,6 +80,10 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
 
         RecyclerViewSymbolLayerActivity.this.mapboxMap = mapboxMap;
 
+        for (Layer singleMapLayer : mapboxMap.getLayers()) {
+          Log.d("MainActivity", "onMapReady: layer name = " + singleMapLayer.getId());
+        }
+
         Bitmap icon = BitmapFactory.decodeResource(
           RecyclerViewSymbolLayerActivity.this.getResources(),
           R.drawable.blue_marker_view);
@@ -87,14 +92,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
 
         setUpLists();
 
-        mapView.addOnMapChangedListener(new MapView.OnMapChangedListener() {
-          @Override
-          public void onMapChanged(int change) {
-            if (change == WILL_START_RENDERING_MAP) {
-              addLayer(mapboxMap);
-            }
-          }
-        });
+        addLayer(mapboxMap);
 
         // Set up the recyclerView
         locationAdapter = new LocationRecyclerViewAdapter(locationList, mapboxMap,
@@ -371,7 +369,11 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   }
 
   public void onMarkerClickHandler(LatLng point) {
-    Log.d(TAG, point == null ? "onMarkerClickHandler: point is null " : "point: point.getLongitude() = " + point.getLongitude());
+    Log.d(TAG, point == null ? "onMarkerClickHandler: point is null " : "point ISN'T null and point.getLongitude() = " + point.getLongitude());
+
+    Log.d(TAG, mapboxMap == null ? "onMarkerClickHandler: mapboxMap is null " : "mapboxMap ISN'T null");
+
+    Log.d(TAG, "SELECTED_MARKER_LAYER_ID = " + SELECTED_MARKER_LAYER_ID);
 
     final SymbolLayer marker = (SymbolLayer) mapboxMap.getLayer(SELECTED_MARKER_LAYER_ID);
 
