@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +28,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -41,20 +39,18 @@ import com.mapbox.services.commons.models.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mapbox.mapboxsdk.maps.MapView.WILL_START_RENDERING_MAP;
-
 /**
  * Use a recyclerview with symbol layer markers to easily explore content all on one screen
  */
 public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implements
-  MapboxMap.OnMapClickListener, MapboxMap.OnMarkerClickListener {
+    MapboxMap.OnMapClickListener, MapboxMap.OnMarkerClickListener {
 
   private MapView mapView;
   public MapboxMap mapboxMap;
   private RecyclerView recyclerView;
   private LocationRecyclerViewAdapter locationAdapter;
   private ArrayList<SingleRecyclerViewLocation> locationList;
-  private String TAG = "RecyclerViewSymbolLayerActivity";
+  private static final String markerImageName = "my-selected-marker-image";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +76,12 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
 
         RecyclerViewSymbolLayerActivity.this.mapboxMap = mapboxMap;
 
-        for (Layer singleMapLayer : mapboxMap.getLayers()) {
-          Log.d("MainActivity", "onMapReady: layer name = " + singleMapLayer.getId());
-        }
-
+        // Create selected marker icon
         Bitmap icon = BitmapFactory.decodeResource(
-          RecyclerViewSymbolLayerActivity.this.getResources(),
-          R.drawable.blue_marker_view);
+            RecyclerViewSymbolLayerActivity.this.getResources(),
+            R.drawable.blue_marker_view);
 
-        mapboxMap.addImage("my-selected-marker-image", icon);
+        mapboxMap.addImage(markerImageName, icon);
 
         setUpLists();
 
@@ -96,9 +89,9 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
 
         // Set up the recyclerView
         locationAdapter = new LocationRecyclerViewAdapter(locationList, mapboxMap,
-          RecyclerViewSymbolLayerActivity.this);
+            RecyclerViewSymbolLayerActivity.this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
-          LinearLayoutManager.HORIZONTAL, true));
+            LinearLayoutManager.HORIZONTAL, true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(locationAdapter);
         SnapHelper snapHelper = new LinearSnapHelper();
@@ -157,14 +150,14 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
 
     locationList = new ArrayList<>();
 
-    LatLng[] coordinates = new LatLng[] {
-      new LatLng(-34.6054099, -58.363654800000006),
-      new LatLng(-34.6041508, -58.38555650000001),
-      new LatLng(-34.6114412, -58.37808899999999),
-      new LatLng(-34.6097604, -58.382064000000014),
-      new LatLng(-34.596636, -58.373077999999964),
-      new LatLng(-34.590548, -58.38256609999996),
-      new LatLng(-34.5982127, -58.38110440000003)
+    LatLng[] coordinates = new LatLng[]{
+        new LatLng(-34.6054099, -58.363654800000006),
+        new LatLng(-34.6041508, -58.38555650000001),
+        new LatLng(-34.6114412, -58.37808899999999),
+        new LatLng(-34.6097604, -58.382064000000014),
+        new LatLng(-34.596636, -58.373077999999964),
+        new LatLng(-34.590548, -58.38256609999996),
+        new LatLng(-34.5982127, -58.38110440000003)
     };
 
     for (int x = 0; x < coordinates.length; x++) {
@@ -175,9 +168,9 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
       locationList.add(singleLocation);
 
       mapboxMap.addMarker(new MarkerOptions()
-        .position(coordinates[x])
-        .title(String.format(getString(R.string.rv_card_name), x))
-        .snippet(String.format(getString(R.string.rv_card_bed_info), x)));
+          .position(coordinates[x])
+          .title(String.format(getString(R.string.rv_card_name), x))
+          .snippet(String.format(getString(R.string.rv_card_bed_info), x)));
       mapboxMap.setOnMarkerClickListener(this);
     }
     return locationList;
@@ -218,7 +211,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   }
 
   static class LocationRecyclerViewAdapter extends
-    RecyclerView.Adapter<LocationRecyclerViewAdapter.MyViewHolder> {
+      RecyclerView.Adapter<LocationRecyclerViewAdapter.MyViewHolder> {
 
     private List<SingleRecyclerViewLocation> locationList;
     private MapboxMap map;
@@ -234,7 +227,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
       View itemView = LayoutInflater.from(parent.getContext())
-        .inflate(R.layout.rv_on_top_of_map_card, parent, false);
+          .inflate(R.layout.rv_on_top_of_map_card, parent, false);
       return new MyViewHolder(itemView);
     }
 
@@ -248,13 +241,13 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
         public void onClick(View view, int position) {
           LatLng selectedLocationLatLng = locationList.get(position).getLocationCoordinates();
           CameraPosition newCameraPosition = new CameraPosition.Builder()
-            .target(selectedLocationLatLng)
-            .build();
+              .target(selectedLocationLatLng)
+              .build();
 
           map.addMarker(new MarkerOptions()
-            .setPosition(selectedLocationLatLng)
-            .setTitle(locationList.get(position).getName()))
-            .setSnippet(locationList.get(position).getBedInfo());
+              .setPosition(selectedLocationLatLng)
+              .setTitle(locationList.get(position).getName()))
+              .setSnippet(locationList.get(position).getBedInfo());
           activity.onMarkerClickHandler(map.getMarkers().get(position).getPosition());
           map.easeCamera(CameraUpdateFactory.newCameraPosition(newCameraPosition));
         }
@@ -306,21 +299,19 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
 
     // Create and add SymbolLayer to the map
     selectedMarkerLayer = new SymbolLayer(SELECTED_MARKER_LAYER_ID, SELECTED_SOURCE_ID)
-      .withProperties(PropertyFactory.iconImage("my-selected-marker-image"));
+        .withProperties(PropertyFactory.iconImage(markerImageName));
 
     mapboxMap.addLayer(selectedMarkerLayer);
 
     // Create and add an empty GeoJSONSource to the map
-    FeatureCollection emptySource = FeatureCollection.fromFeatures(new Feature[] {});
+    FeatureCollection emptySource = FeatureCollection.fromFeatures(new Feature[]{});
     selectedMarkerSource = new GeoJsonSource(SELECTED_SOURCE_ID, emptySource);
     mapboxMap.addSource(selectedMarkerSource);
   }
 
-
   Boolean markerSelected = false;
 
   private void selectMarker(final SymbolLayer marker) {
-    Log.d(TAG, marker == null ? "selectMarker: marker is null " : "selectMarker: marker.getId() = " + marker.getId());
     ValueAnimator markerAnimator = new ValueAnimator();
     markerAnimator.setObjectValues(1f, 2f);
     markerAnimator.setDuration(300);
@@ -328,7 +319,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
       @Override
       public void onAnimationUpdate(ValueAnimator animator) {
         marker.setProperties(
-          PropertyFactory.iconSize((float) animator.getAnimatedValue())
+            PropertyFactory.iconSize((float) animator.getAnimatedValue())
         );
       }
     });
@@ -345,7 +336,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
       @Override
       public void onAnimationUpdate(ValueAnimator animator) {
         marker.setProperties(
-          PropertyFactory.iconSize((float) animator.getAnimatedValue())
+            PropertyFactory.iconSize((float) animator.getAnimatedValue())
         );
       }
     });
@@ -369,23 +360,12 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   }
 
   public void onMarkerClickHandler(LatLng point) {
-    Log.d(TAG, point == null ? "onMarkerClickHandler: point is null " : "point ISN'T null and point.getLongitude() = " + point.getLongitude());
-
-    Log.d(TAG, mapboxMap == null ? "onMarkerClickHandler: mapboxMap is null " : "mapboxMap ISN'T null");
-
-    Log.d(TAG, "SELECTED_MARKER_LAYER_ID = " + SELECTED_MARKER_LAYER_ID);
-
     final SymbolLayer marker = (SymbolLayer) mapboxMap.getLayer(SELECTED_MARKER_LAYER_ID);
-
-    Log.d(TAG, point == null ? "onMarkerClickHandler: marker is null " : "marker: marker.getLongitude() = " + marker.getId());
-
     Position position = Position.fromCoordinates(point.getLongitude(), point.getLatitude());
     Feature feature = Feature.fromGeometry(Point.fromCoordinates(position));
-
     FeatureCollection featureCollection = FeatureCollection.fromFeatures(
-      new Feature[] {feature});
+        new Feature[]{feature});
     GeoJsonSource source = mapboxMap.getSourceAs(SELECTED_SOURCE_ID);
-
     if (source != null) {
       source.setGeoJson(featureCollection);
     }
