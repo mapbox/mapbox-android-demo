@@ -151,13 +151,13 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     locationList = new ArrayList<>();
 
     LatLng[] coordinates = new LatLng[]{
-        new LatLng(-34.6054099, -58.363654800000006),
-        new LatLng(-34.6041508, -58.38555650000001),
-        new LatLng(-34.6114412, -58.37808899999999),
-        new LatLng(-34.6097604, -58.382064000000014),
-        new LatLng(-34.596636, -58.373077999999964),
-        new LatLng(-34.590548, -58.38256609999996),
-        new LatLng(-34.5982127, -58.38110440000003)
+      new LatLng(-34.6054099, -58.363654800000006),
+      new LatLng(-34.6041508, -58.38555650000001),
+      new LatLng(-34.6114412, -58.37808899999999),
+      new LatLng(-34.6097604, -58.382064000000014),
+      new LatLng(-34.596636, -58.373077999999964),
+      new LatLng(-34.590548, -58.38256609999996),
+      new LatLng(-34.5982127, -58.38110440000003)
     };
 
     for (int x = 0; x < coordinates.length; x++) {
