@@ -65,13 +65,12 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
   @Override
   public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    if (holder.getItemViewType() != 0) {
+      return;
+    }
 
     ExampleItemModel detailItem = dataSource.get(position);
     ViewHolder viewHolder = (ViewHolder) holder;
-
-    if (holder.getItemViewType() == 0) {
-      return;
-    }
 
     if (Build.VERSION.SDK_INT < detailItem.getMinSdkVersion()) {
       return;
