@@ -603,13 +603,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_rv_on_map_description,
           new Intent(MainActivity.this, RecyclerViewOnMapActivity.class),
           R.string.activity_lab_rv_on_map_url, false, BuildConfig.MIN_SDK_VERSION));
-        
+
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_labs_inset_map_title,
           R.string.activity_labs_inset_map_description,
           new Intent(MainActivity.this, InsetMapActivity.class),
           R.string.activity_labs_inset_map_url, true, BuildConfig.MIN_SDK_VERSION));
-        
+
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_rv_symbol_layer_on_map_title,
           R.string.activity_lab_rv_symbol_layer_on_map_description,
