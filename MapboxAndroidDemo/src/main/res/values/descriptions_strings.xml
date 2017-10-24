@@ -33,6 +33,7 @@
     <string name="activity_dds_json_vector_mix_description">Style a choropleth map by merging local JSON data with vector tile geometries.</string>
     <string name="activity_dds_style_line_identity_property_description">Using an identity line-color property function for a visualization.</string>
     <string name="activity_dds_time_lapse_rainfall_points_description">Use data-driven styling to visualize point data with a time lapse effect; rainfall in China in this example.</string>
+    <string name="activity_dds_multiple_geometries_description">Draw multiple geometries from a single GeoJSON file.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Android SDK.</string>
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.</string>
@@ -55,9 +56,11 @@
     <string name="activity_mas_optimization_description">Use Mapbox\'s Optimization API to retrieve and display the quickest multi-stop route.</string>
     <string name="activity_mas_geocoding_description">Use Mapbox Android Service\'s geocoder to convert location text into geographic coordinates.</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
+    <string name="activity_mas_matrix_api_description">Use the Directions Matrix API to receive driving times between Boston\'s various electric car charging stations</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
     <string name="activity_plugins_location_plugin_description">Use the location plugin to easily show a user\'s location on the map</string>
+    <string name="activity_plugins_geojson_plugin_description">Easily retrieve GeoJSON data from a url, asset, or path</string>
     <string name="activity_mas_simplify_polyline_description">Using the polylines utility, simplify a polyline which reduces the amount of coordinates making up the polyline depending on tolerance.</string>
     <string name="activity_mas_map_matching_description">Match raw GPS points to the map so they aligns with the roads/pathways.</string>
     <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding.</string>
@@ -68,6 +71,8 @@
     <string name="activity_lab_los_angeles_tourism_description">Use the style API to highlight parks, hotels, and attractions. A pulsing animation is also added to the colors.</string>
     <string name="activity_lab_indoor_map_description">Display an indoor map of a building with toggles to switch between floor levels.</string>
     <string name="activity_lab_rv_on_map_description">Manipulate the map based on recyclerview interactions.</string>
+    <string name="activity_lab_rv_symbol_layer_on_map_description">Add markers via SymbolLayer and manipulate the map based on recyclerview interactions.</string>
     <string name="activity_lab_mapillary_description">Add Mapillary vector tiles to a map</string>
+    <string name="activity_labs_inset_map_description">Show a smaller inset map fragment and link it to a larger map for two map interaction. Great for gaming!</string>
 
 </resources>

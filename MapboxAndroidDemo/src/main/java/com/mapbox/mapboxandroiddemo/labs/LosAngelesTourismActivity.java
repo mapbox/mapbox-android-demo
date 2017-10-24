@@ -49,7 +49,7 @@ public class LosAngelesTourismActivity extends AppCompatActivity implements OnMa
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_lab_las_angeles_tourisim);
+    setContentView(R.layout.activity_lab_los_angeles_tourism);
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -257,7 +257,6 @@ public class LosAngelesTourismActivity extends AppCompatActivity implements OnMa
 
   private String loadJsonFromAsset(String filename) {
     // Using this method to load in GeoJSON files from the assets folder.
-
     try {
       InputStream is = getAssets().open(filename);
       int size = is.available();
