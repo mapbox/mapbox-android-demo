@@ -1,8 +1,4 @@
 <resources>
-
-    <!-- Access Token -->
-    <string name="access_token" translatable="false">pk.eyJ1IjoiY2FtbWFjZSIsImEiOiJjaW9vbGtydnQwMDAwdmRrcWlpdDVoM3pjIn0.Oy_gHelWnV12kJxHQWV7XQ</string>
-
     <string name="app_name">Mapbox Demo</string>
 
     <!-- Titles -->
