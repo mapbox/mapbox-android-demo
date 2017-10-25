@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -41,35 +43,25 @@ public class SliderCompareActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
+      }
+    });
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-          int progress = 0;
-          @Override
-          public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
+    seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+      @Override
+      public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
+        Log.d(TAG, "onProgressChanged: progressValue = " + progressValue);
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.target_framelayout);
+        frameLayout.setLayoutParams(new RelativeLayout.LayoutParams(progressValue, frameLayout.getLayoutParams().height));
+      }
 
-            Log.d(TAG, "onProgressChanged: fromUser == " + fromUser);
-            Log.d(TAG, "onProgressChanged: progressValue = " + progressValue);
+      @Override
+      public void onStartTrackingTouch(SeekBar seekBar) {
 
-            FrameLayout target = (FrameLayout) findViewById(R.id.target_framelayout);
+      }
 
-            progress = progressValue;
+      @Override
+      public void onStopTrackingTouch(SeekBar seekBar) {
 
-            ViewGroup.LayoutParams lp = target.getLayoutParams();
-            lp.height = progress;
-            target.setLayoutParams(lp);
-
-          }
-
-          @Override
-          public void onStartTrackingTouch(SeekBar seekBar) {
-
-          }
-
-          @Override
-          public void onStopTrackingTouch(SeekBar seekBar) {
-
-          }
-        });
       }
     });
   }
