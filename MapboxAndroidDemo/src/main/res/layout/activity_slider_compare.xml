@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:mapbox="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+                                                 android:id="@+id/slider_compare_container"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent">
 
 
     <com.mapbox.mapboxsdk.maps.MapView
@@ -12,7 +13,15 @@
         mapbox:mapbox_cameraTargetLat="40.73581"
         mapbox:mapbox_cameraTargetLng="-73.99155"
         mapbox:mapbox_cameraZoom="11"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
+        mapbox:mapbox_renderTextureMode="true"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"
+        mapbox:mapbox_uiAttribution="false"
+        mapbox:mapbox_uiDoubleTapGestures="false"
+        mapbox:mapbox_uiLogo="false"
+        mapbox:mapbox_uiRotateGestures="false"
+        mapbox:mapbox_uiScrollGestures="false"
+        mapbox:mapbox_uiTiltGestures="false"
+        mapbox:mapbox_uiZoomGestures="false"/>
 
     <FrameLayout
         android:id="@+id/target_framelayout"
@@ -21,22 +30,30 @@
 
         <com.mapbox.mapboxsdk.maps.MapView
             android:id="@+id/mapViewTwo"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
             mapbox:mapbox_cameraTargetLat="40.73581"
             mapbox:mapbox_cameraTargetLng="-73.99155"
             mapbox:mapbox_cameraZoom="11"
             mapbox:mapbox_renderTextureMode="true"
-            mapbox:mapbox_styleUrl="@string/mapbox_style_dark"/>
+            mapbox:mapbox_styleUrl="@string/mapbox_style_dark"
+            mapbox:mapbox_uiAttribution="false"
+            mapbox:mapbox_uiDoubleTapGestures="false"
+            mapbox:mapbox_uiLogo="false"
+            mapbox:mapbox_uiRotateGestures="false"
+            mapbox:mapbox_uiScrollGestures="false"
+            mapbox:mapbox_uiTiltGestures="false"
+            mapbox:mapbox_uiZoomGestures="false"/>
+
     </FrameLayout>
 
     <SeekBar
         android:id="@+id/slider_compare_seek_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:max="600"
         android:progress="300"/>
 
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

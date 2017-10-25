@@ -1,8 +1,11 @@
 package com.mapbox.mapboxandroiddemo.labs;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -43,6 +46,15 @@ public class SliderCompareActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
+        findViewById(R.id.slider_compare_container).setOnTouchListener(new View.OnTouchListener() {
+          @Override
+          public boolean onTouch(View v, MotionEvent event) {
+            Log.d(TAG, "onTouch: ");
+            mapViewOne.onTouchEvent(event);
+            mapViewTwo.onTouchEvent(event);
+            return false;
+          }
+        });
       }
     });
 
@@ -51,7 +63,7 @@ public class SliderCompareActivity extends AppCompatActivity {
       public void onProgressChanged(SeekBar seekBar, int progressValue, boolean fromUser) {
         Log.d(TAG, "onProgressChanged: progressValue = " + progressValue);
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.target_framelayout);
-        frameLayout.setLayoutParams(new RelativeLayout.LayoutParams(progressValue, frameLayout.getLayoutParams().height));
+        frameLayout.setLayoutParams(new CoordinatorLayout.LayoutParams(progressValue, frameLayout.getLayoutParams().height));
       }
 
       @Override
