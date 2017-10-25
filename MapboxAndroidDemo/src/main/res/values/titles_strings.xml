@@ -72,5 +72,6 @@
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
     <string name="activity_labs_mapillary_title">Mapillary integration</string>
     <string name="activity_labs_inset_map_title">Inset map</string>
+    <string name="activity_labs_slider_compare_title">Slider compare</string>
 
 </resources>

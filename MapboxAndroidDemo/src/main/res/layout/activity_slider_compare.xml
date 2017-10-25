@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:showIn="@layout/activity_slider_compare">
+
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapViewOne"
+        android:layout_width="600dp"
+        android:layout_height="300dp"
+        mapbox:mapbox_cameraTargetLat="40.73581"
+        mapbox:mapbox_cameraTargetLng="-73.99155"
+        mapbox:mapbox_cameraZoom="11"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
+
+    <FrameLayout
+        android:id="@+id/target_framelayout"
+        android:layout_width="600dp"
+        android:layout_height="150dp">
+
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/mapViewTwo"
+            android:layout_width="600dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="300dp"
+            mapbox:mapbox_cameraTargetLat="40.73581"
+            mapbox:mapbox_cameraTargetLng="-73.99155"
+            mapbox:mapbox_cameraZoom="11"
+            mapbox:mapbox_styleUrl="@string/mapbox_style_dark"/>
+    </FrameLayout>
+
+    <SeekBar
+        android:id="@+id/slider_compare_seek_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mapViewOne"
+        android:max="600"
+        android:progress="300"/>
+
+
+</RelativeLayout>
