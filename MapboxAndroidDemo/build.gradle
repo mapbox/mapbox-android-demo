@@ -88,6 +88,8 @@ dependencies {
     compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-building:0.1.0'
     compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:0.3.0'
     compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-geojson:0.1.0'
+    compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-cluster:0.1.0'
+
 
     // Mapbox Android UI
     compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.2.6'

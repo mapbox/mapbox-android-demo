@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="19.4326"
         mapbox:mapbox_cameraTargetLng="-99.1332"
-        mapbox:mapbox_cameraZoom="11"
+        mapbox:mapbox_cameraZoom="8"
         mapbox:mapbox_styleUrl="@string/mapbox_style_satellite_streets" />
 
 </android.support.constraint.ConstraintLayout>
