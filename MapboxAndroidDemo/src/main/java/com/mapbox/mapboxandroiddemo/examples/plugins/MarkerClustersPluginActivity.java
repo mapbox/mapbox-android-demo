@@ -95,7 +95,7 @@ public class MarkerClustersPluginActivity extends AppCompatActivity {
   }
 
   protected void startDemo() {
-    mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(48.865539, 2.348603), 9),3500);
+    mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(48.865539, 2.348603), 10.8),2800);
 
     clusterManagerPlugin = new ClusterManagerPlugin<>(this, mapboxMap);
     mapboxMap.addOnCameraIdleListener(clusterManagerPlugin);
