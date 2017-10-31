@@ -114,43 +114,43 @@ public class MarkerClustersPluginActivity extends AppCompatActivity {
   }
 
   public static class MyItem implements ClusterItem {
-    private final LatLng mPosition;
-    private String mTitle;
-    private String mSnippet;
+    private final LatLng position;
+    private String title;
+    private String snippet;
 
     public MyItem(double lat, double lng) {
-      mPosition = new LatLng(lat, lng);
-      mTitle = null;
-      mSnippet = null;
+      position = new LatLng(lat, lng);
+      title = null;
+      snippet = null;
     }
 
     public MyItem(double lat, double lng, String title, String snippet) {
-      mPosition = new LatLng(lat, lng);
-      mTitle = title;
-      mSnippet = snippet;
+      position = new LatLng(lat, lng);
+      this.title = title;
+      this.snippet = snippet;
     }
 
     @Override
     public LatLng getPosition() {
-      return mPosition;
+      return position;
     }
 
     @Override
     public String getTitle() {
-      return mTitle;
+      return title;
     }
 
     @Override
     public String getSnippet() {
-      return mSnippet;
+      return snippet;
     }
 
     public void setTitle(String title) {
-      mTitle = title;
+      this.title = title;
     }
 
     public void setSnippet(String snippet) {
-      mSnippet = snippet;
+      this.snippet = snippet;
     }
   }
 
