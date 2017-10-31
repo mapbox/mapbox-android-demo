@@ -23,6 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Use the marker cluster plugin to automatically add colored circles with numbers, so that a user knows
+ * how many markers are in a certain area at a higher zoom level.
+ */
 public class MarkerClustersPluginActivity extends AppCompatActivity {
 
   private MapView mapView;
