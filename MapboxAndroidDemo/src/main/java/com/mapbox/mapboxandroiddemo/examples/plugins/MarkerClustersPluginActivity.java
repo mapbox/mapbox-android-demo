@@ -99,11 +99,13 @@ public class MarkerClustersPluginActivity extends AppCompatActivity {
   }
 
   protected void startDemo() {
+
     mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(48.865539, 2.348603), 10.8),2800);
 
+    // Initializing the cluster plugin
     clusterManagerPlugin = new ClusterManagerPlugin<>(this, mapboxMap);
-    mapboxMap.addOnCameraIdleListener(clusterManagerPlugin);
 
+    mapboxMap.addOnCameraIdleListener(clusterManagerPlugin);
     try {
       readItems();
     } catch (JSONException exception) {
@@ -117,6 +119,9 @@ public class MarkerClustersPluginActivity extends AppCompatActivity {
     clusterManagerPlugin.addItems(items);
   }
 
+  /**
+   * Custom class for use by the marker cluster plugin
+   */
   public static class MyItem implements ClusterItem {
     private final LatLng position;
     private String title;
@@ -158,6 +163,9 @@ public class MarkerClustersPluginActivity extends AppCompatActivity {
     }
   }
 
+  /**
+   * Custom class which reads JSON data and creates a list of MyItem objects
+   */
   public static class MyItemReader {
 
     private static final String REGEX_INPUT_BOUNDARY_BEGINNING = "\\A";
