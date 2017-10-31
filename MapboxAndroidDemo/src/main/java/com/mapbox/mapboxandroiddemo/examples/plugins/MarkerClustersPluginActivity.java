@@ -11,6 +11,8 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.plugins.cluster.clustering.ClusterItem;
+import com.mapbox.mapboxsdk.plugins.cluster.clustering.ClusterManagerPlugin;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class MarkerClustersPluginActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MarkerClustersPluginActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -40,13 +42,13 @@ public class MarkerClustersPluginActivity extends AppCompatActivity implements O
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(this);
-  }
-
-  @Override
-  public void onMapReady(MapboxMap mapboxMap) {
-    this.mapboxMap = mapboxMap;
-    startDemo();
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(MapboxMap mapboxMap) {
+        MarkerClustersPluginActivity.this.mapboxMap = mapboxMap;
+        startDemo();
+      }
+    });
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
@@ -92,9 +94,8 @@ public class MarkerClustersPluginActivity extends AppCompatActivity implements O
     mapView.onSaveInstanceState(outState);
   }
 
-
   protected void startDemo() {
-    mapboxMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(51.503186, -0.126446), 10));
+    mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(48.865539, 2.348603), 9),3500);
 
     clusterManagerPlugin = new ClusterManagerPlugin<>(this, mapboxMap);
     mapboxMap.addOnCameraIdleListener(clusterManagerPlugin);
@@ -165,13 +166,13 @@ public class MarkerClustersPluginActivity extends AppCompatActivity implements O
         String title = null;
         String snippet = null;
         JSONObject object = array.getJSONObject(i);
-        double lat = object.getDouble("lat");
-        double lng = object.getDouble("lng");
-        if (!object.isNull("title")) {
-          title = object.getString("title");
+        double lat = object.getDouble("latitude");
+        double lng = object.getDouble("longitude");
+        if (!object.isNull("name")) {
+          title = object.getString("name");
         }
-        if (!object.isNull("snippet")) {
-          snippet = object.getString("snippet");
+        if (!object.isNull("address")) {
+          snippet = object.getString("address");
         }
         items.add(new MyItem(lat, lng, title, snippet));
       }
