@@ -15,6 +15,9 @@ import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
 import com.mapbox.services.android.location.LostLocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngine;
 
+/**
+ * Place a rotating mini-window compass map on top of a camera preview.
+ */
 public class RadarCompassActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
