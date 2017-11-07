@@ -6,13 +6,10 @@ This doc covers the steps required to release a new version of [Mapbox Demo App]
 
 Standard workflow:
  - Update and integrate dependencies
- - Pull in the latest string file translations from [Transifex](transifex.com):
-   - [Install the Transifex client](https://docs.transifex.com/client/installing-the-client)
-   - Navigate to this repo's root folder
-   - Run `tx pull -a` to update string files
- - Update `whatsnew/whatsnew-en-US`
+ - Make sure that you've [installed the Transifex client](https://docs.transifex.com/client/installing-the-client). Navigate to this repo's root folder in your command line (Terminal, etc.) and run `tx pull -a` to update the app's string files. This will pull in the latest string file translations from [Transifex](transifex.com).
+ - Update `whatsnew/whatsnew-en-US` with the additions that were made to the app since the last release.
  - Local test with proguard 
- - Merge PR with changes to master
+ - Merge PR with changes to the `master` branch in this repo.
 
 ## Create a tag
 
@@ -31,4 +28,4 @@ We are uploading multiple apk files due to [ABI splits](https://developer.androi
 ## Test application on Google Play
 
 Enroll yourself in the testing group in Google Play console. 
-Test the application in alpha or beta and promote to production.
+Test the application in alpha or beta tracks and eventually promote the build to production.

@@ -1,4 +1,3 @@
-This update is in line with the 5.1.2 release of the Mapbox Maps SDK. New examples to the app include: 
-•Picture-in-picture (for Android O)
-•Adaptive icons (for Android O)
-•Loading a map style via a local file
+This update is in line with the 5.1.4 release of the Mapbox Maps SDK. This release also has several bug fixes and new examples:
+•How to use the new GeoJSON plugin
+•How to add many images as markers

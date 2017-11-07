@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -25,6 +26,7 @@ import android.widget.Switch;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
@@ -35,6 +37,7 @@ import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivit
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
@@ -51,14 +54,18 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActi
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
+import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsMatrixApiActivity;
+import com.mapbox.mapboxandroiddemo.examples.mas.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.GeoJsonPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
@@ -68,7 +75,7 @@ import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.CreateHeatmapPointsActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
@@ -83,10 +90,13 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivi
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
+import com.mapbox.mapboxandroiddemo.labs.MapillaryActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
+import com.mapbox.mapboxandroiddemo.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.labs.RadarCompassActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
+import com.mapbox.mapboxandroiddemo.labs.RecyclerViewSymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
@@ -116,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private AnalyticsTracker analytics;
 
   @Override
+  @AddTrace(name = "onCreateMainActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
@@ -145,6 +156,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
       @Override
+      @AddTrace(name = "onItemClicked")
       public void onItemClicked(RecyclerView recyclerView, int position, View view) {
         if (currentCategory == R.id.nav_lab && position == 0) {
           return;
@@ -229,39 +241,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     return true;
   }
 
+  @AddTrace(name = "listItems")
   private void listItems(int id) {
     exampleItemModel.clear();
     switch (id) {
       case R.id.nav_styles:
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_default_title,
-          R.string.activity_style_default_description,
+          R.string.activity_styles_default_title,
+          R.string.activity_styles_default_description,
           new Intent(MainActivity.this, DefaultStyleActivity.class),
-          R.string.activity_style_default_url
+          R.string.activity_styles_default_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_symbol_layer_title,
-          R.string.activity_style_symbol_layer_description,
+          R.string.activity_styles_symbol_layer_title,
+          R.string.activity_styles_symbol_layer_description,
           new Intent(MainActivity.this, SymbolLayerActivity.class),
-          R.string.activity_style_symbol_layer_url
+          R.string.activity_styles_symbol_layer_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_create_heatmap_points_title,
-          R.string.activity_style_create_heatmap_points_description,
-          new Intent(MainActivity.this, CreateHeatmapPointsActivity.class),
-          R.string.activity_style_create_heatmap_points_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_data_clusters_title,
-          R.string.activity_style_create_data_cluster_description,
+          R.string.activity_styles_data_clusters_title,
+          R.string.activity_styles_create_data_cluster_description,
           new Intent(MainActivity.this, GeoJsonClusteringActivity.class),
-          R.string.activity_style_create_cluster_data_points_url
+          R.string.activity_styles_create_cluster_data_points_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_line_layer_title,
-          R.string.activity_style_line_layer_description,
+          R.string.activity_styles_line_layer_title,
+          R.string.activity_styles_line_layer_description,
           new Intent(MainActivity.this, LineLayerActivity.class),
-          R.string.activity_style_line_layer_url
+          R.string.activity_styles_line_layer_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_styles_color_switcher_title,
@@ -276,10 +283,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_vector_source_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_add_wms_source_title,
-          R.string.activity_style_add_wms_source_description,
+          R.string.activity_styles_add_wms_source_title,
+          R.string.activity_styles_add_wms_source_description,
           new Intent(MainActivity.this, AddWmsSourceActivity.class),
-          R.string.activity_style_add_wms_source_url
+          R.string.activity_styles_add_wms_source_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_styles_geojson_layer_in_stack_title,
@@ -294,8 +301,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_adjust_layer_opacity_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_styles_langauge_switch_title,
-          R.string.activity_styles_langauge_switch_description,
+          R.string.activity_styles_zoom_dependent_fill_color_title,
+          R.string.activity_styles_zoom_dependent_fill_color_description,
+          new Intent(MainActivity.this, ZoomDependentFillColorActivity.class),
+          R.string.activity_styles_zoom_dependent_fill_color_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_styles_language_switch_title,
+          R.string.activity_styles_language_switch_description,
           new Intent(MainActivity.this, LanguageSwitchActivity.class),
           R.string.activity_styles_language_switch_url
         ));
@@ -306,16 +319,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_show_hide_layer_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_mapbox_studio_title,
-          R.string.activity_style_mapbox_studio_description,
+          R.string.activity_styles_mapbox_studio_title,
+          R.string.activity_styles_mapbox_studio_description,
           new Intent(MainActivity.this, MapboxStudioStyleActivity.class),
-          R.string.activity_style_mapbox_studio_url
+          R.string.activity_styles_mapbox_studio_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_local_style_or_raster_source_title,
-          R.string.activity_style_local_style_or_raster_source_description,
+          R.string.activity_styles_local_style_or_raster_source_title,
+          R.string.activity_styles_local_style_or_raster_source_description,
           new Intent(MainActivity.this, LocalStyleSourceActivity.class),
-          R.string.activity_style_local_style_or_raster_source_url
+          R.string.activity_styles_local_style_or_raster_source_url
         ));
         currentCategory = R.id.nav_styles;
         break;
@@ -324,25 +337,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_extrusions_population_density_extrusions_title,
           R.string.activity_extrusions_population_density_extrusions_description,
           new Intent(MainActivity.this, PopulationDensityExtrusionActivity.class),
-          R.string.activity_extrusions_population_density_extrusions_url, true
+          R.string.activity_extrusions_population_density_extrusions_url, false
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_extrusions_catalina_marathon_extrusions_title,
           R.string.activity_extrusions_catalina_marathon_extrusions_description,
           new Intent(MainActivity.this, MarathonExtrusionActivity.class),
-          R.string.activity_extrusions_catalina_marathon_extrusions_url, true
+          R.string.activity_extrusions_catalina_marathon_extrusions_url, false
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_extrusions_adjust_extrusions_title,
           R.string.activity_extrusions_adjust_extrusions_description,
           new Intent(MainActivity.this, AdjustExtrusionLightActivity.class),
-          R.string.activity_extrusions_adjust_extrusions_url, true
+          R.string.activity_extrusions_adjust_extrusions_url, false
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_extrusions_indoor_3d_title,
           R.string.activity_extrusions_indoor_3d_description,
           new Intent(MainActivity.this, Indoor3DMapActivity.class),
           R.string.activity_extrusions_indoor_3d_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_extrusions_rotate_extrusions_title,
+          R.string.activity_extrusions_rotate_extrusions_description,
+          new Intent(MainActivity.this, RotationExtrusionActivity.class),
+          R.string.activity_extrusions_rotate_extrusions_url, false
         ));
         currentCategory = R.id.nav_extrusions;
         break;
@@ -358,13 +377,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_plugins_building_plugin_title,
           R.string.activity_plugins_building_plugin_description,
           new Intent(MainActivity.this, BuildingPluginActivity.class),
-          R.string.activity_plugins_building_plugin_url, true
+          R.string.activity_plugins_building_plugin_url, false
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_plugins_location_plugin_title,
           R.string.activity_plugins_location_plugin_description,
           new Intent(MainActivity.this, LocationPluginActivity.class),
-          R.string.activity_plugins_location_plugin_url, true
+          R.string.activity_plugins_location_plugin_url, false
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_plugins_geojson_plugin_title,
+          R.string.activity_plugins_geojson_plugin_description,
+          new Intent(MainActivity.this, GeoJsonPluginActivity.class),
+          R.string.activity_plugins_geojson_plugin_url, true
         ));
         currentCategory = R.id.nav_plugins;
         break;
@@ -398,7 +423,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_annotation_polygon_holes_title,
           R.string.activity_annotation_polygon_holes_description,
           new Intent(MainActivity.this, PolygonHolesActivity.class),
-          R.string.activity_annotation_polygon_holes_url, true
+          R.string.activity_annotation_polygon_holes_url, false
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_annotation_custom_info_window_title,
@@ -438,7 +463,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_camera_restrict_title,
           R.string.activity_camera_restrict_description,
           new Intent(MainActivity.this, RestrictCameraActivity.class),
-          R.string.activity_camera_restrict_url, true
+          R.string.activity_camera_restrict_url, false
         ));
         currentCategory = R.id.nav_camera;
         break;
@@ -506,6 +531,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_mas_directions_url
         ));
         exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_mas_optimization_title,
+          R.string.activity_mas_optimization_description,
+          new Intent(MainActivity.this, OptimizationActivity.class),
+          R.string.activity_mas_optimization_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_mas_geocoding_title,
           R.string.activity_mas_geocoding_description,
           new Intent(MainActivity.this, GeocodingActivity.class),
@@ -517,15 +548,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, StaticImageActivity.class),
           R.string.activity_mas_static_image_url
         ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_mas_maxtrix_api_title,
+          R.string.activity_mas_matrix_api_description,
+          new Intent(MainActivity.this, DirectionsMatrixApiActivity.class),
+          R.string.activity_mas_matrix_url
+        ));
         currentCategory = R.id.nav_mas;
         break;
       case R.id.nav_lab:
         exampleItemModel.add(null);
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_las_angeles_tourism_title,
-          R.string.activity_lab_las_angeles_tourism_description,
+          R.string.activity_labs_mapillary_title,
+          R.string.activity_lab_mapillary_description,
+          new Intent(MainActivity.this, MapillaryActivity.class),
+          R.string.activity_lab_mapillary_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_los_angeles_tourism_title,
+          R.string.activity_lab_los_angeles_tourism_description,
           new Intent(MainActivity.this, LosAngelesTourismActivity.class),
-          R.string.activity_lab_las_angeles_tourism_url
+          R.string.activity_lab_los_angeles_tourism_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_indoor_map_title,
@@ -551,17 +594,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, SpaceStationLocationActivity.class),
           R.string.activity_lab_space_station_location_url
         ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_picture_in_picture_title,
-          R.string.activity_lab_picture_in_picture_description,
-          new Intent(MainActivity.this, PictureInPictureActivity.class),
-          R.string.activity_lab_picture_in_picture_url, true
-        ));
+        if (Build.VERSION.SDK_INT >= 26) {
+          exampleItemModel.add(new ExampleItemModel(
+            R.string.activity_lab_picture_in_picture_title,
+            R.string.activity_lab_picture_in_picture_description,
+            new Intent(MainActivity.this, PictureInPictureActivity.class),
+            R.string.activity_lab_picture_in_picture_url, false
+          ));
+        }
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_rv_on_map_title,
           R.string.activity_lab_rv_on_map_description,
           new Intent(MainActivity.this, RecyclerViewOnMapActivity.class),
-          R.string.activity_lab_rv_on_map_url, true
+          R.string.activity_lab_rv_on_map_url, false
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_labs_inset_map_title,
+          R.string.activity_labs_inset_map_description,
+          new Intent(MainActivity.this, InsetMapActivity.class),
+          R.string.activity_labs_inset_map_url, true));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_rv_symbol_layer_on_map_title,
+          R.string.activity_lab_rv_symbol_layer_on_map_description,
+          new Intent(MainActivity.this, RecyclerViewSymbolLayerActivity.class),
+          R.string.activity_lab_rv_symbol_layer_on_map_url, true
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_radar_compass_title,
@@ -585,30 +641,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_choropleth_zoom_change_url
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_style_zoom_dependent_fill_color_title,
-          R.string.activity_style_zoom_dependent_fill_color_description,
-          new Intent(MainActivity.this, ZoomDependentFillColorActivity.class),
-          R.string.activity_style_zoom_dependent_fill_color_url
-        ));
-        exampleItemModel.add(new ExampleItemModel(
           R.string.activity_dds_style_line_identity_property_title,
           R.string.activity_dds_style_line_identity_property_description,
           new Intent(MainActivity.this, StyleLineIdentityPropertyActivity.class),
-          R.string.activity_dds_style_line_identity_property_url, true
+          R.string.activity_dds_style_line_identity_property_url, false
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_dds_create_hotspots_points_title,
+          R.string.activity_dds_create_hotspots_points_description,
+          new Intent(MainActivity.this, CreateHotspotsActivity.class),
+          R.string.activity_dds_create_hotspots_points_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_dds_json_vector_mix_title,
           R.string.activity_dds_json_vector_mix_description,
           new Intent(MainActivity.this, ChoroplethJsonVectorMixActivity.class),
           R.string.activity_dds_json_vector_mix_url,
-          true
+          false
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_dds_time_lapse_rainfall_points_title,
           R.string.activity_dds_time_lapse_rainfall_points_description,
           new Intent(MainActivity.this, AddRainFallStyleActivity.class),
           R.string.activity_dds_time_lapse_rainfall_url,
-          true
+          false
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+            R.string.activity_dds_multiple_geometries_title,
+            R.string.activity_dds_multiple_geometries_description,
+            new Intent(MainActivity.this, MultipleGeometriesActivity.class),
+            R.string.activity_dds_multiple_geometries_url, true
         ));
         currentCategory = R.id.nav_dds;
         break;

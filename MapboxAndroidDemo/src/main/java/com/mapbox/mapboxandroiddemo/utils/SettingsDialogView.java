@@ -10,9 +10,9 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.account.LandingActivity;
+import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 
 import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.LOGGED_OUT_OF_MAPBOX_ACCOUNT;
 import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.OPTED_IN_TO_ANALYTICS;
@@ -44,6 +44,7 @@ public class SettingsDialogView {
   }
 
   public void buildDialog() {
+    analyticsOptOutSwitch.setChecked(!analytics.isAnalyticsEnabled());
     new AlertDialog.Builder(context)
       .setView(customDialogView)
       .setTitle(R.string.settings_dialog_title)

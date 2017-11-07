@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply from: "$project.rootDir/script-git-version.gradle"
+apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
     compileSdkVersion 25
@@ -40,9 +41,12 @@ dependencies {
     compile 'com.google.android.gms:play-services-wearable:11.0.4'
     compile 'com.google.android.gms:play-services-location:11.0.4'
     // Mapbox dependencies
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.1.2@aar') {
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.2.0-beta.3@aar') {
         transitive = true
     }
+
+    compile 'com.google.firebase:firebase-crash:11.0.4'
+    compile 'com.google.firebase:firebase-perf:11.0.4'
     compile project(':SharedCode')
 }
 

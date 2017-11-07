@@ -23,6 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        tools:node="replace"
         android:theme="@android:style/Theme.DeviceDefault">
 
         <meta-data
