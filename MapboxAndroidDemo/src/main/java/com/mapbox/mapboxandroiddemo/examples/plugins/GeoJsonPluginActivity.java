@@ -31,6 +31,10 @@ import java.io.File;
 
 import timber.log.Timber;
 
+/**
+ * Retrieve and draw GeoJSON data using the GeoJSON plugin. Fetch the data via a URL,
+ * a file stored in the app, or a file stored somewhere on the device.
+ */
 public class GeoJsonPluginActivity extends AppCompatActivity implements OnMapReadyCallback,
   OnLoadingGeoJsonListener, OnMarkerEventListener, FileChooserDialog.FileCallback {
 
