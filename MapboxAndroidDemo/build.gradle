@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 apply from: "$project.rootDir/script-git-version.gradle"
 apply plugin: 'com.google.firebase.firebase-perf'
 
@@ -106,6 +107,10 @@ dependencies {
     compile 'com.github.Cutta:GifView:1.1'
     gpservicesCompile 'com.google.firebase:firebase-crash:11.0.4'
     compile project(':SharedCode')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
 apply from: '../checkstyle.gradle'
+repositories {
+    mavenCentral()
+}
