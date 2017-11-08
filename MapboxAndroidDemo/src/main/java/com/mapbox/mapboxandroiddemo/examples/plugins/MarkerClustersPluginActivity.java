@@ -50,7 +50,11 @@ public class MarkerClustersPluginActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         MarkerClustersPluginActivity.this.mapboxMap = mapboxMap;
-        startDemo();
+        mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(48.865539, 2.348603), 10.8),2800);
+
+        // Initializing the cluster plugin
+        clusterManagerPlugin = new ClusterManagerPlugin<>(MarkerClustersPluginActivity.this, mapboxMap);
+        initCameraListener();
       }
     });
   }
@@ -98,23 +102,17 @@ public class MarkerClustersPluginActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  protected void startDemo() {
-
-    mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(48.865539, 2.348603), 10.8),2800);
-
-    // Initializing the cluster plugin
-    clusterManagerPlugin = new ClusterManagerPlugin<>(this, mapboxMap);
-
+  protected void initCameraListener() {
     mapboxMap.addOnCameraIdleListener(clusterManagerPlugin);
     try {
-      readItems();
+      addItemsToClusterPlugin(R.raw.paris_bike_share_hubs);
     } catch (JSONException exception) {
       Toast.makeText(this, "Problem reading list of markers.", Toast.LENGTH_LONG).show();
     }
   }
 
-  private void readItems() throws JSONException {
-    InputStream inputStream = getResources().openRawResource(R.raw.radar_search);
+  private void addItemsToClusterPlugin(int rawResourceFile) throws JSONException {
+    InputStream inputStream = getResources().openRawResource(rawResourceFile);
     List<MyItem> items = new MyItemReader().read(inputStream);
     clusterManagerPlugin.addItems(items);
   }
