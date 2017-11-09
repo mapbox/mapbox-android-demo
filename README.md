@@ -4,7 +4,7 @@
 
 [![Build Status](https://www.bitrise.io/app/9778f1e5f744661f.svg?token=bNy-zoctPHivmB6e8inudA&branch=master)](https://www.bitrise.io/app/9778f1e5f744661f)
 
-This is a public demo of the Mapbox Android SDK that's [available now in the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo). It shows off all the examples found on [mapbox.com/android-sdk/examples](https://www.mapbox.com/android-sdk/examples/) using the same code. In addition, the app also includes a section called labs which combines the examples to create more complex demos. To get started using Mapbox in your Android application check out [the overview page](https://www.mapbox.com/android-sdk/).
+This is a public demo of the Mapbox Maps SDK for Android that's [available now in the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo). It shows off all the examples found on [mapbox.com/android-sdk/examples](https://www.mapbox.com/android-sdk/examples/) using the same code. In addition, the app also includes a section called labs which combines the examples to create more complex demos. To get started using Mapbox in your Android application check out [the overview page](https://www.mapbox.com/android-sdk/).
 
 ### Steps to adding a new example
 Feedback and contribution is encouraged in this repo, if you'd like to see a new example added in the app either [open an issue](https://github.com/mapbox/mapbox-android-demo/issues) or create it yourself and open a pull request following these steps:
