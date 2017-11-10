@@ -75,7 +75,7 @@ import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.CreateHeatmapPointsActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
@@ -640,10 +640,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_style_line_identity_property_url, false
         ));
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_dds_create_heatmap_points_title,
-          R.string.activity_dds_create_heatmap_points_description,
-          new Intent(MainActivity.this, CreateHeatmapPointsActivity.class),
-          R.string.activity_dds_create_heatmap_points_url
+          R.string.activity_dds_create_hotspots_points_title,
+          R.string.activity_dds_create_hotspots_points_description,
+          new Intent(MainActivity.this, CreateHotspotsActivity.class),
+          R.string.activity_dds_create_hotspots_points_url
         ));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_dds_json_vector_mix_title,
