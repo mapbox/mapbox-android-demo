@@ -14,6 +14,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.telemetry.location.LocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngineListener;
+import com.mapbox.services.android.telemetry.location.LocationEngineProvider;
 
 /**
  * Lock the camera centered above the user location.
@@ -38,7 +39,10 @@ public class LocationTrackingActivity extends WearableActivity {
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    locationEngine = GoogleLocationEngine.getLocationEngine(this);
+
+    LocationEngineProvider locationEngineProvider = new LocationEngineProvider(this);
+    locationEngine = locationEngineProvider.obtainBestLocationEngineAvailable();
+
     locationEngineListener = new LocationEngineListener() {
       @Override
       public void onConnected() {
