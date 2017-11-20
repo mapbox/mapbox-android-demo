@@ -278,7 +278,6 @@
         <activity
             android:name=".examples.styles.AdjustLayerOpacityActivity"
             android:label="@string/activity_styles_adjust_layer_opacity_title">
-            <m/>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
