@@ -529,11 +529,11 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
 
     @Override
     protected FeatureCollection doInBackground(Void... params) {
-      String geoJSON = loadGeoJsonFromAsset(activity, "sf_poi.geojson");
+      String geoJson = loadGeoJsonFromAsset(activity, "sf_poi.geojson");
       return new GsonBuilder()
         .registerTypeAdapter(Geometry.class, new GeometryDeserializer())
         .registerTypeAdapter(Position.class, new PositionDeserializer())
-        .create().fromJson(geoJSON, FeatureCollection.class);
+        .create().fromJson(geoJson, FeatureCollection.class);
     }
 
     @Override
@@ -678,7 +678,8 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
       holder.title.setText(feature.getStringProperty(PROPERTY_TITLE));
       holder.description.setText(feature.getStringProperty(PROPERTY_DESCRIPTION));
       holder.poi.setText(feature.getStringProperty(PROPERTY_POI));
-      holder.style.setText(feature.getStringProperty(PROPERTY_STYLE) + " - " + feature.getStringProperty(PROPERTY_SUB_STYLE));
+      holder.style.setText(feature.getStringProperty(PROPERTY_STYLE) + " - "
+        + feature.getStringProperty(PROPERTY_SUB_STYLE));
       holder.setClickListener(new ItemClickListener() {
         @Override
         public void onClick(View view, int position) {
@@ -698,7 +699,6 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
      * ViewHolder for RecyclerView.
      */
     static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-      
       TextView title;
       TextView poi;
       TextView style;
