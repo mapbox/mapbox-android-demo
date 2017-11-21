@@ -492,6 +492,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
+        <activity android:name=".examples.ig.SnapshotListActivity"
+            android:label="@string/activity_image_generator_snapshot_list_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity android:name=".examples.ig.SnapshotNotificationActivity"
+            android:label="@string/activity_image_generator_snapshot_list_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
 
         <activity
             android:name=".account.LandingActivity"
