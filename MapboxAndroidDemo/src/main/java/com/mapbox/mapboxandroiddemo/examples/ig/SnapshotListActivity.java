@@ -22,6 +22,7 @@ import timber.log.Timber;
 
 /**
  * Test activity showing how to use a the {@link com.mapbox.mapboxsdk.snapshotter.MapSnapshotter}
+ * Based off of SnapshotterActivity in the TestApp
  */
 
 public class SnapshotListActivity extends AppCompatActivity {
