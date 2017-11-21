@@ -557,13 +557,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         currentCategory = R.id.nav_mas;
         break;
       case R.id.nav_image_generator:
-        exampleItemModel.add(null);
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_image_generator_snapshot_list_title,
           R.string.activity_image_generator_snapshot_list_description,
           new Intent(MainActivity.this, SnapshotListActivity.class),
           R.string.activity_mas_matrix_url // just reused this from another category
         ));
+        currentCategory = R.id.nav_image_generator;
+        break;
       case R.id.nav_lab:
         exampleItemModel.add(null);
         exampleItemModel.add(new ExampleItemModel(
