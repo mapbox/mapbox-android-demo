@@ -21,10 +21,6 @@ import com.mapbox.mapboxsdk.snapshotter.MapSnapshotter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Mapbox on 11/21/17.
- */
-
 public class SnapshotNotificationActivity extends AppCompatActivity {
     private MapView mapView;
     private List<MapSnapshotter> snapshotters = new ArrayList<>();

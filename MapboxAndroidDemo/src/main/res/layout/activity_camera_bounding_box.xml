@@ -14,6 +14,17 @@
         mapbox:mapbox_cameraTargetLat="37.431"
         mapbox:mapbox_cameraTargetLng="-120.981"
         mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"
-        mapbox:mapbox_cameraZoom="4"/>
+        mapbox:mapbox_cameraZoom="4"
+        android:layout_above="@+id/notification_text_view"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/notification_text_view"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/mapboxWhite"
+        android:padding="20dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:text="@string/tap_on_map_for_notification"/>
 
 </RelativeLayout>
