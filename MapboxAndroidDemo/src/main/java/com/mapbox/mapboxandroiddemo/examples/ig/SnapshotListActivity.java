@@ -7,6 +7,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -33,6 +34,11 @@ public class SnapshotListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Mapbox access token is configured here. This needs to be called either in your application
+        // object or in the same activity which contains the mapview.
+        Mapbox.getInstance(this, getString(R.string.access_token));
+
         setContentView(R.layout.activity_snapshot_list);
 
         // Find the grid view and start snapshotting as soon
