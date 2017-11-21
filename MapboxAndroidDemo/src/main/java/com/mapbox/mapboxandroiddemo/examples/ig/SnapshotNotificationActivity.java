@@ -1,12 +1,13 @@
 package com.mapbox.mapboxandroiddemo.examples.ig;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -43,13 +44,6 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
             @Override
             public void onMapReady(final MapboxMap mapboxMap) {
 
-                // Toast instructing user to tap on the map to start animation and set bounds
-                Toast.makeText(
-                        SnapshotNotificationActivity.this,
-                        getString(R.string.tap_on_map_for_notification),
-                        Toast.LENGTH_LONG
-                ).show();
-
                 // When user clicks the map, fit the camera to the bounding box
                 mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
                     @Override
@@ -73,11 +67,14 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
         snapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
             @Override
             public void onSnapshotReady(MapSnapshot snapshot) {
+                PendingIntent pendingIntent = PendingIntent.getActivity(SnapshotNotificationActivity.this, 0, new Intent(SnapshotNotificationActivity.this, SnapshotNotificationActivity.class), 0);
+
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(SnapshotNotificationActivity.this, "123")
                                 .setSmallIcon(R.drawable.ic_circle)
                                 .setContentTitle(getString(R.string.activity_image_generator_snapshot_notification_title))
                                 .setContentText(getString(R.string.activity_image_generator_snapshot_notification_description))
+                                .setContentIntent(pendingIntent)
                                 .setLargeIcon(snapshot.getBitmap());
 
                 ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, mBuilder.build());
