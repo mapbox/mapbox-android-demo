@@ -47,7 +47,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
 
-        // When user clicks the map, fit the camera to the bounding box
+        // When user clicks the map, start the snapshotting process with the given parameters
         mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override
           public void onMapClick(@NonNull LatLng point) {
