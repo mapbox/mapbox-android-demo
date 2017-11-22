@@ -25,7 +25,6 @@ import timber.log.Timber;
  * Test activity showing how to use a the {@link com.mapbox.mapboxsdk.snapshotter.MapSnapshotter}
  * Based off of SnapshotterActivity in the TestApp
  */
-
 public class SnapshotGridActivity extends AppCompatActivity {
     private List<MapSnapshotter> snapshotters = new ArrayList<>();
     private GridLayout grid;
@@ -54,6 +53,9 @@ public class SnapshotGridActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Triggers the creation of the snapshotters that will fill the grid
+     */
     private void addSnapshots() {
         Timber.i("Creating snapshotters");
 
@@ -64,6 +66,11 @@ public class SnapshotGridActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Takes a snapshot with randomized options and insert it into the GridLayout
+     * @param row to insert image
+     * @param column to insert image
+     */
     private void startSnapShot(final int row, final int column) {
 
         // Define the dimensions
