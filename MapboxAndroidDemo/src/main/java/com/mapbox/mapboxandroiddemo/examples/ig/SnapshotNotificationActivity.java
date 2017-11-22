@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
@@ -19,12 +20,13 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshot;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshotter;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Test activity showing how to use a the {@link com.mapbox.mapboxsdk.snapshotter.MapSnapshotter}
+ * in a way that utilizes provided bitmaps in native notifications.
+ */
 public class SnapshotNotificationActivity extends AppCompatActivity {
     private MapView mapView;
-    private List<MapSnapshotter> snapshotters = new ArrayList<>();
+    private MapSnapshotter mapSnapshotter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
 
+        // Set a callback for when MapboxMap is ready to be used
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(final MapboxMap mapboxMap) {
@@ -48,39 +51,64 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
                 mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(@NonNull LatLng point) {
-                        startSnapShot(mapboxMap.getProjection().getVisibleRegion().latLngBounds);
+                        startSnapShot(
+                                mapboxMap.getProjection().getVisibleRegion().latLngBounds,
+                                mapView.getMeasuredHeight(),
+                                mapView.getMeasuredWidth());
                     }
                 });
             }
         });
     }
 
-    private void startSnapShot(LatLngBounds latLngBounds) {
+    /**
+     * Creates bitmap from given parameters, and creates a notification with that bitmap
+     * @param latLngBounds of map
+     * @param height of map
+     * @param width of map
+     */
+    private void startSnapShot(LatLngBounds latLngBounds, int height, int width) {
+        if (mapSnapshotter == null) {
+            // Initialize snapshotter with map dimensions and given bounds
+            MapSnapshotter.Options options = new MapSnapshotter.Options(
+                    width, height)
+                    .withRegion(latLngBounds);
 
-        // Define the dimensions based on map dimensions
-        MapSnapshotter.Options options = new MapSnapshotter.Options(
-                mapView.getMeasuredWidth(), mapView.getMeasuredHeight())
-                .withRegion(latLngBounds);
+            mapSnapshotter = new MapSnapshotter(SnapshotNotificationActivity.this, options);
+        } else {
+            // Reuse pre-existing MapSnapshotter instance
+            mapSnapshotter.setSize(width, height);
+            mapSnapshotter.setRegion(latLngBounds);
+        }
 
-        MapSnapshotter snapshotter = new MapSnapshotter(SnapshotNotificationActivity.this, options);
-
-        snapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
+        mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
             @Override
             public void onSnapshotReady(MapSnapshot snapshot) {
-                PendingIntent pendingIntent = PendingIntent.getActivity(SnapshotNotificationActivity.this, 0, new Intent(SnapshotNotificationActivity.this, SnapshotNotificationActivity.class), 0);
-
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(SnapshotNotificationActivity.this, "123")
-                                .setSmallIcon(R.drawable.ic_circle)
-                                .setContentTitle(getString(R.string.activity_image_generator_snapshot_notification_title))
-                                .setContentText(getString(R.string.activity_image_generator_snapshot_notification_description))
-                                .setContentIntent(pendingIntent)
-                                .setLargeIcon(snapshot.getBitmap());
-
-                ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, mBuilder.build());
+                createNotification(snapshot.getBitmap());
             }
         });
-        snapshotters.add(snapshotter);
+    }
+
+    /**
+     * Creates a notification with given bitmap as a large icon
+     * @param bitmap to set as large icon
+     */
+    private void createNotification(Bitmap bitmap) {
+        // Create a PendingIntent so that when the notification is pressed, the
+        // SnapshotNotificationActivity is reopened
+        PendingIntent pendingIntent = PendingIntent.getActivity(SnapshotNotificationActivity.this, 0, new Intent(SnapshotNotificationActivity.this, SnapshotNotificationActivity.class), 0);
+
+        // Create the notification
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(SnapshotNotificationActivity.this, "123")
+                        .setSmallIcon(R.drawable.ic_circle)
+                        .setContentTitle(getString(R.string.activity_image_generator_snapshot_notification_title))
+                        .setContentText(getString(R.string.activity_image_generator_snapshot_notification_description))
+                        .setContentIntent(pendingIntent)
+                        .setLargeIcon(bitmap);
+
+        // Trigger the notification
+        ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, mBuilder.build());
     }
 
     @Override
@@ -106,11 +134,10 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
         super.onPause();
         mapView.onPause();
 
-        // Make sure to stop the snapshotters on pause
-        for (MapSnapshotter snapshotter : snapshotters) {
-            snapshotter.cancel();
+        // Make sure to stop the snapshotter on pause if it exists
+        if (mapSnapshotter != null) {
+            mapSnapshotter.cancel();
         }
-        snapshotters.clear();
     }
 
     @Override
