@@ -562,13 +562,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_image_generator_snapshot_grid_title,
           R.string.activity_image_generator_snapshot_grid_description,
           new Intent(MainActivity.this, SnapshotGridActivity.class),
-          R.string.activity_mas_matrix_url // just reused this from another category
+          R.string.activity_image_generator_snapshot_grid_url
         ));
         exampleItemModel.add(new ExampleItemModel(
                 R.string.activity_image_generator_snapshot_notification_title,
                 R.string.activity_image_generator_snapshot_notification_description,
                 new Intent(MainActivity.this, SnapshotNotificationActivity.class),
-                R.string.activity_basic_simple_mapview_url // just reused this from another category
+                R.string.activity_image_generator_snapshot_notification_url
         ));
         currentCategory = R.id.nav_image_generator;
         break;
