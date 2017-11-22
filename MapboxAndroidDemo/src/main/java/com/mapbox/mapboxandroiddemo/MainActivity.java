@@ -165,8 +165,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           return;
         } else if (currentCategory == R.id.nav_query_map && position == 0) {
           return;
-        } else if (currentCategory == R.id.nav_offline && position == 0) {
-          return;
         }
         startActivity(exampleItemModel.get(position).getActivity());
 
@@ -471,7 +469,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         currentCategory = R.id.nav_camera;
         break;
       case R.id.nav_offline:
-        exampleItemModel.add(null);
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_offline_simple_title,
           R.string.activity_offline_simple_description,
