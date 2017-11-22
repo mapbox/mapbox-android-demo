@@ -98,7 +98,8 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
   private void createNotification(Bitmap bitmap) {
     // Create a PendingIntent so that when the notification is pressed, the
     // SnapshotNotificationActivity is reopened
-    PendingIntent pendingIntent = PendingIntent.getActivity(SnapshotNotificationActivity.this, 0, new Intent(SnapshotNotificationActivity.this, SnapshotNotificationActivity.class), 0);
+    PendingIntent pendingIntent = PendingIntent.getActivity(SnapshotNotificationActivity.this, 0,
+        new Intent(SnapshotNotificationActivity.this, SnapshotNotificationActivity.class), 0);
 
     // Create the notification
     NotificationCompat.Builder mBuilder =
