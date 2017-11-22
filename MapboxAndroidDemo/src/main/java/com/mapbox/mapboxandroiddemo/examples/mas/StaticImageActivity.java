@@ -1,9 +1,14 @@
 package com.mapbox.mapboxandroiddemo.examples.mas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.services.Constants;
 import com.mapbox.services.api.staticimage.v1.MapboxStaticImage;
@@ -14,6 +19,7 @@ import com.squareup.picasso.Picasso;
  * created URL, Picasso, a third party image loading library, is used to download and loading in the image.
  */
 public class StaticImageActivity extends AppCompatActivity {
+  CardView banner;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -64,5 +70,14 @@ public class StaticImageActivity extends AppCompatActivity {
       .build();
 
     Picasso.with(this).load(londonStaticImage.getUrl().toString()).into(londonImageView);
+    banner = (CardView) findViewById(R.id.banner);
+    banner.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        Intent intent = new Intent(StaticImageActivity.this, MainActivity.class);
+        intent.putExtra(MainActivity.EXTRA_NAV, R.id.nav_image_generator);
+        startActivity(intent);
+      }
+    });
   }
 }

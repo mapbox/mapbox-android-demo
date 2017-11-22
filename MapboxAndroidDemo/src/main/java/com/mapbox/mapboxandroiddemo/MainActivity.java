@@ -115,6 +115,7 @@ import static com.mapbox.mapboxandroiddemo.commons.StringConstants.SKIPPED_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+  public static String EXTRA_NAV = "EXTRA_NAV";
 
   private ArrayList<ExampleItemModel> exampleItemModel;
   private ExampleAdapter adapter;
@@ -148,11 +149,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       recyclerView.setLayoutManager(new LinearLayoutManager(this));
       recyclerView.setAdapter(adapter);
     }
-    if (savedInstanceState == null) {
-      listItems(R.id.nav_basics);
-    } else {
+    if (savedInstanceState != null) {
       currentCategory = savedInstanceState.getInt("CURRENT_CATEGORY");
       listItems(currentCategory);
+    } else if (getIntent().getIntExtra(EXTRA_NAV, -1) == R.id.nav_image_generator) {
+      currentCategory = R.id.nav_image_generator;
+      listItems(R.id.nav_image_generator);
+    } else {
+      listItems(R.id.nav_basics);
     }
 
     ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
