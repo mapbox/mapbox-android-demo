@@ -32,6 +32,7 @@ public class SimpleMapViewActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
+
         // Customize map with markers, polylines, etc.
 
       }
