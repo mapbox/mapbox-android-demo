@@ -70,9 +70,9 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
     private void startSnapShot(LatLngBounds latLngBounds, int height, int width) {
         if (mapSnapshotter == null) {
             // Initialize snapshotter with map dimensions and given bounds
-            MapSnapshotter.Options options = new MapSnapshotter.Options(
-                    width, height)
-                    .withRegion(latLngBounds);
+            MapSnapshotter.Options options =
+                    new MapSnapshotter.Options(width, height)
+                            .withRegion(latLngBounds);
 
             mapSnapshotter = new MapSnapshotter(SnapshotNotificationActivity.this, options);
         } else {
