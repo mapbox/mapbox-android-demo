@@ -37,6 +37,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
       R.layout.layout_mas_description_card, parent, false);
     View view3 = LayoutInflater.from(parent.getContext()).inflate(
       R.layout.layout_query_description_card, parent, false);
+    View view4 = LayoutInflater.from(parent.getContext()).inflate(
+            R.layout.layout_offline_description_card, parent, false);
 
     switch (viewType) {
       case 1:
@@ -45,6 +47,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return new ViewHolderDescription(view2);
       case 3:
         return new ViewHolderDescription(view3);
+      case 4:
+        return new ViewHolderDescription(view4);
       default:
         return new ViewHolder(view);
     }
@@ -58,6 +62,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
       return 2;
     } else if (((MainActivity) context).getCurrentCategory() == R.id.nav_query_map && position == 0) {
       return 3;
+    } else if (((MainActivity) context).getCurrentCategory() == R.id.nav_offline && position == 0) {
+      return 4;
     }
     return 0;
   }
