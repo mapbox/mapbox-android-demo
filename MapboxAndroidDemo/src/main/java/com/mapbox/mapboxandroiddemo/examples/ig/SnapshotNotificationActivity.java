@@ -102,7 +102,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
         new Intent(SnapshotNotificationActivity.this, SnapshotNotificationActivity.class), 0);
 
     // Create the notification
-    NotificationCompat.Builder mBuilder =
+    NotificationCompat.Builder builder =
         new NotificationCompat.Builder(SnapshotNotificationActivity.this, "123")
             .setSmallIcon(R.drawable.ic_circle)
             .setContentTitle(getString(R.string.activity_image_generator_snapshot_notification_title))
@@ -111,7 +111,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
             .setLargeIcon(bitmap);
 
     // Trigger the notification
-    ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, mBuilder.build());
+    ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, builder.build());
   }
 
   @Override
