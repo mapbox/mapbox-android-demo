@@ -115,6 +115,7 @@ import static com.mapbox.mapboxandroiddemo.commons.StringConstants.SKIPPED_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+  // Used to track internal navigation to the Snapshotter section
   public static String EXTRA_NAV = "EXTRA_NAV";
 
   private ArrayList<ExampleItemModel> exampleItemModel;
