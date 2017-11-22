@@ -55,7 +55,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
-import com.mapbox.mapboxandroiddemo.examples.ig.SnapshotListActivity;
+import com.mapbox.mapboxandroiddemo.examples.ig.SnapshotGridActivity;
 import com.mapbox.mapboxandroiddemo.examples.ig.SnapshotNotificationActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
@@ -559,9 +559,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         break;
       case R.id.nav_image_generator:
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_image_generator_snapshot_list_title,
-          R.string.activity_image_generator_snapshot_list_description,
-          new Intent(MainActivity.this, SnapshotListActivity.class),
+          R.string.activity_image_generator_snapshot_grid_title,
+          R.string.activity_image_generator_snapshot_grid_description,
+          new Intent(MainActivity.this, SnapshotGridActivity.class),
           R.string.activity_mas_matrix_url // just reused this from another category
         ));
         exampleItemModel.add(new ExampleItemModel(

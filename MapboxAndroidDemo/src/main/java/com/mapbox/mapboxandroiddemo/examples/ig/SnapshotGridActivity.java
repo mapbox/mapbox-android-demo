@@ -26,10 +26,9 @@ import timber.log.Timber;
  * Based off of SnapshotterActivity in the TestApp
  */
 
-public class SnapshotListActivity extends AppCompatActivity {
-    private GridLayout grid;
+public class SnapshotGridActivity extends AppCompatActivity {
     private List<MapSnapshotter> snapshotters = new ArrayList<>();
-
+    private GridLayout grid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class SnapshotListActivity extends AppCompatActivity {
         // object or in the same activity which contains the mapview.
         Mapbox.getInstance(this, getString(R.string.access_token));
 
-        setContentView(R.layout.activity_snapshot_list);
+        setContentView(R.layout.activity_snapshot_grid);
 
         // Find the grid view and start snapshotting as soon
         // as the view is measured
@@ -100,13 +99,13 @@ public class SnapshotListActivity extends AppCompatActivity {
             );
         }
 
-        MapSnapshotter snapshotter = new MapSnapshotter(SnapshotListActivity.this, options);
+        MapSnapshotter snapshotter = new MapSnapshotter(SnapshotGridActivity.this, options);
 
         snapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
             @Override
             public void onSnapshotReady(MapSnapshot snapshot) {
                 Timber.i("Got the snapshot");
-                ImageView imageView = new ImageView(SnapshotListActivity.this);
+                ImageView imageView = new ImageView(SnapshotGridActivity.this);
                 imageView.setImageBitmap(snapshot.getBitmap());
                 grid.addView(
                         imageView,
