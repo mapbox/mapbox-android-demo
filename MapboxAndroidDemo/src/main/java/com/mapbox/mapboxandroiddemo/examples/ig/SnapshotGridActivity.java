@@ -78,8 +78,6 @@ public class SnapshotGridActivity extends AppCompatActivity {
                 grid.getMeasuredWidth() / grid.getColumnCount(),
                 grid.getMeasuredHeight() / grid.getRowCount()
         )
-                // Optionally the pixel ratio
-                .withPixelRatio(1)
 
                 // Optionally the style
                 .withStyle((column + row) % 2 == 0 ? Style.TRAFFIC_DAY : Style.DARK);
