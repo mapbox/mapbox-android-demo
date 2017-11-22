@@ -35,7 +35,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
         Mapbox.getInstance(this, getString(R.string.access_token));
 
         // This contains the MapView in XML and needs to be called after the access token is configured.
-        setContentView(R.layout.activity_camera_bounding_box);
+        setContentView(R.layout.activity_snapshot_notification);
 
         mapView = (MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
