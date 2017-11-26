@@ -1,13 +1,10 @@
 package com.mapbox.mapboxandroiddemo.examples.ig;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -43,9 +40,14 @@ public class SnapshotShareActivity extends AppCompatActivity {
       public void onMapReady(final MapboxMap mapboxMap) {
 
         // When user clicks the map, start the snapshotting process with the given parameters
-        findViewById(R.id.camera_fab).setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton cameraFab = (FloatingActionButton) findViewById(R.id.camera_fab);
+
+        cameraFab.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+
+            Log.d("SnapshotShareActivity", "onClick:  clicked on fab");
+
             startSnapShot(
               mapboxMap.getProjection().getVisibleRegion().latLngBounds,
               mapView.getMeasuredHeight(),
@@ -82,13 +84,10 @@ public class SnapshotShareActivity extends AppCompatActivity {
       @Override
       public void onSnapshotReady(MapSnapshot snapshot) {
 
-        // TODO: Start share intent
-        // Construct a ShareIntent with link to image
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_STREAM, snapshot.getBitmap());
         shareIntent.setType("image/*");
-        // Launch sharing dialog for image
         startActivity(Intent.createChooser(shareIntent, "Share Image"));
 
       }
