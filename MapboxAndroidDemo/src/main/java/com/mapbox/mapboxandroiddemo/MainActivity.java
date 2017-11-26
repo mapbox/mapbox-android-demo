@@ -57,6 +57,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusi
 import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.ig.SnapshotGridActivity;
 import com.mapbox.mapboxandroiddemo.examples.ig.SnapshotNotificationActivity;
+import com.mapbox.mapboxandroiddemo.examples.ig.SnapshotShareActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
@@ -574,6 +575,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.activity_image_generator_snapshot_notification_description,
                 new Intent(MainActivity.this, SnapshotNotificationActivity.class),
                 R.string.activity_image_generator_snapshot_notification_url
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_image_generator_snapshot_share_title,
+          R.string.activity_image_generator_snapshot_share_description,
+          new Intent(MainActivity.this, SnapshotShareActivity.class),
+          R.string.activity_image_generator_snapshot_notification_url
         ));
         currentCategory = R.id.nav_image_generator;
         break;
