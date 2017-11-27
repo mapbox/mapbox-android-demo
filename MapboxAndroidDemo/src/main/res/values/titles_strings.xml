@@ -17,7 +17,7 @@
     <string name="activity_styles_vector_source_title">Add a vector tile source</string>
     <string name="activity_styles_add_wms_source_title">Add a WMS source</string>
     <string name="activity_styles_zoom_dependent_fill_color_title">Color dependent on zoom level</string>
-    <string name="activity_dds_create_heatmap_points_title">Create a heatmap from points</string>
+    <string name="activity_dds_create_hotspots_points_title">Create hotspots from points</string>
     <string name="activity_styles_data_clusters_title">Create and style data clusters</string>
     <string name="activity_styles_line_layer_title">Create a line layer</string>
     <string name="activity_styles_symbol_layer_title">Marker symbol layer</string>
@@ -55,6 +55,7 @@
     <string name="activity_mas_optimization_title">Show optimized directions on map</string>
     <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
+    <string name="activity_mas_maxtrix_api_title">Directions Matrix API</string>
     <string name="activity_plugins_traffic_plugin_title">Display real-time traffic</string>
     <string name="activity_plugins_building_plugin_title">Display buildings in 3D</string>
     <string name="activity_plugins_location_plugin_title">Show a user\'s location</string>
@@ -63,6 +64,7 @@
     <string name="activity_mas_map_matching_title">Map Matching</string>
     <string name="activity_lab_location_picker_title">Location picker</string>
     <string name="activity_lab_rv_on_map_title">Recyclerview interaction</string>
+    <string name="activity_lab_rv_symbol_layer_on_map_title">Recyclerview + SymbolLayer markers</string>
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
     <string name="activity_lab_space_station_location_title">Space station current location</string>
     <string name="activity_lab_picture_in_picture_title">Picture in picture</string>
@@ -70,5 +72,6 @@
     <string name="activity_lab_los_angeles_tourism_title">Los Angeles for tourists</string>
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
     <string name="activity_labs_mapillary_title">Mapillary integration</string>
+    <string name="activity_labs_inset_map_title">Inset map</string>
 
 </resources>

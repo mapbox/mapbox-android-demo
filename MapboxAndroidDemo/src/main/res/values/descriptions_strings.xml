@@ -18,7 +18,7 @@
     <string name="activity_styles_vector_source_description">Add a vector source to a map and display it as a layer.</string>
     <string name="activity_styles_add_wms_source_description">Adding an external Web Map Service layer to the map</string>
     <string name="activity_styles_zoom_dependent_fill_color_description">Make a property depend on the map zoom level, in this case, the water layers fill color.</string>
-    <string name="activity_dds_create_heatmap_points_description">Use the Mapbox Android SDK to visualize point data as a heatmap.</string>
+    <string name="activity_dds_create_hotspots_points_description">Use the Mapbox Android SDK to visualize point data as hotspots.</string>
     <string name="activity_styles_create_data_cluster_description">Use GeoJSON to visualize point data in clusters.</string>
     <string name="activity_styles_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
     <string name="activity_styles_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
@@ -57,6 +57,7 @@
     <string name="activity_mas_optimization_description">Use Mapbox\'s Optimization API to retrieve and display the quickest multi-stop route.</string>
     <string name="activity_mas_geocoding_description">Use Mapbox Android Service\'s geocoder to convert location text into geographic coordinates.</string>
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
+    <string name="activity_mas_matrix_api_description">Use the Directions Matrix API to receive driving times between Boston\'s various electric car charging stations</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
     <string name="activity_plugins_location_plugin_description">Use the location plugin to easily show a user\'s location on the map</string>
@@ -71,6 +72,8 @@
     <string name="activity_lab_los_angeles_tourism_description">Use the style API to highlight parks, hotels, and attractions. A pulsing animation is also added to the colors.</string>
     <string name="activity_lab_indoor_map_description">Display an indoor map of a building with toggles to switch between floor levels.</string>
     <string name="activity_lab_rv_on_map_description">Manipulate the map based on recyclerview interactions.</string>
+    <string name="activity_lab_rv_symbol_layer_on_map_description">Add markers via SymbolLayer and manipulate the map based on recyclerview interactions.</string>
     <string name="activity_lab_mapillary_description">Add Mapillary vector tiles to a map</string>
+    <string name="activity_labs_inset_map_description">Show a smaller inset map fragment and link it to a larger map for two map interaction. Great for gaming!</string>
 
 </resources>

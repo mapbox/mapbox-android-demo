@@ -19,7 +19,7 @@
     <string name="activity_styles_adjust_layer_opacity_url" translatable="false">http://i.imgur.com/0Av8kWD.png</string>
     <string name="activity_styles_vector_source_url" translatable="false">http://i.imgur.com/N0altyP.png</string>
     <string name="activity_styles_add_wms_source_url" translatable="false">http://i.imgur.com/k14WdRG.png</string>
-    <string name="activity_dds_create_heatmap_points_url" translatable="false">http://i.imgur.com/pAejKLH.png</string>
+    <string name="activity_dds_create_hotspots_points_url" translatable="false">http://i.imgur.com/pAejKLH.png</string>
     <string name="activity_styles_create_cluster_data_points_url" translatable="false">http://i.imgur.com/fGeZhcD.png</string>
     <string name="activity_styles_line_layer_url" translatable="false">http://i.imgur.com/Iqxoing.png</string>
     <string name="activity_styles_symbol_layer_url" translatable="false">http://i.imgur.com/TQ4iA0L.png</string>
@@ -58,6 +58,7 @@
     <string name="activity_mas_geocoding_url" translatable="false">http://i.imgur.com/mBJGh3P.png</string>
     <string name="activity_mas_static_image_url" translatable="false">http://i.imgur.com/COdES0F.png</string>
     <string name="activity_mas_optimization_url" translatable="false">http://i.imgur.com/guEQtlP.jpg</string>
+    <string name="activity_mas_matrix_url" translatable="false">https://i.imgur.com/65RlfRZ.png</string>
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
     <string name="activity_plugins_location_plugin_url" translatable="false">https://i.imgur.com/Opfwv6j.png</string>
@@ -72,6 +73,8 @@
     <string name="activity_lab_los_angeles_tourism_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
     <string name="activity_lab_indoor_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
     <string name="activity_lab_rv_on_map_url" translatable="false">http://i.imgur.com/8mQQuMo.jpg</string>
+    <string name="activity_lab_rv_symbol_layer_on_map_url" translatable="false">https://i.imgur.com/YQlJL3x.jpg</string>
     <string name="activity_lab_mapillary_url" translatable="false">http://i.imgur.com/w4SSif1.png</string>
+    <string name="activity_labs_inset_map_url" translatable="false">https://i.imgur.com/jp4wc24.png</string>
 
 </resources>
