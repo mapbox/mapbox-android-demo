@@ -63,7 +63,6 @@
     <string name="activity_plugins_geojson_plugin_description">Easily retrieve GeoJSON data from a url, asset, or path.</string>
     <string name="activity_mas_simplify_polyline_description">Using the polylines utility, simplify a polyline which reduces the amount of coordinates making up the polyline depending on tolerance.</string>
     <string name="activity_mas_map_matching_description">Match raw GPS points to the map so they aligns with the roads/pathways.</string>
-    <string name="activity_image_generator_snapshot_grid_description">Display multiple snapshots of maps in a grid.</string>
     <string name="activity_image_generator_snapshot_notification_description">Show a snapshotted image in a notification.</string>
     <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding.</string>
     <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>

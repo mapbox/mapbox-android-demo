@@ -492,12 +492,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
-        <activity android:name=".examples.ig.SnapshotGridActivity"
-            android:label="@string/activity_image_generator_snapshot_grid_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
         <activity android:name=".examples.ig.SnapshotNotificationActivity"
             android:label="@string/activity_image_generator_snapshot_notification_title">
             <meta-data
