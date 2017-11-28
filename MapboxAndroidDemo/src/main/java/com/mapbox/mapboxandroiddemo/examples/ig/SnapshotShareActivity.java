@@ -57,7 +57,7 @@ public class SnapshotShareActivity extends AppCompatActivity {
         // When user clicks the map, start the snapshotting process with the given parameters
         cameraFab.setOnClickListener(new View.OnClickListener() {
           @Override
-          public void onClick(View v) {
+          public void onClick(View view) {
 
             Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_SHORT).show();
             startSnapShot(
@@ -110,19 +110,20 @@ public class SnapshotShareActivity extends AppCompatActivity {
 
   private Uri getLocalBitmapUri(Bitmap bmp) {
     Uri bmpUri = null;
-    File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+    File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES),
+      "share_image_" + System.currentTimeMillis() + ".png");
     FileOutputStream out = null;
     try {
       out = new FileOutputStream(file);
       bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
       try {
         out.close();
-      } catch (IOException e) {
-        e.printStackTrace();
+      } catch (IOException exception) {
+        exception.printStackTrace();
       }
       bmpUri = Uri.fromFile(file);
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
+    } catch (FileNotFoundException exception) {
+      exception.printStackTrace();
     }
     return bmpUri;
   }
