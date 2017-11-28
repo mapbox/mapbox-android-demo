@@ -1,22 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:mapbox="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="45dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        mapbox:cardElevation="2dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/origin_green_dot_imageview"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="36dp"
+                android:src="@drawable/green_dot"
+                mapbox:layout_constraintEnd_toEndOf="@+id/destination_red_dot_imageview"
+                mapbox:layout_constraintStart_toStartOf="@+id/destination_red_dot_imageview"
+                mapbox:layout_constraintTop_toTopOf="@+id/constraint_layout" />
+
+            <EditText
+                android:id="@+id/origin_edittext"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:hint="@string/from_hint_text"
+                mapbox:layout_constraintBottom_toBottomOf="@+id/origin_green_dot_imageview"
+                mapbox:layout_constraintEnd_toEndOf="parent"
+                mapbox:layout_constraintStart_toStartOf="@+id/destination_edittext"
+                mapbox:layout_constraintTop_toTopOf="@+id/origin_green_dot_imageview" />
+
+
+            <ImageView
+                android:id="@+id/destination_red_dot_imageview"
+                android:layout_width="9dp"
+                android:layout_height="9dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="36dp"
+                android:src="@drawable/red_dot"
+                mapbox:layout_constraintStart_toStartOf="parent"
+                mapbox:layout_constraintTop_toBottomOf="@id/origin_edittext"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <EditText
+                android:id="@+id/destination_edittext"
+                android:layout_width="0dp"
+                android:layout_height="53dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="24dp"
+                android:hint="@string/to_hint_text"
+                mapbox:layout_constraintBottom_toBottomOf="parent"
+                mapbox:layout_constraintEnd_toEndOf="parent"
+                mapbox:layout_constraintStart_toEndOf="@+id/destination_red_dot_imageview"
+                mapbox:layout_constraintTop_toTopOf="@+id/destination_red_dot_imageview" />
+
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="40.73581"
-        mapbox:mapbox_cameraTargetLng="-73.99155"
-        mapbox:mapbox_cameraZoom="8"
-        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/cj44mfrt20f082snokim4ungi"
-        mapbox:mapbox_uiDoubleTapGestures="false"
-        mapbox:mapbox_uiRotateGestures="false"
-        mapbox:mapbox_uiScrollGestures="false"
-        mapbox:mapbox_uiTiltGestures="false"
-        mapbox:mapbox_uiZoomGestures="false"/>
+        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets" />
 
-</LinearLayout>
+</FrameLayout>

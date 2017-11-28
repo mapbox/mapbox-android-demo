@@ -24,6 +24,10 @@
     <string name="description_mas">Mapbox Android Services bundles many of the Mapbox APIs into a single SDK such as directions, geocoding, and many of the other utilities offered.</string>
     <string name="description_query">Examples here show how to query the map data to obtain information such as a features geometry or properties.</string>
 
+
+    <string name="from_hint_text">From</string>
+    <string name="to_hint_text">To</string>
+
     <!-- toolbar items -->
     <string name="info">Info</string>
 
