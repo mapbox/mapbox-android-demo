@@ -9,18 +9,18 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="34.0444"
-        mapbox:mapbox_cameraTargetLng="-118.2536"
-        mapbox:mapbox_cameraZoom="15"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light" />
+        mapbox:mapbox_cameraTargetLat="37.536172"
+        mapbox:mapbox_cameraTargetLng="126.916954"
+        mapbox:mapbox_cameraTilt="60"
+        mapbox:mapbox_cameraZoom="9"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_satellite_streets" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/camera_fab"
-        android:layout_width="wrap_content"
+        android:id="@+id/camera_share_snapshot_image_fab"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        fab:fab_icon="@drawable/ic_camera"
         fab:fab_size="normal" />
 
 </android.support.design.widget.CoordinatorLayout>

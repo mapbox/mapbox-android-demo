@@ -25,6 +25,9 @@
     <string name="description_query">Examples here show how to query the map data to obtain information such as a features geometry or properties.</string>
     <string name="description_offline">We have a new way to make client-side static maps. We call it the Map Snapshotter, click here for some examples.</string>
 
+    <!-- snapshotter -->
+    <string name="loading_snapshot_image">Loading snapshot image</string>
+
     <!-- toolbar items -->
     <string name="info">Info</string>
 
@@ -37,7 +40,7 @@
     <string name="offline_category">Offline</string>
     <string name="query_map_category">Query map</string>
     <string name="android_services_category">Android Services</string>
-    <string name="image_generator_category">Image Generator</string>
+    <string name="image_generator_category">Image generation</string>
     <string name="lab_category">Lab</string>
     <string name="share">Share</string>
     <string name="settings">Settings</string>

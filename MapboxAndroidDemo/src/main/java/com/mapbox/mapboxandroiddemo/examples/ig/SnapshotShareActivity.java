@@ -1,11 +1,14 @@
 package com.mapbox.mapboxandroiddemo.examples.ig;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -16,9 +19,16 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshot;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshotter;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class SnapshotShareActivity extends AppCompatActivity {
   private MapView mapView;
   private MapSnapshotter mapSnapshotter;
+  private MapboxMap mapboxMap;
+  private FloatingActionButton cameraFab;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +41,10 @@ public class SnapshotShareActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_snapshot_share);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    cameraFab = findViewById(R.id.camera_share_snapshot_image_fab);
+    cameraFab.setImageResource(R.drawable.ic_camera);
+
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
 
     // Set a callback for when MapboxMap is ready to be used
@@ -39,15 +52,14 @@ public class SnapshotShareActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
 
-        // When user clicks the map, start the snapshotting process with the given parameters
-        FloatingActionButton cameraFab = (FloatingActionButton) findViewById(R.id.camera_fab);
+        SnapshotShareActivity.this.mapboxMap = mapboxMap;
 
+        // When user clicks the map, start the snapshotting process with the given parameters
         cameraFab.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
 
-            Log.d("SnapshotShareActivity", "onClick:  clicked on fab");
-
+            Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_SHORT).show();
             startSnapShot(
               mapboxMap.getProjection().getVisibleRegion().latLngBounds,
               mapView.getMeasuredHeight(),
@@ -69,8 +81,7 @@ public class SnapshotShareActivity extends AppCompatActivity {
     if (mapSnapshotter == null) {
       // Initialize snapshotter with map dimensions and given bounds
       MapSnapshotter.Options options =
-        new MapSnapshotter.Options(width, height)
-          .withRegion(latLngBounds);
+        new MapSnapshotter.Options(width, height).withRegion(latLngBounds).withStyle(mapboxMap.getStyleUrl());
 
       mapSnapshotter = new MapSnapshotter(SnapshotShareActivity.this, options);
     } else {
@@ -84,14 +95,36 @@ public class SnapshotShareActivity extends AppCompatActivity {
       @Override
       public void onSnapshotReady(MapSnapshot snapshot) {
 
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, snapshot.getBitmap());
-        shareIntent.setType("image/*");
-        startActivity(Intent.createChooser(shareIntent, "Share Image"));
+        Bitmap bitmapOfMapSnapshotImage = snapshot.getBitmap();
 
+        Uri bmpUri = getLocalBitmapUri(bitmapOfMapSnapshotImage);
+
+        Intent shareIntent = new Intent();
+        shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
+        shareIntent.setType("image/*");
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(Intent.createChooser(shareIntent, "Share map image"));
       }
     });
+  }
+
+  private Uri getLocalBitmapUri(Bitmap bmp) {
+    Uri bmpUri = null;
+    File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+    FileOutputStream out = null;
+    try {
+      out = new FileOutputStream(file);
+      bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
+      try {
+        out.close();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      bmpUri = Uri.fromFile(file);
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
+    return bmpUri;
   }
 
   @Override
