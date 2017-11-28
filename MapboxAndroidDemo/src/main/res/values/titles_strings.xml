@@ -61,6 +61,7 @@
     <string name="activity_plugins_geojson_plugin_title">Load GeoJSON data</string>
     <string name="activity_mas_simplify_polyline_title">Simplify a polyline</string>
     <string name="activity_mas_map_matching_title">Map Matching</string>
+    <string name="activity_image_generator_snapshot_notification_title">Snapshot notification</string>
     <string name="activity_lab_location_picker_title">Location picker</string>
     <string name="activity_lab_rv_on_map_title">Recyclerview interaction</string>
     <string name="activity_lab_rv_symbol_layer_on_map_title">Recyclerview + SymbolLayer markers</string>
