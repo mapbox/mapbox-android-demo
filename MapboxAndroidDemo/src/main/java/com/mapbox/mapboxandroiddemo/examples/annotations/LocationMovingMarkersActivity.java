@@ -1,24 +1,16 @@
 package com.mapbox.mapboxandroiddemo.examples.annotations;
 
-import android.graphics.PointF;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.Log;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Icon;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -44,21 +36,21 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import timber.log.Timber;
 
-public class LocationMovingMarkersActivity extends AppCompatActivity implements OnMapReadyCallback,
-  LocationEngineListener, PermissionsListener, MapboxMap.OnCameraMoveCanceledListener {
+public class LocationMovingMarkersActivity extends AppCompatActivity implements OnMapReadyCallback, LocationEngineListener,
+  PermissionsListener {
 
   private PermissionsManager permissionsManager;
   private LocationLayerPlugin locationPlugin;
   private LocationEngine locationEngine;
   private MapboxMap mapboxMap;
   private MapView mapView;
-  private ImageView hoveringMarker;
+  private ImageView hoveringOriginMarker;
 
   private EditText originEditText;
-  private Marker droppedMarker;
+  private EditText destinationEditText;
 
+  private String TAG = "LocationMovingMarkersActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -72,65 +64,60 @@ public class LocationMovingMarkersActivity extends AppCompatActivity implements 
     setContentView(R.layout.activity_location_with_moving_marker);
 
     originEditText = findViewById(R.id.origin_edittext);
+    destinationEditText = findViewById(R.id.destination_geocoder_widget);
 
-    mapView = findViewById(R.id.mapView);
+    mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
 
-    // When user is still picking a location, we hover a marker above the mapboxMap in the center.
-    // This is done by using an image view with the default marker found in the SDK. You can
     // swap out for your own marker image, just make sure it matches up with the dropped marker.
-    hoveringMarker = new ImageView(this);
-    hoveringMarker.setImageResource(R.drawable.red_marker);
-    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-      ViewGroup.LayoutParams.WRAP_CONTENT,
-      ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-    hoveringMarker.setLayoutParams(params);
-    mapView.addView(hoveringMarker);
+
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(final MapboxMap mapboxMap) {
+
     LocationMovingMarkersActivity.this.mapboxMap = mapboxMap;
     enableLocationPlugin();
-    addMarkers();
-  }
 
-  @Override
-  public void onCameraMoveCanceled() {
-    Timber.d("onCameraMoveCanceled");
-    if (mapboxMap != null) {
-      if (droppedMarker == null) {
-        // We first find where the hovering marker position is relative to the mapboxMap.
-        // Then we set the visibility to gone.
-        float coordinateX = hoveringMarker.getLeft() + (hoveringMarker.getWidth() / 2);
-        float coordinateY = hoveringMarker.getBottom();
-        float[] coords = new float[] {coordinateX, coordinateY};
-        final LatLng latLng = mapboxMap.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
-        hoveringMarker.setVisibility(View.GONE);
+    this.mapboxMap.addOnCameraMoveCancelListener(new MapboxMap.OnCameraMoveCanceledListener() {
+      @Override
+      public void onCameraMoveCanceled() {
 
-        // Create the marker icon the dropped marker will be using.
-        Icon icon = IconFactory.getInstance(this).fromResource(R.drawable.red_marker);
+        Log.d(TAG, "onCameraMoveCanceled starting");
+/*
+        if (mapboxMap != null) {
+          if (droppedMarker == null) {
+            // We first find where the hovering marker position is relative to the mapboxMap.
+            // Then we set the visibility to gone.
+            float coordinateX = hoveringOriginMarker.getLeft() + (hoveringOriginMarker.getWidth() / 2);
+            float coordinateY = hoveringOriginMarker.getBottom();
+            float[] coords = new float[] {coordinateX, coordinateY};
+            final LatLng latLng = mapboxMap.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
+            hoveringOriginMarker.setVisibility(View.GONE);
 
-        // Placing the marker on the mapboxMap as soon as possible causes the illusion
-        // that the hovering marker and dropped marker are the same.
-        droppedMarker = mapboxMap.addMarker(new MarkerOptions().position(latLng).icon(icon));
+            // Create the marker icon the dropped marker will be using.
+            Icon icon = IconFactory.getInstance(LocationMovingMarkersActivity.this).fromResource(R.drawable.red_marker);
 
-        // Finally we get the geocoding information
-        reverseGeocode(latLng);
-      } else {
-        // When the marker is dropped, the user has clicked the button to cancel.
-        // Therefore, we pick the marker back up.
-        mapboxMap.removeMarker(droppedMarker);
+            // Placing the marker on the mapboxMap as soon as possible causes the illusion
+            // that the hovering marker and dropped marker are the same.
+            droppedMarker = mapboxMap.addMarker(new MarkerOptions().position(latLng).icon(icon));
 
-        // Lastly, set the hovering marker back to visible.
-        hoveringMarker.setVisibility(View.VISIBLE);
-        droppedMarker = null;
+            // Finally we get the geocoding information
+            reverseGeocode(latLng);
+          } else {
+            // When the marker is dropped, the user has clicked the button to cancel.
+            // Therefore, we pick the marker back up.
+            mapboxMap.removeMarker(droppedMarker);
+
+            // Lastly, set the hovering marker back to visible.
+            hoveringOriginMarker.setVisibility(View.VISIBLE);
+            droppedMarker = null;
+          }
+        }
+*/
       }
-    }
-  }
-
-  private void addMarkers() {
+    });
 
   }
 
@@ -154,12 +141,12 @@ public class LocationMovingMarkersActivity extends AppCompatActivity implements 
             // the dropped marker snippet with the information. Lastly we open the info
             // window.
             if (feature != null) {
-              Timber.d(feature.getAddress());
-              Timber.d(feature.getLanguage());
-              Timber.d(feature.getMatchingPlaceName());
-              Timber.d(feature.getMatchingText());
-              Timber.d(feature.getText());
-              Timber.d(feature.getPlaceType()[0]);
+              Log.d(TAG, feature.getAddress());
+              Log.d(TAG, feature.getLanguage());
+              Log.d(TAG, feature.getMatchingPlaceName());
+              Log.d(TAG, feature.getMatchingText());
+              Log.d(TAG, feature.getText());
+              Log.d(TAG, feature.getPlaceType()[0]);
               originEditText.setText(feature.getAddress());
             }
           }
@@ -167,11 +154,11 @@ public class LocationMovingMarkersActivity extends AppCompatActivity implements 
 
         @Override
         public void onFailure(Call<GeocodingResponse> call, Throwable throwable) {
-          Timber.d("Geocoding Failure: " + throwable.getMessage());
+          Log.d(TAG, "Geocoding Failure: " + throwable.getMessage());
         }
       });
     } catch (ServicesException servicesException) {
-      Timber.d("Error geocoding: " + servicesException.toString());
+      Log.d(TAG, "Error geocoding: " + servicesException.toString());
       servicesException.printStackTrace();
     }
   }
