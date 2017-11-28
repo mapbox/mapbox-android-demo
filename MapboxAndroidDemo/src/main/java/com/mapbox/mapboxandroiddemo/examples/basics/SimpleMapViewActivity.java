@@ -35,6 +35,7 @@ public class SimpleMapViewActivity extends AppCompatActivity {
 
         // Customize map with markers, polylines, etc.
 
+
       }
     });
   }

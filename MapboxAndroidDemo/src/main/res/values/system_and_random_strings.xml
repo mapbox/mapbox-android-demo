@@ -25,8 +25,9 @@
     <string name="description_query">Examples here show how to query the map data to obtain information such as a features geometry or properties.</string>
 
 
-    <string name="from_hint_text">  From</string>
-    <string name="to_hint_text">  To</string>
+    <string name="ride_share_from_hint_text">  From</string>
+    <string name="ride_share_to_hint_text">  To</string>
+    <string name="ride_share_origin">%1$s %2$s</string>
 
     <!-- toolbar items -->
     <string name="info">Info</string>
