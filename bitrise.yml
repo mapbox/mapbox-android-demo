@@ -52,7 +52,7 @@ workflows:
 
             echo "Run tests on firebase:"
             gcloud auth activate-service-account --key-file secret.json --project mapbox-android-demo
-            gcloud firebase test android run --type robo --app MapboxAndroidDemo/build/outputs/apk/MapboxAndroidDemo-gpservices-debug.apk --device-ids shamu --os-version-ids 22 --locales en --orientations portrait --timeout 10m
+            gcloud firebase test android run --type robo --app MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk --device-ids shamu --os-version-ids 22 --locales en --orientations portrait --timeout 10m
     - deploy-to-bitrise-io:
         inputs:
         - notify_user_groups: none

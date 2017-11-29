@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.styles;
+package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -26,9 +26,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 
 /**
- * Use Mapbox GL clustering to visualize point data as a heatmap.
+ * Use Mapbox GL clustering to visualize point data as hotspots.
  */
-public class CreateHeatmapPointsActivity extends AppCompatActivity {
+public class CreateHotspotsActivity extends AppCompatActivity {
 
   private MapView mapView;
 
@@ -41,7 +41,7 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_style_create_heatmap_points);
+    setContentView(R.layout.activity_style_create_hotspots_points);
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -107,11 +107,11 @@ public class CreateHeatmapPointsActivity extends AppCompatActivity {
           new GeoJsonOptions()
             .withCluster(true)
             .withClusterMaxZoom(15) // Max zoom to cluster points on
-            .withClusterRadius(20) // Use small cluster radius for the heatmap look
+            .withClusterRadius(20) // Use small cluster radius for the hotspots look
         )
       );
     } catch (MalformedURLException malformedUrlException) {
-      Log.e("heatmapActivity", "Check the URL " + malformedUrlException.getMessage());
+      Log.e("CreateHotspotsActivity", "Check the URL " + malformedUrlException.getMessage());
     }
 
     // Use the earthquakes source to create four layers:

@@ -51,7 +51,7 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    // Set bounds to Iceland
+    // Set bounds to Australia
     mapboxMap.setLatLngBoundsForCameraTarget(AUSTRALIA_BOUNDS);
     mapboxMap.setMinZoomPreference(2);
 

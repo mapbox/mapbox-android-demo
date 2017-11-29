@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.WearableRecyclerView;
 
+import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
@@ -25,6 +26,7 @@ public class MainActivity extends WearableActivity implements ExampleAdapter.Ite
   private AnalyticsTracker analytics;
 
   @Override
+  @AddTrace(name = "onCreateMainActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
@@ -57,6 +59,7 @@ public class MainActivity extends WearableActivity implements ExampleAdapter.Ite
   }
 
   @Override
+  @AddTrace(name = "onItemSelected")
   public void onItemSelected(int position) {
     startActivity(exampleItemModels.get(position).getActivity());
     analytics.clickedOnIndividualExample(getString(exampleItemModels.get(position).getTitle()), false);
