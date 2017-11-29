@@ -53,7 +53,7 @@ public class AnimatedImageSourceActivity extends AppCompatActivity implements On
       new LatLng(46.437, -71.516),
       new LatLng(37.936, -71.516),
       new LatLng(37.936, -80.425));
-    ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.waving_bear);
+    ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.waving_bear_gif);
     map.addSource(imageSource);
 
     RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
