@@ -27,6 +27,7 @@ import com.mapbox.mapboxsdk.snapshotter.MapSnapshotter;
 public class SnapshotNotificationActivity extends AppCompatActivity {
   private MapView mapView;
   private MapSnapshotter mapSnapshotter;
+  private MapboxMap mapboxMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
+
+        SnapshotNotificationActivity.this.mapboxMap = mapboxMap;
 
         // When user clicks the map, start the snapshotting process with the given parameters
         mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
@@ -72,8 +75,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
     if (mapSnapshotter == null) {
       // Initialize snapshotter with map dimensions and given bounds
       MapSnapshotter.Options options =
-          new MapSnapshotter.Options(width, height)
-              .withRegion(latLngBounds);
+          new MapSnapshotter.Options(width, height).withStyle(mapboxMap.getStyleUrl()).withRegion(latLngBounds);
 
       mapSnapshotter = new MapSnapshotter(SnapshotNotificationActivity.this, options);
     } else {
