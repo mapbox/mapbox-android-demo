@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -46,18 +47,19 @@ public class AnimatedImageSourceActivity extends AppCompatActivity implements On
 
   @Override
   public void onMapReady(@NonNull final MapboxMap map) {
+
     LatLngQuad quad = new LatLngQuad(
       new LatLng(46.437, -80.425),
       new LatLng(46.437, -71.516),
       new LatLng(37.936, -71.516),
       new LatLng(37.936, -80.425));
-    ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.waving_bear_gif);
+    ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.waving_bear);
     map.addSource(imageSource);
 
     RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
     map.addLayer(layer);
 
-    InputStream gifInputStream = getResources().openRawResource(R.raw.waving_bear_gif);
+    InputStream gifInputStream = getResources().openRawResource(R.raw.waving_bear);
     runnable = new RefreshImageRunnable(imageSource, Movie.decodeStream(gifInputStream), handler = new Handler());
     handler.postDelayed(runnable, 100);
   }
