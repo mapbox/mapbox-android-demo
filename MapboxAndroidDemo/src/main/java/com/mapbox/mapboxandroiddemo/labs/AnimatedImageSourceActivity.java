@@ -6,7 +6,6 @@ import android.graphics.Movie;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -46,7 +45,7 @@ public class AnimatedImageSourceActivity extends AppCompatActivity implements On
       new LatLng(46.437, -71.516),
       new LatLng(37.936, -71.516),
       new LatLng(37.936, -80.425));
-    ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.raw.waving_bear_gif);
+    ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.waving_bear_gif);
     map.addSource(imageSource);
 
     RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
