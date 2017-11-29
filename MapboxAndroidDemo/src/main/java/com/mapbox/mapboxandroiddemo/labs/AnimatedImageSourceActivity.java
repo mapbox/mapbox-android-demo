@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -21,6 +20,9 @@ import com.mapbox.mapboxsdk.style.sources.ImageSource;
 
 import java.io.InputStream;
 
+/**
+ * Add an animated image (GIF) anywhere on the map
+ */
 public class AnimatedImageSourceActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private static final String ID_IMAGE_SOURCE = "animated_image_source";
@@ -38,6 +40,7 @@ public class AnimatedImageSourceActivity extends AppCompatActivity implements On
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_animated_image_source);
 
     mapView = findViewById(R.id.mapView);
@@ -48,17 +51,26 @@ public class AnimatedImageSourceActivity extends AppCompatActivity implements On
   @Override
   public void onMapReady(@NonNull final MapboxMap map) {
 
+    // Set the bounds/size of the gif
     LatLngQuad quad = new LatLngQuad(
       new LatLng(46.437, -80.425),
       new LatLng(46.437, -71.516),
       new LatLng(37.936, -71.516),
       new LatLng(37.936, -80.425));
+
+    // Create an image source object with a unique id, the bounds, and drawable image
     ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.waving_bear_gif);
+
+    // Add the source to the map
     map.addSource(imageSource);
 
+    // Create an raster layer with a unique id and the image source created above
     RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
+
+    // Add the layer to the map
     map.addLayer(layer);
 
+    // Use the RefreshImageRunnable class and runnable to quickly display images for a GIF/video UI experience
     InputStream gifInputStream = getResources().openRawResource(R.raw.waving_bear);
     runnable = new RefreshImageRunnable(imageSource, Movie.decodeStream(gifInputStream), handler = new Handler());
     handler.postDelayed(runnable, 100);
