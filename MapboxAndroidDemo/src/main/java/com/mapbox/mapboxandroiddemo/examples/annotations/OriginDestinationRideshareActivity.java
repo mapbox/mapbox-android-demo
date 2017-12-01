@@ -12,13 +12,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -50,7 +48,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LocationMovingMarkersActivity extends AppCompatActivity implements OnMapReadyCallback,
+public class OriginDestinationRideshareActivity extends AppCompatActivity implements OnMapReadyCallback,
   LocationEngineListener,
   PermissionsListener {
 
@@ -60,11 +58,16 @@ public class LocationMovingMarkersActivity extends AppCompatActivity implements 
   private MapboxMap mapboxMap;
   private MapView mapView;
   private Marker droppedMarker;
-  private ImageView hoveringMarker;
+  private ImageView greenCenterScreenOriginPin;
 
   private EditText originEditText;
-  private LatLng selectedLatLng;
-  private String TAG = "LocationMovingMarkersActivity";
+  private LatLng searchedOriginLatLng;
+  private LatLng finalOriginLatLng;
+
+  private String searchedLocation;
+  private String finalSearchedLocation;
+  private boolean hasSetOriginLocation;
+  private String TAG = "OriginDestinationRideshareActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -79,67 +82,61 @@ public class LocationMovingMarkersActivity extends AppCompatActivity implements 
 
     originEditText = findViewById(R.id.origin_edittext);
 
-
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
 
-    hoveringMarker = new ImageView(this);
-    hoveringMarker.setImageResource(R.drawable.green_marker);
+    greenCenterScreenOriginPin = new ImageView(this);
+    greenCenterScreenOriginPin.setImageResource(R.drawable.green_marker);
     FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
       ViewGroup.LayoutParams.WRAP_CONTENT,
       ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-    hoveringMarker.setLayoutParams(params);
-    mapView.addView(hoveringMarker);
+    greenCenterScreenOriginPin.setLayoutParams(params);
+    mapView.addView(greenCenterScreenOriginPin);
 
   }
 
   @Override
   public void onMapReady(final MapboxMap mapboxMap) {
 
-    LocationMovingMarkersActivity.this.mapboxMap = mapboxMap;
+    OriginDestinationRideshareActivity.this.mapboxMap = mapboxMap;
     enableLocationPlugin();
-    setUpGeocodeWidget();
+    setUpOriginGeocodeWidget();
+    setUpDestinationGeocodeWidget();
 
     mapboxMap.addOnCameraIdleListener(new MapboxMap.OnCameraIdleListener() {
       @Override
       public void onCameraIdle() {
-        crunchOriginLogic();
+        if (finalOriginLatLng == null) {
+          getLatLngOfCenterMarker();
+        }
+      }
+    });
+
+    findViewById(R.id.set_origin_button).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+
+        finalOriginLatLng = searchedOriginLatLng;
+        greenCenterScreenOriginPin.setVisibility(View.INVISIBLE);
+        hasSetOriginLocation = true;
+
       }
     });
   }
 
-  private void crunchOriginLogic() {
+  private void getLatLngOfCenterMarker() {
     if (mapboxMap != null) {
       /*if (droppedMarker == null) {
         // We first find where the hovering marker position is relative to the mapboxMap.
         // Then we set the visibility to gone.*/
-      float coordinateX = hoveringMarker.getLeft() + (hoveringMarker.getWidth() / 2);
-      float coordinateY = hoveringMarker.getBottom();
+      float coordinateX = greenCenterScreenOriginPin.getLeft() + (greenCenterScreenOriginPin.getWidth() / 2);
+      float coordinateY = greenCenterScreenOriginPin.getBottom();
       float[] coords = new float[] {coordinateX, coordinateY};
-      selectedLatLng = mapboxMap.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
-//        hoveringMarker.setVisibility(View.GONE);
+      searchedOriginLatLng = mapboxMap.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
 
-      // Create the marker icon the dropped marker will be using.
-//        Icon icon = IconFactory.getInstance(LocationMovingMarkersActivity.this).fromResource(R.drawable.red_marker);
-
-      // Placing the marker on the mapboxMap as soon as possible causes the illusion
-      // that the hovering marker and dropped marker are the same.
-//        droppedMarker = mapboxMap.addMarker(new MarkerOptions().position(selectedLatLng).icon(icon));
-
-      // Finally we get the geocoding information
-      reverseGeocode(selectedLatLng);
-      /*} else {
-        // When the marker is dropped, the user has clicked the button to cancel.
-        // Therefore, we pick the marker back up.
-        mapboxMap.removeMarker(droppedMarker);
-
-        // Lastly, set the hovering marker back to visible.
-        hoveringMarker.setVisibility(View.VISIBLE);
-        droppedMarker = null;
-      }*/
+      reverseGeocode(searchedOriginLatLng);
     }
-
   }
 
 
@@ -163,14 +160,12 @@ public class LocationMovingMarkersActivity extends AppCompatActivity implements 
             // the dropped marker snippet with the information. Lastly we open the info
             // window.
             if (feature != null) {
-              Log.d(TAG, "feature.getAddress()" + feature.getAddress());
-              Log.d(TAG, "feature.getLanguage()");
-              Log.d(TAG, "feature.getMatchingPlaceName()");
-              Log.d(TAG, "feature.getMatchingText()");
-              Log.d(TAG, "feature.getText()");
-              Log.d(TAG, "feature.getPlaceType()[0]");
-              originEditText.setText(String.format(getString(R.string.ride_share_origin),
-                feature.getAddress(), feature.getText()));
+              if (finalOriginLatLng == null) {
+                searchedLocation = String.format(getString(R.string.ride_share_origin),
+                  feature.getAddress() == null ? feature.getAddress() : "", feature.getText());
+
+                originEditText.setText(searchedLocation);
+              }
             }
           }
         }
@@ -186,21 +181,54 @@ public class LocationMovingMarkersActivity extends AppCompatActivity implements 
     }
   }
 
-  private void setUpGeocodeWidget() {
-    // Set up autocomplete widget
-    Log.d(TAG, "setUpGeocodeWidget() starting");
+  private void setUpOriginGeocodeWidget() {
+    GeocoderAutoCompleteView autocomplete = findViewById(R.id.origin_geocoder_widget);
+    autocomplete.setAccessToken(getString(R.string.access_token));
+    autocomplete.setType(GeocodingCriteria.TYPE_POI);
+    autocomplete.setOnFeatureListener(new GeocoderAutoCompleteView.OnFeatureListener() {
+      @Override
+      public void onFeatureClick(CarmenFeature feature) {
+        hideOnScreenKeyboard();
+        Position position = feature.asPosition();
 
+        if (hasSetOriginLocation) {
+          mapboxMap.addMarker(new MarkerOptions()
+            .position(new LatLng(finalOriginLatLng.getLatitude(), finalOriginLatLng.getLongitude()))
+            .icon(IconFactory.getInstance(OriginDestinationRideshareActivity.this).fromResource(R.drawable.green_marker))
+            .title(getString(R.string.geocode_activity_marker_options_title)));
+
+          addDestinationMarker(position.getLatitude(), position.getLongitude());
+          moveCameraToShowBothMarkers(position.getLatitude(), position.getLongitude());
+        } else {
+          Toast.makeText(OriginDestinationRideshareActivity.this, R.string.choose_origin_first, Toast.LENGTH_SHORT).show();
+        }
+
+      }
+    });
+  }
+
+  private void setUpDestinationGeocodeWidget() {
     GeocoderAutoCompleteView autocomplete = findViewById(R.id.destination_geocoder_widget);
     autocomplete.setAccessToken(getString(R.string.access_token));
     autocomplete.setType(GeocodingCriteria.TYPE_POI);
     autocomplete.setOnFeatureListener(new GeocoderAutoCompleteView.OnFeatureListener() {
       @Override
       public void onFeatureClick(CarmenFeature feature) {
-        Log.d(TAG, "onFeatureClick: feature has been returned");
         hideOnScreenKeyboard();
         Position position = feature.asPosition();
-        addDestinationMarker(position.getLatitude(), position.getLongitude());
-        moveCameraToShowBothMarkers(position.getLatitude(), position.getLongitude());
+
+        if (hasSetOriginLocation) {
+          mapboxMap.addMarker(new MarkerOptions()
+            .position(new LatLng(finalOriginLatLng.getLatitude(), finalOriginLatLng.getLongitude()))
+            .icon(IconFactory.getInstance(OriginDestinationRideshareActivity.this).fromResource(R.drawable.green_marker))
+            .title(getString(R.string.geocode_activity_marker_options_title)));
+
+          addDestinationMarker(position.getLatitude(), position.getLongitude());
+          moveCameraToShowBothMarkers(position.getLatitude(), position.getLongitude());
+        } else {
+          Toast.makeText(OriginDestinationRideshareActivity.this, R.string.choose_origin_first, Toast.LENGTH_SHORT).show();
+        }
+
       }
     });
   }
@@ -219,16 +247,16 @@ public class LocationMovingMarkersActivity extends AppCompatActivity implements 
   private void addDestinationMarker(double destinationLatitude, double destinationLongitude) {
     mapboxMap.addMarker(new MarkerOptions()
       .position(new LatLng(destinationLatitude, destinationLongitude))
-      .icon(IconFactory.getInstance(LocationMovingMarkersActivity.this).fromResource(R.drawable.red_marker))
+      .icon(IconFactory.getInstance(OriginDestinationRideshareActivity.this).fromResource(R.drawable.red_marker))
       .title(getString(R.string.geocode_activity_marker_options_title)));
   }
 
   private void moveCameraToShowBothMarkers(double destinationLatitude, double destinationLongitude) {
     LatLngBounds latLngBounds = new LatLngBounds.Builder()
       .include(new LatLng(destinationLatitude, destinationLongitude))
-      .include(new LatLng(selectedLatLng.getLatitude(), selectedLatLng.getLongitude()))
+      .include(new LatLng(searchedOriginLatLng.getLatitude(), searchedOriginLatLng.getLongitude()))
       .build();
-    mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 100), 5000);
+    mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 400), 2000);
   }
 
   @SuppressWarnings( {"MissingPermission"})
@@ -248,7 +276,7 @@ public class LocationMovingMarkersActivity extends AppCompatActivity implements 
 
   @SuppressWarnings( {"MissingPermission"})
   private void initializeLocationEngine() {
-    locationEngine = new LostLocationEngine(LocationMovingMarkersActivity.this);
+    locationEngine = new LostLocationEngine(OriginDestinationRideshareActivity.this);
     locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
     locationEngine.activate();
 
@@ -262,7 +290,7 @@ public class LocationMovingMarkersActivity extends AppCompatActivity implements 
 
   private void setCameraPosition(Location location) {
     mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-      new LatLng(location.getLatitude(), location.getLongitude()), 16));
+      new LatLng(location.getLatitude(), location.getLongitude()), 10));
   }
 
   @Override

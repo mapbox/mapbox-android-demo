@@ -206,8 +206,8 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
-            android:name=".examples.annotations.LocationMovingMarkersActivity"
-            android:label="@string/activity_annotation_location_and_markers_title">
+            android:name=".examples.annotations.OriginDestinationRideshareActivity"
+            android:label="@string/activity_lab_origin_destination_rideshare_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>

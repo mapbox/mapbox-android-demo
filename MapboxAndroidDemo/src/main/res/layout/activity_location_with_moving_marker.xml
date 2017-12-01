@@ -15,17 +15,6 @@
         android:layout_marginRight="8dp"
         mapbox:cardElevation="2dp">
 
-        <com.mapbox.services.android.ui.geocoder.GeocoderAutoCompleteView
-            android:id="@+id/destination_geocoder_widget"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="80dp"
-            android:hint="@string/ride_share_to_hint_text" />
-
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraint_layout"
             android:layout_width="match_parent"
@@ -35,48 +24,58 @@
                 android:id="@+id/origin_green_dot_imageview"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:layout_marginTop="36dp"
                 android:src="@drawable/green_dot"
-                mapbox:layout_constraintEnd_toEndOf="@+id/destination_red_dot_imageview"
                 mapbox:layout_constraintStart_toStartOf="@+id/destination_red_dot_imageview"
-                mapbox:layout_constraintTop_toTopOf="@+id/constraint_layout" />
+                tools:layout_editor_absoluteY="36dp" />
 
-            <EditText
-                android:id="@+id/origin_edittext"
-                android:layout_width="0dp"
+            <com.mapbox.services.android.ui.geocoder.GeocoderAutoCompleteView
+                android:id="@+id/destination_geocoder_widget"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginStart="6dp"
+                android:hint="@string/ride_share_to_hint_text"
+                mapbox:layout_constraintStart_toEndOf="@+id/destination_red_dot_imageview"
+                tools:layout_editor_absoluteY="80dp" />
+
+            <com.mapbox.services.android.ui.geocoder.GeocoderAutoCompleteView
+                android:id="@+id/origin_geocoder_widget"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:hint="@string/ride_share_from_hint_text"
-                mapbox:layout_constraintBottom_toBottomOf="@+id/origin_green_dot_imageview"
-                mapbox:layout_constraintEnd_toEndOf="parent"
-                mapbox:layout_constraintLeft_toRightOf="@id/origin_green_dot_imageview"
-                mapbox:layout_constraintTop_toTopOf="@+id/origin_green_dot_imageview" />
+                mapbox:layout_constraintBottom_toBottomOf="@+id/set_origin_button"
+                mapbox:layout_constraintEnd_toStartOf="@+id/set_origin_button"
+                mapbox:layout_constraintStart_toEndOf="@+id/origin_green_dot_imageview"
+                mapbox:layout_constraintTop_toTopOf="@+id/set_origin_button" />
+
+            <Button
+                android:id="@+id/set_origin_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/holo_green_dark"
+                android:elevation="2dp"
+                android:text="@string/set_pickup_button_text"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                mapbox:layout_constraintEnd_toEndOf="@+id/destination_geocoder_widget"
+                mapbox:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/destination_red_dot_imageview"
                 android:layout_width="9dp"
                 android:layout_height="9dp"
-                android:layout_marginBottom="32dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="36dp"
                 android:src="@drawable/red_dot"
-                mapbox:layout_constraintBottom_toBottomOf="parent"
-                mapbox:layout_constraintStart_toStartOf="parent"
-                mapbox:layout_constraintTop_toBottomOf="@id/origin_edittext" />
+                mapbox:layout_constraintBottom_toBottomOf="@+id/destination_geocoder_widget"
+                mapbox:layout_constraintTop_toTopOf="@+id/destination_geocoder_widget"
+                tools:layout_editor_absoluteX="16dp" />
 
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
 
 
-    <com.mapbox.mapboxsdk.maps.MapView
+    <!--<com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets" />
-
+        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/cj7t3i5yj0unt2rmt3y4b5e32" />-->
 </FrameLayout>

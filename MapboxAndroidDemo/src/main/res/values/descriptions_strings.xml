@@ -42,7 +42,6 @@
     <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
     <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize the info window.</string>
     <string name="activity_annotation_animated_marker_description">Animate the marker to a new position on the map.</string>
-    <string name="activity_annotation_location_and_markers_description">Adjust the camera to always show device location and moving markers.</string>
     <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
     <string name="activity_camera_restrict_description">Prevent a map from being panned to a different place.</string>
@@ -75,5 +74,6 @@
     <string name="activity_lab_rv_symbol_layer_on_map_description">Add markers via SymbolLayer and manipulate the map based on recyclerview interactions.</string>
     <string name="activity_lab_mapillary_description">Add Mapillary vector tiles to a map</string>
     <string name="activity_labs_inset_map_description">Show a smaller inset map fragment and link it to a larger map for two map interaction. Great for gaming!</string>
+    <string name="activity_lab_origin_destination_rideshare_description">Choose an origin and destination for a rideshare-like app experience.</string>
 
 </resources>

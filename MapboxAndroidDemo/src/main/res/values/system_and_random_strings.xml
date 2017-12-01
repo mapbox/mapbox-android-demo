@@ -28,6 +28,8 @@
     <string name="ride_share_from_hint_text">  From</string>
     <string name="ride_share_to_hint_text">  To</string>
     <string name="ride_share_origin">%1$s %2$s</string>
+    <string name="set_pickup_button_text">Set origin</string>
+    <string name="choose_origin_first">Don\'t forget to set an origin!</string>
 
     <!-- toolbar items -->
     <string name="info">Info</string>

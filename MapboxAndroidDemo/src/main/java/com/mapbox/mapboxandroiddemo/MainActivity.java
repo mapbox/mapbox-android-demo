@@ -37,7 +37,7 @@ import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivit
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.LocationMovingMarkersActivity;
+import com.mapbox.mapboxandroiddemo.examples.annotations.OriginDestinationRideshareActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
@@ -443,12 +443,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, AnimatedMarkerActivity.class),
           R.string.activity_annotation_animated_marker_url
         ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_annotation_location_and_markers_title,
-          R.string.activity_annotation_location_and_markers_description,
-          new Intent(MainActivity.this, LocationMovingMarkersActivity.class),
-          R.string.activity_annotation_location_and_markers_url
-        ));
         currentCategory = R.id.nav_annotations;
         break;
       case R.id.nav_camera:
@@ -623,6 +617,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_rv_symbol_layer_on_map_description,
           new Intent(MainActivity.this, RecyclerViewSymbolLayerActivity.class),
           R.string.activity_lab_rv_symbol_layer_on_map_url, true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_origin_destination_rideshare_title,
+          R.string.activity_lab_origin_destination_rideshare_description,
+          new Intent(MainActivity.this, OriginDestinationRideshareActivity.class),
+          R.string.activity_lab_origin_destination_rideshare_url
         ));
         currentCategory = R.id.nav_lab;
         break;
