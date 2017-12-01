@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.annotations;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -8,10 +9,16 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 
 public class MultipleMovingMarkersActivity extends AppCompatActivity {
 
   private MapView mapView;
+  private MapboxMap mapboxMap;
+  private Handler handler;
+  private Runnable runnable;
+
+  private static final String CAR_LOCATION_LAYER_ID = "car_marker_layer_id";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +37,35 @@ public class MultipleMovingMarkersActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
+        MultipleMovingMarkersActivity.this.mapboxMap = mapboxMap;
 
 
+        SymbolLayer carLocationLayer = new SymbolLayer(CAR_LOCATION_LAYER_ID, "");
 
+        // Use the RefreshCarIconLocationRunnable class and runnable to keep updating the car locations
+        runnable = new RefreshCarIconLocationRunnable(handler = new Handler());
+        handler.postDelayed(runnable, 100);
 
 
       }
     });
+  }
+
+  private static class RefreshCarIconLocationRunnable implements Runnable {
+
+    private Handler handler;
+
+    public RefreshCarIconLocationRunnable(Handler handler) {
+      this.handler = handler;
+    }
+
+    @Override
+    public void run() {
+
+
+
+      handler.postDelayed(this, 50);
+    }
   }
 
   @Override
