@@ -16,6 +16,8 @@ android {
         versionCode gitVersionCode
         versionName gitVersionName
 
+        vectorDrawables.useSupportLibrary = true
+
         buildConfigField "int", "MIN_SDK_VERSION", "$minSdkVersion.apiLevel"
     }
 
