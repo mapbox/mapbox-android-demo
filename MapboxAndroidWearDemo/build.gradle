@@ -1,15 +1,17 @@
 apply plugin: 'com.android.application'
-apply from: "$project.rootDir/script-git-version.gradle"
+apply from: "$project.rootDir/gradle/script-git-version.gradle"
 apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion androidVersions.compileSdkVersion
+    buildToolsVersion androidVersions.buildToolsVersion
 
     defaultConfig {
         applicationId "com.mapbox.mapboxandroiddemo"
-        minSdkVersion 23
-        targetSdkVersion 26
+
+        minSdkVersion androidVersions.minWearSdkVersion
+        targetSdkVersion androidVersions.targetSdkVersion
+
         versionCode gitVersionCode
         versionName gitVersionName
     }
@@ -35,19 +37,24 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    provided 'com.google.android.wearable:wearable:2.0.4'
-    compile 'com.google.android.support:wearable:2.0.4'
-    compile 'com.google.android.gms:play-services-wearable:11.0.4'
-    compile 'com.google.android.gms:play-services-location:11.0.4'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    compileOnly wearDependencies.googleWearable
+    implementation wearDependencies.supportGoogleWearable
+
+    implementation wearDependencies.gpsWearable
+    implementation wearDependencies.gpsLocation
+
     // Mapbox dependencies
-    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:5.2.0-beta.2@aar') {
+    api (dependenciesList.mapboxMapSdk) {
         transitive = true
     }
 
-    compile 'com.google.firebase:firebase-crash:11.0.4'
-    compile 'com.google.firebase:firebase-perf:11.0.4'
-    compile project(':SharedCode')
+    // Firebase
+    implementation dependenciesList.firebaseCrash
+    implementation dependenciesList.firebasePerf
+
+    implementation project(':SharedCode')
 }
 
-apply from: '../checkstyle.gradle'
+apply from: "$project.rootDir/gradle/checkstyle.gradle"

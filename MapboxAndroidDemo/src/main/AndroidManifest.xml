@@ -178,6 +178,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
+            android:name=".labs.AnimatedImageSourceActivity"
+            android:label="@string/activity_labs_gif_on_map_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
             android:name=".examples.annotations.CustomInfoWindowActivity"
             android:label="@string/activity_annotation_custom_info_window_title">
             <meta-data
@@ -278,7 +285,6 @@
         <activity
             android:name=".examples.styles.AdjustLayerOpacityActivity"
             android:label="@string/activity_styles_adjust_layer_opacity_title">
-            <m/>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -319,8 +325,8 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
         <activity
-            android:name=".examples.dds.CreateHeatmapPointsActivity"
-            android:label="@string/activity_dds_create_heatmap_points_title">
+            android:name=".examples.dds.CreateHotspotsActivity"
+            android:label="@string/activity_dds_create_hotspots_points_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
@@ -489,6 +495,12 @@
         <activity
             android:name=".examples.extrusions.Indoor3DMapActivity"
             android:label="@string/activity_extrusions_indoor_3d_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity android:name=".examples.ig.SnapshotNotificationActivity"
+            android:label="@string/activity_image_generator_snapshot_notification_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
