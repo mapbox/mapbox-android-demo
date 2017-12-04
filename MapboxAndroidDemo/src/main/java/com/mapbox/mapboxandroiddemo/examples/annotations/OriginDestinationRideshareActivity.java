@@ -10,9 +10,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -60,7 +60,7 @@ public class OriginDestinationRideshareActivity extends AppCompatActivity implem
   private Marker droppedMarker;
   private ImageView greenCenterScreenOriginPin;
 
-  private EditText originEditText;
+  private TextView originTextview;
   private LatLng searchedOriginLatLng;
   private LatLng finalOriginLatLng;
 
@@ -80,7 +80,7 @@ public class OriginDestinationRideshareActivity extends AppCompatActivity implem
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_location_with_moving_marker);
 
-    originEditText = findViewById(R.id.origin_edittext);
+    originTextview = findViewById(R.id.origin_textview);
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -164,7 +164,7 @@ public class OriginDestinationRideshareActivity extends AppCompatActivity implem
                 searchedLocation = String.format(getString(R.string.ride_share_origin),
                   feature.getAddress() == null ? feature.getAddress() : "", feature.getText());
 
-                originEditText.setText(searchedLocation);
+                originTextview.setText(searchedLocation);
               }
             }
           }
