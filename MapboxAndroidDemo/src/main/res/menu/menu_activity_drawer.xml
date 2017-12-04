@@ -36,6 +36,10 @@
             android:title="@string/android_services_category"/>
 
         <item
+            android:id="@+id/nav_image_generator"
+            android:title="@string/image_generator_category"/>
+
+        <item
             android:id="@+id/nav_lab"
             android:title="@string/lab_category"/>
     </group>
