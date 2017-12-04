@@ -61,8 +61,10 @@ public class OptimizationActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_mas_optimization);
 
-    // Initialize list of Position objects and add the origin Position to the list
-    initializeListOfStops();
+    stops = new ArrayList<>();
+
+    // Add the origin Position to the list
+    addFirstStopToStopsList();
 
     // Setup the MapView
     mapView = (MapView) findViewById(R.id.mapView);
@@ -91,6 +93,15 @@ public class OptimizationActivity extends AppCompatActivity {
           }
         });
         Toast.makeText(OptimizationActivity.this, R.string.click_instructions, Toast.LENGTH_SHORT).show();
+
+        map.setOnMapLongClickListener(new MapboxMap.OnMapLongClickListener() {
+          @Override
+          public void onMapLongClick(@NonNull LatLng point) {
+            map.clear();
+            stops.clear();
+            addFirstStopToStopsList();
+          }
+        });
       }
     });
   }
@@ -113,9 +124,7 @@ public class OptimizationActivity extends AppCompatActivity {
     stops.add(Position.fromCoordinates(point.getLongitude(), point.getLatitude()));
   }
 
-  private void initializeListOfStops() {
-    // Set up stop list
-    stops = new ArrayList<>();
+  private void addFirstStopToStopsList() {
     // Set first stop
     origin = Position.fromCoordinates(30.335098600000038, 59.9342802);
     stops.add(origin);
