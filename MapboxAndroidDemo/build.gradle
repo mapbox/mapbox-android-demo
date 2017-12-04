@@ -1,22 +1,24 @@
 apply plugin: 'com.android.application'
-apply from: "$project.rootDir/script-git-version.gradle"
+apply from: "$project.rootDir/gradle/script-git-version.gradle"
 apply plugin: 'com.google.firebase.firebase-perf'
 
-ext {
-    supportLibVersion = '25.3.1'
-}
-
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion androidVersions.compileSdkVersion
+    buildToolsVersion androidVersions.buildToolsVersion
 
     defaultConfig {
         applicationId "com.mapbox.mapboxandroiddemo"
-        minSdkVersion 15
-        targetSdkVersion 26
+
+        minSdkVersion androidVersions.minSdkVersion
+        targetSdkVersion androidVersions.targetSdkVersion
+
         versionCode gitVersionCode
         versionName gitVersionName
+
+        vectorDrawables.useSupportLibrary = true
     }
+
+    flavorDimensions "default"
 
     productFlavors {
         gpservices {
@@ -66,46 +68,58 @@ android {
 }
 
 dependencies {
+
     // Wearable application module
     gpservicesWearApp project(':MapboxAndroidWearDemo')
-    compile "com.android.support:gridlayout-v7:${supportLibVersion}"
-    compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile "com.android.support:cardview-v7:${supportLibVersion}"
-    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
-    compile "com.android.support:design:${supportLibVersion}"
-    compile "com.android.support:customtabs:${supportLibVersion}"
-    compile "com.android.support:support-v4:${supportLibVersion}"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.code.gson:gson:2.8'
+
+    // Support libraries
+    implementation dependenciesList.supportGridLayout
+    implementation dependenciesList.supportAppcompatV7
+    implementation dependenciesList.supportCardView
+    implementation dependenciesList.supportRecyclerView
+    implementation dependenciesList.supportDesign
+    implementation dependenciesList.supportCustomTabs
+    implementation dependenciesList.supportV4
+    implementation dependenciesList.supportConstraintLayout
+
 
     // Mapbox dependencies
-    compile('com.mapbox.mapboxsdk:mapbox-android-sdk:5.2.0-beta.3@aar') {
+
+    api (dependenciesList.mapboxMapSdk) {
         transitive = true
     }
 
     // Mapbox plugins
-    compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:0.1.0'
-    compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-building:0.1.0'
-    compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:0.3.0'
-    compile 'com.mapbox.mapboxsdk:mapbox-android-plugin-geojson:0.1.0'
+    implementation dependenciesList.mapboxPluginLocationLayer
+    implementation dependenciesList.mapboxPluginBuilding
+    implementation dependenciesList.mapboxPluginTraffic
+    implementation dependenciesList.mapboxPluginGeoJson
 
     // Mapbox Android UI
-    compile 'com.mapbox.mapboxsdk:mapbox-android-ui:2.2.6'
+    implementation dependenciesList.mapboxAndroidUI
+
+    // Firebase
+    implementation dependenciesList.firebaseCrash
+    implementation dependenciesList.firebasePerf
+    gpservicesImplementation dependenciesList.firebaseCrash
 
     // Other dependencies
-    compile 'com.google.firebase:firebase-crash:11.0.4'
-    compile 'com.google.firebase:firebase-perf:11.0.4'
-    compile 'com.github.javiersantos:MaterialStyledDialogs:2.1'
-    compile 'com.getbase:floatingactionbutton:1.10.1'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.squareup.okhttp3:okhttp:3.8.1'
-    compile 'com.afollestad.material-dialogs:commons:0.9.4.5'
-    compile 'com.github.Cutta:GifView:1.1'
-    gpservicesCompile 'com.google.firebase:firebase-crash:11.0.4'
-    compile project(':SharedCode')
+    implementation dependenciesList.gson
+
+    implementation 'com.github.javiersantos:MaterialStyledDialogs:2.1'
+    implementation 'com.getbase:floatingactionbutton:1.10.1'
+    implementation 'com.afollestad.material-dialogs:commons:0.9.4.5'
+    implementation 'com.github.Cutta:GifView:1.1'
+
+    // Square crew
+    implementation dependenciesList.timber
+    implementation dependenciesList.okhttp3
+    implementation dependenciesList.picasso
+    implementation dependenciesList.retrofit
+    implementation dependenciesList.retrofitGsonConverter
+
+    // Common module
+    implementation project(':SharedCode')
 }
 
-apply from: '../checkstyle.gradle'
+apply from: "${rootDir}/gradle/checkstyle.gradle"
