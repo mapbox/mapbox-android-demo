@@ -24,9 +24,11 @@
                 android:id="@+id/origin_green_dot_imageview"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
+                android:layout_marginBottom="8dp"
                 android:src="@drawable/green_dot"
+                mapbox:layout_constraintBottom_toBottomOf="@+id/origin_textview"
                 mapbox:layout_constraintStart_toStartOf="@+id/destination_red_dot_imageview"
-                tools:layout_editor_absoluteY="36dp" />
+                mapbox:layout_constraintTop_toTopOf="@+id/origin_textview" />
 
             <com.mapbox.services.android.ui.geocoder.GeocoderAutoCompleteView
                 android:id="@+id/destination_geocoder_widget"
@@ -36,28 +38,28 @@
                 mapbox:layout_constraintStart_toEndOf="@+id/destination_red_dot_imageview"
                 tools:layout_editor_absoluteY="80dp" />
 
-            <com.mapbox.services.android.ui.geocoder.GeocoderAutoCompleteView
-                android:id="@+id/origin_geocoder_widget"
+            <TextView
+                android:id="@+id/origin_textview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="8dp"
                 android:hint="@string/ride_share_from_hint_text"
                 mapbox:layout_constraintBottom_toBottomOf="@+id/set_origin_button"
                 mapbox:layout_constraintEnd_toStartOf="@+id/set_origin_button"
                 mapbox:layout_constraintStart_toEndOf="@+id/origin_green_dot_imageview"
-                mapbox:layout_constraintTop_toTopOf="@+id/set_origin_button" />
+                mapbox:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/set_origin_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:background="@android:color/holo_green_dark"
                 android:elevation="2dp"
                 android:text="@string/set_pickup_button_text"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 mapbox:layout_constraintEnd_toEndOf="@+id/destination_geocoder_widget"
-                mapbox:layout_constraintTop_toTopOf="parent" />
+                tools:layout_editor_absoluteY="8dp" />
 
             <ImageView
                 android:id="@+id/destination_red_dot_imageview"

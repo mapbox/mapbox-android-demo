@@ -182,7 +182,7 @@ public class OriginDestinationRideshareActivity extends AppCompatActivity implem
   }
 
   private void setUpOriginGeocodeWidget() {
-    GeocoderAutoCompleteView autocomplete = findViewById(R.id.origin_geocoder_widget);
+    GeocoderAutoCompleteView autocomplete = findViewById(R.id.origin_textview);
     autocomplete.setAccessToken(getString(R.string.access_token));
     autocomplete.setType(GeocodingCriteria.TYPE_POI);
     autocomplete.setOnFeatureListener(new GeocoderAutoCompleteView.OnFeatureListener() {
