@@ -74,5 +74,6 @@
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
     <string name="activity_labs_mapillary_title">Mapillary integration</string>
     <string name="activity_labs_inset_map_title">Inset map</string>
+    <string name="activity_labs_gif_on_map_title">Animated image source (GIF)</string>
 
 </resources>

@@ -76,5 +76,6 @@
     <string name="activity_lab_rv_symbol_layer_on_map_description">Add markers via SymbolLayer and manipulate the map based on recyclerview interactions.</string>
     <string name="activity_lab_mapillary_description">Add Mapillary vector tiles to a map.</string>
     <string name="activity_labs_inset_map_description">Show a smaller inset map fragment and link it to a larger map for two map interaction. Great for gaming!</string>
+    <string name="activity_labs_gif_on_map_description">Show an animated image (GIF) anywhere on the map</string>
 
 </resources>
