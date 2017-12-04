@@ -37,7 +37,6 @@ import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivit
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
@@ -48,6 +47,8 @@ import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
@@ -55,10 +56,11 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.ig.SnapshotNotificationActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
+import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsMatrixApiActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
-import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsMatrixApiActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.StaticImageActivity;
@@ -76,7 +78,6 @@ import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
@@ -88,12 +89,13 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
+import com.mapbox.mapboxandroiddemo.labs.AnimatedImageSourceActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
+import com.mapbox.mapboxandroiddemo.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MapillaryActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
-import com.mapbox.mapboxandroiddemo.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewSymbolLayerActivity;
@@ -114,6 +116,8 @@ import static com.mapbox.mapboxandroiddemo.commons.StringConstants.SKIPPED_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+  // Used to track internal navigation to the Snapshotter section
+  public static String EXTRA_NAV = "EXTRA_NAV";
 
   private ArrayList<ExampleItemModel> exampleItemModel;
   private ExampleAdapter adapter;
@@ -147,11 +151,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       recyclerView.setLayoutManager(new LinearLayoutManager(this));
       recyclerView.setAdapter(adapter);
     }
-    if (savedInstanceState == null) {
-      listItems(R.id.nav_basics);
-    } else {
+    if (savedInstanceState != null) {
       currentCategory = savedInstanceState.getInt("CURRENT_CATEGORY");
       listItems(currentCategory);
+    } else if (getIntent().getIntExtra(EXTRA_NAV, -1) == R.id.nav_image_generator) {
+      currentCategory = R.id.nav_image_generator;
+      listItems(R.id.nav_image_generator);
+    } else {
+      listItems(R.id.nav_basics);
     }
 
     ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
@@ -562,6 +569,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ));
         currentCategory = R.id.nav_mas;
         break;
+      case R.id.nav_image_generator:
+        exampleItemModel.add(new ExampleItemModel(
+                R.string.activity_image_generator_snapshot_notification_title,
+                R.string.activity_image_generator_snapshot_notification_description,
+                new Intent(MainActivity.this, SnapshotNotificationActivity.class),
+                R.string.activity_image_generator_snapshot_notification_url
+        ));
+        currentCategory = R.id.nav_image_generator;
+        break;
       case R.id.nav_lab:
         exampleItemModel.add(null);
         exampleItemModel.add(new ExampleItemModel(
@@ -624,6 +640,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_rv_symbol_layer_on_map_description,
           new Intent(MainActivity.this, RecyclerViewSymbolLayerActivity.class),
           R.string.activity_lab_rv_symbol_layer_on_map_url, true
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_labs_gif_on_map_title,
+          R.string.activity_labs_gif_on_map_description,
+          new Intent(MainActivity.this, AnimatedImageSourceActivity.class),
+          R.string.activity_labs_gif_on_map_url, true
         ));
         currentCategory = R.id.nav_lab;
         break;
