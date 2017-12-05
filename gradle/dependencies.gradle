@@ -77,7 +77,7 @@ ext {
             retrofit               : "com.squareup.retrofit2:retrofit:${version.retrofit}",
             retrofitGsonConverter  : "com.squareup.retrofit2:converter-gson:${version.retrofit}",
             leakCanaryDebug        : "com.squareup.leakcanary:leakcanary-android:${version.leakCanary}",
-            leakCanaryRelease      : "com.squareup.leakcanary:leakcanary-android-no-op:${version.leakCanar}",
+            leakCanaryRelease      : "com.squareup.leakcanary:leakcanary-android-no-op:${version.leakCanary}",
 
             // firebase
             firebaseCrash   :  "com.google.firebase:firebase-crash:${version.firebase}",
