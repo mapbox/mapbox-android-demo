@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.ig;
+package com.mapbox.mapboxandroiddemo.examples.snapshot;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -59,7 +59,7 @@ public class SnapshotShareActivity extends AppCompatActivity {
           @Override
           public void onClick(View view) {
 
-            Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_SHORT).show();
+            Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_LONG).show();
             startSnapShot(
               mapboxMap.getProjection().getVisibleRegion().latLngBounds,
               mapView.getMeasuredHeight(),

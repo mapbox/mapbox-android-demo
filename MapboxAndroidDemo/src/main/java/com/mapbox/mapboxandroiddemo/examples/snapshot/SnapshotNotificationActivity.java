@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.ig;
+package com.mapbox.mapboxandroiddemo.examples.snapshot;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;

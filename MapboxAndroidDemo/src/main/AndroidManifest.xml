@@ -499,14 +499,14 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.ig.SnapshotShareActivity"
+            android:name=".examples.snapshot.SnapshotShareActivity"
             android:label="@string/activity_image_generator_snapshot_share_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.ig.SnapshotNotificationActivity"
+            android:name=".examples.snapshot.SnapshotNotificationActivity"
             android:label="@string/activity_image_generator_snapshot_notification_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
