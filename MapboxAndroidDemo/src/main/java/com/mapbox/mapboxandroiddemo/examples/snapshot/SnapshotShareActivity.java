@@ -29,6 +29,7 @@ public class SnapshotShareActivity extends AppCompatActivity {
   private MapSnapshotter mapSnapshotter;
   private MapboxMap mapboxMap;
   private FloatingActionButton cameraFab;
+  private boolean hasStartedSnapshotGeneration;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class SnapshotShareActivity extends AppCompatActivity {
 
     cameraFab = findViewById(R.id.camera_share_snapshot_image_fab);
     cameraFab.setImageResource(R.drawable.ic_camera);
+
+    hasStartedSnapshotGeneration = false;
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -59,11 +62,14 @@ public class SnapshotShareActivity extends AppCompatActivity {
           @Override
           public void onClick(View view) {
 
-            Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_LONG).show();
-            startSnapShot(
-              mapboxMap.getProjection().getVisibleRegion().latLngBounds,
-              mapView.getMeasuredHeight(),
-              mapView.getMeasuredWidth());
+            if (!hasStartedSnapshotGeneration) {
+              hasStartedSnapshotGeneration = true;
+              Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_LONG).show();
+              startSnapShot(
+                mapboxMap.getProjection().getVisibleRegion().latLngBounds,
+                mapView.getMeasuredHeight(),
+                mapView.getMeasuredWidth());
+            }
           }
         });
       }
@@ -104,6 +110,8 @@ public class SnapshotShareActivity extends AppCompatActivity {
         shareIntent.setType("image/*");
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(Intent.createChooser(shareIntent, "Share map image"));
+
+        hasStartedSnapshotGeneration = false;
       }
     });
   }
