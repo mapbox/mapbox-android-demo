@@ -123,6 +123,9 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (handler != null && runnable != null) {
+      handler.removeCallbacks(runnable);
+    }
     mapView.onDestroy();
   }
 
