@@ -97,6 +97,7 @@ dependencies {
     implementation dependenciesList.mapboxPluginBuilding
     implementation dependenciesList.mapboxPluginTraffic
     implementation dependenciesList.mapboxPluginGeoJson
+    implementation dependenciesList.mapboxPluginMarkerCluster
 
     // Mapbox Android UI
     implementation dependenciesList.mapboxAndroidUI

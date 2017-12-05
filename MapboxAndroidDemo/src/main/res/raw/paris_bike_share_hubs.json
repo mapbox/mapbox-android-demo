@@ -1,0 +1,5966 @@
+[
+  {
+    "number":31705,
+    "name":"31705 - CHAMPEAUX (BAGNOLET)",
+    "address":"RUE DES CHAMPEAUX (PRES DE LA GARE ROUTIERE) - 93170 BAGNOLET",
+    "latitude":48.8645278209514,
+    "longitude":2.416170724425901
+  },
+  {
+    "number":10042,
+    "name":"10042 - POISSONNIÈRE - ENGHIEN",
+    "address":"52 RUE D'ENGHIEN / ANGLE RUE DU FAUBOURG POISSONIERE - 75010 PARIS",
+    "latitude":48.87242006305313,
+    "longitude":2.348395236282807
+  },
+  {
+    "number":8020,
+    "name":"08020 - METRO ROME",
+    "address":"74 BOULEVARD DES BATIGNOLLES - 75008 PARIS",
+    "latitude":48.882148945631904,
+    "longitude":2.319860054774211
+  },
+  {
+    "number":35014,
+    "name":"35014 - DE GAULLE (PANTIN)",
+    "address":"139 AVENUE JEAN LOLIVE / MAIL CHARLES DE GAULLE - 93500 PANTIN",
+    "latitude":48.893268664697416,
+    "longitude":2.412715733388685
+  },
+  {
+    "number":28002,
+    "name":"28002 - SOLJENITSYNE (PUTEAUX)",
+    "address":"BOULEVARD ALEXANDRE SOLJENITSYNE - 92800 PUTEAUX",
+    "latitude":48.884478,
+    "longitude":2.24772065
+  },
+  {
+    "number":15111,
+    "name":"15111 - SERRES",
+    "address":"48 RUE OLIVIER DE SERRES - 75015 PARIS",
+    "latitude":48.834658862792736,
+    "longitude":2.295789480315903
+  },
+  {
+    "number":12124,
+    "name":"12124 - PYRAMIDE ARTILLERIE",
+    "address":"ROUTE DE L'ARTILLERIE - 75012 PARIS",
+    "latitude":48.839041145908176,
+    "longitude":2.437655339082955
+  },
+  {
+    "number":9021,
+    "name":"09021 - SAINT GEORGES",
+    "address":"56 RUE SAINT GEORGES - 75009 PARIS",
+    "latitude":48.877872278317966,
+    "longitude":2.337446804203667
+  },
+  {
+    "number":7007,
+    "name":"07007 - MUSÉE D'ORSAY",
+    "address":"62 RUE DE LILLE - 75007 PARIS",
+    "latitude":48.85971010443503,
+    "longitude":2.325809024625026
+  },
+  {
+    "number":20011,
+    "name":"20011 - PYRÉNÉES-DAGORNO",
+    "address":"103 RUE DES PYRENNEES - 75020 PARIS",
+    "latitude":48.85550135398888,
+    "longitude":2.405168520639166
+  },
+  {
+    "number":33006,
+    "name":"33006 - KARMAN (AUBERVILLIERS)",
+    "address":"FACE 143 RUE ANDRE KARMAN - 93300 AUBERVILLIERS",
+    "latitude":48.9101436710038,
+    "longitude":2.38505201824411
+  },
+  {
+    "number":11029,
+    "name":"11029 - MENILMONTANT OBERKAMPF",
+    "address":"137 BOULEVARD MENILMONTANT - 75011 PARIS",
+    "latitude":48.8666176586814,
+    "longitude":2.38301344041578
+  },
+  {
+    "number":4020,
+    "name":"04020 - BEAUBOURG PLACE MICHELET",
+    "address":"FACE 27 RUE QUINCAMPOIX - 75004 PARIS",
+    "latitude":48.86008832610481,
+    "longitude":2.350148335920203
+  },
+  {
+    "number":7012,
+    "name":"07012 - CITE VANEAU",
+    "address":"7 CITE VANEAU - 75007 PARIS",
+    "latitude":48.854268334051035,
+    "longitude":2.319454010061415
+  },
+  {
+    "number":14113,
+    "name":"14113 - ARAGO 2",
+    "address":"36 RUE DE LA SANTE - 75014 PARIS",
+    "latitude":48.83512886504287,
+    "longitude":2.34157863455693
+  },
+  {
+    "number":15028,
+    "name":"15028 - DUPLEIX",
+    "address":"54 BOULEVARD DE GRENELLE - 75015 PARIS",
+    "latitude":48.851396721123486,
+    "longitude":2.291889313228121
+  },
+  {
+    "number":22005,
+    "name":"22005 - DE GAULLE 3 (NEUILLY)",
+    "address":"195 AVENUE CHARLES DE GAULLE - 92200 NEUILLY",
+    "latitude":48.8842989293728,
+    "longitude":2.26099177209953
+  },
+  {
+    "number":18042,
+    "name":"18042 - PIGALLE GERMAIN PILLON",
+    "address":"FACE 36 BOULEVARD DE CLICHY - 75018 PARIS",
+    "latitude":48.882728090545086,
+    "longitude":2.336262639016585
+  },
+  {
+    "number":11008,
+    "name":"11008 - FAIDHERBE CHALIGNY",
+    "address":"223 RUE DU FAUBOURG SAINT ANTOINE - 75011 PARIS",
+    "latitude":48.850379753879935,
+    "longitude":2.38386933547444
+  },
+  {
+    "number":1028,
+    "name":"01028 - BERGER",
+    "address":"FACE AU 41-45 RUE BERGER - 75001 PARIS",
+    "latitude":48.8622255,
+    "longitude":2.3428337
+  },
+  {
+    "number":19038,
+    "name":"19038 - JOURDAIN",
+    "address":"9 RUE LASSUS - 75019 PARIS",
+    "latitude":48.8755503947562,
+    "longitude":2.389038160847546
+  },
+  {
+    "number":15118,
+    "name":"15118 - PLACE BIENVENUE",
+    "address":"11 RUE DE L'ARRIVEE - 75015 PARIS",
+    "latitude":48.84319882807092,
+    "longitude":2.322257377279243
+  },
+  {
+    "number":8031,
+    "name":"08031 - ROND POINT DES CHAMPS ELYSEES",
+    "address":"2 RUE JEAN MERMOZ - 75008 PARIS",
+    "latitude":48.86970884795243,
+    "longitude":2.310714655374236
+  },
+  {
+    "number":14120,
+    "name":"14120 - JOURDAN BARBOUX",
+    "address":"7 RUE HENRI BARBOUX - 75014 PARIS",
+    "latitude":48.82195530645611,
+    "longitude":2.326806869905884
+  },
+  {
+    "number":15040,
+    "name":"15040 - MONCLAR",
+    "address":"33 BIS RUE SAINT AMAND - 75015 PARIS",
+    "latitude":48.83411714783768,
+    "longitude":2.308850015466539
+  },
+  {
+    "number":42201,
+    "name":"42201 - NECKER (CHARENTON)",
+    "address":"RUE NECKER/ RUE DU PORT AUX LIONS - 94220 CHARENTON",
+    "latitude":48.823963252286866,
+    "longitude":2.399998420132992
+  },
+  {
+    "number":11038,
+    "name":"11038 - TEMPLE REPUBLIQUE",
+    "address":"44 BD DU TEMPLE - 75011 PARIS",
+    "latitude":48.865745077094815,
+    "longitude":2.365312950780227
+  },
+  {
+    "number":18019,
+    "name":"18019 - MONTCALM",
+    "address":"2 RUE MONTCALM - 75018 PARIS",
+    "latitude":48.891877957087424,
+    "longitude":2.335447427689794
+  },
+  {
+    "number":901,
+    "name":"00901 -PORT SOLFERINO (STATION MOBILE)",
+    "address":"BERGES DE SEINE, SOUS LA PASSERELLE SENGHOR AU PORT DE SOLFERINO - 75007 PARIS",
+    "latitude":48.86138,
+    "longitude":2.32442
+  },
+  {
+    "number":12031,
+    "name":"12031 - LAME",
+    "address":"49 RUE GABRIEL LAME - 75012 PARIS",
+    "latitude":48.835138050689515,
+    "longitude":2.385478486564838
+  },
+  {
+    "number":34002,
+    "name":"34002 - PERI (SAINT OUEN)",
+    "address":"128 AVENUE GABRIEL PERI / AVENUE DU CAPITAINE GLAMER - 93400 SAINT OUEN",
+    "latitude":48.90259224163092,
+    "longitude":2.330513564840273
+  },
+  {
+    "number":31008,
+    "name":"31008 - VINCENNES (MONTREUIL)",
+    "address":"7 BIS RUE DE VINCENNES - 93100 MONTREUIL",
+    "latitude":48.857702134021,
+    "longitude":2.43736866129498
+  },
+  {
+    "number":15062,
+    "name":"15062 - BOUCICAUT",
+    "address":"87 RUE DE LA CONVENTION - 75015 PARIS",
+    "latitude":48.84214433157821,
+    "longitude":2.285862655943941
+  },
+  {
+    "number":4012,
+    "name":"04012 - ECOUFFES RIVOLI",
+    "address":"2 RUE TIRON - 75004 PARIS",
+    "latitude":48.85579663740384,
+    "longitude":2.357907882135172
+  },
+  {
+    "number":3011,
+    "name":"03011 - TURBIGO",
+    "address":"55 RUE TURBIGO - 75003 PARIS",
+    "latitude":48.86558419108518,
+    "longitude":2.356278447633629
+  },
+  {
+    "number":18028,
+    "name":"18028 - VAUVENARGUES",
+    "address":"195 RUE CHAMPIONNET - 75018 PARIS",
+    "latitude":48.89405725132698,
+    "longitude":2.332199335980013
+  },
+  {
+    "number":11113,
+    "name":"11113 - REPUBLIQUE FERRY",
+    "address":"FACE 140 BOULEVARD RICHARD LENOIR - 75011 PARIS",
+    "latitude":48.86651607982108,
+    "longitude":2.369322530407524
+  },
+  {
+    "number":21015,
+    "name":"21015 - NATIONALE (BOULOGNE-BILLANCOURT)",
+    "address":"39 RUE NATIONALE - 92100 BOULOGNE-BILLANCOURT",
+    "latitude":48.827600424128306,
+    "longitude":2.241835191324587
+  },
+  {
+    "number":42015,
+    "name":"42015 - JEAN FERRAT (IVRY)",
+    "address":"PLACE JEAN FERRAT - 94200 IVRY",
+    "latitude":48.8185,
+    "longitude":2.37427
+  },
+  {
+    "number":10040,
+    "name":"10040 - BELLEVILLE",
+    "address":"8 BOULEVARD DE LA VILETTE - 75010 PARIS",
+    "latitude":48.87277815648997,
+    "longitude":2.376348394645978
+  },
+  {
+    "number":13026,
+    "name":"13026 - PLACE HENOCQUE VERSION 2",
+    "address":"21 RUE DU DR LERAY ET LANDOUZY - 75013 PARIS",
+    "latitude":48.823316172177535,
+    "longitude":2.35433694417225
+  },
+  {
+    "number":19028,
+    "name":"19028 - PLACE DES FETES",
+    "address":"17 RUE DES FETES - 75019 PARIS",
+    "latitude":48.876468339733144,
+    "longitude":2.392284629788502
+  },
+  {
+    "number":10008,
+    "name":"10008 - CITE RIVERIN",
+    "address":"12 RUE CITE RIVERIN / ANGLE RUE DU CHATEAU D'EAU - 75010 PARIS",
+    "latitude":48.8707649818776,
+    "longitude":2.35872446227434
+  },
+  {
+    "number":6015,
+    "name":"06015 - MAZET SAINT ANDRE DES ARTS",
+    "address":"10 RUE ANDRE MAZET - 75006 PARIS",
+    "latitude":48.853751073467855,
+    "longitude":2.339113722899687
+  },
+  {
+    "number":43006,
+    "name":"43006 - MINIMES (VINCENNES)",
+    "address":"30 AVENUE DES MINIMES - 94300 VINCENNES",
+    "latitude":48.841486856300165,
+    "longitude":2.430793451133684
+  },
+  {
+    "number":15054,
+    "name":"15054 - CHANDON",
+    "address":"293 RUE LECOURBE - 75015 PARIS",
+    "latitude":48.83797034201205,
+    "longitude":2.287582307043615
+  },
+  {
+    "number":11043,
+    "name":"11043 - CIRQUE D HIVER",
+    "address":"PLACE PASDELOUP - 75011 PARIS",
+    "latitude":48.862650300140295,
+    "longitude":2.367053490449912
+  },
+  {
+    "number":42504,
+    "name":"42504 - MALON (GENTILLY)",
+    "address":"FACE 59 RUE BENOIT MALON - 94250 GENTILLY",
+    "latitude":48.81444017962381,
+    "longitude":2.341070654172592
+  },
+  {
+    "number":6107,
+    "name":"06107 - CHERCHE MIDI",
+    "address":"27 RUE DU CHERCHE MIDI 75006 PARIS",
+    "latitude":48.8502410871957,
+    "longitude":2.32755154921057
+  },
+  {
+    "number":17029,
+    "name":"17029 - PLACE AIMÉE MAILLART",
+    "address":"29 RUE PIERRE DEMOURS - 75017 PARIS",
+    "latitude":48.88141110121936,
+    "longitude":2.29482820074442
+  },
+  {
+    "number":14029,
+    "name":"14029 - GERGOVIE VERCINGETORIX",
+    "address":"112 RUE VERCINGETORIX - 75014 PARIS",
+    "latitude":48.83425924993043,
+    "longitude":2.313391647113252
+  },
+  {
+    "number":10029,
+    "name":"10029 - PLACE DE ROUBAIX",
+    "address":"39 RUE DE DUNKERQUE - 75010 PARIS",
+    "latitude":48.88072668576597,
+    "longitude":2.351464333201903
+  },
+  {
+    "number":10015,
+    "name":"10015 - RECOLLETS",
+    "address":"46 RUE LUCIE SAMPAIX - 75010 PARIS",
+    "latitude":48.874112916506824,
+    "longitude":2.362498528696257
+  },
+  {
+    "number":6029,
+    "name":"06029 - VAUGIRARD PRINCE",
+    "address":"FACE 1 RUE DE VAUGIRARD - 75006 PARIS",
+    "latitude":48.84892295818577,
+    "longitude":2.341040508705961
+  },
+  {
+    "number":12151,
+    "name":"12151 - GARE DE LYON",
+    "address":"GARE DE LYON - 75012 PARIS",
+    "latitude":48.8455150897939,
+    "longitude":2.3726498446286
+  },
+  {
+    "number":19114,
+    "name":"19114 - MANIN SECRETAN",
+    "address":"31 RUE MANIN - 75019 PARIS",
+    "latitude":48.87927519569598,
+    "longitude":2.378637021920256
+  },
+  {
+    "number":22011,
+    "name":"22011 - MONTROSIER (NEUILLY)",
+    "address":"7 RUE MONTROSIER - 92200 NEUILLY",
+    "latitude":48.87944136963256,
+    "longitude":2.278535717122779
+  },
+  {
+    "number":16110,
+    "name":"16110 - OCTAVE FEUILLET",
+    "address":"4-6 RUE OCTAVE FEUILLET - 75016 PARIS",
+    "latitude":48.8609983661382,
+    "longitude":2.27312852713658
+  },
+  {
+    "number":15049,
+    "name":"15049 - PORTE DE VERSAILLES",
+    "address":"2 AVENUE ERNEST RENAN - 75015 PARIS",
+    "latitude":48.83217944426036,
+    "longitude":2.287122261982559
+  },
+  {
+    "number":19012,
+    "name":"19012 - LALLY TOLLENDAL",
+    "address":"5 RUE LALLY TOLLENDAL - 75019 PARIS",
+    "latitude":48.88270064422199,
+    "longitude":2.37469338894231
+  },
+  {
+    "number":15053,
+    "name":"15053 - LECOURBE",
+    "address":"250 RUE LECOURBE - 75015 PARIS",
+    "latitude":48.83922209776229,
+    "longitude":2.291540507948998
+  },
+  {
+    "number":18027,
+    "name":"18027 - DAMREMONT ORDENER",
+    "address":"102 RUE DAMREMONT - 75018 PARIS",
+    "latitude":48.893400392981874,
+    "longitude":2.336266523912805
+  },
+  {
+    "number":6103,
+    "name":"06103 - MEZIERES RENNES",
+    "address":"16 RUE DE MEZIERES - 75006 PARIS",
+    "latitude":48.850297010217595,
+    "longitude":2.330446820277252
+  },
+  {
+    "number":42006,
+    "name":"42006 - BROSSOLETTE (IVRY)",
+    "address":"23 RUE PIERRE BROSSOLETTE - 94200 IVRY",
+    "latitude":48.816929720561234,
+    "longitude":2.381460319184223
+  },
+  {
+    "number":17011,
+    "name":"17011 - PORTE DE CLICHY FRAGONARD",
+    "address":"4 RUE FRAGONARD - 75017 PARIS",
+    "latitude":48.894151383293696,
+    "longitude":2.314678001115381
+  },
+  {
+    "number":6020,
+    "name":"06020 - SAINT MICHEL DANTON",
+    "address":"2 RUE DANTON - 75006 PARIS",
+    "latitude":48.85293041059132,
+    "longitude":2.342657392891206
+  },
+  {
+    "number":11017,
+    "name":"11017 - ALEXANDRE DUMAS",
+    "address":"FACE 77 BOULEVARD DE CHARONNE - 75011 PARIS",
+    "latitude":48.854176040414856,
+    "longitude":2.396093495321842
+  },
+  {
+    "number":14111,
+    "name":"14111 - DENFERT-ROCHEREAU CASSINI",
+    "address":"16 RUE CASSINI 75014 PARIS",
+    "latitude":48.8375492921975,
+    "longitude":2.33598303046652
+  },
+  {
+    "number":11032,
+    "name":"11032 - METALLOS",
+    "address":"81 BIS RUE JP TIMBAUD - 75011 PARIS",
+    "latitude":48.86793796309799,
+    "longitude":2.377885515684799
+  },
+  {
+    "number":21113,
+    "name":"21113 - PETIT (CLICHY)",
+    "address":"2 RUE PETIT - 92110 CLICHY",
+    "latitude":48.8993483537726,
+    "longitude":2.29662648341284
+  },
+  {
+    "number":11044,
+    "name":"11044 - RICHARD LENOIR VOLTAIRE NORD",
+    "address":"FACE 104 BOULEVARD RICHARD LENOIR - 75011 PARIS",
+    "latitude":48.86343198963591,
+    "longitude":2.37120861796012
+  },
+  {
+    "number":3001,
+    "name":"03001 - CHEMIN VERT BEAUMARCHAIS",
+    "address":"69 BOULEVARD BEAUMARCHAIS - 75003 PARIS",
+    "latitude":48.85804405694242,
+    "longitude":2.367832659296124
+  },
+  {
+    "number":20133,
+    "name":"20133 - RASSELINS",
+    "address":"2 RUE DES RASSELINS - 75020 PARIS",
+    "latitude":48.85352868594103,
+    "longitude":2.409615362775532
+  },
+  {
+    "number":13047,
+    "name":"13047 - BOUTROUX VITRY",
+    "address":"1 AVENUE BOUTROUX - 75013 PARIS",
+    "latitude":48.822632842232245,
+    "longitude":2.377738433657617
+  },
+  {
+    "number":34009,
+    "name":"34009 - MAAR (SAINT OUEN)",
+    "address":"RUE DORA MAAR / GARE RER - 93400 SAINT OUEN",
+    "latitude":48.905269629379745,
+    "longitude":2.322171248688672
+  },
+  {
+    "number":11001,
+    "name":"11001 - BASTILLE RICHARD LENOIR",
+    "address":"2 BOULEVARD RICHARD LENOIR - 75011 PARIS",
+    "latitude":48.85384822621097,
+    "longitude":2.369701488217501
+  },
+  {
+    "number":3007,
+    "name":"03007 - ARCHIVES PASTOURELLE",
+    "address":"67 RUE DES ARCHIVES - 75003 PARIS",
+    "latitude":48.86240121191442,
+    "longitude":2.359447031946381
+  },
+  {
+    "number":905,
+    "name":"00905 - CONCORDE/BERGES DE SEINE (STATION MOBILE)",
+    "address":"BERGES DE SEINE, BAS DE LA BRETELLE AVAL CONCORDE - 75007 PARIS",
+    "latitude":48.863147,
+    "longitude":2.316318
+  },
+  {
+    "number":15115,
+    "name":"15115 - VAUGIRARD",
+    "address":"25-31 BOULEVARD DE VAUGIRARD - 75015 PARIS",
+    "latitude":48.841325259808,
+    "longitude":2.31829155159271
+  },
+  {
+    "number":35006,
+    "name":"35006 - DELIZY (PANTIN)",
+    "address":"FACE AU 23 RUE DELIZY - 93500 PANTIN",
+    "latitude":48.89633193166097,
+    "longitude":2.409087652725976
+  },
+  {
+    "number":4107,
+    "name":"04107 - BEAUMARCHAIS",
+    "address":"27 BOULEVARD BEAUMARCHAIS - 75004 PARIS",
+    "latitude":48.855501357701705,
+    "longitude":2.368429069929045
+  },
+  {
+    "number":17050,
+    "name":"17050 - BATIGNOLLES",
+    "address":"1 RUE DES BATIGNOLLES - 75017 PARIS",
+    "latitude":48.88310390458221,
+    "longitude":2.323834749088381
+  },
+  {
+    "number":5013,
+    "name":"05013 - ULM ERASME",
+    "address":"13 RUE ERASME - 75005 PARIS",
+    "latitude":48.8425479496716,
+    "longitude":2.344596649931604
+  },
+  {
+    "number":13001,
+    "name":"13001 - PORT ROYAL",
+    "address":"51 BOULEVARD PORT ROYAL - 75013 PARIS",
+    "latitude":48.83772792097816,
+    "longitude":2.344664043426302
+  },
+  {
+    "number":31704,
+    "name":"31704 - HORNET (BAGNOLET)",
+    "address":"FACE AU 1 RUE JEANNE HORNET - 93170 BAGNOLET",
+    "latitude":48.873929200033544,
+    "longitude":2.427933579778934
+  },
+  {
+    "number":4103,
+    "name":"04103 - HOTEL DE VILLE",
+    "address":"1 RUE DES ARCHIVES - 75004 PARIS",
+    "latitude":48.857203787697095,
+    "longitude":2.353976273618783
+  },
+  {
+    "number":21013,
+    "name":"21013 - GRENIER (BOULOGNE-BILLANCOURT)",
+    "address":"4 AVENUE PIERRE GRENIER - 92100 BOULOGNE-BILLANCOURT",
+    "latitude":48.82584693469992,
+    "longitude":2.248821391087721
+  },
+  {
+    "number":11012,
+    "name":"11012 - MONTREUIL VOLTAIRE",
+    "address":"93 RUE DE MONTREUIL - 75011 PARIS",
+    "latitude":48.85050701184191,
+    "longitude":2.393075558274471
+  },
+  {
+    "number":35001,
+    "name":"35001 - JAURES 1 (PANTIN)",
+    "address":"168 AVENUE JEAN JAURES - 93500 PANTIN",
+    "latitude":48.91013709505388,
+    "longitude":2.399325633305226
+  },
+  {
+    "number":21703,
+    "name":"21703 - MARTINIE (VANVES)",
+    "address":"5-7 AVENUE MARCEL MARTINIE - 92170 VANVES",
+    "latitude":48.821049923459526,
+    "longitude":2.29130063072414
+  },
+  {
+    "number":2101,
+    "name":"02101 - BACHAUMONT",
+    "address":"14 RUE BACHAUMONT - 75002 PARIS",
+    "latitude":48.866067150086806,
+    "longitude":2.345463652702569
+  },
+  {
+    "number":17025,
+    "name":"17025 - COURCELLES",
+    "address":"2 RUE DE CHAZELLES - 75017 PARIS",
+    "latitude":48.8794303755264,
+    "longitude":2.303467406687128
+  },
+  {
+    "number":7004,
+    "name":"07004 - RASPAIL VARENNE",
+    "address":"FACE 28 BOULEVARD RASPAIL - 75007 PARIS",
+    "latitude":48.853261668611665,
+    "longitude":2.326319806384382
+  },
+  {
+    "number":9008,
+    "name":"09008 - TOUR D'AUVERGNE",
+    "address":"24 RUE D'AUVERGNE - 75009 PARIS",
+    "latitude":48.87916177777549,
+    "longitude":2.34369843072095
+  },
+  {
+    "number":43007,
+    "name":"43007 - VORGES (VINCENNES)",
+    "address":"4 AVENUE VORGES - 94300 VINCENNES",
+    "latitude":48.848257752729346,
+    "longitude":2.439892899386235
+  },
+  {
+    "number":12006,
+    "name":"12006 - QUAI DE LA RAPEE - GARE DE LYON",
+    "address":"76-68 QUAI DE LA RAPEE - 75012 PARIS",
+    "latitude":48.8439658,
+    "longitude":2.3703793
+  },
+  {
+    "number":4014,
+    "name":"04014 - ARCHIVES BLANCS MANTEAUX",
+    "address":"29 RUE DES BLANCS MANTEAUX - 75004 PARIS",
+    "latitude":48.85940271964358,
+    "longitude":2.35592748653501
+  },
+  {
+    "number":15105,
+    "name":"15105 - SUFFREN FÉDÉRATION",
+    "address":"84 RUE DE LA FEDERATION - 75015 PARIS",
+    "latitude":48.85276674352813,
+    "longitude":2.297876431467921
+  },
+  {
+    "number":10024,
+    "name":"10024 - BUISSON SAINT LOUIS",
+    "address":"2 RUE DU BUISSON SAINT LOUIS - 75010 PARIS",
+    "latitude":48.87182588992616,
+    "longitude":2.372203224856393
+  },
+  {
+    "number":32008,
+    "name":"32008 - EMGP-GARDINOUX (AUBERVILLIERS/ST-DENIS)",
+    "address":"204 RUE DES FILLETTES - 93300 AUBERVILLIERS",
+    "latitude":48.906023,
+    "longitude":2.366039
+  },
+  {
+    "number":8054,
+    "name":"08054 - HOCHE ALBRECHT",
+    "address":"10 AVENUE BERTHIER ALBRECHT - 75008 PARIS",
+    "latitude":48.87614039826388,
+    "longitude":2.301303138307601
+  },
+  {
+    "number":7009,
+    "name":"07009 - ASSEMBLEE NATIONALE",
+    "address":"FACE 119 RUE DE LILLE - 75007 PARIS",
+    "latitude":48.86137389094257,
+    "longitude":2.320131276903925
+  },
+  {
+    "number":1015,
+    "name":"01015 - PLACE ANDRE MALRAUX",
+    "address":"2 PLACE ANDRE MALRAUX - 75001 PARIS",
+    "latitude":48.86397965515107,
+    "longitude":2.335599603893845
+  },
+  {
+    "number":17002,
+    "name":"17002 - LA FOURCHE RUE DE LA CONDAMINE",
+    "address":"4 RUE DE LA CONDAMINE - 75017 PARIS",
+    "latitude":48.88790134553051,
+    "longitude":2.324400445437174
+  },
+  {
+    "number":18030,
+    "name":"18030 - SIMPLON",
+    "address":"1 RUE JOSEPH DIJON - 75018 PARIS",
+    "latitude":48.89373427753593,
+    "longitude":2.347517966604574
+  },
+  {
+    "number":32605,
+    "name":"32605 - HORTENSIAS (LES LILAS)",
+    "address":"1 ALLEE DES HORTENSIAS - 93260 LES LILAS",
+    "latitude":48.88217309420464,
+    "longitude":2.42327263606036
+  },
+  {
+    "number":43005,
+    "name":"43005 - AUBERT (VINCENNES)",
+    "address":"18 AVENUE AUBERT - 94300 VINCENNES",
+    "latitude":48.847550436310826,
+    "longitude":2.433432607923368
+  },
+  {
+    "number":13045,
+    "name":"13045 - TOLBIAC ALBERT",
+    "address":"FACE 1 RUE JEAN COLLY - 75013 PARIS",
+    "latitude":48.82783803264948,
+    "longitude":2.370530563855483
+  },
+  {
+    "number":8034,
+    "name":"08034 - HAUSSMANN COURCELLES",
+    "address":"49 RUE DE BERRI - 75008 PARIS",
+    "latitude":48.874810390028195,
+    "longitude":2.308314064189137
+  },
+  {
+    "number":2012,
+    "name":"02012 - QUATRE SEPTEMBRE",
+    "address":"10 RUE DE CHOISEUL - 75002 PARIS",
+    "latitude":48.869969733968915,
+    "longitude":2.3360394555421
+  },
+  {
+    "number":5029,
+    "name":"05029 - PORT ROYAL",
+    "address":"FACE 41 AVENUE GEORGES BERNANOS - 75005 PARIS",
+    "latitude":48.8401089566606,
+    "longitude":2.337296889737942
+  },
+  {
+    "number":17039,
+    "name":"17039 - PLACE SAINT FERDINAND",
+    "address":"26 RUE SAINT FERDINAND - 75017 PARIS",
+    "latitude":48.87815529789739,
+    "longitude":2.288518047864942
+  },
+  {
+    "number":15069,
+    "name":"15069 - BOUCICAUT FAURE",
+    "address":"41 AVENUE FELIX FAURE - 75015 PARIS",
+    "latitude":48.841249336041045,
+    "longitude":2.288386600849503
+  },
+  {
+    "number":5027,
+    "name":"05027 - GOBELINS",
+    "address":"22 AVENUE DES GOBELINS - 75005 PARIS",
+    "latitude":48.83712603861059,
+    "longitude":2.351433329767636
+  },
+  {
+    "number":35003,
+    "name":"35003 - VAILLANT (PANTIN)",
+    "address":"ANGLE RUE GENERAL GOSSERAND ET AVENUE EDOUARD VAILLANT - 93500 PANTIN",
+    "latitude":48.902691617981425,
+    "longitude":2.393255829334146
+  },
+  {
+    "number":20116,
+    "name":"20116 - HAIES REUNION",
+    "address":"53 RUE DES HAIES - 75020 PARIS",
+    "latitude":48.85386896766491,
+    "longitude":2.402426162238911
+  },
+  {
+    "number":18011,
+    "name":"18011 - HERBERT",
+    "address":"85 RUE PAJOL - 75018 PARIS",
+    "latitude":48.89284571116732,
+    "longitude":2.363429016279767
+  },
+  {
+    "number":13005,
+    "name":"13005 - ARAGO CORDELIERE - VERSION 2",
+    "address":"2 RUE DES CORDELIERES - 75013 PARIS",
+    "latitude":48.83548071896613,
+    "longitude":2.348572461702221
+  },
+  {
+    "number":10032,
+    "name":"10032 - DODU",
+    "address":"N° 12-14 RUE CLAUDE VELLEFAUX- 75010 PARIS",
+    "latitude":48.87285913900304,
+    "longitude":2.370071706985146
+  },
+  {
+    "number":15037,
+    "name":"15037 - GROULT",
+    "address":"202 RUE LECOURBE - 75015 PARIS",
+    "latitude":48.84041618840877,
+    "longitude":2.295464906515111
+  },
+  {
+    "number":21106,
+    "name":"21106 - MORICE 2 (CLICHY)",
+    "address":"2-4 RUE MORICE - 92110 CLICHY",
+    "latitude":48.90066034942664,
+    "longitude":2.308569535028556
+  },
+  {
+    "number":8055,
+    "name":"08055 - TERNES COURCELLES",
+    "address":"87 BD COURCELLES - 75008 PARIS",
+    "latitude":48.87818887641853,
+    "longitude":2.299296003861458
+  },
+  {
+    "number":19111,
+    "name":"19111 - ROSA PARKS – GARE RER E",
+    "address":"Parvis Nord Gare RER E ROSA PARKS - 75019 PARIS",
+    "latitude":48.8972395463935,
+    "longitude":2.37504277378321
+  },
+  {
+    "number":15030,
+    "name":"15030 - LINOIS",
+    "address":"66 RUE EMERIAU - 75015 PARIS",
+    "latitude":48.84804578628324,
+    "longitude":2.284380633700994
+  },
+  {
+    "number":11020,
+    "name":"11020 - CHARONNE",
+    "address":"1 RUE DE BELFORT - 75011 PARIS",
+    "latitude":48.85631717803066,
+    "longitude":2.383072452374457
+  },
+  {
+    "number":8549,
+    "name":"08549 - PLACE DUNANT",
+    "address":"39 AVENUE GEORGE V - 75008 PARIS",
+    "latitude":48.87040913507474,
+    "longitude":2.301123191744092
+  },
+  {
+    "number":21501,
+    "name":"21501 - SELLIER (SURESNES)",
+    "address":"RUE DE SAINT CLOUD / BOULEVARD HENRI SELLIER - 92150 SURESNES",
+    "latitude":48.867565806130166,
+    "longitude":2.225998484960623
+  },
+  {
+    "number":14011,
+    "name":"14011 - ALESIA SARRETTE",
+    "address":"6 RUE SARRETTE - 75014 PARIS",
+    "latitude":48.827525292006904,
+    "longitude":2.331729378994153
+  },
+  {
+    "number":43001,
+    "name":"43001 - PARIS 1 (VINCENNES)",
+    "address":"168 AVENUE DE PARIS - 94300 VINCENNES",
+    "latitude":48.84633805388875,
+    "longitude":2.420247340474637
+  },
+  {
+    "number":44101,
+    "name":"44101 - PLACE MONGOLFIER (SAINT MAURICE)",
+    "address":"PLACE MONTGOLFIER - 94410 SAINT MAURICE",
+    "latitude":48.815050006197445,
+    "longitude":2.459239414806482
+  },
+  {
+    "number":8105,
+    "name":"08105 - FRANCOIS 1ER LINCOLN",
+    "address":"56 RUE FRANCOIS 1ER - 75008 PARIS",
+    "latitude":48.86951797934417,
+    "longitude":2.302426218841562
+  },
+  {
+    "number":16042,
+    "name":"16042 - PORTE DE SAINT CLOUD",
+    "address":"120 BOULEVARD MURAT - 75016 PARIS",
+    "latitude":48.837555260014625,
+    "longitude":2.257972572706903
+  },
+  {
+    "number":18022,
+    "name":"18022 - BARBES MARCADET",
+    "address":"57 RUE MARCADET - 75018 PARIS",
+    "latitude":48.89045112096476,
+    "longitude":2.349057392968696
+  },
+  {
+    "number":21101,
+    "name":"21101 - VALITON (CLICHY)",
+    "address":"4 RUE DE VALITON - 92110 CLICHY",
+    "latitude":48.90249245151852,
+    "longitude":2.297840007374352
+  },
+  {
+    "number":17004,
+    "name":"17004 - LEGENDRE AVENUE DE CLICHY",
+    "address":"130 RUE LEGENDRE - 75017 PARIS",
+    "latitude":48.88896161855884,
+    "longitude":2.322528975094376
+  },
+  {
+    "number":17007,
+    "name":"17007 - NAVIER",
+    "address":"FACE 57 RUE NAVIER - 75017 PARIS",
+    "latitude":48.89591411750011,
+    "longitude":2.322727367054828
+  },
+  {
+    "number":17116,
+    "name":"17116 - REIMS",
+    "address":"6 BOULEVARD DE REIMS - 75017 PARIS",
+    "latitude":48.891834448210986,
+    "longitude":2.300144659954865
+  },
+  {
+    "number":9104,
+    "name":"9104 - CAUMARTIN PROVENCE",
+    "address":"52 RUE DE CAUMARTIN - 75009 PARIS",
+    "latitude":48.8745052459648,
+    "longitude":2.32847426086664
+  },
+  {
+    "number":3013,
+    "name":"03013 - RUE DE SEVIGNE",
+    "address":"36 RUE DE SEVIGNE - 75003 PARIS",
+    "latitude":48.856954148055344,
+    "longitude":2.362897420229539
+  },
+  {
+    "number":20016,
+    "name":"20016 - PYRENEES VITRUVE",
+    "address":"114 BIS RUE DES PYRENEES - 75020 PARIS",
+    "latitude":48.85712940035504,
+    "longitude":2.404425625176959
+  },
+  {
+    "number":18005,
+    "name":"18005 - TARDIEU",
+    "address":"8 RUE TARDIEU - 75018 PARIS",
+    "latitude":48.88416326647457,
+    "longitude":2.341879802310627
+  },
+  {
+    "number":15107,
+    "name":"15107 -  PALAIS DES SPORTS",
+    "address":"42 BOULEVARD VICTOR - 75015 PARIS",
+    "latitude":48.8335736182304,
+    "longitude":2.28548042091786
+  },
+  {
+    "number":15013,
+    "name":"15013 - LECOURBE VOLONTAIRE",
+    "address":"DEV 1 RUE DES VOLONTAIRES - 75015 PARIS",
+    "latitude":48.843542735006295,
+    "longitude":2.306558615574665
+  },
+  {
+    "number":33104,
+    "name":"33104 - JOINEAU (PRE SAINT GERVAIS)",
+    "address":"RUE ANDRE JOINEAU / PLACE ANATOLE FRANCE - 93310 LE PRE SAINT GERVAIS",
+    "latitude":48.883620233843736,
+    "longitude":2.403240318366616
+  },
+  {
+    "number":9029,
+    "name":"09029 - TRINITE",
+    "address":"62 RUE SAINT LAZARE - 75009 PARIS",
+    "latitude":48.87685932729332,
+    "longitude":2.332762380011633
+  },
+  {
+    "number":13022,
+    "name":"13022 - BUTTE AUX CAILLES",
+    "address":"27 ET 36 RUE DE LA BUTTE AUX CAILLES - 75013 PARIS",
+    "latitude":48.827564379878744,
+    "longitude":2.34906350669476
+  },
+  {
+    "number":20018,
+    "name":"20018 - HARPIGNIES",
+    "address":"2 RUE HARPIGNIES- 75020 PARIS",
+    "latitude":48.85862166935013,
+    "longitude":2.409942553877677
+  },
+  {
+    "number":8002,
+    "name":"08002 - GARE SAINT LAZARE - COUR DU HAVRE",
+    "address":"Cour du Havre - Face au 2, rue d'Amsterdam - 75008 PARIS",
+    "latitude":48.87572,
+    "longitude":2.32668
+  },
+  {
+    "number":8047,
+    "name":"08047 - GEORGE V",
+    "address":"28 AVENUE GEORGE V - 75008 PARIS",
+    "latitude":48.868165940558264,
+    "longitude":2.301274609316824
+  },
+  {
+    "number":11042,
+    "name":"11042 - OBERKAMPF",
+    "address":"1 RUE DU GRAND PRIEURE - 75011 PARIS",
+    "latitude":48.8646494198968,
+    "longitude":2.369261438255258
+  },
+  {
+    "number":15047,
+    "name":"15047 - DANTZIG",
+    "address":"FACE AU 37 RUE MORILLONS - 75015 PARIS",
+    "latitude":48.83317977055646,
+    "longitude":2.299282641599619
+  },
+  {
+    "number":13121,
+    "name":"13121 - BRUNESEAU - QUAI D'IVRY",
+    "address":"5 RUE BRUNESEAU - 75013 PARIS",
+    "latitude":48.8249528728704,
+    "longitude":2.38858067885378
+  },
+  {
+    "number":7001,
+    "name":"07001 - DUROC",
+    "address":"63 BOULEVARD DES INVALIDES - 75007 PARIS",
+    "latitude":48.84776985682885,
+    "longitude":2.316183886729462
+  },
+  {
+    "number":15039,
+    "name":"15039 - CHARLES VALLIN",
+    "address":"133 RUE DE L'ABBE GROULT - 75015 PARIS",
+    "latitude":48.836058393856256,
+    "longitude":2.301865968384287
+  },
+  {
+    "number":8057,
+    "name":"08057 - HOCHE",
+    "address":"62 AVENUE HOCHE - 75008 PARIS",
+    "latitude":48.87494475810723,
+    "longitude":2.29743857720451
+  },
+  {
+    "number":20019,
+    "name":"20019 - MAQUIS DU VERCORS - PORTE DES LILAS",
+    "address":"PLACE DU MARQUIS DU VERCORS - 75020 PARIS",
+    "latitude":48.877336,
+    "longitude":2.408573
+  },
+  {
+    "number":11111,
+    "name":"11111 - CHARONNE FROT",
+    "address":"31 RUE LEON FROT - 75011 PARIS",
+    "latitude":48.854963800335234,
+    "longitude":2.387217085372007
+  },
+  {
+    "number":18111,
+    "name":"18111 - FELIZ ZIEM",
+    "address":"2 RUE FELIX ZIEM - 75018 PARIS",
+    "latitude":48.88949630486821,
+    "longitude":2.333393658804396
+  },
+  {
+    "number":8026,
+    "name":"08026 - MESSINE",
+    "address":"2 AVENUE MESSINE - 75008 PARIS",
+    "latitude":48.87545720024482,
+    "longitude":2.315465494584916
+  },
+  {
+    "number":9002,
+    "name":"09002 - MAUBEUGE CONDORCET",
+    "address":"19 RUE D'ABBEVILLE - 75009 PARIS",
+    "latitude":48.879223370628495,
+    "longitude":2.349147493536092
+  },
+  {
+    "number":5022,
+    "name":"05022 - CARDINAL LEMOINE",
+    "address":"40 RUE BOU LANGERS - 75005 PARIS",
+    "latitude":48.8462950317216,
+    "longitude":2.35222292160749
+  },
+  {
+    "number":10009,
+    "name":"10009 - HITTORFF",
+    "address":"FACE 14 RUE HITTORFF - 75010 PARIS",
+    "latitude":48.87208360886937,
+    "longitude":2.35766368561921
+  },
+  {
+    "number":12038,
+    "name":"12038 - BEL AIR",
+    "address":"FACE 12 BOULEVARD PICPUS - 75012 PARIS",
+    "latitude":48.839988788911874,
+    "longitude":2.400525668552064
+  },
+  {
+    "number":14036,
+    "name":"14036 - BOULARD DAGUERRE",
+    "address":"14 RUE BOULARD - 75014 PARIS",
+    "latitude":48.834390797006805,
+    "longitude":2.329303946545288
+  },
+  {
+    "number":17005,
+    "name":"17005 - BROCHANT",
+    "address":"43 RUE BROCHANT - 75017 PARIS",
+    "latitude":48.89032998912038,
+    "longitude":2.319730559929781
+  },
+  {
+    "number":16019,
+    "name":"16019 - HENRI MARTIN",
+    "address":"FACE 98 AV. HENRI MARTIN - 75016 PARIS",
+    "latitude":48.863025315388256,
+    "longitude":2.268806550199479
+  },
+  {
+    "number":10111,
+    "name":"10111 - JEMMAPES",
+    "address":"100 QUAI DE JEMMAPES - 75010 PARIS",
+    "latitude":48.8734627987082,
+    "longitude":2.36403505925044
+  },
+  {
+    "number":19022,
+    "name":"19022 - MEAUX - SECRETAN",
+    "address":"53 RUE DE MEAUX - 75019 PARIS",
+    "latitude":48.8813548433424,
+    "longitude":2.37333118915558
+  },
+  {
+    "number":19109,
+    "name":"19109 - PLACE DU MAROC",
+    "address":"27 RUE DE TANGER - 75019 PARIS",
+    "latitude":48.886233417429835,
+    "longitude":2.368856390499634
+  },
+  {
+    "number":8048,
+    "name":"08048 - MARCEAU",
+    "address":"45 AVENUE MARCEAU - 75008 PARIS",
+    "latitude":48.868851708234864,
+    "longitude":2.298514048803577
+  },
+  {
+    "number":9014,
+    "name":"09014 - FAUBOURG MONTMARTRE",
+    "address":"55 RUE DU FAUBOURG MONTMARTRE - 75009 PARIS",
+    "latitude":48.875329723153264,
+    "longitude":2.340772662331439
+  },
+  {
+    "number":9108,
+    "name":"09108 - ROCHECHOUART MAUBEUGE",
+    "address":"25 RUE DE ROCHECHOUART - 75009 PARIS",
+    "latitude":48.87789001497427,
+    "longitude":2.344785602987212
+  },
+  {
+    "number":13009,
+    "name":"13009 - BLANQUI CORVISART",
+    "address":"46 BOULEVARD AUGUSTE BLANQUI - 75013 PARIS",
+    "latitude":48.82998371071962,
+    "longitude":2.350403587821832
+  },
+  {
+    "number":19006,
+    "name":"19006 - MATHIS",
+    "address":"6 RUE MATHIS - 75019 PARIS",
+    "latitude":48.89067812943125,
+    "longitude":2.376142468863619
+  },
+  {
+    "number":12106,
+    "name":"12106 - BARTHES TROYES",
+    "address":"3 RUE ROLAND BARTHES - 75012 PARIS",
+    "latitude":48.84394917584249,
+    "longitude":2.37908134343237
+  },
+  {
+    "number":19125,
+    "name":"19125 - LEDIT DE NANTES",
+    "address":"PLACE LEDIT DE NANTES - 75019 PARIS",
+    "latitude":48.8887900267753,
+    "longitude":2.378500156138491
+  },
+  {
+    "number":42703,
+    "name":"42703 - FONTAINEBLEAU (KREMLIN BICETRE)",
+    "address":"93 AVENUE DE FONTAINEBLEAU - 94270 LE KREMLIN BICETRE",
+    "latitude":48.8095823380351,
+    "longitude":2.36268350990116
+  },
+  {
+    "number":8016,
+    "name":"08016 - SQUARE LOUIS XVI",
+    "address":"DEV 32 RUE PASQUIER - 75008 PARIS",
+    "latitude":48.87320440102894,
+    "longitude":2.323658830743138
+  },
+  {
+    "number":15025,
+    "name":"15025 - AMETTE",
+    "address":"26 RUE DUPLEIX - 75015 PARIS",
+    "latitude":48.851454182127426,
+    "longitude":2.296710300930856
+  },
+  {
+    "number":5031,
+    "name":"05031 - LACEPEDE",
+    "address":"2 RUE LACEPEDE - 75005 PARIS",
+    "latitude":48.84367484543761,
+    "longitude":2.354615982683207
+  },
+  {
+    "number":15033,
+    "name":"15033 - VIOLET",
+    "address":"5 PLACE VIOLET - 75015 PARIS",
+    "latitude":48.84479039026177,
+    "longitude":2.290541560154527
+  },
+  {
+    "number":19035,
+    "name":"19035 - PORTE CHAUMONT",
+    "address":"RUE SIGMUND FREUD / PORTE CHAUMONT - 75019 PARIS",
+    "latitude":48.88573329985865,
+    "longitude":2.397846415383189
+  },
+  {
+    "number":18041,
+    "name":"18041 - MARTYRS 2",
+    "address":"FACE 112 BOULEVARD DE ROCHECHOUART - 75018 PARIS",
+    "latitude":48.88219420395092,
+    "longitude":2.340651849622331
+  },
+  {
+    "number":20047,
+    "name":"20047 - COURS DE VINCENNES BD DAVOUT",
+    "address":"107 COURS DE VINCENNES - 75020 PARIS",
+    "latitude":48.8473310531154,
+    "longitude":2.4103900081973
+  },
+  {
+    "number":2022,
+    "name":"02022 - BONNE NOUVELLE SAINT FIACRE",
+    "address":"20 RUE SAINT FIACRE - 75002 PARIS",
+    "latitude":48.87078277953678,
+    "longitude":2.345905811394424
+  },
+  {
+    "number":17033,
+    "name":"17033 - CARNOT",
+    "address":"8 AVENUE CARNOT - 75017 PARIS",
+    "latitude":48.87553842110213,
+    "longitude":2.293732100169925
+  },
+  {
+    "number":20035,
+    "name":"20035 - PYRENEES",
+    "address":"262 RUE DES PYRENEES - 75020 PARIS",
+    "latitude":48.86941289116132,
+    "longitude":2.395039981220676
+  },
+  {
+    "number":18040,
+    "name":"18040 - CHAPELLE MARX DORMOY",
+    "address":"29 BOULEVARD DE LA CHAPELLE - 75018 PARIS",
+    "latitude":48.88457006316311,
+    "longitude":2.360215572664323
+  },
+  {
+    "number":18026,
+    "name":"18026 - RUISSEAU ORDENER",
+    "address":"37 RUE DU RUISSEAU - 75018 PARIS",
+    "latitude":48.892895283967825,
+    "longitude":2.340119632436559
+  },
+  {
+    "number":19009,
+    "name":"19009 - CITE DES SCIENCES",
+    "address":"28BIS AVENUE CORENTIN CARIOU - 75019 PARIS",
+    "latitude":48.89654905978759,
+    "longitude":2.384649644021933
+  },
+  {
+    "number":17044,
+    "name":"17044 - PORTE DE SAINT OUEN",
+    "address":"1 AVENUE DE LA PORTE DE SAINT OUEN - 75017 PARIS",
+    "latitude":48.89792240854517,
+    "longitude":2.32851451022192
+  },
+  {
+    "number":14001,
+    "name":"14001 - EDGAR QUINET",
+    "address":"13 BOULEVARD EDGAR QUINET - 75014 PARIS",
+    "latitude":48.84115621648301,
+    "longitude":2.324448789519074
+  },
+  {
+    "number":12021,
+    "name":"12021 - COURTELINE",
+    "address":"1 - 3  et 5 avenue Courteline (angle boulevard Soult) - 75012 PARIS",
+    "latitude":48.844373193657,
+    "longitude":2.41097245166824
+  },
+  {
+    "number":3009,
+    "name":"03009 - TEMPLE 113",
+    "address":"76 RUE DU TEMPLE - 75003 PARIS",
+    "latitude":48.861581157730946,
+    "longitude":2.35660934144383
+  },
+  {
+    "number":3004,
+    "name":"03004 - REPUBLIQUE 23",
+    "address":"19 PLACE DE LA REPUBLIQUE - 75003 PARIS",
+    "latitude":48.86707,
+    "longitude":2.36351
+  },
+  {
+    "number":19105,
+    "name":"19105 - PORTE BRUNET",
+    "address":"FACE 1 AVENUE AMBROISE RENDU - 75019 PARIS",
+    "latitude":48.88365921093733,
+    "longitude":2.395719508193907
+  },
+  {
+    "number":18001,
+    "name":"18001 - DAMREMONT CAULAINCOURT",
+    "address":"6 RUE DAMREMONT - 75018 PARIS",
+    "latitude":48.88727464264267,
+    "longitude":2.332648363845394
+  },
+  {
+    "number":15108,
+    "name":"15108 - LOURMEL - MARIE SKOBTSOV",
+    "address":"84 RUE DE LOURMEL - 75015 PARIS",
+    "latitude":48.844974,
+    "longitude":2.287283
+  },
+  {
+    "number":20030,
+    "name":"20030 - PERE LACHAISE",
+    "address":"54 BOULEVARD MENILMONTANT - 75020 PARIS",
+    "latitude":48.863411107404715,
+    "longitude":2.387133957573714
+  },
+  {
+    "number":2020,
+    "name":"02020 - OPERA CASANOVA",
+    "address":"02 RUE DANIEL CASANOVA - 75002 PARIS",
+    "latitude":48.867623078056845,
+    "longitude":2.333268593101536
+  },
+  {
+    "number":14104,
+    "name":"14104 - LOSSERAND BOYER-BARRET",
+    "address":"4 RUE BOYER BARRET - 75014 PARIS",
+    "latitude":48.833139,
+    "longitude":2.317377
+  },
+  {
+    "number":11004,
+    "name":"11004 - CHARONNE SAINT ANTOINE",
+    "address":"3 RUE DE CHARONNE - 75011 PARIS",
+    "latitude":48.852255290042486,
+    "longitude":2.374027235613735
+  },
+  {
+    "number":19106,
+    "name":"19106 - GARE EMGP",
+    "address":"35, rue de la Gare - 75019 PARIS",
+    "latitude":48.90162,
+    "longitude":2.37267
+  },
+  {
+    "number":13010,
+    "name":"13010 - PLACE D ITALIE AURIOL",
+    "address":"FACE 11 PLACE D'ITALIE - 75013 PARIS",
+    "latitude":48.831582643774894,
+    "longitude":2.356708420760657
+  },
+  {
+    "number":17107,
+    "name":"17107 - BERTHIER STUART MERRIL",
+    "address":"182 BOULEVARD BERTHIER - 75017 PARIS",
+    "latitude":48.88591312825616,
+    "longitude":2.293234151072418
+  },
+  {
+    "number":42503,
+    "name":"42503 - LENINE (ARCUEIL/GENTILLY)",
+    "address":"71 AVENUE VLADIMIR LITCH LENINE - 94110 ARCUEIL",
+    "latitude":48.8127462,
+    "longitude":2.3316847
+  },
+  {
+    "number":13151,
+    "name":"13151 - GARE D'AUSTERLITZ",
+    "address":"GARE D'AUSTERLITZ - 75013 PARIS",
+    "latitude":48.84151,
+    "longitude":2.36543
+  },
+  {
+    "number":3003,
+    "name":"03003 - TURENNE BRETAGNE",
+    "address":"4 RUE DES FILLES DU CALVAIRE - 75003 PARIS",
+    "latitude":48.86213223497159,
+    "longitude":2.364951386893752
+  },
+  {
+    "number":13046,
+    "name":"13046 - OUDINE PATAY",
+    "address":"10 RUE EUGENE OUDINE - 75013 PARIS",
+    "latitude":48.825712903519616,
+    "longitude":2.375044300094851
+  },
+  {
+    "number":20023,
+    "name":"20023 - PELLEPORT BELGRAND",
+    "address":"44 RUE PELLEPORT - 75020 PARIS",
+    "latitude":48.86500081847653,
+    "longitude":2.403980836377493
+  },
+  {
+    "number":13111,
+    "name":"13111 - CIMETIERE DE GENTILLY",
+    "address":"RUE DE LA POTERNE DES PEUPLIERS - 75013 PARIS",
+    "latitude":48.818574415839485,
+    "longitude":2.353260183740912
+  },
+  {
+    "number":42008,
+    "name":"42008 - CASANOVA (IVRY)",
+    "address":"128 AVENUE DANIEL CASANOVA - 94200 IVRY",
+    "latitude":48.81420628475591,
+    "longitude":2.384207013557983
+  },
+  {
+    "number":12041,
+    "name":"12041 - BOIS DE VINCENNES",
+    "address":"AVENUE DAUMESNIL - 75012 PARIS",
+    "latitude":48.833654852830335,
+    "longitude":2.413463576486826
+  },
+  {
+    "number":11009,
+    "name":"11009 - RUE DES BOULETS",
+    "address":"45 RUE DES BOULETS - 75011 PARIS",
+    "latitude":48.852193095437535,
+    "longitude":2.3890216505832
+  },
+  {
+    "number":23010,
+    "name":"23010 - VOLTAIRE (LEVALLOIS)",
+    "address":"47 RUE VOLTAIRE - 92300 LEVALLOIS-PERRET",
+    "latitude":48.891962328964816,
+    "longitude":2.284204990113615
+  },
+  {
+    "number":12026,
+    "name":"12026 - PARC DE BERCY",
+    "address":"61 RUE DE BERCY - 75012 PARIS",
+    "latitude":48.83772145898209,
+    "longitude":2.382217337050408
+  },
+  {
+    "number":12012,
+    "name":"12012 - REUILLY DIDEROT",
+    "address":"71 BOULEVARD DIDEROT - 75012 PARIS",
+    "latitude":48.847296310645035,
+    "longitude":2.385707672217665
+  },
+  {
+    "number":5026,
+    "name":"05026 - MOUFFETARD SAINT MEDARD",
+    "address":"3 RUE PASCAL - 75005 PARIS",
+    "latitude":48.83899382454321,
+    "longitude":2.34993205295774
+  },
+  {
+    "number":32602,
+    "name":"32602 - POULMARCH (LES LILAS)",
+    "address":"7 RUE JEAN POULMARCH - 93260 LES LILAS",
+    "latitude":48.8794000532367,
+    "longitude":2.41616066183218
+  },
+  {
+    "number":18046,
+    "name":"18046 - FOURCHE",
+    "address":"12 RUE ETIENNE JOGELLE - 75018 PARIS",
+    "latitude":48.88794016394694,
+    "longitude":2.326124420314341
+  },
+  {
+    "number":10014,
+    "name":"10014 - BEAUREPAIRE",
+    "address":"14 RUE DE MARSEILLE - 75010 PARIS",
+    "latitude":48.8716626619994,
+    "longitude":2.363933311380362
+  },
+  {
+    "number":20042,
+    "name":"20042 - PYRENEES ERMITAGE",
+    "address":"300 RUE DES PYRENEES - 75020 PARIS",
+    "latitude":48.87215737993568,
+    "longitude":2.391739173776302
+  },
+  {
+    "number":7023,
+    "name":"07023 - BOURDONNAIS TOUR EIFFEL",
+    "address":"QUAI BRANLY - 75007 PARIS",
+    "latitude":48.860897797941,
+    "longitude":2.29559959844703
+  },
+  {
+    "number":18113,
+    "name":"18113 - LEPIC",
+    "address":"70 - 72 RUE LEPIC - 75018 PARIS",
+    "latitude":48.8875730709534,
+    "longitude":2.33432733641793
+  },
+  {
+    "number":19027,
+    "name":"19027 - SERRURIER",
+    "address":"FACE 109 BOULEVARD SERURIER - 75019 PARIS",
+    "latitude":48.8806060535742,
+    "longitude":2.3978962906105
+  },
+  {
+    "number":33102,
+    "name":"33102 - JAURES 1 (PRE SAINT GERVAIS)",
+    "address":"RUE GABRIEL PERI ANGLE AVENUE JAURES - 93310 LE PRE SAINT GERVAIS",
+    "latitude":48.886526983267544,
+    "longitude":2.407468689386476
+  },
+  {
+    "number":19026,
+    "name":"19026 - DANUBE",
+    "address":"53 RUE MIGUEL HIDALGO - 75019 PARIS",
+    "latitude":48.88195317244523,
+    "longitude":2.392496216649528
+  },
+  {
+    "number":17028,
+    "name":"17028 - PORTE DE COURCELLE",
+    "address":"34 BOULEVARD DE REIMS - 75017 PARIS",
+    "latitude":48.88880002064895,
+    "longitude":2.296319931841717
+  },
+  {
+    "number":17030,
+    "name":"17030 - RENNEQUIN PEREIRE",
+    "address":"143 BOULEVARD DE PEREIRE - 75017 PARIS",
+    "latitude":48.88363915389933,
+    "longitude":2.295152067446227
+  },
+  {
+    "number":10017,
+    "name":"10017 - GARE DE L'EST SAINT LAURENT",
+    "address":"1 RUE DE LA FIDELITE - 75010 PARIS",
+    "latitude":48.874575036780286,
+    "longitude":2.356796765204903
+  },
+  {
+    "number":15103,
+    "name":"15103 - SQUARE DES CÉVENNES",
+    "address":"01 RUE CAUCHY - 75015 PARIS",
+    "latitude":48.84341723238589,
+    "longitude":2.275108332056225
+  },
+  {
+    "number":19025,
+    "name":"19025 - BOTZARIS",
+    "address":"FACE 80 RUE BOTZARIS - 75019 PARIS",
+    "latitude":48.8795614522371,
+    "longitude":2.38896041078391
+  },
+  {
+    "number":8033,
+    "name":"08033 - SAINT PHILIPPE DU ROULE",
+    "address":"1 RUE DU CDT RIVIERE - 75008 PARIS",
+    "latitude":48.872787680846464,
+    "longitude":2.309722588932229
+  },
+  {
+    "number":2107,
+    "name":"02107 - THOREL",
+    "address":"11 RUE THOREL - 75002 PARIS",
+    "latitude":48.87000061719652,
+    "longitude":2.348995518049354
+  },
+  {
+    "number":12128,
+    "name":"12128 - ROUTE DE LA PYRAMIDE- ECOLE DU BREUIL",
+    "address":"Pyramide  (proche rond-point Route de la Ferme) - 75012 PARIS",
+    "latitude":48.82256,
+    "longitude":2.45877
+  },
+  {
+    "number":20025,
+    "name":"20025 - GAMBETTA GATINES",
+    "address":"13 RUE DES GATINES - 75020 PARIS",
+    "latitude":48.8653941647232,
+    "longitude":2.397814475307571
+  },
+  {
+    "number":14009,
+    "name":"14009 - COTY TOMBE D'ISSOIRE",
+    "address":"49 RUE DE LA TOMBE D'ISSOIRE - 75014 PARIS",
+    "latitude":48.83055599940998,
+    "longitude":2.33378329803361
+  },
+  {
+    "number":11035,
+    "name":"11035 - GONCOURT",
+    "address":"140 AVENUE PARMENTIER - 75011 PARIS",
+    "latitude":48.86946960532872,
+    "longitude":2.371536810663942
+  },
+  {
+    "number":19123,
+    "name":"19123 - QUAI DE METZ",
+    "address":"7 QUAI DE METZ - 75019 PARIS",
+    "latitude":48.89106,
+    "longitude":2.3865
+  },
+  {
+    "number":12033,
+    "name":"12033 - SAINT EMILION",
+    "address":"FACE 28 RUE FRANCOIS TRUFFAUT - 75012 PARIS",
+    "latitude":48.83350833245743,
+    "longitude":2.386133168700345
+  },
+  {
+    "number":14035,
+    "name":"14035 - MAINE GAITE",
+    "address":"90 AVENUE DU MAINE - 75014 PARIS",
+    "latitude":48.83788362776244,
+    "longitude":2.322551640018162
+  },
+  {
+    "number":20039,
+    "name":"20039 - COURONNES",
+    "address":"44 BOULEVARD DE BELLEVILLE - 75020 PARIS",
+    "latitude":48.868940642855314,
+    "longitude":2.381282601102786
+  },
+  {
+    "number":16010,
+    "name":"16010 - BELLES FEUILLES",
+    "address":"4 RUE DES BELLES FEUILLES - 75016 PARIS",
+    "latitude":48.86585549636314,
+    "longitude":2.282859908979733
+  },
+  {
+    "number":8052,
+    "name":"08052 - WASHINGTON",
+    "address":"2 RUE BALZAC - 75008 PARIS",
+    "latitude":48.87288299097443,
+    "longitude":2.299972932642669
+  },
+  {
+    "number":17026,
+    "name":"17026 - WAGRAM COURCELLES",
+    "address":"105 RUE JOUFFROY D'ABBANS - 75017 PARIS",
+    "latitude":48.88185715074461,
+    "longitude":2.301138378176729
+  },
+  {
+    "number":42702,
+    "name":"42702 - LECLERC (KREMLIN BICETRE)",
+    "address":"73 RUE DU GENERAL LECLERC - 94270 LE KREMELIN BICETRE",
+    "latitude":48.81047749960048,
+    "longitude":2.358172896462481
+  },
+  {
+    "number":14110,
+    "name":"14110 - ABBE CARTON",
+    "address":"89 RUE DE L'ABBE CARTON - 75014 PARIS",
+    "latitude":48.82774626607583,
+    "longitude":2.320714098089133
+  },
+  {
+    "number":10152,
+    "name":"10152 - GARE DU NORD 2",
+    "address":"3 BOULEVARD DE DENAIN - 75010 PARIS",
+    "latitude":48.87904931076023,
+    "longitude":2.354159095958248
+  },
+  {
+    "number":14107,
+    "name":"14107 - PORTE DE MONTROUGE 2",
+    "address":"2 AVENUE DE LA PORTE DE MONTROUGE - 75014 PARIS",
+    "latitude":48.82341630050286,
+    "longitude":2.322936857107952
+  },
+  {
+    "number":15031,
+    "name":"15031 - THEATRE",
+    "address":"60 RUE DU THEATRE - 75015 PARIS",
+    "latitude":48.84817034136516,
+    "longitude":2.289906646457531
+  },
+  {
+    "number":11010,
+    "name":"11010 - ST ANTOINE GONNET",
+    "address":"1 RUE DES BOULETS - 75011 PARIS",
+    "latitude":48.84925926211519,
+    "longitude":2.391754614194301
+  },
+  {
+    "number":7021,
+    "name":"07021 - BOSQUET SAINT DOMINIQUE",
+    "address":"37 AVENUE BOSQUET - 75007 PARIS",
+    "latitude":48.85865170952645,
+    "longitude":2.303716580234576
+  },
+  {
+    "number":16005,
+    "name":"16005 - POINCARE VICTOR HUGO",
+    "address":"89 AVENUE RAYMOND POINCARE - 75016 PARIS",
+    "latitude":48.870306124369975,
+    "longitude":2.285074541420228
+  },
+  {
+    "number":21303,
+    "name":"21303 - ILES (ISSY LES MOULINEAUX)",
+    "address":"ANGLE AVENUE JEAN MONNET ET BOULEVARD DES ILES -  92130 ISSY LES MOULINEAUX",
+    "latitude":48.8234505470138,
+    "longitude":2.249665298288027
+  },
+  {
+    "number":13055,
+    "name":"13055 - LAGROUA",
+    "address":"18 RUE MARIE ANDREE LAGROUA - 75013 PARIS",
+    "latitude":48.828595283857425,
+    "longitude":2.380220606266108
+  },
+  {
+    "number":20121,
+    "name":"20121 - MENILMONTANT BOYER",
+    "address":"27 RUE BOYER - 75020 PARIS",
+    "latitude":48.868910127448686,
+    "longitude":2.392020489286297
+  },
+  {
+    "number":19011,
+    "name":"19011 - ROUVET DAMPIERRE",
+    "address":"2 RUE ROUVET - 75019 PARIS",
+    "latitude":48.8933800500227,
+    "longitude":2.38499975689617
+  },
+  {
+    "number":1102,
+    "name":"01102 - FRANCAISE – MAUCONSEIL",
+    "address":"6 RUE FRANCAISE - 75001 PARIS",
+    "latitude":48.8640650469499,
+    "longitude":2.34759791271647
+  },
+  {
+    "number":15057,
+    "name":"15057 - BOSSOUTROT - MARTIAL VALIN",
+    "address":"face au 4 rue Lucien Bossoutrot angle Bd Martial Valin - 75015 PARIS",
+    "latitude":48.83654,
+    "longitude":2.27414
+  },
+  {
+    "number":22101,
+    "name":"22101 - GARE ROUTIERE ( SAINT CLOUD)",
+    "address":"GARE ROUTIERE - ARRET TRAM - 92210 SAINT CLOUD",
+    "latitude":48.843126205966946,
+    "longitude":2.222189235680779
+  },
+  {
+    "number":20131,
+    "name":"20131 - REPOS",
+    "address":"41 RUE DU REPOS - 75020 PARIS",
+    "latitude":48.859358523592554,
+    "longitude":2.389613136684456
+  },
+  {
+    "number":1003,
+    "name":"01003 - RIVOLI SAINT DENIS",
+    "address":"7 RUE SAINT DENIS - 75001 PARIS",
+    "latitude":48.859150287255645,
+    "longitude":2.347620087684511
+  },
+  {
+    "number":17001,
+    "name":"17001 - GUY MOQUET",
+    "address":"RUE GUY MOQUET - 75017 PARIS",
+    "latitude":48.8928229630235,
+    "longitude":2.3268034898348
+  },
+  {
+    "number":1010,
+    "name":"01010 - PONT NEUF",
+    "address":"10 RUE BOUCHER - 75001 PARIS",
+    "latitude":48.85946238924527,
+    "longitude":2.344366128446111
+  },
+  {
+    "number":17016,
+    "name":"17016 - BROCHANT",
+    "address":"3 RUE BROCHANT - 75017 PARIS",
+    "latitude":48.88818698581028,
+    "longitude":2.316861143151153
+  },
+  {
+    "number":11002,
+    "name":"11002 - ROQUETTE THIERE",
+    "address":"37 RUE DE LA ROQUETTE - 75011 PARIS",
+    "latitude":48.85510629540472,
+    "longitude":2.373424541930557
+  },
+  {
+    "number":8004,
+    "name":"08004 - MALESHERBES PASQUIER",
+    "address":"FACE 4 BD MALESHERBES - 75008 PARIS",
+    "latitude":48.87042188343355,
+    "longitude":2.323288994791708
+  },
+  {
+    "number":20113,
+    "name":"20113 - PARC DE BELLEVILLE",
+    "address":"30 RUE PIAT - 75020 PARIS",
+    "latitude":48.87195626635528,
+    "longitude":2.384981390278095
+  },
+  {
+    "number":10036,
+    "name":"10036 - AQUEDUC",
+    "address":"80 RUE DE L'AQUEDUC - 75010 PARIS",
+    "latitude":48.88384326568884,
+    "longitude":2.367110644031659
+  },
+  {
+    "number":42207,
+    "name":"42207 - PARIS 3 (CHARENTON)",
+    "address":"136 RUE DE PARIS - 94220 CHARENTON",
+    "latitude":48.8266572063246,
+    "longitude":2.405876723011083
+  },
+  {
+    "number":12028,
+    "name":"12028 - VIVALDI",
+    "address":"42 ALLEE VIVALDI - 75012 PARIS",
+    "latitude":48.841923663276546,
+    "longitude":2.389728979467376
+  },
+  {
+    "number":5008,
+    "name":"05008 - ST GERMAIN-DANTE",
+    "address":"9 RUE DE DANTE - 75005 PARIS",
+    "latitude":48.850977229793614,
+    "longitude":2.346076825913541
+  },
+  {
+    "number":2003,
+    "name":"02003 - ALLEE PIERRE LAZAEFF",
+    "address":"189 RUE SAINT DENIS - 75002 PARIS",
+    "latitude":48.86614574652862,
+    "longitude":2.350844595287827
+  },
+  {
+    "number":1026,
+    "name":"01026 - COLONEL DRIANT",
+    "address":"PLACE DU LIEUTENANT HENRI KARCHER - 75001 PARIS",
+    "latitude":48.86343050194121,
+    "longitude":2.340169767017624
+  },
+  {
+    "number":16101,
+    "name":"16101 - MALAKOFF",
+    "address":"161 AVENUE MALAKOFF - 75016 PARIS",
+    "latitude":48.87669268743692,
+    "longitude":2.283457593383419
+  },
+  {
+    "number":17110,
+    "name":"17110 - LEGENDRE",
+    "address":"83 RUE LEGENDRE - 75017 PARIS",
+    "latitude":48.8877723254283,
+    "longitude":2.32036786584418
+  },
+  {
+    "number":10114,
+    "name":"10114 - HOPITAL SAINT LOUIS",
+    "address":"12 BIS RUE DE LA GRANGE AUX BELLES - 75010 PARIS",
+    "latitude":48.874794994841274,
+    "longitude":2.366669436984963
+  },
+  {
+    "number":17031,
+    "name":"17031 - PORTE DE CHAMPERET",
+    "address":"PLACE DE LA PORTE DE CHAMPERET - 75017 PARIS",
+    "latitude":48.88561741628322,
+    "longitude":2.290781411279206
+  },
+  {
+    "number":6021,
+    "name":"06021 - BONAPARTE BEAUX ARTS",
+    "address":"17 RUE DES BEAUX ARTS - 75006 PARIS",
+    "latitude":48.8564374096868,
+    "longitude":2.334797622948368
+  },
+  {
+    "number":16031,
+    "name":"16031 - BOULAINVILLIERS",
+    "address":"51 RUE DES VIGNES - 75016 PARIS",
+    "latitude":48.85615074338874,
+    "longitude":2.275188414671189
+  },
+  {
+    "number":16103,
+    "name":"16103 - TRAKTIR",
+    "address":"3 RUE TRAKTIR - 75016 PARIS",
+    "latitude":48.87279915599243,
+    "longitude":2.291508179426733
+  },
+  {
+    "number":6027,
+    "name":"06027 - VAUGIRARD DESGOFFE",
+    "address":"2 RUE BLAISE DESGOFFE - 75006 PARIS",
+    "latitude":48.84612989154848,
+    "longitude":2.324240578144087
+  },
+  {
+    "number":8030,
+    "name":"08030 - MONTAIGNE",
+    "address":"25 RUE BAYARD - 75008 PARIS",
+    "latitude":48.86729323621449,
+    "longitude":2.307691605650344
+  },
+  {
+    "number":4105,
+    "name":"04105 - MORLAND",
+    "address":"17 BOULEVARD DU MORLAND - 75004 PARIS",
+    "latitude":48.84996003527753,
+    "longitude":2.363239868721318
+  },
+  {
+    "number":20044,
+    "name":"20044 - DAVOUT VOLGA",
+    "address":"63 BOULEVARD DAVOUT / ANGLE 84 RUE VOLGA 75020 PARIS",
+    "latitude":48.852919679957296,
+    "longitude":2.410522909779111
+  },
+  {
+    "number":12120,
+    "name":"12120 - CONSERVATION",
+    "address":"ROUTE DE LA CEINTURE DU LAC DAUMESNIL - 75012 PARIS",
+    "latitude":48.82772523704757,
+    "longitude":2.41827234236864
+  },
+  {
+    "number":16018,
+    "name":"16018 - FLANDRIN",
+    "address":"2 BOULEVARD FLANDRIN - 75016 PARIS",
+    "latitude":48.86441140945903,
+    "longitude":2.272448647646471
+  },
+  {
+    "number":41302,
+    "name":"41302 - CHARLES DE GAULLE (NOGENT)",
+    "address":"FACE AU 60 AVENUE CHARLES DE GAULLES - 94130 NOGENT SUR MARNE",
+    "latitude":48.83648112918176,
+    "longitude":2.479464268709081
+  },
+  {
+    "number":9030,
+    "name":"09030 - VICTOIR CHAUSSEE D ANTIN",
+    "address":"79 RUE DE LA VICTOIRE - 75009 PARIS",
+    "latitude":48.87518586417745,
+    "longitude":2.332036313368639
+  },
+  {
+    "number":18017,
+    "name":"18017 - PECQUEUR",
+    "address":"93 RUE CAULAINCOURT - 75018 PARIS",
+    "latitude":48.8896779050281,
+    "longitude":2.33817871442611
+  },
+  {
+    "number":18107,
+    "name":"18107 - CHARTRES",
+    "address":"22-24 RUE DE CHARTRES - 75018 PARIS",
+    "latitude":48.88470686398326,
+    "longitude":2.35358041022707
+  },
+  {
+    "number":7018,
+    "name":"07018 - SEGUR ESTREES",
+    "address":"23 AVENUE DE SEGUR - 75007 PARIS",
+    "latitude":48.85129433458901,
+    "longitude":2.309747615603337
+  },
+  {
+    "number":7022,
+    "name":"07022 - PONT DE L'ALMA",
+    "address":"3 AVENUE BOSQUET - 75007 PARIS",
+    "latitude":48.86164049957625,
+    "longitude":2.302250344175951
+  },
+  {
+    "number":35012,
+    "name":"35012 - CANDALE (PANTIN)",
+    "address":"FACE AU 12 RUE CANDALE - 93500 PANTIN",
+    "latitude":48.889485840195675,
+    "longitude":2.414307515111288
+  },
+  {
+    "number":15051,
+    "name":"15051 - ROLLET",
+    "address":"1 PLACE HENRI ROLLET - 75015 PARIS",
+    "latitude":48.83598100445596,
+    "longitude":2.293467119128608
+  },
+  {
+    "number":20107,
+    "name":"20107 - STADE MARYSE HILSZ",
+    "address":"26 RUE MARYSE HILSZ - 75020 PARIS",
+    "latitude":48.851285276158144,
+    "longitude":2.412733641628248
+  },
+  {
+    "number":8012,
+    "name":"08012 - CLICHY",
+    "address":"10 BOULEVARD DES BATIGNOLLES SUR TPC - 75008 PARIS",
+    "latitude":48.883318044354574,
+    "longitude":2.326207175385489
+  },
+  {
+    "number":3012,
+    "name":"03012 - GAITE LYRIQUE",
+    "address":"FACE 8 RUE SALOMON DE CAUS - 75003 PARIS",
+    "latitude":48.86749798940664,
+    "longitude":2.353660816249226
+  },
+  {
+    "number":10105,
+    "name":"10105 - BONNE NOUVELLE PROP2",
+    "address":"2 RUE DE MAZAGRAN - 75010 PARIS",
+    "latitude":48.870278078579595,
+    "longitude":2.351281636686514
+  },
+  {
+    "number":9033,
+    "name":"09033 - HAVRE CAUMARTIN",
+    "address":"FACE 45 RUE CAUMARTIN - 75009 PARIS",
+    "latitude":48.872795019872605,
+    "longitude":2.328315742616178
+  },
+  {
+    "number":13034,
+    "name":"13034 - EDISON",
+    "address":"54 AVENUE EDISON - 75013 PARIS",
+    "latitude":48.82902666973469,
+    "longitude":2.361069024089417
+  },
+  {
+    "number":17013,
+    "name":"17013 - LEGENDRE",
+    "address":"62 RUE LEGENDRE - 75017 PARIS",
+    "latitude":48.885437730894544,
+    "longitude":2.316473835914172
+  },
+  {
+    "number":31004,
+    "name":"31004 - PARIS 2 (MONTREUIL)",
+    "address":"175/179 RUE DE PARIS - 93100 MONTREUIL",
+    "latitude":48.85550131286469,
+    "longitude":2.422055733613231
+  },
+  {
+    "number":9106,
+    "name":"09106 - AUBER",
+    "address":"3 RUE BOUDREAU - 75009 PARIS",
+    "latitude":48.87219025140095,
+    "longitude":2.329423494000903
+  },
+  {
+    "number":16028,
+    "name":"16028 - MILLET - JEAN DE LA FONTAINE",
+    "address":"12 RUE FRANCOIS MILLET - 75016 PARIS",
+    "latitude":48.85100487466529,
+    "longitude":2.272469482915694
+  },
+  {
+    "number":18034,
+    "name":"18034 - LEIBNITZ",
+    "address":"50 RUE LEIBNITZ - 75018 PARIS",
+    "latitude":48.896328348515986,
+    "longitude":2.333390423834684
+  },
+  {
+    "number":5010,
+    "name":"05010 - SAINT MICHEL HENRI BARBUSSE",
+    "address":"1 RUE HENRI BARBUSSE - 75005 PARIS",
+    "latitude":48.84375698130157,
+    "longitude":2.339306721981416
+  },
+  {
+    "number":5019,
+    "name":"05019 - POISSY",
+    "address":"8-10 RUE DE POISSY - 75005 PARIS",
+    "latitude":48.84969041137042,
+    "longitude":2.352970183602024
+  },
+  {
+    "number":16038,
+    "name":"16038 - RUE MOLITOR",
+    "address":"RUE MOLITOR - 75016 PARIS",
+    "latitude":48.84509712653168,
+    "longitude":2.265724147895062
+  },
+  {
+    "number":9022,
+    "name":"09022 - LAFITTE ROSSINI",
+    "address":"19 RUE ROSSINI - 75009 PARIS",
+    "latitude":48.87334627510507,
+    "longitude":2.337980867701675
+  },
+  {
+    "number":16130,
+    "name":"16130 - BOIS DE BOULOGNE / PORTE DE LA MUETTE 2",
+    "address":"AVENUE LOUIS BARTHOU / PLACE DE LA COLOMBIE - 75016 PARIS",
+    "latitude":48.863757931035046,
+    "longitude":2.267504683574771
+  },
+  {
+    "number":43009,
+    "name":"43009 - MURS DU PARC (VINCENNES)",
+    "address":"AVENUE DES MURS DU PARC - 94300 VINCENNES",
+    "latitude":48.84696126017499,
+    "longitude":2.452237396596088
+  },
+  {
+    "number":1001,
+    "name":"01001 - ILE DE LA CITE PONT NEUF",
+    "address":"41 QUAI DE L'HORLOGE - 75001 PARIS",
+    "latitude":48.857091635218225,
+    "longitude":2.341747995157864
+  },
+  {
+    "number":18044,
+    "name":"18044 - CLICHY",
+    "address":"132 BOULEVARD DE CLICHY - 75018 PARIS",
+    "latitude":48.88412710804656,
+    "longitude":2.328807098192234
+  },
+  {
+    "number":23001,
+    "name":"23001 - COUTURIER 1 (LEVALLOIS)",
+    "address":"2 RUE PAUL VAILLANT COUTURIER - 92300 LEVALLOIS",
+    "latitude":48.8936146524531,
+    "longitude":2.277618727223195
+  },
+  {
+    "number":17046,
+    "name":"17046 - MAC MAHON",
+    "address":"18 AVENUE MAC MAHON - 75017 PARIS",
+    "latitude":48.8775320841302,
+    "longitude":2.29451253605293
+  },
+  {
+    "number":19018,
+    "name":"19018 - CITÉ DE LA MUSIQUE",
+    "address":"FACE 210 AVENUE JEAN JAURES - 75019 PARIS",
+    "latitude":48.8887860708258,
+    "longitude":2.39268612206715
+  },
+  {
+    "number":16033,
+    "name":"16033 - MICHEL ANGE AUTEUIL",
+    "address":"85 RUE JEAN DE LA FONTAINE - 75016 PARIS",
+    "latitude":48.84842761367387,
+    "longitude":2.265253821160005
+  },
+  {
+    "number":14031,
+    "name":"14031 - DIDOT CHATEAU",
+    "address":"13 RUE DIDOT - 75014 PARIS",
+    "latitude":48.8337,
+    "longitude":2.3215
+  },
+  {
+    "number":34010,
+    "name":"34010 - DIDEROT 2 (SAINT OUEN)",
+    "address":"FACE 61-63 RUE DIDEROT- 93400 SAINT OUEN",
+    "latitude":48.91157045930829,
+    "longitude":2.333910127129224
+  },
+  {
+    "number":22006,
+    "name":"22006 - PIERRET (NEUILLY)",
+    "address":"33 RUE PIERRET - 92200 NEUILLY SUR SEINE",
+    "latitude":48.883026659159576,
+    "longitude":2.260096983931875
+  },
+  {
+    "number":19014,
+    "name":"19014 - LORRAINE",
+    "address":"28 RUE DE LORRAINE - 75019 PARIS",
+    "latitude":48.886335082615275,
+    "longitude":2.38246120055766
+  },
+  {
+    "number":15038,
+    "name":"15038 - PLACE ADOLPHE CHERIOUX",
+    "address":"18 PLACE ADOLPHE CHERIOUX - 75015 PARIS",
+    "latitude":48.839635080561905,
+    "longitude":2.300654459291639
+  },
+  {
+    "number":20043,
+    "name":"20043 - CHARONNE AVRON",
+    "address":"48 BOULEVARD DE CHARONNE - 75011 PARIS",
+    "latitude":48.85160266522164,
+    "longitude":2.398403047037931
+  },
+  {
+    "number":20036,
+    "name":"20036 - MENILMONTANT - PELLEPORT",
+    "address":"164 RUE DE MENILMONTANT - 75020 PARIS",
+    "latitude":48.87068263384462,
+    "longitude":2.398959602331646
+  },
+  {
+    "number":18114,
+    "name":"18114 - LEPIC VERON",
+    "address":"35 RUE VERON - 75018 PARIS",
+    "latitude":48.885257971348466,
+    "longitude":2.334617735640665
+  },
+  {
+    "number":9035,
+    "name":"09035 - PLACE DE BUDAPEST",
+    "address":"38 RUE DE LONDRES - 75009 PARIS",
+    "latitude":48.87775323400056,
+    "longitude":2.327339290714228
+  },
+  {
+    "number":5021,
+    "name":"05021 - JUSSIEU",
+    "address":"41 RUE JUSSIEU - 75005 PARIS",
+    "latitude":48.847184641150214,
+    "longitude":2.353398379689353
+  },
+  {
+    "number":18006,
+    "name":"18006 - MARCHE ST-PIERRE",
+    "address":"PLACE SAINT PIERRE - 75018 PARIS",
+    "latitude":48.88469160640549,
+    "longitude":2.344139285947184
+  },
+  {
+    "number":4015,
+    "name":"04015 - MAIRIE DU 4 EME",
+    "address":"25 RUE DU PONT LOUIS PHILIPPE - 75004 PARIS",
+    "latitude":48.8559658562102,
+    "longitude":2.35638115487306
+  },
+  {
+    "number":35009,
+    "name":"35009 - LOLIVE 1 (PANTIN)",
+    "address":"104 AVENUE LOLIVE - 93500 PANTIN",
+    "latitude":48.892139409307205,
+    "longitude":2.409107737701187
+  },
+  {
+    "number":17012,
+    "name":"17012 - MAIRIE DU 17EME",
+    "address":"FACE 16 RUE DES BATIGNOLLES - 75017 PARIS",
+    "latitude":48.884101293163106,
+    "longitude":2.322206025347343
+  },
+  {
+    "number":19029,
+    "name":"19029 - SEINE FLANDRE",
+    "address":"51 QUAI DE LA SEINE - 75019 PARIS",
+    "latitude":48.88679881177337,
+    "longitude":2.374719516795626
+  },
+  {
+    "number":10004,
+    "name":"10004 - METZ",
+    "address":"7 RUE DE METZ - 75010 PARIS",
+    "latitude":48.870893425955984,
+    "longitude":2.353521565011111
+  },
+  {
+    "number":2010,
+    "name":"02010 - BOULEVARD MONTMARTRE",
+    "address":"21 RUE D'UZES - 75002 PARIS",
+    "latitude":48.87077575727228,
+    "longitude":2.343163334385358
+  },
+  {
+    "number":21003,
+    "name":"21003 - JAURES 1 (BOULOGNE-BILLANCOURT)",
+    "address":"2 BOULEVARD JEAN JAURES -  92100 BOULOGNE-BILLANCOURT",
+    "latitude":48.8456381388333,
+    "longitude":2.23701147134366
+  },
+  {
+    "number":13036,
+    "name":"13036 - TOLBIAC NATIONALE",
+    "address":"86 RUE TOLBIAC - 75013 PARIS",
+    "latitude":48.82690019971573,
+    "longitude":2.365177603483576
+  },
+  {
+    "number":14117,
+    "name":"14117 - MOUCHOTTE",
+    "address":"9 RUE DU COMMANDANT MOUCHOTE 75014 PARIS",
+    "latitude":48.8393250250604,
+    "longitude":2.32095412572888
+  },
+  {
+    "number":10031,
+    "name":"10031 - AQUEDUC",
+    "address":"48 RUE LOUIS BLANC - 75010 PARIS",
+    "latitude":48.88199720999019,
+    "longitude":2.363625214552995
+  },
+  {
+    "number":13053,
+    "name":"13053 - CHEVALERET TOLBIAC",
+    "address":"56 RUE CHEVALERET - 75013 PARIS",
+    "latitude":48.82941013459557,
+    "longitude":2.375934558013933
+  },
+  {
+    "number":9010,
+    "name":"09010 - CADET",
+    "address":"1/3 RUE DE ROCHECHOUART - 75009 PARIS",
+    "latitude":48.876719895109,
+    "longitude":2.344393021853951
+  },
+  {
+    "number":1002,
+    "name":"01002 - PLACE DU CHATELET",
+    "address":"14 AVENUE VICTORIA - 75001 PARIS",
+    "latitude":48.857940092963034,
+    "longitude":2.347010058114489
+  },
+  {
+    "number":16107,
+    "name":"16107 - GODARD",
+    "address":"2 RUE BENJAMIN GODARD - 75016 PARIS",
+    "latitude":48.86598324102434,
+    "longitude":2.275725635731198
+  },
+  {
+    "number":13118,
+    "name":"13118 - PATAY REGNAULT",
+    "address":"36-38 RUE REGNAULT - 75013 PARIS",
+    "latitude":48.82434285685922,
+    "longitude":2.376060091685724
+  },
+  {
+    "number":20013,
+    "name":"20013 - PLACE DE LA REUNION",
+    "address":"106 RUE ALEXANDRE DUMAS - 75020 PARIS",
+    "latitude":48.85535513998681,
+    "longitude":2.399728589689724
+  },
+  {
+    "number":17105,
+    "name":"17105 - PALADINES",
+    "address":"18 BOULEVARD D'AURELLE DE PALADINES - 75017 PARIS",
+    "latitude":48.883498081948446,
+    "longitude":2.28201558962579
+  },
+  {
+    "number":17043,
+    "name":"17043 - PLACE GENERAL KOENIG",
+    "address":"10 RUE BELIDOR - 75017 PARIS",
+    "latitude":48.88023362761321,
+    "longitude":2.285380679473588
+  },
+  {
+    "number":14037,
+    "name":"14037 - JEAN MOULIN",
+    "address":"56 AVENUE JEAN MOULIN - 75014 PARIS",
+    "latitude":48.82570981702807,
+    "longitude":2.321849987344236
+  },
+  {
+    "number":8005,
+    "name":"08005 - MADELEINE",
+    "address":"04 PLACE DE LA MADELEINE - 75008 PARIS",
+    "latitude":48.86909008833763,
+    "longitude":2.324429630496505
+  },
+  {
+    "number":16002,
+    "name":"16002 - PERGOLESE",
+    "address":"FACE 25 RUE PERGOLESE - 75016 PARIS",
+    "latitude":48.87518496111192,
+    "longitude":2.284219432060596
+  },
+  {
+    "number":17041,
+    "name":"17041 - PORTE DE VILLIERS",
+    "address":"51 RUE GUERSANT - 75017 PARIS",
+    "latitude":48.88287775178599,
+    "longitude":2.287667370814871
+  },
+  {
+    "number":8102,
+    "name":"08102 - LAMENAIS WASHINGTON",
+    "address":"1 RUE LAMENNAIS - 75008 PARIS",
+    "latitude":48.87355533448877,
+    "longitude":2.303288666125152
+  },
+  {
+    "number":11027,
+    "name":"11027 - SAINT AMBROISE PARMENTIER",
+    "address":"17 RUE SAINT AMBROISE - 75011 PARIS",
+    "latitude":48.8621350384716,
+    "longitude":2.377229858571335
+  },
+  {
+    "number":10001,
+    "name":"10001 - JOHANN STRAUSS",
+    "address":"FACE 50 RUE RENE BOULANGER - 75010 PARIS",
+    "latitude":48.86849994171273,
+    "longitude":2.359970049607283
+  },
+  {
+    "number":15021,
+    "name":"15021 - CROIX NIVERT",
+    "address":"DEV 2 RUE JOSEPH LOUVILLE - 75015 PARIS",
+    "latitude":48.844806421735925,
+    "longitude":2.297572005982148
+  },
+  {
+    "number":9113,
+    "name":"09113 - BLEUE",
+    "address":"5 RUE BLEUE - 75009 PARIS",
+    "latitude":48.87582185503067,
+    "longitude":2.347303230302456
+  },
+  {
+    "number":17040,
+    "name":"17040 - TERNES PEREIRE",
+    "address":"227 BOULEVARD PEREIRE SUR TPC - 75017 PARIS",
+    "latitude":48.879813218337546,
+    "longitude":2.287956452342442
+  },
+  {
+    "number":41203,
+    "name":"41203 - STALINGRAD (FONTENAY SOUS BOIS)",
+    "address":"14 AVENUE STALINGRAD - 94120 FONTENAY SOUS BOIS",
+    "latitude":48.850125232056115,
+    "longitude":2.455529172111142
+  },
+  {
+    "number":15010,
+    "name":"15010 - CAMBRONNE",
+    "address":"FACE 3 BD GARIBALDI - 75015 PARIS",
+    "latitude":48.84757532146731,
+    "longitude":2.30286310050181
+  },
+  {
+    "number":2015,
+    "name":"02015 - OPERA - CAPUCINES",
+    "address":"25 RUE LOUIS LE GRAND - 75002 PARIS",
+    "latitude":48.870508937203915,
+    "longitude":2.334054461939329
+  },
+  {
+    "number":34011,
+    "name":"34011 - DHALENNE (SAINT OUEN)",
+    "address":"FACE AU 61 RUE ALBERT DHALENNE - 93400 SAINT OUEN",
+    "latitude":48.914188312399,
+    "longitude":2.33208283587176
+  },
+  {
+    "number":31706,
+    "name":"31706 - CHATEAU (BAGNOLET)",
+    "address":"RUE DU CHATEAU - 93170 BAGNOLET",
+    "latitude":48.86302549226599,
+    "longitude":2.415622204179507
+  },
+  {
+    "number":16123,
+    "name":"16123 - MAHATMA GANDHI",
+    "address":"Avenue du Mahatma Gandhi face à la Fondation Louis Vuitton dans le Bois de Boulogne - 75016 PARIS",
+    "latitude":48.876356,
+    "longitude":2.264205
+  },
+  {
+    "number":12002,
+    "name":"12002 - LACUEE",
+    "address":"17 RUE LACUEE - 75012 PARIS",
+    "latitude":48.849215862624035,
+    "longitude":2.370503423869599
+  },
+  {
+    "number":12036,
+    "name":"12036 - REUILLY",
+    "address":"116 RUE DE REUILLY - 75012 PARIS",
+    "latitude":48.84030274499962,
+    "longitude":2.394630398715453
+  },
+  {
+    "number":8001,
+    "name":"08001 - PETIT PALAIS",
+    "address":"AV. DUTUIT - 75008 PARIS",
+    "latitude":48.866843803252216,
+    "longitude":2.315779713410026
+  },
+  {
+    "number":10010,
+    "name":"10010 - JACQUES BONSERGENT",
+    "address":"FACE 8 PLACE JACQUES BONSERGENT - 75010 PARIS",
+    "latitude":48.87099998982137,
+    "longitude":2.361141436574885
+  },
+  {
+    "number":21005,
+    "name":"21005 - MORIZET (BOULOGNE-BILLANCOURT)",
+    "address":"20 AVENUE ANDRE MORIZET - 92100 BOULOGNE-BILLANCOURT",
+    "latitude":48.834953979664654,
+    "longitude":2.241688247102405
+  },
+  {
+    "number":18025,
+    "name":"18025 - MAIRIE DU 18 EME",
+    "address":"81 RUE MONT-CENIS - 75018 PARIS",
+    "latitude":48.892925653432606,
+    "longitude":2.344517921162641
+  },
+  {
+    "number":7003,
+    "name":"07003 - BON MARCHE",
+    "address":"RUE VELPEAU - 75007 PARIS",
+    "latitude":48.85123038028847,
+    "longitude":2.325070038738617
+  },
+  {
+    "number":12030,
+    "name":"12030 - WATTIGNIES",
+    "address":"245 RUE DE CHARENTON - 75012 PARIS",
+    "latitude":48.83667579640627,
+    "longitude":2.391795855555629
+  },
+  {
+    "number":10161,
+    "name":"10161 - GARE DE L'EST",
+    "address":"FACE 129 RUE DU FBG SAINT MARTIN - 75010 PARIS",
+    "latitude":48.875670112481366,
+    "longitude":2.359509937592322
+  },
+  {
+    "number":18122,
+    "name":"18122 - BINET",
+    "address":"5 RUE BINET - 75018 PARIS",
+    "latitude":48.899268863316706,
+    "longitude":2.342963477309899
+  },
+  {
+    "number":908,
+    "name":"00908 - PORT DU GROS CAILLOU (STATION MOBILE)",
+    "address":"BERGES DE SEINE, ESCALIER PORT DU GROS CAILLOU - 75007 PARIS",
+    "latitude":48.862905,
+    "longitude":2.306366
+  },
+  {
+    "number":12126,
+    "name":"12126 - AVENUE DE GRAVELLE",
+    "address":"FACE 71 AVENUE DE GRAVELLE - 75012 PARIS",
+    "latitude":48.824407767562604,
+    "longitude":2.418455004234756
+  },
+  {
+    "number":14006,
+    "name":"14006 - SAINT JACQUES TOMBE ISSOIRE",
+    "address":"46 BOULEVARD SAINT JACQUES - 75014 PARIS",
+    "latitude":48.833190318752514,
+    "longitude":2.336933391248149
+  },
+  {
+    "number":17117,
+    "name":"17117 - PEREIRE SAUSSURE",
+    "address":"2 BIS BOULEVARD PEREIRE - 75017 PARIS",
+    "latitude":48.888185641932566,
+    "longitude":2.310120536549759
+  },
+  {
+    "number":8015,
+    "name":"08015 - ROQUEPINE",
+    "address":"4 RUE ROQUEPINE - 75008 PARIS",
+    "latitude":48.8734861693498,
+    "longitude":2.32028123421063
+  },
+  {
+    "number":19119,
+    "name":"19119 - BOURET PAILLERON",
+    "address":"20 RUE EDOUARD PAILLERON - 75019 PARIS",
+    "latitude":48.8805744614225,
+    "longitude":2.376853000562019
+  },
+  {
+    "number":8113,
+    "name":"08113 - PLACE ST AUGUSTIN",
+    "address":"5 PLACE SAINT AUGUSTIN - 75008 PARIS",
+    "latitude":48.874923109802,
+    "longitude":2.319395144377322
+  },
+  {
+    "number":18012,
+    "name":"18012 - DOUDEAUVILLE STEPHENSON",
+    "address":"51 RUE STEPHENSON - 75018 PARIS",
+    "latitude":48.888864896056646,
+    "longitude":2.355966721417555
+  },
+  {
+    "number":21310,
+    "name":"21310 - KLEBER (ISSY LES MOULINEAUX)",
+    "address":"4 RUE KLEBER - 92130 ISSY LES MOULINEAUX",
+    "latitude":48.82692976736927,
+    "longitude":2.272250431956518
+  },
+  {
+    "number":13025,
+    "name":"13025 - PLACE DE RUNGIS",
+    "address":"FACE 35 RUE DE LA FONTAINE A MULARD - 75013 PARIS",
+    "latitude":48.82245594764965,
+    "longitude":2.347382729482953
+  },
+  {
+    "number":31702,
+    "name":"31702 - CURIE (BAGNOLET)",
+    "address":"40 PIERRE ET MARIE CURIE - 93170 BAGNOLET",
+    "latitude":48.870658012858954,
+    "longitude":2.424046437536216
+  },
+  {
+    "number":43401,
+    "name":"43401 - GARE RER (JOINVILLE)",
+    "address":"PARC DU STATIONNEMENT / GARE RER - 94340 JOINVILLE-LE-PONT",
+    "latitude":48.819954101228014,
+    "longitude":2.464025504702534
+  },
+  {
+    "number":11025,
+    "name":"11025 - FROMENT BREGUET",
+    "address":"9 RUE FROMENT - 75011 PARIS",
+    "latitude":48.8570414504784,
+    "longitude":2.37289470306807
+  },
+  {
+    "number":15114,
+    "name":"15114 - PASTEUR COTENTIN",
+    "address":"FACE 1 RUE DU COTENTIN - 75015 PARIS",
+    "latitude":48.838936909959585,
+    "longitude":2.316168412063174
+  },
+  {
+    "number":11013,
+    "name":"11013 - NATION VOLTAIRE",
+    "address":"5 PLACE DE LA NATION - 75011 PARIS",
+    "latitude":48.8492766381855,
+    "longitude":2.39493447775012
+  },
+  {
+    "number":21012,
+    "name":"21012 - LECLERC (BOULOGNE-BILLANCOURT)",
+    "address":"745 AVENUE DU GENERAL LECLERC - 92100 BOULOGNE-BILLANCOURT",
+    "latitude":48.830586296160526,
+    "longitude":2.23449077993291
+  },
+  {
+    "number":20132,
+    "name":"20132 - REUNION",
+    "address":"4 RUE DE LA REUNION - 75020 PARIS",
+    "latitude":48.852566752033766,
+    "longitude":2.403928068708116
+  },
+  {
+    "number":12042,
+    "name":"12042 - MONTEMPOIVRE",
+    "address":"36-38 boulevard Soult - 75012 PARIS",
+    "latitude":48.8403981721562,
+    "longitude":2.40922942058058
+  },
+  {
+    "number":18038,
+    "name":"18038 - ROND POINT DE LA CHAPELLE",
+    "address":"70 RUE DE LA CHAPELLE - 75018 PARIS",
+    "latitude":48.89521990468008,
+    "longitude":2.360097619095422
+  },
+  {
+    "number":10153,
+    "name":"10153 - GARE DU NORD 3",
+    "address":"7 BOULEVARD DE DENAIN - 75010 PARIS",
+    "latitude":48.87957771852628,
+    "longitude":2.354463131150579
+  },
+  {
+    "number":10023,
+    "name":"10023 - VERDUN",
+    "address":"1 AVENUE DE VERDUN - 75010 PARIS",
+    "latitude":48.87615605427147,
+    "longitude":2.360914908320552
+  },
+  {
+    "number":8017,
+    "name":"08017 - ROCHER",
+    "address":"14 RUE ROCHER - 75008 PARIS",
+    "latitude":48.876079329226044,
+    "longitude":2.322731562049324
+  },
+  {
+    "number":20122,
+    "name":"20122 - DAVOUT VITRUVE",
+    "address":"98 RUE VITRUVE - 75020 PARIS",
+    "latitude":48.86024012095245,
+    "longitude":2.408758427822183
+  },
+  {
+    "number":8103,
+    "name":"08103 - D'ARTOIS BERRY",
+    "address":"31 RUE D'ARTOIS - 75008 PARIS",
+    "latitude":48.873794318379595,
+    "longitude":2.306299550271081
+  },
+  {
+    "number":43004,
+    "name":"43004 - MONTREUIL (VINCENNES)",
+    "address":"43 RUE DE MONTREUIL - 94300 VINCENNES",
+    "latitude":48.85041836676044,
+    "longitude":2.43451378622076
+  },
+  {
+    "number":17019,
+    "name":"17019 - MALESHERBES",
+    "address":"20 RUE DE PHALSBOURG - 75017 PARIS",
+    "latitude":48.88260881643341,
+    "longitude":2.309026487339271
+  },
+  {
+    "number":17119,
+    "name":"17119 - TOQUEVILLE",
+    "address":"64 RUE DE TOQUEVILLE - 75017 PARIS",
+    "latitude":48.884924358880866,
+    "longitude":2.310908552941167
+  },
+  {
+    "number":2009,
+    "name":"02009 - BOURSE",
+    "address":"1 RUE DES FILLES SAINT THOMAS - 75002 PARIS",
+    "latitude":48.86885168937216,
+    "longitude":2.339731401086941
+  },
+  {
+    "number":20115,
+    "name":"20115 - PORTE DE BAGNOLET",
+    "address":"102 RUE LOUIS LUMIERE - 75020 PARIS",
+    "latitude":48.864423648565946,
+    "longitude":2.410411115844628
+  },
+  {
+    "number":8036,
+    "name":"08036 - RIO",
+    "address":"39 RUE DE LISBONNE - 75008 PARIS",
+    "latitude":48.87745567681383,
+    "longitude":2.309694221419506
+  },
+  {
+    "number":18002,
+    "name":"18002 - CLIGNANCOURT",
+    "address":"25 RUE DE CLIGNANCOURT - 75018 PARIS",
+    "latitude":48.88530162190401,
+    "longitude":2.347211037538656
+  },
+  {
+    "number":41301,
+    "name":"41301 - CLEMENCEAU (NOGENT)",
+    "address":"2 AVENUE GEORGES CLEMENCEAU - 94130 NOGENT",
+    "latitude":48.8361258429824,
+    "longitude":2.47037545126883
+  },
+  {
+    "number":19017,
+    "name":"19017 - PARC DE LA VILLETTE",
+    "address":"197 AVENUE JEAN JAURES - 75019 PARIS",
+    "latitude":48.88836894202208,
+    "longitude":2.390991659376403
+  },
+  {
+    "number":18032,
+    "name":"18032 - PORTE DE CLIGNANCOURT",
+    "address":"FACE 59 RUE BELLIARD - 75018 PARIS",
+    "latitude":48.89748845974928,
+    "longitude":2.343996499337776
+  },
+  {
+    "number":8039,
+    "name":"08039 - COLISEE",
+    "address":"6 RUE DU COLISEE - 75008 PARIS",
+    "latitude":48.870481938552295,
+    "longitude":2.307662540152187
+  },
+  {
+    "number":14101,
+    "name":"14101 - PLACE FERNAND MOURLOT",
+    "address":"29 BOULEVARD EDGAR QUINET 75014 PARIS",
+    "latitude":48.8415048015128,
+    "longitude":2.32327771564332
+  },
+  {
+    "number":18010,
+    "name":"18010 - MARX DORMOY - RIQUET",
+    "address":"100 RUE RIQUET - 75018 PARIS",
+    "latitude":48.89026411,
+    "longitude":2.36029911
+  },
+  {
+    "number":12003,
+    "name":"12003 - QUAI DE LA RAPEE",
+    "address":"FACE 98 QUAI DE LA RAPEE - 75012 PARIS",
+    "latitude":48.845886946386784,
+    "longitude":2.366896793773722
+  },
+  {
+    "number":13030,
+    "name":"13030 - ITALIE TOLBIAC",
+    "address":"88 AVENUE D'ITALIE - 75013 PARIS",
+    "latitude":48.82583946069817,
+    "longitude":2.357215357508107
+  },
+  {
+    "number":21111,
+    "name":"21111 - LERICHE (CLICHY)",
+    "address":"14 RUE DU PROFESSEUR RENE LERICHE - 92110 CLICHY",
+    "latitude":48.90811038299345,
+    "longitude":2.307519710082483
+  },
+  {
+    "number":14127,
+    "name":"14127 - ODESSA",
+    "address":"5-7 RUE D'ODESSA - 75014 PARIS",
+    "latitude":48.842842278074414,
+    "longitude":2.324441565139471
+  },
+  {
+    "number":13016,
+    "name":"13016 - PRIMO LEVI",
+    "address":"9 RUE PRIMO LEVI - 75013 PARIS",
+    "latitude":48.83094844846017,
+    "longitude":2.37965351592796
+  },
+  {
+    "number":12010,
+    "name":"12010 - MICHEL BIZOT",
+    "address":"251 AVENUE DAUMESNIL - 75012 PARIS",
+    "latitude":48.83749044650707,
+    "longitude":2.401825585802231
+  },
+  {
+    "number":19023,
+    "name":"19023 - MANIN SIMON BOLIVAR",
+    "address":"FACE 1 RUE MANIN - 75019 PARIS",
+    "latitude":48.87649965412676,
+    "longitude":2.379407362599104
+  },
+  {
+    "number":15125,
+    "name":"15125 - AQUABOULEVARD",
+    "address":"2 AVENUE DE LA PORTE DE SEVRES / AQUABOULEVARD - 75015 PARIS",
+    "latitude":48.83321982302087,
+    "longitude":2.276630334051614
+  },
+  {
+    "number":18037,
+    "name":"18037 - AMIRAUX",
+    "address":"48 RUE BOINOD - 75018 PARIS",
+    "latitude":48.89454171584971,
+    "longitude":2.352295466779576
+  },
+  {
+    "number":5034,
+    "name":"05034 - CENSIER",
+    "address":"21 RUE CENSIER - 75005 PARIS",
+    "latitude":48.84050866371248,
+    "longitude":2.353713552033412
+  },
+  {
+    "number":11014,
+    "name":"11014 - NATION TRONE",
+    "address":"FACE 21 PLACE DE LA NATION - 75011 PARIS",
+    "latitude":48.848808,
+    "longitude":2.397406
+  },
+  {
+    "number":20021,
+    "name":"20021 - PRAIRIE L INDRE",
+    "address":"2 RUE DE L'INDRE - 75020 PARIS",
+    "latitude":48.86272646274573,
+    "longitude":2.403351311000777
+  },
+  {
+    "number":7101,
+    "name":"07101 - SEVRES BABYLONE",
+    "address":"BOULEVARD RASPAIL - 75007 PARIS",
+    "latitude":48.852241617707335,
+    "longitude":2.326606019476806
+  },
+  {
+    "number":32006,
+    "name":"32006 - EGLISE SAINT JUSTE (SAINT DENIS)",
+    "address":"AVENUE DU PRESIDENT WILSON / PARKING DE L'EGLISE SAINT JUSTE - 93210 SAINT DENIS",
+    "latitude":48.908586716952485,
+    "longitude":2.358482457792231
+  },
+  {
+    "number":18024,
+    "name":"18024 - CLIGNANCOURT MARCADET",
+    "address":"105 RUE DE CLIGNANCOURT - 75018 PARIS",
+    "latitude":48.891457726153774,
+    "longitude":2.348636478060487
+  },
+  {
+    "number":903,
+    "name":"00903 - QUAI MAURIAC  / PONT DE BERCY",
+    "address":"FETE DE L'OH (BERCY) - QUAI MAURIAC ANG PONT DE BERCY - 75013 PARIS",
+    "latitude":48.8371336894515,
+    "longitude":2.37434055460561
+  },
+  {
+    "number":9025,
+    "name":"09025 - TAITBOUT CHÂTEAUDUN",
+    "address":"77 RUE TAITBOUT - 75009 PARIS",
+    "latitude":48.876383969379,
+    "longitude":2.335356677933531
+  },
+  {
+    "number":13024,
+    "name":"13024 - BOBILLOT TOLBIAC",
+    "address":"81 RUE BOBILLOT - 75013 PARIS",
+    "latitude":48.82552586188404,
+    "longitude":2.350205084974572
+  },
+  {
+    "number":9037,
+    "name":"09037 - CLICHY PARME",
+    "address":"01 RUE DE PARME - 75009 PARIS",
+    "latitude":48.88126642422664,
+    "longitude":2.328197093450571
+  },
+  {
+    "number":20002,
+    "name":"20002 - PIXERECOURT",
+    "address":"FACE 65 RUE PIXERECOURT - 75020 PARIS",
+    "latitude":48.8738036229888,
+    "longitude":2.396012223300534
+  },
+  {
+    "number":23009,
+    "name":"23009 - FRANCE (LEVALLOIS)",
+    "address":"18 RUE ANATOLE FRANCE - 92300 LEVALLOIS-PERRET",
+    "latitude":48.888762777712394,
+    "longitude":2.288136014379512
+  },
+  {
+    "number":14023,
+    "name":"14023 - MALAKOFF PINARD",
+    "address":"76-78 BOULEVARD ADOLPHE PINARD - 75014 PARIS",
+    "latitude":48.823653480254634,
+    "longitude":2.307766825585275
+  },
+  {
+    "number":19041,
+    "name":"19041 - PYRÉNÉES",
+    "address":"101 RUE DE BELLEVILLE - 75019 PARIS",
+    "latitude":48.8743491365289,
+    "longitude":2.38609537399646
+  },
+  {
+    "number":17101,
+    "name":"17101 - ALEXANDRE CHARPENTIER",
+    "address":"FACE 3 RUE ALEXANDRE CHARPENTIER - 75017 PARIS",
+    "latitude":48.88434112466304,
+    "longitude":2.288273752637337
+  },
+  {
+    "number":12018,
+    "name":"12018 - SAINT MANDE - FAVRE",
+    "address":"5 AVENUE SAINT MANDE - 75012 PARIS",
+    "latitude":48.8456092496701,
+    "longitude":2.395932627208539
+  },
+  {
+    "number":33103,
+    "name":"33103 - JAURES 2 (PRE SAINT GERVAIS)",
+    "address":"34 AVENUE JEAN JAURES - 93310 LE PRE SAINT GERVAIS",
+    "latitude":48.884001264434495,
+    "longitude":2.40798991938787
+  },
+  {
+    "number":13014,
+    "name":"13014 - GARE D'AUSTERLITZ",
+    "address":"5 BIS BOULEVARD DE L'HOPITAL - 75013 PARIS",
+    "latitude":48.842524490766195,
+    "longitude":2.364044958656523
+  },
+  {
+    "number":20109,
+    "name":"20109 - SURMELIN HAXO",
+    "address":"2 RUE HAXO - 75020 PARIS",
+    "latitude":48.8694370761222,
+    "longitude":2.40539657537972
+  },
+  {
+    "number":7103,
+    "name":"07103 - BELGRADE",
+    "address":"2 RUE DE BELGRADE - 75007 PARIS",
+    "latitude":48.856059310074706,
+    "longitude":2.302239128884557
+  },
+  {
+    "number":15006,
+    "name":"15006 - CHERCHE MIDI",
+    "address":"133 RUE DU CHERCHE MIDI - 75015 PARIS",
+    "latitude":48.844703,
+    "longitude":2.317819
+  },
+  {
+    "number":35011,
+    "name":"35011 - D'ORVES (PANTIN)",
+    "address":"12 RUE HONORE D'ESTIENNE D'ORVES - 93500 PANTIN",
+    "latitude":48.89048461623744,
+    "longitude":2.406498213832891
+  },
+  {
+    "number":14032,
+    "name":"14032 - MOUTON DUVERNET - MAIRIE DU 14EME",
+    "address":"26 RUE MOUTON DUVERNET - 75014 PARIS",
+    "latitude":48.832501278703454,
+    "longitude":2.325401166692975
+  },
+  {
+    "number":11046,
+    "name":"11046 - VOLTAIRE",
+    "address":"8 place de la république - 75011 PARIS",
+    "latitude":48.86681,
+    "longitude":2.36547
+  },
+  {
+    "number":11031,
+    "name":"11031 - PARMENTIER",
+    "address":"1 RUE JACQUARD - 75011 PARIS",
+    "latitude":48.86455576531679,
+    "longitude":2.373071507389205
+  },
+  {
+    "number":19021,
+    "name":"19021 - MAIRIE DU 19 EME",
+    "address":"4 RUE ARMAND CARREL - 75019 PARIS",
+    "latitude":48.88259146668893,
+    "longitude":2.381220610289335
+  },
+  {
+    "number":14010,
+    "name":"14010 - JEAN MOULIN ALESIA",
+    "address":"12 AVENUE JEAN MOULIN - 75014 PARIS",
+    "latitude":48.82742690008254,
+    "longitude":2.325760332846014
+  },
+  {
+    "number":12110,
+    "name":"12110 - BARON LE ROY TRUFFAUT",
+    "address":"57-61 RUE DES PIROGUES DE BERCY - 75012 PARIS",
+    "latitude":48.83370863507971,
+    "longitude":2.388556666222385
+  },
+  {
+    "number":15048,
+    "name":"15048 - OLIVIER DE SERRE",
+    "address":"PLACE AMEDEE GIORDANI - 75015 PARIS",
+    "latitude":48.830545669445776,
+    "longitude":2.292046396699678
+  },
+  {
+    "number":5015,
+    "name":"05015 - MOUFFETARD EPEE DE BOIS",
+    "address":"12 RUE DE L'EPEE DE BOIS - 75005 PARIS",
+    "latitude":48.841507637390066,
+    "longitude":2.349983047029793
+  },
+  {
+    "number":2001,
+    "name":"02001 - SEBASTOPOL-GRENATA",
+    "address":"12 RUE GRENETA - 75002 PARIS",
+    "latitude":48.86524062169503,
+    "longitude":2.351669873689939
+  },
+  {
+    "number":16024,
+    "name":"16024 - KENNEDY RANELAGH",
+    "address":"4 RUE RANELAGH DEVANT RER - 75016 PARIS",
+    "latitude":48.85293316046699,
+    "longitude":2.280439719992999
+  },
+  {
+    "number":42013,
+    "name":"42013 - BARBES (IVRY)",
+    "address":"RUE BARBES / AVENUE DE VERDUN - 94200 IVRY SUR SEINE",
+    "latitude":48.81591109646686,
+    "longitude":2.368229729243504
+  },
+  {
+    "number":11036,
+    "name":"11036 - JULES FERRY FAUBOURG DU TEMPLE",
+    "address":"FACE 28 RUE JULES FERRY - 75011 PARIS",
+    "latitude":48.8684101048247,
+    "longitude":2.36784149724351
+  },
+  {
+    "number":15109,
+    "name":"15109 - CEVENNES",
+    "address":"65 - 67 RUE DES CEVENNES - 75015 PARIS",
+    "latitude":48.84244145218906,
+    "longitude":2.281070755215898
+  },
+  {
+    "number":14012,
+    "name":"14012 - SIBELLE ALESIA",
+    "address":"FACE 2 AVENUE DE LA SIBELLE - 75014 PARIS",
+    "latitude":48.826703941183546,
+    "longitude":2.338636324158646
+  },
+  {
+    "number":42007,
+    "name":"42007 - PIERRE ET MARIE CURIE (IVRY)",
+    "address":"Angle Avenue de Verdun et rue Pierre et Marie Curie - 94200 IVRY",
+    "latitude":48.8128905614968,
+    "longitude":2.37065026341858
+  },
+  {
+    "number":8028,
+    "name":"08028 - HOUSSAYE",
+    "address":"1 RUE ARSENE HOUSSAYE - 75008 PARIS",
+    "latitude":48.873434081397704,
+    "longitude":2.29770677798004
+  },
+  {
+    "number":18110,
+    "name":"18110 - DEPARTEMENT",
+    "address":"FACE 53 RUE DU DEPARTEMENT - 75018 PARIS",
+    "latitude":48.886665624668375,
+    "longitude":2.36151933793529
+  },
+  {
+    "number":31708,
+    "name":"31708 - NOISY (BAGNOLET)",
+    "address":"116-118 RUE DE NOISY LE SEC - 93170 BAGNOLET",
+    "latitude":48.874457717241434,
+    "longitude":2.415138092250742
+  },
+  {
+    "number":10107,
+    "name":"10107 - MAGENTA PARE",
+    "address":"9 RUE AMBROISE PARE - 75010 PARIS",
+    "latitude":48.881949743161194,
+    "longitude":2.352339506562677
+  },
+  {
+    "number":23006,
+    "name":"23006 - GUESDE (LEVALLOIS)",
+    "address":"8 RUE JULES GUESDE - 92300 LEVALLOIS-PERRET",
+    "latitude":48.89086032289106,
+    "longitude":2.295000370135378
+  },
+  {
+    "number":20041,
+    "name":"20041 - BELLEVILLE",
+    "address":"116 BD DE BELLEVILLE - 75020 PARIS",
+    "latitude":48.87119943139012,
+    "longitude":2.37799433828966
+  },
+  {
+    "number":3014,
+    "name":"03014 - GRENIER SAINT LAZARE",
+    "address":"FACE 34 RUE GRENIER SAINT LAZARE - 75003 PARIS",
+    "latitude":48.863062832743175,
+    "longitude":2.352839380718154
+  },
+  {
+    "number":3006,
+    "name":"03006 - MAIRIE DU 3EME",
+    "address":"10 RUE PERREE - 75003 PARIS",
+    "latitude":48.86453080530752,
+    "longitude":2.361579815214986
+  },
+  {
+    "number":42203,
+    "name":"42203 - ELUARD (CHARENTON)",
+    "address":"FACE AU 7 RUE PAUL ELUARD - 94220 CHARENTON",
+    "latitude":48.82040389400885,
+    "longitude":2.408405472156745
+  },
+  {
+    "number":6026,
+    "name":"06026 - SAINT PLACIDE CHERCHE MIDI",
+    "address":"28 RUE SAINT PLACIDE - 75006 PARIS",
+    "latitude":48.84913990321828,
+    "longitude":2.325175389412747
+  },
+  {
+    "number":2002,
+    "name":"02002 - MONTORGUEIL ETIENNE MARCEL",
+    "address":"32 RUE ETIENNE MARCEL - 75002 PARIS",
+    "latitude":48.864582377464885,
+    "longitude":2.346282111667021
+  },
+  {
+    "number":8056,
+    "name":"08056 - WAGRAM",
+    "address":"21 RUE BEAUJON - 75008 PARIS",
+    "latitude":48.875377647487014,
+    "longitude":2.296555342476269
+  },
+  {
+    "number":5032,
+    "name":"05032 - PANTHEON CARMES",
+    "address":"2 RUE VALETTE - 75005 PARIS",
+    "latitude":48.8469867528133,
+    "longitude":2.34649965376298
+  },
+  {
+    "number":22010,
+    "name":"22010 - DE GAULLE 4 (NEUILLY)",
+    "address":"72 AVENUE CHARLES DE GAULLE - 92200 NEUILLY SUR SEINE",
+    "latitude":48.8816744459654,
+    "longitude":2.27117749892451
+  },
+  {
+    "number":16111,
+    "name":"16111 - HELIE",
+    "address":"4 - 6 rue Faustin Helie - 75016 PARIS",
+    "latitude":48.85940308194,
+    "longitude":2.2765220890277
+  },
+  {
+    "number":14014,
+    "name":"14014 - STADE CHARLETY",
+    "address":"5 BOULEVARD JOURDAN - 75014 PARIS",
+    "latitude":48.81940130486362,
+    "longitude":2.34337661053354
+  },
+  {
+    "number":13049,
+    "name":"13049 - COUR FREYSSINET  1 - VINCENT-AURIOL",
+    "address":"55 BD VINCENT AURIOL - 75013 PARIS",
+    "latitude":48.834183,
+    "longitude":2.370347
+  },
+  {
+    "number":12035,
+    "name":"12035 - MADAGASCAR",
+    "address":"4 RUE DE MADAGASCAR - 75012 PARIS",
+    "latitude":48.834705859741675,
+    "longitude":2.397111552649508
+  },
+  {
+    "number":33005,
+    "name":"33005 - REPUBLIQUE 2 (AUBERVILLIERS)",
+    "address":"FACE AU 106 AVENUE DE LA REPUBLIQUE - 93300 AUBERVILLIERS",
+    "latitude":48.906383398095834,
+    "longitude":2.3895475019254
+  },
+  {
+    "number":12005,
+    "name":"12005 - CROZATIER",
+    "address":"74 RUE CROZATIER - 75012 PARIS",
+    "latitude":48.8504400134045,
+    "longitude":2.37890136621104
+  },
+  {
+    "number":15106,
+    "name":"15106 - GRENELLE VIOLET (PROP3)",
+    "address":"BOULEVARD DE GRENELLE - 75015 PARIS",
+    "latitude":48.849921101862066,
+    "longitude":2.294660575884377
+  },
+  {
+    "number":18043,
+    "name":"18043 - BLANCHE",
+    "address":"55 BOULEVARD DE CLICHY - 75018 PARIS",
+    "latitude":48.88356474485461,
+    "longitude":2.333418629410461
+  },
+  {
+    "number":17015,
+    "name":"17015 - PLACE DE LEVIS",
+    "address":"19BIS/21 RUE LEGENDRE - 75017 PARIS",
+    "latitude":48.88368821751221,
+    "longitude":2.313284405397194
+  },
+  {
+    "number":13043,
+    "name":"13043 - DUNOIS CLISSON",
+    "address":"55 RUE DUNOIS - 75013 PARIS",
+    "latitude":48.832272458639544,
+    "longitude":2.367415866750153
+  },
+  {
+    "number":16007,
+    "name":"16007 - LONGCHAMP",
+    "address":"4 RUE DE LONGCHAMP - 75016 PARIS",
+    "latitude":48.864910448589,
+    "longitude":2.292519101004145
+  },
+  {
+    "number":13051,
+    "name":"13051 -COUR FREYSSINET 2 - CHEVALERET",
+    "address":"55 BD VINCENT AURIOL - 75013 PARIS",
+    "latitude":48.83298,
+    "longitude":2.371373
+  },
+  {
+    "number":7024,
+    "name":"07024 - AVENUE RAPP",
+    "address":"43 AVENUE RAPP - 75007 PARIS",
+    "latitude":48.8581690434843,
+    "longitude":2.300528330043888
+  },
+  {
+    "number":23007,
+    "name":"23007 - WILSON (LEVALLOIS)",
+    "address":"22 RUE DU PRESIDENT WILSON - 92300 LEVALLOIS-PERRET",
+    "latitude":48.890380265413896,
+    "longitude":2.292160482166423
+  },
+  {
+    "number":13104,
+    "name":"13104 - GARE D'AUSTERLITZ",
+    "address":"FACE 109 QUAI D'AUSTERLITZ - 75013 PARIS",
+    "latitude":48.84379047732037,
+    "longitude":2.365585665575604
+  },
+  {
+    "number":21203,
+    "name":"21203 - BRIAND (MONTROUGE)",
+    "address":"PLACE JULES FERRY / AVENUE ARISTIDE BRIAND - 92120 MONTROUGE",
+    "latitude":48.81251090819872,
+    "longitude":2.325680623044519
+  },
+  {
+    "number":42011,
+    "name":"42011 - MARCEL BOYER (IVRY)",
+    "address":"26, Quai Marcel Boyer / rue Victor Hugo - 94200 IVRY",
+    "latitude":48.8225048,
+    "longitude":2.3920678
+  },
+  {
+    "number":5009,
+    "name":"05009 - SQUARE VIVIANI",
+    "address":"6 RUE DU FOUARRE - 75005 PARIS",
+    "latitude":48.85165117936709,
+    "longitude":2.347463334519655
+  },
+  {
+    "number":21208,
+    "name":"21208 - CARVES (MONTROUGE)",
+    "address":"67 RUE CARVES ANGLE AVENUE HENRI GINOUX - 92120 MONTROUGE",
+    "latitude":48.813080911445375,
+    "longitude":2.319787936689348
+  },
+  {
+    "number":23008,
+    "name":"23008 - REPUBLIQUE (LEVALLOIS)",
+    "address":"PLACE DE LA REPUBLIQUE - 92300 LEVALLOIS",
+    "latitude":48.89319467536488,
+    "longitude":2.288914160056623
+  },
+  {
+    "number":18023,
+    "name":"18023 - POISSONNIERS ORDENER",
+    "address":"57 RUE ORDENER - 75018 PARIS",
+    "latitude":48.891213890844654,
+    "longitude":2.351288666219873
+  },
+  {
+    "number":18047,
+    "name":"18047 - ST OUEN LAMARCK",
+    "address":"53 AVENUE DE SAINT OUEN - 75018 PARIS",
+    "latitude":48.891083040295555,
+    "longitude":2.326735694839291
+  },
+  {
+    "number":18031,
+    "name":"18031 - ALBERT KAHN",
+    "address":"67 RUE CHAMPIONNET - 75018 PARIS",
+    "latitude":48.8957969797804,
+    "longitude":2.345585584134864
+  },
+  {
+    "number":15104,
+    "name":"15104 - HÔPITAL GEORGES POMPIDOU (PROP 2)",
+    "address":"FACE 66 - 70 RUE LEBLANC - 75015 PARIS",
+    "latitude":48.837679003308445,
+    "longitude":2.275730609312381
+  },
+  {
+    "number":12023,
+    "name":"12023 - SAHEL",
+    "address":"15 AVENUE EMILE LAURENT - 75012 PARIS",
+    "latitude":48.840762277598394,
+    "longitude":2.41052344083499
+  },
+  {
+    "number":20028,
+    "name":"20028 - GAMBETTA MARTIN NADAUD",
+    "address":"FACE 2 RUE ORFILA - 75020 PARIS",
+    "latitude":48.86518641284941,
+    "longitude":2.394468581137673
+  },
+  {
+    "number":31009,
+    "name":"31009 - DE GAULLE (MONTREUIL)",
+    "address":"13/15 PLACE DU GENERAL DE GAULLE - 93100 MONTREUIL",
+    "latitude":48.8688123638694,
+    "longitude":2.43297479522392
+  },
+  {
+    "number":13004,
+    "name":"13004 - GLACIERE",
+    "address":"88 BOULEVARD AUGUSTE BLANQUI (SUR TPC) - 75013 PARIS",
+    "latitude":48.83062407509372,
+    "longitude":2.345429456645987
+  },
+  {
+    "number":8011,
+    "name":"08011 - DUBLIN",
+    "address":"1 RUE CLAPEYRON - 75008 PARIS",
+    "latitude":48.88093535677379,
+    "longitude":2.324516635146477
+  },
+  {
+    "number":42205,
+    "name":"42205 - PARIS 1 (CHARENTON)",
+    "address":"89 RUE DE PARIS - 94220 CHARENTON",
+    "latitude":48.82214312580457,
+    "longitude":2.412602786467704
+  },
+  {
+    "number":1019,
+    "name":"01019 - SAINT HONORE VENDOME",
+    "address":"237 RUE SAINT HONORE - 75001 PARIS",
+    "latitude":48.866698008473534,
+    "longitude":2.328288185716643
+  },
+  {
+    "number":7026,
+    "name":"07026 - PLACE DE FINLANDE",
+    "address":"39 QUAI D'ORSAY - 75007 PARIS",
+    "latitude":48.86269,
+    "longitude":2.31138
+  },
+  {
+    "number":21704,
+    "name":"21704 - REPUBLIQUE (VANVES)",
+    "address":"2 RUE DE LA REPUBLIQUE - 92170 VANVES",
+    "latitude":48.8217026998931,
+    "longitude":2.285395624828388
+  },
+  {
+    "number":44102,
+    "name":"44102 - VERDUN (SAINT MAURICE)",
+    "address":"14 avenue de Verdun - 94410 SAINT MAURICE",
+    "latitude":48.822175804937544,
+    "longitude":2.421504476062366
+  },
+  {
+    "number":9003,
+    "name":"09003 - PLACE BARBÈS",
+    "address":"PLACE BARBES - 75009 PARIS",
+    "latitude":48.8836531972476,
+    "longitude":2.349040855034395
+  },
+  {
+    "number":21209,
+    "name":"21209 - GEORGES MESSIER (MONTROUGE)",
+    "address":"17 RUE MOLIERE 92120 MONTROUGE",
+    "latitude":48.8111018377725,
+    "longitude":2.314629747785
+  },
+  {
+    "number":22008,
+    "name":"22008 - DE GAULLE (NEUILLY)",
+    "address":"153 BIS AVENUE CHARLES DE GAULLE - 92200 NEUILLY SUR SEINE",
+    "latitude":48.882951625354735,
+    "longitude":2.265135008741844
+  },
+  {
+    "number":42202,
+    "name":"42202 - RONSARD (CHARENTON)",
+    "address":"1 RUE  KENNEDY / ALLEE RONSARD - 94220 CHARENTON",
+    "latitude":48.822736012097714,
+    "longitude":2.405659203207511
+  },
+  {
+    "number":13033,
+    "name":"13033 - PORTE D'ITALIE",
+    "address":"15 AVENUE DE LA PORTE D'ITALIE - 75013 PARIS",
+    "latitude":48.817312300431965,
+    "longitude":2.360218480943566
+  },
+  {
+    "number":17032,
+    "name":"17032 - ESPACE CHAMPERRET",
+    "address":"12 RUE JEAN OESTREICHER - 75017 PARIS",
+    "latitude":48.88657099335245,
+    "longitude":2.288612344984025
+  },
+  {
+    "number":5033,
+    "name":"05033 - SAINT SEVERIN",
+    "address":"42 RUE SAINT SEVERIN - 75005 PARIS",
+    "latitude":48.852705647705136,
+    "longitude":2.344137763245671
+  },
+  {
+    "number":34007,
+    "name":"34007 - ROSIERS (SAINT OUEN)",
+    "address":"43-45 RUE BLANQUI / RUE DES ROSIERS - 93400 SAINT OUEN",
+    "latitude":48.905362251416825,
+    "longitude":2.33738964850196
+  },
+  {
+    "number":19102,
+    "name":"19102 - BELLEVILLE RAMPAL",
+    "address":"4 RUE DE RAMPAL - 75019 PARIS",
+    "latitude":48.87315262385819,
+    "longitude":2.379855610627962
+  },
+  {
+    "number":41103,
+    "name":"41103 - BRIAND (ARCUEIL)",
+    "address":"AVENUE ARISTIDE BRIAND (CARREFOUR VACHE NOIRE) - 94110 ARCUEIL",
+    "latitude":48.8104231700653,
+    "longitude":2.326969764620641
+  },
+  {
+    "number":12020,
+    "name":"12020 - COURS DE VINCENNES - BD SOULT",
+    "address":"FACE 118 COURS DE VINCENNES - 75012 PARIS",
+    "latitude":48.84698906998311,
+    "longitude":2.410145496563922
+  },
+  {
+    "number":42002,
+    "name":"42002 - GARE (IVRY)",
+    "address":"VIS-A-VIS DU 17 RUE DE LA GARE - 94200 IVRY SUR SEINE",
+    "latitude":48.81492646724632,
+    "longitude":2.392001635824925
+  },
+  {
+    "number":904,
+    "name":"00904 -17/19 PLACE JOFFRE / ECOLE MILITAIRE",
+    "address":"ECOLE MILITAIRE-AVENUE DE LA MOTTE PICQUET - 75007 PARIS",
+    "latitude":48.8521809,
+    "longitude":2.3019186
+  },
+  {
+    "number":35010,
+    "name":"35010 - GERVAIS (PANTIN)",
+    "address":"1-3 RUE DU PRE SAINT GERVAIS - 93500 PANTIN",
+    "latitude":48.8910789762746,
+    "longitude":2.402775519686335
+  },
+  {
+    "number":4001,
+    "name":"04001 - NOTRE DAME",
+    "address":"10 RUE D'ARCOLE - 75004 PARIS",
+    "latitude":48.85398414441304,
+    "longitude":2.349380045291025
+  },
+  {
+    "number":16026,
+    "name":"16026 - RANELAGH",
+    "address":"91 RUE DU RANELAGH - 75016 PARIS",
+    "latitude":48.855484883720074,
+    "longitude":2.270408657395703
+  },
+  {
+    "number":43010,
+    "name":"43010 - JARRY (VINCENNES)",
+    "address":"139 RUE DE LA JARRY - 94300 VINCENNES",
+    "latitude":48.849744956976856,
+    "longitude":2.451960306308826
+  },
+  {
+    "number":15012,
+    "name":"15012 - MADEMOISELLE",
+    "address":"76 RUE CAMBRONNE - 75015 PARIS",
+    "latitude":48.843277330035214,
+    "longitude":2.30230766886348
+  },
+  {
+    "number":35002,
+    "name":"35002 - JAURES 2 (PANTIN)",
+    "address":"130 RUE JEAN JAURES - 93500 PANTIN",
+    "latitude":48.907226012664125,
+    "longitude":2.396129200445667
+  },
+  {
+    "number":10038,
+    "name":"10038 - COLONEL FABIEN",
+    "address":"69 RUE DE LA GRANGE AUX BELLES - 75010 PARIS",
+    "latitude":48.87752002849063,
+    "longitude":2.369791245076398
+  },
+  {
+    "number":9031,
+    "name":"09031 - PROVENCE",
+    "address":"69 RUE DE PROVENCE - 75009 PARIS",
+    "latitude":48.87428447542072,
+    "longitude":2.332976511564311
+  },
+  {
+    "number":1004,
+    "name":"01004 - MARGUERITE DE NAVARRE",
+    "address":"12 RUE DES HALLES - 75001 PARIS",
+    "latitude":48.859896314441485,
+    "longitude":2.346756667548724
+  },
+  {
+    "number":20034,
+    "name":"20034 - SORBIER - MÉNILMONTANT",
+    "address":"1 RUE SORBIER - 75020 PARIS",
+    "latitude":48.8685264710698,
+    "longitude":2.389795409535456
+  },
+  {
+    "number":4021,
+    "name":"04021 - BEAUBOURG RAMBUTEAU",
+    "address":"49 RUE RAMBUTEAU - 75004 PARIS",
+    "latitude":48.861419072223185,
+    "longitude":2.35258144286207
+  },
+  {
+    "number":18105,
+    "name":"18105 - BELIARD POISSONNIERS",
+    "address":"157 BIS-159 RUE DES POISSONNIERS - 75018 PARIS",
+    "latitude":48.89740678787196,
+    "longitude":2.352526659355508
+  },
+  {
+    "number":6018,
+    "name":"06018 - MICHELET ASSAS",
+    "address":"13 RUE MICHELET - 75006 PARIS",
+    "latitude":48.84254096604404,
+    "longitude":2.335067885565505
+  },
+  {
+    "number":15122,
+    "name":"15122 - PLACE CHARLES VALLIN",
+    "address":"PLACE CHARLES VALLIN - 75015 PARIS",
+    "latitude":48.835524753591024,
+    "longitude":2.302621940941139
+  },
+  {
+    "number":16020,
+    "name":"16020 - PORTE DE PASSY",
+    "address":"1 PLACE DE LA PORTE DE PASSY - 75016 PARIS",
+    "latitude":48.85738212799326,
+    "longitude":2.264277072081002
+  },
+  {
+    "number":21706,
+    "name":"21706 - BLEUZEN (VANVES)",
+    "address":"74 RUE JEAN BLEUZEN - 92170 VANVES",
+    "latitude":48.82330323408161,
+    "longitude":2.296506343553357
+  },
+  {
+    "number":5001,
+    "name":"05001 - SAINT GERMAIN HARPE",
+    "address":"32 RUE DE LA HARPE - 75005 PARIS",
+    "latitude":48.851581340028176,
+    "longitude":2.343704536722773
+  },
+  {
+    "number":18020,
+    "name":"18020 - RUISSEAU",
+    "address":"31 RUE FRANCOEUR - 75018 PARIS",
+    "latitude":48.89104123261663,
+    "longitude":2.340014585442034
+  },
+  {
+    "number":4011,
+    "name":"04011 - PLACE DU BATAILLON FRANCAIS DE L'ONU",
+    "address":"FACE 18 RUE DE L'HOTEL DE VILLE - 75004 PARIS",
+    "latitude":48.85381414531594,
+    "longitude":2.357092654363953
+  },
+  {
+    "number":22403,
+    "name":"22403 - BROSSOLETTE (MALAKOFF)",
+    "address":"FACE 35 AVENUE PIERRE BROSSOLETTE - 92240 MALAKOFF",
+    "latitude":48.82183564791793,
+    "longitude":2.313458608254228
+  },
+  {
+    "number":19103,
+    "name":"19103 - MANIN CARRIERES",
+    "address":"139 RUE MANIN - 75019 PARIS",
+    "latitude":48.88477085803391,
+    "longitude":2.392093119901052
+  },
+  {
+    "number":34004,
+    "name":"34004 - VOLTAIRE (SAINT OUEN)",
+    "address":"1 RUE VOLTAIRE - 93400 SAINT OUEN",
+    "latitude":48.90249976045801,
+    "longitude":2.342248144661283
+  },
+  {
+    "number":8010,
+    "name":"08010 - LIEGE",
+    "address":"22 RUE DE LIEGE - 75008 PARIS",
+    "latitude":48.879581165638115,
+    "longitude":2.326427352474812
+  },
+  {
+    "number":4019,
+    "name":"04019 - BEAUBOURG SAINT MERRY",
+    "address":"4 RUE DU CLOITRE SAINT MERRI - 75004 PARIS",
+    "latitude":48.858828988192535,
+    "longitude":2.35189147061665
+  },
+  {
+    "number":16003,
+    "name":"16003 - ANDRE MAUROIS",
+    "address":"2 BIS BOULEVARD ANDRE MAUROIS - 75016 PARIS",
+    "latitude":48.87793081716105,
+    "longitude":2.278959824969939
+  },
+  {
+    "number":21702,
+    "name":"21702 - BASCH (VANVES)",
+    "address":"6 AVENUE VICTOR BASCH - 92170 VANVES",
+    "latitude":48.81893986428991,
+    "longitude":2.291959872467908
+  },
+  {
+    "number":6002,
+    "name":"06002 - SAINT PÈRES",
+    "address":"1 RUE SAINT BENOIT - 75006 PARIS",
+    "latitude":48.85549998439073,
+    "longitude":2.333445220031193
+  },
+  {
+    "number":31005,
+    "name":"31005 - PARIS 2  (MONTREUIL)",
+    "address":"127/129 RUE DE PARIS - 93100 MONTREUIL",
+    "latitude":48.85628451618644,
+    "longitude":2.426434490609822
+  },
+  {
+    "number":4017,
+    "name":"04017 - PLACE DE L'HOTEL DE VILLE",
+    "address":"11 PLACE DE L'HOTEL DE VILLE - 75004 PARIS",
+    "latitude":48.857232,
+    "longitude":2.351621
+  },
+  {
+    "number":21705,
+    "name":"21705 - HUGO (VANVES)",
+    "address":"11 AVENUE VICTOR HUGO - 92170 VANVES",
+    "latitude":48.823599644256994,
+    "longitude":2.288819729513169
+  },
+  {
+    "number":4010,
+    "name":"04010 - SAINT PAUL PAVÉE",
+    "address":"105-109 TERRE PLEIN SAINT PAUL - 75004 PARIS",
+    "latitude":48.855023999040945,
+    "longitude":2.361203538755455
+  },
+  {
+    "number":17003,
+    "name":"17003 - JACQUES KELLNER",
+    "address":"4-6 RUE JACQUES KELLNER - 75017 PARIS",
+    "latitude":48.895809485802886,
+    "longitude":2.327897409164145
+  },
+  {
+    "number":8104,
+    "name":"08104 - FRIEDLAND CHATEAUBRIAND",
+    "address":"27/31 RUE DE CHATEAUBRIAND - 75008 PARIS",
+    "latitude":48.8740144756374,
+    "longitude":2.29991625786582
+  },
+  {
+    "number":7017,
+    "name":"07017 - LA TOUR MAUBOURG",
+    "address":"1 AVENUE DE LA MOTTE PICQUET - 75007 PARIS",
+    "latitude":48.85727649829621,
+    "longitude":2.310257927534994
+  },
+  {
+    "number":23011,
+    "name":"23011 - BINEAU (LEVALLOIS)",
+    "address":"16 BOULEVARD BINEAU - 92300 LEVALLOIS-PERRET",
+    "latitude":48.88668137249892,
+    "longitude":2.284023691218167
+  },
+  {
+    "number":15043,
+    "name":"15043 - BRANCION",
+    "address":"122 RUE BRANCION - 75015 PARIS",
+    "latitude":48.8290542164508,
+    "longitude":2.301417436043831
+  },
+  {
+    "number":13123,
+    "name":"13123 - BNF - QUAI FRANÇOIS MAURIAC",
+    "address":"51/57 QUAI FRANCOIS MAURIAC - 75013 PARIS",
+    "latitude":48.8348392381466,
+    "longitude":2.37633056938648
+  },
+  {
+    "number":32604,
+    "name":"32604 - KOCK (LES LILAS)",
+    "address":"FACE 3 AVENUE PAUL DE KOCK - 93260 LES LILAS",
+    "latitude":48.8812154273023,
+    "longitude":2.42020915533382
+  },
+  {
+    "number":15005,
+    "name":"15005 - PLACE TREFOUEL",
+    "address":"FACE 24 BOULEVARD PASTEUR - 75015 PARIS",
+    "latitude":48.84265080464087,
+    "longitude":2.312727390214462
+  },
+  {
+    "number":10026,
+    "name":"10026 - CHATEAU LANDON",
+    "address":"2 RUE DE CHATEAU LANDON - 75010 PARIS",
+    "latitude":48.879305,
+    "longitude":2.362424
+  },
+  {
+    "number":13052,
+    "name":"13052 - TOLBIAC LERREDE",
+    "address":"2 RUE LEREDDE - 75013 PARIS",
+    "latitude":48.8289747443296,
+    "longitude":2.37433200085619
+  },
+  {
+    "number":14018,
+    "name":"14018 - PORTE D'ORLEANS",
+    "address":"6 PLACE DU 25 AOUT 1944 - 75014 PARIS",
+    "latitude":48.8228575017159,
+    "longitude":2.325042670917036
+  },
+  {
+    "number":15068,
+    "name":"15068 - BOULEVARD VICTOR",
+    "address":"FACE 5 BOULEVARD MARTIAL VALIN - 75015 PARIS",
+    "latitude":48.838171310248995,
+    "longitude":2.270338379746369
+  },
+  {
+    "number":31703,
+    "name":"31703 - CARNOT (BAGNOLET)",
+    "address":"177 RUE SADI CARNOT - 93170 BAGNOLET",
+    "latitude":48.8752669984009,
+    "longitude":2.4236494905184
+  },
+  {
+    "number":5023,
+    "name":"05023 - PLACE JUSSIEU",
+    "address":"13 RUE JUSSIEU - 75005 PARIS",
+    "latitude":48.845616878509624,
+    "longitude":2.355745499998791
+  },
+  {
+    "number":21202,
+    "name":"21202 - BARBES (MONTROUGE)",
+    "address":"16 RUE BARBES - 92120 MONTROUGE",
+    "latitude":48.8172449116699,
+    "longitude":2.32750599924383
+  },
+  {
+    "number":5030,
+    "name":"05030 - SORBONNE",
+    "address":"5 RUE DE LA SORBONNE - 75005 PARIS",
+    "latitude":48.849770370603345,
+    "longitude":2.343573575733007
+  },
+  {
+    "number":22003,
+    "name":"22003 - BEFFROY (NEUILLY)",
+    "address":"3 RUE BEFFROY - 92200 NEUILLY",
+    "latitude":48.886704983104785,
+    "longitude":2.261263518031739
+  },
+  {
+    "number":10011,
+    "name":"10011 - BOURSE DU TRAVAIL",
+    "address":"3 RUE DU CHATEAU D'EAU - 75010 PARIS",
+    "latitude":48.86909174869475,
+    "longitude":2.362261761814593
+  },
+  {
+    "number":19037,
+    "name":"19037 - PORTE DES LILAS",
+    "address":"304 RUE DE BELLEVILLE - 75019 PARIS",
+    "latitude":48.87660391892763,
+    "longitude":2.404769691129476
+  },
+  {
+    "number":21103,
+    "name":"21103 - HUGO (CLICHY)",
+    "address":"94-98 BOULEVARD VICTOR HUGO - 92110 CLICHY",
+    "latitude":48.90146015675393,
+    "longitude":2.31712992065507
+  },
+  {
+    "number":19008,
+    "name":"19008 - CORENTIN CARIOU",
+    "address":"177 AVENUE DE FLANDRE - 75019 PARIS",
+    "latitude":48.89465024997023,
+    "longitude":2.381868729508476
+  },
+  {
+    "number":42704,
+    "name":"42704 - ROSSEL (LE KREMLIN BICETRE)",
+    "address":"RUE ROSSEL / AVENUE DE LA CONVENTION - 94270 LE KREMLIN BICETRE",
+    "latitude":48.81201281428704,
+    "longitude":2.35697189328747
+  },
+  {
+    "number":7016,
+    "name":"07016 - TOUR MAUBOURG UNIVERSITE",
+    "address":"13 RUE SURCOUF - 75007 PARIS",
+    "latitude":48.861273016278126,
+    "longitude":2.309453550914185
+  },
+  {
+    "number":9011,
+    "name":"09011 - FOLIES BERGERES",
+    "address":"14 RUE GEOFFROY MARIE - 75009 PARIS",
+    "latitude":48.873781940593325,
+    "longitude":2.344513876337893
+  },
+  {
+    "number":17020,
+    "name":"17020 - NICARAGUA",
+    "address":"49 RUE JOUFFROY D'ABBANS - 75017 PARIS",
+    "latitude":48.885069943671056,
+    "longitude":2.307083216664497
+  },
+  {
+    "number":3002,
+    "name":"03002 - SAINT GILLES",
+    "address":"26 RUE SAINT GILLES - 75003 PARIS",
+    "latitude":48.85815895677863,
+    "longitude":2.364714992099186
+  },
+  {
+    "number":35005,
+    "name":"35005 - GENERAL LECLERC (PANTIN)",
+    "address":"QUAI DE L'AISNE/AVENUE DU GENERAL LECLERC 93500 PANTIN",
+    "latitude":48.89571394982448,
+    "longitude":2.400571894427273
+  },
+  {
+    "number":11007,
+    "name":"11007 - FAIDHERBE PALAIS DE LA FEMME",
+    "address":"17 RUE JEAN MACE - 75011 PARIS",
+    "latitude":48.85328931895065,
+    "longitude":2.383041177204182
+  },
+  {
+    "number":14003,
+    "name":"14003 - RASPAIL SCHOELCHER",
+    "address":"2 RUE VICTOR SCHOELCHER - 75014 PARIS",
+    "latitude":48.836850815842105,
+    "longitude":2.331303600860387
+  },
+  {
+    "number":20026,
+    "name":"20026 - PELLEPORT",
+    "address":"121 AVENUE GAMBETTA - 75020 PARIS",
+    "latitude":48.867925154026736,
+    "longitude":2.400976623546542
+  },
+  {
+    "number":13102,
+    "name":"13102 - LA PITIE-SALPETRIERE",
+    "address":"47-83 BOULEVARD DE L'HOPITAL (Allée de la grille) - 75013 PARIS",
+    "latitude":48.83742,
+    "longitude":2.36506
+  },
+  {
+    "number":13013,
+    "name":"13013 - SAINT MARCEL",
+    "address":"3 BD SAINT MARCEL - 75013 PARIS",
+    "latitude":48.83950442458303,
+    "longitude":2.360989417022932
+  },
+  {
+    "number":7002,
+    "name":"07002 - VANEAU",
+    "address":"86 RUE VANEAU - 75007 PARIS",
+    "latitude":48.84857760756107,
+    "longitude":2.320417393123817
+  },
+  {
+    "number":14015,
+    "name":"14015 - CITE UNIVERSITAIRE",
+    "address":"FACE 15 BOULEVARD JOURDAN - 75014 PARIS",
+    "latitude":48.820150107758145,
+    "longitude":2.339926428187734
+  },
+  {
+    "number":35007,
+    "name":"35007 - DELESSERT (PANTIN)",
+    "address":"1 RUE  BENJAMIN DELESSERT - 93500 PANTIN",
+    "latitude":48.89394371318989,
+    "longitude":2.418029659686782
+  },
+  {
+    "number":16039,
+    "name":"16039 - VERSAILLES EXELMANS",
+    "address":"27 BOULEVARD EXELMANS - 75016 PARIS",
+    "latitude":48.84096295264689,
+    "longitude":2.264394118075111
+  },
+  {
+    "number":7019,
+    "name":"07019 - ECOLE MILITAIRE",
+    "address":"85 AVENUE BOSQUET - 75007 PARIS",
+    "latitude":48.85495116800671,
+    "longitude":2.305478634195716
+  },
+  {
+    "number":33010,
+    "name":"33010 - HUGO (AUBERVILLIERS)",
+    "address":"161 AVENUE VICTOR HUGO - 93300 AUBERVILLIERS",
+    "latitude":48.911104809734795,
+    "longitude":2.379143742302604
+  },
+  {
+    "number":1005,
+    "name":"01005 - LES HALLES - SEBASTOPOL",
+    "address":"3 RUE DE LA COSSONNERIE - 75001 PARIS",
+    "latitude":48.86126206976475,
+    "longitude":2.349399999750171
+  },
+  {
+    "number":16014,
+    "name":"16014 - AVENUE D EYLAU",
+    "address":"4 AVENUE D'EYLAU - 75016 PARIS",
+    "latitude":48.86354640344584,
+    "longitude":2.286394496925036
+  },
+  {
+    "number":18004,
+    "name":"18004 - ABBESSES",
+    "address":"2 RUE DE LA VIEUVILLE - 75018 PARIS",
+    "latitude":48.884482392727506,
+    "longitude":2.338812297029362
+  },
+  {
+    "number":9111,
+    "name":"09111 - LA FAYETTE PROVENCE",
+    "address":"28 RUE DE LA VICTOIRE - 75009 PARIS",
+    "latitude":48.87514373494672,
+    "longitude":2.338118505144376
+  },
+  {
+    "number":13107,
+    "name":"13107 - MARCHAND SANTE",
+    "address":"12 PASSAGE VICTOR MARCHAND - 75013 PARIS",
+    "latitude":48.82884021838649,
+    "longitude":2.341967436827206
+  },
+  {
+    "number":17022,
+    "name":"17022 - PLACE DE WAGRAM",
+    "address":"67 BOULEVARD PEREIRE - 75017 PARIS",
+    "latitude":48.887070607581215,
+    "longitude":2.304111124531457
+  },
+  {
+    "number":21210,
+    "name":"21210 - PERI 2 (MONTROUGE)",
+    "address":"4 RUE GABRIEL PERI - 92120 MONTROUGE",
+    "latitude":48.8178170939014,
+    "longitude":2.32403127829722
+  },
+  {
+    "number":17010,
+    "name":"17010 - JONCQUIERE",
+    "address":"90 RUE DE LA JONQUIERE - 75017 PARIS",
+    "latitude":48.894768624696255,
+    "longitude":2.318885353974425
+  },
+  {
+    "number":21105,
+    "name":"21105 - MORICE (CLICHY)",
+    "address":"35-37 RUE MORICE - 92110 CLICHY",
+    "latitude":48.902615193840354,
+    "longitude":2.313320636502019
+  },
+  {
+    "number":17024,
+    "name":"17024 - VILLIERS",
+    "address":"1/3 PLACE PROSPER GOUBAUX - 75017 PARIS",
+    "latitude":48.88120833279596,
+    "longitude":2.316449640798716
+  },
+  {
+    "number":20033,
+    "name":"20033 - ETIENNE DOLET",
+    "address":"29 RUE ETIENNE DOLLET - 75020 PARIS",
+    "latitude":48.86804941024793,
+    "longitude":2.385133097618902
+  },
+  {
+    "number":17038,
+    "name":"17038 - ARGENTINE",
+    "address":"42 AVENUE DE LA GRANDE ARMEE - 75017 PARIS",
+    "latitude":48.87617438949852,
+    "longitude":2.288247405087516
+  },
+  {
+    "number":12009,
+    "name":"12009 - DIDEROT",
+    "address":"FACE 124 RUE DE CHARENTON - 75012 PARIS",
+    "latitude":48.846268789803915,
+    "longitude":2.379264325090339
+  },
+  {
+    "number":8110,
+    "name":"08110 - STOCKOLM ROME",
+    "address":"6 RUE DE STOCKOLM - 75008 PARIS",
+    "latitude":48.87711191876653,
+    "longitude":2.322329320868037
+  },
+  {
+    "number":1025,
+    "name":"01025 - TEMPLE DE L'ORATOIRE",
+    "address":"2 RUE DE L'ORATOIRE - 75001 PARIS",
+    "latitude":48.8613894682984,
+    "longitude":2.340055232817477
+  },
+  {
+    "number":12040,
+    "name":"12040 - PORTE DE CHARENTON",
+    "address":"FACE 2 AV. DE LA PORTE DE CHARENTON - 75012 PARIS",
+    "latitude":48.83158812517445,
+    "longitude":2.398745664948547
+  },
+  {
+    "number":13039,
+    "name":"13039 - IVRY POINTE D'IVRY",
+    "address":"42 - 44 AVENUE D'IVRY - 75013 PARIS",
+    "latitude":48.8232196831694,
+    "longitude":2.3654696281062
+  },
+  {
+    "number":13054,
+    "name":"13054 - PAU CASALS",
+    "address":"1 RUE PAU CASALS - 75013 PARIS",
+    "latitude":48.83124496844904,
+    "longitude":2.377263236877398
+  },
+  {
+    "number":15029,
+    "name":"15029 - EMERIAU",
+    "address":"27 RUE EMERIAU - 75015 PARIS",
+    "latitude":48.850614750906075,
+    "longitude":2.2872501634709
+  },
+  {
+    "number":19004,
+    "name":"19004 - QUAI DE LA LOIRE",
+    "address":"4 QUAI DE LA LOIRE - 75019 PARIS",
+    "latitude":48.88339733854529,
+    "longitude":2.371074522980134
+  },
+  {
+    "number":21307,
+    "name":"21307 - CRESSON 1 (ISSY LES MOULINEAUX)",
+    "address":"FACE 36 AVENUE VICTOR CRESSON - 92130 ISSY LES MOULINEAUX",
+    "latitude":48.82267836713668,
+    "longitude":2.26863109328801
+  },
+  {
+    "number":8009,
+    "name":"08009 - SAINT LAZARE RER",
+    "address":"1 RUE DE L'ISLY - 75008 PARIS",
+    "latitude":48.874808024965695,
+    "longitude":2.326481486218277
+  },
+  {
+    "number":18033,
+    "name":"18033 - MOSKOWA",
+    "address":"111 RUE BELLIARD - 75018 PARIS",
+    "latitude":48.89669238777841,
+    "longitude":2.338023450388167
+  },
+  {
+    "number":32001,
+    "name":"32001 - PROUDHON (SAINT DENIS)",
+    "address":"AVENUE PRESIDENT WILSON / RUE PROUDHON - 93200 SAINT DENIS",
+    "latitude":48.906469373243816,
+    "longitude":2.358442053954938
+  },
+  {
+    "number":32606,
+    "name":"32606 - GARDE CHASSE (LES LILAS)",
+    "address":"49 RUE DU GARDE CHASSE - 93260 LES LILAS",
+    "latitude":48.883240251645354,
+    "longitude":2.418912369645038
+  },
+  {
+    "number":4104,
+    "name":"04104 - SEBASTOPOL RAMBUTEAU",
+    "address":"FACE 40 BOULEVARD SEBASTOPOL - 75004 PARIS",
+    "latitude":48.861883102214215,
+    "longitude":2.350220976096221
+  },
+  {
+    "number":22405,
+    "name":"22405 - NORD (MALAKOFF)",
+    "address":"ANGLE PASSAGE DU NORD / GABRIEL PERI - 92240 MALAKOFF",
+    "latitude":48.81933915840963,
+    "longitude":2.300476865047907
+  },
+  {
+    "number":21109,
+    "name":"21109 - GUICHET (CLICHY)",
+    "address":"12BIS RUE DU GUICHET - 92110 CLICHY",
+    "latitude":48.90513700396853,
+    "longitude":2.302503160581296
+  },
+  {
+    "number":12008,
+    "name":"12008 - HECTOR MALOT",
+    "address":"15 BIS RUE HECTOR MALOT - 75012 PARIS",
+    "latitude":48.84681513232972,
+    "longitude":2.376929360592796
+  },
+  {
+    "number":33001,
+    "name":"33001 - EMGP (AUBERVILLIERS)",
+    "address":"45 Avenue Victor Hugo - 93300 AUBERVILLIERS",
+    "latitude":48.9031834065108,
+    "longitude":2.3680256126088
+  },
+  {
+    "number":9028,
+    "name":"09028 - MONCEY BLANCHE",
+    "address":"4 RUE MONCEY - 75009 PARIS",
+    "latitude":48.88015398585977,
+    "longitude":2.33107516002003
+  },
+  {
+    "number":12014,
+    "name":"12014 - NATION",
+    "address":"16 PLACE DE LA NATION SUR TPC - 75012 PARIS",
+    "latitude":48.847301800009085,
+    "longitude":2.39552056485834
+  },
+  {
+    "number":41102,
+    "name":"41102 - RENAN (ARCUEIL)",
+    "address":"rue Ernest Renan / angle rue Vaucouleurs (A la sortie du RER B) - 94110 ARCUEIL",
+    "latitude":48.808800394993376,
+    "longitude":2.334689654662475
+  },
+  {
+    "number":2004,
+    "name":"02004 - REAUMUR MONTORGUEIL",
+    "address":"83 ALLEE PIERRE LAZAREF - 75002 PARIS",
+    "latitude":48.866973714239656,
+    "longitude":2.3486324654447
+  },
+  {
+    "number":14005,
+    "name":"14005 - DENFERT ROCHEREAU",
+    "address":"2 AVENUE RENE COTY - 75014 PARIS",
+    "latitude":48.83314079924711,
+    "longitude":2.332672227475083
+  },
+  {
+    "number":21019,
+    "name":"21019 - VAILLANT (BOULOGNE-BILLANCOURT)",
+    "address":"71 AVENUE EDOUARD VAILLANT - 92100 BOULOGNE-BILLANCOURT",
+    "latitude":48.83486081059702,
+    "longitude":2.24786255060931
+  },
+  {
+    "number":13032,
+    "name":"13032 - MASSENA",
+    "address":"163 AVENUE D'ITALIE - 75013 PARIS",
+    "latitude":48.819894618061376,
+    "longitude":2.359432938466414
+  },
+  {
+    "number":13019,
+    "name":"13019 - AURIOL QUAI DE LA GARE",
+    "address":"20 RUE FERNAND BRAUDEL - 75013 PARIS",
+    "latitude":48.83636225239755,
+    "longitude":2.372375389059736
+  },
+  {
+    "number":6032,
+    "name":"06032 - RENNES SABOT",
+    "address":"7 RUE DU SABOT - 75006 PARIS",
+    "latitude":48.8525574216674,
+    "longitude":2.331647722906649
+  },
+  {
+    "number":11104,
+    "name":"11104 - CHARONNE DU BUREAU",
+    "address":"170 RUE DE CHARONNE - 75011 PARIS",
+    "latitude":48.855943779580954,
+    "longitude":2.392532526632664
+  },
+  {
+    "number":7008,
+    "name":"07008 - SOLFERINO",
+    "address":"10 RUE DE VILLERSEXEL - 75007 PARIS",
+    "latitude":48.85831864690376,
+    "longitude":2.323838437789417
+  },
+  {
+    "number":43002,
+    "name":"43002 - LAGNY (VINCENNES)",
+    "address":"1 BIS RUE DE LAGNY - 94300 VINCENNES",
+    "latitude":48.848879019004286,
+    "longitude":2.426198422131812
+  },
+  {
+    "number":8051,
+    "name":"08051 - CHAPTAL",
+    "address":"45 BD BATIGNOLLES - 75008 PARIS",
+    "latitude":48.881914,
+    "longitude":2.320284
+  },
+  {
+    "number":19120,
+    "name":"19120 - ALOUETTES",
+    "address":"20 RUE CARDUCCI - 75019 PARIS",
+    "latitude":48.87751625686576,
+    "longitude":2.386099720372164
+  },
+  {
+    "number":14028,
+    "name":"14028 - PLAISANCE ALESIA",
+    "address":"164 RUE ALESIA - 75014 PARIS",
+    "latitude":48.83163970406255,
+    "longitude":2.315158529047339
+  },
+  {
+    "number":7025,
+    "name":"07025 - SUFFREN TOUR EIFFEL",
+    "address":"2 AVENUE OCTAVE CREARD - 75007 PARIS",
+    "latitude":48.856502977695634,
+    "longitude":2.293178754328878
+  },
+  {
+    "number":6009,
+    "name":"06009 - GUYNEMER LUXEMBOURG",
+    "address":"26 RUE GUYNEMER - 75006 PARIS",
+    "latitude":48.84672098257342,
+    "longitude":2.332394592929583
+  },
+  {
+    "number":42012,
+    "name":"42012 - BARBUSSE (IVRY)",
+    "address":"1 RUE HENRY BARBUSSE - 94200 IVRY",
+    "latitude":48.81020034796607,
+    "longitude":2.379670589115164
+  },
+  {
+    "number":11026,
+    "name":"11026 - CHEMIN VERT SAINT MAUR",
+    "address":"105 RUE DU CHEMIN VERT - 75011 PARIS",
+    "latitude":48.86119441933017,
+    "longitude":2.381301904923526
+  },
+  {
+    "number":6028,
+    "name":"06028 - ODEON QUATRE VENTS",
+    "address":"6 RUE DES QUATRE VENTS - 75006 PARIS",
+    "latitude":48.851751374458864,
+    "longitude":2.338161695134053
+  },
+  {
+    "number":42501,
+    "name":"42501 - RASPAIL 1 - FRAYSSE",
+    "address":"80 AVENUE RASPAIL - 94250 GENTILLY",
+    "latitude":48.81031545,
+    "longitude":2.34395871
+  },
+  {
+    "number":15071,
+    "name":"15071 - CHAMP DE MARS COTE 16EME",
+    "address":"36 AVENUE DE SUFFREN - 75015 PARIS",
+    "latitude":48.8548517488353,
+    "longitude":2.29500791364336
+  },
+  {
+    "number":18103,
+    "name":"18103 - CHARLES HERMITE",
+    "address":"45 RUE CHARLES HERMITE - 75018 PARIS",
+    "latitude":48.89890275343664,
+    "longitude":2.364732494174034
+  },
+  {
+    "number":41201,
+    "name":"41201 - DE RICARD (FONTENAY SOUS BOIS)",
+    "address":"RUE LOUIS-XAVIER DE RICARD - 94120 FONTENAY SOUS BOIS",
+    "latitude":48.84630286069407,
+    "longitude":2.472408774870391
+  },
+  {
+    "number":42004,
+    "name":"42004 - WESTERMEYER - QUAIS D'IVRY (IVRY)",
+    "address":"FACE AU 5 RUE WESTERMEYER ET 30 BD PAUL VAILLANT COUTURIER -  94200 IVRY SUR SEINE",
+    "latitude":48.8190295,
+    "longitude":2.396602
+  },
+  {
+    "number":6004,
+    "name":"06004 - REGARD",
+    "address":"19 RUE DU REGARD - 75006 PARIS",
+    "latitude":48.847517829441934,
+    "longitude":2.326973305586841
+  },
+  {
+    "number":13006,
+    "name":"13006 - SAINT MARCEL JEANNE D'ARC",
+    "address":"02 RUE DUMERIL - 75013 PARIS",
+    "latitude":48.83815160808658,
+    "longitude":2.357108449556404
+  },
+  {
+    "number":20038,
+    "name":"20038 - LEON FRAPIE",
+    "address":"6 RUE LEON FRAPIE - 75020 PARIS",
+    "latitude":48.87354903513999,
+    "longitude":2.411003035880057
+  },
+  {
+    "number":6017,
+    "name":"06017 - SENAT CONDE",
+    "address":"34 RUE CONDE - 75006 PARIS",
+    "latitude":48.849580002186286,
+    "longitude":2.337848437179539
+  },
+  {
+    "number":13044,
+    "name":"13044 - PLACE JEANNE D'ARC",
+    "address":"20 PLACE JEANNE D'ARC - 75013 PARIS",
+    "latitude":48.829575726838485,
+    "longitude":2.369126815717134
+  },
+  {
+    "number":4005,
+    "name":"04005 - SULLY MORLAND",
+    "address":"2 QUAI DES CELESTINS - 75004 PARIS",
+    "latitude":48.85127148209335,
+    "longitude":2.362430212982278
+  },
+  {
+    "number":12114,
+    "name":"12114 - PORTE DE SAINT MANDE",
+    "address":"33 AVENUE COURTELINE - 75012 PARIS",
+    "latitude":48.843949064031825,
+    "longitude":2.415081394834419
+  },
+  {
+    "number":34006,
+    "name":"34006 - MICHELET (SAINT OUEN)",
+    "address":"42 AVENUE MICHELET - 93400 SAINT OUEN",
+    "latitude":48.910356422022,
+    "longitude":2.34430102118432
+  },
+  {
+    "number":21302,
+    "name":"21302 - BRIAND (ISSY LES MOULINEAUX)",
+    "address":"PLACE DE LA RESISTANCE ANGLE RUE ARISTIDE BRIAND - 92130 ISSY LES MOULINEAUX",
+    "latitude":48.821030252865725,
+    "longitude":2.251019571526973
+  },
+  {
+    "number":21206,
+    "name":"21206 - PERI (MONTROUGE)",
+    "address":"39 RUE GABRIEL PERI 92120 MONTROUGE",
+    "latitude":48.8182337326032,
+    "longitude":2.32088453254631
+  },
+  {
+    "number":6005,
+    "name":"06005 - MONTPARNASSE",
+    "address":"40 RUE DU MONTPARNASSE - 75006 PARIS",
+    "latitude":48.843295457036824,
+    "longitude":2.326541134127944
+  },
+  {
+    "number":2006,
+    "name":"02006 - PLACE DES VICTOIRES",
+    "address":"2 RUE D'ABOUKIR - 75002 PARIS",
+    "latitude":48.86600263256513,
+    "longitude":2.341920411962299
+  },
+  {
+    "number":17048,
+    "name":"17048 - TOCQUEVILLE",
+    "address":"12 RUE DE TOCQUEVILLE - 75017 PARIS",
+    "latitude":48.88240228540158,
+    "longitude":2.314000411222978
+  },
+  {
+    "number":21502,
+    "name":"21502 - VERDUN (SURESNES)",
+    "address":"18 BIS RUE DE VERDUN / COUR MADELAINE - 92150 SURESNES",
+    "latitude":48.87100304154044,
+    "longitude":2.227477476770916
+  },
+  {
+    "number":15019,
+    "name":"15019 - VAUGIRARD CAMBRONNE",
+    "address":"3 RUE PAUL BARRUEL - 75015 PARIS",
+    "latitude":48.84005771883908,
+    "longitude":2.304507420961214
+  },
+  {
+    "number":18035,
+    "name":"18035 - PORTE MONTMARTRE",
+    "address":"FACE 66 RUE RENE BINET - 75018 PARIS",
+    "latitude":48.89913599014183,
+    "longitude":2.336893453557286
+  },
+  {
+    "number":7013,
+    "name":"07013 - PLACE DE BRETEUIL",
+    "address":"17 RUE DUROC - 75007 PARIS",
+    "latitude":48.84750225840085,
+    "longitude":2.312688328662078
+  },
+  {
+    "number":21002,
+    "name":"21002 - DENFERT ROCHEREAU (BOULOGNE-BILLANCOURT)",
+    "address":"PLACE DENFERT ROCHEREAU - 92100 BOULOGNE BILLANCOURT",
+    "latitude":48.84317665587707,
+    "longitude":2.246214231580669
+  },
+  {
+    "number":12001,
+    "name":"12001 - BASTILLE",
+    "address":"48 BOULEVARD DE LA BASTILLE - 75012 PARIS",
+    "latitude":48.851311187409664,
+    "longitude":2.369250483580839
+  },
+  {
+    "number":16035,
+    "name":"16035 - HIPPODROME D AUTEUIL",
+    "address":"ALLEE DES FORTIFICATIONS - 75016 PARIS",
+    "latitude":48.848892820997,
+    "longitude":2.25765156147489
+  },
+  {
+    "number":8053,
+    "name":"08053 - FRIEDLAND",
+    "address":"PLACE GEORGES GUILLAUMIN - 75008 PARIS",
+    "latitude":48.874750203956566,
+    "longitude":2.301771435325988
+  },
+  {
+    "number":9015,
+    "name":"09015 - LAMARTINE",
+    "address":"43 RUE LAMARTINE - 75009 PARIS",
+    "latitude":48.87662212037311,
+    "longitude":2.339799899316122
+  },
+  {
+    "number":13117,
+    "name":"13117 - STADE GEORGES CARPENTIER",
+    "address":"95-97 BOULEVARD MASSENA - 75013 PARIS",
+    "latitude":48.82049518804969,
+    "longitude":2.366819682140966
+  },
+  {
+    "number":10019,
+    "name":"10019 - PARADIS",
+    "address":"23 RUE PARADIS - 75010 PARIS",
+    "latitude":48.87503405624492,
+    "longitude":2.352184894826549
+  },
+  {
+    "number":8050,
+    "name":"08050 - BOETIE PONTHIEU",
+    "address":"116 RUE DE LA BOETIE - 75008 PARIS",
+    "latitude":48.871512741519155,
+    "longitude":2.307487564419454
+  },
+  {
+    "number":42701,
+    "name":"42701 - GIDE (LE KREMLIN BICETRE)",
+    "address":"FACE 50 AVENUE CHARLES GIDE - 94270 LE KREMELIN BICETRE",
+    "latitude":48.807211123250035,
+    "longitude":2.353852672868236
+  },
+  {
+    "number":9018,
+    "name":"09018 - PLACE PIGALLE",
+    "address":"05 RUE DUPERRE - 75009 PARIS",
+    "latitude":48.88207022703438,
+    "longitude":2.336679631444242
+  },
+  {
+    "number":19045,
+    "name":"19045 - CANAL SAINT DENIS - BD MACDONALD",
+    "address":"145 BOULEVARD MCDONALD - 75019 PARIS",
+    "latitude":48.8988301928079,
+    "longitude":2.37933010909776
+  },
+  {
+    "number":18014,
+    "name":"18014 - DOUDEAUVILLE LEON",
+    "address":"26 RUE LEON - 75018 PARIS",
+    "latitude":48.88832421845225,
+    "longitude":2.353573372638597
+  },
+  {
+    "number":9024,
+    "name":"09024 - LAFAYETTE TAITBOUT",
+    "address":"27 RUE TAITBOUT - 75009 PARIS",
+    "latitude":48.873385805429535,
+    "longitude":2.33529683976619
+  },
+  {
+    "number":31001,
+    "name":"31001 - LAGNY (MONTREUIL)",
+    "address":"96 RUE DE LAGNY - 93100 MONTREUIL",
+    "latitude":48.84923030086477,
+    "longitude":2.421429940007031
+  },
+  {
+    "number":15032,
+    "name":"15032 - LOURMEL",
+    "address":"112 AVE FELIX FAURE - 75015 PARIS",
+    "latitude":48.838734408274696,
+    "longitude":2.281755540138765
+  },
+  {
+    "number":20108,
+    "name":"20108 - HOSPICE DEBROUSSE",
+    "address":"142 RUE DE BAGNOLET - 75020 PARIS",
+    "latitude":48.8615729587877,
+    "longitude":2.40568863716159
+  },
+  {
+    "number":17115,
+    "name":"17115 - PORTE DE SAINT OUEN",
+    "address":"22 AVENUE DE LA PORTE DE SAINT OUEN - 75017 PARIS",
+    "latitude":48.89876008065392,
+    "longitude":2.329558517454781
+  },
+  {
+    "number":12127,
+    "name":"12127 - TREMBLAY - INSEP",
+    "address":"11, avenue du Temblay - 75012 PARIS",
+    "latitude":48.83397,
+    "longitude":2.45482
+  },
+  {
+    "number":31011,
+    "name":"31011 - STALINGRAD 2 (MONTREUIL)",
+    "address":"27 RUE DE STALINGRAD - 93100 MONTREUIL",
+    "latitude":48.8589230268289,
+    "longitude":2.44314211823533
+  },
+  {
+    "number":41604,
+    "name":"41604 - LAGNY (SAINT MANDE)",
+    "address":"126 RUE LAGNY / ANGLE AVENUE JOFFRE - 94160 SAINT MANDE",
+    "latitude":48.84931182683785,
+    "longitude":2.417909769042342
+  },
+  {
+    "number":3008,
+    "name":"03008 - PERLE",
+    "address":"22 RUE DE LA PERLE - 75003 PARIS",
+    "latitude":48.859846683206975,
+    "longitude":2.361050487092021
+  },
+  {
+    "number":14022,
+    "name":"14022 - DIDOT-MARINIERS",
+    "address":"108 RUE DIDOT - 75014 PARIS",
+    "latitude":48.826508,
+    "longitude":2.31311526
+  },
+  {
+    "number":20004,
+    "name":"20004 - PORTE DE VINCENNES BIS",
+    "address":"10 RUE DU COMMANDANT L'HERMINIER - 75020 PARIS",
+    "latitude":48.84706441752541,
+    "longitude":2.416022960021078
+  },
+  {
+    "number":20007,
+    "name":"20007 - BUZENVAL",
+    "address":"52 RUE BUZENVAL - 75020 PARIS",
+    "latitude":48.851617204998654,
+    "longitude":2.401513597307666
+  },
+  {
+    "number":18102,
+    "name":"18102 - RUE DE LA CHAPELLE",
+    "address":"69 BIS RUE DE LA CHAPELLE - 75018 PARIS",
+    "latitude":48.89648283189724,
+    "longitude":2.358845525233447
+  },
+  {
+    "number":15065,
+    "name":"15065 - HUMBERT",
+    "address":"23 RUE EMILE ZOLA - 75015 PARIS",
+    "latitude":48.846383773003375,
+    "longitude":2.280008411904129
+  },
+  {
+    "number":21301,
+    "name":"21301 - SAINT VINCENT (ISSY LES MOULINEAUX)",
+    "address":"21 RUE COURS SAINT VINCENT 92130 ISSY LES MOULINEAUX",
+    "latitude":48.8194899938888,
+    "longitude":2.25386941995849
+  },
+  {
+    "number":17027,
+    "name":"17027 - PEREIRE LEVALLOIS",
+    "address":"121 BOULEVARD PEREIRE - 75017 PARIS",
+    "latitude":48.88526331365403,
+    "longitude":2.298286466799226
+  },
+  {
+    "number":10037,
+    "name":"10037 - VERSION 2 JAURES",
+    "address":"EGLISE SAINT JOSEPH ARTISAN - 75010 PARIS",
+    "latitude":48.88126816395289,
+    "longitude":2.368117527990073
+  },
+  {
+    "number":1018,
+    "name":"01018 - RIVOLI TUILERIE",
+    "address":"2 RUE D'ALGER - 75001 PARIS",
+    "latitude":48.86479366612619,
+    "longitude":2.329431421945852
+  },
+  {
+    "number":15024,
+    "name":"15024 - LAOS",
+    "address":"88 AVENUE DE SUFFREN - 75015 PARIS",
+    "latitude":48.85091460817171,
+    "longitude":2.301293384670141
+  },
+  {
+    "number":16001,
+    "name":"16001 - AVENUE DES PORTUGAIS",
+    "address":"2 AVENUE DES PORTUGAIS - 75016 PARIS",
+    "latitude":48.871213712191214,
+    "longitude":2.293692133647844
+  },
+  {
+    "number":42502,
+    "name":"42502 - RASPAIL 2 (GENTILLY)",
+    "address":"FACE AU 79 AVENUE RASPAIL- 94250 GENTILLY",
+    "latitude":48.813127647916225,
+    "longitude":2.346794374352219
+  },
+  {
+    "number":33013,
+    "name":"33013 - RECHAUSSIERE (AUBERVILLIERS)",
+    "address":"52 RUE LEOPOLD RECHOSSIERE - 93300 AUBERVILLIERS",
+    "latitude":48.9145061128239,
+    "longitude":2.39105149687865
+  },
+  {
+    "number":20020,
+    "name":"20020 - PYRENEES RENOUVIER",
+    "address":"183 RUE DES PYRENEES - 75020 PARIS",
+    "latitude":48.86095933229224,
+    "longitude":2.400421852042113
+  },
+  {
+    "number":8101,
+    "name":"08101 - LONDRES AMSTERDAM",
+    "address":"42 RUE DE LONDRES - 75008 PARIS",
+    "latitude":48.878034461503965,
+    "longitude":2.326483540969424
+  },
+  {
+    "number":19034,
+    "name":"19034 - PANTIN",
+    "address":"20 AVENUE DE LA PORTE DE PANTIN - 75019 PARIS",
+    "latitude":48.89034195521685,
+    "longitude":2.397813642189543
+  },
+  {
+    "number":5012,
+    "name":"05012 - ULM - LHOMOND",
+    "address":"20 RUE DE L'ESTRAPADE - 75005 PARIS",
+    "latitude":48.845143494008845,
+    "longitude":2.345412681213507
+  },
+  {
+    "number":10022,
+    "name":"10022 - CHABROL SAINT QUENTIN",
+    "address":"FACE 124 RUE DU FAUBOURG SAINT DENIS - 75010 PARIS",
+    "latitude":48.87686690577979,
+    "longitude":2.356119082991818
+  },
+  {
+    "number":42001,
+    "name":"42001 - VANZUPPE-PAUL VAILLANT COUTURIER (IVRY)",
+    "address":"FACE 4 BD PAUL VAILLANT COUTURIER - 94200 IVRY",
+    "latitude":48.82057,
+    "longitude":2.3952015
+  },
+  {
+    "number":19108,
+    "name":"19108 - ROSA PARKS – GASTON TESSIER",
+    "address":"12 Rue Gaston Tessier - 75019 PARIS",
+    "latitude":48.8960206,
+    "longitude":2.3739464
+  },
+  {
+    "number":8035,
+    "name":"08035 - NARVICK",
+    "address":"54 RUE DE LA BIENFAISANCE - 75008 PARIS",
+    "latitude":48.87659994083545,
+    "longitude":2.31316505435543
+  },
+  {
+    "number":5016,
+    "name":"05016 - CONTRESCARPE-THOUIN",
+    "address":"1 RUE THOUIN - 75005 PARIS",
+    "latitude":48.84506225637803,
+    "longitude":2.349497789857777
+  },
+  {
+    "number":14007,
+    "name":"14007 - SAINT JACQUES FERRUS",
+    "address":"1 RUE FERRUS - 75014 PARIS",
+    "latitude":48.83136668000465,
+    "longitude":2.340811882152406
+  },
+  {
+    "number":18048,
+    "name":"18048 - PORTE DE LA CHAPELLE",
+    "address":"29 BOULEVARD NEY - 75018 PARIS",
+    "latitude":48.8983850226507,
+    "longitude":2.36087734922712
+  },
+  {
+    "number":21017,
+    "name":"21017 - REPUBLIQUE 1 (BOULOGNE-BILLANCOURT)",
+    "address":"91 BOULEVARD DE LA REPUBLIPQUE - 92100 BOULOGNE-BILLANCOURT",
+    "latitude":48.833473679272245,
+    "longitude":2.243900532079072
+  },
+  {
+    "number":7102,
+    "name":"07102 - SAINTE CLOTHILDE",
+    "address":"FACE 19 RUE CASIMIR PERIER - 75007 PARIS",
+    "latitude":48.857829110709226,
+    "longitude":2.319149052579355
+  },
+  {
+    "number":16135,
+    "name":"16135 - STADE WILMILLE",
+    "address":"ROND POINT DU MARECHAL DELATRE DE TASSIGNY - 75016 PARIS",
+    "latitude":48.872381,
+    "longitude":2.275283
+  },
+  {
+    "number":10027,
+    "name":"10027 - DUNKERQUE",
+    "address":"4 RUE DE DUNKERQUE - 75010 PARIS",
+    "latitude":48.87935510317391,
+    "longitude":2.358379192454538
+  },
+  {
+    "number":9102,
+    "name":"09102 - PLACE D'ESTIENNE D'ORVES",
+    "address":"2 RUE DE LONDRES - 75009 PARIS",
+    "latitude":48.87673249893723,
+    "longitude":2.33048422584945
+  },
+  {
+    "number":42705,
+    "name":"42705 - CONVENTION (LE KREMLIN BICETRE)",
+    "address":"1 RUE DE LA CONVENTION - 94270 LE KREMLIN BICETRE",
+    "latitude":48.812800296374675,
+    "longitude":2.361041166442304
+  },
+  {
+    "number":1024,
+    "name":"01024 - LOUVRE COQ HERON",
+    "address":"20 RUE COQUILLIERE - 75001 PARIS",
+    "latitude":48.86377283202625,
+    "longitude":2.342707561978307
+  },
+  {
+    "number":17111,
+    "name":"17111 - LEMERCIER",
+    "address":"109 RUE LEMERCIER - 75017 PARIS",
+    "latitude":48.890020496141,
+    "longitude":2.3175909298999
+  },
+  {
+    "number":7011,
+    "name":"07011 - ST DOMINIQUE",
+    "address":"30 BIS RUE LAS CASES - 75007 PARIS",
+    "latitude":48.859068394963046,
+    "longitude":2.318624221125004
+  },
+  {
+    "number":19040,
+    "name":"19040 - TELEGRAPHE",
+    "address":"265 RUE DE BELLEVILLE - 75019 PARIS",
+    "latitude":48.87563618071149,
+    "longitude":2.399461451982782
+  },
+  {
+    "number":15072,
+    "name":"15072 - PLACE FERNAND FOREST",
+    "address":"1 RUE LINOIS ANGLE QUAI DE GRENELLE - 75015 PARIS",
+    "latitude":48.849271,
+    "longitude":2.281849
+  },
+  {
+    "number":14021,
+    "name":"14021 - PLACE DE LA PORTE DE CHATILLON",
+    "address":"PLACE DE LA PORTE DE CHATILLON 75014 PARIS",
+    "latitude":48.8244897024567,
+    "longitude":2.31844743104898
+  },
+  {
+    "number":11011,
+    "name":"11011 - RICHARD LENOIR",
+    "address":"FACE 86 BOULEVARD RICHARD LENOIR - 75011 PARIS",
+    "latitude":48.86180485207153,
+    "longitude":2.372651428265507
+  },
+  {
+    "number":31003,
+    "name":"31003 - PARIS (MONTREUIL)",
+    "address":"237-241 RUE DE PARIS - 93100 MONTREUIL",
+    "latitude":48.8549113323991,
+    "longitude":2.41877242975671
+  },
+  {
+    "number":13029,
+    "name":"13029 - ITALIE",
+    "address":"30 AVENUE D'ITALIE - 75013 PARIS",
+    "latitude":48.82903204071324,
+    "longitude":2.356183369179921
+  },
+  {
+    "number":1014,
+    "name":"01014 - RIVOLI MUSEE DU LOUVRE",
+    "address":"5 RUE DE L'ECHELLE - 75001 PARIS",
+    "latitude":48.86367225536575,
+    "longitude":2.33405760804708
+  },
+  {
+    "number":18108,
+    "name":"18108 - EVANGILE",
+    "address":"61 RUE DE L'EVANGILE - 75018 PARIS",
+    "latitude":48.895090329766326,
+    "longitude":2.368694139840156
+  },
+  {
+    "number":11023,
+    "name":"11023 - LEO FROT ROQUETTE",
+    "address":"2 RUE SAINT MAUR - 75011 PARIS",
+    "latitude":48.858688774062955,
+    "longitude":2.383553994571467
+  },
+  {
+    "number":2021,
+    "name":"02021 - CLERY",
+    "address":"4 RUE DE CLERY - 75002 PARIS",
+    "latitude":48.867467441464115,
+    "longitude":2.344526615114217
+  },
+  {
+    "number":19043,
+    "name":"19043 - PETITS PONTS",
+    "address":"7 rue Delphine Seyrig  - 75019 PARIS",
+    "latitude":48.893800171035,
+    "longitude":2.39791036643403
+  },
+  {
+    "number":9006,
+    "name":"09006 - TRUDAINE ROCHECHOUART",
+    "address":"81 RUE DUNKERQUE - 75009 PARIS",
+    "latitude":48.8821076343589,
+    "longitude":2.34626199853888
+  },
+  {
+    "number":16006,
+    "name":"16006 - RUE LAURISTON",
+    "address":"60 RUE LAURISTON - 75016 PARIS",
+    "latitude":48.869260223734464,
+    "longitude":2.289918722838758
+  },
+  {
+    "number":11102,
+    "name":"11102 - RUE DES BOULETS ( COMPLEMENTAIRE )",
+    "address":"3 RUE ALEXANDRE DUMAS - 75011 PARIS",
+    "latitude":48.85288867036487,
+    "longitude":2.389147640809553
+  },
+  {
+    "number":18021,
+    "name":"18021 - MARCADET - RAMEY",
+    "address":"98 RUE MARCADET - 75018 PARIS",
+    "latitude":48.89092238296793,
+    "longitude":2.344986482110517
+  },
+  {
+    "number":22004,
+    "name":"22004 - CHARLES DE GAULLE (NEUILLY)",
+    "address":"162 AVENUE CHARLES DE GAULLE - 92200 NEUILLY",
+    "latitude":48.884707293437835,
+    "longitude":2.261530819987246
+  },
+  {
+    "number":32601,
+    "name":"32601 - PARIS (LES LILAS)",
+    "address":"46 RUE DE PARIS - 93260 LES LILAS",
+    "latitude":48.878590348828126,
+    "longitude":2.411899977886774
+  },
+  {
+    "number":18003,
+    "name":"18003 - JOSEPH DE MAISTRE LEPIC",
+    "address":"2 RUE JOSEPH DE MAISTRE - 75018 PARIS",
+    "latitude":48.886456815828815,
+    "longitude":2.332897827913839
+  },
+  {
+    "number":4101,
+    "name":"04101 - BASTILLE",
+    "address":"11 RUE DE LA BASTILLE - 75004 PARIS",
+    "latitude":48.8537973449702,
+    "longitude":2.368400806960401
+  },
+  {
+    "number":20031,
+    "name":"20031 - DURIS",
+    "address":"33 RUE DURIS - 75020 PARIS",
+    "latitude":48.86554086710007,
+    "longitude":2.387724496163364
+  },
+  {
+    "number":15017,
+    "name":"15017 - PROCESSION",
+    "address":"7 PLACE FALGUIERE - 75015 PARIS",
+    "latitude":48.83633386181695,
+    "longitude":2.310466238030852
+  },
+  {
+    "number":17017,
+    "name":"17017 - PONT CARDINET",
+    "address":"167 RUE DE ROME - 75017 PARIS",
+    "latitude":48.88714045186671,
+    "longitude":2.314521605640858
+  },
+  {
+    "number":8027,
+    "name":"08027 - MAIRIE DU 8 ÈME",
+    "address":"28 RUE DE MADRID - 75008 PARIS",
+    "latitude":48.87798402750352,
+    "longitude":2.318404862782852
+  },
+  {
+    "number":15112,
+    "name":"15112 - FALGUIÈRE LEBRUN",
+    "address":"19 RUE VIGEE LEBRUN - 75015 PARIS",
+    "latitude":48.838758813496995,
+    "longitude":2.3109360795034
+  },
+  {
+    "number":28001,
+    "name":"28001 - WALLACE (PUTEAUX)",
+    "address":"FACE AU 4 BOULEVARD RICHARD WALLACE - 92800 PUTEAUX",
+    "latitude":48.878706853467605,
+    "longitude":2.241975493693907
+  },
+  {
+    "number":12125,
+    "name":"12125 - PYRAMIDE ENTRÉE PARC FLORAL",
+    "address":"PYRAMIDE ENTREE PARC FLORAL - 75012 PARIS",
+    "latitude":48.837061492855675,
+    "longitude":2.440446664251129
+  },
+  {
+    "number":10020,
+    "name":"10020 - CHABROL",
+    "address":"59 RUE CHABROL - 75010 PARIS",
+    "latitude":48.87710035109807,
+    "longitude":2.351222168052346
+  },
+  {
+    "number":3010,
+    "name":"03010 - BEAUBOURG",
+    "address":"46 RUE BEAUBOURG - 75003 PARIS",
+    "latitude":48.862464980403914,
+    "longitude":2.354236781419645
+  },
+  {
+    "number":11105,
+    "name":"11105 - REPUBLIQUE PARMENTIER",
+    "address":"82 AVENUE PARMENTIER - 75011 PARIS",
+    "latitude":48.864541626812056,
+    "longitude":2.375195196724585
+  },
+  {
+    "number":8032,
+    "name":"08032 - MATIGNON",
+    "address":"27 AVENUE MATIGNON - 75008 PARIS",
+    "latitude":48.871476421300954,
+    "longitude":2.313885419949291
+  },
+  {
+    "number":11033,
+    "name":"11033 - BREGUET SABIN",
+    "address":"FACE 23 BD RICHARD LENOIR - 75011 PARIS",
+    "latitude":48.856870467758306,
+    "longitude":2.370554639861521
+  },
+  {
+    "number":5006,
+    "name":"05006 - SAINT JACQUES SOUFFLOT",
+    "address":"174 RUE SAINT JACQUES - 75005 PARIS",
+    "latitude":48.84651692058683,
+    "longitude":2.343123803367338
+  },
+  {
+    "number":21011,
+    "name":"21011 - SILLY (BOULOGNE BILLANCOURT)",
+    "address":"153 RUE DE SILLY - 92100 BOULOGNE BILLANCOURT",
+    "latitude":48.832274660165,
+    "longitude":2.2340164013498
+  },
+  {
+    "number":18009,
+    "name":"18009 - LEPINE",
+    "address":"12 RUE JEAN FRANCOIS LEPINE - 75018 PARIS",
+    "latitude":48.88611466796807,
+    "longitude":2.356855627529275
+  },
+  {
+    "number":22401,
+    "name":"22401 - DE GAULLE (MALAKOFF)",
+    "address":"BOULEVARD CHARLES DE GAULLE (STATION DE METRO) - 92240 MALAKOFF",
+    "latitude":48.822528306004045,
+    "longitude":2.298631654119718
+  },
+  {
+    "number":9032,
+    "name":"09032 - MATHURINS",
+    "address":"12 RUE DES MATHURINS - 75009 PARIS",
+    "latitude":48.872971251927126,
+    "longitude":2.329465611700831
+  },
+  {
+    "number":41601,
+    "name":"41601 - GENERAL DE GAULLE (SAINT MANDE)",
+    "address":"86 AVENUE DU GENERAL DE GAULLE - 94160 SAINT MANDE",
+    "latitude":48.8390304317692,
+    "longitude":2.41741043540351
+  },
+  {
+    "number":21006,
+    "name":"21006 - PARIS (BOULOGNE-BILLANCOURT)",
+    "address":"162 RUE DE PARIS - 92100 BOULOGNE-BILLANCOURT",
+    "latitude":48.84159702890181,
+    "longitude":2.233496775544275
+  },
+  {
+    "number":18112,
+    "name":"18112 - HÔPITAL BICHAT",
+    "address":"2 RUE ARTHUR RANC - 75018 PARIS",
+    "latitude":48.89801434321367,
+    "longitude":2.333653376162832
+  },
+  {
+    "number":21308,
+    "name":"21308 - BARA (ISSY LES MOULINEAUX)",
+    "address":"23 RUE BARA - 92130 ISSY LES MOULINEAUX",
+    "latitude":48.83363,
+    "longitude":2.26853
+  },
+  {
+    "number":13020,
+    "name":"13020 - MENDES FRANCE",
+    "address":"FACE 15 RUE PAUL KLEE - 75013 PARIS",
+    "latitude":48.83908421830948,
+    "longitude":2.370532330985574
+  },
+  {
+    "number":33011,
+    "name":"33011 - FAURE (AUBERVILLIERS)",
+    "address":"FACE 172-174 BOULEVARD FELIX FAURE - 93300 AUBERVILLIERS",
+    "latitude":48.9113936890419,
+    "longitude":2.375281319974922
+  },
+  {
+    "number":19005,
+    "name":"19005 - RIQUET",
+    "address":"56 AVENUE DE FLANDRE - 75019 PARIS",
+    "latitude":48.888013281448345,
+    "longitude":2.373759595522922
+  },
+  {
+    "number":21201,
+    "name":"21201 - JAURES (MONTROUGE)",
+    "address":"6 PLACE JEAN JAURES / RUE MAURICE ARNOUX ET RUE CAMILLE PELLETIN - 92120 MONTROUGE",
+    "latitude":48.816290677003934,
+    "longitude":2.311279543410485
+  },
+  {
+    "number":16108,
+    "name":"16108 - SABLONS",
+    "address":"40 RUE DES SABLONS - 75016 PARIS",
+    "latitude":48.86387513126816,
+    "longitude":2.281890736577358
+  },
+  {
+    "number":2108,
+    "name":"02108 - VIVIENNE",
+    "address":"42 RUE VIVIENNE - 75002 PARIS",
+    "latitude":48.871242274166406,
+    "longitude":2.341394999257386
+  },
+  {
+    "number":12101,
+    "name":"12101 - CHARENTON PRAGUE",
+    "address":"89 TER RUE DE CHARENTON - 75012 PARIS",
+    "latitude":48.848175129981016,
+    "longitude":2.376358449431232
+  },
+  {
+    "number":8044,
+    "name":"08044 - VAN DYCK",
+    "address":"2 RUE ALFRED DE VIGNY - 75008 PARIS",
+    "latitude":48.87836138361425,
+    "longitude":2.305254448220567
+  },
+  {
+    "number":31010,
+    "name":"31010 - STALINGRAD (MONTREUIL)",
+    "address":"67-69 RUE DE STALINGRAD - 93100 MONTREUIL",
+    "latitude":48.85681112307105,
+    "longitude":2.444987425339264
+  },
+  {
+    "number":14124,
+    "name":"14124 - PORTE D'ARCUEIL",
+    "address":"AVENUE DAVID WEIL - 75014 PARIS",
+    "latitude":48.821111770492195,
+    "longitude":2.333785290429607
+  },
+  {
+    "number":13514,
+    "name":"13514 - GARE D'AUSTERLITZ 2",
+    "address":"9 BOULEVARD DE L'HOPITAL - 75013 PARIS",
+    "latitude":48.84183617360056,
+    "longitude":2.363468636860069
+  },
+  {
+    "number":6012,
+    "name":"06012 - SAINT GERMAIN COPEAU",
+    "address":"141 BD SAINT GERMAIN - 75006 PARIS",
+    "latitude":48.85330527759475,
+    "longitude":2.334465461882703
+  },
+  {
+    "number":5007,
+    "name":"05007 - ECOLES CARMES",
+    "address":"39 RUE DES ECOLES - 75005 PARIS",
+    "latitude":48.848919007908286,
+    "longitude":2.347201329520476
+  },
+  {
+    "number":12034,
+    "name":"12034 - PIROGUES DE BERCY",
+    "address":"20 RUE DES PIROGUES DE BERCY - 75012 PARIS",
+    "latitude":48.83230838936651,
+    "longitude":2.386370278568759
+  },
+  {
+    "number":42707,
+    "name":"42707 - OKABE (LE KREMLIN-BICETRE)",
+    "address":"51 avenue de Fontainebleau - 94270 Le Kremlin-Bicetre",
+    "latitude":48.8123678293798,
+    "longitude":2.36180984825322
+  },
+  {
+    "number":19015,
+    "name":"19015 - THIONVILLE",
+    "address":"24 RUE DE THIONVILLE - 75019 PARIS",
+    "latitude":48.88915491757438,
+    "longitude":2.383375417280365
+  },
+  {
+    "number":14024,
+    "name":"14024 - RAYMOND LOSSERAND",
+    "address":"RUE VERCINGETORIX - 75014 PARIS",
+    "latitude":48.827989487366,
+    "longitude":2.30567210645885
+  },
+  {
+    "number":4016,
+    "name":"04016 - LOBAU",
+    "address":"3 RUE LOBAU - 75004 PARIS",
+    "latitude":48.856246721700735,
+    "longitude":2.353281344612189
+  },
+  {
+    "number":18049,
+    "name":"18049 - PTE D'AUBERVILLIERS",
+    "address":"3-5 BOULEVARD NEY - 75018 PARIS",
+    "latitude":48.8984521733198,
+    "longitude":2.36960946333546
+  },
+  {
+    "number":22009,
+    "name":"22009 - DE GAULLE 2 (NEUILLY)",
+    "address":"FACE AU 99 AVENUE CHARLES DE GAULLE - 92200 NEUILLY SUR SEINE",
+    "latitude":48.88119,
+    "longitude":2.27186
+  },
+  {
+    "number":35013,
+    "name":"35013 - TELL (PANTIN)",
+    "address":"1 RUE GUILLAUME TELL / FACE AU 64 BENJAMIN DELESSERT- 93500 PANTIN",
+    "latitude":48.889488420014786,
+    "longitude":2.419848968734546
+  },
+  {
+    "number":10013,
+    "name":"10013 - SAINT LOUIS",
+    "address":"2 RUE ALIBERT - 75010 PARIS",
+    "latitude":48.87113994970465,
+    "longitude":2.36628044396993
+  },
+  {
+    "number":14002,
+    "name":"14002 - RASPAIL QUINET",
+    "address":"FACE 4 BD EDGAR QUINET - 75014 PARIS",
+    "latitude":48.839199167158384,
+    "longitude":2.32955509720774
+  },
+  {
+    "number":41101,
+    "name":"41101 - DOUMER (ARCUEIL)",
+    "address":"FACE AU 11 AVENUE PAUL DOUMER - 94110 ARCUEIL",
+    "latitude":48.806380010297374,
+    "longitude":2.336710402545291
+  },
+  {
+    "number":13027,
+    "name":"13027 - MAZAGRAND COUBERTIN",
+    "address":"AVENUE DE LA PORTE DE GENTILLY - 75013 PARIS",
+    "latitude":48.81625825722598,
+    "longitude":2.344181922989554
+  },
+  {
+    "number":13015,
+    "name":"13015 - CHEVALERET - LOUISE WEISS",
+    "address":"104 RUE DU CHEVALERET - 75013 PARIS",
+    "latitude":48.8326516,
+    "longitude":2.3710347
+  },
+  {
+    "number":22407,
+    "name":"22407 - BARBUSSE (MALAKOFF)",
+    "address":"ROND POINT HENRI BARBUSSE - 92240 MALAKOFF",
+    "latitude":48.81467965888627,
+    "longitude":2.287400457411747
+  },
+  {
+    "number":9038,
+    "name":"09038 - SQUARE BERLIOZ",
+    "address":"50 BIS RUE DOUAI - 75009 PARIS",
+    "latitude":48.88320784122797,
+    "longitude":2.330849949028507
+  },
+  {
+    "number":21701,
+    "name":"21701 - LARMEROUX (VANVES)",
+    "address":"12 rue Larmeroux 92170 Vanves",
+    "latitude":48.8169399112916,
+    "longitude":2.28098948048455
+  },
+  {
+    "number":5020,
+    "name":"05020 - PONT DE SULLY RIVE GAUCHE",
+    "address":"03 RUE DES FOSSES SAINT BERNARD - 75005 PARIS",
+    "latitude":48.849159689167834,
+    "longitude":2.356140327475379
+  },
+  {
+    "number":18013,
+    "name":"18013 - CHATEAU ROUGE",
+    "address":"28 RUE POULET - 75018 PARIS",
+    "latitude":48.88778177066001,
+    "longitude":2.350517738222509
+  },
+  {
+    "number":17014,
+    "name":"17014 - PORTE DE CLICHY - AVENUE DE CLICHY",
+    "address":"12 AVENUE DE LA PORTE DE CLICHY - 75017 PARIS",
+    "latitude":48.896787395899615,
+    "longitude":2.310714419009491
+  },
+  {
+    "number":31707,
+    "name":"31707 - VAILLANT (BAGNOLET)",
+    "address":"FACE 70 RUE EDOUARD VAILLANT - 93170 BAGNOLET",
+    "latitude":48.85839567854653,
+    "longitude":2.414860628003844
+  },
+  {
+    "number":1023,
+    "name":"01023 - ANDRE MALRAUX MUSEE DU LOUVRE",
+    "address":"165 RUE SAINT HONORE - 75001 PARIS",
+    "latitude":48.86349701996373,
+    "longitude":2.334846327550268
+  },
+  {
+    "number":15102,
+    "name":"15102 - SQUARE BELA BARTOK",
+    "address":"QUAI DE GRENELLE - 75015 PARIS",
+    "latitude":48.851167240679665,
+    "longitude":2.284607607567737
+  },
+  {
+    "number":6007,
+    "name":"06007 - VAVIN",
+    "address":"18 RUE BREA - 75006 PARIS",
+    "latitude":48.842738478257814,
+    "longitude":2.329794221763396
+  },
+  {
+    "number":11034,
+    "name":"11034 - PARMENTIER FONTAINE AU ROI",
+    "address":"124 AVENUE PARMENTIER - 75011 PARIS",
+    "latitude":48.86787670551736,
+    "longitude":2.372705978671471
+  },
+  {
+    "number":17045,
+    "name":"17045 - PLACE DES TERNES - 5",
+    "address":"5 PLACE DES TERNES - 75017 PARIS",
+    "latitude":48.878410386482805,
+    "longitude":2.297831064713626
+  },
+  {
+    "number":11028,
+    "name":"11028 - BLUETS REPUBLIQUE",
+    "address":"FACE 20 RUE GUILLAUME BERTRAND - 75011 PARIS",
+    "latitude":48.86382517434147,
+    "longitude":2.38090637715497
+  },
+  {
+    "number":909,
+    "name":"00909 - PONT D'ARCOLE (STATION MOBILE)",
+    "address":"Voie Georges Pompidou - 75004 PARIS",
+    "latitude":48.855843,
+    "longitude":2.3507829
+  },
+  {
+    "number":16129,
+    "name":"16129 - BOIS DE BOULOGNE / PORTE DE LA MUETTE 1",
+    "address":"CHEMIN DE LA CEINTURE DU LAC INTERIEUR / AVENUE DE SAINT CLOUD - 75016 PARIS",
+    "latitude":48.862081867033794,
+    "longitude":2.261746386041142
+  },
+  {
+    "number":13011,
+    "name":"13011 - CAMPO FORMIO",
+    "address":"112 BD DE L'HOPITAL - 75013 PARIS",
+    "latitude":48.8354057129538,
+    "longitude":2.35821834503044
+  },
+  {
+    "number":10016,
+    "name":"10016 - VILLEMIN",
+    "address":"29 RUE DES RECOLLETS - 75010 PARIS",
+    "latitude":48.875034655883944,
+    "longitude":2.359801238597928
+  },
+  {
+    "number":34008,
+    "name":"34008 - GARIBALDI (SAINT OUEN)",
+    "address":"FACE AU 4 AVENUE GARIBALDI / AVENUE GABRIEL PERI - 93400 SAINT OUEN",
+    "latitude":48.9057350760539,
+    "longitude":2.33149745979217
+  },
+  {
+    "number":34005,
+    "name":"34005 - LESENNE (SAINT OUEN)",
+    "address":"44 RUE ADRIEN LESENNE - 93400 SAINT OUEN",
+    "latitude":48.902553278222726,
+    "longitude":2.348274936304947
+  },
+  {
+    "number":14008,
+    "name":"14008 - MOUTON DUVERNET",
+    "address":"5 RUE MOUTON DUVERNET - 75014 PARIS",
+    "latitude":48.831506675674554,
+    "longitude":2.329319363216664
+  },
+  {
+    "number":21102,
+    "name":"21102 - NATIONS UNIES (CLICHY)",
+    "address":"PLACE DES NATIONS UNIES - 92110 CLICHY",
+    "latitude":48.89710985013293,
+    "longitude":2.309900498213689
+  },
+  {
+    "number":12152,
+    "name":"12152 - MICHEL CHASLES - GARE DE LYON",
+    "address":"4 au 8 et 7bis, rue Michel Chasles - 75012 PARIS",
+    "latitude":48.846375552301,
+    "longitude":2.37390484660864
+  },
+  {
+    "number":11103,
+    "name":"11103 - RICHARD LENOIR",
+    "address":"21 RUE PELEE - 75011 PARIS",
+    "latitude":48.8600393112308,
+    "longitude":2.37098437423996
+  },
+  {
+    "number":12016,
+    "name":"12016 - PICPUS",
+    "address":"43 AVENUE DE SAINT MANDE - 75012 PARIS",
+    "latitude":48.8451282937943,
+    "longitude":2.40140070766687
+  },
+  {
+    "number":8045,
+    "name":"08045 - ALMA",
+    "address":"FACE 3 AVENUE MONTAIGNE - 75008 PARIS",
+    "latitude":48.86492098253841,
+    "longitude":2.302549182385926
+  },
+  {
+    "number":17036,
+    "name":"17036 - AVENUE DE TERNES",
+    "address":"2-4 PLACE TRISTAN BERNARD - 75017 PARIS",
+    "latitude":48.87949288672707,
+    "longitude":2.291498184912626
+  },
+  {
+    "number":11041,
+    "name":"11041 - SAINT AMBROISE",
+    "address":"2 RUE LACHARRIERE - 75011 PARIS",
+    "latitude":48.86082070611917,
+    "longitude":2.375636525867217
+  },
+  {
+    "number":6016,
+    "name":"06016 - DANTON",
+    "address":"FACE AU 7 RUE DANTON 75006 PARIS",
+    "latitude":48.8523930093114,
+    "longitude":2.34144252246847
+  },
+  {
+    "number":17042,
+    "name":"17042 - PORTE MAILLOT",
+    "address":"FACE 279 BOULEVARD PEREIRE - 75017 PARIS",
+    "latitude":48.877750033418835,
+    "longitude":2.284444356553717
+  },
+  {
+    "number":13035,
+    "name":"13035 - IVRY TOLBIAC",
+    "address":"116 AVENUE DE CHOISY - 75013 PARIS",
+    "latitude":48.825970136397075,
+    "longitude":2.360231840755094
+  },
+  {
+    "number":20048,
+    "name":"20048 - BAGNOLET",
+    "address":"110 RUE DE BAGNOLET - 75020 PARIS",
+    "latitude":48.8597776444599,
+    "longitude":2.40344426132457
+  },
+  {
+    "number":2014,
+    "name":"02014 - SAINT AUGUSTIN",
+    "address":"1  3 RUE DAUNOU - 75002 PARIS",
+    "latitude":48.8691131525953,
+    "longitude":2.3325151052685
+  },
+  {
+    "number":14026,
+    "name":"14026 - PLANTES MOULIN VERT",
+    "address":"23 RUE DES PLANTES - 75014 PARIS",
+    "latitude":48.83014719579205,
+    "longitude":2.323313445980224
+  },
+  {
+    "number":22013,
+    "name":"22013 - SAINTE FOY (NEUILLY)",
+    "address":"2 rue de Chézy - 92200 NEUILLY",
+    "latitude":48.885140053090865,
+    "longitude":2.267800008253524
+  },
+  {
+    "number":41202,
+    "name":"41202 - CHARMES (FONTENAY SOUS BOIS)",
+    "address":"ANGLE AVENUE DES CHARMES / AVENUE FOCH - 94120 FONTENAY SOUS BOIS",
+    "latitude":48.84367434144252,
+    "longitude":2.46308263962204
+  },
+  {
+    "number":23005,
+    "name":"23005 - GARE DE CLICHY LEVALLOIS",
+    "address":"Pace du 8 mais 45 (devant la Gare SNCF)  - 92300 LEVALLOIS",
+    "latitude":48.896746,
+    "longitude":2.2982307
+  },
+  {
+    "number":16040,
+    "name":"16040 - EXELMANS",
+    "address":"73 BIS BOULEVARD EXELMANS - 75016 PARIS",
+    "latitude":48.843104494735165,
+    "longitude":2.259821391742079
+  },
+  {
+    "number":11110,
+    "name":"11110 - SQUARE ROQUETTE",
+    "address":"176 RUE DE LA ROQUETTE - 75011 PARIS",
+    "latitude":48.8592429763213,
+    "longitude":2.386593289210004
+  },
+  {
+    "number":11107,
+    "name":"11107 - BIBLIOTHEQUE FAIDHERBE",
+    "address":"11 RUE FAIDHERBE - 75011 PARIS",
+    "latitude":48.851532005340125,
+    "longitude":2.38372328828755
+  },
+  {
+    "number":8037,
+    "name":"08037 - MALSHERBES MONCEAU",
+    "address":"75 RUE DE MONCEAU - 75008 PARIS",
+    "latitude":48.87960645718048,
+    "longitude":2.314553524187054
+  },
+  {
+    "number":18016,
+    "name":"18016 - FRANCOEUR CAULAINCOURT",
+    "address":"1 RUE FRANCOEUR - 75018 PARIS",
+    "latitude":48.89002290339246,
+    "longitude":2.342450012678194
+  },
+  {
+    "number":21020,
+    "name":"21020 - REPUBLIQUE 2 (BOULOGNE-BILLANCOURT)",
+    "address":"28 Bd de la République 92100 BOULOGNE BILLANCOURT",
+    "latitude":48.83199981539791,
+    "longitude":2.253719988007252
+  },
+  {
+    "number":8115,
+    "name":"08115 - BASSANO",
+    "address":"10 RUE VERNET - 75008 PARIS",
+    "latitude":48.87134532710352,
+    "longitude":2.300186572268202
+  },
+  {
+    "number":16036,
+    "name":"16036 - PORTE MOLITOR",
+    "address":"PLACE DE LA PORTE MOLITOR - 75016 PARIS",
+    "latitude":48.84524431387353,
+    "longitude":2.256939537401627
+  },
+  {
+    "number":17104,
+    "name":"17104 - GENERAL KOENIG",
+    "address":"2 BOULEVARD AURELLE DE PALADINES - 75017 PARIS",
+    "latitude":48.881725659667424,
+    "longitude":2.283682661669767
+  },
+  {
+    "number":19117,
+    "name":"19117 - EURYALE DEHAYNIN",
+    "address":"22 RUE EURYALE DEHAYNIN - 75019 PARIS",
+    "latitude":48.88630005108641,
+    "longitude":2.377388863133627
+  },
+  {
+    "number":20111,
+    "name":"20111 - L'ISLE ADAM PYRENÉES",
+    "address":"60 RUE VILLIERS DE L'ISLE ADAM - 75020 PARIS",
+    "latitude":48.867362297165805,
+    "longitude":2.396222890988687
+  },
+  {
+    "number":10041,
+    "name":"10041 - CHARTRES (18 ARR.)",
+    "address":"FACE 39 BOULEVARD DE LA CHAPELLE - 75010 PARIS",
+    "latitude":48.88414119396773,
+    "longitude":2.356109465877721
+  },
+  {
+    "number":19024,
+    "name":"19024 - BUTTES CHAUMONT",
+    "address":"28 / 30 RUE BOTZARIS - 75019 PARIS",
+    "latitude":48.8779512535706,
+    "longitude":2.381464662877906
+  },
+  {
+    "number":12043,
+    "name":"12043 - DAUMESNIL HEBRARD",
+    "address":"108, avenue Daumesnil - 75012 PARIS",
+    "latitude":48.8429,
+    "longitude":2.38474
+  },
+  {
+    "number":21108,
+    "name":"21108 - VILLENEUVE 2 (CLICHY)",
+    "address":"6-8 RUE VILLENEUVE - 92110 CLICHY",
+    "latitude":48.903621012155874,
+    "longitude":2.306228565729878
+  },
+  {
+    "number":23003,
+    "name":"23003 - WILSON (LEVALLOIS)",
+    "address":"132 RUE DU PRESIDENT WILSON - 92300 LEVALLOIS",
+    "latitude":48.89834000227244,
+    "longitude":2.285089933584791
+  },
+  {
+    "number":16115,
+    "name":"16115 - RAFFET",
+    "address":"52 RUE RAFFET - 75016 PARIS",
+    "latitude":48.852618846108584,
+    "longitude":2.262930039103354
+  },
+  {
+    "number":14020,
+    "name":"14020 - PORTE DE MONTROUGE",
+    "address":"AV. DE LA PORTE DE MONTROUGE - 75014 PARIS",
+    "latitude":48.821216789689345,
+    "longitude":2.321173502143062
+  },
+  {
+    "number":13007,
+    "name":"13007 - LE BRUN GOBELINS",
+    "address":"42 RUE LE BRUN - 75013 PARIS",
+    "latitude":48.835092787823875,
+    "longitude":2.353468135133752
+  },
+  {
+    "number":11006,
+    "name":"11006 - LEDRU ROLLIN-BASFROI",
+    "address":"169 AVENUE LEDRU ROLLIN - 75011 PARIS",
+    "latitude":48.856433706943704,
+    "longitude":2.379020587761426
+  },
+  {
+    "number":11024,
+    "name":"11024 - BOULEVARD VOLTAIRE",
+    "address":"82 RUE SEDAINE - 75011 PARIS",
+    "latitude":48.85882890841428,
+    "longitude":2.378871327120361
+  },
+  {
+    "number":15110,
+    "name":"15110 - PLACE ROBERT GUILLEMARD",
+    "address":"PLACE ROBERT GUILLEMARD - 75015 PARIS",
+    "latitude":48.83621036148383,
+    "longitude":2.281039381009245
+  },
+  {
+    "number":7020,
+    "name":"07020 - CLER",
+    "address":"FACE 3 RUE DU CHAMP DE MARS - 75007 PARIS",
+    "latitude":48.85664110011817,
+    "longitude":2.306598534111823
+  },
+  {
+    "number":15123,
+    "name":"15123 - RUE DU COMMERCE",
+    "address":"20 RUE DU COMMERCE - 75015 PARIS",
+    "latitude":48.8479921934615,
+    "longitude":2.29668168569178
+  },
+  {
+    "number":22001,
+    "name":"22001 - CHATEAU (NEUILLY)",
+    "address":"26 BOULEVARD DU CHATEAU - 92200 NEUILLY",
+    "latitude":48.89051191347665,
+    "longitude":2.270167225273174
+  },
+  {
+    "number":31006,
+    "name":"31006 - REPUBLIQUE 2 (MONTREUIL)",
+    "address":"2/4 PLACE DE LA REPUBLIQUE - 93100 MONTREUIL",
+    "latitude":48.85375961633593,
+    "longitude":2.424445808011069
+  },
+  {
+    "number":2007,
+    "name":"02007 - CHABANAIS",
+    "address":"1 RUE CHABANAIS - 75002 PARIS",
+    "latitude":48.867123446448645,
+    "longitude":2.336686608238879
+  },
+  {
+    "number":1008,
+    "name":"01008 - COQUILLIERE - LOUVRE",
+    "address":"9 RUE COQUILLIERE 75001 PARIS",
+    "latitude":48.863575,
+    "longitude":2.3426385
+  },
+  {
+    "number":5110,
+    "name":"05110 - LACEPEDE",
+    "address":"27 RUE LACEPEDE - 75005 PARIS",
+    "latitude":48.843860353248765,
+    "longitude":2.35190222528039
+  },
+  {
+    "number":10151,
+    "name":"10151 - GARE DU NORD 1",
+    "address":"8-10 RUE DE DUNKERQUE - 75010 PARIS",
+    "latitude":48.87963935299516,
+    "longitude":2.356904958415215
+  },
+  {
+    "number":20503,
+    "name":"20503 - COURS DE VINCENNES PYRÉNÉES",
+    "address":"1 RUE DES PYRENEES - 75020 PARIS",
+    "latitude":48.847724968984686,
+    "longitude":2.405907317017889
+  },
+  {
+    "number":31709,
+    "name":"31709 - MARCEL (BAGNOLET)",
+    "address":"FACE AU 184 RUE ETIENNE MARCEL - 93170 BAGNOLET",
+    "latitude":48.857050394743816,
+    "longitude":2.422549956709779
+  },
+  {
+    "number":21503,
+    "name":"21503 - LEDRU ROLLIN (SURESNES)",
+    "address":"13/15 RUE LEDRU ROLLIN - 92150 SURESNES",
+    "latitude":48.870920487633555,
+    "longitude":2.229589352206592
+  },
+  {
+    "number":17006,
+    "name":"17006 - GUY MOQUET DAVY",
+    "address":"34 RUE GUY MOQUET - 75017 PARIS",
+    "latitude":48.8920640862454,
+    "longitude":2.32329134120854
+  },
+  {
+    "number":8041,
+    "name":"08041 - CHAMPS ELYSEES LINCOLN",
+    "address":"16 RUE DE LINCOLN - 75008 PARIS",
+    "latitude":48.87069015790859,
+    "longitude":2.303222423974782
+  },
+  {
+    "number":21311,
+    "name":"21311 - GAMBETTA (ISSY LES MOULINEAUX)",
+    "address":"FACE AU 40 BOULEVARD GAMBETTA - 92130 ISSY LES MOULINEAUX",
+    "latitude":48.827470501735846,
+    "longitude":2.278549600821535
+  },
+  {
+    "number":1020,
+    "name":"01020 - RIVOLI CONCORDE",
+    "address":"2 RUE CAMBON - 75001 PARIS",
+    "latitude":48.866285221156055,
+    "longitude":2.325249045083579
+  },
+  {
+    "number":10007,
+    "name":"10007 - CHATEAU D'EAU",
+    "address":"57 RUE DU CHATEAU D'EAU - 75010 PARIS",
+    "latitude":48.87242997325711,
+    "longitude":2.355489390173873
+  }
+]

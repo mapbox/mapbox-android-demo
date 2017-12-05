@@ -69,6 +69,7 @@ import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.GeoJsonPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerClustersPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
@@ -395,8 +396,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_plugins_geojson_plugin_title,
           R.string.activity_plugins_geojson_plugin_description,
           new Intent(MainActivity.this, GeoJsonPluginActivity.class),
-          R.string.activity_plugins_geojson_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
-
+          R.string.activity_plugins_geojson_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
+        );
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_plugins_marker_clusters_plugin_title,
+          R.string.activity_plugins_geojson_marker_clusters_description,
+          new Intent(MainActivity.this, MarkerClustersPluginActivity.class),
+          R.string.activity_plugins_markers_clusters_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
+        );
         currentCategory = R.id.nav_plugins;
         break;
 
@@ -563,10 +570,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         break;
       case R.id.nav_image_generator:
         exampleItemModel.add(new ExampleItemModel(
-                R.string.activity_image_generator_snapshot_notification_title,
-                R.string.activity_image_generator_snapshot_notification_description,
-                new Intent(MainActivity.this, SnapshotNotificationActivity.class),
-                R.string.activity_image_generator_snapshot_notification_url
+          R.string.activity_image_generator_snapshot_notification_title,
+          R.string.activity_image_generator_snapshot_notification_description,
+          new Intent(MainActivity.this, SnapshotNotificationActivity.class),
+          R.string.activity_image_generator_snapshot_notification_url
         ));
         currentCategory = R.id.nav_image_generator;
         break;
