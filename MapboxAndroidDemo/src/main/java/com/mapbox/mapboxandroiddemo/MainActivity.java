@@ -81,6 +81,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.ImageSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
@@ -335,8 +336,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_local_style_or_raster_source_title,
           R.string.activity_styles_local_style_or_raster_source_description,
           new Intent(MainActivity.this, LocalStyleSourceActivity.class),
-          R.string.activity_styles_local_style_or_raster_source_url, false, BuildConfig.MIN_SDK_VERSION));
-
+          R.string.activity_styles_local_style_or_raster_source_url, false, BuildConfig.MIN_SDK_VERSION
+        ));
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_style_image_source_title,
+          R.string.activity_style_image_source_description,
+          new Intent(MainActivity.this, ImageSourceActivity.class),
+          R.string.activity_style_image_source_url, false, BuildConfig.MIN_SDK_VERSION
+        ));
         currentCategory = R.id.nav_styles;
         break;
       case R.id.nav_extrusions:

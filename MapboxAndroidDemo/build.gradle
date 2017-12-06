@@ -87,7 +87,6 @@ dependencies {
 
 
     // Mapbox dependencies
-
     api (dependenciesList.mapboxMapSdk) {
         transitive = true
     }
