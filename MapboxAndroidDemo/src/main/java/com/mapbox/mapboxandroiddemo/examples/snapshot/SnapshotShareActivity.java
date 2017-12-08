@@ -107,7 +107,8 @@ public class SnapshotShareActivity extends AppCompatActivity {
 
         Intent shareIntent = new Intent();
         shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-        shareIntent.setType("image/*");
+        shareIntent.setType("image/png");
+        shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(Intent.createChooser(shareIntent, "Share map image"));
 
