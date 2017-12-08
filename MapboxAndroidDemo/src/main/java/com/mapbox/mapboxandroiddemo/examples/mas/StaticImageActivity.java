@@ -74,7 +74,7 @@ public class StaticImageActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         Intent intent = new Intent(StaticImageActivity.this, MainActivity.class);
-        intent.putExtra(MainActivity.EXTRA_NAV, R.id.nav_image_generator);
+        intent.putExtra(MainActivity.EXTRA_NAV, R.id.nav_snapshot_image_generator);
         startActivity(intent);
       }
     });

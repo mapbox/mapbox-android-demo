@@ -56,7 +56,8 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
-import com.mapbox.mapboxandroiddemo.examples.ig.SnapshotNotificationActivity;
+import com.mapbox.mapboxandroiddemo.examples.snapshot.SnapshotNotificationActivity;
+import com.mapbox.mapboxandroiddemo.examples.snapshot.SnapshotShareActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsMatrixApiActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
@@ -155,9 +156,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     if (savedInstanceState != null) {
       currentCategory = savedInstanceState.getInt("CURRENT_CATEGORY");
       listItems(currentCategory);
-    } else if (getIntent().getIntExtra(EXTRA_NAV, -1) == R.id.nav_image_generator) {
-      currentCategory = R.id.nav_image_generator;
-      listItems(R.id.nav_image_generator);
+    } else if (getIntent().getIntExtra(EXTRA_NAV, -1) == R.id.nav_snapshot_image_generator) {
+      currentCategory = R.id.nav_snapshot_image_generator;
+      listItems(R.id.nav_snapshot_image_generator);
     } else {
       listItems(R.id.nav_basics);
     }
@@ -575,14 +576,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_mas_matrix_url));
         currentCategory = R.id.nav_mas;
         break;
-      case R.id.nav_image_generator:
+      case R.id.nav_snapshot_image_generator:
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_image_generator_snapshot_notification_title,
           R.string.activity_image_generator_snapshot_notification_description,
           new Intent(MainActivity.this, SnapshotNotificationActivity.class),
           R.string.activity_image_generator_snapshot_notification_url
         ));
-        currentCategory = R.id.nav_image_generator;
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_image_generator_snapshot_share_title,
+          R.string.activity_image_generator_snapshot_share_description,
+          new Intent(MainActivity.this, SnapshotShareActivity.class),
+          R.string.activity_image_generator_snapshot_share_url
+        ));
+        currentCategory = R.id.nav_snapshot_image_generator;
         break;
       case R.id.nav_lab:
         exampleItemModel.add(null);
