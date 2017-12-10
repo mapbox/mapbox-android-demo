@@ -1,3 +1,3 @@
-This update is in line with the 5.1.4 release of the Mapbox Maps SDK. This release also has several bug fixes and new examples:
-•How to use the new GeoJSON plugin
-•How to add many images as markers
+This update is in line with the 5.2.1 release of the Mapbox Maps SDK for Android. This release also has several bug fixes and new examples:
+
+Issues resolved in this release: [https://github.com/mapbox/mapbox-android-demo/issues?q=is%3Aissue+milestone%3A%22Release+5.2.0%22+is%3Aclosed](https://github.com/mapbox/mapbox-android-demo/issues?q=is%3Aissue+milestone%3A%22Release+5.2.0%22+is%3Aclosed)
