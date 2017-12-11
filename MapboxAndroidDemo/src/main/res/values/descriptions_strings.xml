@@ -23,6 +23,7 @@
     <string name="activity_styles_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
     <string name="activity_styles_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
     <string name="activity_styles_local_style_or_raster_source_description">Load a locally stored map style JSON file or custom raster style via a URL.</string>
+    <string name="activity_style_image_source_description">Use an image source to easily display images on the map.</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_description">Use data-driven styling and GeoJSON data to set extrusions\' heights.</string>
     <string name="activity_extrusions_population_density_extrusions_description">Use extrusions to display 3D building height based on imported vector data.</string>
     <string name="activity_extrusions_adjust_extrusions_description">Change the location and color of the light shined on extrusions.</string>
@@ -58,11 +59,13 @@
     <string name="activity_mas_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
     <string name="activity_mas_matrix_api_description">Use the Directions Matrix API to receive driving times between Boston\'s various electric car charging stations.</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
-    <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height.</string>
-    <string name="activity_plugins_location_plugin_description">Use the location plugin to easily show a user\'s location on the map.</string>
-    <string name="activity_plugins_geojson_plugin_description">Easily retrieve GeoJSON data from a url, asset, or path.</string>
+    <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
+    <string name="activity_plugins_location_plugin_description">Use the location plugin to easily show a user\'s location on the map</string>
+    <string name="activity_plugins_geojson_plugin_description">Easily retrieve GeoJSON data from a url, asset, or path</string>
+    <string name="activity_plugins_geojson_marker_clusters_description">Use the plugin to automatically add marker clusters to the map. This example shows bike share stations in Paris.</string>
     <string name="activity_mas_simplify_polyline_description">Using the polylines utility, simplify a polyline which reduces the amount of coordinates making up the polyline depending on tolerance.</string>
     <string name="activity_mas_map_matching_description">Match raw GPS points to the map so they aligns with the roads/pathways.</string>
+    <string name="activity_image_generator_snapshot_share_description">Send and share a map snapshot image.</string>
     <string name="activity_image_generator_snapshot_notification_description">Show a snapshotted image in a notification.</string>
     <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding.</string>
     <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>
