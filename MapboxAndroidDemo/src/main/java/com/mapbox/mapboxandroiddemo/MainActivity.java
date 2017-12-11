@@ -99,8 +99,8 @@ import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MapillaryActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
+import com.mapbox.mapboxandroiddemo.labs.ProjectPinpointSymbolActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
-import com.mapbox.mapboxandroiddemo.labs.RecyclerViewSymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
@@ -650,7 +650,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_rv_symbol_layer_on_map_title,
           R.string.activity_lab_rv_symbol_layer_on_map_description,
-          new Intent(MainActivity.this, RecyclerViewSymbolLayerActivity.class),
+          new Intent(MainActivity.this, ProjectPinpointSymbolActivity.class),
           R.string.activity_lab_rv_symbol_layer_on_map_url, true, BuildConfig.MIN_SDK_VERSION));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_labs_gif_on_map_title,
