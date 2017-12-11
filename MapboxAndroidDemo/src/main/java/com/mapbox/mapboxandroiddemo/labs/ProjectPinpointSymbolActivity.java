@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -100,7 +101,6 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
   private static final String PROPERTY_DESCRIPTION = "description";
   private static final String PROPERTY_POI = "poi";
   private static final String PROPERTY_STYLE = "style";
-  private static final String PROPERTY_SUB_STYLE = "sub-style";
 
   private static final long ANIMATION_TIME = 1950;
 
@@ -244,7 +244,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setItemAnimator(new DefaultItemAnimator());
     recyclerView.setAdapter(adapter);
-    recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+    recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
       @Override
       public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
@@ -256,9 +256,10 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     });
     SnapHelper snapHelper = new PagerSnapHelper();
     snapHelper.attachToRecyclerView(recyclerView);
-    recyclerView.post(new Runnable() {
+
+    recyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
       @Override
-      public void run() {
+      public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
         mapboxMap.setPadding(0, 0, 0, recyclerView.getMeasuredHeight());
       }
     });
@@ -290,7 +291,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
    */
   private void handleClickCallout(Feature feature, PointF screenPoint, PointF symbolScreenPoint) {
     View view = viewMap.get(feature.getStringProperty(PROPERTY_TITLE));
-    View textContainer = view.findViewById(R.id.title);
+    View textContainer = view.findViewById(R.id.text_container);
 
     // create hitbox for textView
     Rect hitRectText = new Rect();
@@ -400,7 +401,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
   }
 
   private void loadMapillaryData(Position position) {
-    new LoadMapillaryDataTask(this, mapboxMap, Picasso.with(getApplicationContext()), position).execute(50);
+    new LoadMapillaryDataTask(mapboxMap, Picasso.with(getApplicationContext()), position).execute(50);
   }
 
   /**
@@ -608,11 +609,11 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
   private static class GenerateViewIconTask extends AsyncTask<FeatureCollection, Void, HashMap<String, Bitmap>> {
 
     private final HashMap<String, View> viewMap = new HashMap<>();
-    private final ProjectPinpointSymbolActivity activity;
+    private final WeakReference<ProjectPinpointSymbolActivity> activityRef;
     private final boolean refreshSource;
 
     GenerateViewIconTask(ProjectPinpointSymbolActivity activity, boolean refreshSource) {
-      this.activity = activity;
+      this.activityRef = new WeakReference<>(activity);
       this.refreshSource = refreshSource;
     }
 
@@ -623,32 +624,43 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     @SuppressWarnings("WrongThread")
     @Override
     protected HashMap<String, Bitmap> doInBackground(FeatureCollection... params) {
-      HashMap<String, Bitmap> imagesMap = new HashMap<>();
-      LayoutInflater inflater = LayoutInflater.from(activity);
-      FeatureCollection featureCollection = params[0];
+      ProjectPinpointSymbolActivity activity = activityRef.get();
+      if (activity != null) {
+        HashMap<String, Bitmap> imagesMap = new HashMap<>();
+        LayoutInflater inflater = LayoutInflater.from(activity);
+        FeatureCollection featureCollection = params[0];
 
-      for (Feature feature : featureCollection.getFeatures()) {
-        View view = inflater.inflate(R.layout.layout_callout, null);
+        for (Feature feature : featureCollection.getFeatures()) {
+          View view = inflater.inflate(R.layout.layout_callout, null);
 
-        String name = feature.getStringProperty(PROPERTY_TITLE);
-        TextView textView = (TextView) view.findViewById(R.id.title);
-        textView.setText(name);
+          String name = feature.getStringProperty(PROPERTY_TITLE);
+          TextView titleTv = (TextView) view.findViewById(R.id.title);
+          titleTv.setText(name);
 
-        boolean favourite = feature.getBooleanProperty(PROPERTY_FAVOURITE);
-        ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
-        imageView.setImageResource(favourite ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
+          String style = feature.getStringProperty(PROPERTY_STYLE);
+          TextView styleTv = (TextView) view.findViewById(R.id.style);
+          styleTv.setText(style);
 
-        Bitmap bitmap = SymbolGenerator.generate(view);
-        imagesMap.put(name, bitmap);
-        viewMap.put(name, view);
+          boolean favourite = feature.getBooleanProperty(PROPERTY_FAVOURITE);
+          ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
+          imageView.setImageResource(favourite ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
+
+          Bitmap bitmap = SymbolGenerator.generate(view);
+          imagesMap.put(name, bitmap);
+          viewMap.put(name, view);
+        }
+
+        return imagesMap;
+      } else {
+        return null;
       }
-      return imagesMap;
     }
 
     @Override
     protected void onPostExecute(HashMap<String, Bitmap> bitmapHashMap) {
       super.onPostExecute(bitmapHashMap);
-      if (activity != null) {
+      ProjectPinpointSymbolActivity activity = activityRef.get();
+      if (activity != null && bitmapHashMap != null) {
         activity.setImageGenResults(viewMap, bitmapHashMap);
         if (refreshSource) {
           activity.refreshSource();
@@ -667,18 +679,17 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     static final String KEY_UNIQUE_FEATURE = "key";
     static final String TOKEN_UNIQUE_FEATURE = "{" + KEY_UNIQUE_FEATURE + "}";
     static final String ID_SOURCE = "cluster_source";
+    static final String ID_LAYER_UNCLUSTERED = "unclustered_layer";
     static final int IMAGE_SIZE = 128;
     static final String API_URL = "https://a.mapillary.com/v3/images/"
       + "?lookat=%f,%f&closeto=%f,%f&radius=%d"
       + "&client_id=bjgtc1FDTnFPaXpxeTZuUDNabmJ5dzozOGE1ODhkMmEyYTkyZTI4";
 
-    private WeakReference<ProjectPinpointSymbolActivity> activityRef;
     private MapboxMap map;
     private Picasso picasso;
     private Position poiPosition;
 
-    public LoadMapillaryDataTask(ProjectPinpointSymbolActivity activity, MapboxMap map, Picasso picasso, Position poiPosition) {
-      this.activityRef = new WeakReference<>(activity);
+    LoadMapillaryDataTask(MapboxMap map, Picasso picasso, Position poiPosition) {
       this.map = map;
       this.picasso = picasso;
       this.poiPosition = poiPosition;
@@ -688,7 +699,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     protected MapillaryDataLoadResult doInBackground(Integer... radius) {
       OkHttpClient okHttpClient = new OkHttpClient();
       try {
-        Request request = new Request.Builder()
+        @SuppressLint("DefaultLocale") Request request = new Request.Builder()
           .url(String.format(API_URL,
             poiPosition.getLongitude(), poiPosition.getLatitude(),
             poiPosition.getLongitude(), poiPosition.getLatitude(),
@@ -720,6 +731,9 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     @Override
     protected void onPostExecute(MapillaryDataLoadResult mapillaryDataLoadResult) {
       super.onPostExecute(mapillaryDataLoadResult);
+      if (mapillaryDataLoadResult == null)
+        return;
+
       FeatureCollection featureCollection = mapillaryDataLoadResult.featureCollection;
 
       Map<Feature, Bitmap> bitmapMap = mapillaryDataLoadResult.bitmapHashMap;
@@ -738,7 +752,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
         ));
 
         // unclustered
-        map.addLayerBelow(new SymbolLayer("test_layer", ID_SOURCE)
+        map.addLayerBelow(new SymbolLayer(ID_LAYER_UNCLUSTERED, ID_SOURCE)
           .withProperties(
             iconImage(TOKEN_UNIQUE_FEATURE),
             iconAllowOverlap(true),
@@ -781,7 +795,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
               ? gte("point_count", layers[i][0]) :
               all(gte("point_count", layers[i][0]), lt("point_count", layers[i - 1][0]))
           );
-          map.addLayer(clusterLayer);
+          map.addLayerBelow(clusterLayer, MAKI_LAYER_ID);
         }
 
         //Add the count labels
@@ -793,7 +807,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
           textColor(Color.WHITE),
           textIgnorePlacement(true)
         );
-        map.addLayer(count);
+        map.addLayerBelow(count, MAKI_LAYER_ID);
       } else {
         mapillarySource.setGeoJson(featureCollection);
       }
@@ -920,11 +934,11 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
 
       MyViewHolder(View view) {
         super(view);
-        title = (TextView) view.findViewById(R.id.textview_title);
-        poi = (TextView) view.findViewById(R.id.textview_poi);
-        style = (TextView) view.findViewById(R.id.textview_style);
-        description = (TextView) view.findViewById(R.id.textview_description);
-        singleCard = (CardView) view.findViewById(R.id.single_location_cardview);
+        title = view.findViewById(R.id.textview_title);
+        poi = view.findViewById(R.id.textview_poi);
+        style = view.findViewById(R.id.textview_style);
+        description = view.findViewById(R.id.textview_description);
+        singleCard = view.findViewById(R.id.single_location_cardview);
         singleCard.setOnClickListener(this);
       }
 

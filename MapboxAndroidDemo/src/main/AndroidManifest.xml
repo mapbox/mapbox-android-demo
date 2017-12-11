@@ -172,7 +172,7 @@
         </activity>
         <activity
             android:name=".labs.RecyclerViewSymbolLayerActivity"
-            android:label="@string/activity_lab_rv_symbol_layer_on_map_title">
+            android:label="@string/activity_lab_symbol_layer_on_map_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />

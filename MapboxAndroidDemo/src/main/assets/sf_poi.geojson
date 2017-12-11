@@ -26,6 +26,72 @@
     {
       "type": "Feature",
       "properties": {
+        "title": "Beautifull",
+        "poi": "restaurant",
+        "style": "Healthy Food",
+        "description": "Modern counter-service spot serving locally sourced, organic soups, sandwiches, bowls & baked goods.",
+        "call-out": "Be healthy!",
+        "selected": false,
+        "favourite": false,
+        "zoom" : 14.8,
+        "bearing" : 125,
+        "tilt" : 42
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+        -122.450252,
+        37.786609
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "HOTEL EPIK",
+        "poi": "lodging",
+        "style": "Hotel",
+        "description": "Chic rooms & suites in a contemporary property featuring a snack bar & a trendy TV lounge.",
+        "call-out": "EPIK beds included!",
+        "selected": false,
+        "favourite": false,
+        "zoom" : 15.0,
+        "bearing" : 81,
+        "tilt" : 30
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+        -122.419135,
+        37.783350
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Hotel Vitale",
+        "poi": "lodging",
+        "style": "Hotel",
+        "description": "Luxe retreat offering elegant rooms, bay views & an upscale spa, plus an on-site Italian restaurant.",
+        "call-out": "The luxury you deserve.",
+        "selected": false,
+        "favourite": false,
+        "zoom" : 14.5,
+        "bearing" : 275,
+        "tilt" : 25
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+        -122.392903,
+        37.793569
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "title": "Sanraku",
         "poi": "restaurant",
         "style": "Japanese",
@@ -196,72 +262,6 @@
         "coordinates": [
           -122.444607,
           37.779066
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "Beautifull",
-        "poi": "restaurant",
-        "style": "Health Food Restaurant",
-        "description": "Modern counter-service spot serving locally sourced, organic soups, sandwiches, bowls & baked goods.",
-        "call-out": "Be healthy!",
-        "selected": false,
-        "favourite": false,
-        "zoom" : 14.8,
-        "bearing" : 125,
-        "tilt" : 42
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-        -122.450252,
-        37.786609
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "HOTEL EPIK",
-        "poi": "lodging",
-        "style": "Hotel",
-        "description": "Chic rooms & suites in a contemporary property featuring a snack bar & a trendy TV lounge.",
-        "call-out": "EPIK beds included!",
-        "selected": false,
-        "favourite": false,
-        "zoom" : 15.0,
-        "bearing" : 81,
-        "tilt" : 30
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-        -122.419135,
-        37.783350
-        ]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "title": "Hotel Vitale",
-        "poi": "lodging",
-        "style": "Hotel",
-        "description": "Luxe retreat offering elegant rooms, bay views & an upscale spa, plus an on-site Italian restaurant.",
-        "call-out": "The luxury you deserve.",
-        "selected": false,
-        "favourite": false,
-        "zoom" : 14.5,
-        "bearing" : 275,
-        "tilt" : 25
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-        -122.392903,
-        37.793569
         ]
       }
     }
