@@ -44,6 +44,7 @@
     <string name="activity_annotation_basic_marker_view_url" translatable="false">http://i.imgur.com/vbWTLIE.png</string>
     <string name="activity_annotation_custom_info_window_url" translatable="false">http://i.imgur.com/mCWbosy.png</string>
     <string name="activity_annotation_animated_marker_url" translatable="false">http://i.imgur.com/XegvIKr.png</string>
+    <string name="activity_annotations_multiple_moving_markers_url" translatable="false">https://i.imgur.com/hgemxnr.png</string>
     <string name="activity_camera_animate_url" translatable="false">http://i.imgur.com/PN3vyNJ.jpg</string>
     <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string>
     <string name="activity_camera_restrict_url" translatable="false">http://i.imgur.com/A227BEs.jpg</string>
@@ -80,6 +81,5 @@
     <string name="activity_lab_mapillary_url" translatable="false">http://i.imgur.com/w4SSif1.png</string>
     <string name="activity_labs_inset_map_url" translatable="false">https://i.imgur.com/jp4wc24.png</string>
     <string name="activity_labs_gif_on_map_url" translatable="false">https://i.imgur.com/3d810QI.png</string>
-    <string name="activity_labs_multiple_moving_markers_url" translatable="false">https://i.imgur.com/77LVIXi.png</string>
 
 </resources>

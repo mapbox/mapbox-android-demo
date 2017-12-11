@@ -464,7 +464,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_annotation_animated_marker_description,
           new Intent(MainActivity.this, AnimatedMarkerActivity.class),
           R.string.activity_annotation_animated_marker_url, false, BuildConfig.MIN_SDK_VERSION));
-
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_annotations_multiple_moving_markers_title,
+          R.string.activity_annotations_multiple_moving_markers_description,
+          new Intent(MainActivity.this, MultipleMovingMarkersActivity.class),
+          R.string.activity_annotations_multiple_moving_markers_url, true, BuildConfig.MIN_SDK_VERSION
+        ));
         currentCategory = R.id.nav_annotations;
         break;
 
@@ -658,12 +663,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_labs_gif_on_map_description,
           new Intent(MainActivity.this, AnimatedImageSourceActivity.class),
           R.string.activity_labs_gif_on_map_url, true, BuildConfig.MIN_SDK_VERSION
-        ));
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_labs_multiple_moving_markers_title,
-          R.string.activity_labs_multiple_moving_markers_description,
-          new Intent(MainActivity.this, MultipleMovingMarkersActivity.class),
-          R.string.activity_labs_multiple_moving_markers_url, true
         ));
         currentCategory = R.id.nav_lab;
         break;
