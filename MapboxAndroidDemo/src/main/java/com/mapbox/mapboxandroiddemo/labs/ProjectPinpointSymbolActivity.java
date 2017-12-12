@@ -15,6 +15,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +42,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.functions.stops.Stop;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
@@ -56,6 +59,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,16 +97,22 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 public class ProjectPinpointSymbolActivity extends AppCompatActivity implements OnMapReadyCallback {
   private static final String SOURCE_ID = "mapbox.poi";
   private static final String MAKI_LAYER_ID = "mapbox.poi.maki";
+  private static final String LOADING_LAYER_ID = "mapbox.poi.loading";
   private static final String CALLOUT_LAYER_ID = "mapbox.poi.callout";
 
   private static final String PROPERTY_SELECTED = "selected";
+  private static final String PROPERTY_LOADING = "loading";
+  private static final String PROPERTY_LOADING_PROGRESS = "loading_progress";
   private static final String PROPERTY_TITLE = "title";
   private static final String PROPERTY_FAVOURITE = "favourite";
   private static final String PROPERTY_DESCRIPTION = "description";
   private static final String PROPERTY_POI = "poi";
   private static final String PROPERTY_STYLE = "style";
 
-  private static final long ANIMATION_TIME = 1950;
+  private static final long CAMERA_ANIMATION_TIME = 1950;
+  private static final float LOADING_CIRCLE_RADIUS = 60;
+  private static final int LOADING_PROGRESS_STEPS = 25; //number of steps ina progress animation
+  private static final int LOADING_STEP_DURATION = 50; //duration between each steps
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -112,6 +122,8 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
   private FeatureCollection featureCollection;
   private HashMap<String, View> viewMap;
   private AnimatorSet animatorSet;
+
+  private LoadMapillaryDataTask loadMapillaryDataTask;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -147,6 +159,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     featureCollection = collection;
     setupSource();
     setupMakiLayer();
+    setupLoadingLayer();
     setupCalloutLayer();
     setupClickListeners();
     setupRecyclerView();
@@ -190,6 +203,34 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
         )
       )
     );
+  }
+
+  /**
+   * Setup layer indicating that there is an ongoing progress.
+   */
+  private void setupLoadingLayer() {
+    mapboxMap.addLayerBelow(new CircleLayer(LOADING_LAYER_ID, SOURCE_ID)
+        .withProperties(
+          circleRadius(property(
+            PROPERTY_LOADING_PROGRESS, exponential(
+              getLoadingAnimationStops()
+            )
+          )),
+          circleColor(Color.GRAY),
+          circleOpacity(0.6f)
+        )
+        .withFilter(eq(PROPERTY_LOADING, true)),
+      MAKI_LAYER_ID
+    );
+  }
+
+  private Stop<Integer, Float>[] getLoadingAnimationStops() {
+    List<Stop<Integer, Float>> stops = new ArrayList<>();
+    for (int i = 0; i < LOADING_PROGRESS_STEPS; i++) {
+      stops.add(stop(i, circleRadius(LOADING_CIRCLE_RADIUS * i / LOADING_PROGRESS_STEPS)));
+    }
+
+    return stops.toArray(new Stop[LOADING_PROGRESS_STEPS]);
   }
 
   /**
@@ -353,7 +394,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     selectFeature(feature);
     animateCameraToSelection(feature);
     refreshSource();
-    loadMapillaryData((Position) feature.getGeometry().getCoordinates());
+    loadMapillaryData(feature);
 
     if (withScroll) {
       recyclerView.scrollToPosition(index);
@@ -400,8 +441,13 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     animatorSet.start();
   }
 
-  private void loadMapillaryData(Position position) {
-    new LoadMapillaryDataTask(mapboxMap, Picasso.with(getApplicationContext()), position).execute(50);
+  private void loadMapillaryData(Feature feature) {
+    if (loadMapillaryDataTask != null) {
+      loadMapillaryDataTask.cancel(true);
+    }
+
+    loadMapillaryDataTask = new LoadMapillaryDataTask(this, mapboxMap, Picasso.with(getApplicationContext()), new Handler(), feature);
+    loadMapillaryDataTask.execute(50);
   }
 
   /**
@@ -478,7 +524,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
 
   private Animator createLatLngAnimator(LatLng currentPosition, LatLng targetPosition) {
     ValueAnimator latLngAnimator = ValueAnimator.ofObject(new LatLngEvaluator(), currentPosition, targetPosition);
-    latLngAnimator.setDuration(ANIMATION_TIME);
+    latLngAnimator.setDuration(CAMERA_ANIMATION_TIME);
     latLngAnimator.setInterpolator(new FastOutSlowInInterpolator());
     latLngAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
@@ -491,7 +537,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
 
   private Animator createZoomAnimator(double currentZoom, double targetZoom) {
     ValueAnimator zoomAnimator = ValueAnimator.ofFloat((float) currentZoom, (float) targetZoom);
-    zoomAnimator.setDuration(ANIMATION_TIME);
+    zoomAnimator.setDuration(CAMERA_ANIMATION_TIME);
     zoomAnimator.setInterpolator(new FastOutSlowInInterpolator());
     zoomAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
@@ -504,7 +550,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
 
   private Animator createBearingAnimator(double currentBearing, double targetBearing) {
     ValueAnimator bearingAnimator = ValueAnimator.ofFloat((float) currentBearing, (float) targetBearing);
-    bearingAnimator.setDuration(ANIMATION_TIME);
+    bearingAnimator.setDuration(CAMERA_ANIMATION_TIME);
     bearingAnimator.setInterpolator(new FastOutSlowInInterpolator());
     bearingAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
@@ -517,7 +563,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
 
   private Animator createTiltAnimator(double currentTilt, double targetTilt) {
     ValueAnimator tiltAnimator = ValueAnimator.ofFloat((float) currentTilt, (float) targetTilt);
-    tiltAnimator.setDuration(ANIMATION_TIME);
+    tiltAnimator.setDuration(CAMERA_ANIMATION_TIME);
     tiltAnimator.setInterpolator(new FastOutSlowInInterpolator());
     tiltAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
@@ -685,20 +731,54 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
       + "?lookat=%f,%f&closeto=%f,%f&radius=%d"
       + "&client_id=bjgtc1FDTnFPaXpxeTZuUDNabmJ5dzozOGE1ODhkMmEyYTkyZTI4";
 
+    private WeakReference<ProjectPinpointSymbolActivity> activityRef;
     private MapboxMap map;
     private Picasso picasso;
-    private Position poiPosition;
+    private final Handler progressHandler;
+    private int loadingProgress;
+    private boolean loadingIncrease = true;
+    private Feature feature;
 
-    LoadMapillaryDataTask(MapboxMap map, Picasso picasso, Position poiPosition) {
+    public LoadMapillaryDataTask(ProjectPinpointSymbolActivity activity, MapboxMap map, Picasso picasso,
+                                 Handler progressHandler, Feature feature) {
+      this.activityRef = new WeakReference<>(activity);
       this.map = map;
       this.picasso = picasso;
-      this.poiPosition = poiPosition;
+      this.progressHandler = progressHandler;
+      this.feature = feature;
+    }
+
+    @Override
+    protected void onCancelled() {
+      super.onCancelled();
+      setLoadingState(false);
+    }
+
+    @Override
+    protected void onCancelled(MapillaryDataLoadResult mapillaryDataLoadResult) {
+      super.onCancelled(mapillaryDataLoadResult);
+      setLoadingState(false);
+    }
+
+    @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+      loadingProgress = 0;
+      setLoadingState(true);
     }
 
     @Override
     protected MapillaryDataLoadResult doInBackground(Integer... radius) {
+      progressHandler.post(progressRunnable);
+      try {
+        Thread.sleep(2500); //ensure loading visualisation
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
       OkHttpClient okHttpClient = new OkHttpClient();
       try {
+        Position poiPosition = (Position) feature.getGeometry().getCoordinates();
+
         @SuppressLint("DefaultLocale") Request request = new Request.Builder()
           .url(String.format(API_URL,
             poiPosition.getLongitude(), poiPosition.getLatitude(),
@@ -731,10 +811,16 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     @Override
     protected void onPostExecute(MapillaryDataLoadResult mapillaryDataLoadResult) {
       super.onPostExecute(mapillaryDataLoadResult);
-      if (mapillaryDataLoadResult == null)
+      setLoadingState(false);
+      if (mapillaryDataLoadResult == null) {
+        ProjectPinpointSymbolActivity activity = activityRef.get();
+        if (activity != null) {
+          Toast.makeText(activity, "Error. Unable to load Mapillary data.", Toast.LENGTH_LONG).show();
+        }
         return;
+      }
 
-      FeatureCollection featureCollection = mapillaryDataLoadResult.featureCollection;
+      FeatureCollection featureCollection = mapillaryDataLoadResult.mapillaryFeatureCollection;
 
       Map<Feature, Bitmap> bitmapMap = mapillaryDataLoadResult.bitmapHashMap;
       for (Map.Entry<Feature, Bitmap> featureBitmapEntry : bitmapMap.entrySet()) {
@@ -834,14 +920,47 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
       //return _bmp;
       return output;
     }
+
+    private Runnable progressRunnable = new Runnable() {
+      @Override
+      public void run() {
+        if (loadingIncrease) {
+          if (loadingProgress >= LOADING_PROGRESS_STEPS) {
+            loadingIncrease = false;
+          }
+        } else {
+          if (loadingProgress <= 0) {
+            loadingIncrease = true;
+          }
+        }
+
+        loadingProgress = loadingIncrease ? loadingProgress + 1 : loadingProgress - 1;
+
+        feature.addNumberProperty(PROPERTY_LOADING_PROGRESS, loadingProgress);
+        ProjectPinpointSymbolActivity activity = activityRef.get();
+        if (activity != null) {
+          activity.refreshSource();
+        }
+        progressHandler.postDelayed(this, LOADING_STEP_DURATION);
+      }
+    };
+
+    private void setLoadingState(boolean isLoading) {
+      progressHandler.removeCallbacksAndMessages(null);
+      feature.addBooleanProperty(PROPERTY_LOADING, isLoading);
+      ProjectPinpointSymbolActivity activity = activityRef.get();
+      if (activity != null) {
+        activity.refreshSource();
+      }
+    }
   }
 
   private static class MapillaryDataLoadResult {
     private final HashMap<Feature, Bitmap> bitmapHashMap = new HashMap<>();
-    private final FeatureCollection featureCollection;
+    private final FeatureCollection mapillaryFeatureCollection;
 
-    MapillaryDataLoadResult(FeatureCollection featureCollection) {
-      this.featureCollection = featureCollection;
+    MapillaryDataLoadResult(FeatureCollection mapillaryFeatureCollection) {
+      this.mapillaryFeatureCollection = mapillaryFeatureCollection;
     }
 
     public void add(Feature feature, Bitmap bitmap) {
