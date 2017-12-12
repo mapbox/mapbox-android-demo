@@ -172,7 +172,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
   }
 
   private void refreshSource() {
-    if (source != null) {
+    if (source != null && featureCollection != null) {
       source.setGeoJson(featureCollection);
     }
   }
