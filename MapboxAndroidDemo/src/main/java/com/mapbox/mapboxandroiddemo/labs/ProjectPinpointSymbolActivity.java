@@ -867,9 +867,10 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
             circleColor(layers[i][1]),
             circleRadius(zoom(
               exponential(
-                stop(16, circleRadius(18f)),
-                stop(15, circleRadius(14f)),
-                stop(14, circleRadius(10f))
+                stop(16, circleRadius(20f)),
+                stop(15, circleRadius(18f)),
+                stop(14, circleRadius(16f)),
+                stop(12, circleRadius(10f))
               )
             )),
             circleOpacity(0.6f)
