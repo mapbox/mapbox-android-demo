@@ -26,7 +26,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -304,9 +303,6 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
         mapboxMap.setPadding(0, 0, 0, recyclerView.getMeasuredHeight());
       }
     });
-
-    // init with default state
-    setSelected(0, false);
   }
 
   private void hideLabelLayers() {
@@ -388,6 +384,10 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
    * @param withScroll indicates if the recyclerView position should be updated
    */
   private void setSelected(int index, boolean withScroll) {
+    if (recyclerView.getVisibility() == View.GONE) {
+      recyclerView.setVisibility(View.VISIBLE);
+    }
+
     deselectAll();
 
     Feature feature = featureCollection.getFeatures().get(index);
