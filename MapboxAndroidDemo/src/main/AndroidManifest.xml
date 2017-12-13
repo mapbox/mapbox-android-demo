@@ -545,7 +545,8 @@
         <activity
             android:name=".account.LoadingActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".labs.ProjectPinpointSymbolActivity"></activity>
+        <activity android:name=".labs.ProjectPinpointSymbolActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

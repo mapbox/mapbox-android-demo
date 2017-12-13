@@ -16,6 +16,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
@@ -57,6 +58,8 @@ import com.mapbox.services.commons.models.Position;
 import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -124,6 +127,26 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
 
   private LoadMapillaryDataTask loadMapillaryDataTask;
 
+  @ActivityStep
+  private int currentStep;
+
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef( {STEP_INITIAL, STEP_LOADING, STEP_READY})
+  public @interface ActivityStep {
+  }
+
+  private static final int STEP_INITIAL = 0;
+  private static final int STEP_LOADING = 1;
+  private static final int STEP_READY = 2;
+
+  private static final Map<Integer, Double> stepZoomMap = new HashMap<>();
+
+  static {
+    stepZoomMap.put(STEP_INITIAL, 11.0);
+    stepZoomMap.put(STEP_LOADING, 13.5);
+    stepZoomMap.put(STEP_READY, 18.0);
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -147,6 +170,8 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
     mapboxMap.getUiSettings().setCompassEnabled(false);
+    mapboxMap.getUiSettings().setLogoEnabled(false);
+    mapboxMap.getUiSettings().setAttributionEnabled(false);
     new LoadPoiDataTask(this).execute();
   }
 
@@ -296,13 +321,6 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     });
     SnapHelper snapHelper = new PagerSnapHelper();
     snapHelper.attachToRecyclerView(recyclerView);
-
-    recyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-      @Override
-      public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-        mapboxMap.setPadding(0, 0, 0, recyclerView.getMeasuredHeight());
-      }
-    });
   }
 
   private void hideLabelLayers() {
@@ -388,7 +406,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
       recyclerView.setVisibility(View.VISIBLE);
     }
 
-    deselectAll();
+    deselectAll(false);
 
     Feature feature = featureCollection.getFeatures().get(index);
     selectFeature(feature);
@@ -404,9 +422,13 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
   /**
    * Deselects the state of all the features
    */
-  private void deselectAll() {
+  private void deselectAll(boolean hideRecycler) {
     for (Feature feature : featureCollection.getFeatures()) {
       feature.getProperties().addProperty(PROPERTY_SELECTED, false);
+    }
+
+    if (hideRecycler) {
+      recyclerView.setVisibility(View.GONE);
     }
   }
 
@@ -419,12 +441,24 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     feature.getProperties().addProperty(PROPERTY_SELECTED, true);
   }
 
+  private Feature getSelectedFeature() {
+    if (featureCollection != null) {
+      for (Feature feature : featureCollection.getFeatures()) {
+        if (feature.getBooleanProperty(PROPERTY_SELECTED)) {
+          return feature;
+        }
+      }
+    }
+
+    return null;
+  }
+
   /**
    * Animate camera to a feature.
    *
    * @param feature the feature to animate to
    */
-  private void animateCameraToSelection(Feature feature) {
+  private void animateCameraToSelection(Feature feature, double newZoom) {
     CameraPosition cameraPosition = mapboxMap.getCameraPosition();
 
     if (animatorSet != null) {
@@ -434,11 +468,16 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     animatorSet = new AnimatorSet();
     animatorSet.playTogether(
       createLatLngAnimator(cameraPosition.target, convertToLatLng(feature)),
-      createZoomAnimator(cameraPosition.zoom, feature.getNumberProperty("zoom").doubleValue()),
+      createZoomAnimator(cameraPosition.zoom, newZoom),
       createBearingAnimator(cameraPosition.bearing, feature.getNumberProperty("bearing").doubleValue()),
       createTiltAnimator(cameraPosition.tilt, feature.getNumberProperty("tilt").doubleValue())
     );
     animatorSet.start();
+  }
+
+  private void animateCameraToSelection(Feature feature) {
+    double zoom = feature.getNumberProperty("zoom").doubleValue();
+    animateCameraToSelection(feature, zoom);
   }
 
   private void loadMapillaryData(Feature feature) {
@@ -474,6 +513,14 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     this.viewMap = viewMap;
   }
 
+  private void setActivityStep(@ActivityStep int activityStep) {
+    Feature selectedFeature = getSelectedFeature();
+    double zoom = stepZoomMap.get(activityStep);
+    animateCameraToSelection(selectedFeature, zoom);
+
+    currentStep = activityStep;
+  }
+
   @Override
   protected void onStart() {
     super.onStart();
@@ -495,6 +542,10 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
   @Override
   protected void onStop() {
     super.onStop();
+
+    if (loadMapillaryDataTask != null) {
+      loadMapillaryDataTask.cancel(true);
+    }
     mapView.onStop();
   }
 
@@ -514,6 +565,20 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
   protected void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
+  }
+
+  @Override
+  public void onBackPressed() {
+    if (currentStep == STEP_LOADING || currentStep == STEP_READY) {
+      if (loadMapillaryDataTask != null) {
+        loadMapillaryDataTask.cancel(true);
+      }
+      setActivityStep(STEP_INITIAL);
+      deselectAll(true);
+      refreshSource();
+    } else {
+      super.onBackPressed();
+    }
   }
 
   private LatLng convertToLatLng(Feature feature) {
@@ -749,22 +814,10 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     }
 
     @Override
-    protected void onCancelled() {
-      super.onCancelled();
-      setLoadingState(false);
-    }
-
-    @Override
-    protected void onCancelled(MapillaryDataLoadResult mapillaryDataLoadResult) {
-      super.onCancelled(mapillaryDataLoadResult);
-      setLoadingState(false);
-    }
-
-    @Override
     protected void onPreExecute() {
       super.onPreExecute();
       loadingProgress = 0;
-      setLoadingState(true);
+      setLoadingState(true, false);
     }
 
     @Override
@@ -811,7 +864,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     @Override
     protected void onPostExecute(MapillaryDataLoadResult mapillaryDataLoadResult) {
       super.onPostExecute(mapillaryDataLoadResult);
-      setLoadingState(false);
+      setLoadingState(false, true);
       if (mapillaryDataLoadResult == null) {
         ProjectPinpointSymbolActivity activity = activityRef.get();
         if (activity != null) {
@@ -925,6 +978,11 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     private Runnable progressRunnable = new Runnable() {
       @Override
       public void run() {
+        if (isCancelled()) {
+          setLoadingState(false, false);
+          return;
+        }
+
         if (loadingIncrease) {
           if (loadingProgress >= LOADING_PROGRESS_STEPS) {
             loadingIncrease = false;
@@ -946,12 +1004,18 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
       }
     };
 
-    private void setLoadingState(boolean isLoading) {
+    private void setLoadingState(boolean isLoading, boolean isSuccess) {
       progressHandler.removeCallbacksAndMessages(null);
       feature.addBooleanProperty(PROPERTY_LOADING, isLoading);
       ProjectPinpointSymbolActivity activity = activityRef.get();
       if (activity != null) {
         activity.refreshSource();
+
+        if (isLoading) { //zooming to a loading state
+          activity.setActivityStep(STEP_LOADING);
+        } else if (isSuccess) { //if success zooming to a ready state, otherwise do nothing
+          activity.setActivityStep(STEP_READY);
+        }
       }
     }
   }
