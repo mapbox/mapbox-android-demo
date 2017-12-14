@@ -496,9 +496,16 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
    */
   private void toggleFavourite(int index) {
     Feature feature = featureCollection.getFeatures().get(index);
+    String title = feature.getStringProperty(PROPERTY_TITLE);
     boolean currentState = feature.getBooleanProperty(PROPERTY_FAVOURITE);
     feature.getProperties().addProperty(PROPERTY_FAVOURITE, !currentState);
-    new GenerateViewIconTask(this, true).execute(featureCollection);
+    View view = viewMap.get(title);
+
+    ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
+    imageView.setImageResource(currentState ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
+    Bitmap bitmap = SymbolGenerator.generate(view);
+    mapboxMap.addImage(title, bitmap);
+    refreshSource();
   }
 
   /**
