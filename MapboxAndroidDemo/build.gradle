@@ -98,6 +98,10 @@ dependencies {
     implementation dependenciesList.mapboxPluginGeoJson
     implementation dependenciesList.mapboxPluginMarkerCluster
 
+    // Mapbox Android internal libraries
+    implementation dependenciesList.mapboxAuth
+    implementation dependenciesList.mapboxAnalytics
+
     // Mapbox Android UI
     implementation dependenciesList.mapboxAndroidUI
 

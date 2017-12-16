@@ -14,6 +14,7 @@ public class MapboxApplication extends Application {
     super.onCreate();
     initializeFirebaseApp();
     setUpPicasso();
+    setupAuthentication();
   }
 
   private void initializeFirebaseApp() {
@@ -30,5 +31,11 @@ public class MapboxApplication extends Application {
     Picasso built = builder.build();
     built.setLoggingEnabled(true);
     Picasso.setSingletonInstance(built);
+  }
+
+  private void setupAuthentication() {
+    UrlRoutingManager urlRoutingManager = UrlRoutingManager.getInstance(
+      "",
+      "");
   }
 }
