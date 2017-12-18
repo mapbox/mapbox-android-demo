@@ -592,13 +592,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         break;
       case R.id.nav_lab:
         exampleItemModel.add(null);
-
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_symbol_layer_on_map_title,
-          R.string.activity_lab_symbol_layer_on_map_description,
-          new Intent(MainActivity.this, SymbolLayerExampleActivity.class),
-          R.string.activity_lab_symbol_layer_on_map_url, true, BuildConfig.MIN_SDK_VERSION));
-
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_los_angeles_tourism_title,
           R.string.activity_lab_los_angeles_tourism_description,
@@ -634,6 +627,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_picture_in_picture_description,
           new Intent(MainActivity.this, PictureInPictureActivity.class),
           R.string.activity_lab_picture_in_picture_url, false, Build.VERSION_CODES.O));
+
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_lab_symbol_layer_and_mapillary_on_map_title,
+          R.string.activity_lab_symbol_layer_and_mapillary_on_map_description,
+          new Intent(MainActivity.this, SymbolLayerExampleActivity.class),
+          R.string.activity_lab_symbol_layer_on_map_url, true, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_rv_on_map_title,

@@ -517,6 +517,14 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".labs.SymbolLayerExampleActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/activity_lab_symbol_layer_and_mapillary_on_map_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".account.LandingActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -538,8 +546,7 @@
         <activity
             android:name=".account.LoadingActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".labs.SymbolLayerExampleActivity"
-            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

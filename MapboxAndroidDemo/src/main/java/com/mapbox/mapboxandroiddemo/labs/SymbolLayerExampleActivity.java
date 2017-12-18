@@ -501,7 +501,8 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
       loadMapillaryDataTask.cancel(true);
     }
 
-    loadMapillaryDataTask = new LoadMapillaryDataTask(this, mapboxMap, Picasso.with(getApplicationContext()), new Handler(), feature);
+    loadMapillaryDataTask = new LoadMapillaryDataTask(this,
+      mapboxMap, Picasso.with(getApplicationContext()), new Handler(), feature);
     loadMapillaryDataTask.execute(50);
   }
 
@@ -848,8 +849,8 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
       progressHandler.post(progressRunnable);
       try {
         Thread.sleep(2500); //ensure loading visualisation
-      } catch (InterruptedException e) {
-        e.printStackTrace();
+      } catch (InterruptedException exception) {
+        exception.printStackTrace();
       }
       OkHttpClient okHttpClient = new OkHttpClient();
       try {
@@ -1120,7 +1121,8 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
   /**
    * RecyclerViewAdapter adapting features to cards.
    */
-  static class LocationRecyclerViewAdapter extends RecyclerView.Adapter<SymbolLayerExampleActivity.LocationRecyclerViewAdapter.MyViewHolder> {
+  static class LocationRecyclerViewAdapter extends
+    RecyclerView.Adapter<SymbolLayerExampleActivity.LocationRecyclerViewAdapter.MyViewHolder> {
 
     private List<Feature> featureCollection;
     private SymbolLayerExampleActivity activity;
