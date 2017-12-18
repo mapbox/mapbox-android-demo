@@ -345,8 +345,8 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
   }
 
   private void setupMapillaryTiles() {
-    mapboxMap.addSource(Mapillary.createSource());
-    mapboxMap.addLayerBelow(Mapillary.createLineLayer(), Mapillary.ID_ABOVE_LAYER);
+    mapboxMap.addSource(MapillaryTiles.createSource());
+    mapboxMap.addLayerBelow(MapillaryTiles.createLineLayer(), LOADING_LAYER_ID);
   }
 
   /**
@@ -1086,22 +1086,25 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     }
   }
 
-  private static class Mapillary {
+  /**
+   * Util class that creates a Source and a Layer based on Mapillary data.
+   * https://www.mapillary.com/developer/tiles-documentation/
+   */
+  private static class MapillaryTiles {
 
-    static final String ID_SOURCE = "mapillary";
-    static final String ID_LINE_LAYER = ID_SOURCE + ".line";
-    static final String ID_ABOVE_LAYER = "aerialway";
+    static final String ID_SOURCE = "mapillary.source";
+    static final String ID_LINE_LAYER = "mapillary.layer.line";
     static final String URL_TILESET = "https://d25uarhxywzl1j.cloudfront.net/v0.1/{z}/{x}/{y}.mvt";
 
     static Source createSource() {
-      TileSet mapillaryTileset = new TileSet("2.1.0", Mapillary.URL_TILESET);
+      TileSet mapillaryTileset = new TileSet("2.1.0", MapillaryTiles.URL_TILESET);
       mapillaryTileset.setMinZoom(0);
       mapillaryTileset.setMaxZoom(14);
-      return new VectorSource(Mapillary.ID_SOURCE, mapillaryTileset);
+      return new VectorSource(MapillaryTiles.ID_SOURCE, mapillaryTileset);
     }
 
     static Layer createLineLayer() {
-      LineLayer lineLayer = new LineLayer(Mapillary.ID_LINE_LAYER, Mapillary.ID_SOURCE);
+      LineLayer lineLayer = new LineLayer(MapillaryTiles.ID_LINE_LAYER, MapillaryTiles.ID_SOURCE);
       lineLayer.setSourceLayer("mapillary-sequences");
       lineLayer.setProperties(
         lineCap(Property.LINE_CAP_ROUND),
