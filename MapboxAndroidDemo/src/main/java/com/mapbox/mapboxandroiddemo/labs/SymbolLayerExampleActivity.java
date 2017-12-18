@@ -4,17 +4,23 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.os.AsyncTask;
-import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,9 +42,17 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.functions.stops.Stop;
+import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.Layer;
+import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.mapboxsdk.style.sources.Source;
+import com.mapbox.mapboxsdk.style.sources.TileSet;
+import com.mapbox.mapboxsdk.style.sources.VectorSource;
 import com.mapbox.services.commons.geojson.Feature;
 import com.mapbox.services.commons.geojson.FeatureCollection;
 import com.mapbox.services.commons.geojson.Geometry;
@@ -46,41 +60,71 @@ import com.mapbox.services.commons.geojson.Point;
 import com.mapbox.services.commons.geojson.custom.GeometryDeserializer;
 import com.mapbox.services.commons.geojson.custom.PositionDeserializer;
 import com.mapbox.services.commons.models.Position;
+import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import timber.log.Timber;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 import static com.mapbox.mapboxsdk.style.functions.Function.property;
+import static com.mapbox.mapboxsdk.style.functions.Function.zoom;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stops.categorical;
+import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
+import static com.mapbox.mapboxsdk.style.layers.Filter.all;
 import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
+import static com.mapbox.mapboxsdk.style.layers.Filter.gte;
+import static com.mapbox.mapboxsdk.style.layers.Filter.lt;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAnchor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOpacity;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textIgnorePlacement;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textOffset;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 
-/**
- * Use a recyclerview with symbol layer markers to easily explore content all on one screen
- */
-public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implements OnMapReadyCallback {
-
+public class SymbolLayerExampleActivity extends AppCompatActivity implements OnMapReadyCallback {
   private static final String SOURCE_ID = "mapbox.poi";
   private static final String MAKI_LAYER_ID = "mapbox.poi.maki";
+  private static final String LOADING_LAYER_ID = "mapbox.poi.loading";
   private static final String CALLOUT_LAYER_ID = "mapbox.poi.callout";
 
   private static final String PROPERTY_SELECTED = "selected";
+  private static final String PROPERTY_LOADING = "loading";
+  private static final String PROPERTY_LOADING_PROGRESS = "loading_progress";
   private static final String PROPERTY_TITLE = "title";
   private static final String PROPERTY_FAVOURITE = "favourite";
   private static final String PROPERTY_DESCRIPTION = "description";
   private static final String PROPERTY_POI = "poi";
   private static final String PROPERTY_STYLE = "style";
-  private static final String PROPERTY_SUB_STYLE = "sub-style";
 
-  private static final long ANIMATION_TIME = 1950;
+  private static final long CAMERA_ANIMATION_TIME = 1950;
+  private static final float LOADING_CIRCLE_RADIUS = 60;
+  private static final int LOADING_PROGRESS_STEPS = 25; //number of steps in a progress animation
+  private static final int LOADING_STEP_DURATION = 50; //duration between each step
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -91,6 +135,28 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   private HashMap<String, View> viewMap;
   private AnimatorSet animatorSet;
 
+  private LoadMapillaryDataTask loadMapillaryDataTask;
+
+  @ActivityStep
+  private int currentStep;
+
+  @Retention(RetentionPolicy.SOURCE)
+  @IntDef( {STEP_INITIAL, STEP_LOADING, STEP_READY})
+  public @interface ActivityStep {
+  }
+
+  private static final int STEP_INITIAL = 0;
+  private static final int STEP_LOADING = 1;
+  private static final int STEP_READY = 2;
+
+  private static final Map<Integer, Double> stepZoomMap = new HashMap<>();
+
+  static {
+    stepZoomMap.put(STEP_INITIAL, 11.0);
+    stepZoomMap.put(STEP_LOADING, 13.5);
+    stepZoomMap.put(STEP_READY, 18.0);
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -100,7 +166,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_rv_symbol_layer);
+    setContentView(R.layout.activity_symbol_layer_example);
 
     recyclerView = (RecyclerView) findViewById(R.id.rv_on_top_of_map);
 
@@ -114,7 +180,9 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
     mapboxMap.getUiSettings().setCompassEnabled(false);
-    new LoadDataTask(RecyclerViewSymbolLayerActivity.this).execute();
+    mapboxMap.getUiSettings().setLogoEnabled(false);
+    mapboxMap.getUiSettings().setAttributionEnabled(false);
+    new LoadPoiDataTask(this).execute();
   }
 
   public void setupData(final FeatureCollection collection) {
@@ -125,10 +193,12 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     featureCollection = collection;
     setupSource();
     setupMakiLayer();
+    setupLoadingLayer();
     setupCalloutLayer();
     setupClickListeners();
     setupRecyclerView();
     hideLabelLayers();
+    setupMapillaryTiles();
   }
 
   private void setupSource() {
@@ -137,7 +207,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   }
 
   private void refreshSource() {
-    if (source != null) {
+    if (source != null && featureCollection != null) {
       source.setGeoJson(featureCollection);
     }
   }
@@ -148,7 +218,9 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   private void setupMakiLayer() {
     mapboxMap.addLayer(new SymbolLayer(MAKI_LAYER_ID, SOURCE_ID)
       .withProperties(
-        /* show maki icon based on the value of poi feature property */
+        /* show maki icon based on the value of poi feature property
+        * https://www.mapbox.com/maki-icons/
+        */
         iconImage("{poi}-15"),
 
         /* allows show all icons */
@@ -159,13 +231,41 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
           property(
             PROPERTY_SELECTED,
             categorical(
-              stop(true, iconSize(1.45f)),
+              stop(true, iconSize(1.5f)),
               stop(false, iconSize(1.0f))
             )
           )
         )
       )
     );
+  }
+
+  /**
+   * Setup layer indicating that there is an ongoing progress.
+   */
+  private void setupLoadingLayer() {
+    mapboxMap.addLayerBelow(new CircleLayer(LOADING_LAYER_ID, SOURCE_ID)
+        .withProperties(
+          circleRadius(property(
+            PROPERTY_LOADING_PROGRESS, exponential(
+              getLoadingAnimationStops()
+            )
+          )),
+          circleColor(Color.GRAY),
+          circleOpacity(0.6f)
+        )
+        .withFilter(eq(PROPERTY_LOADING, true)),
+      MAKI_LAYER_ID
+    );
+  }
+
+  private Stop<Integer, Float>[] getLoadingAnimationStops() {
+    List<Stop<Integer, Float>> stops = new ArrayList<>();
+    for (int i = 0; i < LOADING_PROGRESS_STEPS; i++) {
+      stops.add(stop(i, circleRadius(LOADING_CIRCLE_RADIUS * i / LOADING_PROGRESS_STEPS)));
+    }
+
+    return stops.toArray(new Stop[LOADING_PROGRESS_STEPS]);
   }
 
   /**
@@ -220,7 +320,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     recyclerView.setLayoutManager(layoutManager);
     recyclerView.setItemAnimator(new DefaultItemAnimator());
     recyclerView.setAdapter(adapter);
-    recyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+    recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
       @Override
       public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
@@ -232,15 +332,6 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     });
     SnapHelper snapHelper = new PagerSnapHelper();
     snapHelper.attachToRecyclerView(recyclerView);
-    recyclerView.post(new Runnable() {
-      @Override
-      public void run() {
-        mapboxMap.setPadding(0, 0, 0, recyclerView.getMeasuredHeight());
-      }
-    });
-
-    // init with default state
-    setSelected(0, false);
   }
 
   private void hideLabelLayers() {
@@ -251,6 +342,11 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
         layer.setProperties(visibility("none"));
       }
     }
+  }
+
+  private void setupMapillaryTiles() {
+    mapboxMap.addSource(MapillaryTiles.createSource());
+    mapboxMap.addLayerBelow(MapillaryTiles.createLineLayer(), LOADING_LAYER_ID);
   }
 
   /**
@@ -266,8 +362,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
    */
   private void handleClickCallout(Feature feature, PointF screenPoint, PointF symbolScreenPoint) {
     View view = viewMap.get(feature.getStringProperty(PROPERTY_TITLE));
-    View textContainer = view.findViewById(R.id.title);
-
+    View textContainer = view.findViewById(R.id.text_container);
 
     // create hitbox for textView
     Rect hitRectText = new Rect();
@@ -283,7 +378,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     if (hitRectText.contains((int) screenPoint.x, (int) screenPoint.y)) {
       // user clicked on text
       String callout = feature.getStringProperty("call-out");
-      Toast.makeText(RecyclerViewSymbolLayerActivity.this, callout, Toast.LENGTH_LONG).show();
+      Toast.makeText(this, callout, Toast.LENGTH_LONG).show();
     } else {
       // user clicked on icon
       List<Feature> featureList = featureCollection.getFeatures();
@@ -323,12 +418,17 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
    * @param withScroll indicates if the recyclerView position should be updated
    */
   private void setSelected(int index, boolean withScroll) {
-    deselectAll();
+    if (recyclerView.getVisibility() == View.GONE) {
+      recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    deselectAll(false);
 
     Feature feature = featureCollection.getFeatures().get(index);
     selectFeature(feature);
     animateCameraToSelection(feature);
     refreshSource();
+    loadMapillaryData(feature);
 
     if (withScroll) {
       recyclerView.scrollToPosition(index);
@@ -338,9 +438,13 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   /**
    * Deselects the state of all the features
    */
-  private void deselectAll() {
+  private void deselectAll(boolean hideRecycler) {
     for (Feature feature : featureCollection.getFeatures()) {
       feature.getProperties().addProperty(PROPERTY_SELECTED, false);
+    }
+
+    if (hideRecycler) {
+      recyclerView.setVisibility(View.GONE);
     }
   }
 
@@ -353,12 +457,24 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     feature.getProperties().addProperty(PROPERTY_SELECTED, true);
   }
 
+  private Feature getSelectedFeature() {
+    if (featureCollection != null) {
+      for (Feature feature : featureCollection.getFeatures()) {
+        if (feature.getBooleanProperty(PROPERTY_SELECTED)) {
+          return feature;
+        }
+      }
+    }
+
+    return null;
+  }
+
   /**
    * Animate camera to a feature.
    *
    * @param feature the feature to animate to
    */
-  private void animateCameraToSelection(Feature feature) {
+  private void animateCameraToSelection(Feature feature, double newZoom) {
     CameraPosition cameraPosition = mapboxMap.getCameraPosition();
 
     if (animatorSet != null) {
@@ -368,11 +484,25 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     animatorSet = new AnimatorSet();
     animatorSet.playTogether(
       createLatLngAnimator(cameraPosition.target, convertToLatLng(feature)),
-      createZoomAnimator(cameraPosition.zoom, feature.getNumberProperty("zoom").doubleValue()),
+      createZoomAnimator(cameraPosition.zoom, newZoom),
       createBearingAnimator(cameraPosition.bearing, feature.getNumberProperty("bearing").doubleValue()),
       createTiltAnimator(cameraPosition.tilt, feature.getNumberProperty("tilt").doubleValue())
     );
     animatorSet.start();
+  }
+
+  private void animateCameraToSelection(Feature feature) {
+    double zoom = feature.getNumberProperty("zoom").doubleValue();
+    animateCameraToSelection(feature, zoom);
+  }
+
+  private void loadMapillaryData(Feature feature) {
+    if (loadMapillaryDataTask != null) {
+      loadMapillaryDataTask.cancel(true);
+    }
+
+    loadMapillaryDataTask = new LoadMapillaryDataTask(this, mapboxMap, Picasso.with(getApplicationContext()), new Handler(), feature);
+    loadMapillaryDataTask.execute(50);
   }
 
   /**
@@ -382,9 +512,16 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
    */
   private void toggleFavourite(int index) {
     Feature feature = featureCollection.getFeatures().get(index);
+    String title = feature.getStringProperty(PROPERTY_TITLE);
     boolean currentState = feature.getBooleanProperty(PROPERTY_FAVOURITE);
     feature.getProperties().addProperty(PROPERTY_FAVOURITE, !currentState);
-    new GenerateViewIconTask(RecyclerViewSymbolLayerActivity.this, true).execute(featureCollection);
+    View view = viewMap.get(title);
+
+    ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
+    imageView.setImageResource(currentState ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
+    Bitmap bitmap = SymbolGenerator.generate(view);
+    mapboxMap.addImage(title, bitmap);
+    refreshSource();
   }
 
   /**
@@ -397,6 +534,14 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     }
     // need to store reference to views to be able to use them as hitboxes for click events.
     this.viewMap = viewMap;
+  }
+
+  private void setActivityStep(@ActivityStep int activityStep) {
+    Feature selectedFeature = getSelectedFeature();
+    double zoom = stepZoomMap.get(activityStep);
+    animateCameraToSelection(selectedFeature, zoom);
+
+    currentStep = activityStep;
   }
 
   @Override
@@ -420,6 +565,10 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   @Override
   protected void onStop() {
     super.onStop();
+
+    if (loadMapillaryDataTask != null) {
+      loadMapillaryDataTask.cancel(true);
+    }
     mapView.onStop();
   }
 
@@ -441,6 +590,20 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     mapView.onDestroy();
   }
 
+  @Override
+  public void onBackPressed() {
+    if (currentStep == STEP_LOADING || currentStep == STEP_READY) {
+      if (loadMapillaryDataTask != null) {
+        loadMapillaryDataTask.cancel(true);
+      }
+      setActivityStep(STEP_INITIAL);
+      deselectAll(true);
+      refreshSource();
+    } else {
+      super.onBackPressed();
+    }
+  }
+
   private LatLng convertToLatLng(Feature feature) {
     Point symbolPoint = (Point) feature.getGeometry();
     Position position = symbolPoint.getCoordinates();
@@ -449,7 +612,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
 
   private Animator createLatLngAnimator(LatLng currentPosition, LatLng targetPosition) {
     ValueAnimator latLngAnimator = ValueAnimator.ofObject(new LatLngEvaluator(), currentPosition, targetPosition);
-    latLngAnimator.setDuration(ANIMATION_TIME);
+    latLngAnimator.setDuration(CAMERA_ANIMATION_TIME);
     latLngAnimator.setInterpolator(new FastOutSlowInInterpolator());
     latLngAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
@@ -462,7 +625,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
 
   private Animator createZoomAnimator(double currentZoom, double targetZoom) {
     ValueAnimator zoomAnimator = ValueAnimator.ofFloat((float) currentZoom, (float) targetZoom);
-    zoomAnimator.setDuration(ANIMATION_TIME);
+    zoomAnimator.setDuration(CAMERA_ANIMATION_TIME);
     zoomAnimator.setInterpolator(new FastOutSlowInInterpolator());
     zoomAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
@@ -475,7 +638,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
 
   private Animator createBearingAnimator(double currentBearing, double targetBearing) {
     ValueAnimator bearingAnimator = ValueAnimator.ofFloat((float) currentBearing, (float) targetBearing);
-    bearingAnimator.setDuration(ANIMATION_TIME);
+    bearingAnimator.setDuration(CAMERA_ANIMATION_TIME);
     bearingAnimator.setInterpolator(new FastOutSlowInInterpolator());
     bearingAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
@@ -488,7 +651,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
 
   private Animator createTiltAnimator(double currentTilt, double targetTilt) {
     ValueAnimator tiltAnimator = ValueAnimator.ofFloat((float) currentTilt, (float) targetTilt);
-    tiltAnimator.setDuration(ANIMATION_TIME);
+    tiltAnimator.setDuration(CAMERA_ANIMATION_TIME);
     tiltAnimator.setInterpolator(new FastOutSlowInInterpolator());
     tiltAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
@@ -519,16 +682,22 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   /**
    * AsyncTask to load data from the assets folder.
    */
-  private static class LoadDataTask extends AsyncTask<Void, Void, FeatureCollection> {
+  private static class LoadPoiDataTask extends AsyncTask<Void, Void, FeatureCollection> {
 
-    private final RecyclerViewSymbolLayerActivity activity;
+    private final WeakReference<SymbolLayerExampleActivity> activityRef;
 
-    LoadDataTask(RecyclerViewSymbolLayerActivity activity) {
-      this.activity = activity;
+    LoadPoiDataTask(SymbolLayerExampleActivity activity) {
+      this.activityRef = new WeakReference<>(activity);
     }
 
     @Override
     protected FeatureCollection doInBackground(Void... params) {
+      SymbolLayerExampleActivity activity = activityRef.get();
+
+      if (activity == null) {
+        return null;
+      }
+
       String geoJson = loadGeoJsonFromAsset(activity, "sf_poi.geojson");
       return new GsonBuilder()
         .registerTypeAdapter(Geometry.class, new GeometryDeserializer())
@@ -539,6 +708,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
     @Override
     protected void onPostExecute(FeatureCollection featureCollection) {
       super.onPostExecute(featureCollection);
+      SymbolLayerExampleActivity activity = activityRef.get();
       if (featureCollection == null || activity == null) {
         return;
       }
@@ -573,52 +743,316 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   private static class GenerateViewIconTask extends AsyncTask<FeatureCollection, Void, HashMap<String, Bitmap>> {
 
     private final HashMap<String, View> viewMap = new HashMap<>();
-    private final RecyclerViewSymbolLayerActivity activity;
+    private final WeakReference<SymbolLayerExampleActivity> activityRef;
     private final boolean refreshSource;
 
-    GenerateViewIconTask(RecyclerViewSymbolLayerActivity activity, boolean refreshSource) {
-      this.activity = activity;
+    GenerateViewIconTask(SymbolLayerExampleActivity activity, boolean refreshSource) {
+      this.activityRef = new WeakReference<>(activity);
       this.refreshSource = refreshSource;
     }
 
-    GenerateViewIconTask(RecyclerViewSymbolLayerActivity activity) {
+    GenerateViewIconTask(SymbolLayerExampleActivity activity) {
       this(activity, false);
     }
 
     @SuppressWarnings("WrongThread")
     @Override
     protected HashMap<String, Bitmap> doInBackground(FeatureCollection... params) {
-      HashMap<String, Bitmap> imagesMap = new HashMap<>();
-      LayoutInflater inflater = LayoutInflater.from(activity);
-      FeatureCollection featureCollection = params[0];
+      SymbolLayerExampleActivity activity = activityRef.get();
+      if (activity != null) {
+        HashMap<String, Bitmap> imagesMap = new HashMap<>();
+        LayoutInflater inflater = LayoutInflater.from(activity);
+        FeatureCollection featureCollection = params[0];
 
-      for (Feature feature : featureCollection.getFeatures()) {
-        View view = inflater.inflate(R.layout.layout_callout, null);
+        for (Feature feature : featureCollection.getFeatures()) {
+          View view = inflater.inflate(R.layout.layout_callout, null);
 
-        String name = feature.getStringProperty(PROPERTY_TITLE);
-        TextView textView = (TextView) view.findViewById(R.id.title);
-        textView.setText(name);
+          String name = feature.getStringProperty(PROPERTY_TITLE);
+          TextView titleTv = (TextView) view.findViewById(R.id.title);
+          titleTv.setText(name);
 
-        boolean favourite = feature.getBooleanProperty(PROPERTY_FAVOURITE);
-        ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
-        imageView.setImageResource(favourite ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
+          String style = feature.getStringProperty(PROPERTY_STYLE);
+          TextView styleTv = (TextView) view.findViewById(R.id.style);
+          styleTv.setText(style);
 
-        Bitmap bitmap = SymbolGenerator.generate(view);
-        imagesMap.put(name, bitmap);
-        viewMap.put(name, view);
+          boolean favourite = feature.getBooleanProperty(PROPERTY_FAVOURITE);
+          ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
+          imageView.setImageResource(favourite ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
+
+          Bitmap bitmap = SymbolGenerator.generate(view);
+          imagesMap.put(name, bitmap);
+          viewMap.put(name, view);
+        }
+
+        return imagesMap;
+      } else {
+        return null;
       }
-      return imagesMap;
     }
 
     @Override
     protected void onPostExecute(HashMap<String, Bitmap> bitmapHashMap) {
       super.onPostExecute(bitmapHashMap);
-      if (activity != null) {
+      SymbolLayerExampleActivity activity = activityRef.get();
+      if (activity != null && bitmapHashMap != null) {
         activity.setImageGenResults(viewMap, bitmapHashMap);
         if (refreshSource) {
           activity.refreshSource();
         }
       }
+    }
+  }
+
+  /**
+   * Async task which fetches pictures from around the POI using Mapillary services.
+   * https://www.mapillary.com/developer/api-documentation/
+   */
+  private static class LoadMapillaryDataTask extends AsyncTask<Integer, Void, MapillaryDataLoadResult> {
+
+    static final String URL_IMAGE_PLACEHOLDER = "https://d1cuyjsrcm0gby.cloudfront.net/%s/thumb-320.jpg";
+    static final String KEY_UNIQUE_FEATURE = "key";
+    static final String TOKEN_UNIQUE_FEATURE = "{" + KEY_UNIQUE_FEATURE + "}";
+    static final String ID_SOURCE = "cluster_source";
+    static final String ID_LAYER_UNCLUSTERED = "unclustered_layer";
+    static final int IMAGE_SIZE = 128;
+    static final String API_URL = "https://a.mapillary.com/v3/images/"
+      + "?lookat=%f,%f&closeto=%f,%f&radius=%d"
+      + "&client_id=bjgtc1FDTnFPaXpxeTZuUDNabmJ5dzozOGE1ODhkMmEyYTkyZTI4";
+
+    private WeakReference<SymbolLayerExampleActivity> activityRef;
+    private MapboxMap map;
+    private Picasso picasso;
+    private final Handler progressHandler;
+    private int loadingProgress;
+    private boolean loadingIncrease = true;
+    private Feature feature;
+
+    public LoadMapillaryDataTask(SymbolLayerExampleActivity activity, MapboxMap map, Picasso picasso,
+                                 Handler progressHandler, Feature feature) {
+      this.activityRef = new WeakReference<>(activity);
+      this.map = map;
+      this.picasso = picasso;
+      this.progressHandler = progressHandler;
+      this.feature = feature;
+    }
+
+    @Override
+    protected void onPreExecute() {
+      super.onPreExecute();
+      loadingProgress = 0;
+      setLoadingState(true, false);
+    }
+
+    @Override
+    protected MapillaryDataLoadResult doInBackground(Integer... radius) {
+      progressHandler.post(progressRunnable);
+      try {
+        Thread.sleep(2500); //ensure loading visualisation
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      OkHttpClient okHttpClient = new OkHttpClient();
+      try {
+        Position poiPosition = (Position) feature.getGeometry().getCoordinates();
+
+        @SuppressLint("DefaultLocale") Request request = new Request.Builder()
+          .url(String.format(API_URL,
+            poiPosition.getLongitude(), poiPosition.getLatitude(),
+            poiPosition.getLongitude(), poiPosition.getLatitude(),
+            radius[0]
+          ))
+          .build();
+
+        Response response = okHttpClient.newCall(request).execute();
+        FeatureCollection featureCollection = FeatureCollection.fromJson(response.body().string());
+        MapillaryDataLoadResult mapillaryDataLoadResult = new MapillaryDataLoadResult(featureCollection);
+        for (Feature feature : featureCollection.getFeatures()) {
+          String imageId = feature.getStringProperty(KEY_UNIQUE_FEATURE);
+          String imageUrl = String.format(URL_IMAGE_PLACEHOLDER, imageId);
+          Bitmap bitmap = picasso.load(imageUrl).resize(IMAGE_SIZE, IMAGE_SIZE).get();
+
+          //cropping bitmap to be circular
+          bitmap = getCroppedBitmap(bitmap);
+
+          mapillaryDataLoadResult.add(feature, bitmap);
+        }
+        return mapillaryDataLoadResult;
+
+      } catch (Exception exception) {
+        Timber.e(exception);
+      }
+      return null;
+    }
+
+    @Override
+    protected void onPostExecute(MapillaryDataLoadResult mapillaryDataLoadResult) {
+      super.onPostExecute(mapillaryDataLoadResult);
+      setLoadingState(false, true);
+      if (mapillaryDataLoadResult == null) {
+        SymbolLayerExampleActivity activity = activityRef.get();
+        if (activity != null) {
+          Toast.makeText(activity, "Error. Unable to load Mapillary data.", Toast.LENGTH_LONG).show();
+        }
+        return;
+      }
+
+      FeatureCollection featureCollection = mapillaryDataLoadResult.mapillaryFeatureCollection;
+
+      Map<Feature, Bitmap> bitmapMap = mapillaryDataLoadResult.bitmapHashMap;
+      for (Map.Entry<Feature, Bitmap> featureBitmapEntry : bitmapMap.entrySet()) {
+        Feature feature = featureBitmapEntry.getKey();
+        String key = feature.getStringProperty(KEY_UNIQUE_FEATURE);
+        map.addImage(key, featureBitmapEntry.getValue());
+      }
+
+      GeoJsonSource mapillarySource = (GeoJsonSource) map.getSource(ID_SOURCE);
+      if (mapillarySource == null) {
+        map.addSource(new GeoJsonSource(ID_SOURCE, featureCollection, new GeoJsonOptions()
+          .withCluster(true)
+          .withClusterMaxZoom(17)
+          .withClusterRadius(IMAGE_SIZE / 3)
+        ));
+
+        // unclustered
+        map.addLayerBelow(new SymbolLayer(ID_LAYER_UNCLUSTERED, ID_SOURCE)
+          .withProperties(
+            iconImage(TOKEN_UNIQUE_FEATURE),
+            iconAllowOverlap(true),
+            iconSize(zoom(
+              exponential(
+                stop(18, iconSize(1.7f)),
+                stop(17, iconSize(1.4f)),
+                stop(16, iconSize(1.1f)),
+                stop(15, iconSize(0.8f)),
+                stop(12, iconSize(0.0f))
+              )
+            ))
+          ), MAKI_LAYER_ID);
+
+        // clustered
+        int[][] layers = new int[][] {
+          new int[] {20, Color.RED},
+          new int[] {10, Color.BLUE},
+          new int[] {0, Color.GREEN}
+        };
+
+        for (int i = 0; i < layers.length; i++) {
+          //Add cluster circles
+          CircleLayer clusterLayer = new CircleLayer("cluster-" + i, ID_SOURCE);
+          clusterLayer.setProperties(
+            circleColor(layers[i][1]),
+            circleRadius(zoom(
+              exponential(
+                stop(16, circleRadius(20f)),
+                stop(15, circleRadius(18f)),
+                stop(14, circleRadius(16f)),
+                stop(12, circleRadius(10f))
+              )
+            )),
+            circleOpacity(0.6f)
+          );
+
+          // Add a filter to the cluster layer that hides the circles based on "point_count"
+          clusterLayer.setFilter(
+            i == 0
+              ? gte("point_count", layers[i][0]) :
+              all(gte("point_count", layers[i][0]), lt("point_count", layers[i - 1][0]))
+          );
+          map.addLayerBelow(clusterLayer, MAKI_LAYER_ID);
+        }
+
+        //Add the count labels
+        SymbolLayer count = new SymbolLayer("count", ID_SOURCE);
+        count.setProperties(
+          textField("{point_count}"),
+          textSize(8f),
+          textOffset(new Float[] {0.0f, 0.0f}),
+          textColor(Color.WHITE),
+          textIgnorePlacement(true)
+        );
+        map.addLayerBelow(count, MAKI_LAYER_ID);
+      } else {
+        mapillarySource.setGeoJson(featureCollection);
+      }
+    }
+
+    static Bitmap getCroppedBitmap(Bitmap bitmap) {
+      Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+        bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+      Canvas canvas = new Canvas(output);
+
+      final int color = 0xff424242;
+      final Paint paint = new Paint();
+      final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+
+      paint.setAntiAlias(true);
+      canvas.drawARGB(0, 0, 0, 0);
+      paint.setColor(color);
+      // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+      canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
+        bitmap.getWidth() / 2, paint);
+      paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+      canvas.drawBitmap(bitmap, rect, rect, paint);
+      //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
+      //return _bmp;
+      return output;
+    }
+
+    private Runnable progressRunnable = new Runnable() {
+      @Override
+      public void run() {
+        if (isCancelled()) {
+          setLoadingState(false, false);
+          return;
+        }
+
+        if (loadingIncrease) {
+          if (loadingProgress >= LOADING_PROGRESS_STEPS) {
+            loadingIncrease = false;
+          }
+        } else {
+          if (loadingProgress <= 0) {
+            loadingIncrease = true;
+          }
+        }
+
+        loadingProgress = loadingIncrease ? loadingProgress + 1 : loadingProgress - 1;
+
+        feature.addNumberProperty(PROPERTY_LOADING_PROGRESS, loadingProgress);
+        SymbolLayerExampleActivity activity = activityRef.get();
+        if (activity != null) {
+          activity.refreshSource();
+        }
+        progressHandler.postDelayed(this, LOADING_STEP_DURATION);
+      }
+    };
+
+    private void setLoadingState(boolean isLoading, boolean isSuccess) {
+      progressHandler.removeCallbacksAndMessages(null);
+      feature.addBooleanProperty(PROPERTY_LOADING, isLoading);
+      SymbolLayerExampleActivity activity = activityRef.get();
+      if (activity != null) {
+        activity.refreshSource();
+
+        if (isLoading) { //zooming to a loading state
+          activity.setActivityStep(STEP_LOADING);
+        } else if (isSuccess) { //if success zooming to a ready state, otherwise do nothing
+          activity.setActivityStep(STEP_READY);
+        }
+      }
+    }
+  }
+
+  private static class MapillaryDataLoadResult {
+    private final HashMap<Feature, Bitmap> bitmapHashMap = new HashMap<>();
+    private final FeatureCollection mapillaryFeatureCollection;
+
+    MapillaryDataLoadResult(FeatureCollection mapillaryFeatureCollection) {
+      this.mapillaryFeatureCollection = mapillaryFeatureCollection;
+    }
+
+    public void add(Feature feature, Bitmap bitmap) {
+      bitmapHashMap.put(feature, bitmap);
     }
   }
 
@@ -653,14 +1087,45 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
   }
 
   /**
+   * Util class that creates a Source and a Layer based on Mapillary data.
+   * https://www.mapillary.com/developer/tiles-documentation/
+   */
+  private static class MapillaryTiles {
+
+    static final String ID_SOURCE = "mapillary.source";
+    static final String ID_LINE_LAYER = "mapillary.layer.line";
+    static final String URL_TILESET = "https://d25uarhxywzl1j.cloudfront.net/v0.1/{z}/{x}/{y}.mvt";
+
+    static Source createSource() {
+      TileSet mapillaryTileset = new TileSet("2.1.0", MapillaryTiles.URL_TILESET);
+      mapillaryTileset.setMinZoom(0);
+      mapillaryTileset.setMaxZoom(14);
+      return new VectorSource(MapillaryTiles.ID_SOURCE, mapillaryTileset);
+    }
+
+    static Layer createLineLayer() {
+      LineLayer lineLayer = new LineLayer(MapillaryTiles.ID_LINE_LAYER, MapillaryTiles.ID_SOURCE);
+      lineLayer.setSourceLayer("mapillary-sequences");
+      lineLayer.setProperties(
+        lineCap(Property.LINE_CAP_ROUND),
+        lineJoin(Property.LINE_JOIN_ROUND),
+        lineOpacity(0.6f),
+        lineWidth(2.0f),
+        lineColor(Color.GREEN)
+      );
+      return lineLayer;
+    }
+  }
+
+  /**
    * RecyclerViewAdapter adapting features to cards.
    */
-  static class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRecyclerViewAdapter.MyViewHolder> {
+  static class LocationRecyclerViewAdapter extends RecyclerView.Adapter<SymbolLayerExampleActivity.LocationRecyclerViewAdapter.MyViewHolder> {
 
     private List<Feature> featureCollection;
-    private RecyclerViewSymbolLayerActivity activity;
+    private SymbolLayerExampleActivity activity;
 
-    LocationRecyclerViewAdapter(RecyclerViewSymbolLayerActivity activity, FeatureCollection featureCollection) {
+    LocationRecyclerViewAdapter(SymbolLayerExampleActivity activity, FeatureCollection featureCollection) {
       this.activity = activity;
       this.featureCollection = featureCollection.getFeatures();
     }
@@ -678,8 +1143,7 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
       holder.title.setText(feature.getStringProperty(PROPERTY_TITLE));
       holder.description.setText(feature.getStringProperty(PROPERTY_DESCRIPTION));
       holder.poi.setText(feature.getStringProperty(PROPERTY_POI));
-      holder.style.setText(feature.getStringProperty(PROPERTY_STYLE) + " - "
-        + feature.getStringProperty(PROPERTY_SUB_STYLE));
+      holder.style.setText(feature.getStringProperty(PROPERTY_STYLE));
       holder.setClickListener(new ItemClickListener() {
         @Override
         public void onClick(View view, int position) {
@@ -708,11 +1172,11 @@ public class RecyclerViewSymbolLayerActivity extends AppCompatActivity implement
 
       MyViewHolder(View view) {
         super(view);
-        title = (TextView) view.findViewById(R.id.textview_title);
-        poi = (TextView) view.findViewById(R.id.textview_poi);
-        style = (TextView) view.findViewById(R.id.textview_style);
-        description = (TextView) view.findViewById(R.id.textview_description);
-        singleCard = (CardView) view.findViewById(R.id.single_location_cardview);
+        title = view.findViewById(R.id.textview_title);
+        poi = view.findViewById(R.id.textview_poi);
+        style = view.findViewById(R.id.textview_style);
+        description = view.findViewById(R.id.textview_description);
+        singleCard = view.findViewById(R.id.single_location_cardview);
         singleCard.setOnClickListener(this);
       }
 

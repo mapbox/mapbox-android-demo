@@ -96,10 +96,9 @@ import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
-import com.mapbox.mapboxandroiddemo.labs.MapillaryActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
-import com.mapbox.mapboxandroiddemo.labs.ProjectPinpointSymbolActivity;
+import com.mapbox.mapboxandroiddemo.labs.SymbolLayerExampleActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
@@ -593,11 +592,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         break;
       case R.id.nav_lab:
         exampleItemModel.add(null);
+
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_labs_mapillary_title,
-          R.string.activity_lab_mapillary_description,
-          new Intent(MainActivity.this, MapillaryActivity.class),
-          R.string.activity_lab_mapillary_url, false, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_lab_symbol_layer_on_map_title,
+          R.string.activity_lab_symbol_layer_on_map_description,
+          new Intent(MainActivity.this, SymbolLayerExampleActivity.class),
+          R.string.activity_lab_symbol_layer_on_map_url, true, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_los_angeles_tourism_title,
@@ -647,11 +647,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, InsetMapActivity.class),
           R.string.activity_labs_inset_map_url, false, BuildConfig.MIN_SDK_VERSION));
 
-        exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_lab_symbol_layer_on_map_title,
-          R.string.activity_lab_symbol_layer_on_map_description,
-          new Intent(MainActivity.this, ProjectPinpointSymbolActivity.class),
-          R.string.activity_lab_symbol_layer_on_map_url, true, BuildConfig.MIN_SDK_VERSION));
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_labs_gif_on_map_title,
           R.string.activity_labs_gif_on_map_description,
