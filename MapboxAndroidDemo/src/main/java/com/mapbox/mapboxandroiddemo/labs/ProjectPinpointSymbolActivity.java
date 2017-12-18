@@ -45,9 +45,14 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.functions.stops.Stop;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.Layer;
+import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.mapboxsdk.style.sources.Source;
+import com.mapbox.mapboxsdk.style.sources.TileSet;
+import com.mapbox.mapboxsdk.style.sources.VectorSource;
 import com.mapbox.services.commons.geojson.Feature;
 import com.mapbox.services.commons.geojson.FeatureCollection;
 import com.mapbox.services.commons.geojson.Geometry;
@@ -89,6 +94,11 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAnchor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOpacity;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textIgnorePlacement;
@@ -113,8 +123,8 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
 
   private static final long CAMERA_ANIMATION_TIME = 1950;
   private static final float LOADING_CIRCLE_RADIUS = 60;
-  private static final int LOADING_PROGRESS_STEPS = 25; //number of steps ina progress animation
-  private static final int LOADING_STEP_DURATION = 50; //duration between each steps
+  private static final int LOADING_PROGRESS_STEPS = 25; //number of steps in a progress animation
+  private static final int LOADING_STEP_DURATION = 50; //duration between each step
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -188,6 +198,7 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
     setupClickListeners();
     setupRecyclerView();
     hideLabelLayers();
+    setupMapillaryTiles();
   }
 
   private void setupSource() {
@@ -331,6 +342,11 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
         layer.setProperties(visibility("none"));
       }
     }
+  }
+
+  private void setupMapillaryTiles() {
+    mapboxMap.addSource(Mapillary.createSource());
+    mapboxMap.addLayerBelow(Mapillary.createLineLayer(), Mapillary.ID_ABOVE_LAYER);
   }
 
   /**
@@ -1067,6 +1083,34 @@ public class ProjectPinpointSymbolActivity extends AppCompatActivity implements 
       Canvas canvas = new Canvas(bitmap);
       view.draw(canvas);
       return bitmap;
+    }
+  }
+
+  private static class Mapillary {
+
+    static final String ID_SOURCE = "mapillary";
+    static final String ID_LINE_LAYER = ID_SOURCE + ".line";
+    static final String ID_ABOVE_LAYER = "aerialway";
+    static final String URL_TILESET = "https://d25uarhxywzl1j.cloudfront.net/v0.1/{z}/{x}/{y}.mvt";
+
+    static Source createSource() {
+      TileSet mapillaryTileset = new TileSet("2.1.0", Mapillary.URL_TILESET);
+      mapillaryTileset.setMinZoom(0);
+      mapillaryTileset.setMaxZoom(14);
+      return new VectorSource(Mapillary.ID_SOURCE, mapillaryTileset);
+    }
+
+    static Layer createLineLayer() {
+      LineLayer lineLayer = new LineLayer(Mapillary.ID_LINE_LAYER, Mapillary.ID_SOURCE);
+      lineLayer.setSourceLayer("mapillary-sequences");
+      lineLayer.setProperties(
+        lineCap(Property.LINE_CAP_ROUND),
+        lineJoin(Property.LINE_JOIN_ROUND),
+        lineOpacity(0.6f),
+        lineWidth(2.0f),
+        lineColor(Color.GREEN)
+      );
+      return lineLayer;
     }
   }
 
