@@ -171,18 +171,11 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".labs.RecyclerViewSymbolLayerActivity"
-            android:label="@string/activity_lab_rv_symbol_layer_on_map_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
-        </activity>
-        <activity
             android:name=".labs.AnimatedImageSourceActivity"
             android:label="@string/activity_labs_gif_on_map_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
             android:name=".examples.annotations.CustomInfoWindowActivity"
@@ -260,7 +253,6 @@
         <activity
             android:name=".examples.styles.ShowHideLayersActivity"
             android:label="@string/activity_styles_show_hide_layer_title">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
@@ -268,7 +260,6 @@
         <activity
             android:name=".examples.styles.LanguageSwitchActivity"
             android:label="@string/activity_styles_language_switch_title">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
@@ -276,7 +267,6 @@
         <activity
             android:name=".examples.styles.ColorSwitcherActivity"
             android:label="@string/activity_styles_color_switcher_title">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
@@ -377,7 +367,7 @@
             android:label="@string/activity_style_image_source_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
             android:name=".labs.LosAngelesTourismActivity"
@@ -468,7 +458,7 @@
             android:label="@string/activity_plugins_marker_clusters_plugin_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
             android:name=".examples.extrusions.PopulationDensityExtrusionActivity"
@@ -526,7 +516,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
-
+        <activity
+            android:name=".labs.SymbolLayerExampleActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/activity_lab_symbol_layer_and_mapillary_on_map_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
         <activity
             android:name=".account.LandingActivity"
             android:screenOrientation="portrait">
@@ -548,6 +545,8 @@
         </activity>
         <activity
             android:name=".account.LoadingActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+
     </application>
+
 </manifest>
