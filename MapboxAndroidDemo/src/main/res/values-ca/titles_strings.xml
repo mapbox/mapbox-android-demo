@@ -18,7 +18,7 @@
     <string name="activity_dds_create_hotspots_points_title">Crea un mapa de calor a partir de punts</string>
     <string name="activity_styles_data_clusters_title">Crea i dona estils a agrupacions de dades</string>
     <string name="activity_styles_line_layer_title">Crea una capa de línies</string>
-    <string name="activity_styles_symbol_layer_title">Capa de símbols marcadors</string>
+    <string name="activity_styles_basic_symbol_layer_title">Capa de símbols marcadors</string>
     <string name="activity_extrusions_basic_extrusions_title">Mostra els edificis en 3D</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_title">Utilitza les dades GeoJSON per determinar l\'alçada de l\'extrusió</string>
     <string name="activity_extrusions_population_density_extrusions_title">Mostra l\'alçada de l\'edifici en 3D segons les dades vector</string>

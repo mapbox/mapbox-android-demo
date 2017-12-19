@@ -20,7 +20,7 @@
     <string name="activity_dds_create_hotspots_points_title">Create hotspots from points</string>
     <string name="activity_styles_data_clusters_title">Create and style data clusters</string>
     <string name="activity_styles_line_layer_title">Create a line layer</string>
-    <string name="activity_styles_symbol_layer_title">Marker symbol layer</string>
+    <string name="activity_styles_basic_symbol_layer_title">Marker symbol layer</string>
     <string name="activity_styles_local_style_or_raster_source_title">Local style or custom raster style</string>
     <string name="activity_style_image_source_title">Use an image source</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_title">Use GeoJSON data to set extrusion height</string>

@@ -88,7 +88,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.SymbolLayerActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.BasicSymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
 import com.mapbox.mapboxandroiddemo.labs.AnimatedImageSourceActivity;
@@ -98,7 +98,7 @@ import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
-import com.mapbox.mapboxandroiddemo.labs.SymbolLayerExampleActivity;
+import com.mapbox.mapboxandroiddemo.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
@@ -261,9 +261,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_default_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModel.add(new ExampleItemModel(
-          R.string.activity_styles_symbol_layer_title,
-          R.string.activity_styles_symbol_layer_description,
-          new Intent(MainActivity.this, SymbolLayerActivity.class),
+          R.string.activity_styles_basic_symbol_layer_title,
+          R.string.activity_styles_basic_symbol_layer_description,
+          new Intent(MainActivity.this, BasicSymbolLayerActivity.class),
           R.string.activity_styles_symbol_layer_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModel.add(new ExampleItemModel(
@@ -595,7 +595,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         exampleItemModel.add(new ExampleItemModel(
           R.string.activity_lab_symbol_layer_and_mapillary_on_map_title,
           R.string.activity_lab_symbol_layer_and_mapillary_on_map_description,
-          new Intent(MainActivity.this, SymbolLayerExampleActivity.class),
+          new Intent(MainActivity.this, SymbolLayerMapillaryActivity.class),
           R.string.activity_lab_symbol_layer_on_map_url, true, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModel.add(new ExampleItemModel(

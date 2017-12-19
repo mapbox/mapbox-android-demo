@@ -106,7 +106,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 
-public class SymbolLayerExampleActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class SymbolLayerMapillaryActivity extends AppCompatActivity implements OnMapReadyCallback {
   private static final String SOURCE_ID = "mapbox.poi";
   private static final String MAKI_LAYER_ID = "mapbox.poi.maki";
   private static final String LOADING_LAYER_ID = "mapbox.poi.loading";
@@ -166,7 +166,7 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_symbol_layer_example);
+    setContentView(R.layout.activity_symbol_layer_mapillary);
 
     recyclerView = (RecyclerView) findViewById(R.id.rv_on_top_of_map);
 
@@ -685,15 +685,15 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
    */
   private static class LoadPoiDataTask extends AsyncTask<Void, Void, FeatureCollection> {
 
-    private final WeakReference<SymbolLayerExampleActivity> activityRef;
+    private final WeakReference<SymbolLayerMapillaryActivity> activityRef;
 
-    LoadPoiDataTask(SymbolLayerExampleActivity activity) {
+    LoadPoiDataTask(SymbolLayerMapillaryActivity activity) {
       this.activityRef = new WeakReference<>(activity);
     }
 
     @Override
     protected FeatureCollection doInBackground(Void... params) {
-      SymbolLayerExampleActivity activity = activityRef.get();
+      SymbolLayerMapillaryActivity activity = activityRef.get();
 
       if (activity == null) {
         return null;
@@ -709,7 +709,7 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
     @Override
     protected void onPostExecute(FeatureCollection featureCollection) {
       super.onPostExecute(featureCollection);
-      SymbolLayerExampleActivity activity = activityRef.get();
+      SymbolLayerMapillaryActivity activity = activityRef.get();
       if (featureCollection == null || activity == null) {
         return;
       }
@@ -744,22 +744,22 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
   private static class GenerateViewIconTask extends AsyncTask<FeatureCollection, Void, HashMap<String, Bitmap>> {
 
     private final HashMap<String, View> viewMap = new HashMap<>();
-    private final WeakReference<SymbolLayerExampleActivity> activityRef;
+    private final WeakReference<SymbolLayerMapillaryActivity> activityRef;
     private final boolean refreshSource;
 
-    GenerateViewIconTask(SymbolLayerExampleActivity activity, boolean refreshSource) {
+    GenerateViewIconTask(SymbolLayerMapillaryActivity activity, boolean refreshSource) {
       this.activityRef = new WeakReference<>(activity);
       this.refreshSource = refreshSource;
     }
 
-    GenerateViewIconTask(SymbolLayerExampleActivity activity) {
+    GenerateViewIconTask(SymbolLayerMapillaryActivity activity) {
       this(activity, false);
     }
 
     @SuppressWarnings("WrongThread")
     @Override
     protected HashMap<String, Bitmap> doInBackground(FeatureCollection... params) {
-      SymbolLayerExampleActivity activity = activityRef.get();
+      SymbolLayerMapillaryActivity activity = activityRef.get();
       if (activity != null) {
         HashMap<String, Bitmap> imagesMap = new HashMap<>();
         LayoutInflater inflater = LayoutInflater.from(activity);
@@ -794,7 +794,7 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
     @Override
     protected void onPostExecute(HashMap<String, Bitmap> bitmapHashMap) {
       super.onPostExecute(bitmapHashMap);
-      SymbolLayerExampleActivity activity = activityRef.get();
+      SymbolLayerMapillaryActivity activity = activityRef.get();
       if (activity != null && bitmapHashMap != null) {
         activity.setImageGenResults(viewMap, bitmapHashMap);
         if (refreshSource) {
@@ -820,7 +820,7 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
       + "?lookat=%f,%f&closeto=%f,%f&radius=%d"
       + "&client_id=bjgtc1FDTnFPaXpxeTZuUDNabmJ5dzozOGE1ODhkMmEyYTkyZTI4";
 
-    private WeakReference<SymbolLayerExampleActivity> activityRef;
+    private WeakReference<SymbolLayerMapillaryActivity> activityRef;
     private MapboxMap map;
     private Picasso picasso;
     private final Handler progressHandler;
@@ -828,7 +828,7 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
     private boolean loadingIncrease = true;
     private Feature feature;
 
-    public LoadMapillaryDataTask(SymbolLayerExampleActivity activity, MapboxMap map, Picasso picasso,
+    public LoadMapillaryDataTask(SymbolLayerMapillaryActivity activity, MapboxMap map, Picasso picasso,
                                  Handler progressHandler, Feature feature) {
       this.activityRef = new WeakReference<>(activity);
       this.map = map;
@@ -890,7 +890,7 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
       super.onPostExecute(mapillaryDataLoadResult);
       setLoadingState(false, true);
       if (mapillaryDataLoadResult == null) {
-        SymbolLayerExampleActivity activity = activityRef.get();
+        SymbolLayerMapillaryActivity activity = activityRef.get();
         if (activity != null) {
           Toast.makeText(activity, "Error. Unable to load Mapillary data.", Toast.LENGTH_LONG).show();
         }
@@ -1020,7 +1020,7 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
         loadingProgress = loadingIncrease ? loadingProgress + 1 : loadingProgress - 1;
 
         feature.addNumberProperty(PROPERTY_LOADING_PROGRESS, loadingProgress);
-        SymbolLayerExampleActivity activity = activityRef.get();
+        SymbolLayerMapillaryActivity activity = activityRef.get();
         if (activity != null) {
           activity.refreshSource();
         }
@@ -1031,7 +1031,7 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
     private void setLoadingState(boolean isLoading, boolean isSuccess) {
       progressHandler.removeCallbacksAndMessages(null);
       feature.addBooleanProperty(PROPERTY_LOADING, isLoading);
-      SymbolLayerExampleActivity activity = activityRef.get();
+      SymbolLayerMapillaryActivity activity = activityRef.get();
       if (activity != null) {
         activity.refreshSource();
 
@@ -1122,12 +1122,12 @@ public class SymbolLayerExampleActivity extends AppCompatActivity implements OnM
    * RecyclerViewAdapter adapting features to cards.
    */
   static class LocationRecyclerViewAdapter extends
-    RecyclerView.Adapter<SymbolLayerExampleActivity.LocationRecyclerViewAdapter.MyViewHolder> {
+    RecyclerView.Adapter<SymbolLayerMapillaryActivity.LocationRecyclerViewAdapter.MyViewHolder> {
 
     private List<Feature> featureCollection;
-    private SymbolLayerExampleActivity activity;
+    private SymbolLayerMapillaryActivity activity;
 
-    LocationRecyclerViewAdapter(SymbolLayerExampleActivity activity, FeatureCollection featureCollection) {
+    LocationRecyclerViewAdapter(SymbolLayerMapillaryActivity activity, FeatureCollection featureCollection) {
       this.activity = activity;
       this.featureCollection = featureCollection.getFeatures();
     }

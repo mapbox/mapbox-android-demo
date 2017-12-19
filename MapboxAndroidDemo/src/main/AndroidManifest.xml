@@ -356,8 +356,8 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.styles.SymbolLayerActivity"
-            android:label="@string/activity_styles_symbol_layer_title">
+            android:name=".examples.styles.BasicSymbolLayerActivity"
+            android:label="@string/activity_styles_basic_symbol_layer_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
@@ -517,7 +517,7 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".labs.SymbolLayerExampleActivity"
+            android:name=".labs.SymbolLayerMapillaryActivity"
             android:screenOrientation="portrait"
             android:label="@string/activity_lab_symbol_layer_and_mapillary_on_map_title">
             <meta-data
