@@ -29,7 +29,8 @@ import java.util.List;
 /**
  * Display markers on the map by adding a symbol layer
  */
-public class BasicSymbolLayerActivity extends AppCompatActivity implements OnMapReadyCallback, MapboxMap.OnMapClickListener {
+public class BasicSymbolLayerActivity extends AppCompatActivity implements
+  OnMapReadyCallback, MapboxMap.OnMapClickListener {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -71,7 +72,8 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements OnMap
     Source geoJsonSource = new GeoJsonSource("marker-source", featureCollection);
     mapboxMap.addSource(geoJsonSource);
 
-    Bitmap icon = BitmapFactory.decodeResource(BasicSymbolLayerActivity.this.getResources(), R.drawable.blue_marker_view);
+    Bitmap icon = BitmapFactory.decodeResource(
+      BasicSymbolLayerActivity.this.getResources(), R.drawable.blue_marker_view);
 
     // Add the marker image to map
     mapboxMap.addImage("my-marker-image", icon);
