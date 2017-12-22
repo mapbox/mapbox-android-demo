@@ -1,7 +1,6 @@
 package com.mapbox.mapboxandroiddemo.adapter;
 
 import android.content.Context;
-import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -71,10 +70,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     ExampleItemModel detailItem = dataSource.get(position);
     ViewHolder viewHolder = (ViewHolder) holder;
-
-    if (Build.VERSION.SDK_INT < detailItem.getMinSdkVersion()) {
-      return;
-    }
 
     String imageUrl = context.getString(detailItem.getImageUrl());
 
