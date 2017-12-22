@@ -1,3 +1,1 @@
-This update is in line with the 5.2.1 release of the Mapbox Maps SDK for Android. This release also has several bug fixes and new examples:
-
-Issues resolved in this release: [https://github.com/mapbox/mapbox-android-demo/issues?q=is%3Aissue+milestone%3A%22Release+5.2.0%22+is%3Aclosed](https://github.com/mapbox/mapbox-android-demo/issues?q=is%3Aissue+milestone%3A%22Release+5.2.0%22+is%3Aclosed)
+This update is in line with the 5.3.0 release of the Mapbox Maps SDK for Android. This release also adds enhanced [SymbolLayer example](https://github.com/mapbox/mapbox-android-demo/pull/574).
