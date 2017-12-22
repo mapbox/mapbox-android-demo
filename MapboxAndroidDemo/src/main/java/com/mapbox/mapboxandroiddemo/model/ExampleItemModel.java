@@ -2,6 +2,8 @@ package com.mapbox.mapboxandroiddemo.model;
 
 import android.content.Intent;
 
+import com.mapbox.mapboxandroiddemo.BuildConfig;
+
 public class ExampleItemModel {
   // Just a model for the detailed item recycler
 
@@ -73,5 +75,6 @@ public class ExampleItemModel {
     this.imageUrl = imageUrl;
     this.activity = activity;
     this.showNewIcon = false;
+    this.minSdkVersion = BuildConfig.MIN_SDK_VERSION;
   }
 }
