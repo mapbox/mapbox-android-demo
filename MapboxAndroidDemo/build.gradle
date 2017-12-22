@@ -87,9 +87,7 @@ dependencies {
 
 
     // Mapbox dependencies
-    api (dependenciesList.mapboxMapSdk) {
-        transitive = true
-    }
+    api (dependenciesList.mapboxMapSdk)
 
     // Mapbox plugins
     implementation dependenciesList.mapboxPluginLocationLayer
