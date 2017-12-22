@@ -48,6 +48,9 @@ dependencies {
     // Mapbox dependencies
     api (dependenciesList.mapboxMapSdk)
 
+    // lost
+    implementation dependenciesList.lost
+
     // Firebase
     implementation dependenciesList.firebaseCrash
     implementation dependenciesList.firebasePerf

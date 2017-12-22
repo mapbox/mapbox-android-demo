@@ -99,6 +99,9 @@ dependencies {
     // Mapbox Android UI
     implementation dependenciesList.mapboxAndroidUI
 
+    // lost
+    implementation dependenciesList.lost
+
     // Firebase
     implementation dependenciesList.firebaseCrash
     implementation dependenciesList.firebasePerf
