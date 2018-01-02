@@ -51,8 +51,8 @@ android {
         }
 
         release {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -98,9 +98,6 @@ dependencies {
 
     // Mapbox Android UI
     implementation dependenciesList.mapboxAndroidUI
-
-    // lost
-    implementation dependenciesList.lost
 
     // Firebase
     implementation dependenciesList.firebaseCrash

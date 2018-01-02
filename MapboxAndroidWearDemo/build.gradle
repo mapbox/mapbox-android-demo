@@ -25,8 +25,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -47,9 +47,6 @@ dependencies {
 
     // Mapbox dependencies
     api (dependenciesList.mapboxMapSdk)
-
-    // lost
-    implementation dependenciesList.lost
 
     // Firebase
     implementation dependenciesList.firebaseCrash
