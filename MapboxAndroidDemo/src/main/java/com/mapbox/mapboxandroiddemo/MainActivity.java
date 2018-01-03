@@ -37,6 +37,7 @@ import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivit
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
+import com.mapbox.mapboxandroiddemo.examples.annotations.MultipleMovingMarkersActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
@@ -463,7 +464,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_annotation_animated_marker_description,
           new Intent(MainActivity.this, AnimatedMarkerActivity.class),
           R.string.activity_annotation_animated_marker_url, false, BuildConfig.MIN_SDK_VERSION));
-
+        exampleItemModel.add(new ExampleItemModel(
+          R.string.activity_annotations_multiple_moving_markers_title,
+          R.string.activity_annotations_multiple_moving_markers_description,
+          new Intent(MainActivity.this, MultipleMovingMarkersActivity.class),
+          R.string.activity_annotations_multiple_moving_markers_url, true, BuildConfig.MIN_SDK_VERSION
+        ));
         currentCategory = R.id.nav_annotations;
         break;
 
