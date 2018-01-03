@@ -134,6 +134,7 @@
     <!--Tap on map instruction for toast-->
     <string name="tap_on_map_instruction">Tap anywhere on the map</string>
     <string name="tap_on_map_turf_inside_instruction">Tap inside of blue polygon area</string>
+    <string name="tap_on_map_for_notification">Tap on map to get a notification with map image</string>
 
     <string name="san_francisco">San Francisco</string>
     <string name="los_angeles">Los Angeles</string>
@@ -192,7 +193,7 @@
     <!-- Optimization API activity -->
     <string name="origin">Origin</string>
     <string name="destination">Destination</string>
-    <string name="only_twelve_stops_allowed">Only 12 stops allowed on route</string>
+    <string name="only_twelve_stops_allowed">Only 12 stops allowed on route. Press on the map and hold to clear markers.</string>
     <string name="click_instructions">Tap on the map to select a maximum of 12 locations</string>
     <string name="successful_but_no_routes">No routes found for that location</string>
     <string name="no_success">No routes found, make sure you set the right user and access token</string>

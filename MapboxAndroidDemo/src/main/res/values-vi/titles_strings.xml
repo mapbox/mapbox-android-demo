@@ -17,10 +17,10 @@
     <string name="activity_styles_vector_source_title">Thêm nguồn mảnh vectơ</string>
     <string name="activity_styles_add_wms_source_title">Thêm nguồn WMS</string>
     <string name="activity_styles_zoom_dependent_fill_color_title">Màu sắc tùy mức thu phóng</string>
-    <string name="activity_dds_create_heatmap_points_title">Tạo bản đồ nhiệt từ các điểm</string>
+    <string name="activity_dds_create_hotspots_points_title">Tạo bản đồ nhiệt từ các điểm</string>
     <string name="activity_styles_data_clusters_title">Tạo và định kiểu các cụm dữ liệu</string>
     <string name="activity_styles_line_layer_title">Tạo lớp đường kẻ</string>
-    <string name="activity_styles_symbol_layer_title">Lớp dấu ghim</string>
+    <string name="activity_styles_basic_symbol_layer_title">Lớp dấu ghim</string>
     <string name="activity_styles_local_style_or_raster_source_title">Kiểu địa phương hoặc kiểu raster tùy biến</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_title">Đặt chiều cao của khối nhô ra theo dữ liệu GeoJSON</string>
     <string name="activity_extrusions_population_density_extrusions_title">Hiển thị tòa nhà 3D có chiều cao theo dữ liệu vectơ</string>

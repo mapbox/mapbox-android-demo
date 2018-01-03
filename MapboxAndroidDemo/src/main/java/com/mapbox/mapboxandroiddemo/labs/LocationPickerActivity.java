@@ -20,7 +20,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationSource;
@@ -136,7 +136,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
 
             // Placing the marker on the mapboxMap as soon as possible causes the illusion
             // that the hovering marker and dropped marker are the same.
-            droppedMarker = mapboxMap.addMarker(new MarkerViewOptions().position(latLng).icon(icon));
+            droppedMarker = mapboxMap.addMarker(new MarkerOptions().position(latLng).icon(icon));
 
             // Finally we get the geocoding information
             reverseGeocode(latLng);

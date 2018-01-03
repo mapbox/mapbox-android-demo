@@ -64,29 +64,31 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
   @Override
   public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-    if (holder.getItemViewType() == 0) {
-      ExampleItemModel detailItem = dataSource.get(position);
-      ViewHolder viewHolder = (ViewHolder) holder;
-
-      String imageUrl = context.getString(detailItem.getImageUrl());
-
-      if (!imageUrl.isEmpty()) {
-        Picasso.with(context)
-          .load(imageUrl)
-          .into(viewHolder.imageView);
-      } else {
-        viewHolder.imageView.setImageDrawable(null);
-      }
-
-      if (detailItem.getShowNewIcon()) {
-        viewHolder.newIconImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.new_icon));
-      } else {
-        viewHolder.newIconImageView.setImageDrawable(null);
-      }
-
-      viewHolder.titleTextView.setText(context.getString(detailItem.getTitle()));
-      viewHolder.descriptionTextView.setText(context.getString(detailItem.getDescription()));
+    if (holder.getItemViewType() != 0) {
+      return;
     }
+
+    ExampleItemModel detailItem = dataSource.get(position);
+    ViewHolder viewHolder = (ViewHolder) holder;
+
+    String imageUrl = context.getString(detailItem.getImageUrl());
+
+    if (imageUrl.isEmpty()) {
+      viewHolder.imageView.setImageDrawable(null);
+    } else {
+      Picasso.with(context)
+        .load(imageUrl)
+        .into(viewHolder.imageView);
+    }
+
+    if (detailItem.getShowNewIcon()) {
+      viewHolder.newIconImageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.new_icon));
+    } else {
+      viewHolder.newIconImageView.setImageDrawable(null);
+    }
+
+    viewHolder.titleTextView.setText(context.getString(detailItem.getTitle()));
+    viewHolder.descriptionTextView.setText(context.getString(detailItem.getDescription()));
   }
 
   @Override
