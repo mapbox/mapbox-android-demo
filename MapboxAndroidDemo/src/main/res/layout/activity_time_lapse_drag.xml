@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:mapbox="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="40.73581"
-        mapbox:mapbox_cameraTargetLng="-73.99155"
-        mapbox:mapbox_cameraZoom="11"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light"/>
+        mapbox:mapbox_cameraTargetLat="23.930052"
+        mapbox:mapbox_cameraTargetLng="81.522713"
+        mapbox:mapbox_cameraZoom="2.919193"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_light" />
+        <!--mapbox:mapbox_uiDoubleTapGestures="false"
+        mapbox:mapbox_uiRotateGestures="false"
+        mapbox:mapbox_uiScrollGestures="false"
+        mapbox:mapbox_uiTiltGestures="false"
+        mapbox:mapbox_uiZoomGestures="false"-->
 
 </LinearLayout>
