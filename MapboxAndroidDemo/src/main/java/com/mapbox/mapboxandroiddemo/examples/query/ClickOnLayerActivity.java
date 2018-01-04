@@ -64,7 +64,7 @@ public class ClickOnLayerActivity extends AppCompatActivity {
         layer.setProperties(fillOpacity(0.5f));
         mapboxMap.addLayer(layer);
 
-        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
+        mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override
           public void onMapClick(@NonNull LatLng point) {
             PointF pointf = mapboxMap.getProjection().toScreenLocation(point);

@@ -51,7 +51,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
         SnapshotNotificationActivity.this.mapboxMap = mapboxMap;
 
         // When user clicks the map, start the snapshotting process with the given parameters
-        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
+        mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override
           public void onMapClick(@NonNull LatLng point) {
             startSnapShot(

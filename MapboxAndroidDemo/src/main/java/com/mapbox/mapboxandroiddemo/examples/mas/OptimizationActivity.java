@@ -79,7 +79,7 @@ public class OptimizationActivity extends AppCompatActivity {
           .position(new LatLng(origin.getLatitude(), origin.getLongitude()))
           .title(getString(R.string.origin)));
 
-        map.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
+        map.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override
           public void onMapClick(@NonNull LatLng point) {
             // Optimization API is limited to 12 coordinate sets

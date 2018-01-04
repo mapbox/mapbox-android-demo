@@ -91,7 +91,7 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
       .withProperties(PropertyFactory.iconImage("my-marker-image"));
     mapboxMap.addLayer(selectedMarker);
 
-    mapboxMap.setOnMapClickListener(this);
+    mapboxMap.addOnMapClickListener(this);
   }
 
   @Override

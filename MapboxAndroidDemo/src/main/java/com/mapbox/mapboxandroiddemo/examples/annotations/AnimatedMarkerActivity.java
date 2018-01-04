@@ -51,7 +51,7 @@ public class AnimatedMarkerActivity extends AppCompatActivity {
           Toast.LENGTH_LONG
         ).show();
 
-        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
+        mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override
           public void onMapClick(@NonNull LatLng point) {
 

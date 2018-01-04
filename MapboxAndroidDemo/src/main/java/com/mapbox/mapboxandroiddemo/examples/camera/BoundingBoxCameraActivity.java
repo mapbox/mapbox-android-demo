@@ -58,7 +58,7 @@ public class BoundingBoxCameraActivity extends AppCompatActivity {
         ).show();
 
         // When user clicks the map, fit the camera to the bounding box
-        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
+        mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override
           public void onMapClick(@NonNull LatLng point) {
             LatLngBounds latLngBounds = new LatLngBounds.Builder()

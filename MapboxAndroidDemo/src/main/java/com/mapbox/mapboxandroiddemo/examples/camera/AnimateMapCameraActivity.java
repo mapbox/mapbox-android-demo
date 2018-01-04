@@ -47,7 +47,7 @@ public class AnimateMapCameraActivity extends AppCompatActivity {
 
 
         // When user clicks the map, animate to new camera location
-        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
+        mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
           @Override
           public void onMapClick(@NonNull LatLng point) {
             CameraPosition position = new CameraPosition.Builder()

@@ -296,7 +296,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    * Use OnMapClickListener in combination with queryRenderedFeatures
    */
   private void setupClickListeners() {
-    mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
+    mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
       @Override
       public void onMapClick(@NonNull LatLng point) {
         PointF screenPoint = mapboxMap.getProjection().toScreenLocation(point);
