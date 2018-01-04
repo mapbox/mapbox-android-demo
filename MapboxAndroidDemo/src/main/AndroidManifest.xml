@@ -111,13 +111,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.mas.GeocodingActivity"
-            android:label="@string/activity_mas_geocoding_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
-        </activity>
-        <activity
             android:name=".examples.mas.StaticImageActivity"
             android:label="@string/activity_mas_static_image_title">
             <meta-data
