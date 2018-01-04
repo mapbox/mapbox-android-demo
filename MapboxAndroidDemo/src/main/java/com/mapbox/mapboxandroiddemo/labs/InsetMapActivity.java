@@ -45,7 +45,7 @@ public class InsetMapActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         InsetMapActivity.this.mainLargeMapboxMap = mapboxMap;
-        mainLargeMapboxMap.setOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+        mainLargeMapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
           @Override
           public void onCameraMove() {
             onMapMovedFragmentInterfaceListener.onMapMoved(mainLargeMapboxMap.getCameraPosition());
