@@ -98,6 +98,7 @@ import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
+import com.mapbox.mapboxandroiddemo.labs.RadarCompassActivity;
 import com.mapbox.mapboxandroiddemo.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
@@ -410,7 +411,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_plugins_marker_clusters_plugin_title,
           R.string.activity_plugins_geojson_marker_clusters_description,
           new Intent(MainActivity.this, MarkerClustersPluginActivity.class),
-          R.string.activity_plugins_markers_clusters_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
+          R.string.activity_plugins_markers_clusters_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
         );
         currentCategory = R.id.nav_plugins;
         break;
@@ -597,7 +598,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_symbol_layer_and_mapillary_on_map_title,
           R.string.activity_lab_symbol_layer_and_mapillary_on_map_description,
           new Intent(MainActivity.this, SymbolLayerMapillaryActivity.class),
-          R.string.activity_lab_symbol_layer_on_map_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_lab_symbol_layer_on_map_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_lab_los_angeles_tourism_title,
@@ -651,8 +652,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_labs_gif_on_map_title,
           R.string.activity_labs_gif_on_map_description,
           new Intent(MainActivity.this, AnimatedImageSourceActivity.class),
-          R.string.activity_labs_gif_on_map_url, true, BuildConfig.MIN_SDK_VERSION
+          R.string.activity_labs_gif_on_map_url, false, BuildConfig.MIN_SDK_VERSION
         ));
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_lab_radar_compass_title,
+          R.string.activity_lab_radar_compass_description,
+          new Intent(MainActivity.this, RadarCompassActivity.class),
+          R.string.activity_lab_radar_compass_url, true, Build.VERSION_CODES.LOLLIPOP));
         currentCategory = R.id.nav_lab;
         break;
       case R.id.nav_dds:
@@ -732,7 +738,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   }
 
   private void verifySdkVersion() {
-    for (Iterator<ExampleItemModel> iterator = exampleItemModels.iterator(); iterator.hasNext();) {
+    for (Iterator<ExampleItemModel> iterator = exampleItemModels.iterator(); iterator.hasNext(); ) {
       ExampleItemModel model = iterator.next();
       if (model != null && Build.VERSION.SDK_INT < model.getMinSdkVersion()) {
         iterator.remove();
