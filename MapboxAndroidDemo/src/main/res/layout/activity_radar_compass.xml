@@ -5,20 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextureView
-        android:id="@+id/camera_preview_textureview"
+    <!--<TextureView
+        android:id="@+id/camera_preview_texture_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/mapboxWhite"/>
+        android:background="@color/mapboxWhite"/>-->
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="250dp"
         android:layout_height="400dp"
         android:background="@color/mapboxBlueFaint"
-        mapbox:mapbox_cameraTargetLat="40.73581"
-        mapbox:mapbox_cameraTargetLng="-73.99155"
-        mapbox:mapbox_cameraZoom="11"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
+        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/cj62n87yx3mvi2rp93sfp2w9z"/>
 
 </FrameLayout>

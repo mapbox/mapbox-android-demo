@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.plugins.locationlayer.CompassListener;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerMode;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
 
@@ -26,9 +28,14 @@ public class RadarCompassActivity extends AppCompatActivity implements OnMapRead
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    // Mapbox access token is configured here. This needs to be called either in your application
+    // object or in the same activity which contains the mapview.
+    Mapbox.getInstance(this, getString(R.string.access_token));
+
     setContentView(R.layout.activity_radar_compass);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
@@ -38,7 +45,7 @@ public class RadarCompassActivity extends AppCompatActivity implements OnMapRead
     LocationEngine locationEngine = new LostLocationEngine(this);
     locationLayerPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationEngine);
     locationLayerPlugin.setLocationLayerEnabled(LocationLayerMode.COMPASS);
-    locationLayerPlugin.addCompass(new CompassListener() {
+    locationLayerPlugin.addCompassListener(new CompassListener() {
       @Override
       public void onCompassChanged(float userHeading) {
         CameraPosition cameraPosition = new CameraPosition.Builder().bearing(userHeading).build();

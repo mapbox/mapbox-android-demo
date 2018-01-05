@@ -20,8 +20,9 @@
     <string name="activity_dds_create_hotspots_points_title">Create hotspots from points</string>
     <string name="activity_styles_data_clusters_title">Create and style data clusters</string>
     <string name="activity_styles_line_layer_title">Create a line layer</string>
-    <string name="activity_styles_symbol_layer_title">Marker symbol layer</string>
+    <string name="activity_styles_basic_symbol_layer_title">Marker symbol layer</string>
     <string name="activity_styles_local_style_or_raster_source_title">Local style or custom raster style</string>
+    <string name="activity_style_image_source_title">Use an image source</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_title">Use GeoJSON data to set extrusion height</string>
     <string name="activity_extrusions_population_density_extrusions_title">Display 3D building height based on vector data</string>
     <string name="activity_extrusions_adjust_extrusions_title">Adjust light location and color</string>
@@ -59,18 +60,22 @@
     <string name="activity_plugins_building_plugin_title">Display buildings in 3D</string>
     <string name="activity_plugins_location_plugin_title">Show a user\'s location</string>
     <string name="activity_plugins_geojson_plugin_title">Load GeoJSON data</string>
+    <string name="activity_plugins_marker_clusters_plugin_title">Add marker clusters</string>
     <string name="activity_mas_simplify_polyline_title">Simplify a polyline</string>
     <string name="activity_mas_map_matching_title">Map Matching</string>
+    <string name="activity_image_generator_snapshot_notification_title">Snapshot Notification</string>
+    <string name="activity_image_generator_snapshot_share_title">Share snapshot image</string>
     <string name="activity_lab_location_picker_title">Location picker</string>
-    <string name="activity_lab_rv_on_map_title">Recyclerview interaction</string>
-    <string name="activity_lab_rv_symbol_layer_on_map_title">Recyclerview + SymbolLayer markers</string>
+    <string name="activity_lab_rv_on_map_title">RecyclerView interaction</string>
+    <string name="activity_lab_symbol_layer_and_mapillary_on_map_title">SymbolLayer icons</string>
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
     <string name="activity_lab_space_station_location_title">Space station current location</string>
     <string name="activity_lab_picture_in_picture_title">Picture in picture</string>
     <string name="activity_lab_off_route_title">Off route detection</string>
     <string name="activity_lab_los_angeles_tourism_title">Los Angeles for tourists</string>
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
-    <string name="activity_labs_mapillary_title">Mapillary integration</string>
     <string name="activity_labs_inset_map_title">Inset map</string>
+    <string name="activity_labs_gif_on_map_title">Animated image source (GIF)</string>
+    <string name="activity_lab_radar_compass_title">Radar compass + camera</string>
 
 </resources>

@@ -9,7 +9,7 @@ import com.google.gson.JsonElement;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -67,7 +67,7 @@ public class QueryFeatureActivity extends AppCompatActivity {
                   stringBuilder.append(System.getProperty("line.separator"));
                 }
 
-                featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
+                featureMarker = mapboxMap.addMarker(new MarkerOptions()
                   .position(point)
                   .title(getString(R.string.query_feature_marker_title))
                   .snippet(stringBuilder.toString())
@@ -75,13 +75,13 @@ public class QueryFeatureActivity extends AppCompatActivity {
 
               } else {
                 property = getString(R.string.query_feature_marker_snippet);
-                featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
+                featureMarker = mapboxMap.addMarker(new MarkerOptions()
                   .position(point)
                   .snippet(property)
                 );
               }
             } else {
-              featureMarker = mapboxMap.addMarker(new MarkerViewOptions()
+              featureMarker = mapboxMap.addMarker(new MarkerOptions()
                 .position(point)
                 .snippet(getString(R.string.query_feature_marker_snippet))
               );

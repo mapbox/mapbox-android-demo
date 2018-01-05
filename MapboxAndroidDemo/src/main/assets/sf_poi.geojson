@@ -1,0 +1,293 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Panda Express",
+        "poi": "restaurant",
+        "style": "Chinese Restaurant",
+        "description": "Fast-food chain for Chinese standards, including some health-conscious options.",
+        "call-out": "Some fast Chinese goodies!",
+        "selected": false,
+        "loading": false,
+        "loading_progress": 0,
+        "favourite": false,
+        "zoom" : 13.5,
+        "bearing" : 35,
+        "tilt" : 28
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+        -122.432529,
+        37.783132
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Beautifull",
+        "poi": "restaurant",
+        "style": "Healthy Food",
+        "description": "Modern counter-service spot serving locally sourced, organic soups, sandwiches, bowls & baked goods.",
+        "call-out": "Be healthy!",
+        "selected": false,
+        "loading": false,
+        "loading_progress": 0,
+        "favourite": false,
+        "zoom" : 14.8,
+        "bearing" : 125,
+        "tilt" : 42
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+        -122.450252,
+        37.786609
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "HOTEL EPIK",
+        "poi": "lodging",
+        "style": "Hotel",
+        "description": "Chic rooms & suites in a contemporary property featuring a snack bar & a trendy TV lounge.",
+        "call-out": "EPIK beds included!",
+        "selected": false,
+        "loading": false,
+        "loading_progress": 0,
+        "favourite": false,
+        "zoom" : 15.0,
+        "bearing" : 81,
+        "tilt" : 30
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+        -122.419135,
+        37.783350
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Hotel Vitale",
+        "poi": "lodging",
+        "style": "Hotel",
+        "description": "Luxe retreat offering elegant rooms, bay views & an upscale spa, plus an on-site Italian restaurant.",
+        "call-out": "The luxury you deserve.",
+        "selected": false,
+        "loading": false,
+        "loading_progress": 0,
+        "favourite": false,
+        "zoom" : 14.5,
+        "bearing" : 275,
+        "tilt" : 25
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+        -122.392903,
+        37.793569
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Sanraku",
+        "poi": "restaurant",
+        "style": "Japanese",
+        "description": "Delicious meal. Great ambiance with interesting guests. The best dinner we had during our stay in San Francisco. You can bring your own wine as long as you pay a corkage fee. Highly recommended.",
+        "call-out": "Great ramen and dumplings!",
+        "selected": false,
+        "loading": false,
+        "loading_progress": 0,
+        "favourite": false,
+        "zoom" : 12.95,
+        "bearing" : 0,
+        "tilt" : 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.44400024414062,
+          37.801374964252865
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Akkiko",
+        "poi": "restaurant",
+        "style": "Japanese",
+        "description": "We had an excellent dinner here & it's only a short walk from Union Square. The venu is VERY small, we got lucky as a party of 2 with no reservation and were seated right away. The waitress was very nice, food was fast, affordable and delicious!",
+        "call-out": "Mmmm Sushi",
+        "selected": false,
+        "loading": false,
+        "loading_progress": 0,
+        "favourite": false,
+        "zoom" : 14,
+        "bearing" : 45,
+        "tilt" : 25
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.42443084716797,
+          37.801103690609615
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Sushi boat",
+        "poi": "restaurant",
+        "style": "Japanese",
+        "description": "The Restaurant was ok enough but the food wasnt that good. The sushi wasnt fresh and was undercooked. Service was a little slow",
+        "call-out": "Mediocre Sushi",
+        "selected": false,
+        "loading": false,
+        "loading_progress": 0,
+        "favourite": false,
+        "zoom" : 15,
+        "bearing" : 120,
+        "tilt" : 45
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.42752075195314,
+          37.795678008523424
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Carlton suites",
+        "poi": "lodging",
+        "style": "boutique",
+        "description": "Great base, staff really helpful and room was spacious, decent and clean. Free shuttle is good and on site restaurant has good food even if the menu is limited.",
+        "call-out": "a hotel to revisit",
+        "selected": false,
+        "loading": false,
+        "loading_progress": 0,
+        "favourite": false,
+        "zoom" : 15.7,
+        "bearing" : 160,
+        "tilt" : 35
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.40503311157225,
+          37.79350762410675
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "The Urban",
+        "poi": "lodging",
+        "style": "shelter",
+        "description": "Great location, shared bathrooms",
+        "call-out": "Great hotel location!",
+        "selected": false,
+        "loading": false,
+        "loading_progress": 0,
+        "favourite": false,
+        "zoom" : 14.4,
+        "bearing" : 230,
+        "tilt" : 25
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.402548,
+          37.793212
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Caffe Bianco",
+        "poi": "cafe",
+        "style": "U.S.",
+        "description": "Great family style owned caffe, opens at 5 a.m.",
+        "call-out": "Breakfast burrito is a must here!",
+        "selected": false,
+        "loading": false,
+        "loading_progress": 0,
+        "favourite": false,
+        "zoom" : 14.04,
+        "bearing" : 240,
+        "tilt" : 35
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.401623,
+          37.789964
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Taqueria Tacobar",
+        "poi": "restaurant",
+        "style": "Mexican",
+        "description": "The birthplace of the SF burrito",
+        "call-out": "Taco, taco, taco for days",
+        "selected": false,
+        "loading": false,
+        "loading_progress": 0,
+        "favourite": false,
+        "zoom" : 15.20,
+        "bearing" : 270,
+        "tilt" : 15
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+           -122.421209,
+           37.764125
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Bottoms up",
+        "poi": "cafe",
+        "style": "Mexican",
+        "description": "Their choices of margaritas are very plentiful and I don't think anyone could be bored with their drink menu.",
+        "call-out": "Tequila shots for everyone!",
+        "selected": false,
+        "loading": false,
+        "loading_progress": 0,
+        "favourite": false,
+        "zoom" : 13.8,
+        "bearing" : 359,
+        "tilt" : 35
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.444607,
+          37.779066
+        ]
+      }
+    }
+  ]
+}

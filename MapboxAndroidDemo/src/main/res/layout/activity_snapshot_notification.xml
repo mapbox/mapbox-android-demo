@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".examples.snapshot.SnapshotNotificationActivity">
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="37.431"
+        mapbox:mapbox_cameraTargetLng="-120.981"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"
+        mapbox:mapbox_cameraZoom="4"
+        android:layout_above="@+id/notification_text_view"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/notification_text_view"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/mapboxWhite"
+        android:padding="20dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:text="@string/tap_on_map_for_notification"/>
+</RelativeLayout>
