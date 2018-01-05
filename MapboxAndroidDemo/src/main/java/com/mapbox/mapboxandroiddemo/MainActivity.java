@@ -658,8 +658,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_radar_compass_title,
           R.string.activity_lab_radar_compass_description,
           new Intent(MainActivity.this, RadarCompassActivity.class),
-          R.string.activity_lab_radar_compass_url, true, BuildConfig.MIN_SDK_VERSION
-        ));
+          R.string.activity_lab_radar_compass_url, true, Build.VERSION_CODES.LOLLIPOP));
         currentCategory = R.id.nav_lab;
         break;
       case R.id.nav_dds:
