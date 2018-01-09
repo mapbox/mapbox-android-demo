@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply from: "$project.rootDir/gradle/script-git-version.gradle"
 apply plugin: 'com.google.firebase.firebase-perf'
 
+
 android {
     compileSdkVersion androidVersions.compileSdkVersion
     buildToolsVersion androidVersions.buildToolsVersion
@@ -16,6 +17,8 @@ android {
         versionName gitVersionName
 
         vectorDrawables.useSupportLibrary = true
+
+        buildConfigField "int", "MIN_SDK_VERSION", "$minSdkVersion.apiLevel"
     }
 
     flavorDimensions "default"
@@ -84,16 +87,14 @@ dependencies {
 
 
     // Mapbox dependencies
-
-    api (dependenciesList.mapboxMapSdk) {
-        transitive = true
-    }
+    api (dependenciesList.mapboxMapSdk)
 
     // Mapbox plugins
     implementation dependenciesList.mapboxPluginLocationLayer
     implementation dependenciesList.mapboxPluginBuilding
     implementation dependenciesList.mapboxPluginTraffic
     implementation dependenciesList.mapboxPluginGeoJson
+    implementation dependenciesList.mapboxPluginMarkerCluster
 
     // Mapbox Android UI
     implementation dependenciesList.mapboxAndroidUI

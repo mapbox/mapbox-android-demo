@@ -24,6 +24,9 @@ import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
 import java.util.List;
 
+/**
+ * Use the Location Layer plugin to easily add a device location "puck" to a Mapbox map.
+ */
 public class LocationPluginActivity extends AppCompatActivity implements LocationEngineListener, PermissionsListener {
 
   private PermissionsManager permissionsManager;

@@ -18,7 +18,7 @@
     <string name="activity_dds_create_hotspots_points_description">Feu servir l\'SDK Android de Mapbox per visualitzar dades puntuals com mapes de calor.</string>
     <string name="activity_styles_create_data_cluster_description">Feu servir GeoJSON per visualitzar dades puntuals com agregacions.</string>
     <string name="activity_styles_line_layer_description">Crear línia amb GeoJSON,  canvia\'n l\'estil emprant les propietats, i afegir la capa al mapa.</string>
-    <string name="activity_styles_symbol_layer_description">Mostra marcadors al mapa afegint una capa de de símbols. Consulta el mapa i anima la mida de les icones quan s\'hi faci clic.</string>
+    <string name="activity_styles_basic_symbol_layer_description">Mostra marcadors al mapa afegint una capa de de símbols. Consulta el mapa i anima la mida de les icones quan s\'hi faci clic.</string>
     <string name="activity_extrusions_basic_extrusions_description">Utilitza les extrusions per mostrar l\'alçada dels edificis en 3D</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_description">Empra estils basats en dades i dades GeoJSON per establir l\'alçada d\'extrusió</string>
     <string name="activity_extrusions_population_density_extrusions_description">Utilitza les extrusions per mostrar l\'alçada dels edificis en 3D a partir de dades vector importades</string>

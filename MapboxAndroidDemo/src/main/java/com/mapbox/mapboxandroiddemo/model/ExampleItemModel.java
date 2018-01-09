@@ -2,6 +2,8 @@ package com.mapbox.mapboxandroiddemo.model;
 
 import android.content.Intent;
 
+import com.mapbox.mapboxandroiddemo.BuildConfig;
+
 public class ExampleItemModel {
   // Just a model for the detailed item recycler
 
@@ -10,6 +12,7 @@ public class ExampleItemModel {
   public int imageUrl;
   public Intent activity;
   public boolean showNewIcon;
+  public int minSdkVersion;
 
 
   public int getTitle() {
@@ -52,12 +55,18 @@ public class ExampleItemModel {
     this.showNewIcon = showNewIcon;
   }
 
-  public ExampleItemModel(int title, int description, Intent activity, int imageUrl, boolean showNewIcon) {
+  public int getMinSdkVersion() {
+    return minSdkVersion;
+  }
+
+  public ExampleItemModel(int title, int description, Intent activity, int imageUrl,
+                          boolean showNewIcon, int minSdkVersion) {
     this.title = title;
     this.description = description;
     this.imageUrl = imageUrl;
     this.activity = activity;
     this.showNewIcon = showNewIcon;
+    this.minSdkVersion = minSdkVersion;
   }
 
   public ExampleItemModel(int title, int description, Intent activity, int imageUrl) {
@@ -66,5 +75,6 @@ public class ExampleItemModel {
     this.imageUrl = imageUrl;
     this.activity = activity;
     this.showNewIcon = false;
+    this.minSdkVersion = BuildConfig.MIN_SDK_VERSION;
   }
 }

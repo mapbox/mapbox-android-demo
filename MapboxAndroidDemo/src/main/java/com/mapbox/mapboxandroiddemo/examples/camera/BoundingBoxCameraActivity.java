@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
@@ -44,10 +44,10 @@ public class BoundingBoxCameraActivity extends AppCompatActivity {
         final LatLng locationTwo = new LatLng(25.837058, -106.646234);
 
         // Add markers to map
-        mapboxMap.addMarker(new MarkerViewOptions()
+        mapboxMap.addMarker(new MarkerOptions()
           .position(locationOne));
 
-        mapboxMap.addMarker(new MarkerViewOptions()
+        mapboxMap.addMarker(new MarkerOptions()
           .position(locationTwo));
 
         // Toast instructing user to tap on the map to start animation and set bounds
