@@ -134,6 +134,7 @@ dependencies {
     implementation dependenciesList.mapboxPluginTraffic
     implementation dependenciesList.mapboxPluginMarkerView
     implementation dependenciesList.mapboxPluginAnnotation
+    implementation dependenciesList.mapboxPluginOffline
 
     // Firebase
     globalImplementation dependenciesList.firebaseCrash

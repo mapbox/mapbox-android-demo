@@ -351,4 +351,6 @@
     <!-- Variable label placement-->
     <string name="zoom_map_in_and_out_variable_label_instruction">Zoom in and out to see red labels try to avoid collisions</string>
 
+    <!-- Offline plugin -->
+    <string name="coordinates_need_to_valid_toast">Coordinates need to be in valid range!</string>
 </resources>

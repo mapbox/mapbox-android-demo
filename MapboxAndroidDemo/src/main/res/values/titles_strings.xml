@@ -98,6 +98,7 @@
     <string name="activity_location_location_component_options_title">Customized location icon</string>
     <string name="activity_java_services_simplify_polyline_title">Simplify a polyline</string>
     <string name="activity_java_services_map_matching_title">Map Matching</string>
+    <string name="activity_plugins_offline_title">Download and manage maps for offline use</string>
     <string name="activity_image_generator_snapshot_notification_title">Snapshot Notification</string>
     <string name="activity_image_generator_snapshot_share_title">Share snapshot image</string>
     <string name="activity_lab_animated_marker_title">Animate marker position</string>
