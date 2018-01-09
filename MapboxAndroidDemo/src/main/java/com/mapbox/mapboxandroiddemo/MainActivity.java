@@ -56,6 +56,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.snapshot.SnapshotNotificationActivity;
 import com.mapbox.mapboxandroiddemo.examples.snapshot.SnapshotShareActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
@@ -412,6 +413,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, MarkerClustersPluginActivity.class),
           R.string.activity_plugins_markers_clusters_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
         );
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_plugins_localization_plugin_title,
+          R.string.activity_plugins_localization_plugin_description,
+          new Intent(MainActivity.this, LocalizationPluginActivity.class),
+          R.string.activity_plugins_localization_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
+        );
         currentCategory = R.id.nav_plugins;
         break;
 
@@ -732,7 +739,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   }
 
   private void verifySdkVersion() {
-    for (Iterator<ExampleItemModel> iterator = exampleItemModels.iterator(); iterator.hasNext();) {
+    for (Iterator<ExampleItemModel> iterator = exampleItemModels.iterator(); iterator.hasNext(); ) {
       ExampleItemModel model = iterator.next();
       if (model != null && Build.VERSION.SDK_INT < model.getMinSdkVersion()) {
         iterator.remove();
