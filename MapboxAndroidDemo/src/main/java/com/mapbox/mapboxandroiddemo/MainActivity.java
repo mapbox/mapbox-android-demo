@@ -31,8 +31,6 @@ import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.BasicMarkerViewActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.CustomInfoWindowActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawMarkerActivity;
