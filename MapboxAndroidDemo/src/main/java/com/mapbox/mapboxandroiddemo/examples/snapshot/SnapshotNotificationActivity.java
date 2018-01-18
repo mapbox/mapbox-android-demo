@@ -105,28 +105,11 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
    * @param bitmap to set as large icon
    */
   private void createNotification(Bitmap bitmap) {
-    // Create a PendingIntent so that when the notification is pressed, the
-    // SnapshotNotificationActivity is reopened
-
-   /* // Create the notification
-    NotificationCompat.Builder builder =
-        new NotificationCompat.Builder(SnapshotNotificationActivity.this, "123")
-            .setSmallIcon(R.drawable.ic_circle)
-            .setContentTitle(getString(R.string.activity_image_generator_snapshot_notification_title))
-            .setContentText(getString(R.string.activity_image_generator_snapshot_notification_description))
-            .setContentIntent(pendingIntent)
-            .setLargeIcon(bitmap);
-
-    // Trigger the notification
-    ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, builder.build());
-*/
 
     final int NOTIFY_ID = 1002;
-
     String name = "channel_name";
     String id = "channel_id";
     String description = "channel_description";
-
     Intent intent;
     NotificationCompat.Builder builder;
     PendingIntent pendingIntent;
@@ -136,47 +119,30 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
         (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
+    builder = new NotificationCompat.Builder(this, id);
+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      int importance = NotificationManager.IMPORTANCE_HIGH;
       NotificationChannel notificationChannel = notificationManager.getNotificationChannel(id);
       if (notificationChannel == null) {
-        notificationChannel = new NotificationChannel(id, name, importance);
+        notificationChannel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH);
         notificationChannel.setDescription(description);
         notificationManager.createNotificationChannel(notificationChannel);
       }
-      builder = new NotificationCompat.Builder(this, id);
-
-      intent = new Intent(this, MainActivity.class);
-      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-      pendingIntent = getActivity(this, 0, intent, 0);
-
-      builder.setContentTitle("content")
-        .setSmallIcon(R.drawable.ic_circle)
-        .setContentTitle(getString(R.string.activity_image_generator_snapshot_notification_title))
-        .setContentText(getString(R.string.activity_image_generator_snapshot_notification_description))
-        .setContentIntent(pendingIntent)
-        .setLargeIcon(bitmap);
-    } else {
-
-      builder = new NotificationCompat.Builder(this);
-
-      intent = new Intent(this, MainActivity.class);
-      intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-      pendingIntent = getActivity(this, 0, intent, 0);
-
-
-
-      builder.setContentTitle("content")                           // required
-        .setSmallIcon(R.drawable.ic_circle)
-        .setContentTitle(getString(R.string.activity_image_generator_snapshot_notification_title))
-        .setContentText(getString(R.string.activity_image_generator_snapshot_notification_description))
-        .setContentIntent(pendingIntent)
-        .setLargeIcon(bitmap);
     }
+
+    intent = new Intent(this, MainActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    pendingIntent = getActivity(this, 0, intent, 0);
+
+    builder.setContentTitle("content")
+      .setSmallIcon(R.drawable.ic_circle)
+      .setContentTitle(getString(R.string.activity_image_generator_snapshot_notification_title))
+      .setContentText(getString(R.string.activity_image_generator_snapshot_notification_description))
+      .setContentIntent(pendingIntent)
+      .setLargeIcon(bitmap);
 
     Notification notification = builder.build();
     notificationManager.notify(NOTIFY_ID, notification);
-
   }
 
   @Override
