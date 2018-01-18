@@ -105,42 +105,34 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
    * @param bitmap to set as large icon
    */
   private void createNotification(Bitmap bitmap) {
-
     final int NOTIFY_ID = 1002;
-    String name = "channel_name";
     String id = "channel_id";
-    String description = "channel_description";
     Intent intent;
-    NotificationCompat.Builder builder;
-    PendingIntent pendingIntent;
 
+    PendingIntent pendingIntent;
     if (notificationManager == null) {
       notificationManager =
         (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     }
-
-    builder = new NotificationCompat.Builder(this, id);
-
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       NotificationChannel notificationChannel = notificationManager.getNotificationChannel(id);
       if (notificationChannel == null) {
-        notificationChannel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_HIGH);
-        notificationChannel.setDescription(description);
+        notificationChannel = new NotificationChannel(id, "channel_name", NotificationManager.IMPORTANCE_HIGH);
+        notificationChannel.setDescription("channel_description");
         notificationManager.createNotificationChannel(notificationChannel);
       }
     }
-
     intent = new Intent(this, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
     pendingIntent = getActivity(this, 0, intent, 0);
 
-    builder.setContentTitle("content")
+    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
+      .setContentTitle("content")
       .setSmallIcon(R.drawable.ic_circle)
       .setContentTitle(getString(R.string.activity_image_generator_snapshot_notification_title))
       .setContentText(getString(R.string.activity_image_generator_snapshot_notification_description))
       .setContentIntent(pendingIntent)
       .setLargeIcon(bitmap);
-
     Notification notification = builder.build();
     notificationManager.notify(NOTIFY_ID, notification);
   }
