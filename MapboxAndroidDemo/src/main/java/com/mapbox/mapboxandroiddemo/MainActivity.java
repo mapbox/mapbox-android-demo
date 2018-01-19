@@ -445,18 +445,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_annotation_polygon_holes_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_annotation_custom_info_window_title,
-          R.string.activity_annotation_custom_info_window_description,
-          new Intent(MainActivity.this, CustomInfoWindowActivity.class),
-          R.string.activity_annotation_custom_info_window_url, false, BuildConfig.MIN_SDK_VERSION));
-
-        exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_annotation_marker_view_title,
-          R.string.activity_annotation_marker_view_description,
-          new Intent(MainActivity.this, BasicMarkerViewActivity.class),
-          R.string.activity_annotation_basic_marker_view_url, false, BuildConfig.MIN_SDK_VERSION));
-
-        exampleItemModels.add(new ExampleItemModel(
           R.string.activity_annotation_animated_marker_title,
           R.string.activity_annotation_animated_marker_description,
           new Intent(MainActivity.this, AnimatedMarkerActivity.class),
@@ -554,12 +542,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_mas_optimization_description,
           new Intent(MainActivity.this, OptimizationActivity.class),
           R.string.activity_mas_optimization_url, false, BuildConfig.MIN_SDK_VERSION));
-
-        exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_mas_geocoding_title,
-          R.string.activity_mas_geocoding_description,
-          new Intent(MainActivity.this, GeocodingActivity.class),
-          R.string.activity_mas_geocoding_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_mas_static_image_title,
