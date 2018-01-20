@@ -28,21 +28,6 @@ public class MapFragmentActivity extends WearableActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_basic_support_map_frag);
 
-    LocationEngine locationEngine = new LocationSource(this);
-    locationEngine.activate();
-
-    locationEngine.addLocationEngineListener(new LocationEngineListener() {
-      @Override
-      public void onConnected() {
-
-      }
-
-      @Override
-      public void onLocationChanged(Location location) {
-
-      }
-    });
-
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));

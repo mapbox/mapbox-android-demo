@@ -46,9 +46,7 @@ dependencies {
     implementation wearDependencies.gpsLocation
 
     // Mapbox dependencies
-    api (dependenciesList.mapboxMapSdk) {
-        transitive = true
-    }
+    api (dependenciesList.mapboxMapSdk)
 
     // Firebase
     implementation dependenciesList.firebaseCrash
