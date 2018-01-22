@@ -60,7 +60,6 @@ import com.mapbox.mapboxandroiddemo.examples.snapshot.SnapshotNotificationActivi
 import com.mapbox.mapboxandroiddemo.examples.snapshot.SnapshotShareActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsMatrixApiActivity;
-import com.mapbox.mapboxandroiddemo.examples.mas.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
@@ -563,12 +562,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_mas_optimization_description,
           new Intent(MainActivity.this, OptimizationActivity.class),
           R.string.activity_mas_optimization_url, false, BuildConfig.MIN_SDK_VERSION));
-
-        exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_mas_geocoding_title,
-          R.string.activity_mas_geocoding_description,
-          new Intent(MainActivity.this, GeocodingActivity.class),
-          R.string.activity_mas_geocoding_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_mas_static_image_title,
