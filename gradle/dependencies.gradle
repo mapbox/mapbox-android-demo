@@ -61,7 +61,7 @@ ext {
             mapboxPluginTraffic       : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:${version.mapboxPluginTraffic}",
             mapboxPluginGeoJson       : "com.mapbox.mapboxsdk:mapbox-android-plugin-geojson:${version.mapboxPluginGeoJson}",
             mapboxPluginMarkerCluster : "com.mapbox.mapboxsdk:mapbox-android-plugin-cluster-utils:${version.mapboxPluginMarkerCluster}",
-            mapboxPluginPlaces 		  : "com.mapbox.mapboxsdk:mapbox-android-plugin-cluster-utils:${version.mapboxPluginPlaces}",
+            mapboxPluginPlaces 		  : "com.mapbox.mapboxsdk:mapbox-android-plugin-places:${version.mapboxPluginPlaces}",
 
             // support
             supportV4              : "com.android.support:support-v4:${version.supportLib}",
