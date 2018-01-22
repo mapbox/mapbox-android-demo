@@ -1,17 +1,37 @@
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.mapbox.geocoding.v5.models.CarmenFeature;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.plugins.places.autocomplete.PlaceAutocomplete;
+import com.mapbox.plugins.places.autocomplete.model.PlaceOptions;
 
 public class PlacesPluginActivity extends AppCompatActivity {
 
   private MapView mapView;
+  private MapboxMap mapboxMap;
+  private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
+  private CarmenFeature home;
+  private CarmenFeature work;
+  private FloatingActionButton searchFab;
+  private String TAG = "PlacesPluginActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +50,62 @@ public class PlacesPluginActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
+        PlacesPluginActivity.this.mapboxMap = mapboxMap;
+
         // Customize map with markers, polylines, etc.
 
+        addUserLocations();
+
+        searchFab = findViewById(R.id.fab_location_search);
+        searchFab.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            Intent intent = new PlaceAutocomplete.IntentBuilder()
+              .accessToken(Mapbox.getAccessToken())
+              .placeOptions(PlaceOptions.builder()
+                .backgroundColor(Color.parseColor("#EEEEEE"))
+                .addInjectedFeature(home)
+                .addInjectedFeature(work)
+                .limit(10)
+                .build(PlaceOptions.MODE_CARDS))
+              .build(PlacesPluginActivity.this);
+            startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
+          }
+        });
       }
     });
   }
 
+  private void addUserLocations() {
+    home = CarmenFeature.builder().text("Directions to Home")
+      .placeName("300 Massachusetts Ave NW")
+      .id("directions-home")
+      .properties(new JsonObject())
+      .build();
+
+    work = CarmenFeature.builder().text("Directions to Work")
+      .placeName("1509 16th St NW")
+      .id("directions-work")
+      .properties(new JsonObject())
+      .build();
+  }
+
   // Add the mapView lifecycle to the activity's lifecycle methods
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_AUTOCOMPLETE) {
+      CarmenFeature feature = PlaceAutocomplete.getPlace(data);
+
+      CameraPosition newCameraPosition = new CameraPosition.Builder()
+        .target(new LatLng(feature.geometry().coordinates(), feature.center().longitude()))
+        .build();
+
+      mapboxMap.easeCamera(CameraUpdateFactory.newCameraPosition(newCameraPosition));
+
+    }
+  }
+
   @Override
   public void onResume() {
     super.onResume();

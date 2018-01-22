@@ -405,8 +405,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_plugins_geojson_plugin_description,
           new Intent(MainActivity.this, GeoJsonPluginActivity.class),       
           R.string.activity_plugins_geojson_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
-        
-         exampleItemModel.add(new ExampleItemModel(
+
+        exampleItemModels.add(new ExampleItemModel(
           R.string.activity_plugins_places_plugin_title,
           R.string.activity_plugins_places_plugin_description,
           new Intent(MainActivity.this, PlacesPluginActivity.class),
