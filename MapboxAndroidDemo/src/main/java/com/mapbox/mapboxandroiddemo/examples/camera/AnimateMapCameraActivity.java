@@ -17,9 +17,11 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 /**
  * Animate the map's camera position, tilt, bearing, and zoom.
  */
-public class AnimateMapCameraActivity extends AppCompatActivity {
+public class AnimateMapCameraActivity extends AppCompatActivity implements OnMapReadyCallback,
+  MapboxMap.OnMapClickListener  {
 
   private MapView mapView;
+  private MapboxMap mapboxMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -32,37 +34,45 @@ public class AnimateMapCameraActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_camera_animate);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+    mapView.getMapAsync(this);
+  }
 
-        // Toast instructing user to tap on the map
-        Toast.makeText(
-          AnimateMapCameraActivity.this,
-          getString(R.string.tap_on_map_instruction),
-          Toast.LENGTH_LONG
-        ).show();
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
 
+    AnimateMapCameraActivity.this.mapboxMap = mapboxMap;
 
-        // When user clicks the map, animate to new camera location
-        mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
-          @Override
-          public void onMapClick(@NonNull LatLng point) {
-            CameraPosition position = new CameraPosition.Builder()
-              .target(new LatLng(51.50550, -0.07520)) // Sets the new camera position
-              .zoom(17) // Sets the zoom
-              .bearing(180) // Rotate the camera
-              .tilt(30) // Set the camera tilt
-              .build(); // Creates a CameraPosition from the builder
+    // Toast instructing user to tap on the map
+    Toast.makeText(
+      AnimateMapCameraActivity.this,
+      getString(R.string.tap_on_map_instruction),
+      Toast.LENGTH_LONG
+    ).show();
 
-            mapboxMap.animateCamera(CameraUpdateFactory
-              .newCameraPosition(position), 7000);
-          }
-        });
-      }
-    });
+    mapboxMap.addOnMapClickListener(this);
+  }
+
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
+
+    // Toast instructing user to tap on the map
+    Toast.makeText(
+      AnimateMapCameraActivity.this,
+      getString(R.string.tap_on_map_instruction),
+      Toast.LENGTH_LONG
+    ).show();
+
+    CameraPosition position = new CameraPosition.Builder()
+      .target(new LatLng(51.50550, -0.07520)) // Sets the new camera position
+      .zoom(17) // Sets the zoom
+      .bearing(180) // Rotate the camera
+      .tilt(30) // Set the camera tilt
+      .build(); // Creates a CameraPosition from the builder
+
+    mapboxMap.animateCamera(CameraUpdateFactory
+      .newCameraPosition(position), 7000);
   }
 
   @Override
@@ -104,6 +114,9 @@ public class AnimateMapCameraActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 }
