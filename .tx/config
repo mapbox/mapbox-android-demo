@@ -15,7 +15,7 @@ source_lang = en
 type = ANDROID
 
 [mapbox-android-demo.system_and_random_stringsxml]
-file_filter = MapboxAndroidDemo/src/main/res/values-<lang>/activity_strings.xml
+file_filter = MapboxAndroidDemo/src/main/res/values-<lang>/system_and_random_strings.xml
 source_file = MapboxAndroidDemo/src/main/res/values/system_and_random_strings.xml
 source_lang = en
 type = ANDROID

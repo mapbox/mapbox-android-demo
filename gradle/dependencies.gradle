@@ -12,12 +12,12 @@ ext {
 
     version = [
             // mapbox
-            mapboxMapSdk       : '5.3.0',
+            mapboxMapSdk       : '5.3.2',
             mapboxAndroidUI    :  '2.2.9',
 
             mapboxPluginBuilding      : '0.1.0',
             mapboxPluginGeoJson       : '0.1.0',
-            mapboxPluginLocationLayer : '0.2.0',
+            mapboxPluginLocationLayer : '0.3.0',
             mapboxPluginTraffic       : '0.4.0-SNAPSHOT',
             mapboxPluginMarkerCluster : '0.1.0',
 
