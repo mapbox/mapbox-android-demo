@@ -50,7 +50,6 @@
     <string name="activity_location_animated_icon_description">Utilitza una vista de marcador per marcar la ubicació dels usuaris i afegeix-hi una animació de batec.</string>
     <string name="activity_location_customize_user_description">Ajustar el color de la icona d\'ubicació de l\'usuari i l\'encoixinat per tal que aparegui més avall a la pantalla.</string>
     <string name="activity_mas_directions_description">Empra Mapbox Android Services per demanar indicacions.</string>
-    <string name="activity_mas_geocoding_description">Empra  el geocodificador Mapbox Android Service per convertir un text d\'ubicació en coordenades geogràfiques.</string>
     <string name="activity_mas_static_image_description">Empra Mapbox Android Services per generar una url i descarregar un mapa estàtic.</string>
     <string name="activity_plugins_traffic_plugin_description">Empra el connector de trànsit de Mapbox per mostrar les dades de congestió de cotxes en viu a la part superior d\'un mapa.</string>
     <string name="activity_mas_simplify_polyline_description">Emprant l\'eina de polilínies simplifica una polilínia, cosa que redueix la quantitat de coordenades que componen la polilínia depenent de la tolerància.</string>
