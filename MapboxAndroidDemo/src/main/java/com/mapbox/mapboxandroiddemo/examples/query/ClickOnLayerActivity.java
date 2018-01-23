@@ -67,13 +67,12 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
     layer.setProperties(fillOpacity(0.5f));
     mapboxMap.addLayer(layer);
   }
+
   @Override
   public void onMapClick(@NonNull LatLng point) {
     PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
     RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
-
     List<Feature> featureList = mapboxMap.queryRenderedFeatures(rectF, geoJsonLayerId);
-
     for (com.mapbox.services.commons.geojson.Feature feature : featureList) {
       Log.d("Feature found with %1$s", feature.toJson());
 

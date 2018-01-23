@@ -28,6 +28,7 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
   private MapView mapView;
   private com.mapbox.mapboxsdk.annotations.Polygon selectedBuilding;
   private MapboxMap mapboxMap;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
