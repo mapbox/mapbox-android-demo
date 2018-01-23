@@ -47,7 +47,7 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_basic_symbol_layer);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
@@ -196,6 +196,9 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 
