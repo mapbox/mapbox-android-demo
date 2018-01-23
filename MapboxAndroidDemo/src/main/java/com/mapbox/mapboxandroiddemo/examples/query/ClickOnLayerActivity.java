@@ -26,7 +26,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 /**
  * Detect click events on a polygon that was added as a GeoJsonSource.
  */
-public class ClickOnLayerActivity extends AppCompatActivity {
+public class ClickOnLayerActivity extends AppCompatActivity implements OnMapReadyCallback,
+  MapboxMap.OnMapClickListener {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -49,39 +50,36 @@ public class ClickOnLayerActivity extends AppCompatActivity {
     Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast_instruction,
       Toast.LENGTH_SHORT).show();
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+    mapView.getMapAsync(this);
+  }
 
-        ClickOnLayerActivity.this.mapboxMap = mapboxMap;
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    ClickOnLayerActivity.this.mapboxMap = mapboxMap;
+    mapboxMap.addOnMapClickListener(this);
 
-        addGeoJsonSourceToMap();
+    addGeoJsonSourceToMap();
 
-        // Create FillLayer with GeoJSON source and add the FillLayer to the map
-        layer = new FillLayer(geoJsonLayerId, geoJsonSourceId);
-        layer.setProperties(fillOpacity(0.5f));
-        mapboxMap.addLayer(layer);
+    // Create FillLayer with GeoJSON source and add the FillLayer to the map
+    layer = new FillLayer(geoJsonLayerId, geoJsonSourceId);
+    layer.setProperties(fillOpacity(0.5f));
+    mapboxMap.addLayer(layer);
+  }
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
+    PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
+    RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
 
-        mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
-          @Override
-          public void onMapClick(@NonNull LatLng point) {
-            PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
-            RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
+    List<Feature> featureList = mapboxMap.queryRenderedFeatures(rectF, geoJsonLayerId);
 
-            List<Feature> featureList = mapboxMap.queryRenderedFeatures(rectF, geoJsonLayerId);
+    for (com.mapbox.services.commons.geojson.Feature feature : featureList) {
+      Log.d("Feature found with %1$s", feature.toJson());
 
-            for (com.mapbox.services.commons.geojson.Feature feature : featureList) {
-              Log.d("Feature found with %1$s", feature.toJson());
-
-              Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast,
-                Toast.LENGTH_SHORT).show();
-            }
-          }
-        });
-      }
-    });
+      Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast,
+        Toast.LENGTH_SHORT).show();
+    }
   }
 
   private void addGeoJsonSourceToMap() {
@@ -132,6 +130,9 @@ public class ClickOnLayerActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 
