@@ -106,7 +106,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 
-public class SymbolLayerMapillaryActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class SymbolLayerMapillaryActivity extends AppCompatActivity implements OnMapReadyCallback,
+  MapboxMap.OnMapClickListener {
   private static final String SOURCE_ID = "mapbox.poi";
   private static final String MAKI_LAYER_ID = "mapbox.poi.maki";
   private static final String LOADING_LAYER_ID = "mapbox.poi.loading";
@@ -168,10 +169,10 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_symbol_layer_mapillary);
 
-    recyclerView = (RecyclerView) findViewById(R.id.rv_on_top_of_map);
+    recyclerView = findViewById(R.id.rv_on_top_of_map);
 
     // Initialize the map view
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
@@ -183,6 +184,22 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     mapboxMap.getUiSettings().setLogoEnabled(false);
     mapboxMap.getUiSettings().setAttributionEnabled(false);
     new LoadPoiDataTask(this).execute();
+    mapboxMap.addOnMapClickListener(this);
+  }
+
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
+    PointF screenPoint = mapboxMap.getProjection().toScreenLocation(point);
+    List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, CALLOUT_LAYER_ID);
+    if (!features.isEmpty()) {
+      // we received a click event on the callout layer
+      Feature feature = features.get(0);
+      PointF symbolScreenPoint = mapboxMap.getProjection().toScreenLocation(convertToLatLng(feature));
+      handleClickCallout(feature, screenPoint, symbolScreenPoint);
+    } else {
+      // we didn't find a click event on callout layer, try clicking maki layer
+      handleClickIcon(screenPoint);
+    }
   }
 
   public void setupData(final FeatureCollection collection) {
@@ -195,7 +212,6 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     setupMakiLayer();
     setupLoadingLayer();
     setupCalloutLayer();
-    setupClickListeners();
     setupRecyclerView();
     hideLabelLayers();
     setupMapillaryTiles();
@@ -290,28 +306,6 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       /* add a filter to show only when selected feature property is true */
       .withFilter(eq(PROPERTY_SELECTED, true))
     );
-  }
-
-  /**
-   * Use OnMapClickListener in combination with queryRenderedFeatures
-   */
-  private void setupClickListeners() {
-    mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
-      @Override
-      public void onMapClick(@NonNull LatLng point) {
-        PointF screenPoint = mapboxMap.getProjection().toScreenLocation(point);
-        List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, CALLOUT_LAYER_ID);
-        if (!features.isEmpty()) {
-          // we received a click event on the callout layer
-          Feature feature = features.get(0);
-          PointF symbolScreenPoint = mapboxMap.getProjection().toScreenLocation(convertToLatLng(feature));
-          handleClickCallout(feature, screenPoint, symbolScreenPoint);
-        } else {
-          // we didn't find a click event on callout layer, try clicking maki layer
-          handleClickIcon(screenPoint);
-        }
-      }
-    });
   }
 
   private void setupRecyclerView() {
@@ -588,6 +582,9 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 
