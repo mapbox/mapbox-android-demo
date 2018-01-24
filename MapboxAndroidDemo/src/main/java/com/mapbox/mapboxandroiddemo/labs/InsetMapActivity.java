@@ -22,7 +22,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
 
-public class InsetMapActivity extends AppCompatActivity {
+public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCallback, MapboxMap.OnCameraMoveListener {
 
   private MapView mainMapMapView;
   private MapboxMap mainLargeMapboxMap;
@@ -39,20 +39,9 @@ public class InsetMapActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_inset_map);
 
-    mainMapMapView = (MapView) findViewById(R.id.main_mapView);
+    mainMapMapView = findViewById(R.id.main_mapView);
     mainMapMapView.onCreate(savedInstanceState);
-    mainMapMapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-        InsetMapActivity.this.mainLargeMapboxMap = mapboxMap;
-        mainLargeMapboxMap.setOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
-          @Override
-          public void onCameraMove() {
-            onMapMovedFragmentInterfaceListener.onMapMoved(mainLargeMapboxMap.getCameraPosition());
-          }
-        });
-      }
-    });
+    mainMapMapView.getMapAsync(this);
 
     /* Custom version of the regular Mapbox SupportMapFragment class. A custom one is being built here
     so that the interface call backs can be used in the appropriate places so that the example eventually
@@ -88,6 +77,17 @@ public class InsetMapActivity extends AppCompatActivity {
       customSupportMapFragment = (CustomSupportMapFragment)
         getSupportFragmentManager().findFragmentByTag("com.mapbox.fragmentMap");
     }
+  }
+
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    InsetMapActivity.this.mainLargeMapboxMap = mapboxMap;
+    mainLargeMapboxMap.addOnCameraMoveListener(this);
+  }
+
+  @Override
+  public void onCameraMove() {
+    onMapMovedFragmentInterfaceListener.onMapMoved(mainLargeMapboxMap.getCameraPosition());
   }
 
   private void setOnDataListener(OnMapMovedFragmentInterface onMapMovedFragmentInterface) {
@@ -132,6 +132,9 @@ public class InsetMapActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mainLargeMapboxMap != null) {
+      mainLargeMapboxMap.removeOnCameraMoveListener(this);
+    }
     mainMapMapView.onDestroy();
   }
 
