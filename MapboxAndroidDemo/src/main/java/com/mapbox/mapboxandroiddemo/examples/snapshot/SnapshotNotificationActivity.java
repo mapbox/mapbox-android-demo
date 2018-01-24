@@ -1,15 +1,18 @@
 package com.mapbox.mapboxandroiddemo.examples.snapshot;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -20,14 +23,18 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshot;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshotter;
 
+import static android.app.PendingIntent.getActivity;
+
 /**
  * Test activity showing how to use a the {@link com.mapbox.mapboxsdk.snapshotter.MapSnapshotter}
  * in a way that utilizes provided bitmaps in native notifications.
  */
-public class SnapshotNotificationActivity extends AppCompatActivity {
+public class SnapshotNotificationActivity extends AppCompatActivity implements OnMapReadyCallback,
+  MapboxMap.OnMapClickListener {
   private MapView mapView;
   private MapSnapshotter mapSnapshotter;
   private MapboxMap mapboxMap;
+  private NotificationManager notificationManager;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,28 +47,25 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_snapshot_notification);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
 
     // Set a callback for when MapboxMap is ready to be used
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+    mapView.getMapAsync(this);
+  }
 
-        SnapshotNotificationActivity.this.mapboxMap = mapboxMap;
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    SnapshotNotificationActivity.this.mapboxMap = mapboxMap;
+    mapboxMap.addOnMapClickListener(this);
+  }
 
-        // When user clicks the map, start the snapshotting process with the given parameters
-        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
-          @Override
-          public void onMapClick(@NonNull LatLng point) {
-            startSnapShot(
-                mapboxMap.getProjection().getVisibleRegion().latLngBounds,
-                mapView.getMeasuredHeight(),
-                mapView.getMeasuredWidth());
-          }
-        });
-      }
-    });
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
+    startSnapShot(
+      mapboxMap.getProjection().getVisibleRegion().latLngBounds,
+      mapView.getMeasuredHeight(),
+      mapView.getMeasuredWidth());
   }
 
   /**
@@ -75,7 +79,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
     if (mapSnapshotter == null) {
       // Initialize snapshotter with map dimensions and given bounds
       MapSnapshotter.Options options =
-          new MapSnapshotter.Options(width, height).withStyle(mapboxMap.getStyleUrl()).withRegion(latLngBounds);
+        new MapSnapshotter.Options(width, height).withStyle(mapboxMap.getStyleUrl()).withRegion(latLngBounds);
 
       mapSnapshotter = new MapSnapshotter(SnapshotNotificationActivity.this, options);
     } else {
@@ -98,22 +102,31 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
    * @param bitmap to set as large icon
    */
   private void createNotification(Bitmap bitmap) {
-    // Create a PendingIntent so that when the notification is pressed, the
-    // SnapshotNotificationActivity is reopened
-    PendingIntent pendingIntent = PendingIntent.getActivity(SnapshotNotificationActivity.this, 0,
-        new Intent(SnapshotNotificationActivity.this, SnapshotNotificationActivity.class), 0);
-
-    // Create the notification
-    NotificationCompat.Builder builder =
-        new NotificationCompat.Builder(SnapshotNotificationActivity.this, "123")
-            .setSmallIcon(R.drawable.ic_circle)
-            .setContentTitle(getString(R.string.activity_image_generator_snapshot_notification_title))
-            .setContentText(getString(R.string.activity_image_generator_snapshot_notification_description))
-            .setContentIntent(pendingIntent)
-            .setLargeIcon(bitmap);
-
-    // Trigger the notification
-    ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).notify(1, builder.build());
+    final int notifyId = 1002;
+    String id = "channel_id";
+    if (notificationManager == null) {
+      notificationManager =
+        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+    }
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      NotificationChannel notificationChannel = notificationManager.getNotificationChannel(id);
+      if (notificationChannel == null) {
+        notificationChannel = new NotificationChannel(id, "channel_name", NotificationManager.IMPORTANCE_HIGH);
+        notificationChannel.setDescription("channel_description");
+        notificationManager.createNotificationChannel(notificationChannel);
+      }
+    }
+    Intent intent = new Intent(this, MainActivity.class)
+      .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
+      .setContentTitle("content")
+      .setSmallIcon(R.drawable.ic_circle)
+      .setContentTitle(getString(R.string.activity_image_generator_snapshot_notification_title))
+      .setContentText(getString(R.string.activity_image_generator_snapshot_notification_description))
+      .setContentIntent(getActivity(this, 0, intent, 0))
+      .setLargeIcon(bitmap);
+    Notification notification = builder.build();
+    notificationManager.notify(notifyId, notification);
   }
 
   @Override
@@ -160,6 +173,9 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 }

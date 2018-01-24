@@ -44,7 +44,6 @@
     <string name="activity_query_select_building_title">Chọn một tòa nhà</string>
     <string name="activity_mas_directions_title">Xem tuyến đường trên bản đồ</string>
     <string name="activity_mas_optimization_title">Xem tuyến đường tối ưu hóa trên bản đồ</string>
-    <string name="activity_mas_geocoding_title">Điều khiển tự động điền mã hóa địa lý</string>
     <string name="activity_mas_static_image_title">Tải về bản đồ tĩnh</string>
     <string name="activity_plugins_traffic_plugin_title">Hiển thị giao thông trực tiếp</string>
     <string name="activity_plugins_building_plugin_title">Hiển thị tòa nhà 3D</string>

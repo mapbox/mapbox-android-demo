@@ -96,9 +96,6 @@ dependencies {
     implementation dependenciesList.mapboxPluginGeoJson
     implementation dependenciesList.mapboxPluginMarkerCluster
 
-    // Mapbox Android UI
-    implementation dependenciesList.mapboxAndroidUI
-
     // Firebase
     implementation dependenciesList.firebaseCrash
     implementation dependenciesList.firebasePerf
