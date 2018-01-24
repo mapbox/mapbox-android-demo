@@ -18,11 +18,14 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 /**
- * Animate the marker to a new positiion on the map.
+ * Animate the marker to a new position on the map.
  */
-public class AnimatedMarkerActivity extends AppCompatActivity {
+public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapReadyCallback,
+  MapboxMap.OnMapClickListener {
 
   private MapView mapView;
+  private MapboxMap mapboxMap;
+  private Marker marker;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -35,37 +38,35 @@ public class AnimatedMarkerActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_annotation_animated_marker);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+    mapView.getMapAsync(this);
+  }
 
-        final Marker marker = mapboxMap.addMarker(new MarkerOptions()
-          .position(new LatLng(64.900932, -18.167040)));
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    AnimatedMarkerActivity.this.mapboxMap = mapboxMap;
 
+    marker = mapboxMap.addMarker(new MarkerOptions()
+      .position(new LatLng(64.900932, -18.167040)));
 
-        Toast.makeText(
-          AnimatedMarkerActivity.this,
-          getString(R.string.tap_on_map_instruction),
-          Toast.LENGTH_LONG
-        ).show();
+    Toast.makeText(
+      AnimatedMarkerActivity.this,
+      getString(R.string.tap_on_map_instruction),
+      Toast.LENGTH_LONG
+    ).show();
 
-        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
-          @Override
-          public void onMapClick(@NonNull LatLng point) {
+    mapboxMap.addOnMapClickListener(this);
+  }
 
-            // When the user clicks on the map, we want to animate the marker to that
-            // location.
-            ValueAnimator markerAnimator = ObjectAnimator.ofObject(marker, "position",
-              new LatLngEvaluator(), marker.getPosition(), point);
-            markerAnimator.setDuration(2000);
-            markerAnimator.start();
-          }
-        });
-
-      }
-    });
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
+    // When the user clicks on the map, we want to animate the marker to that
+    // location.
+    ValueAnimator markerAnimator = ObjectAnimator.ofObject(marker, "position",
+      new LatLngEvaluator(), marker.getPosition(), point);
+    markerAnimator.setDuration(2000);
+    markerAnimator.start();
   }
 
   @Override
@@ -101,6 +102,9 @@ public class AnimatedMarkerActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 

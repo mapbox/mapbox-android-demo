@@ -29,7 +29,8 @@ import static android.app.PendingIntent.getActivity;
  * Test activity showing how to use a the {@link com.mapbox.mapboxsdk.snapshotter.MapSnapshotter}
  * in a way that utilizes provided bitmaps in native notifications.
  */
-public class SnapshotNotificationActivity extends AppCompatActivity {
+public class SnapshotNotificationActivity extends AppCompatActivity implements OnMapReadyCallback,
+  MapboxMap.OnMapClickListener {
   private MapView mapView;
   private MapSnapshotter mapSnapshotter;
   private MapboxMap mapboxMap;
@@ -46,28 +47,25 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_snapshot_notification);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
 
     // Set a callback for when MapboxMap is ready to be used
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+    mapView.getMapAsync(this);
+  }
 
-        SnapshotNotificationActivity.this.mapboxMap = mapboxMap;
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    SnapshotNotificationActivity.this.mapboxMap = mapboxMap;
+    mapboxMap.addOnMapClickListener(this);
+  }
 
-        // When user clicks the map, start the snapshotting process with the given parameters
-        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
-          @Override
-          public void onMapClick(@NonNull LatLng point) {
-            startSnapShot(
-              mapboxMap.getProjection().getVisibleRegion().latLngBounds,
-              mapView.getMeasuredHeight(),
-              mapView.getMeasuredWidth());
-          }
-        });
-      }
-    });
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
+    startSnapShot(
+      mapboxMap.getProjection().getVisibleRegion().latLngBounds,
+      mapView.getMeasuredHeight(),
+      mapView.getMeasuredWidth());
   }
 
   /**
@@ -175,6 +173,9 @@ public class SnapshotNotificationActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 }
