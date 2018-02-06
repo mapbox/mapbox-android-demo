@@ -22,10 +22,12 @@ import java.util.List;
 /**
  * Use the query feature to select a building, get its geometry, and draw a polygon highlighting it.
  */
-public class SelectBuildingActivity extends AppCompatActivity {
+public class SelectBuildingActivity extends AppCompatActivity implements OnMapReadyCallback,
+  MapboxMap.OnMapClickListener  {
 
   private MapView mapView;
   private com.mapbox.mapboxsdk.annotations.Polygon selectedBuilding;
+  private MapboxMap mapboxMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -38,53 +40,53 @@ public class SelectBuildingActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_query_select_building);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+    mapView.getMapAsync(this);
+  }
 
-        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
-          @Override
-          public void onMapClick(@NonNull LatLng latLng) {
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    SelectBuildingActivity.this.mapboxMap = mapboxMap;
+    mapboxMap.addOnMapClickListener(this);
+  }
 
-            if (selectedBuilding != null) {
-              mapboxMap.removePolygon(selectedBuilding);
-            }
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
 
-            final PointF point = mapboxMap.getProjection().toScreenLocation(latLng);
-            List<Feature> features = mapboxMap.queryRenderedFeatures(point, "building");
+    if (selectedBuilding != null) {
+      mapboxMap.removePolygon(selectedBuilding);
+    }
 
-            if (features.size() > 0) {
-              String featureId = features.get(0).getId();
+    final PointF finalPoint = mapboxMap.getProjection().toScreenLocation(point);
+    List<Feature> features = mapboxMap.queryRenderedFeatures(finalPoint, "building");
 
-              for (int a = 0; a < features.size(); a++) {
-                if (featureId.equals(features.get(a).getId())) {
-                  if (features.get(a).getGeometry() instanceof Polygon) {
+    if (features.size() > 0) {
+      String featureId = features.get(0).getId();
 
-                    List<LatLng> list = new ArrayList<>();
-                    for (int i = 0; i < ((Polygon) features.get(a).getGeometry()).getCoordinates().size(); i++) {
-                      for (int j = 0;
-                           j < ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).size(); j++) {
-                        list.add(new LatLng(
-                          ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLatitude(),
-                          ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLongitude()
-                        ));
-                      }
-                    }
+      for (int a = 0; a < features.size(); a++) {
+        if (featureId.equals(features.get(a).getId())) {
+          if (features.get(a).getGeometry() instanceof Polygon) {
 
-                    selectedBuilding = mapboxMap.addPolygon(new PolygonOptions()
-                      .addAll(list)
-                      .fillColor(Color.parseColor("#8A8ACB"))
-                    );
-                  }
-                }
+            List<LatLng> list = new ArrayList<>();
+            for (int i = 0; i < ((Polygon) features.get(a).getGeometry()).getCoordinates().size(); i++) {
+              for (int j = 0;
+                   j < ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).size(); j++) {
+                list.add(new LatLng(
+                  ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLatitude(),
+                  ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLongitude()
+                ));
               }
             }
+
+            selectedBuilding = mapboxMap.addPolygon(new PolygonOptions()
+              .addAll(list)
+              .fillColor(Color.parseColor("#8A8ACB"))
+            );
           }
-        });
+        }
       }
-    });
+    }
   }
 
   @Override
@@ -120,6 +122,9 @@ public class SelectBuildingActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 

@@ -18,9 +18,14 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 /**
  * Fit a map to a bounding box
  */
-public class BoundingBoxCameraActivity extends AppCompatActivity {
+public class BoundingBoxCameraActivity extends AppCompatActivity implements OnMapReadyCallback,
+  MapboxMap.OnMapClickListener {
 
   private MapView mapView;
+  private MapboxMap mapboxMap;
+
+  private LatLng locationOne;
+  private LatLng locationTwo;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -33,45 +38,45 @@ public class BoundingBoxCameraActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_camera_bounding_box);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+    mapView.getMapAsync(this);
+  }
 
-        // Declare two locations on map
-        final LatLng locationOne = new LatLng(36.532128, -93.489121);
-        final LatLng locationTwo = new LatLng(25.837058, -106.646234);
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
 
-        // Add markers to map
-        mapboxMap.addMarker(new MarkerOptions()
-          .position(locationOne));
+    BoundingBoxCameraActivity.this.mapboxMap = mapboxMap;
 
-        mapboxMap.addMarker(new MarkerOptions()
-          .position(locationTwo));
+    // Declare two locations on map
+    locationOne = new LatLng(36.532128, -93.489121);
+    locationTwo = new LatLng(25.837058, -106.646234);
 
-        // Toast instructing user to tap on the map to start animation and set bounds
-        Toast.makeText(
-          BoundingBoxCameraActivity.this,
-          getString(R.string.tap_on_map_instruction),
-          Toast.LENGTH_LONG
-        ).show();
+    // Add markers to map
+    mapboxMap.addMarker(new MarkerOptions()
+      .position(locationOne));
 
-        // When user clicks the map, fit the camera to the bounding box
-        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
-          @Override
-          public void onMapClick(@NonNull LatLng point) {
-            LatLngBounds latLngBounds = new LatLngBounds.Builder()
-              .include(locationOne) // Northeast
-              .include(locationTwo) // Southwest
-              .build();
+    mapboxMap.addMarker(new MarkerOptions()
+      .position(locationTwo));
 
-            mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50), 5000);
+    // Toast instructing user to tap on the map to start animation and set bounds
+    Toast.makeText(
+      BoundingBoxCameraActivity.this,
+      getString(R.string.tap_on_map_instruction),
+      Toast.LENGTH_LONG
+    ).show();
 
-          }
-        });
-      }
-    });
+    mapboxMap.addOnMapClickListener(this);
+  }
+
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
+    LatLngBounds latLngBounds = new LatLngBounds.Builder()
+      .include(locationOne) // Northeast
+      .include(locationTwo) // Southwest
+      .build();
+
+    mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50), 5000);
   }
 
   @Override
@@ -113,6 +118,9 @@ public class BoundingBoxCameraActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 }
