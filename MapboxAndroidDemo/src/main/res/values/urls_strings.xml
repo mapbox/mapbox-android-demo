@@ -61,7 +61,7 @@
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
     <string name="activity_plugins_location_plugin_url" translatable="false">https://i.imgur.com/Opfwv6j.png</string>
-    <string name="activity_plugins_places_plugin_url" translatable="false">https://i.imgur.com/Khbd0Jn.png</string>
+    <string name="activity_plugins_places_plugin_url" translatable="false">https://i.imgur.com/oKHx3bv.png</string>
     <string name="activity_plugins_geojson_plugin_url" translatable="false">http://i.imgur.com/kju0sKw.jpg</string>
     <string name="activity_plugins_markers_clusters_plugin_url" translatable="false">https://i.imgur.com/P6wsuea.jpg</string>
     <string name="activity_mas_simplify_polyline_url" translatable="false">http://i.imgur.com/uATgul1.png</string>
