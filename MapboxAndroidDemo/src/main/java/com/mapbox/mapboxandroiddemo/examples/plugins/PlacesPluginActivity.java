@@ -36,8 +36,8 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
   private MapboxMap mapboxMap;
   private CarmenFeature home;
   private CarmenFeature work;
-  private String GEOJSON_SOURCE_LAYER_ID = "GEOJSON_SOURCE_LAYER_ID";
-  private String SYMBOL_ICON_ID = "SYMBOL_ICON_ID";
+  private String geojsonSourceLayerId = "geojsonSourceLayerId";
+  private String symbolIconId = "symbolIconId";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +58,13 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     PlacesPluginActivity.this.mapboxMap = mapboxMap;
-
     initSearchFab();
-
     addUserLocations();
 
     // Add the symbol layer icon to map for future use
     Bitmap icon = BitmapFactory.decodeResource(
       PlacesPluginActivity.this.getResources(), R.drawable.blue_marker_view);
-    mapboxMap.addImage(SYMBOL_ICON_ID, icon);
+    mapboxMap.addImage(symbolIconId, icon);
 
     // Create an empty GeoJSON source using the empty feature collection
     setUpSource();
@@ -79,7 +77,7 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
     FloatingActionButton searchFab = findViewById(R.id.fab_location_search);
     searchFab.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onClick(View v) {
+      public void onClick(View view) {
         Intent intent = new PlaceAutocomplete.IntentBuilder()
           .accessToken(Mapbox.getAccessToken())
           .placeOptions(PlaceOptions.builder()
@@ -111,13 +109,13 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
   }
 
   private void setUpSource() {
-    GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_LAYER_ID);
+    GeoJsonSource geoJsonSource = new GeoJsonSource(geojsonSourceLayerId);
     mapboxMap.addSource(geoJsonSource);
   }
 
   private void setupLayer() {
-    SymbolLayer selectedLocationSymbolLayer = new SymbolLayer("SYMBOL_LAYER_ID", GEOJSON_SOURCE_LAYER_ID);
-    selectedLocationSymbolLayer.withProperties(PropertyFactory.iconImage(SYMBOL_ICON_ID));
+    SymbolLayer selectedLocationSymbolLayer = new SymbolLayer("SYMBOL_LAYER_ID", geojsonSourceLayerId);
+    selectedLocationSymbolLayer.withProperties(PropertyFactory.iconImage(symbolIconId));
     mapboxMap.addLayer(selectedLocationSymbolLayer);
   }
 
@@ -134,7 +132,7 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
         new Feature[] {Feature.fromJson(selectedCarmenFeature.toJson())});
 
       // Retrieve and update the source designated for showing a selected location's symbol layer icon
-      GeoJsonSource source = mapboxMap.getSourceAs(GEOJSON_SOURCE_LAYER_ID);
+      GeoJsonSource source = mapboxMap.getSourceAs(geojsonSourceLayerId);
       if (source != null) {
         source.setGeoJson(featureCollection);
       }
