@@ -75,5 +75,6 @@
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
     <string name="activity_labs_inset_map_title">Inset map</string>
     <string name="activity_labs_gif_on_map_title">Animated image source (GIF)</string>
+    <string name="activity_downloadable_font_title">Download and use Google fonts</string>
 
 </resources>
