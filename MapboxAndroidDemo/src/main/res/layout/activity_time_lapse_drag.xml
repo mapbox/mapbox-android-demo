@@ -9,14 +9,19 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="23.930052"
-        mapbox:mapbox_cameraTargetLng="81.522713"
-        mapbox:mapbox_cameraZoom="2.919193"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light" />
-        <!--mapbox:mapbox_uiDoubleTapGestures="false"
+        mapbox:mapbox_cameraTargetLat="14.519902"
+        mapbox:mapbox_cameraTargetLng="-14.752393"
+        mapbox:mapbox_cameraZoom="5.351457"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_light"
+        mapbox:mapbox_uiDoubleTapGestures="false"
         mapbox:mapbox_uiRotateGestures="false"
         mapbox:mapbox_uiScrollGestures="false"
         mapbox:mapbox_uiTiltGestures="false"
-        mapbox:mapbox_uiZoomGestures="false"-->
+        mapbox:mapbox_uiZoomGestures="false" />
+    <!--mapbox:mapbox_uiDoubleTapGestures="false"
+    mapbox:mapbox_uiRotateGestures="false"
+    mapbox:mapbox_uiScrollGestures="false"
+    mapbox:mapbox_uiTiltGestures="false"
+    mapbox:mapbox_uiZoomGestures="false"-->
 
 </LinearLayout>

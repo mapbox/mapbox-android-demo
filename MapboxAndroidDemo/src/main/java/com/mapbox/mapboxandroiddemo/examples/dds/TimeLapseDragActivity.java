@@ -12,7 +12,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.layers.FillLayer;
+import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.net.URL;
@@ -20,7 +20,7 @@ import java.net.URL;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 
-public class TimeLapseDragActivity extends AppCompatActivity implements MapboxMap.OnScrollListener {
+public class TimeLapseDragActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -28,8 +28,9 @@ public class TimeLapseDragActivity extends AppCompatActivity implements MapboxMa
   private static final String GEOJSON_SOURCE_ID = "GEOJSON_SOURCE_ID";
   private static final String GEOJSON_LAYER_ID = "GEOJSON_LAYER_ID";
   private GeoJsonSource geoJsonSource;
-  private FillLayer layer;
-
+  private LineLayer layer;
+  private float lastRawX;
+  private float currentRawX;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -44,34 +45,36 @@ public class TimeLapseDragActivity extends AppCompatActivity implements MapboxMa
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-        TimeLapseDragActivity.this.mapboxMap = mapboxMap;
-        addIndiaGeoJSONIndia();
+    mapView.getMapAsync(this);
+  }
 
-        // Create FillLayer with GeoJSON source and add the FillLayer to the map
-        layer = new FillLayer(GEOJSON_LAYER_ID, GEOJSON_SOURCE_ID);
-        layer.setProperties(fillOpacity(0.6f),
-          fillColor(Color.YELLOW));
-        mapboxMap.addLayer(layer);
-      }
-    });
-
+  @Override
+  public void onMapReady(final MapboxMap mapboxMap) {
+    TimeLapseDragActivity.this.mapboxMap = mapboxMap;
+    addSenegalGeojson();
+    // Create FillLayer with GeoJSON source and add the FillLayer to the map
+    layer = new LineLayer(GEOJSON_LAYER_ID, GEOJSON_SOURCE_ID);
+    layer.setProperties(fillOpacity(0.6f),
+      fillColor(Color.BLUE));
+    mapboxMap.addLayer(layer);
     mapView.setOnTouchListener(new View.OnTouchListener() {
       @Override
       public boolean onTouch(View v, MotionEvent event) {
-        Log.d(TAG, "onTouch: event.getRawX() = " + event.getRawX());
+        currentRawX = event.getRawX();
+        if (currentRawX > lastRawX) {
+
+          lastRawX = currentRawX;
+        }
 
         return false;
       }
     });
+
   }
 
-  private void addIndiaGeoJSONIndia() {
+  private void addSenegalGeojson() {
     try {
       // Load GeoJSONSource
-      geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID, new URL("https://energydata.info/dataset/a8349fec-8538-46a1-b20b-16ce080ce4c2/resource/a4bd8a79-0d73-4e24-b51c-879dc1629b62/download/senegalfinal.geojson"));
 
       // Add GeoJsonSource to map
       mapboxMap.addSource(geoJsonSource);
@@ -79,12 +82,6 @@ public class TimeLapseDragActivity extends AppCompatActivity implements MapboxMa
     } catch (Throwable throwable) {
       Log.e("ClickOnLayerActivity", "Couldn't add GeoJsonSource to map", throwable);
     }
-  }
-
-
-  @Override
-  public void onScroll() {
-    Log.d(TAG, "onScroll: ");
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
