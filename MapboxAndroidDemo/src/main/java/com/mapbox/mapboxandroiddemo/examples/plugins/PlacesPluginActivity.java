@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.mapbox.geocoding.v5.models.CarmenFeature;
@@ -22,6 +21,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.plugins.places.autocomplete.model.PlaceOptions;
+import com.mapbox.services.commons.geojson.Feature;
 
 public class PlacesPluginActivity extends AppCompatActivity {
 
@@ -78,14 +78,14 @@ public class PlacesPluginActivity extends AppCompatActivity {
 
   private void addUserLocations() {
     home = CarmenFeature.builder().text("Directions to Home")
-      .placeName("300 Massachusetts Ave NW")
-      .id("directions-home")
+      .placeName("740 15th St NW")
+      .id("Mapbox DC")
       .properties(new JsonObject())
       .build();
 
     work = CarmenFeature.builder().text("Directions to Work")
-      .placeName("1509 16th St NW")
-      .id("directions-work")
+      .placeName("85 2nd St")
+      .id("Mapbox SF")
       .properties(new JsonObject())
       .build();
   }
@@ -96,14 +96,29 @@ public class PlacesPluginActivity extends AppCompatActivity {
     super.onActivityResult(requestCode, resultCode, data);
     if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_AUTOCOMPLETE) {
       CarmenFeature feature = PlaceAutocomplete.getPlace(data);
-
       CameraPosition newCameraPosition = new CameraPosition.Builder()
-        .target(new LatLng(feature.geometry().coordinates(), feature.center().longitude()))
+        .target(new LatLng(getFeatureLat(feature), getFeatureLong(feature)))
         .build();
-
       mapboxMap.easeCamera(CameraUpdateFactory.newCameraPosition(newCameraPosition));
-
     }
+  }
+
+  private double getFeatureLat(CarmenFeature singleFeature) {
+    String[] coordinateValues = singleFeature.geometry()
+      .coordinates().toString().replace("Position [", "")
+      .replace(", altitude=NaN]", "").replace("longitude=", "")
+      .replace("]","")
+      .split(", ");
+    return Double.valueOf(coordinateValues[1].replace("latitude=", ""));
+  }
+
+  private double getFeatureLong(CarmenFeature singleFeature) {
+    String[] coordinateValues = singleFeature.geometry()
+      .coordinates().toString().replace("Position [", "")
+      .replace(", altitude=NaN]", "").replace("longitude=", "")
+      .replace("[","")
+      .split(", ");
+    return Double.valueOf(coordinateValues[0]);
   }
 
   @Override
