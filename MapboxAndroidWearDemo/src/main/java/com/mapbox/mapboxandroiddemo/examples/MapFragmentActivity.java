@@ -1,7 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples;
 
 import android.app.FragmentTransaction;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 
@@ -10,13 +9,10 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapFragment;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.android.telemetry.location.LocationEngine;
-import com.mapbox.services.android.telemetry.location.LocationEngineListener;
 
 /**
  * Include a map fragment within your app using Android support library.
