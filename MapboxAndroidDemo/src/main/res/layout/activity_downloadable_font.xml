@@ -17,7 +17,6 @@
         mapbox:mapbox_cameraTargetLng="-75.01515"
         mapbox:mapbox_cameraZoom="1.083637"
         mapbox:mapbox_cameraZoomMax="1.083637"
-        mapbox:mapbox_cameraZoomMin="1.083637"
         mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
