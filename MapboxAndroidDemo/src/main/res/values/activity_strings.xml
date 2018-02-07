@@ -211,6 +211,11 @@
     <string name="click_on_marker_instruction_toast">Click on a bolt marker to get started</string>
 
     <!-- Downloadable font -->
+    <string name="font_one">Font one</string>
+    <string name="font_two">Font two</string>
+    <string name="font_three">Font three</string>
+    <string name="font_four">Font four</string>
+    <string name="font_five">Font five</string>
     <string-array name="fonts_array">
         <item>DIN Offc Pro Black Italic</item>
         <item>Knewave Regular</item>
