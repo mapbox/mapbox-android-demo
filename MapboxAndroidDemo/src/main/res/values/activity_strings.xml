@@ -209,4 +209,15 @@
     <string name="call_error">Oh no! The call to the Directions Matrix API failed!</string>
     <string name="miles_distance">%1$s miles</string>
     <string name="click_on_marker_instruction_toast">Click on a bolt marker to get started</string>
+
+    <!-- Downloadable font -->
+    <string-array name="fonts_array">
+        <item>DIN Offc Pro Black Italic</item>
+        <item>Knewave Regular</item>
+        <item>Heebo ExtraBold</item>
+        <item>Sniglet Regular</item>
+        <item>Rubik Regular</item>
+        <item>Crimson Semibold</item>
+    </string-array>
+
 </resources>

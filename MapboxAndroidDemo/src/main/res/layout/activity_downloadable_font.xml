@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <Spinner
+        android:id="@+id/fonts_spinner"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content" />
 
     <!-- Set the starting camera position and map style using xml-->
     <com.mapbox.mapboxsdk.maps.MapView
@@ -13,10 +18,11 @@
         mapbox:layout_constraintEnd_toEndOf="parent"
         mapbox:layout_constraintStart_toStartOf="parent"
         mapbox:layout_constraintTop_toTopOf="parent"
-        mapbox:mapbox_cameraTargetLat="40.73581"
-        mapbox:mapbox_cameraTargetLng="-73.99155"
-        mapbox:mapbox_cameraZoom="11"
+        mapbox:mapbox_cameraTargetLat="-9.18996699"
+        mapbox:mapbox_cameraTargetLng="-75.01515"
+        mapbox:mapbox_cameraZoom="1"
+        mapbox:mapbox_cameraZoomMax="2"
         mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets" />
 
 
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>
