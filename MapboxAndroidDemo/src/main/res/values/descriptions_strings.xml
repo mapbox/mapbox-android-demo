@@ -24,6 +24,7 @@
     <string name="activity_styles_basic_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
     <string name="activity_styles_local_style_or_raster_source_description">Load a locally stored map style JSON file or custom raster style via a URL.</string>
     <string name="activity_style_image_source_description">Use an image source to easily display images on the map.</string>
+    <string name="activity_style_hillshade_description">Use elevation data to show and customize hills and mountains.</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_description">Use data-driven styling and GeoJSON data to set extrusions\' heights.</string>
     <string name="activity_extrusions_population_density_extrusions_description">Use extrusions to display 3D building height based on imported vector data.</string>
     <string name="activity_extrusions_adjust_extrusions_description">Change the location and color of the light shined on extrusions.</string>

@@ -25,6 +25,7 @@
     <string name="activity_styles_symbol_layer_url" translatable="false">http://i.imgur.com/TQ4iA0L.png</string>
     <string name="activity_styles_local_style_or_raster_source_url" translatable="false">http://i.imgur.com/9w9m3On.jpg</string>
     <string name="activity_style_image_source_url" translatable="false">http://i.imgur.com/ijoGPrF.png</string>
+    <string name="activity_style_hillshade_url" translatable="false">https://i.imgur.com/U2OKixV.png</string>
     <string name="activity_extrusions_population_density_extrusions_url" translatable="false">http://i.imgur.com/se1z8Wb.png</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_url" translatable="false">http://i.imgur.com/6j848JL.jpg</string>
     <string name="activity_extrusions_adjust_extrusions_url" translatable="false">http://i.imgur.com/XNTyIO5.png</string>

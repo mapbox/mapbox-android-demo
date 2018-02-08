@@ -8,10 +8,11 @@ ext {
     ]
 
     version = [
+
             // Mapbox
             mapboxMapSdk             : '6.0.0-beta.7',
             mapboxTurf               : '3.0.1',
-            mapboGeoJson             : '3.0.1',
+            mapboxGeoJson            : '3.0.1',
             mapboxPluginBuilding     : '0.2.0-SNAPSHOT',
             mapboxPluginLocationLayer: '0.5.0-beta.2',
             mapboxPluginMarkerCluster: '0.1.0',
@@ -51,7 +52,7 @@ ext {
             // Mapbox
             mapboxMapSdk             : "com.mapbox.mapboxsdk:mapbox-android-sdk:${version.mapboxMapSdk}",
             mapboxTurf               : "com.mapbox.mapboxsdk:mapbox-sdk-turf:${version.mapboxTurf}",
-            mapboGeoJson             : "com.mapbox.mapboxsdk:mapbox-sdk-geojson:${version.mapboGeoJson}",
+            mapboxGeoJson            : "com.mapbox.mapboxsdk:mapbox-sdk-geojson:${version.mapboxGeoJson}",
 
             // Mapbox plugins
             mapboxPluginLocationLayer: "com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:${version.mapboxPluginLocationLayer}",
