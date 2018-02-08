@@ -4,8 +4,15 @@ apply plugin: 'com.google.firebase.firebase-perf'
 
 
 android {
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     compileSdkVersion androidVersions.compileSdkVersion
     buildToolsVersion androidVersions.buildToolsVersion
+
 
     defaultConfig {
         applicationId "com.mapbox.mapboxandroiddemo"
@@ -85,9 +92,17 @@ dependencies {
     implementation dependenciesList.supportV4
     implementation dependenciesList.supportConstraintLayout
 
-
     // Mapbox dependencies
-    api (dependenciesList.mapboxMapSdk)
+    //api (dependenciesList.mapboxMapSdk)
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //implementation 'com.android.support:appcompat-v7:25.4.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:6.0.0-beta.1@aar'
+    implementation "com.mapbox.mapboxsdk:mapbox-android-telemetry:2.2.9@aar"
+    implementation "com.mapbox.mapboxsdk:mapbox-java-geojson:2.2.9@jar"
+    implementation "com.mapbox.mapboxsdk:mapbox-java-core:2.2.9@jar"
+    implementation "com.squareup.okhttp3:okhttp:3.9.1"
+    implementation "com.google.code.gson:gson:2.8.0"
+    implementation "com.jakewharton.timber:timber:4.5.1"
 
     // Mapbox plugins
     implementation dependenciesList.mapboxPluginLocationLayer

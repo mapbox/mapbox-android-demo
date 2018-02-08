@@ -46,6 +46,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.MathExpressionActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
@@ -676,6 +677,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_multiple_geometries_description,
           new Intent(MainActivity.this, MultipleGeometriesActivity.class),
           R.string.activity_dds_multiple_geometries_url, false, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+                R.string.activity_dds_math_expression_title,
+                R.string.activity_dds_math_expression_description,
+                new Intent(MainActivity.this, MathExpressionActivity.class),
+                R.string.activity_styles_symbol_layer_url, false, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_dds;
         break;
