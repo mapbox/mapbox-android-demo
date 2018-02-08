@@ -135,7 +135,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     setContentView(R.layout.activity_main);
 
     toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
+
+    if (savedInstanceState == null) {
+      setSupportActionBar(toolbar);
+    }
 
     analytics = AnalyticsTracker.getInstance(this, false);
 
