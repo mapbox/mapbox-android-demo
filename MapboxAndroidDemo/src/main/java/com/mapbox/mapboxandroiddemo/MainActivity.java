@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private Switch analyticsOptOutSwitch;
   private boolean loggedIn;
   private Toolbar toolbar;
-
+  private String categoryTitleForToolbar;
   private AnalyticsTracker analytics;
 
   @Override
@@ -135,7 +135,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     setContentView(R.layout.activity_main);
 
     toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
+
+    if (savedInstanceState == null) {
+      setSupportActionBar(toolbar);
+    }
 
     analytics = AnalyticsTracker.getInstance(this, false);
 
@@ -152,6 +155,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     if (savedInstanceState != null) {
       currentCategory = savedInstanceState.getInt("CURRENT_CATEGORY");
+      categoryTitleForToolbar = savedInstanceState.getString("CURRENT_CATEGORY_TOOLBAR_TITLE");
+      toolbar.setTitle(categoryTitleForToolbar);
       listItems(currentCategory);
     } else if (getIntent().getIntExtra(EXTRA_NAV, -1) == R.id.nav_snapshot_image_generator) {
       currentCategory = R.id.nav_snapshot_image_generator;
@@ -236,7 +241,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     if (id != currentCategory && id != R.id.settings_in_nav_drawer) {
       listItems(id);
-      toolbar.setTitle(item.getTitle());
+      categoryTitleForToolbar = item.getTitle().toString();
+      toolbar.setTitle(categoryTitleForToolbar);
       analytics.clickedOnNavDrawerSection(
         item.getTitle().toString(), loggedIn);
     }
@@ -768,6 +774,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     outState.putInt("CURRENT_CATEGORY", currentCategory);
+    outState.putString("CURRENT_CATEGORY_TOOLBAR_TITLE", categoryTitleForToolbar);
   }
 
   private void checkForFirstTimeOpen() {
