@@ -65,6 +65,7 @@ import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.GeoJsonPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerClustersPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
@@ -404,17 +405,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_plugins_location_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_plugins_geojson_plugin_title,
-          R.string.activity_plugins_geojson_plugin_description,
+          R.string.activity_plugins_geojson_plugin_title, R.string.activity_plugins_geojson_plugin_description,
           new Intent(MainActivity.this, GeoJsonPluginActivity.class),
-          R.string.activity_plugins_geojson_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
-        );
+          R.string.activity_plugins_geojson_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_plugins_places_plugin_title, R.string.activity_plugins_places_plugin_description,
+          new Intent(MainActivity.this, PlacesPluginActivity.class),
+          R.string.activity_plugins_places_plugin_url, true, BuildConfig.MIN_SDK_VERSION));
+
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_plugins_marker_clusters_plugin_title,
           R.string.activity_plugins_geojson_marker_clusters_description,
           new Intent(MainActivity.this, MarkerClustersPluginActivity.class),
-          R.string.activity_plugins_markers_clusters_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
-        );
+          R.string.activity_plugins_markers_clusters_plugin_url, true, BuildConfig.MIN_SDK_VERSION));
+
         currentCategory = R.id.nav_plugins;
         break;
 
@@ -717,7 +722,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   }
 
   private void verifySdkVersion() {
-    for (Iterator<ExampleItemModel> iterator = exampleItemModels.iterator(); iterator.hasNext();) {
+    for (Iterator<ExampleItemModel> iterator = exampleItemModels.iterator(); iterator.hasNext(); ) {
       ExampleItemModel model = iterator.next();
       if (model != null && Build.VERSION.SDK_INT < model.getMinSdkVersion()) {
         iterator.remove();

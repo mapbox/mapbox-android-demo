@@ -95,6 +95,7 @@ dependencies {
     implementation dependenciesList.mapboxPluginTraffic
     implementation dependenciesList.mapboxPluginGeoJson
     implementation dependenciesList.mapboxPluginMarkerCluster
+    implementation dependenciesList.mapboxPluginPlaces
 
     // Firebase
     implementation dependenciesList.firebaseCrash
