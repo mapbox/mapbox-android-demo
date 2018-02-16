@@ -147,26 +147,6 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
     }
   }
 
-  // Extracts latitude from single GeoJSON Feature
-  private double getFeatureLat(CarmenFeature singleFeature) {
-    String[] coordinateValues = singleFeature.geometry()
-        .coordinates().toString().replace("Position [", "")
-        .replace(", altitude=NaN]", "").replace("longitude=", "")
-        .replace("]", "")
-        .split(", ");
-    return Double.valueOf(coordinateValues[1].replace("latitude=", ""));
-  }
-
-  // Extracts longitude from single GeoJSON Feature
-  private double getFeatureLong(CarmenFeature singleFeature) {
-    String[] coordinateValues = singleFeature.geometry()
-        .coordinates().toString().replace("Position [", "")
-        .replace(", altitude=NaN]", "").replace("longitude=", "")
-        .replace("[", "")
-        .split(", ");
-    return Double.valueOf(coordinateValues[0]);
-  }
-
   // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
