@@ -125,6 +125,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.plugins.PlacesPluginActivity"
+            android:label="@string/activity_plugins_places_plugin_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
             android:name=".examples.plugins.LocationPluginActivity"
             android:label="@string/activity_plugins_location_plugin_title">
             <meta-data
@@ -166,20 +173,6 @@
         <activity
             android:name=".labs.AnimatedImageSourceActivity"
             android:label="@string/activity_labs_gif_on_map_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
-        </activity>
-        <activity
-            android:name=".examples.annotations.CustomInfoWindowActivity"
-            android:label="@string/activity_annotation_custom_info_window_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
-        </activity>
-        <activity
-            android:name=".examples.annotations.BasicMarkerViewActivity"
-            android:label="@string/activity_annotation_marker_view_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />

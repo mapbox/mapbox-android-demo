@@ -35,10 +35,11 @@ import static com.mapbox.services.Constants.PRECISION_6;
 /**
  * Use Mapbox Android Services to request and compare normal directions with time optimized directions.
  */
-public class OptimizationActivity extends AppCompatActivity {
+public class OptimizationActivity extends AppCompatActivity implements OnMapReadyCallback,
+  MapboxMap.OnMapClickListener, MapboxMap.OnMapLongClickListener {
 
   private MapView mapView;
-  private MapboxMap map;
+  private MapboxMap mapboxMap;
   private DirectionsRoute optimizedRoute;
   private MapboxOptimizedTrips optimizedClient;
   private Polyline optimizedPolyline;
@@ -67,43 +68,40 @@ public class OptimizationActivity extends AppCompatActivity {
     addFirstStopToStopsList();
 
     // Setup the MapView
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-        map = mapboxMap;
+    mapView.getMapAsync(this);
+  }
 
-        // Add origin and destination to the map
-        mapboxMap.addMarker(new MarkerOptions()
-          .position(new LatLng(origin.getLatitude(), origin.getLongitude()))
-          .title(getString(R.string.origin)));
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    this.mapboxMap = mapboxMap;
+    // Add origin and destination to the mapboxMap
+    mapboxMap.addMarker(new MarkerOptions()
+      .position(new LatLng(origin.getLatitude(), origin.getLongitude()))
+      .title(getString(R.string.origin)));
+    Toast.makeText(OptimizationActivity.this, R.string.click_instructions, Toast.LENGTH_SHORT).show();
+    mapboxMap.addOnMapClickListener(this);
+    mapboxMap.addOnMapLongClickListener(this);
+  }
 
-        map.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
-          @Override
-          public void onMapClick(@NonNull LatLng point) {
-            // Optimization API is limited to 12 coordinate sets
-            if (alreadyTwelveMarkersOnMap()) {
-              Toast.makeText(OptimizationActivity.this, R.string.only_twelve_stops_allowed, Toast.LENGTH_LONG).show();
-            } else {
-              addDestinationMarker(point);
-              addPointToStopsList(point);
-              getOptimizedRoute(stops);
-            }
-          }
-        });
-        Toast.makeText(OptimizationActivity.this, R.string.click_instructions, Toast.LENGTH_SHORT).show();
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
+    // Optimization API is limited to 12 coordinate sets
+    if (alreadyTwelveMarkersOnMap()) {
+      Toast.makeText(OptimizationActivity.this, R.string.only_twelve_stops_allowed, Toast.LENGTH_LONG).show();
+    } else {
+      addDestinationMarker(point);
+      addPointToStopsList(point);
+      getOptimizedRoute(stops);
+    }
+  }
 
-        map.setOnMapLongClickListener(new MapboxMap.OnMapLongClickListener() {
-          @Override
-          public void onMapLongClick(@NonNull LatLng point) {
-            map.clear();
-            stops.clear();
-            addFirstStopToStopsList();
-          }
-        });
-      }
-    });
+  @Override
+  public void onMapLongClick(@NonNull LatLng point) {
+    mapboxMap.clear();
+    stops.clear();
+    addFirstStopToStopsList();
   }
 
   private boolean alreadyTwelveMarkersOnMap() {
@@ -115,7 +113,7 @@ public class OptimizationActivity extends AppCompatActivity {
   }
 
   private void addDestinationMarker(LatLng point) {
-    map.addMarker(new MarkerOptions()
+    mapboxMap.addMarker(new MarkerOptions()
       .position(new LatLng(point.getLatitude(), point.getLongitude()))
       .title(getString(R.string.destination)));
   }
@@ -172,11 +170,11 @@ public class OptimizationActivity extends AppCompatActivity {
   private void drawOptimizedRoute(DirectionsRoute route) {
     // Remove old polyline
     if (optimizedPolyline != null) {
-      map.removePolyline(optimizedPolyline);
+      mapboxMap.removePolyline(optimizedPolyline);
     }
     // Draw points on MapView
     LatLng[] pointsToDraw = convertLineStringToLatLng(route);
-    optimizedPolyline = map.addPolyline(new PolylineOptions()
+    optimizedPolyline = mapboxMap.addPolyline(new PolylineOptions()
       .add(pointsToDraw)
       .color(Color.parseColor(TEAL_COLOR))
       .width(POLYLINE_WIDTH));
@@ -231,6 +229,9 @@ public class OptimizationActivity extends AppCompatActivity {
     // Cancel the directions API request
     if (optimizedClient != null) {
       optimizedClient.cancelCall();
+    }
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
     }
     mapView.onDestroy();
   }

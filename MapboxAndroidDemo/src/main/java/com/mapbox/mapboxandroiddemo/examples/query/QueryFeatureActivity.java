@@ -22,10 +22,12 @@ import java.util.Map;
 /**
  * Display map property information for a clicked map feature
  */
-public class QueryFeatureActivity extends AppCompatActivity {
+public class QueryFeatureActivity extends AppCompatActivity implements OnMapReadyCallback,
+  MapboxMap.OnMapClickListener {
 
   private MapView mapView;
   private Marker featureMarker;
+  private MapboxMap mapboxMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -38,61 +40,58 @@ public class QueryFeatureActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_query_feature);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+    mapView.getMapAsync(this);
+  }
 
-        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
-          @Override
-          public void onMapClick(@NonNull LatLng point) {
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    QueryFeatureActivity.this.mapboxMap = mapboxMap;
+    mapboxMap.addOnMapClickListener(this);
+  }
 
-            if (featureMarker != null) {
-              mapboxMap.removeMarker(featureMarker);
-            }
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
+    if (featureMarker != null) {
+      mapboxMap.removeMarker(featureMarker);
+    }
 
-            final PointF pixel = mapboxMap.getProjection().toScreenLocation(point);
-            List<Feature> features = mapboxMap.queryRenderedFeatures(pixel);
+    final PointF pixel = mapboxMap.getProjection().toScreenLocation(point);
+    List<Feature> features = mapboxMap.queryRenderedFeatures(pixel);
 
-            if (features.size() > 0) {
-              Feature feature = features.get(0);
+    if (features.size() > 0) {
+      Feature feature = features.get(0);
 
-              String property;
+      String property;
 
-              StringBuilder stringBuilder = new StringBuilder();
-              if (feature.getProperties() != null) {
-                for (Map.Entry<String, JsonElement> entry : feature.getProperties().entrySet()) {
-                  stringBuilder.append(String.format("%s - %s", entry.getKey(), entry.getValue()));
-                  stringBuilder.append(System.getProperty("line.separator"));
-                }
+      StringBuilder stringBuilder = new StringBuilder();
+      if (feature.getProperties() != null) {
+        for (Map.Entry<String, JsonElement> entry : feature.getProperties().entrySet()) {
+          stringBuilder.append(String.format("%s - %s", entry.getKey(), entry.getValue()));
+          stringBuilder.append(System.getProperty("line.separator"));
+        }
 
-                featureMarker = mapboxMap.addMarker(new MarkerOptions()
-                  .position(point)
-                  .title(getString(R.string.query_feature_marker_title))
-                  .snippet(stringBuilder.toString())
-                );
+        featureMarker = mapboxMap.addMarker(new MarkerOptions()
+          .position(point)
+          .title(getString(R.string.query_feature_marker_title))
+          .snippet(stringBuilder.toString())
+        );
 
-              } else {
-                property = getString(R.string.query_feature_marker_snippet);
-                featureMarker = mapboxMap.addMarker(new MarkerOptions()
-                  .position(point)
-                  .snippet(property)
-                );
-              }
-            } else {
-              featureMarker = mapboxMap.addMarker(new MarkerOptions()
-                .position(point)
-                .snippet(getString(R.string.query_feature_marker_snippet))
-              );
-            }
-
-            mapboxMap.selectMarker(featureMarker);
-
-          }
-        });
+      } else {
+        property = getString(R.string.query_feature_marker_snippet);
+        featureMarker = mapboxMap.addMarker(new MarkerOptions()
+          .position(point)
+          .snippet(property)
+        );
       }
-    });
+    } else {
+      featureMarker = mapboxMap.addMarker(new MarkerOptions()
+        .position(point)
+        .snippet(getString(R.string.query_feature_marker_snippet))
+      );
+    }
+    mapboxMap.selectMarker(featureMarker);
   }
 
   @Override
@@ -128,6 +127,9 @@ public class QueryFeatureActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 
