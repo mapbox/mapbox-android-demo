@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -14,8 +16,6 @@ import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.Source;
-import com.mapbox.services.commons.geojson.Feature;
-import com.mapbox.services.commons.geojson.FeatureCollection;
 import com.mapbox.services.commons.geojson.LineString;
 import com.mapbox.services.commons.models.Position;
 
@@ -42,7 +42,7 @@ public class LineLayerActivity extends AppCompatActivity {
     setContentView(R.layout.activity_style_line_layer);
 
     // Create a list to store our line coordinates.
-    routeCoordinates = new ArrayList<Position>();
+    routeCoordinates = new ArrayList<>();
     routeCoordinates.add(Position.fromCoordinates(-118.39439114221236, 33.397676454651766));
     routeCoordinates.add(Position.fromCoordinates(-118.39421054012902, 33.39769799454838));
     routeCoordinates.add(Position.fromCoordinates(-118.39408583869053, 33.39761901490136));
@@ -101,7 +101,7 @@ public class LineLayerActivity extends AppCompatActivity {
     routeCoordinates.add(Position.fromCoordinates(-118.37546662390886, 33.38847843095069));
     routeCoordinates.add(Position.fromCoordinates(-118.37091717142867, 33.39114243958559));
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -111,8 +111,7 @@ public class LineLayerActivity extends AppCompatActivity {
         // FeatureCollection so we can add the line to our map as a layer.
         LineString lineString = LineString.fromCoordinates(routeCoordinates);
 
-        FeatureCollection featureCollection =
-          FeatureCollection.fromFeatures(new Feature[]{Feature.fromGeometry(lineString)});
+        FeatureCollection featureCollection = FeatureCollection.fromFeatures(new Feature[]{Feature.fromGeometry(lineString)});
 
         Source geoJsonSource = new GeoJsonSource("line-source", featureCollection);
 
@@ -129,9 +128,7 @@ public class LineLayerActivity extends AppCompatActivity {
           PropertyFactory.lineWidth(5f),
           PropertyFactory.lineColor(Color.parseColor("#e55e5e"))
         );
-
         mapboxMap.addLayer(lineLayer);
-
       }
     });
   }

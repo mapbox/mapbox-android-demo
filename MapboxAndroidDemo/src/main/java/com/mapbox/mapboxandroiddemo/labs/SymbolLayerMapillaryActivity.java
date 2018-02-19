@@ -35,6 +35,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -53,8 +55,6 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.Source;
 import com.mapbox.mapboxsdk.style.sources.TileSet;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
-import com.mapbox.services.commons.geojson.Feature;
-import com.mapbox.services.commons.geojson.FeatureCollection;
 import com.mapbox.services.commons.geojson.Geometry;
 import com.mapbox.services.commons.geojson.Point;
 import com.mapbox.services.commons.geojson.custom.GeometryDeserializer;
@@ -375,7 +375,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       Toast.makeText(this, callout, Toast.LENGTH_LONG).show();
     } else {
       // user clicked on icon
-      List<Feature> featureList = featureCollection.getFeatures();
+      List<Feature> featureList = featureCollection.features();
       for (int i = 0; i < featureList.size(); i++) {
         if (featureList.get(i).getStringProperty(PROPERTY_TITLE).equals(feature.getStringProperty(PROPERTY_TITLE))) {
           toggleFavourite(i);
@@ -396,7 +396,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, MAKI_LAYER_ID);
     if (!features.isEmpty()) {
       String title = features.get(0).getStringProperty(PROPERTY_TITLE);
-      List<Feature> featureList = featureCollection.getFeatures();
+      List<Feature> featureList = featureCollection.features();
       for (int i = 0; i < featureList.size(); i++) {
         if (featureList.get(i).getStringProperty(PROPERTY_TITLE).equals(title)) {
           setSelected(i, true);
@@ -418,7 +418,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
 
     deselectAll(false);
 
-    Feature feature = featureCollection.getFeatures().get(index);
+    Feature feature = featureCollection.features().get(index);
     selectFeature(feature);
     animateCameraToSelection(feature);
     refreshSource();
@@ -433,8 +433,8 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    * Deselects the state of all the features
    */
   private void deselectAll(boolean hideRecycler) {
-    for (Feature feature : featureCollection.getFeatures()) {
-      feature.getProperties().addProperty(PROPERTY_SELECTED, false);
+    for (Feature feature : featureCollection.features()) {
+      feature.properties().addProperty(PROPERTY_SELECTED, false);
     }
 
     if (hideRecycler) {
@@ -448,12 +448,12 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    * @param feature the feature to be selected.
    */
   private void selectFeature(Feature feature) {
-    feature.getProperties().addProperty(PROPERTY_SELECTED, true);
+    feature.properties().addProperty(PROPERTY_SELECTED, true);
   }
 
   private Feature getSelectedFeature() {
     if (featureCollection != null) {
-      for (Feature feature : featureCollection.getFeatures()) {
+      for (Feature feature : featureCollection.features()) {
         if (feature.getBooleanProperty(PROPERTY_SELECTED)) {
           return feature;
         }
@@ -506,10 +506,10 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    * @param index the index of the feature to favourite/de-favourite
    */
   private void toggleFavourite(int index) {
-    Feature feature = featureCollection.getFeatures().get(index);
+    Feature feature = featureCollection.features().get(index);
     String title = feature.getStringProperty(PROPERTY_TITLE);
     boolean currentState = feature.getBooleanProperty(PROPERTY_FAVOURITE);
-    feature.getProperties().addProperty(PROPERTY_FAVOURITE, !currentState);
+    feature.properties().addProperty(PROPERTY_FAVOURITE, !currentState);
     View view = viewMap.get(title);
 
     ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
@@ -603,7 +603,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   }
 
   private LatLng convertToLatLng(Feature feature) {
-    Point symbolPoint = (Point) feature.getGeometry();
+    Point symbolPoint = (Point) feature.geometry();
     Position position = symbolPoint.getCoordinates();
     return new LatLng(position.getLatitude(), position.getLongitude());
   }
@@ -762,7 +762,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         LayoutInflater inflater = LayoutInflater.from(activity);
         FeatureCollection featureCollection = params[0];
 
-        for (Feature feature : featureCollection.getFeatures()) {
+        for (Feature feature : featureCollection.features()) {
           View view = inflater.inflate(R.layout.layout_callout, null);
 
           String name = feature.getStringProperty(PROPERTY_TITLE);
@@ -851,7 +851,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       }
       OkHttpClient okHttpClient = new OkHttpClient();
       try {
-        Position poiPosition = (Position) feature.getGeometry().getCoordinates();
+        Position poiPosition = (Position) feature.geometry().coordinates();
 
         @SuppressLint("DefaultLocale") Request request = new Request.Builder()
           .url(String.format(API_URL,
@@ -864,7 +864,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         Response response = okHttpClient.newCall(request).execute();
         FeatureCollection featureCollection = FeatureCollection.fromJson(response.body().string());
         MapillaryDataLoadResult mapillaryDataLoadResult = new MapillaryDataLoadResult(featureCollection);
-        for (Feature feature : featureCollection.getFeatures()) {
+        for (Feature feature : featureCollection.features()) {
           String imageId = feature.getStringProperty(KEY_UNIQUE_FEATURE);
           String imageUrl = String.format(URL_IMAGE_PLACEHOLDER, imageId);
           Bitmap bitmap = picasso.load(imageUrl).resize(IMAGE_SIZE, IMAGE_SIZE).get();
@@ -1126,7 +1126,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
 
     LocationRecyclerViewAdapter(SymbolLayerMapillaryActivity activity, FeatureCollection featureCollection) {
       this.activity = activity;
-      this.featureCollection = featureCollection.getFeatures();
+      this.featureCollection = featureCollection.features();
     }
 
     @Override
