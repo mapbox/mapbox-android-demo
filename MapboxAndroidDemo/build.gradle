@@ -70,6 +70,17 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://mapbox.bintray.com/mapbox_private"
+        credentials {
+            username project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+            password project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+        }
+    }
+}
+
+
 dependencies {
 
     // Wearable application module
@@ -85,9 +96,12 @@ dependencies {
     implementation dependenciesList.supportV4
     implementation dependenciesList.supportConstraintLayout
 
-
     // Mapbox dependencies
     api (dependenciesList.mapboxMapSdk)
+
+    // Mapbox Android internal libraries
+    implementation dependenciesList.mapboxAuth
+    implementation dependenciesList.mapboxAnalytics
 
     // Mapbox plugins
     implementation dependenciesList.mapboxPluginLocationLayer
@@ -113,6 +127,7 @@ dependencies {
     // Square crew
     implementation dependenciesList.timber
     implementation dependenciesList.okhttp3
+    implementation dependenciesList.okhttp3Downloader
     implementation dependenciesList.picasso
     implementation dependenciesList.retrofit
     implementation dependenciesList.retrofitGsonConverter

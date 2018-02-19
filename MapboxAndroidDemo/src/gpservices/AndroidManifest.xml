@@ -383,7 +383,7 @@
         </activity>
 
         <activity
-            android:name=".account.LandingActivity"
+            android:name=".account.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

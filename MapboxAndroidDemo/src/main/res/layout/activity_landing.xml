@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mapboxWhite"
-    tools:context="com.mapbox.mapboxandroiddemo.account.LandingActivity"
+    tools:context="com.mapbox.mapboxandroiddemo.account.LoginActivity"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="81dp">
 

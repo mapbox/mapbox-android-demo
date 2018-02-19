@@ -16,12 +16,6 @@ android {
 
 dependencies {
     implementation dependenciesList.supportAnnotations
-    implementation dependenciesList.segmentAnalytics
-
-    // Mapbox Android internal libraries
-    implementation dependenciesList.mapboxAuth
-    implementation dependenciesList.mapboxAnalytics
-
 }
 
 apply from: './gradle-config.gradle'

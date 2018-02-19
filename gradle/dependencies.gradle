@@ -11,9 +11,10 @@ ext {
     versionName = "5.0.0"
 
     version = [
-            // mapbox
+            // Mapbox Maps SDK
             mapboxMapSdk       : '5.4.1',
 
+            // Mapbox plugins
             mapboxPluginBuilding      : '0.1.0',
             mapboxPluginGeoJson       : '0.1.0',
             mapboxPluginLocationLayer : '0.3.0',
@@ -21,6 +22,7 @@ ext {
             mapboxPluginMarkerCluster : '0.1.0',
             mapboxPluginPlaces : '0.1.0',
 
+            // Mapbox internal libraries
             mapboxAuth : '0.1.0',
             mapboxAnalytics : '0.1.0',
 
@@ -28,18 +30,20 @@ ext {
             supportLib         : '26.1.0',
             constraintLayout   : '1.0.2',
 
+            // Firebase
             firebase        : '11.0.4',
 
             // Square
             leakCanary         : '1.5.4',
             timber             : '4.5.1',
-            okthttp3           : '3.8.1',
+
+            okthttp3           : '2.6.0-SNAPSHOT',
+            okthttp3downloader : '1.1.0',
             picasso            : '2.5.2',
             retrofit           : '2.2.0',
 
-            //other
+            // Other
             gson               :  '2.8',
-            segmentAnalytics   :  '2.0.0'
     ]
 
     wearVersion = [
@@ -54,9 +58,11 @@ ext {
     ]
 
     dependenciesList = [
-            // mapbox
+
+            // Mapbox Maps SDK
             mapboxMapSdk     : "com.mapbox.mapboxsdk:mapbox-android-sdk:${version.mapboxMapSdk}",
 
+            // Mapbox Plugins
             mapboxPluginLocationLayer : "com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:${version.mapboxPluginLocationLayer}",
             mapboxPluginBuilding      : "com.mapbox.mapboxsdk:mapbox-android-plugin-building:${version.mapboxPluginBuilding}",
             mapboxPluginTraffic       : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:${version.mapboxPluginTraffic}",
@@ -64,12 +70,11 @@ ext {
             mapboxPluginMarkerCluster : "com.mapbox.mapboxsdk:mapbox-android-plugin-cluster-utils:${version.mapboxPluginMarkerCluster}",
             mapboxPluginPlaces 		  : "com.mapbox.mapboxsdk:mapbox-android-plugin-places:${version.mapboxPluginPlaces}",
 
-            // mapbox internal
-            
+            // Mapbox internal libraries
             mapboxAuth              : "com.mapbox.mapboxsdk:mapbox-android-auth:${version.mapboxAuth}",
             mapboxAnalytics         : "com.mapbox.mapboxsdk:mapbox-android-analytics:${version.mapboxAnalytics}",                
 
-            // support
+            // Google support libraries
             supportV4              : "com.android.support:support-v4:${version.supportLib}",
             supportAppcompatV7     : "com.android.support:appcompat-v7:${version.supportLib}",
             supportDesign          : "com.android.support:design:${version.supportLib}",
@@ -80,22 +85,22 @@ ext {
             supportConstraintLayout: "com.android.support.constraint:constraint-layout:${version.constraintLayout}",
             supportAnnotations      : "com.android.support:support-annotations:${version.supportLib}",
 
-            // square crew
+            // Square libraries
             timber                 : "com.jakewharton.timber:timber:${version.timber}",
             okhttp3                : "com.squareup.okhttp3:okhttp:${version.okthttp3}",
+            okhttp3Downloader      : "com.jakewharton.picasso:picasso2-okhttp3-downloader:${version.okthttp3downloader}",
             picasso                : "com.squareup.picasso:picasso:${version.picasso}",
             retrofit               : "com.squareup.retrofit2:retrofit:${version.retrofit}",
             retrofitGsonConverter  : "com.squareup.retrofit2:converter-gson:${version.retrofit}",
             leakCanaryDebug        : "com.squareup.leakcanary:leakcanary-android:${version.leakCanary}",
             leakCanaryRelease      : "com.squareup.leakcanary:leakcanary-android-no-op:${version.leakCanary}",
 
-            // firebase
+            // Firebase
             firebaseCrash   :  "com.google.firebase:firebase-crash:${version.firebase}",
             firebasePerf    :  "com.google.firebase:firebase-perf:${version.firebase}",
 
             // Other
             gson             :   "com.google.code.gson:gson:${version.gson}",
-            segmentAnalytics :   "com.segment.analytics.java:analytics:${version.segmentAnalytics}"
     ]
 
     pluginDependencies = [

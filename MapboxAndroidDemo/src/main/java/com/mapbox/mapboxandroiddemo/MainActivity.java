@@ -27,8 +27,8 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.google.firebase.perf.metrics.AddTrace;
+import com.mapbox.android.analytics.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
-import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivity;
@@ -65,8 +65,8 @@ import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.GeoJsonPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerClustersPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
@@ -106,12 +106,6 @@ import com.mapbox.mapboxandroiddemo.utils.SettingsDialogView;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_INFO_DIALOG_NOT_NOW;
-import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_INFO_DIALOG_START_LEARNING;
-import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_INFO_MENU_ITEM;
-import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_SETTINGS_IN_NAV_DRAWER;
-import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.OPENED_APP;
-import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.SKIPPED_ACCOUNT_CREATION;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.SKIPPED_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
 
@@ -129,26 +123,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private String categoryTitleForToolbar;
   private AnalyticsTracker analytics;
 
+  public static final String CLICKED_ON_INFO_MENU_ITEM = "Clicked on info menu item";
+  public static final String CLICKED_ON_INFO_DIALOG_START_LEARNING = "Clicked on info dialog start learning button";
+  public static final String CLICKED_ON_INFO_DIALOG_NOT_NOW = "Clicked on info dialog not now button";
+  public static final String CLICKED_ON_SETTINGS_IN_NAV_DRAWER = "Clicked on settings in nav drawer";
+  public static final String SKIPPED_ACCOUNT_CREATION = "Skipped account creation/login";
+  public static final String OPENED_APP = "Opened app";
+
   @Override
   @AddTrace(name = "onCreateMainActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    toolbar = (Toolbar) findViewById(R.id.toolbar);
+    toolbar = findViewById(R.id.toolbar);
 
     if (savedInstanceState == null) {
       setSupportActionBar(toolbar);
     }
 
-    analytics = AnalyticsTracker.getInstance(this, false);
+    analytics = AnalyticsTracker.getInstance(this);
 
     exampleItemModels = new ArrayList<>();
 
     // Create the adapter to convert the array to views
     adapter = new ExampleAdapter(this, exampleItemModels);
     // Attach the adapter to a ListView
-    recyclerView = (RecyclerView) findViewById(R.id.details_list);
+    recyclerView = findViewById(R.id.details_list);
     if (recyclerView != null) {
       recyclerView.setHasFixedSize(true);
       recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -179,13 +180,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         startActivity(exampleItemModels.get(position).getActivity());
 
-        analytics.clickedOnIndividualExample(getString(exampleItemModels.get(position).getTitle()), loggedIn);
+        analytics.trackEvent("Selected " +
+          getString(exampleItemModels.get(position).getTitle()) + " example", loggedIn);
         analytics.viewedScreen(getString(exampleItemModels.get(position)
           .getTitle()), loggedIn);
       }
     });
 
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
       this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
     if (drawer != null) {
@@ -193,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     toggle.syncState();
 
-    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+    NavigationView navigationView = findViewById(R.id.nav_view);
     if (navigationView != null) {
       navigationView.setNavigationItemSelectedListener(this);
       navigationView.setCheckedItem(R.id.nav_basics);
@@ -217,7 +219,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
   @Override
   public void onBackPressed() {
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
     if (drawer != null) {
       if (drawer.isDrawerOpen(GravityCompat.START)) {
         drawer.closeDrawer(GravityCompat.START);
@@ -244,10 +246,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       listItems(id);
       categoryTitleForToolbar = item.getTitle().toString();
       toolbar.setTitle(categoryTitleForToolbar);
-      analytics.clickedOnNavDrawerSection(
-        item.getTitle().toString(), loggedIn);
+      analytics.trackEvent("Selected " + item.getTitle().toString() + " nav drawer section", loggedIn);
     }
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+    DrawerLayout drawer = findViewById(R.id.drawer_layout);
     if (drawer != null) {
       drawer.closeDrawer(GravityCompat.START);
     }
@@ -785,7 +786,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private void checkForFirstTimeOpen() {
     FirstTimeRunChecker firstTimeRunChecker = new FirstTimeRunChecker(this);
     if (firstTimeRunChecker.firstEverOpen()) {
-      analytics.openedAppForFirstTime(getResources().getBoolean(R.bool.isTablet), loggedIn);
+      analytics.openedAppForFirstTime(this, getResources().getBoolean(R.bool.isTablet), loggedIn);
     }
     firstTimeRunChecker.updateSharedPrefWithCurrentVersion();
   }
@@ -795,14 +796,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     final View customView = inflater.inflate(R.layout.settings_dialog_layout, null);
     analyticsOptOutSwitch = (Switch) customView.findViewById(R.id.analytics_opt_out_switch);
-    analyticsOptOutSwitch.setChecked(!analytics.isAnalyticsEnabled());
+    analyticsOptOutSwitch.setChecked(!analytics.analyticsIsEnabled());
 
-    final SettingsDialogView dialogView = new SettingsDialogView(customView,
-      this, analyticsOptOutSwitch, analytics, loggedIn);
+    final SettingsDialogView dialogView = new SettingsDialogView(customView, this, analyticsOptOutSwitch, analytics, loggedIn);
 
     dialogView.buildDialog();
 
-    Button logOutOfMapboxAccountButton = (Button) customView.findViewById(R.id.log_out_of_account_button);
+    Button logOutOfMapboxAccountButton = customView.findViewById(R.id.log_out_of_account_button);
 
     if (!loggedIn) {
       logOutOfMapboxAccountButton.setVisibility(View.GONE);

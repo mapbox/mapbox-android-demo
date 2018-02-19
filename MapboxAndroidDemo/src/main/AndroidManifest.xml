@@ -147,7 +147,6 @@
         </activity>
 
         <service android:name="com.mapbox.services.android.telemetry.service.TelemetryService" />
-        <service android:name=".account.AccountRetrievalService" />
 
         <activity
             android:name=".examples.basics.MapboxMapOptionActivity"
@@ -511,7 +510,7 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".account.LandingActivity"
+            android:name=".account.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -15,20 +15,19 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.perf.metrics.AddTrace;
-import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+import com.mapbox.android.analytics.AnalyticsTracker;
+import com.mapbox.android.auth.AccountRetrievalBackgroundService;
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
 
-import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_CREATE_ACCOUNT_BUTTON;
-import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_SIGN_IN_BUTTON;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.AUTHCODE_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.CLIENT_ID_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.REDIRECT_URI_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
 
 
-public class LandingActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
   private static final String SIGN_IN_AUTH_URL = "https://api.mapbox.com/oauth/authorize?"
     + "response_type=code&client_id=%s&redirect_uri=%s";
@@ -47,9 +46,7 @@ public class LandingActivity extends AppCompatActivity {
     loggedIn = PreferenceManager.getDefaultSharedPreferences(
       getApplicationContext())
       .getBoolean(TOKEN_SAVED_KEY, false);
-    analytics = AnalyticsTracker.getInstance(this, false);
-
-
+    analytics = AnalyticsTracker.getInstance(this);
     if (!loggedIn) {
       setContentView(R.layout.activity_landing);
       getSupportActionBar().hide();
@@ -79,7 +76,7 @@ public class LandingActivity extends AppCompatActivity {
         showErrorDialog();
       } else {
         String authCode = uri.getQueryParameter("code");
-        Intent intent = new Intent(this, AccountRetrievalService.class);
+        Intent intent = new Intent(this, AccountRetrievalBackgroundService.class);
         intent.putExtra(AUTHCODE_KEY, authCode);
         intent.putExtra(REDIRECT_URI_KEY, REDIRECT_URI);
         intent.putExtra(CLIENT_ID_KEY, CLIENT_ID);
@@ -101,7 +98,7 @@ public class LandingActivity extends AppCompatActivity {
   }
 
   private void setUpSkipDialog() {
-    Button skipForNowButton = (Button) findViewById(R.id.button_skip_for_now);
+    Button skipForNowButton = findViewById(R.id.button_skip_for_now);
     skipForNowButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -112,22 +109,22 @@ public class LandingActivity extends AppCompatActivity {
   }
 
   private void setUpButtons() {
-    Button createAccountButton = (Button) findViewById(R.id.create_account_button);
+    Button createAccountButton = findViewById(R.id.create_account_button);
     createAccountButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         openChromeCustomTab(true);
-        analytics.trackEvent(CLICKED_ON_CREATE_ACCOUNT_BUTTON,
+        analytics.trackEvent("Selected on create account button",
           loggedIn);
       }
     });
 
-    Button signInButton = (Button) findViewById(R.id.sign_in_button);
+    Button signInButton = findViewById(R.id.sign_in_button);
     signInButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         openChromeCustomTab(false);
-        analytics.trackEvent(CLICKED_ON_SIGN_IN_BUTTON,
+        analytics.trackEvent("Selected on sign in button",
           loggedIn)
         ;
       }

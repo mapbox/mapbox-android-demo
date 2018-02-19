@@ -10,13 +10,12 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.mapbox.android.analytics.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxandroiddemo.account.LandingActivity;
-import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
+import com.mapbox.mapboxandroiddemo.account.LoginActivity;
 
-import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.LOGGED_OUT_OF_MAPBOX_ACCOUNT;
-import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.OPTED_IN_TO_ANALYTICS;
-import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.OPTED_OUT_OF_ANALYTICS;
+import static com.mapbox.android.analytics.AnalyticsTracker.OPTED_IN_TO_ANALYTICS;
+import static com.mapbox.android.analytics.AnalyticsTracker.OPTED_OUT_OF_ANALYTICS;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.AVATAR_IMAGE_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.EMAIL_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.FROM_LOG_OUT_BUTTON_KEY;
@@ -33,7 +32,6 @@ public class SettingsDialogView {
   private AnalyticsTracker analytics;
   private boolean loggedInOrNot;
 
-
   public SettingsDialogView(View view, Context context, Switch analyticsOptOutSwitch,
                             AnalyticsTracker analytics, boolean loggedInOrNot) {
     this.customDialogView = view;
@@ -44,7 +42,7 @@ public class SettingsDialogView {
   }
 
   public void buildDialog() {
-    analyticsOptOutSwitch.setChecked(!analytics.isAnalyticsEnabled());
+    analyticsOptOutSwitch.setChecked(!analytics.analyticsIsEnabled());
     new AlertDialog.Builder(context)
       .setView(customDialogView)
       .setTitle(R.string.settings_dialog_title)
@@ -71,17 +69,17 @@ public class SettingsDialogView {
 
   private void changeAnalyticsSettings(boolean optedIn, String toastMessage, boolean loggedIn) {
     if (optedIn) {
-      analytics.optUserIntoAnalytics(optedIn);
+      analytics.setUserAnalyticsOptStatus(optedIn);
       analytics.trackEvent(OPTED_IN_TO_ANALYTICS, loggedIn);
     } else {
       analytics.trackEvent(OPTED_OUT_OF_ANALYTICS, loggedIn);
-      analytics.optUserIntoAnalytics(optedIn);
+      analytics.setUserAnalyticsOptStatus(optedIn);
     }
     Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show();
   }
 
   public void logOut(boolean loggedIn) {
-    analytics.trackEvent(LOGGED_OUT_OF_MAPBOX_ACCOUNT, loggedIn);
+    analytics.trackEvent("Logged out of Mapbox account", loggedIn);
     SharedPreferences.Editor sharePrefEditor = PreferenceManager
       .getDefaultSharedPreferences(context).edit();
     sharePrefEditor.putBoolean(TOKEN_SAVED_KEY, false);
@@ -90,7 +88,7 @@ public class SettingsDialogView {
     sharePrefEditor.putString(AVATAR_IMAGE_KEY, "");
     sharePrefEditor.putString(TOKEN_KEY, "");
     sharePrefEditor.apply();
-    Intent intent = new Intent(context, LandingActivity.class);
+    Intent intent = new Intent(context, LoginActivity.class);
     intent.putExtra(FROM_LOG_OUT_BUTTON_KEY, true);
     context.startActivity(intent);
   }

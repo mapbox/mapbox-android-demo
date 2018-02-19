@@ -1,48 +1,34 @@
 // Top-level build file which has configuration options common to all sub-projects/modules.
 buildscript {
 
-  apply from: "${rootDir}/gradle/dependencies.gradle"
+    apply from: "${rootDir}/gradle/dependencies.gradle"
 
-  repositories {
-    jcenter()
-    google()
-    maven {
-      url "https://mapbox.bintray.com/mapbox_private"
-      credentials {
-        username project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-        password project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
-      }
+    repositories {
+        jcenter()
+        google()
     }
-  }
 
-  dependencies {
-    classpath pluginDependencies.gradle
-    classpath pluginDependencies.firebase
-  }
+    dependencies {
+        classpath pluginDependencies.gradle
+        classpath pluginDependencies.firebase
+    }
 }
 
 allprojects {
-  repositories {
-    jcenter()
-    google()
-    maven { url "https://jitpack.io" }
-    maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
-    maven { url "https://maven.google.com" }
-    maven {
-      url "https://mapbox.bintray.com/mapbox_private"
-      credentials {
-        username project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-        password project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
-      }
+    repositories {
+        jcenter()
+        google()
+        maven { url "https://jitpack.io" }
+        maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://maven.google.com" }
     }
-  }
 }
 
 task clean(type: Delete) {
-  delete rootProject.buildDir
+    delete rootProject.buildDir
 }
 
 subprojects {
-  // apply plugin: 'idea'
-  apply from: "${rootDir}/gradle/dependencies.gradle"
+    // apply plugin: 'idea'
+    apply from: "${rootDir}/gradle/dependencies.gradle"
 }
