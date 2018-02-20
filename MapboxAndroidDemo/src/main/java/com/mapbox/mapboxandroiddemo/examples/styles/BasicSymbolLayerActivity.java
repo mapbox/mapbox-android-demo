@@ -58,7 +58,8 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
     this.mapboxMap = mapboxMap;
 
     List<Feature> markerCoordinates = new ArrayList<>();
-    markerCoordinates.add(Feature.fromGeometry(Point.fromCoordinates(Position.fromCoordinates(-71.065634, 42.354950))) // Boston Common Park);
+    markerCoordinates.add(Feature.fromGeometry(Point.fromCoordinates(
+      Position.fromCoordinates(-71.065634, 42.354950))) // Boston Common Park);
     markerCoordinates.add(Feature.fromGeometry(
       Point.fromCoordinates(Position.fromCoordinates(-71.097293, 42.346645))) // Fenway Park
     );
@@ -112,7 +113,8 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
       return;
     }
 
-    FeatureCollection featureCollection = FeatureCollection.fromFeatures(new Feature[]{Feature.fromGeometry(features.get(0).geometry())});
+    FeatureCollection featureCollection = FeatureCollection.fromFeatures(
+      new Feature[]{Feature.fromGeometry(features.get(0).geometry())});
     GeoJsonSource source = mapboxMap.getSourceAs("selected-marker");
     if (source != null) {
       source.setGeoJson(featureCollection);
