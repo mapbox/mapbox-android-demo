@@ -15,7 +15,7 @@ ext {
             mapboxMapSdk       : '6.0.0-beta.2',
             mapboxPluginBuilding      : '0.1.0',
             mapboxPluginGeoJson       : '0.1.0',
-            mapboxPluginLocationLayer : '0.3.0',
+            mapboxPluginLocationLayer : '0.4.0-SNAPSHOT',
             mapboxPluginTraffic       : '0.4.0-SNAPSHOT',
             mapboxPluginMarkerCluster : '0.1.0',
             mapboxPluginPlaces : '0.1.0',
@@ -52,7 +52,6 @@ ext {
     dependenciesList = [
             // mapbox
             mapboxMapSdk     : "com.mapbox.mapboxsdk:mapbox-android-sdk:${version.mapboxMapSdk}",
-
             mapboxPluginLocationLayer : "com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:${version.mapboxPluginLocationLayer}",
             mapboxPluginBuilding      : "com.mapbox.mapboxsdk:mapbox-android-plugin-building:${version.mapboxPluginBuilding}",
             mapboxPluginTraffic       : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:${version.mapboxPluginTraffic}",
