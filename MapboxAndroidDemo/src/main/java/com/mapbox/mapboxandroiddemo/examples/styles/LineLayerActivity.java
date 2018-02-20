@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.Geometry;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -112,7 +113,7 @@ public class LineLayerActivity extends AppCompatActivity {
         LineString lineString = LineString.fromCoordinates(routeCoordinates);
 
         FeatureCollection featureCollection = FeatureCollection.fromFeatures(
-          new Feature[]{Feature.fromGeometry(lineString)});
+          new Feature[] {Feature.fromGeometry((Geometry) lineString)});
 
         Source geoJsonSource = new GeoJsonSource("line-source", featureCollection);
 
@@ -123,7 +124,7 @@ public class LineLayerActivity extends AppCompatActivity {
         // The layer properties for our line. This is where we make the line dotted, set the
         // color, etc.
         lineLayer.setProperties(
-          PropertyFactory.lineDasharray(new Float[]{0.01f, 2f}),
+          PropertyFactory.lineDasharray(new Float[] {0.01f, 2f}),
           PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
           PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
           PropertyFactory.lineWidth(5f),
