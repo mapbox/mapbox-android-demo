@@ -112,8 +112,10 @@ public class LineLayerActivity extends AppCompatActivity {
         // FeatureCollection so we can add the line to our map as a layer.
         LineString lineString = LineString.fromCoordinates(routeCoordinates);
 
-        FeatureCollection featureCollection = FeatureCollection.fromFeatures(
-          new Feature[] {Feature.fromGeometry((Geometry) lineString)});
+        List<Feature> featureList = new ArrayList<>();
+        featureList.add(Feature.fromGeometry((Geometry) lineString));
+
+        FeatureCollection featureCollection = FeatureCollection.fromFeatures(featureList);
 
         Source geoJsonSource = new GeoJsonSource("line-source", featureCollection);
 
