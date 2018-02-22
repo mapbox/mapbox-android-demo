@@ -5,6 +5,7 @@ import android.app.Application;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.jakewharton.picasso.OkHttp3Downloader;
+import com.mapbox.android.auth.UrlRoutingManager;
 import com.squareup.picasso.Picasso;
 
 public class MapboxApplication extends Application {
@@ -14,6 +15,7 @@ public class MapboxApplication extends Application {
     super.onCreate();
     initializeFirebaseApp();
     setUpPicasso();
+    setUpUrlRoutingManager();
   }
 
   private void initializeFirebaseApp() {
@@ -30,5 +32,11 @@ public class MapboxApplication extends Application {
     Picasso built = builder.build();
     built.setLoggingEnabled(true);
     Picasso.setSingletonInstance(built);
+  }
+
+  private void setUpUrlRoutingManager() {
+    UrlRoutingManager.getInstance(
+      "mapbox-android-dev-preview",
+      "7bb34a0cf68455d33ec0d994af2330a3f60ee636");
   }
 }
