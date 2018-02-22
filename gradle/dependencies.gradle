@@ -44,6 +44,7 @@ ext {
 
             // Other
             gson               :  '2.8',
+            segment               :  '2.0.0',
     ]
 
     wearVersion = [
@@ -72,7 +73,7 @@ ext {
 
             // Mapbox internal libraries
             mapboxAuth              : "com.mapbox.mapboxsdk:mapbox-android-auth:${version.mapboxAuth}",
-            mapboxAnalytics         : "com.mapbox.mapboxsdk:mapbox-android-analytics:${version.mapboxAnalytics}",                
+            mapboxAnalytics         : "com.mapbox.mapboxsdk:mapbox-android-analytics:${version.mapboxAnalytics}",
 
             // Google support libraries
             supportV4              : "com.android.support:support-v4:${version.supportLib}",
@@ -101,6 +102,7 @@ ext {
 
             // Other
             gson             :   "com.google.code.gson:gson:${version.gson}",
+            segment             : "com.segment.analytics.java:analytics:${version.segment}",
     ]
 
     pluginDependencies = [
