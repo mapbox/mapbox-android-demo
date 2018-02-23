@@ -1,15 +1,24 @@
----
-format_version: 1.2.0
-default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
-trigger_map:
-- push_branch: nogpservices
-  workflow: nogpservices
-- push_branch: publish
-  workflow: publish
-- push_branch: "*"
-  workflow: primary
-workflows:
+version: 2
+
+
+# default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+# trigger_map:
+# - push_branch: nogpservices
+#   workflow: nogpservices
+# - push_branch: publish
+#   workflow: publish
+# - push_branch: "*"
+#   workflow: primary
+
+jobs:
   primary:
+    working_directory: ~/code
+    docker:
+      - image: mbgl/7d2403f42e:android-ndk-r16b
+    environment:
+      JVM_OPTS: -Xmx3200m
+      BUILDTYPE: Debug
+      IS_LOCAL_DEVELOPMENT: false
     steps:
     - script:
         title: Export secrets for developer-config.xml
@@ -56,9 +65,26 @@ workflows:
     - deploy-to-bitrise-io:
         inputs:
         - notify_user_groups: none
-  publish:
+# ------------------------------------------------------------------------------
+  nogpservices:
     steps:
     - gradle-runner:
+        inputs:
+        - gradle_task: "$NO_GPS_GRADLE_TASK"
+    - sign-apk: {}
+
+# ------------------------------------------------------------------------------
+  publish:
+    branch:
+      only:
+      - master
+    docker:
+      - image: mbgl/7d2403f42e:android-ndk-r16b
+    working_directory: ~/code
+    environment:
+      BUILDTYPE: Release
+      IS_LOCAL_DEVELOPMENT: false
+    gradle-runner:
         inputs:
         - gradle_task: "$GRADLE_TASK"
     - google-play-deploy:
@@ -70,15 +96,3 @@ workflows:
         - whatsnews_dir: whatsnew
         - service_account_email: ''
         - key_file_path: ''
-    - deploy-to-bitrise-io:
-        inputs:
-        - notify_user_groups: android
-  nogpservices:
-    steps:
-    - gradle-runner:
-        inputs:
-        - gradle_task: "$NO_GPS_GRADLE_TASK"
-    - sign-apk: {}
-    - deploy-to-bitrise-io:
-        inputs:
-        - notify_user_groups: android
