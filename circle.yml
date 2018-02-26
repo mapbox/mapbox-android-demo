@@ -32,8 +32,8 @@ jobs:
       BUILDTYPE: Debug
       IS_LOCAL_DEVELOPMENT: false
     steps:
-    - script:
-        title: Export secrets for developer-config.xml
+    - run:
+        name: Export secrets for developer-config.xml
         inputs:
         - content: |-
             #!/bin/bash
@@ -43,8 +43,8 @@ jobs:
     - gradle-runner:
         inputs:
         - gradle_task: "$CHECKSTYLE_TASK"
-    - script:
-        title: Configure Google Cloud SDK
+    - run:
+        name: Configure Google Cloud SDK
         inputs:
         - content: |-
             #!/bin/bash
@@ -59,8 +59,8 @@ jobs:
             echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
             curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
             sudo apt-get update && sudo apt-get install -y google-cloud-sdk
-    - script:
-        title: Run Firebase instrumentation tests
+    - run:
+        name: Run Firebase instrumentation tests
         inputs:
         - content: |-
             #!/bin/bash
