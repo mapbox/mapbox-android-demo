@@ -32,6 +32,22 @@ jobs:
       BUILDTYPE: Debug
       IS_LOCAL_DEVELOPMENT: false
     steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#      - run:
+#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this. 
+#         command: sudo chmod +x ./gradlew
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Run Tests
+          command: ./gradlew lint test
       - run:
           name: Export secrets for developer-config.xml
           command: |
@@ -39,9 +55,9 @@ jobs:
               export MAPBOX_AUTH_FLOW_SECRET="$MAPBOX_AUTH_FLOW_SECRET"
               export SEGMENT_API_WRITE_KEY_DEMO="$SEGMENT_API_WRITE_KEY_DEMO"
               export SEGMENT_API_WRITE_KEY_WEARABLE_DEMO="$SEGMENT_API_WRITE_KEY_WEARABLE_DEMO"
-      - gradle-runner:
-          inputs:
-          gradle_task: "$CHECKSTYLE_TASK"
+      - run:
+          name: Check code style
+          command: make checkstyle
       - run:
           name: Configure Google Cloud SDK
           command: |
