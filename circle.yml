@@ -24,9 +24,9 @@ workflows:
 
 jobs:
   primary:
-    working_directory: ~/code
     docker:
       - image: mbgl/7d2403f42e:android-ndk-r16b
+    working_directory: ~/code  
     environment:
       JVM_OPTS: -Xmx3200m
       BUILDTYPE: Debug
