@@ -112,4 +112,3 @@ jobs:
           - whatsnews_dir: whatsnew
           - service_account_email: ''
           - key_file_path: ''
-            - notify_user_groups: android
