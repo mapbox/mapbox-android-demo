@@ -18,9 +18,9 @@ workflows:
   publish:
     jobs:
       - publish
-  nogpservices:
-    jobs:
-      - nogpservices    
+  # nogpservices:
+  #   jobs:
+  #     - nogpservices    
 
 jobs:
   primary:
@@ -77,13 +77,13 @@ jobs:
       - store_test_results:
           path: app/build/test-results
 
-# ------------------------------------------------------------------------------
-  nogpservices:
-    steps:
-      - gradle-runner:
-          inputs:
-          - gradle_task: "$NO_GPS_GRADLE_TASK"
-      - sign-apk: {}
+# # ------------------------------------------------------------------------------
+#   nogpservices:
+#     steps:
+#       - gradle-runner:
+#           inputs:
+#           - gradle_task: "$NO_GPS_GRADLE_TASK"
+#       - sign-apk: {}
 
 # ------------------------------------------------------------------------------
   publish:
