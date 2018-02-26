@@ -32,82 +32,84 @@ jobs:
       BUILDTYPE: Debug
       IS_LOCAL_DEVELOPMENT: false
     steps:
-    - run:
-        name: Export secrets for developer-config.xml
-        inputs:
-        - content: |-
-            #!/bin/bash
-            export MAPBOX_AUTH_FLOW_SECRET="$MAPBOX_AUTH_FLOW_SECRET"
-            export SEGMENT_API_WRITE_KEY_DEMO="$SEGMENT_API_WRITE_KEY_DEMO"
-            export SEGMENT_API_WRITE_KEY_WEARABLE_DEMO="$SEGMENT_API_WRITE_KEY_WEARABLE_DEMO"
-    - gradle-runner:
-        inputs:
-        - gradle_task: "$CHECKSTYLE_TASK"
-    - run:
-        name: Configure Google Cloud SDK
-        inputs:
-        - content: |-
-            #!/bin/bash
-            # Install python tools for pip
-            sudo apt-get install -y gcc python-dev python-setuptools
-            sudo easy_install -U pip
-            sudo pip uninstall crcmod
-            sudo pip install -U crcmod
+      - run:
+          name: Export secrets for developer-config.xml
+          command: |
+              #!/bin/bash
+              export MAPBOX_AUTH_FLOW_SECRET="$MAPBOX_AUTH_FLOW_SECRET"
+              export SEGMENT_API_WRITE_KEY_DEMO="$SEGMENT_API_WRITE_KEY_DEMO"
+              export SEGMENT_API_WRITE_KEY_WEARABLE_DEMO="$SEGMENT_API_WRITE_KEY_WEARABLE_DEMO"
+      - gradle-runner:
+          inputs:
+          gradle_task: "$CHECKSTYLE_TASK"
+      - run:
+          name: Configure Google Cloud SDK
+          command: |
+              #!/bin/bash
+              # Install python tools for pip
+              sudo apt-get install -y gcc python-dev python-setuptools
+              sudo easy_install -U pip
+              sudo pip uninstall crcmod
+              sudo pip install -U crcmod
 
-            # Install Google Cloud SDK for Firebase
-            export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
-            echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
-            curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-            sudo apt-get update && sudo apt-get install -y google-cloud-sdk
-    - run:
-        name: Run Firebase instrumentation tests
-        inputs:
-        - content: |-
-            #!/bin/bash
-            echo "Build seperate test apk:"
-            ./gradlew :MapboxAndroidDemo:assembleGpservicesDebug --continue
+              # Install Google Cloud SDK for Firebase
+              export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+              echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
+              curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+              sudo apt-get update && sudo apt-get install -y google-cloud-sdk
+      - run:
+          name: Run Firebase instrumentation tests
+          command: |
+              #!/bin/bash
+              echo "Build seperate test apk:"
+              ./gradlew :MapboxAndroidDemo:assembleGpservicesDebug --continue
 
-            # Get authentication secret
-            echo "Downloading Google Cloud authentication:"
-            wget -O secret.json "$BITRISEIO_FIREBASE_JSON_URL"
+              # Get authentication secret
+              echo "Downloading Google Cloud authentication:"
+              wget -O secret.json "$BITRISEIO_FIREBASE_JSON_URL"
 
-            echo "Run tests on firebase:"
-            gcloud auth activate-service-account --key-file secret.json --project mapbox-android-demo
-            gcloud firebase test android run --type robo --app MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk --device-ids shamu --os-version-ids 22 --locales en --orientations portrait --timeout 10m
+              echo "Run tests on firebase:"
+              gcloud auth activate-service-account --key-file secret.json --project mapbox-android-demo
+              gcloud firebase test android run --type robo --app MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk --device-ids shamu --os-version-ids 22 --locales en --orientations portrait --timeout 10m
     - store_artifacts:
-        path: app/build/reports
-        destination: reports
-    - store_test_results:
-        path: app/build/test-results
+          path: app/build/reports
+          destination: reports
+      - store_test_results:
+          path: app/build/test-results
 
 # ------------------------------------------------------------------------------
   nogpservices:
     steps:
-    - gradle-runner:
-        inputs:
-        - gradle_task: "$NO_GPS_GRADLE_TASK"
-    - sign-apk: {}
+      - gradle-runner:
+          inputs:
+          - gradle_task: "$NO_GPS_GRADLE_TASK"
+      - sign-apk: {}
 
-# # ------------------------------------------------------------------------------
-#   publish:
-#     branch:
-#       only:
-#       - master
-#     docker:
-#       - image: mbgl/7d2403f42e:android-ndk-r16b
-#     working_directory: ~/code
-#     environment:
-#       BUILDTYPE: Release
-#       IS_LOCAL_DEVELOPMENT: false
-#     gradle-runner:
-#       inputs:
-#         - gradle_task: "$GRADLE_TASK"
-#       - google-play-deploy:
-#           inputs:
-#           - apk_path: "$BITRISE_APK_PATH"
-#           - service_account_json_key_path: "$BITRISEIO_SERVICE_ACCOUNT_JSON_URL"
-#           - package_name: com.mapbox.mapboxandroiddemo
-#           - track: alpha
-#           - whatsnews_dir: whatsnew
-#           - service_account_email: ''
-#           - key_file_path: ''
+# ------------------------------------------------------------------------------
+  publish:
+    branch:
+      only:
+      - master
+    docker:
+      - image: mbgl/7d2403f42e:android-ndk-r16b
+    working_directory: ~/code
+    environment:
+      JVM_OPTS: -Xmx3200m
+      BUILDTYPE: Release
+      IS_LOCAL_DEVELOPMENT: false
+    steps:
+      - checkout
+      - gradle-runner:
+          inputs:
+          - gradle_task: "$GRADLE_TASK"
+      - run:
+        name: google-play-deploy
+        command:
+          - apk_path: "$BITRISE_APK_PATH"
+          - service_account_json_key_path: "$BITRISEIO_SERVICE_ACCOUNT_JSON_URL"
+          - package_name: com.mapbox.mapboxandroiddemo
+          - track: alpha
+          - whatsnews_dir: whatsnew
+          - service_account_email: ''
+          - key_file_path: ''
+                - notify_user_groups: android
