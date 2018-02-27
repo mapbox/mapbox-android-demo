@@ -35,9 +35,6 @@ jobs:
       - checkout
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-#      - run:
-#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this. 
-#         command: sudo chmod +x ./gradlew
       - run:
           name: Approve license for build tools
           command: (echo y; echo y; echo y; echo y; echo y; echo y) | $ANDROID_HOME/tools/bin/sdkmanager --licenses
@@ -70,9 +67,9 @@ jobs:
 
               # Install Google Cloud SDK for Firebase
               export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
-              echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
+              echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
               curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-              sudo apt-get update && sudo apt-get install -y google-cloud-sdk
+              sudo apt-get update && sudo apt-get install google-cloud-sdk
       - run:
           name: Run Firebase instrumentation tests
           command: |
