@@ -19,7 +19,7 @@ ext {
             mapboxPluginLocationLayer : '0.3.0',
             mapboxPluginTraffic       : '0.4.0-SNAPSHOT',
             mapboxPluginMarkerCluster : '0.1.0',
-            mapboxPluginPlaces : '0.1.0',
+            mapboxPluginPlaces : '0.2.0',
 
             // Support
             supportLib         : '26.1.0',
