@@ -53,7 +53,6 @@
     <string name="activity_query_click_on_layer_title">Click on single layer</string>
     <string name="activity_mas_directions_title">Show directions on map</string>
     <string name="activity_mas_optimization_title">Show optimized directions on map</string>
-    <string name="activity_mas_geocoding_title">Geocoding autocomplete widget</string>
     <string name="activity_mas_static_image_title">Download a static map</string>
     <string name="activity_mas_maxtrix_api_title">Directions Matrix API</string>
     <string name="activity_plugins_traffic_plugin_title">Display real-time traffic</string>
@@ -61,6 +60,7 @@
     <string name="activity_plugins_location_plugin_title">Show a user\'s location</string>
     <string name="activity_plugins_localization_plugin_title">Change map text to device language</string>
     <string name="activity_plugins_geojson_plugin_title">Load GeoJSON data</string>
+    <string name="activity_plugins_places_plugin_title">Location search</string>
     <string name="activity_plugins_marker_clusters_plugin_title">Add marker clusters</string>
     <string name="activity_mas_simplify_polyline_title">Simplify a polyline</string>
     <string name="activity_mas_map_matching_title">Map Matching</string>
