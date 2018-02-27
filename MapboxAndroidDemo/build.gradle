@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply from: "$project.rootDir/gradle/script-git-version.gradle"
 apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.github.triplet.play'
 
 
 android {
@@ -56,6 +57,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
+    }
+
+    playAccountConfigs {
+        defaultAccountConfig {
+            serviceAccountEmail = 'your-service-account-email'
+            pk12File = file('key.p12')
+        }
+    }
+
+    defaultConfig {
+        // ...
+
+        playAccountConfig = playAccountConfigs.defaultAccountConfig
     }
 
     splits {
