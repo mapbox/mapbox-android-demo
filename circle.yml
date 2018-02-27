@@ -17,7 +17,7 @@ workflows:
       - primary
   publish:
     jobs:
-      - publish
+      - deployment
   # nogpservices:
   #   jobs:
   #     - nogpservices    
