@@ -1,6 +1,5 @@
 version: 2
 
-
 # default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 # trigger_map:
 # - push_branch: nogpservices
@@ -107,6 +106,4 @@ jobs:
 #           inputs:
 #           - gradle_task: "$NO_GPS_GRADLE_TASK"
 #       - sign-apk: {}
-
-# ------------------------------------------------------------------------------
   
