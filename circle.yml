@@ -99,7 +99,7 @@ jobs:
 #       - sign-apk: {}
 
 # ------------------------------------------------------------------------------
-  deployment:
+  deploy:
     production:
       branches:
         only:
