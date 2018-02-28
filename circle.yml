@@ -17,7 +17,13 @@ workflows:
       - primary
   publish:
     jobs:
-      - deployment
+      - primary
+      - deploy:
+          requires:
+            - primary
+          filters:
+            branches:
+              only: master
   # nogpservices:
   #   jobs:
   #     - nogpservices    
@@ -89,7 +95,11 @@ jobs:
           destination: reports
       - store_test_results:
           path: app/build/test-results
-
+  deploy:
+      - run: 
+        name: Publish apk to Play Store alpha track    
+        command: ./gradlew publishApkRelease
+    
 # # ------------------------------------------------------------------------------
 #   nogpservices:
 #     steps:
@@ -99,12 +109,4 @@ jobs:
 #       - sign-apk: {}
 
 # ------------------------------------------------------------------------------
-  deploy:
-    production:
-      branches:
-        only:
-          - master
-      run: 
-        name: Publish apk to Play Store alpha track    
-        command: ./gradlew publishApkRelease
-    
+  
