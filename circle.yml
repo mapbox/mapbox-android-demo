@@ -104,7 +104,9 @@ jobs:
       branches:
         only:
           - master
-      commands:
+      run: 
+        name: Publish apk to Play Store alpha track    
+        command:
         - ./gradlew publishApkRelease
           -Dorg.gradle.project.track=alpha
     
