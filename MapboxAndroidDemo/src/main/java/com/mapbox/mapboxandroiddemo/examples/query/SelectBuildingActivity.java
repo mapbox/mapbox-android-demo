@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mapbox.geojson.Feature;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
@@ -13,7 +14,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.commons.geojson.Feature;
 import com.mapbox.services.commons.geojson.Polygon;
 
 import java.util.ArrayList;
@@ -62,19 +62,19 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
     List<Feature> features = mapboxMap.queryRenderedFeatures(finalPoint, "building");
 
     if (features.size() > 0) {
-      String featureId = features.get(0).getId();
+      String featureId = features.get(0).id();
 
       for (int a = 0; a < features.size(); a++) {
-        if (featureId.equals(features.get(a).getId())) {
-          if (features.get(a).getGeometry() instanceof Polygon) {
+        if (featureId.equals(features.get(a).id())) {
+          if (features.get(a).geometry() instanceof Polygon) {
 
             List<LatLng> list = new ArrayList<>();
-            for (int i = 0; i < ((Polygon) features.get(a).getGeometry()).getCoordinates().size(); i++) {
+            for (int i = 0; i < ((Polygon) features.get(a).geometry()).getCoordinates().size(); i++) {
               for (int j = 0;
-                   j < ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).size(); j++) {
+                   j < ((Polygon) features.get(a).geometry()).getCoordinates().get(i).size(); j++) {
                 list.add(new LatLng(
-                  ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLatitude(),
-                  ((Polygon) features.get(a).getGeometry()).getCoordinates().get(i).get(j).getLongitude()
+                  ((Polygon) features.get(a).geometry()).getCoordinates().get(i).get(j).getLatitude(),
+                  ((Polygon) features.get(a).geometry()).getCoordinates().get(i).get(j).getLongitude()
                 ));
               }
             }

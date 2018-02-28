@@ -5,6 +5,9 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 
+import com.mapbox.android.core.location.LocationEngine;
+import com.mapbox.android.core.location.LocationEngineListener;
+import com.mapbox.android.core.location.LocationEngineProvider;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -12,14 +15,11 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.android.telemetry.location.LocationEngine;
-import com.mapbox.services.android.telemetry.location.LocationEngineListener;
-import com.mapbox.services.android.telemetry.location.LocationEngineProvider;
 
 /**
  * Lock the camera centered above the user location.
  */
-public class LocationTrackingActivity extends WearableActivity {
+public class LocationTrackingActivity extends WearableActivity implements OnMapReadyCallback {
 
   private MapView mapView;
   private MapboxMap map;
@@ -27,6 +27,7 @@ public class LocationTrackingActivity extends WearableActivity {
   private LocationEngineListener locationEngineListener;
 
   @Override
+  @SuppressWarnings( {"MissingPermission"})
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
@@ -37,7 +38,7 @@ public class LocationTrackingActivity extends WearableActivity {
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_simple_mapview);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
 
     LocationEngineProvider locationEngineProvider = new LocationEngineProvider(this);
@@ -56,20 +57,20 @@ public class LocationTrackingActivity extends WearableActivity {
         }
       }
     };
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-
-        // Customize map with markers, polylines, etc.
-        map = mapboxMap;
-        Location lastLocation = locationEngine.getLastLocation();
-        if (lastLocation != null) {
-          map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
-        }
-      }
-    });
+    mapView.getMapAsync(this);
     locationEngine.addLocationEngineListener(locationEngineListener);
     setAmbientEnabled();
+  }
+
+  @Override
+  @SuppressWarnings( {"MissingPermission"})
+  public void onMapReady(MapboxMap mapboxMap) {
+    // Customize map with markers, polylines, etc.
+    map = mapboxMap;
+    Location lastLocation = locationEngine.getLastLocation();
+    if (lastLocation != null) {
+      map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
+    }
   }
 
   @Override

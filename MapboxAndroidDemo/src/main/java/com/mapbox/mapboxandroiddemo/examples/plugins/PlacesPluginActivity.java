@@ -12,6 +12,8 @@ import android.view.View;
 
 import com.google.gson.JsonObject;
 import com.mapbox.geocoding.v5.models.CarmenFeature;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -26,8 +28,6 @@ import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.plugins.places.autocomplete.model.PlaceOptions;
-import com.mapbox.services.commons.geojson.Feature;
-import com.mapbox.services.commons.geojson.FeatureCollection;
 
 public class PlacesPluginActivity extends AppCompatActivity implements OnMapReadyCallback {
 
