@@ -23,9 +23,9 @@ workflows:
           filters:
             branches:
               only: master
-  # nogpservices:
-  #   jobs:
-  #     - nogpservices    
+# nogpservices:
+#   jobs:
+#     - nogpservices    
 
 jobs:
   primary:
@@ -96,9 +96,9 @@ jobs:
           path: app/build/test-results
   deploy:
       - run: 
-        name: Publish apk to Play Store alpha track    
-        command: ./gradlew publishApkRelease
-    
+          name: Publish apk to Play Store alpha track    
+          command: ./gradlew publishApkRelease
+      
 # # ------------------------------------------------------------------------------
 #   nogpservices:
 #     steps:
