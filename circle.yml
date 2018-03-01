@@ -20,9 +20,9 @@ workflows:
       - deploy:
           requires:
             - primary
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
               
 # nogpservices:
 #   jobs:
