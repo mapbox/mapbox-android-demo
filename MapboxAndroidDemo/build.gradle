@@ -62,7 +62,7 @@ android {
     playAccountConfigs {
         defaultAccountConfig {
             serviceAccountEmail = 'apps@mapbox.com'
-            pk12File = file('key.p12')
+            pk12File = file('NEED TO FETCH KEYS HERE SOMEHOW')
         }
     }
 
