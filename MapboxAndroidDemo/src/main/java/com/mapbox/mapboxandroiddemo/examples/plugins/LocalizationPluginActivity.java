@@ -1,7 +1,9 @@
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -9,14 +11,33 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin;
+import com.mapbox.mapboxsdk.plugins.localization.MapLocale;
 
 /**
  * Use the localization plugin to retrieve the device's language and set all map text labels to that language.
  */
-public class LocalizationPluginActivity extends AppCompatActivity {
+public class LocalizationPluginActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
-//  private LocalizationPlugin localizationPluginActivity;
+
+  private LocalizationPlugin localizationPlugin;
+  private MapboxMap mapboxMap;
+  private boolean mapIsLocalized;
+
+  private static final MapLocale[] LOCALES = new MapLocale[] {
+    MapLocale.CANADA,
+    MapLocale.GERMANY,
+    MapLocale.CHINA,
+    MapLocale.US,
+    MapLocale.CANADA_FRENCH,
+    MapLocale.ITALY,
+    MapLocale.JAPAN,
+    MapLocale.KOREA,
+    MapLocale.FRANCE
+  };
+
+  private static int index;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -28,20 +49,42 @@ public class LocalizationPluginActivity extends AppCompatActivity {
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_localization_plugin);
-
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
+    mapView.getMapAsync(this);
+  }
+
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    this.mapboxMap = mapboxMap;
+
+    localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
+    localizationPlugin.matchMapLanguageWithDeviceDefault();
+
+    findViewById(R.id.language_one_cardview).setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onClick(View view) {
+        localizationPlugin.setMapLanguage(MapLocale.ARABIC);
+      }
+    });
 
-        Toast.makeText(getApplicationContext(), R.string.change_language_instruction, Toast.LENGTH_LONG).show();
 
-//        localizationPluginActivity = new LocalizationPluginActivity();
+    findViewById(R.id.language_two_cardview).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        localizationPlugin.setMapLanguage(MapLocale.RUSSIAN);
+      }
+    });
 
+
+    findViewById(R.id.language_three_cardview).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        localizationPlugin.setMapLanguage(MapLocale.SIMPLIFIED_CHINESE);
       }
     });
   }
+
 
   // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
