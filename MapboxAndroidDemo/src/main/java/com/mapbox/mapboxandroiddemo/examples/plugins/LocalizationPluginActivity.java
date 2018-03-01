@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -20,24 +19,7 @@ import com.mapbox.mapboxsdk.plugins.localization.MapLocale;
 public class LocalizationPluginActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
-
   private LocalizationPlugin localizationPlugin;
-  private MapboxMap mapboxMap;
-  private boolean mapIsLocalized;
-
-  private static final MapLocale[] LOCALES = new MapLocale[] {
-    MapLocale.CANADA,
-    MapLocale.GERMANY,
-    MapLocale.CHINA,
-    MapLocale.US,
-    MapLocale.CANADA_FRENCH,
-    MapLocale.ITALY,
-    MapLocale.JAPAN,
-    MapLocale.KOREA,
-    MapLocale.FRANCE
-  };
-
-  private static int index;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +38,8 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
-    this.mapboxMap = mapboxMap;
 
     localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
-    localizationPlugin.matchMapLanguageWithDeviceDefault();
 
     findViewById(R.id.language_one_cardview).setOnClickListener(new View.OnClickListener() {
       @Override
@@ -83,6 +63,21 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
         localizationPlugin.setMapLanguage(MapLocale.SIMPLIFIED_CHINESE);
       }
     });
+
+    findViewById(R.id.match_map_to_device_language).setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+        Snackbar.make(view, R.string.change_device_language_instruction, Snackbar.LENGTH_LONG).show();
+
+        try {
+          localizationPlugin.matchMapLanguageWithDeviceDefault();
+        } catch (NullPointerException exception) {
+          Snackbar.make(view, exception.toString(), Snackbar.LENGTH_LONG).show();
+        }
+      }
+    });
+
   }
 
 
