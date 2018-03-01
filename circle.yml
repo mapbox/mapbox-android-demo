@@ -23,6 +23,7 @@ workflows:
           filters:
             branches:
               only: master
+              
 # nogpservices:
 #   jobs:
 #     - nogpservices    
