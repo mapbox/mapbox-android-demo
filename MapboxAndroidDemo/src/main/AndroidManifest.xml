@@ -104,15 +104,15 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.mas.OptimizationActivity"
-            android:label="@string/activity_mas_optimization_title">
+            android:name=".examples.javaservices.OptimizationActivity"
+            android:label="@string/activity_java_services_optimization_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.mas.StaticImageActivity"
-            android:label="@string/activity_mas_static_image_title">
+            android:name=".examples.javaservices.StaticImageActivity"
+            android:label="@string/activity_java_services_static_image_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
@@ -216,22 +216,22 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.mas.SimplifyPolylineActivity"
-            android:label="@string/activity_mas_simplify_polyline_title">
+            android:name=".examples.javaservices.SimplifyPolylineActivity"
+            android:label="@string/activity_java_services_simplify_polyline_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.mas.MapMatchingActivity"
-            android:label="@string/activity_mas_map_matching_title">
+            android:name=".examples.javaservices.MapMatchingActivity"
+            android:label="@string/activity_java_services_map_matching_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.mas.DirectionsMatrixApiActivity"
-            android:label="@string/activity_mas_maxtrix_api_title">
+            android:name=".examples.javaservices.MatrixApiActivity"
+            android:label="@string/activity_java_services_maxtrix_api_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />

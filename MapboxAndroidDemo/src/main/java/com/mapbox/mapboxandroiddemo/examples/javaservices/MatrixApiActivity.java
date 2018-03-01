@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.mas;
+package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -44,7 +44,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DirectionsMatrixApiActivity extends AppCompatActivity {
+/**
+ * Use the Mapbox Java Services SDK's Matrix API to retrieve travel times between many points.
+ */
+public class MatrixApiActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -75,7 +78,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
-        DirectionsMatrixApiActivity.this.mapboxMap = mapboxMap;
+        MatrixApiActivity.this.mapboxMap = mapboxMap;
 
         // Add markers to the map
         addMarkers();
@@ -97,7 +100,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
             return false;
           }
         });
-        Toast.makeText(DirectionsMatrixApiActivity.this, R.string.click_on_marker_instruction_toast,
+        Toast.makeText(MatrixApiActivity.this, R.string.click_on_marker_instruction_toast,
           Toast.LENGTH_SHORT).show();
       }
     });
@@ -161,7 +164,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
 
       @Override
       public void onFailure(Call<DirectionsMatrixResponse> call, Throwable throwable) {
-        Toast.makeText(DirectionsMatrixApiActivity.this, R.string.call_error,
+        Toast.makeText(MatrixApiActivity.this, R.string.call_error,
           Toast.LENGTH_SHORT).show();
         Log.d("MatrixApiActivity", "onResponse onFailure");
       }
@@ -169,7 +172,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
   }
 
   private void addMarkers() {
-    Icon lightningBoltIcon = IconFactory.getInstance(DirectionsMatrixApiActivity.this)
+    Icon lightningBoltIcon = IconFactory.getInstance(MatrixApiActivity.this)
       .fromResource(R.drawable.lightning_bolt);
     for (Feature feature : featureCollection.getFeatures()) {
       mapboxMap.addMarker(new MarkerOptions()

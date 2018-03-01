@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".examples.mas.SimplifyPolylineActivity">
+    tools:context=".examples.javaservices.SimplifyPolylineActivity">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapview"
