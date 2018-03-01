@@ -41,9 +41,6 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: Approve license for build tools
-          command: (echo y; echo y; echo y; echo y; echo y; echo y) | $ANDROID_HOME/tools/bin/sdkmanager --licenses
-      - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
