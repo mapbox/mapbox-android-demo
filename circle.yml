@@ -1,18 +1,5 @@
 version: 2
-
-workflows:
-  version: 2
-  default:
-    jobs:
-      - primary
-  deploy:
-    jobs:
-      - publish
-          filters:
-            branches:
-              only: master
-          requires:
-            - primary
+          
 jobs:
   primary:
     docker:
@@ -61,3 +48,17 @@ jobs:
     commands:
       -./gradlew publishApkRelease 
         -Dorg.gradle.project.track=alpha
+
+workflows:
+  version: 2
+  default:
+    jobs:
+      - primary
+  deploy:
+    jobs:
+      - publish
+          requires:
+            - primary
+          filters:
+            branches:
+              only: master
