@@ -53,9 +53,9 @@
     <string name="activity_query_select_building_description">Use the query feature to select a building, get its geometry and draw a polygon highlighting it.</string>
     <string name="activity_query_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
     <string name="activity_query_click_on_layer_description">Click on and highlight a selected GeoJSON polygon.</string>
-    <string name="activity_java_services_directions_description">Use Mapbox Android Services to request directions.</string>
+    <string name="activity_java_services_directions_description">Use Mapbox Java Services to request directions.</string>
     <string name="activity_java_services_optimization_description">Use Mapbox\'s Optimization API to retrieve and display the quickest multi-stop route.</string>
-    <string name="activity_java_services_static_image_description">Use Mapbox Android Services to build a url and download a static map.</string>
+    <string name="activity_java_services_static_image_description">Use Mapbox Java Services to build a url and download a static map.</string>
     <string name="activity_java_services_matrix_api_description">Use the Directions Matrix API to receive driving times between Boston\'s various electric car charging stations.</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>

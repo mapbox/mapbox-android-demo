@@ -34,12 +34,12 @@
     <!-- nav drawer categories -->
     <string name="getting_started_category">Getting started</string>
     <string name="styles_category">Styles</string>
-    <string name="dds_category">Data driven styling</string>
+    <string name="dds_category">Data-driven styling</string>
     <string name="annotations_category">Annotations</string>
     <string name="camera_category">Camera</string>
     <string name="offline_category">Offline</string>
     <string name="query_map_category">Query map</string>
-    <string name="java_services_category">Java Services</string>
+    <string name="java_services_category">Java services</string>
     <string name="image_generator_category">Image generation</string>
     <string name="lab_category">Lab</string>
     <string name="share">Share</string>
