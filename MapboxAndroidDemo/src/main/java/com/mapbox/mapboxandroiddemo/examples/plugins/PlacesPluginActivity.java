@@ -11,9 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.google.gson.JsonObject;
-import com.mapbox.geocoding.v5.models.CarmenFeature;
-import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -28,6 +26,8 @@ import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.plugins.places.autocomplete.model.PlaceOptions;
+import com.mapbox.services.commons.geojson.Feature;
+import com.mapbox.services.commons.geojson.FeatureCollection;
 
 public class PlacesPluginActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -128,8 +128,7 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
       CarmenFeature selectedCarmenFeature = PlaceAutocomplete.getPlace(data);
 
       // Create a new FeatureCollection and add a new Feature to it using selectedCarmenFeature above
-      FeatureCollection featureCollection = FeatureCollection.fromFeatures(
-          new Feature[]{Feature.fromJson(selectedCarmenFeature.toJson())});
+      FeatureCollection featureCollection = FeatureCollection.fromFeatures(new Feature[]{Feature.fromJson(selectedCarmenFeature.toJson())});
 
       // Retrieve and update the source designated for showing a selected location's symbol layer icon
       GeoJsonSource source = mapboxMap.getSourceAs(geojsonSourceLayerId);
