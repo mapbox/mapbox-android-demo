@@ -128,7 +128,8 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
       CarmenFeature selectedCarmenFeature = PlaceAutocomplete.getPlace(data);
 
       // Create a new FeatureCollection and add a new Feature to it using selectedCarmenFeature above
-      FeatureCollection featureCollection = FeatureCollection.fromFeatures(new Feature[]{Feature.fromJson(selectedCarmenFeature.toJson())});
+      FeatureCollection featureCollection = FeatureCollection.fromFeatures(
+        new Feature[]{Feature.fromJson(selectedCarmenFeature.toJson())});
 
       // Retrieve and update the source designated for showing a selected location's symbol layer icon
       GeoJsonSource source = mapboxMap.getSourceAs(geojsonSourceLayerId);
