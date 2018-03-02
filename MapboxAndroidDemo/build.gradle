@@ -8,6 +8,13 @@ android {
     compileSdkVersion androidVersions.compileSdkVersion
     buildToolsVersion androidVersions.buildToolsVersion
 
+    playAccountConfigs {
+        defaultAccountConfig {
+            serviceAccountEmail = 'apps@mapbox.com'
+            pk12File = file('NEED TO FETCH KEYS HERE')
+        }
+    }
+
     defaultConfig {
         applicationId "com.mapbox.mapboxandroiddemo"
 
@@ -20,6 +27,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField "int", "MIN_SDK_VERSION", "$minSdkVersion.apiLevel"
+
+        playAccountConfig = playAccountConfigs.defaultAccountConfig
     }
 
     flavorDimensions "default"
@@ -36,10 +45,10 @@ android {
 
     signingConfigs {
         release {
-            keyAlias System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
-            keyPassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+            keyAlias System.getenv("CIRCLECI_ANDROID_KEYSTORE_ALIAS")
+            keyPassword System.getenv("CIRCLECI_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
             storeFile file("$project.rootDir/mapbox_demo.keystore")
-            storePassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
+            storePassword System.getenv("CIRCLECI_ANDROID_KEYSTORE_PASSWORD")
         }
     }
 
@@ -70,17 +79,10 @@ android {
         abortOnError false
     }
 
-    playAccountConfigs {
-        defaultAccountConfig {
-            serviceAccountEmail = 'apps@mapbox.com'
-            pk12File = file('NEED TO FETCH KEYS HERE SOMEHOW')
-        }
-
-    }
-
-    defaultConfig {
-        playAccountConfig = playAccountConfigs.defaultAccountConfig
-
+    play {
+        track = 'alpha'
+        serviceAccountEmail = 'apps@mapbox.com'
+        pk12File = file('NEED TO FETCH KEYS HERE')
     }
 }
 
