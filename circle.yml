@@ -5,9 +5,9 @@ workflows:
   default:
     jobs:
       - primary
-  publishToPlayStore:
+  publish-to-play-store:
     jobs:
-      - publishToPlayStore
+      - publish-to-play-store
 
 jobs:
   primary:
@@ -53,7 +53,10 @@ jobs:
             gcloud firebase test android run --type robo --app MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk --device-ids shamu --os-version-ids 22 --locales en --orientations portrait --timeout 5m
       - store_artifacts:
           path: MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk
-  publishToPlayStore:
+  publish-to-play-store:
+    docker:
+      - image: mbgl/7d2403f42e:android-ndk-r16b
+    working_directory: ~/code
     steps:
       requires:
         - primary
@@ -62,4 +65,4 @@ jobs:
           only: master
       commands:
         -./gradlew publishApkRelease 
-            -Dorg.gradle.project.track=alpha
+          -Dorg.gradle.project.track=alpha
