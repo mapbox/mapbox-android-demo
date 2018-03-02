@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply from: "$project.rootDir/gradle/script-git-version.gradle"
 apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.github.triplet.play'
 
 
 android {
@@ -68,6 +69,19 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    playAccountConfigs {
+        defaultAccountConfig {
+            serviceAccountEmail = 'apps@mapbox.com'
+            pk12File = file('NEED TO FETCH KEYS HERE SOMEHOW')
+        }
+
+    }
+
+    defaultConfig {
+        playAccountConfig = playAccountConfigs.defaultAccountConfig
+
+    }
 }
 
 dependencies {
@@ -85,9 +99,8 @@ dependencies {
     implementation dependenciesList.supportV4
     implementation dependenciesList.supportConstraintLayout
 
-
     // Mapbox dependencies
-    api (dependenciesList.mapboxMapSdk)
+    api(dependenciesList.mapboxMapSdk)
 
     // Mapbox plugins
     implementation dependenciesList.mapboxPluginLocationLayer

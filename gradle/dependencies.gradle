@@ -12,7 +12,7 @@ ext {
 
     version = [
             // mapbox
-            mapboxMapSdk       : '5.5.0',
+            mapboxMapSdk             : '5.5.0',
             mapboxPluginBuilding     : '0.1.0',
             mapboxPluginGeoJson      : '0.1.0',
             mapboxPluginLocationLayer: '0.3.0',
@@ -94,6 +94,8 @@ ext {
             gradle             : "com.android.tools.build:gradle:${pluginVersion.gradle}",
             checkstyle         : "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
             firebase           : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
+            gradlePlayPublisher: "com.github.triplet.gradle:play-publisher:${pluginVersion.gradlePlayPublisher}"
+
     ]
 
     wearDependencies = [

@@ -11,6 +11,8 @@ buildscript {
     dependencies {
         classpath pluginDependencies.gradle
         classpath pluginDependencies.firebase
+        classpath pluginDependencies.gradlePlayPublisher
+
     }
 
 }
