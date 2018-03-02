@@ -95,8 +95,6 @@ ext {
             gradle             : "com.android.tools.build:gradle:${pluginVersion.gradle}",
             checkstyle         : "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
             firebase           : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
-            gradlePlayPublisher: "com.github.triplet.gradle:play-publisher:${pluginVersion.gradlePlayPublisher}"
-
     ]
 
     wearDependencies = [
