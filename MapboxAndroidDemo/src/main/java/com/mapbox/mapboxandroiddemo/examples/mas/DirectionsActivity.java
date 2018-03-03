@@ -10,6 +10,7 @@ import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.MapboxDirections;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -53,10 +54,10 @@ public class DirectionsActivity extends AppCompatActivity {
     setContentView(R.layout.activity_mas_directions);
 
     // Alhambra landmark in Granada, Spain.
-    final Position origin = Position.fromCoordinates(-3.588098, 37.176164);
+    final Point origin = Point.fromLngLat(-3.588098, 37.176164);
 
     // Plaza del Triunfo in Granada, Spain.
-    final Position destination = Position.fromCoordinates(-3.601845, 37.184080);
+    final Point destination = Point.fromLngLat(-3.601845, 37.184080);
 
 
     // Setup the MapView
@@ -69,11 +70,11 @@ public class DirectionsActivity extends AppCompatActivity {
 
         // Add origin and destination to the map
         mapboxMap.addMarker(new MarkerOptions()
-          .position(new LatLng(origin.getLatitude(), origin.getLongitude()))
+          .position(new LatLng(origin.latitude(), origin.longitude()))
           .title(getString(R.string.directions_activity_marker_options_origin_title))
           .snippet(getString(R.string.directions_activity_marker_options_origin_snippet)));
         mapboxMap.addMarker(new MarkerOptions()
-          .position(new LatLng(destination.getLatitude(), destination.getLongitude()))
+          .position(new LatLng(destination.latitude(), destination.longitude()))
           .title(getString(R.string.directions_activity_marker_options_destination_title))
           .snippet(getString(R.string.directions_activity_marker_options_destination_snippet)));
 
@@ -83,15 +84,15 @@ public class DirectionsActivity extends AppCompatActivity {
     });
   }
 
-  private void getRoute(Position origin, Position destination) {
+  private void getRoute(Point origin, Point destination) {
 
-    client = new MapboxDirections.Builder()
+    client = MapboxDirections.builder()
       .origin(origin)
       .destination(destination)
       .overview(DirectionsCriteria.OVERVIEW_FULL)
       .profile(DirectionsCriteria.PROFILE_CYCLING)
       .accessToken(getString(R.string.access_token))
-      .bu();
+      .build();
 
     client.enqueueCall(new Callback<DirectionsResponse>() {
       @Override

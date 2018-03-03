@@ -40,7 +40,7 @@ import com.mapbox.services.android.telemetry.location.LocationEnginePriority;
 import com.mapbox.services.android.telemetry.location.LocationEngineProvider;
 import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
-import com.mapbox.services.commons.models.Position;
+import com.mapbox.services.commons.geojson.Point;
 
 import java.util.List;
 
@@ -251,10 +251,13 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
   private void reverseGeocode(final LatLng point) {
     // This method is used to reverse geocode where the user has dropped the marker.
     try {
+      double[] coordinates = {point.getLongitude(), point.getLatitude()};
+
+//      Point.fromCoordinates(coordinates)
       MapboxGeocoding client = MapboxGeocoding.builder()
         .accessToken(getString(R.string.access_token))
-        .query(Position.fromCoordinates(point.getLongitude(), point.getLatitude()))
-        .setGeocodingType(GeocodingCriteria.TYPE_ADDRESS)
+        .query()
+        .geocodingTypes(GeocodingCriteria.TYPE_ADDRESS)
         .build();
 
       client.enqueueCall(new Callback<GeocodingResponse>() {

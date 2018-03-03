@@ -8,9 +8,10 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 
+import com.mapbox.geojson.Point;
+import com.mapbox.geojson.Polygon;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -20,7 +21,6 @@ import com.mapbox.mapboxsdk.style.functions.stops.Stops;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.services.commons.models.Position;
 import com.mapbox.turf.TurfException;
 import com.mapbox.turf.TurfJoins;
 
@@ -41,7 +41,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 public class IndoorMapActivity extends AppCompatActivity {
 
   private GeoJsonSource indoorBuildingSource;
-  private List<Position> boundingBox;
+  private List<Point> boundingBox;
+  private List<List<Point>> boundingBoxList;
   private View levelButtons;
   private MapView mapView;
   private MapboxMap map;
@@ -67,22 +68,24 @@ public class IndoorMapActivity extends AppCompatActivity {
         levelButtons = findViewById(R.id.floor_level_buttons);
 
         boundingBox = new ArrayList<>();
-        boundingBox.add(Position.fromCoordinates(-77.03791, 38.89715));
-        boundingBox.add(Position.fromCoordinates(-77.03791, 38.89811));
-        boundingBox.add(Position.fromCoordinates(-77.03532, 38.89811));
-        boundingBox.add(Position.fromCoordinates(-77.03532, 38.89708));
+
+        boundingBox.add(Point.fromLngLat(-77.03791, 38.89715));
+        boundingBox.add(Point.fromLngLat(-77.03791, 38.89811));
+        boundingBox.add(Point.fromLngLat(-77.03532, 38.89811));
+        boundingBox.add(Point.fromLngLat(-77.03532, 38.89708));
+
+        boundingBoxList = new ArrayList<>();
+        boundingBoxList.add(boundingBox);
 
         mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
-
           @Override
           public void onCameraMove() {
 
             if (mapboxMap.getCameraPosition().zoom > 16) {
               try {
-                if (TurfJoins.inside(Position.fromCoordinates(
-                  mapboxMap.getCameraPosition().target.getLongitude(),
-                  mapboxMap.getCameraPosition().target.getLatitude()),
-                  boundingBox)) {
+                if (TurfJoins.inside(Point.fromLngLat(mapboxMap.getCameraPosition().target.getLongitude(),
+                  mapboxMap.getCameraPosition().target.getLatitude()), Polygon.fromLngLats(boundingBoxList))) {
+
                   if (levelButtons.getVisibility() != View.VISIBLE) {
                     showLevelButton();
                   }
