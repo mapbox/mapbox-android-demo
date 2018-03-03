@@ -230,7 +230,7 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.mas.DirectionsMatrixApiActivity"
+            android:name=".examples.mas.MatrixApiActivity"
             android:label="@string/activity_mas_maxtrix_api_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

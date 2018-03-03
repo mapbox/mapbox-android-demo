@@ -46,7 +46,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class DirectionsMatrixApiActivity extends AppCompatActivity {
+public class MatrixApiActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -77,7 +77,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
-        DirectionsMatrixApiActivity.this.mapboxMap = mapboxMap;
+        MatrixApiActivity.this.mapboxMap = mapboxMap;
 
         // Add markers to the map
         addMarkers();
@@ -99,7 +99,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
             return false;
           }
         });
-        Toast.makeText(DirectionsMatrixApiActivity.this, R.string.click_on_marker_instruction_toast,
+        Toast.makeText(MatrixApiActivity.this, R.string.click_on_marker_instruction_toast,
           Toast.LENGTH_SHORT).show();
       }
     });
@@ -144,14 +144,18 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       @Override
       public void onResponse(Call<MatrixResponse> call,
                              Response<MatrixResponse> response) {
+
         List<List<Double[]>> durationsToAllOfTheLocationsFromTheOrigin = new ArrayList<>();
+
         durationsToAllOfTheLocationsFromTheOrigin.add(response.body().durations());
 
         for (int x = 0; x < durationsToAllOfTheLocationsFromTheOrigin.size(); x++) {
+
           String finalConvertedFormattedDistance = String.valueOf(new DecimalFormat("#.##")
-            .format(TurfConversion.convertDistance(
-              // TODO
-              durationsToAllOfTheLocationsFromTheOrigin.get(0).get(markerPositionInList][x],"meters", "miles")
+              .format(TurfConversion.convertDistance(
+                  // TODO
+                  durationsToAllOfTheLocationsFromTheOrigin.get(0).get([markerPositionInList][x], "meters", "miles");
+
           if (x == markerPositionInList) {
             matrixLocationList.get(x).setDistanceFromOrigin(finalConvertedFormattedDistance);
           }
@@ -164,7 +168,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
 
       @Override
       public void onFailure(Call<MatrixResponse> call, Throwable throwable) {
-        Toast.makeText(DirectionsMatrixApiActivity.this, R.string.call_error,
+        Toast.makeText(MatrixApiActivity.this, R.string.call_error,
           Toast.LENGTH_SHORT).show();
         Log.d("MatrixApiActivity", "onResponse onFailure");
       }
@@ -172,7 +176,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
   }
 
   private void addMarkers() {
-    Icon lightningBoltIcon = IconFactory.getInstance(DirectionsMatrixApiActivity.this)
+    Icon lightningBoltIcon = IconFactory.getInstance(MatrixApiActivity.this)
       .fromResource(R.drawable.lightning_bolt);
     for (Feature feature : featureCollection.getFeatures()) {
       mapboxMap.addMarker(new MarkerOptions()

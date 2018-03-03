@@ -55,7 +55,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivit
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsActivity;
-import com.mapbox.mapboxandroiddemo.examples.mas.DirectionsMatrixApiActivity;
+import com.mapbox.mapboxandroiddemo.examples.mas.MatrixApiActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.MapMatchingActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.mas.SimplifyPolylineActivity;
@@ -562,7 +562,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_mas_maxtrix_api_title,
           R.string.activity_mas_matrix_api_description,
-          new Intent(MainActivity.this, DirectionsMatrixApiActivity.class),
+          new Intent(MainActivity.this, MatrixApiActivity.class),
           R.string.activity_mas_matrix_url));
         currentCategory = R.id.nav_mas;
         break;
