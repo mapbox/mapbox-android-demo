@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.mapbox.api.directions.v5.DirectionsCriteria;
+import com.mapbox.api.directions.v5.models.DirectionsRoute;
+import com.mapbox.api.optimization.v1.MapboxOptimization;
+import com.mapbox.api.optimization.v1.models.OptimizationResponse;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -16,15 +20,12 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.api.directions.v5.DirectionsCriteria;
-import com.mapbox.services.api.directions.v5.models.DirectionsRoute;
-import com.mapbox.services.api.optimizedtrips.v1.MapboxOptimizedTrips;
-import com.mapbox.services.api.optimizedtrips.v1.models.OptimizedTripsResponse;
 import com.mapbox.services.commons.geojson.LineString;
 import com.mapbox.services.commons.models.Position;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,7 +42,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   private MapView mapView;
   private MapboxMap mapboxMap;
   private DirectionsRoute optimizedRoute;
-  private MapboxOptimizedTrips optimizedClient;
+  private MapboxOptimization optimizedClient;
   private Polyline optimizedPolyline;
   private List<Position> stops;
   private Position origin;
@@ -129,7 +130,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   }
 
   private void getOptimizedRoute(List<Position> coordinates) {
-    optimizedClient = new MapboxOptimizedTrips.Builder()
+    optimizedClient = new MapboxOptimization.Builder()
       .setSource(FIRST)
       .setDestination(ANY)
       .setCoordinates(coordinates)
@@ -138,17 +139,17 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
       .setAccessToken(Mapbox.getAccessToken())
       .build();
 
-    optimizedClient.enqueueCall(new Callback<OptimizedTripsResponse>() {
+    optimizedClient.enqueueCall(new Callback<OptimizationResponse>() {
       @Override
-      public void onResponse(Call<OptimizedTripsResponse> call, Response<OptimizedTripsResponse> response) {
+      public void onResponse(Call<OptimizationResponse> call, Response<OptimizationResponse> response) {
         if (!response.isSuccessful()) {
           Log.d("DirectionsActivity", getString(R.string.no_success));
           Toast.makeText(OptimizationActivity.this, R.string.no_success, Toast.LENGTH_SHORT).show();
           return;
         } else {
-          if (response.body().getTrips().isEmpty()) {
+          if (response.body().trips().isEmpty()) {
             Log.d("DirectionsActivity", getString(R.string.successful_but_no_routes) + " size = "
-              + response.body().getTrips().size());
+              + response.body().trips().size());
             Toast.makeText(OptimizationActivity.this, R.string.successful_but_no_routes,
               Toast.LENGTH_SHORT).show();
             return;
@@ -156,12 +157,12 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
         }
 
         // Get most optimized route from API response
-        optimizedRoute = response.body().getTrips().get(0);
+        optimizedRoute = response.body().trips().get(0);
         drawOptimizedRoute(optimizedRoute);
       }
 
       @Override
-      public void onFailure(Call<OptimizedTripsResponse> call, Throwable throwable) {
+      public void onFailure(Call<OptimizationResponse> call, Throwable throwable) {
         Log.d("DirectionsActivity", "Error: " + throwable.getMessage());
       }
     });
@@ -182,7 +183,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
 
   private LatLng[] convertLineStringToLatLng(DirectionsRoute route) {
     // Convert LineString coordinates into LatLng[]
-    LineString lineString = LineString.fromPolyline(route.getGeometry(), PRECISION_6);
+    LineString lineString = LineString.fromPolyline(route.geometry(), PRECISION_6);
     List<Position> coordinates = lineString.getCoordinates();
     LatLng[] points = new LatLng[coordinates.size()];
     for (int i = 0; i < coordinates.size(); i++) {

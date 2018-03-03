@@ -72,15 +72,16 @@ public class IndoorMapActivity extends AppCompatActivity {
         boundingBox.add(Position.fromCoordinates(-77.03532, 38.89811));
         boundingBox.add(Position.fromCoordinates(-77.03532, 38.89708));
 
-        mapboxMap.setOnCameraChangeListener(new MapboxMap.OnCameraChangeListener() {
-          @Override
-          public void onCameraChange(CameraPosition position) {
+        mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
 
-            if (position.zoom > 16) {
+          @Override
+          public void onCameraMove() {
+
+            if (mapboxMap.getCameraPosition().zoom > 16) {
               try {
                 if (TurfJoins.inside(Position.fromCoordinates(
-                  position.target.getLongitude(),
-                  position.target.getLatitude()),
+                  mapboxMap.getCameraPosition().target.getLongitude(),
+                  mapboxMap.getCameraPosition().target.getLatitude()),
                   boundingBox)) {
                   if (levelButtons.getVisibility() != View.VISIBLE) {
                     showLevelButton();

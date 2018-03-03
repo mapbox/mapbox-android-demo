@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.mapbox.api.directions.v5.DirectionsCriteria;
+import com.mapbox.api.directions.v5.MapboxDirections;
+import com.mapbox.api.directions.v5.models.DirectionsResponse;
+import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -14,10 +18,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.api.directions.v5.DirectionsCriteria;
-import com.mapbox.services.api.directions.v5.MapboxDirections;
-import com.mapbox.services.api.directions.v5.models.DirectionsResponse;
-import com.mapbox.services.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.services.commons.geojson.LineString;
 import com.mapbox.services.commons.models.Position;
 
@@ -86,12 +86,12 @@ public class DirectionsActivity extends AppCompatActivity {
   private void getRoute(Position origin, Position destination) {
 
     client = new MapboxDirections.Builder()
-      .setOrigin(origin)
-      .setDestination(destination)
-      .setOverview(DirectionsCriteria.OVERVIEW_FULL)
-      .setProfile(DirectionsCriteria.PROFILE_CYCLING)
-      .setAccessToken(getString(R.string.access_token))
-      .build();
+      .origin(origin)
+      .destination(destination)
+      .overview(DirectionsCriteria.OVERVIEW_FULL)
+      .profile(DirectionsCriteria.PROFILE_CYCLING)
+      .accessToken(getString(R.string.access_token))
+      .bu();
 
     client.enqueueCall(new Callback<DirectionsResponse>() {
       @Override
@@ -103,16 +103,16 @@ public class DirectionsActivity extends AppCompatActivity {
         if (response.body() == null) {
           Log.e(TAG, "No routes found, make sure you set the right user and access token.");
           return;
-        } else if (response.body().getRoutes().size() < 1) {
+        } else if (response.body().routes().size() < 1) {
           Log.e(TAG, "No routes found");
           return;
         }
 
         // Print some info about the route
-        currentRoute = response.body().getRoutes().get(0);
-        Log.d(TAG, "Distance: " + currentRoute.getDistance());
+        currentRoute = response.body().routes().get(0);
+        Log.d(TAG, "Distance: " + currentRoute.distance());
         Toast.makeText(DirectionsActivity.this, String.format(getString(R.string.directions_activity_toast_message),
-          currentRoute.getDistance()), Toast.LENGTH_SHORT).show();
+          currentRoute.distance()), Toast.LENGTH_SHORT).show();
 
         // Draw the route on the map
         drawRoute(currentRoute);
@@ -128,7 +128,7 @@ public class DirectionsActivity extends AppCompatActivity {
 
   private void drawRoute(DirectionsRoute route) {
     // Convert LineString coordinates into LatLng[]
-    LineString lineString = LineString.fromPolyline(route.getGeometry(), PRECISION_6);
+    LineString lineString = LineString.fromPolyline(route.geometry(), PRECISION_6);
     List<Position> coordinates = lineString.getCoordinates();
     LatLng[] points = new LatLng[coordinates.size()];
     for (int i = 0; i < coordinates.size(); i++) {
