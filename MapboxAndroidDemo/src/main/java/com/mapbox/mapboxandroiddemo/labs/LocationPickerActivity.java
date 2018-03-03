@@ -20,8 +20,10 @@ import com.mapbox.api.geocoding.v5.MapboxGeocoding;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
 import com.mapbox.core.exceptions.ServicesException;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -40,7 +42,7 @@ import com.mapbox.services.android.telemetry.location.LocationEnginePriority;
 import com.mapbox.services.android.telemetry.location.LocationEngineProvider;
 import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
-import com.mapbox.services.commons.geojson.Point;
+import com.mapbox.services.commons.models.Position;
 
 import java.util.List;
 
@@ -123,7 +125,9 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
             float coordinateX = hoveringMarker.getLeft() + (hoveringMarker.getWidth() / 2);
             float coordinateY = hoveringMarker.getBottom();
             float[] coords = new float[] {coordinateX, coordinateY};
-            final LatLng latLng = mapboxMap.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
+            final Point latLng = Point.fromLngLat(mapboxMap.getProjection().fromScreenLocation(
+              new PointF(coords[0], coords[1])).getLongitude(), mapboxMap.getProjection().fromScreenLocation(
+              new PointF(coords[0], coords[1])).getLatitude());
             hoveringMarker.setVisibility(View.GONE);
 
             // Transform the appearance of the button to become the cancel button
@@ -136,7 +140,9 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
 
             // Placing the marker on the mapboxMap as soon as possible causes the illusion
             // that the hovering marker and dropped marker are the same.
-            droppedMarker = mapboxMap.addMarker(new MarkerOptions().position(latLng).icon(icon));
+
+            droppedMarker = mapboxMap.addMarker(new MarkerOptions()
+              .position(new LatLng(latLng.longitude(), latLng.latitude())));
 
             // Finally we get the geocoding information
             reverseGeocode(latLng);
@@ -248,15 +254,13 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
     }
   }
 
-  private void reverseGeocode(final LatLng point) {
+  private void reverseGeocode(final Point point) {
     // This method is used to reverse geocode where the user has dropped the marker.
     try {
-      double[] coordinates = {point.getLongitude(), point.getLatitude()};
 
-//      Point.fromCoordinates(coordinates)
       MapboxGeocoding client = MapboxGeocoding.builder()
         .accessToken(getString(R.string.access_token))
-        .query()
+        .query(point)
         .geocodingTypes(GeocodingCriteria.TYPE_ADDRESS)
         .build();
 
