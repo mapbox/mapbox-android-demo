@@ -57,7 +57,7 @@ workflows:
   deploy:
     jobs:
       - publish
-          requires: primary
+        requires: primary
           filters:
             branches:
               only: master
