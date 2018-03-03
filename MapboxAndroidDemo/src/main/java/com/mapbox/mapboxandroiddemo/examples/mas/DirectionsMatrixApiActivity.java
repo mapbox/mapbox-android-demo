@@ -67,12 +67,12 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_matrix_api);
 
-    recyclerView = (RecyclerView) findViewById(R.id.matrix_api_recyclerview);
+    recyclerView = findViewById(R.id.matrix_api_recyclerview);
 
     // Create list of positions from local GeoJSON file
     initPositionListFromGeoJsonFile();
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -130,7 +130,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     snapHelper.attachToRecyclerView(recyclerView);
   }
 
-  private void makeMapboxMatrixApiCall(final int markerPositionInList, Position positionOfClickedMarker) {
+  private void makeMapboxMatrixApiCall(final int markerPositionInList) {
 
     // Build Mapbox Matrix API parameters
     MapboxMatrix directionsMatrixClient = MapboxMatrix.builder()
@@ -144,12 +144,14 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       @Override
       public void onResponse(Call<MatrixResponse> call,
                              Response<MatrixResponse> response) {
-        List<Double[][]> durationsToAllOfTheLocationsFromTheOrigin = response.body().durations();
-        for (int x = 0; x < durationsToAllOfTheLocationsFromTheOrigin.length; x++) {
+        List<List<Double[]>> durationsToAllOfTheLocationsFromTheOrigin = new ArrayList<>();
+        durationsToAllOfTheLocationsFromTheOrigin.add(response.body().durations());
+
+        for (int x = 0; x < durationsToAllOfTheLocationsFromTheOrigin.size(); x++) {
           String finalConvertedFormattedDistance = String.valueOf(new DecimalFormat("#.##")
             .format(TurfConversion.convertDistance(
-              durationsToAllOfTheLocationsFromTheOrigin[markerPositionInList][x],
-              "meters", "miles")));
+              // TODO
+              durationsToAllOfTheLocationsFromTheOrigin.get(0).get(markerPositionInList][x],"meters", "miles")
           if (x == markerPositionInList) {
             matrixLocationList.get(x).setDistanceFromOrigin(finalConvertedFormattedDistance);
           }
