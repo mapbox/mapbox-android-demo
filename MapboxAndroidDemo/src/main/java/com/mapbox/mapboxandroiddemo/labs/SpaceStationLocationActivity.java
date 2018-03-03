@@ -232,8 +232,8 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
   public static double computeHeading(LatLng from, LatLng to) {
     // Compute bearing/heading using Turf and return the value.
     return TurfMeasurement.bearing(
-      Point.fromCoordinates(Position.fromLngLat(from.getLongitude(), from.getLatitude())),
-      Point.fromCoordinates(Position.fromLngLat(to.getLongitude(), to.getLatitude())));
+      Point.fromCoordinates(new double[] {from.getLongitude(), from.getLatitude()}),
+      Point.fromCoordinates(new double[] {to.getLongitude(), to.getLatitude()}));
   }
 
   // Interface used for Retrofit.

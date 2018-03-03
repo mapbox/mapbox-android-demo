@@ -11,6 +11,7 @@ import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.api.optimization.v1.MapboxOptimization;
 import com.mapbox.api.optimization.v1.models.OptimizationResponse;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -25,7 +26,6 @@ import com.mapbox.services.commons.models.Position;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,8 +44,8 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   private DirectionsRoute optimizedRoute;
   private MapboxOptimization optimizedClient;
   private Polyline optimizedPolyline;
-  private List<Position> stops;
-  private Position origin;
+  private List<Point> stops;
+  private Point origin;
 
   private static final String FIRST = "first";
   private static final String ANY = "any";
@@ -79,7 +79,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     this.mapboxMap = mapboxMap;
     // Add origin and destination to the mapboxMap
     mapboxMap.addMarker(new MarkerOptions()
-      .position(new LatLng(origin.getLatitude(), origin.getLongitude()))
+      .position(new LatLng(origin.latitude(), origin.longitude()))
       .title(getString(R.string.origin)));
     Toast.makeText(OptimizationActivity.this, R.string.click_instructions, Toast.LENGTH_SHORT).show();
     mapboxMap.addOnMapClickListener(this);
@@ -120,23 +120,23 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   }
 
   private void addPointToStopsList(LatLng point) {
-    stops.add(Position.fromCoordinates(point.getLongitude(), point.getLatitude()));
+    stops.add(Point.fromLngLat(point.getLongitude(), point.getLatitude()));
   }
 
   private void addFirstStopToStopsList() {
     // Set first stop
-    origin = Position.fromCoordinates(30.335098600000038, 59.9342802);
+    origin = Point.fromLngLat(30.335098600000038, 59.9342802);
     stops.add(origin);
   }
 
-  private void getOptimizedRoute(List<Position> coordinates) {
-    optimizedClient = new MapboxOptimization.Builder()
-      .setSource(FIRST)
-      .setDestination(ANY)
-      .setCoordinates(coordinates)
-      .setOverview(DirectionsCriteria.OVERVIEW_FULL)
-      .setProfile(DirectionsCriteria.PROFILE_DRIVING)
-      .setAccessToken(Mapbox.getAccessToken())
+  private void getOptimizedRoute(List<Point> coordinates) {
+    optimizedClient = MapboxOptimization.builder()
+      .source(FIRST)
+      .destination(ANY)
+      .coordinates(coordinates)
+      .overview(DirectionsCriteria.OVERVIEW_FULL)
+      .profile(DirectionsCriteria.PROFILE_DRIVING)
+      .accessToken(Mapbox.getAccessToken())
       .build();
 
     optimizedClient.enqueueCall(new Callback<OptimizationResponse>() {

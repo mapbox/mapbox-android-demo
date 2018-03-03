@@ -17,6 +17,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mapbox.api.directions.v5.DirectionsCriteria;
+import com.mapbox.api.matrix.v1.MapboxMatrix;
+import com.mapbox.api.matrix.v1.models.MatrixResponse;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
@@ -27,13 +31,10 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.api.directions.v5.DirectionsCriteria;
-import com.mapbox.services.api.directionsmatrix.v1.MapboxDirectionsMatrix;
-import com.mapbox.services.api.directionsmatrix.v1.models.DirectionsMatrixResponse;
-import com.mapbox.services.api.utils.turf.TurfHelpers;
 import com.mapbox.services.commons.geojson.Feature;
 import com.mapbox.services.commons.geojson.FeatureCollection;
 import com.mapbox.services.commons.models.Position;
+import com.mapbox.turf.TurfConversion;
 
 import java.io.InputStream;
 import java.text.DecimalFormat;
@@ -44,11 +45,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class DirectionsMatrixApiActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private List<Position> positionList;
+  private List<Point> positionList;
   private FeatureCollection featureCollection;
   private RecyclerView recyclerView;
   private MatrixApiLocationRecyclerViewAdapter matrixApiLocationRecyclerViewAdapter;
@@ -131,23 +133,22 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
   private void makeMapboxMatrixApiCall(final int markerPositionInList, Position positionOfClickedMarker) {
 
     // Build Mapbox Matrix API parameters
-    MapboxDirectionsMatrix directionsMatrixClient = new MapboxDirectionsMatrix.Builder()
-      .setAccessToken(getString(R.string.access_token))
-      .setProfile(DirectionsCriteria.PROFILE_DRIVING)
-      .setOrigin(positionOfClickedMarker)
-      .setCoordinates(positionList)
+    MapboxMatrix directionsMatrixClient = MapboxMatrix.builder()
+      .accessToken(getString(R.string.access_token))
+      .profile(DirectionsCriteria.PROFILE_DRIVING)
+      .coordinates(positionList)
       .build();
 
     // Handle the API response
-    directionsMatrixClient.enqueueCall(new Callback<DirectionsMatrixResponse>() {
+    directionsMatrixClient.enqueueCall(new Callback<MatrixResponse>() {
       @Override
-      public void onResponse(Call<DirectionsMatrixResponse> call,
-                             Response<DirectionsMatrixResponse> response) {
-        double[][] durationsToAllOfTheLocationsFromTheORigin = response.body().getDurations();
-        for (int x = 0; x < durationsToAllOfTheLocationsFromTheORigin.length; x++) {
+      public void onResponse(Call<MatrixResponse> call,
+                             Response<MatrixResponse> response) {
+        List<Double[][]> durationsToAllOfTheLocationsFromTheOrigin = response.body().durations();
+        for (int x = 0; x < durationsToAllOfTheLocationsFromTheOrigin.length; x++) {
           String finalConvertedFormattedDistance = String.valueOf(new DecimalFormat("#.##")
-            .format(TurfHelpers.convertDistance(
-              durationsToAllOfTheLocationsFromTheORigin[markerPositionInList][x],
+            .format(TurfConversion.convertDistance(
+              durationsToAllOfTheLocationsFromTheOrigin[markerPositionInList][x],
               "meters", "miles")));
           if (x == markerPositionInList) {
             matrixLocationList.get(x).setDistanceFromOrigin(finalConvertedFormattedDistance);
@@ -160,7 +161,7 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       }
 
       @Override
-      public void onFailure(Call<DirectionsMatrixResponse> call, Throwable throwable) {
+      public void onFailure(Call<MatrixResponse> call, Throwable throwable) {
         Toast.makeText(DirectionsMatrixApiActivity.this, R.string.call_error,
           Toast.LENGTH_SHORT).show();
         Log.d("MatrixApiActivity", "onResponse onFailure");
@@ -207,8 +208,8 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
     // Get the position of each GeoJSON feature and build the list of Position
     // objects for eventual use in the Matrix API call
     for (Feature singleLocation : featureCollection.getFeatures()) {
-      Position singleLocationPosition = (Position) singleLocation.getGeometry().getCoordinates();
-      positionList.add(singleLocationPosition);
+      Point singleLocationPoint = (Point) singleLocation.getGeometry().getCoordinates();
+      positionList.add(singleLocationPoint);
     }
   }
 
@@ -218,8 +219,8 @@ public class DirectionsMatrixApiActivity extends AppCompatActivity {
       SingleRecyclerViewMatrixLocation singleRecyclerViewLocation = new SingleRecyclerViewMatrixLocation();
       singleRecyclerViewLocation.setName(featureCollection.getFeatures().get(x)
         .getStringProperty("Station_Name"));
-      singleRecyclerViewLocation.setLocationLatLng(new LatLng(positionList.get(x).getLatitude(),
-        positionList.get(x).getLongitude()));
+      singleRecyclerViewLocation.setLocationLatLng(new LatLng(positionList.get(x).latitude(),
+        positionList.get(x).longitude()));
       matrixLocationList.add(singleRecyclerViewLocation);
     }
   }
