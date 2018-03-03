@@ -22,8 +22,9 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.api.utils.turf.TurfMeasurement;
+import com.mapbox.services.commons.geojson.Point;
 import com.mapbox.services.commons.models.Position;
+import com.mapbox.turf.TurfMeasurement;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -231,9 +232,8 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
   public static double computeHeading(LatLng from, LatLng to) {
     // Compute bearing/heading using Turf and return the value.
     return TurfMeasurement.bearing(
-      Position.fromCoordinates(from.getLongitude(), from.getLatitude()),
-      Position.fromCoordinates(to.getLongitude(), to.getLatitude())
-    );
+      Point.fromCoordinates(Position.fromLngLat(from.getLongitude(), from.getLatitude())),
+      Point.fromCoordinates(Position.fromLngLat(to.getLongitude(), to.getLatitude())));
   }
 
   // Interface used for Retrofit.
