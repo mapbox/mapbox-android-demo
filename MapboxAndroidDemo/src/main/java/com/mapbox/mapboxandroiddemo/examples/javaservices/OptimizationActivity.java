@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.mas;
+package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -33,7 +33,7 @@ import retrofit2.Response;
 import static com.mapbox.services.Constants.PRECISION_6;
 
 /**
- * Use Mapbox Android Services to request and compare normal directions with time optimized directions.
+ * Use Mapbox Java Services to request and compare normal directions with time optimized directions.
  */
 public class OptimizationActivity extends AppCompatActivity implements OnMapReadyCallback,
   MapboxMap.OnMapClickListener, MapboxMap.OnMapLongClickListener {
@@ -60,7 +60,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_mas_optimization);
+    setContentView(R.layout.activity_javaservices_optimization);
 
     stops = new ArrayList<>();
 

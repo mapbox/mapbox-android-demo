@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.mas;
+package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -30,7 +30,7 @@ import retrofit2.Response;
 import static com.mapbox.services.Constants.PRECISION_6;
 
 /**
- * Use Mapbox Android Services to request directions
+ * Use Mapbox Java Services to request directions
  */
 public class DirectionsActivity extends AppCompatActivity {
 
@@ -50,7 +50,7 @@ public class DirectionsActivity extends AppCompatActivity {
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_mas_directions);
+    setContentView(R.layout.activity_javaservices_directions);
 
     // Alhambra landmark in Granada, Spain.
     final Position origin = Position.fromCoordinates(-3.588098, 37.176164);

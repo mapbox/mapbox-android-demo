@@ -49,11 +49,11 @@
     <string name="activity_location_tracking_description">Bloqueja la càmera centrada sobre la ubicació de l\'usuari.</string>
     <string name="activity_location_animated_icon_description">Utilitza una vista de marcador per marcar la ubicació dels usuaris i afegeix-hi una animació de batec.</string>
     <string name="activity_location_customize_user_description">Ajustar el color de la icona d\'ubicació de l\'usuari i l\'encoixinat per tal que aparegui més avall a la pantalla.</string>
-    <string name="activity_mas_directions_description">Empra Mapbox Android Services per demanar indicacions.</string>
-    <string name="activity_mas_static_image_description">Empra Mapbox Android Services per generar una url i descarregar un mapa estàtic.</string>
+    <string name="activity_java_services_directions_description">Empra Mapbox Android Services per demanar indicacions.</string>
+    <string name="activity_java_services_static_image_description">Empra Mapbox Android Services per generar una url i descarregar un mapa estàtic.</string>
     <string name="activity_plugins_traffic_plugin_description">Empra el connector de trànsit de Mapbox per mostrar les dades de congestió de cotxes en viu a la part superior d\'un mapa.</string>
-    <string name="activity_mas_simplify_polyline_description">Emprant l\'eina de polilínies simplifica una polilínia, cosa que redueix la quantitat de coordenades que componen la polilínia depenent de la tolerància.</string>
-    <string name="activity_mas_map_matching_description">Feu coincidir els punts GPS amb el mapa de manera que encaixin amb les carreteres/vies.</string>
+    <string name="activity_java_services_simplify_polyline_description">Emprant l\'eina de polilínies simplifica una polilínia, cosa que redueix la quantitat de coordenades que componen la polilínia depenent de la tolerància.</string>
+    <string name="activity_java_services_map_matching_description">Feu coincidir els punts GPS amb el mapa de manera que encaixin amb les carreteres/vies.</string>
     <string name="activity_lab_location_picker_description">Posa un punt en una ubicació específica i després realitza la geocodificació inversa.</string>
     <string name="activity_lab_marker_following_route_description">Emprant una ruta GeoJSON encaixada amb el mapa el marcador es desplaça al llarg de la ruta a velocitat constant.</string>
     <string name="activity_lab_space_station_location_description">Veu la posició de l\'Estació Espacial Internacional en temps real.</string>

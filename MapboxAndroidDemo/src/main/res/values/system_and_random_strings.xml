@@ -21,7 +21,7 @@
     <string name="info_dialog_negative_button_text">Not now</string>
 
     <string name="description_labs">While other categories in this app present examples doing one specific thing, the lab category combines examples to show the power of the SDK.</string>
-    <string name="description_mas">Mapbox Android Services bundles many of the Mapbox APIs into a single SDK such as directions, geocoding, and many of the other utilities offered.</string>
+    <string name="description_java_services">Mapbox Java Services bundles many of the Mapbox APIs into a single SDK such as directions, geocoding, and many of the other utilities offered.</string>
     <string name="description_query">Examples here show how to query the map data to obtain information such as a features geometry or properties.</string>
     <string name="description_offline">We have a new way to make client-side static maps. We call it the Map Snapshotter, click here for some examples.</string>
 
@@ -34,12 +34,12 @@
     <!-- nav drawer categories -->
     <string name="getting_started_category">Getting started</string>
     <string name="styles_category">Styles</string>
-    <string name="dds_category">Data driven styling</string>
+    <string name="dds_category">Data-driven styling</string>
     <string name="annotations_category">Annotations</string>
     <string name="camera_category">Camera</string>
     <string name="offline_category">Offline</string>
     <string name="query_map_category">Query map</string>
-    <string name="android_services_category">Android Services</string>
+    <string name="java_services_category">Java services</string>
     <string name="image_generator_category">Image generation</string>
     <string name="lab_category">Lab</string>
     <string name="share">Share</string>
