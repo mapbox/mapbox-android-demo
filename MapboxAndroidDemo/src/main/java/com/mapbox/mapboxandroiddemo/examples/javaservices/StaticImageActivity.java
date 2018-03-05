@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.mas;
+package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,7 @@ import com.mapbox.services.Constants;
 import com.squareup.picasso.Picasso;
 
 /**
- * This example uses the static image API found inside the Mapbox Services SDK to create an API URL. Using the newly
+ * This example uses the static image API found inside the Java Services SDK to create an API URL. Using the newly
  * created URL, Picasso, a third party image loading library, is used to download and loading in the image.
  */
 public class StaticImageActivity extends AppCompatActivity {
@@ -24,7 +24,7 @@ public class StaticImageActivity extends AppCompatActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_mas_static_image);
+    setContentView(R.layout.activity_javaservices_static_image);
 
     ImageView veniceImageView = (ImageView) findViewById(R.id.veniceImageView);
     ImageView parisImageView = (ImageView) findViewById(R.id.parisImageView);

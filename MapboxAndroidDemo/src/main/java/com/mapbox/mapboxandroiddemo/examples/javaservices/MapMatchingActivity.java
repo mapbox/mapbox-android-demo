@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.mas;
+package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -58,7 +58,7 @@ public class MapMatchingActivity extends AppCompatActivity {
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_mas_map_matching);
+    setContentView(R.layout.activity_javaservices_map_matching);
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
