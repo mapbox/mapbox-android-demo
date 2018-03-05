@@ -80,11 +80,11 @@ public class IndoorMapActivity extends AppCompatActivity {
         mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
           @Override
           public void onCameraMove() {
-
             if (mapboxMap.getCameraPosition().zoom > 16) {
               try {
                 if (TurfJoins.inside(Point.fromLngLat(mapboxMap.getCameraPosition().target.getLongitude(),
                   mapboxMap.getCameraPosition().target.getLatitude()), Polygon.fromLngLats(boundingBoxList))) {
+
 
                   if (levelButtons.getVisibility() != View.VISIBLE) {
                     showLevelButton();
@@ -101,6 +101,7 @@ public class IndoorMapActivity extends AppCompatActivity {
               hideLevelButton();
             }
           }
+
         });
 
         indoorBuildingSource = new GeoJsonSource("indoor-building", loadJsonFromAsset("white_house_lvl_0.geojson"));

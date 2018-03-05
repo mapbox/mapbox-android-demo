@@ -15,10 +15,10 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerMode;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
+import com.mapbox.services.android.location.LostLocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngineListener;
 import com.mapbox.services.android.telemetry.location.LocationEnginePriority;
-import com.mapbox.services.android.telemetry.location.LocationEngineProvider;
 import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
 
@@ -74,7 +74,7 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
 
   @SuppressWarnings( {"MissingPermission"})
   private void initializeLocationEngine() {
-    locationEngine = new LocationEngineProvider(this).obtainBestLocationEngineAvailable();
+    locationEngine = new LostLocationEngine(LocationPluginActivity.this);
     locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
     locationEngine.activate();
 

@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.matrix.v1.MapboxMatrix;
 import com.mapbox.api.matrix.v1.models.MatrixResponse;
+import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
@@ -30,8 +32,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.commons.geojson.Feature;
-import com.mapbox.services.commons.geojson.FeatureCollection;
 import com.mapbox.services.commons.models.Position;
 import com.mapbox.turf.TurfConversion;
 
@@ -52,7 +52,7 @@ public class MatrixApiActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private List<Position> positionList;
+  private List<Point> positionList;
   private FeatureCollection featureCollection;
   private RecyclerView recyclerView;
   private MatrixApiLocationRecyclerViewAdapter matrixApiLocationRecyclerViewAdapter;
@@ -146,11 +146,11 @@ public class MatrixApiActivity extends AppCompatActivity {
       @Override
       public void onResponse(Call<MatrixResponse> call,
                              Response<MatrixResponse> response) {
-        double[][] durationsToAllOfTheLocationsFromTheORigin = response.body().durations();
-        for (int x = 0; x < durationsToAllOfTheLocationsFromTheORigin.length; x++) {
+        List<Double[]> durationsToAllOfTheLocationsFromTheOrigin = response.body().durations();
+        for (int x = 0; x < durationsToAllOfTheLocationsFromTheOrigin.size(); x++) {
           String finalConvertedFormattedDistance = String.valueOf(new DecimalFormat("#.##")
             .format(TurfConversion.convertDistance(
-              durationsToAllOfTheLocationsFromTheORigin[markerPositionInList][x],
+              durationsToAllOfTheLocationsFromTheOrigin.get(markerPositionInList)[x],
               "meters", "miles")));
           if (x == markerPositionInList) {
             matrixLocationList.get(x).setDistanceFromOrigin(finalConvertedFormattedDistance);
@@ -210,7 +210,7 @@ public class MatrixApiActivity extends AppCompatActivity {
     // Get the position of each GeoJSON feature and build the list of Position
     // objects for eventual use in the Matrix API call
     for (Feature singleLocation : featureCollection.getFeatures()) {
-      Position singleLocationPosition = (Position) singleLocation.getGeometry().getCoordinates();
+      Point singleLocationPosition = Point.fromLngLat(singleLocation.getGeometry().getCoordinates());
       positionList.add(singleLocationPosition);
     }
   }
@@ -221,8 +221,8 @@ public class MatrixApiActivity extends AppCompatActivity {
       SingleRecyclerViewMatrixLocation singleRecyclerViewLocation = new SingleRecyclerViewMatrixLocation();
       singleRecyclerViewLocation.setName(featureCollection.getFeatures().get(x)
         .getStringProperty("Station_Name"));
-      singleRecyclerViewLocation.setLocationLatLng(new LatLng(positionList.get(x).getLatitude(),
-        positionList.get(x).getLongitude()));
+      singleRecyclerViewLocation.setLocationLatLng(new LatLng(positionList.get(x).latitude(),
+        positionList.get(x).longitude()));
       matrixLocationList.add(singleRecyclerViewLocation);
     }
   }
