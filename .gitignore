@@ -11,3 +11,4 @@ build
 gradlew.bat
 *.properties
 src/main/res/
+MapboxAndroidDemo/src/main/java/com/mapbox/mapboxandroiddemo/account/AccountRetrievalService.java
