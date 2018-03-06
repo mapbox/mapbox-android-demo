@@ -1,0 +1,27 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [50.8, 4.35]
+              },
+              "properties": {
+                "name": "Brussels",
+                "temperature": 10.2
+              }
+        },
+        {
+              "type": "Feature",
+              "geometry": {
+                  "type": "Point",
+                  "coordinates": [-77.04, 38.9]
+               },
+               "properties": {
+                 "name": "Washington D.C.",
+                 "temperature": 1.0
+               }
+        }
+    ]
+}
