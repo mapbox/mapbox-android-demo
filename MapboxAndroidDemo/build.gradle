@@ -88,6 +88,8 @@ dependencies {
 
     // Mapbox dependencies
     api (dependenciesList.mapboxMapSdk)
+    implementation dependenciesList.mapboxTurf
+    implementation dependenciesList.mapboGeoJson
 
     // Mapbox plugins
     implementation dependenciesList.mapboxPluginLocationLayer

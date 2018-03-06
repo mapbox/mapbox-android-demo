@@ -6,6 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.mapbox.api.matching.v5.MapboxMapMatching;
+import com.mapbox.api.matching.v5.models.MapMatchingResponse;
+import com.mapbox.core.exceptions.ServicesException;
+import com.mapbox.geojson.Point;
+import com.mapbox.geojson.utils.PolylineUtils;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Polyline;
@@ -15,14 +20,9 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.Constants;
-import com.mapbox.services.api.ServicesException;
-import com.mapbox.services.api.mapmatching.v5.MapMatchingCriteria;
-import com.mapbox.services.api.mapmatching.v5.MapboxMapMatching;
-import com.mapbox.services.api.mapmatching.v5.models.MapMatchingResponse;
 import com.mapbox.services.commons.geojson.FeatureCollection;
 import com.mapbox.services.commons.geojson.LineString;
 import com.mapbox.services.commons.models.Position;
-import com.mapbox.services.commons.utils.PolylineUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -34,6 +34,9 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.mapbox.api.directions.v5.DirectionsCriteria.PROFILE_DRIVING;
+
 
 /**
  * Match raw GPS points to the map so they align with roads and pathways.
@@ -57,7 +60,7 @@ public class MapMatchingActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_javaservices_map_matching);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -110,11 +113,11 @@ public class MapMatchingActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  private class DrawGeoJson extends AsyncTask<Void, Void, List<Position>> {
+  private class DrawGeoJson extends AsyncTask<Void, Void, List<Point>> {
     @Override
-    protected List<Position> doInBackground(Void... voids) {
+    protected List<Point> doInBackground(Void... voids) {
 
-      List<Position> points = new ArrayList<>();
+      List<Point> points = new ArrayList<>();
 
       try {
         // Load GeoJSON file
@@ -125,54 +128,54 @@ public class MapMatchingActivity extends AppCompatActivity {
         while ((cp = rd.read()) != -1) {
           sb.append((char) cp);
         }
-
         inputStream.close();
         FeatureCollection featureCollection = FeatureCollection.fromJson(sb.toString());
         LineString lineString = (LineString) featureCollection.getFeatures().get(0).getGeometry();
-        points = lineString.getCoordinates();
+        for (Position singlePosition : lineString.getCoordinates()) {
+          points.add(Point.fromLngLat(singlePosition.getLongitude(),
+              singlePosition.getLatitude()));
+        }
       } catch (Exception exception) {
         Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
       }
-
       return points;
     }
 
     @Override
-    protected void onPostExecute(List<Position> points) {
+    protected void onPostExecute(List<Point> points) {
       super.onPostExecute(points);
       drawBeforeMapMatching(points);
-
-      Position[] coordinates = new Position[points.size()];
-      drawMapMatched(points.toArray(coordinates));
+      drawMapMatched(points);
     }
   }
 
-  private void drawBeforeMapMatching(List<Position> points) {
+  private void drawBeforeMapMatching(List<Point> points) {
     LatLng[] pointsArray = new LatLng[points.size()];
     for (int i = 0; i < points.size(); i++) {
-      pointsArray[i] = new LatLng(points.get(i).getLatitude(), points.get(i).getLongitude());
+      pointsArray[i] = new LatLng(points.get(i).latitude(), points.get(i).longitude());
     }
 
     map.addPolyline(new PolylineOptions()
-            .add(pointsArray)
-            .color(Color.parseColor("#8a8acb"))
-            .alpha(0.65f)
-            .width(4));
+        .add(pointsArray)
+        .color(Color.parseColor("#8a8acb"))
+        .alpha(0.65f)
+        .width(4));
   }
 
-  private void drawMapMatched(Position[] coordinates) {
+  private void drawMapMatched(List<Point> coordinates) {
     try {
       // Setup the request using a client.
-      MapboxMapMatching client = new MapboxMapMatching.Builder()
-              .setAccessToken(Mapbox.getAccessToken())
-              .setProfile(MapMatchingCriteria.PROFILE_DRIVING)
-              .setCoordinates(coordinates)
-              .build();
+      MapboxMapMatching client = MapboxMapMatching.builder()
+          .accessToken(Mapbox.getAccessToken())
+          .profile(PROFILE_DRIVING)
+          .coordinates(coordinates)
+          .build();
 
       // Execute the API call and handle the response.
       client.enqueueCall(new Callback<MapMatchingResponse>() {
         @Override
-        public void onResponse(Call<MapMatchingResponse> call, Response<MapMatchingResponse> response) {
+        public void onResponse(Call<MapMatchingResponse> call,
+                               Response<MapMatchingResponse> response) {
           // Create a new list to store the map matched coordinates.
           List<LatLng> mapMatchedPoints = new ArrayList<>();
 
@@ -181,16 +184,15 @@ public class MapMatchingActivity extends AppCompatActivity {
             // Convert the map matched response list from position to latlng coordinates.
             // By default, the SDK uses MapMatchingCriteria.GEOMETRY_POLYLINE_6, therefore
             // you need Constants.PRECISION_6 for the decode to be right
-            String geometry = response.body().getMatchings().get(0).getGeometry();
-            List<Position> positions = PolylineUtils.decode(geometry, Constants.PRECISION_6);
-            if (positions == null) {
+            String geometry = response.body().matchings().get(0).geometry();
+            List<Point> pointList = PolylineUtils.decode(geometry, Constants.PRECISION_6);
+            if (pointList == null) {
               return;
             }
 
-            for (int i = 0; i < positions.size(); i++) {
-              mapMatchedPoints.add(new LatLng(
-                      positions.get(i).getLatitude(),
-                      positions.get(i).getLongitude()));
+            for (Point singlePosition : pointList) {
+              mapMatchedPoints.add(new LatLng(singlePosition.latitude(),
+                  singlePosition.longitude()));
             }
 
             if (mapMatchedRoute != null) {
@@ -199,9 +201,9 @@ public class MapMatchingActivity extends AppCompatActivity {
 
             // Add the map matched route to the Mapbox map.
             mapMatchedRoute = map.addPolyline(new PolylineOptions()
-                    .addAll(mapMatchedPoints)
-                    .color(Color.parseColor("#3bb2d0"))
-                    .width(4));
+                .addAll(mapMatchedPoints)
+                .color(Color.parseColor("#3bb2d0"))
+                .width(4));
           } else {
             // If the response code does not response "OK" an error has occurred.
             Log.e(TAG, "Too many coordinates, profile not found, invalid input, or no match.");

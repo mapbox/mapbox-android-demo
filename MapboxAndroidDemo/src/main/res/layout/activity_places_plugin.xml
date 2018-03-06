@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLng="-43.334931"
         mapbox:mapbox_cameraZoom="0.346515"
-        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/cj44mfrt20f082snokim4ungi" />
+        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_location_search"

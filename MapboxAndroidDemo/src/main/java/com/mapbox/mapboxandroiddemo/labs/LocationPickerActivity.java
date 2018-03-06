@@ -15,6 +15,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.mapbox.api.geocoding.v5.GeocodingCriteria;
+import com.mapbox.api.geocoding.v5.MapboxGeocoding;
+import com.mapbox.api.geocoding.v5.models.CarmenFeature;
+import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
+import com.mapbox.core.exceptions.ServicesException;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
@@ -23,24 +29,17 @@ import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerMode;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
-import com.mapbox.services.android.location.LostLocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngineListener;
 import com.mapbox.services.android.telemetry.location.LocationEnginePriority;
+import com.mapbox.services.android.telemetry.location.LocationEngineProvider;
 import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
-import com.mapbox.services.api.ServicesException;
-import com.mapbox.services.api.geocoding.v5.GeocodingCriteria;
-import com.mapbox.services.api.geocoding.v5.MapboxGeocoding;
-import com.mapbox.services.api.geocoding.v5.models.CarmenFeature;
-import com.mapbox.services.api.geocoding.v5.models.GeocodingResponse;
-import com.mapbox.services.commons.models.Position;
 
 import java.util.List;
 
@@ -77,7 +76,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
     setContentView(R.layout.activity_lab_location_picker);
 
     // Get the location engine object for later use.
-    locationEngine = new LocationSource(this);
+    locationEngine = new LocationEngineProvider(this).obtainBestLocationEngineAvailable();
     locationEngine.activate();
 
     // Initialize the mapboxMap view
@@ -123,7 +122,9 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
             float coordinateX = hoveringMarker.getLeft() + (hoveringMarker.getWidth() / 2);
             float coordinateY = hoveringMarker.getBottom();
             float[] coords = new float[] {coordinateX, coordinateY};
-            final LatLng latLng = mapboxMap.getProjection().fromScreenLocation(new PointF(coords[0], coords[1]));
+            final Point latLng = Point.fromLngLat(mapboxMap.getProjection().fromScreenLocation(
+              new PointF(coords[0], coords[1])).getLongitude(), mapboxMap.getProjection().fromScreenLocation(
+              new PointF(coords[0], coords[1])).getLatitude());
             hoveringMarker.setVisibility(View.GONE);
 
             // Transform the appearance of the button to become the cancel button
@@ -136,7 +137,9 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
 
             // Placing the marker on the mapboxMap as soon as possible causes the illusion
             // that the hovering marker and dropped marker are the same.
-            droppedMarker = mapboxMap.addMarker(new MarkerOptions().position(latLng).icon(icon));
+
+            droppedMarker = mapboxMap.addMarker(new MarkerOptions()
+              .position(new LatLng(latLng.latitude(), latLng.longitude())));
 
             // Finally we get the geocoding information
             reverseGeocode(latLng);
@@ -166,6 +169,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
   }
 
   @Override
+  @SuppressWarnings( {"MissingPermission"})
   protected void onStart() {
     super.onStart();
     if (locationPlugin != null) {
@@ -247,27 +251,28 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
     }
   }
 
-  private void reverseGeocode(final LatLng point) {
+  private void reverseGeocode(final Point point) {
     // This method is used to reverse geocode where the user has dropped the marker.
     try {
-      MapboxGeocoding client = new MapboxGeocoding.Builder()
-        .setAccessToken(getString(R.string.access_token))
-        .setCoordinates(Position.fromCoordinates(point.getLongitude(), point.getLatitude()))
-        .setGeocodingType(GeocodingCriteria.TYPE_ADDRESS)
+
+      MapboxGeocoding client = MapboxGeocoding.builder()
+        .accessToken(getString(R.string.access_token))
+        .query(Point.fromLngLat(point.longitude(), point.latitude()))
+        .geocodingTypes(GeocodingCriteria.TYPE_ADDRESS)
         .build();
 
       client.enqueueCall(new Callback<GeocodingResponse>() {
         @Override
         public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
 
-          List<CarmenFeature> results = response.body().getFeatures();
+          List<CarmenFeature> results = response.body().features();
           if (results.size() > 0) {
             CarmenFeature feature = results.get(0);
             // If the geocoder returns a result, we take the first in the list and update
             // the dropped marker snippet with the information. Lastly we open the info
             // window.
             if (droppedMarker != null) {
-              droppedMarker.setSnippet(feature.getPlaceName());
+              droppedMarker.setSnippet(feature.placeName());
               mapboxMap.selectMarker(droppedMarker);
             }
 
@@ -307,7 +312,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
 
   @SuppressWarnings( {"MissingPermission"})
   private void initializeLocationEngine() {
-    locationEngine = new LostLocationEngine(LocationPickerActivity.this);
+    locationEngine = new LocationEngineProvider(this).obtainBestLocationEngineAvailable();
     locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
     locationEngine.activate();
 
