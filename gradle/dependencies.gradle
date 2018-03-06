@@ -7,9 +7,6 @@ ext {
             buildToolsVersion: '26.0.3'
     ]
 
-    versionCode = 0.1
-    versionName = "5.0.0"
-
     version = [
             // mapbox
             mapboxMapSdk             : '5.5.0',
@@ -96,9 +93,10 @@ ext {
     ]
 
     pluginDependencies = [
-            gradle    : "com.android.tools.build:gradle:${pluginVersion.gradle}",
-            checkstyle: "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
-            firebase  : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
+            gradle       : "com.android.tools.build:gradle:${pluginVersion.gradle}",
+            checkstyle   : "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
+            firebase     : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
+            playPublisher: "com.github.triplet.gradle:play-publisher:${pluginVersion.gradlePlayPublisher}"
     ]
 
     wearDependencies = [
