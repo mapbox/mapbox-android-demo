@@ -11,6 +11,7 @@ buildscript {
     dependencies {
         classpath pluginDependencies.gradle
         classpath pluginDependencies.firebase
+        classpath pluginDependencies.playPublisher
     }
 
 }
@@ -25,7 +26,6 @@ allprojects {
         google()
         maven { url "https://jitpack.io" }
         maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://maven.google.com" }
     }
 }
 
