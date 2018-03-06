@@ -10,6 +10,7 @@ import com.mapbox.api.matching.v5.MapboxMapMatching;
 import com.mapbox.api.matching.v5.models.MapMatchingResponse;
 import com.mapbox.core.exceptions.ServicesException;
 import com.mapbox.geojson.Point;
+import com.mapbox.geojson.utils.PolylineUtils;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Polyline;
@@ -22,7 +23,6 @@ import com.mapbox.services.Constants;
 import com.mapbox.services.commons.geojson.FeatureCollection;
 import com.mapbox.services.commons.geojson.LineString;
 import com.mapbox.services.commons.models.Position;
-import com.mapbox.services.commons.utils.PolylineUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -60,7 +60,7 @@ public class MapMatchingActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_javaservices_map_matching);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -185,14 +185,14 @@ public class MapMatchingActivity extends AppCompatActivity {
             // By default, the SDK uses MapMatchingCriteria.GEOMETRY_POLYLINE_6, therefore
             // you need Constants.PRECISION_6 for the decode to be right
             String geometry = response.body().matchings().get(0).geometry();
-            List<Position> positionList = PolylineUtils.decode(geometry, Constants.PRECISION_6);
-            if (positionList == null) {
+            List<Point> pointList = PolylineUtils.decode(geometry, Constants.PRECISION_6);
+            if (pointList == null) {
               return;
             }
 
-            for (Position singlePosition : positionList) {
-              mapMatchedPoints.add(new LatLng(singlePosition.getLatitude(),
-                  singlePosition.getLongitude()));
+            for (Point singlePosition : pointList) {
+              mapMatchedPoints.add(new LatLng(singlePosition.latitude(),
+                  singlePosition.longitude()));
             }
 
             if (mapMatchedRoute != null) {

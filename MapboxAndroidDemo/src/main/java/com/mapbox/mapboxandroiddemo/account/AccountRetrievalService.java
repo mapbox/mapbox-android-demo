@@ -77,7 +77,7 @@ public class AccountRetrievalService extends IntentService {
 
   private void getAccessToken(String code) {
 
-    String clientSecret = getString(R.string.mapbox_auth_flow_secret);
+    String clientSecret = getString(R.string.app_auth_flow_secret);
 
     String query = new Uri.Builder()
       .appendQueryParameter("grant_type", "authorization_code")
