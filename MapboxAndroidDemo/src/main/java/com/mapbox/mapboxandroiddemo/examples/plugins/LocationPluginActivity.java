@@ -61,7 +61,7 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
   private void enableLocationPlugin() {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
-      // Create an instance of LOST location engine
+      // Create a location engine instance
       initializeLocationEngine();
 
       locationPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationEngine);
