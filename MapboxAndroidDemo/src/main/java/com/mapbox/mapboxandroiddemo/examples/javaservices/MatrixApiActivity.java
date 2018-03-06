@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.matrix.v1.MapboxMatrix;
 import com.mapbox.api.matrix.v1.models.MatrixResponse;
+import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
@@ -52,7 +53,7 @@ public class MatrixApiActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private List<Point> positionList;
+  private List<Point> pointList;
   private FeatureCollection featureCollection;
   private RecyclerView recyclerView;
   private MatrixApiLocationRecyclerViewAdapter matrixApiLocationRecyclerViewAdapter;
@@ -138,7 +139,7 @@ public class MatrixApiActivity extends AppCompatActivity {
     MapboxMatrix directionsMatrixClient = MapboxMatrix.builder()
       .accessToken(getString(R.string.access_token))
       .profile(DirectionsCriteria.PROFILE_DRIVING)
-      .coordinates(positionList)
+      .coordinates(pointList)
       .build();
 
     // Handle the API response
@@ -174,7 +175,7 @@ public class MatrixApiActivity extends AppCompatActivity {
   private void addMarkers() {
     Icon lightningBoltIcon = IconFactory.getInstance(MatrixApiActivity.this)
       .fromResource(R.drawable.lightning_bolt);
-    for (Feature feature : featureCollection.getFeatures()) {
+    for (com.mapbox.geojson.Feature feature : featureCollection.features()) {
       mapboxMap.addMarker(new MarkerOptions()
         .position(new LatLng(feature.getProperty("Latitude").getAsDouble(),
           feature.getProperty("Longitude").getAsDouble()))
@@ -205,24 +206,24 @@ public class MatrixApiActivity extends AppCompatActivity {
     featureCollection = FeatureCollection.fromJson(loadGeoJsonFromAsset("boston_charge_stations.geojson"));
 
     // Initialize List<Position> for eventual use in the Matrix API call
-    positionList = new ArrayList<>();
+    pointList = new ArrayList<>();
 
     // Get the position of each GeoJSON feature and build the list of Position
     // objects for eventual use in the Matrix API call
-    for (Feature singleLocation : featureCollection.getFeatures()) {
-      Point singleLocationPosition = Point.fromLngLat(singleLocation.getGeometry().getCoordinates());
-      positionList.add(singleLocationPosition);
+    for (Feature singleLocation : featureCollection.features()) {
+      Point singleLocationPoint = (Point) singleLocation.geometry();
+      pointList.add(singleLocationPoint);
     }
   }
 
   private void initMatrixLocationListForRecyclerView() {
     matrixLocationList = new ArrayList<>();
-    for (int x = 0; x < featureCollection.getFeatures().size(); x++) {
+    for (int x = 0; x < featureCollection.features().size(); x++) {
       SingleRecyclerViewMatrixLocation singleRecyclerViewLocation = new SingleRecyclerViewMatrixLocation();
-      singleRecyclerViewLocation.setName(featureCollection.getFeatures().get(x)
+      singleRecyclerViewLocation.setName(featureCollection.features().get(x)
         .getStringProperty("Station_Name"));
-      singleRecyclerViewLocation.setLocationLatLng(new LatLng(positionList.get(x).latitude(),
-        positionList.get(x).longitude()));
+      singleRecyclerViewLocation.setLocationLatLng(new LatLng(pointList.get(x).latitude(),
+        pointList.get(x).longitude()));
       matrixLocationList.add(singleRecyclerViewLocation);
     }
   }
