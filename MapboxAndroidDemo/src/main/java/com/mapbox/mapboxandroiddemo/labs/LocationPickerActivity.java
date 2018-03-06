@@ -23,14 +23,12 @@ import com.mapbox.core.exceptions.ServicesException;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.location.LocationSource;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -42,7 +40,6 @@ import com.mapbox.services.android.telemetry.location.LocationEnginePriority;
 import com.mapbox.services.android.telemetry.location.LocationEngineProvider;
 import com.mapbox.services.android.telemetry.permissions.PermissionsListener;
 import com.mapbox.services.android.telemetry.permissions.PermissionsManager;
-import com.mapbox.services.commons.models.Position;
 
 import java.util.List;
 
@@ -79,7 +76,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
     setContentView(R.layout.activity_lab_location_picker);
 
     // Get the location engine object for later use.
-    locationEngine = new LocationSource(this);
+    locationEngine = new LocationEngineProvider(this).obtainBestLocationEngineAvailable();
     locationEngine.activate();
 
     // Initialize the mapboxMap view
@@ -142,7 +139,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
             // that the hovering marker and dropped marker are the same.
 
             droppedMarker = mapboxMap.addMarker(new MarkerOptions()
-              .position(new LatLng(latLng.longitude(), latLng.latitude())));
+              .position(new LatLng(latLng.latitude(), latLng.longitude())));
 
             // Finally we get the geocoding information
             reverseGeocode(latLng);
@@ -260,7 +257,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
 
       MapboxGeocoding client = MapboxGeocoding.builder()
         .accessToken(getString(R.string.access_token))
-        .query(point)
+        .query(Point.fromLngLat(point.longitude(), point.latitude()))
         .geocodingTypes(GeocodingCriteria.TYPE_ADDRESS)
         .build();
 
