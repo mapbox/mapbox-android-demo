@@ -29,6 +29,11 @@ import com.mapbox.plugins.places.autocomplete.model.PlaceOptions;
 import com.mapbox.services.commons.geojson.Feature;
 import com.mapbox.services.commons.geojson.FeatureCollection;
 
+/**
+ * Use the places plugin to take advantage of Mapbox's location search ("geocoding") capabilities. The plugin
+ * automatically makes geocoding requests, has built-in saved locations, includes location picker functionality,
+ * and adds beautiful UI into your Android project.
+ */
 public class PlacesPluginActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private static final int REQUEST_CODE_AUTOCOMPLETE = 1;

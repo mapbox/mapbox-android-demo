@@ -12,14 +12,16 @@ ext {
 
     version = [
             // mapbox
-            mapboxMapSdk              : '5.5.0',
-            mapboxPluginBuilding      : '0.1.0',
-            mapboxPluginGeoJson       : '0.1.0',
-            mapboxPluginLocationLayer : '0.3.0',
-            mapboxPluginTraffic       : '0.4.0-SNAPSHOT',
-            mapboxPluginMarkerCluster : '0.1.0',
-            mapboxPluginPlaces        : '0.2.1',
-            
+            mapboxMapSdk             : '5.5.0',
+            mapboxTurf               : '3.0.0-beta.3',
+            mapboGeoJson             : '3.0.0-beta.3',
+            mapboxPluginBuilding     : '0.1.0',
+            mapboxPluginGeoJson      : '0.1.0',
+            mapboxPluginLocationLayer: '0.3.0',
+            mapboxPluginTraffic      : '0.4.0-SNAPSHOT',
+            mapboxPluginMarkerCluster: '0.1.0',
+            mapboxPluginPlaces       : '0.2.1',
+
             // Support
             supportLib               : '26.1.0',
             constraintLayout         : '1.0.2',
@@ -53,6 +55,8 @@ ext {
     dependenciesList = [
             // mapbox
             mapboxMapSdk             : "com.mapbox.mapboxsdk:mapbox-android-sdk:${version.mapboxMapSdk}",
+            mapboxTurf               : "com.mapbox.mapboxsdk:mapbox-sdk-turf:${version.mapboxTurf}",
+            mapboGeoJson             : "com.mapbox.mapboxsdk:mapbox-sdk-geojson:${version.mapboGeoJson}",
 
             mapboxPluginLocationLayer: "com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:${version.mapboxPluginLocationLayer}",
             mapboxPluginBuilding     : "com.mapbox.mapboxsdk:mapbox-android-plugin-building:${version.mapboxPluginBuilding}",
@@ -91,9 +95,9 @@ ext {
     ]
 
     pluginDependencies = [
-            gradle             : "com.android.tools.build:gradle:${pluginVersion.gradle}",
-            checkstyle         : "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
-            firebase           : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
+            gradle    : "com.android.tools.build:gradle:${pluginVersion.gradle}",
+            checkstyle: "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
+            firebase  : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
     ]
 
     wearDependencies = [
