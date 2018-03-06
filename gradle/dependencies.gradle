@@ -4,117 +4,117 @@ ext {
             minWearSdkVersion: 23,
             targetSdkVersion : 26,
             compileSdkVersion: 26,
-            buildToolsVersion: '26.0.2'
+            buildToolsVersion: '26.0.3'
     ]
 
     versionCode = 0.1
     versionName = "5.0.0"
 
     version = [
-            // Mapbox Maps SDK
-            mapboxMapSdk       : '5.4.1',
-
-            // Mapbox plugins
-            mapboxPluginBuilding      : '0.1.0',
-            mapboxPluginGeoJson       : '0.1.0',
-            mapboxPluginLocationLayer : '0.3.0',
-            mapboxPluginTraffic       : '0.4.0-SNAPSHOT',
-            mapboxPluginMarkerCluster : '0.1.0',
-            mapboxPluginPlaces : '0.1.0',
+            // mapbox
+            mapboxMapSdk             : '5.5.0',
+            mapboxTurf               : '3.0.0-beta.3',
+            mapboGeoJson             : '3.0.0-beta.3',
+            mapboxPluginBuilding     : '0.1.0',
+            mapboxPluginGeoJson      : '0.1.0',
+            mapboxPluginLocationLayer: '0.3.0',
+            mapboxPluginTraffic      : '0.4.0-SNAPSHOT',
+            mapboxPluginMarkerCluster: '0.1.0',
+            mapboxPluginPlaces       : '0.2.1',
 
             // Mapbox internal libraries
-            mapboxAuth : '0.1.0',
-            mapboxAnalytics : '0.1.0',
+            mapboxAuth               : '0.1.0',
+            mapboxAnalytics          : '0.1.0',
 
             // Support
-            supportLib         : '26.1.0',
-            constraintLayout   : '1.0.2',
+            supportLib               : '26.1.0',
+            constraintLayout         : '1.0.2',
 
             // Firebase
-            firebase        : '11.0.4',
+            firebase                 : '11.0.4',
 
             // Square
-            leakCanary         : '1.5.4',
-            timber             : '4.5.1',
+            leakCanary               : '1.5.4',
+            timber                   : '4.5.1',
+            okthttp3                 : '3.8.1',
+            picasso                  : '2.5.2',
+            retrofit                 : '2.2.0',
 
-            okthttp3           : '2.6.0-SNAPSHOT',
-            okthttp3downloader : '1.1.0',
-            picasso            : '2.5.2',
-            retrofit           : '2.2.0',
-
-            // Other
-            gson               :  '2.8',
-            segment               :  '2.0.0',
+            //other
+            gson                     : '2.8',
+            segmentAnalytics         : '2.0.0'
     ]
 
     wearVersion = [
-            googleWearable  :   '2.0.4',
-            googlePlayService : '11.0.4'
+            googleWearable   : '2.0.4',
+            googlePlayService: '11.0.4'
     ]
 
     pluginVersion = [
-            checkstyle: '8.2',
-            firebase: '1.1.1',
-            gradle    : '3.0.0'
+            checkstyle         : '8.2',
+            firebase           : '1.1.1',
+            gradle             : '3.0.0',
+            gradlePlayPublisher: '1.2.0'
     ]
 
     dependenciesList = [
 
-            // Mapbox Maps SDK
-            mapboxMapSdk     : "com.mapbox.mapboxsdk:mapbox-android-sdk:${version.mapboxMapSdk}",
-
-            // Mapbox Plugins
-            mapboxPluginLocationLayer : "com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:${version.mapboxPluginLocationLayer}",
-            mapboxPluginBuilding      : "com.mapbox.mapboxsdk:mapbox-android-plugin-building:${version.mapboxPluginBuilding}",
-            mapboxPluginTraffic       : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:${version.mapboxPluginTraffic}",
-            mapboxPluginGeoJson       : "com.mapbox.mapboxsdk:mapbox-android-plugin-geojson:${version.mapboxPluginGeoJson}",
-            mapboxPluginMarkerCluster : "com.mapbox.mapboxsdk:mapbox-android-plugin-cluster-utils:${version.mapboxPluginMarkerCluster}",
-            mapboxPluginPlaces 		  : "com.mapbox.mapboxsdk:mapbox-android-plugin-places:${version.mapboxPluginPlaces}",
+            // Mapbox
+            mapboxMapSdk             : "com.mapbox.mapboxsdk:mapbox-android-sdk:${version.mapboxMapSdk}",
+            mapboxTurf               : "com.mapbox.mapboxsdk:mapbox-sdk-turf:${version.mapboxTurf}",
+            mapboGeoJson             : "com.mapbox.mapboxsdk:mapbox-sdk-geojson:${version.mapboGeoJson}",
 
             // Mapbox internal libraries
-            mapboxAuth              : "com.mapbox.mapboxsdk:mapbox-android-auth:${version.mapboxAuth}",
-            mapboxAnalytics         : "com.mapbox.mapboxsdk:mapbox-android-analytics:${version.mapboxAnalytics}",
+            mapboxAuth               : "com.mapbox.mapboxsdk:mapbox-android-auth:${version.mapboxAuth}",
+            mapboxAnalytics          : "com.mapbox.mapboxsdk:mapbox-android-analytics:${version.mapboxAnalytics}",
 
-            // Google support libraries
-            supportV4              : "com.android.support:support-v4:${version.supportLib}",
-            supportAppcompatV7     : "com.android.support:appcompat-v7:${version.supportLib}",
-            supportDesign          : "com.android.support:design:${version.supportLib}",
-            supportRecyclerView    : "com.android.support:recyclerview-v7:${version.supportLib}",
-            supportCardView        : "com.android.support:cardview-v7:${version.supportLib}",
-            supportGridLayout      : "com.android.support:gridlayout-v7:${version.supportLib}",
-            supportCustomTabs      : "com.android.support:customtabs:${version.supportLib}",
-            supportConstraintLayout: "com.android.support.constraint:constraint-layout:${version.constraintLayout}",
-            supportAnnotations      : "com.android.support:support-annotations:${version.supportLib}",
+            // Mapbox plugins
+            mapboxPluginLocationLayer: "com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:${version.mapboxPluginLocationLayer}",
+            mapboxPluginBuilding     : "com.mapbox.mapboxsdk:mapbox-android-plugin-building:${version.mapboxPluginBuilding}",
+            mapboxPluginTraffic      : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:${version.mapboxPluginTraffic}",
+            mapboxPluginGeoJson      : "com.mapbox.mapboxsdk:mapbox-android-plugin-geojson:${version.mapboxPluginGeoJson}",
+            mapboxPluginMarkerCluster: "com.mapbox.mapboxsdk:mapbox-android-plugin-cluster-utils:${version.mapboxPluginMarkerCluster}",
+            mapboxPluginPlaces       : "com.mapbox.mapboxsdk:mapbox-android-plugin-places:${version.mapboxPluginPlaces}",
 
-            // Square libraries
-            timber                 : "com.jakewharton.timber:timber:${version.timber}",
-            okhttp3                : "com.squareup.okhttp3:okhttp:${version.okthttp3}",
-            okhttp3Downloader      : "com.jakewharton.picasso:picasso2-okhttp3-downloader:${version.okthttp3downloader}",
-            picasso                : "com.squareup.picasso:picasso:${version.picasso}",
-            retrofit               : "com.squareup.retrofit2:retrofit:${version.retrofit}",
-            retrofitGsonConverter  : "com.squareup.retrofit2:converter-gson:${version.retrofit}",
-            leakCanaryDebug        : "com.squareup.leakcanary:leakcanary-android:${version.leakCanary}",
-            leakCanaryRelease      : "com.squareup.leakcanary:leakcanary-android-no-op:${version.leakCanary}",
+            // Support
+            supportV4                : "com.android.support:support-v4:${version.supportLib}",
+            supportAppcompatV7       : "com.android.support:appcompat-v7:${version.supportLib}",
+            supportDesign            : "com.android.support:design:${version.supportLib}",
+            supportRecyclerView      : "com.android.support:recyclerview-v7:${version.supportLib}",
+            supportCardView          : "com.android.support:cardview-v7:${version.supportLib}",
+            supportGridLayout        : "com.android.support:gridlayout-v7:${version.supportLib}",
+            supportCustomTabs        : "com.android.support:customtabs:${version.supportLib}",
+            supportConstraintLayout  : "com.android.support.constraint:constraint-layout:${version.constraintLayout}",
+            supportAnnotations       : "com.android.support:support-annotations:${version.supportLib}",
+
+            // Square crew
+            timber                   : "com.jakewharton.timber:timber:${version.timber}",
+            okhttp3                  : "com.squareup.okhttp3:okhttp:${version.okthttp3}",
+            picasso                  : "com.squareup.picasso:picasso:${version.picasso}",
+            retrofit                 : "com.squareup.retrofit2:retrofit:${version.retrofit}",
+            retrofitGsonConverter    : "com.squareup.retrofit2:converter-gson:${version.retrofit}",
+            leakCanaryDebug          : "com.squareup.leakcanary:leakcanary-android:${version.leakCanary}",
+            leakCanaryRelease        : "com.squareup.leakcanary:leakcanary-android-no-op:${version.leakCanary}",
 
             // Firebase
-            firebaseCrash   :  "com.google.firebase:firebase-crash:${version.firebase}",
-            firebasePerf    :  "com.google.firebase:firebase-perf:${version.firebase}",
+            firebaseCrash            : "com.google.firebase:firebase-crash:${version.firebase}",
+            firebasePerf             : "com.google.firebase:firebase-perf:${version.firebase}",
 
             // Other
-            gson             :   "com.google.code.gson:gson:${version.gson}",
-            segment             : "com.segment.analytics.java:analytics:${version.segment}",
+            gson                     : "com.google.code.gson:gson:${version.gson}",
+            segmentAnalytics         : "com.segment.analytics.java:analytics:${version.segmentAnalytics}"
     ]
 
     pluginDependencies = [
             gradle    : "com.android.tools.build:gradle:${pluginVersion.gradle}",
             checkstyle: "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
-            firebase  : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}"
+            firebase  : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
     ]
 
     wearDependencies = [
-            googleWearable        : "com.google.android.wearable:wearable:${wearVersion.googleWearable}",
-            supportGoogleWearable : "com.google.android.support:wearable:${wearVersion.googleWearable}",
-            gpsWearable           : "com.google.android.gms:play-services-wearable:${wearVersion.googlePlayService}",
-            gpsLocation           : "com.google.android.gms:play-services-location:${wearVersion.googlePlayService}"
+            googleWearable       : "com.google.android.wearable:wearable:${wearVersion.googleWearable}",
+            supportGoogleWearable: "com.google.android.support:wearable:${wearVersion.googleWearable}",
+            gpsWearable          : "com.google.android.gms:play-services-wearable:${wearVersion.googlePlayService}",
+            gpsLocation          : "com.google.android.gms:play-services-location:${wearVersion.googlePlayService}"
     ]
 }

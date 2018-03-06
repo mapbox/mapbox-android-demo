@@ -34,7 +34,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     View view1 = LayoutInflater.from(parent.getContext()).inflate(
       R.layout.layout_description_item, parent, false);
     View view2 = LayoutInflater.from(parent.getContext()).inflate(
-      R.layout.layout_mas_description_card, parent, false);
+      R.layout.layout_javaservices_description_card, parent, false);
     View view3 = LayoutInflater.from(parent.getContext()).inflate(
       R.layout.layout_query_description_card, parent, false);
 
@@ -54,7 +54,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
   public int getItemViewType(int position) {
     if (((MainActivity) context).getCurrentCategory() == R.id.nav_lab && position == 0) {
       return 1;
-    } else if (((MainActivity) context).getCurrentCategory() == R.id.nav_mas && position == 0) {
+    } else if (((MainActivity) context).getCurrentCategory() == R.id.nav_java_services && position == 0) {
       return 2;
     } else if (((MainActivity) context).getCurrentCategory() == R.id.nav_query_map && position == 0) {
       return 3;

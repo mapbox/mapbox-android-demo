@@ -99,6 +99,9 @@ dependencies {
     // Mapbox dependencies
     api (dependenciesList.mapboxMapSdk)
 
+    implementation dependenciesList.mapboxTurf
+    implementation dependenciesList.mapboGeoJson
+
     // Mapbox Android internal libraries
     implementation dependenciesList.mapboxAuth
     implementation dependenciesList.mapboxAnalytics
@@ -127,7 +130,6 @@ dependencies {
     // Square crew
     implementation dependenciesList.timber
     implementation dependenciesList.okhttp3
-    implementation dependenciesList.okhttp3Downloader
     implementation dependenciesList.picasso
     implementation dependenciesList.retrofit
     implementation dependenciesList.retrofitGsonConverter

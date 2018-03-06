@@ -32,8 +32,8 @@
             android:title="@string/query_map_category"/>
 
         <item
-            android:id="@+id/nav_mas"
-            android:title="@string/android_services_category"/>
+            android:id="@+id/nav_java_services"
+            android:title="@string/java_services_category"/>
 
         <item
             android:id="@+id/nav_snapshot_image_generator"
