@@ -138,7 +138,6 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
       .overview(DirectionsCriteria.OVERVIEW_FULL)
       .profile(DirectionsCriteria.PROFILE_DRIVING)
       .accessToken(Mapbox.getAccessToken())
-
       .build();
 
     optimizedClient.enqueueCall(new Callback<OptimizationResponse>() {
