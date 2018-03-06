@@ -21,7 +21,6 @@ import com.mapbox.mapboxsdk.style.functions.stops.Stops;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.turf.TurfException;
 import com.mapbox.turf.TurfJoins;
 
 import java.io.IOException;
