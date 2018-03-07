@@ -195,7 +195,7 @@ public class GeoJsonPluginActivity extends AppCompatActivity implements OnMapRea
     new FileChooserDialog.Builder(this)
       .extensionsFilter(".geojson", ".json", ".js", ".txt")
       .goUpLabel("Up")
-      .show();
+      .show(this);
   }
 
   @Override
