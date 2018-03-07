@@ -213,7 +213,7 @@
     <string name="mandarin">Mandarin</string>
     <string name="russian">Russian</string>
     <string name="arabic">Arabic</string>
-    <string name="change_device_language_instruction">Change the device\'s language and then tap this button. The map should be in a different language!</string>
+    <string name="change_device_language_instruction">Change the device\'s language to German and then tap this button. Already in German? Try French</string>
     <string name="vacation_description">Uh-oh! You\'re lost in NYC. Tap the buttons below to
         switch the map\'s language so that you can ask for help with directions.</string>
 
