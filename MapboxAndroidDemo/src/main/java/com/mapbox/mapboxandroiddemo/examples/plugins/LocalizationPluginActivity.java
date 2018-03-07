@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.plugins;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -75,7 +76,7 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
 
           mapboxMap.animateCamera(CameraUpdateFactory
             .newCameraPosition(position), 1000);
-        } catch (NullPointerException exception) {
+        } catch (RuntimeException exception) {
           Snackbar.make(view, exception.toString(), Snackbar.LENGTH_LONG).show();
         }
       }
