@@ -7,6 +7,9 @@ import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -37,7 +40,7 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(final MapboxMap mapboxMap) {
 
     localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
 
@@ -72,6 +75,13 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
 
         try {
           localizationPlugin.matchMapLanguageWithDeviceDefault();
+          CameraPosition position = new CameraPosition.Builder()
+            .target(new LatLng(34.032666, -80.363160))
+            .zoom(2.038777)
+            .build();
+
+          mapboxMap.animateCamera(CameraUpdateFactory
+            .newCameraPosition(position), 1000);
         } catch (NullPointerException exception) {
           Snackbar.make(view, exception.toString(), Snackbar.LENGTH_LONG).show();
         }
@@ -79,7 +89,6 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
     });
 
   }
-
 
   // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
