@@ -50,29 +50,22 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
         localizationPlugin.setMapLanguage(MapLocale.ARABIC);
       }
     });
-
-
     findViewById(R.id.language_two_cardview).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         localizationPlugin.setMapLanguage(MapLocale.RUSSIAN);
       }
     });
-
-
     findViewById(R.id.language_three_cardview).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         localizationPlugin.setMapLanguage(MapLocale.SIMPLIFIED_CHINESE);
       }
     });
-
     findViewById(R.id.match_map_to_device_language).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-
         Snackbar.make(view, R.string.change_device_language_instruction, Snackbar.LENGTH_LONG).show();
-
         try {
           localizationPlugin.matchMapLanguageWithDeviceDefault();
           CameraPosition position = new CameraPosition.Builder()
@@ -87,7 +80,6 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
         }
       }
     });
-
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
