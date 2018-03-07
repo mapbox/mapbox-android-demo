@@ -48,7 +48,6 @@ ext {
             firebase           : '1.1.1',
             gradle             : '3.0.0',
             gradlePlayPublisher: '1.2.0'
-                    >>> >>> > master
     ]
 
     dependenciesList = [
