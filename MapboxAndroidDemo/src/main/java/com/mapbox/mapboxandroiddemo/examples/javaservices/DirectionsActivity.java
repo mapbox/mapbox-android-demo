@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.mas;
+package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -6,6 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.mapbox.api.directions.v5.DirectionsCriteria;
+import com.mapbox.api.directions.v5.MapboxDirections;
+import com.mapbox.api.directions.v5.models.DirectionsResponse;
+import com.mapbox.api.directions.v5.models.DirectionsRoute;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -14,10 +19,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.api.directions.v5.DirectionsCriteria;
-import com.mapbox.services.api.directions.v5.MapboxDirections;
-import com.mapbox.services.api.directions.v5.models.DirectionsResponse;
-import com.mapbox.services.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.services.commons.geojson.LineString;
 import com.mapbox.services.commons.models.Position;
 
@@ -30,7 +31,7 @@ import retrofit2.Response;
 import static com.mapbox.services.Constants.PRECISION_6;
 
 /**
- * Use Mapbox Android Services to request directions
+ * Use Mapbox Java Services to request directions
  */
 public class DirectionsActivity extends AppCompatActivity {
 
@@ -50,13 +51,13 @@ public class DirectionsActivity extends AppCompatActivity {
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_mas_directions);
+    setContentView(R.layout.activity_javaservices_directions);
 
     // Alhambra landmark in Granada, Spain.
-    final Position origin = Position.fromCoordinates(-3.588098, 37.176164);
+    final Point origin = Point.fromLngLat(-3.588098, 37.176164);
 
     // Plaza del Triunfo in Granada, Spain.
-    final Position destination = Position.fromCoordinates(-3.601845, 37.184080);
+    final Point destination = Point.fromLngLat(-3.601845, 37.184080);
 
 
     // Setup the MapView
@@ -69,11 +70,11 @@ public class DirectionsActivity extends AppCompatActivity {
 
         // Add origin and destination to the map
         mapboxMap.addMarker(new MarkerOptions()
-          .position(new LatLng(origin.getLatitude(), origin.getLongitude()))
+          .position(new LatLng(origin.latitude(), origin.longitude()))
           .title(getString(R.string.directions_activity_marker_options_origin_title))
           .snippet(getString(R.string.directions_activity_marker_options_origin_snippet)));
         mapboxMap.addMarker(new MarkerOptions()
-          .position(new LatLng(destination.getLatitude(), destination.getLongitude()))
+          .position(new LatLng(destination.latitude(), destination.longitude()))
           .title(getString(R.string.directions_activity_marker_options_destination_title))
           .snippet(getString(R.string.directions_activity_marker_options_destination_snippet)));
 
@@ -83,14 +84,14 @@ public class DirectionsActivity extends AppCompatActivity {
     });
   }
 
-  private void getRoute(Position origin, Position destination) {
+  private void getRoute(Point origin, Point destination) {
 
-    client = new MapboxDirections.Builder()
-      .setOrigin(origin)
-      .setDestination(destination)
-      .setOverview(DirectionsCriteria.OVERVIEW_FULL)
-      .setProfile(DirectionsCriteria.PROFILE_CYCLING)
-      .setAccessToken(getString(R.string.access_token))
+    client = MapboxDirections.builder()
+      .origin(origin)
+      .destination(destination)
+      .overview(DirectionsCriteria.OVERVIEW_FULL)
+      .profile(DirectionsCriteria.PROFILE_CYCLING)
+      .accessToken(getString(R.string.access_token))
       .build();
 
     client.enqueueCall(new Callback<DirectionsResponse>() {
@@ -103,16 +104,16 @@ public class DirectionsActivity extends AppCompatActivity {
         if (response.body() == null) {
           Log.e(TAG, "No routes found, make sure you set the right user and access token.");
           return;
-        } else if (response.body().getRoutes().size() < 1) {
+        } else if (response.body().routes().size() < 1) {
           Log.e(TAG, "No routes found");
           return;
         }
 
         // Print some info about the route
-        currentRoute = response.body().getRoutes().get(0);
-        Log.d(TAG, "Distance: " + currentRoute.getDistance());
+        currentRoute = response.body().routes().get(0);
+        Log.d(TAG, "Distance: " + currentRoute.distance());
         Toast.makeText(DirectionsActivity.this, String.format(getString(R.string.directions_activity_toast_message),
-          currentRoute.getDistance()), Toast.LENGTH_SHORT).show();
+          currentRoute.distance()), Toast.LENGTH_SHORT).show();
 
         // Draw the route on the map
         drawRoute(currentRoute);
@@ -128,7 +129,7 @@ public class DirectionsActivity extends AppCompatActivity {
 
   private void drawRoute(DirectionsRoute route) {
     // Convert LineString coordinates into LatLng[]
-    LineString lineString = LineString.fromPolyline(route.getGeometry(), PRECISION_6);
+    LineString lineString = LineString.fromPolyline(route.geometry(), PRECISION_6);
     List<Position> coordinates = lineString.getCoordinates();
     LatLng[] points = new LatLng[coordinates.size()];
     for (int i = 0; i < coordinates.size(); i++) {

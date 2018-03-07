@@ -1,11 +1,18 @@
 apply plugin: 'com.android.application'
-apply from: "$project.rootDir/gradle/script-git-version.gradle"
 apply plugin: 'com.google.firebase.firebase-perf'
-
+apply plugin: 'com.github.triplet.play'
+apply from: "$project.rootDir/gradle/script-git-version.gradle"
 
 android {
     compileSdkVersion androidVersions.compileSdkVersion
     buildToolsVersion androidVersions.buildToolsVersion
+
+    playAccountConfigs {
+        defaultAccountConfig {
+            serviceAccountEmail = 'mapbox-android-demo-publish@android-gl-native.iam.gserviceaccount.com'
+            jsonFile = file("$project.rootDir/android-gl-native-6d21dd280e7b.json")
+        }
+    }
 
     defaultConfig {
         applicationId "com.mapbox.mapboxandroiddemo"
@@ -19,6 +26,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField "int", "MIN_SDK_VERSION", "$minSdkVersion.apiLevel"
+
+        playAccountConfig = playAccountConfigs.defaultAccountConfig
     }
 
     flavorDimensions "default"
@@ -35,10 +44,10 @@ android {
 
     signingConfigs {
         release {
-            keyAlias System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
-            keyPassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+            keyAlias System.getenv("CIRCLECI_ANDROID_KEYSTORE_ALIAS")
+            keyPassword System.getenv("CIRCLECI_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
             storeFile file("$project.rootDir/mapbox_demo.keystore")
-            storePassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
+            storePassword System.getenv("CIRCLECI_ANDROID_KEYSTORE_PASSWORD")
         }
     }
 
@@ -68,6 +77,11 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    play {
+        track = 'production'
+        untrackOld = true
+    }
 }
 
 dependencies {
@@ -85,9 +99,10 @@ dependencies {
     implementation dependenciesList.supportV4
     implementation dependenciesList.supportConstraintLayout
 
-
     // Mapbox dependencies
-    api (dependenciesList.mapboxMapSdk)
+    api(dependenciesList.mapboxMapSdk)
+    implementation dependenciesList.mapboxTurf
+    implementation dependenciesList.mapboGeoJson
 
     // Mapbox plugins
     implementation dependenciesList.mapboxPluginLocationLayer
@@ -108,7 +123,7 @@ dependencies {
 
     implementation 'com.github.javiersantos:MaterialStyledDialogs:2.1'
     implementation 'com.getbase:floatingactionbutton:1.10.1'
-    implementation 'com.afollestad.material-dialogs:commons:0.9.4.5'
+    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
     implementation 'com.github.Cutta:GifView:1.1'
 
     // Square crew
