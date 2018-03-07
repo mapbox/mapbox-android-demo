@@ -37,6 +37,7 @@ ext {
             leakCanary               : '1.5.4',
             timber                   : '4.5.1',
             okthttp3                 : '3.8.1',
+            okthttpDownloader        : '1.1.0',
             picasso                  : '2.5.2',
             retrofit                 : '2.2.0',
 
@@ -90,6 +91,7 @@ ext {
             // Square crew
             timber                   : "com.jakewharton.timber:timber:${version.timber}",
             okhttp3                  : "com.squareup.okhttp3:okhttp:${version.okthttp3}",
+            okthttpDownloader        : "com.jakewharton.picasso:picasso2-okhttp3-downloader:${version.okthttpDownloader}",
             picasso                  : "com.squareup.picasso:picasso:${version.picasso}",
             retrofit                 : "com.squareup.retrofit2:retrofit:${version.retrofit}",
             retrofitGsonConverter    : "com.squareup.retrofit2:converter-gson:${version.retrofit}",

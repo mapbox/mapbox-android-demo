@@ -130,6 +130,7 @@ dependencies {
     // Square crew
     implementation dependenciesList.timber
     implementation dependenciesList.okhttp3
+    implementation dependenciesList.okthttpDownloader
     implementation dependenciesList.picasso
     implementation dependenciesList.retrofit
     implementation dependenciesList.retrofitGsonConverter
