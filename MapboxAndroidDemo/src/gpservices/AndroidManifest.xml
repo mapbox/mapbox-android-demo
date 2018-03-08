@@ -122,14 +122,6 @@
         </activity>
 
         <activity
-            android:name=".examples.javaservices.GeocodingActivity"
-            android:label="@string/activity_mas_geocoding_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
             android:name=".examples.javaservices.StaticImageActivity"
             android:label="@string/activity_java_services_static_image_title">
             <meta-data
@@ -159,22 +151,6 @@
         <activity
             android:name=".labs.LocationPickerActivity"
             android:label="@string/activity_lab_location_picker_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".examples.annotations.CustomInfoWindowActivity"
-            android:label="@string/activity_annotation_custom_info_window_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
-        </activity>
-
-        <activity
-            android:name=".examples.annotations.BasicMarkerViewActivity"
-            android:label="@string/activity_annotation_marker_view_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
