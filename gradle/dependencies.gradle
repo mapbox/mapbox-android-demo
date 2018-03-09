@@ -8,7 +8,7 @@ ext {
     ]
 
     version = [
-            // mapbox
+            // Mapbox
             mapboxMapSdk             : '5.5.0',
             mapboxTurf               : '3.0.0-beta.3',
             mapboGeoJson             : '3.0.0-beta.3',
@@ -19,11 +19,11 @@ ext {
             mapboxPluginTraffic      : '0.4.0-SNAPSHOT',
             mapboxPluginMarkerCluster: '0.1.0',
             mapboxPluginPlaces       : '0.2.1',
+            mapboxPluginLocalization : '0.1.0',
 
             // Support
             supportLib               : '26.1.0',
             constraintLayout         : '1.0.2',
-
             firebase                 : '11.0.4',
 
             // Square
@@ -33,7 +33,7 @@ ext {
             picasso                  : '2.5.2',
             retrofit                 : '2.2.0',
 
-            //other
+            // Other
             gson                     : '2.8',
             segmentAnalytics         : '2.0.0'
     ]
@@ -51,19 +51,21 @@ ext {
     ]
 
     dependenciesList = [
-            // mapbox
+            // Mapbox
             mapboxMapSdk             : "com.mapbox.mapboxsdk:mapbox-android-sdk:${version.mapboxMapSdk}",
             mapboxTurf               : "com.mapbox.mapboxsdk:mapbox-sdk-turf:${version.mapboxTurf}",
             mapboGeoJson             : "com.mapbox.mapboxsdk:mapbox-sdk-geojson:${version.mapboGeoJson}",
 
+            // Mapbox plugins
             mapboxPluginLocationLayer: "com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:${version.mapboxPluginLocationLayer}",
             mapboxPluginBuilding     : "com.mapbox.mapboxsdk:mapbox-android-plugin-building:${version.mapboxPluginBuilding}",
             mapboxPluginTraffic      : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:${version.mapboxPluginTraffic}",
             mapboxPluginGeoJson      : "com.mapbox.mapboxsdk:mapbox-android-plugin-geojson:${version.mapboxPluginGeoJson}",
             mapboxPluginMarkerCluster: "com.mapbox.mapboxsdk:mapbox-android-plugin-cluster-utils:${version.mapboxPluginMarkerCluster}",
             mapboxPluginPlaces       : "com.mapbox.mapboxsdk:mapbox-android-plugin-places:${version.mapboxPluginPlaces}",
+            mapboxPluginLocalization : "com.mapbox.mapboxsdk:mapbox-android-plugin-localization:${version.mapboxPluginLocalization}",
 
-            // support
+            // Support
             supportV4                : "com.android.support:support-v4:${version.supportLib}",
             supportAppcompatV7       : "com.android.support:appcompat-v7:${version.supportLib}",
             supportDesign            : "com.android.support:design:${version.supportLib}",
@@ -74,7 +76,7 @@ ext {
             supportConstraintLayout  : "com.android.support.constraint:constraint-layout:${version.constraintLayout}",
             supportAnnotations       : "com.android.support:support-annotations:${version.supportLib}",
 
-            // square crew
+            // Square
             timber                   : "com.jakewharton.timber:timber:${version.timber}",
             okhttp3                  : "com.squareup.okhttp3:okhttp:${version.okthttp3}",
             picasso                  : "com.squareup.picasso:picasso:${version.picasso}",
@@ -83,7 +85,7 @@ ext {
             leakCanaryDebug          : "com.squareup.leakcanary:leakcanary-android:${version.leakCanary}",
             leakCanaryRelease        : "com.squareup.leakcanary:leakcanary-android-no-op:${version.leakCanary}",
 
-            // firebase
+            // Firebase
             firebaseCrash            : "com.google.firebase:firebase-crash:${version.firebase}",
             firebasePerf             : "com.google.firebase:firebase-perf:${version.firebase}",
 
