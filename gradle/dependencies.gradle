@@ -8,7 +8,7 @@ ext {
     ]
 
     version = [
-            // mapbox
+            // Mapbox
             mapboxMapSdk             : '5.5.0',
             mapboxTurf               : '3.0.0-beta.3',
             mapboGeoJson             : '3.0.0-beta.3',
@@ -19,6 +19,7 @@ ext {
             mapboxPluginTraffic      : '0.4.0-SNAPSHOT',
             mapboxPluginMarkerCluster: '0.1.0',
             mapboxPluginPlaces       : '0.2.1',
+            mapboxPluginLocalization : '0.1.0',
 
             // Mapbox internal libraries
             mapboxAuth               : '0.1.0',
@@ -39,7 +40,7 @@ ext {
             picasso                  : '2.5.2',
             retrofit                 : '2.2.0',
 
-            //other
+            // Other
             gson                     : '2.8',
             segmentAnalytics         : '2.0.0'
     ]
@@ -74,6 +75,7 @@ ext {
             mapboxPluginGeoJson      : "com.mapbox.mapboxsdk:mapbox-android-plugin-geojson:${version.mapboxPluginGeoJson}",
             mapboxPluginMarkerCluster: "com.mapbox.mapboxsdk:mapbox-android-plugin-cluster-utils:${version.mapboxPluginMarkerCluster}",
             mapboxPluginPlaces       : "com.mapbox.mapboxsdk:mapbox-android-plugin-places:${version.mapboxPluginPlaces}",
+            mapboxPluginLocalization : "com.mapbox.mapboxsdk:mapbox-android-plugin-localization:${version.mapboxPluginLocalization}",
 
             // Support
             supportV4                : "com.android.support:support-v4:${version.supportLib}",
@@ -86,7 +88,7 @@ ext {
             supportConstraintLayout  : "com.android.support.constraint:constraint-layout:${version.constraintLayout}",
             supportAnnotations       : "com.android.support:support-annotations:${version.supportLib}",
 
-            // Square crew
+            // Square
             timber                   : "com.jakewharton.timber:timber:${version.timber}",
             okhttp3                  : "com.squareup.okhttp3:okhttp:${version.okthttp3}",
             okthttpDownloader        : "com.jakewharton.picasso:picasso2-okhttp3-downloader:${version.okthttpDownloader}",

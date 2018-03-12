@@ -58,6 +58,7 @@
     <string name="activity_plugins_traffic_plugin_title">Display real-time traffic</string>
     <string name="activity_plugins_building_plugin_title">Display buildings in 3D</string>
     <string name="activity_plugins_location_plugin_title">Show a user\'s location</string>
+    <string name="activity_plugins_localization_plugin_title">Change map text to device language</string>
     <string name="activity_plugins_geojson_plugin_title">Load GeoJSON data</string>
     <string name="activity_plugins_places_plugin_title">Location search</string>
     <string name="activity_plugins_marker_clusters_plugin_title">Add marker clusters</string>
