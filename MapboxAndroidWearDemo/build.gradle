@@ -56,7 +56,6 @@ dependencies {
     api(dependenciesList.mapboxMapSdk)
 
     // Firebase
-    implementation dependenciesList.firebaseCrash
     implementation dependenciesList.firebasePerf
 
     implementation project(':SharedCode')

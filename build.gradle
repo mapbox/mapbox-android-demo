@@ -6,12 +6,16 @@ buildscript {
     repositories {
         jcenter()
         google()
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
     }
 
     dependencies {
         classpath pluginDependencies.gradle
         classpath pluginDependencies.firebase
         classpath pluginDependencies.playPublisher
+        classpath pluginDependencies.firebaseCrashlytics
     }
 
 }
