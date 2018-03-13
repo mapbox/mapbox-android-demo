@@ -81,5 +81,6 @@
     <string name="activity_lab_mapillary_url" translatable="false">http://i.imgur.com/w4SSif1.png</string>
     <string name="activity_labs_inset_map_url" translatable="false">https://i.imgur.com/jp4wc24.png</string>
     <string name="activity_labs_gif_on_map_url" translatable="false">https://i.imgur.com/3d810QI.png</string>
+    <string name="activity_labs_info_window_symbol_layer_url" translatable="false">https://i.imgur.com/3d810QI.png</string>
 
 </resources>
