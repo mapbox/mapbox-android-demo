@@ -222,4 +222,8 @@
     <string name="call_error">Oh no! The call to the Directions Matrix API failed!</string>
     <string name="miles_distance">%1$s miles</string>
     <string name="click_on_marker_instruction_toast">Click on a bolt marker to get started</string>
+
+    <!-- Infowindow SymbolLayer -->
+    <string name="capital">Capital: %1$s</string>
+    <string name="tap_on_marker_instruction">Tap on a marker</string>
 </resources>

@@ -1,0 +1,73 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "name": "Washington",
+        "capital": "Olympia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.90480,
+          47.03676
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "name": "Oregon",
+        "capital": "Salem"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.03048,
+          44.93847
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "name": "California",
+        "capital": "Sacramento"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.493779,
+          38.576641
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "name": "Idaho",
+        "capital": "Boise"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.199,
+          43.61777
+        ]
+      }
+    }
+  ]
+}
