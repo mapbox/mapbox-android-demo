@@ -384,8 +384,8 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".labs.InsetMapActivity"
-            android:label="@string/activity_labs_inset_map_title">
+            android:name=".labs.InfoWindowSymbolLayerActivity"
+            android:label="@string/activity_labs_info_window_symbol_layer_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
