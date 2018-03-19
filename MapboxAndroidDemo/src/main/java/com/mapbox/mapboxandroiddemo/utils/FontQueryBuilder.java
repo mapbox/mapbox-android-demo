@@ -24,43 +24,43 @@ import android.support.annotation.Nullable;
  */
 public class FontQueryBuilder {
 
-    @NonNull
-    private String mFamilyName;
+  @NonNull
+  private String familyName;
 
-    @Nullable
-    private Float mWidth = null;
+  @Nullable
+  private Float width = null;
 
-    @Nullable
-    private Integer mWeight = null;
+  @Nullable
+  private Integer weight = null;
 
-    @Nullable
-    private Float mItalic = null;
+  @Nullable
+  private Float italic = null;
 
-    @Nullable
-    private Boolean mBesteffort = null;
+  @Nullable
+  private Boolean bestEffort = null;
 
-    FontQueryBuilder(@NonNull String familyName) {
-        mFamilyName = familyName;
+  FontQueryBuilder(@NonNull String familyName) {
+    this.familyName = familyName;
+  }
+
+  String build() {
+    if (weight == null && width == null && italic == null && bestEffort == null) {
+      return familyName;
     }
-
-    String build() {
-        if (mWeight == null && mWidth == null && mItalic == null && mBesteffort == null) {
-            return mFamilyName;
-        }
-        StringBuilder builder = new StringBuilder();
-        builder.append("name=").append(mFamilyName);
-        if (mWeight != null) {
-           builder.append("&weight=").append(mWeight);
-        }
-        if (mWidth != null) {
-            builder.append("&width=").append(mWidth);
-        }
-        if (mItalic != null) {
-            builder.append("&italic=").append(mItalic);
-        }
-        if (mBesteffort != null) {
-            builder.append("&besteffort=").append(mBesteffort);
-        }
-        return builder.toString();
+    StringBuilder builder = new StringBuilder();
+    builder.append("name=").append(familyName);
+    if (weight != null) {
+      builder.append("&weight=").append(weight);
     }
+    if (width != null) {
+      builder.append("&width=").append(width);
+    }
+    if (italic != null) {
+      builder.append("&italic=").append(italic);
+    }
+    if (bestEffort != null) {
+      builder.append("&besteffort=").append(bestEffort);
+    }
+    return builder.toString();
+  }
 }

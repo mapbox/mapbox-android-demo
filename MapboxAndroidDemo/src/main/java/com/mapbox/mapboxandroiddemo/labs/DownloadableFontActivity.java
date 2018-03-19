@@ -24,12 +24,13 @@ import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 
 import java.util.Arrays;
 
-public class DownloadableFontActivity extends AppCompatActivity implements OnMapReadyCallback, AdapterView.OnItemSelectedListener {
+public class DownloadableFontActivity extends AppCompatActivity implements
+  OnMapReadyCallback, AdapterView.OnItemSelectedListener {
 
 
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private String TAG = "DownloadableFontActivity";
+  private String tag = "DownloadableFontActivity";
 
   private Handler handler = null;
   private Spinner spinner;
@@ -100,8 +101,8 @@ public class DownloadableFontActivity extends AppCompatActivity implements OnMap
       @Override
       public void onTypefaceRetrieved(Typeface typeface) {
 
-        Log.d(TAG, "onTypefaceRetrieved: Name of retrieved typeface = " + typeface.toString());
-        Log.d(TAG, "onTypefaceRetrieved: String.valueOf(typeface.getStyle()) = " + String.valueOf(typeface.getStyle()));
+        Log.d(tag, "onTypefaceRetrieved: Name of retrieved typeface = " + typeface.toString());
+        Log.d(tag, "onTypefaceRetrieved: String.valueOf(typeface.getStyle()) = " + String.valueOf(typeface.getStyle()));
 
         //        adjustLayers(typeface.toString());
       }
