@@ -205,6 +205,19 @@
     <string name="load_raster_button_text">Load custom raster style</string>
     <string name="load_local_style_button_text">Load local style</string>
 
+    <!-- Localization plugin -->
+    <string name="map_not_localized">Map not localized to device language and now set to French</string>
+    <string name="map_localized">Map localized to device language</string>
+    <string name="camera_bounds_focus">Camera bounds for country associated with language tag: %1$s</string>
+    <string name="change_language_instruction">Make sure that the device\'s default language is not English</string>
+    <string name="mandarin">Mandarin</string>
+    <string name="russian">Russian</string>
+    <string name="arabic">Arabic</string>
+    <string name="change_device_language_instruction">Change the device\'s language to German and then tap this button. Already in German? Try French</string>
+    <string name="try_different_language_instruction">Try setting your phone to a different language. German or French perhaps?</string>
+    <string name="vacation_description">Uh-oh! You\'re lost in NYC. Tap the buttons below to
+        switch the map\'s language so that you can ask for help with directions.</string>
+
     <!-- Matrix API -->
     <string name="call_error">Oh no! The call to the Directions Matrix API failed!</string>
     <string name="miles_distance">%1$s miles</string>

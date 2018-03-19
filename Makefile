@@ -1,0 +1,2 @@
+checkstyle:
+	./gradlew checkstyle

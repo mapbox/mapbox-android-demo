@@ -2,7 +2,7 @@
 
 ![](https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/splash.png)
 
-[![Build Status](https://www.bitrise.io/app/9778f1e5f744661f.svg?token=bNy-zoctPHivmB6e8inudA&branch=master)](https://www.bitrise.io/app/9778f1e5f744661f)
+[![CircleCI](https://circleci.com/gh/mapbox/mapbox-android-demo.svg?style=svg)](https://circleci.com/gh/mapbox/mapbox-android-demo)
 
 This is a public demo of the Mapbox Maps SDK for Android. The demo app is [available now in the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo) and it shows off all the examples found on [mapbox.com/android-sdk/examples](https://www.mapbox.com/android-sdk/examples/) using the same code. There are also examples that only live in the app. The app "labs" section combines the examples to create more complex demos. Check out [the overview page](https://www.mapbox.com/android-sdk/) to get started using the Mapbox Maps SDK for Android in your Android project.
 

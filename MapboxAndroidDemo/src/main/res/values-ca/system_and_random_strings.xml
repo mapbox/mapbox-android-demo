@@ -14,7 +14,7 @@
     <string name="info_dialog_negative_button_text">Ara no</string>
 
     <string name="description_labs">Mentre que les altres categories en aquesta aplicació mostren exemples fent una cosa específica, la categoria de laboratori combina exemples per demostrar el poder de l\'SDK.</string>
-    <string name="description_mas">El Servei Android de Mapbox empaqueta moltes de les API Mapbox en un únic SDK, com ara adreces, geocodificació i molts altres serveis oferts.</string>
+    <string name="description_java_services">El Servei Android de Mapbox empaqueta moltes de les API Mapbox en un únic SDK, com ara adreces, geocodificació i molts altres serveis oferts.</string>
     <string name="description_query">Aquests exemples mostren com consultar les dades dels mapes per obtenir informació com les característiques d\'una geometria o les propietats.</string>
 
     <!-- toolbar items -->
@@ -28,7 +28,7 @@
     <string name="camera_category">Càmera</string>
     <string name="offline_category">Offline</string>
     <string name="query_map_category">Interrogar mapa</string>
-    <string name="android_services_category">Serveis Android</string>
+    <string name="java_services_category">Serveis Android</string>
     <string name="lab_category">Laboratori</string>
     <string name="settings">Ajustos</string>
 

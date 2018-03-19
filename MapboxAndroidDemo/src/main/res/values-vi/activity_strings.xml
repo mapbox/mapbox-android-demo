@@ -27,7 +27,7 @@
     <string name="camera_category">Điểm nhìn</string>
     <string name="offline_category">Ngoại tuyến</string>
     <string name="query_map_category">Truy vấn bản đồ</string>
-    <string name="android_services_category">Dịch vụ Android</string>
+    <string name="java_services_category">Dịch vụ Android</string>
     <string name="lab_category">Phòng thí nghiệm</string>
     <string name="share">Chia sẻ</string>
     <string name="settings">Thiết lập</string>
