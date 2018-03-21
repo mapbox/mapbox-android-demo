@@ -37,3 +37,6 @@
 
 -keep class com.segment.analytics.** { *; }
 -keep class com.mapbox.mapboxandroiddemo.model.usermodel.** { *; }
+
+# MAS data models that will be serialized/deserialized over Gson
+-keep class com.mapbox.services.api.directionsmatrix.v1.models.** { *; }
