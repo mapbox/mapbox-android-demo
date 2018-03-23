@@ -4,7 +4,7 @@
 
 [![CircleCI](https://circleci.com/gh/mapbox/mapbox-android-demo.svg?style=svg)](https://circleci.com/gh/mapbox/mapbox-android-demo)
 
-This is a public demo of the Mapbox Maps SDK for Android. The demo app is [available now in the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo) and it shows off all the examples found on [mapbox.com/android-sdk/examples](https://www.mapbox.com/android-sdk/examples/) using the same code. There are also examples that only live in the app. The app "labs" section combines the examples to create more complex demos. Check out [the overview page](https://www.mapbox.com/android-sdk/) to get started using the Mapbox Maps SDK for Android in your Android project.
+This is a public demo of the Mapbox Maps SDK for Android. The demo app is [available now in the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo) and it shows off all the examples found on [mapbox.com/android-docs/map-sdk/examples](https://www.mapbox.com/android-docs/map-sdk/examples/) using the same code. There are also examples that only live in the app. The app "labs" section combines the examples to create more complex demos. Check out [the overview page](https://www.mapbox.com/android-sdk/) to get started using the Mapbox Maps SDK for Android in your Android project.
 
 ### Steps to adding a new example
 Feedback and contribution is encouraged in this repo, if you'd like to see a new example added in the app either [open an issue](https://github.com/mapbox/mapbox-android-demo/issues) or create it yourself and open a pull request following these steps:
