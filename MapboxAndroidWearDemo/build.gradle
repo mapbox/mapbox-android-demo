@@ -1,32 +1,58 @@
 apply plugin: 'com.android.application'
-
+apply from: "$project.rootDir/gradle/script-git-version.gradle"
+apply plugin: 'com.google.firebase.firebase-perf'
 
 android {
-  compileSdkVersion 24
-  buildToolsVersion "24.0.2"
+    compileSdkVersion androidVersions.compileSdkVersion
+    buildToolsVersion androidVersions.buildToolsVersion
 
-  defaultConfig {
-    applicationId "com.mapbox.mapboxandroidweardemo"
-    minSdkVersion 21
-    targetSdkVersion 24
-    versionCode 1
-    versionName "1.0"
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    defaultConfig {
+        applicationId "com.mapbox.mapboxandroiddemo"
+
+        minSdkVersion androidVersions.minWearSdkVersion
+        targetSdkVersion androidVersions.targetSdkVersion
+
+        versionCode gitVersionCode
+        versionName gitVersionName
     }
-  }
+    signingConfigs {
+        release {
+            keyAlias System.getenv("CIRCLECI_ANDROID_KEYSTORE_ALIAS")
+            keyPassword System.getenv("CIRCLECI_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+            storeFile file("$project.rootDir/mapbox_demo.keystore")
+            storePassword System.getenv("CIRCLECI_ANDROID_KEYSTORE_PASSWORD")
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  compile 'com.google.android.support:wearable:2.0.0-alpha3'
-  compile 'com.google.android.gms:play-services-wearable:9.6.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-  // Mapbox dependencies
-  compile('com.mapbox.mapboxsdk:mapbox-android-sdk:4.2.0-beta.3@aar') {
-    transitive = true
-  }
+    compileOnly wearDependencies.googleWearable
+    implementation wearDependencies.supportGoogleWearable
+
+    implementation wearDependencies.gpsWearable
+    implementation wearDependencies.gpsLocation
+
+    // Mapbox dependencies
+    api(dependenciesList.mapboxMapSdk)
+
+    // Firebase
+    implementation dependenciesList.firebaseCrash
+    implementation dependenciesList.firebasePerf
+
+    implementation project(':SharedCode')
 }
+
+apply from: "$project.rootDir/gradle/checkstyle.gradle"

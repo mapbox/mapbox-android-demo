@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ****** These strings are of individual example descriptions which appear in
+    each example's recyclerview card ****** -->
+
+    <string name="activity_basic_simple_mapview_description">Show a map in your app using the Mapbox Maps SDK.</string>
+    <string name="activity_basic_support_map_frag_description">Include a map fragment within your app using Android support library.</string>
+    <string name="activity_basic_mapbox_options_description">Add a mapview in a dynamically created layout.</string>
+    <string name="activity_styles_mapbox_studio_description">Use a custom Mapbox-hosted style.</string>
+    <string name="activity_style_raster_description">Use legacy raster tiles in your app.</string>
+    <string name="activity_styles_default_description">Use a variety of professionally designed styles with the Mapbox Maps SDK.</string>
+    <string name="activity_styles_show_hide_layer_description">Create a custom layer switcher to display different datasets.</string>
+    <string name="activity_styles_language_switch_description">Switch the maps language dynamically.</string>
+    <string name="activity_styles_color_switcher_description">"Using layer set to change a layer's fill color."</string>
+    <string name="activity_styles_adjust_layer_opacity_description">Drag the seek bar to adjust the opacity of a raster layer on top of a map.</string>
+    <string name="activity_styles_geojson_layer_in_stack_description">Using the second argument of addLayer, you can be more precise.</string>
+    <string name="activity_styles_vector_source_description">Add a vector source to a map and display it as a layer.</string>
+    <string name="activity_styles_add_wms_source_description">Adding an external Web Map Service layer to the map.</string>
+    <string name="activity_styles_zoom_dependent_fill_color_description">Make a property depend on the map zoom level, in this case, the water layers fill color.</string>
+    <string name="activity_dds_create_hotspots_points_description">Use the Mapbox Maps SDK to visualize point data as hotspots.</string>
+    <string name="activity_styles_create_data_cluster_description">Use GeoJSON to visualize point data in clusters.</string>
+    <string name="activity_styles_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
+    <string name="activity_styles_basic_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
+    <string name="activity_styles_local_style_or_raster_source_description">Load a locally stored map style JSON file or custom raster style via a URL.</string>
+    <string name="activity_style_image_source_description">Use an image source to easily display images on the map.</string>
+    <string name="activity_extrusions_catalina_marathon_extrusions_description">Use data-driven styling and GeoJSON data to set extrusions\' heights.</string>
+    <string name="activity_extrusions_population_density_extrusions_description">Use extrusions to display 3D building height based on imported vector data.</string>
+    <string name="activity_extrusions_adjust_extrusions_description">Change the location and color of the light shined on extrusions.</string>
+    <string name="activity_extrusions_rotate_extrusions_description">Rotate and tilt device to change camera and see all around 3D buildings.</string>
+    <string name="activity_extrusions_indoor_3d_description">Create a 3D indoor map with the fill-extrude-height paint property.</string>
+    <string name="activity_dds_style_circle_categorically_description">Using a categorical circle-color property function for a visualization.</string>
+    <string name="activity_dds_choropleth_zoom_change_description">Style a choropleth map with data-driven styling, local JSON data, and vector tile geometries.</string>
+    <string name="activity_dds_json_vector_mix_description">Style a choropleth map by merging local JSON data with vector tile geometries.</string>
+    <string name="activity_dds_style_line_identity_property_description">Using an identity line-color property function for a visualization.</string>
+    <string name="activity_dds_time_lapse_rainfall_points_description">Use data-driven styling to visualize point data with a time lapse effect; rainfall in China in this example.</string>
+    <string name="activity_dds_multiple_geometries_description">Draw multiple geometries from a single GeoJSON file.</string>
+    <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
+    <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Maps SDK.</string>
+    <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Maps SDK.</string>
+    <string name="activity_annotation_polygon_description">Draw a vector polygon on a map with the Mapbox Maps SDK.</string>
+    <string name="activity_annotation_polygon_holes_description">Draw a vector polygon with holes on a map using the Mapbox Maps SDK.</string>
+    <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
+    <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize the info window.</string>
+    <string name="activity_annotation_animated_marker_description">Animate the marker to a new position on the map.</string>
+    <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
+    <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
+    <string name="activity_camera_restrict_description">Prevent a map from being panned to a different place.</string>
+    <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Maps SDK.</string>
+    <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
+    <string name="activity_description">Download, view, navigate to, and delete an offline region.</string>
+    <string name="activity_query_feature_description">Click the map to add a marker at the location and display the maps property information for that feature.</string>
+    <string name="activity_query_select_building_description">Use the query feature to select a building, get its geometry and draw a polygon highlighting it.</string>
+    <string name="activity_query_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
+    <string name="activity_query_click_on_layer_description">Click on and highlight a selected GeoJSON polygon.</string>
+    <string name="activity_java_services_directions_description">Use Mapbox Java Services to request directions.</string>
+    <string name="activity_java_services_optimization_description">Use Mapbox\'s Optimization API to retrieve and display the quickest multi-stop route.</string>
+    <string name="activity_java_services_static_image_description">Use Mapbox Java Services to build a url and download a static map.</string>
+    <string name="activity_java_services_matrix_api_description">Use the Directions Matrix API to receive driving times between Boston\'s various electric car charging stations.</string>
+    <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
+    <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
+    <string name="activity_plugins_location_plugin_description">Use the location plugin to easily show a user\'s location on the map</string>
+    <string name="activity_plugins_geojson_plugin_description">Easily retrieve GeoJSON data from a url, asset, or path</string>
+    <string name="activity_plugins_places_plugin_description">Add location search ("geocoding") functionality and UI to search for any place in the world</string>
+    <string name="activity_plugins_geojson_marker_clusters_description">Use the plugin to automatically add marker clusters to the map. This example shows bike share stations in Paris.</string>
+    <string name="activity_plugins_localization_plugin_description">Use the plugin to automatically change map label text to the language set on the device.</string>
+    <string name="activity_java_services_simplify_polyline_description">Using the polylines utility, simplify a polyline which reduces the amount of coordinates making up the polyline depending on tolerance.</string>
+    <string name="activity_java_services_map_matching_description">Match raw GPS points to the map so they aligns with the roads/pathways.</string>
+    <string name="activity_image_generator_snapshot_share_description">Send and share a map snapshot image.</string>
+    <string name="activity_image_generator_snapshot_notification_description">Show a snapshotted image in a notification.</string>
+    <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding.</string>
+    <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>
+    <string name="activity_lab_space_station_location_description">See the International Space Station location in real time.</string>
+    <string name="activity_lab_picture_in_picture_description">Use the Android O release of picture-in-picture to maintain a map in a separate window.</string>
+    <string name="activity_lab_off_route_description">Detect when the car is off route and reroute them.</string>
+    <string name="activity_lab_los_angeles_tourism_description">Use the style API to highlight parks, hotels, and attractions. A pulsing animation is also added to the colors.</string>
+    <string name="activity_lab_indoor_map_description">Display an indoor map of a building with toggles to switch between floor levels.</string>
+    <string name="activity_lab_rv_on_map_description">Manipulate the map based on recyclerview interactions.</string>
+    <string name="activity_lab_symbol_layer_and_mapillary_on_map_description">Add markers via SymbolLayer and manipulate the data in real time. A Mapillary integration is also showcased in this example.</string>
+    <string name="activity_labs_inset_map_description">Show a smaller inset map fragment and link it to a larger map for two map interaction. Great for gaming!</string>
+    <string name="activity_labs_gif_on_map_description">Show an animated image (GIF) anywhere on the map</string>
+
+</resources>

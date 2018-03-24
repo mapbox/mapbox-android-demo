@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <group android:checkableBehavior="single">
+    <group android:id="@+id/sections_group" android:checkableBehavior="single">
         <item
             android:id="@+id/nav_basics"
             android:title="@string/getting_started_category"/>
@@ -10,8 +9,17 @@
             android:id="@+id/nav_styles"
             android:title="@string/styles_category"/>
         <item
+            android:id="@+id/nav_dds"
+            android:title="@string/dds_category"/>
+        <item
             android:id="@+id/nav_annotations"
             android:title="@string/annotations_category"/>
+        <item
+            android:id="@+id/nav_extrusions"
+            android:title="@string/extrusions_category"/>
+        <item
+            android:id="@+id/nav_plugins"
+            android:title="@string/plugins_category"/>
         <item
             android:id="@+id/nav_camera"
             android:title="@string/camera_category"/>
@@ -24,16 +32,23 @@
             android:title="@string/query_map_category"/>
 
         <item
-            android:id="@+id/nav_location"
-            android:title="@string/location_category"/>
+            android:id="@+id/nav_java_services"
+            android:title="@string/java_services_category"/>
 
         <item
-            android:id="@+id/nav_mas"
-            android:title="@string/android_services_category"/>
+            android:id="@+id/nav_snapshot_image_generator"
+            android:title="@string/image_generator_category"/>
 
         <item
             android:id="@+id/nav_lab"
             android:title="@string/lab_category"/>
-
+    </group>
+    <group android:id="@+id/settings_group" android:checkableBehavior="single">
+        <item
+            android:id="@+id/share_app_in_nav_drawer"
+            android:title="@string/share"/>
+        <item
+            android:id="@+id/settings_in_nav_drawer"
+            android:title="@string/settings"/>
     </group>
 </menu>

@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.MapboxAccountManager;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -13,6 +13,9 @@ import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.RasterSource;
 import com.mapbox.mapboxsdk.style.sources.TileSet;
 
+/**
+ * Adding an external Web Map Service layer to the map.
+ */
 public class AddWmsSourceActivity extends AppCompatActivity {
 
   MapView mapView;
@@ -23,9 +26,9 @@ public class AddWmsSourceActivity extends AppCompatActivity {
 
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
-    MapboxAccountManager.start(this, getString(R.string.access_token));
+    Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_add_wms_source);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -44,8 +47,7 @@ public class AddWmsSourceActivity extends AppCompatActivity {
 
         // Add the web map source to the map.
         RasterLayer webMapLayer = new RasterLayer("web-map-layer", "web-map-source");
-        mapboxMap.addLayer(webMapLayer, "aeroway-taxiway");
-
+        mapboxMap.addLayerBelow(webMapLayer, "aeroway-taxiway");
       }
     });
   }
@@ -54,6 +56,18 @@ public class AddWmsSourceActivity extends AppCompatActivity {
   protected void onResume() {
     super.onResume();
     mapView.onResume();
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
   }
 
   @Override

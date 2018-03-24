@@ -6,16 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".examples.mas.SimplifyPolylineActivity">
+    tools:context=".examples.javaservices.SimplifyPolylineActivity">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:center_latitude="37.692465"
-        mapbox:center_longitude="-122.410413"
-        mapbox:style_url="mapbox://styles/mapbox/light-v9"
-        mapbox:tilt="45"
-        mapbox:zoom="10.5"/>
+        mapbox:mapbox_cameraTargetLat="37.692465"
+        mapbox:mapbox_cameraTargetLng="-122.410413"
+        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/light-v9"
+        mapbox:mapbox_cameraTilt="45"
+        mapbox:mapbox_cameraZoom="10.5"/>
 
 </LinearLayout>

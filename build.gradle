@@ -1,20 +1,39 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// Top-level build file which has configuration options common to all sub-projects/modules.
 buildscript {
-  repositories {
-    mavenCentral()
-    jcenter()
-  }
-  dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.2'
-  }
+
+    apply from: "${rootDir}/gradle/dependencies.gradle"
+
+    repositories {
+        jcenter()
+        google()
+    }
+
+    dependencies {
+        classpath pluginDependencies.gradle
+        classpath pluginDependencies.firebase
+        classpath pluginDependencies.playPublisher
+    }
+
+}
+
+plugins {
+    id 'com.palantir.circle.style' version '1.1.2'
 }
 
 allprojects {
-  repositories {
-    jcenter()
-  }
+    repositories {
+        jcenter()
+        google()
+        maven { url "https://jitpack.io" }
+        maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+    }
 }
 
 task clean(type: Delete) {
-  delete rootProject.buildDir
+    delete rootProject.buildDir
+}
+
+subprojects {
+    // apply plugin: 'idea'
+    apply from: "${rootDir}/gradle/dependencies.gradle"
 }

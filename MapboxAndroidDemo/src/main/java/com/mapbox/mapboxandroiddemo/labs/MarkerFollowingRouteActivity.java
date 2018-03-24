@@ -4,18 +4,16 @@ import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.animation.LinearInterpolator;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.MapboxAccountManager;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -36,6 +34,9 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Use a map matched GeoJSON route to show a marker travels along the route at consistent speed.
+ */
 public class MarkerFollowingRouteActivity extends AppCompatActivity {
 
   private static final String TAG = "MarkerFollowingRoute";
@@ -54,9 +55,9 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
 
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
-    MapboxAccountManager.start(this, getString(R.string.access_token));
+    Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_lab_marker_following_route);
 
     // Initialize the map view
@@ -82,6 +83,18 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
     if (handler != null && runnable != null) {
       handler.post(runnable);
     }
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
   }
 
   @Override
@@ -180,9 +193,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
             .width(4));
 
         // We are using a custom marker icon.
-        IconFactory iconFactory = IconFactory.getInstance(MarkerFollowingRouteActivity.this);
-        Drawable iconDrawable = ContextCompat.getDrawable(MarkerFollowingRouteActivity.this, R.drawable.pink_dot);
-        Icon icon = iconFactory.fromDrawable(iconDrawable);
+        Icon icon = IconFactory.getInstance(MarkerFollowingRouteActivity.this).fromResource(R.drawable.pink_dot);
 
         // Using a view marker, we place it at the first point in the points list.
         final Marker marker = map.addMarker(new MarkerViewOptions()
@@ -222,7 +233,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
               // and starts outside the current user view. Without this, the user must
               // intentionally execute a gesture before the view marker reappears on
               // the map.
-              map.getMarkerViewManager().scheduleViewMarkerInvalidation();
+              map.getMarkerViewManager().update();
 
               // Keeping the current point count we are on.
               count++;
@@ -252,5 +263,4 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
       return latLng;
     }
   }
-
 }

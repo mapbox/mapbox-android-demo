@@ -11,6 +11,6 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:style_url="mapbox://styles/mapbox/satellite-streets-v9"/>
+        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/satellite-streets-v9"/>
 
 </RelativeLayout>

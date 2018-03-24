@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ****** These strings are for toasts, snackbars, buttons, menu options items,
+   and other strings that are used in individual example activities ****** -->
+
+    <!-- Spinner for color picker example-->
+    <string-array name="layer_spinner_array">
+        <item>Aigua</item>
+        <item>Edifici</item>
+    </string-array>
+
+    <!--Default style names-->
+    <string name="menu_map_style_streets">Carrers</string>
+    <string name="menu_map_style_dark">Fosc</string>
+    <string name="menu_map_style_light">Clar</string>
+    <string name="menu_map_style_outdoors">A l\'aire lliure</string>
+    <string name="menu_map_style_satellite">Satèl·lit</string>
+    <string name="menu_map_style_satellite_streets">Carrers satèl·lit</string>
+
+    <!--Move map instruction for toast-->
+    <string name="move_map_instruction">Desplaça el mapa per afegir place\nmarker a la posició desitjada</string>
+
+    <!--Zoom in and out map instruction for toast-->
+    <string name="zoom_map_in_and_out_instruction">Apropa\'t i allunya\'t per veure com canvien les xifres a les agrupacions</string>
+
+    <!--Geocode widget hint text-->
+    <string name="hint_text_in_geocode_widget">Escull ubicació </string>
+
+    <!--Tap on feature box instruction-->
+    <string name="tap_on_feature_box_instruction">Toqueu al requadre delimitador</string>
+
+    <!--Fragment below textview in support fragment activity-->
+    <string name="fragment_in_card_below">Contenidor de fragment de mapa a la targeta de sota</string>
+
+    <!--Offline manager button text-->
+    <string name="download_button_text">Descarrega</string>
+    <string name="list_button_text">Llista</string>
+
+    <!--Basic user location permission toasts-->
+    <string name="user_location_permission_explanation">Aquesta app necessita permisos per mostrar la seva funcionalitat.</string>
+    <string name="user_location_permission_not_granted">No heu proporcionat permisos de localització.</string>
+
+    <!-- Settings dialog -->
+    <string name="settings_dialog_title">Ajustos</string>
+    <string name="settings_dialog_positive_button_text">Desa</string>
+    <string name="settings_status_toast_analytics_opt_in">Ajust de consentiment desat</string>
+    <string name="settings_status_toast_analytics_opt_out">Ajust de no consentiment desat</string>
+    <string name="settings_dialog_negative_button_text">Cancel·lar</string>
+    <string name="analytics_opt_out_textview">No consentiment a les analísi de seguiment</string>
+    <string name="log_out_of_account_button">Sortir del compte de Mapbox</string>
+    <string name="log_out_toast_confirm">Sessió tancada amb èxit</string>
+    <string name="logged_in_username">Compte d\'usuari: %1$s</string>
+
+    <!--Basic offline map-->
+    <string name="basic_offline_deleted_toast">Mapa offlilne de Yosemite esborrat</string>
+
+    <string name="basic_marker_activity_marker_options_title">Hisense Arena</string>
+    <string name="basic_marker_activity_marker_options_snippet">Olympic Blvd, Melbourne VIC 3001, Australia</string>
+
+    <!--Marker strings for DrawCustomMarkerActivity activity-->
+    <string name="draw_custom_marker_options_title">Cape Town Harbour</string>
+    <string name="draw_custom_marker_options_snippet">Un dels ports més actius a l\'Àfrica del Sud</string>
+
+    <!--Marker strings for DrawMarkerActivity activity-->
+    <string name="draw_marker_options_title">Hola Món!</string>
+    <string name="draw_marker_options_snippet">Benvingut al meu marcador.</string>
+
+    <!--Marker strings for GeocodingActivity activity-->
+    <string name="geocode_activity_marker_options_title">Resultat del geocodificador</string>
+
+    <!--Marker strings for DirectionsActivity activity-->
+    <string name="directions_activity_marker_options_origin_title">Origen</string>
+    <string name="directions_activity_marker_options_origin_snippet">Alhambra</string>
+    <string name="directions_activity_marker_options_destination_title">Destinació</string>
+    <string name="directions_activity_marker_options_destination_snippet">Plaza del Triunfo</string>
+    <string name="directions_activity_toast_message">La ruta té %1$f metres.</string>
+
+    <!--Strings for OfflineManager activity-->
+    <string name="dialog_title">Nom de la nova regió</string>
+    <string name="dialog_message">Descarrega la regió de mapa que estàs veient</string>
+    <string name="dialog_positive_button">Descarrega</string>
+    <string name="dialog_negative_button">Cancel·la</string>
+    <string name="dialog_toast">El nom de la regió no pot ser buit.</string>
+    <string name="end_progress_success">Regió descarregada amb èxit.</string>
+    <string name="toast_no_regions_yet">Encara no tens cap regió.</string>
+    <string name="toast_region_deleted">Regio esborrada</string>
+    <string name="navigate_positive_button">Vés a </string>
+    <string name="navigate_neutral_button_title">Esborra</string>
+    <string name="navigate_negative_button_title">Cancel·la</string>
+    <string name="navigate_title">Llista</string>
+    <string name="region_name">Regió %1$d</string>
+    <string name="set_region_name_hint">Posa el nom</string>
+
+    <!--SimpleOfflineMapActivity activity-->
+    <string name="simple_offline_end_progress_success">Regió descarregada amb èxit.</string>
+
+    <!--FeatureCountActivity activity-->
+    <string name="feature_count_snackbar_feature_size">%1$delements a la caixa</string>
+
+    <!--QueryFeatureActivity activity-->
+    <string name="query_feature_marker_title">Propietats:</string>
+    <string name="query_feature_marker_snippet">Cap propietat per aquest element</string>
+    <string name="query_feature_no_properties_found">Cap propietat per aquest element</string>
+
+    <!--LocationPickerActivity activity-->
+    <string name="location_picker_select_location_button_cancel">Cancel·la</string>
+    <string name="location_picker_select_location_button_select">Escull una ubicació</string>
+    <string name="location_picker_dropped_marker_snippet_no_results">Cap resultat</string>
+
+    <!--LosAngelesTourismActivity activity-->
+    <string name="fab_title_hotels">Hotels</string>
+    <string name="fab_title_parks">Parcs</string>
+    <string name="fab_title_attractions">Atraccions</string>
+
+    <!--OffRouteActivity activity-->
+    <string name="off_route_toast_press_map">Prem el mapa per afegir una destinació</string>
+    <string name="toast_no_routes_found">Cap ruta trobada</string>
+    <string name="off_route_toast_off_route">Fora de la ruta</string>
+
+    <!--LanguageSwitchActivity activity-->
+    <string name="language_switch_options_menu_language_english">Anglès</string>
+    <string name="language_switch_options_menu_language_french">Francès</string>
+    <string name="language_switch_options_menu_language_russian">Rus</string>
+    <string name="language_switch_options_menu_language_german">Alemany</string>
+    <string name="language_switch_options_menu_language_spanish">Espanyol</string>
+
+    <!--LanguageSwitchActivity activity-->
+    <string name="custom_window_marker_title_spain">Espanya</string>
+    <string name="custom_window_marker_title_egypt">Egipte</string>
+    <string name="custom_window_marker_title_germany">Alemanya</string>
+
+    <!--Tap on map instruction for toast-->
+    <string name="tap_on_map_instruction">Toqueu en qualsevol lloc al mapa</string>
+    <string name="tap_on_map_turf_inside_instruction">Toqueu a l\'interior del polígon blau</string>
+
+    <string name="san_francisco">San Francisco</string>
+    <string name="los_angeles">Los Angeles</string>
+    <string name="seattle">Seattle</string>
+    <string name="new_orleans">Nova Orleans</string>
+    <string name="chicago">Xicago</string>
+    <string name="philadelphia">Filadèlfia</string>
+    <string name="new_york">Nova York</string>
+    <string name="atlanta">Atlanta</string>
+    <string name="portland">Portland</string>
+    <string name="denver">Denver</string>
+    <string name="minneapolis">Minneapolis</string>
+    <string name="miami">Miami</string>
+    <string name="extrusions_category">Extrusions 3D</string>
+    <string name="plugins_category">Connectors</string>
+
+    <!--Landing activity-->
+    <string name="tv_create_account_button">Crea un compte</string>
+    <string name="tv_sign_in_to_account_button">Iniciar sessió</string>
+    <string name="landing_cta_tv_text">Crea o entra el teu compte Mapbox per veure les darreres demostracions de Mapbox</string>
+    <string name="skip_for_now_bottom_button">Omet per ara</string>
+    <string name="whoops_error_dialog_title">Whoops!</string>
+    <string name="whoops_error_dialog_message">Alguna cosa ha fallat amb l\'inici de sessió! Si us plau neteja la caché i les galetes del teu navegador.</string>
+    <string name="whoops_error_dialog_ok_positive_button">D\'acord</string>
+
+    <!--Loading activity-->
+    <string name="loading_textview">Carregant&#8230;</string>
+
+    <!--Space station toast-->
+    <string name="space_station_toast">Apropa\'t a l\'estació espacial per veure-la en moviment</string>
+
+    <!-- Extrusion light activity menu -->
+
+    <string name="change_anchor">Canvia l\'àncora</string>
+    <string name="change_intensity">Canvia la intensitat</string>
+
+</resources>

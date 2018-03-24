@@ -8,7 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.MapboxAccountManager;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -22,9 +22,12 @@ import com.mapbox.mapboxsdk.offline.OfflineTilePyramidRegionDefinition;
 
 import org.json.JSONObject;
 
+/**
+ * Download and view an offline map using the Mapbox Android SDK.
+ */
 public class SimpleOfflineMapActivity extends AppCompatActivity {
 
-  private static final String TAG = "MainActivity";
+  private static final String TAG = "SimpOfflineMapActivity";
 
   private boolean isEndNotified;
   private ProgressBar progressBar;
@@ -41,9 +44,9 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
-    MapboxAccountManager.start(this, getString(R.string.access_token));
+    Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_offline_simple);
 
     mapView = (MapView) findViewById(R.id.mapView);
@@ -62,7 +65,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
         // Define the offline region
         OfflineTilePyramidRegionDefinition definition = new OfflineTilePyramidRegionDefinition(
-          mapView.getStyleUrl(),
+          mapboxMap.getStyleUrl(),
           latLngBounds,
           10,
           20,
@@ -105,7 +108,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
                   if (status.isComplete()) {
                     // Download complete
-                    endProgress("Region downloaded successfully.");
+                    endProgress(getString(R.string.simple_offline_end_progress_success));
                   } else if (status.isRequiredResourceCountPrecise()) {
                     // Switch to determinate state
                     setPercentage((int) Math.round(percentage));
@@ -143,33 +146,51 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
   }
 
   @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
+  }
+
+  @Override
   public void onPause() {
     super.onPause();
     mapView.onPause();
-    offlineManager.listOfflineRegions(new OfflineManager.ListOfflineRegionsCallback() {
-      @Override
-      public void onList(OfflineRegion[] offlineRegions) {
-        if (offlineRegions.length > 0) {
-          // delete the last item in the offlineRegions list which will be yosemite offline map
-          offlineRegions[(offlineRegions.length - 1)].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
-            @Override
-            public void onDelete() {
-              Toast.makeText(SimpleOfflineMapActivity.this, "Yosemite offline map deleted", Toast.LENGTH_LONG).show();
-            }
+    if (offlineManager != null) {
+      offlineManager.listOfflineRegions(new OfflineManager.ListOfflineRegionsCallback() {
+        @Override
+        public void onList(OfflineRegion[] offlineRegions) {
+          if (offlineRegions.length > 0) {
+            // delete the last item in the offlineRegions list which will be yosemite offline map
+            offlineRegions[(offlineRegions.length - 1)].delete(new OfflineRegion.OfflineRegionDeleteCallback() {
+              @Override
+              public void onDelete() {
+                Toast.makeText(
+                  SimpleOfflineMapActivity.this,
+                  getString(R.string.basic_offline_deleted_toast),
+                  Toast.LENGTH_LONG
+                ).show();
+              }
 
-            @Override
-            public void onError(String error) {
-              Log.e(TAG, "On Delete error: " + error);
-            }
-          });
+              @Override
+              public void onError(String error) {
+                Log.e(TAG, "On Delete error: " + error);
+              }
+            });
+          }
         }
-      }
 
-      @Override
-      public void onError(String error) {
-        Log.e(TAG, "onListError: " + error);
-      }
-    });
+        @Override
+        public void onError(String error) {
+          Log.e(TAG, "onListError: " + error);
+        }
+      });
+    }
   }
 
   @Override

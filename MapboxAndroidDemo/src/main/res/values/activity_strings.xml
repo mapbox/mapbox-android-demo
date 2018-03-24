@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ****** These strings are for toasts, snackbars, buttons, menu options items,
+    and other strings that are used in individual example activities ****** -->
+
+
+    <!-- Spinner for color picker example-->
+    <string-array name="layer_spinner_array">
+        <item>Water</item>
+        <item>Building</item>
+    </string-array>
+
+    <!--Default style names-->
+    <string name="menu_map_style_streets">Streets</string>
+    <string name="menu_map_style_dark">Dark</string>
+    <string name="menu_map_style_light">Light</string>
+    <string name="menu_map_style_outdoors">Outdoors</string>
+    <string name="menu_map_style_satellite">Satellite</string>
+    <string name="menu_map_style_satellite_streets">Satellite streets</string>
+
+    <!--Move map instruction for toast-->
+    <string name="move_map_instruction">Move map to place\nmarker at desired location</string>
+
+    <!--Zoom in and out map instruction for toast-->
+    <string name="zoom_map_in_and_out_instruction">Zoom in and out to see cluster numbers change</string>
+
+    <!--Tap on feature box instruction-->
+    <string name="tap_on_feature_box_instruction">Tap on bounding box</string>
+
+    <!--Fragment below textview in support fragment activity-->
+    <string name="fragment_in_card_below">Map fragment container in card below</string>
+
+    <!--Offline manager button text-->
+    <string name="download_button_text">Download</string>
+    <string name="list_button_text">List</string>
+
+    <!--Basic user location permission toasts-->
+    <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
+    <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
+
+    <!-- Settings dialog -->
+    <string name="settings_dialog_title">Settings</string>
+    <string name="settings_dialog_positive_button_text">Save</string>
+    <string name="settings_status_toast_analytics_opt_in">Opt in setting saved</string>
+    <string name="settings_status_toast_analytics_opt_out">Opt out setting saved</string>
+    <string name="settings_dialog_negative_button_text">Cancel</string>
+    <string name="analytics_opt_out_textview">Opt out of analytics tracking</string>
+    <string name="log_out_of_account_button">Log out of Mapbox account</string>
+    <string name="log_out_toast_confirm">Successfully logged out</string>
+    <string name="logged_in_username">Account username: %1$s</string>
+
+    <!--Basic offline map-->
+    <string name="basic_offline_deleted_toast">Yosemite offline map deleted</string>
+
+    <string name="basic_marker_activity_marker_options_title">Hisense Arena</string>
+    <string name="basic_marker_activity_marker_options_snippet">Olympic Blvd, Melbourne VIC 3001, Australia</string>
+
+    <!--Marker strings for DrawCustomMarkerActivity activity-->
+    <string name="draw_custom_marker_options_title">Cape Town Harbour</string>
+    <string name="draw_custom_marker_options_snippet">One of the busiest ports in South Africa</string>
+
+    <!--Marker strings for DrawMarkerActivity activity-->
+    <string name="draw_marker_options_title">Hello World!</string>
+    <string name="draw_marker_options_snippet">Welcome to my marker.</string>
+
+    <!--Marker strings for DirectionsActivity activity-->
+    <string name="directions_activity_marker_options_origin_title">Origin</string>
+    <string name="directions_activity_marker_options_origin_snippet">Alhambra</string>
+    <string name="directions_activity_marker_options_destination_title">Destination</string>
+    <string name="directions_activity_marker_options_destination_snippet">Plaza del Triunfo</string>
+    <string name="directions_activity_toast_message">Route is %1$f meters long.</string>
+
+    <!--Strings for OfflineManager activity-->
+    <string name="dialog_title">Name new region</string>
+    <string name="dialog_message">Downloads the map region you currently are viewing</string>
+    <string name="dialog_positive_button">Download</string>
+    <string name="dialog_negative_button">Cancel</string>
+    <string name="dialog_toast">Region name cannot be empty.</string>
+    <string name="end_progress_success">Region downloaded successfully.</string>
+    <string name="toast_no_regions_yet">You have no regions yet.</string>
+    <string name="toast_region_deleted">Region deleted</string>
+    <string name="navigate_positive_button">Navigate to</string>
+    <string name="navigate_neutral_button_title">Delete</string>
+    <string name="navigate_negative_button_title">Cancel</string>
+    <string name="navigate_title">List</string>
+    <string name="region_name">Region %1$d</string>
+    <string name="set_region_name_hint">Enter name</string>
+
+    <!--SimpleOfflineMapActivity activity-->
+    <string name="simple_offline_end_progress_success">Region downloaded successfully.</string>
+
+    <!--FeatureCountActivity activity-->
+    <string name="feature_count_snackbar_feature_size">%1$d features in box</string>
+
+    <!--QueryFeatureActivity activity-->
+    <string name="query_feature_marker_title">Properties:</string>
+    <string name="query_feature_marker_snippet">No feature properties found</string>
+    <string name="query_feature_no_properties_found">No feature properties found</string>
+
+    <!--LocationPickerActivity activity-->
+    <string name="location_picker_select_location_button_cancel">Cancel</string>
+    <string name="location_picker_select_location_button_select">Select a location</string>
+    <string name="location_picker_dropped_marker_snippet_no_results">No results</string>
+
+    <!--LosAngelesTourismActivity activity-->
+    <string name="fab_title_hotels">Hotels</string>
+    <string name="fab_title_parks">Parks</string>
+    <string name="fab_title_attractions">Attractions</string>
+
+    <!--OffRouteActivity activity-->
+    <string name="off_route_toast_press_map">Press map to add destination</string>
+    <string name="toast_no_routes_found">No routes found</string>
+    <string name="off_route_toast_off_route">Off route</string>
+
+    <!--LanguageSwitchActivity activity-->
+    <string name="language_switch_options_menu_language_english">English</string>
+    <string name="language_switch_options_menu_language_french">French</string>
+    <string name="language_switch_options_menu_language_russian">Russian</string>
+    <string name="language_switch_options_menu_language_german">German</string>
+    <string name="language_switch_options_menu_language_spanish">Spanish</string>
+
+    <!--LanguageSwitchActivity activity-->
+    <string name="custom_window_marker_title_spain">Spain</string>
+    <string name="custom_window_marker_title_egypt">Egypt</string>
+    <string name="custom_window_marker_title_germany">Germany</string>
+
+    <!--Tap on map instruction for toast-->
+    <string name="tap_on_map_instruction">Tap anywhere on the map</string>
+    <string name="tap_on_map_turf_inside_instruction">Tap inside of blue polygon area</string>
+    <string name="tap_on_map_for_notification">Tap on map to get a notification with map image</string>
+
+    <string name="san_francisco">San Francisco</string>
+    <string name="los_angeles">Los Angeles</string>
+    <string name="seattle">Seattle</string>
+    <string name="new_orleans">New Orleans</string>
+    <string name="chicago">Chicago</string>
+    <string name="philadelphia">Philadelphia</string>
+    <string name="new_york">New York</string>
+    <string name="atlanta">Atlanta</string>
+    <string name="portland">Portland</string>
+    <string name="denver">Denver</string>
+    <string name="minneapolis">Minneapolis</string>
+    <string name="miami">Miami</string>
+    <string name="extrusions_category">3D Extrusions</string>
+    <string name="plugins_category">Plugins</string>
+
+    <!--Landing activity-->
+    <string name="tv_create_account_button">Create account</string>
+    <string name="tv_sign_in_to_account_button">Sign in</string>
+    <string name="landing_cta_tv_text">Create or sign in to your Mapbox account to view the latest Mapbox demos</string>
+    <string name="skip_for_now_bottom_button">Skip for now</string>
+    <string name="whoops_error_dialog_title">Whoops!</string>
+    <string name="whoops_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
+    <string name="whoops_error_dialog_ok_positive_button">Ok</string>
+
+    <!--Loading activity-->
+    <string name="loading_textview">Loading&#8230;</string>
+
+    <!--Space station toast-->
+    <string name="space_station_toast">Zoom in closely on the space station\nto see it moving across the map</string>
+
+    <!-- Extrusion light activity menu -->
+    <string name="change_anchor">Change anchor</string>
+    <string name="change_intensity">Change intensity</string>
+
+    <string name="no_picture_in_picture_support">This device\'s Android version does not\nsupport picture-in-picture mode</string>
+    <string name="retrieval_error_dialog_title">Whoops!</string>
+    <string name="retrieval_error_dialog_message">Looks like something went wrong with the log in process! Please try clearing your browser\'s cache/cookies and then sign back in.</string>
+    <string name="retrieval_error_dialog_ok_button">Ok</string>
+
+    <!-- Share app intent -->
+    <string name="share_app_subject">Mapbox demo app for Android</string>
+    <string name="share_app_text">Hey, check out these great examples showing what can be built using Mapbox:\n
+    http://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo</string>
+    <string name="share_app_choose_one_instruction">Share the app:</string>
+
+    <!-- Clicked on layer activity -->
+    <string name="click_on_polygon_toast_instruction">Click anywhere within polygon FillLayer</string>
+    <string name="click_on_polygon_toast">Clicked on FillLayer</string>
+
+    <!-- Recyclerview on map -->
+    <string name="rv_card_name">Location #%1$d</string>
+    <string name="rv_card_bed_info">This location has %1$d beds</string>
+    <string name="toast_instruction">Click on cards below</string>
+
+    <!-- Optimization API activity -->
+    <string name="origin">Origin</string>
+    <string name="destination">Destination</string>
+    <string name="only_twelve_stops_allowed">Only 12 stops allowed on route. Press on the map and hold to clear markers.</string>
+    <string name="click_instructions">Tap on the map to select a maximum of 12 locations</string>
+    <string name="successful_but_no_routes">No routes found for that location</string>
+    <string name="no_success">No routes found, make sure you set the right user and access token</string>
+
+    <!-- Rotation extrusion -->
+    <string name="no_accelerometer">This device doesn\'t support an accelerometer sensor</string>
+    <string name="no_magnetic">This device doesn\'t support a magnetic sensor</string>
+
+    <!-- GeoJSON plugin activity-->
+    <string name="find_file_instruction_toast">Select a GeoJSON file on your device</string>
+    <string name="boston_police_stations">Boston police stations</string>
+    <string name="tap_on_markers">Tap on marker</string>
+
+    <!-- Raster and local style source activity-->
+    <string name="load_raster_button_text">Load custom raster style</string>
+    <string name="load_local_style_button_text">Load local style</string>
+
+    <!-- Localization plugin -->
+    <string name="map_not_localized">Map not localized to device language and now set to French</string>
+    <string name="map_localized">Map localized to device language</string>
+    <string name="camera_bounds_focus">Camera bounds for country associated with language tag: %1$s</string>
+    <string name="change_language_instruction">Make sure that the device\'s default language is not English</string>
+    <string name="mandarin">Mandarin</string>
+    <string name="russian">Russian</string>
+    <string name="arabic">Arabic</string>
+    <string name="change_device_language_instruction">Change the device\'s language to German and then tap this button. Already in German? Try French</string>
+    <string name="try_different_language_instruction">Try setting your phone to a different language. German or French perhaps?</string>
+    <string name="vacation_description">Uh-oh! You\'re lost in NYC. Tap the buttons below to
+        switch the map\'s language so that you can ask for help with directions.</string>
+
+    <!-- Matrix API -->
+    <string name="call_error">Oh no! The call to the Directions Matrix API failed!</string>
+    <string name="miles_distance">%1$s miles</string>
+    <string name="click_on_marker_instruction_toast">Click on a bolt marker to get started</string>
+</resources>

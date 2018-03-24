@@ -6,19 +6,26 @@ import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxsdk.MapboxAccountManager;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
-public class AnimatedMarkerActivity extends AppCompatActivity {
+/**
+ * Animate the marker to a new position on the map.
+ */
+public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapReadyCallback,
+  MapboxMap.OnMapClickListener {
 
   private MapView mapView;
+  private MapboxMap mapboxMap;
+  private Marker marker;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -26,41 +33,58 @@ public class AnimatedMarkerActivity extends AppCompatActivity {
 
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
-    MapboxAccountManager.start(this, getString(R.string.access_token));
+    Mapbox.getInstance(this, getString(R.string.access_token));
 
-    // This contains the MapView in XML and needs to be called after the account manager
+    // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_annotation_animated_marker);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+    mapView.getMapAsync(this);
+  }
 
-        final Marker marker = mapboxMap.addMarker(new MarkerViewOptions()
-          .position(new LatLng(64.900932, -18.167040)));
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    AnimatedMarkerActivity.this.mapboxMap = mapboxMap;
 
-        mapboxMap.setOnMapClickListener(new MapboxMap.OnMapClickListener() {
-          @Override
-          public void onMapClick(@NonNull LatLng point) {
+    marker = mapboxMap.addMarker(new MarkerOptions()
+      .position(new LatLng(64.900932, -18.167040)));
 
-            // When the user clicks on the map, we want to animate the marker to that
-            // location.
-            ValueAnimator markerAnimator = ObjectAnimator.ofObject(marker, "position",
-              new LatLngEvaluator(), marker.getPosition(), point);
-            markerAnimator.setDuration(2000);
-            markerAnimator.start();
-          }
-        });
+    Toast.makeText(
+      AnimatedMarkerActivity.this,
+      getString(R.string.tap_on_map_instruction),
+      Toast.LENGTH_LONG
+    ).show();
 
-      }
-    });
+    mapboxMap.addOnMapClickListener(this);
+  }
+
+  @Override
+  public void onMapClick(@NonNull LatLng point) {
+    // When the user clicks on the map, we want to animate the marker to that
+    // location.
+    ValueAnimator markerAnimator = ObjectAnimator.ofObject(marker, "position",
+      new LatLngEvaluator(), marker.getPosition(), point);
+    markerAnimator.setDuration(2000);
+    markerAnimator.start();
   }
 
   @Override
   public void onResume() {
     super.onResume();
     mapView.onResume();
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
   }
 
   @Override
@@ -78,6 +102,9 @@ public class AnimatedMarkerActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 

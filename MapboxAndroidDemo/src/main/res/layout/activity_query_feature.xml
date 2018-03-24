@@ -11,9 +11,9 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:center_latitude="29.7565"
-        mapbox:center_longitude="-95.3625"
-        mapbox:style_url="@string/style_mapbox_streets"
-        mapbox:zoom="16"/>
+        mapbox:mapbox_cameraTargetLat="29.7565"
+        mapbox:mapbox_cameraTargetLng="-95.3625"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"
+        mapbox:mapbox_cameraZoom="16"/>
 
 </RelativeLayout>

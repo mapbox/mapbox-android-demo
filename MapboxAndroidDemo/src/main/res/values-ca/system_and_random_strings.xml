@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Demostració de Mapbox</string>
+    <string name="examples">Exemples Android</string>
+
+    <!-- UI Strings -->
+    <string name="navigation_drawer_open">Obrir panell de navegació</string>
+    <string name="navigation_drawer_close">Tancar panell de navegació</string>
+
+    <string name="info_dialog_title">Començar</string>
+    <string name="info_dialog_description">T\'agraden els mapes i els exemples? Aprén a afegir-los a la teva aplicació</string>
+    <string name="info_dialog_positive_button_text">Inicia l\'aprenentatge</string>
+    <string name="info_dialog_negative_button_text">Ara no</string>
+
+    <string name="description_labs">Mentre que les altres categories en aquesta aplicació mostren exemples fent una cosa específica, la categoria de laboratori combina exemples per demostrar el poder de l\'SDK.</string>
+    <string name="description_java_services">El Servei Android de Mapbox empaqueta moltes de les API Mapbox en un únic SDK, com ara adreces, geocodificació i molts altres serveis oferts.</string>
+    <string name="description_query">Aquests exemples mostren com consultar les dades dels mapes per obtenir informació com les característiques d\'una geometria o les propietats.</string>
+
+    <!-- toolbar items -->
+    <string name="info">Informació</string>
+
+    <!-- nav drawer categories -->
+    <string name="getting_started_category">Començar</string>
+    <string name="styles_category">Estils</string>
+    <string name="dds_category">Estil guiat per dades</string>
+    <string name="annotations_category">Annotacions</string>
+    <string name="camera_category">Càmera</string>
+    <string name="offline_category">Offline</string>
+    <string name="query_map_category">Interrogar mapa</string>
+    <string name="java_services_category">Serveis Android</string>
+    <string name="lab_category">Laboratori</string>
+    <string name="settings">Ajustos</string>
+
+</resources>

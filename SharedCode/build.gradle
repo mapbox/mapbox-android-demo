@@ -1,0 +1,22 @@
+apply plugin: 'com.android.library'
+apply from: "$project.rootDir/gradle/script-git-version.gradle"
+
+android {
+    compileSdkVersion androidVersions.compileSdkVersion
+    buildToolsVersion androidVersions.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion androidVersions.minSdkVersion
+        targetSdkVersion androidVersions.targetSdkVersion
+
+        versionCode gitVersionCode
+        versionName gitVersionName
+    }
+}
+
+dependencies {
+    implementation dependenciesList.supportAnnotations
+    implementation dependenciesList.segmentAnalytics
+}
+
+apply from: './gradle-config.gradle'

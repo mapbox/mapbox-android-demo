@@ -1,0 +1,33 @@
+[main]
+host = https://www.transifex.com
+minimum_perc = 80
+
+[mapbox-android-demo.activity_stringsxml]
+file_filter = MapboxAndroidDemo/src/main/res/values-<lang>/activity_strings.xml
+source_file = MapboxAndroidDemo/src/main/res/values/activity_strings.xml
+source_lang = en
+type = ANDROID
+
+[mapbox-android-demo.descriptions_stringsxml]
+file_filter = MapboxAndroidDemo/src/main/res/values-<lang>/descriptions_strings.xml
+source_file = MapboxAndroidDemo/src/main/res/values/descriptions_strings.xml
+source_lang = en
+type = ANDROID
+
+[mapbox-android-demo.system_and_random_stringsxml]
+file_filter = MapboxAndroidDemo/src/main/res/values-<lang>/system_and_random_strings.xml
+source_file = MapboxAndroidDemo/src/main/res/values/system_and_random_strings.xml
+source_lang = en
+type = ANDROID
+
+[mapbox-android-demo.titles_stringsxml]
+file_filter = MapboxAndroidDemo/src/main/res/values-<lang>/titles_strings.xml
+source_file = MapboxAndroidDemo/src/main/res/values/titles_strings.xml
+source_lang = en
+type = ANDROID
+
+[mapbox-android-demo.urls_stringsxml]
+file_filter = MapboxAndroidDemo/src/main/res/values-<lang>/urls_strings.xml
+source_file = MapboxAndroidDemo/src/main/res/values/urls_strings.xml
+source_lang = en
+type = ANDROID
