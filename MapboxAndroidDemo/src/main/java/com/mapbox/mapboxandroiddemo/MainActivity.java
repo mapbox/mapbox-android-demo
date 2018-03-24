@@ -49,6 +49,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.TimeLapseDragActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
@@ -693,8 +694,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_multiple_geometries_title,
           R.string.activity_dds_multiple_geometries_description,
           new Intent(MainActivity.this, MultipleGeometriesActivity.class),
-          R.string.activity_dds_multiple_geometries_url, false, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_dds_multiple_geometries_url, false, BuildConfig.MIN_SDK_VERSION
+        ));
 
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_dds_time_lapse_drag_title,
+          R.string.activity_dds_time_lapse_drag_description,
+          new Intent(MainActivity.this, TimeLapseDragActivity.class),
+          R.string.activity_dds_time_lapse_drag_url, true, BuildConfig.MIN_SDK_VERSION
+        ));
         currentCategory = R.id.nav_dds;
         break;
       default:
