@@ -11,6 +11,7 @@ import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.api.optimization.v1.MapboxOptimization;
 import com.mapbox.api.optimization.v1.models.OptimizationResponse;
+import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -21,8 +22,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.commons.geojson.LineString;
-import com.mapbox.services.commons.models.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.mapbox.services.Constants.PRECISION_6;
+import static com.mapbox.core.constants.Constants.PRECISION_6;
+
 
 /**
  * Use Mapbox Java Services to request and compare normal directions with time optimized directions.
@@ -66,7 +66,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
 
     stops = new ArrayList<>();
 
-    // Add the origin Position to the list
+    // Add the origin Point to the list
     addFirstStopToStopsList();
 
     // Setup the MapView
@@ -185,12 +185,12 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   private LatLng[] convertLineStringToLatLng(DirectionsRoute route) {
     // Convert LineString coordinates into LatLng[]
     LineString lineString = LineString.fromPolyline(route.geometry(), PRECISION_6);
-    List<Position> coordinates = lineString.getCoordinates();
+    List<Point> coordinates = lineString.coordinates();
     LatLng[] points = new LatLng[coordinates.size()];
     for (int i = 0; i < coordinates.size(); i++) {
       points[i] = new LatLng(
-        coordinates.get(i).getLatitude(),
-        coordinates.get(i).getLongitude());
+        coordinates.get(i).latitude(),
+        coordinates.get(i).longitude());
     }
     return points;
   }

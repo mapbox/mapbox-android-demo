@@ -17,9 +17,10 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.InputStream;
 
-import static com.mapbox.mapboxsdk.style.functions.Function.property;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stops.categorical;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.color;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 
 /**
  * Use data-driven styling to set a line's color based on imported GeoJSON.
@@ -56,13 +57,9 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
 
         LineLayer linesLayer = new LineLayer("finalLines", "lines").withProperties(
           PropertyFactory.lineColor(
-            property(
-              "color",
-              categorical(
-                stop("red", PropertyFactory.lineColor(Color.parseColor("#F7455D"))),
-                stop("blue", PropertyFactory.lineColor(Color.parseColor("#33C9EB")))
-              ))
-          ),
+            match(get("color"), color(Color.parseColor("#000000")),
+              stop("red", color(Color.parseColor("#F7455D"))),
+              stop("blue", color(Color.parseColor("#33C9EB"))))),
           PropertyFactory.visibility(Property.VISIBLE),
           PropertyFactory.lineWidth(3f)
         );

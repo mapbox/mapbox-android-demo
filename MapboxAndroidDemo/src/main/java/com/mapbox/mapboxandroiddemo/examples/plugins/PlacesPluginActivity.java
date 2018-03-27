@@ -12,6 +12,8 @@ import android.view.View;
 
 import com.google.gson.JsonObject;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -21,13 +23,11 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
+import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.plugins.places.autocomplete.PlaceAutocomplete;
-import com.mapbox.plugins.places.autocomplete.model.PlaceOptions;
-import com.mapbox.services.commons.geojson.Feature;
-import com.mapbox.services.commons.geojson.FeatureCollection;
 
 /**
  * Use the places plugin to take advantage of Mapbox's location search ("geocoding") capabilities. The plugin
@@ -68,7 +68,7 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
 
     // Add the symbol layer icon to map for future use
     Bitmap icon = BitmapFactory.decodeResource(
-        PlacesPluginActivity.this.getResources(), R.drawable.blue_marker_view);
+      PlacesPluginActivity.this.getResources(), R.drawable.blue_marker_view);
     mapboxMap.addImage(symbolIconId, icon);
 
     // Create an empty GeoJSON source using the empty feature collection
@@ -84,14 +84,14 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
       @Override
       public void onClick(View view) {
         Intent intent = new PlaceAutocomplete.IntentBuilder()
-            .accessToken(Mapbox.getAccessToken())
-            .placeOptions(PlaceOptions.builder()
-                .backgroundColor(Color.parseColor("#EEEEEE"))
-                .limit(10)
-                .addInjectedFeature(home)
-                .addInjectedFeature(work)
-                .build(PlaceOptions.MODE_CARDS))
-            .build(PlacesPluginActivity.this);
+          .accessToken(Mapbox.getAccessToken())
+          .placeOptions(PlaceOptions.builder()
+            .backgroundColor(Color.parseColor("#EEEEEE"))
+            .limit(10)
+            .addInjectedFeature(home)
+            .addInjectedFeature(work)
+            .build(PlaceOptions.MODE_CARDS))
+          .build(PlacesPluginActivity.this);
         startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
       }
     });
@@ -99,18 +99,18 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
 
   private void addUserLocations() {
     home = CarmenFeature.builder().text("Mapbox SF Office")
-        .geometry(Point.fromLngLat(-122.399854, 37.7884400))
-        .placeName("85 2nd St, San Francisco, CA")
-        .id("mapbox-sf")
-        .properties(new JsonObject())
-        .build();
+      .geometry(Point.fromLngLat(-122.399854, 37.7884400))
+      .placeName("85 2nd St, San Francisco, CA")
+      .id("mapbox-sf")
+      .properties(new JsonObject())
+      .build();
 
     work = CarmenFeature.builder().text("Mapbox DC Office")
-        .placeName("740 15th Street NW, Washington DC")
-        .geometry(Point.fromLngLat(-77.0338348, 38.899750))
-        .id("mapbox-dc")
-        .properties(new JsonObject())
-        .build();
+      .placeName("740 15th Street NW, Washington DC")
+      .geometry(Point.fromLngLat(-77.0338348, 38.899750))
+      .id("mapbox-dc")
+      .properties(new JsonObject())
+      .build();
   }
 
   private void setUpSource() {
@@ -144,10 +144,10 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
 
       // Move map camera to the selected location
       CameraPosition newCameraPosition = new CameraPosition.Builder()
-          .target(new LatLng(((Point) selectedCarmenFeature.geometry()).latitude(),
-              ((Point) selectedCarmenFeature.geometry()).longitude()))
-          .zoom(14)
-          .build();
+        .target(new LatLng(((Point) selectedCarmenFeature.geometry()).latitude(),
+          ((Point) selectedCarmenFeature.geometry()).longitude()))
+        .zoom(14)
+        .build();
       mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(newCameraPosition), 4000);
     }
   }

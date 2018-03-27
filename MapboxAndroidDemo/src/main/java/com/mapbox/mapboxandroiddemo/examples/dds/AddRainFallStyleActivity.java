@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +9,16 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
-import com.mapbox.mapboxsdk.style.layers.Filter;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
-import static com.mapbox.mapboxsdk.style.functions.Function.property;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
@@ -46,7 +47,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     setContentView(R.layout.activity_style_rainfall);
 
     handler = new Handler();
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
@@ -109,7 +110,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
   private class RefreshGeoJsonRunnable implements Runnable {
     @Override
     public void run() {
-      layer.setFilter(Filter.eq("idx", index));
+      layer.setFilter(eq((Expression.get("idx")), literal(index)));
       index++;
       if (index == 40) {
         index = 0;
@@ -128,28 +129,25 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     if (layer == null) {
       layer = new FillLayer(ID_LAYER, ID_SOURCE);
       layer.withSourceLayer("whole");
-      layer.setFilter(Filter.eq("idx", 0));
+      layer.setFilter(eq((get("idx")), literal(0)));
       layer.setProperties(PropertyFactory.visibility(VISIBLE),
-        fillColor(
-          property(
-            "value",
-            exponential(
-              stop(8, fillColor(Color.argb(1, 20, 160, 240))),
-              stop(18, fillColor(Color.argb(1, 20, 190, 240))),
-              stop(36, fillColor(Color.argb(1, 20, 220, 240))),
-              stop(54, fillColor(Color.argb(1, 20, 250, 240))),
-              stop(72, fillColor(Color.argb(1, 20, 250, 160))),
-              stop(90, fillColor(Color.argb(1, 135, 250, 80))),
-              stop(108, fillColor(Color.argb(1, 250, 250, 0))),
-              stop(126, fillColor(Color.argb(1, 250, 180, 0))),
-              stop(144, fillColor(Color.argb(1, 250, 110, 0))),
-              stop(162, fillColor(Color.argb(1, 250, 40, 0))),
-              stop(180, fillColor(Color.argb(1, 180, 40, 40))),
-              stop(198, fillColor(Color.argb(1, 110, 40, 80))),
-              stop(216, fillColor(Color.argb(1, 80, 40, 110))),
-              stop(234, fillColor(Color.argb(1, 50, 40, 140))),
-              stop(252, fillColor(Color.argb(1, 20, 40, 170)))
-            )
+        fillColor(interpolate(Expression.exponential(1f),
+          get("value"),
+          stop(8, Expression.rgb(20, 160, 240)),
+          stop(18, Expression.rgb(20, 190, 240)),
+          stop(36, Expression.rgb(20, 220, 240)),
+          stop(54, Expression.rgb(20, 250, 240)),
+          stop(72, Expression.rgb(20, 250, 160)),
+          stop(90, Expression.rgb(135, 250, 80)),
+          stop(108, Expression.rgb(250, 250, 0)),
+          stop(126, Expression.rgb(250, 180, 0)),
+          stop(144, Expression.rgb(250, 110, 0)),
+          stop(162, Expression.rgb(250, 40, 0)),
+          stop(180, Expression.rgb(180, 40, 40)),
+          stop(198, Expression.rgb(110, 40, 80)),
+          stop(216, Expression.rgb(80, 40, 110)),
+          stop(234, Expression.rgb(50, 40, 140)),
+          stop(252, Expression.rgb(20, 40, 170))
           )
         ),
         PropertyFactory.fillOpacity(0.7f));

@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.gson.JsonElement;
+import com.mapbox.geojson.Feature;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -14,7 +15,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.commons.geojson.Feature;
 
 import java.util.List;
 import java.util.Map;
@@ -66,8 +66,8 @@ public class QueryFeatureActivity extends AppCompatActivity implements OnMapRead
       String property;
 
       StringBuilder stringBuilder = new StringBuilder();
-      if (feature.getProperties() != null) {
-        for (Map.Entry<String, JsonElement> entry : feature.getProperties().entrySet()) {
+      if (feature.properties() != null) {
+        for (Map.Entry<String, JsonElement> entry : feature.properties().entrySet()) {
           stringBuilder.append(String.format("%s - %s", entry.getKey(), entry.getValue()));
           stringBuilder.append(System.getProperty("line.separator"));
         }

@@ -15,12 +15,12 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,15 +34,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.GsonBuilder;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.stops.Stop;
+import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
@@ -53,13 +56,6 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.Source;
 import com.mapbox.mapboxsdk.style.sources.TileSet;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
-import com.mapbox.services.commons.geojson.Feature;
-import com.mapbox.services.commons.geojson.FeatureCollection;
-import com.mapbox.services.commons.geojson.Geometry;
-import com.mapbox.services.commons.geojson.Point;
-import com.mapbox.services.commons.geojson.custom.GeometryDeserializer;
-import com.mapbox.services.commons.geojson.custom.PositionDeserializer;
-import com.mapbox.services.commons.models.Position;
 import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
@@ -77,15 +73,18 @@ import okhttp3.Response;
 import timber.log.Timber;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
-import static com.mapbox.mapboxsdk.style.functions.Function.property;
-import static com.mapbox.mapboxsdk.style.functions.Function.zoom;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stops.categorical;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
-import static com.mapbox.mapboxsdk.style.layers.Filter.all;
-import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
-import static com.mapbox.mapboxsdk.style.layers.Filter.gte;
-import static com.mapbox.mapboxsdk.style.layers.Filter.lt;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.gte;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.lt;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.toNumber;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.zoom;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
@@ -235,24 +234,16 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     mapboxMap.addLayer(new SymbolLayer(MAKI_LAYER_ID, SOURCE_ID)
       .withProperties(
         /* show maki icon based on the value of poi feature property
-        * https://www.mapbox.com/maki-icons/
-        */
+         * https://www.mapbox.com/maki-icons/
+         */
         iconImage("{poi}-15"),
 
         /* allows show all icons */
         iconAllowOverlap(true),
 
         /* when feature is in selected state, grow icon */
-        iconSize(
-          property(
-            PROPERTY_SELECTED,
-            categorical(
-              stop(true, iconSize(1.5f)),
-              stop(false, iconSize(1.0f))
-            )
-          )
-        )
-      )
+        iconSize(match(get(PROPERTY_SELECTED), literal(1.0f),
+          stop(true, 1.5f))))
     );
   }
 
@@ -262,26 +253,23 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   private void setupLoadingLayer() {
     mapboxMap.addLayerBelow(new CircleLayer(LOADING_LAYER_ID, SOURCE_ID)
         .withProperties(
-          circleRadius(property(
-            PROPERTY_LOADING_PROGRESS, exponential(
-              getLoadingAnimationStops()
-            )
-          )),
+          circleRadius(interpolate(exponential(1), get(PROPERTY_LOADING_PROGRESS), getLoadingAnimationStops())),
           circleColor(Color.GRAY),
           circleOpacity(0.6f)
         )
-        .withFilter(eq(PROPERTY_LOADING, true)),
+        /*.withFilter(eq(PROPERTY_LOADING, true)),*/
+        .withFilter(eq((get(PROPERTY_LOADING)), literal(0))),
       MAKI_LAYER_ID
     );
   }
 
-  private Stop<Integer, Float>[] getLoadingAnimationStops() {
-    List<Stop<Integer, Float>> stops = new ArrayList<>();
+  private Expression.Stop[] getLoadingAnimationStops() {
+    List<Expression.Stop> stops = new ArrayList<>();
     for (int i = 0; i < LOADING_PROGRESS_STEPS; i++) {
-      stops.add(stop(i, circleRadius(LOADING_CIRCLE_RADIUS * i / LOADING_PROGRESS_STEPS)));
+      stops.add(stop(i, LOADING_CIRCLE_RADIUS * i / LOADING_PROGRESS_STEPS));
     }
 
-    return stops.toArray(new Stop[LOADING_PROGRESS_STEPS]);
+    return stops.toArray(new Expression.Stop[LOADING_PROGRESS_STEPS]);
   }
 
   /**
@@ -304,8 +292,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       )
 
       /* add a filter to show only when selected feature property is true */
-      .withFilter(eq(PROPERTY_SELECTED, true))
-    );
+      .withFilter(eq((get(PROPERTY_SELECTED)), literal(true))));
   }
 
   private void setupRecyclerView() {
@@ -375,7 +362,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       Toast.makeText(this, callout, Toast.LENGTH_LONG).show();
     } else {
       // user clicked on icon
-      List<Feature> featureList = featureCollection.getFeatures();
+      List<Feature> featureList = featureCollection.features();
       for (int i = 0; i < featureList.size(); i++) {
         if (featureList.get(i).getStringProperty(PROPERTY_TITLE).equals(feature.getStringProperty(PROPERTY_TITLE))) {
           toggleFavourite(i);
@@ -396,7 +383,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, MAKI_LAYER_ID);
     if (!features.isEmpty()) {
       String title = features.get(0).getStringProperty(PROPERTY_TITLE);
-      List<Feature> featureList = featureCollection.getFeatures();
+      List<Feature> featureList = featureCollection.features();
       for (int i = 0; i < featureList.size(); i++) {
         if (featureList.get(i).getStringProperty(PROPERTY_TITLE).equals(title)) {
           setSelected(i, true);
@@ -418,7 +405,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
 
     deselectAll(false);
 
-    Feature feature = featureCollection.getFeatures().get(index);
+    Feature feature = featureCollection.features().get(index);
     selectFeature(feature);
     animateCameraToSelection(feature);
     refreshSource();
@@ -433,8 +420,8 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    * Deselects the state of all the features
    */
   private void deselectAll(boolean hideRecycler) {
-    for (Feature feature : featureCollection.getFeatures()) {
-      feature.getProperties().addProperty(PROPERTY_SELECTED, false);
+    for (Feature feature : featureCollection.features()) {
+      feature.properties().addProperty(PROPERTY_SELECTED, false);
     }
 
     if (hideRecycler) {
@@ -448,12 +435,12 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    * @param feature the feature to be selected.
    */
   private void selectFeature(Feature feature) {
-    feature.getProperties().addProperty(PROPERTY_SELECTED, true);
+    feature.properties().addProperty(PROPERTY_SELECTED, true);
   }
 
   private Feature getSelectedFeature() {
     if (featureCollection != null) {
-      for (Feature feature : featureCollection.getFeatures()) {
+      for (Feature feature : featureCollection.features()) {
         if (feature.getBooleanProperty(PROPERTY_SELECTED)) {
           return feature;
         }
@@ -506,10 +493,10 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    * @param index the index of the feature to favourite/de-favourite
    */
   private void toggleFavourite(int index) {
-    Feature feature = featureCollection.getFeatures().get(index);
+    Feature feature = featureCollection.features().get(index);
     String title = feature.getStringProperty(PROPERTY_TITLE);
     boolean currentState = feature.getBooleanProperty(PROPERTY_FAVOURITE);
-    feature.getProperties().addProperty(PROPERTY_FAVOURITE, !currentState);
+    feature.properties().addProperty(PROPERTY_FAVOURITE, !currentState);
     View view = viewMap.get(title);
 
     ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
@@ -603,9 +590,8 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   }
 
   private LatLng convertToLatLng(Feature feature) {
-    Point symbolPoint = (Point) feature.getGeometry();
-    Position position = symbolPoint.getCoordinates();
-    return new LatLng(position.getLatitude(), position.getLongitude());
+    Point symbolPoint = (Point) feature.geometry();
+    return new LatLng(symbolPoint.latitude(), symbolPoint.longitude());
   }
 
   private Animator createLatLngAnimator(LatLng currentPosition, LatLng targetPosition) {
@@ -615,7 +601,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     latLngAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
       public void onAnimationUpdate(ValueAnimator animation) {
-        mapboxMap.setLatLng((LatLng) animation.getAnimatedValue());
+        mapboxMap.moveCamera(CameraUpdateFactory.newLatLng((LatLng) animation.getAnimatedValue()));
       }
     });
     return latLngAnimator;
@@ -628,7 +614,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     zoomAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
       public void onAnimationUpdate(ValueAnimator animation) {
-        mapboxMap.setZoom((Float) animation.getAnimatedValue());
+        mapboxMap.moveCamera(CameraUpdateFactory.zoomTo((Float) animation.getAnimatedValue()));
       }
     });
     return zoomAnimator;
@@ -641,7 +627,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     bearingAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
       public void onAnimationUpdate(ValueAnimator animation) {
-        mapboxMap.setBearing((Float) animation.getAnimatedValue());
+        mapboxMap.moveCamera(CameraUpdateFactory.bearingTo((Float) animation.getAnimatedValue()));
       }
     });
     return bearingAnimator;
@@ -654,7 +640,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     tiltAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
       public void onAnimationUpdate(ValueAnimator animation) {
-        mapboxMap.setTilt((Float) animation.getAnimatedValue());
+        mapboxMap.moveCamera(CameraUpdateFactory.tiltTo((Float) animation.getAnimatedValue()));
       }
     });
     return tiltAnimator;
@@ -697,10 +683,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       }
 
       String geoJson = loadGeoJsonFromAsset(activity, "sf_poi.geojson");
-      return new GsonBuilder()
-        .registerTypeAdapter(Geometry.class, new GeometryDeserializer())
-        .registerTypeAdapter(Position.class, new PositionDeserializer())
-        .create().fromJson(geoJson, FeatureCollection.class);
+      return FeatureCollection.fromJson(geoJson);
     }
 
     @Override
@@ -762,7 +745,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         LayoutInflater inflater = LayoutInflater.from(activity);
         FeatureCollection featureCollection = params[0];
 
-        for (Feature feature : featureCollection.getFeatures()) {
+        for (Feature feature : featureCollection.features()) {
           View view = inflater.inflate(R.layout.layout_callout, null);
 
           String name = feature.getStringProperty(PROPERTY_TITLE);
@@ -851,12 +834,12 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       }
       OkHttpClient okHttpClient = new OkHttpClient();
       try {
-        Position poiPosition = (Position) feature.getGeometry().getCoordinates();
+        Point poiPosition = (Point) feature.geometry();
 
         @SuppressLint("DefaultLocale") Request request = new Request.Builder()
           .url(String.format(API_URL,
-            poiPosition.getLongitude(), poiPosition.getLatitude(),
-            poiPosition.getLongitude(), poiPosition.getLatitude(),
+            poiPosition.longitude(), poiPosition.latitude(),
+            poiPosition.longitude(), poiPosition.latitude(),
             radius[0]
           ))
           .build();
@@ -864,7 +847,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         Response response = okHttpClient.newCall(request).execute();
         FeatureCollection featureCollection = FeatureCollection.fromJson(response.body().string());
         MapillaryDataLoadResult mapillaryDataLoadResult = new MapillaryDataLoadResult(featureCollection);
-        for (Feature feature : featureCollection.getFeatures()) {
+        for (Feature feature : featureCollection.features()) {
           String imageId = feature.getStringProperty(KEY_UNIQUE_FEATURE);
           String imageUrl = String.format(URL_IMAGE_PLACEHOLDER, imageId);
           Bitmap bitmap = picasso.load(imageUrl).resize(IMAGE_SIZE, IMAGE_SIZE).get();
@@ -912,20 +895,15 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         ));
 
         // unclustered
-        map.addLayerBelow(new SymbolLayer(ID_LAYER_UNCLUSTERED, ID_SOURCE)
-          .withProperties(
-            iconImage(TOKEN_UNIQUE_FEATURE),
-            iconAllowOverlap(true),
-            iconSize(zoom(
-              exponential(
-                stop(18, iconSize(1.7f)),
-                stop(17, iconSize(1.4f)),
-                stop(16, iconSize(1.1f)),
-                stop(15, iconSize(0.8f)),
-                stop(12, iconSize(0.0f))
-              )
-            ))
-          ), MAKI_LAYER_ID);
+        map.addLayerBelow(new SymbolLayer(ID_LAYER_UNCLUSTERED, ID_SOURCE).withProperties(
+          iconImage(TOKEN_UNIQUE_FEATURE),
+          iconAllowOverlap(true),
+          iconSize(interpolate(exponential(1f), zoom(),
+            stop(18, 1.7f),
+            stop(17, 1.4f),
+            stop(16, 1.1f),
+            stop(15, 0.8f),
+            stop(12, 0.0f)))), MAKI_LAYER_ID);
 
         // clustered
         int[][] layers = new int[][] {
@@ -935,26 +913,32 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         };
 
         for (int i = 0; i < layers.length; i++) {
+
+          Expression pointCount = toNumber(Expression.get("point_count"));
+
           //Add cluster circles
           CircleLayer clusterLayer = new CircleLayer("cluster-" + i, ID_SOURCE);
           clusterLayer.setProperties(
             circleColor(layers[i][1]),
-            circleRadius(zoom(
-              exponential(
-                stop(16, circleRadius(20f)),
-                stop(15, circleRadius(18f)),
-                stop(14, circleRadius(16f)),
-                stop(12, circleRadius(10f))
+            circleRadius(
+              interpolate(
+                exponential(1f),
+                zoom(),
+                stop(12, 10f),
+                stop(14, 16f),
+                stop(15, 18f),
+                stop(16, 20f)
               )
-            )),
-            circleOpacity(0.6f)
-          );
-
+            ),
+            circleOpacity(0.6f));
           // Add a filter to the cluster layer that hides the circles based on "point_count"
           clusterLayer.setFilter(
             i == 0
-              ? gte("point_count", layers[i][0]) :
-              all(gte("point_count", layers[i][0]), lt("point_count", layers[i - 1][0]))
+              ? gte(pointCount, literal(layers[i][0])) :
+              all(
+                gte(pointCount, literal(layers[i][0])),
+                lt(pointCount, literal(layers[i - 1][0]))
+              )
           );
           map.addLayerBelow(clusterLayer, MAKI_LAYER_ID);
         }
@@ -1126,7 +1110,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
 
     LocationRecyclerViewAdapter(SymbolLayerMapillaryActivity activity, FeatureCollection featureCollection) {
       this.activity = activity;
-      this.featureCollection = featureCollection.getFeatures();
+      this.featureCollection = featureCollection.features();
     }
 
     @Override

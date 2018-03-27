@@ -9,14 +9,13 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.Stops;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
@@ -40,7 +39,7 @@ public class MarathonExtrusionActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_marathon_extrusion);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -48,7 +47,8 @@ public class MarathonExtrusionActivity extends AppCompatActivity {
         MarathonExtrusionActivity.this.mapboxMap = mapboxMap;
 
         // Add the marathon route source to the map
-        GeoJsonSource courseRouteGeoJson = new GeoJsonSource("coursedata", loadJsonFromAsset("marathon_route.geojson"));
+        GeoJsonSource courseRouteGeoJson = new GeoJsonSource(
+          "coursedata", loadJsonFromAsset("marathon_route.geojson"));
         mapboxMap.addSource(courseRouteGeoJson);
         addExtrusionsLayerToMap();
       }
@@ -61,8 +61,7 @@ public class MarathonExtrusionActivity extends AppCompatActivity {
     courseExtrusionLayer.setProperties(
       fillExtrusionColor(Color.YELLOW),
       fillExtrusionOpacity(0.7f),
-      fillExtrusionHeight(Function.property("e", Stops.<Float>identity()))
-    );
+      fillExtrusionHeight(get("e")));
     mapboxMap.addLayer(courseExtrusionLayer);
   }
 
