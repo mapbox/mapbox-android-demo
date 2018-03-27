@@ -35,6 +35,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -42,7 +44,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.stops.Stop;
+import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
@@ -53,13 +55,6 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.Source;
 import com.mapbox.mapboxsdk.style.sources.TileSet;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
-import com.mapbox.services.commons.geojson.Feature;
-import com.mapbox.services.commons.geojson.FeatureCollection;
-import com.mapbox.services.commons.geojson.Geometry;
-import com.mapbox.services.commons.geojson.Point;
-import com.mapbox.services.commons.geojson.custom.GeometryDeserializer;
-import com.mapbox.services.commons.geojson.custom.PositionDeserializer;
-import com.mapbox.services.commons.models.Position;
 import com.squareup.picasso.Picasso;
 
 import java.io.InputStream;
@@ -77,15 +72,11 @@ import okhttp3.Response;
 import timber.log.Timber;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
-import static com.mapbox.mapboxsdk.style.functions.Function.property;
-import static com.mapbox.mapboxsdk.style.functions.Function.zoom;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stops.categorical;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
-import static com.mapbox.mapboxsdk.style.layers.Filter.all;
-import static com.mapbox.mapboxsdk.style.layers.Filter.eq;
-import static com.mapbox.mapboxsdk.style.layers.Filter.gte;
-import static com.mapbox.mapboxsdk.style.layers.Filter.lt;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.linear;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.zoom;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
@@ -235,8 +226,8 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     mapboxMap.addLayer(new SymbolLayer(MAKI_LAYER_ID, SOURCE_ID)
       .withProperties(
         /* show maki icon based on the value of poi feature property
-        * https://www.mapbox.com/maki-icons/
-        */
+         * https://www.mapbox.com/maki-icons/
+         */
         iconImage("{poi}-15"),
 
         /* allows show all icons */
@@ -939,17 +930,17 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
           CircleLayer clusterLayer = new CircleLayer("cluster-" + i, ID_SOURCE);
           clusterLayer.setProperties(
             circleColor(layers[i][1]),
-            circleRadius(zoom(
-              exponential(
+            circleRadius(
+              interpolate(
+                exponential(1f),
+                zoom(),
                 stop(16, circleRadius(20f)),
                 stop(15, circleRadius(18f)),
                 stop(14, circleRadius(16f)),
                 stop(12, circleRadius(10f))
               )
-            )),
-            circleOpacity(0.6f)
-          );
-
+            ),
+            circleOpacity(0.6f));
           // Add a filter to the cluster layer that hides the circles based on "point_count"
           clusterLayer.setFilter(
             i == 0
@@ -1126,7 +1117,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
 
     LocationRecyclerViewAdapter(SymbolLayerMapillaryActivity activity, FeatureCollection featureCollection) {
       this.activity = activity;
-      this.featureCollection = featureCollection.getFeatures();
+      this.featureCollection = featureCollection.features();
     }
 
     @Override
