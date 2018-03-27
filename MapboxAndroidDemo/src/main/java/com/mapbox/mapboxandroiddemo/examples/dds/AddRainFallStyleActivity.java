@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -12,16 +11,13 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
-import com.mapbox.mapboxsdk.style.layers.Filter;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
-import static com.mapbox.mapboxsdk.style.functions.Function.property;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
 import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
@@ -50,7 +46,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     setContentView(R.layout.activity_style_rainfall);
 
     handler = new Handler();
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
@@ -113,7 +109,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
   private class RefreshGeoJsonRunnable implements Runnable {
     @Override
     public void run() {
-      layer.setFilter(Filter.eq("idx", index));
+      layer.setFilter(Expression.eq((Expression.get("idx")), literal(index)));
       index++;
       if (index == 40) {
         index = 0;
@@ -132,9 +128,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     if (layer == null) {
       layer = new FillLayer(ID_LAYER, ID_SOURCE);
       layer.withSourceLayer("whole");
-/*
-      layer.setFilter(Filter.eq("idx", 0));
-*/
+      layer.setFilter(Expression.eq((Expression.get("idx")), literal(0)));
       layer.setProperties(PropertyFactory.visibility(VISIBLE),
         fillColor(interpolate(Expression.exponential(1f),
           get("value"),
