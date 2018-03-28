@@ -11,7 +11,7 @@ import com.mapbox.api.staticmap.v1.MapboxStaticMap;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.services.Constants;
+import com.mapbox.mapboxsdk.constants.Style;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -32,7 +32,7 @@ public class StaticImageActivity extends AppCompatActivity {
 
     MapboxStaticMap veniceStaticImage = MapboxStaticMap.builder()
       .accessToken(getString(R.string.access_token))
-      .styleId(Constants.MAPBOX_STYLE_LIGHT)
+      .styleId(Style.LIGHT)
       .cameraPoint(Point.fromLngLat(12.3378, 45.4338))
       .cameraZoom(13)
       .width(320) // Image width
@@ -44,7 +44,7 @@ public class StaticImageActivity extends AppCompatActivity {
 
     MapboxStaticMap parisStaticImage = MapboxStaticMap.builder()
       .accessToken(getString(R.string.access_token))
-      .styleId(Constants.MAPBOX_STYLE_OUTDOORS)
+      .styleId(Style.OUTDOORS)
       .cameraPoint(Point.fromLngLat(2.29450, 48.85826))
       .cameraZoom(16)
       .cameraPitch(20)
@@ -58,7 +58,7 @@ public class StaticImageActivity extends AppCompatActivity {
 
     MapboxStaticMap londonStaticImage = MapboxStaticMap.builder()
       .accessToken(getString(R.string.access_token))
-      .styleId(Constants.MAPBOX_STYLE_STREETS)
+      .styleId(Style.MAPBOX_STREETS)
       .cameraPoint(Point.fromLngLat(-0.0756, 51.5062))
       .cameraZoom(14)
       .width(320)
@@ -67,7 +67,7 @@ public class StaticImageActivity extends AppCompatActivity {
       .build();
 
     Picasso.with(this).load(londonStaticImage.url().toString()).into(londonImageView);
-    banner = (CardView) findViewById(R.id.banner);
+    banner = findViewById(R.id.banner);
     banner.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
