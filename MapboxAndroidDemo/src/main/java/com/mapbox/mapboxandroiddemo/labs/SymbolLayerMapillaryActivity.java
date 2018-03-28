@@ -903,20 +903,15 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         ));
 
         // unclustered
-        map.addLayerBelow(new SymbolLayer(ID_LAYER_UNCLUSTERED, ID_SOURCE)
-          .withProperties(
-            iconImage(TOKEN_UNIQUE_FEATURE),
-            iconAllowOverlap(true),
-            iconSize(zoom(
-              exponential(
-                stop(18, iconSize(1.7f)),
-                stop(17, iconSize(1.4f)),
-                stop(16, iconSize(1.1f)),
-                stop(15, iconSize(0.8f)),
-                stop(12, iconSize(0.0f))
-              )
-            ))
-          ), MAKI_LAYER_ID);
+        map.addLayerBelow(new SymbolLayer(ID_LAYER_UNCLUSTERED, ID_SOURCE).withProperties(
+          iconImage(TOKEN_UNIQUE_FEATURE),
+          iconAllowOverlap(true),
+          iconSize(interpolate(exponential(1f), zoom(),
+            stop(18, 1.7f),
+            stop(17, 1.4f),
+            stop(16, 1.1f),
+            stop(15, 0.8f),
+            stop(12, 0.0f)))), MAKI_LAYER_ID);
 
         // clustered
         int[][] layers = new int[][] {
@@ -942,10 +937,8 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
             ),
             circleOpacity(0.6f));
           // Add a filter to the cluster layer that hides the circles based on "point_count"
-          clusterLayer.setFilter(
-            i == 0
-              ? gte("point_count", layers[i][0]) :
-              all(gte("point_count", layers[i][0]), lt("point_count", layers[i - 1][0]))
+          clusterLayer.setFilter(i == 0 ? Expression.get("point_count"), layers[i][0]) :
+          all(Expression.get("point_count"), layers[i][0]), lt("point_count", layers[i - 1][0]))
           );
           map.addLayerBelow(clusterLayer, MAKI_LAYER_ID);
         }
