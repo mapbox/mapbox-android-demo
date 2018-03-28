@@ -11,7 +11,6 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
 import org.json.JSONArray;
@@ -24,6 +23,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.rgba;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
@@ -100,7 +101,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     FillLayer statesJoinLayer = new FillLayer("states-join", vectorSourceName);
     statesJoinLayer.setSourceLayer("states");
     statesJoinLayer.withProperties(
-      fillColor(mat,get(vectorMatchProp), Stops.categorical(stops)).withDefaultValue(fillColor())));
+      fillColor(match(get(vectorMatchProp), rgba(0, 0, 0, 0), stops)));
 
     // Add layer to map below the "waterway-label" layer
     map.addLayerAbove(statesJoinLayer, "waterway-label");
