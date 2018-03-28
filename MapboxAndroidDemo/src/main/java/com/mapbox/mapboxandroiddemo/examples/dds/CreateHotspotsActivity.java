@@ -10,6 +10,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -17,10 +18,9 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.mapbox.mapboxsdk.style.layers.Filter.all;
-import static com.mapbox.mapboxsdk.style.layers.Filter.gte;
-import static com.mapbox.mapboxsdk.style.layers.Filter.lt;
-import static com.mapbox.mapboxsdk.style.layers.Filter.neq;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.toNumber;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleBlur;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
@@ -43,7 +43,7 @@ public class CreateHotspotsActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_create_hotspots_points);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -118,10 +118,10 @@ public class CreateHotspotsActivity extends AppCompatActivity {
     // three for each cluster category, and one for unclustered points
 
     // Each point range gets a different fill color.
-    final int[][] layers = new int[][]{
-      new int[]{150, Color.parseColor("#E55E5E")},
-      new int[]{20, Color.parseColor("#F9886C")},
-      new int[]{0, Color.parseColor("#FBB03B")}
+    final int[][] layers = new int[][] {
+      new int[] {150, Color.parseColor("#E55E5E")},
+      new int[] {20, Color.parseColor("#F9886C")},
+      new int[] {0, Color.parseColor("#FBB03B")}
     };
 
     CircleLayer unclustered = new CircleLayer("unclustered-points", "earthquakes");
@@ -129,9 +129,7 @@ public class CreateHotspotsActivity extends AppCompatActivity {
       circleColor(Color.parseColor("#FBB03B")),
       circleRadius(20f),
       circleBlur(1f));
-    unclustered.setFilter(
-      neq("cluster", true)
-    );
+    unclustered.setFilter(Expression.neq(get("cluster"), literal(true)));
     mapboxMap.addLayerBelow(unclustered, "building");
 
     for (int i = 0; i < layers.length; i++) {
@@ -141,10 +139,14 @@ public class CreateHotspotsActivity extends AppCompatActivity {
         circleRadius(70f),
         circleBlur(1f)
       );
+      Expression pointCount = toNumber(get("point_count"));
       circles.setFilter(
         i == 0
-          ? gte("point_count", layers[i][0]) :
-          all(gte("point_count", layers[i][0]), lt("point_count", layers[i - 1][0]))
+          ? Expression.gte(pointCount, literal(layers[i][0])) :
+          Expression.all(
+            Expression.gte(pointCount, literal(layers[i][0])),
+            Expression.lt(pointCount, literal(layers[i - 1][0]))
+          )
       );
       mapboxMap.addLayerBelow(circles, "building");
     }
