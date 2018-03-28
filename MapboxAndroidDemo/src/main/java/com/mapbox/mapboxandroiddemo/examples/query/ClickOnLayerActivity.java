@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.mapbox.geojson.Feature;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -16,7 +17,6 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.services.commons.geojson.Feature;
 
 import java.net.URL;
 import java.util.List;
@@ -73,11 +73,12 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
     PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
     RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
     List<Feature> featureList = mapboxMap.queryRenderedFeatures(rectF, geoJsonLayerId);
-    for (com.mapbox.services.commons.geojson.Feature feature : featureList) {
-      Log.d("Feature found with %1$s", feature.toJson());
-
-      Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast,
-        Toast.LENGTH_SHORT).show();
+    if (featureList.size() > 0) {
+      for (Feature feature : featureList) {
+        Log.d("Feature found with %1$s", feature.toJson());
+        Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast,
+          Toast.LENGTH_SHORT).show();
+      }
     }
   }
 

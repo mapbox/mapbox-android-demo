@@ -9,9 +9,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.Stop;
-import com.mapbox.mapboxsdk.style.functions.stops.Stops;
+import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
@@ -25,8 +23,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
-import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
+
 
 /**
  * Style a choropleth map by merging local JSON data with vector tile geometries
@@ -57,7 +57,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_choropleth_json_vector_mix);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
@@ -79,7 +79,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     }
 
     // Create stops array
-    Stop[] stops = new Stop[statesArray.length()];
+    Expression.Stop[] stops = new Expression.Stop[statesArray.length()];
 
     for (int x = 0; x < statesArray.length(); x++) {
       try {
@@ -89,7 +89,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
         String color = "rgba(" + 0 + ", " + green + ", " + 0 + ", 1)";
 
         // Add new stop to array of stops
-        stops[x] = stop(singleState.getString(dataMatchProp), PropertyFactory.fillColor(color));
+        stops[x] = stop(singleState.getString(dataMatchProp), fillColor(color));
 
       } catch (JSONException exception) {
         throw new RuntimeException(exception);
@@ -100,9 +100,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     FillLayer statesJoinLayer = new FillLayer("states-join", vectorSourceName);
     statesJoinLayer.setSourceLayer("states");
     statesJoinLayer.withProperties(
-      fillColor(
-        Function.property(
-          vectorMatchProp, Stops.categorical(stops)).withDefaultValue(PropertyFactory.fillColor("rgba(0,0,0,0)"))));
+      fillColor(mat,get(vectorMatchProp), Stops.categorical(stops)).withDefaultValue(fillColor())));
 
     // Add layer to map below the "waterway-label" layer
     map.addLayerAbove(statesJoinLayer, "waterway-label");
