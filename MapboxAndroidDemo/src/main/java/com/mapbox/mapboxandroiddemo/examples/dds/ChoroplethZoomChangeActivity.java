@@ -6,23 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.IntervalStops;
+import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
-import com.mapbox.mapboxsdk.style.layers.Filter;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
+import static com.mapbox.mapboxsdk.style.expressions.Expression.color;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.step;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
 import static com.mapbox.mapboxsdk.style.layers.Property.NONE;
 import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
@@ -49,7 +47,7 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_dds_choropleth_zoom_change);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -63,50 +61,49 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
 
         FillLayer statePopulationLayer = new FillLayer("state-population", "population");
         statePopulationLayer.withSourceLayer("state_county_population_2014_cen");
-        statePopulationLayer.setFilter(Filter.eq("isState", true));
+        statePopulationLayer.setFilter(Expression.eq(get("isState"), literal(true)));
         statePopulationLayer.withProperties(
           fillColor(interpolate(exponential(1f), get("population"),
-            stop(0, fillColor(Color.parseColor("#F2F12D"))),
-            stop(750000, fillColor(Color.parseColor("#EED322"))),
-            stop(1000000, fillColor(Color.parseColor("#DA9C20"))),
-            stop(2500000, fillColor(Color.parseColor("#CA8323"))),
-            stop(5000000, fillColor(Color.parseColor("#B86B25"))),
-            stop(7500000, fillColor(Color.parseColor("#A25626"))),
-            stop(10000000, fillColor(Color.parseColor("#8B4225"))),
-            stop(25000000, fillColor(Color.parseColor("#723122")))
-          ))),
-          fillOpacity(0.75f)
-        );
+            stop(0, color(Color.parseColor("#F2F12D"))),
+            stop(750000, color(Color.parseColor("#EED322"))),
+            stop(1000000, color(Color.parseColor("#DA9C20"))),
+            stop(2500000, color(Color.parseColor("#CA8323"))),
+            stop(5000000, color(Color.parseColor("#B86B25"))),
+            stop(7500000, color(Color.parseColor("#A25626"))),
+            stop(10000000, color(Color.parseColor("#8B4225"))),
+            stop(25000000, color(Color.parseColor("#723122")))
+          )),
+          fillOpacity(0.75f));
 
         mapboxMap.addLayerBelow(statePopulationLayer, "waterway-label");
 
         FillLayer countyPopulationLayer = new FillLayer("county-population", "population");
         countyPopulationLayer.withSourceLayer("state_county_population_2014_cen");
-        countyPopulationLayer.setFilter(Filter.eq("isCounty", true));
+        statePopulationLayer.setFilter(Expression.eq(get("isCounty"), literal(true)));
         countyPopulationLayer.withProperties(
-          fillColor(Function.property("population", IntervalStops.interval(
-            stop(0, fillColor(Color.parseColor("#F2F12D"))),
-            stop(100, fillColor(Color.parseColor("#EED322"))),
-            stop(1000, fillColor(Color.parseColor("#E6B71E"))),
-            stop(5000, fillColor(Color.parseColor("#DA9C20"))),
-            stop(10000, fillColor(Color.parseColor("#CA8323"))),
-            stop(50000, fillColor(Color.parseColor("#B86B25"))),
-            stop(100000, fillColor(Color.parseColor("#A25626"))),
-            stop(500000, fillColor(Color.parseColor("#8B4225"))),
-            stop(1000000, fillColor(Color.parseColor("#723122")))
-          ))),
+          fillColor(step(get("population"), color(Color.parseColor("#fkjfad")),
+            stop(0, color(Color.parseColor("#F2F12D"))),
+            stop(100, color(Color.parseColor("#EED322"))),
+            stop(1000, color(Color.parseColor("#E6B71E"))),
+            stop(5000, color(Color.parseColor("#DA9C20"))),
+            stop(10000, color(Color.parseColor("#CA8323"))),
+            stop(50000, color(Color.parseColor("#B86B25"))),
+            stop(100000, color(Color.parseColor("#A25626"))),
+            stop(500000, color(Color.parseColor("#8B4225"))),
+            stop(1000000, color(Color.parseColor("#723122")))
+          )),
           fillOpacity(0.75f),
-          visibility(NONE)
-        );
+          visibility(NONE));
 
         mapboxMap.addLayerBelow(countyPopulationLayer, "waterway-label");
 
-        mapboxMap.setOnCameraChangeListener(new MapboxMap.OnCameraChangeListener() {
+
+        mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
           @Override
-          public void onCameraChange(CameraPosition position) {
+          public void onCameraMove() {
             Layer stateLayer = mapboxMap.getLayer("state-population");
             Layer countyLayer = mapboxMap.getLayer("county-population");
-            if (position.zoom > ZOOM_THRESHOLD) {
+            if (mapboxMap.getCameraPosition().zoom > ZOOM_THRESHOLD) {
               if (stateLayer != null && countyLayer != null) {
                 countyLayer.setProperties(visibility(VISIBLE));
               }

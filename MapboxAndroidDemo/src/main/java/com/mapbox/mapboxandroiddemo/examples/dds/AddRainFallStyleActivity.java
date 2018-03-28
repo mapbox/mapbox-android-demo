@@ -14,6 +14,7 @@ import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
+import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
@@ -109,7 +110,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
   private class RefreshGeoJsonRunnable implements Runnable {
     @Override
     public void run() {
-      layer.setFilter(Expression.eq((Expression.get("idx")), literal(index)));
+      layer.setFilter(eq((Expression.get("idx")), literal(index)));
       index++;
       if (index == 40) {
         index = 0;
@@ -128,7 +129,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     if (layer == null) {
       layer = new FillLayer(ID_LAYER, ID_SOURCE);
       layer.withSourceLayer("whole");
-      layer.setFilter(Expression.eq((Expression.get("idx")), literal(0)));
+      layer.setFilter(eq((get("idx")), literal(0)));
       layer.setProperties(PropertyFactory.visibility(VISIBLE),
         fillColor(interpolate(Expression.exponential(1f),
           get("value"),

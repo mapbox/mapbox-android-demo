@@ -15,13 +15,18 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
+import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.color;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.lte;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
@@ -64,30 +69,28 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
   private void addFillsLayer() {
     FillLayer fillsLayer = new FillLayer("fills", "population");
     fillsLayer.setSourceLayer("outgeojson");
-    fillsLayer.setFilter(all(lt("pkm2", 300000)));
+    fillsLayer.setFilter(all(Expression.lt(get("pkm2"), literal(300000))));
     fillsLayer.withProperties(
-      fillColor(get("pkm2"), exponential(
-        stop(0, fillColor(Color.parseColor("#160e23"))),
-        stop(14500, fillColor(Color.parseColor("#00617f"))),
-        stop(145000, fillColor(Color.parseColor("#55e9ff"))))
-        .withBase(1f)));
+      fillColor(interpolate(exponential(1f), get("pkm2"),
+        stop(0, color(Color.parseColor("#160e23"))),
+        stop(14500, color(Color.parseColor("#00617f"))),
+        stop(145000, color(Color.parseColor("#55e9ff"))))));
     mapboxMap.addLayerBelow(fillsLayer, "water");
   }
 
   private void addExtrusionsLayer() {
     FillExtrusionLayer fillExtrusionLayer = new FillExtrusionLayer("extrusions", "population");
     fillExtrusionLayer.setSourceLayer("outgeojson");
-    fillExtrusionLayer.setFilter(all(gte("p", 1), lte("pkm2", 300000)));
+    fillExtrusionLayer.setFilter(all(get("p"), literal(1), lte(get("pkm2"), literal(300000))));
     fillExtrusionLayer.withProperties(
       fillExtrusionColor(interpolate(exponential(1f), get("pkm2"),
-        stop(0, Color.parseColor("#160e23")),
-        stop(14500, Color.parseColor("#00617f")),
-        stop(145000, Color.parseColor("#55e9ff")))));
-    fillExtrusionBase(0f),
-      fillExtrusionHeight(get("pkm2"), exponential(
+        stop(0, color(Color.parseColor("#160e23"))),
+        stop(14500, color(Color.parseColor("#00617f"))),
+        stop(145000, color(Color.parseColor("#55e9ff"))))),
+      fillExtrusionBase(0f),
+      fillExtrusionHeight(interpolate(exponential(1f), get("pkm2"),
         stop(0, fillExtrusionHeight(0f)),
-        stop(1450000, fillExtrusionHeight(20000f)))
-        .withBase(1f))));
+        stop(1450000, fillExtrusionHeight(20000f)))));
     mapboxMap.addLayerBelow(fillExtrusionLayer, "airport-label");
   }
 
