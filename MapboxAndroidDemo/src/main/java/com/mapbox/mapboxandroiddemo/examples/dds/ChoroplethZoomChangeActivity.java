@@ -17,6 +17,11 @@ import com.mapbox.mapboxsdk.style.layers.Filter;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
+import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
 import static com.mapbox.mapboxsdk.style.layers.Property.NONE;
 import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
@@ -60,7 +65,7 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
         statePopulationLayer.withSourceLayer("state_county_population_2014_cen");
         statePopulationLayer.setFilter(Filter.eq("isState", true));
         statePopulationLayer.withProperties(
-          fillColor(Function.property("population", IntervalStops.interval(
+          fillColor(interpolate(exponential(1f), get("population"),
             stop(0, fillColor(Color.parseColor("#F2F12D"))),
             stop(750000, fillColor(Color.parseColor("#EED322"))),
             stop(1000000, fillColor(Color.parseColor("#DA9C20"))),

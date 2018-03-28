@@ -12,11 +12,13 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
-import static com.mapbox.mapboxsdk.style.functions.Function.property;
-import static com.mapbox.mapboxsdk.style.functions.Function.zoom;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stop.stop;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stops.categorical;
-import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.color;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.zoom;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 
@@ -54,24 +56,20 @@ public class StyleCirclesCategoricallyActivity extends AppCompatActivity {
         circleLayer.setSourceLayer("sf2010");
         circleLayer.withProperties(
           circleRadius(
-            zoom(
-              exponential(
-                stop(12, circleRadius(2f)),
-                stop(22, circleRadius(180f))
-              ).withBase(1.75f)
-            )
-          ),
+            interpolate(
+              exponential(1.75f),
+              zoom(),
+              stop(12, 2f),
+              stop(22, 180f)
+            )),
           circleColor(
-            property("ethnicity", categorical(
-              stop("white", circleColor(Color.parseColor("#fbb03b"))),
-              stop("Black", circleColor(Color.parseColor("#223b53"))),
-              stop("Hispanic", circleColor(Color.parseColor("#e55e5e"))),
-              stop("Asian", circleColor(Color.parseColor("#3bb2d0"))),
-              stop("Other", circleColor(Color.parseColor("#cccccc")))
-              )
-            )
-          )
-        );
+            match(get("ethnicity"), color(Color.parseColor("#000000")),
+              stop("white", color(Color.parseColor("#fbb03b"))),
+              stop("Black", color(Color.parseColor("#223b53"))),
+              stop("Hispanic", color(Color.parseColor("#e55e5e"))),
+              stop("Asian", color(Color.parseColor("#3bb2d0"))),
+              stop("Other", color(Color.parseColor("#cccccc"))))));
+
         mapboxMap.addLayer(circleLayer);
       }
     });

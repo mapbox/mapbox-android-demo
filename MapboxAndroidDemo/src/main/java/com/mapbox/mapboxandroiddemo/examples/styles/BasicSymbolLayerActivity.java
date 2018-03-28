@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -18,10 +21,6 @@ import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.Source;
-import com.mapbox.services.commons.geojson.Feature;
-import com.mapbox.services.commons.geojson.FeatureCollection;
-import com.mapbox.services.commons.geojson.Point;
-import com.mapbox.services.commons.models.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,14 +58,11 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
 
     List<Feature> markerCoordinates = new ArrayList<>();
     markerCoordinates.add(Feature.fromGeometry(
-      Point.fromCoordinates(Position.fromCoordinates(-71.065634, 42.354950))) // Boston Common Park
-    );
+      Point.fromLngLat(-71.065634, 42.354950))); // Boston Common Park
     markerCoordinates.add(Feature.fromGeometry(
-      Point.fromCoordinates(Position.fromCoordinates(-71.097293, 42.346645))) // Fenway Park
-    );
+      Point.fromLngLat(-71.097293, 42.346645))); // Fenway Park
     markerCoordinates.add(Feature.fromGeometry(
-      Point.fromCoordinates(Position.fromCoordinates(-71.053694, 42.363725))) // The Paul Revere House
-    );
+      Point.fromLngLat(-71.053694, 42.363725))); // The Paul Revere House
     FeatureCollection featureCollection = FeatureCollection.fromFeatures(markerCoordinates);
 
     Source geoJsonSource = new GeoJsonSource("marker-source", featureCollection);
@@ -115,7 +111,7 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
     }
 
     FeatureCollection featureCollection = FeatureCollection.fromFeatures(
-      new Feature[]{Feature.fromGeometry(features.get(0).getGeometry())});
+      new Feature[]{Feature.fromGeometry(features.get(0).geometry())});
     GeoJsonSource source = mapboxMap.getSourceAs("selected-marker");
     if (source != null) {
       source.setGeoJson(featureCollection);
