@@ -78,10 +78,17 @@ import okhttp3.Response;
 import timber.log.Timber;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.gte;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.lt;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.toNumber;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.zoom;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
@@ -240,12 +247,8 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         iconAllowOverlap(true),
 
         /* when feature is in selected state, grow icon */
-        iconSize(interpolate(Expression.bool(true), get(PROPERTY_SELECTED),
-          stop(true, iconSize(1.5f)),
-          stop(false, iconSize(1.0f))
-          )
-        )
-      )
+        iconSize(match(get(PROPERTY_SELECTED), literal(1.0f),
+          stop(true, 1.5f))))
     );
   }
 
@@ -255,26 +258,23 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   private void setupLoadingLayer() {
     mapboxMap.addLayerBelow(new CircleLayer(LOADING_LAYER_ID, SOURCE_ID)
         .withProperties(
-          circleRadius(property(
-            PROPERTY_LOADING_PROGRESS, exponential(
-              getLoadingAnimationStops()
-            )
-          )),
+          circleRadius(interpolate(exponential(1), get(PROPERTY_LOADING_PROGRESS), getLoadingAnimationStops())),
           circleColor(Color.GRAY),
           circleOpacity(0.6f)
         )
-        .withFilter(eq(PROPERTY_LOADING, true)),
+        /*.withFilter(eq(PROPERTY_LOADING, true)),*/
+        .withFilter(eq((get(PROPERTY_LOADING)), literal(0))),
       MAKI_LAYER_ID
     );
   }
 
-  private Stop<Integer, Float>[] getLoadingAnimationStops() {
-    List<Stop<Integer, Float>> stops = new ArrayList<>();
+  private Expression.Stop[] getLoadingAnimationStops() {
+    List<Expression.Stop> stops = new ArrayList<>();
     for (int i = 0; i < LOADING_PROGRESS_STEPS; i++) {
       stops.add(stop(i, circleRadius(LOADING_CIRCLE_RADIUS * i / LOADING_PROGRESS_STEPS)));
     }
 
-    return stops.toArray(new Stop[LOADING_PROGRESS_STEPS]);
+    return stops.toArray(new Expression.Stop[LOADING_PROGRESS_STEPS]);
   }
 
   /**
@@ -297,8 +297,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       )
 
       /* add a filter to show only when selected feature property is true */
-      .withFilter(eq(PROPERTY_SELECTED, true))
-    );
+      .withFilter(eq((get(PROPERTY_SELECTED)), literal(true))));
   }
 
   private void setupRecyclerView() {
@@ -922,6 +921,9 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         };
 
         for (int i = 0; i < layers.length; i++) {
+
+          Expression pointCount = toNumber(Expression.get("point_count"));
+
           //Add cluster circles
           CircleLayer clusterLayer = new CircleLayer("cluster-" + i, ID_SOURCE);
           clusterLayer.setProperties(
@@ -938,8 +940,13 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
             ),
             circleOpacity(0.6f));
           // Add a filter to the cluster layer that hides the circles based on "point_count"
-          clusterLayer.setFilter(i == 0 ? Expression.get("point_count"), layers[i][0]) :
-          all(Expression.get("point_count"), layers[i][0]), lt("point_count", layers[i - 1][0]))
+          clusterLayer.setFilter(
+            i == 0
+              ? gte(pointCount, literal(layers[i][0])) :
+              all(
+                gte(pointCount, literal(layers[i][0])),
+                lt(pointCount, literal(layers[i - 1][0]))
+              )
           );
           map.addLayerBelow(clusterLayer, MAKI_LAYER_ID);
         }
