@@ -19,7 +19,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerMode;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
 
 import java.util.List;
@@ -65,7 +64,7 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
       initializeLocationEngine();
 
       locationPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationEngine);
-      locationPlugin.setLocationLayerEnabled(LocationLayerMode.TRACKING);
+      locationPlugin.setLocationLayerEnabled(true);
     } else {
       permissionsManager = new PermissionsManager(this);
       permissionsManager.requestLocationPermissions(this);
