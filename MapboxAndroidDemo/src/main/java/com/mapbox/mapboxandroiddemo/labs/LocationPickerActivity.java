@@ -38,7 +38,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerMode;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
 
 import java.util.List;
@@ -80,7 +79,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
     locationEngine.activate();
 
     // Initialize the mapboxMap view
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -303,7 +302,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Locatio
       initializeLocationEngine();
 
       locationPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationEngine);
-      locationPlugin.setLocationLayerEnabled(LocationLayerMode.TRACKING);
+      locationPlugin.setLocationLayerEnabled(true);
     } else {
       permissionsManager = new PermissionsManager(this);
       permissionsManager.requestLocationPermissions(this);
