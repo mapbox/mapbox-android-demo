@@ -199,9 +199,9 @@ public class IndoorMapActivity extends AppCompatActivity {
       lineColor(Color.parseColor("#50667f")),
       lineWidth(0.5f),
       lineOpacity(interpolate(exponential(1f), zoom(),
-        stop(17f, lineOpacity(1f)),
-        stop(16.5f, lineOpacity(0.5f)),
-        stop(16f, lineOpacity(0f)))));
+        stop(17f, 1f),
+        stop(16.5f, 0.5f),
+        stop(16f, 0f))));
     map.addLayer(indoorBuildingLineLayer);
   }
 

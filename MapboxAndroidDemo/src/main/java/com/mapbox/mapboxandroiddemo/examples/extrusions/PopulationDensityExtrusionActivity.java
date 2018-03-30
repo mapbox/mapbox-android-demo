@@ -89,8 +89,8 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
         stop(145000, color(Color.parseColor("#55e9ff"))))),
       fillExtrusionBase(0f),
       fillExtrusionHeight(interpolate(exponential(1f), get("pkm2"),
-        stop(0, fillExtrusionHeight(0f)),
-        stop(1450000, fillExtrusionHeight(20000f)))));
+        stop(0, 0f),
+        stop(1450000, 20000f))));
     mapboxMap.addLayerBelow(fillExtrusionLayer, "airport-label");
   }
 

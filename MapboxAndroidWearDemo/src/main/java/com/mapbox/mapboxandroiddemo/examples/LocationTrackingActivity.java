@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples;
 
 
+import android.annotation.SuppressLint;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
@@ -44,6 +45,7 @@ public class LocationTrackingActivity extends WearableActivity {
     locationEngine = locationEngineProvider.obtainBestLocationEngineAvailable();
 
     locationEngineListener = new LocationEngineListener() {
+      @SuppressLint("MissingPermission")
       @Override
       public void onConnected() {
         locationEngine.requestLocationUpdates();
@@ -62,7 +64,9 @@ public class LocationTrackingActivity extends WearableActivity {
 
         // Customize map with markers, polylines, etc.
         map = mapboxMap;
-        Location lastLocation = locationEngine.getLastLocation();
+        @SuppressLint("MissingPermission")
+        Location lastLocation = new LocationEngineProvider(LocationTrackingActivity.this)
+          .obtainBestLocationEngineAvailable().getLastLocation();
         if (lastLocation != null) {
           map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
         }

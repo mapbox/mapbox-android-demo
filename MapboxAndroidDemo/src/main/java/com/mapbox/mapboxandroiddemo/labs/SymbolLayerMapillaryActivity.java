@@ -34,13 +34,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.GsonBuilder;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
-import com.mapbox.geojson.Geometry;
 import com.mapbox.geojson.Point;
-import com.mapbox.geojson.gson.GeometryDeserializer;
-import com.mapbox.geojson.gson.PointDeserializer;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -55,7 +51,6 @@ import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
-import com.mapbox.mapboxsdk.style.light.Position;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.Source;
@@ -271,7 +266,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   private Expression.Stop[] getLoadingAnimationStops() {
     List<Expression.Stop> stops = new ArrayList<>();
     for (int i = 0; i < LOADING_PROGRESS_STEPS; i++) {
-      stops.add(stop(i, circleRadius(LOADING_CIRCLE_RADIUS * i / LOADING_PROGRESS_STEPS)));
+      stops.add(stop(i, LOADING_CIRCLE_RADIUS * i / LOADING_PROGRESS_STEPS));
     }
 
     return stops.toArray(new Expression.Stop[LOADING_PROGRESS_STEPS]);
@@ -619,7 +614,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     zoomAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
       public void onAnimationUpdate(ValueAnimator animation) {
-        mapboxMap.moveCamera(CameraUpdateFactory.zoomTo((Double) animation.getAnimatedValue()));
+        mapboxMap.moveCamera(CameraUpdateFactory.zoomTo((Float) animation.getAnimatedValue()));
       }
     });
     return zoomAnimator;
@@ -632,7 +627,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     bearingAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
       public void onAnimationUpdate(ValueAnimator animation) {
-        mapboxMap.moveCamera(CameraUpdateFactory.bearingTo((Double) animation.getAnimatedValue()));
+        mapboxMap.moveCamera(CameraUpdateFactory.bearingTo((Float) animation.getAnimatedValue()));
       }
     });
     return bearingAnimator;
@@ -645,7 +640,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     tiltAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
       public void onAnimationUpdate(ValueAnimator animation) {
-        mapboxMap.moveCamera(CameraUpdateFactory.tiltTo((Double) animation.getAnimatedValue()));
+        mapboxMap.moveCamera(CameraUpdateFactory.tiltTo((Float) animation.getAnimatedValue()));
       }
     });
     return tiltAnimator;
@@ -688,10 +683,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       }
 
       String geoJson = loadGeoJsonFromAsset(activity, "sf_poi.geojson");
-      return new GsonBuilder()
-        .registerTypeAdapter(Geometry.class, new GeometryDeserializer())
-        .registerTypeAdapter(Position.class, new PointDeserializer())
-        .create().fromJson(geoJson, FeatureCollection.class);
+      return FeatureCollection.fromJson(geoJson);
     }
 
     @Override

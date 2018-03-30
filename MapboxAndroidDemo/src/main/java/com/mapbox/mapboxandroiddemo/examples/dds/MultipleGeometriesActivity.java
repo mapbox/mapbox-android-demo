@@ -65,6 +65,7 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
       PropertyFactory.fillColor(Color.RED),
       PropertyFactory.fillOpacity(.4f));
     borderOutlineLayer.setFilter(eq(geometryType(), literal("Polygon")));
+    borderOutlineLayer.setFilter(eq(literal("$type"), literal("Polygon")));
     mapboxMap.addLayer(borderOutlineLayer);
   }
 
@@ -74,7 +75,7 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
     pointsLayer.setProperties(
       PropertyFactory.circleColor(Color.YELLOW),
       PropertyFactory.circleRadius(3f));
-    pointsLayer.setFilter(eq(geometryType(), literal("Point")));
+    pointsLayer.setFilter(eq(literal("$type"), literal("Point")));
     mapboxMap.addLayer(pointsLayer);
   }
 

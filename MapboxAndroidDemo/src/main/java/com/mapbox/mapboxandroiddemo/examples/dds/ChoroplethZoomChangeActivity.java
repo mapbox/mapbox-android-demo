@@ -19,7 +19,6 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.step;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.toNumber;
 import static com.mapbox.mapboxsdk.style.layers.Property.NONE;
 import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
@@ -62,7 +61,7 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
         statePopulationLayer.withSourceLayer("state_county_population_2014_cen");
         statePopulationLayer.setFilter(Expression.eq(get("isState"), literal(true)));
         statePopulationLayer.withProperties(
-          fillColor(step(toNumber(get("population")), color(Color.TRANSPARENT),
+          fillColor(step((get("population")), color(Color.BLACK),
             stop(0, color(Color.parseColor("#F2F12D"))),
             stop(750000, color(Color.parseColor("#EED322"))),
             stop(1000000, color(Color.parseColor("#DA9C20"))),
@@ -79,7 +78,7 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
 
         FillLayer countyPopulationLayer = new FillLayer("county-population", "population");
         countyPopulationLayer.withSourceLayer("state_county_population_2014_cen");
-        statePopulationLayer.setFilter(Expression.eq(get("isCounty"), literal(true)));
+        countyPopulationLayer.setFilter(Expression.eq(get("isCounty"), literal(true)));
         countyPopulationLayer.withProperties(
           fillColor(step(get("population"), color(Color.TRANSPARENT),
             stop(0, color(Color.parseColor("#F2F12D"))),

@@ -26,8 +26,8 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.rgba;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.toNumber;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
-
 
 /**
  * Style a choropleth map by merging local JSON data with vector tile geometries
@@ -43,8 +43,6 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
   private MapView mapView;
   private JSONArray statesArray;
   private StringBuilder sb;
-
-  private String TAG = "ChoroplethJsonVectorMixActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +82,14 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
       try {
         // Generate green color value for each state/stop
         JSONObject singleState = statesArray.getJSONObject(x);
-        double green = ((Double.parseDouble(singleState.getString(DATA_STYLE_UNEMPLOYMENT_PROP)) / 13) * 255);
+        double green = singleState.getDouble(DATA_STYLE_UNEMPLOYMENT_PROP) / 14 * 255;
 
-        Log.d(TAG, "onMapReady: green value = " + String.valueOf(green) + " for x = " + x);
+        Log.d("Choropleth", "onMapReady: green value = " + String.valueOf(green) + " for x = " + x);
         // Add new stop to array of stops
-        stops[x] = stop(singleState.getString(DATA_MATCH_PROP), rgba(0, green, 0,1));
+        stops[x] = stop(
+          Double.parseDouble(singleState.getString(DATA_MATCH_PROP)),
+          rgba(0, green, 0, 1)
+        );
 
       } catch (JSONException exception) {
         throw new RuntimeException(exception);
@@ -97,9 +98,10 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
 
     // Create layer from the vector tile source with data-driven style
     FillLayer statesJoinLayer = new FillLayer("states-join", VECTOR_SOURCE_NAME);
-    statesJoinLayer.setSourceLayer("states");
+    statesJoinLayer.setSourceLayer(VECTOR_SOURCE_NAME);
     statesJoinLayer.withProperties(
-      fillColor(match(get(VECTOR_MATCH_PROP), rgba(0, 0, 0, 1), stops)));
+      fillColor(match(toNumber(get(VECTOR_MATCH_PROP)), rgba(0, 0, 0, 1), stops))
+    );
 
     // Add layer to map below the "waterway-label" layer
     map.addLayerAbove(statesJoinLayer, "waterway-label");
