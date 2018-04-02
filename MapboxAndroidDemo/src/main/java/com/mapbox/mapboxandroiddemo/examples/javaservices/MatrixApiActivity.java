@@ -150,7 +150,7 @@ public class MatrixApiActivity extends AppCompatActivity {
         List<Double[]> durationsToAllOfTheLocationsFromTheOrigin = response.body().durations();
         for (int x = 0; x < durationsToAllOfTheLocationsFromTheOrigin.size(); x++) {
           String finalConvertedFormattedDistance = String.valueOf(new DecimalFormat("#.##")
-              .format(TurfConversion.convertDistance(
+              .format(TurfConversion.convertLength(
                   durationsToAllOfTheLocationsFromTheOrigin.get(markerPositionInList)[x],
                   "meters", "miles")));
           if (x == markerPositionInList) {
