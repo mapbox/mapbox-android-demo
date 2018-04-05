@@ -10,7 +10,6 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
@@ -59,8 +58,8 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
         LineLayer linesLayer = new LineLayer("finalLines", "lines").withProperties(
           PropertyFactory.lineColor(
             match(get("color"), color(Color.parseColor("#000000")),
-              stop("red", Expression.color(Color.parseColor("#F7455D"))),
-              stop("blue", Expression.color(Color.parseColor("#33C9EB"))))),
+              stop("red", color(Color.parseColor("#F7455D"))),
+              stop("blue", color(Color.parseColor("#33C9EB"))))),
           PropertyFactory.visibility(Property.VISIBLE),
           PropertyFactory.lineWidth(3f)
         );

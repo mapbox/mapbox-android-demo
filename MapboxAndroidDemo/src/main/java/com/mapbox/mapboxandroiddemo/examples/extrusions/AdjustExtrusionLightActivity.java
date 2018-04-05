@@ -69,7 +69,7 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
   private void setupBuildings() {
     FillExtrusionLayer fillExtrusionLayer = new FillExtrusionLayer("3d-buildings", "composite");
     fillExtrusionLayer.setSourceLayer("building");
-    fillExtrusionLayer.setFilter(eq("extrude", "true"));
+    fillExtrusionLayer.setFilter(eq(get("extrude"), "true"));
     fillExtrusionLayer.setMinZoom(15);
     fillExtrusionLayer.setProperties(
       fillExtrusionColor(Color.LTGRAY),
