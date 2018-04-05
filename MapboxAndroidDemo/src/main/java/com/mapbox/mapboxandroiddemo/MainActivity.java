@@ -63,12 +63,10 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.GeoJsonPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerClustersPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
@@ -405,7 +403,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, LocationPluginActivity.class),
           R.string.activity_plugins_location_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
 
-       /* exampleItemModels.add(new ExampleItemModel(
+        /* exampleItemModels.add(new ExampleItemModel(
           R.string.activity_plugins_geojson_plugin_title, R.string.activity_plugins_geojson_plugin_description,
           new Intent(MainActivity.this, GeoJsonPluginActivity.class),
           R.string.activity_plugins_geojson_plugin_url, false, BuildConfig.MIN_SDK_VERSION));*/
