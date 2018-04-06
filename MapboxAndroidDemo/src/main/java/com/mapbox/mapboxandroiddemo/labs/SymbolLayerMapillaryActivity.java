@@ -932,10 +932,10 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
               interpolate(
                 exponential(1f),
                 zoom(),
-                stop(16, 20f),
-                stop(15, 18f),
+                stop(12, 10f),
                 stop(14, 16f),
-                stop(12, 10f)
+                stop(15, 18f),
+                stop(16, 20f)
               )
             ),
             circleOpacity(0.6f));
