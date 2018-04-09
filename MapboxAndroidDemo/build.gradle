@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.firebase.firebase-perf'
 apply plugin: 'com.github.triplet.play'
 apply from: "$project.rootDir/gradle/script-git-version.gradle"
-apply from: "$project.rootDir/gradle/graph.gradle"
+apply from: "$project.rootDir/gradle/gradle-dependencies-graph.gradle"
 
 android {
     compileSdkVersion androidVersions.compileSdkVersion
