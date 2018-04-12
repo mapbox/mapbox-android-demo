@@ -118,13 +118,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.plugins.TrafficPluginActivity"
-            android:label="@string/activity_plugins_traffic_plugin_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
-        </activity>
-        <activity
             android:name=".examples.plugins.PlacesPluginActivity"
             android:label="@string/activity_plugins_places_plugin_title">
             <meta-data
@@ -153,7 +146,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
 
-        <service android:name="com.mapbox.services.android.telemetry.service.TelemetryService" />
         <service android:name=".account.AccountRetrievalService" />
 
         <activity
@@ -435,13 +427,6 @@
         <activity
             android:name=".examples.plugins.BuildingPluginActivity"
             android:label="@string/activity_plugins_building_plugin_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
-        </activity>
-        <activity
-            android:name=".examples.plugins.GeoJsonPluginActivity"
-            android:label="@string/activity_plugins_geojson_plugin_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
