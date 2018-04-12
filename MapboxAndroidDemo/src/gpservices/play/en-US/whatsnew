@@ -1,5 +1,4 @@
-This update is in line with the 5.5.1 release of the Mapbox Maps SDK for Android. Changes include:
+This update is in line with the 6.0.0-beta.7 release of the Mapbox Maps SDK for Android. Changes include:
 
-	• Location layer plugin update
-	• Several small hot fixes
-	• Mapbox Java SDK upgrade
+	• Updates to data-driven styling examples to account for expressions
+	• Mapbox Java SDK updates
