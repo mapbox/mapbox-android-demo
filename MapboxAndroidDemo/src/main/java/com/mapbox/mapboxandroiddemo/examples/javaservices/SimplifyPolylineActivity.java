@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.mapbox.geojson.Point;
+import com.mapbox.geojson.utils.PolylineUtils;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.PolylineOptions;
@@ -14,8 +16,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.commons.models.Position;
-import com.mapbox.services.commons.utils.PolylineUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -49,7 +49,7 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_simplify_polyline);
 
-    mapView = (MapView) findViewById(R.id.mapview);
+    mapView = findViewById(R.id.mapview);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -104,11 +104,11 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  private class DrawGeoJson extends AsyncTask<Void, Void, List<Position>> {
+  private class DrawGeoJson extends AsyncTask<Void, Void, List<Point>> {
     @Override
-    protected List<Position> doInBackground(Void... voids) {
+    protected List<Point> doInBackground(Void... voids) {
 
-      List<Position> points = new ArrayList<>();
+      List<Point> points = new ArrayList<>();
 
       try {
         // Load GeoJSON file
@@ -137,7 +137,7 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
             JSONArray coords = geometry.getJSONArray("coordinates");
             for (int lc = 0; lc < coords.length(); lc++) {
               JSONArray coord = coords.getJSONArray(lc);
-              Position position = Position.fromCoordinates(coord.getDouble(0), coord.getDouble(1));
+              Point position = Point.fromLngLat(coord.getDouble(0), coord.getDouble(1));
               points.add(position);
             }
           }
@@ -150,7 +150,7 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPostExecute(List<Position> points) {
+    protected void onPostExecute(List<Point> points) {
       super.onPostExecute(points);
 
       drawBeforeSimplify(points);
@@ -159,11 +159,11 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
     }
   }
 
-  private void drawBeforeSimplify(List<Position> points) {
+  private void drawBeforeSimplify(List<Point> points) {
 
     LatLng[] pointsArray = new LatLng[points.size()];
     for (int i = 0; i < points.size(); i++) {
-      pointsArray[i] = new LatLng(points.get(i).getLatitude(), points.get(i).getLongitude());
+      pointsArray[i] = new LatLng(points.get(i).latitude(), points.get(i).longitude());
     }
 
     map.addPolyline(new PolylineOptions()
@@ -172,18 +172,18 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
       .width(4));
   }
 
-  private void drawSimplify(List<Position> points) {
+  private void drawSimplify(List<Point> points) {
 
-    Position[] before = new Position[points.size()];
+    List<Point> before = new ArrayList<>();
     for (int i = 0; i < points.size(); i++) {
-      before[i] = points.get(i);
+      before.add(points.get(i));
     }
 
-    Position[] after = PolylineUtils.simplify(before, 0.001);
+    List<Point> after = PolylineUtils.simplify(before, 0.001);
 
-    LatLng[] result = new LatLng[after.length];
-    for (int i = 0; i < after.length; i++) {
-      result[i] = new LatLng(after[i].getLatitude(), after[i].getLongitude());
+    LatLng[] result = new LatLng[after.size()];
+    for (int i = 0; i < after.size(); i++) {
+      result[i] = new LatLng(after.get(i).latitude(), after.get(i).longitude());
     }
 
     map.addPolyline(new PolylineOptions()

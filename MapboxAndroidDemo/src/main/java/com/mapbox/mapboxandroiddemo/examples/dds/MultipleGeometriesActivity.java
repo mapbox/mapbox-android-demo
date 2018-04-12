@@ -11,12 +11,15 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
-import com.mapbox.mapboxsdk.style.layers.Filter;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.geometryType;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 
 public class MultipleGeometriesActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -35,7 +38,7 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_multiple_geometries);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
@@ -61,7 +64,8 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
     borderOutlineLayer.setProperties(
       PropertyFactory.fillColor(Color.RED),
       PropertyFactory.fillOpacity(.4f));
-    borderOutlineLayer.setFilter(Filter.eq("$type", "Polygon"));
+    borderOutlineLayer.setFilter(eq(geometryType(), literal("Polygon")));
+    borderOutlineLayer.setFilter(eq(literal("$type"), literal("Polygon")));
     mapboxMap.addLayer(borderOutlineLayer);
   }
 
@@ -71,7 +75,7 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
     pointsLayer.setProperties(
       PropertyFactory.circleColor(Color.YELLOW),
       PropertyFactory.circleRadius(3f));
-    pointsLayer.setFilter(Filter.eq("$type", "Point"));
+    pointsLayer.setFilter(eq(literal("$type"), literal("Point")));
     mapboxMap.addLayer(pointsLayer);
   }
 

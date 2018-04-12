@@ -15,9 +15,6 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.Stop;
-import com.mapbox.mapboxsdk.style.functions.stops.Stops;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -28,6 +25,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.zoom;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
@@ -57,7 +58,7 @@ public class IndoorMapActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_lab_indoor_map);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -81,7 +82,7 @@ public class IndoorMapActivity extends AppCompatActivity {
           public void onCameraMove() {
             if (mapboxMap.getCameraPosition().zoom > 16) {
               if (TurfJoins.inside(Point.fromLngLat(mapboxMap.getCameraPosition().target.getLongitude(),
-                  mapboxMap.getCameraPosition().target.getLatitude()), Polygon.fromLngLats(boundingBoxList))) {
+                mapboxMap.getCameraPosition().target.getLatitude()), Polygon.fromLngLats(boundingBoxList))) {
                 if (levelButtons.getVisibility() != View.VISIBLE) {
                   showLevelButton();
                 }
@@ -184,29 +185,23 @@ public class IndoorMapActivity extends AppCompatActivity {
     // line layer is added.
 
     FillLayer indoorBuildingLayer = new FillLayer("indoor-building-fill", "indoor-building").withProperties(
-        fillColor(Color.parseColor("#eeeeee")),
-        // Function.zoom is used here to fade out the indoor layer if zoom level is beyond 16. Only
-        // necessary to show the indoor map at high zoom levels.
-        fillOpacity(Function.zoom(Stops.exponential(
-            Stop.stop(17f, fillOpacity(1f)),
-            Stop.stop(16.5f, fillOpacity(0.5f)),
-            Stop.stop(16f, fillOpacity(0f))
-        )))
-
-    );
+      fillColor(Color.parseColor("#eeeeee")),
+      // Function.zoom is used here to fade out the indoor layer if zoom level is beyond 16. Only
+      // necessary to show the indoor map at high zoom levels.
+      fillOpacity(interpolate(exponential(1f), zoom(),
+        stop(17f, 1f),
+        stop(16.5f, 0.5f),
+        stop(16f, 0f))));
 
     map.addLayer(indoorBuildingLayer);
 
     LineLayer indoorBuildingLineLayer = new LineLayer("indoor-building-line", "indoor-building").withProperties(
-        lineColor(Color.parseColor("#50667f")),
-        lineWidth(0.5f),
-        lineOpacity(Function.zoom(Stops.exponential(
-            Stop.stop(17f, lineOpacity(1f)),
-            Stop.stop(16.5f, lineOpacity(0.5f)),
-            Stop.stop(16f, lineOpacity(0f))
-        )))
-
-    );
+      lineColor(Color.parseColor("#50667f")),
+      lineWidth(0.5f),
+      lineOpacity(interpolate(exponential(1f), zoom(),
+        stop(17f, 1f),
+        stop(16.5f, 0.5f),
+        stop(16f, 0f))));
     map.addLayer(indoorBuildingLineLayer);
   }
 

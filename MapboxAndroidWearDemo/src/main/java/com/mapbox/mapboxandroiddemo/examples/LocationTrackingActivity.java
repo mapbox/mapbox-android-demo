@@ -1,10 +1,14 @@
 package com.mapbox.mapboxandroiddemo.examples;
 
 
+import android.annotation.SuppressLint;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 
+import com.mapbox.android.core.location.LocationEngine;
+import com.mapbox.android.core.location.LocationEngineListener;
+import com.mapbox.android.core.location.LocationEngineProvider;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -12,9 +16,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.android.telemetry.location.LocationEngine;
-import com.mapbox.services.android.telemetry.location.LocationEngineListener;
-import com.mapbox.services.android.telemetry.location.LocationEngineProvider;
 
 /**
  * Lock the camera centered above the user location.
@@ -44,6 +45,7 @@ public class LocationTrackingActivity extends WearableActivity {
     locationEngine = locationEngineProvider.obtainBestLocationEngineAvailable();
 
     locationEngineListener = new LocationEngineListener() {
+      @SuppressLint("MissingPermission")
       @Override
       public void onConnected() {
         locationEngine.requestLocationUpdates();
@@ -62,7 +64,9 @@ public class LocationTrackingActivity extends WearableActivity {
 
         // Customize map with markers, polylines, etc.
         map = mapboxMap;
-        Location lastLocation = locationEngine.getLastLocation();
+        @SuppressLint("MissingPermission")
+        Location lastLocation = new LocationEngineProvider(LocationTrackingActivity.this)
+          .obtainBestLocationEngineAvailable().getLastLocation();
         if (lastLocation != null) {
           map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
         }

@@ -10,6 +10,7 @@ import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.MapboxDirections;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
+import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -19,8 +20,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.services.commons.geojson.LineString;
-import com.mapbox.services.commons.models.Position;
 
 import java.util.List;
 
@@ -28,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.mapbox.services.Constants.PRECISION_6;
+import static com.mapbox.core.constants.Constants.PRECISION_6;
 
 /**
  * Use Mapbox Java Services to request directions
@@ -61,7 +60,7 @@ public class DirectionsActivity extends AppCompatActivity {
 
 
     // Setup the MapView
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -130,12 +129,12 @@ public class DirectionsActivity extends AppCompatActivity {
   private void drawRoute(DirectionsRoute route) {
     // Convert LineString coordinates into LatLng[]
     LineString lineString = LineString.fromPolyline(route.geometry(), PRECISION_6);
-    List<Position> coordinates = lineString.getCoordinates();
+    List<Point> coordinates = lineString.coordinates();
     LatLng[] points = new LatLng[coordinates.size()];
     for (int i = 0; i < coordinates.size(); i++) {
       points[i] = new LatLng(
-        coordinates.get(i).getLatitude(),
-        coordinates.get(i).getLongitude());
+        coordinates.get(i).latitude(),
+        coordinates.get(i).longitude());
     }
 
     // Draw Points on MapView

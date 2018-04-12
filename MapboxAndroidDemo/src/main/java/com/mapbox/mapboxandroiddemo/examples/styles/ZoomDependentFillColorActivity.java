@@ -11,11 +11,11 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.Stop;
+import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 
-import static com.mapbox.mapboxsdk.style.functions.stops.Stops.exponential;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.zoom;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
 /**
@@ -36,7 +36,7 @@ public class ZoomDependentFillColorActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_zoom_dependent_fill_color);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -49,12 +49,12 @@ public class ZoomDependentFillColorActivity extends AppCompatActivity {
         }
 
         //Set a zoom function to update the color of the water
-        layer.setProperties(fillColor(Function.zoom(exponential(
-                Stop.stop(1f, fillColor(Color.GREEN)),
-                Stop.stop(8.5f, fillColor(Color.BLUE)),
-                Stop.stop(10f, fillColor(Color.RED)),
-                Stop.stop(18f, fillColor(Color.YELLOW))
-        ))));
+        layer.setProperties(
+          fillColor(Expression.interpolate(Expression.exponential(1f), zoom(),
+            stop(1f, Expression.color(Color.GREEN)),
+            stop(8.5f, Expression.color(Color.BLUE)),
+            stop(10f, Expression.color(Color.RED)),
+            stop(18f, Expression.color(Color.YELLOW)))));
 
         mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(40.73581, -73.99155), 12), 12000);
 

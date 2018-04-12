@@ -9,14 +9,13 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.functions.Function;
-import com.mapbox.mapboxsdk.style.functions.stops.IdentityStops;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
@@ -41,7 +40,7 @@ public class Indoor3DMapActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_indoor_3d_map);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -53,9 +52,9 @@ public class Indoor3DMapActivity extends AppCompatActivity {
 
         FillExtrusionLayer roomExtrusionLayer = new FillExtrusionLayer("room-extrusion", "room-data");
         roomExtrusionLayer.setProperties(
-          fillExtrusionColor(Function.property("color", new IdentityStops<String>())),
-          fillExtrusionHeight(Function.property("height", new IdentityStops<Float>())),
-          fillExtrusionBase(Function.property("base_height", new IdentityStops<Float>())),
+          fillExtrusionColor(get("color")),
+          fillExtrusionHeight(get("height")),
+          fillExtrusionBase(get("base_height")),
           fillExtrusionOpacity(0.5f)
         );
 

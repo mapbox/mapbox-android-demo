@@ -14,6 +14,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
@@ -22,9 +23,12 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static com.mapbox.mapboxsdk.style.layers.Filter.all;
-import static com.mapbox.mapboxsdk.style.layers.Filter.gte;
-import static com.mapbox.mapboxsdk.style.layers.Filter.lt;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.gte;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.lt;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.toNumber;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
@@ -52,7 +56,7 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_geojson_clustering);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
 
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
@@ -155,11 +159,16 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
         circleRadius(18f)
       );
 
+      Expression pointCount = toNumber(get("point_count"));
+
       // Add a filter to the cluster layer that hides the circles based on "point_count"
       circles.setFilter(
         i == 0
-          ? gte("point_count", layers[i][0]) :
-          all(gte("point_count", layers[i][0]), lt("point_count", layers[i - 1][0]))
+          ? gte(pointCount, literal(layers[i][0])) :
+          all(
+            gte(pointCount, literal(layers[i][0])),
+            lt(pointCount, literal(layers[i - 1][0]))
+          )
       );
       mapboxMap.addLayer(circles);
     }
