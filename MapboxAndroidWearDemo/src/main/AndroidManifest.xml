@@ -79,8 +79,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
 
-        <service android:name="com.mapbox.services.android.telemetry.service.TelemetryService"/>
-
     </application>
 
 </manifest>

@@ -13,9 +13,7 @@ ext {
             mapboxTurf               : '3.0.1',
             mapboGeoJson             : '3.0.1',
             mapboxPluginBuilding     : '0.2.0-SNAPSHOT',
-            mapboxPluginGeoJson      : '0.1.0',
             mapboxPluginLocationLayer: '0.5.0-beta.2',
-            mapboxPluginTraffic      : '0.4.0',
             mapboxPluginMarkerCluster: '0.1.0',
             mapboxPluginPlaces       : '0.2.2',
             mapboxPluginLocalization : '0.1.0',
@@ -58,8 +56,6 @@ ext {
             // Mapbox plugins
             mapboxPluginLocationLayer: "com.mapbox.mapboxsdk:mapbox-android-plugin-locationlayer:${version.mapboxPluginLocationLayer}",
             mapboxPluginBuilding     : "com.mapbox.mapboxsdk:mapbox-android-plugin-building:${version.mapboxPluginBuilding}",
-            mapboxPluginTraffic      : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:${version.mapboxPluginTraffic}",
-            mapboxPluginGeoJson      : "com.mapbox.mapboxsdk:mapbox-android-plugin-geojson:${version.mapboxPluginGeoJson}",
             mapboxPluginMarkerCluster: "com.mapbox.mapboxsdk:mapbox-android-plugin-cluster-utils:${version.mapboxPluginMarkerCluster}",
             mapboxPluginPlaces       : "com.mapbox.mapboxsdk:mapbox-android-plugin-places:${version.mapboxPluginPlaces}",
             mapboxPluginLocalization : "com.mapbox.mapboxsdk:mapbox-android-plugin-localization:${version.mapboxPluginLocalization}",
