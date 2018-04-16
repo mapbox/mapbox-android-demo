@@ -30,6 +30,7 @@
     <string name="activity_extrusions_rotate_extrusions_description">Rotate and tilt device to change camera and see all around 3D buildings.</string>
     <string name="activity_extrusions_indoor_3d_description">Create a 3D indoor map with the fill-extrude-height paint property.</string>
     <string name="activity_dds_style_circle_categorically_description">Using a categorical circle-color property function for a visualization.</string>
+    <string name="activity_dds_heatmap_description">Add and customize a heatmap to visualize data.</string>
     <string name="activity_dds_choropleth_zoom_change_description">Style a choropleth map with data-driven styling, local JSON data, and vector tile geometries.</string>
     <string name="activity_dds_json_vector_mix_description">Style a choropleth map by merging local JSON data with vector tile geometries.</string>
     <string name="activity_dds_style_line_identity_property_description">Using an identity line-color property function for a visualization.</string>
