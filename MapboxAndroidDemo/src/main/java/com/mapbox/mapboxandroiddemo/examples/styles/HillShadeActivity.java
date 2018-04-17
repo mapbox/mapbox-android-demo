@@ -19,7 +19,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.hillshadeShadowC
  * Use terrain data to show hills and use runtime styling to style the hill shading.
  */
 public class HillShadeActivity extends AppCompatActivity implements
-  OnMapReadyCallback, MapboxMap.OnCameraIdleListener {
+  OnMapReadyCallback {
 
   private MapView mapView;
   private static final String LAYER_ID = "hillshade-layer";
@@ -59,10 +59,6 @@ public class HillShadeActivity extends AppCompatActivity implements
 
     // Add hillshade layer to map
     mapboxMap.addLayerBelow(hillshadeLayer, LAYER_BELOW_ID);
-  }
-
-  @Override
-  public void onCameraIdle() {
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
