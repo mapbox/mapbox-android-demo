@@ -51,13 +51,13 @@ public class HillShadeActivity extends AppCompatActivity implements
     RasterDemSource rasterDemSource = new RasterDemSource(SOURCE_ID, SOURCE_URL);
     mapboxMap.addSource(rasterDemSource);
 
-    // Create hillshade layer source to map
+    // Create and style a hillshade layer to add to the map
     HillshadeLayer hillshadeLayer = new HillshadeLayer(LAYER_ID, SOURCE_ID).withProperties(
       hillshadeHighlightColor(Color.parseColor(HILLSHADE_HIGHLIGHT_COLOR)),
       hillshadeShadowColor(Color.BLACK)
     );
 
-    // Add hillshade layer to map
+    // Add the hillshade layer to the map
     mapboxMap.addLayerBelow(hillshadeLayer, LAYER_BELOW_ID);
   }
 
