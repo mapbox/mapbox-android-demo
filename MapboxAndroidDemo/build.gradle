@@ -83,6 +83,10 @@ android {
         track = 'production'
         untrackOld = true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -103,7 +107,7 @@ dependencies {
     // Mapbox dependencies
     api(dependenciesList.mapboxMapSdk)
     implementation dependenciesList.mapboxTurf
-    implementation dependenciesList.mapboGeoJson
+    implementation dependenciesList.mapboxGeoJson
 
     // Mapbox plugins
     implementation dependenciesList.mapboxPluginLocationLayer
