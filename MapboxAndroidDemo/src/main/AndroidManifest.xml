@@ -453,6 +453,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.plugins.TrafficPluginActivity"
+            android:label="@string/activity_plugins_traffic_plugin_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.extrusions.PopulationDensityExtrusionActivity"
             android:label="@string/activity_extrusions_population_density_extrusions_title">
             <meta-data

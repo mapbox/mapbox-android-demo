@@ -18,6 +18,7 @@ ext {
             mapboxPluginMarkerCluster: '0.2.0',
             mapboxPluginPlaces       : '0.3.0',
             mapboxPluginLocalization : '0.2.0',
+            mapboxPluginTraffic      : '0.5.0',
 
             // Support
             supportLib               : '26.1.0',
@@ -60,6 +61,7 @@ ext {
             mapboxPluginMarkerCluster: "com.mapbox.mapboxsdk:mapbox-android-plugin-cluster-utils:${version.mapboxPluginMarkerCluster}",
             mapboxPluginPlaces       : "com.mapbox.mapboxsdk:mapbox-android-plugin-places:${version.mapboxPluginPlaces}",
             mapboxPluginLocalization : "com.mapbox.mapboxsdk:mapbox-android-plugin-localization:${version.mapboxPluginLocalization}",
+            mapboxPluginTraffic      : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:${version.mapboxPluginTraffic}",
 
             // Support
             supportV4                : "com.android.support:support-v4:${version.supportLib}",

@@ -68,6 +68,7 @@ import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerClustersPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
@@ -393,6 +394,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         break;
 
       case R.id.nav_plugins:
+
+        exampleItemModels.add(new ExampleItemModel(
+            R.string.activity_plugins_traffic_plugin_title,
+            R.string.activity_plugins_traffic_plugin_description,
+            new Intent(MainActivity.this, TrafficPluginActivity.class),
+            R.string.activity_plugins_traffic_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
+
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_plugins_building_plugin_title,
           R.string.activity_plugins_building_plugin_description,
