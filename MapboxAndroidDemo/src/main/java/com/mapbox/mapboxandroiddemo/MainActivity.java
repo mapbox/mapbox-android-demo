@@ -46,6 +46,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
@@ -407,19 +408,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_plugins_places_plugin_title, R.string.activity_plugins_places_plugin_description,
           new Intent(MainActivity.this, PlacesPluginActivity.class),
-          R.string.activity_plugins_places_plugin_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_plugins_places_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_plugins_marker_clusters_plugin_title,
           R.string.activity_plugins_geojson_marker_clusters_description,
           new Intent(MainActivity.this, MarkerClustersPluginActivity.class),
-          R.string.activity_plugins_markers_clusters_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
+          R.string.activity_plugins_markers_clusters_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
         );
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_plugins_localization_plugin_title,
           R.string.activity_plugins_localization_plugin_description,
           new Intent(MainActivity.this, LocalizationPluginActivity.class),
-          R.string.activity_plugins_localization_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
+          R.string.activity_plugins_localization_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
         );
         currentCategory = R.id.nav_plugins;
         break;
@@ -588,7 +589,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_symbol_layer_and_mapillary_on_map_title,
           R.string.activity_lab_symbol_layer_and_mapillary_on_map_description,
           new Intent(MainActivity.this, SymbolLayerMapillaryActivity.class),
-          R.string.activity_lab_symbol_layer_on_map_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_lab_symbol_layer_on_map_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_lab_los_angeles_tourism_title,
@@ -642,11 +643,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_labs_gif_on_map_title,
           R.string.activity_labs_gif_on_map_description,
           new Intent(MainActivity.this, AnimatedImageSourceActivity.class),
-          R.string.activity_labs_gif_on_map_url, true, BuildConfig.MIN_SDK_VERSION
+          R.string.activity_labs_gif_on_map_url, false, BuildConfig.MIN_SDK_VERSION
         ));
         currentCategory = R.id.nav_lab;
         break;
       case R.id.nav_dds:
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_dds_heatmap_title,
+          R.string.activity_dds_heatmap_description,
+          new Intent(MainActivity.this, HeatmapActivity.class),
+          R.string.activity_dds_heatmap_url, true, BuildConfig.MIN_SDK_VERSION));
+
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_style_circle_categorically_title,
           R.string.activity_dds_style_circle_categorically_description,
