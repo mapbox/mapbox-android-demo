@@ -105,7 +105,6 @@ import com.mapbox.mapboxandroiddemo.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 import com.mapbox.mapboxandroiddemo.utils.SettingsDialogView;
-import com.mapbox.mapboxsdk.style.sources.ImageSource;
 
 import java.util.ArrayList;
 import java.util.Iterator;
