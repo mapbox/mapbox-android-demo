@@ -115,6 +115,7 @@ dependencies {
     implementation dependenciesList.mapboxPluginMarkerCluster
     implementation dependenciesList.mapboxPluginPlaces
     implementation dependenciesList.mapboxPluginLocalization
+    implementation dependenciesList.mapboxPluginTraffic
 
     // Firebase
     implementation dependenciesList.firebaseCrash
