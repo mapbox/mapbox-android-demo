@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -14,11 +15,13 @@ import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.ImageSource;
 
 /**
- * Use an ImageSource to add an image to the map.
+ * Use a series of images to create an animation with an ImageSource
  */
-public class ImageSourceActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class ImageSourceTimeLapseActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
+  private Handler handler;
+  private Runnable runnable;
   private static final String ID_IMAGE_SOURCE = "animated_image_source";
   private static final String ID_IMAGE_LAYER = "animated_image_layer";
 
@@ -31,35 +34,58 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_image_source);
+    setContentView(R.layout.activity_image_source_time_lapse);
 
-    mapView = findViewById(R.id.mapView);
+    mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
-
-    // Set the latitude and longitude values for the image's four corners
+    // Add source
     LatLngQuad quad = new LatLngQuad(
-      new LatLng(25.7836, -80.11725),
-      new LatLng(25.783548, -80.1397431334),
-      new LatLng(25.7680, -80.13964),
-      new LatLng(25.76795, -80.11725)
-    );
+      new LatLng(46.437, -80.425),
+      new LatLng(46.437, -71.516),
+      new LatLng(37.936, -71.516),
+      new LatLng(37.936, -80.425));
+    mapboxMap.addSource(new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.southeast_radar_0));
 
-    // Create an ImageSource object
-    ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.miami_beach);
-
-    // Add the imageSource to the map
-    mapboxMap.addSource(imageSource);
-
-    // Create a raster layer and use the imageSource's ID as the layer's data
+    // Add layer
     RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
-
-    // Add the layer to the map
     mapboxMap.addLayer(layer);
+
+    // Loop the GeoJSON refreshing
+    handler = new Handler();
+    runnable = new RefreshImageRunnable(mapboxMap, handler);
+    handler.postDelayed(runnable, 100);
+  }
+
+  private static class RefreshImageRunnable implements Runnable {
+    private MapboxMap mapboxMap;
+    private Handler handler;
+    private int[] drawables;
+    private int drawableIndex;
+
+    RefreshImageRunnable(MapboxMap mapboxMap, Handler handler) {
+      this.mapboxMap = mapboxMap;
+      this.handler = handler;
+      drawables = new int[4];
+      drawables[0] = R.drawable.southeast_radar_0;
+      drawables[1] = R.drawable.southeast_radar_1;
+      drawables[2] = R.drawable.southeast_radar_2;
+      drawables[3] = R.drawable.southeast_radar_3;
+      drawableIndex = 1;
+    }
+
+    @Override
+    public void run() {
+      ((ImageSource) mapboxMap.getSource(ID_IMAGE_SOURCE)).setImage(drawables[drawableIndex++]);
+      if (drawableIndex > 3) {
+        drawableIndex = 0;
+      }
+      handler.postDelayed(this, 1000);
+    }
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
@@ -97,6 +123,9 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (handler != null && runnable != null) {
+      handler.removeCallbacks(runnable);
+    }
     mapView.onDestroy();
   }
 
