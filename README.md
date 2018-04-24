@@ -18,6 +18,15 @@ Feedback and contribution is encouraged in this repo, if you'd like to see a new
 * Code your example and test to make sure it works properly.
 * Open a pull request with the new example.
 
+### Running locally
+
+##### Setting Mapbox Access Token
+
+_This demo app uses Mapbox vector tiles, which require a Mapbox account and a Mapbox access token. Obtain a free access token on the [Mapbox account page](https://www.mapbox.com/studio/account/tokens/)._
+
+With the first Gradle invocation, Gradle will take the value of the `MAPBOX_ACCESS_TOKEN` environment variable and save it to `SharedCode/src/main/res/values/developer-config.xml`. If the environment variable wasn't set, you can edit `developer-config.xml` manually and add your access token to the `access_token` resource.  
+
+
 ### Screenshots
 <img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/phone/main-activity.png" width="360">
 <img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/phone/navigation-drawer.png" width="360">
