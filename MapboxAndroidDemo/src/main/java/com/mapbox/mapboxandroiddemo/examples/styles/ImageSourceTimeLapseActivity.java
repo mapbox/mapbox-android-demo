@@ -62,8 +62,8 @@ public class ImageSourceTimeLapseActivity extends AppCompatActivity implements O
   }
 
   private static class RefreshImageRunnable implements Runnable {
-    private MapboxMap mapboxMap;
-    private Handler handler;
+    private final MapboxMap mapboxMap;
+    private final Handler handler;
     private int[] drawables;
     private int drawableIndex;
 
