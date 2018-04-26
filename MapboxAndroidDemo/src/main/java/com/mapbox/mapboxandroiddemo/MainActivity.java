@@ -48,6 +48,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.MultipleHeatmapStylingActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
@@ -669,6 +670,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_heatmap_description,
           new Intent(MainActivity.this, HeatmapActivity.class),
           R.string.activity_dds_heatmap_url, true, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_dds_multiple_heatmap_styling_title,
+          R.string.activity_dds_multiple_heatmap_styling_description,
+          new Intent(MainActivity.this, MultipleHeatmapStylingActivity.class),
+          R.string.activity_dds_multiple_heatmap_styling_url, true, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_style_circle_categorically_title,
