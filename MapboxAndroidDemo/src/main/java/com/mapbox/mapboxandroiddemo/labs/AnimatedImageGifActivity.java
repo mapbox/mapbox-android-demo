@@ -23,7 +23,7 @@ import java.io.InputStream;
 /**
  * Add an animated image (GIF) anywhere on the map
  */
-public class AnimatedImageSourceActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class AnimatedImageGifActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private static final String ID_IMAGE_SOURCE = "animated_image_source";
   private static final String ID_IMAGE_LAYER = "animated_image_layer";
@@ -41,7 +41,7 @@ public class AnimatedImageSourceActivity extends AppCompatActivity implements On
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_animated_image_source);
+    setContentView(R.layout.activity_animated_image_gif);
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);

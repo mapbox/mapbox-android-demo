@@ -84,6 +84,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.HillShadeActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ImageSourceActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.ImageSourceTimeLapseActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
@@ -91,7 +92,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
-import com.mapbox.mapboxandroiddemo.labs.AnimatedImageSourceActivity;
+import com.mapbox.mapboxandroiddemo.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
@@ -350,6 +351,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_style_image_source_description,
           new Intent(MainActivity.this, ImageSourceActivity.class),
           R.string.activity_style_image_source_url, false, BuildConfig.MIN_SDK_VERSION
+        ));
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_style_image_source_time_lapse_title,
+          R.string.activity_style_image_source_time_lapse_description,
+          new Intent(MainActivity.this, ImageSourceTimeLapseActivity.class),
+          R.string.activity_style_image_source_time_lapse_url, false, BuildConfig.MIN_SDK_VERSION
         ));
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_styles_hillshade_title,
@@ -650,7 +657,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_labs_gif_on_map_title,
           R.string.activity_labs_gif_on_map_description,
-          new Intent(MainActivity.this, AnimatedImageSourceActivity.class),
+          new Intent(MainActivity.this, AnimatedImageGifActivity.class),
           R.string.activity_labs_gif_on_map_url, false, BuildConfig.MIN_SDK_VERSION
         ));
         currentCategory = R.id.nav_lab;
