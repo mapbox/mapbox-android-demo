@@ -37,7 +37,7 @@ task secretKeysSetup {
 
         String tokenFileContents = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<resources>\n" +
-                "    <string name=\"access_token\">" + mapboxAccessToken + "</string>\n" +
+                "    <string name=\"access_token\" translatable=\"false\">" + mapboxAccessToken + "</string>\n" +
                 "    <string name=\"mapbox_auth_flow_secret\">" + mapboxFlowSecret + "</string>\n" +
                 "    <string name=\"mapbox_segment_write_key\">" + segmentWriteKey + "</string>\n" +
                 "    <string name=\"mapbox_segment_wearable_write_key\">" + segmentWearableWriteKey + "</string>\n" +
