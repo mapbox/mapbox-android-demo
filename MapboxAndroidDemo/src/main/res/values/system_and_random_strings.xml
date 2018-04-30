@@ -8,9 +8,6 @@
     <string name="mapbox" translatable="false">Mapbox</string>
     <string name="examples">Android examples</string>
 
-    <!-- Access Token -->
-    <string name="access_token" translatable="false">pk.eyJ1IjoiY2FtbWFjZSIsImEiOiJjaW9vbGtydnQwMDAwdmRrcWlpdDVoM3pjIn0.Oy_gHelWnV12kJxHQWV7XQ</string>
-
     <!-- UI Strings -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
