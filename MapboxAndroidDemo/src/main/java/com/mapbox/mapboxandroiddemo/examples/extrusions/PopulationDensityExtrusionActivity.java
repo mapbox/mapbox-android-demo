@@ -52,7 +52,6 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
-
   }
 
   @Override
