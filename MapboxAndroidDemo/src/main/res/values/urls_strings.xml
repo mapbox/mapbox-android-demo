@@ -143,6 +143,7 @@
     <string name="activity_lab_shared_preferences_url" translatable="false">https://i.imgur.com/znxAhDG.png</string>
     <string name="activity_lab_biometric_fingerprint_url" translatable="false">https://i.imgur.com/iQZzMIR.png</string>
     <string name="activity_lab_baseball_spray_chart_url" translatable="false">https://i.imgur.com/1j7WVoO.png</string>
+    <string name="activity_labs_animated_traffic_line_url" translatable="false">https://i.imgur.com/3d810QI.png</string>
     <string name="activity_china_simple_china_mapview_url" translatable="false">https://i.imgur.com/KwoEynZ.png</string>
     <string name="activity_china_simple_china_bounds_checker_url" translatable="false">https://i.imgur.com/fIFWqJu.png</string>
     <string name="activity_china_mixed_china_and_global_style_url" translatable="false">https://i.imgur.com/XBS1WAn.png</string>

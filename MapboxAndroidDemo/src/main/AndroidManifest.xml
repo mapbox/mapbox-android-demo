@@ -40,6 +40,7 @@
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".examples.basics.SimpleMapViewActivity"
             android:label="@string/activity_basic_simple_mapview_title">
@@ -387,6 +388,13 @@
         <activity
             android:name=".examples.labs.MarkerFollowingRouteActivity"
             android:label="@string/activity_lab_marker_following_route_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
+            android:name=".labs.AnimatedTrafficLineActivity"
+            android:label="@string/activity_labs_animated_traffic_line_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
