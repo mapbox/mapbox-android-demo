@@ -47,11 +47,6 @@ jobs:
             echo "${GCLOUD_SERVICE_ACCOUNT_JSON}" > secret.json
             gcloud auth activate-service-account --key-file secret.json --project mapbox-android-demo
             rm secret.json
-      # - run:
-      #     name: Export secrets for developer-config.xml
-      #     command: |
-      #       #!/bin/bash
-      #       echo "${MAPBOX_DEVELOPER_CONFIG}" > SharedCode/src/main/res/values/developer-config.xml
       - run:
           name: Check code style
           command: make checkstyle
