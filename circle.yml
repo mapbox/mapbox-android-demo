@@ -28,11 +28,11 @@ jobs:
       IS_LOCAL_DEVELOPMENT: false
     steps:
       - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "MapboxAndroidDemo/build.gradle" }}
       - run:
           name: Clean gradle
           command: ./gradlew clean
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "MapboxAndroidDemo/build.gradle" }}
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
