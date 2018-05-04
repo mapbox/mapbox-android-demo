@@ -83,7 +83,6 @@ jobs:
           name: Export developer-config.xml & Google Play authentication json
           command: |
             #!/bin/bash
-            echo "${MAPBOX_DEVELOPER_CONFIG}" > SharedCode/src/main/res/values/developer-config.xml
             echo "${PLAY_PUBLISH_AUTH_JSON}" > android-gl-native-6d21dd280e7b.json
       - run:
           name: Release to Google Play
