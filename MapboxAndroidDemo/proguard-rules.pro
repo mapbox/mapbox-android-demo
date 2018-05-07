@@ -33,7 +33,7 @@
 -dontwarn com.google.**
 -dontwarn java.nio.**
 -dontwarn javax.annotation.**
--dontwarn java.awt.**
+-keep java.awt.**
 
 -keep class com.segment.analytics.** { *; }
 -keep class com.mapbox.mapboxandroiddemo.model.usermodel.** { *; }
