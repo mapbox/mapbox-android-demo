@@ -72,3 +72,4 @@
 
 # --- Java ---
 -dontwarn com.mapbox.api.staticmap.v1.models.StaticMarkerAnnotation
+-dontwarn com.mapbox.api.staticmap.v1.models.StaticPolylineAnnotation
