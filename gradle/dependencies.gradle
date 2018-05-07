@@ -34,7 +34,11 @@ ext {
 
             // Other
             gson                     : '2.8',
-            segmentAnalytics         : '2.0.0'
+            segmentAnalytics         : '2.0.0',
+            materialStyleDialog      : '2.1',
+            cuttaGifView             : '1.1',
+            baseFab                  : '1.10.1',
+            materialDialogsCommons   : '0.9.6.0'
     ]
 
     wearVersion = [
@@ -89,7 +93,11 @@ ext {
 
             // Other
             gson                     : "com.google.code.gson:gson:${version.gson}",
-            segmentAnalytics         : "com.segment.analytics.java:analytics:${version.segmentAnalytics}"
+            segmentAnalytics         : "com.segment.analytics.java:analytics:${version.segmentAnalytics}",
+            materialStyleDialog      : "com.github.javiersantos:MaterialStyledDialogs:${version.materialStyleDialog}",
+            cuttaGifView             : "com.github.Cutta:GifView:${version.cuttaGifView}",
+            baseFab                  : "com.getbase:floatingactionbutton:${version.baseFab}",
+            materialDialogsCommons   : "com.afollestad.material-dialogs:commons:${version.materialDialogsCommons}"
     ]
 
     pluginDependencies = [
