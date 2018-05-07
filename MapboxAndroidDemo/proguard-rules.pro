@@ -33,7 +33,7 @@
 -dontwarn com.google.**
 -dontwarn java.nio.**
 -dontwarn javax.annotation.**
--dontwarn java.awt.**
+
 
 -keep class com.segment.analytics.** { *; }
 -keep class com.mapbox.mapboxandroiddemo.model.usermodel.** { *; }
@@ -71,4 +71,5 @@
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 
 # --- Java ---
--dontwarn java.awt.Color
+-dontwarn com.mapbox.api.staticmap.v1.models.StaticMarkerAnnotation
+-dontwarn com.mapbox.api.staticmap.v1.models.StaticPolylineAnnotation
