@@ -25,8 +25,6 @@ public class StyleFadeSwitchActivity extends AppCompatActivity implements
   OnMapReadyCallback {
 
   private MapView mapView;
-  private String SATELLITE_RASTER_SOURCE_ID = "SATELLITE_RASTER_SOURCE_ID";
-  private String SATELLITE_RASTER_LAYER_ID = "SATELLITE_RASTER_LAYER_ID";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,20 +46,19 @@ public class StyleFadeSwitchActivity extends AppCompatActivity implements
   public void onMapReady(MapboxMap mapboxMap) {
 
     // Create a data source for the satellite raster images
-    Source satelliteRasterSource = new RasterSource(SATELLITE_RASTER_SOURCE_ID,
+    Source satelliteRasterSource = new RasterSource("SATELLITE_RASTER_SOURCE_ID",
       "mapbox://mapbox.satellite", 512);
 
     // Add the source to the map
     mapboxMap.addSource(satelliteRasterSource);
 
     // Create a new map layer for the satellite raster images
-    RasterLayer satelliteRasterLayer = new RasterLayer(SATELLITE_RASTER_LAYER_ID, SATELLITE_RASTER_SOURCE_ID);
+    RasterLayer satelliteRasterLayer = new RasterLayer("SATELLITE_RASTER_LAYER_ID", "SATELLITE_RASTER_SOURCE_ID");
 
     // Use runtime styling to adjust the satellite layer's opacity based on the map camera's zoom level
     satelliteRasterLayer.withProperties(
       rasterOpacity(interpolate(linear(), zoom(),
-        stop(0, 0),
-        stop(15, .01),
+        stop(15, 0),
         stop(18, 1)
       ))
     );
