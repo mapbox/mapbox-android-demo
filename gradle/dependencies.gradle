@@ -13,12 +13,12 @@ ext {
             mapboxMapSdk             : '6.1.1',
             mapboxTurf               : '3.1.0',
             mapboxGeoJson            : '3.1.0',
-            mapboxPluginBuilding     : '0.2.0',
+            mapboxPluginBuilding     : '0.3.0',
             mapboxPluginLocationLayer: '0.5.0',
-            mapboxPluginMarkerCluster: '0.2.0',
-            mapboxPluginPlaces       : '0.3.0',
-            mapboxPluginLocalization : '0.2.0',
-            mapboxPluginTraffic      : '0.5.0',
+            mapboxPluginMarkerCluster: '0.3.0',
+            mapboxPluginPlaces       : '0.4.0',
+            mapboxPluginLocalization : '0.3.0',
+            mapboxPluginTraffic      : '0.6.0',
 
             // Support
             supportLib               : '26.1.0',
