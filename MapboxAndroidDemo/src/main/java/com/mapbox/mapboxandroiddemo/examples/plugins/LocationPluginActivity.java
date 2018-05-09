@@ -20,6 +20,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
+import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 
 import java.util.List;
 
@@ -62,9 +63,10 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
       // Create a location engine instance
       initializeLocationEngine();
-
       locationPlugin = new LocationLayerPlugin(mapView, mapboxMap, locationEngine);
       locationPlugin.setLocationLayerEnabled(true);
+      locationPlugin.setCameraMode(CameraMode.TRACKING);
+      getLifecycle().addObserver(locationPlugin);
     } else {
       permissionsManager = new PermissionsManager(this);
       permissionsManager.requestLocationPermissions(this);
@@ -75,8 +77,8 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
   private void initializeLocationEngine() {
     locationEngine = new LocationEngineProvider(this).obtainBestLocationEngineAvailable();
     locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
+    locationEngine.addLocationEngineListener(this);
     locationEngine.activate();
-
     Location lastLocation = locationEngine.getLastLocation();
     if (lastLocation != null) {
       setCameraPosition(lastLocation);
@@ -87,7 +89,7 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
 
   private void setCameraPosition(Location location) {
     mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-      new LatLng(location.getLatitude(), location.getLongitude()), 16));
+      new LatLng(location.getLatitude(), location.getLongitude()), 20));
   }
 
   @Override
@@ -97,7 +99,7 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
-
+    // Left blank on purpose
   }
 
   @Override
@@ -128,10 +130,11 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
   @SuppressWarnings( {"MissingPermission"})
   protected void onStart() {
     super.onStart();
-    if (locationPlugin != null) {
-      locationPlugin.onStart();
-    }
     mapView.onStart();
+    if (locationEngine != null) {
+      locationEngine.requestLocationUpdates();
+      locationEngine.addLocationEngineListener(this);
+    }
   }
 
   @Override
@@ -149,13 +152,11 @@ public class LocationPluginActivity extends AppCompatActivity implements Locatio
   @Override
   protected void onStop() {
     super.onStop();
+    mapView.onStop();
     if (locationEngine != null) {
+      locationEngine.removeLocationEngineListener(this);
       locationEngine.removeLocationUpdates();
     }
-    if (locationPlugin != null) {
-      locationPlugin.onStop();
-    }
-    mapView.onStop();
   }
 
   @Override
