@@ -369,7 +369,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_fade_switch_title,
           R.string.activity_styles_fade_switch_description,
           new Intent(MainActivity.this, StyleFadeSwitchActivity.class),
-          R.string.activity_styles_fade_switch_url, false, BuildConfig.MIN_SDK_VERSION
+          R.string.activity_styles_fade_switch_url, true, BuildConfig.MIN_SDK_VERSION
         ));
         currentCategory = R.id.nav_styles;
         break;
@@ -675,7 +675,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_heatmap_title,
           R.string.activity_dds_heatmap_description,
           new Intent(MainActivity.this, HeatmapActivity.class),
-          R.string.activity_dds_heatmap_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_dds_heatmap_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_style_circle_categorically_title,

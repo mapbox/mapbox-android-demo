@@ -20,7 +20,11 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.zoom;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.rasterOpacity;
 
-
+/**
+ * Create an effect of seamlessly fading from one map style to another with runtime styling opacity.
+ * Go from the Mapbox Streets style to a satellite photo raster layer as the map camera zooms in.
+ * This is similar to how Snap uses Mapbox for Snap Maps.
+ */
 public class StyleFadeSwitchActivity extends AppCompatActivity implements
   OnMapReadyCallback {
 
