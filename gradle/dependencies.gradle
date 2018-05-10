@@ -14,7 +14,7 @@ ext {
             mapboxTurf               : '3.1.0',
             mapboxGeoJson            : '3.1.0',
             mapboxPluginBuilding     : '0.3.0',
-            mapboxPluginLocationLayer: '0.5.1',
+            mapboxPluginLocationLayer: '0.5.2',
             mapboxPluginMarkerCluster: '0.3.0',
             mapboxPluginPlaces       : '0.4.0',
             mapboxPluginLocalization : '0.3.0',
