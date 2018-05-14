@@ -20,7 +20,7 @@ workflows:
 jobs:
   primary:
     docker:
-      - image: mbgl/feb0443038
+      - image: mbgl/feb0443038:android-ndk-r17
     working_directory: ~/code
     environment:
       JVM_OPTS: -Xmx3200m
@@ -62,7 +62,7 @@ jobs:
 # ------------------------------------------------------------------------------
   release:
     docker:
-      - image: mbgl/feb0443038
+      - image: mbgl/feb0443038:android-ndk-r17
     working_directory: ~/code
     environment:
       JVM_OPTS: -Xmx3200m
