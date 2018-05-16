@@ -124,11 +124,10 @@ dependencies {
 
     // Other dependencies
     implementation dependenciesList.gson
-
-    implementation 'com.github.javiersantos:MaterialStyledDialogs:2.1'
-    implementation 'com.getbase:floatingactionbutton:1.10.1'
-    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
-    implementation 'com.github.Cutta:GifView:1.1'
+    implementation dependenciesList.baseFab
+    implementation dependenciesList.materialStyleDialog
+    implementation dependenciesList.cuttaGifView
+    implementation dependenciesList.materialDialogsCommons
 
     // Square crew
     implementation dependenciesList.timber
