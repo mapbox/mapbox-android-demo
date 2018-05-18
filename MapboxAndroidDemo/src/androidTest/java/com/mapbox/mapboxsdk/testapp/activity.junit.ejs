@@ -1,0 +1,29 @@
+<%
+  const activity = locals[0];
+  const subPackage = locals[1];
+-%>
+// This file is generated. Edit scripts/generate-test-code.js, then run `sanity-test-example-activities`.
+package com.mapbox.mapboxsdk.testapp.gen.<%- subPackage %>;
+
+import com.mapbox.mapboxandroiddemo.examples.<%- subPackage %>.<%- activity %>;
+import com.mapbox.mapboxsdk.testapp.BaseActivityTest;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import android.support.test.runner.AndroidJUnit4;
+
+/**
+ * Sanity test for <%- activity %>
+ */
+@RunWith(AndroidJUnit4.class)
+public class <%- activity %>Test extends BaseActivityTest {
+
+    @Test
+    public void testSanity() {
+        validateTestSetup();
+    }
+
+    @Override
+    protected Class getActivityClass() {
+        return <%- activity %>.class;
+    }
+}

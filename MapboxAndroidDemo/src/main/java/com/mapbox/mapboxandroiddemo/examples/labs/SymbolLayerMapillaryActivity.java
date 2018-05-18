@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.labs;
+package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;

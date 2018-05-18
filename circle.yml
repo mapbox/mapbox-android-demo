@@ -51,6 +51,9 @@ jobs:
           name: Check code style
           command: make checkstyle
       - run:
+          name: Generate Espresso sanity tests
+          command: make sanity-test-example-activities
+      - run:
           name: Run Firebase instrumentation tests
           command: |
             #!/bin/bash
