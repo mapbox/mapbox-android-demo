@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
-
+// #-code-snippet: simplify-polyline-activity full-java
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -192,3 +192,4 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
       .width(4));
   }
 }
+// #-end-code-snippet: simplify-polyline-activity full-java

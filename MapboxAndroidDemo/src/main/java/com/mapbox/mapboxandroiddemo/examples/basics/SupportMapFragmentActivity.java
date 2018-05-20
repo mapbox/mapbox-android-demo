@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.basics;
-
+// #-code-snippet: support-map-fragment-activity full-java
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -65,3 +65,4 @@ public class SupportMapFragmentActivity extends AppCompatActivity {
     });
   }
 }
+// #-end-code-snippet: support-map-fragment-activity full-java

@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
-
+// #-code-snippet: line-layer-activity full-java
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -178,3 +178,4 @@ public class LineLayerActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 }
+// #-end-code-snippet: line-layer-activity full-java

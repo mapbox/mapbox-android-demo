@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
-
+// #-code-snippet: optimization-activity full-java
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -244,3 +244,4 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     mapView.onLowMemory();
   }
 }
+// #-end-code-snippet: optimization-activity full-java

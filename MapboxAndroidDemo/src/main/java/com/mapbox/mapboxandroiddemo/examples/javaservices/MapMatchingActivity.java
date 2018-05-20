@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
-
+// #-code-snippet: map-matching-activity full-java
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -220,3 +220,4 @@ public class MapMatchingActivity extends AppCompatActivity {
     }
   }
 }
+// #-end-code-snippet: map-matching-activity full-java

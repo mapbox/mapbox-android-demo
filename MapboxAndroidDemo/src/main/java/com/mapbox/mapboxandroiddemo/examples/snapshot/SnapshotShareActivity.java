@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.snapshot;
-
+// #-code-snippet: snapshot-share-activity full-java
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -188,3 +188,4 @@ public class SnapshotShareActivity extends AppCompatActivity {
     mapView.onDestroy();
   }
 }
+// #-end-code-snippet: snapshot-share-activity full-java

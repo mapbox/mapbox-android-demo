@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.annotations;
-
+// #-code-snippet: animated-marker-activity full-java
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
@@ -129,3 +129,4 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
     }
   }
 }
+// #-end-code-snippet: animated-marker-activity full-java

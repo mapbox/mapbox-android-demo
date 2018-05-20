@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
-
+// #-code-snippet: mapbox-studio-style-activity full-java
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -81,3 +81,4 @@ public class MapboxStudioStyleActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 }
+// #-end-code-snippet: mapbox-studio-style-activity full-java

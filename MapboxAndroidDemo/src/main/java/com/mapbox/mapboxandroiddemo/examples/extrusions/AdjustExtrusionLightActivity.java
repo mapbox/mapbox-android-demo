@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
-
+// #-code-snippet: adjust-extrusion-light-activity full-java
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -178,3 +178,4 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
   }
 
 }
+// #-end-code-snippet: adjust-extrusion-light-activity full-java

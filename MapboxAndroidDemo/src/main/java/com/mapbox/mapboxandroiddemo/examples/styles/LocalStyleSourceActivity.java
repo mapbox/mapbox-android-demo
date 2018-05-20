@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
-
+// #-code-snippet: local-style-source-activity full-java
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -99,3 +99,4 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 }
+// #-end-code-snippet: local-style-source-activity full-java
