@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.annotations;
-
+// #-code-snippet: draw-custom-marker-activity full-java
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -92,3 +92,4 @@ public class DrawCustomMarkerActivity extends AppCompatActivity {
     mapView.onDestroy();
   }
 }
+// #-end-code-snippet: draw-custom-marker-activity full-java

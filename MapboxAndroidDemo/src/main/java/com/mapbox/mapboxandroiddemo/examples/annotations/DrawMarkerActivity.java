@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.annotations;
-
+// #-code-snippet: draw-marker-activity full-java
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -85,3 +85,4 @@ public class DrawMarkerActivity extends AppCompatActivity {
     mapView.onDestroy();
   }
 }
+// #-end-code-snippet: draw-marker-activity full-java

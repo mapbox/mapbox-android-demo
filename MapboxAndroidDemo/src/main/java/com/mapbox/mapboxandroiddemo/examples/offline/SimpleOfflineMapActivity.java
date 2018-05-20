@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.offline;
-
+// #-code-snippet: simple-offline-map-activity full-java
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -240,3 +240,4 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
     Toast.makeText(SimpleOfflineMapActivity.this, message, Toast.LENGTH_LONG).show();
   }
 }
+// #-end-code-snippet: simple-offline-map-activity full-java

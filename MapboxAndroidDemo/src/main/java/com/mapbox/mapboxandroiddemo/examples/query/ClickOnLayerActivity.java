@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.query;
-
+// #-code-snippet: click-on-layer-activity full-java
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.os.Bundle;
@@ -142,3 +142,4 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
     mapView.onSaveInstanceState(outState);
   }
 }
+// #-end-code-snippet: click-on-layer-activity full-java

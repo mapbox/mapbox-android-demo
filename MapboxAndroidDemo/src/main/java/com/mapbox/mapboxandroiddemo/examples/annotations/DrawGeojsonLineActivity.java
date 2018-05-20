@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.annotations;
-
+// #-code-snippet: draw-geojson-line-activity full-java
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -161,3 +161,4 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
     }
   }
 }
+// #-end-code-snippet: draw-geojson-line-activity full-java

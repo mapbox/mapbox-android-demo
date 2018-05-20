@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
-
+// #-code-snippet: multiple-geometries-activity full-java
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -137,3 +137,4 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
     }
   }
 }
+// #-end-code-snippet: multiple-geometries-activity full-java

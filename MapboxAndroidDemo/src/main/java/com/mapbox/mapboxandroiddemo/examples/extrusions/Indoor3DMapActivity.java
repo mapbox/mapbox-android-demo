@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
-
+// #-code-snippet: indoor-3d-map-activity full-java
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -122,3 +122,4 @@ public class Indoor3DMapActivity extends AppCompatActivity {
     }
   }
 }
+// #-end-code-snippet: indoor-3d-map-activity full-java

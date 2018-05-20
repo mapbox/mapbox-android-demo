@@ -1,5 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.query;
-
+// #-code-snippet: select-building-activity full-java
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -134,3 +134,4 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
     mapView.onSaveInstanceState(outState);
   }
 }
+// #-end-code-snippet: select-building-activity full-java
