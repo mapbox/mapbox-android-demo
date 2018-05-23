@@ -112,7 +112,6 @@ dependencies {
     // Mapbox plugins
     implementation dependenciesList.mapboxPluginLocationLayer
     implementation dependenciesList.mapboxPluginBuilding
-    implementation dependenciesList.mapboxPluginMarkerCluster
     implementation dependenciesList.mapboxPluginPlaces
     implementation dependenciesList.mapboxPluginLocalization
     implementation dependenciesList.mapboxPluginTraffic

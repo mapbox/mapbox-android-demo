@@ -67,7 +67,6 @@
     <string name="activity_plugins_location_plugin_description">Use the location plugin to easily show a user\'s location on the map</string>
     <string name="activity_plugins_geojson_plugin_description">Easily retrieve GeoJSON data from a url, asset, or path</string>
     <string name="activity_plugins_places_plugin_description">Add location search ("geocoding") functionality and UI to search for any place in the world</string>
-    <string name="activity_plugins_geojson_marker_clusters_description">Use the plugin to automatically add marker clusters to the map. This example shows bike share stations in Paris.</string>
     <string name="activity_plugins_localization_plugin_description">Use the plugin to automatically change map label text to the language set on the device.</string>
     <string name="activity_java_services_simplify_polyline_description">Using the polylines utility, simplify a polyline which reduces the amount of coordinates making up the polyline depending on tolerance.</string>
     <string name="activity_java_services_map_matching_description">Match raw GPS points to the map so they aligns with the roads/pathways.</string>
