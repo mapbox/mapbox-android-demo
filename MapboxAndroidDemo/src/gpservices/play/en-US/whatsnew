@@ -1,4 +1,5 @@
-This update is in line with the 6.0.0-beta.7 release of the Mapbox Maps SDK for Android. Changes include:
+This update is in line with the 6.1.3 release of the Mapbox Maps SDK for Android. Changes include:
 
-	• Updates to data-driven styling examples to account for expressions
-	• Mapbox Java SDK updates
+    • An example showing how to fade from one map style to another
+    • Plugin updates
+    • Small bugfixes
