@@ -23,10 +23,10 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.color;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.gt;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.lt;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.lte;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
@@ -82,7 +82,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
   private void addExtrusionsLayer() {
     FillExtrusionLayer fillExtrusionLayer = new FillExtrusionLayer("extrusions", "population");
     fillExtrusionLayer.setSourceLayer("outgeojson");
-    fillExtrusionLayer.setFilter(all(get("p"), literal(1), lte(get("pkm2"), literal(300000))));
+    fillExtrusionLayer.setFilter(all(gt(get("p"), 1), lt(get("pkm2"), 300000)));
     fillExtrusionLayer.withProperties(
       fillExtrusionColor(interpolate(exponential(1f), get("pkm2"),
         stop(0, color(Color.parseColor("#160e23"))),

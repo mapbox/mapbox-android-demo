@@ -682,7 +682,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_multiple_heatmap_styling_title,
           R.string.activity_dds_multiple_heatmap_styling_description,
           new Intent(MainActivity.this, MultipleHeatmapStylingActivity.class),
-          R.string.activity_dds_multiple_heatmap_styling_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_dds_multiple_heatmap_styling_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_style_circle_categorically_title,
