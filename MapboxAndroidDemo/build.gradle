@@ -80,7 +80,7 @@ android {
     }
 
     play {
-        track = 'production'
+        track = 'alpha'
         untrackOld = true
     }
     compileOptions {
