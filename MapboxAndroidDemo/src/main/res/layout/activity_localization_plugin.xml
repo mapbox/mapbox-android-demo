@@ -9,9 +9,9 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:mapbox_cameraTargetLat="40.745565"
-        app:mapbox_cameraTargetLng="-73.982058"
-        app:mapbox_cameraZoom="11.316102"
+        app:mapbox_cameraTargetLat="35.830744"
+        app:mapbox_cameraTargetLng="136.711369"
+        app:mapbox_cameraZoom="4.5257"
         app:mapbox_styleUrl="@string/mapbox_style_mapbox_streets" />
 
     <android.support.constraint.ConstraintLayout
@@ -93,7 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="16dp"
-                android:text="@string/mandarin"
+                android:text="@string/chinese"
                 android:textColor="@color/mapboxWhite" />
 
         </android.support.v7.widget.CardView>
