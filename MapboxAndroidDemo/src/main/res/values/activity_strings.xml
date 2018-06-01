@@ -210,7 +210,7 @@
     <string name="map_localized">Map localized to device language</string>
     <string name="camera_bounds_focus">Camera bounds for country associated with language tag: %1$s</string>
     <string name="change_language_instruction">Make sure that the device\'s default language is not English</string>
-    <string name="mandarin">Mandarin</string>
+    <string name="chinese">Chinese</string>
     <string name="russian">Russian</string>
     <string name="arabic">Arabic</string>
     <string name="change_device_language_instruction">Change the device\'s language to German and then tap this button. Already in German? Try French</string>
