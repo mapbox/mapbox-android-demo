@@ -43,6 +43,7 @@ import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.BathymetryActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
@@ -677,6 +678,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, MultipleHeatmapStylingActivity.class),
           R.string.activity_dds_multiple_heatmap_styling_url, false, BuildConfig.MIN_SDK_VERSION));
 
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_dds_bathymetry_title,
+          R.string.activity_dds_bathymetry_description,
+          new Intent(MainActivity.this, BathymetryActivity.class),
+          R.string.activity_dds_bathymetry_url, true, BuildConfig.MIN_SDK_VERSION
+        ));
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_style_circle_categorically_title,
           R.string.activity_dds_style_circle_categorically_description,
