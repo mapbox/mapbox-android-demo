@@ -81,7 +81,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.BasicSymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.GeoJsonClusteringActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.HillShadeActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ImageSourceActivity;
@@ -275,12 +275,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_basic_symbol_layer_description,
           new Intent(MainActivity.this, BasicSymbolLayerActivity.class),
           R.string.activity_styles_symbol_layer_url, false, BuildConfig.MIN_SDK_VERSION));
-
-        exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_styles_data_clusters_title,
-          R.string.activity_styles_create_data_cluster_description,
-          new Intent(MainActivity.this, GeoJsonClusteringActivity.class),
-          R.string.activity_styles_create_cluster_data_points_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_styles_line_layer_title,
@@ -683,6 +677,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_multiple_heatmap_styling_description,
           new Intent(MainActivity.this, MultipleHeatmapStylingActivity.class),
           R.string.activity_dds_multiple_heatmap_styling_url, true, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_styles_dds_geojson_clusters_title,
+          R.string.activity_styles_dds_geojson_clusters_description,
+          new Intent(MainActivity.this, GeoJsonClusteringActivity.class),
+          R.string.activity_styles_dds_geojson_clusters_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_style_circle_categorically_title,
