@@ -72,6 +72,7 @@ import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
@@ -436,6 +437,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_plugins_localization_plugin_description,
           new Intent(MainActivity.this, LocalizationPluginActivity.class),
           R.string.activity_plugins_localization_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
+        );
+
+        exampleItemModels.add(new ExampleItemModel(
+            R.string.activity_plugins_place_picker_plugin_title,
+            R.string.activity_plugins_place_picker_plugin_description,
+            new Intent(MainActivity.this, PlaceSelectionPluginActivity.class),
+            R.string.activity_plugins_place_picker_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
         );
         currentCategory = R.id.nav_plugins;
         break;
