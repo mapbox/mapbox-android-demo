@@ -12,6 +12,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerOptions;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 
@@ -53,8 +54,12 @@ public class LocationPluginActivity extends AppCompatActivity implements
   private void enableLocationPlugin() {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
-      // Create a location engine instance
+
+      // Create an instance of the plugin. Adding in LocationLayerOptions is also an optional
+      // parameter
       LocationLayerPlugin locationLayerPlugin = new LocationLayerPlugin(mapView, mapboxMap);
+
+      // Set the plugin's camera mode
       locationLayerPlugin.setCameraMode(CameraMode.TRACKING);
       getLifecycle().addObserver(locationLayerPlugin);
     } else {
