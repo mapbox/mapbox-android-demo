@@ -16,7 +16,7 @@
     <string name="activity_styles_add_wms_source_title">Afegeix una font WMS</string>
     <string name="activity_styles_zoom_dependent_fill_color_title">El color en funció del nivell de zoom</string>
     <string name="activity_dds_create_hotspots_points_title">Crea un mapa de calor a partir de punts</string>
-    <string name="activity_styles_data_clusters_title">Crea i dona estils a agrupacions de dades</string>
+    <string name="activity_styles_dds_geojson_clusters_title">Crea i dona estils a agrupacions de dades</string>
     <string name="activity_styles_line_layer_title">Crea una capa de línies</string>
     <string name="activity_styles_basic_symbol_layer_title">Capa de símbols marcadors</string>
     <string name="activity_extrusions_basic_extrusions_title">Mostra els edificis en 3D</string>

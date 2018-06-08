@@ -16,7 +16,7 @@
     <string name="activity_styles_add_wms_source_description">Afegiu una capa WMS externa al mapa</string>
     <string name="activity_styles_zoom_dependent_fill_color_description">Feu que una propietat depengui del nivell de zoom del mapa, en aquest cas el color de reomplert de la capa aigua.</string>
     <string name="activity_dds_create_hotspots_points_description">Feu servir l\'SDK Android de Mapbox per visualitzar dades puntuals com mapes de calor.</string>
-    <string name="activity_styles_create_data_cluster_description">Feu servir GeoJSON per visualitzar dades puntuals com agregacions.</string>
+    <string name="activity_styles_dds_geojson_clusters_description">Feu servir GeoJSON per visualitzar dades puntuals com agregacions.</string>
     <string name="activity_styles_line_layer_description">Crear línia amb GeoJSON,  canvia\'n l\'estil emprant les propietats, i afegir la capa al mapa.</string>
     <string name="activity_styles_basic_symbol_layer_description">Mostra marcadors al mapa afegint una capa de de símbols. Consulta el mapa i anima la mida de les icones quan s\'hi faci clic.</string>
     <string name="activity_extrusions_basic_extrusions_description">Utilitza les extrusions per mostrar l\'alçada dels edificis en 3D</string>
