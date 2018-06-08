@@ -18,7 +18,7 @@
     <string name="activity_styles_add_wms_source_title">Thêm nguồn WMS</string>
     <string name="activity_styles_zoom_dependent_fill_color_title">Màu sắc tùy mức thu phóng</string>
     <string name="activity_dds_create_hotspots_points_title">Tạo bản đồ nhiệt từ các điểm</string>
-    <string name="activity_styles_data_clusters_title">Tạo và định kiểu các cụm dữ liệu</string>
+    <string name="activity_styles_dds_geojson_clusters_title">Tạo và định kiểu các cụm dữ liệu</string>
     <string name="activity_styles_line_layer_title">Tạo lớp đường kẻ</string>
     <string name="activity_styles_basic_symbol_layer_title">Lớp dấu ghim</string>
     <string name="activity_styles_local_style_or_raster_source_title">Kiểu địa phương hoặc kiểu raster tùy biến</string>
