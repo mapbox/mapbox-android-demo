@@ -81,5 +81,6 @@
     <string name="activity_lab_los_angeles_tourism_title">Los Angeles for tourists</string>
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
     <string name="activity_labs_inset_map_title">Inset map</string>
+    <string name="activity_labs_pickup_dropoff_station_title">Pickup dropoff station</string>
     <string name="activity_labs_gif_on_map_title">Animated image source (GIF)</string>
 </resources>
