@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.labs;
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +17,6 @@ import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -117,7 +115,7 @@ public class PickupStationActivity extends AppCompatActivity
     // This is done by using an image view with the default marker found in the SDK. You can
     // swap out for your own marker image, just make sure it matches up with the dropped marker.
     ImageView targetMarker = new ImageView(this);
-    targetMarker.setImageResource(R.drawable.red_marker);
+    targetMarker.setImageResource(R.drawable.green_station_picker_pin);
 
     // TODO: Get current FrameLayout instead of creating a new one?
     FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
