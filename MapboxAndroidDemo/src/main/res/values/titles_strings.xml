@@ -18,7 +18,7 @@
     <string name="activity_styles_add_wms_source_title">Add a WMS source</string>
     <string name="activity_styles_zoom_dependent_fill_color_title">Color dependent on zoom level</string>
     <string name="activity_dds_create_hotspots_points_title">Create hotspots from points</string>
-    <string name="activity_styles_data_clusters_title">Create and style data clusters</string>
+    <string name="activity_styles_dds_geojson_clusters_title">Create and style data clusters</string>
     <string name="activity_styles_line_layer_title">Create a line layer</string>
     <string name="activity_styles_basic_symbol_layer_title">Marker symbol layer</string>
     <string name="activity_styles_local_style_or_raster_source_title">Local style or custom raster style</string>
@@ -39,6 +39,7 @@
     <string name="activity_dds_multiple_geometries_title">Draw multiple geometries</string>
     <string name="activity_dds_heatmap_title">Show heatmap data</string>
     <string name="activity_dds_multiple_heatmap_styling_title">Styling heatmaps</string>
+    <string name="activity_lab_space_station_location_title">Space station current location</string>
     <string name="activity_dds_bathymetry_title">Display water depth</string>
     <string name="activity_annotation_marker_title">Draw a marker</string>
     <string name="activity_annotation_custom_marker_title">Draw a custom marker icon</string>
@@ -81,5 +82,4 @@
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
     <string name="activity_labs_inset_map_title">Inset map</string>
     <string name="activity_labs_gif_on_map_title">Animated image source (GIF)</string>
-
 </resources>
