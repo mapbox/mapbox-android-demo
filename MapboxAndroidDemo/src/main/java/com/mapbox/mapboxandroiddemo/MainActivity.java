@@ -580,12 +580,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_java_services_matrix_url));
 
         exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_java_services_maxtrix_api_title,
-          R.string.activity_java_services_matrix_api_description,
-          new Intent(MainActivity.this, MatrixApiActivity.class),
-          R.string.activity_java_services_matrix_url));
-
-        exampleItemModels.add(new ExampleItemModel(
           R.string.activity_java_services_geocoding_title,
           R.string.activity_java_services_geocoding_description,
           new Intent(MainActivity.this, GeocodingActivity.class),
