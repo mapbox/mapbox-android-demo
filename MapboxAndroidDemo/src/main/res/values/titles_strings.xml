@@ -57,6 +57,7 @@
     <string name="activity_offline_manager_title">Offline manager</string>
     <string name="activity_query_feature_title">Query a map feature</string>
     <string name="activity_query_select_building_title">Select a building</string>
+    <string name="activity_query_redo_search_in_area_title">Redo search</string>
     <string name="activity_query_feature_count_title">Feature count</string>
     <string name="activity_query_click_on_layer_title">Click on single layer</string>
     <string name="activity_java_services_directions_title">Show directions on map</string>
