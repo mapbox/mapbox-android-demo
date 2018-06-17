@@ -746,7 +746,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         FeatureCollection featureCollection = params[0];
 
         for (Feature feature : featureCollection.features()) {
-          View view = inflater.inflate(R.layout.layout_callout, null);
+          View view = inflater.inflate(R.layout.mapillary_layout_callout, null);
 
           String name = feature.getStringProperty(PROPERTY_TITLE);
           TextView titleTv = (TextView) view.findViewById(R.id.title);

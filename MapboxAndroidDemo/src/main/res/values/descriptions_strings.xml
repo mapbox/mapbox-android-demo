@@ -41,6 +41,7 @@
     <string name="activity_dds_time_lapse_rainfall_points_description">Use data-driven styling to visualize point data with a time lapse effect; rainfall in China in this example.</string>
     <string name="activity_dds_multiple_geometries_description">Filter and draw multiple geometries from a single GeoJSON file.</string>
     <string name="activity_dds_bathymetry_description">Use data-driven styling to show bathymetry (water depth) data</string>
+    <string name="activity_dds_info_window_symbol_layer_description">Use SymbolLayer and icons to show data in a BubbleLayout "info window".</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Maps SDK.</string>
     <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Maps SDK.</string>
@@ -84,5 +85,4 @@
     <string name="activity_lab_symbol_layer_and_mapillary_on_map_description">Add markers via SymbolLayer and manipulate the data in real time. A Mapillary integration is also showcased in this example.</string>
     <string name="activity_labs_inset_map_description">Show a smaller inset map fragment and link it to a larger map for two map interaction. Great for gaming!</string>
     <string name="activity_labs_gif_on_map_description">Show an animated image (GIF) anywhere on the map</string>
-
 </resources>
