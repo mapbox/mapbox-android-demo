@@ -42,6 +42,7 @@
     <string name="activity_dds_time_lapse_rainfall_url" translatable="false">https://i.imgur.com/nWzW6mU.jpg</string>
     <string name="activity_dds_multiple_geometries_url" translatable="false">https://i.imgur.com/NvayvUd.png</string>
     <string name="activity_dds_bathymetry_url" translatable="false">https://i.imgur.com/mwhOcIR.png</string>
+    <string name="activity_dds_info_window_symbol_layer_url" translatable="false">https://i.imgur.com/qYoqgDk.png</string>
     <string name="activity_annotation_marker_url" translatable="false">http://i.imgur.com/X59UoaY.png</string>
     <string name="activity_annotation_custom_marker_url" translatable="false">http://i.imgur.com/BIHtPwJ.png</string>
     <string name="activity_annotation_geojson_line_url" translatable="false">http://i.imgur.com/rIFjsrH.png</string>
