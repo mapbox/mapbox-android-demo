@@ -71,6 +71,9 @@
     <string name="directions_activity_marker_options_destination_snippet">Plaza del Triunfo</string>
     <string name="directions_activity_toast_message">Route is %1$f meters long.</string>
 
+    <!--Marker strings for DirectionsActivity activity-->
+    <string name="snaking_directions_activity_error">Direction route retrieval failed</string>
+
     <!--Strings for OfflineManager activity-->
     <string name="dialog_title">Name new region</string>
     <string name="dialog_message">Downloads the map region you currently are viewing</string>
