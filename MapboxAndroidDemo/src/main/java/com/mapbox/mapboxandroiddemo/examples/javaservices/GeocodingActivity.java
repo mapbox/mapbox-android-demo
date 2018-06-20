@@ -110,15 +110,15 @@ public class GeocodingActivity extends AppCompatActivity implements OnMapReadyCa
     mapCenterButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        // Get the map target's coordinates
-        Double targetLat = mapboxMap.getCameraPosition().target.getLatitude();
-        Double targetLong = mapboxMap.getCameraPosition().target.getLongitude();
+        // Get the map's target
+        LatLng target = mapboxMap.getCameraPosition().target;
 
         // Fill the coordinate EditTexts with the target's coordinates
-        setCoordinateEditTexts(mapboxMap.getCameraPosition().target);
+        setCoordinateEditTexts(target);
 
         // Make a geocoding search with the target's coordinates
-        makeGeocodeSearch(new LatLng(targetLat, targetLong));
+        makeGeocodeSearch(target);
+
       }
     });
   }
