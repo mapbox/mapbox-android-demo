@@ -57,12 +57,12 @@ jobs:
           name: Run Firebase instrumentation tests
           command: |
             #!/bin/bash
-            gcloud firebase test android run --type instrumentation \
             ./gradlew :MapboxAndroidDemo:assembleGpservicesDebug --continue
             ./gradlew :MapboxAndroidDemo:assembleAndroidTest --continue
+            gcloud firebase test android run --type instrumentation
             --app MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk
             --test MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-androidTest.apk
-            --device-ids shamu --os-version-ids 22 --locales en --orientations portrait --timeout 5m
+            --device-ids sailfish --os-version-ids 22 --locales en --orientations portrait --timeout 5m
       - store_artifacts:
           path: MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk
 # ------------------------------------------------------------------------------
