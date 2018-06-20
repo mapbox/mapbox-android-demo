@@ -215,8 +215,8 @@
     <string name="arabic">Arabic</string>
     <string name="change_device_language_instruction">Change the device\'s language to German and then tap this button. Already in German? Try French</string>
     <string name="try_different_language_instruction">Try setting your phone to a different language. German or French perhaps?</string>
-    <string name="vacation_description">Uh-oh! You\'re lost in NYC. Tap the buttons below to
-        switch the map\'s language so that you can ask for help with directions.</string>
+    <string name="instruction_description">Tap the buttons below to
+        switch the map\'s language.</string>
 
     <!-- Matrix API -->
     <string name="call_error">Oh no! The call to the Directions Matrix API failed!</string>
