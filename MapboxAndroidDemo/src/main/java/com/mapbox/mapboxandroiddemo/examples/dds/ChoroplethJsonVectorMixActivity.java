@@ -100,7 +100,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     FillLayer statesJoinLayer = new FillLayer("states-join", VECTOR_SOURCE_NAME);
     statesJoinLayer.setSourceLayer(VECTOR_SOURCE_NAME);
     statesJoinLayer.withProperties(
-      fillColor(match(toNumber(get(VECTOR_MATCH_PROP)), rgba(0, 0, 0, 1), stops))
+      fillColor(match(toNumber(get(DATA_MATCH_PROP)), rgba(0, 0, 0, 1), stops))
     );
 
     // Add layer to map below the "waterway-label" layer
