@@ -223,7 +223,20 @@
     <string name="miles_distance">%1$s miles</string>
     <string name="click_on_marker_instruction_toast">Click on a bolt marker to get started</string>
 
+    <!-- Geocoding -->
+    <string name="latitude">latitude</string>
+    <string name="longitude">longitude</string>
+    <string name="geocode">Start geocode</string>
+    <string name="map_center">Map center</string>
+    <string name="no_results">No results!</string>
+    <string name="choose_city_spinner">Choose city</string>
+    <string name="fill_in_a_value">Fill in a value</string>
+    <string name="geocoding_results">Raw geocoding results:</string>
+    <string name="make_valid_lat">Latitude must be between -90 and 90.
+    Longitude must be between -180 and 180.</string>
+
     <!-- Infowindow SymbolLayer -->
     <string name="capital">Capital: %1$s</string>
     <string name="tap_on_marker_instruction">Tap on a marker</string>
+
 </resources>

@@ -60,6 +60,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivit
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.MapMatchingActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.MatrixApiActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.OptimizationActivity;
@@ -366,13 +367,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_fade_switch_description,
           new Intent(MainActivity.this, StyleFadeSwitchActivity.class),
           R.string.activity_styles_fade_switch_url, false, BuildConfig.MIN_SDK_VERSION));
-
-        exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_styles_fade_switch_title,
-          R.string.activity_styles_fade_switch_description,
-          new Intent(MainActivity.this, StyleFadeSwitchActivity.class),
-          R.string.activity_styles_fade_switch_url, false, BuildConfig.MIN_SDK_VERSION
-        ));
         currentCategory = R.id.nav_styles;
         break;
       case R.id.nav_extrusions:
@@ -584,6 +578,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_java_services_matrix_api_description,
           new Intent(MainActivity.this, MatrixApiActivity.class),
           R.string.activity_java_services_matrix_url));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_java_services_geocoding_title,
+          R.string.activity_java_services_geocoding_description,
+          new Intent(MainActivity.this, GeocodingActivity.class),
+          R.string.activity_java_services_geocoding_url));
+
         currentCategory = R.id.nav_java_services;
         break;
       case R.id.nav_snapshot_image_generator:
@@ -737,8 +738,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_info_window_symbol_layer_title,
           R.string.activity_dds_info_window_symbol_layer_description,
           new Intent(MainActivity.this, InfoWindowSymbolLayerActivity.class),
-          R.string.activity_dds_info_window_symbol_layer_url, true, BuildConfig.MIN_SDK_VERSION
-        ));
+          R.string.activity_dds_info_window_symbol_layer_url, true, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_dds;
         break;
