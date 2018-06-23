@@ -29,6 +29,8 @@ android {
         buildConfigField "int", "MIN_SDK_VERSION", "$minSdkVersion.apiLevel"
 
         playAccountConfig = playAccountConfigs.defaultAccountConfig
+
+        multiDexEnabled true
     }
 
     flavorDimensions "default"
