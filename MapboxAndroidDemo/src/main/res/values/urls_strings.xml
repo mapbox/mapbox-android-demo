@@ -92,5 +92,5 @@
     <string name="activity_labs_inset_map_url" translatable="false">https://i.imgur.com/jp4wc24.png</string>
     <string name="activity_labs_gif_on_map_url" translatable="false">https://i.imgur.com/3d810QI.png</string>
     <string name="activity_labs_snaking_directions_route_url" translatable="false">https://i.imgur.com/6jWEFJi.png</string>
-
+    <string name="activity_dashed_line_directions_picker_url" translatable="false">https://i.imgur.com/0tnlGR6.png</string>
 </resources>
