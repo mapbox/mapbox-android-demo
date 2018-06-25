@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -12,11 +11,11 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
-import static com.mapbox.mapboxsdk.style.expressions.Expression.color;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.rgb;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.zoom;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
@@ -63,12 +62,12 @@ public class StyleCirclesCategoricallyActivity extends AppCompatActivity {
               stop(22, 180f)
             )),
           circleColor(
-            match(get("ethnicity"), color(Color.parseColor("#000000")),
-              stop("white", color(Color.parseColor("#fbb03b"))),
-              stop("Black", color(Color.parseColor("#223b53"))),
-              stop("Hispanic", color(Color.parseColor("#e55e5e"))),
-              stop("Asian", color(Color.parseColor("#3bb2d0"))),
-              stop("Other", color(Color.parseColor("#cccccc"))))));
+            match(get("ethnicity"), rgb(0, 0, 0),
+              stop("white", rgb(251, 176, 59)),
+              stop("Black", rgb(34, 59, 83)),
+              stop("Hispanic", rgb(229, 94, 94)),
+              stop("Asian", rgb(59, 178, 208)),
+              stop("Other", rgb(204, 204, 204)))));
 
         mapboxMap.addLayer(circleLayer);
       }

@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -14,6 +13,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 
+import static com.mapbox.mapboxsdk.style.expressions.Expression.rgb;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.zoom;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
@@ -51,10 +51,10 @@ public class ZoomDependentFillColorActivity extends AppCompatActivity {
         //Set a zoom function to update the color of the water
         layer.setProperties(
           fillColor(Expression.interpolate(Expression.exponential(1f), zoom(),
-            stop(1f, Expression.color(Color.GREEN)),
-            stop(8.5f, Expression.color(Color.BLUE)),
-            stop(10f, Expression.color(Color.RED)),
-            stop(18f, Expression.color(Color.YELLOW)))));
+            stop(1f, rgb(0,209,22)),
+            stop(8.5f, rgb(10,88,255)),
+            stop(10f, rgb(255,10,10)),
+            stop(18f, rgb(251,255,0)))));
 
         mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(40.73581, -73.99155), 12), 12000);
 

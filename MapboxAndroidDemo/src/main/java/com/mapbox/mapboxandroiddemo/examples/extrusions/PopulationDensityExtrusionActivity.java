@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,13 +19,13 @@ import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.color;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.gt;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.lt;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.rgb;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
@@ -73,9 +72,9 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     fillsLayer.setFilter(all(lt(get("pkm2"), literal(300000))));
     fillsLayer.withProperties(
       fillColor(interpolate(exponential(1f), get("pkm2"),
-        stop(0, color(Color.parseColor("#160e23"))),
-        stop(14500, color(Color.parseColor("#00617f"))),
-        stop(145000, color(Color.parseColor("#55e9ff"))))));
+        stop(0, rgb(22, 14, 35)),
+        stop(14500, rgb(0, 97, 127)),
+        stop(145000, rgb(85, 223, 255)))));
     mapboxMap.addLayerBelow(fillsLayer, "water");
   }
 
@@ -85,9 +84,9 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     fillExtrusionLayer.setFilter(all(gt(get("p"), 1), lt(get("pkm2"), 300000)));
     fillExtrusionLayer.withProperties(
       fillExtrusionColor(interpolate(exponential(1f), get("pkm2"),
-        stop(0, color(Color.parseColor("#160e23"))),
-        stop(14500, color(Color.parseColor("#00617f"))),
-        stop(145000, color(Color.parseColor("#55e9ff"))))),
+        stop(0, rgb(22, 14, 35)),
+        stop(14500, rgb(0, 97, 127)),
+        stop(145000, rgb(85, 233, 255)))),
       fillExtrusionBase(0f),
       fillExtrusionHeight(interpolate(exponential(1f), get("pkm2"),
         stop(0, 0f),
