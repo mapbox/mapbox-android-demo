@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,9 +16,9 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.InputStream;
 
-import static com.mapbox.mapboxsdk.style.expressions.Expression.color;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.rgb;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 
 /**
@@ -57,9 +56,9 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
 
         LineLayer linesLayer = new LineLayer("finalLines", "lines").withProperties(
           PropertyFactory.lineColor(
-            match(get("color"), color(Color.parseColor("#000000")),
-              stop("red", color(Color.parseColor("#F7455D"))),
-              stop("blue", color(Color.parseColor("#33C9EB"))))),
+            match(get("color"), rgb(0, 0, 0),
+              stop("red", rgb(247, 69, 93)),
+              stop("blue", rgb(51, 201, 235)))),
           PropertyFactory.visibility(Property.VISIBLE),
           PropertyFactory.lineWidth(3f)
         );

@@ -19,13 +19,13 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.InputStream;
 
-import static com.mapbox.mapboxsdk.style.expressions.Expression.color;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.geometryType;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.linear;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.rgb;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
@@ -91,10 +91,10 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
     depthPolygonFillLayer.withProperties(
       fillColor(interpolate(linear(),
         get("depth"),
-        stop(5, color(Color.parseColor("#109ED2"))),
-        stop(10, color(Color.parseColor("#257491"))),
-        stop(15, color(Color.parseColor("#45667C"))),
-        stop(30, color(Color.parseColor("#1F3443"))))),
+        stop(5, rgb(16, 158, 210)),
+        stop(10, rgb(37, 116, 145)),
+        stop(15, rgb(69, 102, 124)),
+        stop(30, rgb(31, 52, 67)))),
       fillOpacity(.7f));
     // Only display Polygon Features in this layer
     depthPolygonFillLayer.setFilter(eq(geometryType(), literal("Polygon")));
