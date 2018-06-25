@@ -1,5 +1,4 @@
-This update is in line with the 6.1.3 release of the Mapbox Maps SDK for Android. Changes include:
-
-    • An example showing how to fade from one map style to another
-    • Plugin updates
-    • Small bugfixes
+This update is in line with the 6.2.0 release of the Mapbox Maps SDK for Android. Changes include:
+•New example of showing an info window with a SymbolLayer
+•New example of water depth (bathymetry) data visualization
+•New geocoding example
