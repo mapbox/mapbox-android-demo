@@ -76,6 +76,7 @@ import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
+import com.mapbox.mapboxandroiddemo.examples.query.RedoSearchInAreaActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
 import com.mapbox.mapboxandroiddemo.examples.snapshot.SnapshotNotificationActivity;
 import com.mapbox.mapboxandroiddemo.examples.snapshot.SnapshotShareActivity;
@@ -540,6 +541,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, ClickOnLayerActivity.class),
           R.string.activity_query_click_on_layer_url, false, BuildConfig.MIN_SDK_VERSION));
 
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_query_redo_search_in_area_title,
+          R.string.activity_query_redo_search_in_area_description,
+          new Intent(MainActivity.this, RedoSearchInAreaActivity.class),
+          R.string.activity_query_redo_search_in_area_url, true, BuildConfig.MIN_SDK_VERSION));
         currentCategory = R.id.nav_query_map;
         break;
       case R.id.nav_java_services:
@@ -747,6 +753,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_info_window_symbol_layer_description,
           new Intent(MainActivity.this, InfoWindowSymbolLayerActivity.class),
           R.string.activity_dds_info_window_symbol_layer_url, true, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_dds_time_lapse_rainfall_points_title,
+          R.string.activity_dds_time_lapse_rainfall_points_description,
+          new Intent(MainActivity.this, AddRainFallStyleActivity.class),
+          R.string.activity_dds_time_lapse_rainfall_url, false, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_dds_multiple_geometries_title,
+          R.string.activity_dds_multiple_geometries_description,
+          new Intent(MainActivity.this, MultipleGeometriesActivity.class),
+          R.string.activity_dds_multiple_geometries_url, false, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_dds;
         break;

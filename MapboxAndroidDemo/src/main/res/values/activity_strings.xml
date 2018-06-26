@@ -242,4 +242,9 @@
     <string name="capital">Capital: %1$s</string>
     <string name="tap_on_marker_instruction">Tap on a marker</string>
 
+    <!-- Redo search -->
+    <string name="redo_search_button">Search in this area</string>
+    <string name="layer_not_found">The %1$s layer isn\'t part of this map style, so data might not appear</string>
+    <string name="move_the_map_and_research">Move the map and search again</string>
+
 </resources>
