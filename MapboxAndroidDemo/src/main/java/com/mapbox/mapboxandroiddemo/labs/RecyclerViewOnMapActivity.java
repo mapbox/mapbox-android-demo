@@ -100,7 +100,8 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
 
   private void initRecyclerView() {
     RecyclerView recyclerView = findViewById(R.id.rv_on_top_of_map);
-    LocationRecyclerViewAdapter locationAdapter = new LocationRecyclerViewAdapter(createRecyclerViewLocations(), mapboxMap);
+    LocationRecyclerViewAdapter locationAdapter =
+      new LocationRecyclerViewAdapter(createRecyclerViewLocations(), mapboxMap);
     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
       LinearLayoutManager.HORIZONTAL, true));
     recyclerView.setItemAnimator(new DefaultItemAnimator());
