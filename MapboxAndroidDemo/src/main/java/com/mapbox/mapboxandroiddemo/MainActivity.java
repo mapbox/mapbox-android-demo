@@ -46,8 +46,8 @@ import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.BathymetryActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.InfoWindowSymbolLayerActivity;
@@ -112,6 +112,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.StyleFadeSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
+import com.mapbox.mapboxandroiddemo.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 import com.mapbox.mapboxandroiddemo.utils.SettingsDialogView;
@@ -442,10 +443,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         );
 
         exampleItemModels.add(new ExampleItemModel(
-            R.string.activity_plugins_place_picker_plugin_title,
-            R.string.activity_plugins_place_picker_plugin_description,
-            new Intent(MainActivity.this, PlaceSelectionPluginActivity.class),
-            R.string.activity_plugins_place_picker_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
+          R.string.activity_plugins_place_picker_plugin_title,
+          R.string.activity_plugins_place_picker_plugin_description,
+          new Intent(MainActivity.this, PlaceSelectionPluginActivity.class),
+          R.string.activity_plugins_place_picker_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
         );
         currentCategory = R.id.nav_plugins;
         break;
@@ -689,20 +690,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, AnimatedImageGifActivity.class),
           R.string.activity_labs_gif_on_map_url, false, BuildConfig.MIN_SDK_VERSION
         ));
-
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_labs_snaking_directions_route_title,
           R.string.activity_labs_snaking_directions_route_description,
           new Intent(MainActivity.this, SnakingDirectionsRouteActivity.class),
           R.string.activity_labs_snaking_directions_route_url, false, BuildConfig.MIN_SDK_VERSION
         ));
-
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dashed_line_directions_picker_title,
           R.string.activity_dashed_line_directions_picker_description,
           new Intent(MainActivity.this, DashedLineDirectionsPickerActivity.class),
-          R.string.activity_dashed_line_directions_picker_url, false, BuildConfig.MIN_SDK_VERSION
-        ));
+          R.string.activity_dashed_line_directions_picker_url, false, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_lab_calendar_integration_title,
+          R.string.activity_lab_calendar_integration_description,
+          new Intent(MainActivity.this, CalendarIntegrationActivity.class),
+          R.string.activity_lab_calendar_integration_url, false, BuildConfig.MIN_SDK_VERSION));
         currentCategory = R.id.nav_lab;
         break;
       case R.id.nav_dds:
