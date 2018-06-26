@@ -104,6 +104,7 @@ import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
+import com.mapbox.mapboxandroiddemo.labs.SnakingDirectionsRouteActivity;
 import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
@@ -663,6 +664,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_labs_gif_on_map_description,
           new Intent(MainActivity.this, AnimatedImageGifActivity.class),
           R.string.activity_labs_gif_on_map_url, false, BuildConfig.MIN_SDK_VERSION
+        ));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_labs_snaking_directions_route_title,
+          R.string.activity_labs_snaking_directions_route_description,
+          new Intent(MainActivity.this, SnakingDirectionsRouteActivity.class),
+          R.string.activity_labs_snaking_directions_route_url, true, BuildConfig.MIN_SDK_VERSION
         ));
         currentCategory = R.id.nav_lab;
         break;
