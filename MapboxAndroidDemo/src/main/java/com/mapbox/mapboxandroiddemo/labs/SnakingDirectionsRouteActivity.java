@@ -56,10 +56,7 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
   private static final String TAG = "SnakingRouteActivity";
   private MapView mapView;
   private MapboxMap map;
-  private DirectionsRoute currentRoute;
   private MapboxDirections client;
-  private List<Feature> drivingRoutePolyLineFeatureList;
-  private FeatureCollection drivingRouteFeatureCollection;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -101,9 +98,8 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
   }
 
   private void initDrivingRouteSourceAndLayer() {
-    drivingRouteFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     GeoJsonSource drivingRouteGeoJsonSource = new GeoJsonSource(DRIVING_ROUTE_POLYLINE_SOURCE_ID,
-      drivingRouteFeatureCollection);
+      FeatureCollection.fromFeatures(new Feature[] {}));
     map.addSource(drivingRouteGeoJsonSource);
     LineLayer drivingRouteLineLayer = new LineLayer(DRIVING_ROUTE_POLYLINE_LINE_LAYER_ID,
       DRIVING_ROUTE_POLYLINE_SOURCE_ID)
@@ -119,7 +115,8 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
 
   /**
    * Build the Mapbox Directions API request
-   * @param origin The starting point for the directions route
+   *
+   * @param origin      The starting point for the directions route
    * @param destination The final point for the directions route
    */
   private void getDirectionsRoute(Point origin, Point destination) {
@@ -148,7 +145,7 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
         }
 
         // Get the route from the Mapbox Directions API
-        currentRoute = response.body().routes().get(0);
+        DirectionsRoute currentRoute = response.body().routes().get(0);
         List<Point> directionsPointsForLineLayer = new ArrayList<>();
         for (int i = 0; i < currentRoute.legs().size(); i++) {
           RouteLeg leg = currentRoute.legs().get(i);
@@ -159,20 +156,17 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
             for (int k = 0; k < intersections.size(); k++) {
               Point location = intersections.get(k).location();
               directionsPointsForLineLayer.add(Point.fromLngLat(location.longitude(), location.latitude()));
-              drivingRoutePolyLineFeatureList = new ArrayList<>();
+              List<Feature> drivingRoutePolyLineFeatureList = new ArrayList<>();
               LineString lineString = LineString.fromLngLats(directionsPointsForLineLayer);
               List<Point> coordinates = lineString.coordinates();
               for (int x = 0; x < coordinates.size(); x++) {
                 drivingRoutePolyLineFeatureList.add(Feature.fromGeometry(LineString.fromLngLats(coordinates)));
               }
 
-              // set drivingRouteFeatureCollection to a new list of Features
-              drivingRouteFeatureCollection = FeatureCollection.fromFeatures(drivingRoutePolyLineFeatureList);
-
               // Update the GeoJSON source
               GeoJsonSource source = map.getSourceAs(DRIVING_ROUTE_POLYLINE_SOURCE_ID);
               if (source != null) {
-                source.setGeoJson(drivingRouteFeatureCollection);
+                source.setGeoJson(FeatureCollection.fromFeatures(drivingRoutePolyLineFeatureList));
               }
             }
           }
