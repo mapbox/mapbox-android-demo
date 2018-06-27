@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.labs;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -14,29 +16,40 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 
 /**
  * Use a recyclerview with a Mapbox map to easily explore content all on one screen
  */
-public class RecyclerViewOnMapActivity extends AppCompatActivity {
+public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-  private MapView mapView;
+  private static final String SYMBOL_ICON_ID = "SYMBOL_ICON_ID";
+  private static final String SOURCE_ID = "SOURCE_ID";
+  private static final String LAYER_ID = "LAYER_ID";
   public MapboxMap mapboxMap;
-  private RecyclerView recyclerView;
-  private LocationRecyclerViewAdapter locationAdapter;
-  private ArrayList<SingleRecyclerViewLocation> locationList;
+  private MapView mapView;
+  private FeatureCollection featureCollection;
+
+  private LatLng[] coordinates;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -49,30 +62,79 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_lab_recycler_view_on_map);
 
-    recyclerView = (RecyclerView) findViewById(R.id.rv_on_top_of_map);
-
-    Toast.makeText(this, R.string.toast_instruction, Toast.LENGTH_SHORT).show();
+    coordinates = new LatLng[] {
+      new LatLng(-34.6054099, -58.363654800000006),
+      new LatLng(-34.6041508, -58.38555650000001),
+      new LatLng(-34.6114412, -58.37808899999999),
+      new LatLng(-34.6097604, -58.382064000000014),
+      new LatLng(-34.596636, -58.373077999999964),
+      new LatLng(-34.590548, -58.38256609999996),
+      new LatLng(-34.5982127, -58.38110440000003)
+    };
 
     // Initialize the map view
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-        RecyclerViewOnMapActivity.this.mapboxMap = mapboxMap;
+    mapView.getMapAsync(this);
+  }
 
-        setUpLists();
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    RecyclerViewOnMapActivity.this.mapboxMap = mapboxMap;
+    initFeatureCollection();
+    initMarkerIcons();
+    initRecyclerView();
+    Toast.makeText(this, R.string.toast_instruction, Toast.LENGTH_SHORT).show();
+  }
 
-        // Set up the recyclerView
-        locationAdapter = new LocationRecyclerViewAdapter(locationList, mapboxMap);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
-            LinearLayoutManager.HORIZONTAL, true));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(locationAdapter);
-        SnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(recyclerView);
+  private void initFeatureCollection() {
+    featureCollection = FeatureCollection.fromFeatures(new Feature[] {});
+    List<Feature> featureList = new ArrayList<>();
+    if (featureCollection != null) {
+      for (LatLng latLng : coordinates) {
+        featureList.add(Feature.fromGeometry(Point.fromLngLat(latLng.getLongitude(), latLng.getLatitude())));
       }
-    });
+      featureCollection = FeatureCollection.fromFeatures(featureList);
+    }
+  }
+
+  private void initRecyclerView() {
+    RecyclerView recyclerView = findViewById(R.id.rv_on_top_of_map);
+    LocationRecyclerViewAdapter locationAdapter =
+      new LocationRecyclerViewAdapter(createRecyclerViewLocations(), mapboxMap);
+    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
+      LinearLayoutManager.HORIZONTAL, true));
+    recyclerView.setItemAnimator(new DefaultItemAnimator());
+    recyclerView.setAdapter(locationAdapter);
+    SnapHelper snapHelper = new LinearSnapHelper();
+    snapHelper.attachToRecyclerView(recyclerView);
+  }
+
+  private void initMarkerIcons() {
+    Bitmap icon = BitmapFactory.decodeResource(
+      this.getResources(), R.drawable.red_marker);
+    mapboxMap.addImage(SYMBOL_ICON_ID, icon);
+    GeoJsonSource geoJsonSource = new GeoJsonSource(SOURCE_ID, featureCollection);
+    mapboxMap.addSource(geoJsonSource);
+    SymbolLayer symbolLayer = new SymbolLayer(LAYER_ID, SOURCE_ID);
+    symbolLayer.withProperties(
+      iconImage(SYMBOL_ICON_ID),
+      iconAllowOverlap(true)
+    );
+    mapboxMap.addLayer(symbolLayer);
+  }
+
+  private List<SingleRecyclerViewLocation> createRecyclerViewLocations() {
+    ArrayList<SingleRecyclerViewLocation> locationList = new ArrayList<>();
+    for (int x = 0; x < coordinates.length; x++) {
+      SingleRecyclerViewLocation singleLocation = new SingleRecyclerViewLocation();
+      singleLocation.setName(String.format(getString(R.string.rv_card_name), x));
+      singleLocation.setBedInfo(String.format(getString(R.string.rv_card_bed_info),
+        new Random().nextInt(coordinates.length)));
+      singleLocation.setLocationCoordinates(coordinates[x]);
+      locationList.add(singleLocation);
+    }
+    return locationList;
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
@@ -118,35 +180,6 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  private ArrayList<SingleRecyclerViewLocation> setUpLists() {
-
-    // Set up markers on the map and the location list to feed to the recyclerview
-
-    locationList = new ArrayList<>();
-
-    LatLng[] coordinates = new LatLng[]{
-      new LatLng(-34.6054099, -58.363654800000006),
-      new LatLng(-34.6041508, -58.38555650000001), new LatLng(-34.6114412, -58.37808899999999),
-      new LatLng(-34.6097604, -58.382064000000014), new LatLng(-34.596636, -58.373077999999964),
-      new LatLng(-34.590548, -58.38256609999996),
-      new LatLng(-34.5982127, -58.38110440000003)
-    };
-
-    for (int x = 0; x < 7; x++) {
-      SingleRecyclerViewLocation singleLocation = new SingleRecyclerViewLocation();
-      singleLocation.setName(String.format(getString(R.string.rv_card_name), x));
-      singleLocation.setBedInfo(String.format(getString(R.string.rv_card_bed_info), x));
-      singleLocation.setLocationCoordinates(coordinates[x]);
-      locationList.add(singleLocation);
-
-      mapboxMap.addMarker(new MarkerOptions()
-          .position(coordinates[x])
-          .title(String.format(getString(R.string.rv_card_name), x))
-          .snippet(String.format(getString(R.string.rv_card_bed_info), x)));
-    }
-    return locationList;
-  }
-
   /**
    * POJO model class for a single location in the recyclerview
    */
@@ -182,7 +215,7 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
   }
 
   static class LocationRecyclerViewAdapter extends
-      RecyclerView.Adapter<LocationRecyclerViewAdapter.MyViewHolder> {
+    RecyclerView.Adapter<LocationRecyclerViewAdapter.MyViewHolder> {
 
     private List<SingleRecyclerViewLocation> locationList;
     private MapboxMap map;
@@ -195,7 +228,7 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
       View itemView = LayoutInflater.from(parent.getContext())
-          .inflate(R.layout.rv_on_top_of_map_card, parent, false);
+        .inflate(R.layout.rv_on_top_of_map_card, parent, false);
       return new MyViewHolder(itemView);
     }
 
@@ -209,14 +242,8 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
         public void onClick(View view, int position) {
           LatLng selectedLocationLatLng = locationList.get(position).getLocationCoordinates();
           CameraPosition newCameraPosition = new CameraPosition.Builder()
-              .target(selectedLocationLatLng)
-              .build();
-
-          map.addMarker(new MarkerOptions()
-              .setPosition(selectedLocationLatLng)
-              .setTitle(locationList.get(position).getName()))
-              .setSnippet(locationList.get(position).getBedInfo());
-
+            .target(selectedLocationLatLng)
+            .build();
           map.easeCamera(CameraUpdateFactory.newCameraPosition(newCameraPosition));
         }
       });
@@ -235,9 +262,9 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity {
 
       MyViewHolder(View view) {
         super(view);
-        name = (TextView) view.findViewById(R.id.location_title_tv);
-        numOfBeds = (TextView) view.findViewById(R.id.location_num_of_beds_tv);
-        singleCard = (CardView) view.findViewById(R.id.single_location_cardview);
+        name = view.findViewById(R.id.location_title_tv);
+        numOfBeds = view.findViewById(R.id.location_num_of_beds_tv);
+        singleCard = view.findViewById(R.id.single_location_cardview);
         singleCard.setOnClickListener(this);
       }
 
