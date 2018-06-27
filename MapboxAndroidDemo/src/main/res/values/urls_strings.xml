@@ -69,7 +69,7 @@
     <string name="activity_java_services_geocoding_url" translatable="false">https://i.imgur.com/9xl3EF8.png</string>
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
-    <string name="activity_plugins_location_plugin_url" translatable="false">https://i.imgur.com/Opfwv6j.png</string>
+    <string name="activity_plugins_location_plugin_url" translatable="false">https://i.imgur.com/77PVsni.png</string>
     <string name="activity_plugins_places_plugin_url" translatable="false">https://i.imgur.com/oKHx3bv.png</string>
     <string name="activity_plugins_geojson_plugin_url" translatable="false">http://i.imgur.com/kju0sKw.jpg</string>
     <string name="activity_plugins_localization_plugin_url" translatable="false">https://i.imgur.com/tsOM1am.png</string>
