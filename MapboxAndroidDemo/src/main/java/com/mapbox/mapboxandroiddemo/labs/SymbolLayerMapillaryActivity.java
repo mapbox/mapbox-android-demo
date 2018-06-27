@@ -929,7 +929,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
             ),
             circleOpacity(0.6f)
           );
-          clusterLayer.setMaxZoom(14f);
+          clusterLayer.setMaxZoom(17f);
 
           // Add a filter to the cluster layer that hides the circles based on "point_count"
           clusterLayer.setFilter(
