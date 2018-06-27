@@ -252,15 +252,12 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    */
   private void setupLoadingLayer() {
     mapboxMap.addLayerBelow(new CircleLayer(LOADING_LAYER_ID, SOURCE_ID)
-        .withProperties(
-          circleRadius(interpolate(exponential(1), get(PROPERTY_LOADING_PROGRESS), getLoadingAnimationStops())),
-          circleColor(Color.GRAY),
-          circleOpacity(0.6f)
-        )
-        /*.withFilter(eq(PROPERTY_LOADING, true)),*/
-        .withFilter(eq((get(PROPERTY_LOADING)), literal(0))),
-      MAKI_LAYER_ID
-    );
+      .withProperties(
+        circleRadius(interpolate(exponential(1), get(PROPERTY_LOADING_PROGRESS), getLoadingAnimationStops())),
+        circleColor(Color.GRAY),
+        circleOpacity(0.6f)
+      )
+      .withFilter(eq(get(PROPERTY_LOADING), literal(true))), MAKI_LAYER_ID);
   }
 
   private Expression.Stop[] getLoadingAnimationStops() {
