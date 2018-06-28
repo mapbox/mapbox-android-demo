@@ -64,7 +64,7 @@
     <string name="activity_query_click_on_layer_url" translatable="false">https://i.imgur.com/z3aWAqM.png</string>
     <string name="activity_query_redo_search_in_area_url" translatable="false">https://i.imgur.com/42QIsQI.png</string>
     <string name="activity_java_services_directions_url" translatable="false">http://i.imgur.com/DhQltqB.jpg</string>
-    <string name="activity_java_services_static_image_url" translatable="false">http://i.imgur.com/COdES0F.png</string>
+    <string name="activity_java_services_static_image_url" translatable="false">https://i.imgur.com/aHxPYRU.png</string>
     <string name="activity_java_services_optimization_url" translatable="false">http://i.imgur.com/guEQtlP.jpg</string>
     <string name="activity_java_services_matrix_url" translatable="false">https://i.imgur.com/65RlfRZ.png</string>
     <string name="activity_java_services_geocoding_url" translatable="false">https://i.imgur.com/9xl3EF8.png</string>

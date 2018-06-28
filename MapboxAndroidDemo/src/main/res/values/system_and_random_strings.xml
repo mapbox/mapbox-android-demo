@@ -20,7 +20,7 @@
     <string name="description_labs">While other categories in this app present examples doing one specific thing, the lab category combines examples to show the power of the SDK.</string>
     <string name="description_java_services">Mapbox Java Services bundles many of the Mapbox APIs into a single SDK such as directions, geocoding, and many of the other utilities offered.</string>
     <string name="description_query">Examples here show how to query the map data to obtain information such as a features geometry or properties.</string>
-    <string name="description_offline">We have a new way to make client-side static maps. We call it the Map Snapshotter, click here for some examples.</string>
+    <string name="description_offline">Don\'t forget that client-side static maps can be made with the "snapshotter". Click here for some examples.</string>
 
     <!-- snapshotter -->
     <string name="loading_snapshot_image">Loading snapshot image</string>
