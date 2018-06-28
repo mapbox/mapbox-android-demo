@@ -252,15 +252,12 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    */
   private void setupLoadingLayer() {
     mapboxMap.addLayerBelow(new CircleLayer(LOADING_LAYER_ID, SOURCE_ID)
-        .withProperties(
-          circleRadius(interpolate(exponential(1), get(PROPERTY_LOADING_PROGRESS), getLoadingAnimationStops())),
-          circleColor(Color.GRAY),
-          circleOpacity(0.6f)
-        )
-        /*.withFilter(eq(PROPERTY_LOADING, true)),*/
-        .withFilter(eq((get(PROPERTY_LOADING)), literal(0))),
-      MAKI_LAYER_ID
-    );
+      .withProperties(
+        circleRadius(interpolate(exponential(1), get(PROPERTY_LOADING_PROGRESS), getLoadingAnimationStops())),
+        circleColor(Color.GRAY),
+        circleOpacity(0.6f)
+      )
+      .withFilter(eq(get(PROPERTY_LOADING), literal(true))), MAKI_LAYER_ID);
   }
 
   private Expression.Stop[] getLoadingAnimationStops() {
@@ -930,7 +927,10 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
                 stop(16, 20f)
               )
             ),
-            circleOpacity(0.6f));
+            circleOpacity(0.6f)
+          );
+          clusterLayer.setMaxZoom(17f);
+
           // Add a filter to the cluster layer that hides the circles based on "point_count"
           clusterLayer.setFilter(
             i == 0
