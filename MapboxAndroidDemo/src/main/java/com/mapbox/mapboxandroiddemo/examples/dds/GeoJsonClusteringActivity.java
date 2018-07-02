@@ -178,8 +178,7 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
           stop(4.5, rgb(0, 0, 255)),
           stop(7.0, rgb(255, 0, 0))
         )
-      ),
-      iconTranslate(new Float[] {0f, -7f})
+      )
     );
     mapboxMap.addLayer(unclustered);
 
