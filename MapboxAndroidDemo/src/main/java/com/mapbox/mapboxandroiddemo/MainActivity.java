@@ -49,6 +49,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.GeoJsonClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.InfoWindowSymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleHeatmapStylingActivity;
@@ -705,6 +706,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_dds_geojson_clusters_description,
           new Intent(MainActivity.this, GeoJsonClusteringActivity.class),
           R.string.activity_styles_dds_geojson_clusters_url, false, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_dds_image_clustering_title,
+          R.string.activity_dds_image_clustering_description,
+          new Intent(MainActivity.this, ImageClusteringActivity.class),
+          R.string.activity_dds_image_clustering_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_style_circle_categorically_title,
