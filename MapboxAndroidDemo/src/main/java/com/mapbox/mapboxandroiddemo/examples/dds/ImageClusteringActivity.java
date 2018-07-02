@@ -22,18 +22,13 @@ import java.net.URL;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.division;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.gt;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.gte;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.has;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.lt;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.rgb;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.toNumber;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconTranslate;
@@ -145,9 +140,6 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
       Log.e("dataClusterActivity", "Check the URL " + malformedUrlException.getMessage());
     }
 
-    // Use the earthquakes GeoJSON source to create three point ranges.
-    int[] layers = new int[] {150, 20, 0};
-
     //Creating a SymbolLayer icon layer for single data/icon points
     SymbolLayer unclustered = new SymbolLayer("unclustered-points", "earthquakes");
     unclustered.setProperties(
@@ -156,16 +148,12 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
         division(
           get("mag"), literal(4.0f)
         )
-      ),
-      iconColor(
-        interpolate(exponential(1), get("mag"),
-          stop(2.0, rgb(0, 255, 0)),
-          stop(4.5, rgb(0, 0, 255)),
-          stop(7.0, rgb(255, 0, 0))
-        )
       )
     );
     mapboxMap.addLayer(unclustered);
+
+    // Use the earthquakes GeoJSON source to create three point ranges.
+    int[] layers = new int[] {150, 20, 0};
 
     for (int i = 0; i < layers.length; i++) {
       //Add clusters' SymbolLayers images
@@ -190,7 +178,7 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
       mapboxMap.addLayer(symbolLayer);
     }
 
-    //Add the count labels
+    //Add a SymbolLayer for the cluster data number point count
     SymbolLayer count = new SymbolLayer("count", "earthquakes");
     count.setProperties(
       textField(Expression.toString(get("point_count"))),
