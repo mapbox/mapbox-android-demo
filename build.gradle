@@ -15,7 +15,7 @@ buildscript {
         classpath pluginDependencies.gradle
         classpath pluginDependencies.firebase
         classpath pluginDependencies.playPublisher
-        classpath pluginDependencies.firebaseCrashlytics
+        classpath pluginDependencies.firebaseCrashlyticsPlugin
     }
 
 }

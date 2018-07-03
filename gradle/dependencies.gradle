@@ -23,7 +23,7 @@ ext {
             supportLib               : '27.1.1',
             constraintLayout         : '1.0.2',
             firebasePerf             : '11.0.4',
-            firebaseCore             : '11.4.2',
+            firebaseCore             : '16.0.1',
             firebaseCrashlytics      : '2.9.3',
 
             // Square
@@ -48,11 +48,11 @@ ext {
     ]
 
     pluginVersion = [
-            checkstyle         : '8.2',
-            firebase           : '1.1.1',
-            gradle             : '3.1.0',
-            firebaseCrashlytics: '1.25.4',
-            gradlePlayPublisher: '1.2.0'
+            checkstyle               : '8.2',
+            firebase                 : '1.1.1',
+            gradle                   : '3.1.0',
+            firebaseCrashlyticsPlugin: '1.25.4',
+            gradlePlayPublisher      : '1.2.0'
     ]
 
     dependenciesList = [
@@ -103,11 +103,11 @@ ext {
     ]
 
     pluginDependencies = [
-            gradle             : "com.android.tools.build:gradle:${pluginVersion.gradle}",
-            checkstyle         : "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
-            firebase           : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
-            playPublisher      : "com.github.triplet.gradle:play-publisher:${pluginVersion.gradlePlayPublisher}",
-            firebaseCrashlytics: "io.fabric.tools:gradle:${pluginVersion.firebaseCrashlytics}"
+            gradle                   : "com.android.tools.build:gradle:${pluginVersion.gradle}",
+            checkstyle               : "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
+            firebase                 : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
+            playPublisher            : "com.github.triplet.gradle:play-publisher:${pluginVersion.gradlePlayPublisher}",
+            firebaseCrashlyticsPlugin: "io.fabric.tools:gradle:${pluginVersion.firebaseCrashlyticsPlugin}"
     ]
 
     wearDependencies = [
