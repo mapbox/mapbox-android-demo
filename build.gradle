@@ -4,8 +4,8 @@ buildscript {
     apply from: "${rootDir}/gradle/dependencies.gradle"
 
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
 
     dependencies {
@@ -22,10 +22,10 @@ plugins {
 
 allprojects {
     repositories {
-        jcenter()
         google()
         maven { url "https://jitpack.io" }
         maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+        jcenter()
     }
 }
 
