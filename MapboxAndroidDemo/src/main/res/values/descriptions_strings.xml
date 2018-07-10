@@ -108,6 +108,5 @@
     <string name="activity_lab_magic_window_description">Combine two maps for a magic window effect</string>
     <string name="activity_lab_fog_background_description">Add a gradient on top of a MapView to show a background fog effect.</string>
     <string name="activity_china_simple_china_mapview_description">Show an accurate and government-approved China map in your app using the Mapbox Maps SDK.</string>
-
-
+    <string name="activity_lab_home_screen_widget_description">Show the device\'s current location or other information in a homescreen widget.</string>
 </resources>
