@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
@@ -14,6 +15,7 @@ public class MapboxApplication extends Application {
     super.onCreate();
     initializeFirebaseApp();
     setUpPicasso();
+    Mapbox.getInstance(this, getString(R.string.access_token));
   }
 
   private void initializeFirebaseApp() {

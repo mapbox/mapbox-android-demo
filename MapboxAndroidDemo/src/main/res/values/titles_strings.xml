@@ -72,6 +72,7 @@
     <string name="activity_plugins_localization_plugin_title">Change map text to device language</string>
     <string name="activity_plugins_geojson_plugin_title">Load GeoJSON data</string>
     <string name="activity_plugins_places_plugin_title">Location search</string>
+    <string name="activity_plugins_place_picker_plugin_title">Place picker</string>
     <string name="activity_java_services_simplify_polyline_title">Simplify a polyline</string>
     <string name="activity_java_services_map_matching_title">Map Matching</string>
     <string name="activity_image_generator_snapshot_notification_title">Snapshot Notification</string>
