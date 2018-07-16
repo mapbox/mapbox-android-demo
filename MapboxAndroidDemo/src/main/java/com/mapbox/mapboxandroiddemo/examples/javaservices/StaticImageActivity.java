@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,7 +22,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.squareup.picasso.Picasso;
 
 /**
- * Use the Mapbox Static Image API found inside the Java Services SDK to create a URL. After receiving the newly
+ * Use the Mapbox Static Image API found inside the Mapbox Java SDK to create a URL. After receiving the newly
  * created URL, use Picasso, a third party image loading library, to download and load the static map image into
  * the ImageView.
  */
@@ -80,11 +81,13 @@ public class StaticImageActivity extends AppCompatActivity implements
   @Override
   public void onCheckedChanged(RadioGroup radioGroup, int selectedButtonInt) {
     switch (selectedButtonInt) {
-      case 2131296642:
+      case R.id.streets_style_select_radio_button:
+        Log.d("StaticImageActivity", "onCheckedChanged: streets");
         // Selected Streets style
         mapboxMap.setStyle(Style.MAPBOX_STREETS);
         break;
-      case 2131296351:
+      case R.id.dark_style_select_radio_button:
+        Log.d("StaticImageActivity", "onCheckedChanged: dark");
         // Selected Dark style
         mapboxMap.setStyle(Style.DARK);
         break;
