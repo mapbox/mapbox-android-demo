@@ -250,4 +250,12 @@
     <!-- Place Picker plugin -->
     <string name="selected_place_info">Selected location information:\n%1$s</string>
     <string name="go_to_picker_activity">Go to place picker activity</string>
+
+    <!-- Static image -->
+    <string name="choose_style">Choose style</string>
+    <string name="dark_style">Dark</string>
+    <string name="light_style">Light</string>
+    <string name="streets_style">Streets</string>
+    <string name="create_image">Create static image</string>
+    <string name="select_a_style">Select a style button first!</string>
 </resources>
