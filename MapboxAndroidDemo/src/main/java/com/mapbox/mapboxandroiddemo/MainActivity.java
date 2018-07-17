@@ -760,12 +760,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_json_vector_mix_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_dds_time_lapse_rainfall_points_title,
-          R.string.activity_dds_time_lapse_rainfall_points_description,
-          new Intent(MainActivity.this, AddRainFallStyleActivity.class),
-          R.string.activity_dds_time_lapse_rainfall_url, false, BuildConfig.MIN_SDK_VERSION));
-
-        exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_multiple_geometries_title,
           R.string.activity_dds_multiple_geometries_description,
           new Intent(MainActivity.this, MultipleGeometriesActivity.class),
@@ -782,12 +776,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_time_lapse_rainfall_points_description,
           new Intent(MainActivity.this, AddRainFallStyleActivity.class),
           R.string.activity_dds_time_lapse_rainfall_url, false, BuildConfig.MIN_SDK_VERSION));
-
-        exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_dds_multiple_geometries_title,
-          R.string.activity_dds_multiple_geometries_description,
-          new Intent(MainActivity.this, MultipleGeometriesActivity.class),
-          R.string.activity_dds_multiple_geometries_url, false, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_dds;
         break;
