@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.ajoberstar:grgit:1.5.0'
+        classpath 'org.ajoberstar:grgit:2.3.0'
     }
 }
 
@@ -22,8 +22,14 @@ import org.ajoberstar.grgit.Grgit
  */
 
 ext {
-    git = Grgit.open(currentDir: projectDir)
-    gitVersionName = git.describe()
-    gitVersionCode = git.tag.list().size() + 52 // + base version code
-    gitVersionCodeTime = git.head().time
+    try {
+        git = Grgit.open(currentDir: projectDir)
+        gitVersionName = git.describe()
+        gitVersionCode = git.tag.list().size() + 52 // + base version code
+        gitVersionCodeTime = git.head().time
+    } catch (Exception exception) {
+        gitVersionName = "1.0"
+        gitVersionCode = 2
+        gitVersionCodeTime = 1484407970
+    }
 }
