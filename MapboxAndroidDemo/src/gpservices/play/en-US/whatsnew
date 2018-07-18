@@ -1,4 +1,4 @@
-This update is in line with the biweekly release of the Mapbox Maps SDK for Android. This update includes several hotfixes and new examples: 
+This update is in line with the 6.3.0 release of the Mapbox Maps SDK for Android. This update includes several hotfixes and new examples: 
 
-• GeoJSON SymbolLayer clustering
-• Place picker
+•Static image API
+•Building outline
