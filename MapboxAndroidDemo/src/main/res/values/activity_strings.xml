@@ -258,4 +258,8 @@
     <string name="streets_style">Streets</string>
     <string name="create_image">Create static image</string>
     <string name="select_a_style">Select a style button first!</string>
+
+    <!-- Building outline-->
+    <string name="building_layer_not_present">This map style doesn\'t have a building layer</string>
+    <string name="move_map_around_instruction">Move map around</string>
 </resources>

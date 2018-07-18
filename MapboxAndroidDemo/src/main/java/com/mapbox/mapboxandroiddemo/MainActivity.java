@@ -87,6 +87,7 @@ import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.query.BuildingOutlineActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
@@ -556,6 +557,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_query_redo_search_in_area_description,
           new Intent(MainActivity.this, RedoSearchInAreaActivity.class),
           R.string.activity_query_redo_search_in_area_url, true, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_query_building_outline_title,
+          R.string.activity_query_building_outline_description,
+          new Intent(MainActivity.this, BuildingOutlineActivity.class),
+          R.string.activity_query_building_outline_url, true, BuildConfig.MIN_SDK_VERSION));
+
         currentCategory = R.id.nav_query_map;
         break;
       case R.id.nav_java_services:

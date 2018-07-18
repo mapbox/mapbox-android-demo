@@ -62,6 +62,7 @@
     <string name="activity_query_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
     <string name="activity_query_click_on_layer_description">Click on and highlight a selected GeoJSON polygon.</string>
     <string name="activity_query_redo_search_in_area_description">Search for certain features once the map is moved. This example finds parks.</string>
+    <string name="activity_query_building_outline_description">Query the building layer and show a building\'s outline</string>
     <string name="activity_java_services_directions_description">Use Mapbox Java Services to request directions.</string>
     <string name="activity_java_services_optimization_description">Use Mapbox\'s Optimization API to retrieve and display the quickest multi-stop route.</string>
     <string name="activity_java_services_static_image_description">Use Mapbox Java Services to build a url and download a static map.</string>
