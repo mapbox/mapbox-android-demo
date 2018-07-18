@@ -29,6 +29,7 @@ android {
         buildConfigField "int", "MIN_SDK_VERSION", "$minSdkVersion.apiLevel"
 
         playAccountConfig = playAccountConfigs.defaultAccountConfig
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     flavorDimensions "default"
@@ -137,6 +138,15 @@ dependencies {
 
     // Common module
     implementation project(':SharedCode')
+
+    // Testing
+    implementation dependenciesList.testEspressoCore
+    implementation dependenciesList.testEspressoIntents
+    implementation dependenciesList.testEspressoContrib
+    androidTestImplementation dependenciesList.testRunner
+    androidTestImplementation dependenciesList.testRules
+    androidTestImplementation dependenciesList.supportAnnotations
+    implementation dependenciesList.junit
 }
 
 apply from: "${rootDir}/gradle/checkstyle.gradle"

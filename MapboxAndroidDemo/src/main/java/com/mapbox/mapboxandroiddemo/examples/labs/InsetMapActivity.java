@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.labs;
+package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -24,7 +24,7 @@ import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
 
 public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCallback, MapboxMap.OnCameraMoveListener {
 
-  private MapView mainMapMapView;
+  private MapView mapView;
   private MapboxMap mainLargeMapboxMap;
   private OnMapMovedFragmentInterface onMapMovedFragmentInterfaceListener;
 
@@ -39,9 +39,9 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_inset_map);
 
-    mainMapMapView = findViewById(R.id.main_mapView);
-    mainMapMapView.onCreate(savedInstanceState);
-    mainMapMapView.getMapAsync(this);
+    mapView = findViewById(R.id.mapView);
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(this);
 
     /* Custom version of the regular Mapbox SupportMapFragment class. A custom one is being built here
     so that the interface call backs can be used in the appropriate places so that the example eventually
@@ -98,35 +98,35 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
     void onMapMoved(CameraPosition mainMapCameraPosition);
   }
 
-  // Add the mainMapMapView lifecycle to the activity's lifecycle methods
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();
-    mainMapMapView.onResume();
+    mapView.onResume();
   }
 
   @Override
   protected void onStart() {
     super.onStart();
-    mainMapMapView.onStart();
+    mapView.onStart();
   }
 
   @Override
   protected void onStop() {
     super.onStop();
-    mainMapMapView.onStop();
+    mapView.onStop();
   }
 
   @Override
   public void onPause() {
     super.onPause();
-    mainMapMapView.onPause();
+    mapView.onPause();
   }
 
   @Override
   public void onLowMemory() {
     super.onLowMemory();
-    mainMapMapView.onLowMemory();
+    mapView.onLowMemory();
   }
 
   @Override
@@ -135,13 +135,13 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
     if (mainLargeMapboxMap != null) {
       mainLargeMapboxMap.removeOnCameraMoveListener(this);
     }
-    mainMapMapView.onDestroy();
+    mapView.onDestroy();
   }
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    mainMapMapView.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
   }
 
   /**

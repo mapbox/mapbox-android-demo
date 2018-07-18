@@ -149,7 +149,7 @@
         </activity>
 
         <activity
-            android:name=".labs.LocationPickerActivity"
+            android:name=".examples.labs.LocationPickerActivity"
             android:label="@string/activity_lab_location_picker_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -165,7 +165,7 @@
         </activity>
 
         <activity
-            android:name=".labs.MarkerFollowingRouteActivity"
+            android:name=".examples.labs.MarkerFollowingRouteActivity"
             android:label="@string/activity_lab_marker_following_route_title">
 
             <meta-data
@@ -174,7 +174,7 @@
         </activity>
 
         <activity
-            android:name=".labs.SpaceStationLocationActivity"
+            android:name=".examples.labs.SpaceStationLocationActivity"
             android:label="@string/activity_lab_space_station_location_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -311,7 +311,7 @@
         </activity>
 
         <activity
-            android:name=".labs.LosAngelesTourismActivity"
+            android:name=".examples.labs.LosAngelesTourismActivity"
             android:label="@string/activity_lab_los_angeles_tourism_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -319,7 +319,7 @@
         </activity>
 
         <activity
-            android:name=".labs.IndoorMapActivity"
+            android:name=".examples.labs.IndoorMapActivity"
             android:label="@string/activity_lab_indoor_map_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
