@@ -22,9 +22,7 @@
 -dontwarn retrofit.**
 
 # Picasso
--dontwarn com.squareup.okhttp.**
--dontwarn com.squareup.okhttp.MediaType
-
+-dontnote com.squareup.**
 
 -dontwarn android.support.**
 -dontwarn java.lang.**
@@ -63,6 +61,7 @@
 # --- OkHttp ---
 -dontwarn okhttp3.**
 -dontwarn okio.**
+-dontwarn okio.BufferedSink
 -dontwarn javax.annotation.**
 -dontwarn org.conscrypt.**
 # A resource is loaded with a relative path so the package of this class must be preserved.
@@ -85,6 +84,7 @@
 -keepclassmembers class * extends android.arch.lifecycle.ViewModel {
     <init>(...);
 }
+
 # keep Lifecycle State and Event enums values
 -keepclassmembers class android.arch.lifecycle.Lifecycle$State { *; }
 -keepclassmembers class android.arch.lifecycle.Lifecycle$Event { *; }
@@ -105,4 +105,15 @@
 -keep class android.arch.** { *; }
 -dontwarn android.arch.**
 
+
+# Other Mapbox core
+-keep android.arch.lifecycle.MethodCallsLogger
+-keep android.arch.lifecycle.LifecycleOwner
+-keep android.arch.lifecycle.Lifecycle$Event
+-keep com.mapbox.android.core.location.**
+
+# Other Android
+-dontnote android.net.http.*
+-dontnote org.apache.commons.codec.**
+-dontnote org.apache.http.**
 
