@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.camera;
+
 // #-code-snippet: bounding-box-camera-activity full-java
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;

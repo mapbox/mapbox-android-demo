@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
+// #-code-snippet: location-picker-activity full-java
+
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -275,3 +277,4 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
     }
   }
 }
+// #-end-code-snippet: location-picker-activity full-java

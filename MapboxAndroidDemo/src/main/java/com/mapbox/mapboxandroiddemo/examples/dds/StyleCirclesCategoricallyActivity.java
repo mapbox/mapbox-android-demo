@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
+
 // #-code-snippet: style-circles-categorically-activity full-java
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 

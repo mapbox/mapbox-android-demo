@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.query;
 
+// #-code-snippet: building-outline-activity full-java
+
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -191,3 +193,4 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
     mapView.onSaveInstanceState(outState);
   }
 }
+// #-end-code-snippet: building-outline-activity full-java

@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
+// #-code-snippet: la-tourism-activity full-java
+
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
@@ -271,3 +273,4 @@ public class LosAngelesTourismActivity extends AppCompatActivity implements OnMa
     }
   }
 }
+// #-code-snippet: la-tourism-activity full-java

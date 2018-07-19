@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.snapshot;
+
 // #-code-snippet: snapshot-notification-activity full-java
+
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;

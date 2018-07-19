@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.offline;
+
 // #-code-snippet: simple-offline-map-activity full-java
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;

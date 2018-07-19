@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
+
 // #-code-snippet: choropleth-json-vector-mix-activity full-java
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
