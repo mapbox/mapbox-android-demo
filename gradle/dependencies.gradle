@@ -15,7 +15,7 @@ ext {
             mapboxGeoJson            : '3.3.0',
             mapboxPluginBuilding     : '0.3.0',
             mapboxPluginLocationLayer: '0.6.0',
-            mapboxPluginPlaces       : '0.4.0',
+            mapboxPluginPlaces       : '0.5.0-SNAPSHOT',
             mapboxPluginLocalization : '0.3.0',
             mapboxPluginTraffic      : '0.6.0',
 
