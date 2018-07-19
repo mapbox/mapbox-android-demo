@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.query;
+
 // #-code-snippet: query-feature-activity full-java
+
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;

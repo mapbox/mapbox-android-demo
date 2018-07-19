@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
+// #-code-snippet: place-selection-plugin-activity full-java
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -77,3 +79,4 @@ public class PlaceSelectionPluginActivity extends AppCompatActivity {
     }
   }
 }
+// #-end-code-snippet: place-selection-plugin-activity full-java

@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
+
 // #-code-snippet: default-style-activity full-java
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;

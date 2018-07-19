@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
+
 // #-code-snippet: simplify-polyline-activity full-java
+
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;

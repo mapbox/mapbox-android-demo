@@ -1,4 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
+
 // #-code-snippet: static-image-activity full-java
 
 import android.os.Bundle;

@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
+
 // #-code-snippet: optimization-activity full-java
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;

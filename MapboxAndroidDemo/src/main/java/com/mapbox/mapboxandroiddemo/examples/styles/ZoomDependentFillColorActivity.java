@@ -1,4 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
+
 // #-code-snippet: zoom-dependent-fill-color-activity full-java
 
 import android.os.Bundle;

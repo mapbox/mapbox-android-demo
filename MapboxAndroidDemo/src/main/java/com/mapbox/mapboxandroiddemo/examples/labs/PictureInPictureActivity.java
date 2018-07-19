@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
+// #-code-snippet: picture-in-picture-activity full-java
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -109,3 +111,4 @@ public class PictureInPictureActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 }
+// #-end-code-snippet: picture-in-picture-activity full-java

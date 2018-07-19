@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
+// #-code-snippet: space-station-activity full-java
+
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
@@ -241,3 +243,4 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     Call<IssModel> loadLocation();
   }
 }
+// #-end-code-snippet: space-station-activity full-java

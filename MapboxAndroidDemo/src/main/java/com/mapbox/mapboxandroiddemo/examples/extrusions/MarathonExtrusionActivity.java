@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
+
 // #-code-snippet: marathon-extrusion-activity full-java
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

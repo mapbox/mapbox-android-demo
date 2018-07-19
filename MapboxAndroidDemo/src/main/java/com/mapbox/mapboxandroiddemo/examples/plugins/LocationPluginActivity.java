@@ -1,4 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.plugins;
+
 // #-code-snippet: location-plugin-activity full-java
 
 import android.os.Bundle;

@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.offline;
+
 // #-code-snippet: offline-manager-activity full-java
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
