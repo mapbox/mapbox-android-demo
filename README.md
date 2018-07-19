@@ -28,8 +28,11 @@ With the first Gradle invocation, Gradle will take the value of the `MAPBOX_ACCE
 
 
 ### Screenshots
-<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/phone/main-activity.png" width="360">
-<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/phone/navigation-drawer.png" width="360">
-<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/phone/custom-marker-example.png" width="360">
-<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/phone/following-route.png" width="360">
-<img src="https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/phone/user-location.png" width="360">
+
+![ezgif com-optimize](https://user-images.githubusercontent.com/4394910/42973575-7ade2f44-8b68-11e8-9fa4-341c35171b92.gif)
+
+![ezgif com-resize 1](https://user-images.githubusercontent.com/4394910/42974229-3d6061f2-8b6b-11e8-8c27-be58a0a334cf.gif)
+
+![ezgif com-optimize 1](https://user-images.githubusercontent.com/4394910/42974704-32f243aa-8b6d-11e8-8f8d-3b47a889f440.gif)
+
+![ezgif com-resize 2](https://user-images.githubusercontent.com/4394910/42974764-832ac1d0-8b6d-11e8-9ca8-cb259471690b.gif)
