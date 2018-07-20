@@ -49,9 +49,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textIgnorePlacem
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
 /**
- * Use GeoJSON to visualize point data as a clusters.
+ * Use GeoJSON and circle layers to visualize point data as circle clusters.
  */
-public class GeoJsonClusteringActivity extends AppCompatActivity {
+public class CircleLayerClusteringActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -66,7 +66,7 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_geojson_clustering);
+    setContentView(R.layout.activity_circle_layer_clustering);
 
     mapView = findViewById(R.id.mapView);
 
@@ -84,7 +84,7 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
         mapboxMap.addImage("cross-icon-id", BitmapUtils.getBitmapFromDrawable(
           getResources().getDrawable(R.drawable.ic_cross)));
 
-        Toast.makeText(GeoJsonClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
+        Toast.makeText(CircleLayerClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
           Toast.LENGTH_SHORT).show();
       }
     });
