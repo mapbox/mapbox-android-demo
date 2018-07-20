@@ -7,9 +7,9 @@
 This is a public demo of the Mapbox Maps SDK for Android. The demo app is [available now in the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo) and it shows off many of the examples found on:
 
 - [mapbox.com/android-docs/map-sdk/examples](https://www.mapbox.com/android-docs/map-sdk/examples/)
-- [https://www.mapbox.com/android-docs/navigation/examples/](https://www.mapbox.com/android-docs/navigation/examples/)
-- [https://www.mapbox.com/android-docs/java/examples/](https://www.mapbox.com/android-docs/java/examples/)
-- [https://www.mapbox.com/android-docs/plugins/examples/](https://www.mapbox.com/android-docs/plugins/examples/)
+- [mapbox.com/android-docs/navigation/examples/](https://www.mapbox.com/android-docs/navigation/examples/)
+- [mapbox.com/android-docs/java/examples/](https://www.mapbox.com/android-docs/java/examples/)
+- [mapbox.com/android-docs/plugins/examples/](https://www.mapbox.com/android-docs/plugins/examples/)
 
 
 There are also examples that only live in the app. The app's "labs" section has examples which often combine various Mapbox tools to create more complex examples.
