@@ -107,9 +107,7 @@
 
 
 # Other Mapbox core
--keep android.arch.lifecycle.MethodCallsLogger
--keep android.arch.lifecycle.LifecycleOwner
--keep android.arch.lifecycle.Lifecycle$Event
+-keep android.arch.lifecycle.**
 -keep com.mapbox.android.core.location.**
 
 # Other Android

@@ -40,8 +40,7 @@
 -keep public class com.google.android.gms.* { public *; }
 -dontwarn com.google.android.gms.**
 
-
-# Consumer proguard rules for location layer plugin
+# Consumer proguard rules for plugins
 
 # --- AutoValue ---
 # AutoValue annotations are retained but dependency is compileOnly.
@@ -51,19 +50,30 @@
 # Retain generic type information for use by reflection by converters and adapters.
 -keepattributes Signature
 # Retain service method parameters.
--keepclassmembernames,allowobfuscation interface * {
+-keepclassmembernames interface * {
     @retrofit2.http.* <methods>;
 }
 # Ignore annotation used for build tooling.
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn org.codehaus.mojo.animal_sniffer.*
 
 # --- OkHttp ---
 -dontwarn okhttp3.**
 -dontwarn okio.**
+-dontwarn okio.BufferedSink
 -dontwarn javax.annotation.**
 -dontwarn org.conscrypt.**
 # A resource is loaded with a relative path so the package of this class must be preserved.
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
+
 # --- Java ---
 -dontwarn java.awt.Color
+-dontwarn com.mapbox.api.staticmap.v1.models.StaticMarkerAnnotation
+-dontwarn com.mapbox.api.staticmap.v1.models.StaticPolylineAnnotation
+
+
+# Other Android
+-dontnote android.net.http.*
+-dontnote org.apache.commons.codec.**
+-dontnote org.apache.http.**
