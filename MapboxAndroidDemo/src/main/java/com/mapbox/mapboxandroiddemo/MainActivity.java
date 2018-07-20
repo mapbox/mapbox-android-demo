@@ -69,10 +69,10 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivi
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.FlashingLayerTypesActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.LocationPickerActivity;
-import com.mapbox.mapboxandroiddemo.examples.labs.LosAngelesTourismActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
@@ -636,10 +636,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_lab_symbol_layer_on_map_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_lab_los_angeles_tourism_title,
-          R.string.activity_lab_los_angeles_tourism_description,
-          new Intent(MainActivity.this, LosAngelesTourismActivity.class),
-          R.string.activity_lab_los_angeles_tourism_url, false, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_lab_flashing_layer_types_title,
+          R.string.activity_lab_flashing_layer_types_description,
+          new Intent(MainActivity.this, FlashingLayerTypesActivity.class),
+          R.string.activity_lab_flashing_layer_types_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_lab_indoor_map_title,

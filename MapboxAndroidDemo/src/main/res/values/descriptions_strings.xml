@@ -84,7 +84,7 @@
     <string name="activity_lab_space_station_location_description">See the International Space Station location in real time.</string>
     <string name="activity_lab_picture_in_picture_description">Use the Android O release of picture-in-picture to maintain a map in a separate window.</string>
     <string name="activity_lab_off_route_description">Detect when the car is off route and reroute them.</string>
-    <string name="activity_lab_los_angeles_tourism_description">Use the style API to highlight parks, hotels, and attractions. A pulsing animation is also added to the colors.</string>
+    <string name="activity_lab_flashing_layer_types_description">Use the style API to highlight parks, hotels, and attractions. A pulsing animation is also added to the colors.</string>
     <string name="activity_lab_indoor_map_description">Display an indoor map of a building with toggles to switch between floor levels.</string>
     <string name="activity_lab_rv_on_map_description">Manipulate the map based on recyclerview interactions.</string>
     <string name="activity_lab_symbol_layer_and_mapillary_on_map_description">Add markers via SymbolLayer and manipulate the data in real time. A Mapillary integration is also showcased in this example.</string>
