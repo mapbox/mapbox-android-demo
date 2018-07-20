@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
+// #-code-snippet: add-rain-fall-style-activity full-java
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -155,3 +157,4 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     }
   }
 }
+// #-end-code-snippet: add-rain-fall-style-activity full-java

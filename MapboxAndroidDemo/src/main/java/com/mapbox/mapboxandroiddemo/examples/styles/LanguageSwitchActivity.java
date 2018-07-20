@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
+// #-code-snippet: language-switch-activity full-java
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -120,3 +122,4 @@ public class LanguageSwitchActivity extends AppCompatActivity {
     return super.onOptionsItemSelected(item);
   }
 }
+// #-end-code-snippet: language-switch-activity full-java

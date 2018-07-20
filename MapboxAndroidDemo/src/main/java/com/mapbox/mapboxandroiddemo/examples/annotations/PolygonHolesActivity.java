@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.annotations;
 
+// #-code-snippet: polygon-holes-activity full-java
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -150,3 +152,4 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
     };
   }
 }
+// #-end-code-snippet: polygon-holes-activity full-java

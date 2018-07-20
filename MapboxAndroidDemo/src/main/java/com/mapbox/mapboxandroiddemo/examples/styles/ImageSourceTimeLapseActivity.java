@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
+// #-code-snippet: image-source-time-lapse-activity full-java
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -135,3 +137,4 @@ public class ImageSourceTimeLapseActivity extends AppCompatActivity implements O
     mapView.onSaveInstanceState(outState);
   }
 }
+// #-end-code-snippet: image-source-time-lapse-activity full-java

@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
+// #-code-snippet: style-fade-switch-activity full-java
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -123,3 +125,4 @@ public class StyleFadeSwitchActivity extends AppCompatActivity implements
     mapView.onSaveInstanceState(outState);
   }
 }
+// #-end-code-snippet: style-fade-switch-activity full-java
