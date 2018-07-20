@@ -106,7 +106,7 @@
     <string name="location_picker_select_location_button_select">Select a location</string>
     <string name="location_picker_dropped_marker_snippet_no_results">No results</string>
 
-    <!--LosAngelesTourismActivity activity-->
+    <!--PulsingLayerOpacityColorActivity activity-->
     <string name="fab_title_hotels">Hotels</string>
     <string name="fab_title_parks">Parks</string>
     <string name="fab_title_attractions">Attractions</string>

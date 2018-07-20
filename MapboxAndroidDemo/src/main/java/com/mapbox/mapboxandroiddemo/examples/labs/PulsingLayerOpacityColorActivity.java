@@ -34,7 +34,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
  * Use the style API to highlight different types of data.
  * In this example, parks, hotels, and attractions are displayed.
  */
-public class LosAngelesTourismActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class PulsingLayerOpacityColorActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -51,9 +51,8 @@ public class LosAngelesTourismActivity extends AppCompatActivity implements OnMa
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_lab_los_angeles_tourism);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
