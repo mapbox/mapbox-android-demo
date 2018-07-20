@@ -106,10 +106,6 @@
 -dontwarn android.arch.**
 
 
-# Other Mapbox core
--keep android.arch.lifecycle.**
--keep com.mapbox.android.core.location.**
-
 # Other Android
 -dontnote android.net.http.*
 -dontnote org.apache.commons.codec.**
