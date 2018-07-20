@@ -49,7 +49,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textIgnorePlacem
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
 /**
- * Use GeoJSON and circle layers to visualize point data as a circleclusters.
+ * Use GeoJSON and circle layers to visualize point data as a circle clusters.
  */
 public class CircleLayerClusteringActivity extends AppCompatActivity {
 
