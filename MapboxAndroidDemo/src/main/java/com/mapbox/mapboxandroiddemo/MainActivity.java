@@ -47,7 +47,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.BathymetryActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.GeoJsonClusteringActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.InfoWindowSymbolLayerActivity;
@@ -726,10 +726,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ));
 
         exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_styles_dds_geojson_clusters_title,
-          R.string.activity_styles_dds_geojson_clusters_description,
-          new Intent(MainActivity.this, GeoJsonClusteringActivity.class),
-          R.string.activity_styles_dds_geojson_clusters_url, false, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_styles_dds_geojson_circle_layer_clusters_title,
+          R.string.activity_styles_dds_geojson_circle_layer_clusters_description,
+          new Intent(MainActivity.this, CircleLayerClusteringActivity.class),
+          R.string.activity_styles_dds_geojson_circle_layer_clusters_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_image_clustering_title,
