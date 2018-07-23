@@ -104,6 +104,7 @@ dependencies {
     implementation dependenciesList.supportCustomTabs
     implementation dependenciesList.supportV4
     implementation dependenciesList.supportConstraintLayout
+    implementation dependenciesList.supportAnnotations
 
     // Mapbox dependencies
     api(dependenciesList.mapboxMapSdk)
