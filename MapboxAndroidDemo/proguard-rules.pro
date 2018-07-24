@@ -106,12 +106,13 @@
 -dontwarn android.arch.**
 
 
-# Other Mapbox core
--keep android.arch.lifecycle.**
--keep com.mapbox.android.core.location.**
-
 # Other Android
 -dontnote android.net.http.*
 -dontnote org.apache.commons.codec.**
 -dontnote org.apache.http.**
+
+-dontwarn org.xmlpull.v1.**
+-dontnote org.xmlpull.v1.**
+-keep class org.xmlpull.** { *; }
+-keepclassmembers class org.xmlpull.** { *; }
 
