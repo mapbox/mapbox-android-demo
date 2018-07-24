@@ -111,3 +111,8 @@
 -dontnote org.apache.commons.codec.**
 -dontnote org.apache.http.**
 
+-dontwarn org.xmlpull.v1.**
+-dontnote org.xmlpull.v1.**
+-keep class org.xmlpull.** { *; }
+-keepclassmembers class org.xmlpull.** { *; }
+
