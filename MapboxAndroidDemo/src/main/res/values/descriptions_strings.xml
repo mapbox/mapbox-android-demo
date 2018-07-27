@@ -59,6 +59,8 @@
     <string name="activity_dds_satellite_land_select_description">View satellite photos and click to outline an area of land.</string>
     <string name="activity_dds_symbol_zoom_switch_description">Change SymbolLayer icons based on the camera\'s zoom level.</string>
     <string name="activity_dds_circle_radius_description">Set the radii of a circle layer\'s circles based on a data property.</string>
+    <string name="activity_dds_animated_dash_line_description">Animated the gap size of a LineLayer for the appearance of moving lines.</string>
+    <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_dds_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Maps SDK.</string>
     <string name="activity_dds_polygon_select_toggle_description">Tap on various polygons to "select" them and toggle their colors.</string>
     <string name="activity_dds_polygon_description">Draw a vector polygon on a map with the Mapbox Maps SDK.</string>

@@ -33,6 +33,7 @@ import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.SlowlyRotatingCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.AnimatedDashLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.BathymetryActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
@@ -630,6 +631,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       null,
       R.string.activity_style_image_source_url, false, BuildConfig.MIN_SDK_VERSION
     ));
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_click_to_add_image_title,
+      R.string.activity_styles_click_to_add_image_description,
+      new Intent(MainActivity.this, ClickToAddImageActivity.class),
+      null,
+      R.string.activity_styles_click_to_add_image_url, false, BuildConfig.MIN_SDK_VERSION
+    ));
+
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_styles,
       R.string.activity_style_image_source_time_lapse_title,
@@ -1606,6 +1616,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, CircleIconToggleOnClickActivity.class),
       null,
       R.string.activity_dds_circle_icon_toggle_on_click_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_dds,
+      R.string.activity_lab_dashed_line_directions_picker_title,
+      R.string.activity_lab_dashed_line_directions_picker_description,
+      new Intent(MainActivity.this, DashedLineDirectionsPickerActivity.class),
+      null,
+      R.string.activity_lab_dashed_line_directions_picker_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_animated_dash_line_title,
+      R.string.activity_dds_animated_dash_line_description,
+      new Intent(MainActivity.this, AnimatedDashLineActivity.class),
+      null,
+      R.string.activity_dds_animated_dash_line_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_basics,
