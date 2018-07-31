@@ -53,18 +53,17 @@ jobs:
       - run:
           name: Generate Espresso sanity tests
           command: make sanity-test-example-activities
-      # Temporarily disabled because of Firebase GSON issues: https://github.com/google/gson/issues/1354 
-      #- run:
-      #     name: Run Firebase instrumentation tests
-      #     command: |
-      #       #!/bin/bash
-      #       ./gradlew :MapboxAndroidDemo:assembleGpservicesDebug --continue
-      #       ./gradlew :MapboxAndroidDemo:assembleAndroidTest --continue
-      #       gcloud firebase test android run \
-      #       --type instrumentation \
-      #       --app MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk \
-      #       --test MapboxAndroidDemo/build/outputs/apk/androidTest/gpservices/debug/MapboxAndroidDemo-gpservices-debug-androidTest.apk \
-      #       --device-ids sailfish --os-version-ids 26 --locales en --orientations portrait --timeout 5m
+      - run:
+          name: Run Firebase instrumentation tests
+          command: |
+            #!/bin/bash
+            ./gradlew :MapboxAndroidDemo:assembleGpservicesDebug --continue
+            ./gradlew :MapboxAndroidDemo:assembleAndroidTest --continue
+            gcloud firebase test android run \
+            --type instrumentation \
+            --app MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk \
+            --test MapboxAndroidDemo/build/outputs/apk/androidTest/gpservices/debug/MapboxAndroidDemo-gpservices-debug-androidTest.apk \
+            --device-ids sailfish --os-version-ids 26 --locales en --orientations portrait --timeout 5m
       - store_artifacts:
           path: MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk
 # ------------------------------------------------------------------------------
