@@ -556,13 +556,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_query_redo_search_in_area_title,
           R.string.activity_query_redo_search_in_area_description,
           new Intent(MainActivity.this, RedoSearchInAreaActivity.class),
-          R.string.activity_query_redo_search_in_area_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_query_redo_search_in_area_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_query_building_outline_title,
           R.string.activity_query_building_outline_description,
           new Intent(MainActivity.this, BuildingOutlineActivity.class),
-          R.string.activity_query_building_outline_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_query_building_outline_url, false, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_query_map;
         break;
@@ -694,14 +694,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_labs_snaking_directions_route_title,
           R.string.activity_labs_snaking_directions_route_description,
           new Intent(MainActivity.this, SnakingDirectionsRouteActivity.class),
-          R.string.activity_labs_snaking_directions_route_url, true, BuildConfig.MIN_SDK_VERSION
+          R.string.activity_labs_snaking_directions_route_url, false, BuildConfig.MIN_SDK_VERSION
         ));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dashed_line_directions_picker_title,
           R.string.activity_dashed_line_directions_picker_description,
           new Intent(MainActivity.this, DashedLineDirectionsPickerActivity.class),
-          R.string.activity_dashed_line_directions_picker_url, true, BuildConfig.MIN_SDK_VERSION
+          R.string.activity_dashed_line_directions_picker_url, false, BuildConfig.MIN_SDK_VERSION
         ));
         currentCategory = R.id.nav_lab;
         break;
@@ -722,7 +722,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_bathymetry_title,
           R.string.activity_dds_bathymetry_description,
           new Intent(MainActivity.this, BathymetryActivity.class),
-          R.string.activity_dds_bathymetry_url, true, BuildConfig.MIN_SDK_VERSION
+          R.string.activity_dds_bathymetry_url, false, BuildConfig.MIN_SDK_VERSION
         ));
 
         exampleItemModels.add(new ExampleItemModel(
@@ -777,7 +777,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_info_window_symbol_layer_title,
           R.string.activity_dds_info_window_symbol_layer_description,
           new Intent(MainActivity.this, InfoWindowSymbolLayerActivity.class),
-          R.string.activity_dds_info_window_symbol_layer_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_dds_info_window_symbol_layer_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_time_lapse_rainfall_points_title,
