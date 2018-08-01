@@ -15,17 +15,14 @@ public class OnMapReadyIdlingResource implements IdlingResource, OnMapReadyCallb
   private MapboxMap mapboxMap;
   private IdlingResource.ResourceCallback resourceCallback;
 
-  @WorkerThread
   public OnMapReadyIdlingResource(Activity activity) {
-    new Handler(activity.getMainLooper()).post(() -> {
-      try {
-        Field field = activity.getClass().getDeclaredField("mapView");
-        field.setAccessible(true);
-        ((MapView) field.get(activity)).getMapAsync(OnMapReadyIdlingResource.this);
-      } catch (Exception err) {
-        throw new RuntimeException(err);
-      }
-    });
+    try {
+      Field field = activity.getClass().getDeclaredField("mapView");
+      field.setAccessible(true);
+      ((MapView) field.get(activity)).getMapAsync(this);
+    } catch (Exception err) {
+      throw new RuntimeException(err);
+    }
   }
 
   @Override
