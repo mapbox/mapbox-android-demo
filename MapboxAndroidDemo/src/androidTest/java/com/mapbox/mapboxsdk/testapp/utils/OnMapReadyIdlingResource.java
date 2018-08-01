@@ -1,7 +1,6 @@
 package com.mapbox.mapboxsdk.testapp.utils;
 
 import android.app.Activity;
-import android.os.Handler;
 import android.support.test.espresso.IdlingResource;
 
 import com.mapbox.mapboxsdk.maps.MapView;
