@@ -272,4 +272,6 @@
     <string name="no_internet">Tap on a calendar event map icon</string>
     <string name="no_connectivity">Calendar events won\'t appear because your device isn\'t connected to the internet.</string>
 
+    <!-- Temperature change -->
+    <string name="temp_change_feedback"> Showing min and max temperatures up to 2006 in %1$s</string>
 </resources>

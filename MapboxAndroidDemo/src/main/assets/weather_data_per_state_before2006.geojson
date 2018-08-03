@@ -1,0 +1,7457 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Alabama",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "112",
+        "units": "degrees F",
+        "date": "September 6, 1925",
+        "location": "CENTREVILLE",
+        "latitude": "32.95",
+        "longitude": "-87.13333",
+        "station": "011520",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.13333,
+          32.95
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Alabama",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-27",
+        "units": "degrees F",
+        "date": "January 30, 1966",
+        "location": "NEW MARKET 2",
+        "latitude": "34.91667",
+        "longitude": "-86.45",
+        "station": "015867",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.45,
+          34.91667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Alabama",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "Although higher amounts have been observed in other states, the 32.52 inches of rainfall that was observed in 24-hrs over July 19-20, 1997 at Dauphin Island Sea Lab in conjunction with Hurricane Danny is the greatest 24-hr rainfall that has been directly observed at an officially established observation station within the coterminous United States.",
+        "value": "32.52",
+        "units": "inches",
+        "date": "July 19 - 20, 1997",
+        "location": "DAUPHIN ISLAND #2",
+        "latitude": "30.2505",
+        "longitude": "-88.0775",
+        "station": "012172",
+        "status": "EA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.0775,
+          30.2505
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Alabama",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "20",
+        "units": "inches",
+        "date": "March 13, 1993",
+        "location": "WALNUT GROVE",
+        "latitude": "34.0661",
+        "longitude": "-86.3069",
+        "station": "018648",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.3069,
+          34.0661
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Alabama",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "22",
+        "units": "inches",
+        "date": "January 24, 1940",
+        "location": "REFORM",
+        "latitude": "33.37389",
+        "longitude": "-88.0052",
+        "station": "016847",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.0052,
+          33.37389
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Alaska",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "100",
+        "units": "degrees F",
+        "date": "June 27, 1915",
+        "location": "FORT YUKON",
+        "latitude": "66.56667",
+        "longitude": "-145.26667",
+        "station": "26413",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -145.26667,
+          66.56667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Alaska",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-80",
+        "units": "degrees F",
+        "date": "January 23, 1971",
+        "location": "PROSPECT CREEK",
+        "latitude": "66.82361",
+        "longitude": "-150.66889",
+        "station": "507778",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -150.66889,
+          66.82361
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Alaska",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "The previously-listed state record of 15.2 inches at Angoon on October 12, 1982 was determined to be invalid by the SCEC, based largely on analysis that resulted in this Bulletin of the American Meteorological Society article.",
+        "value": "15.05",
+        "units": "inches",
+        "date": "October 10, 1986",
+        "location": "SEWARD AIRPORT",
+        "latitude": "60.12833",
+        "longitude": "-149.41667",
+        "station": "26438",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.41667,
+          60.12833
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Alaska",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "78",
+        "units": "inches",
+        "date": "February 9, 1963",
+        "location": "MILE 47 CAMP",
+        "latitude": "61.26667",
+        "longitude": "-145.2666",
+        "station": "505878",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -145.2666,
+          61.26667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Alaska",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "192",
+        "units": "inches",
+        "date": "April 11, 2008",
+        "location": "VALDEZ AIRPORT",
+        "latitude": "61.1315",
+        "longitude": "-146.2435",
+        "station": "509685",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -146.2435,
+          61.1315
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Alaska",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "192",
+        "units": "inches",
+        "date": "March 7, 2008",
+        "location": "VALDEZ AIRPORT",
+        "latitude": "61.1315",
+        "longitude": "-146.2435",
+        "station": "509685",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -146.2435,
+          61.1315
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Arizona",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "128",
+        "units": "degrees F",
+        "date": "June 29, 1994",
+        "location": "LAKE HAVASU CITY",
+        "latitude": "34.5031",
+        "longitude": "-114.3604",
+        "station": "024761",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.3604,
+          34.5031
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Arizona",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-40",
+        "units": "degrees F",
+        "date": "January 7, 1971",
+        "location": "HAWLEY LAKE",
+        "latitude": "33.98333",
+        "longitude": "-109.75",
+        "station": "023926",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -109.75,
+          33.98333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Arizona",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "11.4",
+        "units": "inches",
+        "date": "September 4 - 5, 1970",
+        "location": "WORKMAN CREEK 1",
+        "latitude": "33.81667",
+        "longitude": "-110.91667",
+        "station": "029534",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.91667,
+          33.81667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Arizona",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "38",
+        "units": "inches",
+        "date": "December 14, 1967",
+        "location": "HEBER (BLACK MESA) RANGER STATION",
+        "latitude": "34.3925",
+        "longitude": "-110.558",
+        "station": "023961",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.558,
+          34.3925
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Arizona",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "38",
+        "units": "inches",
+        "date": "February 25, 1987",
+        "location": "ALPINE 18 SW",
+        "latitude": "33.6391",
+        "longitude": "-109.3277",
+        "station": "020170",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -109.3277,
+          33.6391
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Arizona",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "91",
+        "units": "inches",
+        "date": "December 21, 1967",
+        "location": "HAWLEY LAKE",
+        "latitude": "33.983335",
+        "longitude": "-109.7",
+        "station": "023926",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -109.7,
+          33.983335
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Arkansas",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "120",
+        "units": "degrees F",
+        "date": "August 10, 1936",
+        "location": "OZARK",
+        "latitude": "35.48333",
+        "longitude": "-93.81667",
+        "station": "035508",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.81667,
+          35.48333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Arkansas",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-29",
+        "units": "degrees F",
+        "date": "February 13, 1905",
+        "location": "GRAVETTE",
+        "latitude": "36.4261",
+        "longitude": "-94.448",
+        "station": "032930",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -94.448,
+          36.4261
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Arkansas",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "14.06",
+        "units": "inches",
+        "date": "December 3, 1982",
+        "location": "BIG FORK 1 SSE",
+        "latitude": "34.4619",
+        "longitude": "-93.9983",
+        "station": "030664",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.9983,
+          34.4619
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Arkansas",
+        "element": "Maximum Annual Precipitation Total",
+        "notes": "This value exceeds the previous record of 100.05 inches at Leola (GHCN-Daily ID USC00034134; COOP ID 034134) from July 1, 2008 through June 30, 2009. The previous record was established by an ad hoc SCEC convened in February 2010, and replaced, in turn the previous record of 98.55 inches observed in New Hope in 1957.",
+        "value": "101.05",
+        "units": "inches",
+        "date": "January 1 - December 31, 2015",
+        "location": "BIG FORK 1 SSE",
+        "latitude": "34.4619",
+        "longitude": "-93.9983",
+        "station": "030664",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.9983,
+          34.4619
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Arkansas",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "25",
+        "units": "inches",
+        "date": "January 22, 1918",
+        "location": "CORNING",
+        "latitude": "36.4197",
+        "longitude": "-90.5858",
+        "station": "031632",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.5858,
+          36.4197
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Arkansas",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "26",
+        "units": "inches",
+        "date": "January 22, 1918",
+        "location": "CALICO ROCK 2 WSW",
+        "latitude": "36.1092",
+        "longitude": "-92.1636",
+        "station": "031132",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.1636,
+          36.1092
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "California",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "134",
+        "units": "degrees F",
+        "date": "July 10, 1913",
+        "location": "GREENLAND RANCH",
+        "latitude": "36.4622",
+        "longitude": "-116.8669",
+        "station": "043603",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.8669,
+          36.4622
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "California",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-45",
+        "units": "degrees F",
+        "date": "January 20, 1937",
+        "location": "BOCA",
+        "latitude": "39.3886",
+        "longitude": "-120.0936",
+        "station": "040931",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.0936,
+          39.3886
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "California",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "Hourly precipitation values for Hoegee's Campground (in the mountains outside Los Angeles) indicate the greatest 24-hour rainfall occurred between 1:00 AM on January 22nd to 1:00 AM on January 23rd. During that period, the storm delivered 25.83 inches (corrected from previous reports of 26.12 inches). A detailed post-storm report was produced by the Weather Bureau.",
+        "value": "25.83",
+        "units": "inches",
+        "date": "January 22 - 23, 1943",
+        "location": "HOEGEES FC 60 A",
+        "latitude": "34.21667",
+        "longitude": "-118.03333",
+        "station": "044017",
+        "status": "EA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.03333,
+          34.21667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "California",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "67",
+        "units": "inches",
+        "date": "January 5, 1982",
+        "location": "ECHO SUMT SIERRA AT TAHOE",
+        "latitude": "38.78333",
+        "longitude": "-120.03333",
+        "station": "042671",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.03333,
+          38.78333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "California",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "451",
+        "units": "inches",
+        "date": "March 11, 1911",
+        "location": "TAMARACK",
+        "latitude": "38.6",
+        "longitude": "-119.93333",
+        "station": "048781",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.93333,
+          38.6
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Colorado",
+        "element": "All-Time Maximum Temperature",
+        "notes": "A 118&deg;F temperature that had persisted in the record books at Bennett, CO on July 11, 1888 was found to be a typographical transcription error. Area temperatures were at least 15-20 degrees cooler that date (the highest being a 105&deg;F observation at Glenwood Springs).",
+        "value": "114",
+        "units": "degrees F",
+        "date": "July 1, 1933",
+        "location": "LAS ANIMAS",
+        "latitude": "38.0635",
+        "longitude": "-103.2152",
+        "station": "054834",
+        "status": "N1A"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.2152,
+          38.0635
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Colorado",
+        "element": "All-Time Maximum Temperature",
+        "notes": "A 118&deg;F temperature that had persisted in the record books at Bennett, CO on July 11, 1888 was found to be a typographical transcription error. Area temperatures were at least 15-20 degrees cooler that date (the highest being a 105&deg;F observation at Glenwood Springs).",
+        "value": "114",
+        "units": "degrees F",
+        "date": "July 11, 1954",
+        "location": "SEDGWICK",
+        "latitude": "40.9383",
+        "longitude": "-102.5253",
+        "station": "057513",
+        "status": "N1A"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -102.5253,
+          40.9383
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Colorado",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-61",
+        "units": "degrees F",
+        "date": "February 1, 1985",
+        "location": "MAYBELL",
+        "latitude": "40.5158",
+        "longitude": "-108.0947",
+        "station": "055446",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -108.0947,
+          40.5158
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Colorado",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "Had a 9 AM to 9 AM observing period been used ending at 9 AM on September 13th, that the measurement would have been 12.46. However, the SCEC chose to confirm the calendar-day value as the official record. In either case, the previously acknolwedged record of 11.08 at Holly on June 17, 1965 was superseded.",
+        "value": "11.85",
+        "units": "inches",
+        "date": "September 12, 2013",
+        "location": "USGS Rod & Gun (Ft. Carson)",
+        "latitude": "38.4053",
+        "longitude": "-104.4920",
+        "station": "USGS 384053104492001",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.492,
+          38.4053
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Colorado",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "75.8",
+        "units": "inches",
+        "date": "April 14 - 15, 1921",
+        "location": "SILVER LAKE",
+        "latitude": "40.03278",
+        "longitude": "-105.57583",
+        "station": "057648",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -105.57583,
+          40.03278
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Colorado",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "251",
+        "units": "inches",
+        "date": "March 31, 1979",
+        "location": "WOLF CREEK PASS 1 E",
+        "latitude": "37.47444",
+        "longitude": "-106.79056",
+        "station": "059181",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106.79056,
+          37.47444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Connecticut",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "106",
+        "units": "degrees F",
+        "date": "August 23, 1916",
+        "location": "TORRINGTON (1)",
+        "latitude": "41.8",
+        "longitude": "-73.116667",
+        "station": "068438",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.116667,
+          41.8
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Connecticut",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "106",
+        "units": "degrees F",
+        "date": "July 15, 1995",
+        "location": "DANBURY",
+        "latitude": "41.4",
+        "longitude": "-73.4167",
+        "station": "061762",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.4167,
+          41.4
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Connecticut",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-32",
+        "units": "degrees F",
+        "date": "February 16, 1943",
+        "location": "FALLS VILLAGE",
+        "latitude": "41.95",
+        "longitude": "-73.36667",
+        "station": "062658",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.36667,
+          41.95
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Connecticut",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-32",
+        "units": "degrees F",
+        "date": "January 22, 1961",
+        "location": "COVENTRY",
+        "latitude": "41.8",
+        "longitude": "-72.35",
+        "station": "061689",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.35,
+          41.8
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Connecticut",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "12.77",
+        "units": "inches",
+        "date": "August 19, 1955",
+        "location": "BURLINGTON",
+        "latitude": "41.7944",
+        "longitude": "-72.932",
+        "station": "060973",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.932,
+          41.7944
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Connecticut",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "The 24-hr snowfall at Ansonia 1NE was the result of a powerful blizzard which impacted the Tri-State Region. After the storm subsided, many locations around the region reported more than 30 inches of snow. The State Climate Extremes Committee verified the validity of the observation at Ansonia.",
+        "value": "36",
+        "units": "inches",
+        "date": "February 8 - 9, 2013",
+        "location": "ANSONIA 1 NE",
+        "latitude": "41.3491",
+        "longitude": "-73.0918",
+        "station": "060128",
+        "status": "NSA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.0918,
+          41.3491
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Connecticut",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "55",
+        "units": "inches",
+        "date": "February 5, 1961",
+        "location": "NORFOLK 2 SW",
+        "latitude": "41.9725",
+        "longitude": "-73.2208",
+        "station": "065445",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.2208,
+          41.9725
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Delaware",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "110",
+        "units": "degrees F",
+        "date": "July 21, 1930",
+        "location": "MILLSBORO",
+        "latitude": "38.58333",
+        "longitude": "-75.31667",
+        "station": "076020",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.31667,
+          38.58333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Delaware",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-17",
+        "units": "degrees F",
+        "date": "January 17, 1893",
+        "location": "MILLSBORO",
+        "latitude": "38.58333",
+        "longitude": "-75.31667",
+        "station": "076020",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.31667,
+          38.58333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Delaware",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "8.5",
+        "units": "inches",
+        "date": "July 13, 1975",
+        "location": "DOVER",
+        "latitude": "39.1467",
+        "longitude": "-75.5055",
+        "station": "072730",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.5055,
+          39.1467
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Delaware",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "25",
+        "units": "inches",
+        "date": "February 19, 1979",
+        "location": "DOVER",
+        "latitude": "39.1467",
+        "longitude": "-75.5055",
+        "station": "072730",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.5055,
+          39.1467
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Delaware",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "25",
+        "units": "inches",
+        "date": "February 18, 2003",
+        "location": "WILMINGTON NEW CASTLE CO AP",
+        "latitude": "39.6744",
+        "longitude": "-75.60567",
+        "station": "13781",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.60567,
+          39.6744
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Delaware",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "25",
+        "units": "inches",
+        "date": "February 19, 1979",
+        "location": "BRIDGEVILLE 1 NW",
+        "latitude": "38.75",
+        "longitude": "-75.61667",
+        "station": "071330",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.61667,
+          38.75
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Florida",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "109",
+        "units": "degrees F",
+        "date": "June 29, 1931",
+        "location": "MONTICELLO  5 SE",
+        "latitude": "30.49222",
+        "longitude": "-83.78333",
+        "station": "085879",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.78333,
+          30.49222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Florida",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-2",
+        "units": "degrees F",
+        "date": "February 13, 1899",
+        "location": "TALLAHASSEE",
+        "latitude": "30.43333",
+        "longitude": "-84.28333",
+        "station": "088754",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.28333,
+          30.43333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Florida",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "The previously reported extreme of 38.70 inches at Yankeetown on September 5, 1950 is an estimated depth of rainfall calculated as part of a post-storm survey of Hurricane Easy (Cedar Keys Hurricane). Value has historically been considered reasonably accurate (and even an underestimate of actual rain fall), but as an estimate cannot be considered an official observation from a reliable precipitation gauge.",
+        "value": "23.28",
+        "units": "inches",
+        "date": "November 11 - 12, 1980",
+        "location": "KEY WEST INTL AP",
+        "latitude": "24.555",
+        "longitude": "-81.75222",
+        "station": "12836",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.75222,
+          24.555
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Florida",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "4",
+        "units": "inches",
+        "date": "March 6, 1954",
+        "location": "MILTON EXPERIMENT STN",
+        "latitude": "30.77944",
+        "longitude": "-87.14139",
+        "station": "085793",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.14139,
+          30.77944
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Florida",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "4",
+        "units": "inches",
+        "date": "March 6, 1954",
+        "location": "MILTON EXPERIMENT STN",
+        "latitude": "30.77944",
+        "longitude": "-87.14139",
+        "station": "085793",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.14139,
+          30.77944
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Georgia",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "112",
+        "units": "degrees F",
+        "date": "August 20, 1983",
+        "location": "GREENVILLE",
+        "latitude": "33.02861",
+        "longitude": "-84.735",
+        "station": "093915",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.735,
+          33.02861
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Georgia",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "112",
+        "units": "degrees F",
+        "date": "July 24, 1952",
+        "location": "LOUISVILLE 1 E",
+        "latitude": "33.0125",
+        "longitude": "-82.3914",
+        "station": "095314",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.3914,
+          33.0125
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Georgia",
+        "element": "All-Time Minimum Temperature",
+        "notes": "Record of -17&deg;F at Civilian Conservation Corps Logging Camp F-16 is congruent with similar low temperatures observed in the area on January 27, 1940. This observation is archived as part of the National Archives CCC collection.",
+        "value": "-17",
+        "units": "degrees F",
+        "date": "January 27, 1940",
+        "location": "CCC Fire Camp F-16 (nr. Beatum)",
+        "latitude": "34.5793",
+        "longitude": "-85.1491",
+        "station": "",
+        "status": "EA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.1491,
+          34.5793
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Georgia",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "21.1",
+        "units": "inches",
+        "date": "July 6, 1994",
+        "location": "AMERICUS",
+        "latitude": "32.0306",
+        "longitude": "-84.2461",
+        "station": "090253",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.2461,
+          32.0306
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Georgia",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "19.3",
+        "units": "inches",
+        "date": "March 3, 1942",
+        "location": "CEDARTOWN",
+        "latitude": "34.0588",
+        "longitude": "-85.2338",
+        "station": "091732",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.2338,
+          34.0588
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Georgia",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "18",
+        "units": "inches",
+        "date": "March 13, 1993",
+        "location": "CHATSWORTH 2",
+        "latitude": "34.7582",
+        "longitude": " -84.7642",
+        "station": "091863",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.7642,
+          34.7582
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Hawaii",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "100",
+        "units": "degrees F",
+        "date": "April 27, 1931",
+        "location": "PAHALA 21",
+        "latitude": "19.1987",
+        "longitude": "-155.4778",
+        "station": "517421",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.4778,
+          19.1987
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Hawaii",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "12",
+        "units": "degrees F",
+        "date": "May 17, 1979",
+        "location": "MAUNA KEA OBSERVATORY 111.",
+        "latitude": "19.81667",
+        "longitude": "-155.46667",
+        "station": "516183",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.46667,
+          19.81667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Hawaii",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "The 38.00 inches in 24-hrs at Kilauea Sugar Co. Plantation (Kauai) on January 24-25, 1956 is an estimate, but is listed as the record because it was obtained from a reliable rain gauge and is deemed conservative by an inch or more (that is, the 12-inch gauge was overflowing when it was emptied for the first time). Storm reports indicated 41.90 inches fell over period 9 AM 1/24/56 to 3 PM 1/25/56 (including 6-inches in 30 minutes and 12 inches in the first hour). The greatest accurately observed 24-hr precipitation is 31.95 inches at Honomu (Hawaii) on February 20, 1918. More information on the January 24-25, 1956 Kilauea storm rain fall can be found on page 10 of the Weather Bureau's 1961 Climate of the States: Hawaii (Climatography of the United States No. 60-51).",
+        "value": "38",
+        "units": "inches",
+        "date": "January 24 - 25, 1956",
+        "location": "KILAUEA 1134",
+        "latitude": "22.21389",
+        "longitude": "-159.40444",
+        "station": "514561",
+        "status": "EA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -159.40444,
+          22.21389
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Hawaii",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "6.5",
+        "units": "inches",
+        "date": "February 2, 1936",
+        "location": "HALEAKALA",
+        "latitude": "20.71667",
+        "longitude": "-156.25",
+        "station": "510992",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -156.25,
+          20.71667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Hawaii",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "5",
+        "units": "inches",
+        "date": "April 6, 1938",
+        "location": "HALEAKALA",
+        "latitude": "20.71667",
+        "longitude": "-156.25",
+        "station": "510992",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -156.25,
+          20.71667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Idaho",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "118",
+        "units": "degrees F",
+        "date": "July 28, 1934",
+        "location": "OROFINO",
+        "latitude": "46.48333",
+        "longitude": "-116.26667",
+        "station": "106681",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.26667,
+          46.48333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Idaho",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-60",
+        "units": "degrees F",
+        "date": "January 18, 1943",
+        "location": "ISLAND PARK",
+        "latitude": "44.4189",
+        "longitude": "-111.3714",
+        "station": "104598",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.3714,
+          44.4189
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Idaho",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "7.17",
+        "units": "inches",
+        "date": "November 23, 1909",
+        "location": "RATTLESNAKE CREEK",
+        "latitude": "43.61667",
+        "longitude": "-115.73333",
+        "station": "107545",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -115.73333,
+          43.61667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Idaho",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "31",
+        "units": "inches",
+        "date": "December 18, 1967",
+        "location": "ANDERSON DAM",
+        "latitude": "43.3572",
+        "longitude": "-115.4523",
+        "station": "100282",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -115.4523,
+          43.3572
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Idaho",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "182",
+        "units": "inches",
+        "date": "February 20, 1954",
+        "location": "MULLAN PASS VOR/DME",
+        "latitude": "47.45694",
+        "longitude": "-115.645",
+        "station": "24154",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -115.645,
+          47.45694
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Idaho",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "182",
+        "units": "inches",
+        "date": "February 22, 1954",
+        "location": "MULLAN PASS VOR/DME",
+        "latitude": "47.45694",
+        "longitude": "-115.645",
+        "station": "24154",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -115.645,
+          47.45694
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Illinois",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "117",
+        "units": "degrees F",
+        "date": "July 14, 1954",
+        "location": "EAST ST LOUIS PARKS COLLEGE",
+        "latitude": "38.56667",
+        "longitude": "-90.18333",
+        "station": "112614",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.18333,
+          38.56667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Illinois",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-36",
+        "units": "degrees F",
+        "date": "January 5, 1999",
+        "location": "CONGERVILLE 2NW",
+        "latitude": "40.6211",
+        "longitude": "-89.2415",
+        "station": "111836",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.2415,
+          40.6211
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Illinois",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "16.91",
+        "units": "inches",
+        "date": "July 18, 1996",
+        "location": "AURORA",
+        "latitude": "41.7805",
+        "longitude": "-88.3091",
+        "station": "110338",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.3091,
+          41.7805
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Illinois",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "36",
+        "units": "inches",
+        "date": "February 28, 1900",
+        "location": "ASTORIA",
+        "latitude": "40.228",
+        "longitude": "-90.355",
+        "station": "110291",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.355,
+          40.228
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Illinois",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "41",
+        "units": "inches",
+        "date": "February 28, 1900",
+        "location": "ASTORIA",
+        "latitude": "40.228",
+        "longitude": "-90.355",
+        "station": "110291",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.355,
+          40.228
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Illinois",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "41",
+        "units": "inches",
+        "date": "January 31, 1979",
+        "location": "GEBHARD WOODS STATE PARK",
+        "latitude": "41.35",
+        "longitude": "-88.43333",
+        "station": "113369",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.43333,
+          41.35
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Indiana",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "116",
+        "units": "degrees F",
+        "date": "July 14, 1936",
+        "location": "COLLEGEVILLE ST JOSEPH COUNTY AP",
+        "latitude": "40.9238",
+        "longitude": "-87.1752",
+        "station": "121719",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.1752,
+          40.9238
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Indiana",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-36",
+        "units": "degrees F",
+        "date": "January 19, 1994",
+        "location": "NEW WHITELAND",
+        "latitude": "39.55",
+        "longitude": "-86.1",
+        "station": "126304",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.1,
+          39.55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Indiana",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "10.5",
+        "units": "inches",
+        "date": "August 6, 1905",
+        "location": "PRINCETON 1 W",
+        "latitude": "38.3566",
+        "longitude": "-87.5905",
+        "station": "127125",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.5905,
+          38.3566
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Indiana",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "33",
+        "units": "inches",
+        "date": "December 23, 2004",
+        "location": "SALEM",
+        "latitude": "38.6157",
+        "longitude": "-86.0855",
+        "station": "127755",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -86.0855,
+          38.6157
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Indiana",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "47",
+        "units": "inches",
+        "date": "January 28, 1918",
+        "location": "HAMMOND",
+        "latitude": "41.56667",
+        "longitude": "-87.5",
+        "station": "123650",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -87.5,
+          41.56667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Iowa",
+        "element": "All-Time Maximum Temperature",
+        "notes": "The value of 118&deg;F is confirmed as a valid observation, but the station sits on a bluff above the river and the observation is characteristic more of the local microclimate than the area climate. If this value is in doubt, the next highest value is 117&deg;F on July 25, 1936 at both Logan and Atlantic.",
+        "value": "118",
+        "units": "degrees F",
+        "date": "July 20, 1934",
+        "location": "KEOKUK NO 2",
+        "latitude": "40.38333",
+        "longitude": "-91.38333",
+        "station": "134372",
+        "status": "EA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -91.38333,
+          40.38333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Iowa",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-47",
+        "units": "degrees F",
+        "date": "February 3, 1996",
+        "location": "ELKADER 6 SSW",
+        "latitude": "42.7754",
+        "longitude": "-91.4537",
+        "station": "132603",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -91.4537,
+          42.7754
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Iowa",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-47",
+        "units": "degrees F",
+        "date": "January 12, 1912",
+        "location": "WASHTA",
+        "latitude": "42.5737",
+        "longitude": "-95.718",
+        "station": "138693",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -95.718,
+          42.5737
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Iowa",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "Previously reported record of 16.70 inches in Decatur Co. on August 5-6, 1959 is likely valid, but was estimated from a post-event survey observation. A 13.52 inch observation was made at Atlantic 5SW on June 14, 1998, but it is likely that the observation covered more than a 24-hr period.",
+        "value": "13.18",
+        "units": "inches",
+        "date": "June 14, 1998",
+        "location": "ATLANTIC 1 NE",
+        "latitude": "41.4175",
+        "longitude": "-95.0041",
+        "station": "130364",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -95.0041,
+          41.4175
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Iowa",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "State climatologist reports a greater 24-hr snow fall that spanned 2 observational days.",
+        "value": "24",
+        "units": "inches",
+        "date": "April 20, 1918",
+        "location": "LENOX",
+        "latitude": "40.8747",
+        "longitude": "-94.5717",
+        "station": "134746",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -94.5717,
+          40.8747
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Iowa",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "Possible issues with reporting of snow depth at Lake Park. State climatologist is investigating.",
+        "value": "52",
+        "units": "inches",
+        "date": "February 28, 1969",
+        "location": "LAKE PARK",
+        "latitude": "43.4483",
+        "longitude": "-95.3247",
+        "station": "134561",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -95.3247,
+          43.4483
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Iowa",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "52",
+        "units": "inches",
+        "date": "March 1, 1969",
+        "location": "LAKE PARK",
+        "latitude": "43.4483",
+        "longitude": "-95.3247",
+        "station": "134561",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -95.3247,
+          43.4483
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Kansas",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "121",
+        "units": "degrees F",
+        "date": "July 18, 1936",
+        "location": "FREDONIA",
+        "latitude": "37.534",
+        "longitude": "-95.827",
+        "station": "142894",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -95.827,
+          37.534
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Kansas",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "121",
+        "units": "degrees F",
+        "date": "July 24, 1936",
+        "location": "ALTON 1 W",
+        "latitude": "39.47667",
+        "longitude": "-98.9713",
+        "station": "140201",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.9713,
+          39.47667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Kansas",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-40",
+        "units": "degrees F",
+        "date": "February 13, 1905",
+        "location": "LEBANON",
+        "latitude": "39.8083",
+        "longitude": "-98.5583",
+        "station": "144598",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.5583,
+          39.8083
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Kansas",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "The 30.0 inches observed at Pratt in 2009 was formally evaluated by the State Climate Extremes Committee.",
+        "value": "30",
+        "units": "inches",
+        "date": "March 28, 2009",
+        "location": "PRATT",
+        "latitude": "37.67313",
+        "longitude": "-98.77621",
+        "station": "146549",
+        "status": "NSA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.77621,
+          37.67313
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Kansas",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "40",
+        "units": "inches",
+        "date": "December 31, 1918",
+        "location": "SYRACUSE 1NE",
+        "latitude": "37.9929",
+        "longitude": "-101.7417",
+        "station": "148038",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -101.7417,
+          37.9929
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Kentucky",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "114",
+        "units": "degrees F",
+        "date": "July 28, 1930",
+        "location": "GREENSBURG",
+        "latitude": "37.2571",
+        "longitude": "-85.5012",
+        "station": "153430",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.5012,
+          37.2571
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Kentucky",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-37",
+        "units": "degrees F",
+        "date": "January 19, 1994",
+        "location": "SHELBYVILLE 1 E",
+        "latitude": "38.2",
+        "longitude": "-85.2",
+        "station": "157324",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.2,
+          38.2
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Kentucky",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "Historical value was examined retroactively and found to be valid and exceeded prior stated record.",
+        "value": "10.48",
+        "units": "inches",
+        "date": "March 1, 1997",
+        "location": "LOUISVILLE WFO",
+        "latitude": "38.1151",
+        "longitude": "-85.6445",
+        "station": "154958",
+        "status": "NSA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.6445,
+          38.1151
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Kentucky",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "26",
+        "units": "inches",
+        "date": "March 3, 1942",
+        "location": "SIMERS",
+        "latitude": "37.46667",
+        "longitude": "-82.26667",
+        "station": "157396",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.26667,
+          37.46667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Kentucky",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "31",
+        "units": "inches",
+        "date": "January 20, 1978",
+        "location": "LAGRANGE",
+        "latitude": "38.43333",
+        "longitude": "-85.36667",
+        "station": "154595",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.36667,
+          38.43333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Louisiana",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "114",
+        "units": "degrees F",
+        "date": "August 10, 1936",
+        "location": "PLAIN DEALING ",
+        "latitude": "32.892",
+        "longitude": "-93.6944",
+        "station": "167344",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6944,
+          32.892
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Louisiana",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-16",
+        "units": "degrees F",
+        "date": "February 13, 1899",
+        "location": "MINDEN",
+        "latitude": "32.6052",
+        "longitude": "-93.2947",
+        "station": "166244",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.2947,
+          32.6052
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Louisiana",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "22",
+        "units": "inches",
+        "date": "August 28 - 29, 1962",
+        "location": "HACKBERRY 8 SSW",
+        "latitude": "29.88944",
+        "longitude": "-93.40194",
+        "station": "163979",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.40194,
+          29.88944
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Louisiana",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "The 13.0 inches observed at Colfax on February 13, 1960 is the greatest 24-hr snowfall that could be confirmed for Louisiana. It is likely that higher 24-hr amounts fell during the Valentine's Day blizzard of February 13-15, 1895 (in which storm totals of 14 to 24 inches were prevalent from Galveston, TX to Lake Charles, LA) as well as the blizzard of December 21-22, 1929. However, all reported snow falls from these events appear to be accumulated amounts from which daily totals cannot be reliably extracted.",
+        "value": "13",
+        "units": "inches",
+        "date": "February 13, 1960",
+        "location": "COLFAX",
+        "latitude": "31.5183",
+        "longitude": "-92.7142",
+        "station": "161941",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.7142,
+          31.5183
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Louisiana",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "24",
+        "units": "inches",
+        "date": "February 15, 1895",
+        "location": "RAYNE 6 N",
+        "latitude": "30.33333",
+        "longitude": "-92.26667",
+        "station": "167678",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.26667,
+          30.33333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maine",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "105",
+        "units": "degrees F",
+        "date": "July 10, 1911",
+        "location": "NORTH BRIDGTON",
+        "latitude": "44.13333",
+        "longitude": "-70.71667",
+        "station": "175875",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.71667,
+          44.13333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maine",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "105",
+        "units": "degrees F",
+        "date": "July 4, 1911",
+        "location": "NORTH BRIDGTON",
+        "latitude": "44.13333",
+        "longitude": "-70.71667",
+        "station": "175875",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.71667,
+          44.13333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maine",
+        "element": "All-Time Minimum Temperature",
+        "notes": "The record minimum temperature of -50&deg;F was observed by an automated observing station operated by the US Geological Survey (USGS) at a river gage on the Big Black River near the Canadian border. The data are archived by the USGS, and the validity of the observation was confirmed by the State Climate Extremes Committee. The value also ties observations in NH and VT for the coldest temperature recorded for the Northeast region of the United States.",
+        "value": "-50",
+        "units": "degrees F",
+        "date": "January 16, 2009",
+        "location": "Big Black River (nr. Saint Pamphile, PQ)",
+        "latitude": "46.893889",
+        "longitude": "-69.752222",
+        "station": "USGS BBRM1",
+        "status": "NS"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -69.752222,
+          46.893889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maine",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "13.32",
+        "units": "inches",
+        "date": "October 20 - 21, 1996",
+        "location": "PORTLAND JETPORT",
+        "latitude": "43.64222",
+        "longitude": "-70.30444",
+        "station": "14764",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.30444,
+          43.64222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maine",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "40",
+        "units": "inches",
+        "date": "December 30, 1962",
+        "location": "ORONO",
+        "latitude": "44.89917",
+        "longitude": "-68.67444",
+        "station": "176430",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -68.67444,
+          44.89917
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maine",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "84",
+        "units": "inches",
+        "date": "February 28, 1969",
+        "location": "FARMINGTON",
+        "latitude": "44.68938",
+        "longitude": "-70.15646",
+        "station": "172765",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70.15646,
+          44.68938
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maryland",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "109",
+        "units": "degrees F",
+        "date": "August 6, 1918",
+        "location": "CUMBERLAND",
+        "latitude": "39.65",
+        "longitude": "-78.75",
+        "station": "182280",
+        "status": "E3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.75,
+          39.65
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maryland",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "109",
+        "units": "degrees F",
+        "date": "August 7, 1918",
+        "location": "CUMBERLAND",
+        "latitude": "39.65",
+        "longitude": "-78.75",
+        "station": "182280",
+        "status": "E3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.75,
+          39.65
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maryland",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "109",
+        "units": "degrees F",
+        "date": "July 10, 1936",
+        "location": "FREDERICK POLICE BRKS",
+        "latitude": "39.41611",
+        "longitude": "-77.43889",
+        "station": "183348",
+        "status": "E3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.43889,
+          39.41611
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maryland",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "109",
+        "units": "degrees F",
+        "date": "July 3, 1898",
+        "location": "BOETTCHERVILLE",
+        "latitude": "39.65",
+        "longitude": "-78.8",
+        "station": "180960",
+        "status": "E3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.8,
+          39.65
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maryland",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-40",
+        "units": "degrees F",
+        "date": "January 13, 1912",
+        "location": "OAKLAND 1 SE",
+        "latitude": "39.41317",
+        "longitude": "-79.40025",
+        "station": "186620",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.40025,
+          39.41317
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maryland",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "14.75",
+        "units": "inches",
+        "date": "July 26 - 27, 1897",
+        "location": "JEWELL",
+        "latitude": "38.75",
+        "longitude": "-76.616667",
+        "station": "184650",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.616667,
+          38.75
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maryland",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "31",
+        "units": "inches",
+        "date": "March 29, 1942",
+        "location": "CLEAR SPRING 1 ENE",
+        "latitude": "39.66667",
+        "longitude": "-77.9",
+        "station": "181890",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.9,
+          39.66667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Maryland",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "54",
+        "units": "inches",
+        "date": "March 15, 1993",
+        "location": "FROSTBURG 2",
+        "latitude": "39.65971",
+        "longitude": "-78.93601",
+        "station": "183415",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.93601,
+          39.65971
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Massachusetts",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "107",
+        "units": "degrees F",
+        "date": "August 2, 1975",
+        "location": "CHESTER 2",
+        "latitude": "42.3",
+        "longitude": "-72.98333",
+        "station": "191430",
+        "status": "E2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.98333,
+          42.3
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Massachusetts",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-35",
+        "units": "degrees F",
+        "date": "February 15, 1943",
+        "location": "COLDBROOK",
+        "latitude": "42.38333",
+        "longitude": "-72.05",
+        "station": "191589",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.05,
+          42.38333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Massachusetts",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-35",
+        "units": "degrees F",
+        "date": "January 12, 1981",
+        "location": "CHESTER 2",
+        "latitude": "42.3",
+        "longitude": "-72.98333",
+        "station": "191430",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.98333,
+          42.3
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Massachusetts",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-35",
+        "units": "degrees F",
+        "date": "January 5, 1904",
+        "location": "TAUNTON",
+        "latitude": "41.90028",
+        "longitude": "-71.06583",
+        "station": "198367",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.06583,
+          41.90028
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Massachusetts",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "18.15",
+        "units": "inches",
+        "date": "August 18 - 19, 1955",
+        "location": "WESTFIELD",
+        "latitude": "42.13333",
+        "longitude": "-72.75",
+        "station": "199191",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.75,
+          42.13333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Massachusetts",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "29",
+        "units": "inches",
+        "date": "April 1, 1997",
+        "location": "NATICK",
+        "latitude": "42.2825",
+        "longitude": "-71.344",
+        "station": "195175",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.344,
+          42.2825
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Massachusetts",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "62",
+        "units": "inches",
+        "date": "January 13, 1996",
+        "location": "GREAT BARRINGTON",
+        "latitude": "42.21667",
+        "longitude": "-73.35",
+        "station": "193208",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.35,
+          42.21667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Michigan",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "112",
+        "units": "degrees F",
+        "date": "July 13, 1936",
+        "location": "STANWOOD",
+        "latitude": "43.63333",
+        "longitude": "-85.5",
+        "station": "207834",
+        "status": "E2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.5,
+          43.63333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Michigan",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-51",
+        "units": "degrees F",
+        "date": "February 9, 1934",
+        "location": "VANDERBILT 11ENE",
+        "latitude": "45.1702",
+        "longitude": "-84.4397",
+        "station": "208417",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4397,
+          45.1702
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Michigan",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "9.78",
+        "units": "inches",
+        "date": "August 31, 1914",
+        "location": "BLOOMINGDALE",
+        "latitude": "42.3838",
+        "longitude": "-85.9626",
+        "station": "200864",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -85.9626,
+          42.3838
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Michigan",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "32",
+        "units": "inches",
+        "date": "December 2, 1985",
+        "location": "HERMAN",
+        "latitude": "46.6653",
+        "longitude": "-88.3772",
+        "station": "203744",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.3772,
+          46.6653
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Michigan",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "117",
+        "units": "inches",
+        "date": "January 27, 1948",
+        "location": "EAGLE HARBOR",
+        "latitude": "47.46667",
+        "longitude": "-88.16667",
+        "station": "202332",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.16667,
+          47.46667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Michigan",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "117",
+        "units": "inches",
+        "date": "January 28, 1948",
+        "location": "EAGLE HARBOR",
+        "latitude": "47.46667",
+        "longitude": "-88.16667",
+        "station": "202332",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.16667,
+          47.46667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Michigan",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "117",
+        "units": "inches",
+        "date": "January 29, 1948",
+        "location": "EAGLE HARBOR",
+        "latitude": "47.46667",
+        "longitude": "-88.16667",
+        "station": "202332",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.16667,
+          47.46667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Michigan",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "117",
+        "units": "inches",
+        "date": "January 30, 1948",
+        "location": "EAGLE HARBOR",
+        "latitude": "47.46667",
+        "longitude": "-88.16667",
+        "station": "202332",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.16667,
+          47.46667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Michigan",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "117",
+        "units": "inches",
+        "date": "January 31, 1948",
+        "location": "EAGLE HARBOR",
+        "latitude": "47.46667",
+        "longitude": "-88.16667",
+        "station": "202332",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.16667,
+          47.46667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Minnesota",
+        "element": "All-Time Maximum Temperature",
+        "notes": "The previously reported record of 114&deg;F was reported by observer at Moorhead on 7/6/1936 as 113.6&deg;F (unlikely to be accurate given the 1-degree precision of the mercury in glass thermometer in use at the time), and rounded to 114&deg;F. The extreme reported above for Beardsley was observed as 114.5&deg;F and has been rounded to 115&deg;F per current rounding practices.",
+        "value": "115",
+        "units": "degrees F",
+        "date": "July 29, 1917",
+        "location": "BEARDSLEY",
+        "latitude": "45.55",
+        "longitude": "-96.71667",
+        "station": "210541",
+        "status": "N1A"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.71667,
+          45.55
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Minnesota",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-60",
+        "units": "degrees F",
+        "date": "February 2, 1996",
+        "location": "TOWER 2S",
+        "latitude": "47.7817",
+        "longitude": "-92.2784",
+        "station": "218311",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.2784,
+          47.7817
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Minnesota",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "15.1",
+        "units": "inches",
+        "date": "August 19, 2007",
+        "location": "HOKAH WWTP",
+        "latitude": "43.7635",
+        "longitude": "-91.3481",
+        "station": "213808",
+        "status": "NS"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -91.3481,
+          43.7635
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Minnesota",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "36",
+        "units": "inches",
+        "date": "January 7, 1994",
+        "location": "WOLF RIDGE ELC",
+        "latitude": "47.45",
+        "longitude": "-91.2167",
+        "station": "219134",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -91.2167,
+          47.45
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Minnesota",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "88",
+        "units": "inches",
+        "date": "February 15, 1969",
+        "location": "MEADOWLANDS 9 S",
+        "latitude": "46.98333",
+        "longitude": "-92.73333",
+        "station": "215298",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.73333,
+          46.98333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Minnesota",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "88",
+        "units": "inches",
+        "date": "February 16, 1969",
+        "location": "MEADOWLANDS 9 S",
+        "latitude": "46.98333",
+        "longitude": "-92.73333",
+        "station": "215298",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.73333,
+          46.98333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Minnesota",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "88",
+        "units": "inches",
+        "date": "February 17, 1969",
+        "location": "MEADOWLANDS 9 S",
+        "latitude": "46.98333",
+        "longitude": "-92.73333",
+        "station": "215298",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.73333,
+          46.98333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Minnesota",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "88",
+        "units": "inches",
+        "date": "February 18, 1969",
+        "location": "MEADOWLANDS 9 S",
+        "latitude": "46.98333",
+        "longitude": "-92.73333",
+        "station": "215298",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.73333,
+          46.98333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Minnesota",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "88",
+        "units": "inches",
+        "date": "February 19, 1969",
+        "location": "MEADOWLANDS 9 S",
+        "latitude": "46.98333",
+        "longitude": "-92.73333",
+        "station": "215298",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.73333,
+          46.98333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Minnesota",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "88",
+        "units": "inches",
+        "date": "February 20, 1969",
+        "location": "MEADOWLANDS 9 S",
+        "latitude": "46.98333",
+        "longitude": "-92.73333",
+        "station": "215298",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.73333,
+          46.98333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Minnesota",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "88",
+        "units": "inches",
+        "date": "February 21, 1969",
+        "location": "MEADOWLANDS 9 S",
+        "latitude": "46.98333",
+        "longitude": "-92.73333",
+        "station": "215298",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.73333,
+          46.98333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Mississippi",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "115",
+        "units": "degrees F",
+        "date": "July 29, 1930",
+        "location": "HOLLY SPRINGS 2 N",
+        "latitude": "34.8",
+        "longitude": "-89.43333",
+        "station": "224168",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.43333,
+          34.8
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Mississippi",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-19",
+        "units": "degrees F",
+        "date": "January 30, 1966",
+        "location": "CORINTH 7 SW",
+        "latitude": "34.8791",
+        "longitude": "-88.6177",
+        "station": "221962",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.6177,
+          34.8791
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Mississippi",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "15.68",
+        "units": "inches",
+        "date": "July 9, 1968",
+        "location": "COLUMBUS 4 ESE",
+        "latitude": "33.46667",
+        "longitude": "-88.36667",
+        "station": "221870",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.36667,
+          33.46667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Mississippi",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "18",
+        "units": "inches",
+        "date": "December 23, 1963",
+        "location": "TUNICA 2 N",
+        "latitude": "34.7281",
+        "longitude": "-90.3683",
+        "station": "228998",
+        "status": "N2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.3683,
+          34.7281
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Mississippi",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "18",
+        "units": "inches",
+        "date": "December 23, 1963",
+        "location": "MOUNT PLEASANT 4SW",
+        "latitude": "46.98333",
+        "longitude": "-92.73333",
+        "station": "226084",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -92.73333,
+          46.98333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Missouri",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "118",
+        "units": "degrees F",
+        "date": "July 14, 1954",
+        "location": "WARSAW 1",
+        "latitude": "38.25",
+        "longitude": "-93.36667",
+        "station": "238733",
+        "status": "E3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.36667,
+          38.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Missouri",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-40",
+        "units": "degrees F",
+        "date": "February 13, 1905",
+        "location": "WARSAW 1",
+        "latitude": "38.25",
+        "longitude": "-93.36667",
+        "station": "238733",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.36667,
+          38.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Missouri",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "18.18",
+        "units": "inches",
+        "date": "July 20, 1965",
+        "location": "EDGERTON",
+        "latitude": "39.5075",
+        "longitude": "-94.6328",
+        "station": "232474",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -94.6328,
+          39.5075
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Missouri",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "24",
+        "units": "inches",
+        "date": "February 25, 1979",
+        "location": "JACKSON",
+        "latitude": "37.378",
+        "longitude": "-89.6677",
+        "station": "234226",
+        "status": "N3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.6677,
+          37.378
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Missouri",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "36",
+        "units": "inches",
+        "date": "March 19, 1960",
+        "location": "UNION",
+        "latitude": "38.4444",
+        "longitude": "-91.0041",
+        "station": "238515",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -91.0041,
+          38.4444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Missouri",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "36",
+        "units": "inches",
+        "date": "March 20, 1960",
+        "location": "UNION",
+        "latitude": "38.4444",
+        "longitude": "-91.0041",
+        "station": "238515",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -91.0041,
+          38.4444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Montana",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "117",
+        "units": "degrees F",
+        "date": "July 20, 1893",
+        "location": "GLENDIVE",
+        "latitude": "47.1065",
+        "longitude": "-104.7183",
+        "station": "243581",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.7183,
+          47.1065
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Montana",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "117",
+        "units": "degrees F",
+        "date": "July 5, 1937",
+        "location": "MEDICINE LAKE 3 SE",
+        "latitude": "48.4829",
+        "longitude": "-104.4515",
+        "station": "245572",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.4515,
+          48.4829
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Montana",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-70",
+        "units": "degrees F",
+        "date": "January 20, 1954",
+        "location": "ROGERS PASS",
+        "latitude": "47.08333",
+        "longitude": "-112.36667",
+        "station": "247156",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -112.36667,
+          47.08333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Montana",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "11.5",
+        "units": "inches",
+        "date": "June 20, 1921",
+        "location": "SPRINGBROOK",
+        "latitude": "47.366667",
+        "longitude": "-105.75",
+        "station": "247796",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -105.75,
+          47.366667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Montana",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "48",
+        "units": "inches",
+        "date": "December 27, 2003",
+        "location": "MILLEGAN 14 SE",
+        "latitude": "46.8747",
+        "longitude": "-111.1643",
+        "station": "245712",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.1643,
+          46.8747
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Montana",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "48",
+        "units": "inches",
+        "date": "May 29, 1982",
+        "location": "SHONKIN 7 S",
+        "latitude": "47.5315",
+        "longitude": "-110.5764",
+        "station": "247540",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.5764,
+          47.5315
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Montana",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "147",
+        "units": "inches",
+        "date": "February 18, 1975",
+        "location": "SUMMIT",
+        "latitude": "48.3162",
+        "longitude": "-113.3542",
+        "station": "247978",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.3542,
+          48.3162
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nebraska",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "118",
+        "units": "degrees F",
+        "date": "July 15, 1934",
+        "location": "GENEVA",
+        "latitude": "40.5313",
+        "longitude": "-97.5963",
+        "station": "253175",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.5963,
+          40.5313
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nebraska",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "118",
+        "units": "degrees F",
+        "date": "July 17, 1936",
+        "location": "HARTINGTON",
+        "latitude": "42.6166",
+        "longitude": "-97.2608",
+        "station": "253630",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.2608,
+          42.6166
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nebraska",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "118",
+        "units": "degrees F",
+        "date": "July 24, 1936",
+        "location": "MINDEN",
+        "latitude": "40.5155",
+        "longitude": "-98.9513",
+        "station": "255565",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.9513,
+          40.5155
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nebraska",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-47",
+        "units": "degrees F",
+        "date": "December 22, 1989",
+        "location": "OSHKOSH",
+        "latitude": "41.4014",
+        "longitude": "-102.3465",
+        "station": "256385",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -102.3465,
+          41.4014
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nebraska",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-47",
+        "units": "degrees F",
+        "date": "February 12, 1899",
+        "location": "BRIDGEPORT",
+        "latitude": "41.668",
+        "longitude": "-103.1038",
+        "station": "251145",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.1038,
+          41.668
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nebraska",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "13.15",
+        "units": "inches",
+        "date": "July 8 - 9, 1950",
+        "location": "YORK",
+        "latitude": "40.8678",
+        "longitude": "-97.5922",
+        "station": "259510",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.5922,
+          40.8678
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nebraska",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "27",
+        "units": "inches",
+        "date": "December 21, 2006",
+        "location": "DALTON",
+        "latitude": "41.4086",
+        "longitude": "-102.9661",
+        "station": "252145",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -102.9661,
+          41.4086
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nebraska",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "44",
+        "units": "inches",
+        "date": "February 16, 1936",
+        "location": "FREMONT",
+        "latitude": "41.43",
+        "longitude": "-96.4669",
+        "station": "253050",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -96.4669,
+          41.43
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nevada",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "125",
+        "units": "degrees F",
+        "date": "June 29, 1994",
+        "location": "LAUGHLIN",
+        "latitude": "35.1691",
+        "longitude": "-114.5805",
+        "station": "264480",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.5805,
+          35.1691
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nevada",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-50",
+        "units": "degrees F",
+        "date": "January 8, 1937",
+        "location": "SAN JACINTO",
+        "latitude": "41.88333",
+        "longitude": "-114.68333",
+        "station": "267284",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -114.68333,
+          41.88333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nevada",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "7.78",
+        "units": "inches",
+        "date": "October 20, 2004",
+        "location": "MT. CHARLESTON FIRE STATION",
+        "latitude": "36.2599",
+        "longitude": "-115.645",
+        "station": "265400",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -115.645,
+          36.2599
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nevada",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "36",
+        "units": "inches",
+        "date": "December 21, 1996",
+        "location": "DAGGET PASS",
+        "latitude": "38.9783",
+        "longitude": "-119.8914",
+        "station": "262119",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.8914,
+          38.9783
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nevada",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "271",
+        "units": "inches",
+        "date": "March 12, 1911",
+        "location": "SPOONERS STN",
+        "latitude": "39.1",
+        "longitude": "-119.91667",
+        "station": "267710",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.91667,
+          39.1
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Nevada",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "271",
+        "units": "inches",
+        "date": "March 13, 1911",
+        "location": "SPOONERS STN",
+        "latitude": "39.1",
+        "longitude": "-119.91667",
+        "station": "267710",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.91667,
+          39.1
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Hampshire",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "106",
+        "units": "degrees F",
+        "date": "July 4, 1911",
+        "location": "NASHUA 2 NNW",
+        "latitude": "42.7913",
+        "longitude": "-71.4735",
+        "station": "275712",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.4735,
+          42.7913
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Hampshire",
+        "element": "All-Time Minimum Temperature",
+        "notes": "Value of -50&deg;F exceeds the previously reported all-time minimum temperature extreme of -46 on 1/8/1968. The -50&deg;F is not yet present in NCDC's digital data files but exists on observation forms and publications in NCDC archives. The value ties with Vermont and Maine for coldest temperature recorded in the Northeast region of the United States.",
+        "value": "-50",
+        "units": "degrees F",
+        "date": "January 22, 1885",
+        "location": "MOUNT WASHINGTON",
+        "latitude": "44.2669",
+        "longitude": "-71.2997",
+        "station": "14755",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2997,
+          44.2669
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Hampshire",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "11.07",
+        "units": "inches",
+        "date": "October 20 - 21, 1996",
+        "location": "MOUNT WASHINGTON",
+        "latitude": "44.2669",
+        "longitude": "-71.2997",
+        "station": "14755",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2997,
+          44.2669
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Hampshire",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "49.3",
+        "units": "inches",
+        "date": "February 25, 1969",
+        "location": "MOUNT WASHINGTON",
+        "latitude": "44.2669",
+        "longitude": "-71.2997",
+        "station": "14755",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2997,
+          44.2669
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Hampshire",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "164",
+        "units": "inches",
+        "date": "February 27, 1969",
+        "location": "PINKHAM NOTCH",
+        "latitude": "44.258",
+        "longitude": "-71.2525",
+        "station": "276818",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2525,
+          44.258
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Jersey",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "110",
+        "units": "degrees F",
+        "date": "July 10, 1936",
+        "location": "RUNYON",
+        "latitude": "40.43333",
+        "longitude": "-74.33333",
+        "station": "287825",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.33333,
+          40.43333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Jersey",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-34",
+        "units": "degrees F",
+        "date": "January 5, 1904",
+        "location": "RIVER VALE",
+        "latitude": "44.258",
+        "longitude": "-71.2525",
+        "station": "287620",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2525,
+          44.258
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Jersey",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "14.81",
+        "units": "inches",
+        "date": "August 19 - 20, 1939",
+        "location": "TUCKERTON 2 NE",
+        "latitude": "39.6026",
+        "longitude": "-74.3387",
+        "station": "288899",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.3387,
+          39.6026
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Jersey",
+        "element": "Maximum Annual Precipitation Total",
+        "notes": "This record value was initially evaluated and scientifically validated by the SCEC in 2012. The non-archival status of the station's network was a concern at the time, delaying the approval. This concern is now moot, as the observing system is ingested into a permanent Federal archive.",
+        "value": "90.65",
+        "units": "inches",
+        "date": "January 1 - December 31, 2011",
+        "location": "WEST MILFORD TWP 3.2 NE",
+        "latitude": "41.14099",
+        "longitude": "-74.3536",
+        "station": "CoCoRaHS NJ-PS-16",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.3536,
+          41
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Jersey",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "32",
+        "units": "inches",
+        "date": "December 14, 1915",
+        "location": "RUTHERFORD",
+        "latitude": "40.81667",
+        "longitude": "-74.11667",
+        "station": "287833",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.11667,
+          40.81667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Jersey",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "52",
+        "units": "inches",
+        "date": "February 5, 1961",
+        "location": "CANISTEAR RESERVOIR",
+        "latitude": "41.1093",
+        "longitude": "-74.48276",
+        "station": "281327",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.48276,
+          41.1093
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Mexico",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "122",
+        "units": "degrees F",
+        "date": "June 27, 1994",
+        "location": "WASTE ISOLT'N PILOT PLT",
+        "latitude": "32.3779",
+        "longitude": "-103.7987",
+        "station": "299569",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.7987,
+          32.3779
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Mexico",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-50",
+        "units": "degrees F",
+        "date": "February 1, 1951",
+        "location": "GAVILAN",
+        "latitude": "36.43333",
+        "longitude": "-106.96667",
+        "station": "293505",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106.96667,
+          36.43333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Mexico",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "11.28",
+        "units": "inches",
+        "date": "May 18 - 19, 1955",
+        "location": "LAKE MALOYA",
+        "latitude": "36.9825",
+        "longitude": "-104.375",
+        "station": "294742",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.375,
+          36.9825
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Mexico",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "41",
+        "units": "inches",
+        "date": "February 3, 1964",
+        "location": "KELLY RANCH",
+        "latitude": "34.0311",
+        "longitude": " -107.125",
+        "station": "294461",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -107.125,
+          34.0311
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New Mexico",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "96",
+        "units": "inches",
+        "date": "March 15, 1941",
+        "location": "LEE RANCH",
+        "latitude": "35.83333",
+        "longitude": "-106.5",
+        "station": "294903",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106.5,
+          35.83333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New York",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "108",
+        "units": "degrees F",
+        "date": "July 22, 1926",
+        "location": "TROY",
+        "latitude": "42.733333",
+        "longitude": "-73.7",
+        "station": "308597",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.7,
+          42.733333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New York",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-52",
+        "units": "degrees F",
+        "date": "February 18, 1979",
+        "location": "OLD FORGE",
+        "latitude": "43.7026",
+        "longitude": "-74.9838",
+        "station": "306184",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.9838,
+          43.7026
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New York",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "13.57",
+        "units": "inches",
+        "date": "August 12 - 13, 2014",
+        "location": "ISLIP-LI MACARTHUR AP",
+        "latitude": "40.7939",
+        "longitude": "-73.1017",
+        "station": "04781",
+        "status": ""
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.1017,
+          40.7939
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New York",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "An unofficial, but widely accepted 24-hr snow fall observation of 54 inches was recorded at Barnes Corner (Tug Hill Plateau) in January, 1976.",
+        "value": "49",
+        "units": "inches",
+        "date": "November 14 - 15, 1900",
+        "location": "WATERTOWN",
+        "latitude": "43.9761",
+        "longitude": "-75.8753",
+        "station": "309000",
+        "status": "EA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.8753,
+          43.9761
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "New York",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "119",
+        "units": "inches",
+        "date": "April 20, 1943",
+        "location": "WHITEFACE MOUNTAIN",
+        "latitude": "44.366667",
+        "longitude": "-73.9",
+        "station": "309383",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9,
+          44.366667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Carolina",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "110",
+        "units": "degrees F",
+        "date": "August 21, 1983",
+        "location": "FAYETTEVILLE REGIONAL AP GRANNIS FIELD",
+        "latitude": "34.99139",
+        "longitude": "-78.88028",
+        "station": "93740",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.88028,
+          34.99139
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Carolina",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-34",
+        "units": "degrees F",
+        "date": "January 21, 1985",
+        "location": "MT. MITCHELL",
+        "latitude": "35.7585",
+        "longitude": "-82.2711",
+        "station": "315923",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.2711,
+          35.7585
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Carolina",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "22.22",
+        "units": "inches",
+        "date": "July 15 - 16, 1916",
+        "location": "ALTAPASS",
+        "latitude": "35.9",
+        "longitude": "-82.01667",
+        "station": "310160",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.01667,
+          35.9
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Carolina",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "In May 2016, the SCEC considered a reported 41-inch snowfall event observed in January 2016 at Mt. Mitchell (GHCN-D identifier USC00315923). The value was determined to be invalid, and the existing record of 36 inches set in March 1993 was thereby upheld.",
+        "value": "36",
+        "units": "inches",
+        "date": "March 13, 1993",
+        "location": "MT. MITCHELL",
+        "latitude": "44.366667",
+        "longitude": "-73.9",
+        "station": "315923",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9,
+          44.366667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Carolina",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "50",
+        "units": "inches",
+        "date": "March 14, 1993",
+        "location": "MT. MITCHELL",
+        "latitude": "35.7585",
+        "longitude": "-82.2711",
+        "station": "315923",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.2711,
+          35.7585
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Carolina",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "50",
+        "units": "inches",
+        "date": "March 3, 1942",
+        "location": "MOUNT MITCHELL",
+        "latitude": "35.7585",
+        "longitude": "-82.2711",
+        "station": "315921",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.2711,
+          35.7585
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Carolina",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "50",
+        "units": "inches",
+        "date": "March 4, 1942",
+        "location": "MOUNT MITCHELL",
+        "latitude": "35.7585",
+        "longitude": "-82.2711",
+        "station": "315921",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.2711,
+          35.7585
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Carolina",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "50",
+        "units": "inches",
+        "date": "March 5, 1942",
+        "location": "MOUNT MITCHELL",
+        "latitude": "35.7585",
+        "longitude": "-82.2711",
+        "station": "315921",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.2711,
+          35.7585
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Carolina",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "50",
+        "units": "inches",
+        "date": "March 6, 1942",
+        "location": "MOUNT MITCHELL",
+        "latitude": "35.7585",
+        "longitude": "-82.2711",
+        "station": "315921",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.2711,
+          35.7585
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Dakota",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "121",
+        "units": "degrees F",
+        "date": "July 6, 1936",
+        "location": "STEELE 4N",
+        "latitude": "46.8948",
+        "longitude": "-99.9482",
+        "station": "328366",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.9482,
+          46.8948
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Dakota",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-60",
+        "units": "degrees F",
+        "date": "February 15, 1936",
+        "location": "PARSHALL",
+        "latitude": "47.95",
+        "longitude": "-102.13333",
+        "station": "326867",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -102.13333,
+          47.95
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Dakota",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "8.1",
+        "units": "inches",
+        "date": "June 29, 1975",
+        "location": "LITCHVILLE 2NW",
+        "latitude": "46.6612",
+        "longitude": "-98.2268",
+        "station": "325230",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.2268,
+          46.6612
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Dakota",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "27",
+        "units": "inches",
+        "date": "April 27, 1984",
+        "location": "MINOT INTL AP",
+        "latitude": "48.2552",
+        "longitude": "-101.2733",
+        "station": "24013",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -101.2733,
+          48.2552
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Dakota",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "65",
+        "units": "inches",
+        "date": "March 11, 1897",
+        "location": "BERLIN",
+        "latitude": "46.383333",
+        "longitude": "-98.483333",
+        "station": "320720",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.483333,
+          46.383333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "North Dakota",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "65",
+        "units": "inches",
+        "date": "March 12, 1897",
+        "location": "BERLIN",
+        "latitude": "46.383333",
+        "longitude": "-98.483333",
+        "station": "320720",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.483333,
+          46.383333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Ohio",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "113",
+        "units": "degrees F",
+        "date": "July 21, 1934",
+        "location": "GALLIPOLIS",
+        "latitude": "38.82075",
+        "longitude": "-82.18171",
+        "station": "333029",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.18171,
+          38.82075
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Ohio",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-39",
+        "units": "degrees F",
+        "date": "February 10, 1899",
+        "location": "MILLIGAN",
+        "latitude": "39.75",
+        "longitude": "-82.1",
+        "station": "335310",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.1,
+          39.75
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Ohio",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "Value is published in the August 1995 Storm Data publication and is from a reliable gauge. Higher 24-hr amounts may have occurred in conjunction with a line of severe storms that impacted Northwest Ohio on July 4-5, 1969.",
+        "value": "10.75",
+        "units": "inches",
+        "date": "August 7 - 8, 1995",
+        "location": "Lockington Dam (nr. Sidney, Shelby Co. OH)",
+        "latitude": "40.2141",
+        "longitude": "-84.2450",
+        "station": "",
+        "status": "EA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.245,
+          40.2141
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Ohio",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "30",
+        "units": "inches",
+        "date": "April 20, 1901",
+        "location": "WARREN 3 S",
+        "latitude": "41.20194",
+        "longitude": "-80.81056",
+        "station": "338769",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.81056,
+          41.20194
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Ohio",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "47",
+        "units": "inches",
+        "date": "November 14, 1996",
+        "location": "CHARDON",
+        "latitude": "41.58333",
+        "longitude": "-81.18333",
+        "station": "331458",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.18333,
+          41.58333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oklahoma",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "120",
+        "units": "degrees F",
+        "date": "August 10, 1936",
+        "location": "POTEAU",
+        "latitude": "35.05",
+        "longitude": "-94.63333",
+        "station": "347246",
+        "status": "E1A"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -94.63333,
+          35.05
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oklahoma",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "120",
+        "units": "degrees F",
+        "date": "August 12, 1936",
+        "location": "ALTUS IRIG RES STATION",
+        "latitude": "34.5902",
+        "longitude": "-99.3344",
+        "station": "340179",
+        "status": "E1A"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.3344,
+          34.5902
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oklahoma",
+        "element": "All-Time Maximum Temperature",
+        "notes": "A 120&deg;F observed at Tipton observed by an Oklahoma Mesonet automated weather station on June 27, 1994 was originally approved. However, this value was later withdrawn after problems with the instrumentation configuration were discovered several years later.",
+        "value": "120",
+        "units": "degrees F",
+        "date": "July 18, 1936",
+        "location": "ALVA 1W",
+        "latitude": "36.80139",
+        "longitude": "-98.68778",
+        "station": "340193",
+        "status": "E1A"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.68778,
+          36.80139
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oklahoma",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "120",
+        "units": "degrees F",
+        "date": "July 19, 1936",
+        "location": "ALTUS IRIG RES STATION",
+        "latitude": "34.5902",
+        "longitude": "-99.3344",
+        "station": "340179",
+        "status": "E1A"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.3344,
+          34.5902
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oklahoma",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-31",
+        "units": "degrees F",
+        "date": "February 10, 2011",
+        "location": "Nowata",
+        "latitude": "36.7006",
+        "longitude": "-95.6380",
+        "station": "NOWA (OK Mesonet)",
+        "status": "NSA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          95.638,
+          36.7006
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oklahoma",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "15.68",
+        "units": "inches",
+        "date": "October 11, 1973",
+        "location": "ENID",
+        "latitude": "36.4194",
+        "longitude": "-97.8747",
+        "station": "342912",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.8747,
+          36.4194
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oklahoma",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "The 24-hr snow fall at Woodward and Freedom fell in conjunction with a spring blizzard that set snow fall records in Oklahoma, Kansas and Texas. The State Climate Extremes Committee verified the validity of the observations at Woodward and Freedom. ",
+        "value": "27",
+        "units": "inches",
+        "date": "February 9 - 10, 2011",
+        "location": "SPAVINAW",
+        "latitude": "36.3894",
+        "longitude": "-95.0597",
+        "station": "348380",
+        "status": "NSA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -95.0597,
+          36.3894
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oklahoma",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "36",
+        "units": "inches",
+        "date": "February 22, 1971",
+        "location": "BUFFALO 2 SSW",
+        "latitude": "36.8002",
+        "longitude": "-99.6399",
+        "station": "341243",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.6399,
+          36.8002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oklahoma",
+        "element": "Maximum Wind Gust",
+        "notes": "N/A",
+        "value": "150.8",
+        "units": "mph",
+        "date": "May 24, 2011",
+        "location": "El Reno",
+        "latitude": "35.5323",
+        "longitude": "-97.9550",
+        "station": "ELRE (OK Mesonet)",
+        "status": "NSA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.955,
+          35.5323
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oregon",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "119",
+        "units": "degrees F",
+        "date": "August 10, 1898",
+        "location": "PENDLETON DOWNTOWN",
+        "latitude": "45.6703",
+        "longitude": "-118.7964",
+        "station": "356541",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.7964,
+          45.6703
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oregon",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "119",
+        "units": "degrees F",
+        "date": "July 29, 1898",
+        "location": "PRINEVILLE",
+        "latitude": "44.30048",
+        "longitude": "-120.84063",
+        "station": "356883",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.84063,
+          44.30048
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oregon",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-54",
+        "units": "degrees F",
+        "date": "February 10, 1933",
+        "location": "SENECA",
+        "latitude": "44.1383",
+        "longitude": "-118.975",
+        "station": "357675",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.975,
+          44.1383
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oregon",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-54",
+        "units": "degrees F",
+        "date": "February 9, 1933",
+        "location": "UKIAH",
+        "latitude": "45.13586",
+        "longitude": "-118.93888",
+        "station": "358726",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.93888,
+          45.13586
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oregon",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "11.77",
+        "units": "inches",
+        "date": "November 6, 2006",
+        "location": "NEHALEM 9 NE",
+        "latitude": "45.8127",
+        "longitude": "-123.7752",
+        "station": "355971",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.7752,
+          45.8127
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oregon",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "47",
+        "units": "inches",
+        "date": "January 9, 1980",
+        "location": "HOOD RIVER EXPERIMENT STN",
+        "latitude": "45.6847",
+        "longitude": "-121.5175",
+        "station": "354003",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.5175,
+          45.6847
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Oregon",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "252",
+        "units": "inches",
+        "date": "April 3, 1983",
+        "location": "CRATER LAKE NPS HQ",
+        "latitude": "42.8966",
+        "longitude": "-122.1327",
+        "station": "351946",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1327,
+          42.8966
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Pennsylvania",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "111",
+        "units": "degrees F",
+        "date": "July 10, 1936",
+        "location": "PHOENIXVILLE 1 E",
+        "latitude": "40.12113",
+        "longitude": "-75.49415",
+        "station": "366927",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.49415,
+          40.12113
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Pennsylvania",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "111",
+        "units": "degrees F",
+        "date": "July 9, 1936",
+        "location": "PHOENIXVILLE 1 E",
+        "latitude": "40.12113",
+        "longitude": "-75.49415",
+        "station": "366927",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.49415,
+          40.12113
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Pennsylvania",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-42",
+        "units": "degrees F",
+        "date": "January 5, 1904",
+        "location": "SMETHPORT",
+        "latitude": "41.81667",
+        "longitude": "-78.43333",
+        "station": "368190",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.43333,
+          41.81667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Pennsylvania",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "Arguably the greatest 24-hour rainfall on record outside of the tropics occurred around Smethport, PA on July 17, 1942. A post-event survey by the Weather Bureau provided a widely accepted maximum storm rainfall of 34.50 inches within a 12 hour period, of which an estimated 30.60 inches fell in just 6 hours. However, the greatest observed 24-hr rain fall for Pennsylvania occurred in conjunction with Hurricane Agnes in 1972.",
+        "value": "13.5",
+        "units": "inches",
+        "date": "June 22, 1972",
+        "location": "YORK 3 SSW PUMP STN",
+        "latitude": "39.91667",
+        "longitude": "-76.75",
+        "station": "369933",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.75,
+          39.91667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Pennsylvania",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "38",
+        "units": "inches",
+        "date": "March 20, 1958",
+        "location": "MORGANTOWN",
+        "latitude": "40.158",
+        "longitude": "-75.8862",
+        "station": "365956",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.8862,
+          40.158
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Pennsylvania",
+        "element": "Monthly Maximum Snowfall",
+        "notes": "(View report)",
+        "value": "117.8",
+        "units": "inches",
+        "date": "February 1 - 28, 2010",
+        "location": "LAUREL SUMMIT",
+        "latitude": "40.1692",
+        "longitude": "-79.1411",
+        "station": "364839",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.1411,
+          40.1692
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Pennsylvania",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "60",
+        "units": "inches",
+        "date": "March 22, 1958",
+        "location": "GOULDSBORO",
+        "latitude": "41.25",
+        "longitude": "-75.45",
+        "station": "363394",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.45,
+          41.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Pennsylvania",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "60",
+        "units": "inches",
+        "date": "March 23, 1958",
+        "location": "GOULDSBORO",
+        "latitude": "41.25",
+        "longitude": "-75.45",
+        "station": "363394",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.45,
+          41.25
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Puerto Rico",
+        "element": "All-Time Maximum Temperature",
+        "notes": "Listed record value of 104&deg;F is being reviewed. If found to be invalid, the next highest temperature is 100&deg;F on August 21, 2003 at Ponce 4E.",
+        "value": "104",
+        "units": "degrees F",
+        "date": "July 2, 1996",
+        "location": "MONA ISLAND 2",
+        "latitude": "18.09083",
+        "longitude": "-67.94417",
+        "station": "666258",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -67.94417,
+          18.09083
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Puerto Rico",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "40",
+        "units": "degrees F",
+        "date": "January 24, 1966",
+        "location": "SAN SEBASTIAN 2 WNW",
+        "latitude": "18.3483",
+        "longitude": "-67.0077",
+        "station": "668881",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -67.0077,
+          18.3483
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Puerto Rico",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "40",
+        "units": "degrees F",
+        "date": "March 27, 1985",
+        "location": "RINCON",
+        "latitude": "18.3375",
+        "longitude": "-67.2497",
+        "station": "668126",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -67.2497,
+          18.3375
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Puerto Rico",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "40",
+        "units": "degrees F",
+        "date": "March 9, 1911",
+        "location": "AIBONITO 1 S",
+        "latitude": "18.128",
+        "longitude": "-66.2641",
+        "station": "660158",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.2641,
+          18.128
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Puerto Rico",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "Value was observed during the passage of Tropical Storm Isabel (October 4-8, 1985).",
+        "value": "23.75",
+        "units": "inches",
+        "date": "October 7, 1985",
+        "location": "TORO NEGRO FOREST",
+        "latitude": "18.1731",
+        "longitude": "-66.4928",
+        "station": "669432",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.4928,
+          18.1731
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Rhode Island",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "104",
+        "units": "degrees F",
+        "date": "August 2, 1975",
+        "location": "PROVIDENCE",
+        "latitude": "41.7225",
+        "longitude": "-71.4325",
+        "station": "14765",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.4325,
+          41.7225
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Rhode Island",
+        "element": "All-Time Minimum Temperature",
+        "notes": "Previously reported record of -25&deg;F at Greene on February 5, 1996 could not be verified. Source is unknown and no documentation could be found. Value is exceeded by the currently reported record at Wood River Junction.",
+        "value": "-28",
+        "units": "degrees F",
+        "date": "January 11, 1942",
+        "location": "WOOD RIVER JUNCTION",
+        "latitude": "41.43333",
+        "longitude": "-71.7",
+        "station": "379327",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7,
+          41.43333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Rhode Island",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "12.13",
+        "units": "inches",
+        "date": "September 16 - 17, 1932",
+        "location": "WESTERLY 1 W",
+        "latitude": "41.36667",
+        "longitude": "-71.83333",
+        "station": "378911",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.83333,
+          41.36667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Rhode Island",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "30",
+        "units": "inches",
+        "date": "February 7, 1978",
+        "location": "WOONSOCKET",
+        "latitude": "41.9844",
+        "longitude": "-71.4907",
+        "station": "379423",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.4907,
+          41.9844
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Rhode Island",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "42",
+        "units": "inches",
+        "date": "February 7, 1978",
+        "location": "NORTH FOSTER 1 E",
+        "latitude": "41.8564",
+        "longitude": "-71.7333",
+        "station": "375270",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.7333,
+          41.8564
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "South Carolina",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "113",
+        "units": "degrees F",
+        "date": "June 29, 2012",
+        "location": "COLUMBIA UNIV OF SC",
+        "latitude": "33.99151",
+        "longitude": "-81.02409",
+        "station": "381944",
+        "status": "NS"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.02409,
+          33.99151
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "South Carolina",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-19",
+        "units": "degrees F",
+        "date": "January 21, 1985",
+        "location": "CAESARS HEAD",
+        "latitude": "35.1072",
+        "longitude": "-82.6255",
+        "station": "381256",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.6255,
+          35.1072
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "South Carolina",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "Previously listed record of 17.00 inches at Antreville on Augst 27, 1995 (Tropical Storm Jerry) was incongruent with other observations in the area, and all reliable evidence pointed to a much smaller 24-hr value. The 14.80 inches observed at Myrtle Beach on September 16, 1999 is a result of Hurricane Floyd.",
+        "value": "14.8",
+        "units": "inches",
+        "date": "September 16, 1999",
+        "location": "MYRTLE BEACH",
+        "latitude": "33.7544",
+        "longitude": "-78.8219",
+        "station": "386153",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.8219,
+          33.7544
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "South Carolina",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "24",
+        "units": "inches",
+        "date": "February 9 - 10, 1973",
+        "location": "RIMINI 2 SSW",
+        "latitude": "33.6494",
+        "longitude": "-80.5147",
+        "station": "387313",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.5147,
+          33.6494
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "South Carolina",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "29",
+        "units": "inches",
+        "date": "February 18, 1969",
+        "location": "CAESARS HEAD",
+        "latitude": "35.1072",
+        "longitude": "-82.6255",
+        "station": "381256",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -82.6255,
+          35.1072
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "South Dakota",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "120",
+        "units": "degrees F",
+        "date": "July 15, 2006",
+        "location": "FORT PIERRE 17 WSW",
+        "latitude": "44.2444",
+        "longitude": "-100.6591",
+        "station": "393076",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -100.6591,
+          44.2444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "South Dakota",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "120",
+        "units": "degrees F",
+        "date": "July 5, 1936",
+        "location": "GANN VALLEY 4NW",
+        "latitude": "44.0569",
+        "longitude": "-99.0719",
+        "station": "393217",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.0719,
+          44.0569
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "South Dakota",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-58",
+        "units": "degrees F",
+        "date": "February 17, 1936",
+        "location": "MC INTOSH 6 SE",
+        "latitude": "45.8383",
+        "longitude": "-101.2766",
+        "station": "395381",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -101.2766,
+          45.8383
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "South Dakota",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "The reported value has been evaluated by the State Climate Extremes Committee. Greater amounts have fallen in 24 hours or less across SD, but have not been observed by reliable precipitation measurement gauges. Post flood survey of Black Hills flood of June 9, 1972 indicated rainfall extremes of up to 15 inches (near Keystone, SD) in 6 hours may have occurred. Again, on June 13-14, 1976 up to 10 inches of rain may have fallen over the Black Hills, while on June 14, 1996 a near-stationary thunderstorm produced an estimated 14 inches of rain between Sturgis and Hereford. Finally, on August 17, 2007 an estimated 10.5 inches of rain fell west of Hermosa.",
+        "value": "8.74",
+        "units": "inches",
+        "date": "May 6, 2007",
+        "location": "GROTON",
+        "latitude": "45.4469",
+        "longitude": "-98.0952",
+        "station": "393456",
+        "status": "NSA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -98.0952,
+          45.4469
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "South Dakota",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "52",
+        "units": "inches",
+        "date": "March 14, 1973",
+        "location": "LEAD",
+        "latitude": "44.3544",
+        "longitude": "-103.7431",
+        "station": "394834",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.7431,
+          44.3544
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "South Dakota",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "73",
+        "units": "inches",
+        "date": "March 1, 1998",
+        "location": "LEAD",
+        "latitude": "44.3544",
+        "longitude": "-103.7431",
+        "station": "394834",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.7431,
+          44.3544
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Tennessee",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "113",
+        "units": "degrees F",
+        "date": "August 9, 1930",
+        "location": "PERRYVILLE",
+        "latitude": "35.63333",
+        "longitude": "-88.03333",
+        "station": "407099",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.03333,
+          35.63333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Tennessee",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "113",
+        "units": "degrees F",
+        "date": "July 29, 1930",
+        "location": "PERRYVILLE",
+        "latitude": "35.63333",
+        "longitude": "-88.03333",
+        "station": "407099",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.03333,
+          35.63333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Tennessee",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-32",
+        "units": "degrees F",
+        "date": "December 30, 1917",
+        "location": "MOUNTAIN CITY",
+        "latitude": "36.46667",
+        "longitude": "-81.81667",
+        "station": "406287",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.81667,
+          36.46667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Tennessee",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "13.6",
+        "units": "inches",
+        "date": "September 13, 1982",
+        "location": "MILAN EXP STN",
+        "latitude": "35.9327",
+        "longitude": "-88.7268",
+        "station": "406012",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -88.7268,
+          35.9327
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Tennessee",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "30",
+        "units": "inches",
+        "date": "March 14, 1993",
+        "location": "MT LECONTE",
+        "latitude": "35.655",
+        "longitude": "-83.4411",
+        "station": "406328",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.4411,
+          35.655
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Tennessee",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "63",
+        "units": "inches",
+        "date": "March 14, 1993",
+        "location": "MT LECONTE",
+        "latitude": "35.655",
+        "longitude": "-83.4411",
+        "station": "406328",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.4411,
+          35.655
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Tennessee",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "63",
+        "units": "inches",
+        "date": "March 15, 1993",
+        "location": "MT LECONTE",
+        "latitude": "35.655",
+        "longitude": "-83.4411",
+        "station": "406328",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -83.4411,
+          35.655
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Texas",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "120",
+        "units": "degrees F",
+        "date": "August 12, 1936",
+        "location": "SEYMOUR 3NW",
+        "latitude": "33.6324",
+        "longitude": "-99.2897",
+        "station": "418221",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.2897,
+          33.6324
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Texas",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "120",
+        "units": "degrees F",
+        "date": "June 28, 1994",
+        "location": "MONAHANS",
+        "latitude": "31.54139",
+        "longitude": "-102.91222",
+        "station": "415999",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -102.91222,
+          31.54139
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Texas",
+        "element": "All-Time Minimum Temperature",
+        "notes": "Historical value at Tulia 6NE became available upon digitization and update of previously paper-bound data. It was examined retroactively, found, to be valid and tied the prior stated record.",
+        "value": "-23",
+        "units": "degrees F",
+        "date": "February 12, 1899",
+        "location": "TULIA NEAR",
+        "latitude": "34.6",
+        "longitude": "-101.7",
+        "station": "419176",
+        "status": "SA1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -101.7,
+          34.6
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Texas",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-23",
+        "units": "degrees F",
+        "date": "February 8, 1933",
+        "location": "SEMINOLE",
+        "latitude": "32.7131",
+        "longitude": "-102.6596",
+        "station": "418201",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -102.6596,
+          32.7131
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Texas",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "The 24-hour rainfall of 42.00 inches was reported from an observer 8.5 miles west of Alvin, Texas between 7 AM July 25th and 7 AM July 26th, 1979 in conjunction with Tropical Storm Claudette. Observer reported that the 10-inch gauge was overflowing at his 1 AM reading, and so the 42 inches may be underreported by at least 3 inches. This 42.00-in rainfall exceeds any observed 24-hr precipitation value for the United States. 43.00 inches of rain in this storm is acknowledged as the United States national record 24-hr precipitation amount, but that value appears to have been estimated in a post-storm survey and is therefore not listed here.",
+        "value": "42",
+        "units": "inches",
+        "date": "July 25 - 26, 1979",
+        "location": "Alvin",
+        "latitude": "29.4238",
+        "longitude": "-95.2441",
+        "station": "",
+        "status": "EA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -95.2441,
+          29.4238
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Texas",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "Historical value was examined retroactively and found to be valid and exceeded prior stated record. The previously recognized record of 25, observed in March 2009 at Follett (GHCN-D identifier USC00413225) is documented (here).",
+        "value": "26",
+        "units": "inches",
+        "date": "December 20 - 21, 1929",
+        "location": "HILLSBORO",
+        "latitude": "32.0161",
+        "longitude": "-97.1094",
+        "station": "414182",
+        "status": "NSA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.1094,
+          32.0161
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Texas",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "33",
+        "units": "inches",
+        "date": "February 7, 1956",
+        "location": "VEGA 2NW",
+        "latitude": "35.2774",
+        "longitude": "-102.4633",
+        "station": "419330",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -102.4633,
+          35.2774
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Utah",
+        "element": "All-Time Maximum Temperature",
+        "notes": "A 118&deg;F temperature was observed on July 4, 2007 at a Remote Automated Weather Station (RAWS) located near the Utah Welcome Center on I-15 south of St. George. However, a decision on the validity of this value has not yet been reached by the State Climate Extremes Committee.",
+        "value": "117",
+        "units": "degrees F",
+        "date": "July 5, 1985",
+        "location": "ST. GEORGE",
+        "latitude": "37.119",
+        "longitude": "-113.6068",
+        "station": "427516",
+        "status": "EA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -113.6068,
+          37.119
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Utah",
+        "element": "All-Time Minimum Temperature",
+        "notes": "The previously reported record of -69&deg;F set at Peter's Sink on Feb 1, 1985 is widely considered an accurate observation, but no information concerning the observation or the station could be identified, and the value is heavily affected by the local terrain. The -50&deg;F at Strawberry Tunnel is the coldest temperature observation that can be verified from publicly available observations at established observation stations in Utah.",
+        "value": "-50",
+        "units": "degrees F",
+        "date": "January 5, 1913",
+        "location": "EAST PORTAL",
+        "latitude": "40.16667",
+        "longitude": "-111.18333",
+        "station": "422319",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.18333,
+          40.16667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Utah",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "A value of 8.40 inches was reported as part of a post-flash flood survey conducted by the National Weather Service at North Odgen on September 7-8, 1991.",
+        "value": "5.08",
+        "units": "inches",
+        "date": "February 1, 1963",
+        "location": "DEER CREEK DAM",
+        "latitude": "40.4044",
+        "longitude": "-111.5289",
+        "station": "422057",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.5289,
+          40.4044
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Utah",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "55.5 inches of snow fall in 24 hours was reported at the Alta Guard Station in Alta, UT on January 5-6, 1991, but information concerning this observation or the station is unavailable and cannot be considered official.",
+        "value": "38",
+        "units": "inches",
+        "date": "December 2, 1982",
+        "location": "ALTA",
+        "latitude": "40.5905",
+        "longitude": "-111.6369",
+        "station": "420072",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6369,
+          40.5905
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Utah",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "236 inches of snow depth were observed at the Collins snow study observation site at Alta, UT on May 19, 1983, but information concerning this observation or the station is unavailable and cannot be considered official.",
+        "value": "179",
+        "units": "inches",
+        "date": "April 5, 1958",
+        "location": "ALTA",
+        "latitude": "40.5905",
+        "longitude": "-111.6369",
+        "station": "420072",
+        "status": "N1A"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6369,
+          40.5905
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Utah",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "236 inches of snow depth were observed at the Collins snow study observation site at Alta, UT on May 19, 1983, but information concerning this observation or the station is unavailable and cannot be considered official.",
+        "value": "179",
+        "units": "inches",
+        "date": "April 7, 1958",
+        "location": "ALTA",
+        "latitude": "40.5905",
+        "longitude": "-111.6369",
+        "station": "420072",
+        "status": "N1A"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -111.6369,
+          40.5905
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Vermont",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "107",
+        "units": "degrees F",
+        "date": "July 7, 1912",
+        "location": "VERNON",
+        "latitude": "42.77167",
+        "longitude": "-72.515",
+        "station": "438600",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.515,
+          42.77167
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Vermont",
+        "element": "All-Time Minimum Temperature",
+        "notes": "The -50&deg;F minimum temperature ties with values from NH and ME as the all-time coldest temperature for the Northeast region of the United States.",
+        "value": "-50",
+        "units": "degrees F",
+        "date": "December 30, 1933",
+        "location": "BLOOMFIELD",
+        "latitude": "44.78333",
+        "longitude": "-71.5833",
+        "station": "430690",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.5833,
+          44.78333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Vermont",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "9.92",
+        "units": "inches",
+        "date": "September 17, 1999",
+        "location": "MOUNT MANSFIELD",
+        "latitude": "44.5248",
+        "longitude": "-72.8154",
+        "station": "435416",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.8154,
+          44.5248
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Vermont",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "42",
+        "units": "inches",
+        "date": "February 5, 1995",
+        "location": "JAY PEAK",
+        "latitude": "44.938",
+        "longitude": "-72.5022",
+        "station": "434189",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.5022,
+          44.938
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Vermont",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "149",
+        "units": "inches",
+        "date": "April 2, 1969",
+        "location": "MOUNT MANSFIELD",
+        "latitude": "44.5248",
+        "longitude": "-72.8154",
+        "station": "435416",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -72.8154,
+          44.5248
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Virgin Islands (U.S.)",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "99",
+        "units": "degrees F",
+        "date": "August 4, 1994",
+        "location": "CHARLOTTE AMALIE CYRIL E KING AP",
+        "latitude": "18.3363",
+        "longitude": "-64.98",
+        "station": "11640",
+        "status": "N1A"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.98,
+          18.3363
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Virgin Islands (U.S.)",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "99",
+        "units": "degrees F",
+        "date": "July 31, 1988",
+        "location": "CRUZ BAY",
+        "latitude": "18.3347",
+        "longitude": "-64.7941",
+        "station": "671980",
+        "status": "N1A"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.7941,
+          18.3347
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Virgin Islands (U.S.)",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "99",
+        "units": "degrees F",
+        "date": "June 23, 1996",
+        "location": "CHARLOTTE AMALIE CYRIL E KING AP",
+        "latitude": "18.3363",
+        "longitude": "-64.98",
+        "station": "11640",
+        "status": "N1A"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.98,
+          18.3363
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Virgin Islands (U.S.)",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "51",
+        "units": "degrees F",
+        "date": "January 31, 1954",
+        "location": "ANNAS HOPE",
+        "latitude": "17.73333",
+        "longitude": "-64.73333",
+        "station": "670260",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.73333,
+          17.73333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Virgin Islands (U.S.)",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "20",
+        "units": "inches",
+        "date": "September 4, 1979",
+        "location": "ANNAS HOPE",
+        "latitude": "17.73333",
+        "longitude": "-64.73333",
+        "station": "670260",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -64.73333,
+          17.73333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Virginia",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "110",
+        "units": "degrees F",
+        "date": "July 15, 1954",
+        "location": "BALCONY FALLS",
+        "latitude": "37.61667",
+        "longitude": "-79.45",
+        "station": "440411",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.45,
+          37.61667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Virginia",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "110",
+        "units": "degrees F",
+        "date": "July 5, 1900",
+        "location": "COLUMBIA 2SSE",
+        "latitude": "37.73333",
+        "longitude": "-81.18333",
+        "station": "441929",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.18333,
+          37.73333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Virginia",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "110",
+        "units": "degrees F",
+        "date": "July 7, 1900",
+        "location": "COLUMBIA 2SSE",
+        "latitude": "37.73333",
+        "longitude": "-81.18333",
+        "station": "441929",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.18333,
+          37.73333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Virginia",
+        "element": "All-Time Minimum Temperature",
+        "notes": "The date for the existing record of -30&deg;F at Mountain Lake Biological Station was incorrect by one day. Date listed is the correct observation date.",
+        "value": "-30",
+        "units": "degrees F",
+        "date": "January 21, 1985",
+        "location": "MOUNT LAKE BIOL STN",
+        "latitude": "37.38333",
+        "longitude": "-80.53333",
+        "station": "445828",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.53333,
+          37.38333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Virginia",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "Storm Data (Vol. 11, No. 8) reports associated with Hurricane Camille (August 1969) indicate ... substantiated amounts up to 31 inches ... falling mainly in Nelson and adjacent counties .... The 14.28 inches at Williamsburg fell in conjunction with Hurricane Floyd.",
+        "value": "14.28",
+        "units": "inches",
+        "date": "September 16, 1999",
+        "location": "WILLIAMSBURG 2 N",
+        "latitude": "37.3017",
+        "longitude": "-76.7039",
+        "station": "449151",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.7039,
+          37.3017
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Virginia",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "33.5",
+        "units": "inches",
+        "date": "March 3, 1994",
+        "location": "LURAY 5 E",
+        "latitude": "38.6661",
+        "longitude": "-78.372",
+        "station": "445096",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.372,
+          38.6661
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Virginia",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "47",
+        "units": "inches",
+        "date": "January 7, 1996",
+        "location": "BIG MEADOWS",
+        "latitude": "38.5216",
+        "longitude": "-78.4355",
+        "station": "440720",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.4355,
+          38.5216
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Washington",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "118",
+        "units": "degrees F",
+        "date": "August 5, 1961",
+        "location": "ICE HARBOR DAM",
+        "latitude": "46.2447",
+        "longitude": "-118.8786",
+        "station": "453883",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.8786,
+          46.2447
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Washington",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "118",
+        "units": "degrees F",
+        "date": "July 24, 1928",
+        "location": "WAHLUKE",
+        "latitude": "46.65",
+        "longitude": "-119.71667",
+        "station": "458903",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -119.71667,
+          46.65
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Washington",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-48",
+        "units": "degrees F",
+        "date": "December 30, 1968",
+        "location": "WINTHROP 1 WSW",
+        "latitude": "48.4743",
+        "longitude": "-120.1887",
+        "station": "459376",
+        "status": "E2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -120.1887,
+          48.4743
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Washington",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "14.26",
+        "units": "inches",
+        "date": "November 23 - 24, 1986",
+        "location": "MOUNT MITCHELL #2",
+        "latitude": "46.03",
+        "longitude": "-122.1641",
+        "station": "455668",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.1641,
+          46.03
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Washington",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "The observation of 65.0 inches of snow that fell in 24 hours at the Crystal Mountain ski resort on February 24, 1994 is archived at the Northwest Weather and Avalanche Center. The greatest 24-hr snow fall observed at an official NOAA weather station in Washington is 52.0 inches observed at Winthrop on January 21, 1935.",
+        "value": "65",
+        "units": "inches",
+        "date": "February 24, 1994",
+        "location": "Crystal Mountain Ski Resort",
+        "latitude": "46.9282",
+        "longitude": "-121.5045",
+        "station": "NWAC",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.5045,
+          46.9282
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Washington",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "367",
+        "units": "inches",
+        "date": "March 10, 1956",
+        "location": "RAINIER PARADISE RS",
+        "latitude": "46.7858",
+        "longitude": "-121.7425",
+        "station": "456898",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.7425,
+          46.7858
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Washington",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "367",
+        "units": "inches",
+        "date": "March 9, 1956",
+        "location": "RAINIER PARADISE RS",
+        "latitude": "46.7858",
+        "longitude": "-121.7425",
+        "station": "456898",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.7425,
+          46.7858
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "West Virginia",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "112",
+        "units": "degrees F",
+        "date": "August 4, 1930",
+        "location": "MOOREFIELD 1 SSE",
+        "latitude": "39.0461",
+        "longitude": "-78.9664",
+        "station": "466163",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.9664,
+          39.0461
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "West Virginia",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "112",
+        "units": "degrees F",
+        "date": "July 10, 1936",
+        "location": "MARTINSBURG EASTERN WEST VIRGINIA REGIONAL AIRPORT",
+        "latitude": "39.4038",
+        "longitude": "-77.945",
+        "station": "13734",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.945,
+          39.4038
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "West Virginia",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-37",
+        "units": "degrees F",
+        "date": "December 30, 1917",
+        "location": "LEWISBURG 3 N",
+        "latitude": "37.8566",
+        "longitude": "-80.4042",
+        "station": "465224",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.4042,
+          37.8566
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "West Virginia",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "It is widely accepted that the greatest precipitation in a 24 hr period for West Virginia was an estimated 19.00 inches that reportedly fell in 2 hrs and 10 minutes on July 18, 1889 at Rockport during a cloudburst that caused Tygart Creek to rise 22 feet in one hour. However, this value has not been confirmed.",
+        "value": "12.02",
+        "units": "inches",
+        "date": "June 18, 1949",
+        "location": "BRUSHY RUN",
+        "latitude": "38.83333",
+        "longitude": "-79.2",
+        "station": "461204",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.2,
+          38.83333
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "West Virginia",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "The 35.0 inches of snowfall reported at Flat Top fell from 10 AM on January 27th to 10 AM on January 28th, 1998. Observation-time values for each day are 30.0 and 8.0 inches, respectively.",
+        "value": "35",
+        "units": "inches",
+        "date": "January 27 - 28, 1998",
+        "location": "FLAT TOP",
+        "latitude": "37.5894",
+        "longitude": "-81.0925",
+        "station": "463072",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -81.0925,
+          37.5894
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "West Virginia",
+        "element": "Monthly Maximum Snowfall",
+        "notes": "(View report)",
+        "value": "158.2",
+        "units": "inches",
+        "date": "February 1 - 28, 2010",
+        "location": "BAYARD",
+        "latitude": "39.2728",
+        "longitude": "-79.3684",
+        "station": "460527",
+        "status": "NA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3684,
+          39.2728
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "West Virginia",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "62",
+        "units": "inches",
+        "date": "March 8, 1978",
+        "location": "SNOWSHOE",
+        "latitude": "38.399",
+        "longitude": "-79.9949",
+        "station": "468308",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.9949,
+          38.399
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Wisconsin",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "114",
+        "units": "degrees F",
+        "date": "July 13, 1936",
+        "location": "WISCONSIN DELLS",
+        "latitude": "43.6088",
+        "longitude": "-89.7666",
+        "station": "479319",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -89.7666,
+          43.6088
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Wisconsin",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-55",
+        "units": "degrees F",
+        "date": "February 2, 1996",
+        "location": "COUDERAY 7 W",
+        "latitude": "45.8003",
+        "longitude": "-91.4594",
+        "station": "471847",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -91.4594,
+          45.8003
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Wisconsin",
+        "element": "All-Time Minimum Temperature",
+        "notes": "N/A",
+        "value": "-55",
+        "units": "degrees F",
+        "date": "February 4, 1996",
+        "location": "COUDERAY 7 W",
+        "latitude": "45.8003",
+        "longitude": "-91.4594",
+        "station": "471847",
+        "status": "E1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -91.4594,
+          45.8003
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Wisconsin",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "11.72",
+        "units": "inches",
+        "date": "June 24, 1946",
+        "location": "MELLEN 4 NE",
+        "latitude": "46.3689",
+        "longitude": "-90.6417",
+        "station": "475286",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.6417,
+          46.3689
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Wisconsin",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "26",
+        "units": "inches",
+        "date": "December 26 - 27, 1904",
+        "location": "NEILLSVILLE 3ESE",
+        "latitude": "44.5378",
+        "longitude": "-90.535",
+        "station": "475808",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.535,
+          44.5378
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Wisconsin",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "83",
+        "units": "inches",
+        "date": "April 6, 1933",
+        "location": "FLAMBEAU RESERVOIR",
+        "latitude": "46.06667",
+        "longitude": "-90.23333",
+        "station": "472814",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -90.23333,
+          46.06667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Wyoming",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "115",
+        "units": "degrees F",
+        "date": "August 8, 1983",
+        "location": "BASIN",
+        "latitude": "44.38",
+        "longitude": "-108.035",
+        "station": "480540",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -108.035,
+          44.38
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Wyoming",
+        "element": "All-Time Maximum Temperature",
+        "notes": "N/A",
+        "value": "115",
+        "units": "degrees F",
+        "date": "July 15, 1988",
+        "location": "DIVERSION DAM",
+        "latitude": "43.23348",
+        "longitude": "-108.91332",
+        "station": "482595",
+        "status": "N1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -108.91332,
+          43.23348
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Wyoming",
+        "element": "All-Time Minimum Temperature",
+        "notes": "Original observation of -66&deg;F at Riverside Ranger Station on February 9, 1933 is maintained in Department of Interior archives.",
+        "value": "-66",
+        "units": "degrees F",
+        "date": "February 9, 1933",
+        "location": "Riverside Ranger Stn. (Yellowstone NP)",
+        "latitude": "44.4280",
+        "longitude": "-110.5885",
+        "station": "",
+        "status": "EA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.5885,
+          44.428
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Wyoming",
+        "element": "All-Time Greatest 24-Hour Precipitation",
+        "notes": "N/A",
+        "value": "6.06",
+        "units": "inches",
+        "date": "August 1, 1985",
+        "location": "CHEYENNE WSFO AP",
+        "latitude": "41.15778",
+        "longitude": "-104.80694",
+        "station": "24018",
+        "status": "E"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -104.80694,
+          41.15778
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Wyoming",
+        "element": "All-Time Maximum 24-Hour Snowfall",
+        "notes": "N/A",
+        "value": "49",
+        "units": "inches",
+        "date": "March 21, 1924",
+        "location": "HUNTERS STN",
+        "latitude": "44.36667",
+        "longitude": "-106.95",
+        "station": "484770",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -106.95,
+          44.36667
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "state": "Wyoming",
+        "element": "All-Time Maximum Snow Depth",
+        "notes": "N/A",
+        "value": "128",
+        "units": "inches",
+        "date": "February 4, 1943",
+        "location": "GRASSY LAKE DAM",
+        "latitude": "44.13333",
+        "longitude": "-110.83333",
+        "station": "484050",
+        "status": "N"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -110.83333,
+          44.13333
+        ]
+      }
+    }
+  ]
+}
