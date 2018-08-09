@@ -85,7 +85,7 @@
     <string name="activity_lab_space_station_location_url" translatable="false">http://i.imgur.com/PxuB1T8.png</string>
     <string name="activity_lab_picture_in_picture_url" translatable="false">http://i.imgur.com/kascJEy.png</string>
     <string name="activity_lab_off_route_url" translatable="false">http://i.imgur.com/lx1LdkA.png</string>
-    <string name="activity_lab_los_angeles_tourism_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
+    <string name="activity_lab_pulsing_layer_opacity_color_url" translatable="false">http://i.imgur.com/FUIFkIm.png</string>
     <string name="activity_lab_indoor_map_url" translatable="false">http://i.imgur.com/ItqdTiG.png</string>
     <string name="activity_lab_rv_on_map_url" translatable="false">http://i.imgur.com/8mQQuMo.jpg</string>
     <string name="activity_lab_symbol_layer_on_map_url" translatable="false">https://i.imgur.com/FZWgfd0.png</string>

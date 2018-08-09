@@ -108,7 +108,7 @@
     <string name="location_picker_select_location_button_select">Escull una ubicació</string>
     <string name="location_picker_dropped_marker_snippet_no_results">Cap resultat</string>
 
-    <!--LosAngelesTourismActivity activity-->
+    <!--PulsingLayerOpacityColorActivity activity-->
     <string name="fab_title_hotels">Hotels</string>
     <string name="fab_title_parks">Parcs</string>
     <string name="fab_title_attractions">Atraccions</string>

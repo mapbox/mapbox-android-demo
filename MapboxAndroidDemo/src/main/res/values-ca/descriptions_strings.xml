@@ -58,6 +58,6 @@
     <string name="activity_lab_marker_following_route_description">Emprant una ruta GeoJSON encaixada amb el mapa el marcador es desplaça al llarg de la ruta a velocitat constant.</string>
     <string name="activity_lab_space_station_location_description">Veu la posició de l\'Estació Espacial Internacional en temps real.</string>
     <string name="activity_lab_off_route_description">Detecta quan el vehicle és fora de la ruta i el redirigeix.</string>
-    <string name="activity_lab_los_angeles_tourism_description">Utilitza l\'API d\'estil per ressaltar parcs, hotels i atraccions. També s\'afegeix una animació de batec als colors.</string>
+    <string name="activity_lab_pulsing_layer_opacity_color_description">Utilitza l\'API d\'estil per ressaltar parcs, hotels i atraccions. També s\'afegeix una animació de batec als colors.</string>
     <string name="activity_lab_indoor_map_description">Mostra un mapa d\'interiors d\'un edifici amb opcions per canviar entre els pisos.</string>
 </resources>
