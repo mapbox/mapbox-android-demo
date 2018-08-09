@@ -4,5 +4,6 @@
 	"MapboxMapOptionActivity",
 	"MarathonExtrusionActivity",
 	"RotationExtrusionActivity",
-	"StaticImageActivity"
+	"StaticImageActivity",
+	"PulsingLayerOpacityColorActivity"
 ]
