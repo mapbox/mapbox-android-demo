@@ -49,6 +49,9 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
   private String TAG = "AmbientNoiseActivity";
   static final private double EMA_FILTER = 0.6;
   static final private int REQUEST_MICROPHONE = 34;
+  static final private int measurementSpeed = 300;
+  private Handler handler;
+  private Runnable runnable;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -88,12 +91,12 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
     mapboxMap.addLayer(fillExtrusionLayer);
 
 
-    if (runner == null) {
+    /*if (runner == null) {
       runner = new Thread() {
         public void run() {
           while (runner != null) {
             try {
-              Thread.sleep(1000);
+              Thread.sleep(measurementSpeed);
               Log.d(TAG, "Tock");
             } catch (InterruptedException e) {
             }
@@ -103,7 +106,28 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
       };
       runner.start();
       Log.d("Noise", "start runner()");
-    }
+    }*/
+    setAudioMeasurementRunnable();
+  }
+
+  private void setAudioMeasurementRunnable() {
+    // A handler is needed to called the API every x amount of seconds.
+    handler = new Handler();
+    runnable = new Runnable() {
+      @Override
+      public void run() {
+        // Call the AP  I so we can get the updated coordinates.
+        Log.d(TAG, "run: dB = " + Double.toString(soundDb(getAmplitudeEMA())) + " dB");
+
+
+
+        // Schedule the next execution time for this runnable.
+        handler.postDelayed(this, measurementSpeed);
+      }
+    };
+
+    // The first time this runs we don't need a delay so we immediately post.
+    handler.post(runnable);
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
@@ -111,23 +135,21 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
   public void onResume() {
     super.onResume();
     mapView.onResume();
-
     if (ContextCompat.checkSelfPermission(this,
       Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-
       ActivityCompat.requestPermissions(this,
         new String[] {Manifest.permission.RECORD_AUDIO}, REQUEST_MICROPHONE);
-
     } else {
+      if (handler != null && runnable != null) {
+        handler.post(runnable);
+      }
       startRecorder();
-
     }
   }
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-
     Log.d(TAG, "onActivityResult: requestCode = " + requestCode);
     Log.d(TAG, "onActivityResult: resultCode = " + resultCode);
   }
@@ -149,6 +171,9 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
   public void onPause() {
     super.onPause();
     mapView.onPause();
+    if (handler != null && runnable != null) {
+      handler.removeCallbacks(runnable);
+    }
   }
 
   @Override
@@ -168,14 +193,6 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
   }
-
-  final Runnable updater = new Runnable() {
-    public void run() {
-      Log.d(TAG, "run: dB = " + Double.toString((getAmplitudeEMA())) + " dB");
-    }
-  };
-
-  final Handler mHandler = new Handler();
 
   public void startRecorder() {
     if (mRecorder == null) {
