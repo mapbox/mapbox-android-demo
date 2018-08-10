@@ -122,7 +122,7 @@
     <string name="activity_labs_gif_on_map_url" translatable="false">https://i.imgur.com/3d810QI.png</string>
     <string name="activity_labs_snaking_directions_route_url" translatable="false">https://i.imgur.com/6jWEFJi.png</string>
     <string name="activity_lab_moving_icon_with_trailing_line_url" translatable="false">https://i.imgur.com/jyrQn10.png</string>
-    <string name="activity_lab_dashed_line_directions_picker_url" translatable="false">https://i.imgur.com/0dpCI14.png</string>
+    <string name="activity_labs_dashed_line_directions_picker_url" translatable="false">https://i.imgur.com/0dpCI14.png</string>
     <string name="activity_lab_calendar_integration_url" translatable="false">https://i.imgur.com/M8TU7nH.png</string>
     <string name="activity_lab_magic_window_image_url">https://i.imgur.com/Nw78ZrV.png</string>
     <string name="activity_lab_fog_background_url">https://i.imgur.com/NcSGgD8.png</string>
@@ -133,6 +133,7 @@
     <string name="activity_lab_spinning_icon_url" translatable="false">https://i.imgur.com/jxQpAt2.png</string>
     <string name="activity_lab_change_attribution_color_url" translatable="false">https://i.imgur.com/cGv98jb.png</string>
     <string name="activity_lab_shared_preferences_url" translatable="false">https://i.imgur.com/znxAhDG.png</string>
+    <string name="activity_labs_ambient_noise_extrusion_height_url" translatable="false">https://i.imgur.com/0dpCI14.png</string>
     <string name="activity_china_simple_china_mapview_url" translatable="false">https://i.imgur.com/KwoEynZ.png</string>
     <string name="activity_china_simple_china_bounds_checker_url" translatable="false">https://i.imgur.com/fIFWqJu.png</string>
 </resources>
