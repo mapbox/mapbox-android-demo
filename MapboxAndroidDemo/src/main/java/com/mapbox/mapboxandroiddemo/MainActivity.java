@@ -110,6 +110,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.StyleFadeSwitchActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.TransparentBackgroundActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
 import com.mapbox.mapboxandroiddemo.labs.CalendarIntegrationActivity;
@@ -374,6 +375,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_styles_fade_switch_description,
           new Intent(MainActivity.this, StyleFadeSwitchActivity.class),
           R.string.activity_styles_fade_switch_url, false, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_styles_transparent_background_title,
+          R.string.activity_styles_transparent_background_description,
+          new Intent(MainActivity.this, TransparentBackgroundActivity.class),
+          R.string.activity_styles_transparent_background_url, false, BuildConfig.MIN_SDK_VERSION));
+
         currentCategory = R.id.nav_styles;
         break;
       case R.id.nav_extrusions:
