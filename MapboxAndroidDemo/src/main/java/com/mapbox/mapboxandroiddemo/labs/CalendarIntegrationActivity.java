@@ -3,11 +3,14 @@ package com.mapbox.mapboxandroiddemo.labs;
 // #-code-snippet: calendar-integration-activity full-java
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PointF;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -151,17 +154,22 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
       featureList = new ArrayList<>();
       int index = 0;
       if (cur != null) {
-        while (cur.moveToNext()) {
-          if (index <= 80) {
-            if (!cur.getString(EVENT_LOCATION_INDEX).isEmpty()) {
-              makeMapboxGeocodingRequest(cur.getString(TITLE_INDEX), cur.getString(EVENT_LOCATION_INDEX));
-            } else {
-              Timber.d("getCalendarData: location.isEmpty()");
+        if (!deviceHasInternetConnection()) {
+          Toast.makeText(this, R.string.no_connectivity, Toast.LENGTH_LONG).show();
+          Timber.d("No internet connectivity");
+        } else {
+          while (cur.moveToNext()) {
+            if (index <= 80) {
+              if (!cur.getString(EVENT_LOCATION_INDEX).isEmpty()) {
+                makeMapboxGeocodingRequest(cur.getString(TITLE_INDEX), cur.getString(EVENT_LOCATION_INDEX));
+              } else {
+                Timber.d("getCalendarData: location.isEmpty()");
+              }
+              index++;
             }
-            index++;
           }
+          setUpData();
         }
-        setUpData();
       }
     }
   }
@@ -291,6 +299,13 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
       default:
         return;
     }
+  }
+
+  public boolean deviceHasInternetConnection() {
+    ConnectivityManager connectivityManager = (ConnectivityManager)
+      getApplicationContext().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
+    return activeNetwork != null && activeNetwork.isConnected();
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
