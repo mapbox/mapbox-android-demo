@@ -60,7 +60,7 @@ public class ShowHideLayersActivity extends AppCompatActivity {
         museumsLayer.setProperties(
             visibility(VISIBLE),
             circleRadius(8f),
-            circleColor(Color.argb(1, 55, 148, 179))
+            circleColor(Color.argb(255, 55, 148, 179))
         );
 
         map.addLayer(museumsLayer);
