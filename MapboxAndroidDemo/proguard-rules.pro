@@ -44,6 +44,9 @@
 
 # Consumer proguard rules for plugins
 
+-dontwarn com.mapbox.mapboxandroiddemo.examples.plugins.**
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
 # --- AutoValue ---
 # AutoValue annotations are retained but dependency is compileOnly.
 -dontwarn com.google.auto.value.**
@@ -55,6 +58,7 @@
 -keepclassmembernames interface * {
     @retrofit2.http.* <methods>;
 }
+
 # Ignore annotation used for build tooling.
 -dontwarn org.codehaus.mojo.animal_sniffer.*
 
@@ -115,4 +119,3 @@
 -dontnote org.xmlpull.v1.**
 -keep class org.xmlpull.** { *; }
 -keepclassmembers class org.xmlpull.** { *; }
-
