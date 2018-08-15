@@ -127,7 +127,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
         {Manifest.permission.READ_CALENDAR}, MY_CAL_REQ);
     } else {
       Uri calendarUri;
-      if (Integer.parseInt(Build.VERSION.SDK) >= 8 || Integer.parseInt(Build.VERSION.SDK) <= 13) {
+      if (Integer.parseInt(Build.VERSION.SDK) >= 8 && Integer.parseInt(Build.VERSION.SDK) <= 13) {
         calendarUri = Uri.parse("content://com.android.calendar/events");
       } else if (Integer.parseInt(Build.VERSION.SDK) >= 14) {
         calendarUri = CalendarContract.Events.CONTENT_URI;
