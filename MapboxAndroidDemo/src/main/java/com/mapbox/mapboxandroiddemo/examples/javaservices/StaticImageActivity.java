@@ -29,7 +29,7 @@ import com.squareup.picasso.Picasso;
  * the ImageView.
  */
 public class StaticImageActivity extends AppCompatActivity implements
-  OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
+    OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -70,8 +70,10 @@ public class StaticImageActivity extends AppCompatActivity implements
           Picasso.with(StaticImageActivity.this).load(takeSnapshot(
               mapboxMap.getCameraPosition().zoom,
               mapboxMap.getStyleUrl().equals("mapbox://styles/mapbox/dark-v9") ? StaticMapCriteria.DARK_STYLE :
-                StaticMapCriteria.STREET_STYLE,
+                  StaticMapCriteria.STREET_STYLE,
               mapboxMap.getCameraPosition().target,
+              mapboxMap.getCameraPosition().bearing,
+              mapboxMap.getCameraPosition().tilt,
               findViewById(R.id.static_map_imageview).getMeasuredWidth(),
               findViewById(R.id.static_map_imageview).getMeasuredHeight())
               .url().toString()).into(staticMapImageView);
@@ -99,17 +101,62 @@ public class StaticImageActivity extends AppCompatActivity implements
     }
   }
 
-  private MapboxStaticMap takeSnapshot(double imageZoom, String styleUrl, LatLng imageTarget, int width,
+  private MapboxStaticMap takeSnapshot(double imageZoom, String styleUrl, LatLng imageTarget,
+                                       double bearing, double pitch, int width,
                                        int height) {
     return MapboxStaticMap.builder()
-      .accessToken(getString(R.string.access_token))
-      .styleId(styleUrl)
-      .cameraPoint(Point.fromLngLat(imageTarget.getLongitude(), imageTarget.getLatitude()))
-      .cameraZoom(imageZoom)
-      .width(width)
-      .height(height)
-      .retina(true)
-      .build();
+        .accessToken(getString(R.string.access_token))
+        .styleId(styleUrl)
+        .cameraPoint(Point.fromLngLat(imageTarget.getLongitude(), imageTarget.getLatitude()))
+        .cameraZoom(imageZoom)
+        .cameraPitch(pitch)
+        .cameraBearing(bearing)
+        .width(width)
+        .height(height)
+        .retina(true)
+        .build();
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+    mapView.onStop();
+  }
+
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
+
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
   }
 }
 // #-end-code-snippet: static-image-activity full-java
