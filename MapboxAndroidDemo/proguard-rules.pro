@@ -62,8 +62,12 @@
 # Ignore annotation used for build tooling.
 -dontwarn org.codehaus.mojo.animal_sniffer.*
 
+# GSON
+-dontwarn com.google.gson.**
+
 # --- OkHttp ---
 -dontwarn okhttp3.**
+
 -dontwarn okio.**
 -dontwarn okio.BufferedSink
 -dontwarn javax.annotation.**
@@ -109,6 +113,8 @@
 -keep class android.arch.** { *; }
 -dontwarn android.arch.**
 
+# Mapbox Telemetry
+-dontwarn com.mapbox.android.telemetry.**
 
 # Other Android
 -dontnote android.net.http.*
