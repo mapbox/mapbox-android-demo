@@ -14,10 +14,8 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import timber.log.Timber;
+import java.io.IOException;
+import java.io.InputStream;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
@@ -27,7 +25,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpa
 /**
  * Use data-driven styling and GeoJSON data to set extrusions' heights
  */
-public class MarathonExtrusionActivity extends AppCompatActivity {
+public class MarathonExtrusionActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -45,35 +43,30 @@ public class MarathonExtrusionActivity extends AppCompatActivity {
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-        MarathonExtrusionActivity.this.mapboxMap = mapboxMap;
+    mapView.getMapAsync(this);
+  }
 
-        // Add the marathon route source to the map
-        try {
-          // Create a GeoJsonSource and use the Mapbox Datasets API to retrieve the GeoJSON data
-          // More info about the Datasets API at https://www.mapbox.com/api-documentation/#retrieve-a-dataset
-          GeoJsonSource courseRouteGeoJson = new GeoJsonSource("coursedata",
-            new URL(
-              "https://api.mapbox.com/datasets/v1/appsatmapboxcom/cjhksgac501g5c6qx051jxavj/"
-                + "features?access_token=" + getString(R.string.access_token)));
-          mapboxMap.addSource(courseRouteGeoJson);
-          addExtrusionsLayerToMap();
-        } catch (MalformedURLException malformedUrlException) {
-          Timber.d("Check the URL " + malformedUrlException.getMessage());
-        }
-      }
-    });
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    MarathonExtrusionActivity.this.mapboxMap = mapboxMap;
+
+    // Add the marathon route source to the map
+    // Create a GeoJsonSource and use the Mapbox Datasets API to retrieve the GeoJSON data
+    // More info about the Datasets API at https://www.mapbox.com/api-documentation/#retrieve-a-dataset
+    GeoJsonSource courseRouteGeoJson = new GeoJsonSource(
+        "coursedata", loadJsonFromAsset("marathon_route.geojson"));
+
+    mapboxMap.addSource(courseRouteGeoJson);
+    addExtrusionsLayerToMap();
   }
 
   private void addExtrusionsLayerToMap() {
     // Add FillExtrusion layer to map using GeoJSON data
     FillExtrusionLayer courseExtrusionLayer = new FillExtrusionLayer("course", "coursedata");
     courseExtrusionLayer.setProperties(
-      fillExtrusionColor(Color.YELLOW),
-      fillExtrusionOpacity(0.7f),
-      fillExtrusionHeight(get("e")));
+        fillExtrusionColor(Color.YELLOW),
+        fillExtrusionOpacity(0.7f),
+        fillExtrusionHeight(get("e")));
     mapboxMap.addLayer(courseExtrusionLayer);
   }
 
@@ -117,6 +110,21 @@ public class MarathonExtrusionActivity extends AppCompatActivity {
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
+  }
+
+  private String loadJsonFromAsset(String filename) {
+    // Using this method to load in GeoJSON files from the assets folder.
+    try {
+      InputStream is = getAssets().open(filename);
+      int size = is.available();
+      byte[] buffer = new byte[size];
+      is.read(buffer);
+      is.close();
+      return new String(buffer, "UTF-8");
+    } catch (IOException ex) {
+      ex.printStackTrace();
+      return null;
+    }
   }
 }
 // #-end-code-snippet: marathon-extrusion-activity full-java
