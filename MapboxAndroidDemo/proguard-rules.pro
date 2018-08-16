@@ -63,7 +63,7 @@
 -dontwarn org.codehaus.mojo.animal_sniffer.*
 
 # GSON
--dontwarn com.google.gson.**
+-keep com.google.gson.**
 
 # --- OkHttp ---
 -dontwarn okhttp3.**
@@ -114,15 +114,15 @@
 -dontwarn android.arch.**
 
 # Mapbox Telemetry
--dontwarn com.mapbox.android.telemetry.**
--dontwarn com.mapbox.android.core.location.**
+-keep com.mapbox.android.telemetry.**
+-keep com.mapbox.android.core.location.**
 
 # Other Android
 -dontnote android.net.http.*
 -dontnote org.apache.commons.codec.**
 -dontnote org.apache.http.**
 
--dontwarn com.google.firebase.**
+-keep com.google.firebase.**
 -dontwarn org.xmlpull.v1.**
 -dontnote org.xmlpull.v1.**
 -keep class org.xmlpull.** { *; }
