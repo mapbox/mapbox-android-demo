@@ -72,6 +72,8 @@ public class StaticImageActivity extends AppCompatActivity implements
               mapboxMap.getStyleUrl().equals("mapbox://styles/mapbox/dark-v9") ? StaticMapCriteria.DARK_STYLE :
                   StaticMapCriteria.STREET_STYLE,
               mapboxMap.getCameraPosition().target,
+              mapboxMap.getCameraPosition().bearing,
+              mapboxMap.getCameraPosition().tilt,
               findViewById(R.id.static_map_imageview).getMeasuredWidth(),
               findViewById(R.id.static_map_imageview).getMeasuredHeight())
               .url().toString()).into(staticMapImageView);
@@ -99,13 +101,16 @@ public class StaticImageActivity extends AppCompatActivity implements
     }
   }
 
-  private MapboxStaticMap takeSnapshot(double imageZoom, String styleUrl, LatLng imageTarget, int width,
+  private MapboxStaticMap takeSnapshot(double imageZoom, String styleUrl, LatLng imageTarget,
+                                       double bearing, double pitch, int width,
                                        int height) {
     return MapboxStaticMap.builder()
         .accessToken(getString(R.string.access_token))
         .styleId(styleUrl)
         .cameraPoint(Point.fromLngLat(imageTarget.getLongitude(), imageTarget.getLatitude()))
         .cameraZoom(imageZoom)
+        .cameraPitch(pitch)
+        .cameraBearing(bearing)
         .width(width)
         .height(height)
         .retina(true)
