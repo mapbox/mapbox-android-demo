@@ -285,4 +285,8 @@
 
     <!-- Isochrone change -->
     <string name="click_on_map_instruction">Tap on the map!</string>
+
+    <!--Custom location layer plugin icon-->
+    <string name="tap_the_icon">Tap the location icon!</string>
+    <string name="current_location">Lat: %1$f Long: %2$f</string>
 </resources>

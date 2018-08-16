@@ -2,7 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.location;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -11,7 +10,6 @@ import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.location.LocationComponent;
-import com.mapbox.mapboxsdk.location.LocationComponentOptions;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -21,7 +19,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import java.util.List;
 
 /**
- * Use the Location component to easily add a device location "puck" to a Mapbox map.
+ * Use the LocationComponent to easily add a device location "puck" to a Mapbox map.
  */
 public class LocationComponentActivity extends AppCompatActivity implements
   OnMapReadyCallback, PermissionsListener {
@@ -57,22 +55,19 @@ public class LocationComponentActivity extends AppCompatActivity implements
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
-      LocationComponentOptions options = LocationComponentOptions.builder(this)
-        .trackingGesturesManagement(true)
-        .accuracyColor(ContextCompat.getColor(this, R.color.mapboxGreen))
-        .build();
-
       // Get an instance of the component
       LocationComponent locationComponent = mapboxMap.getLocationComponent();
 
-      // Activate with options
-      locationComponent.activateLocationComponent(this, options);
+      // Activate
+      locationComponent.activateLocationComponent(this);
 
       // Enable to make component visible
       locationComponent.setLocationComponentEnabled(true);
 
       // Set the component's camera mode
       locationComponent.setCameraMode(CameraMode.TRACKING);
+
+      // Set the component's render mode
       locationComponent.setRenderMode(RenderMode.COMPASS);
     } else {
       permissionsManager = new PermissionsManager(this);
