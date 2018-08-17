@@ -3,8 +3,11 @@
 -dontnote retrofit2.Platform
 # Platform used when running on Java 8 VMs. Will not be used at runtime.
 -dontwarn retrofit2.Platform$Java8
+
 # Retain generic type information for use by reflection by converters and adapters.
--keepattributes Signature
+-keepattributes *Annotation*,Signature
+
+
 # Retain declared checked exceptions for use by a Proxy instance.
 -keepattributes Exceptions
 
@@ -51,9 +54,6 @@
 # AutoValue annotations are retained but dependency is compileOnly.
 -dontwarn com.google.auto.value.**
 
-# --- Retrofit ---
-# Retain generic type information for use by reflection by converters and adapters.
--keepattributes Signature
 # Retain service method parameters.
 -keepclassmembernames interface * {
     @retrofit2.http.* <methods>;
@@ -63,7 +63,7 @@
 -dontwarn org.codehaus.mojo.animal_sniffer.*
 
 # GSON
--keep com.google.gson.**
+-keep class com.google.gson.** { *; }
 
 # --- OkHttp ---
 -dontwarn okhttp3.**

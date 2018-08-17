@@ -6,7 +6,8 @@
 # Platform used when running on Java 8 VMs. Will not be used at runtime.
 -dontwarn retrofit2.Platform$Java8
 # Retain generic type information for use by reflection by converters and adapters.
--keepattributes Signature
+-keepattributes *Annotation*,Signature
+
 # Retain declared checked exceptions for use by a Proxy instance.
 -keepattributes Exceptions
 
@@ -17,6 +18,7 @@
 
 -dontwarn okio.**
 -dontwarn okhttp3.**
+-keep class retrofit.**
 -keep class retrofit.** { *; }
 -keepclasseswithmembers class * {
     @retrofit.http.* <methods>;
@@ -47,14 +49,26 @@
 -dontwarn com.google.auto.value.**
 
 # --- Retrofit ---
-# Retain generic type information for use by reflection by converters and adapters.
--keepattributes Signature
 # Retain service method parameters.
 -keepclassmembernames interface * {
     @retrofit2.http.* <methods>;
 }
 # Ignore annotation used for build tooling.
 -dontwarn org.codehaus.mojo.animal_sniffer.*
+
+# GSON
+-keep class com.google.gson.** { *; }
+
+
+# Consumer proguard rules for plugins
+
+-dontwarn com.mapbox.mapboxandroiddemo.examples.plugins.**
+-dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+
+# MAS data models that will be serialized/deserialized over Gson
+-keep class com.mapbox.services.api.directionsmatrix.v1.models.** { *; }
+
+-dontnote com.squareup.**
 
 # --- OkHttp ---
 -dontwarn okhttp3.**
@@ -77,3 +91,7 @@
 -dontnote android.net.http.*
 -dontnote org.apache.commons.codec.**
 -dontnote org.apache.http.**
+-dontwarn org.xmlpull.v1.**
+-dontnote org.xmlpull.v1.**
+-keep class org.xmlpull.** { *; }
+-keepclassmembers class org.xmlpull.** { *; }
