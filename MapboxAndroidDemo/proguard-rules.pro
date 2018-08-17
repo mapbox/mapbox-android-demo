@@ -7,7 +7,6 @@
 # Retain generic type information for use by reflection by converters and adapters.
 -keepattributes *Annotation*,Signature
 
-
 # Retain declared checked exceptions for use by a Proxy instance.
 -keepattributes Exceptions
 
@@ -106,6 +105,7 @@
     <init>(...);
 }
 
+
 -keep class * implements android.arch.lifecycle.LifecycleObserver {
     <init>(...);
 }
@@ -113,16 +113,20 @@
 -keep class android.arch.** { *; }
 -dontwarn android.arch.**
 
-# Mapbox Telemetry
--keep com.mapbox.android.telemetry.**
--keep com.mapbox.android.core.location.**
+# Mapbox
+-keep class com.mapbox.android.telemetry.**
+-keep class com.mapbox.android.core.location.**
+-keep class android.arch.lifecycle.** { *; }
+-keep class com.mapbox.android.core.location.** { *; }
+-keep class com.mapbox.mapboxsdk.** { *; }
 
 # Other Android
 -dontnote android.net.http.*
 -dontnote org.apache.commons.codec.**
 -dontnote org.apache.http.**
 
--keep com.google.firebase.**
+
+-keep class com.google.firebase.**
 -dontwarn org.xmlpull.v1.**
 -dontnote org.xmlpull.v1.**
 -keep class org.xmlpull.** { *; }
