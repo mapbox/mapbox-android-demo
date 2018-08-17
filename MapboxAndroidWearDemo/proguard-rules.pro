@@ -68,6 +68,10 @@
 # MAS data models that will be serialized/deserialized over Gson
 -keep class com.mapbox.services.api.directionsmatrix.v1.models.** { *; }
 
+-keep class android.arch.lifecycle.** { *; }
+-keep class com.mapbox.android.core.location.** { *; }
+-keep class com.mapbox.mapboxsdk.** { *; }
+
 -dontnote com.squareup.**
 
 # --- OkHttp ---
@@ -86,8 +90,16 @@
 -dontwarn com.mapbox.api.staticmap.v1.models.StaticMarkerAnnotation
 -dontwarn com.mapbox.api.staticmap.v1.models.StaticPolylineAnnotation
 
+# Mapbox
+-keep class com.mapbox.android.telemetry.**
+-keep class com.mapbox.android.core.location.**
+-keep class android.arch.lifecycle.** { *; }
+-keep class com.mapbox.android.core.location.** { *; }
+-keep class com.mapbox.mapboxsdk.** { *; }
 
 # Other Android
+-keep public class com.google.firebase.** { public *; }
+-keep class com.google.firebase.** { *; }
 -dontnote android.net.http.*
 -dontnote org.apache.commons.codec.**
 -dontnote org.apache.http.**
