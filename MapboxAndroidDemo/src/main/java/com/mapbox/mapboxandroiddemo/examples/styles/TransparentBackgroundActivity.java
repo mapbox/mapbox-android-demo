@@ -26,7 +26,8 @@ import java.io.Writer;
 import timber.log.Timber;
 
 /**
- * Create a transparent render surface and add whatever you want. This example has a moving water.
+ * Create a transparent render surface and add whatever you want to the background. This example
+ * has a video of moving water behind Earth's land.
  */
 public class TransparentBackgroundActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -106,11 +107,11 @@ public class TransparentBackgroundActivity extends AppCompatActivity implements 
 
   @Override
   protected void onDestroy() {
-    super.onDestroy();
-    mapView.onDestroy();
-    if(null!=backgroundWaterVideoView){
+    if (backgroundWaterVideoView != null) {
       backgroundWaterVideoView.stopPlayback();
     }
+    super.onDestroy();
+    mapView.onDestroy();
   }
 
   @Override
@@ -119,6 +120,9 @@ public class TransparentBackgroundActivity extends AppCompatActivity implements 
     mapView.onSaveInstanceState(outState);
   }
 
+  /**
+   * Get the map style JSON from the raw file in the app's raw folder
+   */
   public static String readRawResource(Context context, @RawRes int rawResource) throws IOException {
     String json = "";
     if (context != null) {

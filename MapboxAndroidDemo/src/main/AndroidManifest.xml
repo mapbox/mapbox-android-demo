@@ -428,7 +428,8 @@
         </activity>
         <activity
             android:name=".examples.styles.TransparentBackgroundActivity"
-            android:label="@string/activity_styles_transparent_background_title">
+            android:label="@string/activity_styles_transparent_background_title"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
