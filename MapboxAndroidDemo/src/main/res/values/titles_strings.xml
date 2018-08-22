@@ -26,6 +26,7 @@
     <string name="activity_style_image_source_title">Use an image source</string>
     <string name="activity_styles_hillshade_title">Hillshading</string>
     <string name="activity_styles_fade_switch_title">Switch map styles with fade</string>
+    <string name="activity_styles_transparent_background_title">Transparent render surface</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_title">Use GeoJSON data to set extrusion height</string>
     <string name="activity_extrusions_population_density_extrusions_title">Display 3D building height based on vector data</string>
     <string name="activity_extrusions_adjust_extrusions_title">Adjust light location and color</string>
