@@ -71,6 +71,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.MatrixApiActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
@@ -297,6 +298,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           models.add(model);
         }
       }
+
     }
 
     adapter.updateDataSet(models, currentCategory);
@@ -868,6 +870,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, IsochroneActivity.class),
       null,
       R.string.activity_java_services_isochrone_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_java_services,
+      R.string.activity_java_services_tilequery_title,
+      R.string.activity_java_services_tilequery_description,
+      new Intent(MainActivity.this, TilequeryActivity.class),
+      null,
+      R.string.activity_java_services_tilequery_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,

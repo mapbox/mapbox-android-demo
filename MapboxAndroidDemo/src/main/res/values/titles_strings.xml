@@ -76,6 +76,7 @@
     <string name="activity_java_services_maxtrix_api_title">Retrieve travel times between many points</string>
     <string name="activity_java_services_geocoding_title">Make a geocode request</string>
     <string name="activity_java_services_isochrone_title">Make a isochrone request</string>
+    <string name="activity_java_services_tilequery_title">Make a tile query</string>
     <string name="activity_plugins_traffic_plugin_title">Display real-time traffic</string>
     <string name="activity_plugins_building_plugin_title">Display buildings in 3D</string>
     <string name="activity_location_location_component_title">Show a user\'s location</string>

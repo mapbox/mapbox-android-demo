@@ -77,6 +77,7 @@
     <string name="activity_java_services_matrix_api_description">Use the Directions Matrix API to receive driving times between 2-25 different locations.</string>
     <string name="activity_java_services_geocoding_description">Use the Geocoding API to receive information about specific coordinates.</string>
     <string name="activity_java_services_isochrone_description">Use the Isochrone API to receive information about how far you can travel within a given time.</string>
+    <string name="activity_java_services_tilequery_description">Use the Tilequery API to search for features in a tileset.</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
     <string name="activity_location_location_component_description">Use the location component to easily show a user\'s location on the map</string>
