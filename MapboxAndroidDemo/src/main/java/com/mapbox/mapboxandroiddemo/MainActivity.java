@@ -113,7 +113,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.StyleFadeSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.TransparentBackgroundActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
-import com.mapbox.mapboxandroiddemo.labs.CalendarIntegrationActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 import com.mapbox.mapboxandroiddemo.utils.SettingsDialogView;
