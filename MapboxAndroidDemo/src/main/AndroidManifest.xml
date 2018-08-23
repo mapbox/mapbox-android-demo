@@ -200,7 +200,7 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".labs.CalendarIntegrationActivity"
+            android:name=".examples.labs.CalendarIntegrationActivity"
             android:label="@string/activity_lab_calendar_integration_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
