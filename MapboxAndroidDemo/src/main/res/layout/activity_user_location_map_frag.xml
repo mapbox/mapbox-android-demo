@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_pressed"
+    tools:context=".examples.basics.SupportMapFragmentActivity">
+
+    <TextView
+        android:id="@+id/fragment_below_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:text="@string/location_layer_fragment_text"/>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/location_frag_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="50dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="@dimen/cardview_default_elevation">
+
+        <FrameLayout
+            android:id="@+id/location_frag_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
