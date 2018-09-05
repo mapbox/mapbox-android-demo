@@ -30,6 +30,7 @@
     <string name="activity_style_hillshade_url" translatable="false">https://i.imgur.com/U2OKixV.png</string>
     <string name="activity_styles_fade_switch_url" translatable="false">https://i.imgur.com/1sPnDx5.png</string>
     <string name="activity_styles_transparent_background_url" translatable="false">https://i.imgur.com/5bYnlp5.png</string>
+    <string name="activity_styles_click_to_add_image_url" translatable="false">https://i.imgur.com/uPIH5Ck.png</string>
     <string name="activity_extrusions_population_density_extrusions_url" translatable="false">http://i.imgur.com/se1z8Wb.png</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_url" translatable="false">http://i.imgur.com/6j848JL.jpg</string>
     <string name="activity_extrusions_adjust_extrusions_url" translatable="false">http://i.imgur.com/XNTyIO5.png</string>
