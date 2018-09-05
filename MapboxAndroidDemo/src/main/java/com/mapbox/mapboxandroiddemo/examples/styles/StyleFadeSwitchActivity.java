@@ -79,7 +79,7 @@ public class StyleFadeSwitchActivity extends AppCompatActivity implements
 
     // Animate the map camera to show the fade in/out UI of the satellite layer
     mapboxMap.animateCamera(
-      CameraUpdateFactory.newCameraPosition(cameraPositionForFragmentMap), 4000);
+      CameraUpdateFactory.newCameraPosition(cameraPositionForFragmentMap), 9000);
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
