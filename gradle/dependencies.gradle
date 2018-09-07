@@ -10,7 +10,7 @@ ext {
     version = [
 
             // Mapbox
-            mapboxMapSdk             : '6.5.0-alpha.2',
+            mapboxMapSdk             : '6.5.0-beta.1',
             mapboxTurf               : '3.4.1',
             mapboxPluginBuilding     : '0.3.0',
             mapboxPluginLocationLayer: '0.7.2',
