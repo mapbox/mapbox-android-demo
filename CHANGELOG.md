@@ -6,6 +6,8 @@ Mapbox welcomes participation and contributions from everyone.
 
 * Device location in a map fragment
 * Transparent background + video example
+* Adding line background highlight example
+* Data-driven styling temperature expression example
 
 ## 6.4.0
 
