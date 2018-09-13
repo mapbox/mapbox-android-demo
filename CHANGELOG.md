@@ -2,6 +2,72 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 6.5.0
+
+* Device location in a map fragment
+* Transparent background + video example
+
+## 6.4.0
+
+* Calendar integration
+* Video background
+
+## 6.3.0
+
+* Static image API
+* Building outline
+
+## 6.2.1
+
+* GeoJSON SymbolLayer clustering
+* Place picker
+
+## 6.2.0
+
+* New example of showing an info window with a SymbolLayer
+* New example of water depth (bathymetry) data visualization
+* New geocoding example 
+
+## 6.1.0
+
+* Re-added the traffic plugin example
+* Added a straightforward ImageSource example
+* Other bug fixes
+
+## 6.0.1
+
+* A new hillshading example
+* A new heatmap example
+
+## 5.5.1
+
+* Location layer plugin update
+* Several small hot fixes
+* Mapbox Java SDK upgrade
+
+## 5.1.4
+
+* How to use the new GeoJSON plugin
+* How to add many images as markers
+
+## 5.1.3-2
+
+* Rotate and tilt the map based on device rotation
+* Example of using the Mapbox Optimization API
+
+## 5.1.2
+
+* Picture-in-picture (for Android O)
+* Adaptive icons (for Android O)
+* Loading a map style via a local file
+
+## 5.1.0
+
+* Extrusions (3D buildings)
+* Data-driven styling
+* Annotations
+* Hotfixes of several examples
+
 ## 4.2.0
 * Indoor map example
 * Los Angeles tourism example
