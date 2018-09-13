@@ -13,9 +13,9 @@ ext {
             mapboxMapSdk             : '6.4.0',
             mapboxTurf               : '3.4.1',
             mapboxPluginBuilding     : '0.3.0',
-            mapboxPluginLocationLayer: '0.8.1',
-            mapboxPluginPlaces       : '0.4.0',
-            mapboxPluginLocalization : '0.3.0',
+            mapboxPluginLocationLayer: '0.8.2',
+            mapboxPluginPlaces       : '0.6.0',
+            mapboxPluginLocalization : '0.5.0',
             mapboxPluginTraffic      : '0.6.0',
 
             // Support
