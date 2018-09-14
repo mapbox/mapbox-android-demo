@@ -38,6 +38,7 @@ import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
+import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivityKotlin;
 import com.mapbox.mapboxandroiddemo.examples.basics.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
@@ -457,14 +458,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_plugins_place_picker_plugin_title,
           R.string.activity_plugins_place_picker_plugin_description,
           new Intent(MainActivity.this, PlaceSelectionPluginActivity.class),
-          R.string.activity_plugins_place_picker_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
+          R.string.activity_plugins_place_picker_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
         );
 
         exampleItemModels.add(new ExampleItemModel(
-           R.string.activity_user_location_map_frag_title,
-           R.string.activity_user_location_map_frag_plugin_description,
-           new Intent(MainActivity.this, LocationPluginFragmentActivity.class),
-           R.string.activity_user_location_fragment_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
+          R.string.activity_user_location_map_frag_title,
+          R.string.activity_user_location_map_frag_plugin_description,
+          new Intent(MainActivity.this, LocationPluginFragmentActivity.class),
+          R.string.activity_user_location_fragment_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
         );
 
         currentCategory = R.id.nav_plugins;
@@ -588,7 +589,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_query_highlighted_line_title,
           R.string.activity_query_highlighted_line_description,
           new Intent(MainActivity.this, HighlightedLineActivity.class),
-          R.string.activity_query_highlighted_line_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_query_highlighted_line_url, false, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_query_map;
         break;
@@ -818,7 +819,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_expression_integration_title,
           R.string.activity_dds_expression_integration_description,
           new Intent(MainActivity.this, ExpressionIntegrationActivity.class),
-          R.string.activity_dds_expression_integration_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_dds_expression_integration_url, false, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_dds;
         break;
@@ -840,6 +841,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_basic_mapbox_options_description,
           new Intent(MainActivity.this, MapboxMapOptionActivity.class),
           R.string.activity_basic_mapbox_options_url, false, BuildConfig.MIN_SDK_VERSION));
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_basic_mapbox_kotlin_title,
+          R.string.activity_basic_mapbox_kotlin_description,
+          new Intent(MainActivity.this, SimpleMapViewActivityKotlin.class),
+          R.string.activity_basic_mapbox_kotlin_url, true, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_basics;
         break;

@@ -8,6 +8,7 @@
     <string name="activity_basic_simple_mapview_url" translatable="false">http://i.imgur.com/IIhIB4J.png</string>
     <string name="activity_basic_support_map_frag_url" translatable="false">http://i.imgur.com/vNlHFjG.png</string>
     <string name="activity_basic_mapbox_options_url" translatable="false">http://i.imgur.com/IhuviRz.png</string>
+    <string name="activity_basic_mapbox_kotlin_url" translatable="false">https://i.imgur.com/YlKYHAi.png</string>
     <string name="activity_styles_mapbox_studio_url" translatable="false">http://i.imgur.com/MbR2zbD.png</string>
     <string name="activity_style_raster_url" translatable="false">http://i.imgur.com/QpFmrdR.png</string>
     <string name="activity_styles_default_url" translatable="false">http://i.imgur.com/ZuUhFHw.jpg</string>

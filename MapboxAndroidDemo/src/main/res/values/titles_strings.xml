@@ -7,6 +7,7 @@
     <string name="activity_basic_simple_mapview_title">A simple map view</string>
     <string name="activity_basic_support_map_frag_title">Support map fragment</string>
     <string name="activity_basic_mapbox_options_title">Dynamically build a map view</string>
+    <string name="activity_basic_mapbox_kotlin_title">Use Kotlin to show a map</string>
     <string name="activity_styles_mapbox_studio_title">Mapbox Studio style</string>
     <string name="activity_styles_default_title">Default styles</string>
     <string name="activity_styles_show_hide_layer_title">Show and hide layers</string>
