@@ -43,6 +43,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
   private MapboxMap mapboxMap;
   private static String TAG = "HighlightedLineActivity";
   private LineLayer backgroundLineLayer;
+  private LineLayer routeLineLayer;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +102,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
    */
   private void initLayers() {
     // Add the regular LineLayer
-    LineLayer routeLineLayer = new LineLayer("line-layer-id", "source-id");
+    routeLineLayer = new LineLayer("line-layer-id", "source-id");
     routeLineLayer.setProperties(
       lineWidth(9f),
       lineColor(Color.BLUE),
@@ -120,7 +121,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
       lineJoin(LINE_JOIN_ROUND),
       visibility(NONE)
     );
-    mapboxMap.addLayerBelow(backgroundLineLayer,"line-layer-id");
+    mapboxMap.addLayerBelow(backgroundLineLayer, "line-layer-id");
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
@@ -156,11 +157,16 @@ public class HighlightedLineActivity extends AppCompatActivity implements
 
   @Override
   protected void onDestroy() {
-    super.onDestroy();
     if (mapboxMap != null) {
       mapboxMap.removeOnMapClickListener(this);
+      mapboxMap.removeLayer(backgroundLineLayer.getId());
+      mapboxMap.removeLayer(routeLineLayer.getId());
+      mapboxMap = null;
+      backgroundLineLayer = null;
     }
     mapView.onDestroy();
+    mapView = null;
+    super.onDestroy();
   }
 
   @Override
