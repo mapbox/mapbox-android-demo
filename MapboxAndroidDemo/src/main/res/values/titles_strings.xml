@@ -63,6 +63,7 @@
     <string name="activity_query_feature_count_title">Feature count</string>
     <string name="activity_query_click_on_layer_title">Click on single layer</string>
     <string name="activity_query_building_outline_title">Building outline</string>
+    <string name="activity_query_highlighted_line_title">Highlighted line</string>
     <string name="activity_java_services_directions_title">Show directions on map</string>
     <string name="activity_java_services_optimization_title">Show optimized directions on map</string>
     <string name="activity_java_services_static_image_title">Download a static map</string>
