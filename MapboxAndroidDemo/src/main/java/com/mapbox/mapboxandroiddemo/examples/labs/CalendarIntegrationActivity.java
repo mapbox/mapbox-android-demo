@@ -160,10 +160,10 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
         } else {
           while (cur.moveToNext()) {
             if (index <= 80) {
-              if (!cur.getString(EVENT_LOCATION_INDEX).isEmpty()) {
+              if (cur.getString(EVENT_LOCATION_INDEX) != null && !cur.getString(EVENT_LOCATION_INDEX).isEmpty()) {
                 makeMapboxGeocodingRequest(cur.getString(TITLE_INDEX), cur.getString(EVENT_LOCATION_INDEX));
               } else {
-                Timber.d("getCalendarData: location.isEmpty()");
+                Timber.d("getCalendarData: location is null or empty");
               }
               index++;
             }
