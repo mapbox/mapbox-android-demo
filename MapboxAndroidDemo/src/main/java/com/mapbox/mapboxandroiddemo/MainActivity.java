@@ -587,7 +587,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_query_highlighted_line_title,
           R.string.activity_query_highlighted_line_description,
           new Intent(MainActivity.this, HighlightedLineActivity.class),
-          R.string.activity_query_highlighted_line_url, false, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_query_highlighted_line_url, true, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_query_map;
         break;
