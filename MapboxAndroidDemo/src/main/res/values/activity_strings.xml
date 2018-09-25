@@ -278,4 +278,8 @@
     <!-- Click to add image -->
     <string name="file_not_found">File not found</string>
     <string name="tap_instructions">Tap four points on the map in a CLOCKWISE order</string>
+
+    <!-- Satellite land selection -->
+    <string name="clear_all">Clear</string>
+    <string name="trace_instruction">Trace some of the Gardens of Versailles!</string>
 </resources>

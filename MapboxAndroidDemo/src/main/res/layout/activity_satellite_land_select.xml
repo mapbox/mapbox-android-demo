@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:mapbox_styleUrl="@string/mapbox_style_satellite"
+        mapbox:mapbox_cameraTargetLat="48.805817"
+        mapbox:mapbox_cameraTargetLng="2.1161985"
+        mapbox:mapbox_cameraZoom="5" />
+
+
+    <Button
+        android:id="@+id/clear_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="88dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/mapboxOrange"
+        android:text="@string/clear_all"
+        android:textAllCaps="false"
+        android:textColor="@color/mapboxWhite" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/drop_pin_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:fab_size="normal"
+        app:srcCompat="@drawable/ic_pin_drop" />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/ic_add" />
+
+</FrameLayout>
