@@ -4,7 +4,7 @@ ext {
             minWearSdkVersion: 23,
             targetSdkVersion : 27,
             compileSdkVersion: 27,
-            buildToolsVersion: '27.0.3'
+            buildToolsVersion: '28.0.3'
     ]
 
     version = [
@@ -51,7 +51,7 @@ ext {
     pluginVersion = [
             checkstyle         : '8.2',
             firebase           : '1.1.1',
-            gradle             : '3.1.0',
+            gradle             : '3.2.0',
             gradlePlayPublisher: '1.2.0'
     ]
 
