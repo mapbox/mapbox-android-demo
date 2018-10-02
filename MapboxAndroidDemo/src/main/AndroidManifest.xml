@@ -43,6 +43,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.basics.SimpleMapViewActivityKotlin"
+            android:label="@string/activity_basic_mapbox_kotlin_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.styles.MapboxStudioStyleActivity"
             android:label="@string/activity_styles_mapbox_studio_title">
             <meta-data

@@ -40,7 +40,9 @@ ext {
             espresso                 : '3.0.2',
             testRunner               : '1.0.2',
             junit                    : '4.12',
-            supportAnnotations       : '27.1.1'
+            supportAnnotations       : '27.1.1',
+            kotlin                   : '1.2.70',
+            multiDex                 : '1.0.3'
     ]
 
     wearVersion = [
@@ -52,7 +54,9 @@ ext {
             checkstyle         : '8.2',
             firebase           : '1.1.1',
             gradle             : '3.2.0',
-            gradlePlayPublisher: '1.2.0'
+            gradlePlayPublisher: '1.2.0',
+            gradlePlayPublisher: '1.2.0',
+            kotlin             : '1.2.70'
     ]
 
     dependenciesList = [
@@ -98,6 +102,8 @@ ext {
             cuttaGifView             : "com.github.Cutta:GifView:${version.cuttaGifView}",
             baseFab                  : "com.getbase:floatingactionbutton:${version.baseFab}",
             materialDialogsCommons   : "com.afollestad.material-dialogs:commons:${version.materialDialogsCommons}",
+            kotlin                   : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${version.kotlin}",
+            multiDex                 : "com.android.support:multidex:${version.multiDex}",
 
             // Testing
             testEspressoCore         : "com.android.support.test.espresso:espresso-core:${version.espresso}",
@@ -112,7 +118,8 @@ ext {
             gradle       : "com.android.tools.build:gradle:${pluginVersion.gradle}",
             checkstyle   : "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
             firebase     : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
-            playPublisher: "com.github.triplet.gradle:play-publisher:${pluginVersion.gradlePlayPublisher}"
+            playPublisher: "com.github.triplet.gradle:play-publisher:${pluginVersion.gradlePlayPublisher}",
+            kotlin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:${pluginVersion.kotlin}"
     ]
 
     wearDependencies = [

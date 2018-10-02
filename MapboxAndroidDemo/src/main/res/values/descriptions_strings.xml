@@ -7,6 +7,7 @@
     <string name="activity_basic_simple_mapview_description">Show a map in your app using the Mapbox Maps SDK.</string>
     <string name="activity_basic_support_map_frag_description">Include a map fragment within your app using Android support library.</string>
     <string name="activity_basic_mapbox_options_description">Add a mapview in a dynamically created layout.</string>
+    <string name="activity_basic_mapbox_kotlin_description">Display a basic map with Kotlin code.</string>
     <string name="activity_styles_mapbox_studio_description">Use a custom Mapbox-hosted style.</string>
     <string name="activity_style_raster_description">Use legacy raster tiles in your app.</string>
     <string name="activity_styles_default_description">Use a variety of professionally designed styles with the Mapbox Maps SDK.</string>
