@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
-// #-code-snippet: localization-plugin-activity full-java
-
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -130,4 +128,3 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: localization-plugin-activity full-java

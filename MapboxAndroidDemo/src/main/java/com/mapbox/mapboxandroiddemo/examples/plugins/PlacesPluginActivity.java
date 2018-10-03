@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
-// #-code-snippet: places-plugin-activity full-java
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -197,4 +195,3 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: places-plugin-activity full-java

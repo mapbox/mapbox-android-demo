@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
-// #-code-snippet: rotation-extrusion-activity full-java
-
 import android.content.Context;
 import android.graphics.Color;
 import android.hardware.Sensor;
@@ -194,4 +192,3 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     }
   }
 }
-// #-end-code-snippet: rotation-extrusion-activity full-java

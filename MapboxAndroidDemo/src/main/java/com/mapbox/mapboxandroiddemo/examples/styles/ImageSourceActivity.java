@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
-// #-code-snippet: image-source-activity full-java
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -108,4 +106,3 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: image-source-activity full-java

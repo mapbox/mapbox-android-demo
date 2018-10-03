@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.camera;
 
-// #-code-snippet: restrict-camera-activity full-java
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -125,4 +123,3 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
     mapView.onLowMemory();
   }
 }
-// #-end-code-snippet: restrict-camera-activity full-java

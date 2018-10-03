@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
-// #-code-snippet: recyclerview-on-map-activity full-java
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -285,4 +283,3 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
     void onClick(View view, int position);
   }
 }
-// #-end-code-snippet: recyclerview-on-map-activity full-java

@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-// #-code-snippet: temperature-change-activity full-java
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -409,4 +407,3 @@ public class ExpressionIntegrationActivity
     return -1;
   }
 }
-// #-end-code-snippet: temperature-change-activity full-java

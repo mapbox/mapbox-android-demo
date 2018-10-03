@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
-// #-code-snippet: dashed-directions-line-activity full-java
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -220,4 +218,3 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
     mapView.onLowMemory();
   }
 }
-// #-end-code-snippet: dashed-directions-line-activity full-java

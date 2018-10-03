@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
-// #-code-snippet: color-switcher-activity full-java
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -205,4 +203,3 @@ public class ColorSwitcherActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: color-switcher-activity full-java

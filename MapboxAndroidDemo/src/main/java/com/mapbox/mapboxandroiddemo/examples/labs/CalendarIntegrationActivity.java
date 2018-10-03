@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
-// #-code-snippet: calendar-integration-activity full-java
-
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -354,4 +352,3 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: calendar-integration-activity full-java

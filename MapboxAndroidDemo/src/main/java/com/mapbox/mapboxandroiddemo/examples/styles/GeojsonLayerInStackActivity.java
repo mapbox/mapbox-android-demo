@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
-// #-code-snippet: geojson-layer-in-stack-activity full-java
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -106,4 +104,3 @@ public class GeojsonLayerInStackActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: geojson-layer-in-stack-activity full-java

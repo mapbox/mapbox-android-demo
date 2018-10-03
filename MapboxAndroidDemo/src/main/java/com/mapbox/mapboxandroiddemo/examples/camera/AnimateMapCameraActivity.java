@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.camera;
 
-// #-code-snippet: animate-map-camera-activity full-java
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -122,4 +120,3 @@ public class AnimateMapCameraActivity extends AppCompatActivity implements OnMap
     mapView.onDestroy();
   }
 }
-// #-end-code-snippet: animate-map-camera-activity full-java

@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
-// #-code-snippet: show-hide-layers-activity full-java
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -130,4 +128,3 @@ public class ShowHideLayersActivity extends AppCompatActivity {
     }
   }
 }
-// #-end-code-snippet: show-hide-layers-activity full-java

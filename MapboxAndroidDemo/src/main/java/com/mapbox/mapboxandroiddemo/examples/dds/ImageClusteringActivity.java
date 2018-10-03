@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-// #-code-snippet: image-cluster-activity full-java
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -192,4 +190,3 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
     mapboxMap.addLayer(count);
   }
 }
-// #-end-code-snippet: image-cluster-activity full-java

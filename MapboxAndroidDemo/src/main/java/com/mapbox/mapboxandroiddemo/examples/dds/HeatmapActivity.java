@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-// #-code-snippet: heatmap-activity full-java
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -233,4 +231,3 @@ public class HeatmapActivity extends AppCompatActivity {
     mapView.onDestroy();
   }
 }
-// #-end-code-snippet: heatmap-activity full-java
