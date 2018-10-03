@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
-// #-code-snippet: hill-shade-activity full-java
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -106,4 +104,3 @@ public class HillShadeActivity extends AppCompatActivity implements
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: hill-shade-activity full-java

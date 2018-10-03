@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
-// #-code-snippet: building-plugin-activity full-java
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -84,4 +82,3 @@ public class BuildingPluginActivity extends AppCompatActivity {
     mapView.onDestroy();
   }
 }
-// #-end-code-snippet: building-plugin-activity full-java

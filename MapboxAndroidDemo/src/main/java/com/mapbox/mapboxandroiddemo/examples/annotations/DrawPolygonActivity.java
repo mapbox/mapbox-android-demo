@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.annotations;
 
-// #-code-snippet: draw-polygon-activity full-java
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -107,4 +105,3 @@ public class DrawPolygonActivity extends AppCompatActivity {
     mapView.onDestroy();
   }
 }
-// #-end-code-snippet: draw-polygon-activity full-java

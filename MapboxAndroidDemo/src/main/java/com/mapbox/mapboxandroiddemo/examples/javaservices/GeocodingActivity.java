@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
-// #-code-snippet: geocoding-activity full-java
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ListPopupWindow;
@@ -263,4 +261,3 @@ public class GeocodingActivity extends AppCompatActivity implements OnMapReadyCa
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: geocoding-activity full-java

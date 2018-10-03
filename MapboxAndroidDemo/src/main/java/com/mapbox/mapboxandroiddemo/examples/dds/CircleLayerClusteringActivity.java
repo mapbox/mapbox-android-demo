@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-// #-code-snippet: geojson-clustering-activity full-java
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -219,4 +217,3 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
 
   }
 }
-// #-end-code-snippet: geojson-clustering-activity full-java

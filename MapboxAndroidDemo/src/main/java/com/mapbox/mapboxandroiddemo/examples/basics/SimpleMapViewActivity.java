@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.basics;
 
-// #-code-snippet: simple-map-view-activity full-java
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -84,4 +82,3 @@ public class SimpleMapViewActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: simple-map-view-activity full-java

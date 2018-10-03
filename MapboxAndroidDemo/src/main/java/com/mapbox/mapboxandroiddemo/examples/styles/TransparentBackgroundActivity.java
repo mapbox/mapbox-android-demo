@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
-// #-code-snippet: transparent-surface-activity full-java
-
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -140,4 +138,3 @@ public class TransparentBackgroundActivity extends AppCompatActivity implements 
     return json;
   }
 }
-// #-end-code-snippet: transparent-surface-activity full-java

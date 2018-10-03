@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.query;
 
-// #-code-snippet: feature-count-activity full-java
-
 import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Bundle;
@@ -137,4 +135,3 @@ public class FeatureCountActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: feature-count-activity full-java

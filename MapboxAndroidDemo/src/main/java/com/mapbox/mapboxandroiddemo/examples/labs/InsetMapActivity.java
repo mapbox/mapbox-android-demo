@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
-// #-code-snippet: inset-mini-map-activity full-java
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -301,4 +299,3 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
     }
   }
 }
-// #-end-code-snippet: inset-mini-map-activity full-java

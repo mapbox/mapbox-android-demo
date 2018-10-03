@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.query;
 
-// #-code-snippet: redo-search-activity full-java
-
 import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Bundle;
@@ -195,4 +193,3 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: redo-search-activity full-java

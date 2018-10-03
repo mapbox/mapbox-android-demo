@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
-// #-code-snippet: matrix-api-activity full-java
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -349,4 +347,3 @@ public class MatrixApiActivity extends AppCompatActivity {
     }
   }
 }
-// #-end-code-snippet: matrix-api-activity full-java

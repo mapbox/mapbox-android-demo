@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.query;
 
-// #-code-snippet: highlighted-line-activity full-java
-
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -191,4 +189,3 @@ public class HighlightedLineActivity extends AppCompatActivity implements
     }
   }
 }
-// #-end-code-snippet: highlighted-line-activity full-java

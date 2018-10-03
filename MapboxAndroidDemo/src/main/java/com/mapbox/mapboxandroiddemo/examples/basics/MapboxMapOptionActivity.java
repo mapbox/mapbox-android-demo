@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.basics;
 
-// #-code-snippet: mapbox-map-option-activity full-java
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -94,4 +92,3 @@ public class MapboxMapOptionActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: mapbox-map-option-activity full-java

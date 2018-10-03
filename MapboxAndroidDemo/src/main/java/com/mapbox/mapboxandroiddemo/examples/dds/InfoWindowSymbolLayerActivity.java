@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-// #-code-snippet: info-window-symbol-layer-activity full-java
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -453,4 +451,3 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
     mapView.onDestroy();
   }
 }
-// #-end-code-snippet: info-window-symbol-layer-activity full-java

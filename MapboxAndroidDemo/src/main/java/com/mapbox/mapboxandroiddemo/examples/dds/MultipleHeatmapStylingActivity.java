@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-// #-code-snippet: multiple-heatmap-styling-activity full-java
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -428,4 +426,3 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
     }
   }
 }
-// #-end-code-snippet: multiple-heatmap-styling-activity full-java

@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
-// #-code-snippet: la-tourism-activity full-java
-
 import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
@@ -272,4 +270,3 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
     }
   }
 }
-// #-code-snippet: la-tourism-activity full-java

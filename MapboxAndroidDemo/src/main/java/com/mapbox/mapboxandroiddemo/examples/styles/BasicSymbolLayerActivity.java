@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
-// #-code-snippet: basic-symbol-layer-activity full-java
-
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -206,4 +204,3 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: basic-symbol-layer-activity full-java

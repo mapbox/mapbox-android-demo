@@ -25,8 +25,6 @@ import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode;
 
 import java.util.List;
 
-// #-code-snippet: location-plugin-fragment-activity full-java
-
 public class LocationPluginFragmentActivity extends AppCompatActivity implements
   MapFragment.OnMapViewReadyCallback, PermissionsListener {
 
@@ -130,4 +128,3 @@ public class LocationPluginFragmentActivity extends AppCompatActivity implements
     }
   }
 }
-// #-end-code-snippet: location-plugin-fragment-activity full-java

@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
-// #-code-snippet: marker-following-activity full-java
-
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
@@ -266,4 +264,3 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
     }
   }
 }
-// #-end-code-snippet: marker-following-activity full-java

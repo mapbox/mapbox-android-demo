@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.snapshot;
 
-// #-code-snippet: snapshot-notification-activity full-java
-
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -181,4 +179,3 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
     mapView.onDestroy();
   }
 }
-// #-end-code-snippet: snapshot-notification-activity full-java
