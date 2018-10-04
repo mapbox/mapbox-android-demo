@@ -52,6 +52,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.InfoWindowSymbolLayerActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.KotlinStyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleHeatmapStylingActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
@@ -820,6 +821,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_expression_integration_description,
           new Intent(MainActivity.this, ExpressionIntegrationActivity.class),
           R.string.activity_dds_expression_integration_url, false, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_dds_style_kotlin_circle_categorically_title,
+          R.string.activity_dds_kotlin_style_circle_categorically_description,
+          new Intent(MainActivity.this, KotlinStyleCirclesCategoricallyActivity.class),
+          R.string.activity_dds_style_circle_categorically_url, false, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_dds;
         break;
