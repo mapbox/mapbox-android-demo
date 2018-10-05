@@ -154,3 +154,4 @@ dependencies {
 }
 
 apply from: "${rootDir}/gradle/checkstyle.gradle"
+apply plugin: 'kotlin-android-extensions'

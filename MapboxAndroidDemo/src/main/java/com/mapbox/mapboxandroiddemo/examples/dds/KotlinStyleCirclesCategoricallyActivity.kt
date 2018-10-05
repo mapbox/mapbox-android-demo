@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.mapbox.mapboxandroiddemo.R
 import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.style.expressions.Expression.*
 import com.mapbox.mapboxsdk.style.layers.CircleLayer
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius
 import com.mapbox.mapboxsdk.style.sources.VectorSource
+import kotlinx.android.synthetic.main.activity_dds_kotlin_style_circles_categorically.*
 
 /**
  * Kotlin example of using data-driven styling to set circles' colors based on imported vector data.
  */
 class KotlinStyleCirclesCategoricallyActivity : AppCompatActivity() {
-    private lateinit var mapView: MapView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +26,6 @@ class KotlinStyleCirclesCategoricallyActivity : AppCompatActivity() {
         // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_dds_kotlin_style_circles_categorically)
 
-        mapView = findViewById(R.id.mapView)
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync { mapboxMap ->
             val vectorSource = VectorSource(
