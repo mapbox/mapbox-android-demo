@@ -20,6 +20,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.utils.MathUtils;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -28,7 +29,7 @@ import com.squareup.picasso.Picasso;
  * the ImageView.
  */
 public class StaticImageActivity extends AppCompatActivity implements
-    OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
+  OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -67,15 +68,15 @@ public class StaticImageActivity extends AppCompatActivity implements
         } else {
           // one of the radio buttons is checked
           Picasso.with(StaticImageActivity.this).load(takeSnapshot(
-              mapboxMap.getCameraPosition().zoom,
-              mapboxMap.getStyleUrl().equals("mapbox://styles/mapbox/dark-v9") ? StaticMapCriteria.DARK_STYLE :
-                  StaticMapCriteria.STREET_STYLE,
-              mapboxMap.getCameraPosition().target,
-              mapboxMap.getCameraPosition().bearing,
-              mapboxMap.getCameraPosition().tilt,
-              findViewById(R.id.static_map_imageview).getMeasuredWidth(),
-              findViewById(R.id.static_map_imageview).getMeasuredHeight())
-              .url().toString()).into(staticMapImageView);
+            mapboxMap.getCameraPosition().zoom,
+            mapboxMap.getStyleUrl().equals("mapbox://styles/mapbox/dark-v9") ? StaticMapCriteria.DARK_STYLE :
+              StaticMapCriteria.STREET_STYLE,
+            mapboxMap.getCameraPosition().target,
+            mapboxMap.getCameraPosition().bearing,
+            mapboxMap.getCameraPosition().tilt,
+            (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredWidth(), 0, 1280),
+            (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredHeight(), 0, 1280))
+            .url().toString()).into(staticMapImageView);
         }
       }
     });
@@ -104,16 +105,16 @@ public class StaticImageActivity extends AppCompatActivity implements
                                        double bearing, double pitch, int width,
                                        int height) {
     return MapboxStaticMap.builder()
-        .accessToken(getString(R.string.access_token))
-        .styleId(styleUrl)
-        .cameraPoint(Point.fromLngLat(imageTarget.getLongitude(), imageTarget.getLatitude()))
-        .cameraZoom(imageZoom)
-        .cameraPitch(pitch)
-        .cameraBearing(bearing)
-        .width(width)
-        .height(height)
-        .retina(true)
-        .build();
+      .accessToken(getString(R.string.access_token))
+      .styleId(styleUrl)
+      .cameraPoint(Point.fromLngLat(imageTarget.getLongitude(), imageTarget.getLatitude()))
+      .cameraZoom(imageZoom)
+      .cameraPitch(pitch)
+      .cameraBearing(bearing)
+      .width(width)
+      .height(height)
+      .retina(true)
+      .build();
   }
 
   @Override
