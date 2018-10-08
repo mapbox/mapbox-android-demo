@@ -1,6 +1,8 @@
 package com.mapbox.mapboxandroiddemo.adapter;
 
 import android.content.Context;
+import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,61 +11,55 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-  private List<ExampleItemModel> dataSource;
-  private Context context;
+  private final List<ExampleItemModel> dataSource = new ArrayList<>();
+  private final Context context;
+  private int viewType;
 
-  public ExampleAdapter(Context context, List<ExampleItemModel> dataSource) {
-    this.dataSource = dataSource;
+  public ExampleAdapter(Context context) {
     this.context = context;
   }
 
+  @NonNull
   @Override
-  public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
+  public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     // create a new view
-    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
-    View view1 = LayoutInflater.from(parent.getContext()).inflate(
-      R.layout.layout_description_item, parent, false);
-    View view2 = LayoutInflater.from(parent.getContext()).inflate(
-      R.layout.layout_javaservices_description_card, parent, false);
-    View view3 = LayoutInflater.from(parent.getContext()).inflate(
-      R.layout.layout_query_description_card, parent, false);
-
+    View view;
     switch (viewType) {
       case 1:
-        return new ViewHolderDescription(view1);
+        view = LayoutInflater.from(parent.getContext()).inflate(
+          R.layout.layout_description_item, parent, false);
+        break;
       case 2:
-        return new ViewHolderDescription(view2);
+        view = LayoutInflater.from(parent.getContext()).inflate(
+          R.layout.layout_javaservices_description_card, parent, false);
+        break;
       case 3:
-        return new ViewHolderDescription(view3);
+        view = LayoutInflater.from(parent.getContext()).inflate(
+          R.layout.layout_query_description_card, parent, false);
+        break;
       default:
-        return new ViewHolder(view);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
     }
+
+    return new ViewHolder(view);
   }
 
   @Override
   public int getItemViewType(int position) {
-    if (((MainActivity) context).getCurrentCategory() == R.id.nav_lab && position == 0) {
-      return 1;
-    } else if (((MainActivity) context).getCurrentCategory() == R.id.nav_java_services && position == 0) {
-      return 2;
-    } else if (((MainActivity) context).getCurrentCategory() == R.id.nav_query_map && position == 0) {
-      return 3;
-    }
-    return 0;
+    return position == 0 ? viewType : 0;
   }
 
   @Override
-  public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+  public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
     if (holder.getItemViewType() != 0) {
       return;
     }
@@ -93,30 +89,51 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
   @Override
   public int getItemCount() {
-    return (null != dataSource ? dataSource.size() : 0);
+    return dataSource.size();
   }
 
-  public static class ViewHolder extends RecyclerView.ViewHolder {
+  public void updateDataSet(List<ExampleItemModel> examples, @IdRes int categoryId) {
+    dataSource.clear();
+    dataSource.addAll(examples);
 
-    public TextView titleTextView;
-    public TextView descriptionTextView;
-    public ImageView imageView;
-    public ImageView newIconImageView;
-
-    public ViewHolder(final View itemView) {
-      super(itemView);
-
-      imageView = (ImageView) itemView.findViewById(R.id.example_image);
-      titleTextView = (TextView) itemView.findViewById(R.id.example_title);
-      descriptionTextView = (TextView) itemView.findViewById(R.id.example_description);
-      newIconImageView = (ImageView) itemView.findViewById(R.id.new_icon_image_view);
+    viewType = getViewType(categoryId);
+    if (viewType > 0) {
+      dataSource.add(0, null);
     }
+
+    notifyDataSetChanged();
   }
 
-  public static class ViewHolderDescription extends RecyclerView.ViewHolder {
+  public ExampleItemModel getItemAt(int position) {
+    return dataSource.get(position);
+  }
 
-    public ViewHolderDescription(final View itemView) {
+  private int getViewType(@IdRes int categoryId) {
+    if (categoryId == R.id.nav_lab) {
+      return 1;
+    } else if (categoryId == R.id.nav_java_services) {
+      return 2;
+    } else if (categoryId == R.id.nav_query_map) {
+      return 3;
+    }
+
+    return 0;
+  }
+
+  static class ViewHolder extends RecyclerView.ViewHolder {
+
+    TextView titleTextView;
+    TextView descriptionTextView;
+    ImageView imageView;
+    ImageView newIconImageView;
+
+    ViewHolder(final View itemView) {
       super(itemView);
+
+      imageView = itemView.findViewById(R.id.example_image);
+      titleTextView = itemView.findViewById(R.id.example_title);
+      descriptionTextView = itemView.findViewById(R.id.example_description);
+      newIconImageView = itemView.findViewById(R.id.new_icon_image_view);
     }
   }
 }
