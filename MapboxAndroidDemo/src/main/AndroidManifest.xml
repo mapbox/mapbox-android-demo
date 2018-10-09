@@ -169,7 +169,7 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.plugins.LocationPluginFragmentActivity"
+            android:name=".examples.plugins.LocationComponentFragmentActivity"
             android:label="@string/activity_user_location_map_frag_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

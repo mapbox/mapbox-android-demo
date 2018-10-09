@@ -87,7 +87,7 @@ import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.KotlinLocationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginFragmentActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.LocationComponentFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
@@ -652,7 +652,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.id.nav_plugins,
       R.string.activity_user_location_map_frag_title,
       R.string.activity_user_location_map_frag_plugin_description,
-      new Intent(MainActivity.this, LocationPluginFragmentActivity.class),
+      new Intent(MainActivity.this, LocationComponentFragmentActivity.class),
       null,
       R.string.activity_user_location_fragment_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
     );

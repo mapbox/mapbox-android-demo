@@ -13,23 +13,18 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.maps.MapFragment;
-import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.SupportMapFragment;
-import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode;
 
 import java.util.List;
 
-public class LocationPluginFragmentActivity extends AppCompatActivity implements
-  MapFragment.OnMapViewReadyCallback, PermissionsListener {
 
-  private LocationLayerPlugin locationLayerPlugin;
-  private MapView mapView;
+public class LocationComponentFragmentActivity extends AppCompatActivity implements PermissionsListener {
+
   private MapboxMap mapboxMap;
   private PermissionsManager permissionsManager;
 
@@ -69,35 +64,27 @@ public class LocationPluginFragmentActivity extends AppCompatActivity implements
       mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
     }
 
-    mapFragment.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-        LocationPluginFragmentActivity.this.mapboxMap = mapboxMap;
-        enableLocationPlugin();
-      }
+    mapFragment.getMapAsync(mapboxMap -> {
+      LocationComponentFragmentActivity.this.mapboxMap = mapboxMap;
+      enableLocationComponent();
     });
   }
 
-  @Override
-  public void onMapViewReady(MapView mapView) {
-    this.mapView = mapView;
-  }
-
   @SuppressWarnings( {"MissingPermission"})
-  private void enableLocationPlugin() {
+  private void enableLocationComponent() {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
-      // Create an instance of the plugin. Adding in LocationLayerOptions is also an optional
+      // Get an instance of the location component. Adding in LocationComponentOptions is also an optional
       // parameter
-      locationLayerPlugin = new LocationLayerPlugin(mapView, mapboxMap);
-      locationLayerPlugin.setCameraMode(CameraMode.TRACKING);
-      locationLayerPlugin.setRenderMode(RenderMode.NORMAL);
-      getLifecycle().addObserver(locationLayerPlugin);
+      LocationComponent locationComponent = mapboxMap.getLocationComponent();
+      locationComponent.activateLocationComponent(this);
+      locationComponent.setLocationComponentEnabled(true);
+      locationComponent.setCameraMode(CameraMode.TRACKING);
+      locationComponent.setRenderMode(RenderMode.NORMAL);
     } else {
       permissionsManager = new PermissionsManager(this);
       permissionsManager.requestLocationPermissions(this);
     }
-    getLifecycle().addObserver(locationLayerPlugin);
   }
 
   @Override
@@ -111,17 +98,9 @@ public class LocationPluginFragmentActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onResume() {
-    super.onResume();
-    if (!PermissionsManager.areLocationPermissionsGranted(this)) {
-      getLifecycle().removeObserver(locationLayerPlugin);
-    }
-  }
-
-  @Override
   public void onPermissionResult(boolean granted) {
     if (granted) {
-      enableLocationPlugin();
+      enableLocationComponent();
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
       finish();
