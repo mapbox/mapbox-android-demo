@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -9,19 +10,21 @@ import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.LocationComponentOptions;
+import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 
 import java.util.List;
 
 /**
- * Use the Location Layer plugin to easily add a device location "puck" to a Mapbox map.
+ * Use the Location component to easily add a device location "puck" to a Mapbox map.
  */
-public class LocationPluginActivity extends AppCompatActivity implements
-    OnMapReadyCallback, PermissionsListener {
+public class LocationComponentActivity extends AppCompatActivity implements
+  OnMapReadyCallback, PermissionsListener {
 
   private PermissionsManager permissionsManager;
   private MapboxMap mapboxMap;
@@ -45,22 +48,32 @@ public class LocationPluginActivity extends AppCompatActivity implements
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
-    LocationPluginActivity.this.mapboxMap = mapboxMap;
-    enableLocationPlugin();
+    LocationComponentActivity.this.mapboxMap = mapboxMap;
+    enableLocationComponent();
   }
 
   @SuppressWarnings( {"MissingPermission"})
-  private void enableLocationPlugin() {
+  private void enableLocationComponent() {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
-      // Create an instance of the plugin. Adding in LocationLayerOptions is also an optional
-      // parameter
-      LocationLayerPlugin locationLayerPlugin = new LocationLayerPlugin(mapView, mapboxMap);
+      LocationComponentOptions options = LocationComponentOptions.builder(this)
+        .trackingGesturesManagement(true)
+        .accuracyColor(ContextCompat.getColor(this, R.color.mapboxGreen))
+        .build();
 
-      // Set the plugin's camera mode
-      locationLayerPlugin.setCameraMode(CameraMode.TRACKING);
-      getLifecycle().addObserver(locationLayerPlugin);
+      // Get an instance of the component
+      LocationComponent locationComponent = mapboxMap.getLocationComponent();
+
+      // Activate with options
+      locationComponent.activateLocationComponent(this, options);
+
+      // Enable to make component visible
+      locationComponent.setLocationComponentEnabled(true);
+
+      // Set the component's camera mode
+      locationComponent.setCameraMode(CameraMode.TRACKING);
+      locationComponent.setRenderMode(RenderMode.COMPASS);
     } else {
       permissionsManager = new PermissionsManager(this);
       permissionsManager.requestLocationPermissions(this);
@@ -80,7 +93,7 @@ public class LocationPluginActivity extends AppCompatActivity implements
   @Override
   public void onPermissionResult(boolean granted) {
     if (granted) {
-      enableLocationPlugin();
+      enableLocationComponent();
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
       finish();
