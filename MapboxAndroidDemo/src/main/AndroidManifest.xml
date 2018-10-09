@@ -148,7 +148,7 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.plugins.KotlinLocationPluginActivity"
+            android:name=".examples.plugins.KotlinLocationComponentActivity"
             android:label="@string/activity_plugins_location_plugin_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
