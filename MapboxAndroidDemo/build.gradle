@@ -114,7 +114,6 @@ dependencies {
     implementation dependenciesList.mapboxTurf
 
     // Mapbox plugins
-    implementation dependenciesList.mapboxPluginLocationLayer
     implementation dependenciesList.mapboxPluginBuilding
     implementation dependenciesList.mapboxPluginPlaces
     implementation dependenciesList.mapboxPluginLocalization

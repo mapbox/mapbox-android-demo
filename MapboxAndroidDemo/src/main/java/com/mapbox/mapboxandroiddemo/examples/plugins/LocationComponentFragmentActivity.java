@@ -14,14 +14,13 @@ import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.modes.CameraMode;
+import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.SupportMapFragment;
-import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
-import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode;
 
 import java.util.List;
-
 
 public class LocationComponentFragmentActivity extends AppCompatActivity implements PermissionsListener {
 

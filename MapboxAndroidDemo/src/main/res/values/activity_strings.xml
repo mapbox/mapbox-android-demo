@@ -39,8 +39,8 @@
     <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
     <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
 
-    <!--Location Layer on Fragment below textview in Plugin activity-->
-    <string name="location_layer_fragment_text">User\'s current location on a map fragment</string>
+    <!--Location Component on Fragment below textview in test activity-->
+    <string name="location_component_fragment_text">User\'s current location on a map fragment</string>
 
     <!-- Settings dialog -->
     <string name="settings_dialog_title">Settings</string>

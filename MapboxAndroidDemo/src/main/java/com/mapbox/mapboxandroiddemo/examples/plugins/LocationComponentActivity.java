@@ -12,11 +12,11 @@ import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentOptions;
+import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class LocationComponentActivity extends AppCompatActivity implements
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_location_plugin);
+    setContentView(R.layout.activity_location_component);
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
