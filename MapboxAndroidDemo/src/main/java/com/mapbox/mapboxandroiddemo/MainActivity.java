@@ -84,7 +84,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.KotlinLocationPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.KotlinLocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationComponentFragmentActivity;
@@ -620,7 +620,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_plugins_location_component_title,
       R.string.activity_plugins_location_component_description,
       new Intent(MainActivity.this, LocationComponentActivity.class),
-      new Intent(MainActivity.this, KotlinLocationPluginActivity.class),
+      new Intent(MainActivity.this, KotlinLocationComponentActivity.class),
       R.string.activity_plugins_location_component_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
