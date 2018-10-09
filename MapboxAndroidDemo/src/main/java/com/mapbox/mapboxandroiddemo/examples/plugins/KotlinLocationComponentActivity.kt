@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
+import com.mapbox.mapboxandroiddemo.R
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.location.LocationComponentOptions
 import com.mapbox.mapboxsdk.location.modes.CameraMode
@@ -31,7 +32,7 @@ class KotlinLocationComponentActivity : AppCompatActivity(), OnMapReadyCallback,
     Mapbox.getInstance(this, getString(R.string.access_token))
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_location_plugin)
+    setContentView(R.layout.activity_location_component)
 
     mapView.onCreate(savedInstanceState)
     mapView.getMapAsync(this)

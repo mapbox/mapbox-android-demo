@@ -47,7 +47,7 @@
     <string name="activity_java_services_static_image_title">Tải về bản đồ tĩnh</string>
     <string name="activity_plugins_traffic_plugin_title">Hiển thị giao thông trực tiếp</string>
     <string name="activity_plugins_building_plugin_title">Hiển thị tòa nhà 3D</string>
-    <string name="activity_plugins_location_component_title">Hiển thị vị trí của người dùng</string>
+    <string name="activity_location_location_component_title">Hiển thị vị trí của người dùng</string>
     <string name="activity_java_services_simplify_polyline_title">Đơn giản hóa hình nhiều đường</string>
     <string name="activity_java_services_map_matching_title">Khớp bản đồ</string>
     <string name="activity_lab_location_picker_title">Trình chọn địa điểm</string>

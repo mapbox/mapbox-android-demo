@@ -149,14 +149,14 @@
         </activity>
         <activity
             android:name=".examples.plugins.KotlinLocationComponentActivity"
-            android:label="@string/activity_plugins_location_plugin_title">
+            android:label="@string/activity_location_location_component_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
             android:name=".examples.plugins.LocationComponentActivity"
-            android:label="@string/activity_plugins_location_component_title">
+            android:label="@string/activity_location_location_component_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
@@ -170,7 +170,7 @@
         </activity>
         <activity
             android:name=".examples.plugins.LocationComponentFragmentActivity"
-            android:label="@string/activity_user_location_map_frag_title">
+            android:label="@string/activity_location_user_location_map_frag_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
