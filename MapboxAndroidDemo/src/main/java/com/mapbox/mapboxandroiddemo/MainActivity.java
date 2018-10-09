@@ -617,11 +617,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
-      R.string.activity_plugins_location_plugin_title,
-      R.string.activity_plugins_location_plugin_description,
+      R.string.activity_plugins_location_component_title,
+      R.string.activity_plugins_location_component_description,
       new Intent(MainActivity.this, LocationComponentActivity.class),
       new Intent(MainActivity.this, KotlinLocationPluginActivity.class),
-      R.string.activity_plugins_location_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_plugins_location_component_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
