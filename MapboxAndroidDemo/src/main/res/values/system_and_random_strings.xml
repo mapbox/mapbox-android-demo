@@ -33,6 +33,7 @@
     <string name="styles_category">Styles</string>
     <string name="dds_category">Data-driven styling</string>
     <string name="annotations_category">Annotations</string>
+    <string name="location_category">Location</string>
     <string name="camera_category">Camera</string>
     <string name="offline_category">Offline</string>
     <string name="query_map_category">Query map</string>
