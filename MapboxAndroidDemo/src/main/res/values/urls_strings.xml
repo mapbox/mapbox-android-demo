@@ -23,6 +23,7 @@
     <string name="activity_dds_create_hotspots_points_url" translatable="false">http://i.imgur.com/pAejKLH.png</string>
     <string name="activity_styles_dds_geojson_circle_layer_clusters_url" translatable="false">http://i.imgur.com/fGeZhcD.png</string>
     <string name="activity_styles_line_layer_url" translatable="false">http://i.imgur.com/Iqxoing.png</string>
+    <string name="activity_dds_line_gradient_url" translatable="false">https://i.imgur.com/cXthmpV.png</string>
     <string name="activity_styles_symbol_layer_url" translatable="false">http://i.imgur.com/TQ4iA0L.png</string>
     <string name="activity_styles_local_style_or_raster_source_url" translatable="false">https://i.imgur.com/ckKOHg6.png</string>
     <string name="activity_style_image_source_time_lapse_url" translatable="false">http://i.imgur.com/ijoGPrF.png</string>

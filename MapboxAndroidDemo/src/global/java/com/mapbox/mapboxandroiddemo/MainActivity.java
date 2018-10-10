@@ -52,6 +52,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.InfoWindowSymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.KotlinStyleCirclesCategoricallyActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.LineGradientActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleHeatmapStylingActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.SatelliteLandSelectActivity;
@@ -1055,6 +1056,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, StyleLineIdentityPropertyActivity.class),
       null,
       R.string.activity_dds_style_line_identity_property_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_line_gradient_title,
+      R.string.activity_dds_line_gradient_description,
+      new Intent(MainActivity.this, LineGradientActivity.class),
+      null,
+      R.string.activity_dds_line_gradient_url, false, BuildConfig.MIN_SDK_VERSION));
+
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,

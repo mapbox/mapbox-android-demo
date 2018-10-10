@@ -588,6 +588,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.dds.LineGradientActivity"
+            android:label="@string/activity_dds_line_gradient_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.camera.RestrictCameraActivity"
             android:label="@string/activity_camera_restrict_title">
             <meta-data
@@ -707,6 +714,7 @@
                     android:scheme="mapbox-android-dev-preview" />
             </intent-filter>
         </activity>
+
         <service android:name=".account.AccountRetrievalService" />
     </application>
 
