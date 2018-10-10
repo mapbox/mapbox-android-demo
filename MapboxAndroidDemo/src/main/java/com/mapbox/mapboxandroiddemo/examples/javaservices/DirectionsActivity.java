@@ -3,43 +3,56 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.MapboxDirections;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.annotations.PolylineOptions;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-
-import java.util.List;
+import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.Property;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 import static com.mapbox.core.constants.Constants.PRECISION_6;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 /**
- * Use Mapbox Java Services to request directions
+ * Use Mapbox Java Services to request directions from the Mapbox Directions API and show the
+ * route with a LineLayer.
  */
 public class DirectionsActivity extends AppCompatActivity {
 
-  private static final String TAG = "DirectionsActivity";
-
+  private static final String ROUTE_LAYER_ID = "route-layer-id";
+  private static final String ROUTE_SOURCE_ID = "route-source-id";
+  private static final String ICON_LAYER_ID = "icon-layer-id";
+  private static final String ICON_SOURCE_ID = "icon-source-id";
+  private static final String RED_PIN_ICON_ID = "red-pin-icon-id";
   private MapView mapView;
-  private MapboxMap map;
+  private MapboxMap mapboxMap;
   private DirectionsRoute currentRoute;
   private MapboxDirections client;
+  private Point origin;
+  private Point destination;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -52,44 +65,86 @@ public class DirectionsActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_javaservices_directions);
 
-    // Alhambra landmark in Granada, Spain.
-    final Point origin = Point.fromLngLat(-3.588098, 37.176164);
-
-    // Plaza del Triunfo in Granada, Spain.
-    final Point destination = Point.fromLngLat(-3.601845, 37.184080);
-
-
     // Setup the MapView
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-        map = mapboxMap;
+    mapView.getMapAsync(map -> {
 
-        // Add origin and destination to the map
-        mapboxMap.addMarker(new MarkerOptions()
-          .position(new LatLng(origin.latitude(), origin.longitude()))
-          .title(getString(R.string.directions_activity_marker_options_origin_title))
-          .snippet(getString(R.string.directions_activity_marker_options_origin_snippet)));
-        mapboxMap.addMarker(new MarkerOptions()
-          .position(new LatLng(destination.latitude(), destination.longitude()))
-          .title(getString(R.string.directions_activity_marker_options_destination_title))
-          .snippet(getString(R.string.directions_activity_marker_options_destination_snippet)));
+      DirectionsActivity.this.mapboxMap = map;
 
-        // Get route from API
-        getRoute(origin, destination);
-      }
+      // Set the origin location to the Alhambra landmark in Granada, Spain.
+      origin = Point.fromLngLat(-3.588098, 37.176164);
+
+      // Set the destination location to the Plaza del Triunfo in Granada, Spain.
+      destination = Point.fromLngLat(-3.601845, 37.184080);
+
+      initSource();
+
+      initLayers();
+
+      // Get the directions route from the Mapbox Directions API
+      getRoute(origin, destination);
     });
   }
 
+  /**
+   * Add the route and marker sources to the map
+   */
+  private void initSource() {
+    GeoJsonSource routeGeoJsonSource = new GeoJsonSource(ROUTE_SOURCE_ID,
+      FeatureCollection.fromFeatures(new Feature[] {}));
+    mapboxMap.addSource(routeGeoJsonSource);
+
+    FeatureCollection iconFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {
+      Feature.fromGeometry(Point.fromLngLat(origin.longitude(), origin.latitude())),
+      Feature.fromGeometry(Point.fromLngLat(destination.longitude(), destination.latitude()))});
+
+    GeoJsonSource iconGeoJsonSource = new GeoJsonSource(ICON_SOURCE_ID, iconFeatureCollection);
+    mapboxMap.addSource(iconGeoJsonSource);
+  }
+
+  /**
+   * Add the route and maker icon layers to the map
+   */
+  private void initLayers() {
+    LineLayer routeLayer = new LineLayer(ROUTE_LAYER_ID, ROUTE_SOURCE_ID);
+
+    // Add the LineLayer to the map. This layer will display the directions route.
+    routeLayer.setProperties(
+      lineCap(Property.LINE_CAP_ROUND),
+      lineJoin(Property.LINE_JOIN_ROUND),
+      lineWidth(5f),
+      lineColor(Color.parseColor("#009688"))
+    );
+    mapboxMap.addLayer(routeLayer);
+
+    // Add the red marker icon image to the map
+    mapboxMap.addImage(RED_PIN_ICON_ID, BitmapUtils.getBitmapFromDrawable(
+      getResources().getDrawable(R.drawable.red_marker)));
+
+    // Add the red marker icon SymbolLayer to the map
+    SymbolLayer startEndIconLayer = new SymbolLayer(ICON_LAYER_ID, ICON_SOURCE_ID);
+    startEndIconLayer.setProperties(
+      iconImage(RED_PIN_ICON_ID),
+      iconIgnorePlacement(true),
+      iconIgnorePlacement(true));
+    mapboxMap.addLayer(startEndIconLayer);
+  }
+
+  /**
+   * Make a request to the Mapbox Directions API. Once successful, pass the route to the
+   * route layer.
+   *
+   * @param origin      the starting point of the route
+   * @param destination the desired finish point of the route
+   */
   private void getRoute(Point origin, Point destination) {
 
     client = MapboxDirections.builder()
       .origin(origin)
       .destination(destination)
       .overview(DirectionsCriteria.OVERVIEW_FULL)
-      .profile(DirectionsCriteria.PROFILE_CYCLING)
+      .profile(DirectionsCriteria.PROFILE_DRIVING)
       .accessToken(getString(R.string.access_token))
       .build();
 
@@ -99,49 +154,43 @@ public class DirectionsActivity extends AppCompatActivity {
         System.out.println(call.request().url().toString());
 
         // You can get the generic HTTP info about the response
-        Log.d(TAG, "Response code: " + response.code());
+        Timber.d("Response code: " + response.code());
         if (response.body() == null) {
-          Log.e(TAG, "No routes found, make sure you set the right user and access token.");
+          Timber.e("No routes found, make sure you set the right user and access token.");
           return;
         } else if (response.body().routes().size() < 1) {
-          Log.e(TAG, "No routes found");
+          Timber.e("No routes found");
           return;
         }
 
-        // Print some info about the route
+        // Get the directions route
         currentRoute = response.body().routes().get(0);
-        Log.d(TAG, "Distance: " + currentRoute.distance());
-        Toast.makeText(DirectionsActivity.this, String.format(getString(R.string.directions_activity_toast_message),
+
+        // Make a toast which displays the route's distance
+        Toast.makeText(DirectionsActivity.this, String.format(
+          getString(R.string.directions_activity_toast_message),
           currentRoute.distance()), Toast.LENGTH_SHORT).show();
 
-        // Draw the route on the map
-        drawRoute(currentRoute);
+        // Retrieve and update the source designated for showing the directions route
+        GeoJsonSource source = mapboxMap.getSourceAs(ROUTE_SOURCE_ID);
+
+        // Create a LineString with the directions route's geometry
+        FeatureCollection featureCollection = FeatureCollection.fromFeature(
+          Feature.fromGeometry(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6)));
+
+        // Reset the GeoJSON source for the route LineLayer source
+        if (source != null) {
+          Timber.d("onResponse: source != null");
+          source.setGeoJson(featureCollection);
+        }
       }
 
       @Override
       public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
-        Log.e(TAG, "Error: " + throwable.getMessage());
+        Timber.e("Error: " + throwable.getMessage());
         Toast.makeText(DirectionsActivity.this, "Error: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
       }
     });
-  }
-
-  private void drawRoute(DirectionsRoute route) {
-    // Convert LineString coordinates into LatLng[]
-    LineString lineString = LineString.fromPolyline(route.geometry(), PRECISION_6);
-    List<Point> coordinates = lineString.coordinates();
-    LatLng[] points = new LatLng[coordinates.size()];
-    for (int i = 0; i < coordinates.size(); i++) {
-      points[i] = new LatLng(
-        coordinates.get(i).latitude(),
-        coordinates.get(i).longitude());
-    }
-
-    // Draw Points on MapView
-    map.addPolyline(new PolylineOptions()
-      .add(points)
-      .color(Color.parseColor("#009688"))
-      .width(5));
   }
 
   @Override
@@ -177,7 +226,7 @@ public class DirectionsActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    // Cancel the directions API request
+    // Cancel the Directions API request
     if (client != null) {
       client.cancelCall();
     }
