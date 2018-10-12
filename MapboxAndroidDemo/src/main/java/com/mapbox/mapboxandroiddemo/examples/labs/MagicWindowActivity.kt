@@ -12,7 +12,6 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.AttributeSet
-import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
@@ -75,8 +74,6 @@ class MagicWindowActivity : AppCompatActivity(), LocationEngineListener {
             magicWindow.setOnTouchListener(listener)
             synchronizeMaps()
         }
-
-        Log.d(TAG, "Initialized app")
     }
 
     fun checkLocationPermissionsAndInitialize() {
@@ -116,11 +113,9 @@ class MagicWindowActivity : AppCompatActivity(), LocationEngineListener {
         val last = locationEngine.lastLocation
         if (last != null) {
             locationEngine.deactivate()
-            Log.d(TAG, "got a location ${last.latitude} ${last.longitude}")
             setInitialMapPosition(LatLng(last.latitude, last.longitude))
         } else {
             locationEngine.addLocationEngineListener(this)
-            Log.d(TAG, "listening for location")
         }
     }
 
