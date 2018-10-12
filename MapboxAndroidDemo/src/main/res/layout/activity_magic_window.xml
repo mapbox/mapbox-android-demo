@@ -17,7 +17,7 @@
         mapbox:mapbox_uiRotateGestures="false"
         />
 
-    <com.mapbox.davidwicks.draggableview.MaskedView
+    <com.mapbox.mapboxandroiddemo.examples.labs.MaskedView
         android:id="@+id/magicWindow"
         android:layout_width="240dp"
         android:layout_height="240dp"
@@ -46,7 +46,7 @@
             mapbox:mapbox_uiRotateGestures="false"
             mapbox:mapbox_uiScrollGestures="false"
             mapbox:mapbox_uiTiltGestures="false" />
-    </com.mapbox.davidwicks.draggableview.MaskedView>
+    </com.mapbox.mapboxandroiddemo.examples.labs.MaskedView>
 
 
 </android.support.constraint.ConstraintLayout>

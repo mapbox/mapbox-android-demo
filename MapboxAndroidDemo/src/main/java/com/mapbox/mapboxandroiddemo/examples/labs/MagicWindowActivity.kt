@@ -45,13 +45,12 @@ class MagicWindowActivity : AppCompatActivity(), LocationEngineListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Mapbox.getInstance(applicationContext, getString(R.string.access_token))
         setContentView(R.layout.activity_magic_window)
 
         if (savedInstanceState == null) {
             checkLocationPermissionsAndInitialize()
         }
-
-        Mapbox.getInstance(applicationContext, getString(R.string.access_token))
         baseMap.onCreate(savedInstanceState?.getBundle(BASE_MAP_BUNDLE))
         revealedMap.onCreate(savedInstanceState?.getBundle(REVEAL_MAP_BUNDLE))
 
