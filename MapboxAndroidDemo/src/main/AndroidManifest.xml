@@ -148,15 +148,15 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.plugins.KotlinLocationPluginActivity"
-            android:label="@string/activity_plugins_location_plugin_title">
+            android:name=".examples.plugins.KotlinLocationComponentActivity"
+            android:label="@string/activity_location_location_component_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.plugins.LocationPluginActivity"
-            android:label="@string/activity_plugins_location_plugin_title">
+            android:name=".examples.plugins.LocationComponentActivity"
+            android:label="@string/activity_location_location_component_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
@@ -169,8 +169,8 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.plugins.LocationPluginFragmentActivity"
-            android:label="@string/activity_user_location_map_frag_title">
+            android:name=".examples.plugins.LocationComponentFragmentActivity"
+            android:label="@string/activity_location_user_location_map_frag_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />

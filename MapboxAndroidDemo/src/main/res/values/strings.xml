@@ -1,4 +1,5 @@
 <resources>
+    <!--Java/Kotlin toggle-->
     <string name="no_examples">No examples in the\nchosen programming language</string>
     <string name="examples_language_kotlin">To Kotlin</string>
     <string name="examples_language_java">To Java</string>

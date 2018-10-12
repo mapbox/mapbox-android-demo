@@ -1,25 +1,27 @@
 package com.mapbox.mapboxandroiddemo.examples.plugins
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxandroiddemo.R
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.location.LocationComponentOptions
+import com.mapbox.mapboxsdk.location.modes.CameraMode
+import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
-import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin
-import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode
-import kotlinx.android.synthetic.main.activity_location_plugin.*
+import kotlinx.android.synthetic.main.activity_location_component.*
 
 /**
  * Use the Location Layer plugin to easily add a device location "puck" to a Mapbox map.
  */
-class KotlinLocationPluginActivity : AppCompatActivity(), OnMapReadyCallback, PermissionsListener {
+class KotlinLocationComponentActivity : AppCompatActivity(), OnMapReadyCallback, PermissionsListener {
 
-  private val permissionsManager: PermissionsManager = PermissionsManager(this)
+  private var permissionsManager: PermissionsManager = PermissionsManager(this)
   private lateinit var mapboxMap: MapboxMap
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +32,7 @@ class KotlinLocationPluginActivity : AppCompatActivity(), OnMapReadyCallback, Pe
     Mapbox.getInstance(this, getString(R.string.access_token))
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_location_plugin)
+    setContentView(R.layout.activity_location_component)
 
     mapView.onCreate(savedInstanceState)
     mapView.getMapAsync(this)
@@ -41,18 +43,30 @@ class KotlinLocationPluginActivity : AppCompatActivity(), OnMapReadyCallback, Pe
     enableLocationPlugin()
   }
 
+  @SuppressLint("MissingPermission")
   private fun enableLocationPlugin() {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
-      // Create an instance of the plugin. Adding in LocationLayerOptions is also an optional
-      // parameter
-      val locationLayerPlugin = LocationLayerPlugin(mapView, mapboxMap)
+      val options = LocationComponentOptions.builder(this)
+        .trackingGesturesManagement(true)
+        .accuracyColor(ContextCompat.getColor(this, R.color.mapboxGreen))
+        .build()
 
-      // Set the plugin's camera mode
-      locationLayerPlugin.cameraMode = CameraMode.TRACKING
-      lifecycle.addObserver(locationLayerPlugin)
+      // Get an instance of the component
+      val locationComponent = mapboxMap.locationComponent
+
+      // Activate with options
+      locationComponent.activateLocationComponent(this, options)
+
+      // Enable to make component visible
+      locationComponent.isLocationComponentEnabled = true
+
+      // Set the component's camera mode
+      locationComponent.cameraMode = CameraMode.TRACKING
+      locationComponent.renderMode = RenderMode.COMPASS
     } else {
+      permissionsManager = PermissionsManager(this)
       permissionsManager.requestLocationPermissions(this)
     }
   }

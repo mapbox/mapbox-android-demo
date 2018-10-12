@@ -84,10 +84,10 @@ import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.KotlinLocationPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.KotlinLocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginFragmentActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.LocationComponentActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.LocationComponentFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
@@ -617,14 +617,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
-      R.string.activity_plugins_location_plugin_title,
-      R.string.activity_plugins_location_plugin_description,
-      new Intent(MainActivity.this, LocationPluginActivity.class),
-      new Intent(MainActivity.this, KotlinLocationPluginActivity.class),
-      R.string.activity_plugins_location_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_plugins,
       R.string.activity_plugins_places_plugin_title, R.string.activity_plugins_places_plugin_description,
       new Intent(MainActivity.this, PlacesPluginActivity.class),
       null,
@@ -646,15 +638,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, PlaceSelectionPluginActivity.class),
       null,
       R.string.activity_plugins_place_picker_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
-    );
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_plugins,
-      R.string.activity_user_location_map_frag_title,
-      R.string.activity_user_location_map_frag_plugin_description,
-      new Intent(MainActivity.this, LocationPluginFragmentActivity.class),
-      null,
-      R.string.activity_user_location_fragment_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
     );
 
     exampleItemModels.add(new ExampleItemModel(
@@ -704,6 +687,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, AnimatedMarkerActivity.class),
       null,
       R.string.activity_annotation_animated_marker_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_location,
+      R.string.activity_location_location_component_title,
+      R.string.activity_location_location_component_description,
+      new Intent(MainActivity.this, LocationComponentActivity.class),
+      new Intent(MainActivity.this, KotlinLocationComponentActivity.class),
+      R.string.activity_location_location_component_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_location,
+      R.string.activity_location_user_location_map_frag_title,
+      R.string.activity_location_user_location_map_frag_plugin_description,
+      new Intent(MainActivity.this, LocationComponentFragmentActivity.class),
+      null,
+      R.string.activity_location_user_location_fragment_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
+    );
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_camera,

@@ -29,11 +29,11 @@ import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
-import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode;
 
 import java.util.List;
 
@@ -45,7 +45,7 @@ import retrofit2.Response;
  * Drop a marker at a specific location and then perform
  * reverse geocoding to retrieve and display the location's address
  */
-public class LocationPickerActivity extends AppCompatActivity implements PermissionsListener,OnMapReadyCallback {
+public class LocationPickerActivity extends AppCompatActivity implements PermissionsListener, OnMapReadyCallback {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -72,7 +72,6 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
-
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
@@ -262,13 +261,14 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
-      // Create an instance of the plugin. Adding in LocationLayerOptions is also an optional
+      // Get an instance of the component. Adding in LocationComponentOptions is also an optional
       // parameter
-      LocationLayerPlugin locationLayerPlugin = new LocationLayerPlugin(mapView, mapboxMap);
+      LocationComponent locationComponent = mapboxMap.getLocationComponent();
+      locationComponent.activateLocationComponent(this);
+      locationComponent.setLocationComponentEnabled(true);
 
-      // Set the plugin's camera mode
-      locationLayerPlugin.setCameraMode(CameraMode.TRACKING);
-      getLifecycle().addObserver(locationLayerPlugin);
+      // Set the component's camera mode
+      locationComponent.setCameraMode(CameraMode.TRACKING);
     } else {
       permissionsManager = new PermissionsManager(this);
       permissionsManager.requestLocationPermissions(this);
