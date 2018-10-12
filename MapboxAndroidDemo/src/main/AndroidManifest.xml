@@ -681,7 +681,7 @@
         <activity
             android:name=".account.LoadingActivity"
             android:screenOrientation="portrait" />
-
+        <activity android:name=".examples.labs.MagicWindowActivity"></activity>
     </application>
 
 </manifest>
