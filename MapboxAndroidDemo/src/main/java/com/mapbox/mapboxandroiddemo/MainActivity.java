@@ -985,12 +985,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
       exampleItemModels.add(new ExampleItemModel(
-              R.id.nav_lab,
-              R.string.activity_lab_magic_window_title,
-              R.string.activity_lab_magic_window_description,
-              null,
-              new Intent(MainActivity.this, MagicWindowActivity.class),
-              R.string.activity_lab_magic_window_image_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.id.nav_lab,
+      R.string.activity_lab_magic_window_title,
+      R.string.activity_lab_magic_window_description,
+      null,
+      new Intent(MainActivity.this, MagicWindowActivity.class),
+      R.string.activity_lab_magic_window_image_url, true, BuildConfig.MIN_SDK_VERSION));
     }
 
     exampleItemModels.add(new ExampleItemModel(
