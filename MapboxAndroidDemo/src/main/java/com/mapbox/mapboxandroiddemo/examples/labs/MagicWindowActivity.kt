@@ -40,7 +40,8 @@ class MagicWindowActivity : AppCompatActivity(), LocationEngineListener {
     lateinit var locationEngine: LocationEngine
     var base: MapboxMap? = null
     var revealed: MapboxMap? = null
-    var initialPosition = LatLng(41.0, 78.0)
+    var initialPosition = LatLng(39.0, -77.0)
+    var initialZoom = 8.0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +58,7 @@ class MagicWindowActivity : AppCompatActivity(), LocationEngineListener {
             if (map != null) {
                 base = map
                 if (savedInstanceState == null) {
-                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(initialPosition, 8.0))
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(initialPosition, initialZoom))
                 }
                 map.addOnCameraMoveListener {
                     synchronizeMaps()
@@ -100,7 +101,8 @@ class MagicWindowActivity : AppCompatActivity(), LocationEngineListener {
 
     fun setInitialMapPosition(ll: LatLng) {
         initialPosition = ll
-        base?.moveCamera(CameraUpdateFactory.newLatLngZoom(initialPosition, 8.0))
+        initialZoom = 9.0
+        base?.moveCamera(CameraUpdateFactory.newLatLngZoom(initialPosition, 12.0))
     }
 
     @SuppressLint("MissingPermission")
