@@ -1,9 +1,4 @@
 <resources>
-    <!--Java/Kotlin toggle-->
-    <string name="no_examples">No examples in the\nchosen programming language</string>
-    <string name="examples_language_kotlin">To Kotlin</string>
-    <string name="examples_language_java">To Java</string>
-    <string name="activity_lab_magic_window_title">Magic Window</string>
-    <string name="activity_lab_magic_window_description">Combine two maps for a magic window effect</string>
-    <string name="activity_lab_magic_window_image_url">https://i.imgur.com/Nw78ZrV.png</string>
+
+
 </resources>
