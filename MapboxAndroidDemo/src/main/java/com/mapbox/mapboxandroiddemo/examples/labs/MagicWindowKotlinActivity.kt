@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.activity_magic_window.*
 import kotlin.math.max
 import kotlin.math.min
 
-class MagicWindowActivity : AppCompatActivity(), LocationEngineListener {
+class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineListener {
     lateinit var listener: DragListener
     lateinit var locationEngine: LocationEngine
     var base: MapboxMap? = null
