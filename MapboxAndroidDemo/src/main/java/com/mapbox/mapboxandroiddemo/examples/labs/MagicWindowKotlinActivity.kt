@@ -30,6 +30,17 @@ import kotlinx.android.synthetic.main.activity_magic_window.*
 import kotlin.math.max
 import kotlin.math.min
 
+/**
+ * Pan around a map with a magic window into a satellite view of the same location.
+ *
+ * Demonstrates:
+ * Using multiple maps and styles in a single activity
+ * Controlling which user interactions are enabled on a map
+ * Rendering maps to texture for more flexible compositing
+ * Showing the user's location on first launch
+ *
+ * Moving the magic window requires Android O and above.
+ */
 class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineListener {
     lateinit var listener: DragListener
     lateinit var locationEngine: LocationEngine
