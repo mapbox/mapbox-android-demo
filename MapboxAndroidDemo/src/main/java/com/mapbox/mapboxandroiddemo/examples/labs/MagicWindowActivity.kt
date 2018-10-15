@@ -30,18 +30,19 @@ import kotlinx.android.synthetic.main.activity_magic_window.*
 import kotlin.math.max
 import kotlin.math.min
 
-const val TAG = "DragActivityTag"
-const val PERMISSION_REQUEST_LOCATION = 404
-const val BASE_MAP_BUNDLE = "$TAG.basemap.bundle"
-const val REVEAL_MAP_BUNDLE = "$TAG.revealedMap.bundle"
-
 class MagicWindowActivity : AppCompatActivity(), LocationEngineListener {
     lateinit var listener: DragListener
     lateinit var locationEngine: LocationEngine
     var base: MapboxMap? = null
     var revealed: MapboxMap? = null
     var initialPosition = LatLng(39.0, -77.0)
-    var initialZoom = 8.0;
+    var initialZoom = 8.0
+    companion object {
+        const val TAG = "DragActivityTag"
+        const val PERMISSION_REQUEST_LOCATION = 404
+        const val BASE_MAP_BUNDLE = "$TAG.basemap.bundle"
+        const val REVEAL_MAP_BUNDLE = "$TAG.revealedMap.bundle"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
