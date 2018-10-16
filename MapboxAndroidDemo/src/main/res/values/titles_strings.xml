@@ -97,4 +97,5 @@
     <string name="activity_labs_snaking_directions_route_title">Snaking directions</string>
     <string name="activity_dashed_line_directions_picker_title">Directions to selected location</string>
     <string name="activity_lab_calendar_integration_title">Calendar integration</string>
+    <string name="activity_lab_magic_window_title">Magic Window</string>
 </resources>

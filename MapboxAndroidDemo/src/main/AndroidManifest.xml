@@ -660,6 +660,14 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.labs.MagicWindowKotlinActivity"
+            android:label="@string/activity_lab_magic_window_title"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".account.LandingActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -678,10 +686,6 @@
                     android:scheme="mapbox-android-dev-preview" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".account.LoadingActivity"
-            android:screenOrientation="portrait" />
-
     </application>
 
 </manifest>

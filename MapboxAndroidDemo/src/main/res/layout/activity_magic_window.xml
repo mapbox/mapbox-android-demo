@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/parentView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".examples.labs.MagicWindowKotlinActivity">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/baseMap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"
+        mapbox:mapbox_uiRotateGestures="false"
+        />
+
+    <com.mapbox.mapboxandroiddemo.examples.labs.MaskedView
+        android:id="@+id/magicWindow"
+        android:layout_width="240dp"
+        android:layout_height="240dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:layerType="hardware"
+        app:layout_constraintBottom_toBottomOf="@+id/baseMap"
+        app:layout_constraintEnd_toEndOf="@+id/baseMap"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/revealedMap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layerType="hardware"
+            mapbox:mapbox_renderTextureMode="true"
+            mapbox:mapbox_styleUrl="@string/mapbox_style_satellite"
+            mapbox:mapbox_uiAttribution="false"
+            mapbox:mapbox_uiDoubleTapGestures="false"
+            mapbox:mapbox_uiLogo="false"
+            mapbox:mapbox_uiRotateGestures="false"
+            mapbox:mapbox_uiScrollGestures="false"
+            mapbox:mapbox_uiTiltGestures="false" />
+    </com.mapbox.mapboxandroiddemo.examples.labs.MaskedView>
+
+
+</android.support.constraint.ConstraintLayout>

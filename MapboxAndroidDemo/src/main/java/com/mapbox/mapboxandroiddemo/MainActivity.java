@@ -74,6 +74,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActi
 import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.LocationPickerActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.MagicWindowKotlinActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivity;
@@ -980,6 +981,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, CalendarIntegrationActivity.class),
       null,
       R.string.activity_lab_calendar_integration_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_magic_window_title,
+      R.string.activity_lab_magic_window_description,
+      null,
+      new Intent(MainActivity.this, MagicWindowKotlinActivity.class),
+      R.string.activity_lab_magic_window_image_url, true, Build.VERSION_CODES.O));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,

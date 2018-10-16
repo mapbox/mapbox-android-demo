@@ -97,6 +97,7 @@ android {
 dependencies {
 
     // Wearable application module
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     gpservicesWearApp project(':MapboxAndroidWearDemo')
 
     // Support libraries
