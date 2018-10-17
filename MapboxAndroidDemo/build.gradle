@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.google.firebase.firebase-perf'
 apply plugin: 'com.github.triplet.play'
 apply from: "$project.rootDir/gradle/script-git-version.gradle"
 apply from: "$project.rootDir/gradle/gradle-dependencies-graph.gradle"
@@ -39,11 +38,6 @@ android {
     flavorDimensions "default"
 
     productFlavors {
-        gpservices {
-            resValue "string", "firebase_app_id", "1:557332920931:android:bdf11618ae45dd61"
-            resValue "string", "firebase_api_key", "AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8"
-        }
-
         nogpservices {
         }
     }
@@ -98,7 +92,6 @@ dependencies {
 
     // Wearable application module
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    gpservicesWearApp project(':MapboxAndroidWearDemo')
 
     // Support libraries
     implementation dependenciesList.supportGridLayout
@@ -119,11 +112,6 @@ dependencies {
     implementation dependenciesList.mapboxPluginPlaces
     implementation dependenciesList.mapboxPluginLocalization
     implementation dependenciesList.mapboxPluginTraffic
-
-    // Firebase
-    implementation dependenciesList.firebaseCrash
-    implementation dependenciesList.firebasePerf
-    gpservicesImplementation dependenciesList.firebaseCrash
 
     // Other dependencies
     implementation dependenciesList.gson
