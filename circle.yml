@@ -57,7 +57,6 @@ jobs:
           name: Run Firebase instrumentation tests
           command: |
             #!/bin/bash
-            ./gradlew :MapboxAndroidDemo:assembleGpservicesDebug --continue
             ./gradlew :MapboxAndroidDemo:assembleAndroidTest --continue
             gcloud firebase test android run \
             --type instrumentation \

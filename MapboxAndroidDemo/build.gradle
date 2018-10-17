@@ -37,6 +37,11 @@ android {
 
     flavorDimensions "default"
 
+    productFlavors {
+        nogpservices {
+        }
+    }
+
     signingConfigs {
         release {
             keyAlias System.getenv("CIRCLECI_ANDROID_KEYSTORE_ALIAS")
