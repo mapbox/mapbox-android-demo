@@ -24,7 +24,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
-import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
@@ -160,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private boolean showJavaExamples = true;
 
   @Override
-  @AddTrace(name = "onCreateMainActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
@@ -284,7 +282,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     return true;
   }
 
-  @AddTrace(name = "listItems")
   private void listItems(int id) {
     List<ExampleItemModel> models = new ArrayList<>();
     for (ExampleItemModel model : exampleItemModels) {

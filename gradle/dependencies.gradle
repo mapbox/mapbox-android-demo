@@ -20,7 +20,6 @@ ext {
             // Support
             supportLib               : '27.1.1',
             constraintLayout         : '1.0.2',
-            firebase                 : '11.0.4',
 
             // Square
             leakCanary               : '1.5.4',
@@ -51,7 +50,6 @@ ext {
 
     pluginVersion = [
             checkstyle         : '8.2',
-            firebase           : '1.1.1',
             gradle             : '3.2.0',
             gradlePlayPublisher: '1.2.0',
             gradlePlayPublisher: '1.2.0',
@@ -89,10 +87,6 @@ ext {
             leakCanaryDebug          : "com.squareup.leakcanary:leakcanary-android:${version.leakCanary}",
             leakCanaryRelease        : "com.squareup.leakcanary:leakcanary-android-no-op:${version.leakCanary}",
 
-            // Firebase
-            firebaseCrash            : "com.google.firebase:firebase-crash:${version.firebase}",
-            firebasePerf             : "com.google.firebase:firebase-perf:${version.firebase}",
-
             // Other
             gson                     : "com.google.code.gson:gson:${version.gson}",
             segmentAnalytics         : "com.segment.analytics.java:analytics:${version.segmentAnalytics}",
@@ -115,7 +109,6 @@ ext {
     pluginDependencies = [
             gradle       : "com.android.tools.build:gradle:${pluginVersion.gradle}",
             checkstyle   : "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
-            firebase     : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
             playPublisher: "com.github.triplet.gradle:play-publisher:${pluginVersion.gradlePlayPublisher}",
             kotlin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:${pluginVersion.kotlin}"
     ]

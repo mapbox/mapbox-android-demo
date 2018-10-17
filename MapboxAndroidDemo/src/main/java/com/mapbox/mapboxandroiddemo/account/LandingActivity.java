@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.MainActivity;
@@ -41,7 +40,6 @@ public class LandingActivity extends AppCompatActivity {
 
 
   @Override
-  @AddTrace(name = "onCreateLandingActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     loggedIn = PreferenceManager.getDefaultSharedPreferences(

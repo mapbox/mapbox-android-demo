@@ -126,7 +126,6 @@
 -dontnote org.apache.http.**
 
 
--keep class com.google.firebase.**
 -dontwarn org.xmlpull.v1.**
 -dontnote org.xmlpull.v1.**
 -keep class org.xmlpull.** { *; }
