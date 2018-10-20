@@ -65,7 +65,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusi
 import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.GeocodingActivity;
-import com.mapbox.mapboxandroiddemo.examples.javaservices.IsochoneActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.IsochroneActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.MapMatchingActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.MatrixApiActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.OptimizationActivity;
@@ -865,7 +865,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.id.nav_java_services,
       R.string.activity_java_services_isochrone_title,
       R.string.activity_java_services_isochrone_description,
-      new Intent(MainActivity.this, IsochoneActivity.class),
+      new Intent(MainActivity.this, IsochroneActivity.class),
       null,
       R.string.activity_java_services_isochrone_url, false, BuildConfig.MIN_SDK_VERSION));
 

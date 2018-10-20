@@ -300,7 +300,7 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.javaservices.IsochoneActivity"
+            android:name=".examples.javaservices.IsochroneActivity"
             android:label="@string/activity_java_services_isochrone_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
