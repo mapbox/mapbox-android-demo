@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.plugins;
+package com.mapbox.mapboxandroiddemo.examples.location;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
