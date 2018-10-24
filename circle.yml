@@ -61,11 +61,11 @@ jobs:
             ./gradlew :MapboxAndroidDemo:assembleAndroidTest --continue
             gcloud firebase test android run \
             --type instrumentation \
-            --app MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk \
-            --test MapboxAndroidDemo/build/outputs/apk/androidTest/gpservices/debug/MapboxAndroidDemo-gpservices-debug-androidTest.apk \
+            --app MapboxAndroidDemo/build/outputs/apk/global/debug/MapboxAndroidDemo-global-debug.apk \
+            --test MapboxAndroidDemo/build/outputs/apk/androidTest/global/debug/MapboxAndroidDemo-global-debug-androidTest.apk \
             --device-ids sailfish --os-version-ids 26 --locales en --orientations portrait --timeout 5m
       - store_artifacts:
-          path: MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk
+          path: MapboxAndroidDemo/build/outputs/apk/global/debug/MapboxAndroidDemo-global-debug.apk
 # ------------------------------------------------------------------------------
   release:
     docker:

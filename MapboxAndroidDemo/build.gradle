@@ -39,12 +39,15 @@ android {
     flavorDimensions "default"
 
     productFlavors {
-        gpservices {
+        global {
             resValue "string", "firebase_app_id", "1:557332920931:android:bdf11618ae45dd61"
             resValue "string", "firebase_api_key", "AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8"
         }
 
-        nogpservices {
+        china {
+            repositories {
+                maven { url "https://mapbox.bintray.com/mapbox" }
+            }
         }
     }
 
@@ -98,7 +101,7 @@ dependencies {
 
     // Wearable application module
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    gpservicesWearApp project(':MapboxAndroidWearDemo')
+    globalWearApp project(':MapboxAndroidWearDemo')
 
     // Support libraries
     implementation dependenciesList.supportGridLayout
@@ -111,7 +114,8 @@ dependencies {
     implementation dependenciesList.supportConstraintLayout
 
     // Mapbox dependencies
-    api(dependenciesList.mapboxMapSdk)
+    chinaImplementation dependenciesList.mapboxChinaPlugin
+    globalApi      dependenciesList.mapboxMapSdk
     implementation dependenciesList.mapboxTurf
 
     // Mapbox plugins
@@ -121,9 +125,9 @@ dependencies {
     implementation dependenciesList.mapboxPluginTraffic
 
     // Firebase
-    implementation dependenciesList.firebaseCrash
-    implementation dependenciesList.firebasePerf
-    gpservicesImplementation dependenciesList.firebaseCrash
+    globalImplementation dependenciesList.firebaseCrash
+    globalImplementation dependenciesList.firebasePerf
+    globalImplementation dependenciesList.firebaseCrash
 
     // Other dependencies
     implementation dependenciesList.gson

@@ -2,8 +2,8 @@ ext {
     androidVersions = [
             minSdkVersion    : 15,
             minWearSdkVersion: 23,
-            targetSdkVersion : 27,
-            compileSdkVersion: 27,
+            targetSdkVersion : 28,
+            compileSdkVersion: 28,
             buildToolsVersion: '28.0.3'
     ]
 
@@ -16,15 +16,16 @@ ext {
             mapboxPluginPlaces       : '0.6.0',
             mapboxPluginLocalization : '0.5.0',
             mapboxPluginTraffic      : '0.6.0',
+            mapboxChinaPlugin        : '0.4.7',
 
             // Support
-            supportLib               : '27.1.1',
-            constraintLayout         : '1.0.2',
+            supportLib               : '28.0.0',
+            constraintLayout         : '1.1.3',
             firebase                 : '11.0.4',
 
             // Square
             leakCanary               : '1.5.4',
-            timber                   : '4.5.1',
+            timber                   : '4.7.1',
             okthttp3                 : '3.8.1',
             picasso                  : '2.5.2',
             retrofit                 : '2.2.0',
@@ -52,10 +53,9 @@ ext {
     pluginVersion = [
             checkstyle         : '8.2',
             firebase           : '1.1.1',
-            gradle             : '3.2.0',
+            gradle             : '3.2.1',
             gradlePlayPublisher: '1.2.0',
-            gradlePlayPublisher: '1.2.0',
-            kotlin             : '1.2.70'
+            kotlin             : '1.2.71'
     ]
 
     dependenciesList = [
@@ -68,6 +68,7 @@ ext {
             mapboxPluginPlaces       : "com.mapbox.mapboxsdk:mapbox-android-plugin-places:${version.mapboxPluginPlaces}",
             mapboxPluginLocalization : "com.mapbox.mapboxsdk:mapbox-android-plugin-localization:${version.mapboxPluginLocalization}",
             mapboxPluginTraffic      : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:${version.mapboxPluginTraffic}",
+            mapboxChinaPlugin        : "com.mapbox.mapboxsdk:mapbox-android-plugin-china:${version.mapboxChinaPlugin}",
 
             // Support
             supportV4                : "com.android.support:support-v4:${version.supportLib}",

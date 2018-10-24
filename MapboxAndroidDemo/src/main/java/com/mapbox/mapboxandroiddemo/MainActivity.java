@@ -41,6 +41,7 @@ import com.mapbox.mapboxandroiddemo.examples.basics.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.china.SimpleChinaMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.BathymetryActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
@@ -158,12 +159,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private boolean loggedIn;
   private int currentCategory = R.id.nav_basics;
   private boolean showJavaExamples = true;
+  private boolean isChinaBuild;
 
   @Override
   @AddTrace(name = "onCreateMainActivity")
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    isChinaBuild = BuildConfig.FLAVOR.contains("nogpservices");
 
     toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
@@ -223,6 +227,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     NavigationView navigationView = findViewById(R.id.nav_view);
     if (navigationView != null) {
+      if (!isChinaBuild) {
+        Menu menu = navigationView.getMenu();
+        MenuItem chinaMenuItem = menu.findItem(R.id.nav_china);
+        chinaMenuItem.setVisible(false);
+      }
       navigationView.setNavigationItemSelectedListener(this);
       navigationView.setCheckedItem(R.id.nav_basics);
     }
@@ -1143,5 +1152,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, SimpleMapViewActivityKotlin.class),
       null,
       R.string.activity_basic_mapbox_kotlin_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    if (isChinaBuild) {
+      // Add China-related examples here
+      exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_china,
+        R.string.activity_china_simple_china_mapview_title,
+        R.string.activity_china_simple_china_mapview_description,
+        new Intent(MainActivity.this, SimpleChinaMapViewActivity.class),
+        null,
+        R.string.activity_china_simple_china_mapview_url, true, BuildConfig.MIN_SDK_VERSION));
+    }
   }
 }
