@@ -184,8 +184,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
 
-        <service android:name=".account.AccountRetrievalService" />
-
         <activity
             android:name=".examples.basics.MapboxMapOptionActivity"
             android:label="@string/activity_basic_mapbox_options_title">

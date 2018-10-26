@@ -41,7 +41,6 @@ import com.mapbox.mapboxandroiddemo.examples.basics.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
-import com.mapbox.mapboxandroiddemo.examples.china.SimpleChinaMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.BathymetryActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
@@ -1152,16 +1151,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, SimpleMapViewActivityKotlin.class),
       null,
       R.string.activity_basic_mapbox_kotlin_url, true, BuildConfig.MIN_SDK_VERSION));
-
-    if (isChinaBuild) {
-      // Add China-related examples here
-      exampleItemModels.add(new ExampleItemModel(
-        R.id.nav_china,
-        R.string.activity_china_simple_china_mapview_title,
-        R.string.activity_china_simple_china_mapview_description,
-        new Intent(MainActivity.this, SimpleChinaMapViewActivity.class),
-        null,
-        R.string.activity_china_simple_china_mapview_url, true, BuildConfig.MIN_SDK_VERSION));
-    }
   }
 }

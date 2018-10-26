@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.google.firebase.firebase-perf'
 apply plugin: 'com.github.triplet.play'
 apply from: "$project.rootDir/gradle/script-git-version.gradle"
 apply from: "$project.rootDir/gradle/gradle-dependencies-graph.gradle"
 
+def isGlobal
 android {
     compileSdkVersion androidVersions.compileSdkVersion
     buildToolsVersion androidVersions.buildToolsVersion
@@ -40,11 +40,13 @@ android {
 
     productFlavors {
         global {
+            isGlobal = true
             resValue "string", "firebase_app_id", "1:557332920931:android:bdf11618ae45dd61"
             resValue "string", "firebase_api_key", "AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8"
         }
 
         china {
+            isGlobal = false
             repositories {
                 maven { url "https://mapbox.bintray.com/mapbox" }
             }
@@ -97,6 +99,9 @@ android {
     }
 }
 
+if (isGlobal) {
+    apply plugin: 'com.google.firebase.firebase-perf'
+}
 dependencies {
 
     // Wearable application module
@@ -115,7 +120,7 @@ dependencies {
 
     // Mapbox dependencies
     chinaImplementation dependenciesList.mapboxChinaPlugin
-    globalApi      dependenciesList.mapboxMapSdk
+    globalImplementation dependenciesList.mapboxMapSdk
     implementation dependenciesList.mapboxTurf
 
     // Mapbox plugins

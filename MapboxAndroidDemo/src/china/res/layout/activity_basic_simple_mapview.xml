@@ -12,9 +12,9 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="39.907609"
-        mapbox:mapbox_cameraTargetLng="116.385602"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets_chinese"
-        mapbox:mapbox_cameraZoom="8"/>
+        mapbox:mapbox_cameraTargetLat="40.73581"
+        mapbox:mapbox_cameraTargetLng="-73.99155"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"
+        mapbox:mapbox_cameraZoom="11"/>
 
 </FrameLayout>
