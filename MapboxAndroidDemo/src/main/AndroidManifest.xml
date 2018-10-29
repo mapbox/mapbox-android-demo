@@ -666,9 +666,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".account.LoadingActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".examples.labs.MagicWindowKotlinActivity"
             android:label="@string/activity_lab_magic_window_title"
             android:screenOrientation="portrait">

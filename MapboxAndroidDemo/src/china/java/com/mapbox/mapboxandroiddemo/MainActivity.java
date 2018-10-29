@@ -67,14 +67,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private boolean loggedIn;
   private int currentCategory = R.id.nav_basics;
   private boolean showJavaExamples = true;
-  private boolean isChinaBuild;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
-    isChinaBuild = BuildConfig.FLAVOR.contains("nogpservices");
 
     toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
@@ -134,11 +131,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     NavigationView navigationView = findViewById(R.id.nav_view);
     if (navigationView != null) {
-      if (!isChinaBuild) {
-        Menu menu = navigationView.getMenu();
-        MenuItem chinaMenuItem = menu.findItem(R.id.nav_china);
-        chinaMenuItem.setVisible(false);
-      }
       navigationView.setNavigationItemSelectedListener(this);
       navigationView.setCheckedItem(R.id.nav_basics);
     }
