@@ -666,6 +666,9 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".account.LoadingActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".examples.labs.MagicWindowKotlinActivity"
             android:label="@string/activity_lab_magic_window_title"
             android:screenOrientation="portrait">
@@ -700,10 +703,7 @@
                     android:scheme="mapbox-android-dev-preview" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".account.LoadingActivity"
-            android:screenOrientation="portrait" />
+        <service android:name=".account.AccountRetrievalService" />
     </application>
 
 </manifest>
