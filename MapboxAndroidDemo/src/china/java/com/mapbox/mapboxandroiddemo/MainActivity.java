@@ -27,7 +27,7 @@ import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
-import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
+import com.mapbox.mapboxandroiddemo.examples.china.SimpleChinaMapViewActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 import com.mapbox.mapboxandroiddemo.utils.SettingsDialogView;
@@ -325,11 +325,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private void initializeModels() {
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_basics,
-      R.string.activity_basic_simple_mapview_title,
-      R.string.activity_basic_simple_mapview_description,
-      new Intent(MainActivity.this, SimpleMapViewActivity.class),
+      R.string.activity_china_simple_china_mapview_title,
+      R.string.activity_china_simple_china_mapview_description,
+      new Intent(MainActivity.this, SimpleChinaMapViewActivity.class),
       null,
-      R.string.activity_basic_simple_mapview_url, false, BuildConfig.MIN_SDK_VERSION));
-
+      R.string.activity_china_simple_china_mapview_url, false, BuildConfig.MIN_SDK_VERSION));
   }
 }

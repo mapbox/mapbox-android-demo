@@ -4,11 +4,6 @@
     <group android:id="@+id/sections_group" android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_china"
-            android:visible="true"
-            android:title="@string/china"/>
-
-        <item
             android:id="@+id/nav_basics"
             android:title="@string/getting_started_category"/>
         <item
