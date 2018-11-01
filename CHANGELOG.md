@@ -2,6 +2,25 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 6.6.4
+
+* Maps SDK 6.6.4 bump 
+* Maps SDK 6.6.3 bump 
+* Maps SDK 6.6.2 bump 
+* Magic Window Demo
+* Fix to local style JSON load example 
+* Reimplement location examples using component  
+* Java/Kotlin toggle, MainActivity refactor
+* Use Kotlin-Android-Extensions to remove extra code 
+* Location layer plugin 0.10.0 release bump
+* Add kotlin circle layer example
+* Remove transfuser errata
+* Variable rename in style fade switch example
+* Docker image update
+* Rainfall data example tweaks
+* Java SDK 4.0.0 bump 
+* Basic Kotlin version of plain map 
+
 ## 6.5.0
 
 * Device location in a map fragment
