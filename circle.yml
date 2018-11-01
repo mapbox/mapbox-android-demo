@@ -69,7 +69,7 @@ jobs:
 # ------------------------------------------------------------------------------
   release:
     docker:
-      - image: mbgl/feb0443038:android-ndk-r17
+      - image: mbgl/61abee1674:android-ndk-r18
     working_directory: ~/code
     environment:
       JVM_OPTS: -Xmx3200m
