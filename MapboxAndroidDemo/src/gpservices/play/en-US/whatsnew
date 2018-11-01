@@ -1,6 +1,4 @@
-This update is in line with the 6.5.0 release of the Mapbox Maps SDK for Android. This update includes several hotfixes and new examples:
+This update is in line with the 6.6.4 release of the Mapbox Maps SDK for Android. This update includes several hot fixes and new examples:
 
-• Device location in a map fragment
-• Transparent background + video example
-• Adding line background highlight example
-• Data-driven styling temperature expression example
+• Magic window
+• Simple map view in Kotlin
