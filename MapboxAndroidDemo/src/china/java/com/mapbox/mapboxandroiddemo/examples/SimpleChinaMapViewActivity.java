@@ -27,7 +27,7 @@ public class SimpleChinaMapViewActivity extends AppCompatActivity {
     // China access token if you want to view any of our China examples and use China map styles.
     // Please fill out the form at https://www.mapbox.cn/contact to start the process of
     // receiving a special China access token. Thank you!
-    Mapbox.getInstance(this, getString(R.string.china_access_token));
+    Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_basic_simple_china_mapview);
