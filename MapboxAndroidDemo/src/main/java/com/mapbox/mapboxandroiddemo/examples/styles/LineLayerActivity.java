@@ -110,28 +110,21 @@ public class LineLayerActivity extends AppCompatActivity {
         // Create the LineString from the list of coordinates and then make a GeoJSON
         // FeatureCollection so we can add the line to our map as a layer.
         LineString lineString = LineString.fromLngLats(routeCoordinates);
-
         FeatureCollection featureCollection =
-          FeatureCollection.fromFeatures(new Feature[]{Feature.fromGeometry(lineString)});
-
+          FeatureCollection.fromFeatures(new Feature[] {Feature.fromGeometry(lineString)});
         Source geoJsonSource = new GeoJsonSource("line-source", featureCollection);
-
         mapboxMap.addSource(geoJsonSource);
-
         LineLayer lineLayer = new LineLayer("linelayer", "line-source");
-
         // The layer properties for our line. This is where we make the line dotted, set the
         // color, etc.
         lineLayer.setProperties(
-          PropertyFactory.lineDasharray(new Float[]{0.01f, 2f}),
+          PropertyFactory.lineDasharray(new Float[] {0.01f, 2f}),
           PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
           PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
           PropertyFactory.lineWidth(5f),
           PropertyFactory.lineColor(Color.parseColor("#e55e5e"))
         );
-
         mapboxMap.addLayer(lineLayer);
-
       }
     });
   }
