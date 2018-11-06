@@ -274,4 +274,8 @@
 
     <!-- Temperature change -->
     <string name="temp_change_feedback"> Showing min and max temperatures up to 2006 in %1$s</string>
+
+    <!-- Click to add image -->
+    <string name="file_not_found">File not found</string>
+    <string name="tap_instructions">Tap four points on the map in a CLOCKWISE order</string>
 </resources>
