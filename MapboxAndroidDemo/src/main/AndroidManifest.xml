@@ -686,6 +686,10 @@
                     android:scheme="mapbox-android-dev-preview" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".account.LoadingActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
