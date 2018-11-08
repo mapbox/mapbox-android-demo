@@ -1117,7 +1117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_basic_simple_mapview_title,
       R.string.activity_basic_simple_mapview_description,
       new Intent(MainActivity.this, SimpleMapViewActivity.class),
-      null,
+      new Intent(MainActivity.this, SimpleMapViewActivityKotlin.class),
       R.string.activity_basic_simple_mapview_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
@@ -1135,13 +1135,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, MapboxMapOptionActivity.class),
       null,
       R.string.activity_basic_mapbox_options_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_basics,
-      R.string.activity_basic_mapbox_kotlin_title,
-      R.string.activity_basic_mapbox_kotlin_description,
-      new Intent(MainActivity.this, SimpleMapViewActivityKotlin.class),
-      null,
-      R.string.activity_basic_mapbox_kotlin_url, true, BuildConfig.MIN_SDK_VERSION));
   }
 }

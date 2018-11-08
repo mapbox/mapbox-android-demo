@@ -102,4 +102,6 @@
     <string name="activity_dashed_line_directions_picker_url" translatable="false">https://i.imgur.com/0dpCI14.png</string>
     <string name="activity_lab_calendar_integration_url" translatable="false">https://i.imgur.com/M8TU7nH.png</string>
     <string name="activity_lab_magic_window_image_url">https://i.imgur.com/Nw78ZrV.png</string>
+    <string name="activity_china_simple_china_mapview_url" translatable="false">https://i.imgur.com/KwoEynZ.png</string>
+
 </resources>

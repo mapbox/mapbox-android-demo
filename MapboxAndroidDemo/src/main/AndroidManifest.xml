@@ -184,8 +184,6 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
 
-        <service android:name=".account.AccountRetrievalService" />
-
         <activity
             android:name=".examples.basics.MapboxMapOptionActivity"
             android:label="@string/activity_basic_mapbox_options_title">
@@ -676,6 +674,14 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.SimpleChinaMapViewActivity"
+            android:label="@string/activity_china_simple_china_mapview_title"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".account.LandingActivity"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -694,10 +700,7 @@
                     android:scheme="mapbox-android-dev-preview" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".account.LoadingActivity"
-            android:screenOrientation="portrait" />
+        <service android:name=".account.AccountRetrievalService" />
     </application>
 
 </manifest>

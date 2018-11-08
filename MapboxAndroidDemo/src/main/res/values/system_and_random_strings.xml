@@ -42,6 +42,7 @@
     <string name="lab_category">Lab</string>
     <string name="share">Share</string>
     <string name="settings">Settings</string>
+    <string name="china">China</string>
 
     <!-- For Kotlin toggles -->
     <string name="no_examples">No examples in the\nchosen programming language</string>
