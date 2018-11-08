@@ -282,4 +282,7 @@
     <!-- Satellite land selection -->
     <string name="clear_all">Clear</string>
     <string name="trace_instruction">Trace some of the Gardens of Versailles!</string>
+
+    <!-- Isochrone change -->
+    <string name="click_on_map_instruction">Tap on the map!</string>
 </resources>
