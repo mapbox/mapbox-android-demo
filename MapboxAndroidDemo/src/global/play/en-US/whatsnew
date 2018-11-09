@@ -1,4 +1,8 @@
-This update is in line with the 6.6.4 release of the Mapbox Maps SDK for Android. This update includes several hot fixes and new examples:
+This update is in line with the 6.7.0 release of the Mapbox Maps SDK for Android. This update includes several hot fixes and new examples:
 
 • Magic window
-• Simple map view in Kotlin
+• Simple Kotlin MapView
+• Isochrone API
+• Line gradient
+• Satellite land selection
+• Click-to-add-bounds image
