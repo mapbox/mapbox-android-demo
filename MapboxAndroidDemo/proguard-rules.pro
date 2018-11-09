@@ -113,6 +113,8 @@
 -keep class android.arch.** { *; }
 -dontwarn android.arch.**
 
+-dontwarn com.cunoraz.gifview.library.**
+
 # Mapbox
 -keep class com.mapbox.android.telemetry.**
 -keep class com.mapbox.android.core.location.**

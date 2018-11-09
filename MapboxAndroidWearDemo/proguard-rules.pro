@@ -38,6 +38,8 @@
 -keep class com.segment.analytics.** { *; }
 
 
+-dontwarn com.cunoraz.gifview.library.**
+
 # --- GMS ---
 -keep public class com.google.android.gms.* { public *; }
 -dontwarn com.google.android.gms.**
