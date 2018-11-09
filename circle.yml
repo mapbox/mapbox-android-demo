@@ -93,5 +93,5 @@ jobs:
             echo "${PLAY_PUBLISH_AUTH_JSON}" > android-gl-native-6d21dd280e7b.json
       - run:
           name: Release to Google Play
-          command: ./gradlew publishGpservicesRelease
+          command: ./gradlew publishGlobalRelease
 # ------------------------------------------------------------------------------
