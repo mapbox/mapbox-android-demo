@@ -357,7 +357,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
         </activity>
-
+        <activity
+            android:name=".account.LoadingActivity"
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".account.LandingActivity"
             android:screenOrientation="portrait">
