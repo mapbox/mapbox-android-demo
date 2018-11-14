@@ -24,5 +24,9 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".account.LoadingActivity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 </manifest>
