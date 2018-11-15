@@ -114,6 +114,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.javaservices.DirectionsActivity"
+            android:label="@string/activity_java_services_directions_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
+        <activity
             android:name=".examples.javaservices.OptimizationActivity"
             android:label="@string/activity_java_services_optimization_title">
             <meta-data
@@ -701,25 +708,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
-        </activity>
-        <activity
-            android:name=".account.LandingActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="authorize"
-                    android:scheme="mapbox-android-dev-preview" />
-            </intent-filter>
         </activity>
 
         <service android:name=".account.AccountRetrievalService" />
