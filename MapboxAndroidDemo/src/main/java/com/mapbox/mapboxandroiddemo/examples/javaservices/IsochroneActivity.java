@@ -96,7 +96,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     // Update the click Symbol Layer to move the red marker to wherever the map was clicked on
     lastSelectedLatLng = point;
     GeoJsonSource source = mapboxMap.getSourceAs("click-source-id");
@@ -106,6 +106,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
 
     // Request and redraw the isochrone information based on the map click point
     redrawIsochroneData(point);
+    return true;
   }
 
   /**

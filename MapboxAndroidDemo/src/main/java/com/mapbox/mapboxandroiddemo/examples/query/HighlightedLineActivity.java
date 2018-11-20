@@ -68,7 +68,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     // Detect whether a linestring was clicked on
     PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
     RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
@@ -79,9 +79,12 @@ public class HighlightedLineActivity extends AppCompatActivity implements
         if (source != null) {
           source.setGeoJson(feature);
           backgroundLineLayer.setProperties(visibility(VISIBLE));
+          return true;
         }
       }
     }
+
+    return false;
   }
 
   /**

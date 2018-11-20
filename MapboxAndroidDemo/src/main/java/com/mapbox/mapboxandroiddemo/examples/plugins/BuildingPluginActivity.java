@@ -1,3 +1,4 @@
+/*
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.os.Bundle;
@@ -11,9 +12,11 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
 
+*/
 /**
  * Use the buildings plugin to display buildings' heights (extrusions) in 3D.
- */
+ *//*
+
 public class BuildingPluginActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -82,3 +85,4 @@ public class BuildingPluginActivity extends AppCompatActivity {
     mapView.onDestroy();
   }
 }
+*/

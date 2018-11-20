@@ -1,3 +1,4 @@
+/*
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.animation.ObjectAnimator;
@@ -32,9 +33,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 
+*/
 /**
  * Display the space station's real-time location
- */
+ *//*
+
 public class SpaceStationLocationActivity extends AppCompatActivity {
 
   private static final String TAG = "SpaceStationActivity";
@@ -241,3 +244,4 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     Call<IssModel> loadLocation();
   }
 }
+*/

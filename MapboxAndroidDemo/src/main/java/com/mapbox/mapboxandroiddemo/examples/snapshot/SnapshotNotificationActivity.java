@@ -61,11 +61,13 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     startSnapShot(
       mapboxMap.getProjection().getVisibleRegion().latLngBounds,
       mapView.getMeasuredHeight(),
       mapView.getMeasuredWidth());
+
+    return true;
   }
 
   /**

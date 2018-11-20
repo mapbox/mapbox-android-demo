@@ -1,3 +1,4 @@
+/*
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.animation.ObjectAnimator;
@@ -34,9 +35,11 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Use a map matched GeoJSON route to show a marker travels along the route at consistent speed.
- */
+ *//*
+
 public class MarkerFollowingRouteActivity extends AppCompatActivity {
 
   private static final String TAG = "MarkerFollowingRoute";
@@ -264,3 +267,4 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
     }
   }
 }
+*/

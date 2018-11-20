@@ -1,3 +1,4 @@
+/*
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.app.Activity;
@@ -29,11 +30,13 @@ import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
+*/
 /**
  * Use the places plugin to take advantage of Mapbox's location search ("geocoding") capabilities. The plugin
  * automatically makes geocoding requests, has built-in saved locations, includes location picker functionality,
  * and adds beautiful UI into your Android project.
- */
+ *//*
+
 public class PlacesPluginActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
@@ -195,3 +198,4 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
     mapView.onSaveInstanceState(outState);
   }
 }
+*/

@@ -91,7 +91,7 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
 
     final SymbolLayer marker = (SymbolLayer) mapboxMap.getLayer("selected-marker-layer");
 
@@ -100,14 +100,14 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
     List<Feature> selectedFeature = mapboxMap.queryRenderedFeatures(pixel, "selected-marker-layer");
 
     if (selectedFeature.size() > 0 && markerSelected) {
-      return;
+      return false;
     }
 
     if (features.isEmpty()) {
       if (markerSelected) {
         deselectMarker(marker);
       }
-      return;
+      return false;
     }
 
     FeatureCollection featureCollection = FeatureCollection.fromFeatures(
@@ -123,6 +123,8 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
     if (features.size() > 0) {
       selectMarker(marker);
     }
+
+    return true;
   }
 
   private void selectMarker(final SymbolLayer marker) {

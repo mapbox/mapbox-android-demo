@@ -70,13 +70,14 @@ public class BoundingBoxCameraActivity extends AppCompatActivity implements OnMa
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     LatLngBounds latLngBounds = new LatLngBounds.Builder()
       .include(locationOne) // Northeast
       .include(locationTwo) // Southwest
       .build();
 
     mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50), 5000);
+    return true;
   }
 
   @Override

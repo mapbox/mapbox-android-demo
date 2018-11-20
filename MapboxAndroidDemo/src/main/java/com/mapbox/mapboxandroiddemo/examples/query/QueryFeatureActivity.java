@@ -52,7 +52,7 @@ public class QueryFeatureActivity extends AppCompatActivity implements OnMapRead
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     if (featureMarker != null) {
       mapboxMap.removeMarker(featureMarker);
     }
@@ -92,6 +92,8 @@ public class QueryFeatureActivity extends AppCompatActivity implements OnMapRead
       );
     }
     mapboxMap.selectMarker(featureMarker);
+
+    return true;
   }
 
   @Override

@@ -88,7 +88,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     // Optimization API is limited to 12 coordinate sets
     if (alreadyTwelveMarkersOnMap()) {
       Toast.makeText(OptimizationActivity.this, R.string.only_twelve_stops_allowed, Toast.LENGTH_LONG).show();
@@ -97,13 +97,17 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
       addPointToStopsList(point);
       getOptimizedRoute(stops);
     }
+
+    return true;
   }
 
   @Override
-  public void onMapLongClick(@NonNull LatLng point) {
+  public boolean onMapLongClick(@NonNull LatLng point) {
     mapboxMap.clear();
     stops.clear();
     addFirstStopToStopsList();
+
+    return true;
   }
 
   private boolean alreadyTwelveMarkersOnMap() {

@@ -1,3 +1,4 @@
+/*
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.os.Bundle;
@@ -17,9 +18,11 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.localization.LocalizationPlugin;
 import com.mapbox.mapboxsdk.plugins.localization.MapLocale;
 
+*/
 /**
  * Use the localization plugin to retrieve the device's language and set all map text labels to that language.
- */
+ *//*
+
 public class LocalizationPluginActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
@@ -128,3 +131,4 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
     mapView.onSaveInstanceState(outState);
   }
 }
+*/

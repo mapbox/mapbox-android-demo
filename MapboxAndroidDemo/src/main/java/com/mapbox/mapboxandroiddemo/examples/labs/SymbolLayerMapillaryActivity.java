@@ -187,7 +187,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     PointF screenPoint = mapboxMap.getProjection().toScreenLocation(point);
     List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, CALLOUT_LAYER_ID);
     if (!features.isEmpty()) {
@@ -197,8 +197,10 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       handleClickCallout(feature, screenPoint, symbolScreenPoint);
     } else {
       // we didn't find a click event on callout layer, try clicking maki layer
-      handleClickIcon(screenPoint);
+      return handleClickIcon(screenPoint);
     }
+
+    return true;
   }
 
   public void setupData(final FeatureCollection collection) {
@@ -282,7 +284,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         iconImage("{title}"),
 
         /* set anchor of icon to bottom-left */
-        iconAnchor("bottom-left"),
+        iconAnchor(Property.ICON_ANCHOR_BOTTOM_LEFT),
 
         /* offset icon slightly to match bubble layout */
         iconOffset(new Float[] {-20.0f, -10.0f})
@@ -317,7 +319,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     for (Layer layer : mapboxMap.getLayers()) {
       id = layer.getId();
       if (id.startsWith("place") || id.startsWith("poi") || id.startsWith("marine") || id.startsWith("road-label")) {
-        layer.setProperties(visibility("none"));
+        layer.setProperties(visibility(Property.NONE));
       }
     }
   }
@@ -376,7 +378,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    *
    * @param screenPoint the point on screen clicked
    */
-  private void handleClickIcon(PointF screenPoint) {
+  private boolean handleClickIcon(PointF screenPoint) {
     List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, MAKI_LAYER_ID);
     if (!features.isEmpty()) {
       String title = features.get(0).getStringProperty(PROPERTY_TITLE);
@@ -386,7 +388,10 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
           setSelected(i, true);
         }
       }
+
+      return true;
     }
+    return false;
   }
 
   /**

@@ -96,8 +96,8 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
-    handleClickIcon(mapboxMap.getProjection().toScreenLocation(point));
+  public boolean onMapClick(@NonNull LatLng point) {
+    return handleClickIcon(mapboxMap.getProjection().toScreenLocation(point));
   }
 
   /**
@@ -105,13 +105,15 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
    *
    * @param screenPoint the point on screen clicked
    */
-  private void handleClickIcon(PointF screenPoint) {
+  private boolean handleClickIcon(PointF screenPoint) {
     List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, MARKER_LAYER_ID);
     if (!features.isEmpty()) {
       String calendarEventTitle = features.get(0).getStringProperty(PROPERTY_TITLE);
       String calendarEventLocation = features.get(0).getStringProperty(PROPERTY_LOCATION);
       Toast.makeText(this, calendarEventTitle + " – " + calendarEventLocation, Toast.LENGTH_SHORT).show();
+      return true;
     }
+    return false;
   }
 
   /**

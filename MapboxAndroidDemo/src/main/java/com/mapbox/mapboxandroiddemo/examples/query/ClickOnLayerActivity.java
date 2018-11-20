@@ -69,7 +69,7 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
     RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
     List<Feature> featureList = mapboxMap.queryRenderedFeatures(rectF, geoJsonLayerId);
@@ -79,7 +79,9 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
         Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast,
           Toast.LENGTH_SHORT).show();
       }
+      return true;
     }
+    return false;
   }
 
   private void addGeoJsonSourceToMap() {

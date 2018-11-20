@@ -18,6 +18,7 @@ import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.light.Light;
 import com.mapbox.mapboxsdk.style.light.Position;
+import com.mapbox.mapboxsdk.utils.ColorUtils;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
@@ -106,7 +107,7 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         isRedColor = !isRedColor;
-        light.setColor(PropertyFactory.colorToRgbaString(isRedColor ? Color.RED : Color.BLUE));
+        light.setColor(ColorUtils.colorToRgbaString(isRedColor ? Color.RED : Color.BLUE));
       }
     });
   }

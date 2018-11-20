@@ -52,7 +52,7 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
 
     if (selectedBuilding != null) {
       mapboxMap.removePolygon(selectedBuilding);
@@ -83,10 +83,14 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
               .addAll(list)
               .fillColor(Color.parseColor("#8A8ACB"))
             );
+
+            return true;
           }
         }
       }
     }
+
+    return false;
   }
 
   @Override

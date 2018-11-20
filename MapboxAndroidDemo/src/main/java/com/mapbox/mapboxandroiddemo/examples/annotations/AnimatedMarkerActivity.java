@@ -60,13 +60,15 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     // When the user clicks on the map, we want to animate the marker to that
     // location.
     ValueAnimator markerAnimator = ObjectAnimator.ofObject(marker, "position",
       new LatLngEvaluator(), marker.getPosition(), point);
     markerAnimator.setDuration(2000);
     markerAnimator.start();
+
+    return true;
   }
 
   @Override

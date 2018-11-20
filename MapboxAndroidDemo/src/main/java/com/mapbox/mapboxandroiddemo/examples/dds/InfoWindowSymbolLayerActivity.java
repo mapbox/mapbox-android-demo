@@ -86,8 +86,8 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
-    handleClickIcon(mapboxMap.getProjection().toScreenLocation(point));
+  public boolean onMapClick(@NonNull LatLng point) {
+    return handleClickIcon(mapboxMap.getProjection().toScreenLocation(point));
   }
 
   /**
@@ -176,7 +176,7 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
    *
    * @param screenPoint the point on screen clicked
    */
-  private void handleClickIcon(PointF screenPoint) {
+  private boolean handleClickIcon(PointF screenPoint) {
     List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, MARKER_LAYER_ID);
     if (!features.isEmpty()) {
       String name = features.get(0).getStringProperty(PROPERTY_NAME);
@@ -190,6 +190,9 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
           }
         }
       }
+      return true;
+    } else {
+      return false;
     }
   }
 

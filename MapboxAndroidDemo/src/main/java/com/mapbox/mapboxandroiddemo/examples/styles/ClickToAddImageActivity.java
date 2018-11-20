@@ -85,7 +85,7 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
 
     // Reset the lists once enough LatLngQuad points have been tapped
     if (boundsFeatureList.size() == 4) {
@@ -134,6 +134,8 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
       pickPhotoIntent.setType("image/*");
       startActivityForResult(pickPhotoIntent, PHOTO_PICK_CODE);
     }
+
+    return true;
   }
 
   /**

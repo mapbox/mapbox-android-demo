@@ -1,3 +1,4 @@
+/*
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
 import android.content.Context;
@@ -21,9 +22,11 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
 
+*/
 /**
  * Change the camera's bearing and tilt based on device movement while viewing building extrusions
- */
+ *//*
+
 public class RotationExtrusionActivity extends AppCompatActivity implements SensorEventListener {
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -192,3 +195,4 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     }
   }
 }
+*/
