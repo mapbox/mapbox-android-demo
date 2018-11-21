@@ -2,6 +2,24 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 6.7.1
+
+* Play store setup gradle tweaks
+* Maps SDK 6.7.1 bump
+ 
+## 6.7.0
+
+* CI Play Store release adjustment
+* Proguard rule adjustment
+* Maps SDK 6.7.0 bump
+* Isochrone API
+* Line gradient
+* Satellite land selection
+* Click-to-add-bounds image
+* Dropped gradle from 3.2.1 to 3.1.0
+* Added LoadingActivity back to global flavor manifest
+* Java SDK bump to 4.1.0
+
 ## 6.6.4
 
 * Maps SDK 6.6.4 bump 
