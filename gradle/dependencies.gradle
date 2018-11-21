@@ -53,8 +53,8 @@ ext {
     pluginVersion = [
             checkstyle         : '8.2',
             firebase           : '1.1.1',
-            gradle             : '3.1.4',
-            gradlePlayPublisher: '1.2.0',
+            gradle             : '3.2.1',
+            gradlePlayPublisher: '1.2.2',
             kotlin             : '1.2.71'
     ]
 
