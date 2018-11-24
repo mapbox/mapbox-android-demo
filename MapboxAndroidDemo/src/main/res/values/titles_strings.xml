@@ -102,6 +102,7 @@
     <string name="activity_dashed_line_directions_picker_title">Directions to selected location</string>
     <string name="activity_lab_calendar_integration_title">Calendar integration</string>
     <string name="activity_lab_magic_window_title">Magic Window</string>
+    <string name="activity_lab_fog_background_title">Background fog</string>
     <string name="activity_china_simple_china_mapview_title">China map view</string>
 
 </resources>
