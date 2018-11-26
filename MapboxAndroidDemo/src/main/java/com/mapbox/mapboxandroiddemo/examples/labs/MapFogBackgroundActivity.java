@@ -11,7 +11,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
 
 /**
- * Add a gradient on top of the MapView to create the effect of the map coming out of a
+ * Add an ImageView gradient on top of the MapView to create the effect of the map coming out of a
  * background fog.
  */
 public class MapFogBackgroundActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -37,6 +37,8 @@ public class MapFogBackgroundActivity extends AppCompatActivity implements OnMap
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
+
+    // Using the Mapbox Building Plugin to easily display 3D extrusions on the map
     buildingPlugin = new BuildingPlugin(mapView, mapboxMap);
     buildingPlugin.setVisibility(true);
   }
