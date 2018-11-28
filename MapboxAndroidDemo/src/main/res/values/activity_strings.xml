@@ -285,4 +285,8 @@
 
     <!-- Isochrone change -->
     <string name="click_on_map_instruction">Tap on the map!</string>
+
+    <!-- Tilequery API -->
+    <string name="api_response">Tilequery API response:</string>
+    <string name="api_error">Error with the request. Do you have internet access?</string>
 </resources>

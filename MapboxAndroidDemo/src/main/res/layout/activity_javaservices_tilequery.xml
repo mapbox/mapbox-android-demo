@@ -35,12 +35,20 @@
         mapbox:layout_constraintStart_toStartOf="parent"
         mapbox:layout_constraintTop_toTopOf="@+id/guideline8">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/black_semi_transparent"
+            android:padding="8dp"
+            android:text="@string/api_response" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="32dp">
 
             <TextView
                 android:id="@+id/tilequery_response_info_textview"
