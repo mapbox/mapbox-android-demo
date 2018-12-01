@@ -81,6 +81,7 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
     });
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

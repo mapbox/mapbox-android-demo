@@ -195,6 +195,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     return points;
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

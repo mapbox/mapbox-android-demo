@@ -129,6 +129,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
     notificationManager.notify(notifyId, notification);
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

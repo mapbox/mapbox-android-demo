@@ -117,6 +117,7 @@ public class StaticImageActivity extends AppCompatActivity implements
       .build();
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   protected void onStart() {
     super.onStart();

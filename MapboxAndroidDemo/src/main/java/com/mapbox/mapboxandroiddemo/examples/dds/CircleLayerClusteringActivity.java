@@ -90,6 +90,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
     });
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onStart() {
     super.onStart();

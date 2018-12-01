@@ -69,6 +69,7 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
     markerAnimator.start();
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

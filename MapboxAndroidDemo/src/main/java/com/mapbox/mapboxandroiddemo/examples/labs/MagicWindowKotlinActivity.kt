@@ -164,6 +164,7 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineListener {
         }
     }
 
+    // Add the mapView lifecycle to the activity's lifecycle methods
     public override fun onStart() {
         super.onStart()
         baseMap.onStart()

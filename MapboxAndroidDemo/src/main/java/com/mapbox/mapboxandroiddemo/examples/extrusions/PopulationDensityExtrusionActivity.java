@@ -92,6 +92,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     mapboxMap.addLayerBelow(fillExtrusionLayer, "airport-label");
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   protected void onStart() {
     super.onStart();

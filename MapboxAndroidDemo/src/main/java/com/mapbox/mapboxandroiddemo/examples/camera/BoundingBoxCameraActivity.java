@@ -79,6 +79,7 @@ public class BoundingBoxCameraActivity extends AppCompatActivity implements OnMa
     mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50), 5000);
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

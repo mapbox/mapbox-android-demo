@@ -73,6 +73,7 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
       Toast.LENGTH_SHORT).show();
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onStart() {
     super.onStart();

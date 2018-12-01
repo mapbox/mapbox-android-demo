@@ -70,6 +70,7 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     buildingPlugin.setVisibility(true);
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   protected void onStart() {
     super.onStart();

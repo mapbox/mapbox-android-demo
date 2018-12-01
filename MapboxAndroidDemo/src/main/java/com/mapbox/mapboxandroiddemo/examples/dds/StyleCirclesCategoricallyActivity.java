@@ -74,6 +74,7 @@ public class StyleCirclesCategoricallyActivity extends AppCompatActivity {
     });
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   protected void onStart() {
     super.onStart();

@@ -76,6 +76,7 @@ public class AnimatedImageGifActivity extends AppCompatActivity implements OnMap
     handler.postDelayed(runnable, 100);
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   protected void onStart() {
     super.onStart();

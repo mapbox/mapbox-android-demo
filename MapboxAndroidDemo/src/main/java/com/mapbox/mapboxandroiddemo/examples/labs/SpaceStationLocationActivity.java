@@ -78,8 +78,9 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
         Toast.makeText(SpaceStationLocationActivity.this, R.string.space_station_toast, Toast.LENGTH_SHORT).show();
       }
     });
-  } // End onCreate
+  }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

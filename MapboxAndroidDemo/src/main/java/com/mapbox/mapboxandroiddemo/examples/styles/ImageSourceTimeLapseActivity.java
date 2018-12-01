@@ -89,7 +89,6 @@ public class ImageSourceTimeLapseActivity extends AppCompatActivity implements O
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
-
   @Override
   public void onResume() {
     super.onResume();

@@ -107,6 +107,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     map.addLayerAbove(statesJoinLayer, "waterway-label");
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   protected void onStart() {
     super.onStart();

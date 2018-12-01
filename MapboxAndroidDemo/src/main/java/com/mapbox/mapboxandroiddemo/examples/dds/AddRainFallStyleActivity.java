@@ -52,6 +52,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     mapView.getMapAsync(this);
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   protected void onStart() {
     super.onStart();

@@ -148,6 +148,7 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
     // Left empty on purpose
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

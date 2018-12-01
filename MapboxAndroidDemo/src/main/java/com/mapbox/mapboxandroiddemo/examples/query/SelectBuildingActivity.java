@@ -89,6 +89,7 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
     }
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

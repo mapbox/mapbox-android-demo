@@ -63,6 +63,7 @@ public class DrawPolygonActivity extends AppCompatActivity {
       .fillColor(Color.parseColor("#3bb2d0")));
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

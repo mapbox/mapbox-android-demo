@@ -88,6 +88,7 @@ class KotlinLocationComponentActivity : AppCompatActivity(), OnMapReadyCallback,
     }
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   override fun onStart() {
     super.onStart()
     mapView.onStart()

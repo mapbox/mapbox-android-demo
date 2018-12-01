@@ -175,6 +175,7 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
     }
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   @SuppressWarnings( {"MissingPermission"})
   protected void onStart() {

@@ -63,7 +63,6 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
-
   @Override
   public void onResume() {
     super.onResume();

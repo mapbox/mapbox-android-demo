@@ -265,6 +265,7 @@ public class ExpressionIntegrationActivity
     return concat(Expression.toString(value), literal(DEGREES_C)); // add C at the end
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   protected void onStart() {
     super.onStart();

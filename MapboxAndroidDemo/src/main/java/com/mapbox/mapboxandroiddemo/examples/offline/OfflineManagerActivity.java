@@ -102,7 +102,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
     });
   }
 
-  // Override Activity lifecycle methods
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

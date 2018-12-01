@@ -94,6 +94,7 @@ public class QueryFeatureActivity extends AppCompatActivity implements OnMapRead
     mapboxMap.selectMarker(featureMarker);
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

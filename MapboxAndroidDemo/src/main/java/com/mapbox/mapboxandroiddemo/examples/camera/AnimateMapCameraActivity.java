@@ -75,6 +75,7 @@ public class AnimateMapCameraActivity extends AppCompatActivity implements OnMap
       .newCameraPosition(position), 7000);
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

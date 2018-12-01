@@ -56,6 +56,7 @@ class KotlinStyleCirclesCategoricallyActivity : AppCompatActivity() {
         }
     }
 
+    // Add the mapView lifecycle to the activity's lifecycle methods
     override fun onStart() {
         super.onStart()
         mapView.onStart()

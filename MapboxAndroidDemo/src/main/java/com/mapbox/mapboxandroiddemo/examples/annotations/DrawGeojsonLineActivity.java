@@ -59,6 +59,7 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
     new DrawGeoJson().execute();
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

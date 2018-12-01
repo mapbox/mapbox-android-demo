@@ -183,7 +183,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
       is.close();
       return new String(buffer, "UTF-8");
     } catch (Exception exception) {
-      Log.d("MatrixApiActivity", "Exception Loading GeoJSON: " + exception.toString());
+      Log.d(TAG, "Exception Loading GeoJSON: " + exception.toString());
       exception.printStackTrace();
       return null;
     }

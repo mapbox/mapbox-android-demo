@@ -52,6 +52,7 @@ public class AddWmsSourceActivity extends AppCompatActivity {
     });
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   protected void onResume() {
     super.onResume();

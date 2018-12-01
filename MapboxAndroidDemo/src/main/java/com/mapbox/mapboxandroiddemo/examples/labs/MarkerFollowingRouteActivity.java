@@ -73,8 +73,9 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
 
       }
     });
-  } // End onCreate
+  }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

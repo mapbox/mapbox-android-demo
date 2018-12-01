@@ -100,6 +100,7 @@ public class LocationComponentActivity extends AppCompatActivity implements
     }
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   @SuppressWarnings( {"MissingPermission"})
   protected void onStart() {

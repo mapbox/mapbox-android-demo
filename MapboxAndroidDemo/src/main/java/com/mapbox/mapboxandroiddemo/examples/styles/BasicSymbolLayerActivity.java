@@ -159,6 +159,7 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
     markerSelected = false;
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   public void onResume() {
     super.onResume();

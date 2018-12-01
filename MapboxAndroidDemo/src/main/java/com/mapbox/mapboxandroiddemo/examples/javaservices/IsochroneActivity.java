@@ -225,6 +225,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
     mapboxMap.addLayer(isochroneLineLayer);
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   protected void onStart() {
     super.onStart();

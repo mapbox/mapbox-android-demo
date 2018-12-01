@@ -523,6 +523,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     currentStep = activityStep;
   }
 
+  // Add the mapView lifecycle to the activity's lifecycle methods
   @Override
   protected void onStart() {
     super.onStart();
