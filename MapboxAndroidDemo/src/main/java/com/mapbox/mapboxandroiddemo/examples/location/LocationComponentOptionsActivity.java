@@ -5,13 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
-import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.location.LocationComponent;
@@ -23,17 +20,8 @@ import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.util.List;
-
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textAllowOverlap;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textIgnorePlacement;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textOffset;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
 /**
  * Use the LocationLayerOptions class to customize the LocationComponent's device location icon.
@@ -57,6 +45,8 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_location_component_options);
+
+    Log.d("LocOptionsActivity", "isInTrackingMode = " + isInTrackingMode);
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -92,7 +82,7 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
       locationComponent.setLocationComponentEnabled(true);
 
       // Set the component's camera mode
-      locationComponent.setCameraMode(CameraMode.TRACKING_COMPASS);
+      locationComponent.setCameraMode(CameraMode.TRACKING);
 
       // Set the component's render mode
       locationComponent.setRenderMode(RenderMode.COMPASS);
@@ -103,13 +93,16 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
       // Add the camera tracking listener. Fires if the map camera is manually moved.
       locationComponent.addOnCameraTrackingChangedListener(this);
 
-      setUpClickMeSymbolLayer();
-
       findViewById(R.id.back_to_camera_tracking_mode).setOnClickListener(view -> {
         if (!isInTrackingMode) {
           isInTrackingMode = true;
+          locationComponent.setCameraMode(CameraMode.TRACKING);
+          locationComponent.zoomWhileTracking(16f);
+          Toast.makeText(this, getString(R.string.tracking_enabled),
+            Toast.LENGTH_SHORT).show();
         } else {
-          isInTrackingMode = false;
+          Toast.makeText(this, getString(R.string.tracking_already_enabled),
+            Toast.LENGTH_SHORT).show();
         }
       });
 
@@ -126,36 +119,17 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
       Toast.makeText(this, String.format(getString(R.string.current_location),
         locationComponent.getLastKnownLocation().getLatitude(),
         locationComponent.getLastKnownLocation().getLongitude()), Toast.LENGTH_LONG).show();
-      
     }
   }
 
   @Override
   public void onCameraTrackingDismissed() {
-    Log.d("LocOptionsActivity", "onCameraTrackingDismissed: ");
     isInTrackingMode = false;
   }
 
   @Override
   public void onCameraTrackingChanged(int currentMode) {
-    Log.d("LocOptionsActivity", "onCameraTrackingChanged: ");
-  }
-
-  @SuppressWarnings( {"MissingPermission"})
-  private void setUpClickMeSymbolLayer() {
-    FeatureCollection featureCollection = FeatureCollection.fromFeatures(new Feature[] {});
-    GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", featureCollection);
-    mapboxMap.addSource(geoJsonSource);
-    SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
-    symbolLayer.setProperties(
-      textSize(17f),
-      textColor(Color.BLUE),
-      textField(getString(R.string.tap_the_icon)),
-      textOffset(new Float[] {0f, -3f}),
-      textIgnorePlacement(true),
-      textAllowOverlap(true)
-    );
-    mapboxMap.addLayer(symbolLayer);
+    // Empty on purpose
   }
 
   @Override
