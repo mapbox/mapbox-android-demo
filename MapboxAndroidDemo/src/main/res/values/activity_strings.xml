@@ -308,4 +308,8 @@
     <string name="light_azimuth_angle">Light azimuthal angle</string>
     <string name="light_polar_angle">Light polar angle</string>
     <string name="building_opacity">Building opacity</string>
+
+    <!-- Zoom based icon change -->
+    <string name="zoom_map_in_and_out_icon_switch_instruction">Zoom in and out to see the icons change</string>
+
 </resources>
