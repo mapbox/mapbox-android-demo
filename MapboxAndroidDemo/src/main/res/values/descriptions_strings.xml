@@ -74,7 +74,7 @@
     <string name="activity_java_services_directions_description">Use Mapbox Java Services to request directions.</string>
     <string name="activity_java_services_optimization_description">Use Mapbox\'s Optimization API to retrieve and display the quickest multi-stop route.</string>
     <string name="activity_java_services_static_image_description">Use Mapbox Java Services to build a url and download a static map.</string>
-    <string name="activity_java_services_matrix_api_description">Use the Directions Matrix API to receive driving times between 2-25 different locations.</string>
+    <string name="activity_java_services_matrix_api_description">Use the Matrix API to receive driving times between 2-25 different locations.</string>
     <string name="activity_java_services_geocoding_description">Use the Geocoding API to receive information about specific coordinates.</string>
     <string name="activity_java_services_isochrone_description">Use the Isochrone API to receive information about how far you can travel within a given time.</string>
     <string name="activity_java_services_tilequery_description">Use the Tilequery API to search for features in a tileset. This example queries for up to 10 buildings which are within 50 meters of the single map click location.</string>
@@ -110,6 +110,7 @@
     <string name="activity_lab_calendar_integration_description">Show calendar event locations on the map.</string>
     <string name="activity_lab_magic_window_description">Combine two maps for a magic window effect</string>
     <string name="activity_lab_fog_background_description">Add a gradient on top of a MapView to show a background fog effect.</string>
+    <string name="activity_lab_animated_interpolator_icon_drop_description">Use Android system interpolators to animate SymbolLayer icons movement.</string>
     <string name="activity_china_simple_china_mapview_description">Show an accurate and government-approved China map in your app using the Mapbox Maps SDK.</string>
 
 

@@ -86,6 +86,7 @@ ext {
             supportCustomTabs        : "com.android.support:customtabs:${version.supportLib}",
             supportConstraintLayout  : "com.android.support.constraint:constraint-layout:${version.constraintLayout}",
             supportAnnotations       : "com.android.support:support-annotations:${version.supportAnnotations}",
+            supportAnimation       : "com.android.support:support-dynamic-animation:${version.supportLib}",
 
             // Square
             timber                   : "com.jakewharton.timber:timber:${version.timber}",

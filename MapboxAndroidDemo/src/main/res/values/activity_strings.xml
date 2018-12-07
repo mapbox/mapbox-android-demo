@@ -312,4 +312,9 @@
     <!-- Zoom based icon change -->
     <string name="zoom_map_in_and_out_icon_switch_instruction">Zoom in and out to see the icons change</string>
 
+    <!-- Pin drop animation -->
+    <string name="bounce_interpolator">Bounce interpolator</string>
+    <string name="linear_interpolator">Linear interpolator</string>
+    <string name="accelerate_interpolator">Accelerate interpolator</string>
+    <string name="decelerate_interpolator">Decelerate interpolator</string>
 </resources>
