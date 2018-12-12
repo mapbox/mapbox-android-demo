@@ -16,6 +16,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Restrict the map camera to certain bounds.
@@ -50,6 +51,8 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
+
+    mapboxMap.setStyle(Style.SATELLITE_STREETS);
 
     // Set bounds to Australia
     mapboxMap.setLatLngBoundsForCameraTarget(AUSTRALIA_BOUNDS);

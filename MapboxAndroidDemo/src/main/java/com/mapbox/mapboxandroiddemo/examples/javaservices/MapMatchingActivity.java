@@ -22,6 +22,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -65,6 +66,7 @@ public class MapMatchingActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
+        map.setStyle(Style.MAPBOX_STREETS);
         new DrawGeoJson().execute();
       }
     });

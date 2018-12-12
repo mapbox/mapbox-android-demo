@@ -10,6 +10,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Create a default marker with an InfoWindow
@@ -34,6 +35,9 @@ public class DrawMarkerActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
+
+        mapboxMap.setStyle(Style.MAPBOX_STREETS);
+
         mapboxMap.addMarker(new MarkerOptions()
           .position(new LatLng(48.13863, 11.57603))
           .title(getString(R.string.draw_marker_options_title))

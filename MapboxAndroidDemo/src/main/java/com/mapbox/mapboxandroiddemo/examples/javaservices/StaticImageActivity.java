@@ -20,6 +20,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.utils.MathUtils;
 import com.squareup.picasso.Picasso;
 
@@ -55,6 +56,7 @@ public class StaticImageActivity extends AppCompatActivity implements
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
+    mapboxMap.setStyle(Style.MAPBOX_STREETS);
     staticMapImageView = findViewById(R.id.static_map_imageview);
     createStaticImageButton = findViewById(R.id.create_static_image_button);
     mapStyleRadioGroup = findViewById(R.id.map_style_radio_group);

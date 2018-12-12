@@ -20,6 +20,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshot;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshotter;
 
@@ -57,6 +58,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     SnapshotNotificationActivity.this.mapboxMap = mapboxMap;
+    mapboxMap.setStyle(Style.MAPBOX_STREETS);
     mapboxMap.addOnMapClickListener(this);
   }
 

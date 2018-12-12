@@ -11,6 +11,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Enter picture-in-picture mode with a map being persisted. Only works on devices running Android O and above.
@@ -36,6 +37,7 @@ public class PictureInPictureActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
+        mapboxMap.setStyle(Style.SATELLITE_STREETS);
       }
     });
 

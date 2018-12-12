@@ -16,6 +16,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -55,6 +56,8 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
+
+        mapboxMap.setStyle(Style.LIGHT);
 
         new DrawGeoJson().execute();
 

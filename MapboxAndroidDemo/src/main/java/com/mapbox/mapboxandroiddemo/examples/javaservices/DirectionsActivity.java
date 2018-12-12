@@ -17,6 +17,7 @@ import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
@@ -72,6 +73,8 @@ public class DirectionsActivity extends AppCompatActivity {
 
       DirectionsActivity.this.mapboxMap = map;
 
+      mapboxMap.setStyle(Style.MAPBOX_STREETS);
+      
       // Set the origin location to the Alhambra landmark in Granada, Spain.
       origin = Point.fromLngLat(-3.588098, 37.176164);
 

@@ -14,7 +14,6 @@
         mapbox:mapbox_cameraTargetLat="41.8362"
         mapbox:mapbox_cameraTargetLng="-87.6321"
         mapbox:mapbox_uiCompassMarginTop="75dp"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light"
         mapbox:mapbox_cameraZoom="9.5"
         mapbox:mapbox_cameraZoomMax="13"
         mapbox:mapbox_cameraZoomMin="7"/>

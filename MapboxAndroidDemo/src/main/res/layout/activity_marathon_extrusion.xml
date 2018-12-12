@@ -26,6 +26,6 @@
         mapbox:mapbox_cameraTargetLng="-118.335074"
         mapbox:mapbox_cameraTilt="55.8873"
         mapbox:mapbox_cameraZoom="12.692151"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_satellite"/>
+        />
 
 </android.support.constraint.ConstraintLayout>

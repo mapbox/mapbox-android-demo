@@ -11,6 +11,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngQuad;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.ImageSource;
 
@@ -43,6 +44,9 @@ public class ImageSourceTimeLapseActivity extends AppCompatActivity implements O
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
+
+    mapboxMap.setStyle(Style.LIGHT);
+
     // Add source
     LatLngQuad quad = new LatLngQuad(
       new LatLng(46.437, -80.425),

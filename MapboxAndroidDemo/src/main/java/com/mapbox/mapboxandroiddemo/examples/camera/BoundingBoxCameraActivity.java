@@ -14,6 +14,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Fit a map to a bounding box
@@ -47,6 +48,8 @@ public class BoundingBoxCameraActivity extends AppCompatActivity implements OnMa
   public void onMapReady(MapboxMap mapboxMap) {
 
     BoundingBoxCameraActivity.this.mapboxMap = mapboxMap;
+
+    mapboxMap.setStyle(Style.MAPBOX_STREETS);
 
     // Declare two locations on map
     locationOne = new LatLng(36.532128, -93.489121);

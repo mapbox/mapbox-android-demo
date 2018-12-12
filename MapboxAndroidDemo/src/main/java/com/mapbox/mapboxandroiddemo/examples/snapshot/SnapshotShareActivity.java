@@ -17,6 +17,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshot;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshotter;
 
@@ -57,6 +58,8 @@ public class SnapshotShareActivity extends AppCompatActivity {
       public void onMapReady(final MapboxMap mapboxMap) {
 
         SnapshotShareActivity.this.mapboxMap = mapboxMap;
+
+        mapboxMap.setStyle(Style.SATELLITE_STREETS);
 
         // When user clicks the map, start the snapshotting process with the given parameters
         cameraFab.setOnClickListener(new View.OnClickListener() {

@@ -22,6 +22,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +79,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
+    mapboxMap.setStyle(Style.SATELLITE_STREETS);
     // Add origin and destination to the mapboxMap
     mapboxMap.addMarker(new MarkerOptions()
       .position(new LatLng(origin.latitude(), origin.longitude()))

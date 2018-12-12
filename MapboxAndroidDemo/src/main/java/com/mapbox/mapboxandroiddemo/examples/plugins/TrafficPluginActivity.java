@@ -41,6 +41,7 @@ public class TrafficPluginActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
+        mapboxMap.setStyle(Style.DARK);
         trafficPlugin = new TrafficPlugin(mapView, mapboxMap);
         TrafficPluginActivity.this.trafficPlugin.setVisibility(true); // Enable the traffic view by default
       }

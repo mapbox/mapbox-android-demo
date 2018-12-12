@@ -8,6 +8,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * The most basic example of adding a map to an activity.
@@ -34,6 +35,8 @@ public class SimpleMapViewActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
 
         // Customize map with markers, polylines, etc.
+
+        mapboxMap.setStyle(Style.MAPBOX_STREETS);
 
       }
     });

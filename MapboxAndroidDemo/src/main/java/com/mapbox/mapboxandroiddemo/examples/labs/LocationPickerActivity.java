@@ -34,6 +34,7 @@ import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.List;
 
@@ -76,6 +77,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     LocationPickerActivity.this.mapboxMap = mapboxMap;
+    mapboxMap.setStyle(Style.MAPBOX_STREETS);
     enableLocationPlugin();
 
     // Toast instructing user to tap on the mapboxMap

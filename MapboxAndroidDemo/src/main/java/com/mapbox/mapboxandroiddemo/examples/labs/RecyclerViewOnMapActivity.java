@@ -27,6 +27,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -81,6 +82,7 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     RecyclerViewOnMapActivity.this.mapboxMap = mapboxMap;
+    mapboxMap.setStyle(Style.DARK);
     initFeatureCollection();
     initMarkerIcons();
     initRecyclerView();

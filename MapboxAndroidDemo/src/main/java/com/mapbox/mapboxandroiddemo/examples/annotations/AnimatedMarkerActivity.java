@@ -16,6 +16,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Animate the marker to a new position on the map.
@@ -46,6 +47,8 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     AnimatedMarkerActivity.this.mapboxMap = mapboxMap;
+
+    mapboxMap.setStyle(Style.SATELLITE_STREETS);
 
     marker = mapboxMap.addMarker(new MarkerOptions()
       .position(new LatLng(64.900932, -18.167040)));

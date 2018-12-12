@@ -13,6 +13,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.HeatmapLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -59,6 +60,7 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     MultipleHeatmapStylingActivity.this.mapboxMap = mapboxMap;
+    mapboxMap.setStyle(Style.LIGHT);
     CameraPosition cameraPositionForFragmentMap = new CameraPosition.Builder()
       .target(new LatLng(34.056684, -118.254002))
       .zoom(11.047)

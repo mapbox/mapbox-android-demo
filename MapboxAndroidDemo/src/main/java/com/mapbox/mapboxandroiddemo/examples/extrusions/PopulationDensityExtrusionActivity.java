@@ -14,6 +14,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
@@ -52,10 +53,11 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
-
+ß
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
+    mapboxMap.setStyle(Style.DARK);
 
     VectorSource vectorSource = new VectorSource("population", "mapbox://peterqliu.d0vin3el");
     mapboxMap.addSource(vectorSource);

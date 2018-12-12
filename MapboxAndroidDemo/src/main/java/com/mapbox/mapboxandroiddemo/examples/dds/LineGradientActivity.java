@@ -12,6 +12,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
@@ -57,6 +58,8 @@ public class LineGradientActivity extends AppCompatActivity implements OnMapRead
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
+
+    mapboxMap.setStyle(Style.LIGHT);
 
     initCoordinates();
 

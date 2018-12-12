@@ -14,7 +14,7 @@
         mapbox:mapbox_cameraTilt="59"
         mapbox:mapbox_cameraZoom="17.17"
         mapbox:mapbox_cameraZoomMax="18.02"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
+        />
 
     <ImageView
         android:layout_width="match_parent"

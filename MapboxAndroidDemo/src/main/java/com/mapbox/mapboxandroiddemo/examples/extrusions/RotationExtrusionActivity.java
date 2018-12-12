@@ -60,6 +60,7 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
         mapboxMap = map;
+        mapboxMap.setStyle(Style.DARK);
         setupBuildingExtrusionPlugin();
       }
     });

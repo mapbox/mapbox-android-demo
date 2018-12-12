@@ -10,6 +10,7 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.RasterSource;
 import com.mapbox.mapboxsdk.style.sources.Source;
@@ -48,6 +49,8 @@ public class StyleFadeSwitchActivity extends AppCompatActivity implements
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
+
+    mapboxMap.setStyle(Style.MAPBOX_STREETS);
 
     // Create a data source for the satellite raster images
     Source satelliteRasterSource = new RasterSource("SATELLITE_RASTER_SOURCE_ID",

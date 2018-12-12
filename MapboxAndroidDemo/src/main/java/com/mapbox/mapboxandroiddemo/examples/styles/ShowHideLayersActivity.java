@@ -11,6 +11,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
@@ -49,7 +50,7 @@ public class ShowHideLayersActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
-
+        mapboxMap.setStyle(Style.LIGHT);
         VectorSource museums = new VectorSource("museums_source", "mapbox://mapbox.2opop9hr");
         map.addSource(museums);
 

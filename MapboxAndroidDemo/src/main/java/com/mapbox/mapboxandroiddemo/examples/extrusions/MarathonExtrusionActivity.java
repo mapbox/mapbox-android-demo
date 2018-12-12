@@ -9,6 +9,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -47,6 +48,8 @@ public class MarathonExtrusionActivity extends AppCompatActivity implements OnMa
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     MarathonExtrusionActivity.this.mapboxMap = mapboxMap;
+
+    mapboxMap.setStyle(Style.SATELLITE);
 
     // Add the marathon route source to the map
     // Create a GeoJsonSource and use the Mapbox Datasets API to retrieve the GeoJSON data

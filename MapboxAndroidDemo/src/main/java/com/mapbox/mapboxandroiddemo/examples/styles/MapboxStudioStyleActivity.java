@@ -8,6 +8,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Use a custom Mapbox-hosted style.
@@ -34,6 +35,8 @@ public class MapboxStudioStyleActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap mapboxMap) {
 
         // Customize map with markers, polylines, etc.
+
+        mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cj3kbeqzo00022smj7akz3o1e"));
 
       }
     });

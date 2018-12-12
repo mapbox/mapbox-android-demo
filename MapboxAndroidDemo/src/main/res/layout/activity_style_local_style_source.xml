@@ -18,8 +18,7 @@
         mapbox:layout_constraintTop_toTopOf="parent"
         mapbox:mapbox_cameraTargetLat="8.853067"
         mapbox:mapbox_cameraTargetLng="-73.846880"
-        mapbox:mapbox_cameraZoom="3.15"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light"/>
+        mapbox:mapbox_cameraZoom="3.15" />
 
     <Button
         android:id="@+id/load_custom_raster_button"

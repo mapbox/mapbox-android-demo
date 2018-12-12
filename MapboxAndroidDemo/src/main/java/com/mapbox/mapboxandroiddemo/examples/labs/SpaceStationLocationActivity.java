@@ -76,6 +76,8 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
 
         map = mapboxMap;
 
+        mapboxMap.setStyle(Style.SATELLITE_STREETS);
+
         callApi();
 
         Toast.makeText(SpaceStationLocationActivity.this, R.string.space_station_toast, Toast.LENGTH_SHORT).show();

@@ -46,6 +46,7 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
   @Override
   public void onMapReady(final MapboxMap mapboxMap) {
 
+    mapboxMap.setStyle(Style.MAPBOX_STREETS)
     localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
 
     findViewById(R.id.language_one_cardview).setOnClickListener(new View.OnClickListener() {

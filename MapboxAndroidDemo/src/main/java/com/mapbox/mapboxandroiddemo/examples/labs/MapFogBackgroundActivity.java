@@ -8,6 +8,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
 
 /**
@@ -37,6 +38,8 @@ public class MapFogBackgroundActivity extends AppCompatActivity implements OnMap
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
+
+    mapboxMap.setStyle(Style.MAPBOX_STREETS);
 
     // Using the Mapbox Building Plugin to easily display 3D extrusions on the map
     buildingPlugin = new BuildingPlugin(mapView, mapboxMap);

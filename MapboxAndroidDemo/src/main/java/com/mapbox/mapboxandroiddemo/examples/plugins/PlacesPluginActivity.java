@@ -66,6 +66,7 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     PlacesPluginActivity.this.mapboxMap = mapboxMap;
+    mapboxMap.setStyle(Style.MAPBOX_STREETS);
     initSearchFab();
     addUserLocations();
 

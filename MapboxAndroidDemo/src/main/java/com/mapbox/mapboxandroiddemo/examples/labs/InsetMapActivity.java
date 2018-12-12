@@ -20,6 +20,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
 
 public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCallback, MapboxMap.OnCameraMoveListener {
@@ -54,7 +55,6 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
 
       // Build map fragment options
       MapboxMapOptions options = new MapboxMapOptions();
-      options.styleUrl("mapbox://styles/mapbox/cj5l80zrp29942rmtg0zctjto");
       options.attributionEnabled(false);
       options.logoEnabled(false);
       options.compassEnabled(false);
@@ -81,6 +81,7 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
+    mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cj5l80zrp29942rmtg0zctjto"));
     InsetMapActivity.this.mainLargeMapboxMap = mapboxMap;
     mainLargeMapboxMap.addOnCameraMoveListener(this);
   }
@@ -185,6 +186,7 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
       fragmentMap.getMapAsync(new OnMapReadyCallback() {
         @Override
         public void onMapReady(final MapboxMap mapInFragment) {
+          mapInFragment.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cj5l80zrp29942rmtg0zctjto"));
           mapInFragment.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPositionForFragmentMap));
         }
       });

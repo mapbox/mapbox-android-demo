@@ -16,6 +16,7 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
@@ -82,6 +83,9 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(mapboxMap -> {
       this.mapboxMap = mapboxMap;
+
+      mapboxMap.setStyle(Style.LIGHT);
+
       mapboxMap.addOnMapClickListener(IsochroneActivity.this);
       initIsochroneCenterSymbolLayer();
 

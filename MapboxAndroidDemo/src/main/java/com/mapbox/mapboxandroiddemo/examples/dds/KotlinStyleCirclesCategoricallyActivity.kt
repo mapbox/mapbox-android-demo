@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.mapbox.mapboxandroiddemo.R
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.maps.Style
 import com.mapbox.mapboxsdk.style.expressions.Expression.*
 import com.mapbox.mapboxsdk.style.layers.CircleLayer
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor
@@ -28,6 +29,9 @@ class KotlinStyleCirclesCategoricallyActivity : AppCompatActivity() {
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync { mapboxMap ->
+
+            mapboxMap.setStyle(Style.MAPBOX_STREETS)
+
             val vectorSource = VectorSource(
                     "ethnicity-source",
                     "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken()!!

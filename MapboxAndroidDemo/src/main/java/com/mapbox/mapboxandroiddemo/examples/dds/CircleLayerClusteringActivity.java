@@ -14,6 +14,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
@@ -76,6 +77,8 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
       public void onMapReady(MapboxMap map) {
 
         mapboxMap = map;
+
+        map.setStyle(Style.LIGHT);
 
         mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
           12.099, -79.045), 3));

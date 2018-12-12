@@ -14,6 +14,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -54,6 +55,8 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
+
+    mapboxMap.setStyle(Style.MAPBOX_STREETS);
 
     // Load and Draw the GeoJSON
     new DrawGeoJson().execute();
@@ -139,7 +142,7 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
             }
           }
         }
-      } catch (Exception exception) {
+      } catch (Exception exception) {w
         Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
       }
 

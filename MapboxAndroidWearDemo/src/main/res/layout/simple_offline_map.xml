@@ -13,7 +13,7 @@
         mapbox:mapbox_cameraTargetLng="-74.0151"
         mapbox:mapbox_cameraZoom="12"
         mapbox:mapbox_cameraZoomMin="12"
-        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/outdoors-v9"/>
+        />
 
     <Button
         android:id="@+id/downloadRegionButton"

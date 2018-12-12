@@ -13,6 +13,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -64,6 +65,8 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     BathymetryActivity.this.mapboxMap = mapboxMap;
+
+    mapboxMap.setStyle(Style.OUTDOORS);
 
     // Set bounds to Lawrence Lake, Michigan
     mapboxMap.setLatLngBoundsForCameraTarget(LAKE_BOUNDS);

@@ -23,6 +23,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -71,6 +72,8 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     DashedLineDirectionsPickerActivity.this.mapboxMap = mapboxMap;
+
+    mapboxMap.setStyle(Style.LIGHT);
 
     // Add a marker on the map's center/"target" for the place picker UI
     ImageView hoveringMarker = new ImageView(this);

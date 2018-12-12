@@ -70,6 +70,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
+        mapboxMap.setStyle(Style.LIGHT)
 
         // Load and Draw the GeoJSON. The marker animation is also handled here.
         new DrawGeoJson().execute();

@@ -13,6 +13,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Animate the map's camera position, tilt, bearing, and zoom.
@@ -43,6 +44,8 @@ public class AnimateMapCameraActivity extends AppCompatActivity implements OnMap
   public void onMapReady(MapboxMap mapboxMap) {
 
     AnimateMapCameraActivity.this.mapboxMap = mapboxMap;
+
+    mapboxMap.setStyle(Style.MAPBOX_STREETS);
 
     // Toast instructing user to tap on the map
     Toast.makeText(

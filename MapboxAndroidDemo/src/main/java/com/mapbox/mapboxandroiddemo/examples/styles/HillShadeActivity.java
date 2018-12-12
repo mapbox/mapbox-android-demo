@@ -9,6 +9,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.HillshadeLayer;
 import com.mapbox.mapboxsdk.style.sources.RasterDemSource;
 
@@ -46,6 +47,8 @@ public class HillShadeActivity extends AppCompatActivity implements
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
+
+    mapboxMap.setStyle(Style.OUTDOORS);
 
     // Add hillshade data source to map
     RasterDemSource rasterDemSource = new RasterDemSource(SOURCE_ID, SOURCE_URL);

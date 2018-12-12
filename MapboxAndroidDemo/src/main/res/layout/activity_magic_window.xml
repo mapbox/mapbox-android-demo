@@ -13,7 +13,6 @@
         android:id="@+id/baseMap"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"
         mapbox:mapbox_uiRotateGestures="false"
         />
 
@@ -39,7 +38,6 @@
             android:layout_height="match_parent"
             android:layerType="hardware"
             mapbox:mapbox_renderTextureMode="true"
-            mapbox:mapbox_styleUrl="@string/mapbox_style_satellite"
             mapbox:mapbox_uiAttribution="false"
             mapbox:mapbox_uiDoubleTapGestures="false"
             mapbox:mapbox_uiLogo="false"

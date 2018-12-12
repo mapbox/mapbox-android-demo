@@ -9,6 +9,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
@@ -62,6 +63,8 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
 
   @Override
   public void onMapReady(MapboxMap map) {
+
+    map.setStyle(Style.LIGHT);
 
     // Add Mapbox-hosted vector source for state polygons
     VectorSource vectorSource = new VectorSource(VECTOR_SOURCE_NAME, "mapbox://mapbox.us_census_states_2015");

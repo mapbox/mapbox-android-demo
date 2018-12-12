@@ -37,6 +37,7 @@ public class BuildingPluginActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
+        map.setStyle(Style.MAPBOX_STREETS)
         buildingPlugin = new BuildingPlugin(mapView, map);
         buildingPlugin.setVisibility(true);
       }

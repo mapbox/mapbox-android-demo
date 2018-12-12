@@ -93,7 +93,6 @@
         android:layout_above="@id/color_picker_content"
         mapbox:mapbox_cameraTargetLat="45.4385"
         mapbox:mapbox_cameraTargetLng="12.338"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light"
         mapbox:mapbox_cameraZoom="17.4"/>
 
 </RelativeLayout>

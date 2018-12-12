@@ -11,6 +11,7 @@ import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Use a variety of professionally designed styles with the Mapbox Android SDK.
@@ -40,6 +41,7 @@ public class DefaultStyleActivity extends AppCompatActivity {
 
         // customize map with markers, polylines, etc
 
+        mapboxMap.setStyle(Style.LIGHT);
       }
     });
   }

@@ -15,6 +15,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngQuad;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.ImageSource;
 
@@ -50,6 +51,8 @@ public class AnimatedImageGifActivity extends AppCompatActivity implements OnMap
 
   @Override
   public void onMapReady(@NonNull final MapboxMap map) {
+
+    map.setStyle(Style.MAPBOX_STREETS);
 
     // Set the bounds/size of the gif
     LatLngQuad quad = new LatLngQuad(

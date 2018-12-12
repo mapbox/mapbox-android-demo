@@ -33,6 +33,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.turf.TurfConversion;
 
 import java.io.InputStream;
@@ -80,6 +81,8 @@ public class MatrixApiActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
         MatrixApiActivity.this.mapboxMap = mapboxMap;
+
+        mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cj8gg22et19ot2rnz65958fkn"));
 
         // Add markers to the map
         addMarkers();

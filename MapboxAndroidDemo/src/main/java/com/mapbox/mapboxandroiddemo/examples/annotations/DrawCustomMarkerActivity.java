@@ -12,6 +12,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Create a marker with a custom icon using the Mapbox Android SDK.
@@ -36,6 +37,8 @@ public class DrawCustomMarkerActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
+
+        mapboxMap.setStyle(Style.OUTDOORS);
 
         // Create an Icon object for the marker to use
         Icon icon = IconFactory.getInstance(DrawCustomMarkerActivity.this).fromResource(R.drawable.purple_marker);

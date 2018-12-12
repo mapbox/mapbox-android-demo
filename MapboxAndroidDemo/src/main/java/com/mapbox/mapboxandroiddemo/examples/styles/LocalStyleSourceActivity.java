@@ -10,6 +10,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Example loads the map style via a locally stored style JSON file or custom raster style
@@ -34,6 +35,8 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
+
+        mapboxMap.setStyle(Style.LIGHT);
 
         Button loadCustomRasterStyleButton = (Button) findViewById(R.id.load_custom_raster_button);
         loadCustomRasterStyleButton.setOnClickListener(new View.OnClickListener() {

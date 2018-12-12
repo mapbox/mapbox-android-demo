@@ -12,7 +12,7 @@
         mapbox:mapbox_cameraTargetLat="41.017538"
         mapbox:mapbox_cameraTargetLng="28.974306"
         mapbox:mapbox_cameraZoom="10.218183"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_dark" />
+        />
 
     <Button
         android:id="@+id/redo_search_button"

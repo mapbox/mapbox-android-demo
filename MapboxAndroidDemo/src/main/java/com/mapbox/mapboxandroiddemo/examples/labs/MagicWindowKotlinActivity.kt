@@ -26,6 +26,7 @@ import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.activity_magic_window.*
 import kotlin.math.max
 import kotlin.math.min
@@ -68,6 +69,7 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineListener {
 
         baseMap.getMapAsync { map: MapboxMap? ->
             if (map != null) {
+                map.setStyle(Style.DARK)
                 base = map
                 if (savedInstanceState == null) {
                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(initialPosition, initialZoom))
@@ -78,7 +80,13 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineListener {
             }
             synchronizeMaps()
         }
-        revealedMap.getMapAsync({ map: MapboxMap? -> revealed = map })
+
+        revealedMap.getMapAsync { map: MapboxMap? ->
+            if (map != null) {
+                revealed = map
+                revealed.setStyle(Style.SATELLITE)
+            }
+        }
 
         parentView.viewTreeObserver.addOnGlobalLayoutListener {
             val yMax = (parentView.height - revealedMap.height).toFloat()

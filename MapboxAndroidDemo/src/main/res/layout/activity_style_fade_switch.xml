@@ -14,6 +14,6 @@
         mapbox:mapbox_cameraTargetLng="31.235"
         mapbox:mapbox_cameraZoom="10"
         mapbox:mapbox_cameraZoomMin="6"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets" />
+         />
 
 </FrameLayout>
