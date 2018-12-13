@@ -23,7 +23,9 @@ import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
+
 import java.net.URL;
+
 import okhttp3.HttpUrl;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
@@ -84,18 +86,18 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
     mapView.getMapAsync(mapboxMap -> {
       this.mapboxMap = mapboxMap;
 
-      mapboxMap.setStyle(Style.LIGHT);
+      mapboxMap.setStyle(Style.LIGHT, style -> {
+        mapboxMap.addOnMapClickListener(IsochroneActivity.this);
+        initIsochroneCenterSymbolLayer();
 
-      mapboxMap.addOnMapClickListener(IsochroneActivity.this);
-      initIsochroneCenterSymbolLayer();
+        // Set the click listener for the floating action button
+        findViewById(R.id.switch_isochrone_style_fab).setOnClickListener(view -> {
+          usePolygon = !usePolygon;
+          redrawIsochroneData(lastSelectedLatLng);
+        });
 
-      // Set the click listener for the floating action button
-      findViewById(R.id.switch_isochrone_style_fab).setOnClickListener(view -> {
-        usePolygon = !usePolygon;
-        redrawIsochroneData(lastSelectedLatLng);
+        Toast.makeText(this, getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
       });
-
-      Toast.makeText(this, getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
     });
   }
 
@@ -103,7 +105,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
   public boolean onMapClick(@NonNull LatLng point) {
     // Update the click Symbol Layer to move the red marker to wherever the map was clicked on
     lastSelectedLatLng = point;
-    GeoJsonSource source = mapboxMap.getSourceAs("click-source-id");
+    GeoJsonSource source = mapboxMap.getStyle().getSourceAs("click-source-id");
     if (source != null) {
       source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
     }
@@ -120,8 +122,8 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    */
   private void redrawIsochroneData(LatLng point) {
     if (layersShown) {
-      mapboxMap.removeLayer(ISOCHRONE_FILL_LAYER + randomNumForLayerId);
-      mapboxMap.removeLayer(ISOCHRONE_LINE_LAYER + randomNumForLayerId);
+      mapboxMap.getStyle().removeLayer(ISOCHRONE_FILL_LAYER + randomNumForLayerId);
+      mapboxMap.getStyle().removeLayer(ISOCHRONE_LINE_LAYER + randomNumForLayerId);
     }
     addDataToMap(point);
   }
@@ -153,7 +155,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
       // Create and add a new GeoJsonSource with a unique ID. The source is fed a List of Feature objects via
       // the Isochrone API response.
       isochroneGeoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID + randomNum, new URL(url.toString()));
-      mapboxMap.addSource(isochroneGeoJsonSource);
+      mapboxMap.getStyle().addSource(isochroneGeoJsonSource);
 
       // Create new Fill and Line layers with unique ids.
       randomNumForLayerId = String.valueOf(randomNum);
@@ -181,18 +183,18 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    * Isochrone API information radiates from.
    */
   private void initIsochroneCenterSymbolLayer() {
-    mapboxMap.addImage("map-click-icon-id", BitmapUtils.getBitmapFromDrawable(
+    mapboxMap.getStyle().addImage("map-click-icon-id", BitmapUtils.getBitmapFromDrawable(
       getResources().getDrawable(R.drawable.red_marker)));
 
     GeoJsonSource geoJsonSource = new GeoJsonSource("click-source-id",
       FeatureCollection.fromFeatures(new Feature[] {}));
-    mapboxMap.addSource(geoJsonSource);
+    mapboxMap.getStyle().addSource(geoJsonSource);
 
     SymbolLayer clickLayer = new SymbolLayer("click_layer_id", "click-source-id");
     clickLayer.setProperties(
       PropertyFactory.iconImage("map-click-icon-id")
     );
-    mapboxMap.addLayer(clickLayer);
+    mapboxMap.getStyle().addLayer(clickLayer);
   }
 
   /**
@@ -209,7 +211,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
       fillColor(get("color")),
       fillOpacity(get("fillOpacity")));
     isochroneFillLayer.setFilter(eq(geometryType(), literal("Polygon")));
-    mapboxMap.addLayer(isochroneFillLayer);
+    mapboxMap.getStyle().addLayer(isochroneFillLayer);
   }
 
   /**
@@ -227,7 +229,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
       lineWidth(5f),
       lineOpacity(get("opacity")));
     isochroneLineLayer.setFilter(eq(geometryType(), literal("LineString")));
-    mapboxMap.addLayer(isochroneLineLayer);
+    mapboxMap.getStyle().addLayer(isochroneLineLayer);
   }
 
   @Override

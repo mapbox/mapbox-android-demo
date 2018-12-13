@@ -46,28 +46,29 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
 
-        mapboxMap.setStyle(Style.OUTDOORS);
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
 
-        // Retrieve GeoJSON from local file and add it to the map
+          // Retrieve GeoJSON from local file and add it to the map
 
-        GeoJsonSource linesSource = new GeoJsonSource("lines", loadGeoJsonFromAsset("golden_gate_lines.geojson"));
+          GeoJsonSource linesSource = new GeoJsonSource("lines", loadGeoJsonFromAsset("golden_gate_lines.geojson"));
 
-        mapboxMap.addSource(linesSource);
+          mapboxMap.getStyle().addSource(linesSource);
 
-        // Create LineLayer, use lineColor, and stop to draw red and blue lines on map
+          // Create LineLayer, use lineColor, and stop to draw red and blue lines on map
 
-        LineLayer linesLayer = new LineLayer("finalLines", "lines").withProperties(
-          PropertyFactory.lineColor(
-            match(get("color"), rgb(0, 0, 0),
-              stop("red", rgb(247, 69, 93)),
-              stop("blue", rgb(51, 201, 235)))),
-          PropertyFactory.visibility(Property.VISIBLE),
-          PropertyFactory.lineWidth(3f)
-        );
+          LineLayer linesLayer = new LineLayer("finalLines", "lines").withProperties(
+            PropertyFactory.lineColor(
+              match(get("color"), rgb(0, 0, 0),
+                stop("red", rgb(247, 69, 93)),
+                stop("blue", rgb(51, 201, 235)))),
+            PropertyFactory.visibility(Property.VISIBLE),
+            PropertyFactory.lineWidth(3f)
+          );
 
-        // Add LineLayer to map
+          // Add LineLayer to map
 
-        mapboxMap.addLayer(linesLayer);
+          mapboxMap.getStyle().addLayer(linesLayer);
+        });
       }
     });
   }

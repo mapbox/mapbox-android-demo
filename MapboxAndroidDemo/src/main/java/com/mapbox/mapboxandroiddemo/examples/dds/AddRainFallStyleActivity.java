@@ -55,13 +55,14 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
-    mapboxMap.setStyle(Style.LIGHT);
-    addRadar(mapboxMap);
-    refreshGeoJsonRunnable = new RefreshGeoJsonRunnable();
-    do {
-      handler.postDelayed(refreshGeoJsonRunnable, 1000);
-    }
-    while (index == 37);
+    mapboxMap.setStyle(Style.LIGHT,style -> {
+      addRadar(mapboxMap);
+      refreshGeoJsonRunnable = new RefreshGeoJsonRunnable();
+      do {
+        handler.postDelayed(refreshGeoJsonRunnable, 1000);
+      }
+      while (index == 37);
+    });
   }
 
   private class RefreshGeoJsonRunnable implements Runnable {
@@ -81,8 +82,8 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
       ID_SOURCE,
       SOURCE_URL
     );
-    mapboxMap.addSource(vectorSource);
-    layer = mapboxMap.getLayerAs(ID_LAYER);
+    mapboxMap.getStyle().addSource(vectorSource);
+    layer = mapboxMap.getStyle().getLayerAs(ID_LAYER);
     if (layer == null) {
       layer = new FillLayer(ID_LAYER, ID_SOURCE);
       layer.withSourceLayer("201806261518");
@@ -108,7 +109,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
           )
         ),
         PropertyFactory.fillOpacity(0.7f));
-      mapboxMap.addLayer(layer);
+      mapboxMap.getStyle().addLayer(layer);
     }
   }
 

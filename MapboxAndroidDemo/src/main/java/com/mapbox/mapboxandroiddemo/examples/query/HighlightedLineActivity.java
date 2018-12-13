@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
 import com.mapbox.mapboxandroiddemo.R;
@@ -63,10 +64,12 @@ public class HighlightedLineActivity extends AppCompatActivity implements
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.LIGHT);
-    initSource();
-    initLayers();
-    mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.LIGHT, style -> {
+      initSource();
+      initLayers();
+      mapboxMap.addOnMapClickListener(this);
+      Toast.makeText(this, getString(R.string.tap_on_line), Toast.LENGTH_SHORT).show();
+    });
   }
 
   @Override
@@ -77,7 +80,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
     List<Feature> featureList = mapboxMap.queryRenderedFeatures(rectF, "line-layer-id");
     if (featureList.size() > 0) {
       for (Feature feature : featureList) {
-        GeoJsonSource source = mapboxMap.getSourceAs("background-geojson-source-id");
+        GeoJsonSource source = mapboxMap.getStyle().getSourceAs("background-geojson-source-id");
         if (source != null) {
           source.setGeoJson(feature);
           backgroundLineLayer.setProperties(visibility(VISIBLE));
@@ -95,9 +98,9 @@ public class HighlightedLineActivity extends AppCompatActivity implements
   private void initSource() {
     GeoJsonSource geoJsonSource = new GeoJsonSource("source-id", loadGeoJsonFromAsset(
       "brussels_station_exits.geojson"));
-    mapboxMap.addSource(geoJsonSource);
+    mapboxMap.getStyle().addSource(geoJsonSource);
     GeoJsonSource emptyBackgroundGeojsonSource = new GeoJsonSource("background-geojson-source-id");
-    mapboxMap.addSource(emptyBackgroundGeojsonSource);
+    mapboxMap.getStyle().addSource(emptyBackgroundGeojsonSource);
   }
 
   /**
@@ -112,7 +115,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
       lineCap(LINE_CAP_ROUND),
       lineJoin(LINE_JOIN_ROUND)
     );
-    mapboxMap.addLayer(routeLineLayer);
+    mapboxMap.getStyle().addLayer(routeLineLayer);
 
     // Add the background LineLayer that will act as the highlighting effect
     backgroundLineLayer = new LineLayer("background-line-layer-id",
@@ -124,7 +127,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
       lineJoin(LINE_JOIN_ROUND),
       visibility(NONE)
     );
-    mapboxMap.addLayerBelow(backgroundLineLayer, "line-layer-id");
+    mapboxMap.getStyle().addLayerBelow(backgroundLineLayer, "line-layer-id");
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
@@ -162,8 +165,8 @@ public class HighlightedLineActivity extends AppCompatActivity implements
   protected void onDestroy() {
     if (mapboxMap != null) {
       mapboxMap.removeOnMapClickListener(this);
-      mapboxMap.removeLayer(backgroundLineLayer.getId());
-      mapboxMap.removeLayer(routeLineLayer.getId());
+      mapboxMap.getStyle().removeLayer(backgroundLineLayer.getId());
+      mapboxMap.getStyle().removeLayer(routeLineLayer.getId());
       mapboxMap = null;
       backgroundLineLayer = null;
     }

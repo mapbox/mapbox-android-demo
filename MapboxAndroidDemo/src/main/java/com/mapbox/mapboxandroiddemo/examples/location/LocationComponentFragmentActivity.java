@@ -11,13 +11,13 @@ import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.SupportMapFragment;
 
 import java.util.List;
@@ -47,7 +47,6 @@ public class LocationComponentFragmentActivity extends AppCompatActivity impleme
 
       // Build mapboxMap
       MapboxMapOptions options = new MapboxMapOptions();
-      options.styleUrl(Style.OUTDOORS);
       options.camera(new CameraPosition.Builder()
         .target(office)
         .zoom(9)
@@ -65,7 +64,7 @@ public class LocationComponentFragmentActivity extends AppCompatActivity impleme
 
     mapFragment.getMapAsync(mapboxMap -> {
       LocationComponentFragmentActivity.this.mapboxMap = mapboxMap;
-      enableLocationComponent();
+      mapboxMap.setStyle(Style.OUTDOORS, style -> enableLocationComponent());
     });
   }
 
@@ -76,7 +75,7 @@ public class LocationComponentFragmentActivity extends AppCompatActivity impleme
       // Get an instance of the location component. Adding in LocationComponentOptions is also an optional
       // parameter
       LocationComponent locationComponent = mapboxMap.getLocationComponent();
-      locationComponent.activateLocationComponent(this);
+      locationComponent.activateLocationComponent(this, mapboxMap.getStyle());
       locationComponent.setLocationComponentEnabled(true);
       locationComponent.setCameraMode(CameraMode.TRACKING);
       locationComponent.setRenderMode(RenderMode.NORMAL);

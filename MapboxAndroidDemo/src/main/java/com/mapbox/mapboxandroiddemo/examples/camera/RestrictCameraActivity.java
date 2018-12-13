@@ -52,17 +52,15 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.SATELLITE_STREETS);
+    mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
+      // Set bounds to Australia
+      mapboxMap.setLatLngBoundsForCameraTarget(AUSTRALIA_BOUNDS);
+      mapboxMap.setMinZoomPreference(2);
 
-    // Set bounds to Australia
-    mapboxMap.setLatLngBoundsForCameraTarget(AUSTRALIA_BOUNDS);
-    mapboxMap.setMinZoomPreference(2);
-
-    // Visualise bounds area
-    showBoundsArea();
-
-    showCrosshair();
-
+      // Visualise bounds area
+      showBoundsArea();
+      showCrosshair();
+    });
   }
 
   private void showBoundsArea() {

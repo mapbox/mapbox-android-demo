@@ -43,22 +43,23 @@ public class VectorSourceActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
-        mapboxMap.setStyle(Style.LIGHT);
+        mapboxMap.setStyle(Style.LIGHT, style -> {
 
-        VectorSource vectorSource = new VectorSource("terrain-data", "mapbox://mapbox.mapbox-terrain-v2");
-        mapboxMap.addSource(vectorSource);
+          VectorSource vectorSource = new VectorSource("terrain-data", "mapbox://mapbox.mapbox-terrain-v2");
+          mapboxMap.getStyle().addSource(vectorSource);
 
-        LineLayer terrainData = new LineLayer("terrain-data", "terrain-data");
-        terrainData.setSourceLayer("contour");
-        terrainData.setProperties(
+          LineLayer terrainData = new LineLayer("terrain-data", "terrain-data");
+          terrainData.setSourceLayer("contour");
+          terrainData.setProperties(
             lineJoin(Property.LINE_JOIN_ROUND),
             lineCap(Property.LINE_CAP_ROUND),
             lineColor(Color.parseColor("#ff69b4")),
             lineWidth(1f)
-        );
+          );
 
-        mapboxMap.addLayer(terrainData);
+          mapboxMap.getStyle().addLayer(terrainData);
 
+        });
       }
     });
   }

@@ -38,17 +38,18 @@ public class DrawCustomMarkerActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
-        mapboxMap.setStyle(Style.OUTDOORS);
+        mapboxMap.setStyle(Style.OUTDOORS, style -> {
 
-        // Create an Icon object for the marker to use
-        Icon icon = IconFactory.getInstance(DrawCustomMarkerActivity.this).fromResource(R.drawable.purple_marker);
+          // Create an Icon object for the marker to use
+          Icon icon = IconFactory.getInstance(DrawCustomMarkerActivity.this).fromResource(R.drawable.purple_marker);
 
-        // Add the custom icon marker to the map
-        mapboxMap.addMarker(new MarkerOptions()
-          .position(new LatLng(-33.8500000, 18.4158234))
-          .title(getString(R.string.draw_custom_marker_options_title))
-          .snippet(getString(R.string.draw_custom_marker_options_snippet))
-          .icon(icon));
+          // Add the custom icon marker to the map
+          mapboxMap.addMarker(new MarkerOptions()
+            .position(new LatLng(-33.8500000, 18.4158234))
+            .title(getString(R.string.draw_custom_marker_options_title))
+            .snippet(getString(R.string.draw_custom_marker_options_snippet))
+            .icon(icon));
+        });
       }
     });
   }

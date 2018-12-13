@@ -82,11 +82,12 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     RecyclerViewOnMapActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.DARK);
-    initFeatureCollection();
-    initMarkerIcons();
-    initRecyclerView();
-    Toast.makeText(this, R.string.toast_instruction, Toast.LENGTH_SHORT).show();
+    mapboxMap.setStyle(Style.DARK, style -> {
+      initFeatureCollection();
+      initMarkerIcons();
+      initRecyclerView();
+      Toast.makeText(this, R.string.toast_instruction, Toast.LENGTH_SHORT).show();
+    });
   }
 
   private void initFeatureCollection() {
@@ -115,15 +116,15 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
   private void initMarkerIcons() {
     Bitmap icon = BitmapFactory.decodeResource(
       this.getResources(), R.drawable.red_marker);
-    mapboxMap.addImage(SYMBOL_ICON_ID, icon);
+    mapboxMap.getStyle().addImage(SYMBOL_ICON_ID, icon);
     GeoJsonSource geoJsonSource = new GeoJsonSource(SOURCE_ID, featureCollection);
-    mapboxMap.addSource(geoJsonSource);
+    mapboxMap.getStyle().addSource(geoJsonSource);
     SymbolLayer symbolLayer = new SymbolLayer(LAYER_ID, SOURCE_ID);
     symbolLayer.withProperties(
       iconImage(SYMBOL_ICON_ID),
       iconAllowOverlap(true)
     );
-    mapboxMap.addLayer(symbolLayer);
+    mapboxMap.getStyle().addLayer(symbolLayer);
   }
 
   private List<SingleRecyclerViewLocation> createRecyclerViewLocations() {

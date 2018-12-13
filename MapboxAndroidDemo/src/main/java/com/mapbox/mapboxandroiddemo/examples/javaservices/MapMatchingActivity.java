@@ -66,8 +66,7 @@ public class MapMatchingActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
-        map.setStyle(Style.MAPBOX_STREETS);
-        new DrawGeoJson().execute();
+        map.setStyle(Style.MAPBOX_STREETS, style -> new DrawGeoJson().execute());
       }
     });
   }

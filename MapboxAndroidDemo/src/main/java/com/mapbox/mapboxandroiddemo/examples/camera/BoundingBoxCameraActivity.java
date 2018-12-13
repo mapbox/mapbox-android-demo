@@ -49,27 +49,28 @@ public class BoundingBoxCameraActivity extends AppCompatActivity implements OnMa
 
     BoundingBoxCameraActivity.this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
 
-    // Declare two locations on map
-    locationOne = new LatLng(36.532128, -93.489121);
-    locationTwo = new LatLng(25.837058, -106.646234);
+      // Declare two locations on map
+      locationOne = new LatLng(36.532128, -93.489121);
+      locationTwo = new LatLng(25.837058, -106.646234);
 
-    // Add markers to map
-    mapboxMap.addMarker(new MarkerOptions()
-      .position(locationOne));
+      // Add markers to map
+      mapboxMap.addMarker(new MarkerOptions()
+        .position(locationOne));
 
-    mapboxMap.addMarker(new MarkerOptions()
-      .position(locationTwo));
+      mapboxMap.addMarker(new MarkerOptions()
+        .position(locationTwo));
 
-    // Toast instructing user to tap on the map to start animation and set bounds
-    Toast.makeText(
-      BoundingBoxCameraActivity.this,
-      getString(R.string.tap_on_map_instruction),
-      Toast.LENGTH_LONG
-    ).show();
+      // Toast instructing user to tap on the map to start animation and set bounds
+      Toast.makeText(
+        BoundingBoxCameraActivity.this,
+        getString(R.string.tap_on_map_instruction),
+        Toast.LENGTH_LONG
+      ).show();
 
-    mapboxMap.addOnMapClickListener(this);
+      mapboxMap.addOnMapClickListener(this);
+    });
   }
 
   @Override

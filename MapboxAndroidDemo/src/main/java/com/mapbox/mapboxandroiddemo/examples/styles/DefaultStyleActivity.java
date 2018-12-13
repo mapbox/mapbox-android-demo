@@ -7,7 +7,6 @@ import android.view.MenuItem;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -99,22 +98,22 @@ public class DefaultStyleActivity extends AppCompatActivity {
     // Handle item selection
     switch (item.getItemId()) {
       case R.id.menu_streets:
-        mapboxMap.setStyleUrl(Style.MAPBOX_STREETS);
+        mapboxMap.setStyle(Style.MAPBOX_STREETS);
         return true;
       case R.id.menu_dark:
-        mapboxMap.setStyleUrl(Style.DARK);
+        mapboxMap.setStyle(Style.DARK);
         return true;
       case R.id.menu_light:
-        mapboxMap.setStyleUrl(Style.LIGHT);
+        mapboxMap.setStyle(Style.LIGHT);
         return true;
       case R.id.menu_outdoors:
-        mapboxMap.setStyleUrl(Style.OUTDOORS);
+        mapboxMap.setStyle(Style.OUTDOORS);
         return true;
       case R.id.menu_satellite:
-        mapboxMap.setStyleUrl(Style.SATELLITE);
+        mapboxMap.setStyle(Style.SATELLITE);
         return true;
       case R.id.menu_satellite_streets:
-        mapboxMap.setStyleUrl(Style.SATELLITE_STREETS);
+        mapboxMap.setStyle(Style.SATELLITE_STREETS);
         return true;
       case android.R.id.home:
         finish();

@@ -80,30 +80,30 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
   public void onMapReady(MapboxMap mapboxMap) {
     this.map = mapboxMap;
 
-    map.setStyle(Style.LIGHT);
+    map.setStyle(Style.LIGHT, style -> {
+      initDrivingRouteSourceAndLayer();
 
-    initDrivingRouteSourceAndLayer();
+      // Origin point in Paris, France
+      final Point origin = Point.fromLngLat(2.35222, 48.856614);
 
-    // Origin point in Paris, France
-    final Point origin = Point.fromLngLat(2.35222, 48.856614);
+      // Destination point in Lyon, France
+      final Point destination = Point.fromLngLat(4.83565, 45.76404);
 
-    // Destination point in Lyon, France
-    final Point destination = Point.fromLngLat(4.83565, 45.76404);
+      // Add origin and destination markers to the map
+      mapboxMap.addMarker(new MarkerOptions()
+        .position(new LatLng(origin.latitude(), origin.longitude())));
+      mapboxMap.addMarker(new MarkerOptions()
+        .position(new LatLng(destination.latitude(), destination.longitude())));
 
-    // Add origin and destination markers to the map
-    mapboxMap.addMarker(new MarkerOptions()
-      .position(new LatLng(origin.latitude(), origin.longitude())));
-    mapboxMap.addMarker(new MarkerOptions()
-      .position(new LatLng(destination.latitude(), destination.longitude())));
-
-    // Get route from API
-    getDirectionsRoute(origin, destination);
+      // Get route from API
+      getDirectionsRoute(origin, destination);
+    });
   }
 
   private void initDrivingRouteSourceAndLayer() {
     GeoJsonSource drivingRouteGeoJsonSource = new GeoJsonSource(DRIVING_ROUTE_POLYLINE_SOURCE_ID,
       FeatureCollection.fromFeatures(new Feature[] {}));
-    map.addSource(drivingRouteGeoJsonSource);
+    map.getStyle().addSource(drivingRouteGeoJsonSource);
     LineLayer drivingRouteLineLayer = new LineLayer(DRIVING_ROUTE_POLYLINE_LINE_LAYER_ID,
       DRIVING_ROUTE_POLYLINE_SOURCE_ID)
       .withProperties(
@@ -113,7 +113,7 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
         lineJoin(LINE_JOIN_ROUND),
         lineColor(Color.parseColor("#d742f4"))
       );
-    map.addLayer(drivingRouteLineLayer);
+    map.getStyle().addLayer(drivingRouteLineLayer);
   }
 
   /**
@@ -167,7 +167,7 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
               }
 
               // Update the GeoJSON source
-              GeoJsonSource source = map.getSourceAs(DRIVING_ROUTE_POLYLINE_SOURCE_ID);
+              GeoJsonSource source = map.getStyle().getSourceAs(DRIVING_ROUTE_POLYLINE_SOURCE_ID);
               if (source != null) {
                 source.setGeoJson(FeatureCollection.fromFeatures(drivingRoutePolyLineFeatureList));
               }
@@ -178,7 +178,7 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
 
       @Override
       public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
-        Log.d("SnakingDirectionsActivity", "Error: " + throwable.getMessage());
+        Log.d("SnakingDirections", "Error: " + throwable.getMessage());
         Toast.makeText(SnakingDirectionsRouteActivity.this,
           R.string.snaking_directions_activity_error, Toast.LENGTH_SHORT).show();
       }

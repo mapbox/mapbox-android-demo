@@ -50,27 +50,29 @@ public class ShowHideLayersActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
-        mapboxMap.setStyle(Style.LIGHT);
-        VectorSource museums = new VectorSource("museums_source", "mapbox://mapbox.2opop9hr");
-        map.addSource(museums);
+        mapboxMap.setStyle(Style.LIGHT, style -> {
 
-        CircleLayer museumsLayer = new CircleLayer("museums", "museums_source");
-        museumsLayer.setSourceLayer("museum-cusco");
-        museumsLayer.setProperties(
+          VectorSource museums = new VectorSource("museums_source", "mapbox://mapbox.2opop9hr");
+          map.getStyle().addSource(museums);
+
+          CircleLayer museumsLayer = new CircleLayer("museums", "museums_source");
+          museumsLayer.setSourceLayer("museum-cusco");
+          museumsLayer.setProperties(
             visibility(VISIBLE),
             circleRadius(8f),
             circleColor(Color.argb(255, 55, 148, 179))
-        );
+          );
 
-        map.addLayer(museumsLayer);
+          map.getStyle().addLayer(museumsLayer);
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
+          floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-            toggleLayer();
+              toggleLayer();
 
-          }
+            }
+          });
         });
       }
     });
@@ -119,7 +121,7 @@ public class ShowHideLayersActivity extends AppCompatActivity {
   }
 
   private void toggleLayer() {
-    Layer layer = map.getLayer("museums");
+    Layer layer = map.getStyle().getLayer("museums");
     if (layer != null) {
       if (VISIBLE.equals(layer.getVisibility().getValue())) {
         layer.setProperties(visibility(NONE));

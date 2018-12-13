@@ -101,7 +101,7 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
 
     // Add the click point to the circle layer and update the display of the circle layer data
     boundsCirclePointList.add(Point.fromLngLat(point.getLongitude(), point.getLatitude()));
-    GeoJsonSource circleSource = mapboxMap.getSourceAs(CIRCLE_SOURCE_ID);
+    GeoJsonSource circleSource = mapboxMap.getStyle().getSourceAs(CIRCLE_SOURCE_ID);
     if (circleSource != null) {
       circleSource.setGeoJson(FeatureCollection.fromFeatures(boundsFeatureList));
     }
@@ -148,7 +148,7 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
   private void initCircleSource() {
     FeatureCollection circleFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     GeoJsonSource circleGeoJsonSource = new GeoJsonSource(CIRCLE_SOURCE_ID, circleFeatureCollection);
-    mapboxMap.addSource(circleGeoJsonSource);
+    mapboxMap.getStyle().addSource(circleGeoJsonSource);
   }
 
   /**
@@ -161,7 +161,7 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
       circleRadius(8f),
       circleColor(Color.parseColor("#d004d3"))
     );
-    mapboxMap.addLayer(circleLayer);
+    mapboxMap.getStyle().addLayer(circleLayer);
   }
 
   /**
@@ -187,14 +187,14 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
         ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE + imageCountIndex, quad, bitmapOfSelectedImage);
 
         // Add the imageSource to the map
-        mapboxMap.addSource(imageSource);
+        mapboxMap.getStyle().addSource(imageSource);
 
         // Create a raster layer and use the imageSource's ID as the layer's data
         RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER + imageCountIndex,
           ID_IMAGE_SOURCE + imageCountIndex);
 
         // Add the layer to the map
-        mapboxMap.addLayer(layer);
+        mapboxMap.getStyle().addLayer(layer);
 
         // Reset lists in preparation for adding more images
         boundsFeatureList = new ArrayList<>();
@@ -203,7 +203,7 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
         imageCountIndex++;
 
         // Clear circles from CircleLayer
-        GeoJsonSource circleSource = mapboxMap.getSourceAs(CIRCLE_SOURCE_ID);
+        GeoJsonSource circleSource = mapboxMap.getStyle().getSourceAs(CIRCLE_SOURCE_ID);
         if (circleSource != null) {
           circleSource.setGeoJson(FeatureCollection.fromFeatures(boundsFeatureList));
         }

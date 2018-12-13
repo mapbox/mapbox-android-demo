@@ -48,18 +48,20 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
   public void onMapReady(MapboxMap mapboxMap) {
     AnimatedMarkerActivity.this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.SATELLITE_STREETS);
+    mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
 
-    marker = mapboxMap.addMarker(new MarkerOptions()
-      .position(new LatLng(64.900932, -18.167040)));
+      marker = mapboxMap.addMarker(new MarkerOptions()
+        .position(new LatLng(64.900932, -18.167040)));
 
-    Toast.makeText(
-      AnimatedMarkerActivity.this,
-      getString(R.string.tap_on_map_instruction),
-      Toast.LENGTH_LONG
-    ).show();
+      Toast.makeText(
+        AnimatedMarkerActivity.this,
+        getString(R.string.tap_on_map_instruction),
+        Toast.LENGTH_LONG
+      ).show();
 
-    mapboxMap.addOnMapClickListener(this);
+      mapboxMap.addOnMapClickListener(this);
+
+    });
   }
 
   @Override

@@ -14,6 +14,7 @@ import com.mapbox.mapboxsdk.location.modes.CameraMode
 import com.mapbox.mapboxsdk.location.modes.RenderMode
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
+import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.activity_location_component.*
 
 /**
@@ -56,15 +57,23 @@ class KotlinLocationComponentActivity : AppCompatActivity(), OnMapReadyCallback,
       // Get an instance of the component
       val locationComponent = mapboxMap.locationComponent
 
-      // Activate with options
-      locationComponent.activateLocationComponent(this, options)
+      mapboxMap.setStyle(Style.Builder().fromUrl(
+              "mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7")) { style ->
 
-      // Enable to make component visible
-      locationComponent.isLocationComponentEnabled = true
+        // Activate the component
+        locationComponent.activateLocationComponent(this, style)
 
-      // Set the component's camera mode
-      locationComponent.cameraMode = CameraMode.TRACKING
-      locationComponent.renderMode = RenderMode.COMPASS
+        // Apply the options to the LocationComponent
+        locationComponent.applyStyle(options)
+
+        // Enable to make component visible
+        locationComponent.isLocationComponentEnabled = true
+
+        // Set the component's camera mode
+        locationComponent.cameraMode = CameraMode.TRACKING
+        locationComponent.renderMode = RenderMode.COMPASS
+
+      }
     } else {
       permissionsManager = PermissionsManager(this)
       permissionsManager.requestLocationPermissions(this)

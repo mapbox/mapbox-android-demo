@@ -16,7 +16,6 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.light.Light;
 import com.mapbox.mapboxsdk.style.light.Position;
 import com.mapbox.mapboxsdk.utils.ColorUtils;
@@ -62,9 +61,10 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
         mapboxMap = map;
-        map.setStyle(Style.DARK);
-        setupBuildings();
-        setupLight();
+        map.setStyle(Style.DARK, style -> {
+          setupBuildings();
+          setupLight();
+        });
       }
     });
   }
@@ -87,11 +87,11 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
       fillExtrusionBase(get("min_height")),
       fillExtrusionOpacity(0.9f)
     );
-    mapboxMap.addLayer(fillExtrusionLayer);
+    mapboxMap.getStyle().addLayer(fillExtrusionLayer);
   }
 
   private void setupLight() {
-    light = mapboxMap.getLight();
+    light = mapboxMap.getStyle().getLight();
 
     findViewById(R.id.fabLightPosition).setOnClickListener(new View.OnClickListener() {
       @Override

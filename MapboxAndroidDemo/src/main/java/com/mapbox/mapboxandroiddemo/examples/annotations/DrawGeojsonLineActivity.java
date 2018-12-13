@@ -56,10 +56,8 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
-
     // Load and Draw the GeoJSON
-    new DrawGeoJson().execute();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> new DrawGeoJson().execute());
   }
 
   @Override
@@ -142,7 +140,7 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
             }
           }
         }
-      } catch (Exception exception) {w
+      } catch (Exception exception) {
         Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
       }
 

@@ -48,20 +48,21 @@ public class HillShadeActivity extends AppCompatActivity implements
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
 
-    mapboxMap.setStyle(Style.OUTDOORS);
+    mapboxMap.setStyle(Style.OUTDOORS,style -> {
+      // Add hillshade data source to map
+      RasterDemSource rasterDemSource = new RasterDemSource(SOURCE_ID, SOURCE_URL);
+      mapboxMap.getStyle().addSource(rasterDemSource);
 
-    // Add hillshade data source to map
-    RasterDemSource rasterDemSource = new RasterDemSource(SOURCE_ID, SOURCE_URL);
-    mapboxMap.addSource(rasterDemSource);
+      // Create and style a hillshade layer to add to the map
+      HillshadeLayer hillshadeLayer = new HillshadeLayer(LAYER_ID, SOURCE_ID).withProperties(
+        hillshadeHighlightColor(Color.parseColor(HILLSHADE_HIGHLIGHT_COLOR)),
+        hillshadeShadowColor(Color.BLACK)
+      );
 
-    // Create and style a hillshade layer to add to the map
-    HillshadeLayer hillshadeLayer = new HillshadeLayer(LAYER_ID, SOURCE_ID).withProperties(
-      hillshadeHighlightColor(Color.parseColor(HILLSHADE_HIGHLIGHT_COLOR)),
-      hillshadeShadowColor(Color.BLACK)
-    );
+      // Add the hillshade layer to the map
+      mapboxMap.getStyle().addLayerBelow(hillshadeLayer, LAYER_BELOW_ID);
 
-    // Add the hillshade layer to the map
-    mapboxMap.addLayerBelow(hillshadeLayer, LAYER_BELOW_ID);
+    });
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

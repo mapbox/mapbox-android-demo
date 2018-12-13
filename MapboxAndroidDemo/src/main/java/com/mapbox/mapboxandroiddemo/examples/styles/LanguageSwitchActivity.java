@@ -95,7 +95,7 @@ public class LanguageSwitchActivity extends AppCompatActivity {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    Layer mapText = map.getLayer("country-label-lg");
+    Layer mapText = map.getStyle().getLayer("country-label-lg");
     if (mapText != null) {
       switch (item.getItemId()) {
         case R.id.french:

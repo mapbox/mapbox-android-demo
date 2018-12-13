@@ -77,76 +77,77 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     LocationPickerActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
-    enableLocationPlugin();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+      enableLocationPlugin();
 
-    // Toast instructing user to tap on the mapboxMap
-    Toast.makeText(
-      LocationPickerActivity.this,
-      getString(R.string.move_map_instruction),
-      Toast.LENGTH_LONG
-    ).show();
+      // Toast instructing user to tap on the mapboxMap
+      Toast.makeText(
+        LocationPickerActivity.this,
+        getString(R.string.move_map_instruction),
+        Toast.LENGTH_LONG
+      ).show();
 
-    // When user is still picking a location, we hover a marker above the mapboxMap in the center.
-    // This is done by using an image view with the default marker found in the SDK. You can
-    // swap out for your own marker image, just make sure it matches up with the dropped marker.
-    hoveringMarker = new ImageView(this);
-    hoveringMarker.setImageResource(R.drawable.red_marker);
-    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-      ViewGroup.LayoutParams.WRAP_CONTENT,
-      ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-    hoveringMarker.setLayoutParams(params);
-    mapView.addView(hoveringMarker);
+      // When user is still picking a location, we hover a marker above the mapboxMap in the center.
+      // This is done by using an image view with the default marker found in the SDK. You can
+      // swap out for your own marker image, just make sure it matches up with the dropped marker.
+      hoveringMarker = new ImageView(this);
+      hoveringMarker.setImageResource(R.drawable.red_marker);
+      FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+        ViewGroup.LayoutParams.WRAP_CONTENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+      hoveringMarker.setLayoutParams(params);
+      mapView.addView(hoveringMarker);
 
-    // Button for user to drop marker or to pick marker back up.
-    selectLocationButton = findViewById(R.id.select_location_button);
-    selectLocationButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        if (mapboxMap != null) {
-          if (droppedMarker == null) {
-            // We first find where the hovering marker position is relative to the mapboxMap.
-            // Then we set the visibility to gone.
-            float coordinateX = hoveringMarker.getLeft() + (hoveringMarker.getWidth() / 2);
-            float coordinateY = hoveringMarker.getBottom();
-            float[] coords = new float[] {coordinateX, coordinateY};
-            final Point latLng = Point.fromLngLat(mapboxMap.getProjection().fromScreenLocation(
-              new PointF(coords[0], coords[1])).getLongitude(), mapboxMap.getProjection().fromScreenLocation(
-              new PointF(coords[0], coords[1])).getLatitude());
-            hoveringMarker.setVisibility(View.GONE);
+      // Button for user to drop marker or to pick marker back up.
+      selectLocationButton = findViewById(R.id.select_location_button);
+      selectLocationButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          if (mapboxMap != null) {
+            if (droppedMarker == null) {
+              // We first find where the hovering marker position is relative to the mapboxMap.
+              // Then we set the visibility to gone.
+              float coordinateX = hoveringMarker.getLeft() + (hoveringMarker.getWidth() / 2);
+              float coordinateY = hoveringMarker.getBottom();
+              float[] coords = new float[] {coordinateX, coordinateY};
+              final Point latLng = Point.fromLngLat(mapboxMap.getProjection().fromScreenLocation(
+                new PointF(coords[0], coords[1])).getLongitude(), mapboxMap.getProjection().fromScreenLocation(
+                new PointF(coords[0], coords[1])).getLatitude());
+              hoveringMarker.setVisibility(View.GONE);
 
-            // Transform the appearance of the button to become the cancel button
-            selectLocationButton.setBackgroundColor(
-              ContextCompat.getColor(LocationPickerActivity.this, R.color.colorAccent));
-            selectLocationButton.setText(getString(R.string.location_picker_select_location_button_cancel));
+              // Transform the appearance of the button to become the cancel button
+              selectLocationButton.setBackgroundColor(
+                ContextCompat.getColor(LocationPickerActivity.this, R.color.colorAccent));
+              selectLocationButton.setText(getString(R.string.location_picker_select_location_button_cancel));
 
-            // Create the marker icon the dropped marker will be using.
-            Icon icon = IconFactory.getInstance(LocationPickerActivity.this).fromResource(R.drawable.red_marker);
+              // Create the marker icon the dropped marker will be using.
+              Icon icon = IconFactory.getInstance(LocationPickerActivity.this).fromResource(R.drawable.red_marker);
 
-            // Placing the marker on the mapboxMap as soon as possible causes the illusion
-            // that the hovering marker and dropped marker are the same.
+              // Placing the marker on the mapboxMap as soon as possible causes the illusion
+              // that the hovering marker and dropped marker are the same.
 
-            droppedMarker = mapboxMap.addMarker(new MarkerOptions()
-              .position(new LatLng(latLng.latitude(), latLng.longitude())));
+              droppedMarker = mapboxMap.addMarker(new MarkerOptions()
+                .position(new LatLng(latLng.latitude(), latLng.longitude())));
 
-            // Finally we get the geocoding information
-            reverseGeocode(latLng);
-          } else {
-            // When the marker is dropped, the user has clicked the button to cancel.
-            // Therefore, we pick the marker back up.
-            mapboxMap.removeMarker(droppedMarker);
+              // Finally we get the geocoding information
+              reverseGeocode(latLng);
+            } else {
+              // When the marker is dropped, the user has clicked the button to cancel.
+              // Therefore, we pick the marker back up.
+              mapboxMap.removeMarker(droppedMarker);
 
-            // Switch the button apperance back to select a location.
-            selectLocationButton.setBackgroundColor(
-              ContextCompat.getColor(LocationPickerActivity.this, R.color.colorPrimary));
-            selectLocationButton.setText(getString(R.string.location_picker_select_location_button_select));
+              // Switch the button apperance back to select a location.
+              selectLocationButton.setBackgroundColor(
+                ContextCompat.getColor(LocationPickerActivity.this, R.color.colorPrimary));
+              selectLocationButton.setText(getString(R.string.location_picker_select_location_button_select));
 
-            // Lastly, set the hovering marker back to visible.
-            hoveringMarker.setVisibility(View.VISIBLE);
-            droppedMarker = null;
+              // Lastly, set the hovering marker back to visible.
+              hoveringMarker.setVisibility(View.VISIBLE);
+              droppedMarker = null;
+            }
           }
         }
-      }
+      });
     });
   }
 
@@ -266,7 +267,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
       // Get an instance of the component. Adding in LocationComponentOptions is also an optional
       // parameter
       LocationComponent locationComponent = mapboxMap.getLocationComponent();
-      locationComponent.activateLocationComponent(this);
+      locationComponent.activateLocationComponent(this, mapboxMap.getStyle());
       locationComponent.setLocationComponentEnabled(true);
 
       // Set the component's camera mode

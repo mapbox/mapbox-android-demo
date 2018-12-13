@@ -46,33 +46,34 @@ public class StyleCirclesCategoricallyActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
-        mapboxMap.setStyle(Style.LIGHT);
+        mapboxMap.setStyle(Style.LIGHT,style -> {
 
-        VectorSource vectorSource = new VectorSource(
-          "ethnicity-source",
-          "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken()
-        );
-        mapboxMap.addSource(vectorSource);
+          VectorSource vectorSource = new VectorSource(
+            "ethnicity-source",
+            "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken()
+          );
+          mapboxMap.getStyle().addSource(vectorSource);
 
-        CircleLayer circleLayer = new CircleLayer("population", "ethnicity-source");
-        circleLayer.setSourceLayer("sf2010");
-        circleLayer.withProperties(
-          circleRadius(
-            interpolate(
-              exponential(1.75f),
-              zoom(),
-              stop(12, 2f),
-              stop(22, 180f)
-            )),
-          circleColor(
-            match(get("ethnicity"), rgb(0, 0, 0),
-              stop("white", rgb(251, 176, 59)),
-              stop("Black", rgb(34, 59, 83)),
-              stop("Hispanic", rgb(229, 94, 94)),
-              stop("Asian", rgb(59, 178, 208)),
-              stop("Other", rgb(204, 204, 204)))));
+          CircleLayer circleLayer = new CircleLayer("population", "ethnicity-source");
+          circleLayer.setSourceLayer("sf2010");
+          circleLayer.withProperties(
+            circleRadius(
+              interpolate(
+                exponential(1.75f),
+                zoom(),
+                stop(12, 2f),
+                stop(22, 180f)
+              )),
+            circleColor(
+              match(get("ethnicity"), rgb(0, 0, 0),
+                stop("white", rgb(251, 176, 59)),
+                stop("Black", rgb(34, 59, 83)),
+                stop("Hispanic", rgb(229, 94, 94)),
+                stop("Asian", rgb(59, 178, 208)),
+                stop("Other", rgb(204, 204, 204)))));
 
-        mapboxMap.addLayer(circleLayer);
+          mapboxMap.getStyle().addLayer(circleLayer);
+        });
       }
     });
   }

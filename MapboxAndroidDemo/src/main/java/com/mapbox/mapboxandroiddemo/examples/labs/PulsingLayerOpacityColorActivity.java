@@ -61,144 +61,144 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.LIGHT);
+    mapboxMap.setStyle(Style.LIGHT, style -> {
 
-    // Add the hotels source to the map
-    GeoJsonSource hotelSource = new GeoJsonSource("hotels", loadJsonFromAsset("la_hotels.geojson"));
-    mapboxMap.addSource(hotelSource);
+      // Add the hotels source to the map
+      GeoJsonSource hotelSource = new GeoJsonSource("hotels", loadJsonFromAsset("la_hotels.geojson"));
+      mapboxMap.getStyle().addSource(hotelSource);
 
-    FillLayer hotelLayer = new FillLayer("hotels", "hotels").withProperties(
-      fillColor(Color.parseColor("#5a9fcf")),
-      PropertyFactory.visibility(Property.NONE)
-    );
+      FillLayer hotelLayer = new FillLayer("hotels", "hotels").withProperties(
+        fillColor(Color.parseColor("#5a9fcf")),
+        PropertyFactory.visibility(Property.NONE)
+      );
 
-    mapboxMap.addLayer(hotelLayer);
+      mapboxMap.getStyle().addLayer(hotelLayer);
 
-    final FillLayer hotels = (FillLayer) mapboxMap.getLayer("hotels");
+      final FillLayer hotels = (FillLayer) mapboxMap.getStyle().getLayer("hotels");
 
-    hotelColorAnimator = ValueAnimator.ofObject(
-      new ArgbEvaluator(),
-      Color.parseColor("#5a9fcf"), // Brighter shade
-      Color.parseColor("#2C6B97") // Darker shade
-    );
-    hotelColorAnimator.setDuration(1000);
-    hotelColorAnimator.setRepeatCount(ValueAnimator.INFINITE);
-    hotelColorAnimator.setRepeatMode(ValueAnimator.REVERSE);
-    hotelColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+      hotelColorAnimator = ValueAnimator.ofObject(
+        new ArgbEvaluator(),
+        Color.parseColor("#5a9fcf"), // Brighter shade
+        Color.parseColor("#2C6B97") // Darker shade
+      );
+      hotelColorAnimator.setDuration(1000);
+      hotelColorAnimator.setRepeatCount(ValueAnimator.INFINITE);
+      hotelColorAnimator.setRepeatMode(ValueAnimator.REVERSE);
+      hotelColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
-      @Override
-      public void onAnimationUpdate(ValueAnimator animator) {
+        @Override
+        public void onAnimationUpdate(ValueAnimator animator) {
 
-        hotels.setProperties(
-          fillColor((int) animator.getAnimatedValue())
-        );
-      }
+          hotels.setProperties(
+            fillColor((int) animator.getAnimatedValue())
+          );
+        }
 
+      });
+
+      // Add the attractions source to the map
+      GeoJsonSource attractionsSource = new GeoJsonSource("attractions", loadJsonFromAsset("la_attractions.geojson"));
+      mapboxMap.getStyle().addSource(attractionsSource);
+
+      CircleLayer attractionsLayer = new CircleLayer("attractions", "attractions").withProperties(
+        circleColor(Color.parseColor("#5a9fcf")),
+        PropertyFactory.visibility(Property.NONE)
+      );
+
+      mapboxMap.getStyle().addLayer(attractionsLayer);
+
+      final CircleLayer attractions = (CircleLayer) mapboxMap.getStyle().getLayer("attractions");
+
+      attractionsColorAnimator = ValueAnimator.ofObject(
+        new ArgbEvaluator(),
+        Color.parseColor("#ec8a8a"), // Brighter shade
+        Color.parseColor("#de3232") // Darker shade
+      );
+      attractionsColorAnimator.setDuration(1000);
+      attractionsColorAnimator.setRepeatCount(ValueAnimator.INFINITE);
+      attractionsColorAnimator.setRepeatMode(ValueAnimator.REVERSE);
+      attractionsColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+        @Override
+        public void onAnimationUpdate(ValueAnimator animator) {
+
+          attractions.setProperties(
+            circleColor((int) animator.getAnimatedValue())
+          );
+        }
+
+      });
+
+      final FillLayer parks = (FillLayer) mapboxMap.getStyle().getLayer("parks");
+      parks.setProperties(
+        PropertyFactory.visibility(Property.NONE)
+      );
+
+      parkColorAnimator = ValueAnimator.ofObject(
+        new ArgbEvaluator(),
+        Color.parseColor("#7ac79c"), // Brighter shade
+        Color.parseColor("#419a68") // Darker shade
+      );
+      parkColorAnimator.setDuration(1000);
+      parkColorAnimator.setRepeatCount(ValueAnimator.INFINITE);
+      parkColorAnimator.setRepeatMode(ValueAnimator.REVERSE);
+      parkColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+        @Override
+        public void onAnimationUpdate(ValueAnimator animator) {
+
+          parks.setProperties(
+            fillColor((int) animator.getAnimatedValue())
+          );
+        }
+      });
+
+      FloatingActionButton toggleHotelsFab = (FloatingActionButton) findViewById(R.id.fab_toggle_hotels);
+      toggleHotelsFab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          setLayerVisible("hotels");
+        }
+      });
+
+
+      FloatingActionButton toggleParksFab = (FloatingActionButton) findViewById(R.id.fab_toggle_parks);
+      toggleParksFab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          setLayerVisible("parks");
+        }
+      });
+
+      FloatingActionButton toggleAttractionsFab = (FloatingActionButton) findViewById(R.id.fab_toggle_attractions);
+      toggleAttractionsFab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          setLayerVisible("attractions");
+        }
+      });
+
+      // Start all the animation at the same time so that they are in sync when displayed.
+      parkColorAnimator.start();
+      hotelColorAnimator.start();
+      attractionsColorAnimator.start();
     });
-
-    // Add the attractions source to the map
-    GeoJsonSource attractionsSource = new GeoJsonSource("attractions", loadJsonFromAsset("la_attractions.geojson"));
-    mapboxMap.addSource(attractionsSource);
-
-    CircleLayer attractionsLayer = new CircleLayer("attractions", "attractions").withProperties(
-      circleColor(Color.parseColor("#5a9fcf")),
-      PropertyFactory.visibility(Property.NONE)
-    );
-
-    mapboxMap.addLayer(attractionsLayer);
-
-    final CircleLayer attractions = (CircleLayer) mapboxMap.getLayer("attractions");
-
-    attractionsColorAnimator = ValueAnimator.ofObject(
-      new ArgbEvaluator(),
-      Color.parseColor("#ec8a8a"), // Brighter shade
-      Color.parseColor("#de3232") // Darker shade
-    );
-    attractionsColorAnimator.setDuration(1000);
-    attractionsColorAnimator.setRepeatCount(ValueAnimator.INFINITE);
-    attractionsColorAnimator.setRepeatMode(ValueAnimator.REVERSE);
-    attractionsColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-      @Override
-      public void onAnimationUpdate(ValueAnimator animator) {
-
-        attractions.setProperties(
-          circleColor((int) animator.getAnimatedValue())
-        );
-      }
-
-    });
-
-    final FillLayer parks = (FillLayer) mapboxMap.getLayer("parks");
-    parks.setProperties(
-      PropertyFactory.visibility(Property.NONE)
-    );
-
-    parkColorAnimator = ValueAnimator.ofObject(
-      new ArgbEvaluator(),
-      Color.parseColor("#7ac79c"), // Brighter shade
-      Color.parseColor("#419a68") // Darker shade
-    );
-    parkColorAnimator.setDuration(1000);
-    parkColorAnimator.setRepeatCount(ValueAnimator.INFINITE);
-    parkColorAnimator.setRepeatMode(ValueAnimator.REVERSE);
-    parkColorAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-
-      @Override
-      public void onAnimationUpdate(ValueAnimator animator) {
-
-        parks.setProperties(
-          fillColor((int) animator.getAnimatedValue())
-        );
-      }
-    });
-
-    FloatingActionButton toggleHotelsFab = (FloatingActionButton) findViewById(R.id.fab_toggle_hotels);
-    toggleHotelsFab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        setLayerVisible("hotels");
-      }
-    });
-
-
-    FloatingActionButton toggleParksFab = (FloatingActionButton) findViewById(R.id.fab_toggle_parks);
-    toggleParksFab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        setLayerVisible("parks");
-      }
-    });
-
-    FloatingActionButton toggleAttractionsFab = (FloatingActionButton) findViewById(R.id.fab_toggle_attractions);
-    toggleAttractionsFab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        setLayerVisible("attractions");
-      }
-    });
-
-    // Start all the animation at the same time so that they are in sync when displayed.
-    parkColorAnimator.start();
-    hotelColorAnimator.start();
-    attractionsColorAnimator.start();
-
   }
 
   private void setLayerVisible(String layerId) {
-    Layer layer = mapboxMap.getLayer(layerId);
+    Layer layer = mapboxMap.getStyle().getLayer(layerId);
     if (layer == null) {
       return;
     }
     if (VISIBLE.equals(layer.getVisibility().getValue())) {
       // Layer is visible
       layer.setProperties(
-        PropertyFactory.visibility("none")
+        PropertyFactory.visibility(Property.NONE)
       );
     } else {
       // Layer isn't visible
       layer.setProperties(
-        PropertyFactory.visibility("visible")
+        PropertyFactory.visibility(VISIBLE)
       );
     }
   }

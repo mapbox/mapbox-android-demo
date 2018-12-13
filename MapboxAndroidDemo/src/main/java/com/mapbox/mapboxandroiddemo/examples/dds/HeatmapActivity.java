@@ -64,17 +64,18 @@ public class HeatmapActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         HeatmapActivity.this.mapboxMap = mapboxMap;
-        mapboxMap.setStyle(Style.DARK);
-        addEarthquakeSource();
-        addHeatmapLayer();
-        addCircleLayer();
+        mapboxMap.setStyle(Style.DARK,style -> {
+          addEarthquakeSource();
+          addHeatmapLayer();
+          addCircleLayer();
+        });
       }
     });
   }
 
   private void addEarthquakeSource() {
     try {
-      mapboxMap.addSource(new GeoJsonSource(EARTHQUAKE_SOURCE_ID, new URL(EARTHQUAKE_SOURCE_URL)));
+      mapboxMap.getStyle().addSource(new GeoJsonSource(EARTHQUAKE_SOURCE_ID, new URL(EARTHQUAKE_SOURCE_URL)));
     } catch (MalformedURLException malformedUrlException) {
       Timber.e(malformedUrlException, "That's not an url... ");
     }
@@ -87,7 +88,7 @@ public class HeatmapActivity extends AppCompatActivity {
     layer.setProperties(
 
       // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
-      // Begin color ramp at 0-stop with a 0-transparancy color
+      // Begin color ramp at 0-stop with a 0-transparency color
       // to create a blur-like effect.
       heatmapColor(
         interpolate(
@@ -139,7 +140,7 @@ public class HeatmapActivity extends AppCompatActivity {
       )
     );
 
-    mapboxMap.addLayerAbove(layer, "waterway-label");
+    mapboxMap.getStyle().addLayerAbove(layer, "waterway-label");
   }
 
   private void addCircleLayer() {
@@ -188,7 +189,7 @@ public class HeatmapActivity extends AppCompatActivity {
       circleStrokeWidth(1.0f)
     );
 
-    mapboxMap.addLayerBelow(circleLayer, HEATMAP_LAYER_ID);
+    mapboxMap.getStyle().addLayerBelow(circleLayer, HEATMAP_LAYER_ID);
   }
 
   @Override

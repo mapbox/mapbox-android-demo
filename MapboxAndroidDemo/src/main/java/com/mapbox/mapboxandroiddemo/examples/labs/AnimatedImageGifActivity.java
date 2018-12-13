@@ -52,31 +52,32 @@ public class AnimatedImageGifActivity extends AppCompatActivity implements OnMap
   @Override
   public void onMapReady(@NonNull final MapboxMap map) {
 
-    map.setStyle(Style.MAPBOX_STREETS);
+    map.setStyle(Style.MAPBOX_STREETS, style -> {
 
-    // Set the bounds/size of the gif
-    LatLngQuad quad = new LatLngQuad(
-      new LatLng(46.437, -80.425),
-      new LatLng(46.437, -71.516),
-      new LatLng(37.936, -71.516),
-      new LatLng(37.936, -80.425));
+      // Set the bounds/size of the gif
+      LatLngQuad quad = new LatLngQuad(
+        new LatLng(46.437, -80.425),
+        new LatLng(46.437, -71.516),
+        new LatLng(37.936, -71.516),
+        new LatLng(37.936, -80.425));
 
-    // Create an image source object with a unique id, the bounds, and drawable image
-    ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.waving_bear_gif);
+      // Create an image source object with a unique id, the bounds, and drawable image
+      ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.waving_bear_gif);
 
-    // Add the source to the map
-    map.addSource(imageSource);
+      // Add the source to the map
+      map.getStyle().addSource(imageSource);
 
-    // Create an raster layer with a unique id and the image source created above
-    RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
+      // Create an raster layer with a unique id and the image source created above
+      RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
 
-    // Add the layer to the map
-    map.addLayer(layer);
+      // Add the layer to the map
+      map.getStyle().addLayer(layer);
 
-    // Use the RefreshImageRunnable class and runnable to quickly display images for a GIF/video UI experience
-    InputStream gifInputStream = getResources().openRawResource(R.raw.waving_bear);
-    runnable = new RefreshImageRunnable(imageSource, Movie.decodeStream(gifInputStream), handler = new Handler());
-    handler.postDelayed(runnable, 100);
+      // Use the RefreshImageRunnable class and runnable to quickly display images for a GIF/video UI experience
+      InputStream gifInputStream = getResources().openRawResource(R.raw.waving_bear);
+      runnable = new RefreshImageRunnable(imageSource, Movie.decodeStream(gifInputStream), handler = new Handler());
+      handler.postDelayed(runnable, 100);
+    });
   }
 
   @Override

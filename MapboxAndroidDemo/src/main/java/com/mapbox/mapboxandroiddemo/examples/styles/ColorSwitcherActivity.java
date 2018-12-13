@@ -154,10 +154,10 @@ public class ColorSwitcherActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
-        mapboxMap.setStyle(Style.LIGHT);
-        water = (FillLayer) map.getLayer("water");
-        building = (FillLayer) map.getLayer("building");
-
+        mapboxMap.setStyle(Style.LIGHT, style -> {
+          water = (FillLayer) map.getStyle().getLayer("water");
+          building = (FillLayer) map.getStyle().getLayer("building");
+        });
       }
     });
   }

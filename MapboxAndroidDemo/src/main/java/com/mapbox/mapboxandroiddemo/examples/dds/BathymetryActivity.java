@@ -66,24 +66,25 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
   public void onMapReady(MapboxMap mapboxMap) {
     BathymetryActivity.this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.OUTDOORS);
+    mapboxMap.setStyle(Style.OUTDOORS,style -> {
+      // Set bounds to Lawrence Lake, Michigan
+      mapboxMap.setLatLngBoundsForCameraTarget(LAKE_BOUNDS);
 
-    // Set bounds to Lawrence Lake, Michigan
-    mapboxMap.setLatLngBoundsForCameraTarget(LAKE_BOUNDS);
+      // Remove lake label layer
+      mapboxMap.getStyle().removeLayer("water-label");
 
-    // Remove lake label layer
-    mapboxMap.removeLayer("water-label");
+      // Initialize FeatureCollection object for future use with layers
+      featureCollection = FeatureCollection.fromJson(loadGeoJsonFromAsset("bathymetry-data.geojson"));
 
-    // Initialize FeatureCollection object for future use with layers
-    featureCollection = FeatureCollection.fromJson(loadGeoJsonFromAsset("bathymetry-data.geojson"));
+      // Retrieve GeoJSON from local file and add it to the map
+      GeoJsonSource geoJsonSource = new GeoJsonSource(geojsonSourceId,
+        featureCollection);
+      mapboxMap.getStyle().addSource(geoJsonSource);
 
-    // Retrieve GeoJSON from local file and add it to the map
-    GeoJsonSource geoJsonSource = new GeoJsonSource(geojsonSourceId,
-      featureCollection);
-    mapboxMap.addSource(geoJsonSource);
+      setUpDepthFillLayers();
+      setUpDepthNumberSymbolLayer();
 
-    setUpDepthFillLayers();
-    setUpDepthNumberSymbolLayer();
+    });
   }
 
   /**
@@ -101,7 +102,7 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
       fillOpacity(.7f));
     // Only display Polygon Features in this layer
     depthPolygonFillLayer.setFilter(eq(geometryType(), literal("Polygon")));
-    mapboxMap.addLayer(depthPolygonFillLayer);
+    mapboxMap.getStyle().addLayer(depthPolygonFillLayer);
   }
 
   /**
@@ -118,7 +119,7 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
     );
     // Only display Point Features in this layer
     depthNumberSymbolLayer.setFilter(eq(geometryType(), literal("Point")));
-    mapboxMap.addLayerAbove(depthNumberSymbolLayer, "DEPTH_POLYGON_FILL_LAYER_ID");
+    mapboxMap.getStyle().addLayerAbove(depthNumberSymbolLayer, "DEPTH_POLYGON_FILL_LAYER_ID");
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

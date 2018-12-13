@@ -59,29 +59,29 @@ public class SnapshotShareActivity extends AppCompatActivity {
 
         SnapshotShareActivity.this.mapboxMap = mapboxMap;
 
-        mapboxMap.setStyle(Style.SATELLITE_STREETS);
+        mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
+          // When user clicks the map, start the snapshotting process with the given parameters
+          cameraFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        // When user clicks the map, start the snapshotting process with the given parameters
-        cameraFab.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-
-            if (!hasStartedSnapshotGeneration) {
-              hasStartedSnapshotGeneration = true;
-              Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_LONG).show();
-              startSnapShot(
-                mapboxMap.getProjection().getVisibleRegion().latLngBounds,
-                mapView.getMeasuredHeight(),
-                mapView.getMeasuredWidth());
+              if (!hasStartedSnapshotGeneration) {
+                hasStartedSnapshotGeneration = true;
+                Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_LONG).show();
+                startSnapShot(
+                  mapboxMap.getProjection().getVisibleRegion().latLngBounds,
+                  mapView.getMeasuredHeight(),
+                  mapView.getMeasuredWidth());
+              }
             }
-          }
+          });
         });
+
+        // To account for new security measures regarding file management that were released with Android Nougat.
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
       }
     });
-
-    // To account for new security measures regarding file management that were released with Android Nougat.
-    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-    StrictMode.setVmPolicy(builder.build());
   }
 
   /**
@@ -95,7 +95,7 @@ public class SnapshotShareActivity extends AppCompatActivity {
     if (mapSnapshotter == null) {
       // Initialize snapshotter with map dimensions and given bounds
       MapSnapshotter.Options options =
-        new MapSnapshotter.Options(width, height).withRegion(latLngBounds).withStyle(mapboxMap.getStyleUrl());
+        new MapSnapshotter.Options(width, height).withRegion(latLngBounds).withStyle(mapboxMap.getStyle().getUrl());
 
       mapSnapshotter = new MapSnapshotter(SnapshotShareActivity.this, options);
     } else {

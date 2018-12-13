@@ -5,6 +5,7 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Polygon;
@@ -49,8 +50,10 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     SelectBuildingActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.LIGHT);
-    mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.LIGHT, style -> {
+      mapboxMap.addOnMapClickListener(this);
+      Toast.makeText(this, getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
+    });
   }
 
   @Override

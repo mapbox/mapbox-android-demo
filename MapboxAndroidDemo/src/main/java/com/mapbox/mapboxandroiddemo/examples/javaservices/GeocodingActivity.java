@@ -68,9 +68,10 @@ public class GeocodingActivity extends AppCompatActivity implements OnMapReadyCa
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
-    initTextViews();
-    initButtons();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+      initTextViews();
+      initButtons();
+    });
   }
 
   private void initTextViews() {

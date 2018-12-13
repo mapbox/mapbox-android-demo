@@ -15,6 +15,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -65,57 +66,62 @@ public class IndoorMapActivity extends AppCompatActivity {
       public void onMapReady(final MapboxMap mapboxMap) {
         map = mapboxMap;
 
-        levelButtons = findViewById(R.id.floor_level_buttons);
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
 
-        boundingBox = new ArrayList<>();
+          levelButtons = findViewById(R.id.floor_level_buttons);
 
-        boundingBox.add(Point.fromLngLat(-77.03791, 38.89715));
-        boundingBox.add(Point.fromLngLat(-77.03791, 38.89811));
-        boundingBox.add(Point.fromLngLat(-77.03532, 38.89811));
-        boundingBox.add(Point.fromLngLat(-77.03532, 38.89708));
+          boundingBox = new ArrayList<>();
 
-        boundingBoxList = new ArrayList<>();
-        boundingBoxList.add(boundingBox);
+          boundingBox.add(Point.fromLngLat(-77.03791, 38.89715));
+          boundingBox.add(Point.fromLngLat(-77.03791, 38.89811));
+          boundingBox.add(Point.fromLngLat(-77.03532, 38.89811));
+          boundingBox.add(Point.fromLngLat(-77.03532, 38.89708));
 
-        mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
-          @Override
-          public void onCameraMove() {
-            if (mapboxMap.getCameraPosition().zoom > 16) {
-              if (TurfJoins.inside(Point.fromLngLat(mapboxMap.getCameraPosition().target.getLongitude(),
-                mapboxMap.getCameraPosition().target.getLatitude()), Polygon.fromLngLats(boundingBoxList))) {
-                if (levelButtons.getVisibility() != View.VISIBLE) {
-                  showLevelButton();
+          boundingBoxList = new ArrayList<>();
+          boundingBoxList.add(boundingBox);
+
+          mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+              if (mapboxMap.getCameraPosition().zoom > 16) {
+                if (TurfJoins.inside(Point.fromLngLat(mapboxMap.getCameraPosition().target.getLongitude(),
+                  mapboxMap.getCameraPosition().target.getLatitude()), Polygon.fromLngLats(boundingBoxList))) {
+                  if (levelButtons.getVisibility() != View.VISIBLE) {
+                    showLevelButton();
+                  }
+                } else {
+                  if (levelButtons.getVisibility() == View.VISIBLE) {
+                    hideLevelButton();
+                  }
                 }
-              } else {
-                if (levelButtons.getVisibility() == View.VISIBLE) {
-                  hideLevelButton();
-                }
+              } else if (levelButtons.getVisibility() == View.VISIBLE) {
+                hideLevelButton();
               }
-            } else if (levelButtons.getVisibility() == View.VISIBLE) {
-              hideLevelButton();
             }
+          });
+          indoorBuildingSource = new GeoJsonSource("indoor-building", loadJsonFromAsset("white_house_lvl_0.geojson"));
+          mapboxMap.getStyle().addSource(indoorBuildingSource);
+
+          // Add the building layers since we know zoom levels in range
+          loadBuildingLayer();
+
+        });
+
+        Button buttonSecondLevel = findViewById(R.id.second_level_button);
+        buttonSecondLevel.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            indoorBuildingSource.setGeoJson(loadJsonFromAsset("white_house_lvl_1.geojson"));
           }
         });
-        indoorBuildingSource = new GeoJsonSource("indoor-building", loadJsonFromAsset("white_house_lvl_0.geojson"));
-        mapboxMap.addSource(indoorBuildingSource);
 
-        // Add the building layers since we know zoom levels in range
-        loadBuildingLayer();
-      }
-    });
-    Button buttonSecondLevel = findViewById(R.id.second_level_button);
-    buttonSecondLevel.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        indoorBuildingSource.setGeoJson(loadJsonFromAsset("white_house_lvl_1.geojson"));
-      }
-    });
-
-    Button buttonGroundLevel = findViewById(R.id.ground_level_button);
-    buttonGroundLevel.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        indoorBuildingSource.setGeoJson(loadJsonFromAsset("white_house_lvl_0.geojson"));
+        Button buttonGroundLevel = findViewById(R.id.ground_level_button);
+        buttonGroundLevel.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            indoorBuildingSource.setGeoJson(loadJsonFromAsset("white_house_lvl_0.geojson"));
+          }
+        });
       }
     });
   }
@@ -193,7 +199,7 @@ public class IndoorMapActivity extends AppCompatActivity {
         stop(16.5f, 0.5f),
         stop(16f, 0f))));
 
-    map.addLayer(indoorBuildingLayer);
+    map.getStyle().addLayer(indoorBuildingLayer);
 
     LineLayer indoorBuildingLineLayer = new LineLayer("indoor-building-line", "indoor-building").withProperties(
       lineColor(Color.parseColor("#50667f")),
@@ -202,7 +208,7 @@ public class IndoorMapActivity extends AppCompatActivity {
         stop(17f, 1f),
         stop(16.5f, 0.5f),
         stop(16f, 0f))));
-    map.addLayer(indoorBuildingLineLayer);
+    map.getStyle().addLayer(indoorBuildingLineLayer);
   }
 
   private String loadJsonFromAsset(String filename) {

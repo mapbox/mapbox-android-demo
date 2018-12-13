@@ -53,17 +53,16 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
-ß
+
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.DARK);
-
-    VectorSource vectorSource = new VectorSource("population", "mapbox://peterqliu.d0vin3el");
-    mapboxMap.addSource(vectorSource);
-
-    addFillsLayer();
-    addExtrusionsLayer();
+    mapboxMap.setStyle(Style.DARK, style -> {
+      VectorSource vectorSource = new VectorSource("population", "mapbox://peterqliu.d0vin3el");
+      mapboxMap.getStyle().addSource(vectorSource);
+      addFillsLayer();
+      addExtrusionsLayer();
+    });
   }
 
   private void addFillsLayer() {
@@ -75,7 +74,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
         stop(0, rgb(22, 14, 35)),
         stop(14500, rgb(0, 97, 127)),
         stop(145000, rgb(85, 223, 255)))));
-    mapboxMap.addLayerBelow(fillsLayer, "water");
+    mapboxMap.getStyle().addLayerBelow(fillsLayer, "water");
   }
 
   private void addExtrusionsLayer() {
@@ -91,7 +90,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
       fillExtrusionHeight(interpolate(exponential(1f), get("pkm2"),
         stop(0, 0f),
         stop(1450000, 20000f))));
-    mapboxMap.addLayerBelow(fillExtrusionLayer, "airport-label");
+    mapboxMap.getStyle().addLayerBelow(fillExtrusionLayer, "airport-label");
   }
 
   @Override

@@ -26,6 +26,7 @@ import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -79,11 +80,13 @@ public class TilequeryActivity extends AppCompatActivity implements
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     TilequeryActivity.this.mapboxMap = mapboxMap;
-    addClickLayer();
-    addResultLayer();
-    displayDeviceLocation();
-    mapboxMap.addOnMapClickListener(this);
-    Toast.makeText(this, R.string.click_on_map_instruction, Toast.LENGTH_SHORT).show();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS,style -> {
+      addClickLayer();
+      addResultLayer();
+      displayDeviceLocation();
+      mapboxMap.addOnMapClickListener(this);
+      Toast.makeText(this, R.string.click_on_map_instruction, Toast.LENGTH_SHORT).show();
+    });
   }
 
   /**
@@ -92,11 +95,11 @@ public class TilequeryActivity extends AppCompatActivity implements
   private void addClickLayer() {
     Bitmap clickSymbolIcon = BitmapFactory.decodeResource(
       TilequeryActivity.this.getResources(), R.drawable.red_marker);
-    mapboxMap.addImage("CLICK-ICON-ID", clickSymbolIcon);
+    mapboxMap.getStyle().addImage("CLICK-ICON-ID", clickSymbolIcon);
 
     GeoJsonSource clickGeoJsonSource = new GeoJsonSource(CLICK_CENTER_GEOJSON_SOURCE_ID,
       FeatureCollection.fromFeatures(new Feature[]{}));
-    mapboxMap.addSource(clickGeoJsonSource);
+    mapboxMap.getStyle().addSource(clickGeoJsonSource);
 
     SymbolLayer clickSymbolLayer = new SymbolLayer("click-layer", CLICK_CENTER_GEOJSON_SOURCE_ID);
     clickSymbolLayer.setProperties(
@@ -105,7 +108,7 @@ public class TilequeryActivity extends AppCompatActivity implements
       iconIgnorePlacement(true),
       iconAllowOverlap(true)
     );
-    mapboxMap.addLayer(clickSymbolLayer);
+    mapboxMap.getStyle().addLayer(clickSymbolLayer);
   }
 
   /**
@@ -115,12 +118,12 @@ public class TilequeryActivity extends AppCompatActivity implements
     // Add the marker image to map
     Bitmap resultSymbolIcon = BitmapFactory.decodeResource(
       TilequeryActivity.this.getResources(), R.drawable.blue_marker);
-    mapboxMap.addImage("RESULT-ICON-ID", resultSymbolIcon);
+    mapboxMap.getStyle().addImage("RESULT-ICON-ID", resultSymbolIcon);
 
     // Retrieve GeoJSON information from the Mapbox Tilequery API
     GeoJsonSource resultBlueMarkerGeoJsonSource = new GeoJsonSource(RESULT_GEOJSON_SOURCE_ID,
       FeatureCollection.fromFeatures(new Feature[]{}));
-    mapboxMap.addSource(resultBlueMarkerGeoJsonSource);
+    mapboxMap.getStyle().addSource(resultBlueMarkerGeoJsonSource);
 
     SymbolLayer resultSymbolLayer = new SymbolLayer(LAYER_ID, RESULT_GEOJSON_SOURCE_ID);
     resultSymbolLayer.setProperties(
@@ -129,21 +132,23 @@ public class TilequeryActivity extends AppCompatActivity implements
       iconIgnorePlacement(true),
       iconAllowOverlap(true)
     );
-    mapboxMap.addLayer(resultSymbolLayer);
+    mapboxMap.getStyle().addLayer(resultSymbolLayer);
   }
 
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
 
     // Move and display the click center layer's red marker icon to wherever the map was clicked on
-    GeoJsonSource clickLocationSource = mapboxMap.getSourceAs(CLICK_CENTER_GEOJSON_SOURCE_ID);
+    GeoJsonSource clickLocationSource = mapboxMap.getStyle().getSourceAs(CLICK_CENTER_GEOJSON_SOURCE_ID);
     if (clickLocationSource != null) {
       clickLocationSource.setGeoJson(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
     }
 
     // Use the map click location to make a Tilequery API call
     makeTilequeryApiCall(point);
+
+    return true;
   }
 
   /**
@@ -167,7 +172,7 @@ public class TilequeryActivity extends AppCompatActivity implements
       @Override
       public void onResponse(Call<FeatureCollection> call, Response<FeatureCollection> response) {
         tilequeryResponseTextView.setText(response.body().toJson());
-        GeoJsonSource resultSource = mapboxMap.getSourceAs(RESULT_GEOJSON_SOURCE_ID);
+        GeoJsonSource resultSource = mapboxMap.getStyle().getSourceAs(RESULT_GEOJSON_SOURCE_ID);
         if (resultSource != null && response.body().features() != null) {
           resultSource.setGeoJson(FeatureCollection.fromFeatures(response.body().features()));
         }
@@ -193,7 +198,7 @@ public class TilequeryActivity extends AppCompatActivity implements
       LocationComponent locationComponent = mapboxMap.getLocationComponent();
 
       // Activate with options
-      locationComponent.activateLocationComponent(this);
+      locationComponent.activateLocationComponent(this,mapboxMap.getStyle());
 
       // Enable to make component visible
       locationComponent.setLocationComponentEnabled(true);

@@ -59,15 +59,14 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     ClickOnLayerActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
-    mapboxMap.addOnMapClickListener(this);
-
-    addGeoJsonSourceToMap();
-
-    // Create FillLayer with GeoJSON source and add the FillLayer to the map
-    layer = new FillLayer(geoJsonLayerId, geoJsonSourceId);
-    layer.setProperties(fillOpacity(0.5f));
-    mapboxMap.addLayer(layer);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+      mapboxMap.addOnMapClickListener(this);
+      addGeoJsonSourceToMap();
+      // Create FillLayer with GeoJSON source and add the FillLayer to the map
+      layer = new FillLayer(geoJsonLayerId, geoJsonSourceId);
+      layer.setProperties(fillOpacity(0.5f));
+      mapboxMap.getStyle().addLayer(layer);
+    });
   }
 
   @Override
@@ -94,7 +93,7 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
         + "d58f20f4a1d8841e8/regions.geojson"));
 
       // Add GeoJsonSource to map
-      mapboxMap.addSource(source);
+      mapboxMap.getStyle().addSource(source);
 
     } catch (Throwable throwable) {
       Log.e("ClickOnLayerActivity", "Couldn't add GeoJsonSource to map", throwable);

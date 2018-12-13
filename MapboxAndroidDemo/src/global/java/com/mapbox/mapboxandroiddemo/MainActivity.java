@@ -62,7 +62,6 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActi
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
-//import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.IsochroneActivity;
@@ -80,25 +79,23 @@ import com.mapbox.mapboxandroiddemo.examples.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MagicWindowKotlinActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MapFogBackgroundActivity;
-import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
-//import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity;
-//import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
+<<<<<<< HEAD
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentOptionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 //import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
+=======
+>>>>>>> 5544093f... needed refactoring to use the new Style class and getStyle()
 import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
-//import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
-//import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
-//import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
-//import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
+import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.BuildingOutlineActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
@@ -143,6 +140,15 @@ import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.OPENED_APP;
 import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.SKIPPED_ACCOUNT_CREATION;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.SKIPPED_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
+
+//import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
+//import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
+//import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
+//import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
+//import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
+//import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
+//import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
+//import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
   // Used to track internal navigation to the Snapshotter section

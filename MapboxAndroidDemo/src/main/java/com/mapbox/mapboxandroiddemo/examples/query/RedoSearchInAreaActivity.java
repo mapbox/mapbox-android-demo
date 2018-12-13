@@ -69,34 +69,35 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.DARK);
-    mapboxMap.addOnMoveListener(this);
-    initGeoJsonSource();
-    initFillLayer();
-    this.redoSearchButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        mapboxMap.clear();
-        if (!moveMapInstructionShown) {
-          Toast.makeText(RedoSearchInAreaActivity.this,
-            R.string.move_the_map_and_research, Toast.LENGTH_SHORT).show();
-          moveMapInstructionShown = true;
+    mapboxMap.setStyle(Style.DARK, style -> {
+      mapboxMap.addOnMoveListener(this);
+      initGeoJsonSource();
+      initFillLayer();
+      this.redoSearchButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          mapboxMap.clear();
+          if (!moveMapInstructionShown) {
+            Toast.makeText(RedoSearchInAreaActivity.this,
+              R.string.move_the_map_and_research, Toast.LENGTH_SHORT).show();
+            moveMapInstructionShown = true;
+          }
+          FeatureCollection featureCollection = null;
+          if (mapboxMap.getStyle().getLayer(desiredMapLayerToShow) != null) {
+            featureCollection = FeatureCollection.fromFeatures(getFeaturesInViewport(desiredMapLayerToShow));
+          } else {
+            Toast.makeText(RedoSearchInAreaActivity.this,
+              String.format(getString(R.string.layer_not_found), desiredMapLayerToShow),
+              Toast.LENGTH_SHORT).show();
+          }
+          // Retrieve and update the GeoJSON source used in the FillLayer
+          dataGeoJsonSource = mapboxMap.getStyle().getSourceAs(geoJsonSourceId);
+          if (dataGeoJsonSource != null && featureCollection != null) {
+            dataGeoJsonSource.setGeoJson(featureCollection);
+          }
+          redoSearchButton.setVisibility(View.INVISIBLE);
         }
-        FeatureCollection featureCollection = null;
-        if (mapboxMap.getLayer(desiredMapLayerToShow) != null) {
-          featureCollection = FeatureCollection.fromFeatures(getFeaturesInViewport(desiredMapLayerToShow));
-        } else {
-          Toast.makeText(RedoSearchInAreaActivity.this,
-            String.format(getString(R.string.layer_not_found), desiredMapLayerToShow),
-            Toast.LENGTH_SHORT).show();
-        }
-        // Retrieve and update the GeoJSON source used in the FillLayer
-        dataGeoJsonSource = mapboxMap.getSourceAs(geoJsonSourceId);
-        if (dataGeoJsonSource != null && featureCollection != null) {
-          dataGeoJsonSource.setGeoJson(featureCollection);
-        }
-        redoSearchButton.setVisibility(View.INVISIBLE);
-      }
+      });
     });
   }
 
@@ -106,7 +107,7 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
   private void initGeoJsonSource() {
     dataFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     dataGeoJsonSource = new GeoJsonSource(geoJsonSourceId, dataFeatureCollection);
-    mapboxMap.addSource(dataGeoJsonSource);
+    mapboxMap.getStyle().addSource(dataGeoJsonSource);
   }
 
   /**
@@ -123,7 +124,7 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
         stop(15f, 1f))),
       fillColor(Color.parseColor("#00F7FF"))
     );
-    mapboxMap.addLayer(dataFillLayer);
+    mapboxMap.getStyle().addLayer(dataFillLayer);
   }
 
   /**

@@ -9,12 +9,12 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Polygon;
 import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,6 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
     MapboxMapOptions options = new MapboxMapOptions()
       .attributionTintColor(RED_COLOR)
       .compassFadesWhenFacingNorth(false)
-      .styleUrl(Style.MAPBOX_STREETS)
       .camera(new CameraPosition.Builder()
         .target(new LatLng(25.255377, 55.3089185))
         .zoom(11.86)
@@ -61,10 +60,11 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
   @Override
   public void onMapReady(MapboxMap map) {
     mapboxMap = map;
-    polygon = mapboxMap.addPolygon(new PolygonOptions()
-      .addAll(POLYGON_COORDINATES)
-      .addAllHoles(HOLE_COORDINATES)
-      .fillColor(BLUE_COLOR));
+    map.setStyle(Style.MAPBOX_STREETS, style ->
+      polygon = mapboxMap.addPolygon(new PolygonOptions()
+        .addAll(POLYGON_COORDINATES)
+        .addAllHoles(HOLE_COORDINATES)
+        .fillColor(BLUE_COLOR)));
   }
 
   @Override

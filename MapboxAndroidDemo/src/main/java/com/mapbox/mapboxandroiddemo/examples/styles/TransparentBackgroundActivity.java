@@ -12,6 +12,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -52,7 +53,7 @@ public class TransparentBackgroundActivity extends AppCompatActivity implements 
   public void onMapReady(MapboxMap mapboxMap) {
     try {
       // Switch the map to a style that has no background
-      mapboxMap.setStyleJson(readRawResource(this, R.raw.no_bg_style));
+      mapboxMap.setStyle(new Style.Builder().fromJson(readRawResource(this, R.raw.no_bg_style)));
       initVideoView();
     } catch (IOException exception) {
       Timber.e(exception);

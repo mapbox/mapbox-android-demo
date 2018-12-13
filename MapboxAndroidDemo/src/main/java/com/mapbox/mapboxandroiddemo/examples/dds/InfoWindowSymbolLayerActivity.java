@@ -82,9 +82,10 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
-    new LoadGeoJsonDataTask(this).execute();
-    mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS,style -> {
+      new LoadGeoJsonDataTask(this).execute();
+      mapboxMap.addOnMapClickListener(this);
+    });
   }
 
   @Override
@@ -113,7 +114,7 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
    */
   private void setupSource() {
     source = new GeoJsonSource(geojsonSourceId, featureCollection);
-    mapboxMap.addSource(source);
+    mapboxMap.getStyle().addSource(source);
   }
 
   /**
@@ -122,7 +123,7 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   private void setUpImage() {
     Bitmap icon = BitmapFactory.decodeResource(
       this.getResources(), R.drawable.red_marker);
-    mapboxMap.addImage(MARKER_IMAGE_ID, icon);
+    mapboxMap.getStyle().addImage(MARKER_IMAGE_ID, icon);
   }
 
   /**
@@ -138,7 +139,7 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
    * Setup a layer with maki icons, eg. west coast city.
    */
   private void setUpMarkerLayer() {
-    mapboxMap.addLayer(new SymbolLayer(MARKER_LAYER_ID, geojsonSourceId)
+    mapboxMap.getStyle().addLayer(new SymbolLayer(MARKER_LAYER_ID, geojsonSourceId)
       .withProperties(
         iconImage(MARKER_IMAGE_ID),
         iconAllowOverlap(true)
@@ -152,7 +153,7 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
    * </p>
    */
   private void setUpInfoWindowLayer() {
-    mapboxMap.addLayer(new SymbolLayer(CALLOUT_LAYER_ID, geojsonSourceId)
+    mapboxMap.getStyle().addLayer(new SymbolLayer(CALLOUT_LAYER_ID, geojsonSourceId)
       .withProperties(
         /* show image with id title based on the value of the name feature property */
         iconImage("{name}"),
@@ -238,7 +239,7 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   public void setImageGenResults(HashMap<String, View> viewMap, HashMap<String, Bitmap> imageMap) {
     if (mapboxMap != null) {
       // calling addImages is faster as separate addImage calls for each bitmap.
-      mapboxMap.addImages(imageMap);
+      mapboxMap.getStyle().addImages(imageMap);
     }
     // need to store reference to views to be able to use them as hitboxes for click events.
     this.viewMap = viewMap;

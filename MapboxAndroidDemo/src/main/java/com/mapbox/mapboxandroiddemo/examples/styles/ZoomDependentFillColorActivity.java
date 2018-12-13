@@ -43,23 +43,24 @@ public class ZoomDependentFillColorActivity extends AppCompatActivity {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
 
-        mapboxMap.setStyle(Style.DARK);
+        mapboxMap.setStyle(Style.DARK, style -> {
 
-        FillLayer layer = mapboxMap.getLayerAs("water");
-        if (layer == null) {
-          return;
-        }
+          FillLayer layer = mapboxMap.getStyle().getLayerAs("water");
+          if (layer == null) {
+            return;
+          }
 
-        //Set a zoom function to update the color of the water
-        layer.setProperties(
-          fillColor(Expression.interpolate(Expression.exponential(1f), zoom(),
-            stop(1f, rgb(0,209,22)),
-            stop(8.5f, rgb(10,88,255)),
-            stop(10f, rgb(255,10,10)),
-            stop(18f, rgb(251,255,0)))));
+          //Set a zoom function to update the color of the water
+          layer.setProperties(
+            fillColor(Expression.interpolate(Expression.exponential(1f), zoom(),
+              stop(1f, rgb(0,209,22)),
+              stop(8.5f, rgb(10,88,255)),
+              stop(10f, rgb(255,10,10)),
+              stop(18f, rgb(251,255,0)))));
 
-        mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(40.73581, -73.99155), 12), 12000);
+          mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(40.73581, -73.99155), 12), 12000);
 
+        });
       }
     });
   }

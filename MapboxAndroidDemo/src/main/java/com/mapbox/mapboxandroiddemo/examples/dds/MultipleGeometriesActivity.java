@@ -47,17 +47,18 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     MultipleGeometriesActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.LIGHT);
-    createGeoJsonSource();
-    addPolygonLayer();
-    addPointsLayer();
+    mapboxMap.setStyle(Style.LIGHT,style -> {
+      createGeoJsonSource();
+      addPolygonLayer();
+      addPointsLayer();
+    });
   }
 
   private void createGeoJsonSource() {
     // Load data from GeoJSON file in the assets folder
     GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID,
       loadJsonFromAsset("fake_norway_campsites.geojson"));
-    mapboxMap.addSource(geoJsonSource);
+    mapboxMap.getStyle().addSource(geoJsonSource);
   }
 
   private void addPolygonLayer() {
@@ -68,7 +69,7 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
       PropertyFactory.fillOpacity(.4f));
     borderOutlineLayer.setFilter(eq(geometryType(), literal("Polygon")));
     borderOutlineLayer.setFilter(eq(literal("$type"), literal("Polygon")));
-    mapboxMap.addLayer(borderOutlineLayer);
+    mapboxMap.getStyle().addLayer(borderOutlineLayer);
   }
 
   private void addPointsLayer() {
@@ -78,7 +79,7 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
       PropertyFactory.circleColor(Color.YELLOW),
       PropertyFactory.circleRadius(3f));
     pointsLayer.setFilter(eq(literal("$type"), literal("Point")));
-    mapboxMap.addLayer(pointsLayer);
+    mapboxMap.getStyle().addLayer(pointsLayer);
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

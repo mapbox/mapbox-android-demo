@@ -144,7 +144,7 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineCallback<Lo
     override fun onSuccess(result: LocationEngineResult?) {
         if (result != null) {
             setInitialMapPosition(LatLng(result.lastLocation!!.latitude,
-                    result.lastLocation!!.latitude))
+                    result.lastLocation!!.longitude))
             locationEngine.removeLocationUpdates(this)
         }
     }

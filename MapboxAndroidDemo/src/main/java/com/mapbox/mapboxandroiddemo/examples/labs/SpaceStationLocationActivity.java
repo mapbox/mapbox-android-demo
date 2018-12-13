@@ -1,5 +1,4 @@
-/*
-package com.mapbox.mapboxandroiddemo.examples.labs;
+/*package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
@@ -24,6 +23,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.geojson.Point;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.turf.TurfMeasurement;
 
 import retrofit2.Call;
@@ -33,10 +33,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 
-*/
-/**
+*
  * Display the space station's real-time location
- *//*
+
 
 public class SpaceStationLocationActivity extends AppCompatActivity {
 
@@ -76,11 +75,11 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
 
         map = mapboxMap;
 
-        mapboxMap.setStyle(Style.SATELLITE_STREETS);
+        mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
+          callApi();
 
-        callApi();
-
-        Toast.makeText(SpaceStationLocationActivity.this, R.string.space_station_toast, Toast.LENGTH_SHORT).show();
+          Toast.makeText(SpaceStationLocationActivity.this, R.string.space_station_toast, Toast.LENGTH_SHORT).show();
+        });
       }
     });
   } // End onCreate

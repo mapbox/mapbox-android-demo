@@ -91,10 +91,11 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     CalendarIntegrationActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
-    featureCollection = FeatureCollection.fromFeatures(new Feature[] {});
-    getCalendarData();
-    mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+      featureCollection = FeatureCollection.fromFeatures(new Feature[] {});
+      getCalendarData();
+      mapboxMap.addOnMapClickListener(this);
+    });
   }
 
   @Override
@@ -209,7 +210,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
               singleFeature.addStringProperty(PROPERTY_LOCATION, eventLocation);
               featureList.add(singleFeature);
               featureCollection = FeatureCollection.fromFeatures(featureList);
-              GeoJsonSource source = mapboxMap.getSourceAs(geojsonSourceId);
+              GeoJsonSource source = mapboxMap.getStyle().getSourceAs(geojsonSourceId);
               if (source != null) {
                 source.setGeoJson(featureCollection);
               } else {
@@ -250,7 +251,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
    * Adds the GeoJSON source to the map
    */
   private void setupSource() {
-    mapboxMap.addSource(new GeoJsonSource(geojsonSourceId, featureCollection));
+    mapboxMap.getStyle().addSource(new GeoJsonSource(geojsonSourceId, featureCollection));
   }
 
   /**
@@ -259,7 +260,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
   private void setUpImage() {
     Bitmap icon = BitmapFactory.decodeResource(
       this.getResources(), R.drawable.calendar_event_icon);
-    mapboxMap.addImage(MARKER_IMAGE_ID, icon);
+    mapboxMap.getStyle().addImage(MARKER_IMAGE_ID, icon);
   }
 
   /**
@@ -273,7 +274,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
       iconAllowOverlap(true),
       iconIgnorePlacement(true)
     );
-    mapboxMap.addLayer(eventSymbolLayer);
+    mapboxMap.getStyle().addLayer(eventSymbolLayer);
   }
 
   @Override

@@ -126,63 +126,65 @@ public class ExpressionIntegrationActivity
 
     this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS,style -> {
 
-    setUpMapImagePins();
+      setUpMapImagePins();
 
-    // Initialize FeatureCollection object for future use with layers
-    FeatureCollection featureCollection =
-      FeatureCollection.fromJson(loadGeoJsonFromAsset("weather_data_per_state_before2006.geojson"));
+      // Initialize FeatureCollection object for future use with layers
+      FeatureCollection featureCollection =
+        FeatureCollection.fromJson(loadGeoJsonFromAsset("weather_data_per_state_before2006.geojson"));
 
 
-    // Find out the states represented in the FeatureCollection
-    // and bounds of the extreme conditions
-    states = new ArrayList<>();
-    for (Feature feature : featureCollection.features()) {
-      String stateName = feature.getStringProperty("state");
-      String lat = feature.getStringProperty("latitude");
-      String lon = feature.getStringProperty("longitude");
+      // Find out the states represented in the FeatureCollection
+      // and bounds of the extreme conditions
+      states = new ArrayList<>();
+      for (Feature feature : featureCollection.features()) {
+        String stateName = feature.getStringProperty("state");
+        String lat = feature.getStringProperty("latitude");
+        String lon = feature.getStringProperty("longitude");
 
-      LatLng latLng = new LatLng(
-        Double.parseDouble(lat),
-        Double.parseDouble(lon));
+        LatLng latLng = new LatLng(
+          Double.parseDouble(lat),
+          Double.parseDouble(lon));
 
-      State state = null;
-      for (State curState : states) {
-        if (curState.name.equals(stateName)) {
-          state = curState;
-          break;
+        State state = null;
+        for (State curState : states) {
+          if (curState.name.equals(stateName)) {
+            state = curState;
+            break;
+          }
+        }
+        if (state == null) {
+          state = new State(stateName, latLng);
+          states.add(state);
+        } else {
+          state.add(latLng);
         }
       }
-      if (state == null) {
-        state = new State(stateName, latLng);
-        states.add(state);
-      } else {
-        state.add(latLng);
-      }
-    }
 
-    // Retrieves GeoJSON from local file and adds it to the map
-    GeoJsonSource geoJsonSource =
-      new GeoJsonSource(GEOJSON_SRC_ID, featureCollection);
-    mapboxMap.addSource(geoJsonSource);
+      // Retrieves GeoJSON from local file and adds it to the map
+      GeoJsonSource geoJsonSource =
+        new GeoJsonSource(GEOJSON_SRC_ID, featureCollection);
+      mapboxMap.getStyle().addSource(geoJsonSource);
 
-    initTemperatureLayers();
-    populateMenu();
+      initTemperatureLayers();
+      populateMenu();
 
-    // show Connecticut by default
-    int indexOfState = indexOfState("Connecticut");
-    selectState(states.get(indexOfState).name, indexOfState);
+      // show Connecticut by default
+      int indexOfState = indexOfState("Connecticut");
+      selectState(states.get(indexOfState).name, indexOfState);
 
-    // When user clicks the map, start the snapshotting process with the given parameters
-    unitsFab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
+      // When user clicks the map, start the snapshotting process with the given parameters
+      unitsFab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
 
-        if (mapboxMap != null) {
-          changeTemperatureUnits(!isImperial);
+          if (mapboxMap != null) {
+            changeTemperatureUnits(!isImperial);
+          }
         }
-      }
+      });
+
     });
   }
 
@@ -192,11 +194,11 @@ public class ExpressionIntegrationActivity
   private void setUpMapImagePins() {
     Bitmap icon = BitmapFactory.decodeResource(
       this.getResources(), R.drawable.red_marker);
-    mapboxMap.addImage(RED_PIN_IMAGE_ID, icon);
+    mapboxMap.getStyle().addImage(RED_PIN_IMAGE_ID, icon);
 
     icon = BitmapFactory.decodeResource(
       this.getResources(), R.drawable.blue_marker);
-    mapboxMap.addImage(BLUE_PIN_IMAGE_ID, icon);
+    mapboxMap.getStyle().addImage(BLUE_PIN_IMAGE_ID, icon);
   }
 
   private void initTemperatureLayers() {
@@ -217,7 +219,7 @@ public class ExpressionIntegrationActivity
       );
       // Only display Maximum Temperature in this layer
       maxTempLayer.setFilter(eq(get("element"), literal("All-Time Maximum Temperature")));
-      mapboxMap.addLayer(maxTempLayer);
+      mapboxMap.getStyle().addLayer(maxTempLayer);
 
       // Adds a SymbolLayer to display minimum temperature in state
       SymbolLayer minTempLayer = new SymbolLayer(MIN_TEMP_LAYER_ID, GEOJSON_SRC_ID);
@@ -233,7 +235,7 @@ public class ExpressionIntegrationActivity
         iconIgnorePlacement(true));
       // Only display Minimum Temperature in this layer
       minTempLayer.setFilter(eq(get("element"), literal("All-Time Minimum Temperature")));
-      mapboxMap.addLayer(minTempLayer);
+      mapboxMap.getStyle().addLayer(minTempLayer);
 
       unitsText.setText(isImperial ? DEGREES_C : DEGREES_F);
     }
@@ -244,10 +246,10 @@ public class ExpressionIntegrationActivity
       this.isImperial = isImperial;
 
       // Apply new units to the data displayed in textfields of SymbolLayers
-      SymbolLayer maxTempLayer = (SymbolLayer)mapboxMap.getLayer(MAX_TEMP_LAYER_ID);
+      SymbolLayer maxTempLayer = (SymbolLayer)mapboxMap.getStyle().getLayer(MAX_TEMP_LAYER_ID);
       maxTempLayer.withProperties(textField(getTemperatureValue()));
 
-      SymbolLayer minTempLayer = (SymbolLayer)mapboxMap.getLayer(MIN_TEMP_LAYER_ID);
+      SymbolLayer minTempLayer = (SymbolLayer)mapboxMap.getStyle().getLayer(MIN_TEMP_LAYER_ID);
       minTempLayer.withProperties(textField(getTemperatureValue()));
 
       unitsText.setText(isImperial ? DEGREES_C : DEGREES_F);
@@ -302,11 +304,11 @@ public class ExpressionIntegrationActivity
     states = null;
 
     if (mapboxMap != null) {
-      mapboxMap.removeImage(RED_PIN_IMAGE_ID);
-      mapboxMap.removeImage(BLUE_PIN_IMAGE_ID);
-      mapboxMap.removeLayer(MAX_TEMP_LAYER_ID);
-      mapboxMap.removeLayer(MIN_TEMP_LAYER_ID);
-      mapboxMap.removeSource(GEOJSON_SRC_ID);
+      mapboxMap.getStyle().removeImage(RED_PIN_IMAGE_ID);
+      mapboxMap.getStyle().removeImage(BLUE_PIN_IMAGE_ID);
+      mapboxMap.getStyle().removeLayer(MAX_TEMP_LAYER_ID);
+      mapboxMap.getStyle().removeLayer(MIN_TEMP_LAYER_ID);
+      mapboxMap.getStyle().removeSource(GEOJSON_SRC_ID);
     }
     mapView.onDestroy();
 
@@ -374,7 +376,7 @@ public class ExpressionIntegrationActivity
 
     if (indexOfState(stateName) == stateIndex) {
       // Adds a SymbolLayer to display maximum temperature in state
-      SymbolLayer maxTempLayer = (SymbolLayer) mapboxMap.getLayer(MAX_TEMP_LAYER_ID);
+      SymbolLayer maxTempLayer = (SymbolLayer) mapboxMap.getStyle().getLayer(MAX_TEMP_LAYER_ID);
       // Only display Maximum Temperature in this layer for SELECTED State
       maxTempLayer.setFilter(all(
         eq(get("element"), literal("All-Time Maximum Temperature")),
@@ -382,7 +384,7 @@ public class ExpressionIntegrationActivity
 
 
       // Adds a SymbolLayer to display minimum temperature in state
-      SymbolLayer minTempLayer = (SymbolLayer) mapboxMap.getLayer(MIN_TEMP_LAYER_ID);
+      SymbolLayer minTempLayer = (SymbolLayer) mapboxMap.getStyle().getLayer(MIN_TEMP_LAYER_ID);
       // Only display Maximum Temperature in this layer for SELECTED State
       minTempLayer.setFilter(all(
         eq(get("element"), literal("All-Time Minimum Temperature")),

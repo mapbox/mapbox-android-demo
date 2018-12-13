@@ -60,38 +60,39 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     MultipleHeatmapStylingActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.LIGHT);
-    CameraPosition cameraPositionForFragmentMap = new CameraPosition.Builder()
-      .target(new LatLng(34.056684, -118.254002))
-      .zoom(11.047)
-      .build();
-    mapboxMap.animateCamera(
-      CameraUpdateFactory.newCameraPosition(cameraPositionForFragmentMap), 2600);
-    addHeatmapDataSource();
-    initHeatmapColors();
-    initHeatmapRadiusStops();
-    initHeatmapIntensityStops();
-    addHeatmapLayer();
-    findViewById(R.id.switch_heatmap_style_fab).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        index++;
-        if (index == listOfHeatmapColors.length - 1) {
-          index = 0;
+    mapboxMap.setStyle(Style.LIGHT,style -> {
+      CameraPosition cameraPositionForFragmentMap = new CameraPosition.Builder()
+        .target(new LatLng(34.056684, -118.254002))
+        .zoom(11.047)
+        .build();
+      mapboxMap.animateCamera(
+        CameraUpdateFactory.newCameraPosition(cameraPositionForFragmentMap), 2600);
+      addHeatmapDataSource();
+      initHeatmapColors();
+      initHeatmapRadiusStops();
+      initHeatmapIntensityStops();
+      addHeatmapLayer();
+      findViewById(R.id.switch_heatmap_style_fab).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          index++;
+          if (index == listOfHeatmapColors.length - 1) {
+            index = 0;
+          }
+          if (mapboxMap.getStyle().getLayer(HEATMAP_LAYER_ID) != null) {
+            mapboxMap.getStyle().getLayer(HEATMAP_LAYER_ID).setProperties(
+              heatmapColor(listOfHeatmapColors[index]),
+              heatmapRadius(listOfHeatmapRadiusStops[index]),
+              heatmapIntensity(listOfHeatmapIntensityStops[index])
+            );
+          }
         }
-        if (mapboxMap.getLayer(HEATMAP_LAYER_ID) != null) {
-          mapboxMap.getLayer(HEATMAP_LAYER_ID).setProperties(
-            heatmapColor(listOfHeatmapColors[index]),
-            heatmapRadius(listOfHeatmapRadiusStops[index]),
-            heatmapIntensity(listOfHeatmapIntensityStops[index])
-          );
-        }
-      }
+      });
     });
   }
 
   private void addHeatmapDataSource() {
-    mapboxMap.addSource(new GeoJsonSource(HEATMAP_SOURCE_ID,
+    mapboxMap.getStyle().addSource(new GeoJsonSource(HEATMAP_SOURCE_ID,
       loadGeoJsonFromAsset("la_heatmap_styling_points.geojson")));
   }
 
@@ -119,7 +120,7 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
     );
 
     // Add the heatmap layer to the map and above the "water-label" layer
-    mapboxMap.addLayerAbove(layer, "waterway-label");
+    mapboxMap.getStyle().addLayerAbove(layer, "waterway-label");
   }
 
   @Override

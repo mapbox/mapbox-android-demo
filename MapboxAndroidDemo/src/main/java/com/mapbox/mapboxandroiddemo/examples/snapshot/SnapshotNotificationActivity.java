@@ -58,8 +58,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     SnapshotNotificationActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
-    mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> mapboxMap.addOnMapClickListener(this));
   }
 
   @Override
@@ -83,7 +82,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
     if (mapSnapshotter == null) {
       // Initialize snapshotter with map dimensions and given bounds
       MapSnapshotter.Options options =
-        new MapSnapshotter.Options(width, height).withStyle(mapboxMap.getStyleUrl()).withRegion(latLngBounds);
+        new MapSnapshotter.Options(width, height).withStyle(mapboxMap.getStyle().getUrl()).withRegion(latLngBounds);
 
       mapSnapshotter = new MapSnapshotter(SnapshotNotificationActivity.this, options);
     } else {

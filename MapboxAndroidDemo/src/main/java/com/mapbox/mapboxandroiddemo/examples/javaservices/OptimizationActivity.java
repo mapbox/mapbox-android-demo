@@ -79,14 +79,15 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.SATELLITE_STREETS);
-    // Add origin and destination to the mapboxMap
-    mapboxMap.addMarker(new MarkerOptions()
-      .position(new LatLng(origin.latitude(), origin.longitude()))
-      .title(getString(R.string.origin)));
-    Toast.makeText(OptimizationActivity.this, R.string.click_instructions, Toast.LENGTH_SHORT).show();
-    mapboxMap.addOnMapClickListener(this);
-    mapboxMap.addOnMapLongClickListener(this);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS,style -> {
+      // Add origin and destination to the mapboxMap
+      mapboxMap.addMarker(new MarkerOptions()
+        .position(new LatLng(origin.latitude(), origin.longitude()))
+        .title(getString(R.string.origin)));
+      Toast.makeText(OptimizationActivity.this, R.string.click_instructions, Toast.LENGTH_SHORT).show();
+      mapboxMap.addOnMapClickListener(this);
+      mapboxMap.addOnMapLongClickListener(this);
+    });
   }
 
   @Override

@@ -37,20 +37,20 @@ public class PictureInPictureActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(final MapboxMap mapboxMap) {
-        mapboxMap.setStyle(Style.SATELLITE_STREETS);
-      }
-    });
-
-    addPictureFab = (FloatingActionButton) findViewById(R.id.add_window_fab);
-    addPictureFab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        try {
-          enterPictureInPictureMode();
-        } catch (Exception exception) {
-          Toast.makeText(PictureInPictureActivity.this, R.string.no_picture_in_picture_support,
-            Toast.LENGTH_SHORT).show();
-        }
+        mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
+          addPictureFab = (FloatingActionButton) findViewById(R.id.add_window_fab);
+          addPictureFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              try {
+                enterPictureInPictureMode();
+              } catch (Exception exception) {
+                Toast.makeText(PictureInPictureActivity.this, R.string.no_picture_in_picture_support,
+                  Toast.LENGTH_SHORT).show();
+              }
+            }
+          });
+        });
       }
     });
   }

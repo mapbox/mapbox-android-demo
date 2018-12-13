@@ -180,12 +180,13 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.DARK);
-    mapboxMap.getUiSettings().setCompassEnabled(false);
-    mapboxMap.getUiSettings().setLogoEnabled(false);
-    mapboxMap.getUiSettings().setAttributionEnabled(false);
-    new LoadPoiDataTask(this).execute();
-    mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.DARK, style -> {
+      mapboxMap.getUiSettings().setCompassEnabled(false);
+      mapboxMap.getUiSettings().setLogoEnabled(false);
+      mapboxMap.getUiSettings().setAttributionEnabled(false);
+      new LoadPoiDataTask(this).execute();
+      mapboxMap.addOnMapClickListener(this);
+    });
   }
 
   @Override
@@ -222,7 +223,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
 
   private void setupSource() {
     source = new GeoJsonSource(SOURCE_ID, featureCollection);
-    mapboxMap.addSource(source);
+    mapboxMap.getStyle().addSource(source);
   }
 
   private void refreshSource() {
@@ -235,7 +236,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    * Setup a layer with maki icons, eg. restaurant.
    */
   private void setupMakiLayer() {
-    mapboxMap.addLayer(new SymbolLayer(MAKI_LAYER_ID, SOURCE_ID)
+    mapboxMap.getStyle().addLayer(new SymbolLayer(MAKI_LAYER_ID, SOURCE_ID)
       .withProperties(
         /* show maki icon based on the value of poi feature property
          * https://www.mapbox.com/maki-icons/
@@ -255,7 +256,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    * Setup layer indicating that there is an ongoing progress.
    */
   private void setupLoadingLayer() {
-    mapboxMap.addLayerBelow(new CircleLayer(LOADING_LAYER_ID, SOURCE_ID)
+    mapboxMap.getStyle().addLayerBelow(new CircleLayer(LOADING_LAYER_ID, SOURCE_ID)
       .withProperties(
         circleRadius(interpolate(exponential(1), get(PROPERTY_LOADING_PROGRESS), getLoadingAnimationStops())),
         circleColor(Color.GRAY),
@@ -280,7 +281,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    * </p>
    */
   private void setupCalloutLayer() {
-    mapboxMap.addLayer(new SymbolLayer(CALLOUT_LAYER_ID, SOURCE_ID)
+    mapboxMap.getStyle().addLayer(new SymbolLayer(CALLOUT_LAYER_ID, SOURCE_ID)
       .withProperties(
         /* show image with id title based on the value of the title feature property */
         iconImage("{title}"),
@@ -318,7 +319,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
 
   private void hideLabelLayers() {
     String id;
-    for (Layer layer : mapboxMap.getLayers()) {
+    for (Layer layer : mapboxMap.getStyle().getLayers()) {
       id = layer.getId();
       if (id.startsWith("place") || id.startsWith("poi") || id.startsWith("marine") || id.startsWith("road-label")) {
         layer.setProperties(visibility(Property.NONE));
@@ -327,8 +328,8 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   }
 
   private void setupMapillaryTiles() {
-    mapboxMap.addSource(MapillaryTiles.createSource());
-    mapboxMap.addLayerBelow(MapillaryTiles.createLineLayer(), LOADING_LAYER_ID);
+    mapboxMap.getStyle().addSource(MapillaryTiles.createSource());
+    mapboxMap.getStyle().addLayerBelow(MapillaryTiles.createLineLayer(), LOADING_LAYER_ID);
   }
 
   /**
@@ -506,7 +507,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
     imageView.setImageResource(currentState ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
     Bitmap bitmap = SymbolGenerator.generate(view);
-    mapboxMap.addImage(title, bitmap);
+    mapboxMap.getStyle().addImage(title, bitmap);
     refreshSource();
   }
 
@@ -516,7 +517,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   public void setImageGenResults(HashMap<String, View> viewMap, HashMap<String, Bitmap> imageMap) {
     if (mapboxMap != null) {
       // calling addImages is faster as separate addImage calls for each bitmap.
-      mapboxMap.addImages(imageMap);
+      mapboxMap.getStyle().addImages(imageMap);
     }
     // need to store reference to views to be able to use them as hitboxes for click events.
     this.viewMap = viewMap;
@@ -887,19 +888,19 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       for (Map.Entry<Feature, Bitmap> featureBitmapEntry : bitmapMap.entrySet()) {
         Feature feature = featureBitmapEntry.getKey();
         String key = feature.getStringProperty(KEY_UNIQUE_FEATURE);
-        map.addImage(key, featureBitmapEntry.getValue());
+        map.getStyle().addImage(key, featureBitmapEntry.getValue());
       }
 
-      GeoJsonSource mapillarySource = (GeoJsonSource) map.getSource(ID_SOURCE);
+      GeoJsonSource mapillarySource = (GeoJsonSource) map.getStyle().getSource(ID_SOURCE);
       if (mapillarySource == null) {
-        map.addSource(new GeoJsonSource(ID_SOURCE, featureCollection, new GeoJsonOptions()
+        map.getStyle().addSource(new GeoJsonSource(ID_SOURCE, featureCollection, new GeoJsonOptions()
           .withCluster(true)
           .withClusterMaxZoom(17)
           .withClusterRadius(IMAGE_SIZE / 3)
         ));
 
         // unclustered
-        map.addLayerBelow(new SymbolLayer(ID_LAYER_UNCLUSTERED, ID_SOURCE).withProperties(
+        map.getStyle().addLayerBelow(new SymbolLayer(ID_LAYER_UNCLUSTERED, ID_SOURCE).withProperties(
           iconImage(TOKEN_UNIQUE_FEATURE),
           iconAllowOverlap(true),
           iconSize(interpolate(exponential(1f), zoom(),
@@ -947,7 +948,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
                 lt(pointCount, literal(layers[i - 1][0]))
               )
           );
-          map.addLayerBelow(clusterLayer, MAKI_LAYER_ID);
+          map.getStyle().addLayerBelow(clusterLayer, MAKI_LAYER_ID);
         }
 
         //Add the count labels
@@ -959,7 +960,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
           textColor(Color.WHITE),
           textIgnorePlacement(true)
         );
-        map.addLayerBelow(count, MAKI_LAYER_ID);
+        map.getStyle().addLayerBelow(count, MAKI_LAYER_ID);
       } else {
         mapillarySource.setGeoJson(featureCollection);
       }
@@ -1047,9 +1048,6 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
 
   /**
    * Utility class to generate Bitmaps for Symbol.
-   * <p>
-   * Bitmaps can be added to the map with {@link com.mapbox.mapboxsdk.maps.MapboxMap#addImage(String, Bitmap)}
-   * </p>
    */
   private static class SymbolGenerator {
 

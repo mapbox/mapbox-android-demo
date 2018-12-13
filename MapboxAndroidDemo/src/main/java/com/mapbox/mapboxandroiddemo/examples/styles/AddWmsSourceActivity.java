@@ -38,19 +38,21 @@ public class AddWmsSourceActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
-        mapboxMap.setStyle(Style.LIGHT);
-        
-        RasterSource webMapSource = new RasterSource(
-          "web-map-source",
-          new TileSet("tileset", "https://geodata.state.nj.us/imagerywms/Natural2015?bbox={"
-            + "bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&"
-            + "srs=EPSG:3857&width=256&height=256&layers=Natural2015"), 256);
+        mapboxMap.setStyle(Style.LIGHT, style -> {
 
-        mapboxMap.addSource(webMapSource);
+          RasterSource webMapSource = new RasterSource(
+            "web-map-source",
+            new TileSet("tileset", "https://geodata.state.nj.us/imagerywms/Natural2015?bbox={"
+              + "bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&"
+              + "srs=EPSG:3857&width=256&height=256&layers=Natural2015"), 256);
 
-        // Add the web map source to the map.
-        RasterLayer webMapLayer = new RasterLayer("web-map-layer", "web-map-source");
-        mapboxMap.addLayerBelow(webMapLayer, "aeroway-taxiway");
+          mapboxMap.getStyle().addSource(webMapSource);
+
+          // Add the web map source to the map.
+          RasterLayer webMapLayer = new RasterLayer("web-map-layer", "web-map-source");
+          mapboxMap.getStyle().addLayerBelow(webMapLayer, "aeroway-taxiway");
+
+        });
       }
     });
   }

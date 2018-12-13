@@ -45,24 +45,25 @@ public class ImageSourceTimeLapseActivity extends AppCompatActivity implements O
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
 
-    mapboxMap.setStyle(Style.LIGHT);
+    mapboxMap.setStyle(Style.LIGHT,style -> {
+      // Add source
+      LatLngQuad quad = new LatLngQuad(
+        new LatLng(46.437, -80.425),
+        new LatLng(46.437, -71.516),
+        new LatLng(37.936, -71.516),
+        new LatLng(37.936, -80.425));
+      mapboxMap.getStyle().addSource(new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.southeast_radar_0));
 
-    // Add source
-    LatLngQuad quad = new LatLngQuad(
-      new LatLng(46.437, -80.425),
-      new LatLng(46.437, -71.516),
-      new LatLng(37.936, -71.516),
-      new LatLng(37.936, -80.425));
-    mapboxMap.addSource(new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.southeast_radar_0));
+      // Add layer
+      RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
+      mapboxMap.getStyle().addLayer(layer);
 
-    // Add layer
-    RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
-    mapboxMap.addLayer(layer);
+      // Loop the GeoJSON refreshing
+      handler = new Handler();
+      runnable = new RefreshImageRunnable(mapboxMap, handler);
+      handler.postDelayed(runnable, 100);
 
-    // Loop the GeoJSON refreshing
-    handler = new Handler();
-    runnable = new RefreshImageRunnable(mapboxMap, handler);
-    handler.postDelayed(runnable, 100);
+    });
   }
 
   private static class RefreshImageRunnable implements Runnable {
@@ -84,7 +85,7 @@ public class ImageSourceTimeLapseActivity extends AppCompatActivity implements O
 
     @Override
     public void run() {
-      ((ImageSource) mapboxMap.getSource(ID_IMAGE_SOURCE)).setImage(drawables[drawableIndex++]);
+      ((ImageSource) mapboxMap.getStyle().getSource(ID_IMAGE_SOURCE)).setImage(drawables[drawableIndex++]);
       if (drawableIndex > 3) {
         drawableIndex = 0;
       }

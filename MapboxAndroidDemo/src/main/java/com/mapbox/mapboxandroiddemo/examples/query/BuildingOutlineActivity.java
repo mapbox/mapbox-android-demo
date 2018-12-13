@@ -60,10 +60,11 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     BuildingOutlineActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
-    setUpLineLayer();
-    mapboxMap.addOnCameraIdleListener(this);
-    Toast.makeText(this, R.string.move_map_around_instruction, Toast.LENGTH_SHORT).show();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+      setUpLineLayer();
+      mapboxMap.addOnCameraIdleListener(this);
+      Toast.makeText(this, R.string.move_map_around_instruction, Toast.LENGTH_SHORT).show();
+    });
   }
 
   /**
@@ -75,7 +76,7 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
 
     // Create a GeoJSONSource from the empty FeatureCollection
     GeoJsonSource geoJsonSource = new GeoJsonSource("source", featureCollection);
-    mapboxMap.addSource(geoJsonSource);
+    mapboxMap.getStyle().addSource(geoJsonSource);
 
     // Use runtime styling to adjust the look of the building outline LineLayer
     LineLayer lineLayer = new LineLayer("lineLayer", "source");
@@ -85,7 +86,7 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
       lineCap(LINE_CAP_ROUND),
       lineJoin(LINE_JOIN_BEVEL)
     );
-    mapboxMap.addLayer(lineLayer);
+    mapboxMap.getStyle().addLayer(lineLayer);
   }
 
   @Override
@@ -113,7 +114,7 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
     List<Point> pointList = new ArrayList<>();
 
     // Check whether the map style has a building layer
-    if (mapboxMap.getLayer("building") != null) {
+    if (mapboxMap.getStyle().getLayer("building") != null) {
 
       // Retrieve the building Feature that is displayed in the middle of the map
       List<Feature> features = mapboxMap.queryRenderedFeatures(pixel, "building");
@@ -142,7 +143,7 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
     // Update the data source used by the building outline LineLayer and refresh the map
     featureCollection = FeatureCollection.fromFeatures(new Feature[]
       {Feature.fromGeometry(getBuildingFeatureOutline())});
-    GeoJsonSource source = mapboxMap.getSourceAs("source");
+    GeoJsonSource source = mapboxMap.getStyle().getSourceAs("source");
     if (source != null) {
       source.setGeoJson(featureCollection);
     }

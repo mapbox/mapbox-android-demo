@@ -81,33 +81,33 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.SATELLITE);
+    mapboxMap.setStyle(Style.SATELLITE, style -> {
+      mapboxMap.animateCamera(
+        CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+          .zoom(16)
+          .build()), 4000);
 
-    mapboxMap.animateCamera(
-      CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
-        .zoom(16)
-        .build()), 4000);
+      fillLayerPointList = new ArrayList<>();
+      circleLayerFeatureList = new ArrayList<>();
+      lineLayerPointList = new ArrayList<>();
 
-    fillLayerPointList = new ArrayList<>();
-    circleLayerFeatureList = new ArrayList<>();
-    lineLayerPointList = new ArrayList<>();
+      // Add sources to the map
+      initCircleSource();
+      initLineSource();
+      initFillSource();
 
-    // Add sources to the map
-    initCircleSource();
-    initLineSource();
-    initFillSource();
+      this.circleSource = mapboxMap.getStyle().getSourceAs(CIRCLE_SOURCE_ID);
+      this.fillSource = mapboxMap.getStyle().getSourceAs(FILL_SOURCE_ID);
+      this.lineSource = mapboxMap.getStyle().getSourceAs(LINE_SOURCE_ID);
 
-    this.circleSource = mapboxMap.getSourceAs(CIRCLE_SOURCE_ID);
-    this.fillSource = mapboxMap.getSourceAs(FILL_SOURCE_ID);
-    this.lineSource = mapboxMap.getSourceAs(LINE_SOURCE_ID);
+      // Add layers to the map
+      initCircleLayer();
+      initLineLayer();
+      initFillLayer();
 
-    // Add layers to the map
-    initCircleLayer();
-    initLineLayer();
-    initFillLayer();
-
-    initFloatingActionButtonClickListeners();
-    Toast.makeText(this, R.string.trace_instruction, Toast.LENGTH_LONG).show();
+      initFloatingActionButtonClickListeners();
+      Toast.makeText(this, R.string.trace_instruction, Toast.LENGTH_LONG).show();
+    });
   }
 
   /**
@@ -205,7 +205,7 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
   private void initCircleSource() {
     FeatureCollection circleFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     GeoJsonSource circleGeoJsonSource = new GeoJsonSource(CIRCLE_SOURCE_ID, circleFeatureCollection);
-    mapboxMap.addSource(circleGeoJsonSource);
+    mapboxMap.getStyle().addSource(circleGeoJsonSource);
   }
 
   /**
@@ -218,7 +218,7 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
       circleRadius(7f),
       circleColor(Color.parseColor("#d004d3"))
     );
-    mapboxMap.addLayer(circleLayer);
+    mapboxMap.getStyle().addLayer(circleLayer);
   }
 
   /**
@@ -227,7 +227,7 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
   private void initFillSource() {
     FeatureCollection fillFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     GeoJsonSource fillGeoJsonSource = new GeoJsonSource(FILL_SOURCE_ID, fillFeatureCollection);
-    mapboxMap.addSource(fillGeoJsonSource);
+    mapboxMap.getStyle().addSource(fillGeoJsonSource);
   }
 
   /**
@@ -240,7 +240,7 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
       fillOpacity(.6f),
       fillColor(Color.parseColor("#00e9ff"))
     );
-    mapboxMap.addLayerBelow(fillLayer, LINE_LAYER_ID);
+    mapboxMap.getStyle().addLayerBelow(fillLayer, LINE_LAYER_ID);
   }
 
   /**
@@ -249,7 +249,7 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
   private void initLineSource() {
     FeatureCollection lineFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     GeoJsonSource lineGeoJsonSource = new GeoJsonSource(LINE_SOURCE_ID, lineFeatureCollection);
-    mapboxMap.addSource(lineGeoJsonSource);
+    mapboxMap.getStyle().addSource(lineGeoJsonSource);
   }
 
   /**
@@ -262,7 +262,7 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
       lineColor(Color.WHITE),
       lineWidth(5f)
     );
-    mapboxMap.addLayerBelow(lineLayer, CIRCLE_LAYER_ID);
+    mapboxMap.getStyle().addLayerBelow(lineLayer, CIRCLE_LAYER_ID);
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

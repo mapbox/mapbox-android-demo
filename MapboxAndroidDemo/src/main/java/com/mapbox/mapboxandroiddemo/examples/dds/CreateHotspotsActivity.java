@@ -49,8 +49,7 @@ public class CreateHotspotsActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
-        mapboxMap.setStyle(Style.DARK);
-        addClusteredGeoJsonSource(mapboxMap);
+        mapboxMap.setStyle(Style.DARK, style -> addClusteredGeoJsonSource(mapboxMap));
       }
     });
   }
@@ -101,7 +100,7 @@ public class CreateHotspotsActivity extends AppCompatActivity {
 
     // Add a new source from our GeoJSON data and set the 'cluster' option to true.
     try {
-      mapboxMap.addSource(
+      mapboxMap.getStyle().addSource(
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
         // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
         new GeoJsonSource("earthquakes",
@@ -132,7 +131,7 @@ public class CreateHotspotsActivity extends AppCompatActivity {
       circleRadius(20f),
       circleBlur(1f));
     unclustered.setFilter(Expression.neq(get("cluster"), literal(true)));
-    mapboxMap.addLayerBelow(unclustered, "building");
+    mapboxMap.getStyle().addLayerBelow(unclustered, "building");
 
     for (int i = 0; i < layers.length; i++) {
       CircleLayer circles = new CircleLayer("cluster-" + i, "earthquakes");
@@ -150,7 +149,7 @@ public class CreateHotspotsActivity extends AppCompatActivity {
             Expression.lt(pointCount, literal(layers[i - 1][0]))
           )
       );
-      mapboxMap.addLayerBelow(circles, "building");
+      mapboxMap.getStyle().addLayerBelow(circles, "building");
     }
   }
 }

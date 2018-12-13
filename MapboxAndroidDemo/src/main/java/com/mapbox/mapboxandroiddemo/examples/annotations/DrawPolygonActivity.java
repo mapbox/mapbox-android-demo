@@ -39,8 +39,7 @@ public class DrawPolygonActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
-        mapboxMap.setStyle(Style.MAPBOX_STREETS);
-        drawPolygon(mapboxMap);
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> drawPolygon(mapboxMap));
       }
     });
   }

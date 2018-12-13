@@ -1,5 +1,4 @@
-/*
-package com.mapbox.mapboxandroiddemo.examples.labs;
+/*package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
@@ -24,6 +23,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -35,10 +35,9 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-*/
-/**
+*
  * Use a map matched GeoJSON route to show a marker travels along the route at consistent speed.
- *//*
+
 
 public class MarkerFollowingRouteActivity extends AppCompatActivity {
 
@@ -70,10 +69,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
-        mapboxMap.setStyle(Style.LIGHT)
-
-        // Load and Draw the GeoJSON. The marker animation is also handled here.
-        new DrawGeoJson().execute();
+        mapboxMap.setStyle(Style.LIGHT, style -> new DrawGeoJson().execute());
 
       }
     });

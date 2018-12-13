@@ -74,32 +74,33 @@ public class OfflineManagerActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
         map = mapboxMap;
-        mapboxMap.setStyle(Style.MAPBOX_STREETS);
-      }
-    });
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
 
-    // Assign progressBar for later use
-    progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+          // Assign progressBar for later use
+          progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
-    // Set up the offlineManager
-    offlineManager = OfflineManager.getInstance(this);
+          // Set up the offlineManager
+          offlineManager = OfflineManager.getInstance(OfflineManagerActivity.this);
 
-    // Bottom navigation bar button clicks are handled here.
-    // Download offline button
-    downloadButton = (Button) findViewById(R.id.download_button);
-    downloadButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        downloadRegionDialog();
-      }
-    });
+          // Bottom navigation bar button clicks are handled here.
+          // Download offline button
+          downloadButton = (Button) findViewById(R.id.download_button);
+          downloadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              downloadRegionDialog();
+            }
+          });
 
-    // List offline regions
-    listButton = (Button) findViewById(R.id.list_button);
-    listButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        downloadedRegionList();
+          // List offline regions
+          listButton = (Button) findViewById(R.id.list_button);
+          listButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              downloadedRegionList();
+            }
+          });
+        });
       }
     });
   }
@@ -195,7 +196,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
     // Create offline definition using the current
     // style and boundaries of visible map area
-    String styleUrl = map.getStyleUrl();
+    String styleUrl = map.getStyle().getUrl();
     LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
     double minZoom = map.getCameraPosition().zoom;
     double maxZoom = map.getMaxZoomLevel();

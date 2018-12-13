@@ -49,16 +49,16 @@ public class MarathonExtrusionActivity extends AppCompatActivity implements OnMa
   public void onMapReady(MapboxMap mapboxMap) {
     MarathonExtrusionActivity.this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.SATELLITE);
-
-    // Add the marathon route source to the map
-    // Create a GeoJsonSource and use the Mapbox Datasets API to retrieve the GeoJSON data
-    // More info about the Datasets API at https://www.mapbox.com/api-documentation/#retrieve-a-dataset
-    GeoJsonSource courseRouteGeoJson = new GeoJsonSource(
+    mapboxMap.setStyle(Style.SATELLITE, style -> {
+      // Add the marathon route source to the map
+      // Create a GeoJsonSource and use the Mapbox Datasets API to retrieve the GeoJSON data
+      // More info about the Datasets API at https://www.mapbox.com/api-documentation/#retrieve-a-dataset
+      GeoJsonSource courseRouteGeoJson = new GeoJsonSource(
         "coursedata", loadJsonFromAsset("marathon_route.geojson"));
 
-    mapboxMap.addSource(courseRouteGeoJson);
-    addExtrusionsLayerToMap();
+      mapboxMap.getStyle().addSource(courseRouteGeoJson);
+      addExtrusionsLayerToMap();
+    });
   }
 
   private void addExtrusionsLayerToMap() {
@@ -68,7 +68,7 @@ public class MarathonExtrusionActivity extends AppCompatActivity implements OnMa
         fillExtrusionColor(Color.YELLOW),
         fillExtrusionOpacity(0.7f),
         fillExtrusionHeight(get("e")));
-    mapboxMap.addLayer(courseExtrusionLayer);
+    mapboxMap.getStyle().addLayer(courseExtrusionLayer);
   }
 
   @Override

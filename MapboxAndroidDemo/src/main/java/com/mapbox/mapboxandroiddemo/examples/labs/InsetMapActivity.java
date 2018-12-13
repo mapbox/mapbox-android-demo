@@ -81,9 +81,9 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
-    mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cj5l80zrp29942rmtg0zctjto"));
     InsetMapActivity.this.mainLargeMapboxMap = mapboxMap;
-    mainLargeMapboxMap.addOnCameraMoveListener(this);
+    mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cj5l80zrp29942rmtg0zctjto"),
+      style -> mainLargeMapboxMap.addOnCameraMoveListener(this));
   }
 
   @Override
@@ -175,7 +175,6 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
     // Override method for OnMapMovedFragmentInterface
     @Override
     public void onMapMoved(final CameraPosition mainMapCameraPosition) {
-
       cameraPositionForFragmentMap = new CameraPosition.Builder()
         .target(mainMapCameraPosition.target)
         .zoom(mainMapCameraPosition.zoom - ZOOM_DISTANCE_BETWEEN_MAIN_AND_FRAGMENT_MAPS)
@@ -186,7 +185,6 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
       fragmentMap.getMapAsync(new OnMapReadyCallback() {
         @Override
         public void onMapReady(final MapboxMap mapInFragment) {
-          mapInFragment.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cj5l80zrp29942rmtg0zctjto"));
           mapInFragment.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPositionForFragmentMap));
         }
       });

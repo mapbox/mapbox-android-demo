@@ -39,11 +39,11 @@ public class MapFogBackgroundActivity extends AppCompatActivity implements OnMap
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
 
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
-
-    // Using the Mapbox Building Plugin to easily display 3D extrusions on the map
-    buildingPlugin = new BuildingPlugin(mapView, mapboxMap);
-    buildingPlugin.setVisibility(true);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+      // Using the Mapbox Building Plugin to easily display 3D extrusions on the map
+      /*buildingPlugin = new BuildingPlugin(mapView, mapboxMap);
+      buildingPlugin.setVisibility(true);*/
+    });
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
