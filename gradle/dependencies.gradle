@@ -12,11 +12,13 @@ ext {
             // Mapbox
             mapboxMapSdk             : '6.7.1',
             mapboxTurf               : '4.2.0',
+            mapboxServices           : '4.2.0',
             mapboxPluginBuilding     : '0.3.0',
             mapboxPluginPlaces       : '0.6.0',
             mapboxPluginLocalization : '0.5.0',
             mapboxPluginTraffic      : '0.6.0',
             mapboxChinaPlugin        : '0.4.7',
+            mapboxPluginMarkerView   : '0.1.0',
 
             // Support
             supportLib               : '28.0.0',
@@ -62,6 +64,7 @@ ext {
             // Mapbox
             mapboxMapSdk             : "com.mapbox.mapboxsdk:mapbox-android-sdk:${version.mapboxMapSdk}",
             mapboxTurf               : "com.mapbox.mapboxsdk:mapbox-sdk-turf:${version.mapboxTurf}",
+            mapboxServices           : "com.mapbox.mapboxsdk:mapbox-sdk-services:${version.mapboxServices}",
 
             // Mapbox plugins
             mapboxPluginBuilding     : "com.mapbox.mapboxsdk:mapbox-android-plugin-building:${version.mapboxPluginBuilding}",
@@ -69,6 +72,7 @@ ext {
             mapboxPluginLocalization : "com.mapbox.mapboxsdk:mapbox-android-plugin-localization:${version.mapboxPluginLocalization}",
             mapboxPluginTraffic      : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic:${version.mapboxPluginTraffic}",
             mapboxChinaPlugin        : "com.mapbox.mapboxsdk:mapbox-android-plugin-china:${version.mapboxChinaPlugin}",
+            mapboxPluginMarkerView   : "com.mapbox.mapboxsdk:mapbox-android-plugin-markerview:${version.mapboxPluginMarkerView}",
 
             // Support
             supportV4                : "com.android.support:support-v4:${version.supportLib}",
