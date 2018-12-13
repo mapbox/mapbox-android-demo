@@ -133,7 +133,7 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineCallback<Lo
         locationEngine = LocationEngineProvider.getBestLocationEngine(this)
 
         var request = LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
-                .setPriority(LocationEngineRequest.PRIORITY_NO_POWER)
+                .setPriority(LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
                 .setMaxWaitTime(DEFAULT_MAX_WAIT_TIME).build()
 
         locationEngine.requestLocationUpdates(request, this, mainLooper)
