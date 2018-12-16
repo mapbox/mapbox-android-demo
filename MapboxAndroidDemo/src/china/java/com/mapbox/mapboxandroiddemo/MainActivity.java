@@ -28,6 +28,48 @@ import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.SimpleChinaMapViewActivity;
+import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
+import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivity;
+import com.mapbox.mapboxandroiddemo.examples.annotations.DrawMarkerActivity;
+import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
+import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivityKotlin;
+import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.InfoWindowSymbolLayerActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.MultipleHeatmapStylingActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.PictureInPictureActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
+import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
+import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.query.BuildingOutlineActivity;
+import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
+import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
+import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
+import com.mapbox.mapboxandroiddemo.examples.query.RedoSearchInAreaActivity;
+import com.mapbox.mapboxandroiddemo.examples.query.SelectBuildingActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.BasicSymbolLayerActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.ImageSourceActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.ImageSourceTimeLapseActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 import com.mapbox.mapboxandroiddemo.utils.SettingsDialogView;
@@ -330,5 +372,344 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, SimpleChinaMapViewActivity.class),
       null,
       R.string.activity_china_simple_china_mapview_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_basic_symbol_layer_title,
+      R.string.activity_styles_basic_symbol_layer_description,
+      new Intent(MainActivity.this, BasicSymbolLayerActivity.class),
+      null,
+      R.string.activity_styles_symbol_layer_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_line_layer_title,
+      R.string.activity_styles_line_layer_description,
+      new Intent(MainActivity.this, LineLayerActivity.class),
+      null,
+      R.string.activity_styles_line_layer_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_color_switcher_title,
+      R.string.activity_styles_color_switcher_description,
+      new Intent(MainActivity.this, ColorSwitcherActivity.class),
+      null,
+      R.string.activity_styles_color_switcher_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_add_wms_source_title,
+      R.string.activity_styles_add_wms_source_description,
+      new Intent(MainActivity.this, AddWmsSourceActivity.class),
+      null,
+      R.string.activity_styles_add_wms_source_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_geojson_layer_in_stack_title,
+      R.string.activity_styles_geojson_layer_in_stack_description,
+      new Intent(MainActivity.this, GeojsonLayerInStackActivity.class),
+      null,
+      R.string.activity_styles_geojson_layer_in_stack_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_zoom_dependent_fill_color_title,
+      R.string.activity_styles_zoom_dependent_fill_color_description,
+      new Intent(MainActivity.this, ZoomDependentFillColorActivity.class),
+      null,
+      R.string.activity_styles_zoom_dependent_fill_color_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_language_switch_title,
+      R.string.activity_styles_language_switch_description,
+      new Intent(MainActivity.this, LanguageSwitchActivity.class),
+      null,
+      R.string.activity_styles_language_switch_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_style_image_source_title,
+      R.string.activity_style_image_source_description,
+      new Intent(MainActivity.this, ImageSourceActivity.class),
+      null,
+      R.string.activity_style_image_source_url, false, BuildConfig.MIN_SDK_VERSION
+    ));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_style_image_source_time_lapse_title,
+      R.string.activity_style_image_source_time_lapse_description,
+      new Intent(MainActivity.this, ImageSourceTimeLapseActivity.class),
+      null,
+      R.string.activity_style_image_source_time_lapse_url, false, BuildConfig.MIN_SDK_VERSION
+    ));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_extrusions,
+      R.string.activity_extrusions_adjust_extrusions_title,
+      R.string.activity_extrusions_adjust_extrusions_description,
+      new Intent(MainActivity.this, AdjustExtrusionLightActivity.class),
+      null,
+      R.string.activity_extrusions_adjust_extrusions_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_extrusions,
+      R.string.activity_extrusions_rotate_extrusions_title,
+      R.string.activity_extrusions_rotate_extrusions_description,
+      new Intent(MainActivity.this, RotationExtrusionActivity.class),
+      null,
+      R.string.activity_extrusions_rotate_extrusions_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_plugins,
+      R.string.activity_plugins_building_plugin_title,
+      R.string.activity_plugins_building_plugin_description,
+      new Intent(MainActivity.this, BuildingPluginActivity.class),
+      null,
+      R.string.activity_plugins_building_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_plugins,
+      R.string.activity_plugins_places_plugin_title, R.string.activity_plugins_places_plugin_description,
+      new Intent(MainActivity.this, PlacesPluginActivity.class),
+      null,
+      R.string.activity_plugins_places_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_plugins,
+      R.string.activity_plugins_localization_plugin_title,
+      R.string.activity_plugins_localization_plugin_description,
+      new Intent(MainActivity.this, LocalizationPluginActivity.class),
+      null,
+      R.string.activity_plugins_localization_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
+    );
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_annotations,
+      R.string.activity_annotation_marker_title,
+      R.string.activity_annotation_custom_marker_description,
+      new Intent(MainActivity.this, DrawMarkerActivity.class),
+      null,
+      R.string.activity_annotation_marker_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_annotations,
+      R.string.activity_annotation_custom_marker_title,
+      R.string.activity_annotation_custom_marker_description,
+      new Intent(MainActivity.this, DrawCustomMarkerActivity.class),
+      null,
+      R.string.activity_annotation_custom_marker_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_annotations,
+      R.string.activity_annotation_polygon_title,
+      R.string.activity_annotation_polygon_description,
+      new Intent(MainActivity.this, DrawPolygonActivity.class),
+      null,
+      R.string.activity_annotation_polygon_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_annotations,
+      R.string.activity_annotation_animated_marker_title,
+      R.string.activity_annotation_animated_marker_description,
+      new Intent(MainActivity.this, AnimatedMarkerActivity.class),
+      null,
+      R.string.activity_annotation_animated_marker_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_camera,
+      R.string.activity_camera_animate_title,
+      R.string.activity_camera_animate_description,
+      new Intent(MainActivity.this, AnimateMapCameraActivity.class),
+      null,
+      R.string.activity_camera_animate_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_camera,
+      R.string.activity_camera_bounding_box_title,
+      R.string.activity_camera_bounding_box_description,
+      new Intent(MainActivity.this, BoundingBoxCameraActivity.class),
+      null,
+      R.string.activity_camera_bounding_box_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_camera,
+      R.string.activity_camera_restrict_title,
+      R.string.activity_camera_restrict_description,
+      new Intent(MainActivity.this, RestrictCameraActivity.class),
+      null,
+      R.string.activity_camera_restrict_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_offline,
+      R.string.activity_offline_simple_title,
+      R.string.activity_offline_simple_description,
+      new Intent(MainActivity.this, SimpleOfflineMapActivity.class),
+      null,
+      R.string.activity_offline_simple_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_offline,
+      R.string.activity_offline_manager_title,
+      R.string.activity_offline_manager_description,
+      new Intent(MainActivity.this, OfflineManagerActivity.class),
+      null,
+      R.string.activity_offline_manager_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_query_map,
+      R.string.activity_query_select_building_title,
+      R.string.activity_query_select_building_description,
+      new Intent(MainActivity.this, SelectBuildingActivity.class),
+      null,
+      R.string.activity_query_select_building_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_query_map,
+      R.string.activity_query_feature_count_title,
+      R.string.activity_query_feature_count_description,
+      new Intent(MainActivity.this, FeatureCountActivity.class),
+      null,
+      R.string.activity_query_feature_count_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_query_map,
+      R.string.activity_query_feature_title,
+      R.string.activity_query_feature_description,
+      new Intent(MainActivity.this, QueryFeatureActivity.class),
+      null,
+      R.string.activity_query_feature_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_query_map,
+      R.string.activity_query_click_on_layer_title,
+      R.string.activity_query_click_on_layer_description,
+      new Intent(MainActivity.this, ClickOnLayerActivity.class),
+      null,
+      R.string.activity_query_click_on_layer_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_query_map,
+      R.string.activity_query_redo_search_in_area_title,
+      R.string.activity_query_redo_search_in_area_description,
+      new Intent(MainActivity.this, RedoSearchInAreaActivity.class),
+      null,
+      R.string.activity_query_redo_search_in_area_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_query_map,
+      R.string.activity_query_building_outline_title,
+      R.string.activity_query_building_outline_description,
+      new Intent(MainActivity.this, BuildingOutlineActivity.class),
+      null,
+      R.string.activity_query_building_outline_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_symbol_layer_and_mapillary_on_map_title,
+      R.string.activity_lab_symbol_layer_and_mapillary_on_map_description,
+      new Intent(MainActivity.this, SymbolLayerMapillaryActivity.class),
+      null,
+      R.string.activity_lab_symbol_layer_on_map_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_pulsing_layer_opacity_color_title,
+      R.string.activity_lab_pulsing_layer_opacity_color_description,
+      new Intent(MainActivity.this, PulsingLayerOpacityColorActivity.class),
+      null,
+      R.string.activity_lab_pulsing_layer_opacity_color_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_indoor_map_title,
+      R.string.activity_lab_indoor_map_description,
+      new Intent(MainActivity.this, IndoorMapActivity.class),
+      null,
+      R.string.activity_lab_indoor_map_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_marker_following_route_title,
+      R.string.activity_lab_marker_following_route_description,
+      new Intent(MainActivity.this, MarkerFollowingRouteActivity.class),
+      null,
+      R.string.activity_lab_marker_following_route_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_space_station_location_title,
+      R.string.activity_lab_space_station_location_description,
+      new Intent(MainActivity.this, SpaceStationLocationActivity.class),
+      null,
+      R.string.activity_lab_space_station_location_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_picture_in_picture_title,
+      R.string.activity_lab_picture_in_picture_description,
+      new Intent(MainActivity.this, PictureInPictureActivity.class),
+      null,
+      R.string.activity_lab_picture_in_picture_url, false, Build.VERSION_CODES.O));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_rv_on_map_title,
+      R.string.activity_lab_rv_on_map_description,
+      new Intent(MainActivity.this, RecyclerViewOnMapActivity.class),
+      null,
+      R.string.activity_lab_rv_on_map_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_labs_gif_on_map_title,
+      R.string.activity_labs_gif_on_map_description,
+      new Intent(MainActivity.this, AnimatedImageGifActivity.class),
+      null,
+      R.string.activity_labs_gif_on_map_url, false, BuildConfig.MIN_SDK_VERSION
+    ));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_multiple_heatmap_styling_title,
+      R.string.activity_dds_multiple_heatmap_styling_description,
+      new Intent(MainActivity.this, MultipleHeatmapStylingActivity.class),
+      null,
+      R.string.activity_dds_multiple_heatmap_styling_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_style_line_identity_property_title,
+      R.string.activity_dds_style_line_identity_property_description,
+      new Intent(MainActivity.this, StyleLineIdentityPropertyActivity.class),
+      null,
+      R.string.activity_dds_style_line_identity_property_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_multiple_geometries_title,
+      R.string.activity_dds_multiple_geometries_description,
+      new Intent(MainActivity.this, MultipleGeometriesActivity.class),
+      null,
+      R.string.activity_dds_multiple_geometries_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_info_window_symbol_layer_title,
+      R.string.activity_dds_info_window_symbol_layer_description,
+      new Intent(MainActivity.this, InfoWindowSymbolLayerActivity.class),
+      null,
+      R.string.activity_dds_info_window_symbol_layer_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_basics,
+      R.string.activity_basic_mapbox_kotlin_title,
+      R.string.activity_basic_mapbox_kotlin_description,
+      new Intent(MainActivity.this, SimpleMapViewActivityKotlin.class),
+      null,
+      R.string.activity_basic_mapbox_kotlin_url, true, BuildConfig.MIN_SDK_VERSION));
   }
 }
