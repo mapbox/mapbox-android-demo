@@ -308,4 +308,7 @@
     <string name="light_azimuth_angle">Light azimuthal angle</string>
     <string name="light_polar_angle">Light polar angle</string>
     <string name="building_opacity">Building opacity</string>
+
+    <!-- Rotating camera -->
+    <string name="rotating_camera_toast_instruction">Try tapping on the map and/or adjusting the zoom</string>
 </resources>

@@ -37,6 +37,7 @@ import com.mapbox.mapboxandroiddemo.examples.basics.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.camera.SlowlyRotatingCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.BathymetryActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
@@ -757,6 +758,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, RestrictCameraActivity.class),
       null,
       R.string.activity_camera_restrict_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_camera,
+      R.string.activity_camera_slowly_rotating_title,
+      R.string.activity_camera_slowly_rotating_description,
+      new Intent(MainActivity.this, SlowlyRotatingCameraActivity.class),
+      null,
+      R.string.activity_camera_slowly_rotating_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_offline,
