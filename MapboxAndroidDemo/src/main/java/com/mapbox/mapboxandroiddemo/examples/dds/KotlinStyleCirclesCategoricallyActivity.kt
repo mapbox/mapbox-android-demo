@@ -30,33 +30,33 @@ class KotlinStyleCirclesCategoricallyActivity : AppCompatActivity() {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync { mapboxMap ->
 
-            mapboxMap.setStyle(Style.MAPBOX_STREETS)
+            mapboxMap.setStyle(Style.LIGHT){
+                val vectorSource = VectorSource(
+                        "ethnicity-source",
+                        "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken()!!
+                )
+                mapboxMap.style?.addSource(vectorSource)
 
-            val vectorSource = VectorSource(
-                    "ethnicity-source",
-                    "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken()!!
-            )
-            mapboxMap.style?.addSource(vectorSource)
+                val circleLayer = CircleLayer("population", "ethnicity-source")
+                circleLayer.sourceLayer = "sf2010"
+                circleLayer.withProperties(
+                        circleRadius(
+                                interpolate(
+                                        exponential(1.75f),
+                                        zoom(),
+                                        stop(12, 2f),
+                                        stop(22, 180f)
+                                )),
+                        circleColor(
+                                match(get("ethnicity"), rgb(0, 0, 0),
+                                        stop("white", rgb(251, 176, 59)),
+                                        stop("Black", rgb(34, 59, 83)),
+                                        stop("Hispanic", rgb(229, 94, 94)),
+                                        stop("Asian", rgb(59, 178, 208)),
+                                        stop("Other", rgb(204, 204, 204)))))
 
-            val circleLayer = CircleLayer("population", "ethnicity-source")
-            circleLayer.sourceLayer = "sf2010"
-            circleLayer.withProperties(
-                    circleRadius(
-                            interpolate(
-                                    exponential(1.75f),
-                                    zoom(),
-                                    stop(12, 2f),
-                                    stop(22, 180f)
-                            )),
-                    circleColor(
-                            match(get("ethnicity"), rgb(0, 0, 0),
-                                    stop("white", rgb(251, 176, 59)),
-                                    stop("Black", rgb(34, 59, 83)),
-                                    stop("Hispanic", rgb(229, 94, 94)),
-                                    stop("Asian", rgb(59, 178, 208)),
-                                    stop("Other", rgb(204, 204, 204)))))
-
-            mapboxMap.style?.addLayer(circleLayer)
+                mapboxMap.style?.addLayer(circleLayer)
+            }
         }
     }
 

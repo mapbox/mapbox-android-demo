@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.basics;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -30,16 +31,14 @@ public class SimpleMapViewActivity extends AppCompatActivity {
 
     mapView = (MapView) findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+    mapView.getMapAsync(mapboxMap ->
+      mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
 
-        // Customize map with markers, polylines, etc.
+        // Map is set up and the style has loaded. Now you can add data or make other map adjustments
 
-        mapboxMap.setStyle(Style.MAPBOX_STREETS);
 
-      }
-    });
+      })
+    );
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
