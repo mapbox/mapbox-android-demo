@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.LineString;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.PolylineOptions;
@@ -15,6 +19,11 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.Property;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.mapboxsdk.style.sources.Source;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -56,8 +65,11 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    // Load and Draw the GeoJSON
-    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> new DrawGeoJson().execute());
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+      initSourceAndLayer();
+      new DrawGeoJson().execute();
+    });
+
   }
 
   @Override
@@ -102,11 +114,29 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
     mapView.onDestroy();
   }
 
-  private class DrawGeoJson extends AsyncTask<Void, Void, List<LatLng>> {
-    @Override
-    protected List<LatLng> doInBackground(Void... voids) {
+  private void initSourceAndLayer() {
+    // Create the LineString from the list of coordinates and then make a GeoJSON
 
-      ArrayList<LatLng> points = new ArrayList<>();
+    Source geoJsonSource = new GeoJsonSource("line-source");
+    mapboxMap.getStyle().addSource(geoJsonSource);
+    LineLayer lineLayer = new LineLayer("linelayer", "line-source");
+    // The layer properties for our line. This is where we make the line dotted, set the
+    // color, etc.
+    lineLayer.setProperties(
+      PropertyFactory.lineCap(Property.LINE_CAP_SQUARE),
+      PropertyFactory.lineJoin(Property.LINE_JOIN_MITER),
+      PropertyFactory.lineOpacity(.7f),
+      PropertyFactory.lineWidth(7f),
+      PropertyFactory.lineColor(Color.parseColor("#3bb2d0"))
+    );
+    mapboxMap.getStyle().addLayer(lineLayer);
+  }
+
+  private class DrawGeoJson extends AsyncTask<Void, Void, List<Point>> {
+    @Override
+    protected List<Point> doInBackground(Void... voids) {
+
+      ArrayList<Point> points = new ArrayList<>();
 
       try {
         // Load GeoJSON file
@@ -135,8 +165,8 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
             JSONArray coords = geometry.getJSONArray("coordinates");
             for (int lc = 0; lc < coords.length(); lc++) {
               JSONArray coord = coords.getJSONArray(lc);
-              LatLng latLng = new LatLng(coord.getDouble(1), coord.getDouble(0));
-              points.add(latLng);
+              Point singlePoint = Point.fromLngLat(coord.getDouble(0), coord.getDouble(1));
+              points.add(singlePoint);
             }
           }
         }
@@ -148,16 +178,16 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
     }
 
     @Override
-    protected void onPostExecute(List<LatLng> points) {
+    protected void onPostExecute(List<Point> points) {
       super.onPostExecute(points);
 
       if (points.size() > 0) {
 
-        // Draw polyline on map
-        mapboxMap.addPolyline(new PolylineOptions()
-          .addAll(points)
-          .color(Color.parseColor("#3bb2d0"))
-          .width(2));
+        // FeatureCollection so we can add the line to our map as a layer.
+        GeoJsonSource source = mapboxMap.getStyle().getSourceAs("line-source");
+        if (source != null) {
+          source.setGeoJson(Feature.fromGeometry(LineString.fromLngLats(points)));
+        }
       }
     }
   }
