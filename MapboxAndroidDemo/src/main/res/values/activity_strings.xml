@@ -304,5 +304,14 @@
     <!-- Highlighted line -->
     <string name="tap_on_line">Tap on one of the blue lines</string>
 
+<<<<<<< HEAD
 >>>>>>> 5544093f... needed refactoring to use the new Style class and getStyle()
+=======
+    <!-- Building plugin -->
+    <string name="radial_coordinate">Light radial coordinate</string>
+    <string name="light_azimuth_angle">Light azimuthal angle</string>
+    <string name="light_polar_angle">Light polar angle</string>
+    <string name="building_opacity">Building opacity</string>
+
+>>>>>>> e7d63d60... Building plugin activity tweak
 </resources>
