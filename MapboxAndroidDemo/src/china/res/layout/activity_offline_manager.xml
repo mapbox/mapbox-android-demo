@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".examples.offline.OfflineManagerActivity">
+
+    <com.mapbox.mapboxsdk.plugins.china.maps.ChinaMapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="29.720"
+        mapbox:mapbox_cameraTargetLng="-95.342"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_light"
+        mapbox:mapbox_cameraZoom="15.27"
+        mapbox:mapbox_cameraZoomMin="10"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/bottom_navigation"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorAccent"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:paddingTop="8dp">
+
+        <Button
+            android:id="@+id/download_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_get_app_24dp"
+            android:text="@string/download_button_text"
+            android:textAllCaps="false"
+            android:textColor="@color/mapboxWhite"
+            android:textSize="12sp"/>
+
+        <Button
+            android:id="@+id/list_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/ic_list_24dp"
+            android:text="@string/list_button_text"
+            android:textAllCaps="false"
+            android:textColor="@color/mapboxWhite"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+</RelativeLayout>

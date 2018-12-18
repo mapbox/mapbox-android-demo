@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Set the starting camera position and map style using xml-->
+    <com.mapbox.mapboxsdk.plugins.china.maps.ChinaMapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="41.017538"
+        mapbox:mapbox_cameraTargetLng="28.974306"
+        mapbox:mapbox_cameraZoom="10.218183"
+        mapbox:mapbox_styleUrl="@string/mapbox_style_dark" />
+
+    <Button
+        android:id="@+id/redo_search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/mapboxPurpleDark"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:text="@string/redo_search_button"
+        android:textColor="@color/mapboxWhite"
+        android:visibility="visible" />
+
+</FrameLayout>
