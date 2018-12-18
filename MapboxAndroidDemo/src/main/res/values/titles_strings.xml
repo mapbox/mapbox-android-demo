@@ -76,6 +76,7 @@
     <string name="activity_java_services_maxtrix_api_title">Retrieve travel times between many points</string>
     <string name="activity_java_services_geocoding_title">Make a geocode request</string>
     <string name="activity_java_services_isochrone_title">Make a isochrone request</string>
+    <string name="activity_java_services_tilequery_title">Make a tilequery request</string>
     <string name="activity_plugins_traffic_plugin_title">Display real-time traffic</string>
     <string name="activity_plugins_building_plugin_title">Display buildings in 3D</string>
     <string name="activity_plugins_localization_plugin_title">Change map text to device language</string>
@@ -103,6 +104,7 @@
     <string name="activity_dashed_line_directions_picker_title">Directions to selected location</string>
     <string name="activity_lab_calendar_integration_title">Calendar integration</string>
     <string name="activity_lab_magic_window_title">Magic Window</string>
+    <string name="activity_lab_fog_background_title">Background fog</string>
     <string name="activity_china_simple_china_mapview_title">China map view</string>
 
 </resources>

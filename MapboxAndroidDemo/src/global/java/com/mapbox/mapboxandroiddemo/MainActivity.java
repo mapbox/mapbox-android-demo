@@ -71,6 +71,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.MatrixApiActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
@@ -78,6 +79,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MagicWindowKotlinActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.MapFogBackgroundActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivity;
@@ -298,6 +300,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           models.add(model);
         }
       }
+
     }
 
     adapter.updateDataSet(models, currentCategory);
@@ -880,6 +883,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_java_services_isochrone_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_java_services,
+      R.string.activity_java_services_tilequery_title,
+      R.string.activity_java_services_tilequery_description,
+      new Intent(MainActivity.this, TilequeryActivity.class),
+      null,
+      R.string.activity_java_services_tilequery_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,
       R.string.activity_image_generator_snapshot_notification_title,
       R.string.activity_image_generator_snapshot_notification_description,
@@ -985,6 +996,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, SnakingDirectionsRouteActivity.class),
       null,
       R.string.activity_labs_snaking_directions_route_url, false, BuildConfig.MIN_SDK_VERSION
+    ));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_lab,
+        R.string.activity_lab_fog_background_title,
+        R.string.activity_lab_fog_background_description,
+        new Intent(MainActivity.this, MapFogBackgroundActivity.class),
+        null,
+        R.string.activity_lab_fog_background_url, false, BuildConfig.MIN_SDK_VERSION
     ));
 
     exampleItemModels.add(new ExampleItemModel(

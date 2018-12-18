@@ -291,4 +291,9 @@
     <string name="current_location">Lat: %1$f Long: %2$f</string>
     <string name="tracking_enabled">Tracking mode re-enabled</string>
     <string name="tracking_already_enabled">Tracking already enabled. Move the map!</string>
+
+    <!-- Tilequery API -->
+    <string name="api_response">Tilequery API response:</string>
+    <string name="api_error">Error with the request. Do you have internet access?</string>
+
 </resources>
