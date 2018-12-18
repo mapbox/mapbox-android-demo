@@ -147,7 +147,7 @@ public class ColorSwitcherActivity extends AppCompatActivity {
       }
     });
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override

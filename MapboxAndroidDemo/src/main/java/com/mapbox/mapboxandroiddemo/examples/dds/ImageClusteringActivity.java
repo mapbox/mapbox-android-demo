@@ -59,7 +59,6 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
     setContentView(R.layout.activity_dds_image_clustering);
 
     mapView = findViewById(R.id.mapView);
-
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }

@@ -67,7 +67,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
     setContentView(R.layout.activity_offline_manager);
 
     // Set up the MapView
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override

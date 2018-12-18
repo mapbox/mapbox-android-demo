@@ -61,7 +61,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
     setContentView(R.layout.activity_lab_marker_following_route);
 
     // Initialize the map view
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override

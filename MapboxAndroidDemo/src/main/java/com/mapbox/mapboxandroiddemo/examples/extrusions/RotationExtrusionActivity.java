@@ -51,7 +51,7 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_extrusion_rotation);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
