@@ -87,6 +87,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentOptionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
@@ -710,6 +711,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, LocationComponentFragmentActivity.class),
       null,
       R.string.activity_location_user_location_fragment_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
+    );
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_location,
+      R.string.activity_location_location_component_options_title,
+      R.string.activity_location_location_component_options_description,
+      new Intent(MainActivity.this, LocationComponentOptionsActivity.class),
+      null,
+      R.string.activity_location_location_component_options_url, false, BuildConfig.MIN_SDK_VERSION)
     );
 
     exampleItemModels.add(new ExampleItemModel(

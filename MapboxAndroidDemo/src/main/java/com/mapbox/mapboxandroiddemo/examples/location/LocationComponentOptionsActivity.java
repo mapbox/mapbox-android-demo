@@ -1,8 +1,10 @@
 package com.mapbox.mapboxandroiddemo.examples.location;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.android.core.permissions.PermissionsListener;
@@ -10,6 +12,9 @@ import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.LocationComponentOptions;
+import com.mapbox.mapboxsdk.location.OnCameraTrackingChangedListener;
+import com.mapbox.mapboxsdk.location.OnLocationClickListener;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -19,14 +24,16 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import java.util.List;
 
 /**
- * Use the LocationComponent to easily add a device location "puck" to a Mapbox map.
+ * Use the LocationLayerOptions class to customize the LocationComponent's device location icon.
  */
-public class LocationComponentActivity extends AppCompatActivity implements
-  OnMapReadyCallback, PermissionsListener {
+public class LocationComponentOptionsActivity extends AppCompatActivity implements
+  OnMapReadyCallback, OnLocationClickListener, PermissionsListener, OnCameraTrackingChangedListener {
 
   private PermissionsManager permissionsManager;
-  private MapboxMap mapboxMap;
   private MapView mapView;
+  private MapboxMap mapboxMap;
+  private LocationComponent locationComponent;
+  private boolean isInTrackingMode;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +44,9 @@ public class LocationComponentActivity extends AppCompatActivity implements
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_location_component);
+    setContentView(R.layout.activity_location_component_options);
+
+    Log.d("LocOptionsActivity", "isInTrackingMode = " + isInTrackingMode);
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -46,7 +55,7 @@ public class LocationComponentActivity extends AppCompatActivity implements
 
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
-    LocationComponentActivity.this.mapboxMap = mapboxMap;
+    this.mapboxMap = mapboxMap;
     enableLocationComponent();
   }
 
@@ -55,11 +64,19 @@ public class LocationComponentActivity extends AppCompatActivity implements
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
-      // Get an instance of the component
-      LocationComponent locationComponent = mapboxMap.getLocationComponent();
+      // Create and customize the LocationComponent's options
+      LocationComponentOptions options = LocationComponentOptions.builder(this)
+        .elevation(5)
+        .accuracyAlpha(.6f)
+        .accuracyColor(Color.RED)
+        .foregroundDrawable(R.drawable.android_custom_location_icon)
+        .build();
 
-      // Activate
-      locationComponent.activateLocationComponent(this);
+      // Get an instance of the component
+      locationComponent = mapboxMap.getLocationComponent();
+
+      // Activate with options
+      locationComponent.activateLocationComponent(this, options);
 
       // Enable to make component visible
       locationComponent.setLocationComponentEnabled(true);
@@ -69,10 +86,50 @@ public class LocationComponentActivity extends AppCompatActivity implements
 
       // Set the component's render mode
       locationComponent.setRenderMode(RenderMode.COMPASS);
+
+      // Add the location icon click listener
+      locationComponent.addOnLocationClickListener(this);
+
+      // Add the camera tracking listener. Fires if the map camera is manually moved.
+      locationComponent.addOnCameraTrackingChangedListener(this);
+
+      findViewById(R.id.back_to_camera_tracking_mode).setOnClickListener(view -> {
+        if (!isInTrackingMode) {
+          isInTrackingMode = true;
+          locationComponent.setCameraMode(CameraMode.TRACKING);
+          locationComponent.zoomWhileTracking(16f);
+          Toast.makeText(this, getString(R.string.tracking_enabled),
+            Toast.LENGTH_SHORT).show();
+        } else {
+          Toast.makeText(this, getString(R.string.tracking_already_enabled),
+            Toast.LENGTH_SHORT).show();
+        }
+      });
+
     } else {
       permissionsManager = new PermissionsManager(this);
       permissionsManager.requestLocationPermissions(this);
     }
+  }
+
+  @SuppressWarnings( {"MissingPermission"})
+  @Override
+  public void onLocationComponentClick() {
+    if (locationComponent.getLastKnownLocation() != null) {
+      Toast.makeText(this, String.format(getString(R.string.current_location),
+        locationComponent.getLastKnownLocation().getLatitude(),
+        locationComponent.getLastKnownLocation().getLongitude()), Toast.LENGTH_LONG).show();
+    }
+  }
+
+  @Override
+  public void onCameraTrackingDismissed() {
+    isInTrackingMode = false;
+  }
+
+  @Override
+  public void onCameraTrackingChanged(int currentMode) {
+    // Empty on purpose
   }
 
   @Override
@@ -95,7 +152,6 @@ public class LocationComponentActivity extends AppCompatActivity implements
     }
   }
 
-  @Override
   @SuppressWarnings( {"MissingPermission"})
   protected void onStart() {
     super.onStart();
