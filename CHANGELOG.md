@@ -2,6 +2,14 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+
+## 6.8.0
+
+* Maps SDK 6.8.0 bump
+* LocationComponent options example
+* Background fog example
+* Java SDK 4.3.0 bump
+
 ## 6.7.1
 
 * Play store setup gradle tweaks
