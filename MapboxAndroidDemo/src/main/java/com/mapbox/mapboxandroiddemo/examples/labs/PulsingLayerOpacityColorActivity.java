@@ -231,9 +231,15 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
   public void onPause() {
     super.onPause();
     mapView.onPause();
-    hotelColorAnimator.cancel();
-    parkColorAnimator.cancel();
-    attractionsColorAnimator.cancel();
+    if (hotelColorAnimator != null) {
+      hotelColorAnimator.cancel();
+    }
+    if (parkColorAnimator != null) {
+      parkColorAnimator.cancel();
+    }
+    if (attractionsColorAnimator != null) {
+      attractionsColorAnimator.cancel();
+    }
   }
 
   @Override
