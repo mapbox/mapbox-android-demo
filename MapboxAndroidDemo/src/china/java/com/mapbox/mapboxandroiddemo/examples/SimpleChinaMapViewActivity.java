@@ -54,13 +54,19 @@ public class SimpleChinaMapViewActivity extends AppCompatActivity {
     // Handle item selection
     switch (item.getItemId()) {
       case R.id.menu_streets:
-        mapboxMap.setStyleUrl(ChinaStyle.MAPBOX_STREETS_CHINESE);
+        if (mapboxMap != null) {
+          mapboxMap.setStyleUrl(ChinaStyle.MAPBOX_STREETS_CHINESE);
+        }
         return true;
       case R.id.menu_dark:
-        mapboxMap.setStyleUrl(ChinaStyle.MAPBOX_DARK_CHINESE);
+        if (mapboxMap != null) {
+          mapboxMap.setStyleUrl(ChinaStyle.MAPBOX_DARK_CHINESE);
+        }
         return true;
       case R.id.menu_light:
-        mapboxMap.setStyleUrl(ChinaStyle.MAPBOX_LIGHT_CHINESE);
+        if (mapboxMap != null) {
+          mapboxMap.setStyleUrl(ChinaStyle.MAPBOX_LIGHT_CHINESE);
+        }
         return true;
       default:
         return super.onOptionsItemSelected(item);
