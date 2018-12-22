@@ -2,6 +2,9 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 6.8.1
+
+* Maps SDK 6.8.1 bump
 
 ## 6.8.0
 
