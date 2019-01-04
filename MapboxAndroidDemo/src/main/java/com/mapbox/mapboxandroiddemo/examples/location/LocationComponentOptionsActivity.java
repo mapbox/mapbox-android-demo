@@ -20,6 +20,7 @@ import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.List;
 
@@ -46,8 +47,6 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_location_component_options);
 
-    Log.d("LocOptionsActivity", "isInTrackingMode = " + isInTrackingMode);
-
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
@@ -56,7 +55,9 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    enableLocationComponent();
+    mapboxMap.setStyle(Style.LIGHT,style -> {
+      enableLocationComponent();
+    });
   }
 
   @SuppressWarnings( {"MissingPermission"})
@@ -76,7 +77,7 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
       locationComponent = mapboxMap.getLocationComponent();
 
       // Activate with options
-      locationComponent.activateLocationComponent(this, options);
+      locationComponent.activateLocationComponent(this, mapboxMap.getStyle(), options);
 
       // Enable to make component visible
       locationComponent.setLocationComponentEnabled(true);

@@ -9,7 +9,6 @@
     <com.mapbox.mapboxsdk.plugins.china.maps.ChinaMapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7"/>
+        android:layout_height="match_parent" />
 
 </FrameLayout>

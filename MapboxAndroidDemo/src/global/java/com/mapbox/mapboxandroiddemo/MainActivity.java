@@ -84,13 +84,10 @@ import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivi
 import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
-<<<<<<< HEAD
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentOptionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 //import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
-=======
->>>>>>> 5544093f... needed refactoring to use the new Style class and getStyle()
 import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
