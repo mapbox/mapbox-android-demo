@@ -21,7 +21,7 @@
     <string name="activity_styles_zoom_dependent_fill_color_description">Make a property depend on the map zoom level, in this case, the water layers fill color.</string>
     <string name="activity_dds_create_hotspots_points_description">Use the Mapbox Maps SDK to visualize point data as hotspots.</string>
     <string name="activity_styles_dds_geojson_circle_layer_clusters_description">Use GeoJSON and circle layers to visualize point data in clusters.</string>
-    <string name="activity_dds_image_clustering_description">Use GeoJSON and SymbolLayer icons to view clustered images.</string>
+    <string name="activity_dds_symbol_clustering_description">Use GeoJSON and SymbolLayer icons to view clustered images.</string>
     <string name="activity_styles_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
     <string name="activity_dds_line_gradient_description">Style a line with colored gradient.</string>
     <string name="activity_styles_basic_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>

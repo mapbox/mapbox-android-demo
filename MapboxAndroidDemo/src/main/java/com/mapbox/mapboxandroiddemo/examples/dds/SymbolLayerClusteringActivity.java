@@ -41,7 +41,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 /**
  * Use GeoJson data with SymbolLayers to create a data clustering effect.
  */
-public class ImageClusteringActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class SymbolLayerClusteringActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -56,7 +56,7 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_dds_image_clustering);
+    setContentView(R.layout.activity_dds_symbol_clustering);
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -68,7 +68,7 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
     this.mapboxMap = mapboxMap;
     initLayerIcons();
     addClusteredGeoJsonSource();
-    Toast.makeText(ImageClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
+    Toast.makeText(SymbolLayerClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
       Toast.LENGTH_SHORT).show();
   }
 

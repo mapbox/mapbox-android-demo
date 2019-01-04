@@ -49,7 +49,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ExpressionIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.SymbolLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.InfoWindowSymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.KotlinStyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.LineGradientActivity;
@@ -1056,11 +1056,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
-      R.string.activity_dds_image_clustering_title,
-      R.string.activity_dds_image_clustering_description,
-      new Intent(MainActivity.this, ImageClusteringActivity.class),
+      R.string.activity_dds_symbol_clustering_title,
+      R.string.activity_dds_symbol_clustering_description,
+      new Intent(MainActivity.this, SymbolLayerClusteringActivity.class),
       null,
-      R.string.activity_dds_image_clustering_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_dds_symbol_clustering_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,

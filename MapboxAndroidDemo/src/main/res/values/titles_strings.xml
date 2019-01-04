@@ -46,7 +46,7 @@
     <string name="activity_lab_space_station_location_title">Space station current location</string>
     <string name="activity_dds_bathymetry_title">Display water depth</string>
     <string name="activity_dds_info_window_symbol_layer_title">Symbol layer info window</string>
-    <string name="activity_dds_image_clustering_title">SymbolLayer clustering</string>
+    <string name="activity_dds_symbol_clustering_title">SymbolLayer clustering</string>
     <string name="activity_dds_expression_integration_title">Temperature change</string>
     <string name="activity_dds_satellite_land_select_title">Satellite land select</string>
     <string name="activity_dds_line_gradient_title">Line gradient</string>
