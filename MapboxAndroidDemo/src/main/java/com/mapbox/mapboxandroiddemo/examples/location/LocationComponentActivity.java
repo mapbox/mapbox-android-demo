@@ -44,9 +44,9 @@ public class LocationComponentActivity extends AppCompatActivity implements
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
-
+  
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     LocationComponentActivity.this.mapboxMap = mapboxMap;
 
     mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7"),

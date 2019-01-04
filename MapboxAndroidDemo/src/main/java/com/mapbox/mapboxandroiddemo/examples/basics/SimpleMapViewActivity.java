@@ -29,7 +29,7 @@ public class SimpleMapViewActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_basic_simple_mapview);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(mapboxMap ->
       mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
