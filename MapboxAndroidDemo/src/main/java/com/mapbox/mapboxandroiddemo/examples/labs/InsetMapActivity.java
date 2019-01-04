@@ -25,6 +25,8 @@ import com.mapbox.mapboxsdk.utils.MapFragmentUtils;
 
 public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCallback, MapboxMap.OnCameraMoveListener {
 
+  private static final String STYLE_URL = "mapbox://styles/mapbox/cj5l80zrp29942rmtg0zctjto";
+
   private MapView mapView;
   private MapboxMap mainLargeMapboxMap;
   private OnMapMovedFragmentInterface onMapMovedFragmentInterfaceListener;
@@ -73,16 +75,13 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
       transaction.add(R.id.mini_map_fragment_container, customSupportMapFragment, "com.mapbox.fragmentMap");
       transaction.commit();
 
-    } else {
-      customSupportMapFragment = (CustomSupportMapFragment)
-        getSupportFragmentManager().findFragmentByTag("com.mapbox.fragmentMap");
     }
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     InsetMapActivity.this.mainLargeMapboxMap = mapboxMap;
-    mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cj5l80zrp29942rmtg0zctjto"),
+    mapboxMap.setStyle(new Style.Builder().fromUrl(STYLE_URL),
       style -> mainLargeMapboxMap.addOnCameraMoveListener(this));
   }
 
@@ -148,15 +147,12 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
   /**
    * Custom version of the regular Mapbox SupportMapFragment class. A custom one is being built here
    * so that the interface call backs can be used in the appropriate places so that the example eventually
-   * works
-   *
-   * @see #getMapAsync(OnMapReadyCallback)
+   * works.
    */
   public static class CustomSupportMapFragment extends Fragment implements
     InsetMapActivity.OnMapMovedFragmentInterface {
 
-    private MapView fragmentMap;
-    private OnMapReadyCallback onMapReadyCallback;
+    private MapView insetFragmentMapView;
     private CameraPosition cameraPositionForFragmentMap;
     private static final int ZOOM_DISTANCE_BETWEEN_MAIN_AND_FRAGMENT_MAPS = 3;
 
@@ -182,18 +178,17 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
         .tilt(mainMapCameraPosition.tilt)
         .build();
 
-      fragmentMap.getMapAsync(new OnMapReadyCallback() {
-        @Override
-        public void onMapReady(final MapboxMap mapInFragment) {
-          mapInFragment.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPositionForFragmentMap));
-        }
-      });
+      insetFragmentMapView.getMapAsync(mapInFragment ->
+        mapInFragment.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPositionForFragmentMap))
+      );
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      ((InsetMapActivity) getActivity()).setOnDataListener(this);
+    public void onAttach(Context context) {
+      super.onAttach(context);
+      if (context instanceof InsetMapActivity) {
+        ((InsetMapActivity) context).setOnDataListener(this);
+      }
     }
 
     /**
@@ -205,10 +200,10 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
      * @return The view created
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       super.onCreateView(inflater, container, savedInstanceState);
       Context context = inflater.getContext();
-      return fragmentMap = new MapView(context, MapFragmentUtils.resolveArgs(context, getArguments()));
+      return insetFragmentMapView = new MapView(context, MapFragmentUtils.resolveArgs(context, getArguments()));
     }
 
     /**
@@ -218,9 +213,10 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
      * @param savedInstanceState THe saved instance state of the framgnt
      */
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      fragmentMap.onCreate(savedInstanceState);
+      insetFragmentMapView.onCreate(savedInstanceState);
+      insetFragmentMapView.getMapAsync(mapboxMap -> mapboxMap.setStyle(new Style.Builder().fromUrl(STYLE_URL)));
     }
 
     /**
@@ -229,8 +225,7 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onStart() {
       super.onStart();
-      fragmentMap.onStart();
-      fragmentMap.getMapAsync(onMapReadyCallback);
+      insetFragmentMapView.onStart();
     }
 
     /**
@@ -239,7 +234,7 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onResume() {
       super.onResume();
-      fragmentMap.onResume();
+      insetFragmentMapView.onResume();
     }
 
     /**
@@ -248,7 +243,7 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onPause() {
       super.onPause();
-      fragmentMap.onPause();
+      insetFragmentMapView.onPause();
     }
 
     /**
@@ -259,7 +254,7 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
       super.onSaveInstanceState(outState);
-      fragmentMap.onSaveInstanceState(outState);
+      insetFragmentMapView.onSaveInstanceState(outState);
     }
 
     /**
@@ -268,7 +263,7 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onStop() {
       super.onStop();
-      fragmentMap.onStop();
+      insetFragmentMapView.onStop();
     }
 
     /**
@@ -277,7 +272,7 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onLowMemory() {
       super.onLowMemory();
-      fragmentMap.onLowMemory();
+      insetFragmentMapView.onLowMemory();
     }
 
     /**
@@ -286,16 +281,7 @@ public class InsetMapActivity extends AppCompatActivity implements OnMapReadyCal
     @Override
     public void onDestroyView() {
       super.onDestroyView();
-      fragmentMap.onDestroy();
-    }
-
-    /**
-     * Sets a callback object which will be triggered when the MapboxMap instance is ready to be used.
-     *
-     * @param onMapReadyCallback The callback to be invoked.
-     */
-    public void getMapAsync(@NonNull final OnMapReadyCallback onMapReadyCallback) {
-      this.onMapReadyCallback = onMapReadyCallback;
+      insetFragmentMapView.onDestroy();
     }
   }
 }
