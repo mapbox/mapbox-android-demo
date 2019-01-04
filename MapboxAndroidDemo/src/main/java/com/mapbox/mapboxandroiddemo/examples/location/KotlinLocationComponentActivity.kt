@@ -18,7 +18,7 @@ import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.activity_location_component.*
 
 /**
- * Use the Location Layer plugin to easily add a device location "puck" to a Mapbox map.
+ * Use the LocationComponent to easily add a device location "puck" to a Mapbox map.
  */
 class KotlinLocationComponentActivity : AppCompatActivity(), OnMapReadyCallback, PermissionsListener {
 
@@ -41,11 +41,17 @@ class KotlinLocationComponentActivity : AppCompatActivity(), OnMapReadyCallback,
 
   override fun onMapReady(mapboxMap: MapboxMap) {
     this.mapboxMap = mapboxMap
-    enableLocationPlugin()
+    mapboxMap.setStyle(Style.Builder().fromUrl(
+            "mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7")) {
+
+      // Map is set up and the style has loaded. Now you can add data or make other map adjustments
+      enableLocationComponent()
+
+    }
   }
 
   @SuppressLint("MissingPermission")
-  private fun enableLocationPlugin() {
+  private fun enableLocationComponent() {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
@@ -57,11 +63,8 @@ class KotlinLocationComponentActivity : AppCompatActivity(), OnMapReadyCallback,
       // Get an instance of the component
       val locationComponent = mapboxMap.locationComponent
 
-      mapboxMap.setStyle(Style.Builder().fromUrl(
-              "mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7")) { style ->
-
         // Activate the component
-        locationComponent.activateLocationComponent(this, style)
+        locationComponent.activateLocationComponent(this, mapboxMap.style!!)
 
         // Apply the options to the LocationComponent
         locationComponent.applyStyle(options)
@@ -73,7 +76,7 @@ class KotlinLocationComponentActivity : AppCompatActivity(), OnMapReadyCallback,
         locationComponent.cameraMode = CameraMode.TRACKING
         locationComponent.renderMode = RenderMode.COMPASS
 
-      }
+
     } else {
       permissionsManager = PermissionsManager(this)
       permissionsManager.requestLocationPermissions(this)
@@ -90,7 +93,7 @@ class KotlinLocationComponentActivity : AppCompatActivity(), OnMapReadyCallback,
 
   override fun onPermissionResult(granted: Boolean) {
     if (granted) {
-      enableLocationPlugin()
+        enableLocationComponent()
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show()
       finish()
