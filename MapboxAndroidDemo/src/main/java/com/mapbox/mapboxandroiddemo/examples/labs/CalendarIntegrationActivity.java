@@ -89,7 +89,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     CalendarIntegrationActivity.this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
       featureCollection = FeatureCollection.fromFeatures(new Feature[] {});

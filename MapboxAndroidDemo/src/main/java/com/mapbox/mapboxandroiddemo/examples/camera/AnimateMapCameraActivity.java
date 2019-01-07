@@ -41,7 +41,7 @@ public class AnimateMapCameraActivity extends AppCompatActivity implements OnMap
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
     AnimateMapCameraActivity.this.mapboxMap = mapboxMap;
 

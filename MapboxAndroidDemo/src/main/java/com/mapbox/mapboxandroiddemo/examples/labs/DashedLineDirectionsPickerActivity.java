@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -71,7 +72,7 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
 
   @SuppressWarnings( {"MissingPermission"})
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     DashedLineDirectionsPickerActivity.this.mapboxMap = mapboxMap;
 
     mapboxMap.setStyle(Style.LIGHT, style -> {

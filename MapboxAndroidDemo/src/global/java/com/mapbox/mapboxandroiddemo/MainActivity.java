@@ -29,8 +29,8 @@ import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.DrawGeojsonLineActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerViewPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity;
@@ -91,8 +91,6 @@ import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
-import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
-import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.BuildingOutlineActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
@@ -664,7 +662,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.id.nav_annotations,
       R.string.activity_annotation_custom_marker_title,
       R.string.activity_annotation_custom_marker_description,
-      new Intent(MainActivity.this, DrawCustomMarkerActivity.class),
+      new Intent(MainActivity.this, MarkerViewPluginActivity.class),
       null,
       R.string.activity_annotation_custom_marker_url, false, BuildConfig.MIN_SDK_VERSION));
 

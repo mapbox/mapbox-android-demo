@@ -75,7 +75,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     LocationPickerActivity.this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
       enableLocationPlugin();

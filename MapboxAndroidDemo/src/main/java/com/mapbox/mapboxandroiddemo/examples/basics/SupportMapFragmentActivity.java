@@ -57,7 +57,7 @@ public class SupportMapFragmentActivity extends AppCompatActivity {
 
     mapFragment.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
         mapboxMap.setStyle(Style.SATELLITE, new Style.OnStyleLoaded() {
           @Override

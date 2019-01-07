@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.geojson.Feature;
@@ -106,7 +107,7 @@ public class LineLayerActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
         mapboxMap.setStyle(Style.OUTDOORS, style -> {
           // Create the LineString from the list of coordinates and then make a GeoJSON

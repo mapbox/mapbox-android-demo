@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.camera;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -49,7 +50,7 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
     mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {

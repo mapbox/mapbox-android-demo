@@ -45,7 +45,7 @@ public class BoundingBoxCameraActivity extends AppCompatActivity implements OnMa
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
     BoundingBoxCameraActivity.this.mapboxMap = mapboxMap;
 

@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -55,7 +56,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.DARK, style -> {
       VectorSource vectorSource = new VectorSource("population", "mapbox://peterqliu.d0vin3el");

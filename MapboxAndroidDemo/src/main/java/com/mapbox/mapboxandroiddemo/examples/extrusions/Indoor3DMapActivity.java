@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -45,7 +46,7 @@ public class Indoor3DMapActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         map = mapboxMap;
 
         mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {

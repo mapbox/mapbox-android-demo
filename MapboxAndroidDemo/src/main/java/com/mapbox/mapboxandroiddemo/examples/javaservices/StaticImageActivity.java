@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -53,7 +54,7 @@ public class StaticImageActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.MAPBOX_STREETS,style -> {
       staticMapImageView = findViewById(R.id.static_map_imageview);

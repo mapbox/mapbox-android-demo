@@ -74,7 +74,7 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
     mapboxMap.setStyle(Style.MAPBOX_STREETS);
 

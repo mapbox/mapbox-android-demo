@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -58,7 +59,7 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     MultipleHeatmapStylingActivity.this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.LIGHT,style -> {
       CameraPosition cameraPositionForFragmentMap = new CameraPosition.Builder()

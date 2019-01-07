@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -46,7 +47,7 @@ public class MarathonExtrusionActivity extends AppCompatActivity implements OnMa
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     MarathonExtrusionActivity.this.mapboxMap = mapboxMap;
 
     mapboxMap.setStyle(Style.SATELLITE, style -> {

@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RawRes;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.VideoView;
@@ -50,7 +51,7 @@ public class TransparentBackgroundActivity extends AppCompatActivity implements 
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     try {
       // Switch the map to a style that has no background
       mapboxMap.setStyle(new Style.Builder().fromJson(readRawResource(this, R.raw.no_bg_style)));

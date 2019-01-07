@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -54,7 +55,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     mapboxMap.setStyle(Style.LIGHT,style -> {
       addRadar(mapboxMap);
       refreshGeoJsonRunnable = new RefreshGeoJsonRunnable();

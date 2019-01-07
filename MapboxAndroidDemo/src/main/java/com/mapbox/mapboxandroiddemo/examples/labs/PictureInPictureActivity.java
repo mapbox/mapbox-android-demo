@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -36,7 +37,7 @@ public class PictureInPictureActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
           addPictureFab = (FloatingActionButton) findViewById(R.id.add_window_fab);
           addPictureFab.setOnClickListener(new View.OnClickListener() {

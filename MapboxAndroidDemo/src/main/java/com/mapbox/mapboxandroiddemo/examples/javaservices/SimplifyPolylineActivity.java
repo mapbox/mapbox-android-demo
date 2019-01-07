@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -54,7 +55,7 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
         map = mapboxMap;
 
         mapboxMap.setStyle(Style.LIGHT, style -> new DrawGeoJson().execute());

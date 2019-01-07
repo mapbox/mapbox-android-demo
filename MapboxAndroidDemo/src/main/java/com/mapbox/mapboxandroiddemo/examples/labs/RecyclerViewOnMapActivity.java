@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.labs;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -80,7 +81,7 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     RecyclerViewOnMapActivity.this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.DARK, style -> {
       initFeatureCollection();

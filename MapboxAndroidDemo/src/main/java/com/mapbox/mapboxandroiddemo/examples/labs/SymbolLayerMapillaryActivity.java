@@ -178,7 +178,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.DARK, style -> {
       mapboxMap.getUiSettings().setCompassEnabled(false);

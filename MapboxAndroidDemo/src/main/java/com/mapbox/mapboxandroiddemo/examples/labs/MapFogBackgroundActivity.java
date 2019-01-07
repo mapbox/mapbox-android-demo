@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -37,7 +38,7 @@ public class MapFogBackgroundActivity extends AppCompatActivity implements OnMap
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
     mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
       // Using the Mapbox Building Plugin to easily display 3D extrusions on the map

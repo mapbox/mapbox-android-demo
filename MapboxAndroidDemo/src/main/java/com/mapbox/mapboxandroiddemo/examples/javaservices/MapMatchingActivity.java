@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -64,7 +65,7 @@ public class MapMatchingActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
         map = mapboxMap;
         map.setStyle(Style.MAPBOX_STREETS, style -> new DrawGeoJson().execute());
       }

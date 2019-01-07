@@ -53,7 +53,7 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.LIGHT,style -> {
       enableLocationComponent();

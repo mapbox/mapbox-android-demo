@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -62,7 +63,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
   }
 
   @Override
-  public void onMapReady(MapboxMap map) {
+  public void onMapReady(@NonNull MapboxMap map) {
 
     map.setStyle(Style.LIGHT, style -> {
       // Add Mapbox-hosted vector source for state polygons

@@ -48,7 +48,7 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     SelectBuildingActivity.this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.LIGHT, style -> {
       mapboxMap.addOnMapClickListener(this);

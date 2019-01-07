@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.offline;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -54,7 +55,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
         mapboxMap.setStyle(Style.OUTDOORS, style -> {
 

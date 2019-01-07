@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ListPopupWindow;
 import android.text.TextUtils;
@@ -66,7 +67,7 @@ public class GeocodingActivity extends AppCompatActivity implements OnMapReadyCa
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
       initTextViews();

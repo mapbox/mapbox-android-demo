@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.query;
 import android.graphics.Color;
 import android.graphics.RectF;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -50,7 +51,7 @@ public class FeatureCountActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
         mapboxMap.setStyle(Style.LIGHT, style -> {
           mapboxMap.getStyle().addSource(

@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -37,13 +38,13 @@ public class ImageSourceTimeLapseActivity extends AppCompatActivity implements O
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_image_source_time_lapse);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
     mapboxMap.setStyle(Style.DARK,style -> {
       // Add source

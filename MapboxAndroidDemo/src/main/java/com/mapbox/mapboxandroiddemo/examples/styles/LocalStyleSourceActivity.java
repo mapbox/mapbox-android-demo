@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -30,15 +31,15 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_local_style_source);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
         mapboxMap.setStyle(Style.LIGHT);
 
-        Button loadCustomRasterStyleButton = (Button) findViewById(R.id.load_custom_raster_button);
+        Button loadCustomRasterStyleButton = findViewById(R.id.load_custom_raster_button);
         loadCustomRasterStyleButton.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -47,7 +48,7 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
           }
         });
 
-        Button loadLocalStyleButton = (Button) findViewById(R.id.load_local_style_button);
+        Button loadLocalStyleButton = findViewById(R.id.load_local_style_button);
         loadLocalStyleButton.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {

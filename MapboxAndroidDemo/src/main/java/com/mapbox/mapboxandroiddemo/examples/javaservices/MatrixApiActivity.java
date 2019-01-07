@@ -79,7 +79,7 @@ public class MatrixApiActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         MatrixApiActivity.this.mapboxMap = mapboxMap;
 
         mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cj8gg22et19ot2rnz65958fkn"),

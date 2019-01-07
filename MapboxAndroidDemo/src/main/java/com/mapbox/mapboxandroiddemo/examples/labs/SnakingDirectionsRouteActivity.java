@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
@@ -77,7 +78,7 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     this.map = mapboxMap;
 
     map.setStyle(Style.LIGHT, style -> {
