@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -17,6 +19,8 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 /**
  * Animate the marker to a new position on the map.
@@ -50,8 +54,11 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
 
     mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
 
-      marker = mapboxMap.addMarker(new MarkerOptions()
-        .position(new LatLng(64.900932, -18.167040)));
+      mapboxMap.getStyle().addSource(new GeoJsonSource("source-id",
+        Feature.fromGeometry(Point.fromLngLat(18.167040, 64.900932))));
+
+      SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
+      mapboxMap.getStyle().addLayer(symbolLayer);
 
       Toast.makeText(
         AnimatedMarkerActivity.this,
@@ -64,6 +71,7 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
     });
   }
 
+
   @Override
   public boolean onMapClick(@NonNull LatLng point) {
     // When the user clicks on the map, we want to animate the marker to that
@@ -74,6 +82,21 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
     markerAnimator.start();
 
     return true;
+  }
+
+  private static class LatLngEvaluator implements TypeEvaluator<LatLng> {
+    // Method is used to interpolate the marker animation.
+
+    private LatLng latLng = new LatLng();
+
+    @Override
+    public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
+      latLng.setLatitude(startValue.getLatitude()
+        + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
+      latLng.setLongitude(startValue.getLongitude()
+        + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
+      return latLng;
+    }
   }
 
   @Override
@@ -119,20 +142,5 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
-  }
-
-  private static class LatLngEvaluator implements TypeEvaluator<LatLng> {
-    // Method is used to interpolate the marker animation.
-
-    private LatLng latLng = new LatLng();
-
-    @Override
-    public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
-      latLng.setLatitude(startValue.getLatitude()
-        + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
-      latLng.setLongitude(startValue.getLongitude()
-        + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
-      return latLng;
-    }
   }
 }

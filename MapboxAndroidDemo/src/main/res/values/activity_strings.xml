@@ -59,7 +59,7 @@
     <string name="basic_marker_activity_marker_options_title">Hisense Arena</string>
     <string name="basic_marker_activity_marker_options_snippet">Olympic Blvd, Melbourne VIC 3001, Australia</string>
 
-    <!--Marker strings for DrawCustomMarkerActivity activity-->
+    <!--Marker strings for MarkerViewPluginActivity activity-->
     <string name="draw_custom_marker_options_title">Cape Town Harbour</string>
     <string name="draw_custom_marker_options_snippet">One of the busiest ports in South Africa</string>
 
