@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 /**
  * Download and view an offline map using the Mapbox Android SDK.
  */
-public class OfflineMapActivity extends WearableActivity {
+public class OfflineMapActivity extends WearableActivity implements OnMapReadyCallback {
   private static final String TAG = "OfflineMapFragment";
   private boolean isEndNotified;
   private ProgressBar progressBar;
@@ -56,32 +57,32 @@ public class OfflineMapActivity extends WearableActivity {
 
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.simple_offline_map);
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
+    mapView.getMapAsync(this);
+    downloadRegion = findViewById(R.id.downloadRegionButton);
+    listRegions = findViewById(R.id.listRegionsButton);
+    // Assign progressBar for later use
+    progressBar = findViewById(R.id.progress_bar);
+  }
+
+  @Override
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+    map = mapboxMap;
+    // Set up the OfflineManager
+    offlineManager = OfflineManager.getInstance(OfflineMapActivity.this);
+    downloadRegion.setOnClickListener(new View.OnClickListener() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
-        map = mapboxMap;
-        // Set up the OfflineManager
-        offlineManager = OfflineManager.getInstance(OfflineMapActivity.this);
-        downloadRegion.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            downloadRegionDialog();
-          }
-        });
-        listRegions.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            downloadedRegionList();
-          }
-        });
+      public void onClick(View view) {
+        downloadRegionDialog();
       }
     });
-    downloadRegion = (Button) findViewById(R.id.downloadRegionButton);
-    listRegions = (Button) findViewById(R.id.listRegionsButton);
-    // Assign progressBar for later use
-    progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+    listRegions.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        downloadedRegionList();
+      }
+    });
   }
 
   private void downloadRegionDialog() {
@@ -132,7 +133,7 @@ public class OfflineMapActivity extends WearableActivity {
 
     // Create offline definition using the current
     // style and boundaries of visible map area
-    String styleUrl = map.getStyleUrl();
+    String styleUrl = map.getStyle().getUrl();
     LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
     double minZoom = map.getCameraPosition().zoom;
     double maxZoom = map.getMaxZoomLevel();

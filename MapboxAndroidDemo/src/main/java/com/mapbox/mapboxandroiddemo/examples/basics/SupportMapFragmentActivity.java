@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.basics;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
@@ -58,10 +59,15 @@ public class SupportMapFragmentActivity extends AppCompatActivity {
       @Override
       public void onMapReady(MapboxMap mapboxMap) {
 
-        // Customize map with markers, polylines, etc.
+        mapboxMap.setStyle(Style.SATELLITE, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-        mapboxMap.setStyle(Style.SATELLITE);
+            // Customize map with markers, polylines, etc.
 
+
+          }
+        });
       }
     });
   }

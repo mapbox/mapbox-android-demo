@@ -45,7 +45,7 @@ public class ImageSourceTimeLapseActivity extends AppCompatActivity implements O
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
 
-    mapboxMap.setStyle(Style.LIGHT,style -> {
+    mapboxMap.setStyle(Style.DARK,style -> {
       // Add source
       LatLngQuad quad = new LatLngQuad(
         new LatLng(46.437, -80.425),

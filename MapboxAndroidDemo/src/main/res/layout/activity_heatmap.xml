@@ -2,11 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-       <com.mapbox.mapboxsdk.maps.MapView
+    <com.mapbox.mapboxsdk.maps.MapView
         android:id="@id/mapView"
+        mapbox:mapbox_cameraTargetLat="52.276656"
+        mapbox:mapbox_cameraTargetLng="-153.147986"
+        mapbox:mapbox_cameraZoom="2.040885"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

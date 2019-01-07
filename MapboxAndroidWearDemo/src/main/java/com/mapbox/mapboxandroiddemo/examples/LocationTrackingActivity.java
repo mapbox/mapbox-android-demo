@@ -24,7 +24,8 @@ import java.util.List;
 /**
  * Lock the camera centered above the user location.
  */
-public class LocationTrackingActivity extends WearableActivity implements PermissionsListener {
+public class LocationTrackingActivity extends WearableActivity implements PermissionsListener,
+  OnMapReadyCallback {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -44,20 +45,20 @@ public class LocationTrackingActivity extends WearableActivity implements Permis
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(this);
+  }
 
-    mapView.getMapAsync(new OnMapReadyCallback() {
+  @Override
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+
+    // Customize map with markers, polylines, etc.
+    LocationTrackingActivity.this.mapboxMap = mapboxMap;
+
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-
-        // Customize map with markers, polylines, etc.
-        LocationTrackingActivity.this.mapboxMap = mapboxMap;
-
-        mapboxMap.setStyle(Style.MAPBOX_STREETS,
-          style -> {
-
-            enableLocationComponent();
-            setAmbientEnabled();
-          });
+      public void onStyleLoaded(@NonNull Style style) {
+        enableLocationComponent();
+        setAmbientEnabled();
       }
     });
   }

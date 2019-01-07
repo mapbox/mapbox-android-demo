@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -11,6 +12,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.HillshadeLayer;
+import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.sources.RasterDemSource;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.hillshadeHighlightColor;
@@ -24,7 +26,6 @@ public class HillShadeActivity extends AppCompatActivity implements
 
   private MapView mapView;
   private static final String LAYER_ID = "hillshade-layer";
-  private static final String LAYER_BELOW_ID = "waterway-river-canal-shadow";
   private static final String SOURCE_ID = "hillshade-source";
   private static final String SOURCE_URL = "mapbox://mapbox.terrain-rgb";
   private static final String HILLSHADE_HIGHLIGHT_COLOR = "#008924";
@@ -49,6 +50,11 @@ public class HillShadeActivity extends AppCompatActivity implements
   public void onMapReady(MapboxMap mapboxMap) {
 
     mapboxMap.setStyle(Style.OUTDOORS,style -> {
+
+      for (Layer singleLayer : mapboxMap.getStyle().getLayers()) {
+        Log.d("HillShadeActivity", "onMapReady: layer id = " + singleLayer.getId());
+      }
+
       // Add hillshade data source to map
       RasterDemSource rasterDemSource = new RasterDemSource(SOURCE_ID, SOURCE_URL);
       mapboxMap.getStyle().addSource(rasterDemSource);
@@ -60,7 +66,7 @@ public class HillShadeActivity extends AppCompatActivity implements
       );
 
       // Add the hillshade layer to the map
-      mapboxMap.getStyle().addLayerBelow(hillshadeLayer, LAYER_BELOW_ID);
+      mapboxMap.getStyle().addLayerBelow(hillshadeLayer, "aerialway");
 
     });
   }

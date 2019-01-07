@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.wearable.activity.WearableActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -12,7 +13,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 /**
  * Show a map in your app using the Mapbox Android SDK.
  */
-public class SimpleMapViewActivity extends WearableActivity {
+public class SimpleMapViewActivity extends WearableActivity implements OnMapReadyCallback {
 
   private MapView mapView;
 
@@ -27,15 +28,17 @@ public class SimpleMapViewActivity extends WearableActivity {
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.activity_simple_mapview);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+    mapView.getMapAsync(this);
+  }
 
-        // Customize map with markers, polylines, etc.
-      }
-    });
+  @Override
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+
+    // Customize map with markers, polylines, etc.
+
+
   }
 
   @Override
