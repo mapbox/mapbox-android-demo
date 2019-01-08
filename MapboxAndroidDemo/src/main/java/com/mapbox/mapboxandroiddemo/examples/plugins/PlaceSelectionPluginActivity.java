@@ -1,4 +1,3 @@
-/*
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.content.Intent;
@@ -15,13 +14,11 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.plugins.places.picker.PlacePicker;
 import com.mapbox.mapboxsdk.plugins.places.picker.model.PlacePickerOptions;
 
-*/
 /**
  * Use the place picker functionality inside of the Places Plugin, to show UI for
  * choosing a map location. Once selected, return to the previous location with a
  * CarmenFeature to extract information from for whatever use that you want.
- *//*
-
+ */
 public class PlaceSelectionPluginActivity extends AppCompatActivity {
 
   private static final int REQUEST_CODE = 5678;
@@ -33,13 +30,12 @@ public class PlaceSelectionPluginActivity extends AppCompatActivity {
     setContentView(R.layout.activity_place_selection);
     selectedLocationTextView = findViewById(R.id.selected_location_info_textview);
     goToPickerActivity();
+
   }
 
-  */
-/**
+  /**
    * Set up the PlacePickerOptions and startActivityForResult
-   *//*
-
+   */
   private void goToPickerActivity() {
     startActivityForResult(
       new PlacePicker.IntentBuilder()
@@ -51,14 +47,12 @@ public class PlaceSelectionPluginActivity extends AppCompatActivity {
         .build(this), REQUEST_CODE);
   }
 
-  */
-/**
+  /**
    * This fires after a location is selected in the Places Plugin's PlacePickerActivity.
    * @param requestCode code that is a part of the return to this activity
    * @param resultCode code that is a part of the return to this activity
    * @param data the data that is a part of the return to this activity
-   *//*
-
+   */
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
@@ -84,4 +78,3 @@ public class PlaceSelectionPluginActivity extends AppCompatActivity {
     }
   }
 }
-*/

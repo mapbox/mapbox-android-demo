@@ -1,4 +1,3 @@
-/*
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.app.Activity;
@@ -24,19 +23,18 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
-*/
 /**
  * Use the places plugin to take advantage of Mapbox's location search ("geocoding") capabilities. The plugin
  * automatically makes geocoding requests, has built-in saved locations, includes location picker functionality,
  * and adds beautiful UI into your Android project.
- *//*
-
+ */
 public class PlacesPluginActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
@@ -66,20 +64,21 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
   @Override
   public void onMapReady(MapboxMap mapboxMap) {
     PlacesPluginActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
-    initSearchFab();
-    addUserLocations();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+      initSearchFab();
+      addUserLocations();
 
-    // Add the symbol layer icon to map for future use
-    Bitmap icon = BitmapFactory.decodeResource(
-      PlacesPluginActivity.this.getResources(), R.drawable.blue_marker_view);
-    mapboxMap.addImage(symbolIconId, icon);
+      // Add the symbol layer icon to map for future use
+      Bitmap icon = BitmapFactory.decodeResource(
+        PlacesPluginActivity.this.getResources(), R.drawable.blue_marker_view);
+      mapboxMap.getStyle().addImage(symbolIconId, icon);
 
-    // Create an empty GeoJSON source using the empty feature collection
-    setUpSource();
+      // Create an empty GeoJSON source using the empty feature collection
+      setUpSource();
 
-    // Set up a new symbol layer for displaying the searched location's feature coordinates
-    setupLayer();
+      // Set up a new symbol layer for displaying the searched location's feature coordinates
+      setupLayer();
+    });
   }
 
   private void initSearchFab() {
@@ -119,13 +118,13 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
 
   private void setUpSource() {
     GeoJsonSource geoJsonSource = new GeoJsonSource(geojsonSourceLayerId);
-    mapboxMap.addSource(geoJsonSource);
+    mapboxMap.getStyle().addSource(geoJsonSource);
   }
 
   private void setupLayer() {
     SymbolLayer selectedLocationSymbolLayer = new SymbolLayer("SYMBOL_LAYER_ID", geojsonSourceLayerId);
     selectedLocationSymbolLayer.withProperties(PropertyFactory.iconImage(symbolIconId));
-    mapboxMap.addLayer(selectedLocationSymbolLayer);
+    mapboxMap.getStyle().addLayer(selectedLocationSymbolLayer);
   }
 
   @Override
@@ -141,7 +140,7 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
         new Feature[]{Feature.fromJson(selectedCarmenFeature.toJson())});
 
       // Retrieve and update the source designated for showing a selected location's symbol layer icon
-      GeoJsonSource source = mapboxMap.getSourceAs(geojsonSourceLayerId);
+      GeoJsonSource source = mapboxMap.getStyle().getSourceAs(geojsonSourceLayerId);
       if (source != null) {
         source.setGeoJson(featureCollection);
       }
@@ -199,4 +198,3 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
     mapView.onSaveInstanceState(outState);
   }
 }
-*/

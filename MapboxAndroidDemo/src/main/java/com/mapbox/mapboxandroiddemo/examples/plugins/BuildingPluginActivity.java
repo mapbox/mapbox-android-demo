@@ -38,7 +38,7 @@ public class BuildingPluginActivity extends AppCompatActivity {
 
     setContentView(R.layout.activity_building_plugin);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override

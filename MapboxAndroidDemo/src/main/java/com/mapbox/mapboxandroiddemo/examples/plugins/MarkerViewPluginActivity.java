@@ -47,7 +47,7 @@ public class MarkerViewPluginActivity extends AppCompatActivity {
 
         mapboxMap.setStyle(Style.OUTDOORS, style -> {
 
-          /*// Create an Icon object for the marker to use
+          // Create an Icon object for the marker to use
 
           markerViewManager = new MarkerViewManager(mapView, mapboxMap);
 
@@ -59,7 +59,7 @@ public class MarkerViewPluginActivity extends AppCompatActivity {
             .position(new LatLng(-33.8500000, 18.4158234))
             .title(getString(R.string.draw_custom_marker_options_title))
             .snippet(getString(R.string.draw_custom_marker_options_snippet))
-            .icon(icon));*/
+            .icon(icon));
         });
       }
     });

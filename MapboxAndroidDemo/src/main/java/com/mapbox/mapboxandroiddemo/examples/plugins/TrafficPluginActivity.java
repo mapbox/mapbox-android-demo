@@ -1,4 +1,3 @@
-/*
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.os.Bundle;
@@ -10,14 +9,13 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.traffic.TrafficPlugin;
 
-*/
 /**
  * Toggle the Mapbox Traffic plugin to display real-time traffic data on top
  * of your map (not all regions supported at the moment).
- *//*
-
+ */
 public class TrafficPluginActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -35,7 +33,7 @@ public class TrafficPluginActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_traffic_plugin);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -99,4 +97,3 @@ public class TrafficPluginActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 }
-*/
