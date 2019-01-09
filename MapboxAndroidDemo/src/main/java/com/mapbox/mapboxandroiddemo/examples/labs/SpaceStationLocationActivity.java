@@ -1,29 +1,29 @@
-/*package com.mapbox.mapboxandroiddemo.examples.labs;
+package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.animation.LinearInterpolator;
 import android.widget.Toast;
 
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.model.IssModel;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
-import com.mapbox.mapboxsdk.annotations.MarkerView;
-import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.plugins.markerview.MarkerView;
 import com.mapbox.turf.TurfMeasurement;
 
 import retrofit2.Call;
@@ -33,10 +33,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 
-*
+/**
  * Display the space station's real-time location
-
-
+ */
 public class SpaceStationLocationActivity extends AppCompatActivity {
 
   private static final String TAG = "SpaceStationActivity";
@@ -67,7 +66,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     setContentView(R.layout.activity_lab_space_station_location);
 
     // Initialize the map view
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -75,10 +74,13 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
 
         map = mapboxMap;
 
-        mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
-          callApi();
+        mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            callApi();
 
-          Toast.makeText(SpaceStationLocationActivity.this, R.string.space_station_toast, Toast.LENGTH_SHORT).show();
+            Toast.makeText(SpaceStationLocationActivity.this, R.string.space_station_toast, Toast.LENGTH_SHORT).show();
+          }
         });
       }
     });
@@ -245,4 +247,3 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     Call<IssModel> loadLocation();
   }
 }
-*/

@@ -11,17 +11,16 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="41.017538"
         mapbox:mapbox_cameraTargetLng="28.974306"
-        mapbox:mapbox_cameraZoom="10.218183"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_dark" />
+        mapbox:mapbox_cameraZoom="10.218183" />
 
     <Button
         android:id="@+id/redo_search_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:layout_marginBottom="24dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="24dp"
         android:background="@color/mapboxPurpleDark"
         android:elevation="4dp"
         android:padding="16dp"

@@ -13,6 +13,6 @@
         mapbox:mapbox_cameraTargetLng="-74.011"
         mapbox:mapbox_cameraTilt="45"
         mapbox:mapbox_cameraZoom="16.5"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"/>
+        />
 
 </FrameLayout>

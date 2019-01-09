@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -11,7 +10,7 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="38.89770"
         mapbox:mapbox_cameraTargetLng="-77.03655"
-        mapbox:mapbox_cameraZoom="18"/>
+        mapbox:mapbox_cameraZoom="18" />
 
     <LinearLayout
         android:id="@+id/floor_level_buttons"
@@ -28,7 +27,7 @@
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:text="2"
-            android:textColor="@color/mapboxWhite"/>
+            android:textColor="@color/mapboxWhite" />
 
         <Button
             android:id="@+id/ground_level_button"
@@ -36,7 +35,7 @@
             android:layout_height="wrap_content"
             android:background="?android:attr/selectableItemBackground"
             android:text="G"
-            android:textColor="@color/mapboxWhite"/>
+            android:textColor="@color/mapboxWhite" />
 
     </LinearLayout>
 

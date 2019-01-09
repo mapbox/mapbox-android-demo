@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -12,8 +11,7 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="34.0444"
         mapbox:mapbox_cameraTargetLng="-118.2536"
-        mapbox:mapbox_cameraZoom="15"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light"/>
+        mapbox:mapbox_cameraZoom="15" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_actions_parent_fab"
@@ -33,7 +31,7 @@
             fab:fab_colorNormal="@color/mapboxBlue"
             fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
-            fab:fab_title="@string/fab_title_hotels"/>
+            fab:fab_title="@string/fab_title_hotels" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_toggle_parks"
@@ -42,7 +40,7 @@
             fab:fab_colorNormal="@color/mapboxGreen"
             fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
-            fab:fab_title="@string/fab_title_parks"/>
+            fab:fab_title="@string/fab_title_parks" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_toggle_attractions"
@@ -51,7 +49,7 @@
             fab:fab_colorNormal="@color/mapboxRed"
             fab:fab_colorPressed="@color/mapboxWhite"
             fab:fab_size="mini"
-            fab:fab_title="@string/fab_title_attractions"/>
+            fab:fab_title="@string/fab_title_attractions" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

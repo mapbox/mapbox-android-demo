@@ -1,4 +1,3 @@
-/*
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
 import android.content.Context;
@@ -23,12 +22,9 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
 
-*/
 /**
  * Change the camera's bearing and tilt based on device movement while viewing building extrusions
- *//*
-
-
+ */
 public class RotationExtrusionActivity extends AppCompatActivity implements SensorEventListener {
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -62,13 +58,18 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
         mapboxMap = map;
-        mapboxMap.setStyle(Style.DARK, style -> setupBuildingExtrusionPlugin());
+        mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            setupBuildingExtrusionPlugin();
+          }
+        });
       }
     });
   }
 
   private void setupBuildingExtrusionPlugin() {
-    BuildingPlugin buildingPlugin = new BuildingPlugin(mapView, mapboxMap);
+    BuildingPlugin buildingPlugin = new BuildingPlugin(mapView, mapboxMap, mapboxMap.getStyle());
     buildingPlugin.setColor(Color.LTGRAY);
     buildingPlugin.setOpacity(0.6f);
     buildingPlugin.setMinZoomLevel(15);
@@ -198,4 +199,3 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
   }
 }
 
-*/

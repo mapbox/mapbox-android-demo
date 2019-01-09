@@ -67,23 +67,22 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
 
   private void addPolygonLayer() {
     // Create and style a FillLayer that uses the Polygon Feature's coordinates in the GeoJSON data
-    FillLayer borderOutlineLayer = new FillLayer("polygon", GEOJSON_SOURCE_ID);
-    borderOutlineLayer.setProperties(
+    FillLayer countryPolygonFillLayer = new FillLayer("polygon", GEOJSON_SOURCE_ID);
+    countryPolygonFillLayer.setProperties(
       PropertyFactory.fillColor(Color.RED),
       PropertyFactory.fillOpacity(.4f));
-    borderOutlineLayer.setFilter(eq(geometryType(), literal("Polygon")));
-    borderOutlineLayer.setFilter(eq(literal("$type"), literal("Polygon")));
-    mapboxMap.getStyle().addLayer(borderOutlineLayer);
+    countryPolygonFillLayer.setFilter(eq(literal("$type"), literal("Polygon")));
+    mapboxMap.getStyle().addLayer(countryPolygonFillLayer);
   }
 
   private void addPointsLayer() {
     // Create and style a CircleLayer that uses the Point Features' coordinates in the GeoJSON data
-    CircleLayer pointsLayer = new CircleLayer("points", GEOJSON_SOURCE_ID);
-    pointsLayer.setProperties(
+    CircleLayer individualCirclesLayer = new CircleLayer("points", GEOJSON_SOURCE_ID);
+    individualCirclesLayer.setProperties(
       PropertyFactory.circleColor(Color.YELLOW),
       PropertyFactory.circleRadius(3f));
-    pointsLayer.setFilter(eq(literal("$type"), literal("Point")));
-    mapboxMap.getStyle().addLayer(pointsLayer);
+    individualCirclesLayer.setFilter(eq(literal("$type"), literal("Point")));
+    mapboxMap.getStyle().addLayer(individualCirclesLayer);
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

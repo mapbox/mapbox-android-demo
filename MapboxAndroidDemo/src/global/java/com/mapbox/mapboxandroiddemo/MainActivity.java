@@ -89,7 +89,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentOptionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
-//import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
@@ -138,14 +138,14 @@ import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.SKIPPED_ACCO
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.SKIPPED_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
 
-//import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
-//import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
-//import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
-//import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
-//import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
-//import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
-//import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
-//import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
   // Used to track internal navigation to the Snapshotter section
@@ -620,54 +620,54 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       null,
       R.string.activity_extrusions_indoor_3d_url, false, BuildConfig.MIN_SDK_VERSION));
 
-    /*exampleItemModels.add(new ExampleItemModel(
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_extrusions,
       R.string.activity_extrusions_rotate_extrusions_title,
       R.string.activity_extrusions_rotate_extrusions_description,
       new Intent(MainActivity.this, RotationExtrusionActivity.class),
       null,
-      R.string.activity_extrusions_rotate_extrusions_url, false, BuildConfig.MIN_SDK_VERSION));*/
+      R.string.activity_extrusions_rotate_extrusions_url, false, BuildConfig.MIN_SDK_VERSION));
 
-    /*exampleItemModels.add(new ExampleItemModel(
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
       R.string.activity_plugins_traffic_plugin_title,
       R.string.activity_plugins_traffic_plugin_description,
       new Intent(MainActivity.this, TrafficPluginActivity.class),
       null,
-      R.string.activity_plugins_traffic_plugin_url, false, BuildConfig.MIN_SDK_VERSION));*/
+      R.string.activity_plugins_traffic_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
 
-    /*exampleItemModels.add(new ExampleItemModel(
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
       R.string.activity_plugins_building_plugin_title,
       R.string.activity_plugins_building_plugin_description,
       new Intent(MainActivity.this, BuildingPluginActivity.class),
       null,
-      R.string.activity_plugins_building_plugin_url, false, BuildConfig.MIN_SDK_VERSION));*/
+      R.string.activity_plugins_building_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
 
-    /*exampleItemModels.add(new ExampleItemModel(
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
       R.string.activity_plugins_places_plugin_title, R.string.activity_plugins_places_plugin_description,
       new Intent(MainActivity.this, PlacesPluginActivity.class),
       null,
-      R.string.activity_plugins_places_plugin_url, false, BuildConfig.MIN_SDK_VERSION));*/
+      R.string.activity_plugins_places_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
 
-    /*exampleItemModels.add(new ExampleItemModel(
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
       R.string.activity_plugins_localization_plugin_title,
       R.string.activity_plugins_localization_plugin_description,
       new Intent(MainActivity.this, LocalizationPluginActivity.class),
       null,
       R.string.activity_plugins_localization_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
-    );*/
+    );
 
-    /*exampleItemModels.add(new ExampleItemModel(
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
       R.string.activity_plugins_place_picker_plugin_title,
       R.string.activity_plugins_place_picker_plugin_description,
       new Intent(MainActivity.this, PlaceSelectionPluginActivity.class),
       null,
       R.string.activity_plugins_place_picker_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
-    );*/
+    );
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_annotations,

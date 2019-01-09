@@ -65,6 +65,8 @@ public class DrawPolygonActivity extends AppCompatActivity {
             polygonFeatureList.add(Feature.fromGeometry(Point.fromLngLat(-122.702007, 45.506346)));
             polygonFeatureList.add(Feature.fromGeometry(Point.fromLngLat(-122.685699, 45.522585)));
 
+            Log.d("DrawPolygonActivity", "onStyleLoaded: polygonFeatureList size = " + polygonFeatureList.size());
+
             GeoJsonSource geoJsonSource = new GeoJsonSource("source-id",
               FeatureCollection.fromFeatures(polygonFeatureList));
             mapboxMap.getStyle().addSource(geoJsonSource);
@@ -77,27 +79,6 @@ public class DrawPolygonActivity extends AppCompatActivity {
 
 
             mapboxMap.getStyle().addLayer(polygonFillLayer);
-            /*
-            Log.d("DrawPolygonActivity", "onMapReady: layer added");
-
-
-            List<LatLng> polygon = new ArrayList<>();
-            polygon.add(new LatLng(45.522585, -122.685699));
-            polygon.add(new LatLng(45.534611, -122.708873));
-            polygon.add(new LatLng(45.530883, -122.678833));
-            polygon.add(new LatLng(45.547115, -122.667503));
-            polygon.add(new LatLng(45.530643, -122.660121));
-            polygon.add(new LatLng(45.533529, -122.636260));
-            polygon.add(new LatLng(45.521743, -122.659091));
-            polygon.add(new LatLng(45.510677, -122.648792));
-            polygon.add(new LatLng(45.515008, -122.664070));
-            polygon.add(new LatLng(45.502496, -122.669048));
-            polygon.add(new LatLng(45.515369, -122.678489));
-            polygon.add(new LatLng(45.506346, -122.702007));
-            polygon.add(new LatLng(45.522585, -122.685699));
-            mapboxMap.addPolygon(new PolygonOptions()
-              .addAll(polygon)
-              .fillColor(Color.parseColor("#3bb2d0")));*/
 
           }
         });
