@@ -62,13 +62,16 @@ public class HighlightedLineActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.LIGHT, style -> {
-      initSource();
-      initLayers();
-      mapboxMap.addOnMapClickListener(this);
-      Toast.makeText(this, getString(R.string.tap_on_line), Toast.LENGTH_SHORT).show();
+    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        initSource();
+        initLayers();
+        mapboxMap.addOnMapClickListener(HighlightedLineActivity.this);
+        Toast.makeText(HighlightedLineActivity.this, getString(R.string.tap_on_line), Toast.LENGTH_SHORT).show();
+      }
     });
   }
 

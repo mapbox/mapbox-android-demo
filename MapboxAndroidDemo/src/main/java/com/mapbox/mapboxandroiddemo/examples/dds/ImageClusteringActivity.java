@@ -69,11 +69,14 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
   @Override
   public void onMapReady(@NonNull MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.LIGHT,style -> {
-      initLayerIcons();
-      addClusteredGeoJsonSource();
-      Toast.makeText(ImageClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
-        Toast.LENGTH_SHORT).show();
+    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        initLayerIcons();
+        addClusteredGeoJsonSource();
+        Toast.makeText(ImageClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
+          Toast.LENGTH_SHORT).show();
+      }
     });
   }
 

@@ -33,24 +33,27 @@ public class PictureInPictureActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_picture_in_picture);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-        mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
-          addPictureFab = (FloatingActionButton) findViewById(R.id.add_window_fab);
-          addPictureFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              try {
-                enterPictureInPictureMode();
-              } catch (Exception exception) {
-                Toast.makeText(PictureInPictureActivity.this, R.string.no_picture_in_picture_support,
-                  Toast.LENGTH_SHORT).show();
+        mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            addPictureFab = findViewById(R.id.add_window_fab);
+            addPictureFab.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                try {
+                  enterPictureInPictureMode();
+                } catch (Exception exception) {
+                  Toast.makeText(PictureInPictureActivity.this, R.string.no_picture_in_picture_support,
+                    Toast.LENGTH_SHORT).show();
+                }
               }
-            }
-          });
+            });
+          }
         });
       }
     });

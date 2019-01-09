@@ -79,17 +79,19 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
 
         mapboxMap = map;
 
-        map.setStyle(Style.LIGHT,style -> {
-          mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
-            12.099, -79.045), 3));
+        map.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+              12.099, -79.045), 3));
 
-          addClusteredGeoJsonSource();
-          mapboxMap.getStyle().addImage("cross-icon-id", BitmapUtils.getBitmapFromDrawable(
-            getResources().getDrawable(R.drawable.ic_cross)));
+            addClusteredGeoJsonSource();
+            mapboxMap.getStyle().addImage("cross-icon-id", BitmapUtils.getBitmapFromDrawable(
+              getResources().getDrawable(R.drawable.ic_cross)));
 
-          Toast.makeText(CircleLayerClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
-            Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(CircleLayerClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
+              Toast.LENGTH_SHORT).show();
+          }
         });
       }
     });

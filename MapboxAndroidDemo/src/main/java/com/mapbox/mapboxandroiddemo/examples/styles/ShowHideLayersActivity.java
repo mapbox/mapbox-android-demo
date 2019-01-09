@@ -51,29 +51,31 @@ public class ShowHideLayersActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
         map = mapboxMap;
-        mapboxMap.setStyle(Style.LIGHT, style -> {
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            VectorSource museums = new VectorSource("museums_source", "mapbox://mapbox.2opop9hr");
+            map.getStyle().addSource(museums);
 
-          VectorSource museums = new VectorSource("museums_source", "mapbox://mapbox.2opop9hr");
-          map.getStyle().addSource(museums);
+            CircleLayer museumsLayer = new CircleLayer("museums", "museums_source");
+            museumsLayer.setSourceLayer("museum-cusco");
+            museumsLayer.setProperties(
+              visibility(VISIBLE),
+              circleRadius(8f),
+              circleColor(Color.argb(255, 55, 148, 179))
+            );
 
-          CircleLayer museumsLayer = new CircleLayer("museums", "museums_source");
-          museumsLayer.setSourceLayer("museum-cusco");
-          museumsLayer.setProperties(
-            visibility(VISIBLE),
-            circleRadius(8f),
-            circleColor(Color.argb(255, 55, 148, 179))
-          );
+            map.getStyle().addLayer(museumsLayer);
 
-          map.getStyle().addLayer(museumsLayer);
+            floatingActionButton.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
 
-          floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                toggleLayer();
 
-              toggleLayer();
-
-            }
-          });
+              }
+            });
+          }
         });
       }
     });

@@ -60,22 +60,25 @@ public class SnapshotShareActivity extends AppCompatActivity {
 
         SnapshotShareActivity.this.mapboxMap = mapboxMap;
 
-        mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
-          // When user clicks the map, start the snapshotting process with the given parameters
-          cameraFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            // When user clicks the map, start the snapshotting process with the given parameters
+            cameraFab.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
 
-              if (!hasStartedSnapshotGeneration) {
-                hasStartedSnapshotGeneration = true;
-                Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_LONG).show();
-                startSnapShot(
-                  mapboxMap.getProjection().getVisibleRegion().latLngBounds,
-                  mapView.getMeasuredHeight(),
-                  mapView.getMeasuredWidth());
+                if (!hasStartedSnapshotGeneration) {
+                  hasStartedSnapshotGeneration = true;
+                  Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_LONG).show();
+                  startSnapShot(
+                    mapboxMap.getProjection().getVisibleRegion().latLngBounds,
+                    mapView.getMeasuredHeight(),
+                    mapView.getMeasuredWidth());
+                }
               }
-            }
-          });
+            });
+          }
         });
 
         // To account for new security measures regarding file management that were released with Android Nougat.

@@ -49,8 +49,13 @@ public class CreateHotspotsActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(@NonNull MapboxMap mapboxMap) {
-        mapboxMap.setStyle(Style.DARK, style -> addClusteredGeoJsonSource(mapboxMap));
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+        mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            addClusteredGeoJsonSource(mapboxMap);
+          }
+        });
       }
     });
   }

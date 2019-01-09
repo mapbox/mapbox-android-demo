@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.annotations;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -30,19 +31,22 @@ public class DrawMarkerActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_annotation_marker);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-        mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-          mapboxMap.addMarker(new MarkerOptions()
-            .position(new LatLng(48.13863, 11.57603))
-            .title(getString(R.string.draw_marker_options_title))
-            .snippet(getString(R.string.draw_marker_options_snippet)));
+            mapboxMap.addMarker(new MarkerOptions()
+              .position(new LatLng(48.13863, 11.57603))
+              .title(getString(R.string.draw_marker_options_title))
+              .snippet(getString(R.string.draw_marker_options_snippet)));
 
+          }
         });
       }
     });

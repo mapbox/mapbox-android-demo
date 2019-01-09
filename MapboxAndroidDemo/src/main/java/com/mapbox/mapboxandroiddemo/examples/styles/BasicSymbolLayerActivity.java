@@ -53,43 +53,46 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
     this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.DARK, style -> {
-      List<Feature> markerCoordinates = new ArrayList<>();
-      markerCoordinates.add(Feature.fromGeometry(
-        Point.fromLngLat(-71.065634, 42.354950))); // Boston Common Park
-      markerCoordinates.add(Feature.fromGeometry(
-        Point.fromLngLat(-71.097293, 42.346645))); // Fenway Park
-      markerCoordinates.add(Feature.fromGeometry(
-        Point.fromLngLat(-71.053694, 42.363725))); // The Paul Revere House
-      FeatureCollection featureCollection = FeatureCollection.fromFeatures(markerCoordinates);
+    mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        List<Feature> markerCoordinates = new ArrayList<>();
+        markerCoordinates.add(Feature.fromGeometry(
+          Point.fromLngLat(-71.065634, 42.354950))); // Boston Common Park
+        markerCoordinates.add(Feature.fromGeometry(
+          Point.fromLngLat(-71.097293, 42.346645))); // Fenway Park
+        markerCoordinates.add(Feature.fromGeometry(
+          Point.fromLngLat(-71.053694, 42.363725))); // The Paul Revere House
+        FeatureCollection featureCollection = FeatureCollection.fromFeatures(markerCoordinates);
 
-      Source geoJsonSource = new GeoJsonSource("marker-source", featureCollection);
-      mapboxMap.getStyle().addSource(geoJsonSource);
+        Source geoJsonSource = new GeoJsonSource("marker-source", featureCollection);
+        mapboxMap.getStyle().addSource(geoJsonSource);
 
-      Bitmap icon = BitmapFactory.decodeResource(
-        BasicSymbolLayerActivity.this.getResources(), R.drawable.blue_marker_view);
+        Bitmap icon = BitmapFactory.decodeResource(
+          BasicSymbolLayerActivity.this.getResources(), R.drawable.blue_marker_view);
 
-      // Add the marker image to map
-      mapboxMap.getStyle().addImage("my-marker-image", icon);
+        // Add the marker image to map
+        mapboxMap.getStyle().addImage("my-marker-image", icon);
 
-      SymbolLayer markers = new SymbolLayer("marker-layer", "marker-source")
-        .withProperties(PropertyFactory.iconImage("my-marker-image"));
-      mapboxMap.getStyle().addLayer(markers);
+        SymbolLayer markers = new SymbolLayer("marker-layer", "marker-source")
+          .withProperties(PropertyFactory.iconImage("my-marker-image"));
+        mapboxMap.getStyle().addLayer(markers);
 
-      // Add the selected marker source and layer
-      FeatureCollection emptySource = FeatureCollection.fromFeatures(new Feature[] {});
-      Source selectedMarkerSource = new GeoJsonSource("selected-marker", emptySource);
-      mapboxMap.getStyle().addSource(selectedMarkerSource);
+        // Add the selected marker source and layer
+        FeatureCollection emptySource = FeatureCollection.fromFeatures(new Feature[] {});
+        Source selectedMarkerSource = new GeoJsonSource("selected-marker", emptySource);
+        mapboxMap.getStyle().addSource(selectedMarkerSource);
 
-      SymbolLayer selectedMarker = new SymbolLayer("selected-marker-layer", "selected-marker")
-        .withProperties(PropertyFactory.iconImage("my-marker-image"));
-      mapboxMap.getStyle().addLayer(selectedMarker);
+        SymbolLayer selectedMarker = new SymbolLayer("selected-marker-layer", "selected-marker")
+          .withProperties(PropertyFactory.iconImage("my-marker-image"));
+        mapboxMap.getStyle().addLayer(selectedMarker);
 
-      mapboxMap.addOnMapClickListener(BasicSymbolLayerActivity.this);
+        mapboxMap.addOnMapClickListener(BasicSymbolLayerActivity.this);
+      }
     });
   }
 

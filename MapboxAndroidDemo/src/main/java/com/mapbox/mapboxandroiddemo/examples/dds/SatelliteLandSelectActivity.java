@@ -79,35 +79,38 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.SATELLITE, style -> {
-      mapboxMap.animateCamera(
-        CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
-          .zoom(16)
-          .build()), 4000);
+    mapboxMap.setStyle(Style.SATELLITE, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        mapboxMap.animateCamera(
+          CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+            .zoom(16)
+            .build()), 4000);
 
-      fillLayerPointList = new ArrayList<>();
-      circleLayerFeatureList = new ArrayList<>();
-      lineLayerPointList = new ArrayList<>();
+        fillLayerPointList = new ArrayList<>();
+        circleLayerFeatureList = new ArrayList<>();
+        lineLayerPointList = new ArrayList<>();
 
-      // Add sources to the map
-      initCircleSource();
-      initLineSource();
-      initFillSource();
+        // Add sources to the map
+        initCircleSource();
+        initLineSource();
+        initFillSource();
 
-      this.circleSource = mapboxMap.getStyle().getSourceAs(CIRCLE_SOURCE_ID);
-      this.fillSource = mapboxMap.getStyle().getSourceAs(FILL_SOURCE_ID);
-      this.lineSource = mapboxMap.getStyle().getSourceAs(LINE_SOURCE_ID);
+        circleSource = mapboxMap.getStyle().getSourceAs(CIRCLE_SOURCE_ID);
+        fillSource = mapboxMap.getStyle().getSourceAs(FILL_SOURCE_ID);
+        lineSource = mapboxMap.getStyle().getSourceAs(LINE_SOURCE_ID);
 
-      // Add layers to the map
-      initCircleLayer();
-      initLineLayer();
-      initFillLayer();
+        // Add layers to the map
+        initCircleLayer();
+        initLineLayer();
+        initFillLayer();
 
-      initFloatingActionButtonClickListeners();
-      Toast.makeText(this, R.string.trace_instruction, Toast.LENGTH_LONG).show();
+        initFloatingActionButtonClickListeners();
+        Toast.makeText(SatelliteLandSelectActivity.this, R.string.trace_instruction, Toast.LENGTH_LONG).show();
+      }
     });
   }
 

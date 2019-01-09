@@ -44,23 +44,26 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_camera_restrict);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
-      // Set bounds to Australia
-      mapboxMap.setLatLngBoundsForCameraTarget(AUSTRALIA_BOUNDS);
-      mapboxMap.setMinZoomPreference(2);
+    mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        // Set bounds to Australia
+        mapboxMap.setLatLngBoundsForCameraTarget(AUSTRALIA_BOUNDS);
+        mapboxMap.setMinZoomPreference(2);
 
-      // Visualise bounds area
-      showBoundsArea();
-      showCrosshair();
+        // Visualise bounds area
+        showBoundsArea();
+        showCrosshair();
+      }
     });
   }
 

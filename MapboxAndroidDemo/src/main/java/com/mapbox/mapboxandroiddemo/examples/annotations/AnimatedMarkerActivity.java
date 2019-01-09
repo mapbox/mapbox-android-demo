@@ -13,7 +13,6 @@ import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -49,25 +48,27 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     AnimatedMarkerActivity.this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.SATELLITE_STREETS, style -> {
+    mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        mapboxMap.getStyle().addSource(new GeoJsonSource("source-id",
+          Feature.fromGeometry(Point.fromLngLat(18.167040, 64.900932))));
 
-      mapboxMap.getStyle().addSource(new GeoJsonSource("source-id",
-        Feature.fromGeometry(Point.fromLngLat(18.167040, 64.900932))));
+        SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
+        mapboxMap.getStyle().addLayer(symbolLayer);
 
-      SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
-      mapboxMap.getStyle().addLayer(symbolLayer);
+        Toast.makeText(
+          AnimatedMarkerActivity.this,
+          getString(R.string.tap_on_map_instruction),
+          Toast.LENGTH_LONG
+        ).show();
 
-      Toast.makeText(
-        AnimatedMarkerActivity.this,
-        getString(R.string.tap_on_map_instruction),
-        Toast.LENGTH_LONG
-      ).show();
+        mapboxMap.addOnMapClickListener(AnimatedMarkerActivity.this);
 
-      mapboxMap.addOnMapClickListener(this);
-
+      }
     });
   }
 

@@ -41,30 +41,33 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-    mapboxMap.setStyle(Style.DARK,style -> {
+    mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
 
-      // Set the latitude and longitude values for the image's four corners
-      LatLngQuad quad = new LatLngQuad(
-        new LatLng(25.7836, -80.11725),
-        new LatLng(25.783548, -80.1397431334),
-        new LatLng(25.7680, -80.13964),
-        new LatLng(25.76795, -80.11725)
-      );
+        // Set the latitude and longitude values for the image's four corners
+        LatLngQuad quad = new LatLngQuad(
+          new LatLng(25.7836, -80.11725),
+          new LatLng(25.783548, -80.1397431334),
+          new LatLng(25.7680, -80.13964),
+          new LatLng(25.76795, -80.11725)
+        );
 
-      // Create an ImageSource object
-      ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.miami_beach);
+        // Create an ImageSource object
+        ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.miami_beach);
 
-      // Add the imageSource to the map
-      mapboxMap.getStyle().addSource(imageSource);
+        // Add the imageSource to the map
+        mapboxMap.getStyle().addSource(imageSource);
 
-      // Create a raster layer and use the imageSource's ID as the layer's data
-      RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
+        // Create a raster layer and use the imageSource's ID as the layer's data
+        RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
 
-      // Add the layer to the map
-      mapboxMap.getStyle().addLayer(layer);
+        // Add the layer to the map
+        mapboxMap.getStyle().addLayer(layer);
 
+      }
     });
   }
 

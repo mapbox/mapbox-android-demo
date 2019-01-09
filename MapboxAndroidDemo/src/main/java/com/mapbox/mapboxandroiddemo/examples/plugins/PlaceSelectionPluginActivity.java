@@ -30,7 +30,6 @@ public class PlaceSelectionPluginActivity extends AppCompatActivity {
     setContentView(R.layout.activity_place_selection);
     selectedLocationTextView = findViewById(R.id.selected_location_info_textview);
     goToPickerActivity();
-
   }
 
   /**

@@ -69,38 +69,41 @@ public class OfflineManagerActivity extends AppCompatActivity {
     setContentView(R.layout.activity_offline_manager);
 
     // Set up the MapView
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
         map = mapboxMap;
-        mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-          // Assign progressBar for later use
-          progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+            // Assign progressBar for later use
+            progressBar = findViewById(R.id.progress_bar);
 
-          // Set up the offlineManager
-          offlineManager = OfflineManager.getInstance(OfflineManagerActivity.this);
+            // Set up the offlineManager
+            offlineManager = OfflineManager.getInstance(OfflineManagerActivity.this);
 
-          // Bottom navigation bar button clicks are handled here.
-          // Download offline button
-          downloadButton = (Button) findViewById(R.id.download_button);
-          downloadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              downloadRegionDialog();
-            }
-          });
+            // Bottom navigation bar button clicks are handled here.
+            // Download offline button
+            downloadButton = findViewById(R.id.download_button);
+            downloadButton.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                downloadRegionDialog();
+              }
+            });
 
-          // List offline regions
-          listButton = (Button) findViewById(R.id.list_button);
-          listButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-              downloadedRegionList();
-            }
-          });
+            // List offline regions
+            listButton =  findViewById(R.id.list_button);
+            listButton.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                downloadedRegionList();
+              }
+            });
+          }
         });
       }
     });

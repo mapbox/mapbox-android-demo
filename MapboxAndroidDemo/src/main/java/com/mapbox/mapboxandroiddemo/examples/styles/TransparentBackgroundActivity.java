@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -54,8 +55,13 @@ public class TransparentBackgroundActivity extends AppCompatActivity implements 
   public void onMapReady(@NonNull MapboxMap mapboxMap) {
     try {
       // Switch the map to a style that has no background
-      mapboxMap.setStyle(new Style.Builder().fromJson(readRawResource(this, R.raw.no_bg_style)));
-      initVideoView();
+      mapboxMap.setStyle(new Style.Builder().fromJson(readRawResource(this, R.raw.no_bg_style)),
+        new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            initVideoView();
+          }
+        });
     } catch (IOException exception) {
       Timber.e(exception);
     }
@@ -69,9 +75,12 @@ public class TransparentBackgroundActivity extends AppCompatActivity implements 
     String path = "android.resource://" + getPackageName() + "/" + R.raw.moving_background_water;
     backgroundWaterVideoView.setVideoURI(Uri.parse(path));
     backgroundWaterVideoView.start();
-    backgroundWaterVideoView.setOnCompletionListener(mediaPlayer ->
-      backgroundWaterVideoView.start()
-    );
+    backgroundWaterVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+      @Override
+      public void onCompletion(MediaPlayer mediaPlayer) {
+        backgroundWaterVideoView.start();
+      }
+    });
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

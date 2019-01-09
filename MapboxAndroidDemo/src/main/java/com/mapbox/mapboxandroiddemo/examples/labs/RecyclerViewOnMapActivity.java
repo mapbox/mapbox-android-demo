@@ -83,11 +83,14 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
   @Override
   public void onMapReady(@NonNull MapboxMap mapboxMap) {
     RecyclerViewOnMapActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.DARK, style -> {
-      initFeatureCollection();
-      initMarkerIcons();
-      initRecyclerView();
-      Toast.makeText(this, R.string.toast_instruction, Toast.LENGTH_SHORT).show();
+    mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        initFeatureCollection();
+        initMarkerIcons();
+        initRecyclerView();
+        Toast.makeText(RecyclerViewOnMapActivity.this, R.string.toast_instruction, Toast.LENGTH_SHORT).show();
+      }
     });
   }
 

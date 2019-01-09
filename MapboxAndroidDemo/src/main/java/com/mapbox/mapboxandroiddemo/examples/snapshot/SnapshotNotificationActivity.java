@@ -56,9 +56,14 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     SnapshotNotificationActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> mapboxMap.addOnMapClickListener(this));
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        mapboxMap.addOnMapClickListener(SnapshotNotificationActivity.this);
+      }
+    });
   }
 
   @Override

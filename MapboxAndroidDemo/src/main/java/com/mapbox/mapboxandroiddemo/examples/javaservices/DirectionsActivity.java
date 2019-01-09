@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
@@ -69,24 +71,29 @@ public class DirectionsActivity extends AppCompatActivity {
     // Setup the MapView
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(map -> {
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+        DirectionsActivity.this.mapboxMap = mapboxMap;
 
-      DirectionsActivity.this.mapboxMap = map;
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            // Set the origin location to the Alhambra landmark in Granada, Spain.
+            origin = Point.fromLngLat(-3.588098, 37.176164);
 
-      mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
-        // Set the origin location to the Alhambra landmark in Granada, Spain.
-        origin = Point.fromLngLat(-3.588098, 37.176164);
+            // Set the destination location to the Plaza del Triunfo in Granada, Spain.
+            destination = Point.fromLngLat(-3.601845, 37.184080);
 
-        // Set the destination location to the Plaza del Triunfo in Granada, Spain.
-        destination = Point.fromLngLat(-3.601845, 37.184080);
+            initSource();
 
-        initSource();
+            initLayers();
 
-        initLayers();
-
-        // Get the directions route from the Mapbox Directions API
-        getRoute(origin, destination);
-      });
+            // Get the directions route from the Mapbox Directions API
+            getRoute(origin, destination);
+          }
+        });
+      }
     });
   }
 

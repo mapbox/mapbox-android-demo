@@ -55,14 +55,17 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
-    mapboxMap.setStyle(Style.LIGHT,style -> {
-      addRadar(mapboxMap);
-      refreshGeoJsonRunnable = new RefreshGeoJsonRunnable();
-      do {
-        handler.postDelayed(refreshGeoJsonRunnable, 1000);
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        addRadar(mapboxMap);
+        refreshGeoJsonRunnable = new RefreshGeoJsonRunnable();
+        do {
+          handler.postDelayed(refreshGeoJsonRunnable, 1000);
+        }
+        while (index == 37);
       }
-      while (index == 37);
     });
   }
 

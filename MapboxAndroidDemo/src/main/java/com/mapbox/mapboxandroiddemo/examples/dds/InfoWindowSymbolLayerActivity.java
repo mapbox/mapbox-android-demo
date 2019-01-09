@@ -80,11 +80,14 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS,style -> {
-      new LoadGeoJsonDataTask(this).execute();
-      mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        new LoadGeoJsonDataTask(InfoWindowSymbolLayerActivity.this).execute();
+        mapboxMap.addOnMapClickListener(InfoWindowSymbolLayerActivity.this);
+      }
     });
   }
 

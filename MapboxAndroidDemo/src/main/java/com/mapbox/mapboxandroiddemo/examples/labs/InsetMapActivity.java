@@ -78,8 +78,12 @@ public class InsetMapActivity extends AppCompatActivity {
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
       InsetMapActivity.this.mainMapboxMap = mapboxMap;
-      mapboxMap.setStyle(new Style.Builder().fromUrl(STYLE_URL),
-        style -> mainMapboxMap.addOnCameraMoveListener(mainCameraMoveListener));
+      mapboxMap.setStyle(new Style.Builder().fromUrl(STYLE_URL), new Style.OnStyleLoaded() {
+        @Override
+        public void onStyleLoaded(@NonNull Style style) {
+          mainMapboxMap.addOnCameraMoveListener(mainCameraMoveListener);
+        }
+      });
     }
   };
 

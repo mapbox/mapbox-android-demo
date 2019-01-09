@@ -83,29 +83,32 @@ public class MatrixApiActivity extends AppCompatActivity {
         MatrixApiActivity.this.mapboxMap = mapboxMap;
 
         mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cj8gg22et19ot2rnz65958fkn"),
-          style -> {
-            // Add markers to the map
-            addMarkers();
+          new Style.OnStyleLoaded() {
+            @Override
+            public void onStyleLoaded(@NonNull Style style) {
+              // Add markers to the map
+              addMarkers();
 
-            // Set up list of locations to pass to the recyclerview
-            initMatrixLocationListForRecyclerView();
+              // Set up list of locations to pass to the recyclerview
+              initMatrixLocationListForRecyclerView();
 
-            // Set up the recyclerview of charging station cards
-            initRecyclerView();
+              // Set up the recyclerview of charging station cards
+              initRecyclerView();
 
-            mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
-              @Override
-              public boolean onMarkerClick(@NonNull Marker marker) {
+              mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(@NonNull Marker marker) {
 
-                // Make a call to the Mapbox Matrix API
-                makeMapboxMatrixApiCall(getClickedMarkerNumInPositionList(marker), Point.fromLngLat(
-                  marker.getPosition().getLongitude(), marker.getPosition().getLatitude()));
-                return false;
-              }
-            });
-            Toast.makeText(MatrixApiActivity.this, R.string.click_on_marker_instruction_toast,
-              Toast.LENGTH_SHORT).show();
-          } );
+                  // Make a call to the Mapbox Matrix API
+                  makeMapboxMatrixApiCall(getClickedMarkerNumInPositionList(marker), Point.fromLngLat(
+                    marker.getPosition().getLongitude(), marker.getPosition().getLatitude()));
+                  return false;
+                }
+              });
+              Toast.makeText(MatrixApiActivity.this, R.string.click_on_marker_instruction_toast,
+                Toast.LENGTH_SHORT).show();
+            }
+          });
       }
     });
   }

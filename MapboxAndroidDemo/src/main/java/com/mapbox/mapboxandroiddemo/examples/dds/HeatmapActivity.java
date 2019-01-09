@@ -65,10 +65,13 @@ public class HeatmapActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
         HeatmapActivity.this.mapboxMap = mapboxMap;
-        mapboxMap.setStyle(Style.DARK,style -> {
-          addEarthquakeSource();
-          addHeatmapLayer();
-          addCircleLayer();
+        mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            addEarthquakeSource();
+            addHeatmapLayer();
+            addCircleLayer();
+          }
         });
       }
     });

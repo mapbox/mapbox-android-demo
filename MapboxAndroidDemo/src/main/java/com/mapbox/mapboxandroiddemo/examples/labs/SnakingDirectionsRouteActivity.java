@@ -78,26 +78,29 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.map = mapboxMap;
 
-    map.setStyle(Style.LIGHT, style -> {
-      initDrivingRouteSourceAndLayer();
+    map.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        initDrivingRouteSourceAndLayer();
 
-      // Origin point in Paris, France
-      final Point origin = Point.fromLngLat(2.35222, 48.856614);
+        // Origin point in Paris, France
+        final Point origin = Point.fromLngLat(2.35222, 48.856614);
 
-      // Destination point in Lyon, France
-      final Point destination = Point.fromLngLat(4.83565, 45.76404);
+        // Destination point in Lyon, France
+        final Point destination = Point.fromLngLat(4.83565, 45.76404);
 
-      // Add origin and destination markers to the map
-      mapboxMap.addMarker(new MarkerOptions()
-        .position(new LatLng(origin.latitude(), origin.longitude())));
-      mapboxMap.addMarker(new MarkerOptions()
-        .position(new LatLng(destination.latitude(), destination.longitude())));
+        // Add origin and destination markers to the map
+        mapboxMap.addMarker(new MarkerOptions()
+          .position(new LatLng(origin.latitude(), origin.longitude())));
+        mapboxMap.addMarker(new MarkerOptions()
+          .position(new LatLng(destination.latitude(), destination.longitude())));
 
-      // Get route from API
-      getDirectionsRoute(origin, destination);
+        // Get route from API
+        getDirectionsRoute(origin, destination);
+      }
     });
   }
 

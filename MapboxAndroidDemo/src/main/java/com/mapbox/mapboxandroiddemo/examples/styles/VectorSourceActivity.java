@@ -42,24 +42,24 @@ public class VectorSourceActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            VectorSource vectorSource = new VectorSource("terrain-data", "mapbox://mapbox.mapbox-terrain-v2");
+            mapboxMap.getStyle().addSource(vectorSource);
 
-        mapboxMap.setStyle(Style.LIGHT, style -> {
+            LineLayer terrainData = new LineLayer("terrain-data", "terrain-data");
+            terrainData.setSourceLayer("contour");
+            terrainData.setProperties(
+              lineJoin(Property.LINE_JOIN_ROUND),
+              lineCap(Property.LINE_CAP_ROUND),
+              lineColor(Color.parseColor("#ff69b4")),
+              lineWidth(1f)
+            );
 
-          VectorSource vectorSource = new VectorSource("terrain-data", "mapbox://mapbox.mapbox-terrain-v2");
-          mapboxMap.getStyle().addSource(vectorSource);
-
-          LineLayer terrainData = new LineLayer("terrain-data", "terrain-data");
-          terrainData.setSourceLayer("contour");
-          terrainData.setProperties(
-            lineJoin(Property.LINE_JOIN_ROUND),
-            lineCap(Property.LINE_CAP_ROUND),
-            lineColor(Color.parseColor("#ff69b4")),
-            lineWidth(1f)
-          );
-
-          mapboxMap.getStyle().addLayer(terrainData);
-
+            mapboxMap.getStyle().addLayer(terrainData);
+          }
         });
       }
     });

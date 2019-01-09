@@ -56,13 +56,16 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.DARK, style -> {
-      VectorSource vectorSource = new VectorSource("population", "mapbox://peterqliu.d0vin3el");
-      mapboxMap.getStyle().addSource(vectorSource);
-      addFillsLayer();
-      addExtrusionsLayer();
+    mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        VectorSource vectorSource = new VectorSource("population", "mapbox://peterqliu.d0vin3el");
+        mapboxMap.getStyle().addSource(vectorSource);
+        addFillsLayer();
+        addExtrusionsLayer();
+      }
     });
   }
 

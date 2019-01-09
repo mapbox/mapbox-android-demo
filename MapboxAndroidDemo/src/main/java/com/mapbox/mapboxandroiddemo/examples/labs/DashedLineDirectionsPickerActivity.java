@@ -20,7 +20,6 @@ import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
-import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -72,30 +71,33 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
 
   @SuppressWarnings( {"MissingPermission"})
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     DashedLineDirectionsPickerActivity.this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.LIGHT, style -> {
-      // Add a marker on the map's center/"target" for the place picker UI
-      ImageView hoveringMarker = new ImageView(this);
-      hoveringMarker.setImageResource(R.drawable.red_marker);
-      FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-        ViewGroup.LayoutParams.WRAP_CONTENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-      hoveringMarker.setLayoutParams(params);
-      mapView.addView(hoveringMarker);
+    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        // Add a marker on the map's center/"target" for the place picker UI
+        ImageView hoveringMarker = new ImageView(DashedLineDirectionsPickerActivity.this);
+        hoveringMarker.setImageResource(R.drawable.red_marker);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+          ViewGroup.LayoutParams.WRAP_CONTENT,
+          ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+        hoveringMarker.setLayoutParams(params);
+        mapView.addView(hoveringMarker);
 
-      // Add the layer for the dashed directions route line
-      initDottedLineSourceAndLayer();
+        // Add the layer for the dashed directions route line
+        initDottedLineSourceAndLayer();
 
-      // Add the camera idle listener
-      mapboxMap.addOnCameraIdleListener(this);
+        // Add the camera idle listener
+        mapboxMap.addOnCameraIdleListener(DashedLineDirectionsPickerActivity.this);
 
-      Toast.makeText(
-        this,
-        getString(R.string.move_map_around_instruction),
-        Toast.LENGTH_LONG
-      ).show();
+        Toast.makeText(
+          DashedLineDirectionsPickerActivity.this,
+          getString(R.string.move_map_around_instruction),
+          Toast.LENGTH_LONG
+        ).show();
+      }
     });
   }
 

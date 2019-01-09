@@ -48,11 +48,15 @@ public class QueryFeatureActivity extends AppCompatActivity implements OnMapRead
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     QueryFeatureActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
-      mapboxMap.addOnMapClickListener(this);
-      Toast.makeText(this, getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        mapboxMap.addOnMapClickListener(QueryFeatureActivity.this);
+        Toast.makeText(QueryFeatureActivity.this,
+          getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
+      }
     });
   }
 

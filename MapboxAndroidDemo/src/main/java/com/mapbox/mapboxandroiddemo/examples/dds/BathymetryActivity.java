@@ -64,27 +64,29 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     BathymetryActivity.this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.OUTDOORS,style -> {
-      // Set bounds to Lawrence Lake, Michigan
-      mapboxMap.setLatLngBoundsForCameraTarget(LAKE_BOUNDS);
+    mapboxMap.setStyle(Style.OUTDOORS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        // Set bounds to Lawrence Lake, Michigan
+        mapboxMap.setLatLngBoundsForCameraTarget(LAKE_BOUNDS);
 
-      // Remove lake label layer
-      mapboxMap.getStyle().removeLayer("water-label");
+        // Remove lake label layer
+        mapboxMap.getStyle().removeLayer("water-label");
 
-      // Initialize FeatureCollection object for future use with layers
-      featureCollection = FeatureCollection.fromJson(loadGeoJsonFromAsset("bathymetry-data.geojson"));
+        // Initialize FeatureCollection object for future use with layers
+        featureCollection = FeatureCollection.fromJson(loadGeoJsonFromAsset("bathymetry-data.geojson"));
 
-      // Retrieve GeoJSON from local file and add it to the map
-      GeoJsonSource geoJsonSource = new GeoJsonSource(geojsonSourceId,
-        featureCollection);
-      mapboxMap.getStyle().addSource(geoJsonSource);
+        // Retrieve GeoJSON from local file and add it to the map
+        GeoJsonSource geoJsonSource = new GeoJsonSource(geojsonSourceId,
+          featureCollection);
+        mapboxMap.getStyle().addSource(geoJsonSource);
 
-      setUpDepthFillLayers();
-      setUpDepthNumberSymbolLayer();
-
+        setUpDepthFillLayers();
+        setUpDepthNumberSymbolLayer();
+      }
     });
   }
 

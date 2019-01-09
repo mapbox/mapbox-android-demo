@@ -41,20 +41,23 @@ public class AnimateMapCameraActivity extends AppCompatActivity implements OnMap
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
     AnimateMapCameraActivity.this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
 
-      // Toast instructing user to tap on the map
-      Toast.makeText(
-        AnimateMapCameraActivity.this,
-        getString(R.string.tap_on_map_instruction),
-        Toast.LENGTH_LONG
-      ).show();
+        // Toast instructing user to tap on the map
+        Toast.makeText(
+          AnimateMapCameraActivity.this,
+          getString(R.string.tap_on_map_instruction),
+          Toast.LENGTH_LONG
+        ).show();
 
-      mapboxMap.addOnMapClickListener(this);
+        mapboxMap.addOnMapClickListener(AnimateMapCameraActivity.this);
+      }
     });
   }
 

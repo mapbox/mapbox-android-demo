@@ -3,18 +3,16 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.PolylineOptions;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -56,7 +54,7 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_annotation_geojson_line);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
@@ -65,11 +63,13 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
   public void onMapReady(MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
-      initSourceAndLayer();
-      new DrawGeoJson().execute();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        initSourceAndLayer();
+        new DrawGeoJson().execute();
+      }
     });
-
   }
 
   @Override

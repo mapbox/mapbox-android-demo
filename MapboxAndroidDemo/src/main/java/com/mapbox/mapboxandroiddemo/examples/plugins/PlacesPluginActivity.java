@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -62,22 +63,25 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
-    PlacesPluginActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
-      initSearchFab();
-      addUserLocations();
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+    this.mapboxMap = mapboxMap;
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        initSearchFab();
+        addUserLocations();
 
-      // Add the symbol layer icon to map for future use
-      Bitmap icon = BitmapFactory.decodeResource(
-        PlacesPluginActivity.this.getResources(), R.drawable.blue_marker_view);
-      mapboxMap.getStyle().addImage(symbolIconId, icon);
+        // Add the symbol layer icon to map for future use
+        Bitmap icon = BitmapFactory.decodeResource(
+          PlacesPluginActivity.this.getResources(), R.drawable.blue_marker_view);
+        mapboxMap.getStyle().addImage(symbolIconId, icon);
 
-      // Create an empty GeoJSON source using the empty feature collection
-      setUpSource();
+        // Create an empty GeoJSON source using the empty feature collection
+        setUpSource();
 
-      // Set up a new symbol layer for displaying the searched location's feature coordinates
-      setupLayer();
+        // Set up a new symbol layer for displaying the searched location's feature coordinates
+        setupLayer();
+      }
     });
   }
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
@@ -16,6 +17,7 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
@@ -83,21 +85,31 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(mapboxMap -> {
-      this.mapboxMap = mapboxMap;
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+        IsochroneActivity.this.mapboxMap = mapboxMap;
 
-      mapboxMap.setStyle(Style.LIGHT, style -> {
-        mapboxMap.addOnMapClickListener(IsochroneActivity.this);
-        initIsochroneCenterSymbolLayer();
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            mapboxMap.addOnMapClickListener(IsochroneActivity.this);
+            initIsochroneCenterSymbolLayer();
 
-        // Set the click listener for the floating action button
-        findViewById(R.id.switch_isochrone_style_fab).setOnClickListener(view -> {
-          usePolygon = !usePolygon;
-          redrawIsochroneData(lastSelectedLatLng);
+            // Set the click listener for the floating action button
+            findViewById(R.id.switch_isochrone_style_fab).setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                usePolygon = !usePolygon;
+                redrawIsochroneData(lastSelectedLatLng);
+              }
+            });
+
+            Toast.makeText(IsochroneActivity.this,
+              getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
+          }
         });
-
-        Toast.makeText(this, getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
-      });
+      }
     });
   }
 

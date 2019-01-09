@@ -42,12 +42,14 @@ public class MapboxMapOptionActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
-        mapboxMap.setStyle(Style.OUTDOORS, style ->{
+        mapboxMap.setStyle(Style.OUTDOORS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-          // Customize map with markers, polylines, etc.
+            // Customize map with markers, polylines, etc.
 
 
-
+          }
         });
       }
     });

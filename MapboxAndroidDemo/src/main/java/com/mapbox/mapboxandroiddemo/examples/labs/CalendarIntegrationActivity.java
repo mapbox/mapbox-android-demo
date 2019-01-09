@@ -89,12 +89,15 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     CalendarIntegrationActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
-      featureCollection = FeatureCollection.fromFeatures(new Feature[] {});
-      getCalendarData();
-      mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        featureCollection = FeatureCollection.fromFeatures(new Feature[] {});
+        getCalendarData();
+        mapboxMap.addOnMapClickListener(CalendarIntegrationActivity.this);
+      }
     });
   }
 
@@ -185,7 +188,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
    *                      eventually displayed in a Toast when a calendar event icon is tapped on.
    * @param eventLocation the event's location. This text is used in the Mapbox geocoding search
    */
-  private void makeMapboxGeocodingRequest(String eventTitle, String eventLocation) {
+  private void makeMapboxGeocodingRequest(final String eventTitle, final String eventLocation) {
     try {
       // Build a Mapbox geocoding request
       MapboxGeocoding client = MapboxGeocoding.builder()

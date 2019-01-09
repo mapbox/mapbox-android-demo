@@ -4,7 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.mapbox.android.core.permissions.PermissionsListener;
@@ -55,8 +55,11 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
   @Override
   public void onMapReady(@NonNull MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.LIGHT,style -> {
-      enableLocationComponent();
+    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        enableLocationComponent();
+      }
     });
   }
 
@@ -94,16 +97,19 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
       // Add the camera tracking listener. Fires if the map camera is manually moved.
       locationComponent.addOnCameraTrackingChangedListener(this);
 
-      findViewById(R.id.back_to_camera_tracking_mode).setOnClickListener(view -> {
-        if (!isInTrackingMode) {
-          isInTrackingMode = true;
-          locationComponent.setCameraMode(CameraMode.TRACKING);
-          locationComponent.zoomWhileTracking(16f);
-          Toast.makeText(this, getString(R.string.tracking_enabled),
-            Toast.LENGTH_SHORT).show();
-        } else {
-          Toast.makeText(this, getString(R.string.tracking_already_enabled),
-            Toast.LENGTH_SHORT).show();
+      findViewById(R.id.back_to_camera_tracking_mode).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          if (!isInTrackingMode) {
+            isInTrackingMode = true;
+            locationComponent.setCameraMode(CameraMode.TRACKING);
+            locationComponent.zoomWhileTracking(16f);
+            Toast.makeText(LocationComponentOptionsActivity.this, getString(R.string.tracking_enabled),
+              Toast.LENGTH_SHORT).show();
+          } else {
+            Toast.makeText(LocationComponentOptionsActivity.this, getString(R.string.tracking_already_enabled),
+              Toast.LENGTH_SHORT).show();
+          }
         }
       });
 

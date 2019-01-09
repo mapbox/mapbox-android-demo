@@ -61,9 +61,12 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
         mapboxMap = map;
-        map.setStyle(Style.DARK, style -> {
-          setupBuildings();
-          setupLight();
+        map.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            setupBuildings();
+            setupLight();
+          }
         });
       }
     });

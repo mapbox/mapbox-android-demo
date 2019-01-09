@@ -178,14 +178,17 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.DARK, style -> {
-      mapboxMap.getUiSettings().setCompassEnabled(false);
-      mapboxMap.getUiSettings().setLogoEnabled(false);
-      mapboxMap.getUiSettings().setAttributionEnabled(false);
-      new LoadPoiDataTask(this).execute();
-      mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        mapboxMap.getUiSettings().setCompassEnabled(false);
+        mapboxMap.getUiSettings().setLogoEnabled(false);
+        mapboxMap.getUiSettings().setAttributionEnabled(false);
+        new LoadPoiDataTask(SymbolLayerMapillaryActivity.this).execute();
+        mapboxMap.addOnMapClickListener(SymbolLayerMapillaryActivity.this);
+      }
     });
   }
 

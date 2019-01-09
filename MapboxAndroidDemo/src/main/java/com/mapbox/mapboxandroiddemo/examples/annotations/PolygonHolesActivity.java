@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.annotations;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -60,11 +61,15 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
   @Override
   public void onMapReady(MapboxMap map) {
     mapboxMap = map;
-    map.setStyle(Style.MAPBOX_STREETS, style ->
-      polygon = mapboxMap.addPolygon(new PolygonOptions()
-        .addAll(POLYGON_COORDINATES)
-        .addAllHoles(HOLE_COORDINATES)
-        .fillColor(BLUE_COLOR)));
+    map.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        polygon = mapboxMap.addPolygon(new PolygonOptions()
+          .addAll(POLYGON_COORDINATES)
+          .addAllHoles(HOLE_COORDINATES)
+          .fillColor(BLUE_COLOR));
+      }
+    });
   }
 
   @Override

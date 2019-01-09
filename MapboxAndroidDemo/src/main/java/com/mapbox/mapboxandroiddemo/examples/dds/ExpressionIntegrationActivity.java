@@ -123,69 +123,71 @@ public class ExpressionIntegrationActivity
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
     this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.MAPBOX_STREETS,style -> {
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        setUpMapImagePins();
 
-      setUpMapImagePins();
-
-      // Initialize FeatureCollection object for future use with layers
-      FeatureCollection featureCollection =
-        FeatureCollection.fromJson(loadGeoJsonFromAsset("weather_data_per_state_before2006.geojson"));
+        // Initialize FeatureCollection object for future use with layers
+        FeatureCollection featureCollection =
+          FeatureCollection.fromJson(loadGeoJsonFromAsset("weather_data_per_state_before2006.geojson"));
 
 
-      // Find out the states represented in the FeatureCollection
-      // and bounds of the extreme conditions
-      states = new ArrayList<>();
-      for (Feature feature : featureCollection.features()) {
-        String stateName = feature.getStringProperty("state");
-        String lat = feature.getStringProperty("latitude");
-        String lon = feature.getStringProperty("longitude");
+        // Find out the states represented in the FeatureCollection
+        // and bounds of the extreme conditions
+        states = new ArrayList<>();
+        for (Feature feature : featureCollection.features()) {
+          String stateName = feature.getStringProperty("state");
+          String lat = feature.getStringProperty("latitude");
+          String lon = feature.getStringProperty("longitude");
 
-        LatLng latLng = new LatLng(
-          Double.parseDouble(lat),
-          Double.parseDouble(lon));
+          LatLng latLng = new LatLng(
+            Double.parseDouble(lat),
+            Double.parseDouble(lon));
 
-        State state = null;
-        for (State curState : states) {
-          if (curState.name.equals(stateName)) {
-            state = curState;
-            break;
+          State state = null;
+          for (State curState : states) {
+            if (curState.name.equals(stateName)) {
+              state = curState;
+              break;
+            }
+          }
+          if (state == null) {
+            state = new State(stateName, latLng);
+            states.add(state);
+          } else {
+            state.add(latLng);
           }
         }
-        if (state == null) {
-          state = new State(stateName, latLng);
-          states.add(state);
-        } else {
-          state.add(latLng);
-        }
+
+        // Retrieves GeoJSON from local file and adds it to the map
+        GeoJsonSource geoJsonSource =
+          new GeoJsonSource(GEOJSON_SRC_ID, featureCollection);
+        mapboxMap.getStyle().addSource(geoJsonSource);
+
+        initTemperatureLayers();
+        populateMenu();
+
+        // show Connecticut by default
+        int indexOfState = indexOfState("Connecticut");
+        selectState(states.get(indexOfState).name, indexOfState);
+
+        // When user clicks the map, start the snapshotting process with the given parameters
+        unitsFab.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+
+            if (mapboxMap != null) {
+              changeTemperatureUnits(!isImperial);
+            }
+          }
+        });
+
       }
-
-      // Retrieves GeoJSON from local file and adds it to the map
-      GeoJsonSource geoJsonSource =
-        new GeoJsonSource(GEOJSON_SRC_ID, featureCollection);
-      mapboxMap.getStyle().addSource(geoJsonSource);
-
-      initTemperatureLayers();
-      populateMenu();
-
-      // show Connecticut by default
-      int indexOfState = indexOfState("Connecticut");
-      selectState(states.get(indexOfState).name, indexOfState);
-
-      // When user clicks the map, start the snapshotting process with the given parameters
-      unitsFab.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-          if (mapboxMap != null) {
-            changeTemperatureUnits(!isImperial);
-          }
-        }
-      });
-
     });
   }
 

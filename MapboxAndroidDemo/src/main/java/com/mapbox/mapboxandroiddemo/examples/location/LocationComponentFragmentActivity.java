@@ -17,6 +17,7 @@ import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.SupportMapFragment;
 
@@ -62,9 +63,17 @@ public class LocationComponentFragmentActivity extends AppCompatActivity impleme
       mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
     }
 
-    mapFragment.getMapAsync(mapboxMap -> {
-      LocationComponentFragmentActivity.this.mapboxMap = mapboxMap;
-      mapboxMap.setStyle(Style.OUTDOORS, style -> enableLocationComponent());
+    mapFragment.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+        LocationComponentFragmentActivity.this.mapboxMap = mapboxMap;
+        mapboxMap.setStyle(Style.OUTDOORS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            enableLocationComponent();
+          }
+        });
+      }
     });
   }
 

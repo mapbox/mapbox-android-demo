@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -37,20 +38,26 @@ public class TrafficPluginActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(final MapboxMap mapboxMap) {
         map = mapboxMap;
-        mapboxMap.setStyle(Style.DARK);
-        trafficPlugin = new TrafficPlugin(mapView, mapboxMap);
-        TrafficPluginActivity.this.trafficPlugin.setVisibility(true); // Enable the traffic view by default
-      }
-    });
+        mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            trafficPlugin = new TrafficPlugin(mapView, mapboxMap, mapboxMap.getStyle());
 
-    findViewById(R.id.traffic_toggle_fab).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        if (map != null) {
-          trafficPlugin.setVisibility(!trafficPlugin.isVisible());
-        }
+            // Enable the traffic view by default
+            TrafficPluginActivity.this.trafficPlugin.setVisibility(true);
+
+            findViewById(R.id.traffic_toggle_fab).setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                if (map != null) {
+                  trafficPlugin.setVisibility(!trafficPlugin.isVisible());
+                }
+              }
+            });
+          }
+        });
       }
     });
   }

@@ -45,48 +45,51 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        localizationPlugin = new LocalizationPlugin(mapView, mapboxMap, mapboxMap.getStyle());
 
-      localizationPlugin = new LocalizationPlugin(mapView, mapboxMap);
-
-      findViewById(R.id.language_one_cardview).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          localizationPlugin.setMapLanguage(MapLocale.ARABIC);
-        }
-      });
-      findViewById(R.id.language_two_cardview).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          localizationPlugin.setMapLanguage(MapLocale.RUSSIAN);
-        }
-      });
-      findViewById(R.id.language_three_cardview).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          localizationPlugin.setMapLanguage(MapLocale.SIMPLIFIED_CHINESE);
-        }
-      });
-      findViewById(R.id.match_map_to_device_language).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          Snackbar.make(view, R.string.change_device_language_instruction, Snackbar.LENGTH_LONG).show();
-          try {
-            localizationPlugin.matchMapLanguageWithDeviceDefault();
-            CameraPosition position = new CameraPosition.Builder()
-              .target(new LatLng(34.032666, -80.363160))
-              .zoom(2.038777)
-              .build();
-
-            mapboxMap.animateCamera(CameraUpdateFactory
-              .newCameraPosition(position), 1000);
-          } catch (RuntimeException exception) {
-            Snackbar.make(view, exception.toString(), Snackbar.LENGTH_LONG).show();
+        findViewById(R.id.language_one_cardview).setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            localizationPlugin.setMapLanguage(MapLocale.ARABIC);
           }
-        }
-      });
+        });
+        findViewById(R.id.language_two_cardview).setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            localizationPlugin.setMapLanguage(MapLocale.RUSSIAN);
+          }
+        });
+        findViewById(R.id.language_three_cardview).setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            localizationPlugin.setMapLanguage(MapLocale.SIMPLIFIED_CHINESE);
+          }
+        });
+        findViewById(R.id.match_map_to_device_language).setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            Snackbar.make(view, R.string.change_device_language_instruction, Snackbar.LENGTH_LONG).show();
+            try {
+              localizationPlugin.matchMapLanguageWithDeviceDefault();
+              CameraPosition position = new CameraPosition.Builder()
+                .target(new LatLng(34.032666, -80.363160))
+                .zoom(2.038777)
+                .build();
 
-      Toast.makeText(this, R.string.instruction_description, Toast.LENGTH_LONG).show();
+              mapboxMap.animateCamera(CameraUpdateFactory
+                .newCameraPosition(position), 1000);
+            } catch (RuntimeException exception) {
+              Snackbar.make(view, exception.toString(), Snackbar.LENGTH_LONG).show();
+            }
+          }
+        });
+
+        Toast.makeText(LocalizationPluginActivity.this, R.string.instruction_description,
+          Toast.LENGTH_LONG).show();
+      }
     });
   }
 

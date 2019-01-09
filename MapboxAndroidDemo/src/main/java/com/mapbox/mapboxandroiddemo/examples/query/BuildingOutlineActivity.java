@@ -59,12 +59,16 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     BuildingOutlineActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
-      setUpLineLayer();
-      mapboxMap.addOnCameraIdleListener(this);
-      Toast.makeText(this, R.string.move_map_around_instruction, Toast.LENGTH_SHORT).show();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        setUpLineLayer();
+        mapboxMap.addOnCameraIdleListener(BuildingOutlineActivity.this);
+        Toast.makeText(BuildingOutlineActivity.this, R.string.move_map_around_instruction,
+          Toast.LENGTH_SHORT).show();
+      }
     });
   }
 

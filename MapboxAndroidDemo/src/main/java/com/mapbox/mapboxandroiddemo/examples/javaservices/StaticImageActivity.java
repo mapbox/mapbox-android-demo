@@ -54,34 +54,37 @@ public class StaticImageActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS,style -> {
-      staticMapImageView = findViewById(R.id.static_map_imageview);
-      createStaticImageButton = findViewById(R.id.create_static_image_button);
-      mapStyleRadioGroup = findViewById(R.id.map_style_radio_group);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        staticMapImageView = findViewById(R.id.static_map_imageview);
+        createStaticImageButton = findViewById(R.id.create_static_image_button);
+        mapStyleRadioGroup = findViewById(R.id.map_style_radio_group);
 
-      mapStyleRadioGroup.setOnCheckedChangeListener(this);
-      createStaticImageButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          if (mapStyleRadioGroup.getCheckedRadioButtonId() == -1) {
-            Toast.makeText(StaticImageActivity.this, R.string.select_a_style, Toast.LENGTH_SHORT).show();
-          } else {
-            // one of the radio buttons is checked
-            Picasso.with(StaticImageActivity.this).load(takeSnapshot(
-              mapboxMap.getCameraPosition().zoom,
-              mapboxMap.getStyle().getUrl().equals("mapbox://styles/mapbox/dark-v9") ? StaticMapCriteria.DARK_STYLE :
-                StaticMapCriteria.STREET_STYLE,
-              mapboxMap.getCameraPosition().target,
-              mapboxMap.getCameraPosition().bearing,
-              mapboxMap.getCameraPosition().tilt,
-              (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredWidth(), 0, 1280),
-              (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredHeight(), 0, 1280))
-              .url().toString()).into(staticMapImageView);
+        mapStyleRadioGroup.setOnCheckedChangeListener(StaticImageActivity.this);
+        createStaticImageButton.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            if (mapStyleRadioGroup.getCheckedRadioButtonId() == -1) {
+              Toast.makeText(StaticImageActivity.this, R.string.select_a_style, Toast.LENGTH_SHORT).show();
+            } else {
+              // one of the radio buttons is checked
+              Picasso.with(StaticImageActivity.this).load(takeSnapshot(
+                mapboxMap.getCameraPosition().zoom,
+                mapboxMap.getStyle().getUrl().equals("mapbox://styles/mapbox/dark-v9") ? StaticMapCriteria.DARK_STYLE :
+                  StaticMapCriteria.STREET_STYLE,
+                mapboxMap.getCameraPosition().target,
+                mapboxMap.getCameraPosition().bearing,
+                mapboxMap.getCameraPosition().tilt,
+                (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredWidth(), 0, 1280),
+                (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredHeight(), 0, 1280))
+                .url().toString()).into(staticMapImageView);
+            }
           }
-        }
-      });
+        });
+      }
     });
   }
 

@@ -57,9 +57,12 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
         map = mapboxMap;
-
-        mapboxMap.setStyle(Style.LIGHT, style -> new DrawGeoJson().execute());
-
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            new DrawGeoJson().execute();
+          }
+        });
       }
     });
   }

@@ -44,15 +44,19 @@ public class BuildingPluginActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
         BuildingPluginActivity.this.mapboxMap = map;
-        map.setStyle(Style.MAPBOX_STREETS, style -> {
-          seekbarLightRadialCoordinate = findViewById(R.id.seekbarLightRadialCoordinate);
-          seekbarLightAzimuthalAngle = findViewById(R.id.seekbarLightAzimuthalAngle);
-          seekbarLightPolarAngle = findViewById(R.id.seekbarLightPolarAngle);
-          seekbarBuildingOpacity = findViewById(R.id.seekbarBuildingOpacity);
+        map.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-          buildingPlugin = new BuildingPlugin(mapView, map);
-          buildingPlugin.setVisibility(true);
-          initLightSeekbar();
+            seekbarLightRadialCoordinate = findViewById(R.id.seekbarLightRadialCoordinate);
+            seekbarLightAzimuthalAngle = findViewById(R.id.seekbarLightAzimuthalAngle);
+            seekbarLightPolarAngle = findViewById(R.id.seekbarLightPolarAngle);
+            seekbarBuildingOpacity = findViewById(R.id.seekbarBuildingOpacity);
+
+            buildingPlugin = new BuildingPlugin(mapView, map, map.getStyle());
+            buildingPlugin.setVisibility(true);
+            initLightSeekbar();
+          }
         });
       }
     });
@@ -73,7 +77,7 @@ public class BuildingPluginActivity extends AppCompatActivity {
 
   private class PositionChangeListener implements android.widget.SeekBar.OnSeekBarChangeListener {
     @Override
-    public void onProgressChanged(android.widget.SeekBar seekBar, int i, boolean b) {
+    public void onProgressChanged(android.widget.SeekBar seekBar, int progress, boolean fromUser) {
       invalidateLightPosition();
     }
 

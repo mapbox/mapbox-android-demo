@@ -78,14 +78,17 @@ public class TilequeryActivity extends AppCompatActivity implements
 
   @SuppressWarnings({"MissingPermission"})
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     TilequeryActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS,style -> {
-      addClickLayer();
-      addResultLayer();
-      displayDeviceLocation();
-      mapboxMap.addOnMapClickListener(this);
-      Toast.makeText(this, R.string.click_on_map_instruction, Toast.LENGTH_SHORT).show();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        addClickLayer();
+        addResultLayer();
+        displayDeviceLocation();
+        mapboxMap.addOnMapClickListener(TilequeryActivity.this);
+        Toast.makeText(TilequeryActivity.this, R.string.click_on_map_instruction, Toast.LENGTH_SHORT).show();
+      }
     });
   }
 

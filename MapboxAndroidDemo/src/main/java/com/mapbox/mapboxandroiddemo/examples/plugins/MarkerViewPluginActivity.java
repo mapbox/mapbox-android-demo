@@ -3,21 +3,13 @@ package com.mapbox.mapboxandroiddemo.examples.plugins;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Icon;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
-import com.mapbox.mapboxsdk.plugins.markerview.MarkerView;
 import com.mapbox.mapboxsdk.plugins.markerview.MarkerViewManager;
 
 /**
@@ -45,21 +37,23 @@ public class MarkerViewPluginActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
-        mapboxMap.setStyle(Style.OUTDOORS, style -> {
+        mapboxMap.setStyle(Style.OUTDOORS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            // Create an Icon object for the marker to use
 
-          // Create an Icon object for the marker to use
+           /* markerViewManager = new MarkerViewManager(mapView, mapboxMap);
 
-          markerViewManager = new MarkerViewManager(mapView, mapboxMap);
+            MarkerView marker = new MarkerView(LatLng(), customView);
 
-          MarkerView marker = new MarkerView(LatLng(), customView);
-
-          markerViewManager.addMarker(marker);
-          // Add the custom icon marker to the map
-          mapboxMap.addMarker(new MarkerOptions()
-            .position(new LatLng(-33.8500000, 18.4158234))
-            .title(getString(R.string.draw_custom_marker_options_title))
-            .snippet(getString(R.string.draw_custom_marker_options_snippet))
-            .icon(icon));
+            markerViewManager.addMarker(marker);
+            // Add the custom icon marker to the map
+            mapboxMap.addMarker(new MarkerOptions()
+              .position(new LatLng(-33.8500000, 18.4158234))
+              .title(getString(R.string.draw_custom_marker_options_title))
+              .snippet(getString(R.string.draw_custom_marker_options_snippet))
+              .icon(icon));*/
+          }
         });
       }
     });

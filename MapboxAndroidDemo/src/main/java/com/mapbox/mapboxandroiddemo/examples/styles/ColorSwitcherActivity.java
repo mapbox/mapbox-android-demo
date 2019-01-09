@@ -40,11 +40,11 @@ public class ColorSwitcherActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_color_switcher);
 
-    final SeekBar redSeekBar = (SeekBar) findViewById(R.id.red_seek_bar);
-    final SeekBar greenSeekBar = (SeekBar) findViewById(R.id.green_seek_bar);
-    final SeekBar blueSeekBar = (SeekBar) findViewById(R.id.blue_seek_bar);
+    final SeekBar redSeekBar = findViewById(R.id.red_seek_bar);
+    final SeekBar greenSeekBar =  findViewById(R.id.green_seek_bar);
+    final SeekBar blueSeekBar = findViewById(R.id.blue_seek_bar);
 
-    final Spinner layerPicker = (Spinner) findViewById(R.id.spinner_layer_picker);
+    final Spinner layerPicker = findViewById(R.id.spinner_layer_picker);
 
     layerPicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
       @Override
@@ -155,9 +155,12 @@ public class ColorSwitcherActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
         map = mapboxMap;
-        mapboxMap.setStyle(Style.LIGHT, style -> {
-          water = (FillLayer) map.getStyle().getLayer("water");
-          building = (FillLayer) map.getStyle().getLayer("building");
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            water = (FillLayer) map.getStyle().getLayer("water");
+            building = (FillLayer) map.getStyle().getLayer("building");
+          }
         });
       }
     });

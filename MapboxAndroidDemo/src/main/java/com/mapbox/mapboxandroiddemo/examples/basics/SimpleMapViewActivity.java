@@ -31,17 +31,20 @@ public class SimpleMapViewActivity extends AppCompatActivity {
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(mapboxMap ->
-      mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
-        @Override
-        public void onStyleLoaded(@NonNull Style style) {
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-          // Map is set up and the style has loaded. Now you can add data or make other map adjustments
+            // Map is set up and the style has loaded. Now you can add data or make other map adjustments
 
 
-        }
-      })
-    );
+          }
+        });
+      }
+    });
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

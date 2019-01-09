@@ -63,51 +63,54 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap map) {
+  public void onMapReady(@NonNull final MapboxMap map) {
 
-    map.setStyle(Style.LIGHT, style -> {
-      // Add Mapbox-hosted vector source for state polygons
-      VectorSource vectorSource = new VectorSource(VECTOR_SOURCE_NAME, "mapbox://mapbox.us_census_states_2015");
-      map.getStyle().addSource(vectorSource);
+    map.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        // Add Mapbox-hosted vector source for state polygons
+        VectorSource vectorSource = new VectorSource(VECTOR_SOURCE_NAME, "mapbox://mapbox.us_census_states_2015");
+        map.getStyle().addSource(vectorSource);
 
-      loadJson();
+        loadJson();
 
-      try {
-        statesArray = new JSONArray(sb.toString());
-      } catch (Exception exception) {
-        Log.e("JSONVectorMix", "Exception Loading GeoJSON: ", exception);
-      }
-
-      // Create stops array
-      Expression.Stop[] stops = new Expression.Stop[statesArray.length()];
-
-      for (int x = 0; x < statesArray.length(); x++) {
         try {
-          // Generate green color value for each state/stop
-          JSONObject singleState = statesArray.getJSONObject(x);
-          double green = singleState.getDouble(DATA_STYLE_UNEMPLOYMENT_PROP) / 14 * 255;
-
-          Log.d("Choropleth", "onMapReady: green value = " + String.valueOf(green) + " for x = " + x);
-          // Add new stop to array of stops
-          stops[x] = stop(
-            Double.parseDouble(singleState.getString(DATA_MATCH_PROP)),
-            rgba(0, green, 0, 1)
-          );
-
-        } catch (JSONException exception) {
-          throw new RuntimeException(exception);
+          statesArray = new JSONArray(sb.toString());
+        } catch (Exception exception) {
+          Log.e("JSONVectorMix", "Exception Loading GeoJSON: ", exception);
         }
+
+        // Create stops array
+        Expression.Stop[] stops = new Expression.Stop[statesArray.length()];
+
+        for (int x = 0; x < statesArray.length(); x++) {
+          try {
+            // Generate green color value for each state/stop
+            JSONObject singleState = statesArray.getJSONObject(x);
+            double green = singleState.getDouble(DATA_STYLE_UNEMPLOYMENT_PROP) / 14 * 255;
+
+            Log.d("Choropleth", "onMapReady: green value = " + String.valueOf(green) + " for x = " + x);
+            // Add new stop to array of stops
+            stops[x] = stop(
+              Double.parseDouble(singleState.getString(DATA_MATCH_PROP)),
+              rgba(0, green, 0, 1)
+            );
+
+          } catch (JSONException exception) {
+            throw new RuntimeException(exception);
+          }
+        }
+
+        // Create layer from the vector tile source with data-driven style
+        FillLayer statesJoinLayer = new FillLayer("states-join", VECTOR_SOURCE_NAME);
+        statesJoinLayer.setSourceLayer(VECTOR_SOURCE_NAME);
+        statesJoinLayer.withProperties(
+          fillColor(match(toNumber(get(DATA_MATCH_PROP)), rgba(0, 0, 0, 1), stops))
+        );
+
+        // Add layer to map below the "waterway-label" layer
+        map.getStyle().addLayerAbove(statesJoinLayer, "waterway-label");
       }
-
-      // Create layer from the vector tile source with data-driven style
-      FillLayer statesJoinLayer = new FillLayer("states-join", VECTOR_SOURCE_NAME);
-      statesJoinLayer.setSourceLayer(VECTOR_SOURCE_NAME);
-      statesJoinLayer.withProperties(
-        fillColor(match(toNumber(get(DATA_MATCH_PROP)), rgba(0, 0, 0, 1), stops))
-      );
-
-      // Add layer to map below the "waterway-label" layer
-      map.getStyle().addLayerAbove(statesJoinLayer, "waterway-label");
     });
   }
 

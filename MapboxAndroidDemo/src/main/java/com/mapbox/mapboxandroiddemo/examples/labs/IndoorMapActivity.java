@@ -67,45 +67,46 @@ public class IndoorMapActivity extends AppCompatActivity {
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         map = mapboxMap;
 
-        mapboxMap.setStyle(Style.MAPBOX_STREETS, style -> {
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            levelButtons = findViewById(R.id.floor_level_buttons);
 
-          levelButtons = findViewById(R.id.floor_level_buttons);
+            boundingBox = new ArrayList<>();
 
-          boundingBox = new ArrayList<>();
+            boundingBox.add(Point.fromLngLat(-77.03791, 38.89715));
+            boundingBox.add(Point.fromLngLat(-77.03791, 38.89811));
+            boundingBox.add(Point.fromLngLat(-77.03532, 38.89811));
+            boundingBox.add(Point.fromLngLat(-77.03532, 38.89708));
 
-          boundingBox.add(Point.fromLngLat(-77.03791, 38.89715));
-          boundingBox.add(Point.fromLngLat(-77.03791, 38.89811));
-          boundingBox.add(Point.fromLngLat(-77.03532, 38.89811));
-          boundingBox.add(Point.fromLngLat(-77.03532, 38.89708));
+            boundingBoxList = new ArrayList<>();
+            boundingBoxList.add(boundingBox);
 
-          boundingBoxList = new ArrayList<>();
-          boundingBoxList.add(boundingBox);
-
-          mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
-            @Override
-            public void onCameraMove() {
-              if (mapboxMap.getCameraPosition().zoom > 16) {
-                if (TurfJoins.inside(Point.fromLngLat(mapboxMap.getCameraPosition().target.getLongitude(),
-                  mapboxMap.getCameraPosition().target.getLatitude()), Polygon.fromLngLats(boundingBoxList))) {
-                  if (levelButtons.getVisibility() != View.VISIBLE) {
-                    showLevelButton();
+            mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+              @Override
+              public void onCameraMove() {
+                if (mapboxMap.getCameraPosition().zoom > 16) {
+                  if (TurfJoins.inside(Point.fromLngLat(mapboxMap.getCameraPosition().target.getLongitude(),
+                    mapboxMap.getCameraPosition().target.getLatitude()), Polygon.fromLngLats(boundingBoxList))) {
+                    if (levelButtons.getVisibility() != View.VISIBLE) {
+                      showLevelButton();
+                    }
+                  } else {
+                    if (levelButtons.getVisibility() == View.VISIBLE) {
+                      hideLevelButton();
+                    }
                   }
-                } else {
-                  if (levelButtons.getVisibility() == View.VISIBLE) {
-                    hideLevelButton();
-                  }
+                } else if (levelButtons.getVisibility() == View.VISIBLE) {
+                  hideLevelButton();
                 }
-              } else if (levelButtons.getVisibility() == View.VISIBLE) {
-                hideLevelButton();
               }
-            }
-          });
-          indoorBuildingSource = new GeoJsonSource("indoor-building", loadJsonFromAsset("white_house_lvl_0.geojson"));
-          mapboxMap.getStyle().addSource(indoorBuildingSource);
+            });
+            indoorBuildingSource = new GeoJsonSource("indoor-building", loadJsonFromAsset("white_house_lvl_0.geojson"));
+            mapboxMap.getStyle().addSource(indoorBuildingSource);
 
-          // Add the building layers since we know zoom levels in range
-          loadBuildingLayer();
-
+            // Add the building layers since we know zoom levels in range
+            loadBuildingLayer();
+          }
         });
 
         Button buttonSecondLevel = findViewById(R.id.second_level_button);

@@ -48,10 +48,13 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
   @Override
   public void onMapReady(@NonNull MapboxMap mapboxMap) {
     MultipleGeometriesActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.LIGHT,style -> {
-      createGeoJsonSource();
-      addPolygonLayer();
-      addPointsLayer();
+    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        createGeoJsonSource();
+        addPolygonLayer();
+        addPointsLayer();
+      }
     });
   }
 

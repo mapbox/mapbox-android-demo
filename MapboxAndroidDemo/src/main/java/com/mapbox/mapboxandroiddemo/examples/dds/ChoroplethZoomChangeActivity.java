@@ -52,67 +52,70 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-        mapboxMap.setStyle(Style.LIGHT, style -> {
-          VectorSource vectorSource = new VectorSource(
-            "population",
-            "http://api.mapbox.com/v4/mapbox.660ui7x6.json?access_token=" + Mapbox.getAccessToken()
-          );
-          mapboxMap.getStyle().addSource(vectorSource);
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            VectorSource vectorSource = new VectorSource(
+              "population",
+              "http://api.mapbox.com/v4/mapbox.660ui7x6.json?access_token=" + Mapbox.getAccessToken()
+            );
+            mapboxMap.getStyle().addSource(vectorSource);
 
-          FillLayer statePopulationLayer = new FillLayer("state-population", "population");
-          statePopulationLayer.withSourceLayer("state_county_population_2014_cen");
-          statePopulationLayer.setFilter(Expression.eq(get("isState"), literal(true)));
-          statePopulationLayer.withProperties(
-            fillColor(step((get("population")), rgb(0,0,0),
-              stop(0, rgb(242,241,45)),
-              stop(750000, rgb(238,211,34)),
-              stop(1000000, rgb(218,156,32)),
-              stop(2500000, rgb(202,131,35)),
-              stop(5000000, rgb(184,107,37)),
-              stop(7500000, rgb(162,86,38)),
-              stop(10000000, rgb(139,66,37)),
-              stop(25000000, rgb(114,49,34)))),
-            fillOpacity(0.75f)
-          );
+            FillLayer statePopulationLayer = new FillLayer("state-population", "population");
+            statePopulationLayer.withSourceLayer("state_county_population_2014_cen");
+            statePopulationLayer.setFilter(Expression.eq(get("isState"), literal(true)));
+            statePopulationLayer.withProperties(
+              fillColor(step((get("population")), rgb(0,0,0),
+                stop(0, rgb(242,241,45)),
+                stop(750000, rgb(238,211,34)),
+                stop(1000000, rgb(218,156,32)),
+                stop(2500000, rgb(202,131,35)),
+                stop(5000000, rgb(184,107,37)),
+                stop(7500000, rgb(162,86,38)),
+                stop(10000000, rgb(139,66,37)),
+                stop(25000000, rgb(114,49,34)))),
+              fillOpacity(0.75f)
+            );
 
-          mapboxMap.getStyle().addLayerBelow(statePopulationLayer, "waterway-label");
+            mapboxMap.getStyle().addLayerBelow(statePopulationLayer, "waterway-label");
 
-          FillLayer countyPopulationLayer = new FillLayer("county-population", "population");
-          countyPopulationLayer.withSourceLayer("state_county_population_2014_cen");
-          countyPopulationLayer.setFilter(Expression.eq(get("isCounty"), literal(true)));
-          countyPopulationLayer.withProperties(
-            fillColor(step(get("population"), rgb(0,0,0),
-              stop(0, rgb(242,241,45)),
-              stop(100, rgb(238,211,34)),
-              stop(1000, rgb(230,183,30)),
-              stop(5000, rgb(218,156,32)),
-              stop(10000, rgb(202,131,35)),
-              stop(50000, rgb(184,107,37)),
-              stop(100000, rgb(162,86,38)),
-              stop(500000, rgb(139,66,37)),
-              stop(1000000, rgb(114,49,34)))),
-            fillOpacity(0.75f),
-            visibility(NONE)
-          );
+            FillLayer countyPopulationLayer = new FillLayer("county-population", "population");
+            countyPopulationLayer.withSourceLayer("state_county_population_2014_cen");
+            countyPopulationLayer.setFilter(Expression.eq(get("isCounty"), literal(true)));
+            countyPopulationLayer.withProperties(
+              fillColor(step(get("population"), rgb(0,0,0),
+                stop(0, rgb(242,241,45)),
+                stop(100, rgb(238,211,34)),
+                stop(1000, rgb(230,183,30)),
+                stop(5000, rgb(218,156,32)),
+                stop(10000, rgb(202,131,35)),
+                stop(50000, rgb(184,107,37)),
+                stop(100000, rgb(162,86,38)),
+                stop(500000, rgb(139,66,37)),
+                stop(1000000, rgb(114,49,34)))),
+              fillOpacity(0.75f),
+              visibility(NONE)
+            );
 
-          mapboxMap.getStyle().addLayerBelow(countyPopulationLayer, "waterway-label");
+            mapboxMap.getStyle().addLayerBelow(countyPopulationLayer, "waterway-label");
 
-          mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
-            @Override
-            public void onCameraMove() {
-              Layer stateLayer = mapboxMap.getStyle().getLayer("state-population");
-              Layer countyLayer = mapboxMap.getStyle().getLayer("county-population");
-              if (mapboxMap.getCameraPosition().zoom > ZOOM_THRESHOLD) {
-                if (stateLayer != null && countyLayer != null) {
-                  countyLayer.setProperties(visibility(VISIBLE));
-                }
-              } else {
-                if (stateLayer != null && countyLayer != null) {
-                  countyLayer.setProperties(visibility(NONE));
+            mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+              @Override
+              public void onCameraMove() {
+                Layer stateLayer = mapboxMap.getStyle().getLayer("state-population");
+                Layer countyLayer = mapboxMap.getStyle().getLayer("county-population");
+                if (mapboxMap.getCameraPosition().zoom > ZOOM_THRESHOLD) {
+                  if (stateLayer != null && countyLayer != null) {
+                    countyLayer.setProperties(visibility(VISIBLE));
+                  }
+                } else {
+                  if (stateLayer != null && countyLayer != null) {
+                    countyLayer.setProperties(visibility(NONE));
+                  }
                 }
               }
-            }
-          });
+            });
+          }
         });
       }
     });

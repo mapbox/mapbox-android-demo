@@ -35,7 +35,7 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
         mapboxMap.setStyle(Style.LIGHT);
 
