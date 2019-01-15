@@ -9,14 +9,14 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.animation.LinearInterpolator;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.model.IssModel;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Icon;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -24,6 +24,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.markerview.MarkerView;
+import com.mapbox.mapboxsdk.plugins.markerview.MarkerViewManager;
 import com.mapbox.turf.TurfMeasurement;
 
 import retrofit2.Call;
@@ -51,8 +52,10 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
 
   // Map variables
   private MapView mapView;
-  private MarkerView marker;
+  private MarkerView spaceStationMarkerView;
   private MapboxMap map;
+  private MarkerViewManager markerViewManager;
+  private LatLng currentLocation;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_lab_space_station_location);
 
-    // Initialize the map view
+    // Initialize the MapView
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
@@ -77,14 +80,14 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
+            markerViewManager = new MarkerViewManager(mapView, mapboxMap);
             callApi();
-
             Toast.makeText(SpaceStationLocationActivity.this, R.string.space_station_toast, Toast.LENGTH_SHORT).show();
           }
         });
       }
     });
-  } // End onCreate
+  }
 
   @Override
   public void onResume() {
@@ -162,7 +165,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
             // We only need the latitude and longitude from the API.
             double latitude = response.body().getIssPosition().getLatitude();
             double longitude = response.body().getIssPosition().getLongitude();
-
+            currentLocation = new LatLng(latitude, longitude);
             updateMarkerPosition(new LatLng(latitude, longitude));
           }
 
@@ -191,16 +194,16 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     // This method is were we update the marker position once we have new coordinates. First we
     // check if this is the first time we are executing this handler, the best way to do this is
     // check if marker is null;
-    if (marker == null) {
+    if (spaceStationMarkerView == null) {
 
       // Create the icon for the marker
-      Icon icon = IconFactory.getInstance(this).fromResource(R.drawable.iss);
+      ImageView spaceStationImageView = new ImageView(this);
+      spaceStationImageView.setImageResource(R.drawable.iss);
+      spaceStationImageView.setLayoutParams(new FrameLayout.LayoutParams(80, 80));
+      spaceStationMarkerView = new MarkerView(
+        new LatLng(position.getLatitude(), position.getLongitude()), spaceStationImageView);
 
-      // Add the marker to the map using the API's latitude and longitude.
-      marker = map.addMarker(new MarkerViewOptions()
-        .position(position)
-        .anchor(0.5f, 0.5f)
-        .icon(icon));
+      markerViewManager.addMarker(spaceStationMarkerView);
 
       // Lastly, animate the camera to the new position so the user
       // wont have to search for the marker and then return.
@@ -208,12 +211,8 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
       return;
     }
 
-    // Marker rotation is critical only if you want the marker to point in the direction the
-    // object's moving.
-    marker.setRotation((float) computeHeading(marker.getPosition(), position));
-
-    ValueAnimator markerAnimator = ObjectAnimator.ofObject(marker, "position",
-      new LatLngEvaluator(), marker.getPosition(), position);
+    ValueAnimator markerAnimator = ObjectAnimator.ofObject(spaceStationMarkerView, "position",
+      new LatLngEvaluator(), currentLocation, position);
     markerAnimator.setDuration(apiCallTime);
     markerAnimator.setInterpolator(new LinearInterpolator());
     markerAnimator.start();

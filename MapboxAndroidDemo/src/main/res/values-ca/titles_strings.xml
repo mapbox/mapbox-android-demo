@@ -29,10 +29,10 @@
     <string name="activity_dds_json_vector_mix_title">Unir dades JSON locals amb geometries de tessel·les vector</string>
     <string name="activity_dds_style_line_identity_property_title">Aplicar estil a les línies utilitzant una funció de propietat d\'identitat</string>
     <string name="activity_annotation_marker_title">Dibuixa un marcador</string>
-    <string name="activity_annotation_custom_marker_title">Dibuixa un marcador amb icona personalitzada</string>
-    <string name="activity_annotation_geojson_line_title">Dibuixa una línia GeoJSON</string>
+    <string name="activity_plugins_markerview_plugin_title">Dibuixa un marcador amb icona personalitzada</string>
+    <string name="activity_dds_geojson_line_title">Dibuixa una línia GeoJSON</string>
     <string name="activity_annotation_polygon_title">Dibuixa un polígon</string>
-    <string name="activity_annotation_polygon_holes_title">Dibuixa un polígon amb forats</string>
+    <string name="activity_dds_polygon_holes_title">Dibuixa un polígon amb forats</string>
     <string name="activity_annotation_marker_view_title">Dibuixa una vista de marcador</string>
     <string name="activity_annotation_custom_info_window_title">Finestra d\'informació personalitzada</string>
     <string name="activity_annotation_animated_marker_title">Afegeix animació a la posició del marcador</string>

@@ -30,7 +30,6 @@ import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.SimpleChinaMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivityKotlin;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;

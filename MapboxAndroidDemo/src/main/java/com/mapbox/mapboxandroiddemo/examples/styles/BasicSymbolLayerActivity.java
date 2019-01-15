@@ -26,6 +26,8 @@ import com.mapbox.mapboxsdk.style.sources.Source;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
+
 /**
  * Display markers on the map by adding a symbol layer
  */
@@ -79,7 +81,8 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
         mapboxMap.getStyle().addImage("my-marker-image", icon);
 
         SymbolLayer markers = new SymbolLayer("marker-layer", "marker-source")
-          .withProperties(PropertyFactory.iconImage("my-marker-image"));
+          .withProperties(PropertyFactory.iconImage("my-marker-image"),
+            iconOffset(new Float[] {0f, -4f}));
         mapboxMap.getStyle().addLayer(markers);
 
         // Add the selected marker source and layer
@@ -88,7 +91,8 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
         mapboxMap.getStyle().addSource(selectedMarkerSource);
 
         SymbolLayer selectedMarker = new SymbolLayer("selected-marker-layer", "selected-marker")
-          .withProperties(PropertyFactory.iconImage("my-marker-image"));
+          .withProperties(PropertyFactory.iconImage("my-marker-image"),
+            iconOffset(new Float[] {0f, -4f}));
         mapboxMap.getStyle().addLayer(selectedMarker);
 
         mapboxMap.addOnMapClickListener(BasicSymbolLayerActivity.this);

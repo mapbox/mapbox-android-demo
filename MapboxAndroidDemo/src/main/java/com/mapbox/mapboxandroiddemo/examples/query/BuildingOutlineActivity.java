@@ -5,6 +5,9 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
@@ -66,8 +69,10 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
       public void onStyleLoaded(@NonNull Style style) {
         setUpLineLayer();
         mapboxMap.addOnCameraIdleListener(BuildingOutlineActivity.this);
+        showCrosshair();
         Toast.makeText(BuildingOutlineActivity.this, R.string.move_map_around_instruction,
           Toast.LENGTH_SHORT).show();
+        updateOutline();
       }
     });
   }
@@ -152,6 +157,13 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
     if (source != null) {
       source.setGeoJson(featureCollection);
     }
+  }
+
+  private void showCrosshair() {
+    View crosshair = new View(this);
+    crosshair.setLayoutParams(new FrameLayout.LayoutParams(20, 20, Gravity.CENTER));
+    crosshair.setBackgroundColor(Color.RED);
+    mapView.addView(crosshair);
   }
 
   @Override

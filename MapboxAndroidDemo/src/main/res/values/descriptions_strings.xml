@@ -51,10 +51,9 @@
     <string name="activity_dds_expression_integration_description">Use multiple expressions to visualize unit change in data.</string>
     <string name="activity_dds_satellite_land_select_description">View satellite photos and click to outline an area of land.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
-    <string name="activity_annotation_custom_marker_description">Create a marker with a custom icon using the Mapbox Maps SDK.</string>
-    <string name="activity_annotation_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Maps SDK.</string>
+    <string name="activity_dds_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Maps SDK.</string>
     <string name="activity_annotation_polygon_description">Draw a vector polygon on a map with the Mapbox Maps SDK.</string>
-    <string name="activity_annotation_polygon_holes_description">Draw a vector polygon with holes on a map using the Mapbox Maps SDK.</string>
+    <string name="activity_dds_polygon_holes_description">Draw a vector polygon with holes on a map using the Mapbox Maps SDK.</string>
     <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
     <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize the info window.</string>
     <string name="activity_annotation_animated_marker_description">Animate the marker to a new position on the map.</string>
@@ -84,6 +83,7 @@
     <string name="activity_plugins_places_plugin_description">Add location search ("geocoding") functionality and UI to search for any place in the world</string>
     <string name="activity_plugins_localization_plugin_description">Use the plugin to automatically change map label text to the language set on the device.</string>
     <string name="activity_plugins_place_picker_plugin_description">Use the place picker function of the Places Plugin to choose a specific location in the world.</string>
+    <string name="activity_plugins_markerview_plugin_description">Create a marker with an Android-system View.</string>
     <string name="activity_location_location_component_description">Use the location component to easily show a user\'s location on the map</string>
     <string name="activity_location_user_location_map_frag_plugin_description">Use the location component to display a user\'s location on a map fragment.</string>
     <string name="activity_location_location_component_options_description">Use location component options to customize the user location information.</string>

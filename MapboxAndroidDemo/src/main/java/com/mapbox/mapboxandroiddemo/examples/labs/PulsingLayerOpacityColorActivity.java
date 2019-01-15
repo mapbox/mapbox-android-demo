@@ -131,7 +131,7 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
 
         });
 
-        final FillLayer parks = (FillLayer) mapboxMap.getStyle().getLayer("parks");
+        final FillLayer parks = (FillLayer) mapboxMap.getStyle().getLayer("landuse");
         parks.setProperties(
           PropertyFactory.visibility(Property.NONE)
         );
@@ -148,14 +148,13 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
 
           @Override
           public void onAnimationUpdate(ValueAnimator animator) {
-
             parks.setProperties(
               fillColor((int) animator.getAnimatedValue())
             );
           }
         });
 
-        FloatingActionButton toggleHotelsFab = (FloatingActionButton) findViewById(R.id.fab_toggle_hotels);
+        FloatingActionButton toggleHotelsFab = findViewById(R.id.fab_toggle_hotels);
         toggleHotelsFab.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -163,16 +162,15 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
           }
         });
 
-
-        FloatingActionButton toggleParksFab = (FloatingActionButton) findViewById(R.id.fab_toggle_parks);
+        FloatingActionButton toggleParksFab = findViewById(R.id.fab_toggle_parks);
         toggleParksFab.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            setLayerVisible("parks");
+            setLayerVisible("landuse");
           }
         });
 
-        FloatingActionButton toggleAttractionsFab = (FloatingActionButton) findViewById(R.id.fab_toggle_attractions);
+        FloatingActionButton toggleAttractionsFab = findViewById(R.id.fab_toggle_attractions);
         toggleAttractionsFab.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {

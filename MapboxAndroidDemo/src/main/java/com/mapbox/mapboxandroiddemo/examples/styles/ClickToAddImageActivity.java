@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
-// #-code-snippet: click-to-add-image-activity full-java
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,7 +17,6 @@ import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngQuad;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -74,18 +71,21 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-    mapboxMap.setStyle(Style.MAPBOX_STREETS);
-
-    boundsFeatureList = new ArrayList<>();
-    boundsCirclePointList = new ArrayList<>();
-    this.mapboxMap = mapboxMap;
-    mapboxMap.addOnMapClickListener(this);
-    imageCountIndex = 0;
-    initCircleSource();
-    initCircleLayer();
-    Toast.makeText(this, R.string.tap_instructions, Toast.LENGTH_LONG).show();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        boundsFeatureList = new ArrayList<>();
+        boundsCirclePointList = new ArrayList<>();
+        ClickToAddImageActivity.this.mapboxMap = mapboxMap;
+        mapboxMap.addOnMapClickListener(ClickToAddImageActivity.this);
+        imageCountIndex = 0;
+        initCircleSource();
+        initCircleLayer();
+        Toast.makeText(ClickToAddImageActivity.this, R.string.tap_instructions, Toast.LENGTH_LONG).show();
+      }
+    });
   }
 
   @Override
@@ -106,20 +106,8 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
       circleSource.setGeoJson(FeatureCollection.fromFeatures(boundsFeatureList));
     }
 
-    // Add to latLngList to eventually add a Polygon
-    List<LatLng> latLngList = new ArrayList<>();
-    for (Point singlePoint : boundsCirclePointList) {
-      latLngList.add(new LatLng(singlePoint.latitude(), singlePoint.longitude()));
-    }
-
     // Once the 4 LatLngQuad points have been set for where the image will placed...
     if (boundsCirclePointList.size() == 4) {
-
-      // Add polygon
-      mapboxMap.addPolygon(new PolygonOptions()
-        .addAll(latLngList)
-        .alpha(.3f)
-        .fillColor(Color.parseColor("#d004d3")));
 
       // Create the LatLng objects to use in the LatLngQuad
       LatLng latLng1 = new LatLng(boundsCirclePointList.get(0).latitude(),
@@ -262,4 +250,3 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: click-to-add-image-activity full-java

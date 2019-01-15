@@ -43,7 +43,7 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
   private GeoJsonSource dataGeoJsonSource;
   private FillLayer dataFillLayer;
   private Button redoSearchButton;
-  private String desiredMapLayerToShow = "parks";
+  private String desiredMapLayerToShow = "landuse";
   private String geoJsonSourceId = "geoJsonSourceId";
   private String fillLayerId = "fillLayerId";
   private boolean moveMapInstructionShown;
@@ -88,6 +88,9 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
             FeatureCollection featureCollection = null;
             if (mapboxMap.getStyle().getLayer(desiredMapLayerToShow) != null) {
               featureCollection = FeatureCollection.fromFeatures(getFeaturesInViewport(desiredMapLayerToShow));
+              Toast.makeText(RedoSearchInAreaActivity.this,
+                String.format(getString(R.string.feature_amount),
+                  featureCollection.features().size()), Toast.LENGTH_SHORT).show();
             } else {
               Toast.makeText(RedoSearchInAreaActivity.this,
                 String.format(getString(R.string.layer_not_found), desiredMapLayerToShow),

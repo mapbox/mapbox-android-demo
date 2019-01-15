@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -41,7 +42,14 @@ public class LanguageSwitchActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
         map = mapboxMap;
-        mapboxMap.setStyle(Style.LIGHT);
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            for (Layer singleLayer : map.getStyle().getLayers()) {
+              Log.d("LanguageSwitchActivity", "onMapReady: layer id = " + singleLayer.getId());
+            }
+          }
+        });
       }
     });
   }
@@ -96,7 +104,7 @@ public class LanguageSwitchActivity extends AppCompatActivity {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    Layer mapText = map.getStyle().getLayer("country-label-lg");
+    Layer mapText = map.getStyle().getLayer("country-label");
     if (mapText != null) {
       switch (item.getItemId()) {
         case R.id.french:

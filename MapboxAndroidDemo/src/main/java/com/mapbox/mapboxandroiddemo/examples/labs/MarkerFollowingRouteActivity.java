@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
-import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
@@ -18,7 +17,6 @@ import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.MarkerViewOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -27,7 +25,6 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.mapboxsdk.style.sources.Source;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
 import org.json.JSONArray;
@@ -43,7 +40,6 @@ import java.util.List;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconTranslate;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
@@ -113,23 +109,25 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
           // This gives us the duration we will need to execute the ValueAnimator.
           // Multiplying by ten is done to slow down the marker speed. Adjusting
           // this value will result in the marker traversing faster or slower along
-          // the line
-          distance = (long) marker.getPosition().distanceTo(featureList.get(count)) * 10;
+          // the line distance = (long) marker.getPosition().distanceTo(featureList.get(count)) * 10;
 
           // animate the marker from it's current position to the next point in the
           // points list.
-          ValueAnimator animator = ObjectAnimator.ofObject(marker, "position",
-            new LatLngEvaluator(), marker.getPosition(), featureList.get(count));
-          animator.setDuration(distance);
+          ValueAnimator animator = ValueAnimator.ofInt(0, featureList.size());
+          animator.setDuration(30000);
           animator.setInterpolator(new LinearInterpolator());
           animator.start();
+          animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+              FeatureCollection featureCollection = FeatureCollection.fromFeature(featureList.get(count));
+              GeoJsonSource source = map.getStyle().getSourceAs("source-id");
+              if (source != null && featureCollection != null) {
+                source.setGeoJson(featureCollection);
+              }
 
-          // This line will make sure the marker appears when it is being animated
-          // and starts outside the current user view. Without this, the user must
-          // intentionally execute a gesture before the view marker reappears on
-          // the map.
-          pinSymbolLayer.setProperties();
-
+            }
+          });
 
           // Keeping the current point count we are on.
           count++;
@@ -173,18 +171,6 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
     );
     map.getStyle().addLayer(lineLayer);
   }
-/*
-  *//**
-   * Updates the display of data on the map after the FeatureCollection has been modified
-   *//*
-  private void refreshSource(List<Feature> featureList) {
-    this.featureList = featureList;
-    FeatureCollection featureCollection = FeatureCollection.fromFeatures(featureList);
-    GeoJsonSource source = map.getStyle().getSourceAs("source-id");
-    if (source != null && featureCollection != null) {
-      source.setGeoJson(featureCollection);
-    }
-  }*/
 
   @Override
   public void onResume() {

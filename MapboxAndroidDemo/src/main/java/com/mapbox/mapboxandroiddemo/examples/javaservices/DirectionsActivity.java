@@ -34,6 +34,7 @@ import timber.log.Timber;
 import static com.mapbox.core.constants.Constants.PRECISION_6;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
@@ -137,7 +138,8 @@ public class DirectionsActivity extends AppCompatActivity {
     startEndIconLayer.setProperties(
       iconImage(RED_PIN_ICON_ID),
       iconIgnorePlacement(true),
-      iconIgnorePlacement(true));
+      iconIgnorePlacement(true),
+      iconOffset(new Float[] {0f, -4f}));
     mapboxMap.getStyle().addLayer(startEndIconLayer);
   }
 

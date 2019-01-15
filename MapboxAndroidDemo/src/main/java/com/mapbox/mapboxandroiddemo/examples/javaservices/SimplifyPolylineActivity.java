@@ -8,16 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.geojson.utils.PolylineUtils;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.PolylineOptions;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,6 +30,9 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 /**
  * Using the polylines utility, simplify a polyline at a
@@ -150,50 +155,52 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
       } catch (Exception exception) {
         Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
       }
-
       return points;
     }
 
     @Override
     protected void onPostExecute(List<Point> points) {
       super.onPostExecute(points);
-
       drawBeforeSimplify(points);
       drawSimplify(points);
-
+      Log.d(TAG, "onPostExecute: done");
     }
   }
 
   private void drawBeforeSimplify(List<Point> points) {
-
-    LatLng[] pointsArray = new LatLng[points.size()];
+    Log.d(TAG, "drawBeforeSimplify: starting");
+    List<Feature> featureList = new ArrayList<>();
     for (int i = 0; i < points.size(); i++) {
-      pointsArray[i] = new LatLng(points.get(i).latitude(), points.get(i).longitude());
+      featureList.add(Feature.fromGeometry(Point.fromLngLat(points.get(i).longitude(), points.get(i).latitude())));
     }
-
-    map.addPolyline(new PolylineOptions()
-      .add(pointsArray)
-      .color(Color.parseColor("#8a8acb"))
-      .width(4));
+    addLineLayer("rawLine", featureList, "#8a8acb");
   }
 
   private void drawSimplify(List<Point> points) {
-
+    Log.d(TAG, "drawSimplify: starting");
     List<Point> before = new ArrayList<>();
     for (int i = 0; i < points.size(); i++) {
       before.add(points.get(i));
     }
-
     List<Point> after = PolylineUtils.simplify(before, 0.001);
-
-    LatLng[] result = new LatLng[after.size()];
+    List<Feature> result = new ArrayList<>();
     for (int i = 0; i < after.size(); i++) {
-      result[i] = new LatLng(after.get(i).latitude(), after.get(i).longitude());
+      result.add(Feature.fromGeometry(Point.fromLngLat(after.get(i).longitude(), after.get(i).latitude())));
     }
+    addLineLayer("simplifiedLine", result, "#3bb2d0");
+  }
 
-    map.addPolyline(new PolylineOptions()
-      .add(result)
-      .color(Color.parseColor("#3bb2d0"))
-      .width(4));
+  private void addLineLayer(String layerId, List<Feature> features, String lineColorHex) {
+    Log.d(TAG, "addLineLayer: layerId layer being added for " + layerId);
+    String sourceId = "source for " + layerId;
+    GeoJsonSource geoJsonSource = new GeoJsonSource(sourceId,
+      FeatureCollection.fromFeatures(features));
+    map.getStyle().addSource(geoJsonSource);
+    LineLayer lineLayer = new LineLayer(layerId, sourceId);
+    lineLayer.setProperties(
+      lineColor(Color.parseColor(lineColorHex)),
+      lineWidth(4f)
+    );
+    map.getStyle().addLayer(lineLayer);
   }
 }

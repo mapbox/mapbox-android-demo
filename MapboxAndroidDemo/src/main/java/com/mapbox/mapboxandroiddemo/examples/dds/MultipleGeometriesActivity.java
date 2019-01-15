@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.geometryType;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 
 public class MultipleGeometriesActivity extends AppCompatActivity implements OnMapReadyCallback {

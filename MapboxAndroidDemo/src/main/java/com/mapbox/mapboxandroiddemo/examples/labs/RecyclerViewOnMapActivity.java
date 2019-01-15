@@ -38,6 +38,7 @@ import java.util.Random;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 
 /**
  * Use a recyclerview with a Mapbox map to easily explore content all on one screen
@@ -126,7 +127,8 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
     SymbolLayer symbolLayer = new SymbolLayer(LAYER_ID, SOURCE_ID);
     symbolLayer.withProperties(
       iconImage(SYMBOL_ICON_ID),
-      iconAllowOverlap(true)
+      iconAllowOverlap(true),
+      iconOffset(new Float[] {0f, -4f})
     );
     mapboxMap.getStyle().addLayer(symbolLayer);
   }

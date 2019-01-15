@@ -27,9 +27,11 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 
 /**
  * Use the places plugin to take advantage of Mapbox's location search ("geocoding") capabilities. The plugin
@@ -127,7 +129,10 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
 
   private void setupLayer() {
     SymbolLayer selectedLocationSymbolLayer = new SymbolLayer("SYMBOL_LAYER_ID", geojsonSourceLayerId);
-    selectedLocationSymbolLayer.withProperties(PropertyFactory.iconImage(symbolIconId));
+    selectedLocationSymbolLayer.withProperties(
+      iconImage(symbolIconId),
+      iconOffset(new Float[] {0f, -5f})
+    );
     mapboxMap.getStyle().addLayer(selectedLocationSymbolLayer);
   }
 

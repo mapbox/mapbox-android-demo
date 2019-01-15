@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
+    android:layout_width="200dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/cardview_dark_background"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp"
     app:cardUseCompatPadding="true"
-    android:layout_height="32dp">
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="32dp"
-        android:layout_alignParentLeft="true"
-        android:layout_height="32dp"
-        android:padding="4dp"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/marker_window_title"
+        android:layout_width="wrap_content"
+        android:padding="8dp"
+        tools:text="Text here is this"
+        android:textStyle="bold"
+        android:textColor="@color/black_semi_transparent"
+        android:layout_height="wrap_content" />
 
+    <TextView
+        android:id="@+id/marker_window_snippet"
+        android:layout_width="wrap_content"
+        android:padding="8dp"
+        tools:text="Text here is this"
+        android:textColor="@color/black_semi_transparent"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
 </android.support.v7.widget.CardView>

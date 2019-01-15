@@ -31,11 +31,8 @@ import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerViewPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.DrawMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivityKotlin;
@@ -49,6 +46,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ExpressionIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
@@ -64,6 +62,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActi
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.IsochroneActivity;
@@ -86,13 +85,18 @@ import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivi
 import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentOptionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
-import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
-import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerViewPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.BuildingOutlineActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
@@ -105,6 +109,7 @@ import com.mapbox.mapboxandroiddemo.examples.snapshot.SnapshotShareActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.BasicSymbolLayerActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.ClickToAddImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
@@ -137,15 +142,6 @@ import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.OPENED_APP;
 import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.SKIPPED_ACCOUNT_CREATION;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.SKIPPED_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
-
-import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
-import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
-import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
   // Used to track internal navigation to the Snapshotter section
@@ -589,6 +585,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_styles_transparent_background_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_click_to_add_image_title,
+      R.string.activity_styles_click_to_add_image_description,
+      new Intent(MainActivity.this, ClickToAddImageActivity.class),
+      null,
+      R.string.activity_styles_click_to_add_image_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_extrusions,
       R.string.activity_extrusions_population_density_extrusions_title,
       R.string.activity_extrusions_population_density_extrusions_description,
@@ -670,28 +674,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     );
 
     exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_marker_title,
-      R.string.activity_annotation_custom_marker_description,
-      new Intent(MainActivity.this, DrawMarkerActivity.class),
-      null,
-      R.string.activity_annotation_marker_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_custom_marker_title,
-      R.string.activity_annotation_custom_marker_description,
+      R.id.nav_plugins,
+      R.string.activity_plugins_markerview_plugin_title,
+      R.string.activity_plugins_markerview_plugin_description,
       new Intent(MainActivity.this, MarkerViewPluginActivity.class),
       null,
-      R.string.activity_annotation_custom_marker_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_geojson_line_title,
-      R.string.activity_annotation_geojson_line_description,
-      new Intent(MainActivity.this, DrawGeojsonLineActivity.class),
-      null,
-      R.string.activity_annotation_geojson_line_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_plugins_markerview_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_annotations,
@@ -700,14 +688,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, DrawPolygonActivity.class),
       null,
       R.string.activity_annotation_polygon_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_polygon_holes_title,
-      R.string.activity_annotation_polygon_holes_description,
-      new Intent(MainActivity.this, PolygonHolesActivity.class),
-      null,
-      R.string.activity_annotation_polygon_holes_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_annotations,
@@ -1051,6 +1031,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       null,
       new Intent(MainActivity.this, MagicWindowKotlinActivity.class),
       R.string.activity_lab_magic_window_image_url, true, Build.VERSION_CODES.O));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_geojson_line_title,
+      R.string.activity_dds_geojson_line_description,
+      new Intent(MainActivity.this, DrawGeojsonLineActivity.class),
+      null,
+      R.string.activity_dds_geojson_line_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_polygon_holes_title,
+      R.string.activity_dds_polygon_holes_description,
+      new Intent(MainActivity.this, PolygonHolesActivity.class),
+      null,
+      R.string.activity_dds_polygon_holes_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,

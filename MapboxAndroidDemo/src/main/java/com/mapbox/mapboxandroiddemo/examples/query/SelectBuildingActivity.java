@@ -8,17 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.Polygon;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.FillLayer;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,6 +54,7 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
+        initSelectedBuildingFillLayer();
         mapboxMap.addOnMapClickListener(SelectBuildingActivity.this);
         Toast.makeText(SelectBuildingActivity.this,
           getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
@@ -62,44 +64,26 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
 
   @Override
   public boolean onMapClick(@NonNull LatLng point) {
-
-    if (selectedBuilding != null) {
-      mapboxMap.removePolygon(selectedBuilding);
-    }
-
     final PointF finalPoint = mapboxMap.getProjection().toScreenLocation(point);
     List<Feature> features = mapboxMap.queryRenderedFeatures(finalPoint, "building");
-
     if (features.size() > 0) {
-      String featureId = features.get(0).id();
-
-      for (int a = 0; a < features.size(); a++) {
-        if (featureId.equals(features.get(a).id())) {
-          if (features.get(a).geometry() instanceof Polygon) {
-
-            List<LatLng> list = new ArrayList<>();
-            for (int i = 0; i < ((Polygon) features.get(a).geometry()).coordinates().size(); i++) {
-              for (int j = 0;
-                   j < ((Polygon) features.get(a).geometry()).coordinates().get(i).size(); j++) {
-                list.add(new LatLng(
-                  ((Polygon) features.get(a).geometry()).coordinates().get(i).get(j).latitude(),
-                  ((Polygon) features.get(a).geometry()).coordinates().get(i).get(j).longitude()
-                ));
-              }
-            }
-
-            selectedBuilding = mapboxMap.addPolygon(new PolygonOptions()
-              .addAll(list)
-              .fillColor(Color.parseColor("#8A8ACB"))
-            );
-
-            return true;
-          }
-        }
+      GeoJsonSource selectedBuildingSource = mapboxMap.getStyle().getSourceAs("source-id");
+      if (selectedBuildingSource != null) {
+        selectedBuildingSource.setGeoJson(FeatureCollection.fromFeatures(features));
       }
     }
-
     return false;
+  }
+
+  private void initSelectedBuildingFillLayer() {
+    GeoJsonSource geoJsonSource = new GeoJsonSource("source-id");
+    mapboxMap.getStyle().addSource(geoJsonSource);
+
+    FillLayer selectedBuildingFillLayer = new FillLayer("layer-id", "source-id");
+    selectedBuildingFillLayer.setProperties(
+      PropertyFactory.fillColor(Color.parseColor("#8A8ACB"))
+    );
+    mapboxMap.getStyle().addLayer(selectedBuildingFillLayer);
   }
 
   @Override
