@@ -146,19 +146,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     // Item click listener
-    ItemClickSupport.addTo(recyclerView).setOnItemClickListener((recyclerView, position, view) -> {
-      ExampleItemModel model = adapter.getItemAt(position);
+    ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+      @Override
+      public void onItemClicked(RecyclerView recyclerView, int position, View view) {
+        ExampleItemModel model = adapter.getItemAt(position);
 
-      // in case it's an info tile
-      if (model != null) {
-        if (showJavaExamples) {
-          startActivity(model.getJavaActivity());
-        } else {
-          startActivity(model.getKotlinActivity());
+        // in case it's an info tile
+        if (model != null) {
+          if (showJavaExamples) {
+            startActivity(model.getJavaActivity());
+          } else {
+            startActivity(model.getKotlinActivity());
+          }
+
+          analytics.clickedOnIndividualExample(getString(model.getTitle()), loggedIn);
+          analytics.viewedScreen(getString(model.getTitle()), loggedIn);
         }
-
-        analytics.clickedOnIndividualExample(getString(model.getTitle()), loggedIn);
-        analytics.viewedScreen(getString(model.getTitle()), loggedIn);
       }
     });
 
@@ -287,14 +290,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .setHeaderColor(R.color.mapboxBlue)
         .withDivider(true)
         .setPositiveText(getString(R.string.info_dialog_positive_button_text))
-        .onPositive((dialog, which) -> {
-          analytics.trackEvent(CLICKED_ON_INFO_DIALOG_START_LEARNING, false);
-          Intent intent = new Intent(Intent.ACTION_VIEW);
-          intent.setData(Uri.parse("https://mapbox.com/android-sdk"));
-          startActivity(intent);
+        .onPositive(new MaterialDialog.SingleButtonCallback() {
+          @Override
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            analytics.trackEvent(CLICKED_ON_INFO_DIALOG_START_LEARNING, false);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://mapbox.com/android-sdk"));
+            startActivity(intent);
+          }
         })
         .setNegativeText(getString(R.string.info_dialog_negative_button_text))
-        .onNegative((dialog, which) -> analytics.trackEvent(CLICKED_ON_INFO_DIALOG_NOT_NOW, loggedIn))
+        .onNegative(new MaterialDialog.SingleButtonCallback() {
+          @Override
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            analytics.trackEvent(CLICKED_ON_INFO_DIALOG_NOT_NOW, loggedIn);
+          }
+        })
         .show();
       return true;
     } else if (id == R.id.action_show_other_language) {

@@ -34,12 +34,20 @@ public class SimpleChinaMapViewActivity extends AppCompatActivity {
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(mapboxMap -> {
-      this.mapboxMap = mapboxMap;
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+        this.mapboxMap = mapboxMap;
+        mapboxMap.setStyle(new Style.Builder().fromUrl(ChinaStyle.MAPBOX_STREETS_CHINESE), new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-      // Customize map with markers, polylines, etc.
+            // Map is set up and the style has loaded. Now you can add data or make other map adjustments
 
 
+          }
+        });
+      }
     });
   }
 
