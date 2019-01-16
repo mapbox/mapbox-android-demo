@@ -31,7 +31,7 @@
     <string name="activity_annotation_marker_title">Vẽ ghim</string>
     <string name="activity_plugins_markerview_plugin_title">Vẽ hình ghim tùy biến</string>
     <string name="activity_dds_geojson_line_title">Kẻ đường GeoJSON</string>
-    <string name="activity_annotation_polygon_title">Vẽ hình đa giác</string>
+    <string name="activity_dds_polygon_title">Vẽ hình đa giác</string>
     <string name="activity_dds_polygon_holes_title">Vẽ hình đa giác có lỗ</string>
     <string name="activity_annotation_custom_info_window_title">Cửa sổ thông tin tùy biến</string>
     <string name="activity_annotation_animated_marker_title">Làm động vị trí của ghim</string>

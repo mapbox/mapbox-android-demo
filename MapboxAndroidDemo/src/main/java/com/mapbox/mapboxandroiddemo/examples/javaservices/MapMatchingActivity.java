@@ -157,13 +157,11 @@ public class MapMatchingActivity extends AppCompatActivity {
   }
 
   private void drawBeforeMapMatching(List<Point> points) {
-    Log.d(TAG, "drawBeforeMapMatching: starting");
-    Log.d(TAG, "drawBeforeMapMatching: points size " + points.size());
-
     List<Feature> featureList = new ArrayList<>();
     for (int i = 0; i < points.size(); i++) {
       featureList.add(Feature.fromGeometry(Point.fromLngLat(points.get(i).longitude(), points.get(i).latitude())));
     }
+
     GeoJsonSource geoJsonSource = new GeoJsonSource("pre-matched-source-id",
       FeatureCollection.fromFeatures(featureList));
     map.getStyle().addSource(geoJsonSource);
@@ -171,10 +169,9 @@ public class MapMatchingActivity extends AppCompatActivity {
     lineLayer.setProperties(
       lineColor(Color.parseColor("#8a8acb")),
       lineWidth(6f),
-      lineOpacity(0.65f)
+      lineOpacity(1f)
     );
     map.getStyle().addLayer(lineLayer);
-    Log.d(TAG, "drawBeforeMapMatching: done");
   }
 
   private void drawMapMatched(List<Point> coordinates) {
@@ -199,11 +196,9 @@ public class MapMatchingActivity extends AppCompatActivity {
             LineLayer matchedLineLayer = new LineLayer("matched-layer-id", "matched-source-id");
             matchedLineLayer.setProperties(
               lineColor(Color.parseColor("#3bb2d0")),
-              lineWidth(6f),
-              lineOpacity(0.65f)
+              lineWidth(6f)
             );
             map.getStyle().addLayer(matchedLineLayer);
-            Log.d(TAG, "onResponse: added matched line");
           } else {
             // If the response code does not response "OK" an error has occurred.
             Log.e(TAG, "Too many coordinates, profile not found, invalid input, or no match.");

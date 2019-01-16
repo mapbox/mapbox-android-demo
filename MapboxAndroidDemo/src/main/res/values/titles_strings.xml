@@ -52,7 +52,7 @@
     <string name="activity_dds_line_gradient_title">Line gradient</string>
     <string name="activity_annotation_marker_title">Draw a marker</string>
     <string name="activity_dds_geojson_line_title">Draw a GeoJSON line</string>
-    <string name="activity_annotation_polygon_title">Draw a polygon</string>
+    <string name="activity_dds_polygon_title">Draw a polygon</string>
     <string name="activity_dds_polygon_holes_title">Draw a polygon with holes</string>
     <string name="activity_annotation_marker_view_title">Draw a marker view</string>
     <string name="activity_annotation_custom_info_window_title">Custom info window</string>

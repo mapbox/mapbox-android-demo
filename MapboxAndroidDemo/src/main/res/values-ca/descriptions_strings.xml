@@ -31,7 +31,7 @@
     <string name="activity_annotation_marker_description">Crea un marcador per defecte amb una finestra d\'informació .</string>
     <string name="activity_plugins_markerview_plugin_description">Crea un marcador amb una icona personalitzada emprant l\'SDK Android de Mapbox.</string>
     <string name="activity_dds_geojson_line_description">Dibuixa una polilínia mitjançant l\'anàlisi d\'un arxiu GeoJSON amb l\'SDK Android de Mapbox.</string>
-    <string name="activity_annotation_polygon_description">Dibuixa un polígon vector en un mapa amb l\'SDK Android de Mapbox.</string>
+    <string name="activity_dds_polygon_description">Dibuixa un polígon vector en un mapa amb l\'SDK Android de Mapbox.</string>
     <string name="activity_dds_polygon_holes_description">Dibuixa un polígon vector amb forats en un mapa amb el Mapbox Android SDK.</string>
     <string name="activity_annotation_marker_view_description">Adjunta una vista a una posició donada en el mapa.</string>
     <string name="activity_annotation_custom_info_window_description">Utilitza un adaptador de la finestra d\'informació per personalitzar la finestra d\'informació.</string>

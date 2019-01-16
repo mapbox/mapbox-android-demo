@@ -52,7 +52,7 @@
     <string name="activity_dds_satellite_land_select_url" translatable="false">https://i.imgur.com/tfbO1m4.png</string>
     <string name="activity_annotation_marker_url" translatable="false">http://i.imgur.com/X59UoaY.png</string>
     <string name="activity_dds_geojson_line_url" translatable="false">https://i.imgur.com/Bs0X98z.png</string>
-    <string name="activity_annotation_polygon_url" translatable="false">http://i.imgur.com/v9X28id.png</string>
+    <string name="activity_dds_polygon_url" translatable="false">http://i.imgur.com/v9X28id.png</string>
     <string name="activity_dds_polygon_holes_url" translatable="false">https://i.imgur.com/6hcqbNw.png</string>
     <string name="activity_annotation_basic_marker_view_url" translatable="false">http://i.imgur.com/vbWTLIE.png</string>
     <string name="activity_annotation_custom_info_window_url" translatable="false">http://i.imgur.com/mCWbosy.png</string>

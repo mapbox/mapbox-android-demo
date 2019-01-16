@@ -682,12 +682,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_plugins_markerview_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_polygon_title,
-      R.string.activity_annotation_polygon_description,
+      R.id.nav_dds,
+      R.string.activity_dds_polygon_title,
+      R.string.activity_dds_polygon_description,
       new Intent(MainActivity.this, DrawPolygonActivity.class),
       null,
-      R.string.activity_annotation_polygon_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_dds_polygon_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_annotations,

@@ -161,6 +161,7 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
     @Override
     protected void onPostExecute(List<Point> points) {
       super.onPostExecute(points);
+      Log.d(TAG, "onPostExecute: points size = " + points.size());
       drawBeforeSimplify(points);
       drawSimplify(points);
       Log.d(TAG, "onPostExecute: done");

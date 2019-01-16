@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
@@ -46,7 +45,6 @@ public class DrawPolygonActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-
         mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
@@ -65,21 +63,15 @@ public class DrawPolygonActivity extends AppCompatActivity {
             polygonFeatureList.add(Feature.fromGeometry(Point.fromLngLat(-122.702007, 45.506346)));
             polygonFeatureList.add(Feature.fromGeometry(Point.fromLngLat(-122.685699, 45.522585)));
 
-            Log.d("DrawPolygonActivity", "onStyleLoaded: polygonFeatureList size = " + polygonFeatureList.size());
-
             GeoJsonSource geoJsonSource = new GeoJsonSource("source-id",
               FeatureCollection.fromFeatures(polygonFeatureList));
             mapboxMap.getStyle().addSource(geoJsonSource);
-            Log.d("DrawPolygonActivity", "onMapReady: source added ");
 
             FillLayer polygonFillLayer = new FillLayer("layer-id", "source-id");
-            polygonFillLayer.withProperties(
+            polygonFillLayer.setProperties(
               fillColor(Color.RED)
             );
-
-
             mapboxMap.getStyle().addLayer(polygonFillLayer);
-
           }
         });
       }
