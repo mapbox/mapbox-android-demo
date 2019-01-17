@@ -168,7 +168,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
   protected void onDestroy() {
     if (mapboxMap != null) {
       mapboxMap.removeOnMapClickListener(this);
-      if (backgroundLineLayer!=null) {
+      if (backgroundLineLayer != null) {
         mapboxMap.getStyle().removeLayer(backgroundLineLayer.getId());
       }
       if (routeLineLayer != null) {
