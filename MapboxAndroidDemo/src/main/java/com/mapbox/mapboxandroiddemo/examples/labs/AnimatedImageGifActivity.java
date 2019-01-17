@@ -105,7 +105,9 @@ public class AnimatedImageGifActivity extends AppCompatActivity implements OnMap
   protected void onStop() {
     super.onStop();
     mapView.onStop();
-    handler.removeCallbacks(runnable);
+    if (handler != null) {
+      handler.removeCallbacks(runnable);
+    }
   }
 
   @Override
