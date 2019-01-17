@@ -301,9 +301,13 @@ public class ExpressionIntegrationActivity
   protected void onDestroy() {
     unitsFab.setOnClickListener(null);
 
-    menu.clear();
+    if (menu != null) {
+      menu.clear();
+    }
 
-    states.clear();
+    if (states != null) {
+      states.clear();
+    }
     states = null;
 
     if (mapboxMap != null) {
