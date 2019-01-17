@@ -308,9 +308,10 @@ public class ExpressionIntegrationActivity
     if (states != null) {
       states.clear();
     }
+
     states = null;
 
-    if (mapboxMap != null) {
+    if (mapboxMap != null && mapboxMap.getStyle() != null) {
       mapboxMap.getStyle().removeImage(RED_PIN_IMAGE_ID);
       mapboxMap.getStyle().removeImage(BLUE_PIN_IMAGE_ID);
       mapboxMap.getStyle().removeLayer(MAX_TEMP_LAYER_ID);
