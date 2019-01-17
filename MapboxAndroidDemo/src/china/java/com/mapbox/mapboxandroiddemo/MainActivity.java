@@ -350,7 +350,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     if (!loggedIn) {
       logOutOfMapboxAccountButton.setVisibility(View.GONE);
     } else {
-      logOutOfMapboxAccountButton.setOnClickListener(view -> dialogView.logOut(loggedIn));
+      logOutOfMapboxAccountButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          dialogView.logOut(loggedIn);
+        }
+      });
     }
   }
 
