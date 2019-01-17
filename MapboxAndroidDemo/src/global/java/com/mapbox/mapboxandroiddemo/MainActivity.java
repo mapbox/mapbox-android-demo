@@ -32,7 +32,6 @@ import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivityKotlin;
@@ -55,6 +54,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.KotlinStyleCirclesCategorically
 import com.mapbox.mapboxandroiddemo.examples.dds.LineGradientActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleHeatmapStylingActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.SatelliteLandSelectActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
@@ -80,10 +80,12 @@ import com.mapbox.mapboxandroiddemo.examples.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MagicWindowKotlinActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MapFogBackgroundActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
@@ -941,21 +943,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       null,
       R.string.activity_lab_location_picker_url, false, BuildConfig.MIN_SDK_VERSION));
 
-    /*exampleItemModels.add(new ExampleItemModel(
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,
       R.string.activity_lab_marker_following_route_title,
       R.string.activity_lab_marker_following_route_description,
       new Intent(MainActivity.this, MarkerFollowingRouteActivity.class),
       null,
-      R.string.activity_lab_marker_following_route_url, false, BuildConfig.MIN_SDK_VERSION));*/
+      R.string.activity_lab_marker_following_route_url, false, BuildConfig.MIN_SDK_VERSION));
 
-    /*exampleItemModels.add(new ExampleItemModel(
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,
       R.string.activity_lab_space_station_location_title,
       R.string.activity_lab_space_station_location_description,
       new Intent(MainActivity.this, SpaceStationLocationActivity.class),
       null,
-      R.string.activity_lab_space_station_location_url, false, BuildConfig.MIN_SDK_VERSION));*/
+      R.string.activity_lab_space_station_location_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,

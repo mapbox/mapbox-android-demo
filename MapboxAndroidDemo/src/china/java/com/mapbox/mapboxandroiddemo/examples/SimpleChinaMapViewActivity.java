@@ -10,6 +10,9 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.plugins.china.constants.ChinaStyle;
 import com.mapbox.mapboxsdk.plugins.china.maps.ChinaMapView;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.plugins.china.constants.ChinaStyle
 
 /**
  * The most basic example of adding a government approved and performant China map to an activity.

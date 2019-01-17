@@ -24,12 +24,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.SimpleChinaMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivityKotlin;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
@@ -503,28 +504,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     );
 
     exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_marker_title,
-      R.string.activity_annotation_custom_marker_description,
-      new Intent(MainActivity.this, DrawMarkerActivity.class),
-      null,
-      R.string.activity_annotation_marker_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_custom_marker_title,
-      R.string.activity_annotation_custom_marker_description,
-      new Intent(MainActivity.this, DrawCustomMarkerActivity.class),
-      null,
-      R.string.activity_annotation_custom_marker_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_polygon_title,
-      R.string.activity_annotation_polygon_description,
+      R.id.nav_dds,
+      R.string.activity_dds_polygon_title,
+      R.string.activity_dds_polygon_description,
       new Intent(MainActivity.this, DrawPolygonActivity.class),
       null,
-      R.string.activity_annotation_polygon_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_dds_polygon_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_annotations,
