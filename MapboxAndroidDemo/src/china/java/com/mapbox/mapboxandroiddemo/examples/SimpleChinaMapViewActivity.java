@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -39,7 +40,7 @@ public class SimpleChinaMapViewActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
-        this.mapboxMap = mapboxMap;
+        SimpleChinaMapViewActivity.this.mapboxMap = mapboxMap;
         mapboxMap.setStyle(new Style.Builder().fromUrl(ChinaStyle.MAPBOX_STREETS_CHINESE), new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
@@ -65,17 +66,17 @@ public class SimpleChinaMapViewActivity extends AppCompatActivity {
     switch (item.getItemId()) {
       case R.id.menu_streets:
         if (mapboxMap != null) {
-          mapboxMap.setStyleUrl(ChinaStyle.MAPBOX_STREETS_CHINESE);
+          mapboxMap.setStyle(new Style.Builder().fromUrl(ChinaStyle.MAPBOX_STREETS_CHINESE));
         }
         return true;
       case R.id.menu_dark:
         if (mapboxMap != null) {
-          mapboxMap.setStyleUrl(ChinaStyle.MAPBOX_DARK_CHINESE);
+          mapboxMap.setStyle(new Style.Builder().fromUrl(ChinaStyle.MAPBOX_DARK_CHINESE));
         }
         return true;
       case R.id.menu_light:
         if (mapboxMap != null) {
-          mapboxMap.setStyleUrl(ChinaStyle.MAPBOX_LIGHT_CHINESE);
+          mapboxMap.setStyle(new Style.Builder().fromUrl(ChinaStyle.MAPBOX_LIGHT_CHINESE));
         }
         return true;
       default:
