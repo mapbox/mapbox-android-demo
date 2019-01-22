@@ -34,8 +34,6 @@ public class LocationChangeListeningActivity extends AppCompatActivity implement
   private PermissionsManager permissionsManager;
   private MapboxMap mapboxMap;
   private MapView mapView;
-  private LocationEngine locationEngine;
-  private LocationComponent locationComponent;
   private long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
   private long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
 
@@ -68,18 +66,9 @@ public class LocationChangeListeningActivity extends AppCompatActivity implement
       });
   }
 
-  @SuppressLint("MissingPermission")
-  private void initLocationEngine() {
-    locationEngine = LocationEngineProvider.getBestLocationEngine(this);
-
-    LocationEngineRequest request = new LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
-      .setPriority(LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
-      .setMaxWaitTime(DEFAULT_MAX_WAIT_TIME).build();
-
-    locationEngine.requestLocationUpdates(request, this, getMainLooper());
-    locationEngine.getLastLocation(this);
-  }
-
+  /**
+   * Initialize the Maps SDK's LocationComponent
+   */
   @SuppressWarnings( {"MissingPermission"})
   private void enableLocationComponent() {
     // Check if permissions are enabled and if not request
@@ -88,7 +77,7 @@ public class LocationChangeListeningActivity extends AppCompatActivity implement
       initLocationEngine();
 
       // Get an instance of the component
-      locationComponent = mapboxMap.getLocationComponent();
+      LocationComponent locationComponent = mapboxMap.getLocationComponent();
 
       // Activate with options
       locationComponent.activateLocationComponent(this, mapboxMap.getStyle());
@@ -107,17 +96,38 @@ public class LocationChangeListeningActivity extends AppCompatActivity implement
     }
   }
 
+  /**
+   * Set up the LocationEngine and the parameters for querying the device's location
+   */
+  @SuppressLint("MissingPermission")
+  private void initLocationEngine() {
+    LocationEngine locationEngine = LocationEngineProvider.getBestLocationEngine(this);
+
+    LocationEngineRequest request = new LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
+      .setPriority(LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
+      .setMaxWaitTime(DEFAULT_MAX_WAIT_TIME).build();
+
+    locationEngine.requestLocationUpdates(request, this, getMainLooper());
+    locationEngine.getLastLocation(this);
+  }
+
+  /**
+   * The LocationEngineCallback interface's method which fires when the device's location has changed.
+   *
+   * @param result the LocationEngineResult object which has the last known location within it.
+   */
   @Override
   public void onSuccess(LocationEngineResult result) {
     Toast.makeText(this, String.format(getString(R.string.new_location),
       String.valueOf(result.getLastLocation().getLatitude()), String.valueOf(result.getLastLocation().getLongitude())),
-      Toast.LENGTH_SHORT).show();
-
-    // Run the following line if you'd like the LocationComponent device "puck" to move to the latest device location
-
-    // locationComponent.forceLocationUpdate(result.getLastLocation());
+      Toast.LENGTH_LONG).show();
   }
 
+  /**
+   * The LocationEngineCallback interface's method which fires when the device's location can not be captured
+   *
+   * @param exception the exception message
+   */
   @Override
   public void onFailure(@NonNull Exception exception) {
     Toast.makeText(this, exception.getLocalizedMessage(),
@@ -145,7 +155,6 @@ public class LocationChangeListeningActivity extends AppCompatActivity implement
   }
 
   @Override
-  @SuppressWarnings( {"MissingPermission"})
   protected void onStart() {
     super.onStart();
     mapView.onStart();

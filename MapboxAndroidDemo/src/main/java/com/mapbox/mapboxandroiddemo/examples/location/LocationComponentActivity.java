@@ -104,7 +104,6 @@ public class LocationComponentActivity extends AppCompatActivity implements
   }
 
   @Override
-  @SuppressWarnings( {"MissingPermission"})
   protected void onStart() {
     super.onStart();
     mapView.onStart();
