@@ -177,6 +177,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.location.LocationChangeListeningActivity"
+            android:label="@string/activity_location_location_change_listening_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.plugins.LocalizationPluginActivity"
             android:label="@string/activity_plugins_localization_plugin_title">
             <meta-data

@@ -87,6 +87,7 @@
     <string name="activity_location_location_component_description">Use the location component to easily show a user\'s location on the map</string>
     <string name="activity_location_user_location_map_frag_plugin_description">Use the location component to display a user\'s location on a map fragment.</string>
     <string name="activity_location_location_component_options_description">Use location component options to customize the user location information.</string>
+    <string name="activity_location_location_change_listening_description">Capture and use updates to the location of the device</string>
     <string name="activity_java_services_simplify_polyline_description">Using the polylines utility, simplify a polyline which reduces the amount of coordinates making up the polyline depending on tolerance.</string>
     <string name="activity_java_services_map_matching_description">Match raw GPS points to the map so they aligns with the roads/pathways.</string>
     <string name="activity_image_generator_snapshot_share_description">Send and share a map snapshot image.</string>

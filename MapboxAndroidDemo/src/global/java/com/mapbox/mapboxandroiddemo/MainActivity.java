@@ -88,6 +88,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity
 import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.LocationChangeListeningActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentOptionsActivity;
@@ -723,6 +724,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, LocationComponentOptionsActivity.class),
       null,
       R.string.activity_location_location_component_options_url, false, BuildConfig.MIN_SDK_VERSION)
+    );
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_location,
+      R.string.activity_location_location_change_listening_title,
+      R.string.activity_location_location_change_listening_description,
+      new Intent(MainActivity.this, LocationChangeListeningActivity.class),
+      null,
+      R.string.activity_location_location_change_listening_url, false, BuildConfig.MIN_SDK_VERSION)
     );
 
     exampleItemModels.add(new ExampleItemModel(
