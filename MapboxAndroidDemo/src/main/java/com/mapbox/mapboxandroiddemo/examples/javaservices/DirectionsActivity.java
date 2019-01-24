@@ -86,9 +86,9 @@ public class DirectionsActivity extends AppCompatActivity {
             // Set the destination location to the Plaza del Triunfo in Granada, Spain.
             destination = Point.fromLngLat(-3.601845, 37.184080);
 
-            initSource();
+            initSource(style);
 
-            initLayers();
+            initLayers(style);
 
             // Get the directions route from the Mapbox Directions API
             getRoute(origin, destination);
@@ -101,23 +101,23 @@ public class DirectionsActivity extends AppCompatActivity {
   /**
    * Add the route and marker sources to the map
    */
-  private void initSource() {
+  private void initSource(@NonNull Style loadedMapStyle) {
     GeoJsonSource routeGeoJsonSource = new GeoJsonSource(ROUTE_SOURCE_ID,
       FeatureCollection.fromFeatures(new Feature[] {}));
-    mapboxMap.getStyle().addSource(routeGeoJsonSource);
+    loadedMapStyle.addSource(routeGeoJsonSource);
 
     FeatureCollection iconFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {
       Feature.fromGeometry(Point.fromLngLat(origin.longitude(), origin.latitude())),
       Feature.fromGeometry(Point.fromLngLat(destination.longitude(), destination.latitude()))});
 
     GeoJsonSource iconGeoJsonSource = new GeoJsonSource(ICON_SOURCE_ID, iconFeatureCollection);
-    mapboxMap.getStyle().addSource(iconGeoJsonSource);
+    loadedMapStyle.addSource(iconGeoJsonSource);
   }
 
   /**
    * Add the route and maker icon layers to the map
    */
-  private void initLayers() {
+  private void initLayers(@NonNull Style loadedMapStyle) {
     LineLayer routeLayer = new LineLayer(ROUTE_LAYER_ID, ROUTE_SOURCE_ID);
 
     // Add the LineLayer to the map. This layer will display the directions route.
@@ -127,10 +127,10 @@ public class DirectionsActivity extends AppCompatActivity {
       lineWidth(5f),
       lineColor(Color.parseColor("#009688"))
     );
-    mapboxMap.getStyle().addLayer(routeLayer);
+    loadedMapStyle.addLayer(routeLayer);
 
     // Add the red marker icon image to the map
-    mapboxMap.getStyle().addImage(RED_PIN_ICON_ID, BitmapUtils.getBitmapFromDrawable(
+    loadedMapStyle.addImage(RED_PIN_ICON_ID, BitmapUtils.getBitmapFromDrawable(
       getResources().getDrawable(R.drawable.red_marker)));
 
     // Add the red marker icon SymbolLayer to the map
@@ -140,7 +140,7 @@ public class DirectionsActivity extends AppCompatActivity {
       iconIgnorePlacement(true),
       iconIgnorePlacement(true),
       iconOffset(new Float[] {0f, -4f}));
-    mapboxMap.getStyle().addLayer(startEndIconLayer);
+    loadedMapStyle.addLayer(startEndIconLayer);
   }
 
   /**

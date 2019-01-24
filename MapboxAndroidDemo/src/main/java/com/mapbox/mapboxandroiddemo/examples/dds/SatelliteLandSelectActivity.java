@@ -95,18 +95,14 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
         lineLayerPointList = new ArrayList<>();
 
         // Add sources to the map
-        initCircleSource();
-        initLineSource();
-        initFillSource();
-
-        circleSource = mapboxMap.getStyle().getSourceAs(CIRCLE_SOURCE_ID);
-        fillSource = mapboxMap.getStyle().getSourceAs(FILL_SOURCE_ID);
-        lineSource = mapboxMap.getStyle().getSourceAs(LINE_SOURCE_ID);
+        circleSource = initCircleSource(style);
+        fillSource = initFillSource(style);
+        lineSource = initLineSource(style);
 
         // Add layers to the map
-        initCircleLayer();
-        initLineLayer();
-        initFillLayer();
+        initCircleLayer(style);
+        initLineLayer(style);
+        initFillLayer(style);
 
         initFloatingActionButtonClickListeners();
         Toast.makeText(SatelliteLandSelectActivity.this, R.string.trace_instruction, Toast.LENGTH_LONG).show();
@@ -206,67 +202,70 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
   /**
    * Set up the CircleLayer source for showing map click points
    */
-  private void initCircleSource() {
+  private GeoJsonSource initCircleSource(@NonNull Style loadedMapStyle) {
     FeatureCollection circleFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     GeoJsonSource circleGeoJsonSource = new GeoJsonSource(CIRCLE_SOURCE_ID, circleFeatureCollection);
-    mapboxMap.getStyle().addSource(circleGeoJsonSource);
+    loadedMapStyle.addSource(circleGeoJsonSource);
+    return circleGeoJsonSource;
   }
 
   /**
    * Set up the CircleLayer for showing polygon click points
    */
-  private void initCircleLayer() {
+  private void initCircleLayer(@NonNull Style loadedMapStyle) {
     CircleLayer circleLayer = new CircleLayer(CIRCLE_LAYER_ID,
       CIRCLE_SOURCE_ID);
     circleLayer.setProperties(
       circleRadius(7f),
       circleColor(Color.parseColor("#d004d3"))
     );
-    mapboxMap.getStyle().addLayer(circleLayer);
+    loadedMapStyle.addLayer(circleLayer);
   }
 
   /**
    * Set up the FillLayer source for showing map click points
    */
-  private void initFillSource() {
+  private GeoJsonSource initFillSource(@NonNull Style loadedMapStyle) {
     FeatureCollection fillFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     GeoJsonSource fillGeoJsonSource = new GeoJsonSource(FILL_SOURCE_ID, fillFeatureCollection);
-    mapboxMap.getStyle().addSource(fillGeoJsonSource);
+    loadedMapStyle.addSource(fillGeoJsonSource);
+    return fillGeoJsonSource;
   }
 
   /**
    * Set up the FillLayer for showing the set boundaries' polygons
    */
-  private void initFillLayer() {
+  private void initFillLayer(@NonNull Style loadedMapStyle) {
     FillLayer fillLayer = new FillLayer(FILL_LAYER_ID,
       FILL_SOURCE_ID);
     fillLayer.setProperties(
       fillOpacity(.6f),
       fillColor(Color.parseColor("#00e9ff"))
     );
-    mapboxMap.getStyle().addLayerBelow(fillLayer, LINE_LAYER_ID);
+    loadedMapStyle.addLayerBelow(fillLayer, LINE_LAYER_ID);
   }
 
   /**
    * Set up the LineLayer source for showing map click points
    */
-  private void initLineSource() {
+  private GeoJsonSource initLineSource(@NonNull Style loadedMapStyle) {
     FeatureCollection lineFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     GeoJsonSource lineGeoJsonSource = new GeoJsonSource(LINE_SOURCE_ID, lineFeatureCollection);
-    mapboxMap.getStyle().addSource(lineGeoJsonSource);
+    loadedMapStyle.addSource(lineGeoJsonSource);
+    return lineGeoJsonSource;
   }
 
   /**
    * Set up the LineLayer for showing the set boundaries' polygons
    */
-  private void initLineLayer() {
+  private void initLineLayer(@NonNull Style loadedMapStyle) {
     LineLayer lineLayer = new LineLayer(LINE_LAYER_ID,
       LINE_SOURCE_ID);
     lineLayer.setProperties(
       lineColor(Color.WHITE),
       lineWidth(5f)
     );
-    mapboxMap.getStyle().addLayerBelow(lineLayer, CIRCLE_LAYER_ID);
+    loadedMapStyle.addLayerBelow(lineLayer, CIRCLE_LAYER_ID);
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

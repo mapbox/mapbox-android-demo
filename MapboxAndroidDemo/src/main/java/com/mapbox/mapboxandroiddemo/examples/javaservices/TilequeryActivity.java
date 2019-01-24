@@ -83,9 +83,9 @@ public class TilequeryActivity extends AppCompatActivity implements
     mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        addClickLayer();
-        addResultLayer();
-        displayDeviceLocation();
+        addClickLayer(style);
+        addResultLayer(style);
+        displayDeviceLocation(style);
         mapboxMap.addOnMapClickListener(TilequeryActivity.this);
         Toast.makeText(TilequeryActivity.this, R.string.click_on_map_instruction, Toast.LENGTH_SHORT).show();
       }
@@ -95,14 +95,14 @@ public class TilequeryActivity extends AppCompatActivity implements
   /**
    * Add a map layer which will show a marker icon where the map was clicked
    */
-  private void addClickLayer() {
+  private void addClickLayer(@NonNull Style loadedMapStyle) {
     Bitmap clickSymbolIcon = BitmapFactory.decodeResource(
       TilequeryActivity.this.getResources(), R.drawable.red_marker);
-    mapboxMap.getStyle().addImage("CLICK-ICON-ID", clickSymbolIcon);
+    loadedMapStyle.addImage("CLICK-ICON-ID", clickSymbolIcon);
 
     GeoJsonSource clickGeoJsonSource = new GeoJsonSource(CLICK_CENTER_GEOJSON_SOURCE_ID,
       FeatureCollection.fromFeatures(new Feature[]{}));
-    mapboxMap.getStyle().addSource(clickGeoJsonSource);
+    loadedMapStyle.addSource(clickGeoJsonSource);
 
     SymbolLayer clickSymbolLayer = new SymbolLayer("click-layer", CLICK_CENTER_GEOJSON_SOURCE_ID);
     clickSymbolLayer.setProperties(
@@ -111,22 +111,22 @@ public class TilequeryActivity extends AppCompatActivity implements
       iconIgnorePlacement(true),
       iconAllowOverlap(true)
     );
-    mapboxMap.getStyle().addLayer(clickSymbolLayer);
+    loadedMapStyle.addLayer(clickSymbolLayer);
   }
 
   /**
    * Add a map layer which will show marker icons for all of the Tilequery API results
    */
-  private void addResultLayer() {
+  private void addResultLayer(@NonNull Style loadedMapStyle) {
     // Add the marker image to map
     Bitmap resultSymbolIcon = BitmapFactory.decodeResource(
       TilequeryActivity.this.getResources(), R.drawable.blue_marker);
-    mapboxMap.getStyle().addImage("RESULT-ICON-ID", resultSymbolIcon);
+    loadedMapStyle.addImage("RESULT-ICON-ID", resultSymbolIcon);
 
     // Retrieve GeoJSON information from the Mapbox Tilequery API
     GeoJsonSource resultBlueMarkerGeoJsonSource = new GeoJsonSource(RESULT_GEOJSON_SOURCE_ID,
       FeatureCollection.fromFeatures(new Feature[]{}));
-    mapboxMap.getStyle().addSource(resultBlueMarkerGeoJsonSource);
+    loadedMapStyle.addSource(resultBlueMarkerGeoJsonSource);
 
     SymbolLayer resultSymbolLayer = new SymbolLayer(LAYER_ID, RESULT_GEOJSON_SOURCE_ID);
     resultSymbolLayer.setProperties(
@@ -135,7 +135,7 @@ public class TilequeryActivity extends AppCompatActivity implements
       iconIgnorePlacement(true),
       iconAllowOverlap(true)
     );
-    mapboxMap.getStyle().addLayer(resultSymbolLayer);
+    loadedMapStyle.addLayer(resultSymbolLayer);
   }
 
 
@@ -193,7 +193,7 @@ public class TilequeryActivity extends AppCompatActivity implements
    * Use the Maps SDK's LocationComponent to display the device location on the map
    */
   @SuppressWarnings({"MissingPermission"})
-  private void displayDeviceLocation() {
+  private void displayDeviceLocation(@NonNull Style loadedMapStyle) {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
@@ -201,7 +201,7 @@ public class TilequeryActivity extends AppCompatActivity implements
       LocationComponent locationComponent = mapboxMap.getLocationComponent();
 
       // Activate with options
-      locationComponent.activateLocationComponent(this,mapboxMap.getStyle());
+      locationComponent.activateLocationComponent(this, loadedMapStyle);
 
       // Enable to make component visible
       locationComponent.setLocationComponentEnabled(true);
@@ -235,7 +235,7 @@ public class TilequeryActivity extends AppCompatActivity implements
   @Override
   public void onPermissionResult(boolean granted) {
     if (granted) {
-      displayDeviceLocation();
+      displayDeviceLocation(mapboxMap.getStyle());
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
       finish();

@@ -87,7 +87,7 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
         mapView.addView(hoveringMarker);
 
         // Add the layer for the dashed directions route line
-        initDottedLineSourceAndLayer();
+        initDottedLineSourceAndLayer(style);
 
         // Add the camera idle listener
         mapboxMap.addOnCameraIdleListener(DashedLineDirectionsPickerActivity.this);
@@ -115,10 +115,10 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
    * Set up a GeoJsonSource and LineLayer in order to show the directions route from the device location
    * to the place picker location
    */
-  private void initDottedLineSourceAndLayer() {
+  private void initDottedLineSourceAndLayer(@NonNull Style loadedMapStyle) {
     dashedLineDirectionsFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     GeoJsonSource geoJsonSource = new GeoJsonSource("SOURCE_ID", dashedLineDirectionsFeatureCollection);
-    mapboxMap.getStyle().addSource(geoJsonSource);
+    loadedMapStyle.addSource(geoJsonSource);
     LineLayer dashedDirectionsRouteLayer = new LineLayer(
       "DIRECTIONS_LAYER_ID", "SOURCE_ID");
     dashedDirectionsRouteLayer.withProperties(
@@ -127,7 +127,7 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
       lineTranslate(new Float[] {0f, 4f}),
       lineDasharray(new Float[] {1.2f, 1.2f})
     );
-    mapboxMap.getStyle().addLayerBelow(dashedDirectionsRouteLayer, "road-label-small");
+    loadedMapStyle.addLayerBelow(dashedDirectionsRouteLayer, "road-label-small");
   }
 
   /**

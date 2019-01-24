@@ -71,9 +71,8 @@ public class LineGradientActivity extends AppCompatActivity implements OnMapRead
 
         FeatureCollection featureCollection = FeatureCollection.fromFeature(Feature.fromGeometry(lineString));
 
-        Source geoJsonSource = new GeoJsonSource("line-source", featureCollection,
-          new GeoJsonOptions().withLineMetrics(true));
-        mapboxMap.getStyle().addSource(geoJsonSource);
+        style.addSource(new GeoJsonSource("line-source", featureCollection,
+            new GeoJsonOptions().withLineMetrics(true)));
 
         LineLayer lineLayer = new LineLayer("linelayer", "line-source");
 
@@ -92,7 +91,7 @@ public class LineGradientActivity extends AppCompatActivity implements OnMapRead
             stop(0.7f, rgb(255, 252, 0)), // yellow
             stop(1f, rgb(255, 30, 0)) // red
           )));
-        mapboxMap.getStyle().addLayer(lineLayer);
+        style.addLayer(lineLayer);
       }
     });
   }

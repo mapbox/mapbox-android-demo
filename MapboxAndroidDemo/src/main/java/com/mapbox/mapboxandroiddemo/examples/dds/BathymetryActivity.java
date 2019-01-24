@@ -79,9 +79,8 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
             "bathymetry-data.geojson"));
 
         // Retrieve GeoJSON from local file and add it to the map
-        GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID,
-          featureCollection);
-        style.addSource(geoJsonSource);
+        style.addSource(new GeoJsonSource(GEOJSON_SOURCE_ID,
+            featureCollection));
 
         setUpDepthFillLayers(style);
         setUpDepthNumberSymbolLayer(style);

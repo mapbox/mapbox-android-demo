@@ -85,8 +85,8 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
             mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
               12.099, -79.045), 3));
 
-            addClusteredGeoJsonSource();
-            mapboxMap.getStyle().addImage("cross-icon-id", BitmapUtils.getBitmapFromDrawable(
+            addClusteredGeoJsonSource(style);
+            style.addImage("cross-icon-id", BitmapUtils.getBitmapFromDrawable(
               getResources().getDrawable(R.drawable.ic_cross)));
 
             Toast.makeText(CircleLayerClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
@@ -140,11 +140,11 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
   }
 
 
-  private void addClusteredGeoJsonSource() {
+  private void addClusteredGeoJsonSource(@NonNull Style loadedMapStyle) {
 
     // Add a new source from the GeoJSON data and set the 'cluster' option to true.
     try {
-      mapboxMap.getStyle().addSource(
+      loadedMapStyle.addSource(
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
         // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
         new GeoJsonSource("earthquakes",
@@ -186,7 +186,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
         )
       )
     );
-    mapboxMap.getStyle().addLayer(unclustered);
+    loadedMapStyle.addLayer(unclustered);
 
     for (int i = 0; i < layers.length; i++) {
       //Add clusters' circles
@@ -208,7 +208,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
           lt(pointCount, literal(layers[i - 1][0]))
         )
       );
-      mapboxMap.getStyle().addLayer(circles);
+      loadedMapStyle.addLayer(circles);
     }
 
     //Add the count labels
@@ -220,7 +220,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
       textIgnorePlacement(true),
       textAllowOverlap(true)
     );
-    mapboxMap.getStyle().addLayer(count);
+    loadedMapStyle.addLayer(count);
 
   }
 }

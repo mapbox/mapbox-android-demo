@@ -50,38 +50,38 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        createGeoJsonSource();
-        addPolygonLayer();
-        addPointsLayer();
+        createGeoJsonSource(style);
+        addPolygonLayer(style);
+        addPointsLayer(style);
       }
     });
   }
 
-  private void createGeoJsonSource() {
+  private void createGeoJsonSource(@NonNull Style loadedMapStyle) {
     // Load data from GeoJSON file in the assets folder
     GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID,
       loadJsonFromAsset("fake_norway_campsites.geojson"));
-    mapboxMap.getStyle().addSource(geoJsonSource);
+    loadedMapStyle.addSource(geoJsonSource);
   }
 
-  private void addPolygonLayer() {
+  private void addPolygonLayer(@NonNull Style loadedMapStyle) {
     // Create and style a FillLayer that uses the Polygon Feature's coordinates in the GeoJSON data
     FillLayer countryPolygonFillLayer = new FillLayer("polygon", GEOJSON_SOURCE_ID);
     countryPolygonFillLayer.setProperties(
       PropertyFactory.fillColor(Color.RED),
       PropertyFactory.fillOpacity(.4f));
     countryPolygonFillLayer.setFilter(eq(literal("$type"), literal("Polygon")));
-    mapboxMap.getStyle().addLayer(countryPolygonFillLayer);
+    loadedMapStyle.addLayer(countryPolygonFillLayer);
   }
 
-  private void addPointsLayer() {
+  private void addPointsLayer(@NonNull Style loadedMapStyle) {
     // Create and style a CircleLayer that uses the Point Features' coordinates in the GeoJSON data
     CircleLayer individualCirclesLayer = new CircleLayer("points", GEOJSON_SOURCE_ID);
     individualCirclesLayer.setProperties(
       PropertyFactory.circleColor(Color.YELLOW),
       PropertyFactory.circleRadius(3f));
     individualCirclesLayer.setFilter(eq(literal("$type"), literal("Point")));
-    mapboxMap.getStyle().addLayer(individualCirclesLayer);
+    loadedMapStyle.addLayer(individualCirclesLayer);
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

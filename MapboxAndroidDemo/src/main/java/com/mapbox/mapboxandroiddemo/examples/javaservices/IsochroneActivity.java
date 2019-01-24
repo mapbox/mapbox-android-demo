@@ -95,7 +95,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
           @Override
           public void onStyleLoaded(@NonNull Style style) {
             mapboxMap.addOnMapClickListener(IsochroneActivity.this);
-            initIsochroneCenterSymbolLayer();
+            initIsochroneCenterSymbolLayer(style);
 
             // Set the click listener for the floating action button
             findViewById(R.id.switch_isochrone_style_fab).setOnClickListener(new View.OnClickListener() {
@@ -123,7 +123,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
       source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
     }
 
-    // Request and redraw the isochrone information based on the map click point
+    // Request and redraw the Isochrone information based on the map click point
     redrawIsochroneData(point);
     return true;
   }
@@ -135,8 +135,11 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    */
   private void redrawIsochroneData(LatLng point) {
     if (layersShown) {
-      mapboxMap.getStyle().removeLayer(ISOCHRONE_FILL_LAYER + randomNumForLayerId);
-      mapboxMap.getStyle().removeLayer(ISOCHRONE_LINE_LAYER + randomNumForLayerId);
+      if (mapboxMap.getStyle() != null) {
+        Style style = mapboxMap.getStyle();
+        style.removeLayer(ISOCHRONE_FILL_LAYER + randomNumForLayerId);
+        style.removeLayer(ISOCHRONE_LINE_LAYER + randomNumForLayerId);
+      }
     }
     addDataToMap(point);
   }
@@ -195,20 +198,20 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    * Add a SymbolLayer to the map so that the map click point has a visual marker. This is where the
    * Isochrone API information radiates from.
    */
-  private void initIsochroneCenterSymbolLayer() {
-    mapboxMap.getStyle().addImage("map-click-icon-id", BitmapUtils.getBitmapFromDrawable(
+  private void initIsochroneCenterSymbolLayer(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addImage("map-click-icon-id", BitmapUtils.getBitmapFromDrawable(
       getResources().getDrawable(R.drawable.red_marker)));
 
     GeoJsonSource geoJsonSource = new GeoJsonSource("click-source-id",
       FeatureCollection.fromFeatures(new Feature[] {}));
-    mapboxMap.getStyle().addSource(geoJsonSource);
+    loadedMapStyle.addSource(geoJsonSource);
 
     SymbolLayer clickLayer = new SymbolLayer("click_layer_id", "click-source-id");
     clickLayer.setProperties(
       iconImage("map-click-icon-id"),
       iconOffset(new Float[] {0f, -4f})
     );
-    mapboxMap.getStyle().addLayer(clickLayer);
+    loadedMapStyle.addLayer(clickLayer);
   }
 
   /**

@@ -50,11 +50,10 @@ public class StyleCirclesCategoricallyActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            VectorSource vectorSource = new VectorSource(
-              "ethnicity-source",
-              "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken()
-            );
-            mapboxMap.getStyle().addSource(vectorSource);
+            style.addSource(new VectorSource(
+                "ethnicity-source",
+                "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken()
+            ));
 
             CircleLayer circleLayer = new CircleLayer("population", "ethnicity-source");
             circleLayer.setSourceLayer("sf2010");
@@ -74,7 +73,7 @@ public class StyleCirclesCategoricallyActivity extends AppCompatActivity {
                   stop("Asian", rgb(59, 178, 208)),
                   stop("Other", rgb(204, 204, 204)))));
 
-            mapboxMap.getStyle().addLayer(circleLayer);
+            style.addLayer(circleLayer);
           }
         });
       }

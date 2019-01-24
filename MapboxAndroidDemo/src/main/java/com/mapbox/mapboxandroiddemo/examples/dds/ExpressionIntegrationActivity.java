@@ -132,8 +132,8 @@ public class ExpressionIntegrationActivity
 
     mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
-      public void onStyleLoaded(@NonNull Style style) {
-        setUpMapImagePins();
+      public void onStyleLoaded(@NonNull final Style style) {
+        setUpMapImagePins(style);
 
         // Initialize FeatureCollection object for future use with layers
         FeatureCollection featureCollection =
@@ -171,12 +171,12 @@ public class ExpressionIntegrationActivity
           new GeoJsonSource(GEOJSON_SRC_ID, featureCollection);
         mapboxMap.getStyle().addSource(geoJsonSource);
 
-        initTemperatureLayers();
+        initTemperatureLayers(style);
         populateMenu();
 
         // show Connecticut by default
         int indexOfState = indexOfState("Connecticut");
-        selectState(states.get(indexOfState).name, indexOfState);
+        selectState(states.get(indexOfState).name, indexOfState, mapboxMap.getStyle());
 
         // When user clicks the map, start the snapshotting process with the given parameters
         unitsFab.setOnClickListener(new View.OnClickListener() {
@@ -184,7 +184,7 @@ public class ExpressionIntegrationActivity
           public void onClick(View view) {
 
             if (mapboxMap != null) {
-              changeTemperatureUnits(!isImperial);
+              changeTemperatureUnits(!isImperial, style);
             }
           }
         });
@@ -196,17 +196,17 @@ public class ExpressionIntegrationActivity
   /**
    * Adds the marker image to the map for use as a SymbolLayer icon
    */
-  private void setUpMapImagePins() {
+  private void setUpMapImagePins(@NonNull Style loadedMapStyle) {
     Bitmap icon = BitmapFactory.decodeResource(
       this.getResources(), R.drawable.red_marker);
-    mapboxMap.getStyle().addImage(RED_PIN_IMAGE_ID, icon);
+    loadedMapStyle.addImage(RED_PIN_IMAGE_ID, icon);
 
     icon = BitmapFactory.decodeResource(
       this.getResources(), R.drawable.blue_marker);
-    mapboxMap.getStyle().addImage(BLUE_PIN_IMAGE_ID, icon);
+    loadedMapStyle.addImage(BLUE_PIN_IMAGE_ID, icon);
   }
 
-  private void initTemperatureLayers() {
+  private void initTemperatureLayers(@NonNull Style loadedMapStyle) {
     if (mapboxMap != null) {
 
       // Adds a SymbolLayer to display maximum temperature in state
@@ -224,7 +224,7 @@ public class ExpressionIntegrationActivity
       );
       // Only display Maximum Temperature in this layer
       maxTempLayer.setFilter(eq(get("element"), literal("All-Time Maximum Temperature")));
-      mapboxMap.getStyle().addLayer(maxTempLayer);
+      loadedMapStyle.addLayer(maxTempLayer);
 
       // Adds a SymbolLayer to display minimum temperature in state
       SymbolLayer minTempLayer = new SymbolLayer(MIN_TEMP_LAYER_ID, GEOJSON_SRC_ID);
@@ -240,21 +240,22 @@ public class ExpressionIntegrationActivity
         iconIgnorePlacement(true));
       // Only display Minimum Temperature in this layer
       minTempLayer.setFilter(eq(get("element"), literal("All-Time Minimum Temperature")));
-      mapboxMap.getStyle().addLayer(minTempLayer);
+      loadedMapStyle.addLayer(minTempLayer);
 
       unitsText.setText(isImperial ? DEGREES_C : DEGREES_F);
     }
   }
 
-  private void changeTemperatureUnits(boolean isImperial) {
+  private void changeTemperatureUnits(boolean isImperial, @NonNull Style loadedMapStyle) {
+
     if (mapboxMap != null && this.isImperial != isImperial) {
       this.isImperial = isImperial;
 
-      // Apply new units to the data displayed in textfields of SymbolLayers
-      SymbolLayer maxTempLayer = (SymbolLayer)mapboxMap.getStyle().getLayer(MAX_TEMP_LAYER_ID);
+      // Apply new units to the data displayed in text fields of SymbolLayers
+      SymbolLayer maxTempLayer = (SymbolLayer) loadedMapStyle.getLayer(MAX_TEMP_LAYER_ID);
       maxTempLayer.withProperties(textField(getTemperatureValue()));
 
-      SymbolLayer minTempLayer = (SymbolLayer)mapboxMap.getStyle().getLayer(MIN_TEMP_LAYER_ID);
+      SymbolLayer minTempLayer = (SymbolLayer) loadedMapStyle.getLayer(MIN_TEMP_LAYER_ID);
       minTempLayer.withProperties(textField(getTemperatureValue()));
 
       unitsText.setText(isImperial ? DEGREES_C : DEGREES_F);
@@ -312,11 +313,12 @@ public class ExpressionIntegrationActivity
     }
 
     if (mapboxMap != null && mapboxMap.getStyle() != null) {
-      mapboxMap.getStyle().removeImage(RED_PIN_IMAGE_ID);
-      mapboxMap.getStyle().removeImage(BLUE_PIN_IMAGE_ID);
-      mapboxMap.getStyle().removeLayer(MAX_TEMP_LAYER_ID);
-      mapboxMap.getStyle().removeLayer(MIN_TEMP_LAYER_ID);
-      mapboxMap.getStyle().removeSource(GEOJSON_SRC_ID);
+      Style style = mapboxMap.getStyle();
+      style.removeImage(RED_PIN_IMAGE_ID);
+      style.removeImage(BLUE_PIN_IMAGE_ID);
+      style.removeLayer(MAX_TEMP_LAYER_ID);
+      style.removeLayer(MIN_TEMP_LAYER_ID);
+      style.removeSource(GEOJSON_SRC_ID);
     }
     mapView.onDestroy();
 
@@ -367,7 +369,7 @@ public class ExpressionIntegrationActivity
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
 
-    selectState(item.getTitle(), item.getItemId());
+    selectState(item.getTitle(), item.getItemId(), mapboxMap.getStyle());
 
     return super.onOptionsItemSelected(item);
   }
@@ -380,11 +382,11 @@ public class ExpressionIntegrationActivity
     }
   }
 
-  private void selectState(CharSequence stateName, int stateIndex) {
+  private void selectState(CharSequence stateName, int stateIndex,@NonNull Style loadedMapStyle) {
 
     if (indexOfState(stateName) == stateIndex) {
       // Adds a SymbolLayer to display maximum temperature in state
-      SymbolLayer maxTempLayer = (SymbolLayer) mapboxMap.getStyle().getLayer(MAX_TEMP_LAYER_ID);
+      SymbolLayer maxTempLayer = (SymbolLayer) loadedMapStyle.getLayer(MAX_TEMP_LAYER_ID);
       // Only display Maximum Temperature in this layer for SELECTED State
       maxTempLayer.setFilter(all(
         eq(get("element"), literal("All-Time Maximum Temperature")),
@@ -392,7 +394,7 @@ public class ExpressionIntegrationActivity
 
 
       // Adds a SymbolLayer to display minimum temperature in state
-      SymbolLayer minTempLayer = (SymbolLayer) mapboxMap.getStyle().getLayer(MIN_TEMP_LAYER_ID);
+      SymbolLayer minTempLayer = (SymbolLayer) loadedMapStyle.getLayer(MIN_TEMP_LAYER_ID);
       // Only display Maximum Temperature in this layer for SELECTED State
       minTempLayer.setFilter(all(
         eq(get("element"), literal("All-Time Minimum Temperature")),

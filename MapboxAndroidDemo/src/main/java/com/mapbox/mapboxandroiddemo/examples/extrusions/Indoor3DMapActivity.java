@@ -52,10 +52,12 @@ public class Indoor3DMapActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            GeoJsonSource roomDataSource = new GeoJsonSource("room-data", loadJsonFromAsset("indoor-3d-map.geojson"));
-            map.getStyle().addSource(roomDataSource);
+            style.addSource(
+                new GeoJsonSource("room-data",
+                    loadJsonFromAsset("indoor-3d-map.geojson")));
 
-            FillExtrusionLayer roomExtrusionLayer = new FillExtrusionLayer("room-extrusion", "room-data");
+            FillExtrusionLayer roomExtrusionLayer = new FillExtrusionLayer(
+                "room-extrusion", "room-data");
             roomExtrusionLayer.setProperties(
               fillExtrusionColor(get("color")),
               fillExtrusionHeight(get("height")),
@@ -63,7 +65,7 @@ public class Indoor3DMapActivity extends AppCompatActivity {
               fillExtrusionOpacity(0.5f)
             );
 
-            map.getStyle().addLayer(roomExtrusionLayer);
+            style.addLayer(roomExtrusionLayer);
           }
         });
       }

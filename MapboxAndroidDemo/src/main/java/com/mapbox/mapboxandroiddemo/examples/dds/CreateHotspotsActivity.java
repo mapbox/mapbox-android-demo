@@ -53,11 +53,68 @@ public class CreateHotspotsActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            addClusteredGeoJsonSource(mapboxMap);
+            addClusteredGeoJsonSource(style);
           }
         });
       }
     });
+  }
+
+  private void addClusteredGeoJsonSource(@NonNull Style loadedMapStyle) {
+
+    // Add a new source from our GeoJSON data and set the 'cluster' option to true.
+    try {
+      loadedMapStyle.addSource(
+          // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
+          // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
+          new GeoJsonSource("earthquakes",
+              new URL("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"),
+              new GeoJsonOptions()
+                  .withCluster(true)
+                  .withClusterMaxZoom(15) // Max zoom to cluster points on
+                  .withClusterRadius(20) // Use small cluster radius for the hotspots look
+          )
+      );
+    } catch (MalformedURLException malformedUrlException) {
+      Log.e("CreateHotspotsActivity", "Check the URL " + malformedUrlException.getMessage());
+    }
+
+    // Use the earthquakes source to create four layers:
+    // three for each cluster category, and one for unclustered points
+
+    // Each point range gets a different fill color.
+    final int[][] layers = new int[][]{
+        new int[]{150, Color.parseColor("#E55E5E")},
+        new int[]{20, Color.parseColor("#F9886C")},
+        new int[]{0, Color.parseColor("#FBB03B")}
+    };
+
+    CircleLayer unclustered = new CircleLayer("unclustered-points", "earthquakes");
+    unclustered.setProperties(
+        circleColor(Color.parseColor("#FBB03B")),
+        circleRadius(20f),
+        circleBlur(1f));
+    unclustered.setFilter(Expression.neq(get("cluster"), literal(true)));
+    loadedMapStyle.addLayerBelow(unclustered, "building");
+
+    for (int i = 0; i < layers.length; i++) {
+      CircleLayer circles = new CircleLayer("cluster-" + i, "earthquakes");
+      circles.setProperties(
+          circleColor(layers[i][1]),
+          circleRadius(70f),
+          circleBlur(1f)
+      );
+      Expression pointCount = toNumber(get("point_count"));
+      circles.setFilter(
+          i == 0
+              ? Expression.gte(pointCount, literal(layers[i][0])) :
+              Expression.all(
+                  Expression.gte(pointCount, literal(layers[i][0])),
+                  Expression.lt(pointCount, literal(layers[i - 1][0]))
+              )
+      );
+      loadedMapStyle.addLayerBelow(circles, "building");
+    }
   }
 
   @Override
@@ -100,62 +157,5 @@ public class CreateHotspotsActivity extends AppCompatActivity {
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
-  }
-
-  private void addClusteredGeoJsonSource(MapboxMap mapboxMap) {
-
-    // Add a new source from our GeoJSON data and set the 'cluster' option to true.
-    try {
-      mapboxMap.getStyle().addSource(
-        // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
-        // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        new GeoJsonSource("earthquakes",
-          new URL("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"),
-          new GeoJsonOptions()
-            .withCluster(true)
-            .withClusterMaxZoom(15) // Max zoom to cluster points on
-            .withClusterRadius(20) // Use small cluster radius for the hotspots look
-        )
-      );
-    } catch (MalformedURLException malformedUrlException) {
-      Log.e("CreateHotspotsActivity", "Check the URL " + malformedUrlException.getMessage());
-    }
-
-    // Use the earthquakes source to create four layers:
-    // three for each cluster category, and one for unclustered points
-
-    // Each point range gets a different fill color.
-    final int[][] layers = new int[][] {
-      new int[] {150, Color.parseColor("#E55E5E")},
-      new int[] {20, Color.parseColor("#F9886C")},
-      new int[] {0, Color.parseColor("#FBB03B")}
-    };
-
-    CircleLayer unclustered = new CircleLayer("unclustered-points", "earthquakes");
-    unclustered.setProperties(
-      circleColor(Color.parseColor("#FBB03B")),
-      circleRadius(20f),
-      circleBlur(1f));
-    unclustered.setFilter(Expression.neq(get("cluster"), literal(true)));
-    mapboxMap.getStyle().addLayerBelow(unclustered, "building");
-
-    for (int i = 0; i < layers.length; i++) {
-      CircleLayer circles = new CircleLayer("cluster-" + i, "earthquakes");
-      circles.setProperties(
-        circleColor(layers[i][1]),
-        circleRadius(70f),
-        circleBlur(1f)
-      );
-      Expression pointCount = toNumber(get("point_count"));
-      circles.setFilter(
-        i == 0
-          ? Expression.gte(pointCount, literal(layers[i][0])) :
-          Expression.all(
-            Expression.gte(pointCount, literal(layers[i][0])),
-            Expression.lt(pointCount, literal(layers[i - 1][0]))
-          )
-      );
-      mapboxMap.getStyle().addLayerBelow(circles, "building");
-    }
   }
 }

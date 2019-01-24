@@ -55,7 +55,8 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
     this.mapboxMap = mapboxMap;
 
     geoJsonSource = new GeoJsonSource("source-id",
-      Feature.fromGeometry(Point.fromLngLat(currentPosition.getLongitude(), currentPosition.getLatitude())));
+      Feature.fromGeometry(Point.fromLngLat(currentPosition.getLongitude(),
+          currentPosition.getLatitude())));
 
     Style.Builder styleBuilder = new Style.Builder()
       .fromUrl(Style.SATELLITE_STREETS)
@@ -111,9 +112,9 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
     };
 
   // Class is used to interpolate the marker animation.
-  private final TypeEvaluator<LatLng> latLngEvaluator = new TypeEvaluator<LatLng>() {
+  private static final  TypeEvaluator<LatLng> latLngEvaluator = new TypeEvaluator<LatLng>() {
 
-    private LatLng latLng = new LatLng();
+    private final LatLng latLng = new LatLng();
 
     @Override
     public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {

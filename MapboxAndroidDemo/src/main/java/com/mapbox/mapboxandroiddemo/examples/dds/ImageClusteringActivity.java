@@ -72,8 +72,8 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        initLayerIcons();
-        addClusteredGeoJsonSource();
+        initLayerIcons(style);
+        addClusteredGeoJsonSource(style);
         Toast.makeText(ImageClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
           Toast.LENGTH_SHORT).show();
       }
@@ -122,17 +122,17 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
     mapView.onSaveInstanceState(outState);
   }
 
-  private void initLayerIcons() {
-    mapboxMap.getStyle().addImage("single-quake-icon-id", BitmapUtils.getBitmapFromDrawable(
+  private void initLayerIcons(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addImage("single-quake-icon-id", BitmapUtils.getBitmapFromDrawable(
       getResources().getDrawable(R.drawable.single_quake_icon)));
-    mapboxMap.getStyle().addImage("quake-triangle-icon-id", BitmapUtils.getBitmapFromDrawable(
+    loadedMapStyle.addImage("quake-triangle-icon-id", BitmapUtils.getBitmapFromDrawable(
       getResources().getDrawable(R.drawable.earthquake_triangle)));
   }
 
-  private void addClusteredGeoJsonSource() {
+  private void addClusteredGeoJsonSource(@NonNull Style loadedMapStyle) {
     // Add a new source from the GeoJSON data and set the 'cluster' option to true.
     try {
-      mapboxMap.getStyle().addSource(
+      loadedMapStyle.addSource(
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
         // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
         new GeoJsonSource("earthquakes",
@@ -157,7 +157,7 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
         )
       )
     );
-    mapboxMap.getStyle().addLayer(unclustered);
+    loadedMapStyle.addLayer(unclustered);
 
     // Use the earthquakes GeoJSON source to create three point ranges.
     int[] layers = new int[] {150, 20, 0};
@@ -182,7 +182,7 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
           lt(pointCount, literal(layers[i - 1]))
         )
       );
-      mapboxMap.getStyle().addLayer(symbolLayer);
+      loadedMapStyle.addLayer(symbolLayer);
     }
 
     //Add a SymbolLayer for the cluster data number point count
@@ -194,6 +194,6 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
       textIgnorePlacement(true),
       textAllowOverlap(true)
     );
-    mapboxMap.getStyle().addLayer(count);
+    loadedMapStyle.addLayer(count);
   }
 }

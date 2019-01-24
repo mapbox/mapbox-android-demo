@@ -59,20 +59,20 @@ public class MarathonExtrusionActivity extends AppCompatActivity implements OnMa
         GeoJsonSource courseRouteGeoJson = new GeoJsonSource(
           "coursedata", loadJsonFromAsset("marathon_route.geojson"));
 
-        mapboxMap.getStyle().addSource(courseRouteGeoJson);
-        addExtrusionsLayerToMap();
+        style.addSource(courseRouteGeoJson);
+        addExtrusionsLayerToMap(style);
       }
     });
   }
 
-  private void addExtrusionsLayerToMap() {
+  private void addExtrusionsLayerToMap(@NonNull Style loadedMapStyle) {
     // Add FillExtrusion layer to map using GeoJSON data
     FillExtrusionLayer courseExtrusionLayer = new FillExtrusionLayer("course", "coursedata");
     courseExtrusionLayer.setProperties(
         fillExtrusionColor(Color.YELLOW),
         fillExtrusionOpacity(0.7f),
         fillExtrusionHeight(get("e")));
-    mapboxMap.getStyle().addLayer(courseExtrusionLayer);
+    loadedMapStyle.addLayer(courseExtrusionLayer);
   }
 
   @Override

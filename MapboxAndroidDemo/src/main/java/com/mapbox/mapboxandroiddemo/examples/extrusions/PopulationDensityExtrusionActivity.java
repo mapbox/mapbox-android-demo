@@ -61,15 +61,16 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        VectorSource vectorSource = new VectorSource("population", "mapbox://peterqliu.d0vin3el");
-        mapboxMap.getStyle().addSource(vectorSource);
-        addFillsLayer();
-        addExtrusionsLayer();
+        style.addSource(
+            new VectorSource("population", "mapbox://peterqliu.d0vin3el")
+        );
+        addFillsLayer(style);
+        addExtrusionsLayer(style);
       }
     });
   }
 
-  private void addFillsLayer() {
+  private void addFillsLayer(@NonNull Style loadedMapStyle) {
     FillLayer fillsLayer = new FillLayer("fills", "population");
     fillsLayer.setSourceLayer("outgeojson");
     fillsLayer.setFilter(all(lt(get("pkm2"), literal(300000))));
@@ -78,10 +79,10 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
         stop(0, rgb(22, 14, 35)),
         stop(14500, rgb(0, 97, 127)),
         stop(145000, rgb(85, 223, 255)))));
-    mapboxMap.getStyle().addLayerBelow(fillsLayer, "water");
+    loadedMapStyle.addLayerBelow(fillsLayer, "water");
   }
 
-  private void addExtrusionsLayer() {
+  private void addExtrusionsLayer(@NonNull Style loadedMapStyle) {
     FillExtrusionLayer fillExtrusionLayer = new FillExtrusionLayer("extrusions", "population");
     fillExtrusionLayer.setSourceLayer("outgeojson");
     fillExtrusionLayer.setFilter(all(gt(get("p"), 1), lt(get("pkm2"), 300000)));
@@ -94,7 +95,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
       fillExtrusionHeight(interpolate(exponential(1f), get("pkm2"),
         stop(0, 0f),
         stop(1450000, 20000f))));
-    mapboxMap.getStyle().addLayerBelow(fillExtrusionLayer, "airport-label");
+    loadedMapStyle.addLayerBelow(fillExtrusionLayer, "airport-label");
   }
 
   @Override
@@ -215,5 +216,4 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     mapboxMap.moveCamera(CameraUpdateFactory
       .newCameraPosition(position));
   }
-
 }

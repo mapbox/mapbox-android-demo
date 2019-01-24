@@ -64,15 +64,15 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
         map.setStyle(Style.DARK, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            setupBuildings();
-            setupLight();
+            setupBuildings(style);
+            setupLight(style);
           }
         });
       }
     });
   }
 
-  private void setupBuildings() {
+  private void setupBuildings(@NonNull Style loadedMapStyle) {
     FillExtrusionLayer fillExtrusionLayer = new FillExtrusionLayer("3d-buildings", "composite");
     fillExtrusionLayer.setSourceLayer("building");
     fillExtrusionLayer.setFilter(eq(get("extrude"), "true"));
@@ -90,11 +90,11 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
       fillExtrusionBase(get("min_height")),
       fillExtrusionOpacity(0.9f)
     );
-    mapboxMap.getStyle().addLayer(fillExtrusionLayer);
+    loadedMapStyle.addLayer(fillExtrusionLayer);
   }
 
-  private void setupLight() {
-    light = mapboxMap.getStyle().getLight();
+  private void setupLight(@NonNull Style loadedMapStyle) {
+    light = loadedMapStyle.getLight();
 
     findViewById(R.id.fabLightPosition).setOnClickListener(new View.OnClickListener() {
       @Override
