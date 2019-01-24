@@ -12,12 +12,13 @@ import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Marker;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -29,7 +30,9 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
 
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private Marker marker;
+  private LatLng currentPosition = new LatLng(64.900932, -18.167040);
+  private GeoJsonSource geoJsonSource;
+  private ValueAnimator animator;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +52,25 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
 
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-    AnimatedMarkerActivity.this.mapboxMap = mapboxMap;
+    this.mapboxMap = mapboxMap;
 
-    mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
+    geoJsonSource = new GeoJsonSource("source-id",
+      Feature.fromGeometry(Point.fromLngLat(currentPosition.getLongitude(), currentPosition.getLatitude())));
+
+    Style.Builder styleBuilder = new Style.Builder()
+      .fromUrl(Style.SATELLITE_STREETS)
+      .withImage("marker_icon", IconFactory.getInstance(this).defaultMarker().getBitmap())
+      .withSource(geoJsonSource)
+      .withLayer(new SymbolLayer("layer-id", "source-id")
+        .withProperties(
+          PropertyFactory.iconImage("marker_icon"),
+          PropertyFactory.iconIgnorePlacement(true),
+          PropertyFactory.iconAllowOverlap(true)
+        ));
+
+    mapboxMap.setStyle(styleBuilder, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        mapboxMap.getStyle().addSource(new GeoJsonSource("source-id",
-          Feature.fromGeometry(Point.fromLngLat(18.167040, 64.900932))));
-
-        SymbolLayer symbolLayer = new SymbolLayer("layer-id", "source-id");
-        mapboxMap.getStyle().addLayer(symbolLayer);
-
         Toast.makeText(
           AnimatedMarkerActivity.this,
           getString(R.string.tap_on_map_instruction),
@@ -67,26 +78,40 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
         ).show();
 
         mapboxMap.addOnMapClickListener(AnimatedMarkerActivity.this);
-
       }
     });
   }
-
 
   @Override
   public boolean onMapClick(@NonNull LatLng point) {
     // When the user clicks on the map, we want to animate the marker to that
     // location.
-    ValueAnimator markerAnimator = ObjectAnimator.ofObject(marker, "position",
-      new LatLngEvaluator(), marker.getPosition(), point);
-    markerAnimator.setDuration(2000);
-    markerAnimator.start();
+    if (animator != null && animator.isStarted()) {
+      currentPosition = (LatLng) animator.getAnimatedValue();
+      animator.cancel();
+    }
 
+    animator = ObjectAnimator
+      .ofObject(latLngEvaluator, currentPosition, point)
+      .setDuration(2000);
+    animator.addUpdateListener(animatorUpdateListener);
+    animator.start();
+
+    currentPosition = point;
     return true;
   }
 
-  private static class LatLngEvaluator implements TypeEvaluator<LatLng> {
-    // Method is used to interpolate the marker animation.
+  private final ValueAnimator.AnimatorUpdateListener animatorUpdateListener =
+    new ValueAnimator.AnimatorUpdateListener() {
+      @Override
+      public void onAnimationUpdate(ValueAnimator valueAnimator) {
+        LatLng animatedPosition = (LatLng) valueAnimator.getAnimatedValue();
+        geoJsonSource.setGeoJson(Point.fromLngLat(animatedPosition.getLongitude(), animatedPosition.getLatitude()));
+      }
+    };
+
+  // Class is used to interpolate the marker animation.
+  private final TypeEvaluator<LatLng> latLngEvaluator = new TypeEvaluator<LatLng>() {
 
     private LatLng latLng = new LatLng();
 
@@ -98,7 +123,7 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
         + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
       return latLng;
     }
-  }
+  };
 
   @Override
   public void onResume() {
@@ -133,6 +158,9 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (animator != null) {
+      animator.cancel();
+    }
     if (mapboxMap != null) {
       mapboxMap.removeOnMapClickListener(this);
     }
