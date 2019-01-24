@@ -51,17 +51,17 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 public class OptimizationActivity extends AppCompatActivity implements OnMapReadyCallback,
   MapboxMap.OnMapClickListener, MapboxMap.OnMapLongClickListener {
 
+  private static final String ICON_GEOJSON_SOURCE_ID = "icon-source-id";
+  private static final String FIRST = "first";
+  private static final String ANY = "any";
+  private static final String TEAL_COLOR = "#23D2BE";
+  private static final float POLYLINE_WIDTH = 5;
   private MapView mapView;
   private MapboxMap mapboxMap;
   private DirectionsRoute optimizedRoute;
   private MapboxOptimization optimizedClient;
   private List<Point> stops;
   private Point origin;
-
-  private static final String FIRST = "first";
-  private static final String ANY = "any";
-  private static final String TEAL_COLOR = "#23D2BE";
-  private static final float POLYLINE_WIDTH = 5;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -108,11 +108,11 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     mapboxMap.getStyle().addImage("icon-image", icon);
 
     // Add the source to the map
-    GeoJsonSource geoJsonSource = new GeoJsonSource("icon-source-id",
+    GeoJsonSource geoJsonSource = new GeoJsonSource(ICON_GEOJSON_SOURCE_ID,
       Feature.fromGeometry(Point.fromLngLat(origin.longitude(), origin.latitude())));
 
     mapboxMap.getStyle().addSource(geoJsonSource);
-    SymbolLayer symbolLayer = new SymbolLayer("icon-layer-id", "icon-source-id");
+    SymbolLayer symbolLayer = new SymbolLayer("icon-layer-id", ICON_GEOJSON_SOURCE_ID);
     symbolLayer.setProperties(
       iconImage("icon-image"),
       iconSize(1f),
@@ -158,7 +158,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   }
 
   private void resetDestinationMarkers() {
-    GeoJsonSource optimizedLineSource = mapboxMap.getStyle().getSourceAs("icon-source-id");
+    GeoJsonSource optimizedLineSource = mapboxMap.getStyle().getSourceAs(ICON_GEOJSON_SOURCE_ID);
     if (optimizedLineSource != null) {
       optimizedLineSource.setGeoJson(Feature.fromGeometry(Point.fromLngLat(origin.longitude(),
         origin.latitude())));
@@ -187,7 +187,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
         Point.fromLngLat(singlePoint.longitude(), singlePoint.latitude())));
     }
     destinationMarkerList.add(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
-    GeoJsonSource iconSource = mapboxMap.getStyle().getSourceAs("icon-source-id");
+    GeoJsonSource iconSource = mapboxMap.getStyle().getSourceAs(ICON_GEOJSON_SOURCE_ID);
     if (iconSource != null) {
       iconSource.setGeoJson(FeatureCollection.fromFeatures(destinationMarkerList));
     }

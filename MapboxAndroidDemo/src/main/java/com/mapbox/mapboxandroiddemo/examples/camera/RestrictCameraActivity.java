@@ -66,13 +66,13 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
         mapboxMap.setMinZoomPreference(2);
 
         // Visualise bounds area
-        showBoundsArea();
+        showBoundsArea(style);
         showCrosshair();
       }
     });
   }
 
-  private void showBoundsArea() {
+  private void showBoundsArea(@NonNull Style loadedMapStyle) {
     GeoJsonSource geoJsonSource = new GeoJsonSource("source-id",
       FeatureCollection.fromFeatures(new Feature[] {
         Feature.fromGeometry(Point.fromLngLat(AUSTRALIA_BOUNDS.getNorthWest().getLongitude(),
@@ -85,14 +85,14 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
           AUSTRALIA_BOUNDS.getNorthWest().getLatitude()))
       }));
 
-    mapboxMap.getStyle().addSource(geoJsonSource);
+    loadedMapStyle.addSource(geoJsonSource);
 
     FillLayer boundsAreaFillLayer = new FillLayer("layer-id", "source-id");
     boundsAreaFillLayer.setProperties(
       fillColor(Color.RED),
       fillOpacity(.25f)
     );
-    mapboxMap.getStyle().addLayer(boundsAreaFillLayer);
+    loadedMapStyle.addLayer(boundsAreaFillLayer);
   }
 
   private void showCrosshair() {

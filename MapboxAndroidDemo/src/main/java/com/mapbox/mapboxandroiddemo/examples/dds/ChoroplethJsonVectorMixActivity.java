@@ -38,13 +38,11 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
 
   private static final String STATE_UNEMPLOYMENT_INFO_JSON = "state_unemployment_info.json";
   private static final String VECTOR_SOURCE_NAME = "states";
-  private static final String VECTOR_MATCH_PROP = "STATEFP";
   private static final String DATA_MATCH_PROP = "STATE_ID";
   private static final String DATA_STYLE_UNEMPLOYMENT_PROP = "unemployment";
 
   private MapView mapView;
   private JSONArray statesArray;
-  private StringBuilder sb;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +66,12 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     map.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        // Add Mapbox-hosted vector source for state polygons
-        VectorSource vectorSource = new VectorSource(VECTOR_SOURCE_NAME, "mapbox://mapbox.us_census_states_2015");
-        map.getStyle().addSource(vectorSource);
 
-        loadJson();
+        // Add Mapbox-hosted vector source for state polygons
+        style.addSource(new VectorSource(VECTOR_SOURCE_NAME, "mapbox://mapbox.us_census_states_2015"));
 
         try {
-          statesArray = new JSONArray(sb.toString());
+          statesArray = new JSONArray(loadJson());
         } catch (Exception exception) {
           Log.e("JSONVectorMix", "Exception Loading GeoJSON: ", exception);
         }
@@ -89,7 +85,6 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
             JSONObject singleState = statesArray.getJSONObject(x);
             double green = singleState.getDouble(DATA_STYLE_UNEMPLOYMENT_PROP) / 14 * 255;
 
-            Log.d("Choropleth", "onMapReady: green value = " + String.valueOf(green) + " for x = " + x);
             // Add new stop to array of stops
             stops[x] = stop(
               Double.parseDouble(singleState.getString(DATA_MATCH_PROP)),
@@ -109,9 +104,26 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
         );
 
         // Add layer to map below the "waterway-label" layer
-        map.getStyle().addLayerAbove(statesJoinLayer, "waterway-label");
+        style.addLayerAbove(statesJoinLayer, "waterway-label");
       }
     });
+  }
+
+  private String loadJson() {
+    StringBuilder sb = new StringBuilder();
+    try {
+      // Load GeoJSON file
+      InputStream inputStream = getAssets().open(STATE_UNEMPLOYMENT_INFO_JSON);
+      BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+      int cp;
+      while ((cp = rd.read()) != -1) {
+        sb.append((char) cp);
+      }
+      inputStream.close();
+    } catch (Exception exception) {
+      Log.e("JSONVectorMix", "Exception Loading GeoJSON: ", exception);
+    }
+    return sb.toString();
   }
 
   @Override
@@ -154,22 +166,5 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
-  }
-
-  private StringBuilder loadJson() {
-    sb = new StringBuilder();
-    try {
-      // Load GeoJSON file
-      InputStream inputStream = getAssets().open(STATE_UNEMPLOYMENT_INFO_JSON);
-      BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-      int cp;
-      while ((cp = rd.read()) != -1) {
-        sb.append((char) cp);
-      }
-      inputStream.close();
-    } catch (Exception exception) {
-      Log.e("JSONVectorMix", "Exception Loading GeoJSON: ", exception);
-    }
-    return sb;
   }
 }

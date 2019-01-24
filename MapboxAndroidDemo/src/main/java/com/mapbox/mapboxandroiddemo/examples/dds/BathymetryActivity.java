@@ -38,14 +38,13 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
 public class BathymetryActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+  private static final String GEOJSON_SOURCE_ID = "GEOJSON_SOURCE_ID";
   private static final LatLngBounds LAKE_BOUNDS = new LatLngBounds.Builder()
     .include(new LatLng(44.936236, -85.673450))
     .include(new LatLng(44.932955, -85.669272))
     .build();
   private FeatureCollection featureCollection;
   private MapView mapView;
-  private MapboxMap mapboxMap;
-  private String geojsonSourceId = "geojsonSourceId";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +64,6 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
 
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-    BathymetryActivity.this.mapboxMap = mapboxMap;
 
     mapboxMap.setStyle(Style.OUTDOORS, new Style.OnStyleLoaded() {
       @Override
@@ -74,18 +72,19 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
         mapboxMap.setLatLngBoundsForCameraTarget(LAKE_BOUNDS);
 
         // Remove lake label layer
-        mapboxMap.getStyle().removeLayer("water-label");
+        style.removeLayer("water-label");
 
         // Initialize FeatureCollection object for future use with layers
-        featureCollection = FeatureCollection.fromJson(loadGeoJsonFromAsset("bathymetry-data.geojson"));
+        featureCollection = FeatureCollection.fromJson(loadGeoJsonFromAsset(
+            "bathymetry-data.geojson"));
 
         // Retrieve GeoJSON from local file and add it to the map
-        GeoJsonSource geoJsonSource = new GeoJsonSource(geojsonSourceId,
+        GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID,
           featureCollection);
-        mapboxMap.getStyle().addSource(geoJsonSource);
+        style.addSource(geoJsonSource);
 
-        setUpDepthFillLayers();
-        setUpDepthNumberSymbolLayer();
+        setUpDepthFillLayers(style);
+        setUpDepthNumberSymbolLayer(style);
       }
     });
   }
@@ -93,8 +92,8 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
   /**
    * Adds a FillLayer and uses data-driven styling to display the lake's areas
    */
-  private void setUpDepthFillLayers() {
-    FillLayer depthPolygonFillLayer = new FillLayer("DEPTH_POLYGON_FILL_LAYER_ID", geojsonSourceId);
+  private void setUpDepthFillLayers(@NonNull Style loadedMapStyle) {
+    FillLayer depthPolygonFillLayer = new FillLayer("DEPTH_POLYGON_FILL_LAYER_ID", GEOJSON_SOURCE_ID);
     depthPolygonFillLayer.withProperties(
       fillColor(interpolate(linear(),
         get("depth"),
@@ -105,15 +104,15 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
       fillOpacity(.7f));
     // Only display Polygon Features in this layer
     depthPolygonFillLayer.setFilter(eq(geometryType(), literal("Polygon")));
-    mapboxMap.getStyle().addLayer(depthPolygonFillLayer);
+    loadedMapStyle.addLayer(depthPolygonFillLayer);
   }
 
   /**
    * Adds a SymbolLayer to display the depth of the lake's areas
    */
-  private void setUpDepthNumberSymbolLayer() {
+  private void setUpDepthNumberSymbolLayer(@NonNull Style loadedMapStyle) {
     SymbolLayer depthNumberSymbolLayer = new SymbolLayer("DEPTH_NUMBER_SYMBOL_LAYER_ID",
-      geojsonSourceId);
+        GEOJSON_SOURCE_ID);
     depthNumberSymbolLayer.withProperties(
       textField("{depth}"),
       textSize(17f),
@@ -122,7 +121,7 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
     );
     // Only display Point Features in this layer
     depthNumberSymbolLayer.setFilter(eq(geometryType(), literal("Point")));
-    mapboxMap.getStyle().addLayerAbove(depthNumberSymbolLayer, "DEPTH_POLYGON_FILL_LAYER_ID");
+    loadedMapStyle.addLayerAbove(depthNumberSymbolLayer, "DEPTH_POLYGON_FILL_LAYER_ID");
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
@@ -179,7 +178,7 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
       return new String(buffer, "UTF-8");
 
     } catch (Exception exception) {
-      Log.e("StyleLineActivity", "Exception Loading GeoJSON: " + exception.toString());
+      Log.e("BathymetryActivity", "Exception Loading GeoJSON: " + exception.toString());
       exception.printStackTrace();
       return null;
     }

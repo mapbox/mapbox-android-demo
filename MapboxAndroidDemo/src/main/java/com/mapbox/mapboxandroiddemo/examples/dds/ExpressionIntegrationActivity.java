@@ -73,6 +73,10 @@ public class ExpressionIntegrationActivity
   private TextView unitsText;
   private boolean isImperial = true;
 
+  private final List<State> states = new ArrayList<>();
+
+
+
   /**
    * weather_data_per_state_before2006.geojson file (found in assets)
    * contains various weather related records per state/territory.
@@ -100,7 +104,6 @@ public class ExpressionIntegrationActivity
     }
   }
 
-  private List<State> states;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -139,7 +142,6 @@ public class ExpressionIntegrationActivity
 
         // Find out the states represented in the FeatureCollection
         // and bounds of the extreme conditions
-        states = new ArrayList<>();
         for (Feature feature : featureCollection.features()) {
           String stateName = feature.getStringProperty("state");
           String lat = feature.getStringProperty("latitude");
@@ -308,8 +310,6 @@ public class ExpressionIntegrationActivity
     if (states != null) {
       states.clear();
     }
-
-    states = null;
 
     if (mapboxMap != null && mapboxMap.getStyle() != null) {
       mapboxMap.getStyle().removeImage(RED_PIN_IMAGE_ID);

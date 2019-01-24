@@ -6,6 +6,7 @@ import com.mapbox.mapboxandroiddemo.R
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.Style
+import kotlinx.android.synthetic.main.activity_basic_simple_kotlin.*
 
 /**
  * The most basic example of adding a map to an activity with Kotlin code

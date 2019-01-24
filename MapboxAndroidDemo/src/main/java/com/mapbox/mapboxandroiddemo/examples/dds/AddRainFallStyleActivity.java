@@ -59,7 +59,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        addRadar(mapboxMap);
+        addRadar(style);
         refreshGeoJsonRunnable = new RefreshGeoJsonRunnable();
         do {
           handler.postDelayed(refreshGeoJsonRunnable, 1000);
@@ -81,13 +81,13 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     }
   }
 
-  private void addRadar(MapboxMap mapboxMap) {
+  private void addRadar(@NonNull Style loadedMapStyle) {
     VectorSource vectorSource = new VectorSource(
       ID_SOURCE,
       SOURCE_URL
     );
-    mapboxMap.getStyle().addSource(vectorSource);
-    layer = mapboxMap.getStyle().getLayerAs(ID_LAYER);
+    loadedMapStyle.addSource(vectorSource);
+    layer = loadedMapStyle.getLayerAs(ID_LAYER);
     if (layer == null) {
       layer = new FillLayer(ID_LAYER, ID_SOURCE);
       layer.withSourceLayer("201806261518");
@@ -113,7 +113,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
           )
         ),
         PropertyFactory.fillOpacity(0.7f));
-      mapboxMap.getStyle().addLayer(layer);
+      loadedMapStyle.addLayer(layer);
     }
   }
 

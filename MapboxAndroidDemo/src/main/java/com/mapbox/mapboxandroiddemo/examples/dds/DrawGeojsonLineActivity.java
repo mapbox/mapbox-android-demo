@@ -4,13 +4,11 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 
-import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.LineString;
-import com.mapbox.geojson.Point;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -21,17 +19,10 @@ import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.mapboxsdk.style.sources.Source;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.ref.WeakReference;
+import java.util.Scanner;
 
 /**
  * Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.
@@ -66,10 +57,61 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
     mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        initSourceAndLayer();
-        new DrawGeoJson().execute();
+        new LoadGeoJson(DrawGeojsonLineActivity.this).execute();
       }
     });
+  }
+
+  private void drawLines(@NonNull FeatureCollection featureCollection) {
+    if (featureCollection.features().size() > 0 && mapboxMap.getStyle() != null) {
+      mapboxMap.getStyle().addSource(new GeoJsonSource("line-source", featureCollection));
+
+      // The layer properties for our line. This is where we make the line dotted, set the
+      // color, etc.
+      mapboxMap.getStyle().addLayer(new LineLayer("linelayer", "line-source")
+          .withProperties(PropertyFactory.lineCap(Property.LINE_CAP_SQUARE),
+              PropertyFactory.lineJoin(Property.LINE_JOIN_MITER),
+              PropertyFactory.lineOpacity(.7f),
+              PropertyFactory.lineWidth(7f),
+              PropertyFactory.lineColor(Color.parseColor("#3bb2d0"))));
+    }
+  }
+
+  private static class LoadGeoJson extends AsyncTask<Void, Void, FeatureCollection> {
+
+    private WeakReference<DrawGeojsonLineActivity> weakReference;
+
+    LoadGeoJson(DrawGeojsonLineActivity activity) {
+      this.weakReference = new WeakReference<>(activity);
+    }
+
+    @Override
+    protected FeatureCollection doInBackground(Void... voids) {
+      try {
+        DrawGeojsonLineActivity activity = weakReference.get();
+        if (activity != null) {
+          InputStream inputStream = activity.getAssets().open("example.geojson");
+          return FeatureCollection.fromJson(convertStreamToString(inputStream));
+        }
+      } catch (Exception exception) {
+        Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
+      }
+      return null;
+    }
+
+    static String convertStreamToString(InputStream is) {
+      Scanner scanner = new Scanner(is).useDelimiter("\\A");
+      return scanner.hasNext() ? scanner.next() : "";
+    }
+
+    @Override
+    protected void onPostExecute(@Nullable FeatureCollection featureCollection) {
+      super.onPostExecute(featureCollection);
+      DrawGeojsonLineActivity activity = weakReference.get();
+      if (activity != null && featureCollection != null) {
+        activity.drawLines(featureCollection);
+      }
+    }
   }
 
   @Override
@@ -112,83 +154,5 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
   public void onDestroy() {
     super.onDestroy();
     mapView.onDestroy();
-  }
-
-  private void initSourceAndLayer() {
-    // Create the LineString from the list of coordinates and then make a GeoJSON
-
-    Source geoJsonSource = new GeoJsonSource("line-source");
-    mapboxMap.getStyle().addSource(geoJsonSource);
-    LineLayer lineLayer = new LineLayer("linelayer", "line-source");
-    // The layer properties for our line. This is where we make the line dotted, set the
-    // color, etc.
-    lineLayer.setProperties(
-      PropertyFactory.lineCap(Property.LINE_CAP_SQUARE),
-      PropertyFactory.lineJoin(Property.LINE_JOIN_MITER),
-      PropertyFactory.lineOpacity(.7f),
-      PropertyFactory.lineWidth(7f),
-      PropertyFactory.lineColor(Color.parseColor("#3bb2d0"))
-    );
-    mapboxMap.getStyle().addLayer(lineLayer);
-  }
-
-  private class DrawGeoJson extends AsyncTask<Void, Void, List<Point>> {
-    @Override
-    protected List<Point> doInBackground(Void... voids) {
-
-      ArrayList<Point> points = new ArrayList<>();
-
-      try {
-        // Load GeoJSON file
-        InputStream inputStream = getAssets().open("example.geojson");
-        BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-          sb.append((char) cp);
-        }
-
-        inputStream.close();
-
-        // Parse JSON
-        JSONObject json = new JSONObject(sb.toString());
-        JSONArray features = json.getJSONArray("features");
-        JSONObject feature = features.getJSONObject(0);
-        JSONObject geometry = feature.getJSONObject("geometry");
-        if (geometry != null) {
-          String type = geometry.getString("type");
-
-          // Our GeoJSON only has one feature: a line string
-          if (!TextUtils.isEmpty(type) && type.equalsIgnoreCase("LineString")) {
-
-            // Get the Coordinates
-            JSONArray coords = geometry.getJSONArray("coordinates");
-            for (int lc = 0; lc < coords.length(); lc++) {
-              JSONArray coord = coords.getJSONArray(lc);
-              Point singlePoint = Point.fromLngLat(coord.getDouble(0), coord.getDouble(1));
-              points.add(singlePoint);
-            }
-          }
-        }
-      } catch (Exception exception) {
-        Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
-      }
-
-      return points;
-    }
-
-    @Override
-    protected void onPostExecute(List<Point> points) {
-      super.onPostExecute(points);
-
-      if (points.size() > 0) {
-
-        // FeatureCollection so we can add the line to our map as a layer.
-        GeoJsonSource source = mapboxMap.getStyle().getSourceAs("line-source");
-        if (source != null) {
-          source.setGeoJson(Feature.fromGeometry(LineString.fromLngLats(points)));
-        }
-      }
-    }
   }
 }
