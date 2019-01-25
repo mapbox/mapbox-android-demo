@@ -29,7 +29,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpa
 public class Indoor3DMapActivity extends AppCompatActivity {
 
   private MapView mapView;
-  private MapboxMap map;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,8 +46,6 @@ public class Indoor3DMapActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-        map = mapboxMap;
-
         mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
@@ -56,16 +53,13 @@ public class Indoor3DMapActivity extends AppCompatActivity {
                 new GeoJsonSource("room-data",
                     loadJsonFromAsset("indoor-3d-map.geojson")));
 
-            FillExtrusionLayer roomExtrusionLayer = new FillExtrusionLayer(
-                "room-extrusion", "room-data");
-            roomExtrusionLayer.setProperties(
+            style.addLayer(new FillExtrusionLayer(
+              "room-extrusion", "room-data").withProperties(
               fillExtrusionColor(get("color")),
               fillExtrusionHeight(get("height")),
               fillExtrusionBase(get("base_height")),
               fillExtrusionOpacity(0.5f)
-            );
-
-            style.addLayer(roomExtrusionLayer);
+            ));
           }
         });
       }

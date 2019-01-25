@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -60,7 +59,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   private MapboxMap mapboxMap;
   private DirectionsRoute optimizedRoute;
   private MapboxOptimization optimizedClient;
-  private List<Point> stops;
+  private List<Point> stops = new ArrayList<>();
   private Point origin;
 
   @Override
@@ -73,8 +72,6 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_javaservices_optimization);
-
-    stops = new ArrayList<>();
 
     // Add the origin Point to the list
     addFirstStopToStopsList();
@@ -92,8 +89,8 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
       @Override
       public void onStyleLoaded(@NonNull Style style) {
         // Add origin and destination to the mapboxMap
-        initMarkerIconSymbolLayer();
-        initOptimizedRouteLineLayer();
+        initMarkerIconSymbolLayer(style);
+        initOptimizedRouteLineLayer(style);
         Toast.makeText(OptimizationActivity.this, R.string.click_instructions, Toast.LENGTH_SHORT).show();
         mapboxMap.addOnMapClickListener(OptimizationActivity.this);
         mapboxMap.addOnMapLongClickListener(OptimizationActivity.this);
@@ -101,37 +98,32 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     });
   }
 
-  private void initMarkerIconSymbolLayer() {
+  private void initMarkerIconSymbolLayer(@NonNull Style loadedMapStyle) {
     // Add the marker image to map
-    Bitmap icon = BitmapFactory.decodeResource(
-      this.getResources(), R.drawable.red_marker);
-    mapboxMap.getStyle().addImage("icon-image", icon);
+    loadedMapStyle.addImage("icon-image", BitmapFactory.decodeResource(
+      this.getResources(), R.drawable.red_marker));
 
     // Add the source to the map
-    GeoJsonSource geoJsonSource = new GeoJsonSource(ICON_GEOJSON_SOURCE_ID,
-      Feature.fromGeometry(Point.fromLngLat(origin.longitude(), origin.latitude())));
 
-    mapboxMap.getStyle().addSource(geoJsonSource);
-    SymbolLayer symbolLayer = new SymbolLayer("icon-layer-id", ICON_GEOJSON_SOURCE_ID);
-    symbolLayer.setProperties(
+    loadedMapStyle.addSource(new GeoJsonSource(ICON_GEOJSON_SOURCE_ID,
+      Feature.fromGeometry(Point.fromLngLat(origin.longitude(), origin.latitude()))));
+
+    loadedMapStyle.addLayer(new SymbolLayer("icon-layer-id", ICON_GEOJSON_SOURCE_ID).withProperties(
       iconImage("icon-image"),
       iconSize(1f),
       iconAllowOverlap(true),
       iconIgnorePlacement(true),
       iconOffset(new Float[] {0f, -4f})
-    );
-    mapboxMap.getStyle().addLayer(symbolLayer);
+    ));
   }
 
-  private void initOptimizedRouteLineLayer() {
-    GeoJsonSource geoJsonSource = new GeoJsonSource("optimized-route-source-id");
-    mapboxMap.getStyle().addSource(geoJsonSource);
-    LineLayer lineLayer = new LineLayer("optimized-route-layer-id", "optimized-route-source-id");
-    lineLayer.setProperties(
-      lineColor(Color.parseColor(TEAL_COLOR)),
-      lineWidth(POLYLINE_WIDTH)
-    );
-    mapboxMap.getStyle().addLayerBelow(lineLayer, "icon-layer-id");
+  private void initOptimizedRouteLineLayer(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addSource(new GeoJsonSource("optimized-route-source-id"));
+    loadedMapStyle.addLayerBelow(new LineLayer("optimized-route-layer-id", "optimized-route-source-id")
+      .withProperties(
+        lineColor(Color.parseColor(TEAL_COLOR)),
+        lineWidth(POLYLINE_WIDTH)
+      ), "icon-layer-id");
   }
 
   @Override
@@ -144,16 +136,17 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
       addPointToStopsList(point);
       getOptimizedRoute(stops);
     }
-
     return true;
   }
 
   @Override
   public boolean onMapLongClick(@NonNull LatLng point) {
     stops.clear();
-    resetDestinationMarkers();
-    removeOptimizedRoute();
-    addFirstStopToStopsList();
+    if (mapboxMap != null) {
+      resetDestinationMarkers();
+      removeOptimizedRoute();
+      addFirstStopToStopsList();
+    }
     return true;
   }
 
@@ -173,11 +166,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   }
 
   private boolean alreadyTwelveMarkersOnMap() {
-    if (stops.size() == 12) {
-      return true;
-    } else {
-      return false;
-    }
+    return stops.size() == 12;
   }
 
   private void addDestinationMarker(LatLng point) {

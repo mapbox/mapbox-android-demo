@@ -56,7 +56,6 @@
     <string name="activity_dds_polygon_holes_description">Draw a vector polygon with holes on a map using the Mapbox Maps SDK.</string>
     <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
     <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize the info window.</string>
-    <string name="activity_annotation_animated_marker_description">Animate the marker to a new position on the map.</string>
     <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
     <string name="activity_camera_restrict_description">Prevent a map from being panned to a different place.</string>
@@ -91,6 +90,7 @@
     <string name="activity_java_services_map_matching_description">Match raw GPS points to the map so they aligns with the roads/pathways.</string>
     <string name="activity_image_generator_snapshot_share_description">Send and share a map snapshot image.</string>
     <string name="activity_image_generator_snapshot_notification_description">Show a snapshotted image in a notification.</string>
+    <string name="activity_lab_animated_marker_description">Animate the marker to a new position on the map.</string>
     <string name="activity_lab_location_picker_description">Drop a marker at a specific location and then perform reverse geocoding.</string>
     <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>
     <string name="activity_lab_space_station_location_description">See the International Space Station location in real time.</string>

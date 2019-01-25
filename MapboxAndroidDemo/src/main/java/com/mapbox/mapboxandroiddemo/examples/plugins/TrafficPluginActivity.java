@@ -43,10 +43,10 @@ public class TrafficPluginActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            trafficPlugin = new TrafficPlugin(mapView, mapboxMap, mapboxMap.getStyle());
+            trafficPlugin = new TrafficPlugin(mapView, mapboxMap, style);
 
             // Enable the traffic view by default
-            TrafficPluginActivity.this.trafficPlugin.setVisibility(true);
+            trafficPlugin.setVisibility(true);
 
             findViewById(R.id.traffic_toggle_fab).setOnClickListener(new View.OnClickListener() {
               @Override

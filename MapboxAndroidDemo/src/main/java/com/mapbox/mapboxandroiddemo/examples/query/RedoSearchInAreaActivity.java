@@ -37,15 +37,13 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMapReadyCallback,
   MapboxMap.OnMoveListener {
 
+  private static final String FILL_LAYER_ID = "FILL_LAYER_ID";
+  private static final String GEO_JSON_SOURCE_ID = "GEO_JSON_SOURCE_ID";
+  private static final String ID_OF_LAYER_TO_HIGHLIGHT = "landuse";
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private FeatureCollection dataFeatureCollection;
   private GeoJsonSource dataGeoJsonSource;
-  private FillLayer dataFillLayer;
   private Button redoSearchButton;
-  private String desiredMapLayerToShow = "landuse";
-  private String geoJsonSourceId = "geoJsonSourceId";
-  private String fillLayerId = "fillLayerId";
   private boolean moveMapInstructionShown;
 
   @Override
@@ -72,29 +70,39 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
     this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
       @Override
-      public void onStyleLoaded(@NonNull Style style) {
+      public void onStyleLoaded(@NonNull final Style style) {
         mapboxMap.addOnMoveListener(RedoSearchInAreaActivity.this);
-        initGeoJsonSource();
-        initFillLayer();
+
+        style.addSource(new GeoJsonSource(GEO_JSON_SOURCE_ID,
+          FeatureCollection.fromFeatures(new Feature[] {})));
+
+        style.addLayer(new FillLayer(FILL_LAYER_ID,
+          GEO_JSON_SOURCE_ID).withProperties(
+          fillOpacity(interpolate(exponential(1f), zoom(),
+            stop(3, 0f),
+            stop(8, .5f),
+            stop(15f, 1f))),
+          fillColor(Color.parseColor("#00F7FF"))
+        ));
+
         redoSearchButton.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            mapboxMap.clear();
             if (!moveMapInstructionShown) {
               Toast.makeText(RedoSearchInAreaActivity.this,
                 R.string.move_the_map_and_research, Toast.LENGTH_SHORT).show();
               moveMapInstructionShown = true;
             }
             FeatureCollection featureCollection = null;
-            if (mapboxMap.getStyle().getLayer(desiredMapLayerToShow) != null) {
-              featureCollection = FeatureCollection.fromFeatures(getFeaturesInViewport(desiredMapLayerToShow));
+            if (style.getLayer(ID_OF_LAYER_TO_HIGHLIGHT) != null) {
+              featureCollection = FeatureCollection.fromFeatures(getFeaturesInViewport(ID_OF_LAYER_TO_HIGHLIGHT));
             } else {
               Toast.makeText(RedoSearchInAreaActivity.this,
-                String.format(getString(R.string.layer_not_found), desiredMapLayerToShow),
+                String.format(getString(R.string.layer_not_found), ID_OF_LAYER_TO_HIGHLIGHT),
                 Toast.LENGTH_SHORT).show();
             }
             // Retrieve and update the GeoJSON source used in the FillLayer
-            dataGeoJsonSource = mapboxMap.getStyle().getSourceAs(geoJsonSourceId);
+            dataGeoJsonSource = style.getSourceAs(GEO_JSON_SOURCE_ID);
             if (dataGeoJsonSource != null && featureCollection != null) {
               dataGeoJsonSource.setGeoJson(featureCollection);
             }
@@ -103,32 +111,6 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
         });
       }
     });
-  }
-
-  /**
-   * Set up the GeoJsonSource and add it to the map
-   */
-  private void initGeoJsonSource() {
-    dataFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
-    dataGeoJsonSource = new GeoJsonSource(geoJsonSourceId, dataFeatureCollection);
-    mapboxMap.getStyle().addSource(dataGeoJsonSource);
-  }
-
-  /**
-   * Set up the FillLayer and add it to the map. This layer will display the rendered features that are
-   * a part of the map layer you want to show (i.e. the desiredMapLayerToShow variable)
-   */
-  private void initFillLayer() {
-    dataFillLayer = new FillLayer(fillLayerId,
-      geoJsonSourceId);
-    dataFillLayer.withProperties(
-      fillOpacity(interpolate(exponential(1f), zoom(),
-        stop(3, 0f),
-        stop(8, .5f),
-        stop(15f, 1f))),
-      fillColor(Color.parseColor("#00F7FF"))
-    );
-    mapboxMap.getStyle().addLayer(dataFillLayer);
   }
 
   /**

@@ -77,16 +77,12 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
         innerList.add(innerLineString);
         innerList.add(secondInnerLineString);
 
-        GeoJsonSource geoJsonSource = new GeoJsonSource("source-id",
-          Feature.fromGeometry(Polygon.fromOuterInner(outerLineString, innerList)));
+        style.addSource(new GeoJsonSource("source-id",
+          Feature.fromGeometry(Polygon.fromOuterInner(outerLineString, innerList))));
 
-        map.getStyle().addSource(geoJsonSource);
-
-        FillLayer polygonWithHoleLayer = new FillLayer("layer-id", "source-id");
-        polygonWithHoleLayer.setProperties(
+        style.addLayer(new FillLayer("layer-id", "source-id").withProperties(
           PropertyFactory.fillColor(BLUE_COLOR)
-        );
-        map.getStyle().addLayer(polygonWithHoleLayer);
+        ));
       }
     });
   }

@@ -34,8 +34,6 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
   private MapboxMap mapboxMap;
   private static final String geoJsonSourceId = "geoJsonData";
   private static final String geoJsonLayerId = "polygonFillLayer";
-  private FillLayer layer;
-  private GeoJsonSource source;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +61,13 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
       @Override
       public void onStyleLoaded(@NonNull Style style) {
         mapboxMap.addOnMapClickListener(ClickOnLayerActivity.this);
-        addGeoJsonSourceToMap();
+        addGeoJsonSourceToMap(style);
+
         // Create FillLayer with GeoJSON source and add the FillLayer to the map
-        layer = new FillLayer(geoJsonLayerId, geoJsonSourceId);
-        layer.setProperties(fillOpacity(0.5f));
-        mapboxMap.getStyle().addLayer(layer);
+        if (mapboxMap.getStyle() != null) {
+          mapboxMap.getStyle().addLayer(new FillLayer(geoJsonLayerId, geoJsonSourceId)
+            .withProperties(fillOpacity(0.5f)));
+        }
       }
     });
   }
@@ -88,16 +88,12 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
     return false;
   }
 
-  private void addGeoJsonSourceToMap() {
+  private void addGeoJsonSourceToMap(@NonNull Style loadedMapStyle) {
     try {
-      // Load GeoJSONSource
-      source = new GeoJsonSource(geoJsonSourceId, new URL("https://gist.githubusercontent"
-        + ".com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303"
-        + "d58f20f4a1d8841e8/regions.geojson"));
-
       // Add GeoJsonSource to map
-      mapboxMap.getStyle().addSource(source);
-
+      loadedMapStyle.addSource(new GeoJsonSource(geoJsonSourceId, new URL("https://gist.githubusercontent"
+        + ".com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303"
+        + "d58f20f4a1d8841e8/regions.geojson")));
     } catch (Throwable throwable) {
       Log.e("ClickOnLayerActivity", "Couldn't add GeoJsonSource to map", throwable);
     }

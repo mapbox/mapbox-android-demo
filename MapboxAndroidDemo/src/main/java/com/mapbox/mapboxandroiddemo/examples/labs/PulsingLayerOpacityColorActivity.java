@@ -37,7 +37,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 public class PulsingLayerOpacityColorActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
-  private MapboxMap mapboxMap;
   private ValueAnimator parkColorAnimator;
   private ValueAnimator hotelColorAnimator;
   private ValueAnimator attractionsColorAnimator;
@@ -60,23 +59,22 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
 
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-    this.mapboxMap = mapboxMap;
 
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
-      public void onStyleLoaded(@NonNull Style style) {
+      public void onStyleLoaded(@NonNull final Style style) {
         // Add the hotels source to the map
         GeoJsonSource hotelSource = new GeoJsonSource("hotels", loadJsonFromAsset("la_hotels.geojson"));
-        mapboxMap.getStyle().addSource(hotelSource);
+        style.addSource(hotelSource);
 
         FillLayer hotelLayer = new FillLayer("hotels", "hotels").withProperties(
           fillColor(Color.parseColor("#5a9fcf")),
           PropertyFactory.visibility(Property.NONE)
         );
 
-        mapboxMap.getStyle().addLayer(hotelLayer);
+        style.addLayer(hotelLayer);
 
-        final FillLayer hotels = (FillLayer) mapboxMap.getStyle().getLayer("hotels");
+        final FillLayer hotels = (FillLayer) style.getLayer("hotels");
 
         hotelColorAnimator = ValueAnimator.ofObject(
           new ArgbEvaluator(),
@@ -100,16 +98,16 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
 
         // Add the attractions source to the map
         GeoJsonSource attractionsSource = new GeoJsonSource("attractions", loadJsonFromAsset("la_attractions.geojson"));
-        mapboxMap.getStyle().addSource(attractionsSource);
+        style.addSource(attractionsSource);
 
         CircleLayer attractionsLayer = new CircleLayer("attractions", "attractions").withProperties(
           circleColor(Color.parseColor("#5a9fcf")),
           PropertyFactory.visibility(Property.NONE)
         );
 
-        mapboxMap.getStyle().addLayer(attractionsLayer);
+        style.addLayer(attractionsLayer);
 
-        final CircleLayer attractions = (CircleLayer) mapboxMap.getStyle().getLayer("attractions");
+        final CircleLayer attractions = (CircleLayer) style.getLayer("attractions");
 
         attractionsColorAnimator = ValueAnimator.ofObject(
           new ArgbEvaluator(),
@@ -131,7 +129,7 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
 
         });
 
-        final FillLayer parks = (FillLayer) mapboxMap.getStyle().getLayer("landuse");
+        final FillLayer parks = (FillLayer) style.getLayer("landuse");
         parks.setProperties(
           PropertyFactory.visibility(Property.NONE)
         );
@@ -158,7 +156,7 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
         toggleHotelsFab.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            setLayerVisible("hotels");
+            setLayerVisible("hotels", style);
           }
         });
 
@@ -166,7 +164,7 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
         toggleParksFab.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            setLayerVisible("landuse");
+            setLayerVisible("landuse", style);
           }
         });
 
@@ -174,7 +172,7 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
         toggleAttractionsFab.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            setLayerVisible("attractions");
+            setLayerVisible("attractions", style);
           }
         });
 
@@ -186,8 +184,8 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
     });
   }
 
-  private void setLayerVisible(String layerId) {
-    Layer layer = mapboxMap.getStyle().getLayer(layerId);
+  private void setLayerVisible(String layerId,@NonNull Style loadedMapStyle) {
+    Layer layer = loadedMapStyle.getLayer(layerId);
     if (layer == null) {
       return;
     }

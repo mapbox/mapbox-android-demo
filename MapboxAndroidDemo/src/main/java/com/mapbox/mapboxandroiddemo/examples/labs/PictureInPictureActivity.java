@@ -62,13 +62,14 @@ public class PictureInPictureActivity extends AppCompatActivity {
   @Override
   public void onPictureInPictureModeChanged(boolean isInPictureInPictureMode) {
     super.onPictureInPictureModeChanged(isInPictureInPictureMode);
+
+    addPictureFab.setVisibility(isInPictureInPictureMode ? View.GONE : View.VISIBLE);
+
     if (isInPictureInPictureMode) {
       // Hide the controls in picture-in-picture mode.
-      addPictureFab.setVisibility(View.GONE);
       getSupportActionBar().hide();
     } else {
       // Restore the playback UI based on the playback status.
-      addPictureFab.setVisibility(View.VISIBLE);
       getSupportActionBar().show();
     }
   }

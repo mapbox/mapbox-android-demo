@@ -58,13 +58,13 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        enableLocationComponent();
+        enableLocationComponent(style);
       }
     });
   }
 
   @SuppressWarnings( {"MissingPermission"})
-  private void enableLocationComponent() {
+  private void enableLocationComponent(@NonNull Style loadedMapStyle) {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
@@ -80,7 +80,7 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
       locationComponent = mapboxMap.getLocationComponent();
 
       // Activate with options
-      locationComponent.activateLocationComponent(this, mapboxMap.getStyle(), options);
+      locationComponent.activateLocationComponent(this, loadedMapStyle, options);
 
       // Enable to make component visible
       locationComponent.setLocationComponentEnabled(true);
@@ -151,8 +151,8 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
 
   @Override
   public void onPermissionResult(boolean granted) {
-    if (granted) {
-      enableLocationComponent();
+    if (granted && mapboxMap.getStyle() != null) {
+      enableLocationComponent(mapboxMap.getStyle());
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
       finish();

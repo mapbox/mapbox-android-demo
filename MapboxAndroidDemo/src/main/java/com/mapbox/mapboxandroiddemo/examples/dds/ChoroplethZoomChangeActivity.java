@@ -59,7 +59,7 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
               "population",
               "http://api.mapbox.com/v4/mapbox.660ui7x6.json?access_token=" + Mapbox.getAccessToken()
             );
-            mapboxMap.getStyle().addSource(vectorSource);
+            style.addSource(vectorSource);
 
             FillLayer statePopulationLayer = new FillLayer("state-population", "population");
             statePopulationLayer.withSourceLayer("state_county_population_2014_cen");
@@ -77,7 +77,7 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
               fillOpacity(0.75f)
             );
 
-            mapboxMap.getStyle().addLayerBelow(statePopulationLayer, "waterway-label");
+            style.addLayerBelow(statePopulationLayer, "waterway-label");
 
             FillLayer countyPopulationLayer = new FillLayer("county-population", "population");
             countyPopulationLayer.withSourceLayer("state_county_population_2014_cen");
@@ -97,20 +97,23 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
               visibility(NONE)
             );
 
-            mapboxMap.getStyle().addLayerBelow(countyPopulationLayer, "waterway-label");
+            style.addLayerBelow(countyPopulationLayer, "waterway-label");
 
             mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
               @Override
               public void onCameraMove() {
-                Layer stateLayer = mapboxMap.getStyle().getLayer("state-population");
-                Layer countyLayer = mapboxMap.getStyle().getLayer("county-population");
-                if (mapboxMap.getCameraPosition().zoom > ZOOM_THRESHOLD) {
-                  if (stateLayer != null && countyLayer != null) {
-                    countyLayer.setProperties(visibility(VISIBLE));
-                  }
-                } else {
-                  if (stateLayer != null && countyLayer != null) {
-                    countyLayer.setProperties(visibility(NONE));
+                if (mapboxMap.getStyle() != null) {
+                  Style loadedStyle = mapboxMap.getStyle();
+                  Layer stateLayer = loadedStyle.getLayer("state-population");
+                  Layer countyLayer = loadedStyle.getLayer("county-population");
+                  if (mapboxMap.getCameraPosition().zoom > ZOOM_THRESHOLD) {
+                    if (stateLayer != null && countyLayer != null) {
+                      countyLayer.setProperties(visibility(VISIBLE));
+                    }
+                  } else {
+                    if (stateLayer != null && countyLayer != null) {
+                      countyLayer.setProperties(visibility(NONE));
+                    }
                   }
                 }
               }

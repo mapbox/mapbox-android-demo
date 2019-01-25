@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-// #-code-snippet: satellite-land-select-activity full-java
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -307,4 +306,3 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: satellite-land-select-activity full-java

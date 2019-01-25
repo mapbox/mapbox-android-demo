@@ -50,24 +50,20 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            // Retrieve GeoJSON from local file and add it to the map
 
+            // Retrieve GeoJSON from local file and add it to the map
             style.addSource(new GeoJsonSource("lines",
                 loadGeoJsonFromAsset("golden_gate_lines.geojson")));
 
-            // Create LineLayer, use lineColor, and stop to draw red and blue lines on map
-
-            LineLayer linesLayer = new LineLayer("finalLines", "lines").withProperties(
+            // Create a LineLayer. Use lineColor and stops to draw red and blue lines on the map
+            style.addLayer(new LineLayer("finalLines", "lines").withProperties(
               PropertyFactory.lineColor(
                 match(get("color"), rgb(0, 0, 0),
                   stop("red", rgb(247, 69, 93)),
                   stop("blue", rgb(51, 201, 235)))),
               PropertyFactory.visibility(Property.VISIBLE),
               PropertyFactory.lineWidth(3f)
-            );
-
-            // Add LineLayer to map
-            style.addLayer(linesLayer);
+            ));
           }
         });
       }

@@ -173,7 +173,7 @@ public class MapMatchingActivity extends AppCompatActivity {
     if (style != null) {
       style.addSource(new GeoJsonSource("pre-matched-source-id", feature));
       style.addLayer(new LineLayer("pre-matched-layer-id", "pre-matched-source-id").withProperties(
-        lineColor(ColorUtils.colorToRgbaString(Color.parseColor("#8a8acb"))),
+        lineColor(ColorUtils.colorToRgbaString(Color.parseColor("#3bb2d0"))),
         lineWidth(6f),
         lineOpacity(1f)
       ));

@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
@@ -140,43 +139,37 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
   }
 
   private void initSpaceStationSymbolLayer() {
-    Bitmap icon = BitmapFactory.decodeResource(
-      this.getResources(), R.drawable.iss);
 
-    map.getStyle().addImage("space-station-icon-id", icon);
-    GeoJsonSource spaceStationGeojsonSource = new GeoJsonSource("source-id");
+    map.getStyle().addImage("space-station-icon-id",
+      BitmapFactory.decodeResource(
+        this.getResources(), R.drawable.iss));
 
-    map.getStyle().addSource(spaceStationGeojsonSource);
+    map.getStyle().addSource(new GeoJsonSource("source-id"));
 
-    SymbolLayer spaceStationSymbolLayer = new SymbolLayer("layer-id", "source-id");
-    spaceStationSymbolLayer.withProperties(
+    map.getStyle().addLayer(new SymbolLayer("layer-id", "source-id").withProperties(
       iconImage("space-station-icon-id"),
       iconIgnorePlacement(true),
       iconAllowOverlap(true),
       iconSize(.7f)
-    );
-    map.getStyle().addLayer(spaceStationSymbolLayer);
+    ));
   }
 
   private void updateMarkerPosition(LatLng position) {
     // This method is were we update the marker position once we have new coordinates. First we
     // check if this is the first time we are executing this handler, the best way to do this is
     // check if marker is null;
-    Log.d(TAG, "updateMarkerPosition: Point.fromLngLat(position.getLongitude() = " + position.getLongitude());
-    Log.d(TAG, "updateMarkerPosition: Point.fromLngLat(position.getLatitude() = " + position.getLatitude());
-
-    spaceStationSource = map.getStyle().getSourceAs("source-id");
-    if (spaceStationSource != null) {
-      spaceStationSource.setGeoJson(FeatureCollection.fromFeature(
-        Feature.fromGeometry(Point.fromLngLat(position.getLongitude(), position.getLatitude()))
-      ));
+    if (map.getStyle() != null) {
+      spaceStationSource = map.getStyle().getSourceAs("source-id");
+      if (spaceStationSource != null) {
+        spaceStationSource.setGeoJson(FeatureCollection.fromFeature(
+          Feature.fromGeometry(Point.fromLngLat(position.getLongitude(), position.getLatitude()))
+        ));
+      }
     }
 
     // Lastly, animate the camera to the new position so the user
     // wont have to search for the marker and then return.
     map.animateCamera(CameraUpdateFactory.newLatLng(position));
-
-    return;
   }
 
   // Interface used for Retrofit.

@@ -59,7 +59,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        addRadar(style);
+        addRadarData(style);
         refreshGeoJsonRunnable = new RefreshGeoJsonRunnable();
         do {
           handler.postDelayed(refreshGeoJsonRunnable, 1000);
@@ -81,7 +81,7 @@ public class AddRainFallStyleActivity extends AppCompatActivity implements OnMap
     }
   }
 
-  private void addRadar(@NonNull Style loadedMapStyle) {
+  private void addRadarData(@NonNull Style loadedMapStyle) {
     VectorSource vectorSource = new VectorSource(
       ID_SOURCE,
       SOURCE_URL

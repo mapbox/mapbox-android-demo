@@ -26,6 +26,7 @@ import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
  * Change the camera's bearing and tilt based on device movement while viewing building extrusions
  */
 public class RotationExtrusionActivity extends AppCompatActivity implements SensorEventListener {
+
   private MapView mapView;
   private MapboxMap mapboxMap;
   private SensorManager sensorManager;

@@ -55,18 +55,11 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
           new LatLng(25.76795, -80.11725)
         );
 
-        // Create an ImageSource object
-        ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.miami_beach);
+        // Add an ImageSource to the map
+        style.addSource(new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.miami_beach));
 
-        // Add the imageSource to the map
-        mapboxMap.getStyle().addSource(imageSource);
-
-        // Create a raster layer and use the imageSource's ID as the layer's data
-        RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
-
-        // Add the layer to the map
-        mapboxMap.getStyle().addLayer(layer);
-
+        // Create a raster layer and use the imageSource's ID as the layer's data. Then add a RasterLayer to the map.
+        style.addLayer(new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE));
       }
     });
   }

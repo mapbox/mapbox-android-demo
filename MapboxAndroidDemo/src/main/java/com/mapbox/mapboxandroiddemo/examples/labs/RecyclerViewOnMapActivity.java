@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -52,7 +51,15 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
   private MapView mapView;
   private FeatureCollection featureCollection;
 
-  private LatLng[] coordinates;
+  private LatLng[] coordinates = new LatLng[] {
+    new LatLng(-34.6054099, -58.363654800000006),
+    new LatLng(-34.6041508, -58.38555650000001),
+    new LatLng(-34.6114412, -58.37808899999999),
+    new LatLng(-34.6097604, -58.382064000000014),
+    new LatLng(-34.596636, -58.373077999999964),
+    new LatLng(-34.590548, -58.38256609999996),
+    new LatLng(-34.5982127, -58.38110440000003)
+  };
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +71,6 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_lab_recycler_view_on_map);
-
-    coordinates = new LatLng[] {
-      new LatLng(-34.6054099, -58.363654800000006),
-      new LatLng(-34.6041508, -58.38555650000001),
-      new LatLng(-34.6114412, -58.37808899999999),
-      new LatLng(-34.6097604, -58.382064000000014),
-      new LatLng(-34.596636, -58.373077999999964),
-      new LatLng(-34.590548, -58.38256609999996),
-      new LatLng(-34.5982127, -58.38110440000003)
-    };
 
     // Initialize the map view
     mapView = findViewById(R.id.mapView);
@@ -88,7 +85,7 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
       @Override
       public void onStyleLoaded(@NonNull Style style) {
         initFeatureCollection();
-        initMarkerIcons();
+        initMarkerIcons(style);
         initRecyclerView();
         Toast.makeText(RecyclerViewOnMapActivity.this, R.string.toast_instruction, Toast.LENGTH_SHORT).show();
       }
@@ -118,19 +115,15 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
     snapHelper.attachToRecyclerView(recyclerView);
   }
 
-  private void initMarkerIcons() {
-    Bitmap icon = BitmapFactory.decodeResource(
-      this.getResources(), R.drawable.red_marker);
-    mapboxMap.getStyle().addImage(SYMBOL_ICON_ID, icon);
-    GeoJsonSource geoJsonSource = new GeoJsonSource(SOURCE_ID, featureCollection);
-    mapboxMap.getStyle().addSource(geoJsonSource);
-    SymbolLayer symbolLayer = new SymbolLayer(LAYER_ID, SOURCE_ID);
-    symbolLayer.withProperties(
+  private void initMarkerIcons(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addImage(SYMBOL_ICON_ID, BitmapFactory.decodeResource(
+      this.getResources(), R.drawable.red_marker));
+    loadedMapStyle.addSource(new GeoJsonSource(SOURCE_ID, featureCollection));
+    loadedMapStyle.addLayer(new SymbolLayer(LAYER_ID, SOURCE_ID).withProperties(
       iconImage(SYMBOL_ICON_ID),
       iconAllowOverlap(true),
       iconOffset(new Float[] {0f, -4f})
-    );
-    mapboxMap.getStyle().addLayer(symbolLayer);
+    ));
   }
 
   private List<SingleRecyclerViewLocation> createRecyclerViewLocations() {

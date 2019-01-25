@@ -38,7 +38,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpa
 public class AdjustExtrusionLightActivity extends AppCompatActivity {
 
   private MapView mapView;
-  private MapboxMap mapboxMap;
   private Light light;
   private boolean isMapAnchorLight;
   private boolean isLowIntensityLight;
@@ -60,7 +59,6 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
-        mapboxMap = map;
         map.setStyle(Style.DARK, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
@@ -182,5 +180,4 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
     super.onDestroy();
     mapView.onDestroy();
   }
-
 }

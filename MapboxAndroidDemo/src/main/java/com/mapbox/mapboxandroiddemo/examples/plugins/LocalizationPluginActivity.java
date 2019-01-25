@@ -48,7 +48,7 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
     mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        localizationPlugin = new LocalizationPlugin(mapView, mapboxMap, mapboxMap.getStyle());
+        localizationPlugin = new LocalizationPlugin(mapView, mapboxMap, style);
 
         findViewById(R.id.language_one_cardview).setOnClickListener(new View.OnClickListener() {
           @Override
@@ -74,13 +74,13 @@ public class LocalizationPluginActivity extends AppCompatActivity implements OnM
             Snackbar.make(view, R.string.change_device_language_instruction, Snackbar.LENGTH_LONG).show();
             try {
               localizationPlugin.matchMapLanguageWithDeviceDefault();
-              CameraPosition position = new CameraPosition.Builder()
-                .target(new LatLng(34.032666, -80.363160))
-                .zoom(2.038777)
-                .build();
 
               mapboxMap.animateCamera(CameraUpdateFactory
-                .newCameraPosition(position), 1000);
+                .newCameraPosition(new CameraPosition.Builder()
+                  .target(new LatLng(34.032666, -80.363160))
+                  .zoom(2.038777)
+                  .build()), 1000);
+
             } catch (RuntimeException exception) {
               Snackbar.make(view, exception.toString(), Snackbar.LENGTH_LONG).show();
             }

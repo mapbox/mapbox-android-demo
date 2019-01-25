@@ -56,24 +56,20 @@ public class AnimatedImageGifActivity extends AppCompatActivity implements OnMap
       @Override
       public void onStyleLoaded(@NonNull Style style) {
 
-        // Set the bounds/size of the gif
-        LatLngQuad quad = new LatLngQuad(
-          new LatLng(46.437, -80.425),
-          new LatLng(46.437, -71.516),
-          new LatLng(37.936, -71.516),
-          new LatLng(37.936, -80.425));
-
-        // Create an image source object with a unique id, the bounds, and drawable image
-        ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.waving_bear_gif);
+        // Set the bounds/size of the gif. Then create an image source object with a unique id,
+        // the bounds, and drawable image
+        ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE,
+          new LatLngQuad(
+            new LatLng(46.437, -80.425),
+            new LatLng(46.437, -71.516),
+            new LatLng(37.936, -71.516),
+            new LatLng(37.936, -80.425)), R.drawable.waving_bear_gif);
 
         // Add the source to the map
-        map.getStyle().addSource(imageSource);
+        style.addSource(imageSource);
 
-        // Create an raster layer with a unique id and the image source created above
-        RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
-
-        // Add the layer to the map
-        map.getStyle().addLayer(layer);
+        // Create an raster layer with a unique id and the image source created above. Then add the layer to the map.
+        style.addLayer(new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE));
 
         // Use the RefreshImageRunnable class and runnable to quickly display images for a GIF/video UI experience
         InputStream gifInputStream = getResources().openRawResource(R.raw.waving_bear);

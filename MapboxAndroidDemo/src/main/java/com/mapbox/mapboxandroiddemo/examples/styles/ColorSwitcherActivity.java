@@ -25,7 +25,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 public class ColorSwitcherActivity extends AppCompatActivity {
 
   private MapView mapView;
-  private MapboxMap map;
   FillLayer water;
   FillLayer building;
 
@@ -154,12 +153,11 @@ public class ColorSwitcherActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
-        map = mapboxMap;
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            water = (FillLayer) map.getStyle().getLayer("water");
-            building = (FillLayer) map.getStyle().getLayer("building");
+            water = (FillLayer) style.getLayer("water");
+            building = (FillLayer) style.getLayer("building");
           }
         });
       }

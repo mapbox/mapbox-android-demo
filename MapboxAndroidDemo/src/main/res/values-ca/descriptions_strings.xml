@@ -35,7 +35,7 @@
     <string name="activity_dds_polygon_holes_description">Dibuixa un polígon vector amb forats en un mapa amb el Mapbox Android SDK.</string>
     <string name="activity_annotation_marker_view_description">Adjunta una vista a una posició donada en el mapa.</string>
     <string name="activity_annotation_custom_info_window_description">Utilitza un adaptador de la finestra d\'informació per personalitzar la finestra d\'informació.</string>
-    <string name="activity_annotation_animated_marker_description">Anima el marcador a una nova posició al mapa.</string>
+    <string name="activity_lab_animated_marker_description">Anima el marcador a una nova posició al mapa.</string>
     <string name="activity_camera_animate_description">Anima la posició de la càmera, l\'iinclinació, el rodament i el zoom del mapa.</string>
     <string name="activity_camera_bounding_box_description">Col·loca la càmera de manera que tots els marcadors donats estan a la vista.</string>
     <string name="activity_camera_restrict_description">Evita que un mapa es pugui moure a un altre panell</string>

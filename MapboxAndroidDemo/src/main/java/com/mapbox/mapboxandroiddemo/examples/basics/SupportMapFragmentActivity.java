@@ -36,12 +36,10 @@ public class SupportMapFragmentActivity extends AppCompatActivity {
       // Create fragment
       final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-      LatLng patagonia = new LatLng(-52.6885, -70.1395);
-
       // Build mapboxMap
       MapboxMapOptions options = new MapboxMapOptions();
       options.camera(new CameraPosition.Builder()
-        .target(patagonia)
+        .target(new LatLng(-52.6885, -70.1395))
         .zoom(9)
         .build());
 
@@ -63,7 +61,7 @@ public class SupportMapFragmentActivity extends AppCompatActivity {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
 
-            // Customize map with markers, polylines, etc.
+            // Map is set up and the style has loaded. Now you can add data or make other map adjustments
 
 
           }

@@ -46,8 +46,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 public class ImageClusteringActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
-  private MapboxMap mapboxMap;
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -59,16 +57,13 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_dds_image_clustering);
-
     mapView = findViewById(R.id.mapView);
-
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
 
   @Override
   public void onMapReady(@NonNull MapboxMap mapboxMap) {
-    this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
@@ -78,6 +73,77 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
           Toast.LENGTH_SHORT).show();
       }
     });
+  }
+
+  private void initLayerIcons(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addImage("single-quake-icon-id", BitmapUtils.getBitmapFromDrawable(
+      getResources().getDrawable(R.drawable.single_quake_icon)));
+    loadedMapStyle.addImage("quake-triangle-icon-id", BitmapUtils.getBitmapFromDrawable(
+      getResources().getDrawable(R.drawable.earthquake_triangle)));
+  }
+
+  private void addClusteredGeoJsonSource(@NonNull Style loadedMapStyle) {
+    // Add a new source from the GeoJSON data and set the 'cluster' option to true.
+    try {
+      loadedMapStyle.addSource(
+        // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
+        // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
+        new GeoJsonSource("earthquakes",
+          new URL("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"),
+          new GeoJsonOptions()
+            .withCluster(true)
+            .withClusterMaxZoom(14)
+            .withClusterRadius(50)
+        )
+      );
+    } catch (MalformedURLException malformedUrlException) {
+      Log.e("dataClusterActivity", "Check the URL " + malformedUrlException.getMessage());
+    }
+
+    //Creating a SymbolLayer icon layer for single data/icon points
+    loadedMapStyle.addLayer(new SymbolLayer("unclustered-points", "earthquakes").withProperties(
+      iconImage("single-quake-icon-id"),
+      iconSize(
+        division(
+          get("mag"), literal(4.0f)
+        )
+      )
+    ));
+
+    // Use the earthquakes GeoJSON source to create three point ranges.
+    int[] layers = new int[] {150, 20, 0};
+
+    for (int i = 0; i < layers.length; i++) {
+      //Add clusters' SymbolLayers images
+      SymbolLayer symbolLayer = new SymbolLayer("cluster-" + i, "earthquakes");
+
+      symbolLayer.setProperties(
+        iconImage("quake-triangle-icon-id"),
+        iconTranslate(new Float[] {0f, -9f})
+      );
+      Expression pointCount = toNumber(get("point_count"));
+
+      // Add a filter to the cluster layer that hides the icons based on "point_count"
+      symbolLayer.setFilter(
+        i == 0
+          ? all(has("point_count"),
+          gte(pointCount, literal(layers[i]))
+        ) : all(has("point_count"),
+          gt(pointCount, literal(layers[i])),
+          lt(pointCount, literal(layers[i - 1]))
+        )
+      );
+      loadedMapStyle.addLayer(symbolLayer);
+    }
+
+    //Add a SymbolLayer for the cluster data number point count
+    loadedMapStyle.addLayer(new SymbolLayer("count", "earthquakes").withProperties(
+      textField(Expression.toString(get("point_count"))),
+      textSize(12f),
+      textColor(Color.BLACK),
+      textIgnorePlacement(true),
+      textAllowOverlap(true)
+    ));
   }
 
   @Override
@@ -120,80 +186,5 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
-  }
-
-  private void initLayerIcons(@NonNull Style loadedMapStyle) {
-    loadedMapStyle.addImage("single-quake-icon-id", BitmapUtils.getBitmapFromDrawable(
-      getResources().getDrawable(R.drawable.single_quake_icon)));
-    loadedMapStyle.addImage("quake-triangle-icon-id", BitmapUtils.getBitmapFromDrawable(
-      getResources().getDrawable(R.drawable.earthquake_triangle)));
-  }
-
-  private void addClusteredGeoJsonSource(@NonNull Style loadedMapStyle) {
-    // Add a new source from the GeoJSON data and set the 'cluster' option to true.
-    try {
-      loadedMapStyle.addSource(
-        // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
-        // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
-        new GeoJsonSource("earthquakes",
-          new URL("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"),
-          new GeoJsonOptions()
-            .withCluster(true)
-            .withClusterMaxZoom(14)
-            .withClusterRadius(50)
-        )
-      );
-    } catch (MalformedURLException malformedUrlException) {
-      Log.e("dataClusterActivity", "Check the URL " + malformedUrlException.getMessage());
-    }
-
-    //Creating a SymbolLayer icon layer for single data/icon points
-    SymbolLayer unclustered = new SymbolLayer("unclustered-points", "earthquakes");
-    unclustered.setProperties(
-      iconImage("single-quake-icon-id"),
-      iconSize(
-        division(
-          get("mag"), literal(4.0f)
-        )
-      )
-    );
-    loadedMapStyle.addLayer(unclustered);
-
-    // Use the earthquakes GeoJSON source to create three point ranges.
-    int[] layers = new int[] {150, 20, 0};
-
-    for (int i = 0; i < layers.length; i++) {
-      //Add clusters' SymbolLayers images
-      SymbolLayer symbolLayer = new SymbolLayer("cluster-" + i, "earthquakes");
-
-      symbolLayer.setProperties(
-        iconImage("quake-triangle-icon-id"),
-        iconTranslate(new Float[] {0f, -9f})
-      );
-      Expression pointCount = toNumber(get("point_count"));
-
-      // Add a filter to the cluster layer that hides the icons based on "point_count"
-      symbolLayer.setFilter(
-        i == 0
-          ? all(has("point_count"),
-          gte(pointCount, literal(layers[i]))
-        ) : all(has("point_count"),
-          gt(pointCount, literal(layers[i])),
-          lt(pointCount, literal(layers[i - 1]))
-        )
-      );
-      loadedMapStyle.addLayer(symbolLayer);
-    }
-
-    //Add a SymbolLayer for the cluster data number point count
-    SymbolLayer count = new SymbolLayer("count", "earthquakes");
-    count.setProperties(
-      textField(Expression.toString(get("point_count"))),
-      textSize(12f),
-      textColor(Color.BLACK),
-      textIgnorePlacement(true),
-      textAllowOverlap(true)
-    );
-    loadedMapStyle.addLayer(count);
   }
 }

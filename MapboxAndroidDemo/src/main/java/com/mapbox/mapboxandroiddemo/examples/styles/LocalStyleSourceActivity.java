@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -39,8 +38,7 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
 
         mapboxMap.setStyle(Style.LIGHT);
 
-        Button loadCustomRasterStyleButton = findViewById(R.id.load_custom_raster_button);
-        loadCustomRasterStyleButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.load_custom_raster_button).setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
             // Reference the custom raster file URL and pass through as the string parameter
@@ -48,8 +46,7 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
           }
         });
 
-        Button loadLocalStyleButton = findViewById(R.id.load_local_style_button);
-        loadLocalStyleButton.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.load_local_style_button).setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
             // Reference the local JSON style file in the assets folder and pass through as the string parameter

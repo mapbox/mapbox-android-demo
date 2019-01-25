@@ -13,9 +13,6 @@
             android:id="@+id/nav_dds"
             android:title="@string/dds_category"/>
         <item
-            android:id="@+id/nav_annotations"
-            android:title="@string/annotations_category"/>
-        <item
             android:id="@+id/nav_location"
             android:title="@string/location_category"/>
         <item

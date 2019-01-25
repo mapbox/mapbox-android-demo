@@ -61,6 +61,7 @@ public class MarkerViewPluginActivity extends AppCompatActivity {
             // Set the View's TextViews with content
             TextView titleTextView = customView.findViewById(R.id.marker_window_title);
             titleTextView.setText(R.string.draw_marker_options_title);
+
             TextView snippetTextView = customView.findViewById(R.id.marker_window_snippet);
             snippetTextView.setText(R.string.draw_marker_options_snippet);
 

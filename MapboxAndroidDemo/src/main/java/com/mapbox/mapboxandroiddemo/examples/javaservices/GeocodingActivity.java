@@ -44,9 +44,7 @@ public class GeocodingActivity extends AppCompatActivity implements OnMapReadyCa
 
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private Button startGeocodeButton;
   private Button chooseCityButton;
-  private Button mapCenterButton;
   private EditText latEditText;
   private EditText longEditText;
   private TextView geocodeResultTextView;
@@ -86,8 +84,8 @@ public class GeocodingActivity extends AppCompatActivity implements OnMapReadyCa
   }
 
   private void initButtons() {
-    mapCenterButton = findViewById(R.id.map_center_button);
-    startGeocodeButton = findViewById(R.id.start_geocode_button);
+    Button mapCenterButton = findViewById(R.id.map_center_button);
+    Button startGeocodeButton = findViewById(R.id.start_geocode_button);
     chooseCityButton = findViewById(R.id.choose_city_spinner_button);
     startGeocodeButton.setOnClickListener(new View.OnClickListener() {
       @Override

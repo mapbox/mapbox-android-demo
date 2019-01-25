@@ -46,8 +46,9 @@ public class VectorSourceActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            VectorSource vectorSource = new VectorSource("terrain-data", "mapbox://mapbox.mapbox-terrain-v2");
-            mapboxMap.getStyle().addSource(vectorSource);
+            mapboxMap.getStyle().addSource(
+              new VectorSource("terrain-data", "mapbox://mapbox.mapbox-terrain-v2")
+            );
 
             LineLayer terrainData = new LineLayer("terrain-data", "terrain-data");
             terrainData.setSourceLayer("contour");

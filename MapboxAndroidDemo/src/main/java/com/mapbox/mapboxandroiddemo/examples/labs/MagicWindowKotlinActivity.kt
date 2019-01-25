@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.*
-import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -26,7 +25,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.activity_magic_window.*
-import java.lang.Exception
 import kotlin.math.max
 import kotlin.math.min
 

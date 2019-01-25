@@ -29,7 +29,6 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
   MapboxMap.OnMapClickListener  {
 
   private MapView mapView;
-  private com.mapbox.mapboxsdk.annotations.Polygon selectedBuilding;
   private MapboxMap mapboxMap;
 
   @Override
@@ -54,7 +53,13 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        initSelectedBuildingFillLayer();
+
+        style.addSource(new GeoJsonSource("source-id"));
+
+        style.addLayer(new FillLayer("layer-id", "source-id").withProperties(
+          PropertyFactory.fillColor(Color.parseColor("#8A8ACB"))
+        ));
+
         mapboxMap.addOnMapClickListener(SelectBuildingActivity.this);
         Toast.makeText(SelectBuildingActivity.this,
           getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
@@ -73,17 +78,6 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
       }
     }
     return false;
-  }
-
-  private void initSelectedBuildingFillLayer() {
-    GeoJsonSource geoJsonSource = new GeoJsonSource("source-id");
-    mapboxMap.getStyle().addSource(geoJsonSource);
-
-    FillLayer selectedBuildingFillLayer = new FillLayer("layer-id", "source-id");
-    selectedBuildingFillLayer.setProperties(
-      PropertyFactory.fillColor(Color.parseColor("#8A8ACB"))
-    );
-    mapboxMap.getStyle().addLayer(selectedBuildingFillLayer);
   }
 
   @Override

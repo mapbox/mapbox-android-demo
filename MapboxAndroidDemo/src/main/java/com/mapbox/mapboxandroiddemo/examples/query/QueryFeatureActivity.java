@@ -62,9 +62,6 @@ public class QueryFeatureActivity extends AppCompatActivity implements OnMapRead
 
   @Override
   public boolean onMapClick(@NonNull LatLng point) {
-    if (featureMarker != null) {
-      mapboxMap.removeMarker(featureMarker);
-    }
 
     final PointF pixel = mapboxMap.getProjection().toScreenLocation(point);
     List<Feature> features = mapboxMap.queryRenderedFeatures(pixel);

@@ -70,11 +70,12 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
           .build();
         mapboxMap.animateCamera(
           CameraUpdateFactory.newCameraPosition(cameraPositionForFragmentMap), 2600);
-        addHeatmapDataSource();
+        style.addSource(new GeoJsonSource(HEATMAP_SOURCE_ID,
+          loadGeoJsonFromAsset("la_heatmap_styling_points.geojson")));
         initHeatmapColors();
         initHeatmapRadiusStops();
         initHeatmapIntensityStops();
-        addHeatmapLayer();
+        addHeatmapLayer(style);
         findViewById(R.id.switch_heatmap_style_fab).setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
@@ -95,12 +96,7 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
     });
   }
 
-  private void addHeatmapDataSource() {
-    mapboxMap.getStyle().addSource(new GeoJsonSource(HEATMAP_SOURCE_ID,
-      loadGeoJsonFromAsset("la_heatmap_styling_points.geojson")));
-  }
-
-  private void addHeatmapLayer() {
+  private void addHeatmapLayer(@NonNull Style loadedMapStyle) {
     // Create the heatmap layer
     HeatmapLayer layer = new HeatmapLayer(HEATMAP_LAYER_ID, HEATMAP_SOURCE_ID);
 
@@ -124,7 +120,7 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
     );
 
     // Add the heatmap layer to the map and above the "water-label" layer
-    mapboxMap.getStyle().addLayerAbove(layer, "waterway-label");
+    loadedMapStyle.addLayerAbove(layer, "waterway-label");
   }
 
   @Override

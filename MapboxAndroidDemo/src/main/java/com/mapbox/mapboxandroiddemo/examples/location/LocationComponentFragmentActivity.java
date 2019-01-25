@@ -44,12 +44,10 @@ public class LocationComponentFragmentActivity extends AppCompatActivity impleme
       // Create fragment
       final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-      LatLng office = new LatLng(38.899895, -77.03401);
-
       // Build mapboxMap
       MapboxMapOptions options = new MapboxMapOptions();
       options.camera(new CameraPosition.Builder()
-        .target(office)
+        .target(new LatLng(38.899895, -77.03401))
         .zoom(9)
         .build());
 
@@ -70,7 +68,7 @@ public class LocationComponentFragmentActivity extends AppCompatActivity impleme
         mapboxMap.setStyle(Style.OUTDOORS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            enableLocationComponent();
+            enableLocationComponent(style);
           }
         });
       }
@@ -78,13 +76,13 @@ public class LocationComponentFragmentActivity extends AppCompatActivity impleme
   }
 
   @SuppressWarnings( {"MissingPermission"})
-  private void enableLocationComponent() {
+  private void enableLocationComponent(@NonNull Style loadedMapStyle) {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
       // Get an instance of the location component. Adding in LocationComponentOptions is also an optional
       // parameter
       LocationComponent locationComponent = mapboxMap.getLocationComponent();
-      locationComponent.activateLocationComponent(this, mapboxMap.getStyle());
+      locationComponent.activateLocationComponent(this, loadedMapStyle);
       locationComponent.setLocationComponentEnabled(true);
       locationComponent.setCameraMode(CameraMode.TRACKING);
       locationComponent.setRenderMode(RenderMode.NORMAL);
@@ -106,8 +104,8 @@ public class LocationComponentFragmentActivity extends AppCompatActivity impleme
 
   @Override
   public void onPermissionResult(boolean granted) {
-    if (granted) {
-      enableLocationComponent();
+    if (granted && mapboxMap.getStyle() != null) {
+      enableLocationComponent(mapboxMap.getStyle());
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
       finish();

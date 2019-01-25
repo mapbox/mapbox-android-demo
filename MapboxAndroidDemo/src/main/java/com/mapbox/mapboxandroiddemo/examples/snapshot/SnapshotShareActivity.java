@@ -96,7 +96,7 @@ public class SnapshotShareActivity extends AppCompatActivity {
    * @param width        of map
    */
   private void startSnapShot(LatLngBounds latLngBounds, int height, int width) {
-    if (mapSnapshotter == null) {
+    if (mapSnapshotter == null && mapboxMap.getStyle() != null) {
       // Initialize snapshotter with map dimensions and given bounds
       MapSnapshotter.Options options =
         new MapSnapshotter.Options(width, height).withRegion(latLngBounds).withStyle(mapboxMap.getStyle().getUrl());

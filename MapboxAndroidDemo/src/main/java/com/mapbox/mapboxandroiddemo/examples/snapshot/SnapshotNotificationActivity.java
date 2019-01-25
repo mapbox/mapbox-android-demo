@@ -72,7 +72,6 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
       mapboxMap.getProjection().getVisibleRegion().latLngBounds,
       mapView.getMeasuredHeight(),
       mapView.getMeasuredWidth());
-
     return true;
   }
 
@@ -95,7 +94,6 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
       mapSnapshotter.setSize(width, height);
       mapSnapshotter.setRegion(latLngBounds);
     }
-
     mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
       @Override
       public void onSnapshotReady(MapSnapshot snapshot) {

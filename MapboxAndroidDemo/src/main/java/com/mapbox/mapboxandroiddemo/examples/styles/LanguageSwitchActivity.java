@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -45,9 +44,6 @@ public class LanguageSwitchActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            for (Layer singleLayer : map.getStyle().getLayers()) {
-              Log.d("LanguageSwitchActivity", "onMapReady: layer id = " + singleLayer.getId());
-            }
           }
         });
       }

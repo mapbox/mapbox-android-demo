@@ -25,7 +25,6 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 public class MultipleGeometriesActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
-  private MapboxMap mapboxMap;
   private static final String GEOJSON_SOURCE_ID = "GEOJSONFILE";
 
   @Override
@@ -46,7 +45,6 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
 
   @Override
   public void onMapReady(@NonNull MapboxMap mapboxMap) {
-    MultipleGeometriesActivity.this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
@@ -59,9 +57,8 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
 
   private void createGeoJsonSource(@NonNull Style loadedMapStyle) {
     // Load data from GeoJSON file in the assets folder
-    GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID,
-      loadJsonFromAsset("fake_norway_campsites.geojson"));
-    loadedMapStyle.addSource(geoJsonSource);
+    loadedMapStyle.addSource(new GeoJsonSource(GEOJSON_SOURCE_ID,
+      loadJsonFromAsset("fake_norway_campsites.geojson")));
   }
 
   private void addPolygonLayer(@NonNull Style loadedMapStyle) {

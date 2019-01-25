@@ -1,7 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -96,22 +95,18 @@ public class TilequeryActivity extends AppCompatActivity implements
    * Add a map layer which will show a marker icon where the map was clicked
    */
   private void addClickLayer(@NonNull Style loadedMapStyle) {
-    Bitmap clickSymbolIcon = BitmapFactory.decodeResource(
-      TilequeryActivity.this.getResources(), R.drawable.red_marker);
-    loadedMapStyle.addImage("CLICK-ICON-ID", clickSymbolIcon);
+    loadedMapStyle.addImage("CLICK-ICON-ID", BitmapFactory.decodeResource(
+      TilequeryActivity.this.getResources(), R.drawable.red_marker));
 
-    GeoJsonSource clickGeoJsonSource = new GeoJsonSource(CLICK_CENTER_GEOJSON_SOURCE_ID,
-      FeatureCollection.fromFeatures(new Feature[]{}));
-    loadedMapStyle.addSource(clickGeoJsonSource);
+    loadedMapStyle.addSource(new GeoJsonSource(CLICK_CENTER_GEOJSON_SOURCE_ID,
+      FeatureCollection.fromFeatures(new Feature[]{})));
 
-    SymbolLayer clickSymbolLayer = new SymbolLayer("click-layer", CLICK_CENTER_GEOJSON_SOURCE_ID);
-    clickSymbolLayer.setProperties(
+    loadedMapStyle.addLayer(new SymbolLayer("click-layer", CLICK_CENTER_GEOJSON_SOURCE_ID).withProperties(
       iconImage("CLICK-ICON-ID"),
       iconOffset(new Float[]{0f, -12f}),
       iconIgnorePlacement(true),
       iconAllowOverlap(true)
-    );
-    loadedMapStyle.addLayer(clickSymbolLayer);
+    ));
   }
 
   /**
@@ -119,23 +114,19 @@ public class TilequeryActivity extends AppCompatActivity implements
    */
   private void addResultLayer(@NonNull Style loadedMapStyle) {
     // Add the marker image to map
-    Bitmap resultSymbolIcon = BitmapFactory.decodeResource(
-      TilequeryActivity.this.getResources(), R.drawable.blue_marker);
-    loadedMapStyle.addImage("RESULT-ICON-ID", resultSymbolIcon);
+    loadedMapStyle.addImage("RESULT-ICON-ID", BitmapFactory.decodeResource(
+      TilequeryActivity.this.getResources(), R.drawable.blue_marker));
 
     // Retrieve GeoJSON information from the Mapbox Tilequery API
-    GeoJsonSource resultBlueMarkerGeoJsonSource = new GeoJsonSource(RESULT_GEOJSON_SOURCE_ID,
-      FeatureCollection.fromFeatures(new Feature[]{}));
-    loadedMapStyle.addSource(resultBlueMarkerGeoJsonSource);
+    loadedMapStyle.addSource(new GeoJsonSource(RESULT_GEOJSON_SOURCE_ID,
+      FeatureCollection.fromFeatures(new Feature[]{})));
 
-    SymbolLayer resultSymbolLayer = new SymbolLayer(LAYER_ID, RESULT_GEOJSON_SOURCE_ID);
-    resultSymbolLayer.setProperties(
+    loadedMapStyle.addLayer(new SymbolLayer(LAYER_ID, RESULT_GEOJSON_SOURCE_ID).withProperties(
       iconImage("RESULT-ICON-ID"),
-      iconOffset(new Float[]{0f, -12f}),
+      iconOffset(new Float[] {0f, -12f}),
       iconIgnorePlacement(true),
       iconAllowOverlap(true)
-    );
-    loadedMapStyle.addLayer(resultSymbolLayer);
+    ));
   }
 
 
@@ -175,9 +166,11 @@ public class TilequeryActivity extends AppCompatActivity implements
       @Override
       public void onResponse(Call<FeatureCollection> call, Response<FeatureCollection> response) {
         tilequeryResponseTextView.setText(response.body().toJson());
-        GeoJsonSource resultSource = mapboxMap.getStyle().getSourceAs(RESULT_GEOJSON_SOURCE_ID);
-        if (resultSource != null && response.body().features() != null) {
-          resultSource.setGeoJson(FeatureCollection.fromFeatures(response.body().features()));
+        if (mapboxMap.getStyle() != null) {
+          GeoJsonSource resultSource = mapboxMap.getStyle().getSourceAs(RESULT_GEOJSON_SOURCE_ID);
+          if (resultSource != null && response.body().features() != null) {
+            resultSource.setGeoJson(FeatureCollection.fromFeatures(response.body().features()));
+          }
         }
       }
 

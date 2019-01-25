@@ -35,7 +35,7 @@
     <string name="activity_dds_polygon_holes_title">Dibuixa un polígon amb forats</string>
     <string name="activity_annotation_marker_view_title">Dibuixa una vista de marcador</string>
     <string name="activity_annotation_custom_info_window_title">Finestra d\'informació personalitzada</string>
-    <string name="activity_annotation_animated_marker_title">Afegeix animació a la posició del marcador</string>
+    <string name="activity_lab_animated_marker_title">Afegeix animació a la posició del marcador</string>
     <string name="activity_camera_animate_title">Afegeix animació a la càmera del mapa</string>
     <string name="activity_camera_bounding_box_title">Encaixa la càmera en el requadre delimitador</string>
     <string name="activity_camera_restrict_title">Restringeix desplaçar el mapa</string>

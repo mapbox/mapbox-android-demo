@@ -56,7 +56,6 @@
     <string name="activity_dds_polygon_holes_title">Draw a polygon with holes</string>
     <string name="activity_annotation_marker_view_title">Draw a marker view</string>
     <string name="activity_annotation_custom_info_window_title">Custom info window</string>
-    <string name="activity_annotation_animated_marker_title">Animate marker position</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
     <string name="activity_camera_restrict_title">Restrict map panning</string>
@@ -90,6 +89,7 @@
     <string name="activity_java_services_map_matching_title">Map Matching</string>
     <string name="activity_image_generator_snapshot_notification_title">Snapshot Notification</string>
     <string name="activity_image_generator_snapshot_share_title">Share snapshot image</string>
+    <string name="activity_lab_animated_marker_title">Animate marker position</string>
     <string name="activity_lab_location_picker_title">Location picker</string>
     <string name="activity_lab_rv_on_map_title">RecyclerView interaction</string>
     <string name="activity_lab_symbol_layer_and_mapillary_on_map_title">SymbolLayer icons</string>

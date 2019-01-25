@@ -30,8 +30,8 @@ import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.SimpleChinaMapViewActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivityKotlin;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
@@ -512,12 +512,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_dds_polygon_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_animated_marker_title,
-      R.string.activity_annotation_animated_marker_description,
+      R.id.nav_lab,
+      R.string.activity_lab_animated_marker_title,
+      R.string.activity_lab_animated_marker_description,
       new Intent(MainActivity.this, AnimatedMarkerActivity.class),
       null,
-      R.string.activity_annotation_animated_marker_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_lab_animated_marker_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_camera,
@@ -710,6 +710,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_basic_mapbox_kotlin_description,
       new Intent(MainActivity.this, SimpleMapViewActivityKotlin.class),
       null,
-      R.string.activity_basic_mapbox_kotlin_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_basic_simple_mapview_url, true, BuildConfig.MIN_SDK_VERSION));
   }
 }

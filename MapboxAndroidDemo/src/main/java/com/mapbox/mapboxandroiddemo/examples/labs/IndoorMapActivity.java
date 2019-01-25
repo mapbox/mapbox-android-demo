@@ -43,7 +43,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 public class IndoorMapActivity extends AppCompatActivity {
 
   private GeoJsonSource indoorBuildingSource;
-  private List<Point> boundingBox;
+
   private List<List<Point>> boundingBoxList;
   private View levelButtons;
   private MapView mapView;
@@ -72,7 +72,7 @@ public class IndoorMapActivity extends AppCompatActivity {
           public void onStyleLoaded(@NonNull Style style) {
             levelButtons = findViewById(R.id.floor_level_buttons);
 
-            boundingBox = new ArrayList<>();
+            final List<Point> boundingBox = new ArrayList<>();
 
             boundingBox.add(Point.fromLngLat(-77.03791, 38.89715));
             boundingBox.add(Point.fromLngLat(-77.03791, 38.89811));
@@ -101,7 +101,8 @@ public class IndoorMapActivity extends AppCompatActivity {
                 }
               }
             });
-            indoorBuildingSource = new GeoJsonSource("indoor-building", loadJsonFromAsset("white_house_lvl_0.geojson"));
+            indoorBuildingSource = new GeoJsonSource(
+              "indoor-building", loadJsonFromAsset("white_house_lvl_0.geojson"));
             mapboxMap.getStyle().addSource(indoorBuildingSource);
 
             // Add the building layers since we know zoom levels in range

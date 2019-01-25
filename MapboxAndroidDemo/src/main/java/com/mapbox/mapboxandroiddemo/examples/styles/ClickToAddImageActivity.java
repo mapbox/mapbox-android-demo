@@ -81,8 +81,8 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
         ClickToAddImageActivity.this.mapboxMap = mapboxMap;
         mapboxMap.addOnMapClickListener(ClickToAddImageActivity.this);
         imageCountIndex = 0;
-        initCircleSource();
-        initCircleLayer();
+        initCircleSource(style);
+        initCircleLayer(style);
         Toast.makeText(ClickToAddImageActivity.this, R.string.tap_instructions, Toast.LENGTH_LONG).show();
       }
     });
@@ -133,23 +133,21 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
   /**
    * Set up the CircleLayer source for showing LatLngQuad map click points
    */
-  private void initCircleSource() {
-    FeatureCollection circleFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
-    GeoJsonSource circleGeoJsonSource = new GeoJsonSource(CIRCLE_SOURCE_ID, circleFeatureCollection);
-    mapboxMap.getStyle().addSource(circleGeoJsonSource);
+  private void initCircleSource(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addSource(
+      new GeoJsonSource(CIRCLE_SOURCE_ID, FeatureCollection.fromFeatures(new Feature[] {}))
+    );
   }
 
   /**
    * Set up the CircleLayer for showing LatLngQuad map click points
    */
-  private void initCircleLayer() {
-    CircleLayer circleLayer = new CircleLayer("circle-layer-bounds-corner-id",
-      CIRCLE_SOURCE_ID);
-    circleLayer.setProperties(
+  private void initCircleLayer(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addLayer( new CircleLayer("circle-layer-bounds-corner-id",
+      CIRCLE_SOURCE_ID).withProperties(
       circleRadius(8f),
       circleColor(Color.parseColor("#d004d3"))
-    );
-    mapboxMap.getStyle().addLayer(circleLayer);
+    ));
   }
 
   /**
@@ -171,18 +169,13 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
 
         Bitmap bitmapOfSelectedImage = BitmapFactory.decodeStream(imageStream);
 
-        // Create an ImageSource object
-        ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE + imageCountIndex, quad, bitmapOfSelectedImage);
-
         // Add the imageSource to the map
-        mapboxMap.getStyle().addSource(imageSource);
+        mapboxMap.getStyle().addSource(
+          new ImageSource(ID_IMAGE_SOURCE + imageCountIndex, quad, bitmapOfSelectedImage));
 
-        // Create a raster layer and use the imageSource's ID as the layer's data
-        RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER + imageCountIndex,
-          ID_IMAGE_SOURCE + imageCountIndex);
-
-        // Add the layer to the map
-        mapboxMap.getStyle().addLayer(layer);
+        // Create a raster layer and use the imageSource's ID as the layer's data// Add the layer to the map
+        mapboxMap.getStyle().addLayer(new RasterLayer(ID_IMAGE_LAYER + imageCountIndex,
+          ID_IMAGE_SOURCE + imageCountIndex));
 
         // Reset lists in preparation for adding more images
         boundsFeatureList = new ArrayList<>();
@@ -195,9 +188,6 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
         if (circleSource != null) {
           circleSource.setGeoJson(FeatureCollection.fromFeatures(boundsFeatureList));
         }
-
-        mapboxMap.clear();
-
       } catch (FileNotFoundException exception) {
         exception.printStackTrace();
       }

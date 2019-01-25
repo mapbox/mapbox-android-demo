@@ -1,7 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.animation.ValueAnimator;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.mapboxsdk.style.sources.Source;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +30,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
  * Display markers on the map by adding a symbol layer
  */
 public class BasicSymbolLayerActivity extends AppCompatActivity implements
-  OnMapReadyCallback, MapboxMap.OnMapClickListener {
+    OnMapReadyCallback, MapboxMap.OnMapClickListener {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -64,36 +62,33 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
       public void onStyleLoaded(@NonNull Style style) {
         List<Feature> markerCoordinates = new ArrayList<>();
         markerCoordinates.add(Feature.fromGeometry(
-          Point.fromLngLat(-71.065634, 42.354950))); // Boston Common Park
+            Point.fromLngLat(-71.065634, 42.354950))); // Boston Common Park
         markerCoordinates.add(Feature.fromGeometry(
-          Point.fromLngLat(-71.097293, 42.346645))); // Fenway Park
+            Point.fromLngLat(-71.097293, 42.346645))); // Fenway Park
         markerCoordinates.add(Feature.fromGeometry(
-          Point.fromLngLat(-71.053694, 42.363725))); // The Paul Revere House
-        FeatureCollection featureCollection = FeatureCollection.fromFeatures(markerCoordinates);
+            Point.fromLngLat(-71.053694, 42.363725))); // The Paul Revere House
 
-        Source geoJsonSource = new GeoJsonSource("marker-source", featureCollection);
-        mapboxMap.getStyle().addSource(geoJsonSource);
-
-        Bitmap icon = BitmapFactory.decodeResource(
-          BasicSymbolLayerActivity.this.getResources(), R.drawable.blue_marker_view);
+        style.addSource(new GeoJsonSource("marker-source",
+            FeatureCollection.fromFeatures(markerCoordinates)));
 
         // Add the marker image to map
-        mapboxMap.getStyle().addImage("my-marker-image", icon);
+        style.addImage("my-marker-image", BitmapFactory.decodeResource(
+            BasicSymbolLayerActivity.this.getResources(), R.drawable.blue_marker_view));
 
-        SymbolLayer markers = new SymbolLayer("marker-layer", "marker-source")
-          .withProperties(PropertyFactory.iconImage("my-marker-image"),
-            iconOffset(new Float[] {0f, -4f}));
-        mapboxMap.getStyle().addLayer(markers);
+        // Adding an offset so that the bottom of the blue icon gets fixed to the coordinate, rather than the
+        // middle of the icon being fixed to the coordinate point.
+        style.addLayer(new SymbolLayer("marker-layer", "marker-source")
+            .withProperties(PropertyFactory.iconImage("my-marker-image"),
+                iconOffset(new Float[]{0f, -9f})));
 
         // Add the selected marker source and layer
-        FeatureCollection emptySource = FeatureCollection.fromFeatures(new Feature[] {});
-        Source selectedMarkerSource = new GeoJsonSource("selected-marker", emptySource);
-        mapboxMap.getStyle().addSource(selectedMarkerSource);
+        style.addSource(new GeoJsonSource("selected-marker"));
 
-        SymbolLayer selectedMarker = new SymbolLayer("selected-marker-layer", "selected-marker")
-          .withProperties(PropertyFactory.iconImage("my-marker-image"),
-            iconOffset(new Float[] {0f, -4f}));
-        mapboxMap.getStyle().addLayer(selectedMarker);
+        // Adding an offset so that the bottom of the blue icon gets fixed to the coordinate, rather than the
+        // middle of the icon being fixed to the coordinate point.
+        style.addLayer(new SymbolLayer("selected-marker-layer", "selected-marker")
+            .withProperties(PropertyFactory.iconImage("my-marker-image"),
+                iconOffset(new Float[]{0f, -9f})));
 
         mapboxMap.addOnMapClickListener(BasicSymbolLayerActivity.this);
       }
@@ -103,41 +98,43 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
   @Override
   public boolean onMapClick(@NonNull LatLng point) {
 
-    final SymbolLayer marker = (SymbolLayer) mapboxMap.getStyle().getLayer("selected-marker-layer");
+    if (mapboxMap.getStyle() != null) {
+      final SymbolLayer selectedMarkerSymbolLayer =
+          (SymbolLayer) mapboxMap.getStyle().getLayer("selected-marker-layer");
 
-    final PointF pixel = mapboxMap.getProjection().toScreenLocation(point);
-    List<Feature> features = mapboxMap.queryRenderedFeatures(pixel, "marker-layer");
-    List<Feature> selectedFeature = mapboxMap.queryRenderedFeatures(pixel, "selected-marker-layer");
+      final PointF pixel = mapboxMap.getProjection().toScreenLocation(point);
+      List<Feature> features = mapboxMap.queryRenderedFeatures(pixel, "marker-layer");
+      List<Feature> selectedFeature = mapboxMap.queryRenderedFeatures(
+          pixel, "selected-marker-layer");
 
-    if (selectedFeature.size() > 0 && markerSelected) {
-      return false;
-    }
-
-    if (features.isEmpty()) {
-      if (markerSelected) {
-        deselectMarker(marker);
+      if (selectedFeature.size() > 0 && markerSelected) {
+        return false;
       }
-      return false;
-    }
 
-    FeatureCollection featureCollection = FeatureCollection.fromFeatures(
-      new Feature[] {Feature.fromGeometry(features.get(0).geometry())});
-    GeoJsonSource source = mapboxMap.getStyle().getSourceAs("selected-marker");
-    if (source != null) {
-      source.setGeoJson(featureCollection);
-    }
+      if (features.isEmpty()) {
+        if (markerSelected) {
+          deselectMarker(selectedMarkerSymbolLayer);
+        }
+        return false;
+      }
 
-    if (markerSelected) {
-      deselectMarker(marker);
-    }
-    if (features.size() > 0) {
-      selectMarker(marker);
-    }
+      GeoJsonSource source = mapboxMap.getStyle().getSourceAs("selected-marker");
+      if (source != null) {
+        source.setGeoJson(FeatureCollection.fromFeatures(
+            new Feature[]{Feature.fromGeometry(features.get(0).geometry())}));
+      }
 
+      if (markerSelected) {
+        deselectMarker(selectedMarkerSymbolLayer);
+      }
+      if (features.size() > 0) {
+        selectMarker(selectedMarkerSymbolLayer);
+      }
+    }
     return true;
   }
 
-  private void selectMarker(final SymbolLayer marker) {
+  private void selectMarker(final SymbolLayer iconLayer) {
     ValueAnimator markerAnimator = new ValueAnimator();
     markerAnimator.setObjectValues(1f, 2f);
     markerAnimator.setDuration(300);
@@ -145,8 +142,8 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
 
       @Override
       public void onAnimationUpdate(ValueAnimator animator) {
-        marker.setProperties(
-          PropertyFactory.iconSize((float) animator.getAnimatedValue())
+        iconLayer.setProperties(
+            PropertyFactory.iconSize((float) animator.getAnimatedValue())
         );
       }
     });
@@ -154,7 +151,7 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
     markerSelected = true;
   }
 
-  private void deselectMarker(final SymbolLayer marker) {
+  private void deselectMarker(final SymbolLayer iconLayer) {
     ValueAnimator markerAnimator = new ValueAnimator();
     markerAnimator.setObjectValues(2f, 1f);
     markerAnimator.setDuration(300);
@@ -162,8 +159,8 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
 
       @Override
       public void onAnimationUpdate(ValueAnimator animator) {
-        marker.setProperties(
-          PropertyFactory.iconSize((float) animator.getAnimatedValue())
+        iconLayer.setProperties(
+            PropertyFactory.iconSize((float) animator.getAnimatedValue())
         );
       }
     });

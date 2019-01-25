@@ -7,12 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -25,11 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
-import java.nio.charset.Charset;
 import java.util.Scanner;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
@@ -44,12 +37,13 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
  */
 public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-  private static final String STATE_UNEMPLOYMENT_INFO_JSON = "state_unemployment_info.json";
+  private static final String STATE_UNEMPLOYMENT_INFO_JSON_FILE = "state_unemployment_info.json";
   private static final String VECTOR_SOURCE_NAME = "states";
   private static final String DATA_MATCH_PROP = "STATE_ID";
   private static final String DATA_STYLE_UNEMPLOYMENT_PROP = "unemployment";
 
   private MapView mapView;
+  private MapboxMap mapboxMap;
   private JSONArray statesArray;
 
   @Override
@@ -71,6 +65,7 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
   @Override
   public void onMapReady(@NonNull final MapboxMap map) {
 
+    this.mapboxMap = map;
     map.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
@@ -78,72 +73,74 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
         // Add Mapbox-hosted vector source for state polygons
         style.addSource(new VectorSource(VECTOR_SOURCE_NAME, "mapbox://mapbox.us_census_states_2015"));
 
-        new LoadGeoJson(ChoroplethJsonVectorMixActivity.this).execute();
-
-
-        try {
-          statesArray = new JSONArray(loadJson());
-        } catch (Exception exception) {
-          Log.e("JSONVectorMix", "Exception Loading GeoJSON: ", exception);
-        }
-
-        // Create stops array
-        Expression.Stop[] stops = new Expression.Stop[statesArray.length()];
-
-        for (int x = 0; x < statesArray.length(); x++) {
-          try {
-            // Generate green color value for each state/stop
-            JSONObject singleState = statesArray.getJSONObject(x);
-            double green = singleState.getDouble(DATA_STYLE_UNEMPLOYMENT_PROP) / 14 * 255;
-
-            // Add new stop to array of stops
-            stops[x] = stop(
-              Double.parseDouble(singleState.getString(DATA_MATCH_PROP)),
-              rgba(0, green, 0, 1)
-            );
-
-          } catch (JSONException exception) {
-            throw new RuntimeException(exception);
-          }
-        }
-
-        // Create layer from the vector tile source with data-driven style
-        FillLayer statesJoinLayer = new FillLayer("states-join", VECTOR_SOURCE_NAME);
-        statesJoinLayer.setSourceLayer(VECTOR_SOURCE_NAME);
-        statesJoinLayer.withProperties(
-          fillColor(match(toNumber(get(DATA_MATCH_PROP)), rgba(0, 0, 0, 1), stops))
-        );
-
-        // Add layer to map below the "waterway-label" layer
-        style.addLayerAbove(statesJoinLayer, "waterway-label");
+        new LoadJson(ChoroplethJsonVectorMixActivity.this).execute();
       }
     });
   }
 
-  private static class LoadGeoJson extends AsyncTask<Void, Void, FeatureCollection> {
+  /**
+   * Create layer from the vector tile source with data-driven style
+   *
+   * @param stops the array of stops to use in the FillLayer
+   */
+  private void addDataToMap(@NonNull Expression.Stop[] stops) {
+
+    FillLayer statesJoinLayer = new FillLayer("states-join", VECTOR_SOURCE_NAME);
+    statesJoinLayer.setSourceLayer(VECTOR_SOURCE_NAME);
+    statesJoinLayer.withProperties(
+      fillColor(match(toNumber(get(DATA_MATCH_PROP)),
+        rgba(0, 0, 0, 1), stops))
+    );
+
+    // Add layer to map below the "waterway-label" layer
+    if (mapboxMap.getStyle() != null) {
+      mapboxMap.getStyle().addLayerAbove(statesJoinLayer, "waterway-label");
+    }
+  }
+
+  private static class LoadJson extends AsyncTask<Void, Void, Expression.Stop[]> {
 
     private WeakReference<ChoroplethJsonVectorMixActivity> weakReference;
+    private static final String TAG = "ChJSonVectorMix";
 
-    LoadGeoJson(ChoroplethJsonVectorMixActivity activity) {
+    LoadJson(ChoroplethJsonVectorMixActivity activity) {
       this.weakReference = new WeakReference<>(activity);
     }
 
     @Override
-    protected FeatureCollection doInBackground(Void... voids) {
+    protected Expression.Stop[] doInBackground(Void... voids) {
       try {
         ChoroplethJsonVectorMixActivity activity = weakReference.get();
         if (activity != null) {
 
-          InputStream inputStream = activity.getAssets().open("weather_data_per_state_before2006.geojson");
+          InputStream inputStream = activity.getAssets().open(STATE_UNEMPLOYMENT_INFO_JSON_FILE);
 
-          // Initialize FeatureCollection object for future use with layers
-          FeatureCollection featureCollection = FeatureCollection.fromJson(convertStreamToString(inputStream));
+          activity.statesArray = new JSONArray(convertStreamToString(inputStream));
 
+          // Create stops array
+          Expression.Stop[] stops = new Expression.Stop[activity.statesArray.length()];
 
-          return featureCollection;
+          for (int x = 0; x < activity.statesArray.length(); x++) {
+            try {
+              // Generate green color value for each state/stop
+              JSONObject singleState = activity.statesArray.getJSONObject(x);
+              double green = singleState.getDouble(DATA_STYLE_UNEMPLOYMENT_PROP) / 14 * 255;
+
+              // Add new stop to array of stops
+              stops[x] = stop(
+                Double.parseDouble(singleState.getString(DATA_MATCH_PROP)),
+                rgba(0, green, 0, 1)
+              );
+
+            } catch (JSONException exception) {
+              throw new RuntimeException(exception);
+            }
+          }
+
+          return stops;
         }
       } catch (Exception exception) {
-        Log.d("ExpressionIntegration", "Exception Loading GeoJSON: " + exception.toString());
+        Log.d("JsonVectorMixActivity", "Exception Loading GeoJSON: " + exception.toString());
       }
       return null;
     }
@@ -154,30 +151,13 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     }
 
     @Override
-    protected void onPostExecute(@Nullable FeatureCollection featureCollection) {
-      super.onPostExecute(featureCollection);
+    protected void onPostExecute(@Nullable Expression.Stop[] stopsArray) {
+      super.onPostExecute(stopsArray);
       ChoroplethJsonVectorMixActivity activity = weakReference.get();
-      if (activity != null && featureCollection != null) {
-        activity.addDataToMap(featureCollection);
+      if (activity != null && stopsArray != null) {
+        activity.addDataToMap(stopsArray);
       }
     }
-  }
-
-  private String loadJson() {
-    StringBuilder sb = new StringBuilder();
-    try {
-      // Load GeoJSON file
-      InputStream inputStream = getAssets().open(STATE_UNEMPLOYMENT_INFO_JSON);
-      BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-      int cp;
-      while ((cp = rd.read()) != -1) {
-        sb.append((char) cp);
-      }
-      inputStream.close();
-    } catch (Exception exception) {
-      Log.e("JSONVectorMix", "Exception Loading GeoJSON: ", exception);
-    }
-    return sb.toString();
   }
 
   @Override

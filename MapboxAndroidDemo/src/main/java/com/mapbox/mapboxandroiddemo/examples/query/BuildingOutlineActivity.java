@@ -67,7 +67,7 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
     mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        setUpLineLayer();
+        setUpLineLayer(style);
         mapboxMap.addOnCameraIdleListener(BuildingOutlineActivity.this);
         showCrosshair();
         Toast.makeText(BuildingOutlineActivity.this, R.string.move_map_around_instruction,
@@ -80,23 +80,18 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
   /**
    * Sets up the source and layer for drawing the building outline
    */
-  private void setUpLineLayer() {
-    // Create an empty FeatureCollection
-    featureCollection = FeatureCollection.fromFeatures(new Feature[] {});
-
-    // Create a GeoJSONSource from the empty FeatureCollection
-    GeoJsonSource geoJsonSource = new GeoJsonSource("source", featureCollection);
-    mapboxMap.getStyle().addSource(geoJsonSource);
+  private void setUpLineLayer(@NonNull Style loadedMapStyle) {
+    // Create a GeoJSONSource from an empty FeatureCollection
+    loadedMapStyle.addSource(new GeoJsonSource("source",
+      FeatureCollection.fromFeatures(new Feature[] {})));
 
     // Use runtime styling to adjust the look of the building outline LineLayer
-    LineLayer lineLayer = new LineLayer("lineLayer", "source");
-    lineLayer.withProperties(
+    loadedMapStyle.addLayer(new LineLayer("lineLayer", "source").withProperties(
       lineColor(Color.RED),
       lineWidth(6f),
       lineCap(LINE_CAP_ROUND),
       lineJoin(LINE_JOIN_BEVEL)
-    );
-    mapboxMap.getStyle().addLayer(lineLayer);
+    ));
   }
 
   @Override
@@ -153,9 +148,11 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
     // Update the data source used by the building outline LineLayer and refresh the map
     featureCollection = FeatureCollection.fromFeatures(new Feature[]
       {Feature.fromGeometry(getBuildingFeatureOutline())});
-    GeoJsonSource source = mapboxMap.getStyle().getSourceAs("source");
-    if (source != null) {
-      source.setGeoJson(featureCollection);
+    if (mapboxMap.getStyle() != null) {
+      GeoJsonSource source = mapboxMap.getStyle().getSourceAs("source");
+      if (source != null) {
+        source.setGeoJson(featureCollection);
+      }
     }
   }
 

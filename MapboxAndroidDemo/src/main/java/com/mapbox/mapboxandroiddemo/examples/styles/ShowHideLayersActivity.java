@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -30,7 +29,6 @@ public class ShowHideLayersActivity extends AppCompatActivity {
 
   private MapView mapView;
   private MapboxMap map;
-  private FloatingActionButton floatingActionButton;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +40,6 @@ public class ShowHideLayersActivity extends AppCompatActivity {
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_show_hide_layers);
-
-    floatingActionButton = (FloatingActionButton) findViewById(R.id.fab_layer_toggle);
-
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
@@ -54,8 +49,9 @@ public class ShowHideLayersActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            VectorSource museums = new VectorSource("museums_source", "mapbox://mapbox.2opop9hr");
-            map.getStyle().addSource(museums);
+            style.addSource(
+              new VectorSource("museums_source", "mapbox://mapbox.2opop9hr")
+            );
 
             CircleLayer museumsLayer = new CircleLayer("museums", "museums_source");
             museumsLayer.setSourceLayer("museum-cusco");
@@ -64,15 +60,12 @@ public class ShowHideLayersActivity extends AppCompatActivity {
               circleRadius(8f),
               circleColor(Color.argb(255, 55, 148, 179))
             );
+            style.addLayer(museumsLayer);
 
-            map.getStyle().addLayer(museumsLayer);
-
-            floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.fab_layer_toggle).setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-
                 toggleLayer();
-
               }
             });
           }

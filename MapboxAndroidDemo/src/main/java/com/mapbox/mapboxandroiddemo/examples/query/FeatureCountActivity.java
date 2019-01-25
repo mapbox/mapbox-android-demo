@@ -56,11 +56,11 @@ public class FeatureCountActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            mapboxMap.getStyle().addSource(
-              new GeoJsonSource("highlighted-shapes-source"));
+
+            style.addSource(new GeoJsonSource("highlighted-shapes-source"));
 
             // add a layer to the map that highlights the maps buildings inside the bounding box.
-            mapboxMap.getStyle().addLayer(
+            style.addLayer(
               new FillLayer("highlighted-shapes-layer", "highlighted-shapes-source")
                 .withProperties(fillColor(Color.parseColor("#50667F"))));
 
@@ -88,9 +88,11 @@ public class FeatureCountActivity extends AppCompatActivity {
                   String.format(getString(R.string.feature_count_snackbar_feature_size), features.size()),
                   Snackbar.LENGTH_LONG).show();
 
-                GeoJsonSource source = mapboxMap.getStyle().getSourceAs("highlighted-shapes-source");
-                if (source != null) {
-                  source.setGeoJson(FeatureCollection.fromFeatures(features));
+                if (mapboxMap.getStyle() != null) {
+                  GeoJsonSource source = mapboxMap.getStyle().getSourceAs("highlighted-shapes-source");
+                  if (source != null) {
+                    source.setGeoJson(FeatureCollection.fromFeatures(features));
+                  }
                 }
               }
             });

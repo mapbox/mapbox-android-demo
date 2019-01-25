@@ -19,7 +19,6 @@ import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.mapboxsdk.style.sources.Source;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +41,43 @@ public class LineLayerActivity extends AppCompatActivity {
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_line_layer);
+    mapView = findViewById(R.id.mapView);
+    mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
+        mapboxMap.setStyle(Style.OUTDOORS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+
+            initRouteCoordinates();
+
+            // Create the LineString from the list of coordinates and then make a GeoJSON
+            // FeatureCollection so we can add the line to our map as a layer.
+            style.addSource(new GeoJsonSource("line-source",
+              FeatureCollection.fromFeatures(new Feature[] {Feature.fromGeometry(
+                LineString.fromLngLats(routeCoordinates)
+              )})));
+
+            // The layer properties for our line. This is where we make the line dotted, set the
+            // color, etc.
+            style.addLayer(new LineLayer("linelayer", "line-source").withProperties(
+              PropertyFactory.lineDasharray(new Float[] {0.01f, 2f}),
+              PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
+              PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
+              PropertyFactory.lineWidth(5f),
+              PropertyFactory.lineColor(Color.parseColor("#e55e5e"))
+            ));
+          }
+        });
+      }
+    });
+  }
+
+  private void initRouteCoordinates() {
     // Create a list to store our line coordinates.
-    routeCoordinates = new ArrayList<Point>();
+    routeCoordinates = new ArrayList<>();
     routeCoordinates.add(Point.fromLngLat(-118.39439114221236, 33.397676454651766));
     routeCoordinates.add(Point.fromLngLat(-118.39421054012902, 33.39769799454838));
     routeCoordinates.add(Point.fromLngLat(-118.39408583869053, 33.39761901490136));
@@ -103,37 +136,6 @@ public class LineLayerActivity extends AppCompatActivity {
     routeCoordinates.add(Point.fromLngLat(-118.37546662390886, 33.38847843095069));
     routeCoordinates.add(Point.fromLngLat(-118.37091717142867, 33.39114243958559));
 
-    mapView = findViewById(R.id.mapView);
-    mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-
-        mapboxMap.setStyle(Style.OUTDOORS, new Style.OnStyleLoaded() {
-          @Override
-          public void onStyleLoaded(@NonNull Style style) {
-            // Create the LineString from the list of coordinates and then make a GeoJSON
-            // FeatureCollection so we can add the line to our map as a layer.
-            LineString lineString = LineString.fromLngLats(routeCoordinates);
-            FeatureCollection featureCollection =
-              FeatureCollection.fromFeatures(new Feature[] {Feature.fromGeometry(lineString)});
-            Source geoJsonSource = new GeoJsonSource("line-source", featureCollection);
-            mapboxMap.getStyle().addSource(geoJsonSource);
-            LineLayer lineLayer = new LineLayer("linelayer", "line-source");
-            // The layer properties for our line. This is where we make the line dotted, set the
-            // color, etc.
-            lineLayer.setProperties(
-              PropertyFactory.lineDasharray(new Float[] {0.01f, 2f}),
-              PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
-              PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
-              PropertyFactory.lineWidth(5f),
-              PropertyFactory.lineColor(Color.parseColor("#e55e5e"))
-            );
-            mapboxMap.getStyle().addLayer(lineLayer);
-          }
-        });
-      }
-    });
   }
 
   @Override

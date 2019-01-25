@@ -38,7 +38,7 @@ public class BuildingPluginActivity extends AppCompatActivity {
         map.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            buildingPlugin = new BuildingPlugin(mapView, map, map.getStyle());
+            buildingPlugin = new BuildingPlugin(mapView, map, style);
             buildingPlugin.setMinZoomLevel(15f);
             buildingPlugin.setVisibility(true);
           }

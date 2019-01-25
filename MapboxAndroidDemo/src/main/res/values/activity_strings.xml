@@ -108,6 +108,7 @@
     <string name="location_picker_select_location_button_cancel">Cancel</string>
     <string name="location_picker_select_location_button_select">Select a location</string>
     <string name="location_picker_dropped_marker_snippet_no_results">No results</string>
+    <string name="location_picker_place_name_result">Place name: %1$s</string>
 
     <!--PulsingLayerOpacityColorActivity activity-->
     <string name="fab_title_hotels">Hotels</string>
@@ -225,7 +226,7 @@
         switch the map\'s language.</string>
 
     <!-- Matrix API -->
-    <string name="call_error">Oh no! The call to the Directions Matrix API failed!</string>
+    <string name="call_error">Oh no! The call to the Directions Matrix API failed</string>
     <string name="miles_distance">%1$s miles</string>
     <string name="click_on_marker_instruction_toast">Click on a bolt marker to get started</string>
 
@@ -234,7 +235,7 @@
     <string name="longitude">longitude</string>
     <string name="geocode">Start geocode</string>
     <string name="map_center">Map center</string>
-    <string name="no_results">No results!</string>
+    <string name="no_results">No results</string>
     <string name="choose_city_spinner">Choose city</string>
     <string name="fill_in_a_value">Fill in a value</string>
     <string name="geocoding_results">Raw geocoding results:</string>
@@ -260,7 +261,7 @@
     <string name="light_style">Light</string>
     <string name="streets_style">Streets</string>
     <string name="create_image">Create static image</string>
-    <string name="select_a_style">Select a style button first!</string>
+    <string name="select_a_style">Select a style button first</string>
 
     <!-- Building outline-->
     <string name="building_layer_not_present">This map style doesn\'t have a building layer</string>
@@ -281,23 +282,23 @@
 
     <!-- Satellite land selection -->
     <string name="clear_all">Clear</string>
-    <string name="trace_instruction">Trace some of the Gardens of Versailles!</string>
+    <string name="trace_instruction">Trace some of the Gardens of Versailles</string>
 
     <!-- Isochrone change -->
-    <string name="click_on_map_instruction">Tap on the map!</string>
+    <string name="click_on_map_instruction">Tap on the map</string>
 
     <!--Custom location layer plugin icon-->
-    <string name="tap_the_icon">Tap the location icon!</string>
+    <string name="tap_the_icon">Tap the location icon</string>
     <string name="current_location">Lat: %1$f Long: %2$f</string>
     <string name="tracking_enabled">Tracking mode re-enabled</string>
-    <string name="tracking_already_enabled">Tracking already enabled. Move the map!</string>
+    <string name="tracking_already_enabled">Tracking already enabled. Move the map</string>
 
     <!-- Tilequery API -->
     <string name="api_response">Tilequery API response:</string>
     <string name="api_error">Error with the request. Do you have internet access?</string>
 
     <!-- Magic window -->
-    <string name="could_not_get_location">Couldn\'t retrieve the device\'s location!</string>
+    <string name="could_not_get_location">Couldn\'t retrieve the device\'s location</string>
 
     <!-- Highlighted line -->
     <string name="tap_on_line">Tap on one of the blue lines</string>

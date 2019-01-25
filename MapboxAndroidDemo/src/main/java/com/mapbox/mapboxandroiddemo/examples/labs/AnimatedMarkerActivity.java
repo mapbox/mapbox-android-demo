@@ -1,8 +1,9 @@
-package com.mapbox.mapboxandroiddemo.examples.annotations;
+package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +13,6 @@ import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -56,22 +56,25 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
 
     geoJsonSource = new GeoJsonSource("source-id",
       Feature.fromGeometry(Point.fromLngLat(currentPosition.getLongitude(),
-          currentPosition.getLatitude())));
+        currentPosition.getLatitude())));
 
-    Style.Builder styleBuilder = new Style.Builder()
-      .fromUrl(Style.SATELLITE_STREETS)
-      .withImage("marker_icon", IconFactory.getInstance(this).defaultMarker().getBitmap())
-      .withSource(geoJsonSource)
-      .withLayer(new SymbolLayer("layer-id", "source-id")
-        .withProperties(
-          PropertyFactory.iconImage("marker_icon"),
-          PropertyFactory.iconIgnorePlacement(true),
-          PropertyFactory.iconAllowOverlap(true)
-        ));
 
-    mapboxMap.setStyle(styleBuilder, new Style.OnStyleLoaded() {
+    mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
+
+        style.addImage(("marker_icon"), BitmapFactory.decodeResource(
+          getResources(), R.drawable.red_marker));
+
+        style.addSource(geoJsonSource);
+
+        style.addLayer(new SymbolLayer("layer-id", "source-id")
+          .withProperties(
+            PropertyFactory.iconImage("marker_icon"),
+            PropertyFactory.iconIgnorePlacement(true),
+            PropertyFactory.iconAllowOverlap(true)
+          ));
+
         Toast.makeText(
           AnimatedMarkerActivity.this,
           getString(R.string.tap_on_map_instruction),
@@ -79,6 +82,7 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
         ).show();
 
         mapboxMap.addOnMapClickListener(AnimatedMarkerActivity.this);
+
       }
     });
   }
@@ -112,7 +116,7 @@ public class AnimatedMarkerActivity extends AppCompatActivity implements OnMapRe
     };
 
   // Class is used to interpolate the marker animation.
-  private static final  TypeEvaluator<LatLng> latLngEvaluator = new TypeEvaluator<LatLng>() {
+  private static final TypeEvaluator<LatLng> latLngEvaluator = new TypeEvaluator<LatLng>() {
 
     private final LatLng latLng = new LatLng();
 

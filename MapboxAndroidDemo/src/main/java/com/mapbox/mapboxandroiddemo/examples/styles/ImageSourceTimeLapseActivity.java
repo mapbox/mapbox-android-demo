@@ -49,35 +49,33 @@ public class ImageSourceTimeLapseActivity extends AppCompatActivity implements O
     mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        // Add source
-        LatLngQuad quad = new LatLngQuad(
-          new LatLng(46.437, -80.425),
-          new LatLng(46.437, -71.516),
-          new LatLng(37.936, -71.516),
-          new LatLng(37.936, -80.425));
-        mapboxMap.getStyle().addSource(new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.southeast_radar_0));
+        style.addSource(new ImageSource(ID_IMAGE_SOURCE,
+          new LatLngQuad(
+            new LatLng(46.437, -80.425),
+            new LatLng(46.437, -71.516),
+            new LatLng(37.936, -71.516),
+            new LatLng(37.936, -80.425)), R.drawable.southeast_radar_0));
 
         // Add layer
-        RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
-        mapboxMap.getStyle().addLayer(layer);
+        style.addLayer(new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE));
 
         // Loop the GeoJSON refreshing
         handler = new Handler();
-        runnable = new RefreshImageRunnable(mapboxMap, handler);
+        runnable = new RefreshImageRunnable(handler, style);
         handler.postDelayed(runnable, 100);
       }
     });
   }
 
   private static class RefreshImageRunnable implements Runnable {
-    private final MapboxMap mapboxMap;
+    private final Style loadedMapStyle;
     private final Handler handler;
     private int[] drawables;
     private int drawableIndex;
 
-    RefreshImageRunnable(MapboxMap mapboxMap, Handler handler) {
-      this.mapboxMap = mapboxMap;
+    RefreshImageRunnable(Handler handler,Style loadedMapStyle) {
       this.handler = handler;
+      this.loadedMapStyle = loadedMapStyle;
       drawables = new int[4];
       drawables[0] = R.drawable.southeast_radar_0;
       drawables[1] = R.drawable.southeast_radar_1;
@@ -88,7 +86,7 @@ public class ImageSourceTimeLapseActivity extends AppCompatActivity implements O
 
     @Override
     public void run() {
-      ((ImageSource) mapboxMap.getStyle().getSource(ID_IMAGE_SOURCE)).setImage(drawables[drawableIndex++]);
+      ((ImageSource) loadedMapStyle.getSource(ID_IMAGE_SOURCE)).setImage(drawables[drawableIndex++]);
       if (drawableIndex > 3) {
         drawableIndex = 0;
       }

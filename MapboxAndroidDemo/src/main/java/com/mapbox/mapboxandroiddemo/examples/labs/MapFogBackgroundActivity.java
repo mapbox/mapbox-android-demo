@@ -44,7 +44,7 @@ public class MapFogBackgroundActivity extends AppCompatActivity implements OnMap
       @Override
       public void onStyleLoaded(@NonNull Style style) {
         // Using the Mapbox Building Plugin to easily display 3D extrusions on the map
-        buildingPlugin = new BuildingPlugin(mapView, mapboxMap, mapboxMap.getStyle());
+        buildingPlugin = new BuildingPlugin(mapView, mapboxMap, style);
         buildingPlugin.setVisibility(true);
       }
     });

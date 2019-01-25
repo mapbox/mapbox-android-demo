@@ -34,7 +34,7 @@
     <string name="activity_dds_polygon_title">Vẽ hình đa giác</string>
     <string name="activity_dds_polygon_holes_title">Vẽ hình đa giác có lỗ</string>
     <string name="activity_annotation_custom_info_window_title">Cửa sổ thông tin tùy biến</string>
-    <string name="activity_annotation_animated_marker_title">Làm động vị trí của ghim</string>
+    <string name="activity_lab_animated_marker_title">Làm động vị trí của ghim</string>
     <string name="activity_camera_animate_title">Làm động điểm nhìn của bản đồ</string>
     <string name="activity_camera_bounding_box_title">Làm điểm nhìn vừa hộp bao</string>
     <string name="activity_camera_restrict_title">Hạn chế cuộn bản đồ</string>

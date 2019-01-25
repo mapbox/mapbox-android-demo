@@ -38,8 +38,8 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_adjust_layer_opacity);
 
-    final SeekBar opacitySeekBar = (SeekBar) findViewById(R.id.seek_bar_layer_opacity);
-    final TextView percentTextView = (TextView) findViewById(R.id.textview_opacity_value);
+    final SeekBar opacitySeekBar = findViewById(R.id.seek_bar_layer_opacity);
+    final TextView percentTextView = findViewById(R.id.textview_opacity_value);
 
     opacitySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
       @Override
@@ -49,8 +49,8 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
               rasterOpacity((float) progress / 100)
           );
         }
-        String progressPrecentage = progress + "%";
-        percentTextView.setText(progressPrecentage);
+        String progressPercentage = progress + "%";
+        percentTextView.setText(progressPercentage);
       }
 
       @Override
@@ -70,17 +70,11 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
         map = mapboxMap;
-
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-
-            RasterSource chicagoSource = new RasterSource("chicago-source", "mapbox://mapbox.u8yyzaor");
-            map.getStyle().addSource(chicagoSource);
-
-            RasterLayer chicagoLayer = new RasterLayer("chicago", "chicago-source");
-            map.getStyle().addLayer(chicagoLayer);
-
+            style.addSource(new RasterSource("chicago-source", "mapbox://mapbox.u8yyzaor"));
+            style.addLayer(new RasterLayer("chicago", "chicago-source"));
             chicago = map.getStyle().getLayer("chicago");
           }
         });

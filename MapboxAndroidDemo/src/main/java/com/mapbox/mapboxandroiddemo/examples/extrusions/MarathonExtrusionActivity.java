@@ -28,7 +28,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpa
 public class MarathonExtrusionActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
-  private MapboxMap mapboxMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,6 @@ public class MarathonExtrusionActivity extends AppCompatActivity implements OnMa
 
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-    MarathonExtrusionActivity.this.mapboxMap = mapboxMap;
 
     mapboxMap.setStyle(Style.SATELLITE, new Style.OnStyleLoaded() {
       @Override
@@ -67,12 +65,10 @@ public class MarathonExtrusionActivity extends AppCompatActivity implements OnMa
 
   private void addExtrusionsLayerToMap(@NonNull Style loadedMapStyle) {
     // Add FillExtrusion layer to map using GeoJSON data
-    FillExtrusionLayer courseExtrusionLayer = new FillExtrusionLayer("course", "coursedata");
-    courseExtrusionLayer.setProperties(
-        fillExtrusionColor(Color.YELLOW),
-        fillExtrusionOpacity(0.7f),
-        fillExtrusionHeight(get("e")));
-    loadedMapStyle.addLayer(courseExtrusionLayer);
+    loadedMapStyle.addLayer(new FillExtrusionLayer("course", "coursedata").withProperties(
+      fillExtrusionColor(Color.YELLOW),
+      fillExtrusionOpacity(0.7f),
+      fillExtrusionHeight(get("e"))));
   }
 
   @Override

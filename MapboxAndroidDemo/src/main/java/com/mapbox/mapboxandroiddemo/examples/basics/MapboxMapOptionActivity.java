@@ -46,7 +46,7 @@ public class MapboxMapOptionActivity extends AppCompatActivity {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
 
-            // Customize map with markers, polylines, etc.
+            // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
 
 
           }

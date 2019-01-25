@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.mapbox.mapboxandroiddemo.R
 import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.activity_basic_simple_kotlin.*
 
@@ -12,8 +11,6 @@ import kotlinx.android.synthetic.main.activity_basic_simple_kotlin.*
  * The most basic example of adding a map to an activity with Kotlin code
  */
 class SimpleMapViewActivityKotlin : AppCompatActivity() {
-
-    private var mapView: MapView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +21,11 @@ class SimpleMapViewActivityKotlin : AppCompatActivity() {
 
         // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_basic_simple_kotlin)
-        mapView = findViewById(R.id.mapView)
         mapView?.onCreate(savedInstanceState)
         mapView?.getMapAsync { mapboxMap ->
             mapboxMap.setStyle(Style.MAPBOX_STREETS) {
 
-                // Map is set up and the style has loaded. Now you can add data or make other map adjustments
+                // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
 
             }
         }

@@ -213,20 +213,23 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     if (mapboxMap == null) {
       return;
     }
-
     featureCollection = collection;
-    setupSource();
-    setupMakiLayer();
-    setupLoadingLayer();
-    setupCalloutLayer();
-    setupRecyclerView();
-    hideLabelLayers();
-    setupMapillaryTiles();
+
+    if (mapboxMap.getStyle() != null) {
+      Style style = mapboxMap.getStyle();
+      setupSource(style);
+      setupMakiLayer(style);
+      setupLoadingLayer(style);
+      setupCalloutLayer(style);
+      setupRecyclerView();
+      hideLabelLayers();
+      setupMapillaryTiles(style);
+    }
   }
 
-  private void setupSource() {
+  private void setupSource(@NonNull Style loadedMapStyle) {
     source = new GeoJsonSource(SOURCE_ID, featureCollection);
-    mapboxMap.getStyle().addSource(source);
+    loadedMapStyle.addSource(source);
   }
 
   private void refreshSource() {
@@ -238,8 +241,8 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   /**
    * Setup a layer with maki icons, eg. restaurant.
    */
-  private void setupMakiLayer() {
-    mapboxMap.getStyle().addLayer(new SymbolLayer(MAKI_LAYER_ID, SOURCE_ID)
+  private void setupMakiLayer(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addLayer(new SymbolLayer(MAKI_LAYER_ID, SOURCE_ID)
       .withProperties(
         /* show maki icon based on the value of poi feature property
          * https://www.mapbox.com/maki-icons/
@@ -258,8 +261,8 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
   /**
    * Setup layer indicating that there is an ongoing progress.
    */
-  private void setupLoadingLayer() {
-    mapboxMap.getStyle().addLayerBelow(new CircleLayer(LOADING_LAYER_ID, SOURCE_ID)
+  private void setupLoadingLayer(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addLayerBelow(new CircleLayer(LOADING_LAYER_ID, SOURCE_ID)
       .withProperties(
         circleRadius(interpolate(exponential(1), get(PROPERTY_LOADING_PROGRESS), getLoadingAnimationStops())),
         circleColor(Color.GRAY),
@@ -283,8 +286,8 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    * title of the feature is used as key for the iconImage
    * </p>
    */
-  private void setupCalloutLayer() {
-    mapboxMap.getStyle().addLayer(new SymbolLayer(CALLOUT_LAYER_ID, SOURCE_ID)
+  private void setupCalloutLayer(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addLayer(new SymbolLayer(CALLOUT_LAYER_ID, SOURCE_ID)
       .withProperties(
         /* show image with id title based on the value of the title feature property */
         iconImage("{title}"),
@@ -330,9 +333,9 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     }
   }
 
-  private void setupMapillaryTiles() {
-    mapboxMap.getStyle().addSource(MapillaryTiles.createSource());
-    mapboxMap.getStyle().addLayerBelow(MapillaryTiles.createLineLayer(), LOADING_LAYER_ID);
+  private void setupMapillaryTiles(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addSource(MapillaryTiles.createSource());
+    loadedMapStyle.addLayerBelow(MapillaryTiles.createLineLayer(), LOADING_LAYER_ID);
   }
 
   /**
@@ -507,7 +510,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     feature.properties().addProperty(PROPERTY_FAVOURITE, !currentState);
     View view = viewMap.get(title);
 
-    ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
+    ImageView imageView = view.findViewById(R.id.logoView);
     imageView.setImageResource(currentState ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
     Bitmap bitmap = SymbolGenerator.generate(view);
     mapboxMap.getStyle().addImage(title, bitmap);
@@ -757,15 +760,15 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
           View view = inflater.inflate(R.layout.mapillary_layout_callout, null);
 
           String name = feature.getStringProperty(PROPERTY_TITLE);
-          TextView titleTv = (TextView) view.findViewById(R.id.title);
+          TextView titleTv = view.findViewById(R.id.title);
           titleTv.setText(name);
 
           String style = feature.getStringProperty(PROPERTY_STYLE);
-          TextView styleTv = (TextView) view.findViewById(R.id.style);
+          TextView styleTv = view.findViewById(R.id.style);
           styleTv.setText(style);
 
           boolean favourite = feature.getBooleanProperty(PROPERTY_FAVOURITE);
-          ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
+          ImageView imageView = view.findViewById(R.id.logoView);
           imageView.setImageResource(favourite ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
 
           Bitmap bitmap = SymbolGenerator.generate(view);

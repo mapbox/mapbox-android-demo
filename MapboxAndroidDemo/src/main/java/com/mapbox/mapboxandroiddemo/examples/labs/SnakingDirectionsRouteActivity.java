@@ -20,14 +20,14 @@ import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +39,8 @@ import retrofit2.Response;
 import static com.mapbox.api.directions.v5.DirectionsCriteria.GEOMETRY_POLYLINE;
 import static com.mapbox.mapboxsdk.style.layers.Property.LINE_CAP_ROUND;
 import static com.mapbox.mapboxsdk.style.layers.Property.LINE_JOIN_ROUND;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
@@ -59,6 +61,11 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
   private MapView mapView;
   private MapboxMap map;
   private MapboxDirections client;
+  // Origin point in Paris, France
+  private static final Point origin = Point.fromLngLat(2.35222, 48.856614);
+
+  // Destination point in Lyon, France
+  private static  Point destination = Point.fromLngLat(4.83565, 45.76404);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -84,19 +91,10 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
     map.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        initDrivingRouteSourceAndLayer();
 
-        // Origin point in Paris, France
-        final Point origin = Point.fromLngLat(2.35222, 48.856614);
+        initDrivingRouteSourceAndLayer(style);
 
-        // Destination point in Lyon, France
-        final Point destination = Point.fromLngLat(4.83565, 45.76404);
-
-        // Add origin and destination markers to the map
-        mapboxMap.addMarker(new MarkerOptions()
-          .position(new LatLng(origin.latitude(), origin.longitude())));
-        mapboxMap.addMarker(new MarkerOptions()
-          .position(new LatLng(destination.latitude(), destination.longitude())));
+        addMarkerIconsToMap(style);
 
         // Get route from API
         getDirectionsRoute(origin, destination);
@@ -104,11 +102,28 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
     });
   }
 
-  private void initDrivingRouteSourceAndLayer() {
-    GeoJsonSource drivingRouteGeoJsonSource = new GeoJsonSource(DRIVING_ROUTE_POLYLINE_SOURCE_ID,
-      FeatureCollection.fromFeatures(new Feature[] {}));
-    map.getStyle().addSource(drivingRouteGeoJsonSource);
-    LineLayer drivingRouteLineLayer = new LineLayer(DRIVING_ROUTE_POLYLINE_LINE_LAYER_ID,
+  private void addMarkerIconsToMap(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addImage("icon-id", BitmapUtils.getBitmapFromDrawable(
+      getResources().getDrawable(R.drawable.red_marker)));
+
+    loadedMapStyle.addSource(new GeoJsonSource("source-id",
+      FeatureCollection.fromFeatures(new Feature[] {
+        Feature.fromGeometry(Point.fromLngLat(origin.longitude(), origin.latitude())),
+        Feature.fromGeometry(Point.fromLngLat(destination.longitude(), destination.latitude())),
+      })));
+
+    loadedMapStyle.addLayer(new SymbolLayer("layer-id",
+      "source-id").withProperties(
+      iconImage("icon-id"),
+      iconOffset(new Float[]{0f,-8f})
+    ));
+  }
+
+
+  private void initDrivingRouteSourceAndLayer(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addSource( new GeoJsonSource(DRIVING_ROUTE_POLYLINE_SOURCE_ID,
+      FeatureCollection.fromFeatures(new Feature[] {})));
+    loadedMapStyle.addLayer(new LineLayer(DRIVING_ROUTE_POLYLINE_LINE_LAYER_ID,
       DRIVING_ROUTE_POLYLINE_SOURCE_ID)
       .withProperties(
         lineWidth(NAVIGATION_LINE_WIDTH),
@@ -116,8 +131,7 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
         lineCap(LINE_CAP_ROUND),
         lineJoin(LINE_JOIN_ROUND),
         lineColor(Color.parseColor("#d742f4"))
-      );
-    map.getStyle().addLayer(drivingRouteLineLayer);
+      ));
   }
 
   /**

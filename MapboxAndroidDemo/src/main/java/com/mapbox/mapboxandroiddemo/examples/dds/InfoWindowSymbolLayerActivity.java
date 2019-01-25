@@ -49,6 +49,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   OnMapReadyCallback, MapboxMap.OnMapClickListener {
 
+  private static final String GEOJSON_SOURCE_ID = "GEOJSON_SOURCE_ID";
   private static final String MARKER_IMAGE_ID = "MARKER_IMAGE_ID";
   private static final String MARKER_LAYER_ID = "MARKER_LAYER_ID";
   private static final String CALLOUT_LAYER_ID = "CALLOUT_LAYER_ID";
@@ -57,10 +58,8 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   private static final String PROPERTY_CAPITAL = "capital";
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private String geojsonSourceId = "geojsonSourceId";
   private GeoJsonSource source;
   private FeatureCollection featureCollection;
-  private HashMap<String, View> viewMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -106,27 +105,29 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
       return;
     }
     featureCollection = collection;
-    setupSource();
-    setUpImage();
-    setUpMarkerLayer();
-    setUpInfoWindowLayer();
+    if (mapboxMap.getStyle() != null) {
+      Style loadedStyle = mapboxMap.getStyle();
+      setupSource(loadedStyle);
+      setUpImage(loadedStyle);
+      setUpMarkerLayer(loadedStyle);
+      setUpInfoWindowLayer(loadedStyle);
+    }
   }
 
   /**
    * Adds the GeoJSON source to the map
    */
-  private void setupSource() {
-    source = new GeoJsonSource(geojsonSourceId, featureCollection);
-    mapboxMap.getStyle().addSource(source);
+  private void setupSource(@NonNull Style loadedStyle) {
+    source = new GeoJsonSource(GEOJSON_SOURCE_ID, featureCollection);
+    loadedStyle.addSource(source);
   }
 
   /**
    * Adds the marker image to the map for use as a SymbolLayer icon
    */
-  private void setUpImage() {
-    Bitmap icon = BitmapFactory.decodeResource(
-      this.getResources(), R.drawable.red_marker);
-    mapboxMap.getStyle().addImage(MARKER_IMAGE_ID, icon);
+  private void setUpImage(@NonNull Style loadedStyle) {
+    loadedStyle.addImage(MARKER_IMAGE_ID, BitmapFactory.decodeResource(
+      this.getResources(), R.drawable.red_marker));
   }
 
   /**
@@ -141,8 +142,8 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   /**
    * Setup a layer with maki icons, eg. west coast city.
    */
-  private void setUpMarkerLayer() {
-    mapboxMap.getStyle().addLayer(new SymbolLayer(MARKER_LAYER_ID, geojsonSourceId)
+  private void setUpMarkerLayer(@NonNull Style loadedStyle) {
+    loadedStyle.addLayer(new SymbolLayer(MARKER_LAYER_ID, GEOJSON_SOURCE_ID)
       .withProperties(
         iconImage(MARKER_IMAGE_ID),
         iconAllowOverlap(true)
@@ -155,8 +156,8 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
    * name of the feature is used as key for the iconImage
    * </p>
    */
-  private void setUpInfoWindowLayer() {
-    mapboxMap.getStyle().addLayer(new SymbolLayer(CALLOUT_LAYER_ID, geojsonSourceId)
+  private void setUpInfoWindowLayer(@NonNull Style loadedStyle) {
+    loadedStyle.addLayer(new SymbolLayer(CALLOUT_LAYER_ID, GEOJSON_SOURCE_ID)
       .withProperties(
         /* show image with id title based on the value of the name feature property */
         iconImage("{name}"),
@@ -244,8 +245,6 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
       // calling addImages is faster as separate addImage calls for each bitmap.
       mapboxMap.getStyle().addImages(imageMap);
     }
-    // need to store reference to views to be able to use them as hitboxes for click events.
-    this.viewMap = viewMap;
   }
 
   /**
@@ -387,9 +386,6 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
 
   /**
    * Utility class to generate Bitmaps for Symbol.
-   * <p>
-   * Bitmaps can be added to the map with {@link com.mapbox.mapboxsdk.maps.MapboxMap#addImage(String, Bitmap)}
-   * </p>
    */
   private static class SymbolGenerator {
 

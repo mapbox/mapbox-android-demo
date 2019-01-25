@@ -102,15 +102,12 @@ public class DirectionsActivity extends AppCompatActivity {
    * Add the route and marker sources to the map
    */
   private void initSource(@NonNull Style loadedMapStyle) {
-    GeoJsonSource routeGeoJsonSource = new GeoJsonSource(ROUTE_SOURCE_ID,
-      FeatureCollection.fromFeatures(new Feature[] {}));
-    loadedMapStyle.addSource(routeGeoJsonSource);
+    loadedMapStyle.addSource(new GeoJsonSource(ROUTE_SOURCE_ID,
+      FeatureCollection.fromFeatures(new Feature[] {})));
 
-    FeatureCollection iconFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {
+    GeoJsonSource iconGeoJsonSource = new GeoJsonSource(ICON_SOURCE_ID, FeatureCollection.fromFeatures(new Feature[] {
       Feature.fromGeometry(Point.fromLngLat(origin.longitude(), origin.latitude())),
-      Feature.fromGeometry(Point.fromLngLat(destination.longitude(), destination.latitude()))});
-
-    GeoJsonSource iconGeoJsonSource = new GeoJsonSource(ICON_SOURCE_ID, iconFeatureCollection);
+      Feature.fromGeometry(Point.fromLngLat(destination.longitude(), destination.latitude()))}));
     loadedMapStyle.addSource(iconGeoJsonSource);
   }
 
@@ -134,13 +131,11 @@ public class DirectionsActivity extends AppCompatActivity {
       getResources().getDrawable(R.drawable.red_marker)));
 
     // Add the red marker icon SymbolLayer to the map
-    SymbolLayer startEndIconLayer = new SymbolLayer(ICON_LAYER_ID, ICON_SOURCE_ID);
-    startEndIconLayer.setProperties(
+    loadedMapStyle.addLayer(new SymbolLayer(ICON_LAYER_ID, ICON_SOURCE_ID).withProperties(
       iconImage(RED_PIN_ICON_ID),
       iconIgnorePlacement(true),
       iconIgnorePlacement(true),
-      iconOffset(new Float[] {0f, -4f}));
-    loadedMapStyle.addLayer(startEndIconLayer);
+      iconOffset(new Float[] {0f, -4f})));
   }
 
   /**
@@ -186,21 +181,20 @@ public class DirectionsActivity extends AppCompatActivity {
         // Retrieve and update the source designated for showing the directions route
         GeoJsonSource source = mapboxMap.getStyle().getSourceAs(ROUTE_SOURCE_ID);
 
-        // Create a LineString with the directions route's geometry
-        FeatureCollection featureCollection = FeatureCollection.fromFeature(
-          Feature.fromGeometry(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6)));
-
-        // Reset the GeoJSON source for the route LineLayer source
+        // Create a LineString with the directions route's geometry and
+        // reset the GeoJSON source for the route LineLayer source
         if (source != null) {
           Timber.d("onResponse: source != null");
-          source.setGeoJson(featureCollection);
+          source.setGeoJson(FeatureCollection.fromFeature(
+            Feature.fromGeometry(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6))));
         }
       }
 
       @Override
       public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
         Timber.e("Error: " + throwable.getMessage());
-        Toast.makeText(DirectionsActivity.this, "Error: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(DirectionsActivity.this, "Error: " + throwable.getMessage(),
+          Toast.LENGTH_SHORT).show();
       }
     });
   }

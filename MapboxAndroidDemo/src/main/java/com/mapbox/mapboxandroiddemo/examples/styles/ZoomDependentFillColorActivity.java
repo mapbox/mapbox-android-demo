@@ -48,7 +48,7 @@ public class ZoomDependentFillColorActivity extends AppCompatActivity {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
 
-            FillLayer layer = mapboxMap.getStyle().getLayerAs("water");
+            FillLayer layer = style.getLayerAs("water");
             if (layer == null) {
               return;
             }
@@ -61,7 +61,8 @@ public class ZoomDependentFillColorActivity extends AppCompatActivity {
                 stop(10f, rgb(255,10,10)),
                 stop(18f, rgb(251,255,0)))));
 
-            mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(40.73581, -73.99155), 12), 12000);
+            mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+              new LatLng(40.73581, -73.99155), 12), 12000);
 
           }
         });

@@ -1,4 +1,4 @@
-package com.mapbox.mapboxandroiddemo.examples.annotations;
+package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.mapboxsdk.utils.ColorUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,8 +69,8 @@ public class DrawPolygonActivity extends AppCompatActivity {
           public void onStyleLoaded(@NonNull Style style) {
             style.addSource(new GeoJsonSource("source-id", Polygon.fromLngLats(POINTS)));
             style.addLayer(new FillLayer("layer-id", "source-id").withProperties(
-              fillColor(ColorUtils.colorToRgbaString(Color.RED))
-            ));
+              fillColor(Color.parseColor("#3bb2d0")))
+            );
           }
         });
       }

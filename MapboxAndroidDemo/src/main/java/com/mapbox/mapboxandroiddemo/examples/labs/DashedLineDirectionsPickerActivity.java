@@ -77,6 +77,7 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
+
         // Add a marker on the map's center/"target" for the place picker UI
         ImageView hoveringMarker = new ImageView(DashedLineDirectionsPickerActivity.this);
         hoveringMarker.setImageResource(R.drawable.red_marker);
@@ -117,17 +118,15 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
    */
   private void initDottedLineSourceAndLayer(@NonNull Style loadedMapStyle) {
     dashedLineDirectionsFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
-    GeoJsonSource geoJsonSource = new GeoJsonSource("SOURCE_ID", dashedLineDirectionsFeatureCollection);
-    loadedMapStyle.addSource(geoJsonSource);
-    LineLayer dashedDirectionsRouteLayer = new LineLayer(
-      "DIRECTIONS_LAYER_ID", "SOURCE_ID");
-    dashedDirectionsRouteLayer.withProperties(
+    loadedMapStyle.addSource(new GeoJsonSource("SOURCE_ID", dashedLineDirectionsFeatureCollection));
+    loadedMapStyle.addLayerBelow(
+      new LineLayer(
+        "DIRECTIONS_LAYER_ID", "SOURCE_ID").withProperties(
       lineWidth(4.5f),
       lineColor(Color.BLACK),
       lineTranslate(new Float[] {0f, 4f}),
       lineDasharray(new Float[] {1.2f, 1.2f})
-    );
-    loadedMapStyle.addLayerBelow(dashedDirectionsRouteLayer, "road-label-small");
+    ), "road-label-small");
   }
 
   /**
