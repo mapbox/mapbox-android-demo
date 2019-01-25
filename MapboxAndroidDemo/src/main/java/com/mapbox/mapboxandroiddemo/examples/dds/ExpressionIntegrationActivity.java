@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,8 +33,10 @@ import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.concat;
@@ -62,20 +65,15 @@ public class ExpressionIntegrationActivity
   private static final String MAX_TEMP_LAYER_ID = "max_temp_layer_id";
   private static final String RED_PIN_IMAGE_ID = "red_pin_id";
   private static final String BLUE_PIN_IMAGE_ID = "blue_pin_id";
-
   private static final String DEGREES_C = "℃"; //"\u2103";
   private static final String DEGREES_F = "℉"; //"\u2109";
-
+  private final List<State> states = new ArrayList<>();
   private MapboxMap mapboxMap;
   private MapView mapView;
   private Menu menu;
   private FloatingActionButton unitsFab;
   private TextView unitsText;
   private boolean isImperial = true;
-
-  private final List<State> states = new ArrayList<>();
-
-
 
   /**
    * weather_data_per_state_before2006.geojson file (found in assets)
@@ -127,70 +125,109 @@ public class ExpressionIntegrationActivity
 
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-
     this.mapboxMap = mapboxMap;
-
     mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull final Style style) {
         setUpMapImagePins(style);
-
-        // Initialize FeatureCollection object for future use with layers
-        FeatureCollection featureCollection =
-          FeatureCollection.fromJson(loadGeoJsonFromAsset("weather_data_per_state_before2006.geojson"));
-
-
-        // Find out the states represented in the FeatureCollection
-        // and bounds of the extreme conditions
-        for (Feature feature : featureCollection.features()) {
-          String stateName = feature.getStringProperty("state");
-          String lat = feature.getStringProperty("latitude");
-          String lon = feature.getStringProperty("longitude");
-
-          LatLng latLng = new LatLng(
-            Double.parseDouble(lat),
-            Double.parseDouble(lon));
-
-          State state = null;
-          for (State curState : states) {
-            if (curState.name.equals(stateName)) {
-              state = curState;
-              break;
-            }
-          }
-          if (state == null) {
-            state = new State(stateName, latLng);
-            states.add(state);
-          } else {
-            state.add(latLng);
-          }
-        }
-
-        // Retrieves GeoJSON from local file and adds it to the map
-        GeoJsonSource geoJsonSource =
-          new GeoJsonSource(GEOJSON_SRC_ID, featureCollection);
-        mapboxMap.getStyle().addSource(geoJsonSource);
-
-        initTemperatureLayers(style);
-        populateMenu();
-
-        // show Connecticut by default
-        int indexOfState = indexOfState("Connecticut");
-        selectState(states.get(indexOfState).name, indexOfState, mapboxMap.getStyle());
-
-        // When user clicks the map, start the snapshotting process with the given parameters
-        unitsFab.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-
-            if (mapboxMap != null) {
-              changeTemperatureUnits(!isImperial, style);
-            }
-          }
-        });
-
+        new LoadGeoJson(ExpressionIntegrationActivity.this).execute();
       }
     });
+  }
+
+  private void addDataToMap(@NonNull FeatureCollection featureCollection) {
+    // Retrieves GeoJSON from local file and adds it to the map
+    GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SRC_ID, featureCollection);
+    if (mapboxMap.getStyle() != null) {
+      final Style mapStyle = mapboxMap.getStyle();
+      mapStyle.addSource(geoJsonSource);
+      initTemperatureLayers(mapStyle);
+      populateMenu();
+
+      // show Connecticut by default
+      int indexOfState = indexOfState("Connecticut");
+      selectState(states.get(indexOfState).name, indexOfState, mapboxMap.getStyle());
+
+      // When user clicks the map, start the snapshotting process with the given parameters
+      unitsFab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          if (mapboxMap != null) {
+            changeTemperatureUnits(!isImperial, mapStyle);
+          }
+        }
+      });
+    }
+  }
+
+  private static class LoadGeoJson extends AsyncTask<Void, Void, FeatureCollection> {
+
+    private WeakReference<ExpressionIntegrationActivity> weakReference;
+
+    LoadGeoJson(ExpressionIntegrationActivity activity) {
+      this.weakReference = new WeakReference<>(activity);
+    }
+
+    @Override
+    protected FeatureCollection doInBackground(Void... voids) {
+      try {
+        ExpressionIntegrationActivity activity = weakReference.get();
+        if (activity != null) {
+
+          InputStream inputStream = activity.getAssets().open("weather_data_per_state_before2006.geojson");
+
+          // Initialize FeatureCollection object for future use with layers
+          FeatureCollection featureCollection = FeatureCollection.fromJson(convertStreamToString(inputStream));
+
+          // Find out the states represented in the FeatureCollection
+          // and bounds of the extreme conditions
+          for (Feature feature : featureCollection.features()) {
+            String stateName = feature.getStringProperty("state");
+            String lat = feature.getStringProperty("latitude");
+            String lon = feature.getStringProperty("longitude");
+
+            LatLng latLng = new LatLng(
+              Double.parseDouble(lat),
+              Double.parseDouble(lon));
+
+            State state = null;
+            for (State curState : activity.states) {
+              if (curState.name.equals(stateName)) {
+                state = curState;
+                break;
+              }
+            }
+            if (state == null) {
+              activity.states.add(activity.createState(stateName, latLng));
+            } else {
+              state.add(latLng);
+            }
+          }
+          return featureCollection;
+        }
+      } catch (Exception exception) {
+        Log.d("ExpressionIntegration", "Exception Loading GeoJSON: " + exception.toString());
+      }
+      return null;
+    }
+
+    static String convertStreamToString(InputStream is) {
+      Scanner scanner = new Scanner(is).useDelimiter("\\A");
+      return scanner.hasNext() ? scanner.next() : "";
+    }
+
+    @Override
+    protected void onPostExecute(@Nullable FeatureCollection featureCollection) {
+      super.onPostExecute(featureCollection);
+      ExpressionIntegrationActivity activity = weakReference.get();
+      if (activity != null && featureCollection != null) {
+        activity.addDataToMap(featureCollection);
+      }
+    }
+  }
+
+  private State createState(String stateName, LatLng latLng) {
+    return new State(stateName, latLng);
   }
 
   /**
@@ -215,7 +252,7 @@ public class ExpressionIntegrationActivity
         iconImage(RED_PIN_IMAGE_ID),
         textField(getTemperatureValue()),
         textSize(17f),
-        textOffset(new Float[]{0f, -1.75f}),
+        textOffset(new Float[] {0f, -1.75f}),
         textColor(Color.RED),
         textAllowOverlap(true),
         textIgnorePlacement(true),
@@ -232,7 +269,7 @@ public class ExpressionIntegrationActivity
         iconImage(BLUE_PIN_IMAGE_ID),
         textField(getTemperatureValue()),
         textSize(17f),
-        textOffset(new Float[]{0f, -2.5f}),
+        textOffset(new Float[] {0f, -2.5f}),
         textColor(Color.BLUE),
         textAllowOverlap(true),
         textIgnorePlacement(true),
@@ -382,7 +419,7 @@ public class ExpressionIntegrationActivity
     }
   }
 
-  private void selectState(CharSequence stateName, int stateIndex,@NonNull Style loadedMapStyle) {
+  private void selectState(CharSequence stateName, int stateIndex, @NonNull Style loadedMapStyle) {
 
     if (indexOfState(stateName) == stateIndex) {
       // Adds a SymbolLayer to display maximum temperature in state

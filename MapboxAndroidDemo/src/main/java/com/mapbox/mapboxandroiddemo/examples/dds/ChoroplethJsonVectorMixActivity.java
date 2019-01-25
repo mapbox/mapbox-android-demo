@@ -1,12 +1,18 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -22,7 +28,9 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.nio.charset.Charset;
+import java.util.Scanner;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
@@ -70,6 +78,9 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
         // Add Mapbox-hosted vector source for state polygons
         style.addSource(new VectorSource(VECTOR_SOURCE_NAME, "mapbox://mapbox.us_census_states_2015"));
 
+        new LoadGeoJson(ChoroplethJsonVectorMixActivity.this).execute();
+
+
         try {
           statesArray = new JSONArray(loadJson());
         } catch (Exception exception) {
@@ -107,6 +118,49 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
         style.addLayerAbove(statesJoinLayer, "waterway-label");
       }
     });
+  }
+
+  private static class LoadGeoJson extends AsyncTask<Void, Void, FeatureCollection> {
+
+    private WeakReference<ChoroplethJsonVectorMixActivity> weakReference;
+
+    LoadGeoJson(ChoroplethJsonVectorMixActivity activity) {
+      this.weakReference = new WeakReference<>(activity);
+    }
+
+    @Override
+    protected FeatureCollection doInBackground(Void... voids) {
+      try {
+        ChoroplethJsonVectorMixActivity activity = weakReference.get();
+        if (activity != null) {
+
+          InputStream inputStream = activity.getAssets().open("weather_data_per_state_before2006.geojson");
+
+          // Initialize FeatureCollection object for future use with layers
+          FeatureCollection featureCollection = FeatureCollection.fromJson(convertStreamToString(inputStream));
+
+
+          return featureCollection;
+        }
+      } catch (Exception exception) {
+        Log.d("ExpressionIntegration", "Exception Loading GeoJSON: " + exception.toString());
+      }
+      return null;
+    }
+
+    static String convertStreamToString(InputStream is) {
+      Scanner scanner = new Scanner(is).useDelimiter("\\A");
+      return scanner.hasNext() ? scanner.next() : "";
+    }
+
+    @Override
+    protected void onPostExecute(@Nullable FeatureCollection featureCollection) {
+      super.onPostExecute(featureCollection);
+      ChoroplethJsonVectorMixActivity activity = weakReference.get();
+      if (activity != null && featureCollection != null) {
+        activity.addDataToMap(featureCollection);
+      }
+    }
   }
 
   private String loadJson() {

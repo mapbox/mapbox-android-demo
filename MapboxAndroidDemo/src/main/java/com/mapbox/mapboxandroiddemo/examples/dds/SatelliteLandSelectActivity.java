@@ -52,9 +52,9 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
   private static final String CIRCLE_LAYER_ID = "circle-layer-id";
   private static final String FILL_LAYER_ID = "fill-layer-polygon-id";
   private static final String LINE_LAYER_ID = "line-layer-id";
-  private List<Point> fillLayerPointList;
-  private List<Point> lineLayerPointList;
-  private List<Feature> circleLayerFeatureList;
+  private List<Point> fillLayerPointList = new ArrayList<>();
+  private List<Point> lineLayerPointList = new ArrayList<>();
+  private List<Feature> circleLayerFeatureList = new ArrayList<>();
   private List<List<Point>> listOfList;
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -89,10 +89,6 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
           CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
             .zoom(16)
             .build()), 4000);
-
-        fillLayerPointList = new ArrayList<>();
-        circleLayerFeatureList = new ArrayList<>();
-        lineLayerPointList = new ArrayList<>();
 
         // Add sources to the map
         circleSource = initCircleSource(style);

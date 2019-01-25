@@ -73,7 +73,8 @@ public class StaticImageActivity extends AppCompatActivity implements
               // one of the radio buttons is checked
               Picasso.with(StaticImageActivity.this).load(takeSnapshot(
                   mapboxMap.getCameraPosition(),
-                  mapboxMap.getStyle().getUrl().equals("mapbox://styles/mapbox/dark-v9") ? StaticMapCriteria.DARK_STYLE :
+                  mapboxMap.getStyle().getUrl().equals("mapbox://styles/mapbox/dark-v9")
+                    ? StaticMapCriteria.DARK_STYLE :
                       StaticMapCriteria.STREET_STYLE,
                   (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredWidth(), 0, 1280),
                   (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredHeight(), 0, 1280))

@@ -35,7 +35,7 @@ class KotlinStyleCirclesCategoricallyActivity : AppCompatActivity() {
                         "ethnicity-source",
                         "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken()!!
                 )
-                mapboxMap.style?.addSource(vectorSource)
+                it.addSource(vectorSource)
 
                 val circleLayer = CircleLayer("population", "ethnicity-source")
                 circleLayer.sourceLayer = "sf2010"
@@ -55,7 +55,7 @@ class KotlinStyleCirclesCategoricallyActivity : AppCompatActivity() {
                                         stop("Asian", rgb(59, 178, 208)),
                                         stop("Other", rgb(204, 204, 204)))))
 
-                mapboxMap.style?.addLayer(circleLayer)
+                it.addLayer(circleLayer)
             }
         }
     }
