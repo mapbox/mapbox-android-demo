@@ -48,7 +48,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
   private static final String TAG = "MarkerFollowingRoute";
   private static final String DOT_SOURCE_ID = "dot-source-id";
   private static final String LINE_SOURCE_ID = "line-source-id";
-  private static int count = 0;
+  private int count = 0;
   private MapView mapView;
   private MapboxMap mapboxMap;
   private Handler handler;
@@ -223,7 +223,10 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
     // Check if the marker is currently animating and if so, we pause the animation so we aren't
     // using resources when the activities not in view.
     if (handler != null && runnable != null) {
-      handler.removeCallbacks(runnable);
+      handler.removeCallbacksAndMessages(null);
+    }
+    if (markerIconAnimator != null) {
+      markerIconAnimator.cancel();
     }
   }
 
@@ -236,9 +239,6 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    if (markerIconAnimator != null) {
-      markerIconAnimator.cancel();
-    }
     mapView.onDestroy();
   }
 
