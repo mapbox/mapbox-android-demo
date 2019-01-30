@@ -241,7 +241,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
   /**
    * Sets up all of the sources and layers needed for this example
    *
-   * @param style
+   * @param style style
    */
   public void setUpData(@NonNull Style style) {
     setupSource(style);

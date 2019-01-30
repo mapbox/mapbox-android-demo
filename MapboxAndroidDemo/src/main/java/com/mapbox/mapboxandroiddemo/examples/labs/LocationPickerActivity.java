@@ -243,7 +243,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
   /**
    * This method is used to reverse geocode where the user has dropped the marker.
    *
-   * @param style
+   * @param style style
    * @param point The location to use for the search
    */
 
