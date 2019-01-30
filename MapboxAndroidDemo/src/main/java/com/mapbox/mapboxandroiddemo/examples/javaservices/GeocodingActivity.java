@@ -1,10 +1,12 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ListPopupWindow;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +27,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +44,7 @@ public class GeocodingActivity extends AppCompatActivity implements OnMapReadyCa
 
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private Button startGeocodeButton;
   private Button chooseCityButton;
-  private Button mapCenterButton;
   private EditText latEditText;
   private EditText longEditText;
   private TextView geocodeResultTextView;
@@ -65,10 +66,15 @@ public class GeocodingActivity extends AppCompatActivity implements OnMapReadyCa
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    initTextViews();
-    initButtons();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        initTextViews();
+        initButtons();
+      }
+    });
   }
 
   private void initTextViews() {
@@ -78,8 +84,8 @@ public class GeocodingActivity extends AppCompatActivity implements OnMapReadyCa
   }
 
   private void initButtons() {
-    mapCenterButton = findViewById(R.id.map_center_button);
-    startGeocodeButton = findViewById(R.id.start_geocode_button);
+    Button mapCenterButton = findViewById(R.id.map_center_button);
+    Button startGeocodeButton = findViewById(R.id.start_geocode_button);
     chooseCityButton = findViewById(R.id.choose_city_spinner_button);
     startGeocodeButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -144,36 +150,39 @@ public class GeocodingActivity extends AppCompatActivity implements OnMapReadyCa
     modes.add("Osaka");
     ArrayAdapter<String> profileAdapter = new ArrayAdapter<>(this,
       android.R.layout.simple_list_item_1, modes);
-    ListPopupWindow listPopup = new ListPopupWindow(this);
+    final ListPopupWindow listPopup = new ListPopupWindow(this);
     listPopup.setAdapter(profileAdapter);
     listPopup.setAnchorView(chooseCityButton);
-    listPopup.setOnItemClickListener((parent, itemView, position, id) -> {
-      LatLng cityLatLng = new LatLng();
-      if (position == 0) {
-        // Vancouver
-        cityLatLng = new LatLng(49.2827, -123.1207);
-        setCoordinateEditTexts(cityLatLng);
-      } else if (position == 1) {
-        // Helsinki
-        cityLatLng = new LatLng(60.1698, 24.938);
-        setCoordinateEditTexts(cityLatLng);
-      } else if (position == 2) {
-        // Lima
-        cityLatLng = new LatLng(-12.0463, -77.0427);
-        setCoordinateEditTexts(cityLatLng);
-      } else if (position == 3) {
-        // Osaka
-        cityLatLng = new LatLng(34.693, 135.5021);
-        setCoordinateEditTexts(cityLatLng);
+    listPopup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> adapterView, View view, int position, long longg) {
+        LatLng cityLatLng = new LatLng();
+        if (position == 0) {
+          // Vancouver
+          cityLatLng = new LatLng(49.2827, -123.1207);
+          setCoordinateEditTexts(cityLatLng);
+        } else if (position == 1) {
+          // Helsinki
+          cityLatLng = new LatLng(60.1698, 24.938);
+          setCoordinateEditTexts(cityLatLng);
+        } else if (position == 2) {
+          // Lima
+          cityLatLng = new LatLng(-12.0463, -77.0427);
+          setCoordinateEditTexts(cityLatLng);
+        } else if (position == 3) {
+          // Osaka
+          cityLatLng = new LatLng(34.693, 135.5021);
+          setCoordinateEditTexts(cityLatLng);
+        }
+        animateCameraToNewPosition(cityLatLng);
+        makeGeocodeSearch(cityLatLng);
+        listPopup.dismiss();
       }
-      animateCameraToNewPosition(cityLatLng);
-      makeGeocodeSearch(cityLatLng);
-      listPopup.dismiss();
     });
     listPopup.show();
   }
 
-  private void makeGeocodeSearch(LatLng latLng) {
+  private void makeGeocodeSearch(final LatLng latLng) {
     try {
       // Build a Mapbox geocoding request
       MapboxGeocoding client = MapboxGeocoding.builder()

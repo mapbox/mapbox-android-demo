@@ -1,7 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,6 +25,7 @@ import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -75,75 +75,80 @@ public class TilequeryActivity extends AppCompatActivity implements
     mapView.getMapAsync(this);
   }
 
-  @SuppressWarnings({"MissingPermission"})
+  @SuppressWarnings( {"MissingPermission"})
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     TilequeryActivity.this.mapboxMap = mapboxMap;
-    addClickLayer();
-    addResultLayer();
-    displayDeviceLocation();
-    mapboxMap.addOnMapClickListener(this);
-    Toast.makeText(this, R.string.click_on_map_instruction, Toast.LENGTH_SHORT).show();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        addClickLayer(style);
+        addResultLayer(style);
+        displayDeviceLocation(style);
+        mapboxMap.addOnMapClickListener(TilequeryActivity.this);
+        Toast.makeText(TilequeryActivity.this, R.string.click_on_map_instruction, Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
   /**
    * Add a map layer which will show a marker icon where the map was clicked
    */
-  private void addClickLayer() {
-    Bitmap clickSymbolIcon = BitmapFactory.decodeResource(
-      TilequeryActivity.this.getResources(), R.drawable.red_marker);
-    mapboxMap.addImage("CLICK-ICON-ID", clickSymbolIcon);
+  private void addClickLayer(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addImage("CLICK-ICON-ID", BitmapFactory.decodeResource(
+      TilequeryActivity.this.getResources(), R.drawable.red_marker));
 
-    GeoJsonSource clickGeoJsonSource = new GeoJsonSource(CLICK_CENTER_GEOJSON_SOURCE_ID,
-      FeatureCollection.fromFeatures(new Feature[]{}));
-    mapboxMap.addSource(clickGeoJsonSource);
+    loadedMapStyle.addSource(new GeoJsonSource(CLICK_CENTER_GEOJSON_SOURCE_ID,
+      FeatureCollection.fromFeatures(new Feature[] {})));
 
-    SymbolLayer clickSymbolLayer = new SymbolLayer("click-layer", CLICK_CENTER_GEOJSON_SOURCE_ID);
-    clickSymbolLayer.setProperties(
+    loadedMapStyle.addLayer(new SymbolLayer("click-layer", CLICK_CENTER_GEOJSON_SOURCE_ID).withProperties(
       iconImage("CLICK-ICON-ID"),
-      iconOffset(new Float[]{0f, -12f}),
+      iconOffset(new Float[] {0f, -12f}),
       iconIgnorePlacement(true),
       iconAllowOverlap(true)
-    );
-    mapboxMap.addLayer(clickSymbolLayer);
+    ));
   }
 
   /**
    * Add a map layer which will show marker icons for all of the Tilequery API results
    */
-  private void addResultLayer() {
+  private void addResultLayer(@NonNull Style loadedMapStyle) {
     // Add the marker image to map
-    Bitmap resultSymbolIcon = BitmapFactory.decodeResource(
-      TilequeryActivity.this.getResources(), R.drawable.blue_marker);
-    mapboxMap.addImage("RESULT-ICON-ID", resultSymbolIcon);
+    loadedMapStyle.addImage("RESULT-ICON-ID", BitmapFactory.decodeResource(
+      TilequeryActivity.this.getResources(), R.drawable.blue_marker));
 
     // Retrieve GeoJSON information from the Mapbox Tilequery API
-    GeoJsonSource resultBlueMarkerGeoJsonSource = new GeoJsonSource(RESULT_GEOJSON_SOURCE_ID,
-      FeatureCollection.fromFeatures(new Feature[]{}));
-    mapboxMap.addSource(resultBlueMarkerGeoJsonSource);
+    loadedMapStyle.addSource(new GeoJsonSource(RESULT_GEOJSON_SOURCE_ID,
+      FeatureCollection.fromFeatures(new Feature[] {})));
 
-    SymbolLayer resultSymbolLayer = new SymbolLayer(LAYER_ID, RESULT_GEOJSON_SOURCE_ID);
-    resultSymbolLayer.setProperties(
+    loadedMapStyle.addLayer(new SymbolLayer(LAYER_ID, RESULT_GEOJSON_SOURCE_ID).withProperties(
       iconImage("RESULT-ICON-ID"),
-      iconOffset(new Float[]{0f, -12f}),
+      iconOffset(new Float[] {0f, -12f}),
       iconIgnorePlacement(true),
       iconAllowOverlap(true)
-    );
-    mapboxMap.addLayer(resultSymbolLayer);
+    ));
   }
 
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
 
-    // Move and display the click center layer's red marker icon to wherever the map was clicked on
-    GeoJsonSource clickLocationSource = mapboxMap.getSourceAs(CLICK_CENTER_GEOJSON_SOURCE_ID);
-    if (clickLocationSource != null) {
-      clickLocationSource.setGeoJson(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
+    Style style = mapboxMap.getStyle();
+    if (style != null) {
+      // Move and display the click center layer's red marker icon to wherever the map was clicked on
+      GeoJsonSource clickLocationSource = style.getSourceAs(CLICK_CENTER_GEOJSON_SOURCE_ID);
+      if (clickLocationSource != null) {
+        clickLocationSource.setGeoJson(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(),
+          point.getLatitude())));
+      }
+
+      // Use the map click location to make a Tilequery API call
+      makeTilequeryApiCall(style, point);
+
+      return true;
     }
 
-    // Use the map click location to make a Tilequery API call
-    makeTilequeryApiCall(point);
+    return false;
   }
 
   /**
@@ -151,7 +156,7 @@ public class TilequeryActivity extends AppCompatActivity implements
    *
    * @param point the center point that the the tilequery will originate from.
    */
-  private void makeTilequeryApiCall(@NonNull LatLng point) {
+  private void makeTilequeryApiCall(@NonNull final Style style, @NonNull LatLng point) {
     MapboxTilequery tilequery = MapboxTilequery.builder()
       .accessToken(getString(R.string.access_token))
       .mapIds("mapbox.mapbox-streets-v7")
@@ -167,7 +172,7 @@ public class TilequeryActivity extends AppCompatActivity implements
       @Override
       public void onResponse(Call<FeatureCollection> call, Response<FeatureCollection> response) {
         tilequeryResponseTextView.setText(response.body().toJson());
-        GeoJsonSource resultSource = mapboxMap.getSourceAs(RESULT_GEOJSON_SOURCE_ID);
+        GeoJsonSource resultSource = style.getSourceAs(RESULT_GEOJSON_SOURCE_ID);
         if (resultSource != null && response.body().features() != null) {
           resultSource.setGeoJson(FeatureCollection.fromFeatures(response.body().features()));
         }
@@ -184,8 +189,8 @@ public class TilequeryActivity extends AppCompatActivity implements
   /**
    * Use the Maps SDK's LocationComponent to display the device location on the map
    */
-  @SuppressWarnings({"MissingPermission"})
-  private void displayDeviceLocation() {
+  @SuppressWarnings( {"MissingPermission"})
+  private void displayDeviceLocation(@NonNull Style loadedMapStyle) {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
@@ -193,7 +198,7 @@ public class TilequeryActivity extends AppCompatActivity implements
       LocationComponent locationComponent = mapboxMap.getLocationComponent();
 
       // Activate with options
-      locationComponent.activateLocationComponent(this);
+      locationComponent.activateLocationComponent(this, loadedMapStyle);
 
       // Enable to make component visible
       locationComponent.setLocationComponentEnabled(true);
@@ -226,8 +231,9 @@ public class TilequeryActivity extends AppCompatActivity implements
 
   @Override
   public void onPermissionResult(boolean granted) {
-    if (granted) {
-      displayDeviceLocation();
+    Style style = mapboxMap.getStyle();
+    if (granted && style != null) {
+      displayDeviceLocation(style);
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
       finish();

@@ -12,6 +12,6 @@
         mapbox:mapbox_cameraTargetLat="40.879"
         mapbox:mapbox_cameraTargetLng="-76.476"
         mapbox:mapbox_cameraZoom="4.3"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"/>
+        />
 
 </android.support.constraint.ConstraintLayout>

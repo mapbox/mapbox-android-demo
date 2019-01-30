@@ -5,29 +5,32 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.Polygon;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.FillLayer;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Use the query feature to select a building, get its geometry, and draw a polygon highlighting it.
  */
 public class SelectBuildingActivity extends AppCompatActivity implements OnMapReadyCallback,
-  MapboxMap.OnMapClickListener  {
+  MapboxMap.OnMapClickListener {
 
   private MapView mapView;
-  private com.mapbox.mapboxsdk.annotations.Polygon selectedBuilding;
   private MapboxMap mapboxMap;
+  private Style style;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -46,47 +49,40 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     SelectBuildingActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        SelectBuildingActivity.this.style = style;
+        style.addSource(new GeoJsonSource("source-id"));
+
+        style.addLayer(new FillLayer("layer-id", "source-id").withProperties(
+          PropertyFactory.fillColor(Color.parseColor("#8A8ACB"))
+        ));
+
+        mapboxMap.addOnMapClickListener(SelectBuildingActivity.this);
+        Toast.makeText(SelectBuildingActivity.this,
+          getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
-
-    if (selectedBuilding != null) {
-      mapboxMap.removePolygon(selectedBuilding);
+  public boolean onMapClick(@NonNull LatLng point) {
+    if (!style.isFullyLoaded()) {
+      return false;
     }
 
     final PointF finalPoint = mapboxMap.getProjection().toScreenLocation(point);
     List<Feature> features = mapboxMap.queryRenderedFeatures(finalPoint, "building");
-
     if (features.size() > 0) {
-      String featureId = features.get(0).id();
-
-      for (int a = 0; a < features.size(); a++) {
-        if (featureId.equals(features.get(a).id())) {
-          if (features.get(a).geometry() instanceof Polygon) {
-
-            List<LatLng> list = new ArrayList<>();
-            for (int i = 0; i < ((Polygon) features.get(a).geometry()).coordinates().size(); i++) {
-              for (int j = 0;
-                   j < ((Polygon) features.get(a).geometry()).coordinates().get(i).size(); j++) {
-                list.add(new LatLng(
-                  ((Polygon) features.get(a).geometry()).coordinates().get(i).get(j).latitude(),
-                  ((Polygon) features.get(a).geometry()).coordinates().get(i).get(j).longitude()
-                ));
-              }
-            }
-
-            selectedBuilding = mapboxMap.addPolygon(new PolygonOptions()
-              .addAll(list)
-              .fillColor(Color.parseColor("#8A8ACB"))
-            );
-          }
-        }
+      GeoJsonSource selectedBuildingSource = style.getSourceAs("source-id");
+      if (selectedBuildingSource != null) {
+        selectedBuildingSource.setGeoJson(FeatureCollection.fromFeatures(features));
       }
     }
+    return false;
   }
 
   @Override

@@ -6,5 +6,6 @@
 	"RotationExtrusionActivity",
 	"StaticImageActivity",
 	"PulsingLayerOpacityColorActivity",
-	"LocationComponentFragmentActivity"
+	"LocationComponentFragmentActivity",
+	"InsetMapActivity"
 ]

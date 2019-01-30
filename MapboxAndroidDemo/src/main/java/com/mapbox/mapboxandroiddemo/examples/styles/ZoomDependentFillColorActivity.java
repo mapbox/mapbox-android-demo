@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -10,6 +11,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 
@@ -40,24 +42,30 @@ public class ZoomDependentFillColorActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
+        mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-        FillLayer layer = mapboxMap.getLayerAs("water");
-        if (layer == null) {
-          return;
-        }
+            FillLayer layer = style.getLayerAs("water");
+            if (layer == null) {
+              return;
+            }
 
-        //Set a zoom function to update the color of the water
-        layer.setProperties(
-          fillColor(Expression.interpolate(Expression.exponential(1f), zoom(),
-            stop(1f, rgb(0,209,22)),
-            stop(8.5f, rgb(10,88,255)),
-            stop(10f, rgb(255,10,10)),
-            stop(18f, rgb(251,255,0)))));
+            //Set a zoom function to update the color of the water
+            layer.setProperties(
+              fillColor(Expression.interpolate(Expression.exponential(1f), zoom(),
+                stop(1f, rgb(0,209,22)),
+                stop(8.5f, rgb(10,88,255)),
+                stop(10f, rgb(255,10,10)),
+                stop(18f, rgb(251,255,0)))));
 
-        mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(40.73581, -73.99155), 12), 12000);
+            mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+              new LatLng(40.73581, -73.99155), 12), 12000);
 
+          }
+        });
       }
     });
   }

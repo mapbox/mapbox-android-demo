@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".examples.annotations.DrawGeojsonLineActivity">
+    tools:context=".examples.dds.DrawGeojsonLineActivity">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="45.5076"
         mapbox:mapbox_cameraTargetLng="-122.6736"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"
         mapbox:mapbox_cameraZoom="11"/>
 
 </RelativeLayout>

@@ -26,7 +26,6 @@
         mapbox:mapbox_cameraTargetLng="100.501765"
         mapbox:mapbox_cameraTilt="0"
         mapbox:mapbox_cameraZoom="3"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_satellite_streets"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp"/>
 

@@ -14,6 +14,6 @@
         mapbox:mapbox_cameraTargetLat="50.844999"
         mapbox:mapbox_cameraTargetLng="4.356449"
         mapbox:mapbox_cameraZoom="15"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light"/>
+        />
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.mapbox.mapboxandroiddemo.examples.offline;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.offline.OfflineManager;
 import com.mapbox.mapboxsdk.offline.OfflineRegion;
 import com.mapbox.mapboxsdk.offline.OfflineRegionError;
@@ -67,37 +69,42 @@ public class OfflineManagerActivity extends AppCompatActivity {
     setContentView(R.layout.activity_offline_manager);
 
     // Set up the MapView
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
         map = mapboxMap;
-      }
-    });
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-    // Assign progressBar for later use
-    progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+            // Assign progressBar for later use
+            progressBar = findViewById(R.id.progress_bar);
 
-    // Set up the offlineManager
-    offlineManager = OfflineManager.getInstance(this);
+            // Set up the offlineManager
+            offlineManager = OfflineManager.getInstance(OfflineManagerActivity.this);
 
-    // Bottom navigation bar button clicks are handled here.
-    // Download offline button
-    downloadButton = (Button) findViewById(R.id.download_button);
-    downloadButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        downloadRegionDialog();
-      }
-    });
+            // Bottom navigation bar button clicks are handled here.
+            // Download offline button
+            downloadButton = findViewById(R.id.download_button);
+            downloadButton.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                downloadRegionDialog();
+              }
+            });
 
-    // List offline regions
-    listButton = (Button) findViewById(R.id.list_button);
-    listButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        downloadedRegionList();
+            // List offline regions
+            listButton =  findViewById(R.id.list_button);
+            listButton.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                downloadedRegionList();
+              }
+            });
+          }
+        });
       }
     });
   }
@@ -193,7 +200,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
     // Create offline definition using the current
     // style and boundaries of visible map area
-    String styleUrl = map.getStyleUrl();
+    String styleUrl = map.getStyle().getUrl();
     LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
     double minZoom = map.getCameraPosition().zoom;
     double maxZoom = map.getMaxZoomLevel();

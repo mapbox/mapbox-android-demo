@@ -2,34 +2,45 @@ package com.mapbox.mapboxandroiddemo.examples.camera;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.mapbox.geojson.Point;
+import com.mapbox.geojson.Polygon;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Marker;
-import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.FillLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 
 /**
  * Restrict the map camera to certain bounds.
  */
 public class RestrictCameraActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-  private static final LatLngBounds AUSTRALIA_BOUNDS = new LatLngBounds.Builder()
-    .include(new LatLng(-9.136343, 109.372126))
-    .include(new LatLng(-44.640488, 158.590484))
+  private static final List<List<Point>> POINTS = new ArrayList<>();
+  private static final List<Point> OUTER_POINTS = new ArrayList<>();
+  private static final LatLng BOUND_CORNER_NW = new LatLng(-8.491377105132457, 108.26584125231903);
+  private static final LatLng BOUND_CORNER_SE = new LatLng(-42.73740968175186, 158.19629538046348);
+  private static final LatLngBounds RESTRICTED_BOUNDS_AREA = new LatLngBounds.Builder()
+    .include(BOUND_CORNER_NW)
+    .include(BOUND_CORNER_SE)
     .build();
-
   private MapView mapView;
-  private MapboxMap mapboxMap;
-  private Marker marker;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -42,35 +53,55 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_camera_restrict);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
-    this.mapboxMap = mapboxMap;
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-    // Set bounds to Australia
-    mapboxMap.setLatLngBoundsForCameraTarget(AUSTRALIA_BOUNDS);
-    mapboxMap.setMinZoomPreference(2);
+    mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        // Set the boundary area for the map camera
+        mapboxMap.setLatLngBoundsForCameraTarget(RESTRICTED_BOUNDS_AREA);
 
-    // Visualise bounds area
-    showBoundsArea();
+        // Set the minimum zoom level of the map camera
+        mapboxMap.setMinZoomPreference(2);
 
-    showCrosshair();
+        showBoundsArea(style);
 
+        showCrosshair();
+      }
+    });
   }
 
-  private void showBoundsArea() {
-    PolygonOptions boundsArea = new PolygonOptions()
-      .add(AUSTRALIA_BOUNDS.getNorthWest())
-      .add(AUSTRALIA_BOUNDS.getNorthEast())
-      .add(AUSTRALIA_BOUNDS.getSouthEast())
-      .add(AUSTRALIA_BOUNDS.getSouthWest());
-    boundsArea.alpha(0.25f);
-    boundsArea.fillColor(Color.RED);
-    mapboxMap.addPolygon(boundsArea);
+  /**
+   * Add a FillLayer to show the boundary area
+   *
+   * @param loadedMapStyle a Style object which has been loaded by the map
+   */
+  private void showBoundsArea(@NonNull Style loadedMapStyle) {
+    OUTER_POINTS.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getNorthWest().getLongitude(),
+      RESTRICTED_BOUNDS_AREA.getNorthWest().getLatitude()));
+    OUTER_POINTS.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getNorthEast().getLongitude(),
+      RESTRICTED_BOUNDS_AREA.getNorthEast().getLatitude()));
+    OUTER_POINTS.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getSouthEast().getLongitude(),
+      RESTRICTED_BOUNDS_AREA.getSouthEast().getLatitude()));
+    OUTER_POINTS.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getSouthWest().getLongitude(),
+      RESTRICTED_BOUNDS_AREA.getSouthWest().getLatitude()));
+    OUTER_POINTS.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getNorthWest().getLongitude(),
+      RESTRICTED_BOUNDS_AREA.getNorthWest().getLatitude()));
+    POINTS.add(OUTER_POINTS);
+
+    loadedMapStyle.addSource(new GeoJsonSource("source-id",
+      Polygon.fromLngLats(POINTS)));
+
+    loadedMapStyle.addLayer(new FillLayer("layer-id", "source-id").withProperties(
+      fillColor(Color.RED),
+      fillOpacity(.25f)
+    ));
   }
 
   private void showCrosshair() {
@@ -79,7 +110,6 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
     crosshair.setBackgroundColor(Color.GREEN);
     mapView.addView(crosshair);
   }
-
 
   @Override
   protected void onStart() {

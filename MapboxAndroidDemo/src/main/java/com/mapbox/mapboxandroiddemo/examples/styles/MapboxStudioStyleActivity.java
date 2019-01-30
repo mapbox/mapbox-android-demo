@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -8,6 +9,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Use a custom Mapbox-hosted style.
@@ -27,14 +29,12 @@ public class MapboxStudioStyleActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_mapbox_studio);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-
-        // Customize map with markers, polylines, etc.
-
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+        mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cj3kbeqzo00022smj7akz3o1e"));
       }
     });
   }

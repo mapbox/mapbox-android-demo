@@ -8,8 +8,7 @@
     <com.mapbox.mapboxsdk.plugins.china.maps.ChinaMapView
         android:id="@id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light" />
+        android:layout_height="match_parent" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/switch_heatmap_style_fab"

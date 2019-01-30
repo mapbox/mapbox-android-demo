@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.basics;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -8,6 +9,8 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+
 
 /**
  * The most basic example of adding a map to an activity.
@@ -27,14 +30,20 @@ public class SimpleMapViewActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_basic_simple_mapview);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-        // Customize map with markers, polylines, etc.
+            // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
 
+
+          }
+        });
       }
     });
   }

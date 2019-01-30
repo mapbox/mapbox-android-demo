@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -9,6 +10,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.traffic.TrafficPlugin;
 
 /**
@@ -32,23 +34,30 @@ public class TrafficPluginActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_traffic_plugin);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(final MapboxMap mapboxMap) {
         map = mapboxMap;
-        trafficPlugin = new TrafficPlugin(mapView, mapboxMap);
-        TrafficPluginActivity.this.trafficPlugin.setVisibility(true); // Enable the traffic view by default
-      }
-    });
+        mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            trafficPlugin = new TrafficPlugin(mapView, mapboxMap, style);
 
-    findViewById(R.id.traffic_toggle_fab).setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        if (map != null) {
-          trafficPlugin.setVisibility(!trafficPlugin.isVisible());
-        }
+            // Enable the traffic view by default
+            trafficPlugin.setVisibility(true);
+
+            findViewById(R.id.traffic_toggle_fab).setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                if (map != null) {
+                  trafficPlugin.setVisibility(!trafficPlugin.isVisible());
+                }
+              }
+            });
+          }
+        });
       }
     });
   }

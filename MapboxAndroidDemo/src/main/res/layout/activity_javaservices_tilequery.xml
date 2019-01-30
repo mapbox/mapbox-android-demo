@@ -19,7 +19,7 @@
         mapbox:mapbox_cameraTargetLat="40.73581"
         mapbox:mapbox_cameraTargetLng="-73.99155"
         mapbox:mapbox_cameraZoom="11"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets" />
+        />
 
     <android.support.v7.widget.CardView
         android:layout_width="0dp"

@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -9,6 +10,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -36,28 +38,33 @@ public class GeojsonLayerInStackActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_geojson_layer_in_stack);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-        try {
-          URL geoJsonUrl = new URL("https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_urban_areas.geojson");
-          GeoJsonSource urbanAreasSource = new GeoJsonSource("urban-areas", geoJsonUrl);
-          mapboxMap.addSource(urbanAreasSource);
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            try {
+              URL geoJsonUrl = new URL("https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_urban_areas.geojson");
+              GeoJsonSource urbanAreasSource = new GeoJsonSource("urban-areas", geoJsonUrl);
+              style.addSource(urbanAreasSource);
 
-          FillLayer urbanArea = new FillLayer("urban-areas-fill", "urban-areas");
+              FillLayer urbanArea = new FillLayer("urban-areas-fill", "urban-areas");
 
-          urbanArea.setProperties(
-              fillColor(Color.parseColor("#ff0088")),
-              fillOpacity(0.4f)
-          );
+              urbanArea.setProperties(
+                fillColor(Color.parseColor("#ff0088")),
+                fillOpacity(0.4f)
+              );
 
-          mapboxMap.addLayerBelow(urbanArea, "water");
-        } catch (MalformedURLException malformedUrlException) {
-          malformedUrlException.printStackTrace();
-        }
+              style.addLayerBelow(urbanArea, "water");
+            } catch (MalformedURLException malformedUrlException) {
+              malformedUrlException.printStackTrace();
+            }
+          }
+        });
       }
     });
   }

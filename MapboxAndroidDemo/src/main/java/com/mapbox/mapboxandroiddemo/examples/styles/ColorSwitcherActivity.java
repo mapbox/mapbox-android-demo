@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,6 +14,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
@@ -23,7 +25,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 public class ColorSwitcherActivity extends AppCompatActivity {
 
   private MapView mapView;
-  private MapboxMap map;
   FillLayer water;
   FillLayer building;
 
@@ -38,11 +39,11 @@ public class ColorSwitcherActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_color_switcher);
 
-    final SeekBar redSeekBar = (SeekBar) findViewById(R.id.red_seek_bar);
-    final SeekBar greenSeekBar = (SeekBar) findViewById(R.id.green_seek_bar);
-    final SeekBar blueSeekBar = (SeekBar) findViewById(R.id.blue_seek_bar);
+    final SeekBar redSeekBar = findViewById(R.id.red_seek_bar);
+    final SeekBar greenSeekBar =  findViewById(R.id.green_seek_bar);
+    final SeekBar blueSeekBar = findViewById(R.id.blue_seek_bar);
 
-    final Spinner layerPicker = (Spinner) findViewById(R.id.spinner_layer_picker);
+    final Spinner layerPicker = findViewById(R.id.spinner_layer_picker);
 
     layerPicker.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
       @Override
@@ -147,16 +148,18 @@ public class ColorSwitcherActivity extends AppCompatActivity {
       }
     });
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-        map = mapboxMap;
-
-        water = (FillLayer) map.getLayer("water");
-        building = (FillLayer) map.getLayer("building");
-
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            water = (FillLayer) style.getLayer("water");
+            building = (FillLayer) style.getLayer("building");
+          }
+        });
       }
     });
   }

@@ -13,11 +13,12 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.light.Light;
 import com.mapbox.mapboxsdk.style.light.Position;
+import com.mapbox.mapboxsdk.utils.ColorUtils;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
@@ -37,7 +38,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpa
 public class AdjustExtrusionLightActivity extends AppCompatActivity {
 
   private MapView mapView;
-  private MapboxMap mapboxMap;
   private Light light;
   private boolean isMapAnchorLight;
   private boolean isLowIntensityLight;
@@ -59,14 +59,18 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
-        mapboxMap = map;
-        setupBuildings();
-        setupLight();
+        map.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            setupBuildings(style);
+            setupLight(style);
+          }
+        });
       }
     });
   }
 
-  private void setupBuildings() {
+  private void setupBuildings(@NonNull Style loadedMapStyle) {
     FillExtrusionLayer fillExtrusionLayer = new FillExtrusionLayer("3d-buildings", "composite");
     fillExtrusionLayer.setSourceLayer("building");
     fillExtrusionLayer.setFilter(eq(get("extrude"), "true"));
@@ -84,11 +88,11 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
       fillExtrusionBase(get("min_height")),
       fillExtrusionOpacity(0.9f)
     );
-    mapboxMap.addLayer(fillExtrusionLayer);
+    loadedMapStyle.addLayer(fillExtrusionLayer);
   }
 
-  private void setupLight() {
-    light = mapboxMap.getLight();
+  private void setupLight(@NonNull Style loadedMapStyle) {
+    light = loadedMapStyle.getLight();
 
     findViewById(R.id.fabLightPosition).setOnClickListener(new View.OnClickListener() {
       @Override
@@ -106,7 +110,7 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
       @Override
       public void onClick(View view) {
         isRedColor = !isRedColor;
-        light.setColor(PropertyFactory.colorToRgbaString(isRedColor ? Color.RED : Color.BLUE));
+        light.setColor(ColorUtils.colorToRgbaString(isRedColor ? Color.RED : Color.BLUE));
       }
     });
   }
@@ -176,5 +180,4 @@ public class AdjustExtrusionLightActivity extends AppCompatActivity {
     super.onDestroy();
     mapView.onDestroy();
   }
-
 }

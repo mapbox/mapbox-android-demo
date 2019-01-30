@@ -33,6 +33,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.turf.TurfConversion;
 
 import java.io.InputStream;
@@ -78,30 +79,36 @@ public class MatrixApiActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         MatrixApiActivity.this.mapboxMap = mapboxMap;
 
-        // Add markers to the map
-        addMarkers();
+        mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cj8gg22et19ot2rnz65958fkn"),
+          new Style.OnStyleLoaded() {
+            @Override
+            public void onStyleLoaded(@NonNull Style style) {
+              // Add markers to the map
+              addMarkers();
 
-        // Set up list of locations to pass to the recyclerview
-        initMatrixLocationListForRecyclerView();
+              // Set up list of locations to pass to the recyclerview
+              initMatrixLocationListForRecyclerView();
 
-        // Set up the recyclerview of charging station cards
-        initRecyclerView();
+              // Set up the recyclerview of charging station cards
+              initRecyclerView();
 
-        mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
-          @Override
-          public boolean onMarkerClick(@NonNull Marker marker) {
+              mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(@NonNull Marker marker) {
 
-            // Make a call to the Mapbox Matrix API
-            makeMapboxMatrixApiCall(getClickedMarkerNumInPositionList(marker), Point.fromLngLat(
-              marker.getPosition().getLongitude(), marker.getPosition().getLatitude()));
-            return false;
-          }
-        });
-        Toast.makeText(MatrixApiActivity.this, R.string.click_on_marker_instruction_toast,
-          Toast.LENGTH_SHORT).show();
+                  // Make a call to the Mapbox Matrix API
+                  makeMapboxMatrixApiCall(getClickedMarkerNumInPositionList(marker), Point.fromLngLat(
+                    marker.getPosition().getLongitude(), marker.getPosition().getLatitude()));
+                  return false;
+                }
+              });
+              Toast.makeText(MatrixApiActivity.this, R.string.click_on_marker_instruction_toast,
+                Toast.LENGTH_SHORT).show();
+            }
+          });
       }
     });
   }

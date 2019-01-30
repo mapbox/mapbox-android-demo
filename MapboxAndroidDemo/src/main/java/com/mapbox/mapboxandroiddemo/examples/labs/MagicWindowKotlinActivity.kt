@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.*
-import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -16,16 +15,15 @@ import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
-import com.mapbox.android.core.location.LocationEngine
-import com.mapbox.android.core.location.LocationEngineListener
-import com.mapbox.android.core.location.LocationEnginePriority
-import com.mapbox.android.core.location.LocationEngineProvider
+import android.widget.Toast
+import com.mapbox.android.core.location.*
 import com.mapbox.mapboxandroiddemo.R
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.activity_magic_window.*
 import kotlin.math.max
 import kotlin.math.min
@@ -41,13 +39,17 @@ import kotlin.math.min
  *
  * Moving the magic window requires Android O and above.
  */
-class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineListener {
-    lateinit var listener: DragListener
-    lateinit var locationEngine: LocationEngine
-    var base: MapboxMap? = null
-    var revealed: MapboxMap? = null
-    var initialPosition = LatLng(39.0, -77.0)
-    var initialZoom = 8.0
+class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineCallback<LocationEngineResult> {
+    private lateinit var listener: DragListener
+    private lateinit var locationEngine: LocationEngine
+    private var base: MapboxMap? = null
+    private var revealed: MapboxMap? = null
+    private var initialPosition = LatLng(39.0, -77.0)
+    private var initialZoom = 8.0
+
+    private val DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L
+    private val DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5
+
     companion object {
         const val TAG = "DragActivityTag"
         const val PERMISSION_REQUEST_LOCATION = 404
@@ -68,6 +70,7 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineListener {
 
         baseMap.getMapAsync { map: MapboxMap? ->
             if (map != null) {
+                map.setStyle(Style.DARK)
                 base = map
                 if (savedInstanceState == null) {
                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(initialPosition, initialZoom))
@@ -78,11 +81,17 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineListener {
             }
             synchronizeMaps()
         }
-        revealedMap.getMapAsync({ map: MapboxMap? -> revealed = map })
+
+        revealedMap.getMapAsync { map: MapboxMap? ->
+            if (map != null) {
+                revealed = map
+                map.setStyle(Style.SATELLITE)
+            }
+        }
 
         parentView.viewTreeObserver.addOnGlobalLayoutListener {
             val yMax = (parentView.height - revealedMap.height).toFloat()
-            listener = DragListener(yMin = 0.0f, yMax = yMax )
+            listener = DragListener(yMin = 0.0f, yMax = yMax)
             listener.setOnDragListener { synchronizeMaps() }
             magicWindow.setOnTouchListener(listener)
             synchronizeMaps()
@@ -119,30 +128,28 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineListener {
 
     @SuppressLint("MissingPermission")
     fun initializeLocationEngine() {
-        val provider = LocationEngineProvider(this)
-        locationEngine = provider.obtainBestLocationEngineAvailable()
-        locationEngine.priority = LocationEnginePriority.BALANCED_POWER_ACCURACY
-        locationEngine.activate()
+        locationEngine = LocationEngineProvider.getBestLocationEngine(this)
 
-        val last = locationEngine.lastLocation
-        if (last != null) {
-            locationEngine.deactivate()
-            setInitialMapPosition(LatLng(last.latitude, last.longitude))
-        } else {
-            locationEngine.addLocationEngineListener(this)
+        var request = LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
+                .setPriority(LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
+                .setMaxWaitTime(DEFAULT_MAX_WAIT_TIME).build()
+
+        locationEngine.requestLocationUpdates(request, this, mainLooper)
+
+        locationEngine.getLastLocation(this)
+    }
+
+    override fun onSuccess(result: LocationEngineResult?) {
+        if (result != null) {
+            setInitialMapPosition(LatLng(result.lastLocation!!.latitude,
+                    result.lastLocation!!.longitude))
+            locationEngine.removeLocationUpdates(this)
         }
     }
 
-    override fun onConnected() {
-        // noop
-    }
-
-    override fun onLocationChanged(location: Location?) {
-        if (location != null) {
-            setInitialMapPosition(LatLng(location.latitude, location.longitude))
-            locationEngine.deactivate()
-            locationEngine.removeLocationEngineListener(this)
-        }
+    override fun onFailure(exception: Exception) {
+        Toast.makeText(this, getString(R.string.could_not_get_location),
+                Toast.LENGTH_SHORT).show()
     }
 
     fun synchronizeMaps() {
@@ -270,10 +277,11 @@ class DragListener(val yMax: Float = Float.POSITIVE_INFINITY, val yMin: Float = 
     }
 }
 
-class MaskedView: FrameLayout {
-    constructor(context: Context): super(context)
-    constructor(context: Context, attrs: AttributeSet?): super(context, attrs)
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int): super(context, attrs, defStyleAttr)
+class MaskedView : FrameLayout {
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
     val strokeWidth = dpToPixels(1.0f)
     val mask by lazy {
         val b = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888)

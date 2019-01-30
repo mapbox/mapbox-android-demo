@@ -15,6 +15,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -33,8 +34,6 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
   private MapboxMap mapboxMap;
   private static final String geoJsonSourceId = "geoJsonData";
   private static final String geoJsonLayerId = "polygonFillLayer";
-  private FillLayer layer;
-  private GeoJsonSource source;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -56,20 +55,25 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     ClickOnLayerActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        mapboxMap.addOnMapClickListener(ClickOnLayerActivity.this);
+        addGeoJsonSourceToMap(style);
 
-    addGeoJsonSourceToMap();
-
-    // Create FillLayer with GeoJSON source and add the FillLayer to the map
-    layer = new FillLayer(geoJsonLayerId, geoJsonSourceId);
-    layer.setProperties(fillOpacity(0.5f));
-    mapboxMap.addLayer(layer);
+        // Create FillLayer with GeoJSON source and add the FillLayer to the map
+        if (style != null) {
+          style.addLayer(new FillLayer(geoJsonLayerId, geoJsonSourceId)
+            .withProperties(fillOpacity(0.5f)));
+        }
+      }
+    });
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
     RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
     List<Feature> featureList = mapboxMap.queryRenderedFeatures(rectF, geoJsonLayerId);
@@ -79,19 +83,17 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
         Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast,
           Toast.LENGTH_SHORT).show();
       }
+      return true;
     }
+    return false;
   }
 
-  private void addGeoJsonSourceToMap() {
+  private void addGeoJsonSourceToMap(@NonNull Style loadedMapStyle) {
     try {
-      // Load GeoJSONSource
-      source = new GeoJsonSource(geoJsonSourceId, new URL("https://gist.githubusercontent"
-        + ".com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303"
-        + "d58f20f4a1d8841e8/regions.geojson"));
-
       // Add GeoJsonSource to map
-      mapboxMap.addSource(source);
-
+      loadedMapStyle.addSource(new GeoJsonSource(geoJsonSourceId, new URL("https://gist.githubusercontent"
+        + ".com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303"
+        + "d58f20f4a1d8841e8/regions.geojson")));
     } catch (Throwable throwable) {
       Log.e("ClickOnLayerActivity", "Couldn't add GeoJsonSource to map", throwable);
     }

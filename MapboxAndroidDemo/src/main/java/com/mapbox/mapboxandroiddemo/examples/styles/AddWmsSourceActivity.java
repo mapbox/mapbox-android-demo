@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -9,6 +10,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.RasterSource;
 import com.mapbox.mapboxsdk.style.sources.TileSet;
@@ -31,23 +33,28 @@ public class AddWmsSourceActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_add_wms_source);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-        RasterSource webMapSource = new RasterSource(
-          "web-map-source",
-          new TileSet("tileset", "https://geodata.state.nj.us/imagerywms/Natural2015?bbox={"
-            + "bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&"
-            + "srs=EPSG:3857&width=256&height=256&layers=Natural2015"), 256);
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-        mapboxMap.addSource(webMapSource);
+            style.addSource(new RasterSource(
+              "web-map-source",
+              new TileSet("tileset", "https://geodata.state.nj.us/imagerywms/Natural2015?bbox={"
+                + "bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&"
+                + "srs=EPSG:3857&width=256&height=256&layers=Natural2015"), 256));
 
-        // Add the web map source to the map.
-        RasterLayer webMapLayer = new RasterLayer("web-map-layer", "web-map-source");
-        mapboxMap.addLayerBelow(webMapLayer, "aeroway-taxiway");
+            // Add the web map source to the map.
+            style.addLayerBelow(
+              new RasterLayer("web-map-layer", "web-map-source"), "aeroway-taxiway");
+
+          }
+        });
       }
     });
   }

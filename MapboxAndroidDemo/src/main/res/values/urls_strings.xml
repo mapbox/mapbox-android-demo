@@ -5,10 +5,9 @@
     to load an image in each example's recyclerview card ****** -->
 
     <string name="empty_image"> </string>
-    <string name="activity_basic_simple_mapview_url" translatable="false">http://i.imgur.com/IIhIB4J.png</string>
-    <string name="activity_basic_support_map_frag_url" translatable="false">http://i.imgur.com/vNlHFjG.png</string>
-    <string name="activity_basic_mapbox_options_url" translatable="false">http://i.imgur.com/IhuviRz.png</string>
-    <string name="activity_basic_mapbox_kotlin_url" translatable="false">https://i.imgur.com/YlKYHAi.png</string>
+    <string name="activity_basic_simple_mapview_url" translatable="false">https://i.imgur.com/UF3B0o8.png</string>
+    <string name="activity_basic_support_map_frag_url" translatable="false">https://i.imgur.com/y5QIBeM.png</string>
+    <string name="activity_basic_mapbox_options_url" translatable="false">https://i.imgur.com/CRtK8UE.png</string>
     <string name="activity_styles_mapbox_studio_url" translatable="false">http://i.imgur.com/MbR2zbD.png</string>
     <string name="activity_style_raster_url" translatable="false">http://i.imgur.com/QpFmrdR.png</string>
     <string name="activity_styles_default_url" translatable="false">http://i.imgur.com/ZuUhFHw.jpg</string>
@@ -51,13 +50,11 @@
     <string name="activity_dds_expression_integration_url" translatable="false">https://imgur.com/YiBeH0I.png</string>
     <string name="activity_dds_satellite_land_select_url" translatable="false">https://i.imgur.com/tfbO1m4.png</string>
     <string name="activity_annotation_marker_url" translatable="false">http://i.imgur.com/X59UoaY.png</string>
-    <string name="activity_annotation_custom_marker_url" translatable="false">http://i.imgur.com/BIHtPwJ.png</string>
-    <string name="activity_annotation_geojson_line_url" translatable="false">http://i.imgur.com/rIFjsrH.png</string>
-    <string name="activity_annotation_polygon_url" translatable="false">http://i.imgur.com/v9X28id.png</string>
-    <string name="activity_annotation_polygon_holes_url" translatable="false">http://i.imgur.com/uJ9ftZk.jpg</string>
+    <string name="activity_dds_geojson_line_url" translatable="false">https://i.imgur.com/Bs0X98z.png</string>
+    <string name="activity_dds_polygon_url" translatable="false">http://i.imgur.com/v9X28id.png</string>
+    <string name="activity_dds_polygon_holes_url" translatable="false">https://i.imgur.com/6hcqbNw.png</string>
     <string name="activity_annotation_basic_marker_view_url" translatable="false">http://i.imgur.com/vbWTLIE.png</string>
     <string name="activity_annotation_custom_info_window_url" translatable="false">http://i.imgur.com/mCWbosy.png</string>
-    <string name="activity_annotation_animated_marker_url" translatable="false">http://i.imgur.com/XegvIKr.png</string>
     <string name="activity_camera_animate_url" translatable="false">http://i.imgur.com/PN3vyNJ.jpg</string>
     <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string>
     <string name="activity_camera_restrict_url" translatable="false">http://i.imgur.com/A227BEs.jpg</string>
@@ -69,14 +66,14 @@
     <string name="activity_query_feature_count_url" translatable="false">http://i.imgur.com/phzOt81.png</string>
     <string name="activity_query_click_on_layer_url" translatable="false">https://i.imgur.com/z3aWAqM.png</string>
     <string name="activity_query_redo_search_in_area_url" translatable="false">https://i.imgur.com/42QIsQI.png</string>
-    <string name="activity_query_building_outline_url" translatable="false">https://i.imgur.com/40BSGmJ.png</string>
+    <string name="activity_query_building_outline_url" translatable="false">https://i.imgur.com/eCc9e7o.png</string>
     <string name="activity_query_highlighted_line_url" translatable="false">https://i.imgur.com/ZrZCl7G.png</string>
     <string name="activity_java_services_directions_url" translatable="false">http://i.imgur.com/DhQltqB.jpg</string>
     <string name="activity_java_services_static_image_url" translatable="false">https://i.imgur.com/aHxPYRU.png</string>
     <string name="activity_java_services_optimization_url" translatable="false">http://i.imgur.com/guEQtlP.jpg</string>
     <string name="activity_java_services_matrix_url" translatable="false">https://i.imgur.com/65RlfRZ.png</string>
     <string name="activity_java_services_geocoding_url" translatable="false">https://i.imgur.com/9xl3EF8.png</string>
-    <string name="activity_java_services_isochrone_url" translatable="false">https://i.imgur.com/HKOSK6j.png</string>
+    <string name="activity_java_services_isochrone_url" translatable="false">https://i.imgur.com/5tQPmDs.png</string>
     <string name="activity_java_services_tilequery_url" translatable="false">http://i.imgur.com/VkOCYwq.jpg</string>
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
@@ -84,6 +81,7 @@
     <string name="activity_plugins_geojson_plugin_url" translatable="false">http://i.imgur.com/kju0sKw.jpg</string>
     <string name="activity_plugins_localization_plugin_url" translatable="false">https://i.imgur.com/tsOM1am.png</string>
     <string name="activity_plugins_place_picker_plugin_url" translatable="false">https://i.imgur.com/fPZQg7z.png</string>
+    <string name="activity_plugins_markerview_plugin_url" translatable="false">https://i.imgur.com/DyDVUJr.png</string>
     <string name="activity_location_location_component_url" translatable="false">https://i.imgur.com/77PVsni.png</string>
     <string name="activity_location_user_location_fragment_plugin_url" translatable="false">https://i.imgur.com/1jG8WQG.png</string>
     <string name="activity_location_location_component_options_url" translatable="false">https://i.imgur.com/4HiEJC1.png</string>
@@ -91,6 +89,7 @@
     <string name="activity_java_services_map_matching_url" translatable="false">http://i.imgur.com/bWvVbwC.png</string>
     <string name="activity_image_generator_snapshot_notification_url" translatable="false">https://i.imgur.com/OiveDFG.png</string>
     <string name="activity_image_generator_snapshot_share_url" translatable="false">https://i.imgur.com/KgfsY3s.png</string>
+    <string name="activity_lab_animated_marker_url" translatable="false">http://i.imgur.com/XegvIKr.png</string>
     <string name="activity_lab_location_picker_url" translatable="false">http://i.imgur.com/0JTVwaa.png</string>
     <string name="activity_lab_marker_following_route_url" translatable="false">http://i.imgur.com/spsZu9X.png</string>
     <string name="activity_lab_space_station_location_url" translatable="false">http://i.imgur.com/PxuB1T8.png</string>

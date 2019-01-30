@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -8,6 +9,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.HeatmapLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -61,31 +63,36 @@ public class HeatmapActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
         HeatmapActivity.this.mapboxMap = mapboxMap;
-        addEarthquakeSource();
-        addHeatmapLayer();
-        addCircleLayer();
+        mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            addEarthquakeSource(style);
+            addHeatmapLayer(style);
+            addCircleLayer(style);
+          }
+        });
       }
     });
   }
 
-  private void addEarthquakeSource() {
+  private void addEarthquakeSource(@NonNull Style loadedMapStyle) {
     try {
-      mapboxMap.addSource(new GeoJsonSource(EARTHQUAKE_SOURCE_ID, new URL(EARTHQUAKE_SOURCE_URL)));
+      loadedMapStyle.addSource(new GeoJsonSource(EARTHQUAKE_SOURCE_ID, new URL(EARTHQUAKE_SOURCE_URL)));
     } catch (MalformedURLException malformedUrlException) {
       Timber.e(malformedUrlException, "That's not an url... ");
     }
   }
 
-  private void addHeatmapLayer() {
+  private void addHeatmapLayer(@NonNull Style loadedMapStyle) {
     HeatmapLayer layer = new HeatmapLayer(HEATMAP_LAYER_ID, EARTHQUAKE_SOURCE_ID);
     layer.setMaxZoom(9);
     layer.setSourceLayer(HEATMAP_LAYER_SOURCE);
     layer.setProperties(
 
       // Color ramp for heatmap.  Domain is 0 (low) to 1 (high).
-      // Begin color ramp at 0-stop with a 0-transparancy color
+      // Begin color ramp at 0-stop with a 0-transparency color
       // to create a blur-like effect.
       heatmapColor(
         interpolate(
@@ -137,10 +144,10 @@ public class HeatmapActivity extends AppCompatActivity {
       )
     );
 
-    mapboxMap.addLayerAbove(layer, "waterway-label");
+    loadedMapStyle.addLayerAbove(layer, "waterway-label");
   }
 
-  private void addCircleLayer() {
+  private void addCircleLayer(@NonNull Style loadedMapStyle) {
     CircleLayer circleLayer = new CircleLayer(CIRCLE_LAYER_ID, EARTHQUAKE_SOURCE_ID);
     circleLayer.setProperties(
 
@@ -186,7 +193,7 @@ public class HeatmapActivity extends AppCompatActivity {
       circleStrokeWidth(1.0f)
     );
 
-    mapboxMap.addLayerBelow(circleLayer, HEATMAP_LAYER_ID);
+    loadedMapStyle.addLayerBelow(circleLayer, HEATMAP_LAYER_ID);
   }
 
   @Override

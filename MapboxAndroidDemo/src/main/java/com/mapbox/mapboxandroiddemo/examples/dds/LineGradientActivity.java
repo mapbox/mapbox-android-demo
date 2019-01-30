@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.geojson.Feature;
@@ -12,11 +13,11 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.mapboxsdk.style.sources.Source;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,38 +57,39 @@ public class LineGradientActivity extends AppCompatActivity implements OnMapRead
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-    initCoordinates();
+    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        initCoordinates();
 
-    // Create the LineString from the list of coordinates and then make a GeoJSON
-    // FeatureCollection so we can add the line to our map as a layer.
-    LineString lineString = LineString.fromLngLats(routeCoordinates);
+        // Create the LineString from the list of coordinates and then make a GeoJSON
+        // FeatureCollection so we can add the line to our map as a layer.
+        LineString lineString = LineString.fromLngLats(routeCoordinates);
 
-    FeatureCollection featureCollection = FeatureCollection.fromFeature(Feature.fromGeometry(lineString));
+        FeatureCollection featureCollection = FeatureCollection.fromFeature(Feature.fromGeometry(lineString));
 
-    Source geoJsonSource = new GeoJsonSource("line-source", featureCollection,
-      new GeoJsonOptions().withLineMetrics(true));
-    mapboxMap.addSource(geoJsonSource);
+        style.addSource(new GeoJsonSource("line-source", featureCollection,
+            new GeoJsonOptions().withLineMetrics(true)));
 
-    LineLayer lineLayer = new LineLayer("linelayer", "line-source");
-
-    // The layer properties for our line. This is where we set the gradient colors, set the
-    // line width, etc.
-    lineLayer.setProperties(
-      lineCap(Property.LINE_CAP_ROUND),
-      lineJoin(Property.LINE_JOIN_ROUND),
-      lineWidth(14f),
-      lineGradient(interpolate(
-        linear(), lineProgress(),
-        stop(0f, rgb(6, 1, 255)), // blue
-        stop(0.1f, rgb(59, 118, 227)), // royal blue
-        stop(0.3f, rgb(7, 238, 251)), // cyan
-        stop(0.5f, rgb(0, 255, 42)), // lime
-        stop(0.7f, rgb(255, 252, 0)), // yellow
-        stop(1f, rgb(255, 30, 0)) // red
-      )));
-    mapboxMap.addLayer(lineLayer);
+        // The layer properties for our line. This is where we set the gradient colors, set the
+        // line width, etc
+        style.addLayer(new LineLayer("linelayer", "line-source").withProperties(
+            lineCap(Property.LINE_CAP_ROUND),
+            lineJoin(Property.LINE_JOIN_ROUND),
+            lineWidth(14f),
+            lineGradient(interpolate(
+              linear(), lineProgress(),
+              stop(0f, rgb(6, 1, 255)), // blue
+              stop(0.1f, rgb(59, 118, 227)), // royal blue
+              stop(0.3f, rgb(7, 238, 251)), // cyan
+              stop(0.5f, rgb(0, 255, 42)), // lime
+              stop(0.7f, rgb(255, 252, 0)), // yellow
+              stop(1f, rgb(255, 30, 0)) // red
+            ))));
+      }
+    });
   }
 
   private void initCoordinates() {

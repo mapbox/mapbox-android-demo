@@ -19,12 +19,14 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
 
 /**
  * Change the camera's bearing and tilt based on device movement while viewing building extrusions
  */
 public class RotationExtrusionActivity extends AppCompatActivity implements SensorEventListener {
+
   private MapView mapView;
   private MapboxMap mapboxMap;
   private SensorManager sensorManager;
@@ -51,19 +53,24 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_extrusion_rotation);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
         mapboxMap = map;
-        setupBuildingExtrusionPlugin();
+        mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            setupBuildingExtrusionPlugin(style);
+          }
+        });
       }
     });
   }
 
-  private void setupBuildingExtrusionPlugin() {
-    BuildingPlugin buildingPlugin = new BuildingPlugin(mapView, mapboxMap);
+  private void setupBuildingExtrusionPlugin(@NonNull Style style) {
+    BuildingPlugin buildingPlugin = new BuildingPlugin(mapView, mapboxMap, style);
     buildingPlugin.setColor(Color.LTGRAY);
     buildingPlugin.setOpacity(0.6f);
     buildingPlugin.setMinZoomLevel(15);
@@ -192,3 +199,4 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     }
   }
 }
+

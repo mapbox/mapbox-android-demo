@@ -17,8 +17,7 @@
         app:layout_constraintBottom_toTopOf="@+id/create_static_image_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/street_style_tv"

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshot;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshotter;
 
@@ -28,9 +30,9 @@ import java.io.IOException;
 public class SnapshotShareActivity extends AppCompatActivity {
   private MapView mapView;
   private MapSnapshotter mapSnapshotter;
-  private MapboxMap mapboxMap;
   private FloatingActionButton cameraFab;
   private boolean hasStartedSnapshotGeneration;
+  private Style style;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -54,31 +56,34 @@ public class SnapshotShareActivity extends AppCompatActivity {
     // Set a callback for when MapboxMap is ready to be used
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
-
-        SnapshotShareActivity.this.mapboxMap = mapboxMap;
-
-        // When user clicks the map, start the snapshotting process with the given parameters
-        cameraFab.setOnClickListener(new View.OnClickListener() {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+        mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
           @Override
-          public void onClick(View view) {
+          public void onStyleLoaded(@NonNull Style style) {
+            SnapshotShareActivity.this.style = style;
+            // When user clicks the map, start the snapshotting process with the given parameters
+            cameraFab.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
 
-            if (!hasStartedSnapshotGeneration) {
-              hasStartedSnapshotGeneration = true;
-              Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_LONG).show();
-              startSnapShot(
-                mapboxMap.getProjection().getVisibleRegion().latLngBounds,
-                mapView.getMeasuredHeight(),
-                mapView.getMeasuredWidth());
-            }
+                if (!hasStartedSnapshotGeneration) {
+                  hasStartedSnapshotGeneration = true;
+                  Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_LONG).show();
+                  startSnapShot(
+                    mapboxMap.getProjection().getVisibleRegion().latLngBounds,
+                    mapView.getMeasuredHeight(),
+                    mapView.getMeasuredWidth());
+                }
+              }
+            });
           }
         });
+
+        // To account for new security measures regarding file management that were released with Android Nougat.
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
       }
     });
-
-    // To account for new security measures regarding file management that were released with Android Nougat.
-    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-    StrictMode.setVmPolicy(builder.build());
   }
 
   /**
@@ -89,10 +94,14 @@ public class SnapshotShareActivity extends AppCompatActivity {
    * @param width        of map
    */
   private void startSnapShot(LatLngBounds latLngBounds, int height, int width) {
+    if (!style.isFullyLoaded()) {
+      return;
+    }
+
     if (mapSnapshotter == null) {
       // Initialize snapshotter with map dimensions and given bounds
       MapSnapshotter.Options options =
-        new MapSnapshotter.Options(width, height).withRegion(latLngBounds).withStyle(mapboxMap.getStyleUrl());
+        new MapSnapshotter.Options(width, height).withRegion(latLngBounds).withStyle(style.getUrl());
 
       mapSnapshotter = new MapSnapshotter(SnapshotShareActivity.this, options);
     } else {

@@ -1,6 +1,9 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -9,6 +12,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
@@ -17,10 +21,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
+import java.lang.ref.WeakReference;
+import java.util.Scanner;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
@@ -34,15 +37,14 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
  */
 public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-  private static final String STATE_UNEMPLOYMENT_INFO_JSON = "state_unemployment_info.json";
+  private static final String STATE_UNEMPLOYMENT_INFO_JSON_FILE = "state_unemployment_info.json";
   private static final String VECTOR_SOURCE_NAME = "states";
-  private static final String VECTOR_MATCH_PROP = "STATEFP";
   private static final String DATA_MATCH_PROP = "STATE_ID";
   private static final String DATA_STYLE_UNEMPLOYMENT_PROP = "unemployment";
 
   private MapView mapView;
+  private MapboxMap mapboxMap;
   private JSONArray statesArray;
-  private StringBuilder sb;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -61,50 +63,104 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
   }
 
   @Override
-  public void onMapReady(MapboxMap map) {
+  public void onMapReady(@NonNull final MapboxMap map) {
 
-    // Add Mapbox-hosted vector source for state polygons
-    VectorSource vectorSource = new VectorSource(VECTOR_SOURCE_NAME, "mapbox://mapbox.us_census_states_2015");
-    map.addSource(vectorSource);
+    this.mapboxMap = map;
+    map.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
 
-    loadJson();
+        // Add Mapbox-hosted vector source for state polygons
+        style.addSource(new VectorSource(VECTOR_SOURCE_NAME, "mapbox://mapbox.us_census_states_2015"));
 
-    try {
-      statesArray = new JSONArray(sb.toString());
-    } catch (Exception exception) {
-      Log.e("JSONVectorMix", "Exception Loading GeoJSON: ", exception);
-    }
-
-    // Create stops array
-    Expression.Stop[] stops = new Expression.Stop[statesArray.length()];
-
-    for (int x = 0; x < statesArray.length(); x++) {
-      try {
-        // Generate green color value for each state/stop
-        JSONObject singleState = statesArray.getJSONObject(x);
-        double green = singleState.getDouble(DATA_STYLE_UNEMPLOYMENT_PROP) / 14 * 255;
-
-        Log.d("Choropleth", "onMapReady: green value = " + String.valueOf(green) + " for x = " + x);
-        // Add new stop to array of stops
-        stops[x] = stop(
-          Double.parseDouble(singleState.getString(DATA_MATCH_PROP)),
-          rgba(0, green, 0, 1)
-        );
-
-      } catch (JSONException exception) {
-        throw new RuntimeException(exception);
+        new LoadJson(ChoroplethJsonVectorMixActivity.this).execute();
       }
-    }
+    });
+  }
 
-    // Create layer from the vector tile source with data-driven style
+  /**
+   * Create layer from the vector tile source with data-driven style
+   *
+   * @param stops the array of stops to use in the FillLayer
+   */
+  private void addDataToMap(@NonNull Expression.Stop[] stops) {
+
     FillLayer statesJoinLayer = new FillLayer("states-join", VECTOR_SOURCE_NAME);
     statesJoinLayer.setSourceLayer(VECTOR_SOURCE_NAME);
     statesJoinLayer.withProperties(
-      fillColor(match(toNumber(get(DATA_MATCH_PROP)), rgba(0, 0, 0, 1), stops))
+      fillColor(match(toNumber(get(DATA_MATCH_PROP)),
+        rgba(0, 0, 0, 1), stops))
     );
 
     // Add layer to map below the "waterway-label" layer
-    map.addLayerAbove(statesJoinLayer, "waterway-label");
+    if (mapboxMap != null) {
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        style.addLayerAbove(statesJoinLayer, "waterway-label");
+      }
+    }
+  }
+
+  private static class LoadJson extends AsyncTask<Void, Void, Expression.Stop[]> {
+
+    private WeakReference<ChoroplethJsonVectorMixActivity> weakReference;
+    private static final String TAG = "ChJSonVectorMix";
+
+    LoadJson(ChoroplethJsonVectorMixActivity activity) {
+      this.weakReference = new WeakReference<>(activity);
+    }
+
+    @Override
+    protected Expression.Stop[] doInBackground(Void... voids) {
+      try {
+        ChoroplethJsonVectorMixActivity activity = weakReference.get();
+        if (activity != null) {
+
+          InputStream inputStream = activity.getAssets().open(STATE_UNEMPLOYMENT_INFO_JSON_FILE);
+
+          activity.statesArray = new JSONArray(convertStreamToString(inputStream));
+
+          // Create stops array
+          Expression.Stop[] stops = new Expression.Stop[activity.statesArray.length()];
+
+          for (int x = 0; x < activity.statesArray.length(); x++) {
+            try {
+              // Generate green color value for each state/stop
+              JSONObject singleState = activity.statesArray.getJSONObject(x);
+              double green = singleState.getDouble(DATA_STYLE_UNEMPLOYMENT_PROP) / 14 * 255;
+
+              // Add new stop to array of stops
+              stops[x] = stop(
+                Double.parseDouble(singleState.getString(DATA_MATCH_PROP)),
+                rgba(0, green, 0, 1)
+              );
+
+            } catch (JSONException exception) {
+              throw new RuntimeException(exception);
+            }
+          }
+
+          return stops;
+        }
+      } catch (Exception exception) {
+        Log.d("JsonVectorMixActivity", "Exception Loading GeoJSON: " + exception.toString());
+      }
+      return null;
+    }
+
+    static String convertStreamToString(InputStream is) {
+      Scanner scanner = new Scanner(is).useDelimiter("\\A");
+      return scanner.hasNext() ? scanner.next() : "";
+    }
+
+    @Override
+    protected void onPostExecute(@Nullable Expression.Stop[] stopsArray) {
+      super.onPostExecute(stopsArray);
+      ChoroplethJsonVectorMixActivity activity = weakReference.get();
+      if (activity != null && stopsArray != null) {
+        activity.addDataToMap(stopsArray);
+      }
+    }
   }
 
   @Override
@@ -147,22 +203,5 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
-  }
-
-  private StringBuilder loadJson() {
-    sb = new StringBuilder();
-    try {
-      // Load GeoJSON file
-      InputStream inputStream = getAssets().open(STATE_UNEMPLOYMENT_INFO_JSON);
-      BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-      int cp;
-      while ((cp = rd.read()) != -1) {
-        sb.append((char) cp);
-      }
-      inputStream.close();
-    } catch (Exception exception) {
-      Log.e("JSONVectorMix", "Exception Loading GeoJSON: ", exception);
-    }
-    return sb;
   }
 }

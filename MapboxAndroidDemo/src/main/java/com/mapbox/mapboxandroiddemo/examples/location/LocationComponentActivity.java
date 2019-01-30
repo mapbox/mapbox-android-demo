@@ -15,6 +15,7 @@ import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.List;
 
@@ -45,21 +46,28 @@ public class LocationComponentActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     LocationComponentActivity.this.mapboxMap = mapboxMap;
-    enableLocationComponent();
+
+    mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7"),
+      new Style.OnStyleLoaded() {
+        @Override
+        public void onStyleLoaded(@NonNull Style style) {
+          enableLocationComponent(style);
+        }
+      });
   }
 
   @SuppressWarnings( {"MissingPermission"})
-  private void enableLocationComponent() {
+  private void enableLocationComponent(@NonNull Style loadedMapStyle) {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
       // Get an instance of the component
       LocationComponent locationComponent = mapboxMap.getLocationComponent();
 
-      // Activate
-      locationComponent.activateLocationComponent(this);
+      // Activate with options
+      locationComponent.activateLocationComponent(this, loadedMapStyle);
 
       // Enable to make component visible
       locationComponent.setLocationComponentEnabled(true);
@@ -88,7 +96,12 @@ public class LocationComponentActivity extends AppCompatActivity implements
   @Override
   public void onPermissionResult(boolean granted) {
     if (granted) {
-      enableLocationComponent();
+      mapboxMap.getStyle(new Style.OnStyleLoaded() {
+        @Override
+        public void onStyleLoaded(@NonNull Style style) {
+          enableLocationComponent(style);
+        }
+      });
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
       finish();

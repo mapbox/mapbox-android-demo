@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Enter picture-in-picture mode with a map being persisted. Only works on devices running Android O and above.
@@ -31,24 +33,28 @@ public class PictureInPictureActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_picture_in_picture);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
-      }
-    });
-
-    addPictureFab = (FloatingActionButton) findViewById(R.id.add_window_fab);
-    addPictureFab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        try {
-          enterPictureInPictureMode();
-        } catch (Exception exception) {
-          Toast.makeText(PictureInPictureActivity.this, R.string.no_picture_in_picture_support,
-            Toast.LENGTH_SHORT).show();
-        }
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+        mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            addPictureFab = findViewById(R.id.add_window_fab);
+            addPictureFab.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                try {
+                  enterPictureInPictureMode();
+                } catch (Exception exception) {
+                  Toast.makeText(PictureInPictureActivity.this, R.string.no_picture_in_picture_support,
+                    Toast.LENGTH_SHORT).show();
+                }
+              }
+            });
+          }
+        });
       }
     });
   }
@@ -56,13 +62,14 @@ public class PictureInPictureActivity extends AppCompatActivity {
   @Override
   public void onPictureInPictureModeChanged(boolean isInPictureInPictureMode) {
     super.onPictureInPictureModeChanged(isInPictureInPictureMode);
+
+    addPictureFab.setVisibility(isInPictureInPictureMode ? View.GONE : View.VISIBLE);
+
     if (isInPictureInPictureMode) {
       // Hide the controls in picture-in-picture mode.
-      addPictureFab.setVisibility(View.GONE);
       getSupportActionBar().hide();
     } else {
       // Restore the playback UI based on the playback status.
-      addPictureFab.setVisibility(View.VISIBLE);
       getSupportActionBar().show();
     }
   }

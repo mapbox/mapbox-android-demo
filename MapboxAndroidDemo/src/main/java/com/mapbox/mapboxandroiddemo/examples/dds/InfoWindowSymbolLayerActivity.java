@@ -24,6 +24,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -48,6 +49,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   OnMapReadyCallback, MapboxMap.OnMapClickListener {
 
+  private static final String GEOJSON_SOURCE_ID = "GEOJSON_SOURCE_ID";
   private static final String MARKER_IMAGE_ID = "MARKER_IMAGE_ID";
   private static final String MARKER_LAYER_ID = "MARKER_LAYER_ID";
   private static final String CALLOUT_LAYER_ID = "CALLOUT_LAYER_ID";
@@ -56,10 +58,8 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   private static final String PROPERTY_CAPITAL = "capital";
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private String geojsonSourceId = "geojsonSourceId";
   private GeoJsonSource source;
   private FeatureCollection featureCollection;
-  private HashMap<String, View> viewMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -79,15 +79,20 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    new LoadGeoJsonDataTask(this).execute();
-    mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        new LoadGeoJsonDataTask(InfoWindowSymbolLayerActivity.this).execute();
+        mapboxMap.addOnMapClickListener(InfoWindowSymbolLayerActivity.this);
+      }
+    });
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
-    handleClickIcon(mapboxMap.getProjection().toScreenLocation(point));
+  public boolean onMapClick(@NonNull LatLng point) {
+    return handleClickIcon(mapboxMap.getProjection().toScreenLocation(point));
   }
 
   /**
@@ -96,31 +101,32 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
    * @param collection the FeatureCollection to set equal to the globally-declared FeatureCollection
    */
   public void setUpData(final FeatureCollection collection) {
-    if (mapboxMap == null) {
-      return;
-    }
     featureCollection = collection;
-    setupSource();
-    setUpImage();
-    setUpMarkerLayer();
-    setUpInfoWindowLayer();
+    if (mapboxMap != null) {
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        setupSource(style);
+        setUpImage(style);
+        setUpMarkerLayer(style);
+        setUpInfoWindowLayer(style);
+      }
+    }
   }
 
   /**
    * Adds the GeoJSON source to the map
    */
-  private void setupSource() {
-    source = new GeoJsonSource(geojsonSourceId, featureCollection);
-    mapboxMap.addSource(source);
+  private void setupSource(@NonNull Style loadedStyle) {
+    source = new GeoJsonSource(GEOJSON_SOURCE_ID, featureCollection);
+    loadedStyle.addSource(source);
   }
 
   /**
    * Adds the marker image to the map for use as a SymbolLayer icon
    */
-  private void setUpImage() {
-    Bitmap icon = BitmapFactory.decodeResource(
-      this.getResources(), R.drawable.red_marker);
-    mapboxMap.addImage(MARKER_IMAGE_ID, icon);
+  private void setUpImage(@NonNull Style loadedStyle) {
+    loadedStyle.addImage(MARKER_IMAGE_ID, BitmapFactory.decodeResource(
+      this.getResources(), R.drawable.red_marker));
   }
 
   /**
@@ -135,8 +141,8 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   /**
    * Setup a layer with maki icons, eg. west coast city.
    */
-  private void setUpMarkerLayer() {
-    mapboxMap.addLayer(new SymbolLayer(MARKER_LAYER_ID, geojsonSourceId)
+  private void setUpMarkerLayer(@NonNull Style loadedStyle) {
+    loadedStyle.addLayer(new SymbolLayer(MARKER_LAYER_ID, GEOJSON_SOURCE_ID)
       .withProperties(
         iconImage(MARKER_IMAGE_ID),
         iconAllowOverlap(true)
@@ -149,8 +155,8 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
    * name of the feature is used as key for the iconImage
    * </p>
    */
-  private void setUpInfoWindowLayer() {
-    mapboxMap.addLayer(new SymbolLayer(CALLOUT_LAYER_ID, geojsonSourceId)
+  private void setUpInfoWindowLayer(@NonNull Style loadedStyle) {
+    loadedStyle.addLayer(new SymbolLayer(CALLOUT_LAYER_ID, GEOJSON_SOURCE_ID)
       .withProperties(
         /* show image with id title based on the value of the name feature property */
         iconImage("{name}"),
@@ -176,7 +182,7 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
    *
    * @param screenPoint the point on screen clicked
    */
-  private void handleClickIcon(PointF screenPoint) {
+  private boolean handleClickIcon(PointF screenPoint) {
     List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, MARKER_LAYER_ID);
     if (!features.isEmpty()) {
       String name = features.get(0).getStringProperty(PROPERTY_NAME);
@@ -190,6 +196,9 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
           }
         }
       }
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -230,13 +239,14 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   /**
    * Invoked when the bitmaps have been generated from a view.
    */
-  public void setImageGenResults(HashMap<String, View> viewMap, HashMap<String, Bitmap> imageMap) {
+  public void setImageGenResults(HashMap<String, Bitmap> imageMap) {
     if (mapboxMap != null) {
-      // calling addImages is faster as separate addImage calls for each bitmap.
-      mapboxMap.addImages(imageMap);
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        // calling addImages is faster as separate addImage calls for each bitmap.
+        style.addImages(imageMap);
+      }
     }
-    // need to store reference to views to be able to use them as hitboxes for click events.
-    this.viewMap = viewMap;
   }
 
   /**
@@ -367,7 +377,7 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
       super.onPostExecute(bitmapHashMap);
       InfoWindowSymbolLayerActivity activity = activityRef.get();
       if (activity != null && bitmapHashMap != null) {
-        activity.setImageGenResults(viewMap, bitmapHashMap);
+        activity.setImageGenResults(bitmapHashMap);
         if (refreshSource) {
           activity.refreshSource();
         }
@@ -378,9 +388,6 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
 
   /**
    * Utility class to generate Bitmaps for Symbol.
-   * <p>
-   * Bitmaps can be added to the map with {@link com.mapbox.mapboxsdk.maps.MapboxMap#addImage(String, Bitmap)}
-   * </p>
    */
   private static class SymbolGenerator {
 

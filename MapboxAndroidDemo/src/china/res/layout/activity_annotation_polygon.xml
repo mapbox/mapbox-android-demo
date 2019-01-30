@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".examples.annotations.DrawPolygonActivity">
+    tools:context=".examples.dds.DrawPolygonActivity">
 
     <com.mapbox.mapboxsdk.plugins.china.maps.ChinaMapView
         android:id="@+id/mapView"
@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="45.520486"
         mapbox:mapbox_cameraTargetLng="-122.673541"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"
         mapbox:mapbox_cameraZoom="11"/>
 
 </RelativeLayout>

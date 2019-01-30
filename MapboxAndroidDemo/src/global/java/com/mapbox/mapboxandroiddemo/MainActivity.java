@@ -23,17 +23,15 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
-import com.mapbox.mapboxandroiddemo.examples.annotations.AnimatedMarkerActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.DrawCustomMarkerActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.DrawGeojsonLineActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.DrawMarkerActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.DrawPolygonActivity;
-import com.mapbox.mapboxandroiddemo.examples.annotations.PolygonHolesActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivityKotlin;
@@ -47,6 +45,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ExpressionIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
@@ -55,6 +54,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.KotlinStyleCirclesCategorically
 import com.mapbox.mapboxandroiddemo.examples.dds.LineGradientActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleHeatmapStylingActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.SatelliteLandSelectActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
@@ -87,14 +87,15 @@ import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentOptionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
-import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
-import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerViewPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
@@ -110,6 +111,7 @@ import com.mapbox.mapboxandroiddemo.examples.snapshot.SnapshotShareActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AddWmsSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.AdjustLayerOpacityActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.BasicSymbolLayerActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.ClickToAddImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
@@ -203,19 +205,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     // Item click listener
-    ItemClickSupport.addTo(recyclerView).setOnItemClickListener((recyclerView, position, view) -> {
-      ExampleItemModel model = adapter.getItemAt(position);
+    ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+      @Override
+      public void onItemClicked(RecyclerView recyclerView, int position, View view) {
+        ExampleItemModel model = adapter.getItemAt(position);
 
-      // in case it's an info tile
-      if (model != null) {
-        if (showJavaExamples) {
-          startActivity(model.getJavaActivity());
-        } else {
-          startActivity(model.getKotlinActivity());
+        // in case it's an info tile
+        if (model != null) {
+          if (showJavaExamples) {
+            startActivity(model.getJavaActivity());
+          } else {
+            startActivity(model.getKotlinActivity());
+          }
+
+          analytics.clickedOnIndividualExample(getString(model.getTitle()), loggedIn);
+          analytics.viewedScreen(getString(model.getTitle()), loggedIn);
         }
-
-        analytics.clickedOnIndividualExample(getString(model.getTitle()), loggedIn);
-        analytics.viewedScreen(getString(model.getTitle()), loggedIn);
       }
     });
 
@@ -346,15 +351,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .setHeaderColor(R.color.mapboxBlue)
         .withDivider(true)
         .setPositiveText(getString(R.string.info_dialog_positive_button_text))
-        .onPositive((dialog, which) -> {
-          analytics.trackEvent(CLICKED_ON_INFO_DIALOG_START_LEARNING, false);
-          Intent intent = new Intent(Intent.ACTION_VIEW);
-          intent.setData(Uri.parse("https://mapbox.com/android-sdk"));
-          startActivity(intent);
+        .onPositive(new MaterialDialog.SingleButtonCallback() {
+          @Override
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            analytics.trackEvent(CLICKED_ON_INFO_DIALOG_START_LEARNING, false);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("https://mapbox.com/android-sdk"));
+            startActivity(intent);
+          }
         })
         .setNegativeText(getString(R.string.info_dialog_negative_button_text))
-        .onNegative((dialog, which) -> analytics.trackEvent(CLICKED_ON_INFO_DIALOG_NOT_NOW, loggedIn))
+        .onNegative(new MaterialDialog.SingleButtonCallback() {
+          @Override
+          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+            analytics.trackEvent(CLICKED_ON_INFO_DIALOG_NOT_NOW, loggedIn);
+          }
+        })
         .show();
+
       return true;
     } else if (id == R.id.action_show_other_language) {
       if (showJavaExamples) {
@@ -398,7 +412,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     if (!loggedIn) {
       logOutOfMapboxAccountButton.setVisibility(View.GONE);
     } else {
-      logOutOfMapboxAccountButton.setOnClickListener(view -> dialogView.logOut(loggedIn));
+      logOutOfMapboxAccountButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          dialogView.logOut(loggedIn);
+        }
+      });
     }
   }
 
@@ -568,6 +587,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_styles_transparent_background_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_click_to_add_image_title,
+      R.string.activity_styles_click_to_add_image_description,
+      new Intent(MainActivity.this, ClickToAddImageActivity.class),
+      null,
+      R.string.activity_styles_click_to_add_image_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_extrusions,
       R.string.activity_extrusions_population_density_extrusions_title,
       R.string.activity_extrusions_population_density_extrusions_description,
@@ -649,52 +676,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     );
 
     exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_marker_title,
-      R.string.activity_annotation_custom_marker_description,
-      new Intent(MainActivity.this, DrawMarkerActivity.class),
+      R.id.nav_plugins,
+      R.string.activity_plugins_markerview_plugin_title,
+      R.string.activity_plugins_markerview_plugin_description,
+      new Intent(MainActivity.this, MarkerViewPluginActivity.class),
       null,
-      R.string.activity_annotation_marker_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_plugins_markerview_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_custom_marker_title,
-      R.string.activity_annotation_custom_marker_description,
-      new Intent(MainActivity.this, DrawCustomMarkerActivity.class),
-      null,
-      R.string.activity_annotation_custom_marker_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_geojson_line_title,
-      R.string.activity_annotation_geojson_line_description,
-      new Intent(MainActivity.this, DrawGeojsonLineActivity.class),
-      null,
-      R.string.activity_annotation_geojson_line_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_polygon_title,
-      R.string.activity_annotation_polygon_description,
+      R.id.nav_dds,
+      R.string.activity_dds_polygon_title,
+      R.string.activity_dds_polygon_description,
       new Intent(MainActivity.this, DrawPolygonActivity.class),
       null,
-      R.string.activity_annotation_polygon_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_polygon_holes_title,
-      R.string.activity_annotation_polygon_holes_description,
-      new Intent(MainActivity.this, PolygonHolesActivity.class),
-      null,
-      R.string.activity_annotation_polygon_holes_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_annotations,
-      R.string.activity_annotation_animated_marker_title,
-      R.string.activity_annotation_animated_marker_description,
-      new Intent(MainActivity.this, AnimatedMarkerActivity.class),
-      null,
-      R.string.activity_annotation_animated_marker_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_dds_polygon_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_location,
@@ -910,6 +905,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,
+      R.string.activity_lab_animated_marker_title,
+      R.string.activity_lab_animated_marker_description,
+      new Intent(MainActivity.this, AnimatedMarkerActivity.class),
+      null,
+      R.string.activity_lab_animated_marker_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
       R.string.activity_lab_symbol_layer_and_mapillary_on_map_title,
       R.string.activity_lab_symbol_layer_and_mapillary_on_map_description,
       new Intent(MainActivity.this, SymbolLayerMapillaryActivity.class),
@@ -1030,6 +1033,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       null,
       new Intent(MainActivity.this, MagicWindowKotlinActivity.class),
       R.string.activity_lab_magic_window_image_url, true, Build.VERSION_CODES.O));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_geojson_line_title,
+      R.string.activity_dds_geojson_line_description,
+      new Intent(MainActivity.this, DrawGeojsonLineActivity.class),
+      null,
+      R.string.activity_dds_geojson_line_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_polygon_holes_title,
+      R.string.activity_dds_polygon_holes_description,
+      new Intent(MainActivity.this, PolygonHolesActivity.class),
+      null,
+      R.string.activity_dds_polygon_holes_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,

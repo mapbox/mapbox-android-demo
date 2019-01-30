@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -9,6 +10,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -26,7 +28,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpa
 public class MarathonExtrusionActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
-  private MapboxMap mapboxMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -45,27 +46,29 @@ public class MarathonExtrusionActivity extends AppCompatActivity implements OnMa
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
-    MarathonExtrusionActivity.this.mapboxMap = mapboxMap;
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-    // Add the marathon route source to the map
-    // Create a GeoJsonSource and use the Mapbox Datasets API to retrieve the GeoJSON data
-    // More info about the Datasets API at https://www.mapbox.com/api-documentation/#retrieve-a-dataset
-    GeoJsonSource courseRouteGeoJson = new GeoJsonSource(
-        "coursedata", loadJsonFromAsset("marathon_route.geojson"));
+    mapboxMap.setStyle(Style.SATELLITE, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        // Add the marathon route source to the map
+        // Create a GeoJsonSource and use the Mapbox Datasets API to retrieve the GeoJSON data
+        // More info about the Datasets API at https://www.mapbox.com/api-documentation/#retrieve-a-dataset
+        GeoJsonSource courseRouteGeoJson = new GeoJsonSource(
+          "coursedata", loadJsonFromAsset("marathon_route.geojson"));
 
-    mapboxMap.addSource(courseRouteGeoJson);
-    addExtrusionsLayerToMap();
+        style.addSource(courseRouteGeoJson);
+        addExtrusionsLayerToMap(style);
+      }
+    });
   }
 
-  private void addExtrusionsLayerToMap() {
+  private void addExtrusionsLayerToMap(@NonNull Style loadedMapStyle) {
     // Add FillExtrusion layer to map using GeoJSON data
-    FillExtrusionLayer courseExtrusionLayer = new FillExtrusionLayer("course", "coursedata");
-    courseExtrusionLayer.setProperties(
-        fillExtrusionColor(Color.YELLOW),
-        fillExtrusionOpacity(0.7f),
-        fillExtrusionHeight(get("e")));
-    mapboxMap.addLayer(courseExtrusionLayer);
+    loadedMapStyle.addLayer(new FillExtrusionLayer("course", "coursedata").withProperties(
+      fillExtrusionColor(Color.YELLOW),
+      fillExtrusionOpacity(0.7f),
+      fillExtrusionHeight(get("e"))));
   }
 
   @Override

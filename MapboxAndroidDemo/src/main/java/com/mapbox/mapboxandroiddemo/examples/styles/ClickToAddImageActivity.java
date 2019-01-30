@@ -1,7 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
-// #-code-snippet: click-to-add-image-activity full-java
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,12 +17,12 @@ import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.PolygonOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.geometry.LatLngQuad;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -73,19 +71,24 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
-    boundsFeatureList = new ArrayList<>();
-    boundsCirclePointList = new ArrayList<>();
-    this.mapboxMap = mapboxMap;
-    mapboxMap.addOnMapClickListener(this);
-    imageCountIndex = 0;
-    initCircleSource();
-    initCircleLayer();
-    Toast.makeText(this, R.string.tap_instructions, Toast.LENGTH_LONG).show();
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        boundsFeatureList = new ArrayList<>();
+        boundsCirclePointList = new ArrayList<>();
+        ClickToAddImageActivity.this.mapboxMap = mapboxMap;
+        mapboxMap.addOnMapClickListener(ClickToAddImageActivity.this);
+        imageCountIndex = 0;
+        initCircleSource(style);
+        initCircleLayer(style);
+        Toast.makeText(ClickToAddImageActivity.this, R.string.tap_instructions, Toast.LENGTH_LONG).show();
+      }
+    });
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
 
     // Reset the lists once enough LatLngQuad points have been tapped
     if (boundsFeatureList.size() == 4) {
@@ -97,25 +100,17 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
 
     // Add the click point to the circle layer and update the display of the circle layer data
     boundsCirclePointList.add(Point.fromLngLat(point.getLongitude(), point.getLatitude()));
-    GeoJsonSource circleSource = mapboxMap.getSourceAs(CIRCLE_SOURCE_ID);
-    if (circleSource != null) {
-      circleSource.setGeoJson(FeatureCollection.fromFeatures(boundsFeatureList));
-    }
 
-    // Add to latLngList to eventually add a Polygon
-    List<LatLng> latLngList = new ArrayList<>();
-    for (Point singlePoint : boundsCirclePointList) {
-      latLngList.add(new LatLng(singlePoint.latitude(), singlePoint.longitude()));
+    Style style = mapboxMap.getStyle();
+    if (style != null) {
+      GeoJsonSource circleSource = style.getSourceAs(CIRCLE_SOURCE_ID);
+      if (circleSource != null) {
+        circleSource.setGeoJson(FeatureCollection.fromFeatures(boundsFeatureList));
+      }
     }
 
     // Once the 4 LatLngQuad points have been set for where the image will placed...
     if (boundsCirclePointList.size() == 4) {
-
-      // Add polygon
-      mapboxMap.addPolygon(new PolygonOptions()
-        .addAll(latLngList)
-        .alpha(.3f)
-        .fillColor(Color.parseColor("#d004d3")));
 
       // Create the LatLng objects to use in the LatLngQuad
       LatLng latLng1 = new LatLng(boundsCirclePointList.get(0).latitude(),
@@ -134,35 +129,35 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
       pickPhotoIntent.setType("image/*");
       startActivityForResult(pickPhotoIntent, PHOTO_PICK_CODE);
     }
+
+    return true;
   }
 
   /**
    * Set up the CircleLayer source for showing LatLngQuad map click points
    */
-  private void initCircleSource() {
-    FeatureCollection circleFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
-    GeoJsonSource circleGeoJsonSource = new GeoJsonSource(CIRCLE_SOURCE_ID, circleFeatureCollection);
-    mapboxMap.addSource(circleGeoJsonSource);
+  private void initCircleSource(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addSource(
+      new GeoJsonSource(CIRCLE_SOURCE_ID, FeatureCollection.fromFeatures(new Feature[] {}))
+    );
   }
 
   /**
    * Set up the CircleLayer for showing LatLngQuad map click points
    */
-  private void initCircleLayer() {
-    CircleLayer circleLayer = new CircleLayer("circle-layer-bounds-corner-id",
-      CIRCLE_SOURCE_ID);
-    circleLayer.setProperties(
+  private void initCircleLayer(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addLayer(new CircleLayer("circle-layer-bounds-corner-id",
+      CIRCLE_SOURCE_ID).withProperties(
       circleRadius(8f),
       circleColor(Color.parseColor("#d004d3"))
-    );
-    mapboxMap.addLayer(circleLayer);
+    ));
   }
 
   /**
    * Calling onActivityResult() to handle the return to the example from the device's image galleyr picker
    */
   @Override
-  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+  public void onActivityResult(int requestCode, int resultCode, final Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == PHOTO_PICK_CODE && resultCode == Activity.RESULT_OK) {
       if (data == null) {
@@ -170,43 +165,44 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
         Log.d("ClickToAddImageActivity", "data == null");
         return;
       }
-      Uri selectedImage = data.getData();
-      InputStream imageStream = null;
-      try {
-        imageStream = getContentResolver().openInputStream(selectedImage);
 
-        Bitmap bitmapOfSelectedImage = BitmapFactory.decodeStream(imageStream);
+      if (mapboxMap != null) {
+        mapboxMap.getStyle(new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            Uri selectedImage = data.getData();
+            InputStream imageStream = null;
+            try {
+              imageStream = getContentResolver().openInputStream(selectedImage);
 
-        // Create an ImageSource object
-        ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE + imageCountIndex, quad, bitmapOfSelectedImage);
+              Bitmap bitmapOfSelectedImage = BitmapFactory.decodeStream(imageStream);
 
-        // Add the imageSource to the map
-        mapboxMap.addSource(imageSource);
+              // Add the imageSource to the map
+              style.addSource(
+                new ImageSource(ID_IMAGE_SOURCE + imageCountIndex, quad, bitmapOfSelectedImage));
 
-        // Create a raster layer and use the imageSource's ID as the layer's data
-        RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER + imageCountIndex,
-          ID_IMAGE_SOURCE + imageCountIndex);
+              // Create a raster layer and use the imageSource's ID as the layer's data// Add the layer to the map
+              style.addLayer(new RasterLayer(ID_IMAGE_LAYER + imageCountIndex,
+                ID_IMAGE_SOURCE + imageCountIndex));
 
-        // Add the layer to the map
-        mapboxMap.addLayer(layer);
+              // Reset lists in preparation for adding more images
+              boundsFeatureList = new ArrayList<>();
+              boundsCirclePointList = new ArrayList<>();
 
-        // Reset lists in preparation for adding more images
-        boundsFeatureList = new ArrayList<>();
-        boundsCirclePointList = new ArrayList<>();
+              imageCountIndex++;
 
-        imageCountIndex++;
-
-        // Clear circles from CircleLayer
-        GeoJsonSource circleSource = mapboxMap.getSourceAs(CIRCLE_SOURCE_ID);
-        if (circleSource != null) {
-          circleSource.setGeoJson(FeatureCollection.fromFeatures(boundsFeatureList));
-        }
-
-        mapboxMap.clear();
-
-      } catch (FileNotFoundException exception) {
-        exception.printStackTrace();
+              // Clear circles from CircleLayer
+              GeoJsonSource circleSource = style.getSourceAs(CIRCLE_SOURCE_ID);
+              if (circleSource != null) {
+                circleSource.setGeoJson(FeatureCollection.fromFeatures(boundsFeatureList));
+              }
+            } catch (FileNotFoundException exception) {
+              exception.printStackTrace();
+            }
+          }
+        });
       }
+
     }
   }
 
@@ -256,4 +252,3 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: click-to-add-image-activity full-java

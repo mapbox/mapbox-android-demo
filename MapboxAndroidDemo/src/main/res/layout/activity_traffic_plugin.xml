@@ -21,8 +21,7 @@
         mapbox:layout_constraintTop_toTopOf="parent"
         mapbox:mapbox_cameraTargetLat="1.352506"
         mapbox:mapbox_cameraTargetLng="103.842874"
-        mapbox:mapbox_cameraZoom="9.579712"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_dark"/>
+        mapbox:mapbox_cameraZoom="9.579712" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/traffic_toggle_fab"

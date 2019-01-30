@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -9,6 +10,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
@@ -18,13 +20,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.geometryType;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 
 public class MultipleGeometriesActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
-  private MapboxMap mapboxMap;
   private static final String GEOJSON_SOURCE_ID = "GEOJSONFILE";
 
   @Override
@@ -44,39 +44,41 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
-    MultipleGeometriesActivity.this.mapboxMap = mapboxMap;
-    createGeoJsonSource();
-    addPolygonLayer();
-    addPointsLayer();
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
+    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        createGeoJsonSource(style);
+        addPolygonLayer(style);
+        addPointsLayer(style);
+      }
+    });
   }
 
-  private void createGeoJsonSource() {
+  private void createGeoJsonSource(@NonNull Style loadedMapStyle) {
     // Load data from GeoJSON file in the assets folder
-    GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID,
-      loadJsonFromAsset("fake_norway_campsites.geojson"));
-    mapboxMap.addSource(geoJsonSource);
+    loadedMapStyle.addSource(new GeoJsonSource(GEOJSON_SOURCE_ID,
+      loadJsonFromAsset("fake_norway_campsites.geojson")));
   }
 
-  private void addPolygonLayer() {
+  private void addPolygonLayer(@NonNull Style loadedMapStyle) {
     // Create and style a FillLayer that uses the Polygon Feature's coordinates in the GeoJSON data
-    FillLayer borderOutlineLayer = new FillLayer("polygon", GEOJSON_SOURCE_ID);
-    borderOutlineLayer.setProperties(
+    FillLayer countryPolygonFillLayer = new FillLayer("polygon", GEOJSON_SOURCE_ID);
+    countryPolygonFillLayer.setProperties(
       PropertyFactory.fillColor(Color.RED),
       PropertyFactory.fillOpacity(.4f));
-    borderOutlineLayer.setFilter(eq(geometryType(), literal("Polygon")));
-    borderOutlineLayer.setFilter(eq(literal("$type"), literal("Polygon")));
-    mapboxMap.addLayer(borderOutlineLayer);
+    countryPolygonFillLayer.setFilter(eq(literal("$type"), literal("Polygon")));
+    loadedMapStyle.addLayer(countryPolygonFillLayer);
   }
 
-  private void addPointsLayer() {
+  private void addPointsLayer(@NonNull Style loadedMapStyle) {
     // Create and style a CircleLayer that uses the Point Features' coordinates in the GeoJSON data
-    CircleLayer pointsLayer = new CircleLayer("points", GEOJSON_SOURCE_ID);
-    pointsLayer.setProperties(
+    CircleLayer individualCirclesLayer = new CircleLayer("points", GEOJSON_SOURCE_ID);
+    individualCirclesLayer.setProperties(
       PropertyFactory.circleColor(Color.YELLOW),
       PropertyFactory.circleRadius(3f));
-    pointsLayer.setFilter(eq(literal("$type"), literal("Point")));
-    mapboxMap.addLayer(pointsLayer);
+    individualCirclesLayer.setFilter(eq(literal("$type"), literal("Point")));
+    loadedMapStyle.addLayer(individualCirclesLayer);
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

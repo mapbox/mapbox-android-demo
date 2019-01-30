@@ -20,6 +20,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshot;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshotter;
 
@@ -35,6 +36,7 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
   private MapSnapshotter mapSnapshotter;
   private MapboxMap mapboxMap;
   private NotificationManager notificationManager;
+  private Style style;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +57,24 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     SnapshotNotificationActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        SnapshotNotificationActivity.this.style = style;
+        mapboxMap.addOnMapClickListener(SnapshotNotificationActivity.this);
+      }
+    });
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     startSnapShot(
       mapboxMap.getProjection().getVisibleRegion().latLngBounds,
       mapView.getMeasuredHeight(),
       mapView.getMeasuredWidth());
+    return true;
   }
 
   /**
@@ -76,10 +85,14 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
    * @param width        of map
    */
   private void startSnapShot(LatLngBounds latLngBounds, int height, int width) {
+    if (!style.isFullyLoaded()) {
+      return;
+    }
+
     if (mapSnapshotter == null) {
       // Initialize snapshotter with map dimensions and given bounds
       MapSnapshotter.Options options =
-        new MapSnapshotter.Options(width, height).withStyle(mapboxMap.getStyleUrl()).withRegion(latLngBounds);
+        new MapSnapshotter.Options(width, height).withStyle(style.getUrl()).withRegion(latLngBounds);
 
       mapSnapshotter = new MapSnapshotter(SnapshotNotificationActivity.this, options);
     } else {
@@ -87,7 +100,6 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
       mapSnapshotter.setSize(width, height);
       mapSnapshotter.setRegion(latLngBounds);
     }
-
     mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
       @Override
       public void onSnapshotReady(MapSnapshot snapshot) {

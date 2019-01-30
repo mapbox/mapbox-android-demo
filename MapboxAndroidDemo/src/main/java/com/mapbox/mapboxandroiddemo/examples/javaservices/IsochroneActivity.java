@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
@@ -16,13 +17,16 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
+
 import java.net.URL;
+
 import okhttp3.HttpUrl;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
@@ -31,6 +35,8 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
@@ -46,7 +52,6 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
   private static final String ISOCHRONE_LINE_LAYER = "ISOCHRONE_LINE_LAYER";
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private GeoJsonSource isochroneGeoJsonSource;
   private LatLng lastSelectedLatLng;
   private String randomNumForLayerId;
   private boolean layersShown;
@@ -80,32 +85,51 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(mapboxMap -> {
-      this.mapboxMap = mapboxMap;
-      mapboxMap.addOnMapClickListener(IsochroneActivity.this);
-      initIsochroneCenterSymbolLayer();
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+        IsochroneActivity.this.mapboxMap = mapboxMap;
 
-      // Set the click listener for the floating action button
-      findViewById(R.id.switch_isochrone_style_fab).setOnClickListener(view -> {
-        usePolygon = !usePolygon;
-        redrawIsochroneData(lastSelectedLatLng);
-      });
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull final Style style) {
+            mapboxMap.addOnMapClickListener(IsochroneActivity.this);
 
-      Toast.makeText(this, getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
+            initIsochroneCenterSymbolLayer(style);
+
+            // Set the click listener for the floating action button
+            findViewById(R.id.switch_isochrone_style_fab).setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                usePolygon = !usePolygon;
+                redrawIsochroneData(style, lastSelectedLatLng);
+              }
+            });
+
+            Toast.makeText(IsochroneActivity.this,
+              getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
+          }
+        });
+      }
     });
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     // Update the click Symbol Layer to move the red marker to wherever the map was clicked on
     lastSelectedLatLng = point;
-    GeoJsonSource source = mapboxMap.getSourceAs("click-source-id");
-    if (source != null) {
-      source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
-    }
 
-    // Request and redraw the isochrone information based on the map click point
-    redrawIsochroneData(point);
+    Style style = mapboxMap.getStyle();
+    if (style != null) {
+      GeoJsonSource source = style.getSourceAs("click-source-id");
+      if (source != null) {
+        source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
+      }
+
+      // Request and redraw the Isochrone information based on the map click point
+      redrawIsochroneData(style, point);
+    }
+    return true;
   }
 
   /**
@@ -113,12 +137,12 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    *
    * @param point The center point to use for the request to the Isochrone API
    */
-  private void redrawIsochroneData(LatLng point) {
+  private void redrawIsochroneData(Style style, LatLng point) {
     if (layersShown) {
-      mapboxMap.removeLayer(ISOCHRONE_FILL_LAYER + randomNumForLayerId);
-      mapboxMap.removeLayer(ISOCHRONE_LINE_LAYER + randomNumForLayerId);
+      style.removeLayer(ISOCHRONE_FILL_LAYER + randomNumForLayerId);
+      style.removeLayer(ISOCHRONE_LINE_LAYER + randomNumForLayerId);
     }
-    addDataToMap(point);
+    addDataToMap(style, point);
   }
 
   /**
@@ -126,7 +150,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    *
    * @param mapClickPoint The center point of the isochrone. It is part of the API request.
    */
-  private void addDataToMap(@NonNull LatLng mapClickPoint) {
+  private void addDataToMap(@NonNull Style style, @NonNull LatLng mapClickPoint) {
     try {
       HttpUrl url = new HttpUrl.Builder()
         .scheme("https")
@@ -147,13 +171,12 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
 
       // Create and add a new GeoJsonSource with a unique ID. The source is fed a List of Feature objects via
       // the Isochrone API response.
-      isochroneGeoJsonSource = new GeoJsonSource(GEOJSON_SOURCE_ID + randomNum, new URL(url.toString()));
-      mapboxMap.addSource(isochroneGeoJsonSource);
+      style.addSource(new GeoJsonSource(GEOJSON_SOURCE_ID + randomNum, new URL(url.toString())));
 
       // Create new Fill and Line layers with unique ids.
       randomNumForLayerId = String.valueOf(randomNum);
-      initFillLayer(randomNumForLayerId, GEOJSON_SOURCE_ID + randomNum);
-      initLineLayer(randomNumForLayerId, GEOJSON_SOURCE_ID + randomNum);
+      initFillLayer(style, randomNumForLayerId, GEOJSON_SOURCE_ID + randomNum);
+      initLineLayer(style, randomNumForLayerId, GEOJSON_SOURCE_ID + randomNum);
 
       layersShown = true;
 
@@ -175,19 +198,17 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    * Add a SymbolLayer to the map so that the map click point has a visual marker. This is where the
    * Isochrone API information radiates from.
    */
-  private void initIsochroneCenterSymbolLayer() {
-    mapboxMap.addImage("map-click-icon-id", BitmapUtils.getBitmapFromDrawable(
+  private void initIsochroneCenterSymbolLayer(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addImage("map-click-icon-id", BitmapUtils.getBitmapFromDrawable(
       getResources().getDrawable(R.drawable.red_marker)));
 
-    GeoJsonSource geoJsonSource = new GeoJsonSource("click-source-id",
-      FeatureCollection.fromFeatures(new Feature[] {}));
-    mapboxMap.addSource(geoJsonSource);
+    loadedMapStyle.addSource(new GeoJsonSource("click-source-id",
+      FeatureCollection.fromFeatures(new Feature[] {})));
 
-    SymbolLayer clickLayer = new SymbolLayer("click_layer_id", "click-source-id");
-    clickLayer.setProperties(
-      PropertyFactory.iconImage("map-click-icon-id")
-    );
-    mapboxMap.addLayer(clickLayer);
+    loadedMapStyle.addLayer(new SymbolLayer("click-layer-id", "click-source-id").withProperties(
+      iconImage("map-click-icon-id"),
+      iconOffset(new Float[] {0f, -4f})
+    ));
   }
 
   /**
@@ -197,14 +218,14 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    *                       adding it to the map.
    * @param sourceId       The sourceId of the GeoJsonSource that the layer should depend on
    */
-  private void initFillLayer(@NonNull String randomNumForId, @NonNull String sourceId) {
+  private void initFillLayer(@NonNull Style style, @NonNull String randomNumForId, @NonNull String sourceId) {
     // Create and style a FillLayer based on information in the Isochrone API response
     FillLayer isochroneFillLayer = new FillLayer(ISOCHRONE_FILL_LAYER + randomNumForId, sourceId);
     isochroneFillLayer.setProperties(
       fillColor(get("color")),
       fillOpacity(get("fillOpacity")));
     isochroneFillLayer.setFilter(eq(geometryType(), literal("Polygon")));
-    mapboxMap.addLayer(isochroneFillLayer);
+    style.addLayerBelow(isochroneFillLayer, "click-layer-id");
   }
 
   /**
@@ -214,7 +235,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    *                       adding it to the map.
    * @param sourceId       The sourceId of the GeoJsonSource that the layer should depend on
    */
-  private void initLineLayer(@NonNull String randomNumForId, @NonNull String sourceId) {
+  private void initLineLayer(@NonNull Style style, @NonNull String randomNumForId, @NonNull String sourceId) {
     // Create and style a LineLayer based on information in the Isochrone API response
     LineLayer isochroneLineLayer = new LineLayer(ISOCHRONE_LINE_LAYER + randomNumForId, sourceId);
     isochroneLineLayer.setProperties(
@@ -222,7 +243,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
       lineWidth(5f),
       lineOpacity(get("opacity")));
     isochroneLineLayer.setFilter(eq(geometryType(), literal("LineString")));
-    mapboxMap.addLayer(isochroneLineLayer);
+    style.addLayerBelow(isochroneLineLayer, "click-layer-id");
   }
 
   @Override

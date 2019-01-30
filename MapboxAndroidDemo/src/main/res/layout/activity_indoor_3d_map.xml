@@ -14,7 +14,7 @@
         mapbox:mapbox_cameraZoom="15.99"
         mapbox:mapbox_cameraBearing="20"
         mapbox:mapbox_cameraTilt="40"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets"/>
+        />
 
 
 </LinearLayout>

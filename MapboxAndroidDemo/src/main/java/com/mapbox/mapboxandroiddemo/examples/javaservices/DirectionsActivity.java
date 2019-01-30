@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -17,6 +18,8 @@ import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
@@ -31,6 +34,7 @@ import timber.log.Timber;
 import static com.mapbox.core.constants.Constants.PRECISION_6;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
@@ -68,45 +72,49 @@ public class DirectionsActivity extends AppCompatActivity {
     // Setup the MapView
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(map -> {
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+        DirectionsActivity.this.mapboxMap = mapboxMap;
 
-      DirectionsActivity.this.mapboxMap = map;
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            // Set the origin location to the Alhambra landmark in Granada, Spain.
+            origin = Point.fromLngLat(-3.588098, 37.176164);
 
-      // Set the origin location to the Alhambra landmark in Granada, Spain.
-      origin = Point.fromLngLat(-3.588098, 37.176164);
+            // Set the destination location to the Plaza del Triunfo in Granada, Spain.
+            destination = Point.fromLngLat(-3.601845, 37.184080);
 
-      // Set the destination location to the Plaza del Triunfo in Granada, Spain.
-      destination = Point.fromLngLat(-3.601845, 37.184080);
+            initSource(style);
 
-      initSource();
+            initLayers(style);
 
-      initLayers();
-
-      // Get the directions route from the Mapbox Directions API
-      getRoute(origin, destination);
+            // Get the directions route from the Mapbox Directions API
+            getRoute(style, origin, destination);
+          }
+        });
+      }
     });
   }
 
   /**
    * Add the route and marker sources to the map
    */
-  private void initSource() {
-    GeoJsonSource routeGeoJsonSource = new GeoJsonSource(ROUTE_SOURCE_ID,
-      FeatureCollection.fromFeatures(new Feature[] {}));
-    mapboxMap.addSource(routeGeoJsonSource);
+  private void initSource(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addSource(new GeoJsonSource(ROUTE_SOURCE_ID,
+      FeatureCollection.fromFeatures(new Feature[] {})));
 
-    FeatureCollection iconFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {
+    GeoJsonSource iconGeoJsonSource = new GeoJsonSource(ICON_SOURCE_ID, FeatureCollection.fromFeatures(new Feature[] {
       Feature.fromGeometry(Point.fromLngLat(origin.longitude(), origin.latitude())),
-      Feature.fromGeometry(Point.fromLngLat(destination.longitude(), destination.latitude()))});
-
-    GeoJsonSource iconGeoJsonSource = new GeoJsonSource(ICON_SOURCE_ID, iconFeatureCollection);
-    mapboxMap.addSource(iconGeoJsonSource);
+      Feature.fromGeometry(Point.fromLngLat(destination.longitude(), destination.latitude()))}));
+    loadedMapStyle.addSource(iconGeoJsonSource);
   }
 
   /**
    * Add the route and maker icon layers to the map
    */
-  private void initLayers() {
+  private void initLayers(@NonNull Style loadedMapStyle) {
     LineLayer routeLayer = new LineLayer(ROUTE_LAYER_ID, ROUTE_SOURCE_ID);
 
     // Add the LineLayer to the map. This layer will display the directions route.
@@ -116,19 +124,18 @@ public class DirectionsActivity extends AppCompatActivity {
       lineWidth(5f),
       lineColor(Color.parseColor("#009688"))
     );
-    mapboxMap.addLayer(routeLayer);
+    loadedMapStyle.addLayer(routeLayer);
 
     // Add the red marker icon image to the map
-    mapboxMap.addImage(RED_PIN_ICON_ID, BitmapUtils.getBitmapFromDrawable(
+    loadedMapStyle.addImage(RED_PIN_ICON_ID, BitmapUtils.getBitmapFromDrawable(
       getResources().getDrawable(R.drawable.red_marker)));
 
     // Add the red marker icon SymbolLayer to the map
-    SymbolLayer startEndIconLayer = new SymbolLayer(ICON_LAYER_ID, ICON_SOURCE_ID);
-    startEndIconLayer.setProperties(
+    loadedMapStyle.addLayer(new SymbolLayer(ICON_LAYER_ID, ICON_SOURCE_ID).withProperties(
       iconImage(RED_PIN_ICON_ID),
       iconIgnorePlacement(true),
-      iconIgnorePlacement(true));
-    mapboxMap.addLayer(startEndIconLayer);
+      iconIgnorePlacement(true),
+      iconOffset(new Float[] {0f, -4f})));
   }
 
   /**
@@ -138,7 +145,7 @@ public class DirectionsActivity extends AppCompatActivity {
    * @param origin      the starting point of the route
    * @param destination the desired finish point of the route
    */
-  private void getRoute(Point origin, Point destination) {
+  private void getRoute(@NonNull final Style style, Point origin, Point destination) {
 
     client = MapboxDirections.builder()
       .origin(origin)
@@ -171,24 +178,25 @@ public class DirectionsActivity extends AppCompatActivity {
           getString(R.string.directions_activity_toast_message),
           currentRoute.distance()), Toast.LENGTH_SHORT).show();
 
-        // Retrieve and update the source designated for showing the directions route
-        GeoJsonSource source = mapboxMap.getSourceAs(ROUTE_SOURCE_ID);
+        if (style.isFullyLoaded()) {
+          // Retrieve and update the source designated for showing the directions route
+          GeoJsonSource source = style.getSourceAs(ROUTE_SOURCE_ID);
 
-        // Create a LineString with the directions route's geometry
-        FeatureCollection featureCollection = FeatureCollection.fromFeature(
-          Feature.fromGeometry(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6)));
-
-        // Reset the GeoJSON source for the route LineLayer source
-        if (source != null) {
-          Timber.d("onResponse: source != null");
-          source.setGeoJson(featureCollection);
+          // Create a LineString with the directions route's geometry and
+          // reset the GeoJSON source for the route LineLayer source
+          if (source != null) {
+            Timber.d("onResponse: source != null");
+            source.setGeoJson(FeatureCollection.fromFeature(
+              Feature.fromGeometry(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6))));
+          }
         }
       }
 
       @Override
       public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
         Timber.e("Error: " + throwable.getMessage());
-        Toast.makeText(DirectionsActivity.this, "Error: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(DirectionsActivity.this, "Error: " + throwable.getMessage(),
+          Toast.LENGTH_SHORT).show();
       }
     });
   }

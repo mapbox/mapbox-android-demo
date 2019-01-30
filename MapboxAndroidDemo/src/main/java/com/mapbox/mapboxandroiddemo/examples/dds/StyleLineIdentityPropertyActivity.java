@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -9,6 +10,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
@@ -39,33 +41,31 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_line);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-        // Retrieve GeoJSON from local file and add it to the map
+            // Retrieve GeoJSON from local file and add it to the map
+            style.addSource(new GeoJsonSource("lines",
+                loadGeoJsonFromAsset("golden_gate_lines.geojson")));
 
-        GeoJsonSource linesSource = new GeoJsonSource("lines", loadGeoJsonFromAsset("golden_gate_lines.geojson"));
-
-        mapboxMap.addSource(linesSource);
-
-        // Create LineLayer, use lineColor, and stop to draw red and blue lines on map
-
-        LineLayer linesLayer = new LineLayer("finalLines", "lines").withProperties(
-          PropertyFactory.lineColor(
-            match(get("color"), rgb(0, 0, 0),
-              stop("red", rgb(247, 69, 93)),
-              stop("blue", rgb(51, 201, 235)))),
-          PropertyFactory.visibility(Property.VISIBLE),
-          PropertyFactory.lineWidth(3f)
-        );
-
-        // Add LineLayer to map
-
-        mapboxMap.addLayer(linesLayer);
+            // Create a LineLayer. Use lineColor and stops to draw red and blue lines on the map
+            style.addLayer(new LineLayer("finalLines", "lines").withProperties(
+              PropertyFactory.lineColor(
+                match(get("color"), rgb(0, 0, 0),
+                  stop("red", rgb(247, 69, 93)),
+                  stop("blue", rgb(51, 201, 235)))),
+              PropertyFactory.visibility(Property.VISIBLE),
+              PropertyFactory.lineWidth(3f)
+            ));
+          }
+        });
       }
     });
   }

@@ -11,8 +11,7 @@
         android:layout_height="match_parent"
         app:mapbox_cameraTargetLat="35.830744"
         app:mapbox_cameraTargetLng="136.711369"
-        app:mapbox_cameraZoom="4.5257"
-        app:mapbox_styleUrl="@string/mapbox_style_mapbox_streets" />
+        app:mapbox_cameraZoom="4.5257" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -84,9 +83,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
-        android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_swap_horiz_white_24dp"

@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.HeatmapLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -57,43 +59,44 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     MultipleHeatmapStylingActivity.this.mapboxMap = mapboxMap;
-    CameraPosition cameraPositionForFragmentMap = new CameraPosition.Builder()
-      .target(new LatLng(34.056684, -118.254002))
-      .zoom(11.047)
-      .build();
-    mapboxMap.animateCamera(
-      CameraUpdateFactory.newCameraPosition(cameraPositionForFragmentMap), 2600);
-    addHeatmapDataSource();
-    initHeatmapColors();
-    initHeatmapRadiusStops();
-    initHeatmapIntensityStops();
-    addHeatmapLayer();
-    findViewById(R.id.switch_heatmap_style_fab).setOnClickListener(new View.OnClickListener() {
+    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
-      public void onClick(View view) {
-        index++;
-        if (index == listOfHeatmapColors.length - 1) {
-          index = 0;
-        }
-        if (mapboxMap.getLayer(HEATMAP_LAYER_ID) != null) {
-          mapboxMap.getLayer(HEATMAP_LAYER_ID).setProperties(
-            heatmapColor(listOfHeatmapColors[index]),
-            heatmapRadius(listOfHeatmapRadiusStops[index]),
-            heatmapIntensity(listOfHeatmapIntensityStops[index])
-          );
-        }
+      public void onStyleLoaded(@NonNull final Style style) {
+        CameraPosition cameraPositionForFragmentMap = new CameraPosition.Builder()
+          .target(new LatLng(34.056684, -118.254002))
+          .zoom(11.047)
+          .build();
+        mapboxMap.animateCamera(
+          CameraUpdateFactory.newCameraPosition(cameraPositionForFragmentMap), 2600);
+        style.addSource(new GeoJsonSource(HEATMAP_SOURCE_ID,
+          loadGeoJsonFromAsset("la_heatmap_styling_points.geojson")));
+        initHeatmapColors();
+        initHeatmapRadiusStops();
+        initHeatmapIntensityStops();
+        addHeatmapLayer(style);
+        findViewById(R.id.switch_heatmap_style_fab).setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            index++;
+            if (index == listOfHeatmapColors.length - 1) {
+              index = 0;
+            }
+            if (style.getLayer(HEATMAP_LAYER_ID) != null) {
+              style.getLayer(HEATMAP_LAYER_ID).setProperties(
+                heatmapColor(listOfHeatmapColors[index]),
+                heatmapRadius(listOfHeatmapRadiusStops[index]),
+                heatmapIntensity(listOfHeatmapIntensityStops[index])
+              );
+            }
+          }
+        });
       }
     });
   }
 
-  private void addHeatmapDataSource() {
-    mapboxMap.addSource(new GeoJsonSource(HEATMAP_SOURCE_ID,
-      loadGeoJsonFromAsset("la_heatmap_styling_points.geojson")));
-  }
-
-  private void addHeatmapLayer() {
+  private void addHeatmapLayer(@NonNull Style loadedMapStyle) {
     // Create the heatmap layer
     HeatmapLayer layer = new HeatmapLayer(HEATMAP_LAYER_ID, HEATMAP_SOURCE_ID);
 
@@ -117,7 +120,7 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
     );
 
     // Add the heatmap layer to the map and above the "water-label" layer
-    mapboxMap.addLayerAbove(layer, "waterway-label");
+    loadedMapStyle.addLayerAbove(layer, "waterway-label");
   }
 
   @Override

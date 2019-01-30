@@ -15,6 +15,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngQuad;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.ImageSource;
 
@@ -51,29 +52,31 @@ public class AnimatedImageGifActivity extends AppCompatActivity implements OnMap
   @Override
   public void onMapReady(@NonNull final MapboxMap map) {
 
-    // Set the bounds/size of the gif
-    LatLngQuad quad = new LatLngQuad(
-      new LatLng(46.437, -80.425),
-      new LatLng(46.437, -71.516),
-      new LatLng(37.936, -71.516),
-      new LatLng(37.936, -80.425));
+    map.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
 
-    // Create an image source object with a unique id, the bounds, and drawable image
-    ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.waving_bear_gif);
+        // Set the bounds/size of the gif. Then create an image source object with a unique id,
+        // the bounds, and drawable image
+        ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE,
+          new LatLngQuad(
+            new LatLng(46.437, -80.425),
+            new LatLng(46.437, -71.516),
+            new LatLng(37.936, -71.516),
+            new LatLng(37.936, -80.425)), R.drawable.waving_bear_gif);
 
-    // Add the source to the map
-    map.addSource(imageSource);
+        // Add the source to the map
+        style.addSource(imageSource);
 
-    // Create an raster layer with a unique id and the image source created above
-    RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
+        // Create an raster layer with a unique id and the image source created above. Then add the layer to the map.
+        style.addLayer(new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE));
 
-    // Add the layer to the map
-    map.addLayer(layer);
-
-    // Use the RefreshImageRunnable class and runnable to quickly display images for a GIF/video UI experience
-    InputStream gifInputStream = getResources().openRawResource(R.raw.waving_bear);
-    runnable = new RefreshImageRunnable(imageSource, Movie.decodeStream(gifInputStream), handler = new Handler());
-    handler.postDelayed(runnable, 100);
+        // Use the RefreshImageRunnable class and runnable to quickly display images for a GIF/video UI experience
+        InputStream gifInputStream = getResources().openRawResource(R.raw.waving_bear);
+        runnable = new RefreshImageRunnable(imageSource, Movie.decodeStream(gifInputStream), handler = new Handler());
+        handler.postDelayed(runnable, 100);
+      }
+    });
   }
 
   @Override
@@ -98,7 +101,9 @@ public class AnimatedImageGifActivity extends AppCompatActivity implements OnMap
   protected void onStop() {
     super.onStop();
     mapView.onStop();
-    handler.removeCallbacks(runnable);
+    if (handler != null) {
+      handler.removeCallbacks(runnable);
+    }
   }
 
   @Override

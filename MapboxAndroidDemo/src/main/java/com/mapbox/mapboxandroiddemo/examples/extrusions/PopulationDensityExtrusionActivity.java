@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
@@ -54,17 +56,21 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-
-    VectorSource vectorSource = new VectorSource("population", "mapbox://peterqliu.d0vin3el");
-    mapboxMap.addSource(vectorSource);
-
-    addFillsLayer();
-    addExtrusionsLayer();
+    mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        style.addSource(
+            new VectorSource("population", "mapbox://peterqliu.d0vin3el")
+        );
+        addFillsLayer(style);
+        addExtrusionsLayer(style);
+      }
+    });
   }
 
-  private void addFillsLayer() {
+  private void addFillsLayer(@NonNull Style loadedMapStyle) {
     FillLayer fillsLayer = new FillLayer("fills", "population");
     fillsLayer.setSourceLayer("outgeojson");
     fillsLayer.setFilter(all(lt(get("pkm2"), literal(300000))));
@@ -73,10 +79,10 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
         stop(0, rgb(22, 14, 35)),
         stop(14500, rgb(0, 97, 127)),
         stop(145000, rgb(85, 223, 255)))));
-    mapboxMap.addLayerBelow(fillsLayer, "water");
+    loadedMapStyle.addLayerBelow(fillsLayer, "water");
   }
 
-  private void addExtrusionsLayer() {
+  private void addExtrusionsLayer(@NonNull Style loadedMapStyle) {
     FillExtrusionLayer fillExtrusionLayer = new FillExtrusionLayer("extrusions", "population");
     fillExtrusionLayer.setSourceLayer("outgeojson");
     fillExtrusionLayer.setFilter(all(gt(get("p"), 1), lt(get("pkm2"), 300000)));
@@ -89,7 +95,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
       fillExtrusionHeight(interpolate(exponential(1f), get("pkm2"),
         stop(0, 0f),
         stop(1450000, 20000f))));
-    mapboxMap.addLayerBelow(fillExtrusionLayer, "airport-label");
+    loadedMapStyle.addLayerBelow(fillExtrusionLayer, "airport-label");
   }
 
   @Override
@@ -210,5 +216,4 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     mapboxMap.moveCamera(CameraUpdateFactory
       .newCameraPosition(position));
   }
-
 }

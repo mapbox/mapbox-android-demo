@@ -13,6 +13,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Animate the map's camera position, tilt, bearing, and zoom.
@@ -40,22 +41,28 @@ public class AnimateMapCameraActivity extends AppCompatActivity implements OnMap
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
     AnimateMapCameraActivity.this.mapboxMap = mapboxMap;
 
-    // Toast instructing user to tap on the map
-    Toast.makeText(
-      AnimateMapCameraActivity.this,
-      getString(R.string.tap_on_map_instruction),
-      Toast.LENGTH_LONG
-    ).show();
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
 
-    mapboxMap.addOnMapClickListener(this);
+        // Toast instructing user to tap on the map
+        Toast.makeText(
+          AnimateMapCameraActivity.this,
+          getString(R.string.tap_on_map_instruction),
+          Toast.LENGTH_LONG
+        ).show();
+
+        mapboxMap.addOnMapClickListener(AnimateMapCameraActivity.this);
+      }
+    });
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
 
     // Toast instructing user to tap on the map
     Toast.makeText(
@@ -73,6 +80,8 @@ public class AnimateMapCameraActivity extends AppCompatActivity implements OnMap
 
     mapboxMap.animateCamera(CameraUpdateFactory
       .newCameraPosition(position), 7000);
+
+    return true;
   }
 
   @Override

@@ -29,12 +29,12 @@
     <string name="activity_dds_choropleth_zoom_change_title">Cập nhật lớp vùng giá trị theo mức thu phóng</string>
     <string name="activity_dds_style_line_identity_property_title">Định vị tuyến dùng hàm thuộc tính đồng nhất thức</string>
     <string name="activity_annotation_marker_title">Vẽ ghim</string>
-    <string name="activity_annotation_custom_marker_title">Vẽ hình ghim tùy biến</string>
-    <string name="activity_annotation_geojson_line_title">Kẻ đường GeoJSON</string>
-    <string name="activity_annotation_polygon_title">Vẽ hình đa giác</string>
-    <string name="activity_annotation_polygon_holes_title">Vẽ hình đa giác có lỗ</string>
+    <string name="activity_plugins_markerview_plugin_title">Vẽ hình ghim tùy biến</string>
+    <string name="activity_dds_geojson_line_title">Kẻ đường GeoJSON</string>
+    <string name="activity_dds_polygon_title">Vẽ hình đa giác</string>
+    <string name="activity_dds_polygon_holes_title">Vẽ hình đa giác có lỗ</string>
     <string name="activity_annotation_custom_info_window_title">Cửa sổ thông tin tùy biến</string>
-    <string name="activity_annotation_animated_marker_title">Làm động vị trí của ghim</string>
+    <string name="activity_lab_animated_marker_title">Làm động vị trí của ghim</string>
     <string name="activity_camera_animate_title">Làm động điểm nhìn của bản đồ</string>
     <string name="activity_camera_bounding_box_title">Làm điểm nhìn vừa hộp bao</string>
     <string name="activity_camera_restrict_title">Hạn chế cuộn bản đồ</string>

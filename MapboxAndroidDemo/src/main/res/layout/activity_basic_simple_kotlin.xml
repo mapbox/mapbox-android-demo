@@ -4,18 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".examples.basics.SimpleMapViewActivity">
+    tools:context=".examples.basics.SimpleMapViewActivityKotlin">
 
     <!-- Set the starting camera position and map style using xml-->
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraBearing="315.177846"
-        mapbox:mapbox_cameraTargetLat="-34.069040"
-        mapbox:mapbox_cameraTargetLng="-69.837955"
-        mapbox:mapbox_cameraTilt="54.9710"
-        mapbox:mapbox_cameraZoom="7.899536"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_mapbox_streets" />
+        mapbox:mapbox_cameraTargetLat="40.73581"
+        mapbox:mapbox_cameraTargetLng="-73.99155"
+        mapbox:mapbox_cameraZoom="11"/>
 
 </FrameLayout>

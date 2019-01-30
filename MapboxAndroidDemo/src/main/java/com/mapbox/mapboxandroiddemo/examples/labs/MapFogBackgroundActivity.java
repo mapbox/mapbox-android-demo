@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -8,6 +9,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
 
 /**
@@ -36,11 +38,16 @@ public class MapFogBackgroundActivity extends AppCompatActivity implements OnMap
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-    // Using the Mapbox Building Plugin to easily display 3D extrusions on the map
-    buildingPlugin = new BuildingPlugin(mapView, mapboxMap);
-    buildingPlugin.setVisibility(true);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        // Using the Mapbox Building Plugin to easily display 3D extrusions on the map
+        buildingPlugin = new BuildingPlugin(mapView, mapboxMap, style);
+        buildingPlugin.setVisibility(true);
+      }
+    });
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

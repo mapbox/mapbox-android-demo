@@ -24,7 +24,7 @@
         mapbox:mapbox_cameraZoomMax="16"
         mapbox:mapbox_cameraZoomMin="12"
         mapbox:mapbox_cameraTilt="45"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_dark">
+        >
     </com.mapbox.mapboxsdk.maps.MapView>
 
     <android.support.constraint.Guideline

@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.RasterSource;
@@ -36,8 +38,8 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_adjust_layer_opacity);
 
-    final SeekBar opacitySeekBar = (SeekBar) findViewById(R.id.seek_bar_layer_opacity);
-    final TextView percentTextView = (TextView) findViewById(R.id.textview_opacity_value);
+    final SeekBar opacitySeekBar = findViewById(R.id.seek_bar_layer_opacity);
+    final TextView percentTextView = findViewById(R.id.textview_opacity_value);
 
     opacitySeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
       @Override
@@ -47,8 +49,8 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
               rasterOpacity((float) progress / 100)
           );
         }
-        String progressPrecentage = progress + "%";
-        percentTextView.setText(progressPrecentage);
+        String progressPercentage = progress + "%";
+        percentTextView.setText(progressPercentage);
       }
 
       @Override
@@ -62,21 +64,20 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
       }
     });
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
         map = mapboxMap;
-
-        RasterSource chicagoSource = new RasterSource("chicago-source", "mapbox://mapbox.u8yyzaor");
-        map.addSource(chicagoSource);
-
-        RasterLayer chicagoLayer = new RasterLayer("chicago", "chicago-source");
-        map.addLayer(chicagoLayer);
-
-        chicago = map.getLayer("chicago");
-
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            style.addSource(new RasterSource("chicago-source", "mapbox://mapbox.u8yyzaor"));
+            style.addLayer(new RasterLayer("chicago", "chicago-source"));
+            chicago = map.getStyle().getLayer("chicago");
+          }
+        });
       }
     });
   }

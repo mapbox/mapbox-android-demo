@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -10,6 +11,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngQuad;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.ImageSource;
 
@@ -39,27 +41,27 @@ public class ImageSourceActivity extends AppCompatActivity implements OnMapReady
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-    // Set the latitude and longitude values for the image's four corners
-    LatLngQuad quad = new LatLngQuad(
-      new LatLng(25.7836, -80.11725),
-      new LatLng(25.783548, -80.1397431334),
-      new LatLng(25.7680, -80.13964),
-      new LatLng(25.76795, -80.11725)
-    );
+    mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
 
-    // Create an ImageSource object
-    ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.miami_beach);
+        // Set the latitude and longitude values for the image's four corners
+        LatLngQuad quad = new LatLngQuad(
+          new LatLng(25.7836, -80.11725),
+          new LatLng(25.783548, -80.1397431334),
+          new LatLng(25.7680, -80.13964),
+          new LatLng(25.76795, -80.11725)
+        );
 
-    // Add the imageSource to the map
-    mapboxMap.addSource(imageSource);
+        // Add an ImageSource to the map
+        style.addSource(new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.miami_beach));
 
-    // Create a raster layer and use the imageSource's ID as the layer's data
-    RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
-
-    // Add the layer to the map
-    mapboxMap.addLayer(layer);
+        // Create a raster layer and use the imageSource's ID as the layer's data. Then add a RasterLayer to the map.
+        style.addLayer(new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE));
+      }
+    });
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

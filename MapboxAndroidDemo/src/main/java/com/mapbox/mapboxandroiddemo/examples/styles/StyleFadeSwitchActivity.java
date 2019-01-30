@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -10,9 +11,9 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.RasterSource;
-import com.mapbox.mapboxsdk.style.sources.Source;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.linear;
@@ -47,37 +48,32 @@ public class StyleFadeSwitchActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-    // Create a data source for the satellite raster images
-    Source satelliteRasterSource = new RasterSource("SATELLITE_RASTER_SOURCE_ID",
-      "mapbox://mapbox.satellite", 512);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        // Create a data source for the satellite raster image and add the source to the map
+        style.addSource(new RasterSource("SATELLITE_RASTER_SOURCE_ID",
+          "mapbox://mapbox.satellite", 512));
 
-    // Add the source to the map
-    mapboxMap.addSource(satelliteRasterSource);
+        // Create a new map layer for the satellite raster images and add the satellite layer to the map.
+        // Use runtime styling to adjust the satellite layer's opacity based on the map camera's zoom level
+        style.addLayer(
+          new RasterLayer("SATELLITE_RASTER_LAYER_ID", "SATELLITE_RASTER_SOURCE_ID").withProperties(
+          rasterOpacity(interpolate(linear(), zoom(),
+            stop(15, 0),
+            stop(18, 1)
+          ))));
 
-    // Create a new map layer for the satellite raster images
-    RasterLayer satelliteRasterLayer = new RasterLayer("SATELLITE_RASTER_LAYER_ID", "SATELLITE_RASTER_SOURCE_ID");
+        // Create a new camera position and animate the map camera to show the fade in/out UI of the satellite layer
+        mapboxMap.animateCamera(
+          CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+            .zoom(19)
+            .build()), 9000);
 
-    // Use runtime styling to adjust the satellite layer's opacity based on the map camera's zoom level
-    satelliteRasterLayer.withProperties(
-      rasterOpacity(interpolate(linear(), zoom(),
-        stop(15, 0),
-        stop(18, 1)
-      ))
-    );
-
-    // Add the satellite layer to the map
-    mapboxMap.addLayer(satelliteRasterLayer);
-
-    // Create a new camera position
-    CameraPosition newCameraPosition = new CameraPosition.Builder()
-      .zoom(19)
-      .build();
-
-    // Animate the map camera to show the fade in/out UI of the satellite layer
-    mapboxMap.animateCamera(
-      CameraUpdateFactory.newCameraPosition(newCameraPosition), 9000);
+      }
+    });
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods

@@ -3,29 +3,34 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.geojson.utils.PolylineUtils;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.PolylineOptions;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.mapboxsdk.utils.ColorUtils;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
+import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
+
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 /**
  * Using the polylines utility, simplify a polyline at a
@@ -53,11 +58,14 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
         map = mapboxMap;
-
-        new DrawGeoJson().execute();
-
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            new DrawGeoJson(SimplifyPolylineActivity.this).execute();
+          }
+        });
       }
     });
   }
@@ -104,91 +112,72 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
-  private class DrawGeoJson extends AsyncTask<Void, Void, List<Point>> {
+  private static class DrawGeoJson extends AsyncTask<Void, Void, FeatureCollection> {
+
+    private WeakReference<SimplifyPolylineActivity> weakReference;
+
+    DrawGeoJson(SimplifyPolylineActivity activity) {
+      this.weakReference = new WeakReference<>(activity);
+    }
+
     @Override
-    protected List<Point> doInBackground(Void... voids) {
-
-      List<Point> points = new ArrayList<>();
-
+    protected FeatureCollection doInBackground(Void... voids) {
       try {
-        // Load GeoJSON file
-        InputStream inputStream = getAssets().open("matched_route.geojson");
-        BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-        StringBuilder sb = new StringBuilder();
-        int cp;
-        while ((cp = rd.read()) != -1) {
-          sb.append((char) cp);
-        }
-
-        inputStream.close();
-
-        // Parse JSON
-        JSONObject json = new JSONObject(sb.toString());
-        JSONArray features = json.getJSONArray("features");
-        JSONObject feature = features.getJSONObject(0);
-        JSONObject geometry = feature.getJSONObject("geometry");
-        if (geometry != null) {
-          String type = geometry.getString("type");
-
-          // Our GeoJSON only has one feature: a line string
-          if (!TextUtils.isEmpty(type) && type.equalsIgnoreCase("LineString")) {
-
-            // Get the Coordinates
-            JSONArray coords = geometry.getJSONArray("coordinates");
-            for (int lc = 0; lc < coords.length(); lc++) {
-              JSONArray coord = coords.getJSONArray(lc);
-              Point position = Point.fromLngLat(coord.getDouble(0), coord.getDouble(1));
-              points.add(position);
-            }
-          }
+        SimplifyPolylineActivity activity = weakReference.get();
+        if (activity != null) {
+          InputStream inputStream = activity.getAssets().open("matched_route.geojson");
+          return FeatureCollection.fromJson(convertStreamToString(inputStream));
         }
       } catch (Exception exception) {
         Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
       }
+      return null;
+    }
 
-      return points;
+    static String convertStreamToString(InputStream is) {
+      Scanner scanner = new Scanner(is).useDelimiter("\\A");
+      return scanner.hasNext() ? scanner.next() : "";
     }
 
     @Override
-    protected void onPostExecute(List<Point> points) {
-      super.onPostExecute(points);
-
-      drawBeforeSimplify(points);
-      drawSimplify(points);
-
+    protected void onPostExecute(@Nullable FeatureCollection featureCollection) {
+      super.onPostExecute(featureCollection);
+      SimplifyPolylineActivity activity = weakReference.get();
+      if (activity != null && featureCollection != null) {
+        activity.drawLines(featureCollection);
+      }
     }
   }
 
-  private void drawBeforeSimplify(List<Point> points) {
-
-    LatLng[] pointsArray = new LatLng[points.size()];
-    for (int i = 0; i < points.size(); i++) {
-      pointsArray[i] = new LatLng(points.get(i).latitude(), points.get(i).longitude());
+  private void drawLines(@NonNull FeatureCollection featureCollection) {
+    List<Feature> features = featureCollection.features();
+    if (features != null && features.size() > 0) {
+      Feature feature = features.get(0);
+      drawBeforeSimplify(feature);
+      drawSimplify(feature);
     }
-
-    map.addPolyline(new PolylineOptions()
-      .add(pointsArray)
-      .color(Color.parseColor("#8a8acb"))
-      .width(4));
   }
 
-  private void drawSimplify(List<Point> points) {
+  private void drawBeforeSimplify(@NonNull Feature lineStringFeature) {
+    addLine("rawLine", lineStringFeature, "#8a8acb");
+  }
 
-    List<Point> before = new ArrayList<>();
-    for (int i = 0; i < points.size(); i++) {
-      before.add(points.get(i));
+  private void drawSimplify(@NonNull Feature feature) {
+    List<Point> points = ((LineString) Objects.requireNonNull(feature.geometry())).coordinates();
+    List<Point> after = PolylineUtils.simplify(points, 0.001);
+    addLine("simplifiedLine", Feature.fromGeometry(LineString.fromLngLats(after)), "#3bb2d0");
+  }
+
+  private void addLine(String layerId, Feature feature, String lineColorHex) {
+    Style style = map.getStyle();
+    if (style != null) {
+      style.addSource(new GeoJsonSource(layerId, feature));
+      style.addLayer(new LineLayer(layerId, layerId).withProperties(
+        lineColor(ColorUtils.colorToRgbaString(Color.parseColor(lineColorHex))),
+        lineWidth(4f)
+      ));
+    } else {
+      throw new IllegalStateException("Style hasn't been fully initialised");
     }
-
-    List<Point> after = PolylineUtils.simplify(before, 0.001);
-
-    LatLng[] result = new LatLng[after.size()];
-    for (int i = 0; i < after.size(); i++) {
-      result[i] = new LatLng(after.get(i).latitude(), after.get(i).longitude());
-    }
-
-    map.addPolyline(new PolylineOptions()
-      .add(result)
-      .color(Color.parseColor("#3bb2d0"))
-      .width(4));
   }
 }

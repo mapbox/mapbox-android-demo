@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,11 +16,11 @@ import com.mapbox.api.staticmap.v1.StaticMapCriteria;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.constants.Style;
-import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.utils.MathUtils;
 import com.squareup.picasso.Picasso;
 
@@ -53,46 +54,52 @@ public class StaticImageActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    staticMapImageView = findViewById(R.id.static_map_imageview);
-    createStaticImageButton = findViewById(R.id.create_static_image_button);
-    mapStyleRadioGroup = findViewById(R.id.map_style_radio_group);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS);
+    initViews();
+  }
 
-    mapStyleRadioGroup.setOnCheckedChangeListener(this);
+  private void initViews() {
+    staticMapImageView = findViewById(R.id.static_map_imageview);
+
+    createStaticImageButton = findViewById(R.id.create_static_image_button);
     createStaticImageButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         if (mapStyleRadioGroup.getCheckedRadioButtonId() == -1) {
           Toast.makeText(StaticImageActivity.this, R.string.select_a_style, Toast.LENGTH_SHORT).show();
         } else {
-          // one of the radio buttons is checked
-          Picasso.with(StaticImageActivity.this).load(takeSnapshot(
-            mapboxMap.getCameraPosition().zoom,
-            mapboxMap.getStyleUrl().equals("mapbox://styles/mapbox/dark-v9") ? StaticMapCriteria.DARK_STYLE :
-              StaticMapCriteria.STREET_STYLE,
-            mapboxMap.getCameraPosition().target,
-            mapboxMap.getCameraPosition().bearing,
-            mapboxMap.getCameraPosition().tilt,
-            (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredWidth(), 0, 1280),
-            (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredHeight(), 0, 1280))
-            .url().toString()).into(staticMapImageView);
+          mapboxMap.getStyle(new Style.OnStyleLoaded() {
+            @Override
+            public void onStyleLoaded(@NonNull Style style) {
+              // one of the radio buttons is checked
+              Log.d("Static", "onClick: initViews style.getUrl() = " + style.getUrl());
+              Picasso.with(StaticImageActivity.this).load(takeSnapshot(
+                mapboxMap.getCameraPosition(),
+                style.getUrl().contains("mapbox/dark-v")
+                  ? StaticMapCriteria.DARK_STYLE :
+                  StaticMapCriteria.STREET_STYLE,
+                (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredWidth(), 0, 1280),
+                (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredHeight(), 0, 1280))
+                .url().toString()).into(staticMapImageView);
+            }
+          });
         }
       }
     });
+
+    mapStyleRadioGroup = findViewById(R.id.map_style_radio_group);
+    mapStyleRadioGroup.setOnCheckedChangeListener(StaticImageActivity.this);
   }
 
   @Override
   public void onCheckedChanged(RadioGroup radioGroup, int selectedButtonInt) {
     switch (selectedButtonInt) {
       case R.id.streets_style_select_radio_button:
-        Log.d("StaticImageActivity", "onCheckedChanged: streets");
-        // Selected Streets style
         mapboxMap.setStyle(Style.MAPBOX_STREETS);
         break;
       case R.id.dark_style_select_radio_button:
-        Log.d("StaticImageActivity", "onCheckedChanged: dark");
-        // Selected Dark style
         mapboxMap.setStyle(Style.DARK);
         break;
       default:
@@ -101,16 +108,16 @@ public class StaticImageActivity extends AppCompatActivity implements
     }
   }
 
-  private MapboxStaticMap takeSnapshot(double imageZoom, String styleUrl, LatLng imageTarget,
-                                       double bearing, double pitch, int width,
+  private MapboxStaticMap takeSnapshot(CameraPosition cameraPosition, String styleUrl, int width,
                                        int height) {
     return MapboxStaticMap.builder()
       .accessToken(getString(R.string.access_token))
       .styleId(styleUrl)
-      .cameraPoint(Point.fromLngLat(imageTarget.getLongitude(), imageTarget.getLatitude()))
-      .cameraZoom(imageZoom)
-      .cameraPitch(pitch)
-      .cameraBearing(bearing)
+      .cameraPoint(Point.fromLngLat(cameraPosition.target.getLongitude(),
+        cameraPosition.target.getLatitude()))
+      .cameraZoom(cameraPosition.zoom)
+      .cameraPitch(cameraPosition.tilt)
+      .cameraBearing(cameraPosition.bearing)
       .width(width)
       .height(height)
       .retina(true)

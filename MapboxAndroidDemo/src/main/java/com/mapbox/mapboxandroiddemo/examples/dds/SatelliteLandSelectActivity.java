@@ -1,9 +1,9 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-// #-code-snippet: satellite-land-select-activity full-java
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,6 +22,7 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
@@ -50,9 +51,9 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
   private static final String CIRCLE_LAYER_ID = "circle-layer-id";
   private static final String FILL_LAYER_ID = "fill-layer-polygon-id";
   private static final String LINE_LAYER_ID = "line-layer-id";
-  private List<Point> fillLayerPointList;
-  private List<Point> lineLayerPointList;
-  private List<Feature> circleLayerFeatureList;
+  private List<Point> fillLayerPointList = new ArrayList<>();
+  private List<Point> lineLayerPointList = new ArrayList<>();
+  private List<Feature> circleLayerFeatureList = new ArrayList<>();
   private List<List<Point>> listOfList;
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -77,34 +78,31 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    mapboxMap.animateCamera(
-      CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
-        .zoom(16)
-        .build()), 4000);
+    mapboxMap.setStyle(Style.SATELLITE, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        mapboxMap.animateCamera(
+          CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
+            .zoom(16)
+            .build()), 4000);
 
-    fillLayerPointList = new ArrayList<>();
-    circleLayerFeatureList = new ArrayList<>();
-    lineLayerPointList = new ArrayList<>();
+        // Add sources to the map
+        circleSource = initCircleSource(style);
+        fillSource = initFillSource(style);
+        lineSource = initLineSource(style);
 
-    // Add sources to the map
-    initCircleSource();
-    initLineSource();
-    initFillSource();
+        // Add layers to the map
+        initCircleLayer(style);
+        initLineLayer(style);
+        initFillLayer(style);
 
-    this.circleSource = mapboxMap.getSourceAs(CIRCLE_SOURCE_ID);
-    this.fillSource = mapboxMap.getSourceAs(FILL_SOURCE_ID);
-    this.lineSource = mapboxMap.getSourceAs(LINE_SOURCE_ID);
-
-    // Add layers to the map
-    initCircleLayer();
-    initLineLayer();
-    initFillLayer();
-
-    initFloatingActionButtonClickListeners();
-    Toast.makeText(this, R.string.trace_instruction, Toast.LENGTH_LONG).show();
+        initFloatingActionButtonClickListeners();
+        Toast.makeText(SatelliteLandSelectActivity.this, R.string.trace_instruction, Toast.LENGTH_LONG).show();
+      }
+    });
   }
 
   /**
@@ -199,67 +197,70 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
   /**
    * Set up the CircleLayer source for showing map click points
    */
-  private void initCircleSource() {
+  private GeoJsonSource initCircleSource(@NonNull Style loadedMapStyle) {
     FeatureCollection circleFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     GeoJsonSource circleGeoJsonSource = new GeoJsonSource(CIRCLE_SOURCE_ID, circleFeatureCollection);
-    mapboxMap.addSource(circleGeoJsonSource);
+    loadedMapStyle.addSource(circleGeoJsonSource);
+    return circleGeoJsonSource;
   }
 
   /**
    * Set up the CircleLayer for showing polygon click points
    */
-  private void initCircleLayer() {
+  private void initCircleLayer(@NonNull Style loadedMapStyle) {
     CircleLayer circleLayer = new CircleLayer(CIRCLE_LAYER_ID,
       CIRCLE_SOURCE_ID);
     circleLayer.setProperties(
       circleRadius(7f),
       circleColor(Color.parseColor("#d004d3"))
     );
-    mapboxMap.addLayer(circleLayer);
+    loadedMapStyle.addLayer(circleLayer);
   }
 
   /**
    * Set up the FillLayer source for showing map click points
    */
-  private void initFillSource() {
+  private GeoJsonSource initFillSource(@NonNull Style loadedMapStyle) {
     FeatureCollection fillFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     GeoJsonSource fillGeoJsonSource = new GeoJsonSource(FILL_SOURCE_ID, fillFeatureCollection);
-    mapboxMap.addSource(fillGeoJsonSource);
+    loadedMapStyle.addSource(fillGeoJsonSource);
+    return fillGeoJsonSource;
   }
 
   /**
    * Set up the FillLayer for showing the set boundaries' polygons
    */
-  private void initFillLayer() {
+  private void initFillLayer(@NonNull Style loadedMapStyle) {
     FillLayer fillLayer = new FillLayer(FILL_LAYER_ID,
       FILL_SOURCE_ID);
     fillLayer.setProperties(
       fillOpacity(.6f),
       fillColor(Color.parseColor("#00e9ff"))
     );
-    mapboxMap.addLayerBelow(fillLayer, LINE_LAYER_ID);
+    loadedMapStyle.addLayerBelow(fillLayer, LINE_LAYER_ID);
   }
 
   /**
    * Set up the LineLayer source for showing map click points
    */
-  private void initLineSource() {
+  private GeoJsonSource initLineSource(@NonNull Style loadedMapStyle) {
     FeatureCollection lineFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     GeoJsonSource lineGeoJsonSource = new GeoJsonSource(LINE_SOURCE_ID, lineFeatureCollection);
-    mapboxMap.addSource(lineGeoJsonSource);
+    loadedMapStyle.addSource(lineGeoJsonSource);
+    return lineGeoJsonSource;
   }
 
   /**
    * Set up the LineLayer for showing the set boundaries' polygons
    */
-  private void initLineLayer() {
+  private void initLineLayer(@NonNull Style loadedMapStyle) {
     LineLayer lineLayer = new LineLayer(LINE_LAYER_ID,
       LINE_SOURCE_ID);
     lineLayer.setProperties(
       lineColor(Color.WHITE),
       lineWidth(5f)
     );
-    mapboxMap.addLayerBelow(lineLayer, CIRCLE_LAYER_ID);
+    loadedMapStyle.addLayerBelow(lineLayer, CIRCLE_LAYER_ID);
   }
 
   // Add the mapView lifecycle to the activity's lifecycle methods
@@ -305,4 +306,3 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
     mapView.onSaveInstanceState(outState);
   }
 }
-// #-end-code-snippet: satellite-land-select-activity full-java

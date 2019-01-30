@@ -4,6 +4,7 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.google.gson.JsonElement;
 import com.mapbox.geojson.Feature;
@@ -15,6 +16,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.List;
 import java.util.Map;
@@ -46,16 +48,20 @@ public class QueryFeatureActivity extends AppCompatActivity implements OnMapRead
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     QueryFeatureActivity.this.mapboxMap = mapboxMap;
-    mapboxMap.addOnMapClickListener(this);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        mapboxMap.addOnMapClickListener(QueryFeatureActivity.this);
+        Toast.makeText(QueryFeatureActivity.this,
+          getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
-    if (featureMarker != null) {
-      mapboxMap.removeMarker(featureMarker);
-    }
+  public boolean onMapClick(@NonNull LatLng point) {
 
     final PointF pixel = mapboxMap.getProjection().toScreenLocation(point);
     List<Feature> features = mapboxMap.queryRenderedFeatures(pixel);
@@ -92,6 +98,8 @@ public class QueryFeatureActivity extends AppCompatActivity implements OnMapRead
       );
     }
     mapboxMap.selectMarker(featureMarker);
+
+    return true;
   }
 
   @Override

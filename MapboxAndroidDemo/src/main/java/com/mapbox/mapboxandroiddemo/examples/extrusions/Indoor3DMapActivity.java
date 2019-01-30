@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
@@ -9,6 +10,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -27,7 +29,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpa
 public class Indoor3DMapActivity extends AppCompatActivity {
 
   private MapView mapView;
-  private MapboxMap map;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,21 +45,23 @@ public class Indoor3DMapActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
-        map = mapboxMap;
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            style.addSource(
+                new GeoJsonSource("room-data",
+                    loadJsonFromAsset("indoor-3d-map.geojson")));
 
-        GeoJsonSource roomDataSource = new GeoJsonSource("room-data", loadJsonFromAsset("indoor-3d-map.geojson"));
-        map.addSource(roomDataSource);
-
-        FillExtrusionLayer roomExtrusionLayer = new FillExtrusionLayer("room-extrusion", "room-data");
-        roomExtrusionLayer.setProperties(
-          fillExtrusionColor(get("color")),
-          fillExtrusionHeight(get("height")),
-          fillExtrusionBase(get("base_height")),
-          fillExtrusionOpacity(0.5f)
-        );
-
-        map.addLayer(roomExtrusionLayer);
+            style.addLayer(new FillExtrusionLayer(
+              "room-extrusion", "room-data").withProperties(
+              fillExtrusionColor(get("color")),
+              fillExtrusionHeight(get("height")),
+              fillExtrusionBase(get("base_height")),
+              fillExtrusionOpacity(0.5f)
+            ));
+          }
+        });
       }
     });
   }

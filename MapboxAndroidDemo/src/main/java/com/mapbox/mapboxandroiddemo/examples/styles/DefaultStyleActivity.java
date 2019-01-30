@@ -1,16 +1,17 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.constants.Style;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Use a variety of professionally designed styles with the Mapbox Android SDK.
@@ -31,15 +32,13 @@ public class DefaultStyleActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_style_default);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
         DefaultStyleActivity.this.mapboxMap = mapboxMap;
-
-        // customize map with markers, polylines, etc
-
+        mapboxMap.setStyle(Style.LIGHT);
       }
     });
   }
@@ -97,22 +96,22 @@ public class DefaultStyleActivity extends AppCompatActivity {
     // Handle item selection
     switch (item.getItemId()) {
       case R.id.menu_streets:
-        mapboxMap.setStyleUrl(Style.MAPBOX_STREETS);
+        mapboxMap.setStyle(Style.MAPBOX_STREETS);
         return true;
       case R.id.menu_dark:
-        mapboxMap.setStyleUrl(Style.DARK);
+        mapboxMap.setStyle(Style.DARK);
         return true;
       case R.id.menu_light:
-        mapboxMap.setStyleUrl(Style.LIGHT);
+        mapboxMap.setStyle(Style.LIGHT);
         return true;
       case R.id.menu_outdoors:
-        mapboxMap.setStyleUrl(Style.OUTDOORS);
+        mapboxMap.setStyle(Style.OUTDOORS);
         return true;
       case R.id.menu_satellite:
-        mapboxMap.setStyleUrl(Style.SATELLITE);
+        mapboxMap.setStyle(Style.SATELLITE);
         return true;
       case R.id.menu_satellite_streets:
-        mapboxMap.setStyleUrl(Style.SATELLITE_STREETS);
+        mapboxMap.setStyle(Style.SATELLITE_STREETS);
         return true;
       case android.R.id.home:
         finish();

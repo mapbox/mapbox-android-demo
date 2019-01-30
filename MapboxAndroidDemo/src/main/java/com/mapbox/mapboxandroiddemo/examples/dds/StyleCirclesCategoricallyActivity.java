@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -8,6 +9,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
@@ -39,37 +41,41 @@ public class StyleCirclesCategoricallyActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_dds_style_circles_categorically);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-        VectorSource vectorSource = new VectorSource(
-          "ethnicity-source",
-          "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken()
-        );
-        mapboxMap.addSource(vectorSource);
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            style.addSource(new VectorSource(
+                "ethnicity-source",
+                "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken()
+            ));
 
-        CircleLayer circleLayer = new CircleLayer("population", "ethnicity-source");
-        circleLayer.setSourceLayer("sf2010");
-        circleLayer.withProperties(
-          circleRadius(
-            interpolate(
-              exponential(1.75f),
-              zoom(),
-              stop(12, 2f),
-              stop(22, 180f)
-            )),
-          circleColor(
-            match(get("ethnicity"), rgb(0, 0, 0),
-              stop("white", rgb(251, 176, 59)),
-              stop("Black", rgb(34, 59, 83)),
-              stop("Hispanic", rgb(229, 94, 94)),
-              stop("Asian", rgb(59, 178, 208)),
-              stop("Other", rgb(204, 204, 204)))));
+            CircleLayer circleLayer = new CircleLayer("population", "ethnicity-source");
+            circleLayer.setSourceLayer("sf2010");
+            circleLayer.withProperties(
+              circleRadius(
+                interpolate(
+                  exponential(1.75f),
+                  zoom(),
+                  stop(12, 2f),
+                  stop(22, 180f)
+                )),
+              circleColor(
+                match(get("ethnicity"), rgb(0, 0, 0),
+                  stop("white", rgb(251, 176, 59)),
+                  stop("Black", rgb(34, 59, 83)),
+                  stop("Hispanic", rgb(229, 94, 94)),
+                  stop("Asian", rgb(59, 178, 208)),
+                  stop("Other", rgb(204, 204, 204)))));
 
-        mapboxMap.addLayer(circleLayer);
+            style.addLayer(circleLayer);
+          }
+        });
       }
     });
   }

@@ -2,31 +2,36 @@ package com.mapbox.mapboxandroiddemo.examples;
 
 
 import android.annotation.SuppressLint;
-import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.wearable.activity.WearableActivity;
+import android.widget.Toast;
 
-import com.mapbox.android.core.location.LocationEngine;
-import com.mapbox.android.core.location.LocationEngineListener;
-import com.mapbox.android.core.location.LocationEngineProvider;
+import com.mapbox.android.core.permissions.PermissionsListener;
+import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.modes.CameraMode;
+import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+
+import java.util.List;
 
 /**
  * Lock the camera centered above the user location.
  */
-public class LocationTrackingActivity extends WearableActivity {
+public class LocationTrackingActivity extends WearableActivity implements PermissionsListener,
+  OnMapReadyCallback {
 
   private MapView mapView;
-  private MapboxMap map;
-  private LocationEngine locationEngine;
-  private LocationEngineListener locationEngineListener;
+  private MapboxMap mapboxMap;
+  private PermissionsManager permissionsManager;
 
+  @SuppressLint("MissingPermission")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -40,40 +45,70 @@ public class LocationTrackingActivity extends WearableActivity {
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
+    mapView.getMapAsync(this);
+  }
 
-    LocationEngineProvider locationEngineProvider = new LocationEngineProvider(this);
-    locationEngine = locationEngineProvider.obtainBestLocationEngineAvailable();
+  @Override
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
 
-    locationEngineListener = new LocationEngineListener() {
-      @SuppressLint("MissingPermission")
+    // Customize map with markers, polylines, etc.
+    LocationTrackingActivity.this.mapboxMap = mapboxMap;
+
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
-      public void onConnected() {
-        locationEngine.requestLocationUpdates();
-      }
-
-      @Override
-      public void onLocationChanged(Location location) {
-        if (map != null) {
-          map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location), 16));
-        }
-      }
-    };
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap mapboxMap) {
-
-        // Customize map with markers, polylines, etc.
-        map = mapboxMap;
-        @SuppressLint("MissingPermission")
-        Location lastLocation = new LocationEngineProvider(LocationTrackingActivity.this)
-          .obtainBestLocationEngineAvailable().getLastLocation();
-        if (lastLocation != null) {
-          map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation), 16));
-        }
+      public void onStyleLoaded(@NonNull Style style) {
+        enableLocationComponent(style);
+        setAmbientEnabled();
       }
     });
-    locationEngine.addLocationEngineListener(locationEngineListener);
-    setAmbientEnabled();
+  }
+
+  @SuppressWarnings( {"MissingPermission"})
+  private void enableLocationComponent(@NonNull Style style) {
+    // Check if permissions are enabled and if not request
+    if (PermissionsManager.areLocationPermissionsGranted(this)) {
+
+      // Get an instance of the component
+      LocationComponent locationComponent = mapboxMap.getLocationComponent();
+
+      // Activate with options
+      locationComponent.activateLocationComponent(this, style);
+
+      // Enable to make component visible
+      locationComponent.setLocationComponentEnabled(true);
+
+      // Set the component's camera mode
+      locationComponent.setCameraMode(CameraMode.TRACKING);
+      locationComponent.setRenderMode(RenderMode.COMPASS);
+    } else {
+      permissionsManager = new PermissionsManager(this);
+      permissionsManager.requestLocationPermissions(this);
+    }
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
+  }
+
+  @Override
+  public void onExplanationNeeded(List<String> permissionsToExplain) {
+    Toast.makeText(this, R.string.user_location_permission_explanation, Toast.LENGTH_LONG).show();
+  }
+
+  @Override
+  public void onPermissionResult(boolean granted) {
+    if (granted) {
+      mapboxMap.getStyle(new Style.OnStyleLoaded() {
+        @Override
+        public void onStyleLoaded(@NonNull Style style) {
+          enableLocationComponent(style);
+        }
+      });
+    } else {
+      Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
+      finish();
+    }
   }
 
   @Override
@@ -98,13 +133,10 @@ public class LocationTrackingActivity extends WearableActivity {
   protected void onStart() {
     super.onStart();
     mapView.onStart();
-    locationEngine.activate();
   }
 
   @Override
   protected void onStop() {
-    locationEngine.removeLocationUpdates();
-    locationEngine.deactivate();
     super.onStop();
     mapView.onStop();
   }

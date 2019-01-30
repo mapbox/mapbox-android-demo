@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,6 +24,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -69,23 +71,35 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
 
   @SuppressWarnings( {"MissingPermission"})
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     DashedLineDirectionsPickerActivity.this.mapboxMap = mapboxMap;
 
-    // Add a marker on the map's center/"target" for the place picker UI
-    ImageView hoveringMarker = new ImageView(this);
-    hoveringMarker.setImageResource(R.drawable.red_marker);
-    FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
-      ViewGroup.LayoutParams.WRAP_CONTENT,
-      ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
-    hoveringMarker.setLayoutParams(params);
-    mapView.addView(hoveringMarker);
+    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
 
-    // Add the layer for the dashed directions route line
-    initDottedLineSourceAndLayer();
+        // Add a marker on the map's center/"target" for the place picker UI
+        ImageView hoveringMarker = new ImageView(DashedLineDirectionsPickerActivity.this);
+        hoveringMarker.setImageResource(R.drawable.red_marker);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+          ViewGroup.LayoutParams.WRAP_CONTENT,
+          ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+        hoveringMarker.setLayoutParams(params);
+        mapView.addView(hoveringMarker);
 
-    // Add the camera idle listener
-    mapboxMap.addOnCameraIdleListener(this);
+        // Add the layer for the dashed directions route line
+        initDottedLineSourceAndLayer(style);
+
+        // Add the camera idle listener
+        mapboxMap.addOnCameraIdleListener(DashedLineDirectionsPickerActivity.this);
+
+        Toast.makeText(
+          DashedLineDirectionsPickerActivity.this,
+          getString(R.string.move_map_around_instruction),
+          Toast.LENGTH_LONG
+        ).show();
+      }
+    });
   }
 
   @Override
@@ -102,19 +116,17 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
    * Set up a GeoJsonSource and LineLayer in order to show the directions route from the device location
    * to the place picker location
    */
-  private void initDottedLineSourceAndLayer() {
+  private void initDottedLineSourceAndLayer(@NonNull Style loadedMapStyle) {
     dashedLineDirectionsFeatureCollection = FeatureCollection.fromFeatures(new Feature[] {});
-    GeoJsonSource geoJsonSource = new GeoJsonSource("SOURCE_ID", dashedLineDirectionsFeatureCollection);
-    mapboxMap.addSource(geoJsonSource);
-    LineLayer dashedDirectionsRouteLayer = new LineLayer(
-      "DIRECTIONS_LAYER_ID", "SOURCE_ID");
-    dashedDirectionsRouteLayer.withProperties(
-      lineWidth(4.5f),
-      lineColor(Color.BLACK),
-      lineTranslate(new Float[] {0f, 4f}),
-      lineDasharray(new Float[] {1.2f, 1.2f})
-    );
-    mapboxMap.addLayerBelow(dashedDirectionsRouteLayer, "road-label-small");
+    loadedMapStyle.addSource(new GeoJsonSource("SOURCE_ID", dashedLineDirectionsFeatureCollection));
+    loadedMapStyle.addLayerBelow(
+      new LineLayer(
+        "DIRECTIONS_LAYER_ID", "SOURCE_ID").withProperties(
+        lineWidth(4.5f),
+        lineColor(Color.BLACK),
+        lineTranslate(new Float[] {0f, 4f}),
+        lineDasharray(new Float[] {1.2f, 1.2f})
+      ), "road-label-small");
   }
 
   /**
@@ -161,17 +173,24 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
    *
    * @param route The route to be drawn in the map's LineLayer that was set up above.
    */
-  private void drawNavigationPolylineRoute(DirectionsRoute route) {
-    List<Feature> directionsRouteFeatureList = new ArrayList<>();
-    LineString lineString = LineString.fromPolyline(route.geometry(), PRECISION_6);
-    List<Point> coordinates = lineString.coordinates();
-    for (int i = 0; i < coordinates.size(); i++) {
-      directionsRouteFeatureList.add(Feature.fromGeometry(LineString.fromLngLats(coordinates)));
-    }
-    dashedLineDirectionsFeatureCollection = FeatureCollection.fromFeatures(directionsRouteFeatureList);
-    GeoJsonSource source = mapboxMap.getSourceAs("SOURCE_ID");
-    if (source != null) {
-      source.setGeoJson(dashedLineDirectionsFeatureCollection);
+  private void drawNavigationPolylineRoute(final DirectionsRoute route) {
+    if (mapboxMap != null) {
+      mapboxMap.getStyle(new Style.OnStyleLoaded() {
+        @Override
+        public void onStyleLoaded(@NonNull Style style) {
+          List<Feature> directionsRouteFeatureList = new ArrayList<>();
+          LineString lineString = LineString.fromPolyline(route.geometry(), PRECISION_6);
+          List<Point> coordinates = lineString.coordinates();
+          for (int i = 0; i < coordinates.size(); i++) {
+            directionsRouteFeatureList.add(Feature.fromGeometry(LineString.fromLngLats(coordinates)));
+          }
+          dashedLineDirectionsFeatureCollection = FeatureCollection.fromFeatures(directionsRouteFeatureList);
+          GeoJsonSource source = style.getSourceAs("SOURCE_ID");
+          if (source != null) {
+            source.setGeoJson(dashedLineDirectionsFeatureCollection);
+          }
+        }
+      });
     }
   }
 

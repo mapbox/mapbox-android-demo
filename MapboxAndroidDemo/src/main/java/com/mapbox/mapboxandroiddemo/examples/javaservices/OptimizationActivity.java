@@ -1,5 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,27 +12,36 @@ import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.api.optimization.v1.MapboxOptimization;
 import com.mapbox.api.optimization.v1.models.OptimizationResponse;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.annotations.Polyline;
-import com.mapbox.mapboxsdk.annotations.PolylineOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.mapbox.core.constants.Constants.PRECISION_6;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 
 /**
@@ -40,18 +50,17 @@ import static com.mapbox.core.constants.Constants.PRECISION_6;
 public class OptimizationActivity extends AppCompatActivity implements OnMapReadyCallback,
   MapboxMap.OnMapClickListener, MapboxMap.OnMapLongClickListener {
 
+  private static final String ICON_GEOJSON_SOURCE_ID = "icon-source-id";
+  private static final String FIRST = "first";
+  private static final String ANY = "any";
+  private static final String TEAL_COLOR = "#23D2BE";
+  private static final float POLYLINE_WIDTH = 5;
   private MapView mapView;
   private MapboxMap mapboxMap;
   private DirectionsRoute optimizedRoute;
   private MapboxOptimization optimizedClient;
-  private Polyline optimizedPolyline;
-  private List<Point> stops;
+  private List<Point> stops = new ArrayList<>();
   private Point origin;
-
-  private static final String FIRST = "first";
-  private static final String ANY = "any";
-  private static final String TEAL_COLOR = "#23D2BE";
-  private static final int POLYLINE_WIDTH = 5;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +73,6 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_javaservices_optimization);
 
-    stops = new ArrayList<>();
-
     // Add the origin Point to the list
     addFirstStopToStopsList();
 
@@ -76,48 +83,110 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    // Add origin and destination to the mapboxMap
-    mapboxMap.addMarker(new MarkerOptions()
-      .position(new LatLng(origin.latitude(), origin.longitude()))
-      .title(getString(R.string.origin)));
-    Toast.makeText(OptimizationActivity.this, R.string.click_instructions, Toast.LENGTH_SHORT).show();
-    mapboxMap.addOnMapClickListener(this);
-    mapboxMap.addOnMapLongClickListener(this);
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        // Add origin and destination to the mapboxMap
+        initMarkerIconSymbolLayer(style);
+        initOptimizedRouteLineLayer(style);
+        Toast.makeText(OptimizationActivity.this, R.string.click_instructions, Toast.LENGTH_SHORT).show();
+        mapboxMap.addOnMapClickListener(OptimizationActivity.this);
+        mapboxMap.addOnMapLongClickListener(OptimizationActivity.this);
+      }
+    });
+  }
+
+  private void initMarkerIconSymbolLayer(@NonNull Style loadedMapStyle) {
+    // Add the marker image to map
+    loadedMapStyle.addImage("icon-image", BitmapFactory.decodeResource(
+      this.getResources(), R.drawable.red_marker));
+
+    // Add the source to the map
+
+    loadedMapStyle.addSource(new GeoJsonSource(ICON_GEOJSON_SOURCE_ID,
+      Feature.fromGeometry(Point.fromLngLat(origin.longitude(), origin.latitude()))));
+
+    loadedMapStyle.addLayer(new SymbolLayer("icon-layer-id", ICON_GEOJSON_SOURCE_ID).withProperties(
+      iconImage("icon-image"),
+      iconSize(1f),
+      iconAllowOverlap(true),
+      iconIgnorePlacement(true),
+      iconOffset(new Float[] {0f, -4f})
+    ));
+  }
+
+  private void initOptimizedRouteLineLayer(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addSource(new GeoJsonSource("optimized-route-source-id"));
+    loadedMapStyle.addLayerBelow(new LineLayer("optimized-route-layer-id", "optimized-route-source-id")
+      .withProperties(
+        lineColor(Color.parseColor(TEAL_COLOR)),
+        lineWidth(POLYLINE_WIDTH)
+      ), "icon-layer-id");
   }
 
   @Override
-  public void onMapClick(@NonNull LatLng point) {
+  public boolean onMapClick(@NonNull LatLng point) {
     // Optimization API is limited to 12 coordinate sets
     if (alreadyTwelveMarkersOnMap()) {
       Toast.makeText(OptimizationActivity.this, R.string.only_twelve_stops_allowed, Toast.LENGTH_LONG).show();
     } else {
-      addDestinationMarker(point);
-      addPointToStopsList(point);
-      getOptimizedRoute(stops);
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        addDestinationMarker(style, point);
+        addPointToStopsList(point);
+        getOptimizedRoute(style, stops);
+      }
     }
+    return true;
   }
 
   @Override
-  public void onMapLongClick(@NonNull LatLng point) {
-    mapboxMap.clear();
+  public boolean onMapLongClick(@NonNull LatLng point) {
     stops.clear();
-    addFirstStopToStopsList();
+    if (mapboxMap != null) {
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        resetDestinationMarkers(style);
+        removeOptimizedRoute(style);
+        addFirstStopToStopsList();
+        return true;
+      }
+    }
+    return false;
   }
 
-  private boolean alreadyTwelveMarkersOnMap() {
-    if (stops.size() == 12) {
-      return true;
-    } else {
-      return false;
+  private void resetDestinationMarkers(@NonNull Style style) {
+    GeoJsonSource optimizedLineSource = style.getSourceAs(ICON_GEOJSON_SOURCE_ID);
+    if (optimizedLineSource != null) {
+      optimizedLineSource.setGeoJson(Feature.fromGeometry(Point.fromLngLat(origin.longitude(),
+        origin.latitude())));
     }
   }
 
-  private void addDestinationMarker(LatLng point) {
-    mapboxMap.addMarker(new MarkerOptions()
-      .position(new LatLng(point.getLatitude(), point.getLongitude()))
-      .title(getString(R.string.destination)));
+  private void removeOptimizedRoute(@NonNull Style style) {
+    GeoJsonSource optimizedLineSource = style.getSourceAs("optimized-route-source-id");
+    if (optimizedLineSource != null) {
+      optimizedLineSource.setGeoJson(FeatureCollection.fromFeatures(new Feature[] {}));
+    }
+  }
+
+  private boolean alreadyTwelveMarkersOnMap() {
+    return stops.size() == 12;
+  }
+
+  private void addDestinationMarker(@NonNull Style style, LatLng point) {
+    List<Feature> destinationMarkerList = new ArrayList<>();
+    for (Point singlePoint : stops) {
+      destinationMarkerList.add(Feature.fromGeometry(
+        Point.fromLngLat(singlePoint.longitude(), singlePoint.latitude())));
+    }
+    destinationMarkerList.add(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
+    GeoJsonSource iconSource = style.getSourceAs(ICON_GEOJSON_SOURCE_ID);
+    if (iconSource != null) {
+      iconSource.setGeoJson(FeatureCollection.fromFeatures(destinationMarkerList));
+    }
   }
 
   private void addPointToStopsList(LatLng point) {
@@ -130,7 +199,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     stops.add(origin);
   }
 
-  private void getOptimizedRoute(List<Point> coordinates) {
+  private void getOptimizedRoute(@NonNull final Style style, List<Point> coordinates) {
     optimizedClient = MapboxOptimization.builder()
       .source(FIRST)
       .destination(ANY)
@@ -159,7 +228,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
 
         // Get most optimized route from API response
         optimizedRoute = response.body().trips().get(0);
-        drawOptimizedRoute(optimizedRoute);
+        drawOptimizedRoute(style, optimizedRoute);
       }
 
       @Override
@@ -169,30 +238,12 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     });
   }
 
-  private void drawOptimizedRoute(DirectionsRoute route) {
-    // Remove old polyline
-    if (optimizedPolyline != null) {
-      mapboxMap.removePolyline(optimizedPolyline);
+  private void drawOptimizedRoute(@NonNull Style style, DirectionsRoute route) {
+    GeoJsonSource optimizedLineSource = style.getSourceAs("optimized-route-source-id");
+    if (optimizedLineSource != null) {
+      optimizedLineSource.setGeoJson(FeatureCollection.fromFeature(Feature.fromGeometry(
+        LineString.fromPolyline(route.geometry(), PRECISION_6))));
     }
-    // Draw points on MapView
-    LatLng[] pointsToDraw = convertLineStringToLatLng(route);
-    optimizedPolyline = mapboxMap.addPolyline(new PolylineOptions()
-      .add(pointsToDraw)
-      .color(Color.parseColor(TEAL_COLOR))
-      .width(POLYLINE_WIDTH));
-  }
-
-  private LatLng[] convertLineStringToLatLng(DirectionsRoute route) {
-    // Convert LineString coordinates into LatLng[]
-    LineString lineString = LineString.fromPolyline(route.geometry(), PRECISION_6);
-    List<Point> coordinates = lineString.coordinates();
-    LatLng[] points = new LatLng[coordinates.size()];
-    for (int i = 0; i < coordinates.size(); i++) {
-      points[i] = new LatLng(
-        coordinates.get(i).latitude(),
-        coordinates.get(i).longitude());
-    }
-    return points;
   }
 
   @Override

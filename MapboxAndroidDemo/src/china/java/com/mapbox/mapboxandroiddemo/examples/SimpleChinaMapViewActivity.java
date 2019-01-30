@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -10,6 +11,8 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.plugins.china.constants.ChinaStyle;
 import com.mapbox.mapboxsdk.plugins.china.maps.ChinaMapView;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * The most basic example of adding a government approved and performant China map to an activity.
@@ -34,12 +37,20 @@ public class SimpleChinaMapViewActivity extends AppCompatActivity {
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(mapboxMap -> {
-      this.mapboxMap = mapboxMap;
+    mapView.getMapAsync(new OnMapReadyCallback() {
+      @Override
+      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+        SimpleChinaMapViewActivity.this.mapboxMap = mapboxMap;
+        mapboxMap.setStyle(new Style.Builder().fromUrl(ChinaStyle.MAPBOX_STREETS_CHINESE), new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
 
-      // Customize map with markers, polylines, etc.
+            // Map is set up and the style has loaded. Now you can add data or make other map adjustments
 
 
+          }
+        });
+      }
     });
   }
 
@@ -55,17 +66,17 @@ public class SimpleChinaMapViewActivity extends AppCompatActivity {
     switch (item.getItemId()) {
       case R.id.menu_streets:
         if (mapboxMap != null) {
-          mapboxMap.setStyleUrl(ChinaStyle.MAPBOX_STREETS_CHINESE);
+          mapboxMap.setStyle(new Style.Builder().fromUrl(ChinaStyle.MAPBOX_STREETS_CHINESE));
         }
         return true;
       case R.id.menu_dark:
         if (mapboxMap != null) {
-          mapboxMap.setStyleUrl(ChinaStyle.MAPBOX_DARK_CHINESE);
+          mapboxMap.setStyle(new Style.Builder().fromUrl(ChinaStyle.MAPBOX_DARK_CHINESE));
         }
         return true;
       case R.id.menu_light:
         if (mapboxMap != null) {
-          mapboxMap.setStyleUrl(ChinaStyle.MAPBOX_LIGHT_CHINESE);
+          mapboxMap.setStyle(new Style.Builder().fromUrl(ChinaStyle.MAPBOX_LIGHT_CHINESE));
         }
         return true;
       default:

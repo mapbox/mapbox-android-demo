@@ -4,7 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.mapbox.android.core.permissions.PermissionsListener;
@@ -20,6 +20,7 @@ import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.List;
 
@@ -46,21 +47,24 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_location_component_options);
 
-    Log.d("LocOptionsActivity", "isInTrackingMode = " + isInTrackingMode);
-
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
+  public void onMapReady(@NonNull MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    enableLocationComponent();
+    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        enableLocationComponent(style);
+      }
+    });
   }
 
   @SuppressWarnings( {"MissingPermission"})
-  private void enableLocationComponent() {
+  private void enableLocationComponent(@NonNull Style loadedMapStyle) {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
@@ -76,7 +80,7 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
       locationComponent = mapboxMap.getLocationComponent();
 
       // Activate with options
-      locationComponent.activateLocationComponent(this, options);
+      locationComponent.activateLocationComponent(this, loadedMapStyle, options);
 
       // Enable to make component visible
       locationComponent.setLocationComponentEnabled(true);
@@ -93,16 +97,19 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
       // Add the camera tracking listener. Fires if the map camera is manually moved.
       locationComponent.addOnCameraTrackingChangedListener(this);
 
-      findViewById(R.id.back_to_camera_tracking_mode).setOnClickListener(view -> {
-        if (!isInTrackingMode) {
-          isInTrackingMode = true;
-          locationComponent.setCameraMode(CameraMode.TRACKING);
-          locationComponent.zoomWhileTracking(16f);
-          Toast.makeText(this, getString(R.string.tracking_enabled),
-            Toast.LENGTH_SHORT).show();
-        } else {
-          Toast.makeText(this, getString(R.string.tracking_already_enabled),
-            Toast.LENGTH_SHORT).show();
+      findViewById(R.id.back_to_camera_tracking_mode).setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          if (!isInTrackingMode) {
+            isInTrackingMode = true;
+            locationComponent.setCameraMode(CameraMode.TRACKING);
+            locationComponent.zoomWhileTracking(16f);
+            Toast.makeText(LocationComponentOptionsActivity.this, getString(R.string.tracking_enabled),
+              Toast.LENGTH_SHORT).show();
+          } else {
+            Toast.makeText(LocationComponentOptionsActivity.this, getString(R.string.tracking_already_enabled),
+              Toast.LENGTH_SHORT).show();
+          }
         }
       });
 
@@ -145,7 +152,12 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
   @Override
   public void onPermissionResult(boolean granted) {
     if (granted) {
-      enableLocationComponent();
+      mapboxMap.getStyle(new Style.OnStyleLoaded() {
+        @Override
+        public void onStyleLoaded(@NonNull Style style) {
+          enableLocationComponent(style);
+        }
+      });
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
       finish();

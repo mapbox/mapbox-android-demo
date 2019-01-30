@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
@@ -73,19 +75,24 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(MapboxMap map) {
+      public void onMapReady(@NonNull MapboxMap map) {
 
         mapboxMap = map;
 
-        mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
-          12.099, -79.045), 3));
+        map.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
+              12.099, -79.045), 3));
 
-        addClusteredGeoJsonSource();
-        mapboxMap.addImage("cross-icon-id", BitmapUtils.getBitmapFromDrawable(
-          getResources().getDrawable(R.drawable.ic_cross)));
+            addClusteredGeoJsonSource(style);
+            style.addImage("cross-icon-id", BitmapUtils.getBitmapFromDrawable(
+              getResources().getDrawable(R.drawable.ic_cross)));
 
-        Toast.makeText(CircleLayerClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
-          Toast.LENGTH_SHORT).show();
+            Toast.makeText(CircleLayerClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
+              Toast.LENGTH_SHORT).show();
+          }
+        });
       }
     });
   }
@@ -133,11 +140,11 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
   }
 
 
-  private void addClusteredGeoJsonSource() {
+  private void addClusteredGeoJsonSource(@NonNull Style loadedMapStyle) {
 
     // Add a new source from the GeoJSON data and set the 'cluster' option to true.
     try {
-      mapboxMap.addSource(
+      loadedMapStyle.addSource(
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
         // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
         new GeoJsonSource("earthquakes",
@@ -179,7 +186,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
         )
       )
     );
-    mapboxMap.addLayer(unclustered);
+    loadedMapStyle.addLayer(unclustered);
 
     for (int i = 0; i < layers.length; i++) {
       //Add clusters' circles
@@ -201,7 +208,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
           lt(pointCount, literal(layers[i - 1][0]))
         )
       );
-      mapboxMap.addLayer(circles);
+      loadedMapStyle.addLayer(circles);
     }
 
     //Add the count labels
@@ -213,7 +220,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
       textIgnorePlacement(true),
       textAllowOverlap(true)
     );
-    mapboxMap.addLayer(count);
+    loadedMapStyle.addLayer(count);
 
   }
 }

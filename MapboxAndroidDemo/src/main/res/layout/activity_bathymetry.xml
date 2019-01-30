@@ -11,7 +11,6 @@
         mapbox:mapbox_cameraTargetLat="44.934448"
         mapbox:mapbox_cameraTargetLng="-85.671378"
         mapbox:mapbox_cameraZoom="15.69"
-        mapbox:mapbox_cameraZoomMin="14.9"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_outdoors" />
+        mapbox:mapbox_cameraZoomMin="14.9" />
 
 </android.support.constraint.ConstraintLayout>

@@ -12,8 +12,7 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraZoom="15"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_light" />
+        mapbox:mapbox_cameraZoom="15" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/back_to_camera_tracking_mode"

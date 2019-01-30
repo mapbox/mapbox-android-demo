@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -8,6 +9,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.Layer;
@@ -48,66 +50,71 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(final MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-        VectorSource vectorSource = new VectorSource(
-          "population",
-          "http://api.mapbox.com/v4/mapbox.660ui7x6.json?access_token=" + Mapbox.getAccessToken()
-        );
-        mapboxMap.addSource(vectorSource);
-
-        FillLayer statePopulationLayer = new FillLayer("state-population", "population");
-        statePopulationLayer.withSourceLayer("state_county_population_2014_cen");
-        statePopulationLayer.setFilter(Expression.eq(get("isState"), literal(true)));
-        statePopulationLayer.withProperties(
-          fillColor(step((get("population")), rgb(0,0,0),
-            stop(0, rgb(242,241,45)),
-            stop(750000, rgb(238,211,34)),
-            stop(1000000, rgb(218,156,32)),
-            stop(2500000, rgb(202,131,35)),
-            stop(5000000, rgb(184,107,37)),
-            stop(7500000, rgb(162,86,38)),
-            stop(10000000, rgb(139,66,37)),
-            stop(25000000, rgb(114,49,34)))),
-          fillOpacity(0.75f)
-        );
-
-        mapboxMap.addLayerBelow(statePopulationLayer, "waterway-label");
-
-        FillLayer countyPopulationLayer = new FillLayer("county-population", "population");
-        countyPopulationLayer.withSourceLayer("state_county_population_2014_cen");
-        countyPopulationLayer.setFilter(Expression.eq(get("isCounty"), literal(true)));
-        countyPopulationLayer.withProperties(
-          fillColor(step(get("population"), rgb(0,0,0),
-            stop(0, rgb(242,241,45)),
-            stop(100, rgb(238,211,34)),
-            stop(1000, rgb(230,183,30)),
-            stop(5000, rgb(218,156,32)),
-            stop(10000, rgb(202,131,35)),
-            stop(50000, rgb(184,107,37)),
-            stop(100000, rgb(162,86,38)),
-            stop(500000, rgb(139,66,37)),
-            stop(1000000, rgb(114,49,34)))),
-          fillOpacity(0.75f),
-          visibility(NONE)
-        );
-
-        mapboxMap.addLayerBelow(countyPopulationLayer, "waterway-label");
-
-        mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+        mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
-          public void onCameraMove() {
-            Layer stateLayer = mapboxMap.getLayer("state-population");
-            Layer countyLayer = mapboxMap.getLayer("county-population");
-            if (mapboxMap.getCameraPosition().zoom > ZOOM_THRESHOLD) {
-              if (stateLayer != null && countyLayer != null) {
-                countyLayer.setProperties(visibility(VISIBLE));
+          public void onStyleLoaded(@NonNull final Style style) {
+            VectorSource vectorSource = new VectorSource(
+              "population",
+              "http://api.mapbox.com/v4/mapbox.660ui7x6.json?access_token=" + Mapbox.getAccessToken()
+            );
+            style.addSource(vectorSource);
+
+            FillLayer statePopulationLayer = new FillLayer("state-population", "population");
+            statePopulationLayer.withSourceLayer("state_county_population_2014_cen");
+            statePopulationLayer.setFilter(Expression.eq(get("isState"), literal(true)));
+            statePopulationLayer.withProperties(
+              fillColor(step((get("population")), rgb(0,0,0),
+                stop(0, rgb(242,241,45)),
+                stop(750000, rgb(238,211,34)),
+                stop(1000000, rgb(218,156,32)),
+                stop(2500000, rgb(202,131,35)),
+                stop(5000000, rgb(184,107,37)),
+                stop(7500000, rgb(162,86,38)),
+                stop(10000000, rgb(139,66,37)),
+                stop(25000000, rgb(114,49,34)))),
+              fillOpacity(0.75f)
+            );
+
+            style.addLayerBelow(statePopulationLayer, "waterway-label");
+
+            FillLayer countyPopulationLayer = new FillLayer("county-population", "population");
+            countyPopulationLayer.withSourceLayer("state_county_population_2014_cen");
+            countyPopulationLayer.setFilter(Expression.eq(get("isCounty"), literal(true)));
+            countyPopulationLayer.withProperties(
+              fillColor(step(get("population"), rgb(0,0,0),
+                stop(0, rgb(242,241,45)),
+                stop(100, rgb(238,211,34)),
+                stop(1000, rgb(230,183,30)),
+                stop(5000, rgb(218,156,32)),
+                stop(10000, rgb(202,131,35)),
+                stop(50000, rgb(184,107,37)),
+                stop(100000, rgb(162,86,38)),
+                stop(500000, rgb(139,66,37)),
+                stop(1000000, rgb(114,49,34)))),
+              fillOpacity(0.75f),
+              visibility(NONE)
+            );
+
+            style.addLayerBelow(countyPopulationLayer, "waterway-label");
+
+            mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+              @Override
+              public void onCameraMove() {
+                Layer stateLayer = style.getLayer("state-population");
+                Layer countyLayer = style.getLayer("county-population");
+                if (mapboxMap.getCameraPosition().zoom > ZOOM_THRESHOLD) {
+                  if (stateLayer != null && countyLayer != null) {
+                    countyLayer.setProperties(visibility(VISIBLE));
+                  }
+                } else {
+                  if (stateLayer != null && countyLayer != null) {
+                    countyLayer.setProperties(visibility(NONE));
+                  }
+                }
               }
-            } else {
-              if (stateLayer != null && countyLayer != null) {
-                countyLayer.setProperties(visibility(NONE));
-              }
-            }
+            });
           }
         });
       }

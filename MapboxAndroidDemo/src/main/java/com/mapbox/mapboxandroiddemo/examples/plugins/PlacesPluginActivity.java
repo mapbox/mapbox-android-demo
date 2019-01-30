@@ -2,11 +2,10 @@ package com.mapbox.mapboxandroiddemo.examples.plugins;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -23,11 +22,14 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 
 /**
  * Use the places plugin to take advantage of Mapbox's location search ("geocoding") capabilities. The plugin
@@ -61,26 +63,30 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
-    PlacesPluginActivity.this.mapboxMap = mapboxMap;
-    initSearchFab();
-    addUserLocations();
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+    this.mapboxMap = mapboxMap;
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        initSearchFab();
 
-    // Add the symbol layer icon to map for future use
-    Bitmap icon = BitmapFactory.decodeResource(
-      PlacesPluginActivity.this.getResources(), R.drawable.blue_marker_view);
-    mapboxMap.addImage(symbolIconId, icon);
+        addUserLocations();
 
-    // Create an empty GeoJSON source using the empty feature collection
-    setUpSource();
+        // Add the symbol layer icon to map for future use
+        style.addImage(symbolIconId, BitmapFactory.decodeResource(
+          PlacesPluginActivity.this.getResources(), R.drawable.blue_marker_view));
 
-    // Set up a new symbol layer for displaying the searched location's feature coordinates
-    setupLayer();
+        // Create an empty GeoJSON source using the empty feature collection
+        setUpSource(style);
+
+        // Set up a new symbol layer for displaying the searched location's feature coordinates
+        setupLayer(style);
+      }
+    });
   }
 
   private void initSearchFab() {
-    FloatingActionButton searchFab = findViewById(R.id.fab_location_search);
-    searchFab.setOnClickListener(new View.OnClickListener() {
+    findViewById(R.id.fab_location_search).setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         Intent intent = new PlaceAutocomplete.IntentBuilder()
@@ -113,15 +119,15 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
       .build();
   }
 
-  private void setUpSource() {
-    GeoJsonSource geoJsonSource = new GeoJsonSource(geojsonSourceLayerId);
-    mapboxMap.addSource(geoJsonSource);
+  private void setUpSource(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addSource(new GeoJsonSource(geojsonSourceLayerId));
   }
 
-  private void setupLayer() {
-    SymbolLayer selectedLocationSymbolLayer = new SymbolLayer("SYMBOL_LAYER_ID", geojsonSourceLayerId);
-    selectedLocationSymbolLayer.withProperties(PropertyFactory.iconImage(symbolIconId));
-    mapboxMap.addLayer(selectedLocationSymbolLayer);
+  private void setupLayer(@NonNull Style loadedMapStyle) {
+    loadedMapStyle.addLayer(new SymbolLayer("SYMBOL_LAYER_ID", geojsonSourceLayerId).withProperties(
+      iconImage(symbolIconId),
+      iconOffset(new Float[] {0f, -8f})
+    ));
   }
 
   @Override
@@ -132,23 +138,27 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
       // Retrieve selected location's CarmenFeature
       CarmenFeature selectedCarmenFeature = PlaceAutocomplete.getPlace(data);
 
-      // Create a new FeatureCollection and add a new Feature to it using selectedCarmenFeature above
-      FeatureCollection featureCollection = FeatureCollection.fromFeatures(
-        new Feature[]{Feature.fromJson(selectedCarmenFeature.toJson())});
+      // Create a new FeatureCollection and add a new Feature to it using selectedCarmenFeature above.
+      // Then retrieve and update the source designated for showing a selected location's symbol layer icon
 
-      // Retrieve and update the source designated for showing a selected location's symbol layer icon
-      GeoJsonSource source = mapboxMap.getSourceAs(geojsonSourceLayerId);
-      if (source != null) {
-        source.setGeoJson(featureCollection);
+      if (mapboxMap != null) {
+        Style style = mapboxMap.getStyle();
+        if (style != null) {
+          GeoJsonSource source = style.getSourceAs(geojsonSourceLayerId);
+          if (source != null) {
+            source.setGeoJson(FeatureCollection.fromFeatures(
+              new Feature[] {Feature.fromJson(selectedCarmenFeature.toJson())}));
+          }
+
+          // Move map camera to the selected location
+          mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(
+            new CameraPosition.Builder()
+              .target(new LatLng(((Point) selectedCarmenFeature.geometry()).latitude(),
+                ((Point) selectedCarmenFeature.geometry()).longitude()))
+              .zoom(14)
+              .build()), 4000);
+        }
       }
-
-      // Move map camera to the selected location
-      CameraPosition newCameraPosition = new CameraPosition.Builder()
-        .target(new LatLng(((Point) selectedCarmenFeature.geometry()).latitude(),
-          ((Point) selectedCarmenFeature.geometry()).longitude()))
-        .zoom(14)
-        .build();
-      mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(newCameraPosition), 4000);
     }
   }
 

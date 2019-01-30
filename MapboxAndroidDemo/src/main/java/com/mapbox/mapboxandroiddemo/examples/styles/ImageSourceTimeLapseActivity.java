@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -11,6 +12,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngQuad;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.RasterLayer;
 import com.mapbox.mapboxsdk.style.sources.ImageSource;
 
@@ -36,40 +38,44 @@ public class ImageSourceTimeLapseActivity extends AppCompatActivity implements O
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_image_source_time_lapse);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
-    // Add source
-    LatLngQuad quad = new LatLngQuad(
-      new LatLng(46.437, -80.425),
-      new LatLng(46.437, -71.516),
-      new LatLng(37.936, -71.516),
-      new LatLng(37.936, -80.425));
-    mapboxMap.addSource(new ImageSource(ID_IMAGE_SOURCE, quad, R.drawable.southeast_radar_0));
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-    // Add layer
-    RasterLayer layer = new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE);
-    mapboxMap.addLayer(layer);
+    mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        style.addSource(new ImageSource(ID_IMAGE_SOURCE,
+          new LatLngQuad(
+            new LatLng(46.437, -80.425),
+            new LatLng(46.437, -71.516),
+            new LatLng(37.936, -71.516),
+            new LatLng(37.936, -80.425)), R.drawable.southeast_radar_0));
 
-    // Loop the GeoJSON refreshing
-    handler = new Handler();
-    runnable = new RefreshImageRunnable(mapboxMap, handler);
-    handler.postDelayed(runnable, 100);
+        // Add layer
+        style.addLayer(new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE));
+
+        // Loop the GeoJSON refreshing
+        handler = new Handler();
+        runnable = new RefreshImageRunnable(handler, style);
+        handler.postDelayed(runnable, 100);
+      }
+    });
   }
 
   private static class RefreshImageRunnable implements Runnable {
-    private final MapboxMap mapboxMap;
+    private final Style loadedMapStyle;
     private final Handler handler;
     private int[] drawables;
     private int drawableIndex;
 
-    RefreshImageRunnable(MapboxMap mapboxMap, Handler handler) {
-      this.mapboxMap = mapboxMap;
+    RefreshImageRunnable(Handler handler,Style loadedMapStyle) {
       this.handler = handler;
+      this.loadedMapStyle = loadedMapStyle;
       drawables = new int[4];
       drawables[0] = R.drawable.southeast_radar_0;
       drawables[1] = R.drawable.southeast_radar_1;
@@ -80,7 +86,7 @@ public class ImageSourceTimeLapseActivity extends AppCompatActivity implements O
 
     @Override
     public void run() {
-      ((ImageSource) mapboxMap.getSource(ID_IMAGE_SOURCE)).setImage(drawables[drawableIndex++]);
+      ((ImageSource) loadedMapStyle.getSource(ID_IMAGE_SOURCE)).setImage(drawables[drawableIndex++]);
       if (drawableIndex > 3) {
         drawableIndex = 0;
       }

@@ -13,7 +13,7 @@
         mapbox:mapbox_cameraTargetLng="-122.439004"
         mapbox:mapbox_cameraTilt="25"
         mapbox:mapbox_cameraZoom="11"
-        mapbox:mapbox_styleUrl="@string/mapbox_style_dark" />
+         />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_on_top_of_map"

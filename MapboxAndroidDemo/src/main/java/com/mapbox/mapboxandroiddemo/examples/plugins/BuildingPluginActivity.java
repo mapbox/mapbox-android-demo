@@ -9,10 +9,11 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
 
 /**
- * Use the buildings plugin to display buildings' heights (extrusions) in 3D.
+ *  Use the buildings plugin to display buildings' heights (extrusions) in 3D.
  */
 public class BuildingPluginActivity extends AppCompatActivity {
 
@@ -29,13 +30,19 @@ public class BuildingPluginActivity extends AppCompatActivity {
 
     setContentView(R.layout.activity_building_plugin);
 
-    mapView = (MapView) findViewById(R.id.mapView);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap map) {
-        buildingPlugin = new BuildingPlugin(mapView, map);
-        buildingPlugin.setVisibility(true);
+        map.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            buildingPlugin = new BuildingPlugin(mapView, map, style);
+            buildingPlugin.setMinZoomLevel(15f);
+            buildingPlugin.setVisibility(true);
+          }
+        });
       }
     });
   }
