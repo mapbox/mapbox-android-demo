@@ -54,7 +54,7 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
 
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
-          public void onStyleLoaded(@NonNull Style style) {
+          public void onStyleLoaded(@NonNull final Style style) {
             VectorSource vectorSource = new VectorSource(
               "population",
               "http://api.mapbox.com/v4/mapbox.660ui7x6.json?access_token=" + Mapbox.getAccessToken()
@@ -102,18 +102,15 @@ public class ChoroplethZoomChangeActivity extends AppCompatActivity {
             mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
               @Override
               public void onCameraMove() {
-                if (mapboxMap.getStyle() != null) {
-                  Style loadedStyle = mapboxMap.getStyle();
-                  Layer stateLayer = loadedStyle.getLayer("state-population");
-                  Layer countyLayer = loadedStyle.getLayer("county-population");
-                  if (mapboxMap.getCameraPosition().zoom > ZOOM_THRESHOLD) {
-                    if (stateLayer != null && countyLayer != null) {
-                      countyLayer.setProperties(visibility(VISIBLE));
-                    }
-                  } else {
-                    if (stateLayer != null && countyLayer != null) {
-                      countyLayer.setProperties(visibility(NONE));
-                    }
+                Layer stateLayer = style.getLayer("state-population");
+                Layer countyLayer = style.getLayer("county-population");
+                if (mapboxMap.getCameraPosition().zoom > ZOOM_THRESHOLD) {
+                  if (stateLayer != null && countyLayer != null) {
+                    countyLayer.setProperties(visibility(VISIBLE));
+                  }
+                } else {
+                  if (stateLayer != null && countyLayer != null) {
+                    countyLayer.setProperties(visibility(NONE));
                   }
                 }
               }

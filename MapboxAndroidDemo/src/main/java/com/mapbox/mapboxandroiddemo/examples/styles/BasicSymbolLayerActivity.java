@@ -97,10 +97,10 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
 
   @Override
   public boolean onMapClick(@NonNull LatLng point) {
-
-    if (mapboxMap.getStyle() != null) {
+    Style style = mapboxMap.getStyle();
+    if (style != null) {
       final SymbolLayer selectedMarkerSymbolLayer =
-          (SymbolLayer) mapboxMap.getStyle().getLayer("selected-marker-layer");
+          (SymbolLayer) style.getLayer("selected-marker-layer");
 
       final PointF pixel = mapboxMap.getProjection().toScreenLocation(point);
       List<Feature> features = mapboxMap.queryRenderedFeatures(pixel, "marker-layer");
@@ -118,7 +118,7 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
         return false;
       }
 
-      GeoJsonSource source = mapboxMap.getStyle().getSourceAs("selected-marker");
+      GeoJsonSource source = style.getSourceAs("selected-marker");
       if (source != null) {
         source.setGeoJson(FeatureCollection.fromFeatures(
             new Feature[]{Feature.fromGeometry(features.get(0).geometry())}));

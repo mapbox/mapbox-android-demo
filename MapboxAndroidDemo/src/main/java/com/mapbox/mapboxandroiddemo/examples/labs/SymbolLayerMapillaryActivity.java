@@ -129,6 +129,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
 
   private MapView mapView;
   private MapboxMap mapboxMap;
+  private Style style;
   private RecyclerView recyclerView;
 
   private GeoJsonSource source;
@@ -183,6 +184,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
+        SymbolLayerMapillaryActivity.this.style = style;
         mapboxMap.getUiSettings().setCompassEnabled(false);
         mapboxMap.getUiSettings().setLogoEnabled(false);
         mapboxMap.getUiSettings().setAttributionEnabled(false);
@@ -215,14 +217,13 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     }
     featureCollection = collection;
 
-    if (mapboxMap.getStyle() != null) {
-      Style style = mapboxMap.getStyle();
+    if (style.isFullyLoaded()) {
       setupSource(style);
       setupMakiLayer(style);
       setupLoadingLayer(style);
       setupCalloutLayer(style);
       setupRecyclerView();
-      hideLabelLayers();
+      hideLabelLayers(style);
       setupMapillaryTiles(style);
     }
   }
@@ -323,9 +324,9 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     snapHelper.attachToRecyclerView(recyclerView);
   }
 
-  private void hideLabelLayers() {
+  private void hideLabelLayers(@NonNull Style style) {
     String id;
-    for (Layer layer : mapboxMap.getStyle().getLayers()) {
+    for (Layer layer : style.getLayers()) {
       id = layer.getId();
       if (id.startsWith("place") || id.startsWith("poi") || id.startsWith("marine") || id.startsWith("road-label")) {
         layer.setProperties(visibility(Property.NONE));
@@ -513,7 +514,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     ImageView imageView = view.findViewById(R.id.logoView);
     imageView.setImageResource(currentState ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
     Bitmap bitmap = SymbolGenerator.generate(view);
-    mapboxMap.getStyle().addImage(title, bitmap);
+    style.addImage(title, bitmap);
     refreshSource();
   }
 
@@ -521,9 +522,9 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
    * Invoked when the bitmaps have been generated from a view.
    */
   public void setImageGenResults(HashMap<String, View> viewMap, HashMap<String, Bitmap> imageMap) {
-    if (mapboxMap != null) {
+    if (style.isFullyLoaded()) {
       // calling addImages is faster as separate addImage calls for each bitmap.
-      mapboxMap.getStyle().addImages(imageMap);
+      style.addImages(imageMap);
     }
     // need to store reference to views to be able to use them as hitboxes for click events.
     this.viewMap = viewMap;

@@ -62,15 +62,15 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
         mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            setupBuildingExtrusionPlugin();
+            setupBuildingExtrusionPlugin(style);
           }
         });
       }
     });
   }
 
-  private void setupBuildingExtrusionPlugin() {
-    BuildingPlugin buildingPlugin = new BuildingPlugin(mapView, mapboxMap, mapboxMap.getStyle());
+  private void setupBuildingExtrusionPlugin(@NonNull Style style) {
+    BuildingPlugin buildingPlugin = new BuildingPlugin(mapView, mapboxMap, style);
     buildingPlugin.setColor(Color.LTGRAY);
     buildingPlugin.setOpacity(0.6f);
     buildingPlugin.setMinZoomLevel(15);

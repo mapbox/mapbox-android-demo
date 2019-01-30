@@ -43,6 +43,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
   private MapboxMap mapboxMap;
   private LineLayer backgroundLineLayer;
   private LineLayer routeLineLayer;
+  private Style style;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
+        HighlightedLineActivity.this.style = style;
         initSource(style);
         initLayers(style);
         mapboxMap.addOnMapClickListener(HighlightedLineActivity.this);
@@ -76,13 +78,17 @@ public class HighlightedLineActivity extends AppCompatActivity implements
 
   @Override
   public boolean onMapClick(@NonNull LatLng point) {
+    if (!style.isFullyLoaded()) {
+      return false;
+    }
+
     // Detect whether a linestring was clicked on
     PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
     RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
     List<Feature> featureList = mapboxMap.queryRenderedFeatures(rectF, "line-layer-id");
     if (featureList.size() > 0) {
       for (Feature feature : featureList) {
-        GeoJsonSource source = mapboxMap.getStyle().getSourceAs("background-geojson-source-id");
+        GeoJsonSource source = style.getSourceAs("background-geojson-source-id");
         if (source != null) {
           source.setGeoJson(feature);
           backgroundLineLayer.setProperties(visibility(VISIBLE));
@@ -100,7 +106,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
   private void initSource(@NonNull Style loadedMapStyle) {
     loadedMapStyle.addSource(new GeoJsonSource("source-id", loadGeoJsonFromAsset(
       "brussels_station_exits.geojson")));
-    loadedMapStyle.addSource( new GeoJsonSource("background-geojson-source-id"));
+    loadedMapStyle.addSource(new GeoJsonSource("background-geojson-source-id"));
   }
 
   /**
@@ -165,12 +171,6 @@ public class HighlightedLineActivity extends AppCompatActivity implements
   protected void onDestroy() {
     if (mapboxMap != null) {
       mapboxMap.removeOnMapClickListener(this);
-      if (backgroundLineLayer != null) {
-        mapboxMap.getStyle().removeLayer(backgroundLineLayer.getId());
-      }
-      if (routeLineLayer != null) {
-        mapboxMap.getStyle().removeLayer(routeLineLayer.getId());
-      }
       mapboxMap = null;
       backgroundLineLayer = null;
     }

@@ -95,7 +95,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
       @Override
       public void onStyleLoaded(@NonNull Style style) {
         featureCollection = FeatureCollection.fromFeatures(new Feature[] {});
-        getCalendarData();
+        getCalendarData(style);
         mapboxMap.addOnMapClickListener(CalendarIntegrationActivity.this);
       }
     });
@@ -126,7 +126,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
    * Using a Calendar content provider (https://developer.android.com/guide/topics/providers/calendar-provider),
    * retrieve the title and location of calendar events that are from the main account signed in on the device.
    */
-  public void getCalendarData() {
+  public void getCalendarData(@NonNull Style style) {
     if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR)
       != PackageManager.PERMISSION_GRANTED) {
       ActivityCompat.requestPermissions(this, new String[]
@@ -167,14 +167,14 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
           while (cur.moveToNext()) {
             if (index <= 80) {
               if (cur.getString(EVENT_LOCATION_INDEX) != null && !cur.getString(EVENT_LOCATION_INDEX).isEmpty()) {
-                makeMapboxGeocodingRequest(cur.getString(TITLE_INDEX), cur.getString(EVENT_LOCATION_INDEX));
+                makeMapboxGeocodingRequest(style, cur.getString(TITLE_INDEX), cur.getString(EVENT_LOCATION_INDEX));
               } else {
                 Timber.d("getCalendarData: location is null or empty");
               }
               index++;
             }
           }
-          setUpData();
+          setUpData(style);
         }
       }
     }
@@ -188,7 +188,8 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
    *                      eventually displayed in a Toast when a calendar event icon is tapped on.
    * @param eventLocation the event's location. This text is used in the Mapbox geocoding search
    */
-  private void makeMapboxGeocodingRequest(final String eventTitle, final String eventLocation) {
+  private void makeMapboxGeocodingRequest(@NonNull final Style style, final String eventTitle,
+                                          final String eventLocation) {
     try {
       // Build a Mapbox geocoding request
       MapboxGeocoding client = MapboxGeocoding.builder()
@@ -205,7 +206,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
           if (results.size() > 0) {
             // Get the first Feature from the successful geocoding response
             CarmenFeature feature = results.get(0);
-            if (feature != null) {
+            if (feature != null && style.isFullyLoaded()) {
               LatLng featureLatLng = new LatLng(feature.center().latitude(), feature.center().longitude());
               Feature singleFeature = Feature.fromGeometry(Point.fromLngLat(featureLatLng.getLongitude(),
                 featureLatLng.getLatitude()));
@@ -213,7 +214,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
               singleFeature.addStringProperty(PROPERTY_LOCATION, eventLocation);
               featureList.add(singleFeature);
               featureCollection = FeatureCollection.fromFeatures(featureList);
-              GeoJsonSource source = mapboxMap.getStyle().getSourceAs(geojsonSourceId);
+              GeoJsonSource source = style.getSourceAs(geojsonSourceId);
               if (source != null) {
                 source.setGeoJson(featureCollection);
               } else {
@@ -239,37 +240,37 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
 
   /**
    * Sets up all of the sources and layers needed for this example
+   *
+   * @param style
    */
-  public void setUpData() {
-    if (mapboxMap == null) {
-      return;
-    }
-    setupSource();
-    setUpImage();
-    setUpCalendarIconLayer();
-    Toast.makeText(this, R.string.click_on_calendar_icon_instruction, Toast.LENGTH_SHORT).show();
+  public void setUpData(@NonNull Style style) {
+    setupSource(style);
+    setUpImage(style);
+    setUpCalendarIconLayer(style);
+    Toast.makeText(CalendarIntegrationActivity.this, R.string.click_on_calendar_icon_instruction,
+      Toast.LENGTH_SHORT).show();
   }
 
   /**
    * Adds the GeoJSON source to the map
    */
-  private void setupSource() {
-    mapboxMap.getStyle().addSource(new GeoJsonSource(geojsonSourceId, featureCollection));
+  private void setupSource(@NonNull Style style) {
+    style.addSource(new GeoJsonSource(geojsonSourceId, featureCollection));
   }
 
   /**
    * Adds the marker image to the map for use as a SymbolLayer icon
    */
-  private void setUpImage() {
+  private void setUpImage(@NonNull Style style) {
     Bitmap icon = BitmapFactory.decodeResource(
       this.getResources(), R.drawable.calendar_event_icon);
-    mapboxMap.getStyle().addImage(MARKER_IMAGE_ID, icon);
+    style.addImage(MARKER_IMAGE_ID, icon);
   }
 
   /**
    * Setup a layer with a calendar icon representing the location of each calendar event.
    */
-  private void setUpCalendarIconLayer() {
+  private void setUpCalendarIconLayer(@NonNull Style style) {
     SymbolLayer eventSymbolLayer = new SymbolLayer(MARKER_LAYER_ID, geojsonSourceId);
     eventSymbolLayer.withProperties(
       iconImage(MARKER_IMAGE_ID),
@@ -277,7 +278,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
       iconAllowOverlap(true),
       iconIgnorePlacement(true)
     );
-    mapboxMap.getStyle().addLayer(eventSymbolLayer);
+    style.addLayer(eventSymbolLayer);
   }
 
   @Override
@@ -296,7 +297,14 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
       case MY_CAL_REQ: {
         if (grantResults.length > 0
           && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-          getCalendarData();
+          if (mapboxMap != null) {
+            mapboxMap.getStyle(new Style.OnStyleLoaded() {
+              @Override
+              public void onStyleLoaded(@NonNull Style style) {
+                getCalendarData(style);
+              }
+            });
+          }
         } else {
           Toast.makeText(this, R.string.user_calendar_permission_explanation, Toast.LENGTH_LONG).show();
         }

@@ -30,9 +30,9 @@ import java.io.IOException;
 public class SnapshotShareActivity extends AppCompatActivity {
   private MapView mapView;
   private MapSnapshotter mapSnapshotter;
-  private MapboxMap mapboxMap;
   private FloatingActionButton cameraFab;
   private boolean hasStartedSnapshotGeneration;
+  private Style style;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +57,10 @@ public class SnapshotShareActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-
-        SnapshotShareActivity.this.mapboxMap = mapboxMap;
-
         mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
+            SnapshotShareActivity.this.style = style;
             // When user clicks the map, start the snapshotting process with the given parameters
             cameraFab.setOnClickListener(new View.OnClickListener() {
               @Override
@@ -96,10 +94,14 @@ public class SnapshotShareActivity extends AppCompatActivity {
    * @param width        of map
    */
   private void startSnapShot(LatLngBounds latLngBounds, int height, int width) {
-    if (mapSnapshotter == null && mapboxMap.getStyle() != null) {
+    if (!style.isFullyLoaded()) {
+      return;
+    }
+
+    if (mapSnapshotter == null) {
       // Initialize snapshotter with map dimensions and given bounds
       MapSnapshotter.Options options =
-        new MapSnapshotter.Options(width, height).withRegion(latLngBounds).withStyle(mapboxMap.getStyle().getUrl());
+        new MapSnapshotter.Options(width, height).withRegion(latLngBounds).withStyle(style.getUrl());
 
       mapSnapshotter = new MapSnapshotter(SnapshotShareActivity.this, options);
     } else {

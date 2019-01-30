@@ -72,7 +72,7 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
         showCrosshair();
         Toast.makeText(BuildingOutlineActivity.this, R.string.move_map_around_instruction,
           Toast.LENGTH_SHORT).show();
-        updateOutline();
+        updateOutline(style);
       }
     });
   }
@@ -96,8 +96,9 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
 
   @Override
   public void onCameraIdle() {
-    if (mapboxMap != null) {
-      updateOutline();
+    Style style = mapboxMap.getStyle();
+    if (style != null) {
+      updateOutline(style);
     } else {
       Toast.makeText(this, R.string.building_layer_not_present, Toast.LENGTH_SHORT).show();
     }
@@ -107,9 +108,10 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
    * Query the map for a building Feature in the map's building layer. The query happens in the middle of the
    * map ("the target"). If there's a building Feature in the middle of the map, its coordinates are turned
    * into a list of Point objects so that a LineString can be created.
+   *
    * @return the LineString built via the building's coordinates
    */
-  private LineString getBuildingFeatureOutline() {
+  private LineString getBuildingFeatureOutline(@NonNull Style style) {
     // Retrieve the middle of the map
     final PointF pixel = mapboxMap.getProjection().toScreenLocation(new LatLng(
       mapboxMap.getCameraPosition().target.getLatitude(),
@@ -119,7 +121,7 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
     List<Point> pointList = new ArrayList<>();
 
     // Check whether the map style has a building layer
-    if (mapboxMap.getStyle().getLayer("building") != null) {
+    if (style.getLayer("building") != null) {
 
       // Retrieve the building Feature that is displayed in the middle of the map
       List<Feature> features = mapboxMap.queryRenderedFeatures(pixel, "building");
@@ -144,15 +146,13 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
   /**
    * Update the FeatureCollection used by the building outline LineLayer. Then refresh the map.
    */
-  private void updateOutline() {
+  private void updateOutline(@NonNull Style style) {
     // Update the data source used by the building outline LineLayer and refresh the map
     featureCollection = FeatureCollection.fromFeatures(new Feature[]
-      {Feature.fromGeometry(getBuildingFeatureOutline())});
-    if (mapboxMap.getStyle() != null) {
-      GeoJsonSource source = mapboxMap.getStyle().getSourceAs("source");
-      if (source != null) {
-        source.setGeoJson(featureCollection);
-      }
+      {Feature.fromGeometry(getBuildingFeatureOutline(style))});
+    GeoJsonSource source = style.getSourceAs("source");
+    if (source != null) {
+      source.setGeoJson(featureCollection);
     }
   }
 

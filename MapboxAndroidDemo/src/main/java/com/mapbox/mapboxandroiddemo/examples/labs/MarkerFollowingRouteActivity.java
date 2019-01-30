@@ -94,11 +94,14 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
   private void initData(@NonNull FeatureCollection featureCollection) {
     LineString lineString = (LineString) featureCollection.features().get(0).geometry();
     routeCoordinateList = lineString.coordinates();
-    if (mapboxMap.getStyle() != null) {
-      initSources(mapboxMap.getStyle(), featureCollection);
-      initSymbolLayer(mapboxMap.getStyle());
-      initDotLinePath(mapboxMap.getStyle());
-      initRunnable();
+    if (mapboxMap != null) {
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        initSources(style, featureCollection);
+        initSymbolLayer(style);
+        initDotLinePath(style);
+        initRunnable();
+      }
     }
   }
 
@@ -124,10 +127,10 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
             markerIconAnimator.cancel();
           }
           markerIconAnimator = ObjectAnimator
-              .ofObject(latLngEvaluator, count == 0 ? new LatLng(37.61501, -122.385374)
-                  : markerIconCurrentLocation,
-                  new LatLng(nextLocation.latitude(), nextLocation.longitude()))
-              .setDuration(300);
+            .ofObject(latLngEvaluator, count == 0 ? new LatLng(37.61501, -122.385374)
+                : markerIconCurrentLocation,
+              new LatLng(nextLocation.latitude(), nextLocation.longitude()))
+            .setDuration(300);
           markerIconAnimator.setInterpolator(new LinearInterpolator());
 
           markerIconAnimator.addUpdateListener(animatorUpdateListener);
@@ -155,7 +158,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
         LatLng animatedPosition = (LatLng) valueAnimator.getAnimatedValue();
         if (dotGeoJsonSource != null) {
           dotGeoJsonSource.setGeoJson(Point.fromLngLat(
-              animatedPosition.getLongitude(), animatedPosition.getLatitude()));
+            animatedPosition.getLongitude(), animatedPosition.getLatitude()));
         }
       }
     };

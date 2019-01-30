@@ -52,7 +52,6 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
   private static final String ISOCHRONE_LINE_LAYER = "ISOCHRONE_LINE_LAYER";
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private GeoJsonSource isochroneGeoJsonSource;
   private LatLng lastSelectedLatLng;
   private String randomNumForLayerId;
   private boolean layersShown;
@@ -93,7 +92,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
 
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
-          public void onStyleLoaded(@NonNull Style style) {
+          public void onStyleLoaded(@NonNull final Style style) {
             mapboxMap.addOnMapClickListener(IsochroneActivity.this);
 
             initIsochroneCenterSymbolLayer(style);
@@ -103,7 +102,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
               @Override
               public void onClick(View view) {
                 usePolygon = !usePolygon;
-                redrawIsochroneData(lastSelectedLatLng);
+                redrawIsochroneData(style, lastSelectedLatLng);
               }
             });
 
@@ -120,14 +119,15 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
     // Update the click Symbol Layer to move the red marker to wherever the map was clicked on
     lastSelectedLatLng = point;
 
-    if (mapboxMap.getStyle() != null) {
-      GeoJsonSource source = mapboxMap.getStyle().getSourceAs("click-source-id");
+    Style style = mapboxMap.getStyle();
+    if (style != null) {
+      GeoJsonSource source = style.getSourceAs("click-source-id");
       if (source != null) {
         source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
       }
 
       // Request and redraw the Isochrone information based on the map click point
-      redrawIsochroneData(point);
+      redrawIsochroneData(style, point);
     }
     return true;
   }
@@ -137,15 +137,12 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    *
    * @param point The center point to use for the request to the Isochrone API
    */
-  private void redrawIsochroneData(LatLng point) {
+  private void redrawIsochroneData(Style style, LatLng point) {
     if (layersShown) {
-      if (mapboxMap.getStyle() != null) {
-        Style style = mapboxMap.getStyle();
-        style.removeLayer(ISOCHRONE_FILL_LAYER + randomNumForLayerId);
-        style.removeLayer(ISOCHRONE_LINE_LAYER + randomNumForLayerId);
-      }
+      style.removeLayer(ISOCHRONE_FILL_LAYER + randomNumForLayerId);
+      style.removeLayer(ISOCHRONE_LINE_LAYER + randomNumForLayerId);
     }
-    addDataToMap(point);
+    addDataToMap(style, point);
   }
 
   /**
@@ -153,7 +150,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    *
    * @param mapClickPoint The center point of the isochrone. It is part of the API request.
    */
-  private void addDataToMap(@NonNull LatLng mapClickPoint) {
+  private void addDataToMap(@NonNull Style style, @NonNull LatLng mapClickPoint) {
     try {
       HttpUrl url = new HttpUrl.Builder()
         .scheme("https")
@@ -174,17 +171,14 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
 
       // Create and add a new GeoJsonSource with a unique ID. The source is fed a List of Feature objects via
       // the Isochrone API response.
+      style.addSource(new GeoJsonSource(GEOJSON_SOURCE_ID + randomNum, new URL(url.toString())));
 
-      if (mapboxMap.getStyle() != null) {
-        mapboxMap.getStyle().addSource(new GeoJsonSource(GEOJSON_SOURCE_ID + randomNum, new URL(url.toString())));
+      // Create new Fill and Line layers with unique ids.
+      randomNumForLayerId = String.valueOf(randomNum);
+      initFillLayer(style, randomNumForLayerId, GEOJSON_SOURCE_ID + randomNum);
+      initLineLayer(style, randomNumForLayerId, GEOJSON_SOURCE_ID + randomNum);
 
-        // Create new Fill and Line layers with unique ids.
-        randomNumForLayerId = String.valueOf(randomNum);
-        initFillLayer(randomNumForLayerId, GEOJSON_SOURCE_ID + randomNum);
-        initLineLayer(randomNumForLayerId, GEOJSON_SOURCE_ID + randomNum);
-
-        layersShown = true;
-      }
+      layersShown = true;
 
       // Move the camera from the map in case it's too zoomed in. This is here so that the isochrone information
       // can be seen if the camera is too close to the map.
@@ -224,14 +218,14 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    *                       adding it to the map.
    * @param sourceId       The sourceId of the GeoJsonSource that the layer should depend on
    */
-  private void initFillLayer(@NonNull String randomNumForId, @NonNull String sourceId) {
+  private void initFillLayer(@NonNull Style style, @NonNull String randomNumForId, @NonNull String sourceId) {
     // Create and style a FillLayer based on information in the Isochrone API response
     FillLayer isochroneFillLayer = new FillLayer(ISOCHRONE_FILL_LAYER + randomNumForId, sourceId);
     isochroneFillLayer.setProperties(
       fillColor(get("color")),
       fillOpacity(get("fillOpacity")));
     isochroneFillLayer.setFilter(eq(geometryType(), literal("Polygon")));
-    mapboxMap.getStyle().addLayerBelow(isochroneFillLayer, "click-layer-id");
+    style.addLayerBelow(isochroneFillLayer, "click-layer-id");
   }
 
   /**
@@ -241,7 +235,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
    *                       adding it to the map.
    * @param sourceId       The sourceId of the GeoJsonSource that the layer should depend on
    */
-  private void initLineLayer(@NonNull String randomNumForId, @NonNull String sourceId) {
+  private void initLineLayer(@NonNull Style style, @NonNull String randomNumForId, @NonNull String sourceId) {
     // Create and style a LineLayer based on information in the Isochrone API response
     LineLayer isochroneLineLayer = new LineLayer(ISOCHRONE_LINE_LAYER + randomNumForId, sourceId);
     isochroneLineLayer.setProperties(
@@ -249,7 +243,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
       lineWidth(5f),
       lineOpacity(get("opacity")));
     isochroneLineLayer.setFilter(eq(geometryType(), literal("LineString")));
-    mapboxMap.getStyle().addLayerBelow(isochroneLineLayer, "click-layer-id");
+    style.addLayerBelow(isochroneLineLayer, "click-layer-id");
   }
 
   @Override

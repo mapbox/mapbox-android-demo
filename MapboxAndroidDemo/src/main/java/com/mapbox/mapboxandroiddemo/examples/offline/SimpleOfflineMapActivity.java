@@ -72,7 +72,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
             // Define the offline region
             OfflineTilePyramidRegionDefinition definition = new OfflineTilePyramidRegionDefinition(
-              mapboxMap.getStyle().getUrl(),
+              style.getUrl(),
               latLngBounds,
               10,
               20,

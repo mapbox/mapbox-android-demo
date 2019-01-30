@@ -138,25 +138,27 @@ public class ExpressionIntegrationActivity
   private void addDataToMap(@NonNull FeatureCollection featureCollection) {
     // Retrieves GeoJSON from local file and adds it to the map
     GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SRC_ID, featureCollection);
-    if (mapboxMap.getStyle() != null) {
-      final Style mapStyle = mapboxMap.getStyle();
-      mapStyle.addSource(geoJsonSource);
-      initTemperatureLayers(mapStyle);
-      populateMenu();
+    if (mapboxMap != null) {
+      final Style style = mapboxMap.getStyle();
+      if (style != null) {
+        style.addSource(geoJsonSource);
+        initTemperatureLayers(style);
+        populateMenu();
 
-      // show Connecticut by default
-      int indexOfState = indexOfState("Connecticut");
-      selectState(states.get(indexOfState).name, indexOfState, mapboxMap.getStyle());
+        // show Connecticut by default
+        int indexOfState = indexOfState("Connecticut");
+        selectState(states.get(indexOfState).name, indexOfState, style);
 
-      // When user clicks the map, start the snapshotting process with the given parameters
-      unitsFab.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          if (mapboxMap != null) {
-            changeTemperatureUnits(!isImperial, mapStyle);
+        // When user clicks the map, start the snapshotting process with the given parameters
+        unitsFab.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            if (mapboxMap != null) {
+              changeTemperatureUnits(!isImperial, style);
+            }
           }
-        }
-      });
+        });
+      }
     }
   }
 
@@ -345,18 +347,7 @@ public class ExpressionIntegrationActivity
       menu.clear();
     }
 
-    if (states != null) {
-      states.clear();
-    }
-
-    if (mapboxMap != null && mapboxMap.getStyle() != null) {
-      Style style = mapboxMap.getStyle();
-      style.removeImage(RED_PIN_IMAGE_ID);
-      style.removeImage(BLUE_PIN_IMAGE_ID);
-      style.removeLayer(MAX_TEMP_LAYER_ID);
-      style.removeLayer(MIN_TEMP_LAYER_ID);
-      style.removeSource(GEOJSON_SRC_ID);
-    }
+    states.clear();
     mapView.onDestroy();
 
     mapView = null;
@@ -378,23 +369,6 @@ public class ExpressionIntegrationActivity
     mapView.onSaveInstanceState(outState);
   }
 
-  private String loadGeoJsonFromAsset(String filename) {
-    try {
-      // Load GeoJSON file
-      InputStream is = getAssets().open(filename);
-      int size = is.available();
-      byte[] buffer = new byte[size];
-      is.read(buffer);
-      is.close();
-      return new String(buffer, "UTF-8");
-
-    } catch (Exception exception) {
-      Log.e("StyleLineActivity", "Exception Loading GeoJSON: " + exception.toString());
-      exception.printStackTrace();
-      return null;
-    }
-  }
-
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     this.menu = menu;
@@ -405,14 +379,18 @@ public class ExpressionIntegrationActivity
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-
-    selectState(item.getTitle(), item.getItemId(), mapboxMap.getStyle());
+    if (mapboxMap != null) {
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        selectState(item.getTitle(), item.getItemId(), style);
+      }
+    }
 
     return super.onOptionsItemSelected(item);
   }
 
   private void populateMenu() {
-    if (menu != null && states != null) {
+    if (menu != null) {
       for (int id = 0; id < states.size(); id++) {
         menu.add(Menu.NONE, id, Menu.NONE, states.get(id).name);
       }

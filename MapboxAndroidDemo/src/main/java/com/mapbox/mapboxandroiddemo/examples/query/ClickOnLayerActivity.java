@@ -64,8 +64,8 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
         addGeoJsonSourceToMap(style);
 
         // Create FillLayer with GeoJSON source and add the FillLayer to the map
-        if (mapboxMap.getStyle() != null) {
-          mapboxMap.getStyle().addLayer(new FillLayer(geoJsonLayerId, geoJsonSourceId)
+        if (style != null) {
+          style.addLayer(new FillLayer(geoJsonLayerId, geoJsonSourceId)
             .withProperties(fillOpacity(0.5f)));
         }
       }

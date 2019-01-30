@@ -26,10 +26,11 @@ import java.util.List;
  * Use the query feature to select a building, get its geometry, and draw a polygon highlighting it.
  */
 public class SelectBuildingActivity extends AppCompatActivity implements OnMapReadyCallback,
-  MapboxMap.OnMapClickListener  {
+  MapboxMap.OnMapClickListener {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
+  private Style style;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-
+        SelectBuildingActivity.this.style = style;
         style.addSource(new GeoJsonSource("source-id"));
 
         style.addLayer(new FillLayer("layer-id", "source-id").withProperties(
@@ -69,10 +70,14 @@ public class SelectBuildingActivity extends AppCompatActivity implements OnMapRe
 
   @Override
   public boolean onMapClick(@NonNull LatLng point) {
+    if (!style.isFullyLoaded()) {
+      return false;
+    }
+
     final PointF finalPoint = mapboxMap.getProjection().toScreenLocation(point);
     List<Feature> features = mapboxMap.queryRenderedFeatures(finalPoint, "building");
     if (features.size() > 0) {
-      GeoJsonSource selectedBuildingSource = mapboxMap.getStyle().getSourceAs("source-id");
+      GeoJsonSource selectedBuildingSource = style.getSourceAs("source-id");
       if (selectedBuildingSource != null) {
         selectedBuildingSource.setGeoJson(FeatureCollection.fromFeatures(features));
       }

@@ -63,7 +63,7 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
     MultipleHeatmapStylingActivity.this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
-      public void onStyleLoaded(@NonNull Style style) {
+      public void onStyleLoaded(@NonNull final Style style) {
         CameraPosition cameraPositionForFragmentMap = new CameraPosition.Builder()
           .target(new LatLng(34.056684, -118.254002))
           .zoom(11.047)
@@ -83,8 +83,8 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
             if (index == listOfHeatmapColors.length - 1) {
               index = 0;
             }
-            if (mapboxMap.getStyle().getLayer(HEATMAP_LAYER_ID) != null) {
-              mapboxMap.getStyle().getLayer(HEATMAP_LAYER_ID).setProperties(
+            if (style.getLayer(HEATMAP_LAYER_ID) != null) {
+              style.getLayer(HEATMAP_LAYER_ID).setProperties(
                 heatmapColor(listOfHeatmapColors[index]),
                 heatmapRadius(listOfHeatmapRadiusStops[index]),
                 heatmapIntensity(listOfHeatmapIntensityStops[index])

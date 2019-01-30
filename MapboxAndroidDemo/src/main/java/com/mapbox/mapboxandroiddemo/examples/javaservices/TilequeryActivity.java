@@ -75,7 +75,7 @@ public class TilequeryActivity extends AppCompatActivity implements
     mapView.getMapAsync(this);
   }
 
-  @SuppressWarnings({"MissingPermission"})
+  @SuppressWarnings( {"MissingPermission"})
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     TilequeryActivity.this.mapboxMap = mapboxMap;
@@ -99,11 +99,11 @@ public class TilequeryActivity extends AppCompatActivity implements
       TilequeryActivity.this.getResources(), R.drawable.red_marker));
 
     loadedMapStyle.addSource(new GeoJsonSource(CLICK_CENTER_GEOJSON_SOURCE_ID,
-      FeatureCollection.fromFeatures(new Feature[]{})));
+      FeatureCollection.fromFeatures(new Feature[] {})));
 
     loadedMapStyle.addLayer(new SymbolLayer("click-layer", CLICK_CENTER_GEOJSON_SOURCE_ID).withProperties(
       iconImage("CLICK-ICON-ID"),
-      iconOffset(new Float[]{0f, -12f}),
+      iconOffset(new Float[] {0f, -12f}),
       iconIgnorePlacement(true),
       iconAllowOverlap(true)
     ));
@@ -119,7 +119,7 @@ public class TilequeryActivity extends AppCompatActivity implements
 
     // Retrieve GeoJSON information from the Mapbox Tilequery API
     loadedMapStyle.addSource(new GeoJsonSource(RESULT_GEOJSON_SOURCE_ID,
-      FeatureCollection.fromFeatures(new Feature[]{})));
+      FeatureCollection.fromFeatures(new Feature[] {})));
 
     loadedMapStyle.addLayer(new SymbolLayer(LAYER_ID, RESULT_GEOJSON_SOURCE_ID).withProperties(
       iconImage("RESULT-ICON-ID"),
@@ -133,16 +133,22 @@ public class TilequeryActivity extends AppCompatActivity implements
   @Override
   public boolean onMapClick(@NonNull LatLng point) {
 
-    // Move and display the click center layer's red marker icon to wherever the map was clicked on
-    GeoJsonSource clickLocationSource = mapboxMap.getStyle().getSourceAs(CLICK_CENTER_GEOJSON_SOURCE_ID);
-    if (clickLocationSource != null) {
-      clickLocationSource.setGeoJson(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
+    Style style = mapboxMap.getStyle();
+    if (style != null) {
+      // Move and display the click center layer's red marker icon to wherever the map was clicked on
+      GeoJsonSource clickLocationSource = style.getSourceAs(CLICK_CENTER_GEOJSON_SOURCE_ID);
+      if (clickLocationSource != null) {
+        clickLocationSource.setGeoJson(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(),
+          point.getLatitude())));
+      }
+
+      // Use the map click location to make a Tilequery API call
+      makeTilequeryApiCall(style, point);
+
+      return true;
     }
 
-    // Use the map click location to make a Tilequery API call
-    makeTilequeryApiCall(point);
-
-    return true;
+    return false;
   }
 
   /**
@@ -150,7 +156,7 @@ public class TilequeryActivity extends AppCompatActivity implements
    *
    * @param point the center point that the the tilequery will originate from.
    */
-  private void makeTilequeryApiCall(@NonNull LatLng point) {
+  private void makeTilequeryApiCall(@NonNull final Style style, @NonNull LatLng point) {
     MapboxTilequery tilequery = MapboxTilequery.builder()
       .accessToken(getString(R.string.access_token))
       .mapIds("mapbox.mapbox-streets-v7")
@@ -166,11 +172,9 @@ public class TilequeryActivity extends AppCompatActivity implements
       @Override
       public void onResponse(Call<FeatureCollection> call, Response<FeatureCollection> response) {
         tilequeryResponseTextView.setText(response.body().toJson());
-        if (mapboxMap.getStyle() != null) {
-          GeoJsonSource resultSource = mapboxMap.getStyle().getSourceAs(RESULT_GEOJSON_SOURCE_ID);
-          if (resultSource != null && response.body().features() != null) {
-            resultSource.setGeoJson(FeatureCollection.fromFeatures(response.body().features()));
-          }
+        GeoJsonSource resultSource = style.getSourceAs(RESULT_GEOJSON_SOURCE_ID);
+        if (resultSource != null && response.body().features() != null) {
+          resultSource.setGeoJson(FeatureCollection.fromFeatures(response.body().features()));
         }
       }
 
@@ -185,7 +189,7 @@ public class TilequeryActivity extends AppCompatActivity implements
   /**
    * Use the Maps SDK's LocationComponent to display the device location on the map
    */
-  @SuppressWarnings({"MissingPermission"})
+  @SuppressWarnings( {"MissingPermission"})
   private void displayDeviceLocation(@NonNull Style loadedMapStyle) {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
@@ -227,8 +231,9 @@ public class TilequeryActivity extends AppCompatActivity implements
 
   @Override
   public void onPermissionResult(boolean granted) {
-    if (granted) {
-      displayDeviceLocation(mapboxMap.getStyle());
+    Style style = mapboxMap.getStyle();
+    if (granted && style != null) {
+      displayDeviceLocation(style);
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
       finish();

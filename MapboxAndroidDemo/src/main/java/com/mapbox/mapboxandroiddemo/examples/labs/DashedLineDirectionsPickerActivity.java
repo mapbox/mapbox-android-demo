@@ -122,11 +122,11 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
     loadedMapStyle.addLayerBelow(
       new LineLayer(
         "DIRECTIONS_LAYER_ID", "SOURCE_ID").withProperties(
-      lineWidth(4.5f),
-      lineColor(Color.BLACK),
-      lineTranslate(new Float[] {0f, 4f}),
-      lineDasharray(new Float[] {1.2f, 1.2f})
-    ), "road-label-small");
+        lineWidth(4.5f),
+        lineColor(Color.BLACK),
+        lineTranslate(new Float[] {0f, 4f}),
+        lineDasharray(new Float[] {1.2f, 1.2f})
+      ), "road-label-small");
   }
 
   /**
@@ -173,17 +173,24 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
    *
    * @param route The route to be drawn in the map's LineLayer that was set up above.
    */
-  private void drawNavigationPolylineRoute(DirectionsRoute route) {
-    List<Feature> directionsRouteFeatureList = new ArrayList<>();
-    LineString lineString = LineString.fromPolyline(route.geometry(), PRECISION_6);
-    List<Point> coordinates = lineString.coordinates();
-    for (int i = 0; i < coordinates.size(); i++) {
-      directionsRouteFeatureList.add(Feature.fromGeometry(LineString.fromLngLats(coordinates)));
-    }
-    dashedLineDirectionsFeatureCollection = FeatureCollection.fromFeatures(directionsRouteFeatureList);
-    GeoJsonSource source = mapboxMap.getStyle().getSourceAs("SOURCE_ID");
-    if (source != null) {
-      source.setGeoJson(dashedLineDirectionsFeatureCollection);
+  private void drawNavigationPolylineRoute(final DirectionsRoute route) {
+    if (mapboxMap != null) {
+      mapboxMap.getStyle(new Style.OnStyleLoaded() {
+        @Override
+        public void onStyleLoaded(@NonNull Style style) {
+          List<Feature> directionsRouteFeatureList = new ArrayList<>();
+          LineString lineString = LineString.fromPolyline(route.geometry(), PRECISION_6);
+          List<Point> coordinates = lineString.coordinates();
+          for (int i = 0; i < coordinates.size(); i++) {
+            directionsRouteFeatureList.add(Feature.fromGeometry(LineString.fromLngLats(coordinates)));
+          }
+          dashedLineDirectionsFeatureCollection = FeatureCollection.fromFeatures(directionsRouteFeatureList);
+          GeoJsonSource source = style.getSourceAs("SOURCE_ID");
+          if (source != null) {
+            source.setGeoJson(dashedLineDirectionsFeatureCollection);
+          }
+        }
+      });
     }
   }
 

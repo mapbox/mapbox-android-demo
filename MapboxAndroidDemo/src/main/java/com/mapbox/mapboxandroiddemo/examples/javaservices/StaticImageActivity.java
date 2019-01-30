@@ -30,7 +30,7 @@ import com.squareup.picasso.Picasso;
  * the ImageView.
  */
 public class StaticImageActivity extends AppCompatActivity implements
-    OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
+  OnMapReadyCallback, RadioGroup.OnCheckedChangeListener {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -56,43 +56,41 @@ public class StaticImageActivity extends AppCompatActivity implements
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
-    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
-      @Override
-      public void onStyleLoaded(@NonNull Style style) {
-
-        initViews();
-
-        mapStyleRadioGroup.setOnCheckedChangeListener(StaticImageActivity.this);
-
-        createStaticImageButton.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            if (mapStyleRadioGroup.getCheckedRadioButtonId() == -1) {
-              Toast.makeText(StaticImageActivity.this, R.string.select_a_style, Toast.LENGTH_SHORT).show();
-            } else {
-              // one of the radio buttons is checked
-              Log.d("Static", "onClick: initViews mapboxMap.getStyle().getUrl() = " + mapboxMap.getStyle().getUrl());
-              if (mapboxMap.getStyle() != null) {
-                Picasso.with(StaticImageActivity.this).load(takeSnapshot(
-                  mapboxMap.getCameraPosition(),
-                  mapboxMap.getStyle().getUrl().contains("mapbox/dark-v")
-                    ? StaticMapCriteria.DARK_STYLE :
-                    StaticMapCriteria.STREET_STYLE,
-                  (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredWidth(), 0, 1280),
-                  (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredHeight(), 0, 1280))
-                  .url().toString()).into(staticMapImageView);
-              }
-            }
-          }
-        });
-      }
-    });
+    mapboxMap.setStyle(Style.MAPBOX_STREETS);
+    initViews();
   }
 
   private void initViews() {
     staticMapImageView = findViewById(R.id.static_map_imageview);
+
     createStaticImageButton = findViewById(R.id.create_static_image_button);
+    createStaticImageButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if (mapStyleRadioGroup.getCheckedRadioButtonId() == -1) {
+          Toast.makeText(StaticImageActivity.this, R.string.select_a_style, Toast.LENGTH_SHORT).show();
+        } else {
+          mapboxMap.getStyle(new Style.OnStyleLoaded() {
+            @Override
+            public void onStyleLoaded(@NonNull Style style) {
+              // one of the radio buttons is checked
+              Log.d("Static", "onClick: initViews style.getUrl() = " + style.getUrl());
+              Picasso.with(StaticImageActivity.this).load(takeSnapshot(
+                mapboxMap.getCameraPosition(),
+                style.getUrl().contains("mapbox/dark-v")
+                  ? StaticMapCriteria.DARK_STYLE :
+                  StaticMapCriteria.STREET_STYLE,
+                (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredWidth(), 0, 1280),
+                (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredHeight(), 0, 1280))
+                .url().toString()).into(staticMapImageView);
+            }
+          });
+        }
+      }
+    });
+
     mapStyleRadioGroup = findViewById(R.id.map_style_radio_group);
+    mapStyleRadioGroup.setOnCheckedChangeListener(StaticImageActivity.this);
   }
 
   @Override
@@ -113,17 +111,17 @@ public class StaticImageActivity extends AppCompatActivity implements
   private MapboxStaticMap takeSnapshot(CameraPosition cameraPosition, String styleUrl, int width,
                                        int height) {
     return MapboxStaticMap.builder()
-        .accessToken(getString(R.string.access_token))
-        .styleId(styleUrl)
-        .cameraPoint(Point.fromLngLat(cameraPosition.target.getLongitude(),
-            cameraPosition.target.getLatitude()))
-        .cameraZoom(cameraPosition.zoom)
-        .cameraPitch(cameraPosition.tilt)
-        .cameraBearing(cameraPosition.bearing)
-        .width(width)
-        .height(height)
-        .retina(true)
-        .build();
+      .accessToken(getString(R.string.access_token))
+      .styleId(styleUrl)
+      .cameraPoint(Point.fromLngLat(cameraPosition.target.getLongitude(),
+        cameraPosition.target.getLatitude()))
+      .cameraZoom(cameraPosition.zoom)
+      .cameraPitch(cameraPosition.tilt)
+      .cameraBearing(cameraPosition.bearing)
+      .width(width)
+      .height(height)
+      .retina(true)
+      .build();
   }
 
   @Override

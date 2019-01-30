@@ -101,16 +101,15 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
    * @param collection the FeatureCollection to set equal to the globally-declared FeatureCollection
    */
   public void setUpData(final FeatureCollection collection) {
-    if (mapboxMap == null) {
-      return;
-    }
     featureCollection = collection;
-    if (mapboxMap.getStyle() != null) {
-      Style loadedStyle = mapboxMap.getStyle();
-      setupSource(loadedStyle);
-      setUpImage(loadedStyle);
-      setUpMarkerLayer(loadedStyle);
-      setUpInfoWindowLayer(loadedStyle);
+    if (mapboxMap != null) {
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        setupSource(style);
+        setUpImage(style);
+        setUpMarkerLayer(style);
+        setUpInfoWindowLayer(style);
+      }
     }
   }
 
@@ -240,10 +239,13 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   /**
    * Invoked when the bitmaps have been generated from a view.
    */
-  public void setImageGenResults(HashMap<String, View> viewMap, HashMap<String, Bitmap> imageMap) {
+  public void setImageGenResults(HashMap<String, Bitmap> imageMap) {
     if (mapboxMap != null) {
-      // calling addImages is faster as separate addImage calls for each bitmap.
-      mapboxMap.getStyle().addImages(imageMap);
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        // calling addImages is faster as separate addImage calls for each bitmap.
+        style.addImages(imageMap);
+      }
     }
   }
 
@@ -375,7 +377,7 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
       super.onPostExecute(bitmapHashMap);
       InfoWindowSymbolLayerActivity activity = activityRef.get();
       if (activity != null && bitmapHashMap != null) {
-        activity.setImageGenResults(viewMap, bitmapHashMap);
+        activity.setImageGenResults(bitmapHashMap);
         if (refreshSource) {
           activity.refreshSource();
         }

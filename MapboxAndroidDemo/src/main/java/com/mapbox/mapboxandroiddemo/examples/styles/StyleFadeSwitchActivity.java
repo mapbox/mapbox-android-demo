@@ -59,7 +59,7 @@ public class StyleFadeSwitchActivity extends AppCompatActivity implements
 
         // Create a new map layer for the satellite raster images and add the satellite layer to the map.
         // Use runtime styling to adjust the satellite layer's opacity based on the map camera's zoom level
-        mapboxMap.getStyle().addLayer(
+        style.addLayer(
           new RasterLayer("SATELLITE_RASTER_LAYER_ID", "SATELLITE_RASTER_SOURCE_ID").withProperties(
           rasterOpacity(interpolate(linear(), zoom(),
             stop(15, 0),

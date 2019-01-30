@@ -57,14 +57,14 @@ public class LocationTrackingActivity extends WearableActivity implements Permis
     mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        enableLocationComponent();
+        enableLocationComponent(style);
         setAmbientEnabled();
       }
     });
   }
 
   @SuppressWarnings( {"MissingPermission"})
-  private void enableLocationComponent() {
+  private void enableLocationComponent(@NonNull Style style) {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
@@ -72,7 +72,7 @@ public class LocationTrackingActivity extends WearableActivity implements Permis
       LocationComponent locationComponent = mapboxMap.getLocationComponent();
 
       // Activate with options
-      locationComponent.activateLocationComponent(this, mapboxMap.getStyle());
+      locationComponent.activateLocationComponent(this, style);
 
       // Enable to make component visible
       locationComponent.setLocationComponentEnabled(true);
@@ -99,7 +99,12 @@ public class LocationTrackingActivity extends WearableActivity implements Permis
   @Override
   public void onPermissionResult(boolean granted) {
     if (granted) {
-      enableLocationComponent();
+      mapboxMap.getStyle(new Style.OnStyleLoaded() {
+        @Override
+        public void onStyleLoaded(@NonNull Style style) {
+          enableLocationComponent(style);
+        }
+      });
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
       finish();

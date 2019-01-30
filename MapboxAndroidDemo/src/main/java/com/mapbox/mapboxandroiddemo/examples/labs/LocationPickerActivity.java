@@ -85,7 +85,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
     LocationPickerActivity.this.mapboxMap = mapboxMap;
     mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
-      public void onStyleLoaded(@NonNull Style style) {
+      public void onStyleLoaded(@NonNull final Style style) {
         enableLocationPlugin(style);
 
         // Toast instructing user to tap on the mapboxMap
@@ -112,49 +112,45 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
         selectLocationButton.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            if (mapboxMap.getStyle() != null) {
+            if (hoveringMarker.getVisibility() == View.VISIBLE) {
 
-              Style mapStyle = mapboxMap.getStyle();
-              if (hoveringMarker.getVisibility() == View.VISIBLE) {
+              // Use the map target's coordinates to make a reverse geocoding search
+              final LatLng mapTargetLatLng = mapboxMap.getCameraPosition().target;
 
-                // Use the map target's coordinates to make a reverse geocoding search
-                final LatLng mapTargetLatLng = mapboxMap.getCameraPosition().target;
+              // Hide the hovering red hovering ImageView marker
+              hoveringMarker.setVisibility(View.INVISIBLE);
 
-                // Hide the hovering red hovering ImageView marker
-                hoveringMarker.setVisibility(View.INVISIBLE);
+              // Transform the appearance of the button to become the cancel button
+              selectLocationButton.setBackgroundColor(
+                ContextCompat.getColor(LocationPickerActivity.this, R.color.colorAccent));
+              selectLocationButton.setText(getString(R.string.location_picker_select_location_button_cancel));
 
-                // Transform the appearance of the button to become the cancel button
-                selectLocationButton.setBackgroundColor(
-                  ContextCompat.getColor(LocationPickerActivity.this, R.color.colorAccent));
-                selectLocationButton.setText(getString(R.string.location_picker_select_location_button_cancel));
-
-                // Show the SymbolLayer icon to represent the selected map location
-                if (mapStyle.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
-                  GeoJsonSource source = mapboxMap.getStyle().getSourceAs("dropped-marker-source-id");
-                  if (source != null) {
-                    source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(
-                      mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude())));
-                  }
-                  mapStyle.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(VISIBLE));
+              // Show the SymbolLayer icon to represent the selected map location
+              if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
+                GeoJsonSource source = style.getSourceAs("dropped-marker-source-id");
+                if (source != null) {
+                  source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(
+                    mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude())));
                 }
+                style.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(VISIBLE));
+              }
 
-                // Use the map camera target's coordinates to make a reverse geocoding search
-                reverseGeocode(Point.fromLngLat(mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude()));
+              // Use the map camera target's coordinates to make a reverse geocoding search
+              reverseGeocode(style, Point.fromLngLat(mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude()));
 
-              } else {
+            } else {
 
-                // Switch the button appearance back to select a location.
-                selectLocationButton.setBackgroundColor(
-                  ContextCompat.getColor(LocationPickerActivity.this, R.color.colorPrimary));
-                selectLocationButton.setText(getString(R.string.location_picker_select_location_button_select));
+              // Switch the button appearance back to select a location.
+              selectLocationButton.setBackgroundColor(
+                ContextCompat.getColor(LocationPickerActivity.this, R.color.colorPrimary));
+              selectLocationButton.setText(getString(R.string.location_picker_select_location_button_select));
 
-                // Show the red hovering ImageView marker
-                hoveringMarker.setVisibility(View.VISIBLE);
+              // Show the red hovering ImageView marker
+              hoveringMarker.setVisibility(View.VISIBLE);
 
-                // Hide the selected location SymbolLayer
-                if (mapStyle.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
-                  mapStyle.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(NONE));
-                }
+              // Hide the selected location SymbolLayer
+              if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
+                style.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(NONE));
               }
             }
           }
@@ -233,9 +229,10 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
 
   @Override
   public void onPermissionResult(boolean granted) {
-    if (granted) {
-      if (mapboxMap.getStyle() != null) {
-        enableLocationPlugin(mapboxMap.getStyle());
+    if (granted && mapboxMap != null) {
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        enableLocationPlugin(style);
       }
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
@@ -246,10 +243,11 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
   /**
    * This method is used to reverse geocode where the user has dropped the marker.
    *
+   * @param style
    * @param point The location to use for the search
    */
 
-  private void reverseGeocode(final Point point) {
+  private void reverseGeocode(@NonNull final Style style, final Point point) {
     try {
       MapboxGeocoding client = MapboxGeocoding.builder()
         .accessToken(getString(R.string.access_token))
@@ -266,7 +264,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
             CarmenFeature feature = results.get(0);
 
             // If the geocoder returns a result, we take the first in the list and show a Toast with the place name.
-            if (mapboxMap.getStyle() != null && mapboxMap.getStyle().getLayer(DROPPED_MARKER_LAYER_ID) != null) {
+            if (style.isFullyLoaded() && style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
               Toast.makeText(LocationPickerActivity.this,
                 String.format(getString(R.string.location_picker_place_name_result),
                   feature.placeName()), Toast.LENGTH_SHORT).show();

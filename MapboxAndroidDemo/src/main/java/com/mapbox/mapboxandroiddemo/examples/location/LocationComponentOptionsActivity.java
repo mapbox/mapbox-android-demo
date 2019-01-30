@@ -151,8 +151,13 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
 
   @Override
   public void onPermissionResult(boolean granted) {
-    if (granted && mapboxMap.getStyle() != null) {
-      enableLocationComponent(mapboxMap.getStyle());
+    if (granted) {
+      mapboxMap.getStyle(new Style.OnStyleLoaded() {
+        @Override
+        public void onStyleLoaded(@NonNull Style style) {
+          enableLocationComponent(style);
+        }
+      });
     } else {
       Toast.makeText(this, R.string.user_location_permission_not_granted, Toast.LENGTH_LONG).show();
       finish();

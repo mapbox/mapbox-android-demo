@@ -79,7 +79,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            initSpaceStationSymbolLayer();
+            initSpaceStationSymbolLayer(style);
             callApi();
             Toast.makeText(SpaceStationLocationActivity.this, R.string.space_station_toast, Toast.LENGTH_SHORT).show();
           }
@@ -138,15 +138,14 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     handler.post(runnable);
   }
 
-  private void initSpaceStationSymbolLayer() {
-
-    map.getStyle().addImage("space-station-icon-id",
+  private void initSpaceStationSymbolLayer(@NonNull Style style) {
+    style.addImage("space-station-icon-id",
       BitmapFactory.decodeResource(
         this.getResources(), R.drawable.iss));
 
-    map.getStyle().addSource(new GeoJsonSource("source-id"));
+    style.addSource(new GeoJsonSource("source-id"));
 
-    map.getStyle().addLayer(new SymbolLayer("layer-id", "source-id").withProperties(
+    style.addLayer(new SymbolLayer("layer-id", "source-id").withProperties(
       iconImage("space-station-icon-id"),
       iconIgnorePlacement(true),
       iconAllowOverlap(true),

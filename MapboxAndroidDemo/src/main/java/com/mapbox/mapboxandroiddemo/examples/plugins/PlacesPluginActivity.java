@@ -140,19 +140,25 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
 
       // Create a new FeatureCollection and add a new Feature to it using selectedCarmenFeature above.
       // Then retrieve and update the source designated for showing a selected location's symbol layer icon
-      GeoJsonSource source = mapboxMap.getStyle().getSourceAs(geojsonSourceLayerId);
-      if (source != null) {
-        source.setGeoJson(FeatureCollection.fromFeatures(
-          new Feature[]{Feature.fromJson(selectedCarmenFeature.toJson())}));
-      }
 
-      // Move map camera to the selected location
-      mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(
-        new CameraPosition.Builder()
-          .target(new LatLng(((Point) selectedCarmenFeature.geometry()).latitude(),
-            ((Point) selectedCarmenFeature.geometry()).longitude()))
-          .zoom(14)
-          .build()), 4000);
+      if (mapboxMap != null) {
+        Style style = mapboxMap.getStyle();
+        if (style != null) {
+          GeoJsonSource source = style.getSourceAs(geojsonSourceLayerId);
+          if (source != null) {
+            source.setGeoJson(FeatureCollection.fromFeatures(
+              new Feature[] {Feature.fromJson(selectedCarmenFeature.toJson())}));
+          }
+
+          // Move map camera to the selected location
+          mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(
+            new CameraPosition.Builder()
+              .target(new LatLng(((Point) selectedCarmenFeature.geometry()).latitude(),
+                ((Point) selectedCarmenFeature.geometry()).longitude()))
+              .zoom(14)
+              .build()), 4000);
+        }
+      }
     }
   }
 

@@ -93,8 +93,11 @@ public class ChoroplethJsonVectorMixActivity extends AppCompatActivity implement
     );
 
     // Add layer to map below the "waterway-label" layer
-    if (mapboxMap.getStyle() != null) {
-      mapboxMap.getStyle().addLayerAbove(statesJoinLayer, "waterway-label");
+    if (mapboxMap != null) {
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        style.addLayerAbove(statesJoinLayer, "waterway-label");
+      }
     }
   }
 

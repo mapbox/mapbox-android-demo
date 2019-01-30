@@ -91,7 +91,7 @@ public class DirectionsActivity extends AppCompatActivity {
             initLayers(style);
 
             // Get the directions route from the Mapbox Directions API
-            getRoute(origin, destination);
+            getRoute(style, origin, destination);
           }
         });
       }
@@ -145,7 +145,7 @@ public class DirectionsActivity extends AppCompatActivity {
    * @param origin      the starting point of the route
    * @param destination the desired finish point of the route
    */
-  private void getRoute(Point origin, Point destination) {
+  private void getRoute(@NonNull final Style style, Point origin, Point destination) {
 
     client = MapboxDirections.builder()
       .origin(origin)
@@ -178,15 +178,17 @@ public class DirectionsActivity extends AppCompatActivity {
           getString(R.string.directions_activity_toast_message),
           currentRoute.distance()), Toast.LENGTH_SHORT).show();
 
-        // Retrieve and update the source designated for showing the directions route
-        GeoJsonSource source = mapboxMap.getStyle().getSourceAs(ROUTE_SOURCE_ID);
+        if (style.isFullyLoaded()) {
+          // Retrieve and update the source designated for showing the directions route
+          GeoJsonSource source = style.getSourceAs(ROUTE_SOURCE_ID);
 
-        // Create a LineString with the directions route's geometry and
-        // reset the GeoJSON source for the route LineLayer source
-        if (source != null) {
-          Timber.d("onResponse: source != null");
-          source.setGeoJson(FeatureCollection.fromFeature(
-            Feature.fromGeometry(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6))));
+          // Create a LineString with the directions route's geometry and
+          // reset the GeoJSON source for the route LineLayer source
+          if (source != null) {
+            Timber.d("onResponse: source != null");
+            source.setGeoJson(FeatureCollection.fromFeature(
+              Feature.fromGeometry(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6))));
+          }
         }
       }
 

@@ -50,7 +50,7 @@ public class GeojsonLayerInStackActivity extends AppCompatActivity {
             try {
               URL geoJsonUrl = new URL("https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_urban_areas.geojson");
               GeoJsonSource urbanAreasSource = new GeoJsonSource("urban-areas", geoJsonUrl);
-              mapboxMap.getStyle().addSource(urbanAreasSource);
+              style.addSource(urbanAreasSource);
 
               FillLayer urbanArea = new FillLayer("urban-areas-fill", "urban-areas");
 
@@ -59,7 +59,7 @@ public class GeojsonLayerInStackActivity extends AppCompatActivity {
                 fillOpacity(0.4f)
               );
 
-              mapboxMap.getStyle().addLayerBelow(urbanArea, "water");
+              style.addLayerBelow(urbanArea, "water");
             } catch (MalformedURLException malformedUrlException) {
               malformedUrlException.printStackTrace();
             }

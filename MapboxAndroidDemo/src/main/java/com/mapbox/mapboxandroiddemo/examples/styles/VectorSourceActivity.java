@@ -46,7 +46,7 @@ public class VectorSourceActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            mapboxMap.getStyle().addSource(
+            style.addSource(
               new VectorSource("terrain-data", "mapbox://mapbox.mapbox-terrain-v2")
             );
 
@@ -59,7 +59,7 @@ public class VectorSourceActivity extends AppCompatActivity {
               lineWidth(1f)
             );
 
-            mapboxMap.getStyle().addLayer(terrainData);
+            style.addLayer(terrainData);
           }
         });
       }

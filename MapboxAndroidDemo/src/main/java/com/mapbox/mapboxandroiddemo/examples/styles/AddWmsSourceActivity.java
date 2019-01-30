@@ -43,14 +43,14 @@ public class AddWmsSourceActivity extends AppCompatActivity {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
 
-            mapboxMap.getStyle().addSource(new RasterSource(
+            style.addSource(new RasterSource(
               "web-map-source",
               new TileSet("tileset", "https://geodata.state.nj.us/imagerywms/Natural2015?bbox={"
                 + "bbox-epsg-3857}&format=image/png&service=WMS&version=1.1.1&request=GetMap&"
                 + "srs=EPSG:3857&width=256&height=256&layers=Natural2015"), 256));
 
             // Add the web map source to the map.
-            mapboxMap.getStyle().addLayerBelow(
+            style.addLayerBelow(
               new RasterLayer("web-map-layer", "web-map-source"), "aeroway-taxiway");
 
           }

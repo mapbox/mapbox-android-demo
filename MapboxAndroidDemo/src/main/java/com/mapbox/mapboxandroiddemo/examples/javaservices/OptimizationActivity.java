@@ -132,9 +132,12 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     if (alreadyTwelveMarkersOnMap()) {
       Toast.makeText(OptimizationActivity.this, R.string.only_twelve_stops_allowed, Toast.LENGTH_LONG).show();
     } else {
-      addDestinationMarker(point);
-      addPointToStopsList(point);
-      getOptimizedRoute(stops);
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        addDestinationMarker(style, point);
+        addPointToStopsList(point);
+        getOptimizedRoute(style, stops);
+      }
     }
     return true;
   }
@@ -143,23 +146,27 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   public boolean onMapLongClick(@NonNull LatLng point) {
     stops.clear();
     if (mapboxMap != null) {
-      resetDestinationMarkers();
-      removeOptimizedRoute();
-      addFirstStopToStopsList();
+      Style style = mapboxMap.getStyle();
+      if (style != null) {
+        resetDestinationMarkers(style);
+        removeOptimizedRoute(style);
+        addFirstStopToStopsList();
+        return true;
+      }
     }
-    return true;
+    return false;
   }
 
-  private void resetDestinationMarkers() {
-    GeoJsonSource optimizedLineSource = mapboxMap.getStyle().getSourceAs(ICON_GEOJSON_SOURCE_ID);
+  private void resetDestinationMarkers(@NonNull Style style) {
+    GeoJsonSource optimizedLineSource = style.getSourceAs(ICON_GEOJSON_SOURCE_ID);
     if (optimizedLineSource != null) {
       optimizedLineSource.setGeoJson(Feature.fromGeometry(Point.fromLngLat(origin.longitude(),
         origin.latitude())));
     }
   }
 
-  private void removeOptimizedRoute() {
-    GeoJsonSource optimizedLineSource = mapboxMap.getStyle().getSourceAs("optimized-route-source-id");
+  private void removeOptimizedRoute(@NonNull Style style) {
+    GeoJsonSource optimizedLineSource = style.getSourceAs("optimized-route-source-id");
     if (optimizedLineSource != null) {
       optimizedLineSource.setGeoJson(FeatureCollection.fromFeatures(new Feature[] {}));
     }
@@ -169,14 +176,14 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     return stops.size() == 12;
   }
 
-  private void addDestinationMarker(LatLng point) {
+  private void addDestinationMarker(@NonNull Style style, LatLng point) {
     List<Feature> destinationMarkerList = new ArrayList<>();
     for (Point singlePoint : stops) {
       destinationMarkerList.add(Feature.fromGeometry(
         Point.fromLngLat(singlePoint.longitude(), singlePoint.latitude())));
     }
     destinationMarkerList.add(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
-    GeoJsonSource iconSource = mapboxMap.getStyle().getSourceAs(ICON_GEOJSON_SOURCE_ID);
+    GeoJsonSource iconSource = style.getSourceAs(ICON_GEOJSON_SOURCE_ID);
     if (iconSource != null) {
       iconSource.setGeoJson(FeatureCollection.fromFeatures(destinationMarkerList));
     }
@@ -192,7 +199,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     stops.add(origin);
   }
 
-  private void getOptimizedRoute(List<Point> coordinates) {
+  private void getOptimizedRoute(@NonNull final Style style, List<Point> coordinates) {
     optimizedClient = MapboxOptimization.builder()
       .source(FIRST)
       .destination(ANY)
@@ -221,7 +228,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
 
         // Get most optimized route from API response
         optimizedRoute = response.body().trips().get(0);
-        drawOptimizedRoute(optimizedRoute);
+        drawOptimizedRoute(style, optimizedRoute);
       }
 
       @Override
@@ -231,8 +238,8 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
     });
   }
 
-  private void drawOptimizedRoute(DirectionsRoute route) {
-    GeoJsonSource optimizedLineSource = mapboxMap.getStyle().getSourceAs("optimized-route-source-id");
+  private void drawOptimizedRoute(@NonNull Style style, DirectionsRoute route) {
+    GeoJsonSource optimizedLineSource = style.getSourceAs("optimized-route-source-id");
     if (optimizedLineSource != null) {
       optimizedLineSource.setGeoJson(FeatureCollection.fromFeature(Feature.fromGeometry(
         LineString.fromPolyline(route.geometry(), PRECISION_6))));
