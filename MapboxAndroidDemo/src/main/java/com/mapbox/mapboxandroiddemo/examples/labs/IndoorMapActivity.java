@@ -103,10 +103,10 @@ public class IndoorMapActivity extends AppCompatActivity {
             });
             indoorBuildingSource = new GeoJsonSource(
               "indoor-building", loadJsonFromAsset("white_house_lvl_0.geojson"));
-            mapboxMap.getStyle().addSource(indoorBuildingSource);
+            style.addSource(indoorBuildingSource);
 
             // Add the building layers since we know zoom levels in range
-            loadBuildingLayer();
+            loadBuildingLayer(style);
           }
         });
 
@@ -189,7 +189,7 @@ public class IndoorMapActivity extends AppCompatActivity {
     levelButtons.setVisibility(View.VISIBLE);
   }
 
-  private void loadBuildingLayer() {
+  private void loadBuildingLayer(@NonNull Style style) {
     // Method used to load the indoor layer on the map. First the fill layer is drawn and then the
     // line layer is added.
 
@@ -198,20 +198,20 @@ public class IndoorMapActivity extends AppCompatActivity {
       // Function.zoom is used here to fade out the indoor layer if zoom level is beyond 16. Only
       // necessary to show the indoor map at high zoom levels.
       fillOpacity(interpolate(exponential(1f), zoom(),
-        stop(17f, 1f),
+        stop(16f, 0f),
         stop(16.5f, 0.5f),
-        stop(16f, 0f))));
+        stop(17f, 1f))));
 
-    map.getStyle().addLayer(indoorBuildingLayer);
+    style.addLayer(indoorBuildingLayer);
 
     LineLayer indoorBuildingLineLayer = new LineLayer("indoor-building-line", "indoor-building").withProperties(
       lineColor(Color.parseColor("#50667f")),
       lineWidth(0.5f),
       lineOpacity(interpolate(exponential(1f), zoom(),
-        stop(17f, 1f),
+        stop(16f, 0f),
         stop(16.5f, 0.5f),
-        stop(16f, 0f))));
-    map.getStyle().addLayer(indoorBuildingLineLayer);
+        stop(17f, 1f))));
+    style.addLayer(indoorBuildingLineLayer);
   }
 
   private String loadJsonFromAsset(String filename) {
