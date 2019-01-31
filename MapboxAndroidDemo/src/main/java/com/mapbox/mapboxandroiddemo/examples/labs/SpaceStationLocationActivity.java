@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
@@ -29,6 +28,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
@@ -122,9 +122,9 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
             // If retrofit fails or the API was unreachable, an error will be called.
             //to check if throwable is null, then give a custom message.
             if (throwable.getMessage() == null) {
-              Log.e(TAG, "Http connection failed");
+              Timber.e("Http connection failed");
             } else {
-              Log.e(TAG, throwable.getMessage());
+              Timber.e(throwable.getMessage());
             }
 
           }

@@ -25,7 +25,6 @@ public class InsetMapActivity extends AppCompatActivity {
 
   private MapView mainMapView;
   private MapboxMap mainMapboxMap;
-
   private MapboxMap insetMapboxMap;
 
   @Override

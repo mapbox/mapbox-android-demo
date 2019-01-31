@@ -52,7 +52,6 @@ public class DirectionsActivity extends AppCompatActivity {
   private static final String ICON_SOURCE_ID = "icon-source-id";
   private static final String RED_PIN_ICON_ID = "red-pin-icon-id";
   private MapView mapView;
-  private MapboxMap mapboxMap;
   private DirectionsRoute currentRoute;
   private MapboxDirections client;
   private Point origin;
@@ -75,7 +74,6 @@ public class DirectionsActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
-        DirectionsActivity.this.mapboxMap = mapboxMap;
 
         mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
           @Override

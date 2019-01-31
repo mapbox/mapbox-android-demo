@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.offline;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -24,12 +23,12 @@ import com.mapbox.mapboxsdk.offline.OfflineTilePyramidRegionDefinition;
 
 import org.json.JSONObject;
 
+import timber.log.Timber;
+
 /**
  * Download and view an offline map using the Mapbox Android SDK.
  */
 public class SimpleOfflineMapActivity extends AppCompatActivity {
-
-  private static final String TAG = "SimpOfflineMapActivity";
 
   private boolean isEndNotified;
   private ProgressBar progressBar;
@@ -86,7 +85,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
               String json = jsonObject.toString();
               metadata = json.getBytes(JSON_CHARSET);
             } catch (Exception exception) {
-              Log.e(TAG, "Failed to encode metadata: " + exception.getMessage());
+              Timber.e("Failed to encode metadata: %s", exception.getMessage());
               metadata = null;
             }
 
@@ -100,7 +99,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
                   offlineRegion.setDownloadState(OfflineRegion.STATE_ACTIVE);
 
                   // Display the download progress bar
-                  progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+                  progressBar = findViewById(R.id.progress_bar);
                   startProgress();
 
                   // Monitor the download progress using setObserver
@@ -125,21 +124,21 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
                     @Override
                     public void onError(OfflineRegionError error) {
                       // If an error occurs, print to logcat
-                      Log.e(TAG, "onError reason: " + error.getReason());
-                      Log.e(TAG, "onError message: " + error.getMessage());
+                      Timber.e("onError reason: %s", error.getReason());
+                      Timber.e("onError message: %s", error.getMessage());
                     }
 
                     @Override
                     public void mapboxTileCountLimitExceeded(long limit) {
                       // Notify if offline region exceeds maximum tile count
-                      Log.e(TAG, "Mapbox tile count limit exceeded: " + limit);
+                      Timber.e("Mapbox tile count limit exceeded: %s", limit);
                     }
                   });
                 }
 
                 @Override
                 public void onError(String error) {
-                  Log.e(TAG, "Error: " + error);
+                  Timber.e("Error: %s", error);
                 }
               });
           }
@@ -188,7 +187,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
               @Override
               public void onError(String error) {
-                Log.e(TAG, "On Delete error: " + error);
+                Timber.e("On delete error: %s", error);
               }
             });
           }
@@ -196,7 +195,7 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
         @Override
         public void onError(String error) {
-          Log.e(TAG, "onListError: " + error);
+          Timber.e("onListError: %s", error);
         }
       });
     }

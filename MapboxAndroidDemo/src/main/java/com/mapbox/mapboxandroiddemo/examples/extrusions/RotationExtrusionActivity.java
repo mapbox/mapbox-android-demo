@@ -9,7 +9,6 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -21,6 +20,8 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.building.BuildingPlugin;
+
+import timber.log.Timber;
 
 /**
  * Change the camera's bearing and tilt based on device movement while viewing building extrusions
@@ -170,13 +171,13 @@ public class RotationExtrusionActivity extends AppCompatActivity implements Sens
     if (sensorControl.getGyro() != null) {
       sensorManager.registerListener(this, sensorControl.getGyro(), sensorEventDeliveryRate);
     } else {
-      Log.d("RotationExtrusion", "Whoops, no accelerometer sensor");
+      Timber.d("Whoops, no accelerometer sensor");
       Toast.makeText(this, R.string.no_accelerometer, Toast.LENGTH_SHORT).show();
     }
     if (sensorControl.getMagnetic() != null) {
       sensorManager.registerListener(this, sensorControl.getMagnetic(), sensorEventDeliveryRate);
     } else {
-      Log.d("RotationExtrusion", "Whoops, no magnetic sensor");
+      Timber.d("Whoops, no magnetic sensor");
       Toast.makeText(this, R.string.no_magnetic, Toast.LENGTH_SHORT).show();
     }
   }

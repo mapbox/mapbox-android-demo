@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
@@ -32,6 +31,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
@@ -162,7 +163,7 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
     if (requestCode == PHOTO_PICK_CODE && resultCode == Activity.RESULT_OK) {
       if (data == null) {
         //Display an error
-        Log.d("ClickToAddImageActivity", "data == null");
+        Timber.d("data == null");
         return;
       }
 
