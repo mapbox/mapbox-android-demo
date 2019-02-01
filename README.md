@@ -41,6 +41,11 @@ With the first Gradle invocation, Gradle will take the value of the `MAPBOX_ACCE
 <string name="access_token">PASTE_YOUR_TOKEN_HERE</string>
 ```
 
+##### Flavoring
+
+The app has a `global` and a `china` flavor. You'll probably want the `global` flavor, which has the full set of demo app examples. Make sure to switch to the `global` build variant if you're seeing messages and warnings about `ChinaMapView`/etc.
+
+The `china` flavor uses [the Mapbox China Plugin for Android](https://docs.mapbox.com/android/plugins/overview/china/) and requires a special China access token. Contact Mapbox via [https://www.mapbox.cn/contact](https://www.mapbox.cn/contact) to start the process of receiving a China access token.
 
 ### Inside the app
 
