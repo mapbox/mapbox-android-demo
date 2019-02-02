@@ -20,6 +20,7 @@ import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.offline.OfflineManager;
 import com.mapbox.mapboxsdk.offline.OfflineRegion;
 import com.mapbox.mapboxsdk.offline.OfflineRegionError;
@@ -69,18 +70,23 @@ public class OfflineMapActivity extends WearableActivity implements OnMapReadyCa
   @Override
   public void onMapReady(@NonNull MapboxMap mapboxMap) {
     map = mapboxMap;
-    // Set up the OfflineManager
-    offlineManager = OfflineManager.getInstance(OfflineMapActivity.this);
-    downloadRegion.setOnClickListener(new View.OnClickListener() {
+    map.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
-      public void onClick(View view) {
-        downloadRegionDialog();
-      }
-    });
-    listRegions.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        downloadedRegionList();
+      public void onStyleLoaded(@NonNull Style style) {
+        // Set up the OfflineManager
+        offlineManager = OfflineManager.getInstance(OfflineMapActivity.this);
+        downloadRegion.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            downloadRegionDialog();
+          }
+        });
+        listRegions.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            downloadedRegionList();
+          }
+        });
       }
     });
   }
