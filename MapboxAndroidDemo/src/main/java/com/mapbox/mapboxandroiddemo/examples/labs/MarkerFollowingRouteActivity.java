@@ -126,22 +126,25 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
             markerIconCurrentLocation = (LatLng) markerIconAnimator.getAnimatedValue();
             markerIconAnimator.cancel();
           }
-          markerIconAnimator = ObjectAnimator
-            .ofObject(latLngEvaluator, count == 0 ? new LatLng(37.61501, -122.385374)
-                : markerIconCurrentLocation,
-              new LatLng(nextLocation.latitude(), nextLocation.longitude()))
-            .setDuration(300);
-          markerIconAnimator.setInterpolator(new LinearInterpolator());
 
-          markerIconAnimator.addUpdateListener(animatorUpdateListener);
-          markerIconAnimator.start();
+          if (latLngEvaluator != null) {
+            markerIconAnimator = ObjectAnimator
+              .ofObject(latLngEvaluator, count == 0 ? new LatLng(37.61501, -122.385374)
+                  : markerIconCurrentLocation,
+                new LatLng(nextLocation.latitude(), nextLocation.longitude()))
+              .setDuration(300);
+            markerIconAnimator.setInterpolator(new LinearInterpolator());
 
-          // Keeping the current point count we are on.
-          count++;
+            markerIconAnimator.addUpdateListener(animatorUpdateListener);
+            markerIconAnimator.start();
 
-          // Once we finish we need to repeat the entire process by executing the
-          // handler again once the ValueAnimator is finished.
-          handler.postDelayed(this, 300);
+            // Keeping the current point count we are on.
+            count++;
+
+            // Once we finish we need to repeat the entire process by executing the
+            // handler again once the ValueAnimator is finished.
+            handler.postDelayed(this, 300);
+          }
         }
       }
     };
