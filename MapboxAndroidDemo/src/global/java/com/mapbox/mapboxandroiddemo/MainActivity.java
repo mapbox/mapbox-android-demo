@@ -25,6 +25,9 @@ import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.basics.KotlinSimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.KotlinSupportMapFragmentActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.AmbientNoiseExtrusionHeightActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SupportMapFragmentActivity;
@@ -41,7 +44,6 @@ import com.mapbox.mapboxandroiddemo.examples.dds.CircleRadiusActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleToIconTransitionActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ExpressionIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
@@ -80,7 +82,6 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfLineDistanceActivi
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfPhysicalCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfRingActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
-import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.ChangeAttributionColorActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
@@ -1218,11 +1219,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,
-      R.string.activity_lab_dashed_line_directions_picker_title,
-      R.string.activity_lab_dashed_line_directions_picker_description,
+      R.string.activity_labs_dashed_line_directions_picker_title,
+      R.string.activity_labs_dashed_line_directions_picker_description,
       new Intent(MainActivity.this, DashedLineDirectionsPickerActivity.class),
       null,
-      R.string.activity_lab_dashed_line_directions_picker_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_labs_dashed_line_directions_picker_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_labs_ambient_noise_extrusion_height_title,
+      R.string.activity_labs_ambient_noise_extrusion_height_description,
+      new Intent(MainActivity.this, AmbientNoiseExtrusionHeightActivity.class),
+      null,
+      R.string.activity_labs_ambient_noise_extrusion_height_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,

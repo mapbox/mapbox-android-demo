@@ -10,8 +10,8 @@ import android.widget.Toast;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.MainActivity;
-import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
+import com.mapbox.mapboxandroiddemo.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.browser.customtabs.CustomTabsIntent;

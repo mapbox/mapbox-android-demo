@@ -124,7 +124,7 @@
     <string name="activity_labs_gif_on_map_description">Show an animated image (GIF) anywhere on the map</string>
     <string name="activity_labs_snaking_directions_route_description">Rather than showing the directions route all at once, have it "snake" from the origin to destination.</string>
     <string name="activity_lab_moving_icon_with_trailing_line_description">Draw a line behind a moving SymbolLayer icon which moves along a Mapbox Directions API route.</string>
-    <string name="activity_lab_dashed_line_directions_picker_description">Show a dotted directions route to a location that\'s based on map movement.</string>
+    <string name="activity_labs_dashed_line_directions_picker_description">Show a dotted directions route to a location that\'s based on map movement.</string>
     <string name="activity_lab_calendar_integration_description">Show calendar event locations on the map.</string>
     <string name="activity_lab_magic_window_description">Combine two maps for a magic window effect</string>
     <string name="activity_lab_fog_background_description">Add a gradient on top of a MapView to show a background fog effect.</string>
@@ -135,8 +135,8 @@
     <string name="activity_lab_spinning_icon_description">Use a ValueAnimator to adjust SymbolLayer icons\' rotation values and create a spinning effect.</string>
     <string name="activity_lab_change_attribution_color_description">Adjust the attribution "i" to match a map style, app UI, or color motif.</string>
     <string name="activity_lab_shared_preferences_description">Use the Android system\'s SharedPreferences to save and retrieve information such as coordinates.</string>
-    <string name="activity_labs_ambient_noise_extrusion_height_description">Set extrusion height based on the noise level recorded by the device's microphone.</string>
     <string name="activity_china_simple_china_mapview_description">Show an accurate and government-approved China map in your app using the Mapbox Maps SDK.</string>
     <string name="activity_china_simple_china_bounds_checker_description">Use the China plugin to determine whether or not the device is inside of China.</string>
+    <string name="activity_labs_ambient_noise_extrusion_height_description">Set extrusion height based on the noise level recorded by the device\'s microphone.</string>
 
 </resources>

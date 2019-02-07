@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
@@ -31,27 +33,32 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHei
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 
+/**
+ * Measure the ambient noise's decibel level with the Android device and dynamically adjust building heights
+ * based on that noise level.
+ */
 public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private static final String LAYER_ID = "mapbox-android-plugin-3d-buildings";
+  private static double mEMA = 0.0;
+  static final private double EMA_FILTER = 0.6;
+  static final private int REQUEST_MICROPHONE = 34;
+  static final private int measurementSpeed = 300;
   private MapView mapView;
-  private MapboxMap mapboxMap;
   private FillExtrusionLayer fillExtrusionLayer;
+  private MediaRecorder mRecorder;
+  private Thread runner;
+  private String TAG = "AmbientNoiseActivity";
+  private Handler handler;
+  private Runnable runnable;
   private int color = Color.LTGRAY;
   private float opacity = 0.6f;
   private float minZoomLevel = 15.0f;
   private int bins = 16;
   private int maxHeight = 200;
   private int binWidth = maxHeight / bins;
-  private MediaRecorder mRecorder;
-  private Thread runner;
-  private static double mEMA = 0.0;
-  private String TAG = "AmbientNoiseActivity";
-  static final private double EMA_FILTER = 0.6;
-  static final private int REQUEST_MICROPHONE = 34;
-  static final private int measurementSpeed = 300;
-  private Handler handler;
-  private Runnable runnable;
+  private int previousDb;
+  private int currentDb;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -70,25 +77,29 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
   }
 
   @Override
-  public void onMapReady(MapboxMap mapboxMap) {
-    this.mapboxMap = mapboxMap;
-    fillExtrusionLayer = new FillExtrusionLayer(LAYER_ID, "composite");
-    fillExtrusionLayer.setSourceLayer("building");
-    fillExtrusionLayer.setMinZoom(minZoomLevel);
-    fillExtrusionLayer.setProperties(
-      visibility(VISIBLE),
-      fillExtrusionColor(color),
-      fillExtrusionHeight(
-        interpolate(
-          exponential(1f),
-          zoom(),
-          stop(15, literal(0)),
-          stop(16, get("height"))
-        )
-      ),
-      fillExtrusionOpacity(opacity)
-    );
-    mapboxMap.addLayer(fillExtrusionLayer);
+  public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+
+    mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/examples/cj68bstx01a3r2rndlud0pwpv"),
+      new Style.OnStyleLoaded() {
+        @Override
+        public void onStyleLoaded(@NonNull Style style) {
+          fillExtrusionLayer = new FillExtrusionLayer(LAYER_ID, "composite");
+          fillExtrusionLayer.setSourceLayer("building");
+          fillExtrusionLayer.setMinZoom(minZoomLevel);
+          fillExtrusionLayer.setProperties(
+            visibility(VISIBLE),
+            fillExtrusionColor(color),
+            fillExtrusionHeight(
+              interpolate(
+                exponential(1f),
+                zoom(),
+                stop(15, literal(0)),
+                stop(16, get("height"))
+              )
+            ),
+            fillExtrusionOpacity(opacity)
+          );
+          style.addLayer(fillExtrusionLayer);
 
 
     /*if (runner == null) {
@@ -107,7 +118,10 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
       runner.start();
       Log.d("Noise", "start runner()");
     }*/
-    setAudioMeasurementRunnable();
+          setAudioMeasurementRunnable();
+
+        }
+      });
   }
 
   private void setAudioMeasurementRunnable() {
@@ -117,9 +131,15 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
       @Override
       public void run() {
         // Call the AP  I so we can get the updated coordinates.
-        Log.d(TAG, "run: dB = " + Double.toString(soundDb(getAmplitudeEMA())) + " dB");
 
+        double total = soundDb(getAmplitudeEMA()) * soundDb(getAmplitudeEMA());
+        double totalDivide = total / 100000000;
+        Log.d(TAG, "run: total = " + total);
+        Log.d(TAG, "run: total divide = " + total / 1000000);
 
+        fillExtrusionLayer.setProperties(
+          fillExtrusionHeight((float) totalDivide)
+        );
 
         // Schedule the next execution time for this runnable.
         handler.postDelayed(this, measurementSpeed);
@@ -250,4 +270,3 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
   }
 
 }
-// #-end-code-snippet: simple-map-view-activity full-java
