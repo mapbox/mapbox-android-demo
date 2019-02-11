@@ -86,8 +86,11 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
               12.099, -79.045), 3));
 
             addClusteredGeoJsonSource(style);
-            style.addImage("cross-icon-id", BitmapUtils.getBitmapFromDrawable(
-              getResources().getDrawable(R.drawable.ic_cross)));
+            style.addImage(
+              "cross-icon-id",
+              BitmapUtils.getBitmapFromDrawable(getResources().getDrawable(R.drawable.ic_cross)),
+              true
+            );
 
             Toast.makeText(CircleLayerClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
               Toast.LENGTH_SHORT).show();
