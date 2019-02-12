@@ -114,6 +114,7 @@
     <string name="activity_lab_magic_window_image_url">https://i.imgur.com/Nw78ZrV.png</string>
     <string name="activity_lab_fog_background_url">https://i.imgur.com/NcSGgD8.png</string>
     <string name="activity_lab_animated_interpolator_icon_drop_url">https://i.imgur.com/JfLf69C.png</string>
+    <string name="activity_dds_polygon_select_toggle_url" translatable="false">https://i.imgur.com/01aZrsG.png</string>
     <string name="activity_china_simple_china_mapview_url" translatable="false">https://i.imgur.com/KwoEynZ.png</string>
     <string name="activity_lab_home_screen_widget_url" translatable="false">https://i.imgur.com/H5N9jDn.png</string>
 </resources>

@@ -331,4 +331,6 @@
     <string name="fab_toggle_text_size">Size</string>
     <string name="fab_toggle_text_color">Color</string>
 
+    <!-- Polygon toggle -->
+    <string name="tap_on_neighborhood">Tap on a neighborhood area to toggle its color</string>
 </resources>

@@ -112,6 +112,7 @@
     <string name="activity_lab_magic_window_title">Magic Window</string>
     <string name="activity_lab_fog_background_title">Background fog</string>
     <string name="activity_lab_animated_interpolator_icon_drop_title">Animated icon movement</string>
+    <string name="activity_dds_polygon_select_toggle_title">Polygon toggle</string>
     <string name="activity_china_simple_china_mapview_title">China map view</string>
     <string name="activity_lab_home_screen_widget_title">Homescreen geocoding widget</string>
 </resources>
