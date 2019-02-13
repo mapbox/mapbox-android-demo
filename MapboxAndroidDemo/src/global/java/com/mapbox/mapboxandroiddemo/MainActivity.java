@@ -111,6 +111,7 @@ import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.BuildingOutlineActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
+import com.mapbox.mapboxandroiddemo.examples.query.FingerDrawActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.HighlightedLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.RedoSearchInAreaActivity;
@@ -900,6 +901,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, HighlightedLineActivity.class),
       null,
       R.string.activity_query_highlighted_line_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_query_map,
+      R.string.activity_lab_drag_draw_title,
+      R.string.activity_lab_drag_draw_description,
+      new Intent(MainActivity.this, FingerDrawActivity.class),
+      null,
+      R.string.activity_lab_drag_draw_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_java_services,
