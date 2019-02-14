@@ -1,7 +1,9 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
@@ -11,8 +13,7 @@ import com.mapbox.api.directions.v5.MapboxDirections;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.api.directions.v5.models.LegStep;
-import com.mapbox.api.directions.v5.models.RouteLeg;
-import com.mapbox.api.directions.v5.models.StepIntersection;
+import com.mapbox.core.constants.Constants;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.LineString;
@@ -26,7 +27,6 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,24 +48,28 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
 /**
- * Rather than showing the directions all at once, have it "snake" from the origin to destination
+ * Rather than showing the directions route all at once, have it "snake" from the origin to destination by showing the
+ * route one {@link LegStep} section at a time.
  */
-
 public class SnakingDirectionsRouteActivity extends AppCompatActivity
   implements OnMapReadyCallback {
 
   private static final float NAVIGATION_LINE_WIDTH = 6;
+  private static final float NAVIGATION_LINE_OPACITY = .8f;
   private static final String DRIVING_ROUTE_POLYLINE_LINE_LAYER_ID = "DRIVING_ROUTE_POLYLINE_LINE_LAYER_ID";
   private static final String DRIVING_ROUTE_POLYLINE_SOURCE_ID = "DRIVING_ROUTE_POLYLINE_SOURCE_ID";
-  private static final String TAG = "SnakingRouteActivity";
+  private static final int DRAW_SPEED_MILLISECONDS = 500;
   private MapView mapView;
-  private MapboxMap map;
-  private MapboxDirections client;
+  private MapboxMap mapboxMap;
+  private MapboxDirections mapboxDirectionsClient;
+  private Handler handler;
+  private Runnable runnable;
+
   // Origin point in Paris, France
-  private static final Point origin = Point.fromLngLat(2.35222, 48.856614);
+  private static final Point PARIS_ORIGIN_POINT = Point.fromLngLat(2.35222, 48.856614);
 
   // Destination point in Lyon, France
-  private static  Point destination = Point.fromLngLat(4.83565, 45.76404);
+  private static Point LYON_DESTINATION_POINT = Point.fromLngLat(4.83565, 45.76404);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +90,9 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
 
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-    this.map = mapboxMap;
+    this.mapboxMap = mapboxMap;
 
-    map.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
+    this.mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
 
@@ -96,38 +100,45 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
 
         addMarkerIconsToMap(style);
 
-        // Get route from API
-        getDirectionsRoute(origin, destination);
+        getDirectionsRoute(PARIS_ORIGIN_POINT, LYON_DESTINATION_POINT);
       }
     });
   }
 
+  /**
+   * Add origin and destination SymbolLayer marker icons to the map
+   *
+   * @param loadedMapStyle A fully loaded {@link Style} object
+   */
   private void addMarkerIconsToMap(@NonNull Style loadedMapStyle) {
-    loadedMapStyle.addImage("icon-id", BitmapUtils.getBitmapFromDrawable(
-      getResources().getDrawable(R.drawable.red_marker)));
+    loadedMapStyle.addImage("icon-id", BitmapFactory.decodeResource(
+      getResources(), R.drawable.red_marker));
 
     loadedMapStyle.addSource(new GeoJsonSource("source-id",
       FeatureCollection.fromFeatures(new Feature[] {
-        Feature.fromGeometry(Point.fromLngLat(origin.longitude(), origin.latitude())),
-        Feature.fromGeometry(Point.fromLngLat(destination.longitude(), destination.latitude())),
+        Feature.fromGeometry(Point.fromLngLat(PARIS_ORIGIN_POINT.longitude(), PARIS_ORIGIN_POINT.latitude())),
+        Feature.fromGeometry(Point.fromLngLat(LYON_DESTINATION_POINT.longitude(), LYON_DESTINATION_POINT.latitude())),
       })));
 
     loadedMapStyle.addLayer(new SymbolLayer("layer-id",
       "source-id").withProperties(
       iconImage("icon-id"),
-      iconOffset(new Float[]{0f,-8f})
+      iconOffset(new Float[] {0f, -8f})
     ));
   }
 
-
+  /**
+   * Add a source and LineLayer for the snaking directions route line
+   *
+   * @param loadedMapStyle A fully loaded {@link Style} object
+   */
   private void initDrivingRouteSourceAndLayer(@NonNull Style loadedMapStyle) {
-    loadedMapStyle.addSource( new GeoJsonSource(DRIVING_ROUTE_POLYLINE_SOURCE_ID,
-      FeatureCollection.fromFeatures(new Feature[] {})));
+    loadedMapStyle.addSource(new GeoJsonSource(DRIVING_ROUTE_POLYLINE_SOURCE_ID));
     loadedMapStyle.addLayer(new LineLayer(DRIVING_ROUTE_POLYLINE_LINE_LAYER_ID,
       DRIVING_ROUTE_POLYLINE_SOURCE_ID)
       .withProperties(
         lineWidth(NAVIGATION_LINE_WIDTH),
-        lineOpacity(.3f),
+        lineOpacity(NAVIGATION_LINE_OPACITY),
         lineCap(LINE_CAP_ROUND),
         lineJoin(LINE_JOIN_ROUND),
         lineColor(Color.parseColor("#d742f4"))
@@ -141,7 +152,7 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
    * @param destination The final point for the directions route
    */
   private void getDirectionsRoute(Point origin, Point destination) {
-    client = MapboxDirections.builder()
+    mapboxDirectionsClient = MapboxDirections.builder()
       .origin(origin)
       .destination(destination)
       .overview(DirectionsCriteria.OVERVIEW_FULL)
@@ -152,55 +163,72 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
       .accessToken(getString(R.string.access_token))
       .build();
 
-    client.enqueueCall(new Callback<DirectionsResponse>() {
+    mapboxDirectionsClient.enqueueCall(new Callback<DirectionsResponse>() {
       @Override
       public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
-
         // Create log messages in case no response or routes are present
         if (response.body() == null) {
-          Timber.d("No routes found, make sure you set the right user and access token.");
+          Timber.d( "No routes found, make sure you set the right user and access token.");
           return;
         } else if (response.body().routes().size() < 1) {
-          Timber.d("No routes found");
+          Timber.d( "No routes found");
           return;
         }
 
-        // Get the route from the Mapbox Directions API
+        // Get the route from the Mapbox Directions API response
         DirectionsRoute currentRoute = response.body().routes().get(0);
-        List<Point> directionsPointsForLineLayer = new ArrayList<>();
-        for (int i = 0; i < currentRoute.legs().size(); i++) {
-          RouteLeg leg = currentRoute.legs().get(i);
-          List<LegStep> steps = leg.steps();
-          for (int j = 0; j < steps.size(); j++) {
-            LegStep step = steps.get(j);
-            List<StepIntersection> intersections = step.intersections();
-            for (int k = 0; k < intersections.size(); k++) {
-              Point location = intersections.get(k).location();
-              directionsPointsForLineLayer.add(Point.fromLngLat(location.longitude(), location.latitude()));
-              List<Feature> drivingRoutePolyLineFeatureList = new ArrayList<>();
-              LineString lineString = LineString.fromLngLats(directionsPointsForLineLayer);
-              List<Point> coordinates = lineString.coordinates();
-              for (int x = 0; x < coordinates.size(); x++) {
-                drivingRoutePolyLineFeatureList.add(Feature.fromGeometry(LineString.fromLngLats(coordinates)));
-              }
 
-              // Update the GeoJSON source
-              GeoJsonSource source = map.getStyle().getSourceAs(DRIVING_ROUTE_POLYLINE_SOURCE_ID);
-              if (source != null) {
-                source.setGeoJson(FeatureCollection.fromFeatures(drivingRoutePolyLineFeatureList));
-              }
-            }
-          }
-        }
+        // Start the step-by-step process of drawing the route
+        runnable = new DrawRouteRunnable(mapboxMap, currentRoute.legs().get(0).steps(), handler = new Handler());
+        handler.postDelayed(runnable, DRAW_SPEED_MILLISECONDS);
       }
 
       @Override
       public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
-        Timber.d("Error: %s", throwable.getMessage());
         Toast.makeText(SnakingDirectionsRouteActivity.this,
           R.string.snaking_directions_activity_error, Toast.LENGTH_SHORT).show();
       }
     });
+  }
+
+  /**
+   * Runnable class which goes through the route and draws each {@link LegStep} of the Directions API route
+   */
+  private static class DrawRouteRunnable implements Runnable {
+    private MapboxMap mapboxMap;
+    private List<LegStep> steps;
+    private List<Feature> drivingRoutePolyLineFeatureList;
+    private Handler handler;
+    private int counterIndex;
+
+    DrawRouteRunnable(MapboxMap mapboxMap, List<LegStep> steps, Handler handler) {
+      this.mapboxMap = mapboxMap;
+      this.steps = steps;
+      this.handler = handler;
+      this.counterIndex = 0;
+      drivingRoutePolyLineFeatureList = new ArrayList<>();
+    }
+
+    @Override
+    public void run() {
+      if (counterIndex < steps.size()) {
+        LegStep singleStep = steps.get(counterIndex);
+        if (singleStep != null && singleStep.geometry() != null) {
+          LineString lineStringRepresentingSingleStep = LineString.fromPolyline(
+            singleStep.geometry(), Constants.PRECISION_5);
+          Feature featureLineString = Feature.fromGeometry(lineStringRepresentingSingleStep);
+          drivingRoutePolyLineFeatureList.add(featureLineString);
+        }
+        if (mapboxMap.getStyle() != null) {
+          GeoJsonSource source = mapboxMap.getStyle().getSourceAs(DRIVING_ROUTE_POLYLINE_SOURCE_ID);
+          if (source != null) {
+            source.setGeoJson(FeatureCollection.fromFeatures(drivingRoutePolyLineFeatureList));
+          }
+        }
+        counterIndex++;
+        handler.postDelayed(this, DRAW_SPEED_MILLISECONDS);
+      }
+    }
   }
 
   @Override
@@ -219,6 +247,9 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
   protected void onStop() {
     super.onStop();
     mapView.onStop();
+    if (handler != null) {
+      handler.removeCallbacks(runnable);
+    }
   }
 
   @Override
@@ -237,8 +268,8 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
   protected void onDestroy() {
     super.onDestroy();
     // Cancel the directions API request
-    if (client != null) {
-      client.cancelCall();
+    if (mapboxDirectionsClient != null) {
+      mapboxDirectionsClient.cancelCall();
     }
     mapView.onDestroy();
   }
