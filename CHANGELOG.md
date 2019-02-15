@@ -2,6 +2,15 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 7.1.2
+
+* Localization plugin 0.8.0 bump #960
+* Add data point icon as an SDF in the CircleLayerClusteringActivity #964 
+* Place search SF office address change #941
+* Replacing all Log. with Timber #956
+* Added wearable declaration tag to manifest #963 
+* Fixing wearable black screen #627
+
 ## 7.0.0
 
 * Maps SDK 7.0.0 bump
