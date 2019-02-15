@@ -9,6 +9,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 /**
  * Show a map in your app using the Mapbox Android SDK.
@@ -35,9 +36,15 @@ public class SimpleMapViewActivity extends WearableActivity implements OnMapRead
 
   @Override
   public void onMapReady(@NonNull MapboxMap mapboxMap) {
+    mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
 
-    // Customize map with markers, polylines, etc.
+        // Customize map with markers, polylines, etc.
 
+
+      }
+    });
 
   }
 
