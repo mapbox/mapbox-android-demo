@@ -6,7 +6,6 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
@@ -22,6 +21,8 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.InputStream;
 import java.util.List;
+
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.layers.Property.LINE_CAP_ROUND;
 import static com.mapbox.mapboxsdk.style.layers.Property.LINE_JOIN_ROUND;
@@ -195,7 +196,7 @@ public class HighlightedLineActivity extends AppCompatActivity implements
       is.close();
       return new String(buffer, "UTF-8");
     } catch (Exception exception) {
-      Log.d("MatrixApiActivity", "Exception Loading GeoJSON: " + exception.toString());
+      Timber.d("Exception loading GeoJSON: %s", exception.toString());
       exception.printStackTrace();
       return null;
     }

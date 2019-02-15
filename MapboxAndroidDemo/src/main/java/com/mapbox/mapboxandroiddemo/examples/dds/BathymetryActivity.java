@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxandroiddemo.R;
@@ -20,6 +19,8 @@ import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.InputStream;
+
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.geometryType;
@@ -177,7 +178,7 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
       return new String(buffer, "UTF-8");
 
     } catch (Exception exception) {
-      Log.e("BathymetryActivity", "Exception Loading GeoJSON: " + exception.toString());
+      Timber.e("Exception Loading GeoJSON: %s", exception.toString());
       exception.printStackTrace();
       return null;
     }

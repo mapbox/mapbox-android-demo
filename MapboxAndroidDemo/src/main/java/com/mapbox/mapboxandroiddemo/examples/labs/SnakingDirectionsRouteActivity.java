@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.api.directions.v5.DirectionsCriteria;
@@ -35,6 +34,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 import static com.mapbox.api.directions.v5.DirectionsCriteria.GEOMETRY_POLYLINE;
 import static com.mapbox.mapboxsdk.style.layers.Property.LINE_CAP_ROUND;
@@ -158,10 +158,10 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
 
         // Create log messages in case no response or routes are present
         if (response.body() == null) {
-          Log.d(TAG, "No routes found, make sure you set the right user and access token.");
+          Timber.d("No routes found, make sure you set the right user and access token.");
           return;
         } else if (response.body().routes().size() < 1) {
-          Log.d(TAG, "No routes found");
+          Timber.d("No routes found");
           return;
         }
 
@@ -196,7 +196,7 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
 
       @Override
       public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
-        Log.d("SnakingDirections", "Error: " + throwable.getMessage());
+        Timber.d("Error: %s", throwable.getMessage());
         Toast.makeText(SnakingDirectionsRouteActivity.this,
           R.string.snaking_directions_activity_error, Toast.LENGTH_SHORT).show();
       }

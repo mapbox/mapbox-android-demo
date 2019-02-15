@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.extrusions;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -152,51 +151,39 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     switch (item.getItemId()) {
       case R.id.san_francisco:
         goToNewLocation(37.784282779035216, -122.4232292175293);
-        Log.d("PopDensityExtrusion", "onOptionsItemSelected: san_francisco");
         return true;
       case R.id.los_angeles:
         goToNewLocation(34.04412546508576, -118.28636169433594);
-        Log.d("PopDensityExtrusion", "onOptionsItemSelected: los_angeles");
         return true;
       case R.id.seattle:
         goToNewLocation(47.60651025683697, -122.33327865600585);
-        Log.d("PopDensityExtrusion", "onOptionsItemSelected: seattle");
         return true;
       case R.id.new_orleans:
         goToNewLocation(29.946159058399612, -90.10042190551758);
-        Log.d("PopDensityExtrusion", "onOptionsItemSelected: new_orleans");
         return true;
       case R.id.chicago:
         goToNewLocation(41.87531293759582, -87.6240348815918);
-        Log.d("PopDensityExtrusion", "onOptionsItemSelected: chicago");
         return true;
       case R.id.philadelphia:
         goToNewLocation(39.95370120254379, -75.1626205444336);
-        Log.d("PopDensityExtrusion", "onOptionsItemSelected: philadelphia");
         return true;
       case R.id.new_york:
         goToNewLocation(40.72228267283148, -73.99772644042969);
-        Log.d("PopDensityExtrusion", "onOptionsItemSelected: new york");
         return true;
       case R.id.atlanta:
         goToNewLocation(33.74910736130734, -84.39079284667969);
-        Log.d("PopDensityExtrusion", "onOptionsItemSelected: atlanta");
         return true;
       case R.id.portland:
         goToNewLocation(45.522104713562825, -122.67179489135742);
-        Log.d("PopDensityExtrusion", "onOptionsItemSelected: portland");
         return true;
       case R.id.denver:
         goToNewLocation(39.74428621972816, -104.99565124511719);
-        Log.d("PopDensityExtrusion", "onOptionsItemSelected: denver");
         return true;
       case R.id.minneapolis:
         goToNewLocation(44.969656023708175, -93.26637268066406);
-        Log.d("PopDensityExtrusion", "onOptionsItemSelected: minneapolis");
         return true;
       case R.id.miami:
         goToNewLocation(25.773846629676616, -80.19624710083008);
-        Log.d("PopDensityExtrusion", "onOptionsItemSelected: miami");
         return true;
       case android.R.id.home:
         finish();

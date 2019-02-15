@@ -47,7 +47,6 @@ public class IndoorMapActivity extends AppCompatActivity {
   private List<List<Point>> boundingBoxList;
   private View levelButtons;
   private MapView mapView;
-  private MapboxMap map;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,8 +64,6 @@ public class IndoorMapActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-        map = mapboxMap;
-
         mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {

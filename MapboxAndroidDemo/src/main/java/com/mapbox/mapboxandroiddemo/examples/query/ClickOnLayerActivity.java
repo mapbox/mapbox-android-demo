@@ -5,7 +5,6 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
@@ -21,6 +20,8 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.net.URL;
 import java.util.List;
+
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 
@@ -79,7 +80,7 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
     List<Feature> featureList = mapboxMap.queryRenderedFeatures(rectF, geoJsonLayerId);
     if (featureList.size() > 0) {
       for (Feature feature : featureList) {
-        Log.d("Feature found with %1$s", feature.toJson());
+        Timber.d("Feature found with %1$s", feature.toJson());
         Toast.makeText(ClickOnLayerActivity.this, R.string.click_on_polygon_toast,
           Toast.LENGTH_SHORT).show();
       }
@@ -95,7 +96,7 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
         + ".com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303"
         + "d58f20f4a1d8841e8/regions.geojson")));
     } catch (Throwable throwable) {
-      Log.e("ClickOnLayerActivity", "Couldn't add GeoJsonSource to map", throwable);
+      Timber.e("Couldn't add GeoJsonSource to map - %s", throwable);
     }
   }
 

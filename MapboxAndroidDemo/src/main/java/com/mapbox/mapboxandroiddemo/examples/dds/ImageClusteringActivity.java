@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -21,6 +20,8 @@ import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.division;
@@ -97,7 +98,7 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
         )
       );
     } catch (MalformedURLException malformedUrlException) {
-      Log.e("dataClusterActivity", "Check the URL " + malformedUrlException.getMessage());
+      Timber.e("Check the URL %s" , malformedUrlException.getMessage());
     }
 
     //Creating a SymbolLayer icon layer for single data/icon points

@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -17,6 +16,8 @@ import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.InputStream;
+
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
@@ -124,7 +125,7 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
       return new String(buffer, "UTF-8");
 
     } catch (Exception exception) {
-      Log.e("StyleLineActivity", "Exception Loading GeoJSON: " + exception.toString());
+      Timber.e("Exception Loading GeoJSON: %s", exception.toString());
       exception.printStackTrace();
       return null;
     }

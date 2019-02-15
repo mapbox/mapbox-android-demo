@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -19,6 +18,8 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
@@ -76,7 +77,7 @@ public class CreateHotspotsActivity extends AppCompatActivity {
         )
       );
     } catch (MalformedURLException malformedUrlException) {
-      Log.e("CreateHotspotsActivity", "Check the URL " + malformedUrlException.getMessage());
+      Timber.e("Check the URL %s", malformedUrlException.getMessage());
     }
 
     // Use the earthquakes source to create four layers:

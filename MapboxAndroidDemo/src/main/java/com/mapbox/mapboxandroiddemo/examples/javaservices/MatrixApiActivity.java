@@ -10,7 +10,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +43,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 
 /**
@@ -172,7 +172,7 @@ public class MatrixApiActivity extends AppCompatActivity {
       public void onFailure(Call<MatrixResponse> call, Throwable throwable) {
         Toast.makeText(MatrixApiActivity.this, R.string.call_error,
           Toast.LENGTH_SHORT).show();
-        Log.d("MatrixApiActivity", "onResponse onFailure");
+        Timber.d( "onResponse onFailure");
       }
     });
   }
@@ -199,7 +199,7 @@ public class MatrixApiActivity extends AppCompatActivity {
       is.close();
       return new String(buffer, "UTF-8");
     } catch (Exception exception) {
-      Log.d("MatrixApiActivity", "Exception Loading GeoJSON: " + exception.toString());
+      Timber.d(exception.toString(), "Exception Loading GeoJSON: ");
       exception.printStackTrace();
       return null;
     }

@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -28,6 +27,7 @@ import com.mapbox.mapboxsdk.utils.BitmapUtils;
 import java.net.URL;
 
 import okhttp3.HttpUrl;
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.geometryType;
@@ -190,7 +190,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
       }
 
     } catch (Throwable throwable) {
-      Log.e("IsochroneActivity", "Couldn't add GeoJsonSource to map", throwable);
+      Timber.e(throwable, "Couldn't add GeoJsonSource to map");
     }
   }
 

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxandroiddemo.R;
@@ -24,12 +23,12 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.Scanner;
 
+import timber.log.Timber;
+
 /**
  * Draw a polyline by parsing a GeoJSON file with the Mapbox Android SDK.
  */
 public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapReadyCallback {
-
-  private static final String TAG = "DrawGeojsonLineActivity";
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -98,7 +97,7 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
           return FeatureCollection.fromJson(convertStreamToString(inputStream));
         }
       } catch (Exception exception) {
-        Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
+        Timber.e("Exception Loading GeoJSON: %s" , exception.toString());
       }
       return null;
     }

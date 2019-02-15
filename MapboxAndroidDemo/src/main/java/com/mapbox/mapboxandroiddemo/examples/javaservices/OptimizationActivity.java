@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.api.directions.v5.DirectionsCriteria;
@@ -33,6 +32,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 import static com.mapbox.core.constants.Constants.PRECISION_6;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
@@ -213,13 +213,13 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
       @Override
       public void onResponse(Call<OptimizationResponse> call, Response<OptimizationResponse> response) {
         if (!response.isSuccessful()) {
-          Log.d("DirectionsActivity", getString(R.string.no_success));
+          Timber.d( getString(R.string.no_success));
           Toast.makeText(OptimizationActivity.this, R.string.no_success, Toast.LENGTH_SHORT).show();
           return;
         } else {
           if (response.body().trips().isEmpty()) {
-            Log.d("DirectionsActivity", getString(R.string.successful_but_no_routes) + " size = "
-              + response.body().trips().size());
+            Timber.d("%s size = %s", getString(R.string.successful_but_no_routes), response.body().trips().size());
+
             Toast.makeText(OptimizationActivity.this, R.string.successful_but_no_routes,
               Toast.LENGTH_SHORT).show();
             return;
@@ -233,7 +233,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
 
       @Override
       public void onFailure(Call<OptimizationResponse> call, Throwable throwable) {
-        Log.d("DirectionsActivity", "Error: " + throwable.getMessage());
+        Timber.d("Error: %s", throwable.getMessage());
       }
     });
   }
