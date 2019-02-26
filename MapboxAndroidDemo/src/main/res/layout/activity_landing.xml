@@ -95,12 +95,12 @@
         app:layout_constraintTop_toTopOf="parent"
         custom:cardElevation="2dp">
 
-        <com.cunoraz.gifview.library.GifView
+        <ImageView
             android:id="@+id/astronaut_gif"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            custom:gif="@mipmap/mapbox_changing_hands_astronaut"
+            android:src="@drawable/pointing_mapbox_astronaut"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="197dp"/>
 
