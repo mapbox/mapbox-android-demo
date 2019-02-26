@@ -254,8 +254,8 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         iconAllowOverlap(true),
 
         /* when feature is in selected state, grow icon */
-        iconSize(match(get(PROPERTY_SELECTED), literal(1.0f),
-          stop(true, 1.5f))))
+        iconSize(match(Expression.toString(get(PROPERTY_SELECTED)), literal(1.0f),
+          stop("true", 1.5f))))
     );
   }
 
@@ -911,11 +911,12 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
           iconImage(TOKEN_UNIQUE_FEATURE),
           iconAllowOverlap(true),
           iconSize(interpolate(exponential(1f), zoom(),
-            stop(18, 1.7f),
-            stop(17, 1.4f),
-            stop(16, 1.1f),
+            stop(12, 0.0f),
             stop(15, 0.8f),
-            stop(12, 0.0f)))), MAKI_LAYER_ID);
+            stop(16, 1.1f),
+            stop(17, 1.4f),
+            stop(18, 1.7f)
+          ))), MAKI_LAYER_ID);
 
         // clustered
         int[][] layers = new int[][] {
