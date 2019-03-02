@@ -324,4 +324,10 @@
     <string name="accelerate_interpolator">Accelerate interpolator</string>
     <string name="decelerate_interpolator">Decelerate interpolator</string>
 
+    <!--TextFieldFormatting activity-->
+    <string name="instruction_toast">Use the buttons to adjust the ocean name text labels</string>
+    <string name="fab_toggle_font">Font</string>
+    <string name="fab_toggle_text_size">Size</string>
+    <string name="fab_toggle_text_color">Color</string>
+
 </resources>
