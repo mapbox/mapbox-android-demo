@@ -4,11 +4,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.geojson.Polygon;
+import com.mapbox.geojson.MultiPolygon;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
@@ -22,12 +24,11 @@ import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity.Config.BLUE_COLOR;
-import static com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity.Config.HOLE_COORDINATES;
-import static com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity.Config.POLYGON_COORDINATES;
 import static com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity.Config.RED_COLOR;
 
 /**
@@ -50,9 +51,8 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
       .attributionTintColor(RED_COLOR)
       .compassFadesWhenFacingNorth(false)
       .camera(new CameraPosition.Builder()
-        .target(new LatLng(25.255377, 55.3089185))
-        .zoom(11.86)
-        .tilt(10)
+        .target(new LatLng(-37.5097258429375, -58.84277343749999))
+        .zoom(3)
         .build());
 
     mapView = new MapView(this, options);
@@ -69,18 +69,13 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
       @Override
       public void onStyleLoaded(@NonNull Style style) {
 
-        LineString outerLineString = LineString.fromLngLats(POLYGON_COORDINATES);
-        LineString innerLineString = LineString.fromLngLats(HOLE_COORDINATES.get(0));
-        LineString secondInnerLineString = LineString.fromLngLats(HOLE_COORDINATES.get(1));
-
-        List<LineString> innerList = new ArrayList<>();
-        innerList.add(innerLineString);
-        innerList.add(secondInnerLineString);
+        MultiPolygon multiPolygon = MultiPolygon.fromJson(loadGeoJsonFromAsset("polygon-holes.geojson"));
 
         style.addSource(new GeoJsonSource("source-id",
-          Feature.fromGeometry(Polygon.fromOuterInner(outerLineString, innerList))));
+          Feature.fromGeometry(multiPolygon)));
 
-        style.addLayer(new FillLayer("layer-id", "source-id").withProperties(
+
+                style.addLayer(new FillLayer("layer-id", "source-id").withProperties(
           PropertyFactory.fillColor(BLUE_COLOR)
         ));
       }
@@ -91,42 +86,6 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
     static final int BLUE_COLOR = Color.parseColor("#3bb2d0");
     static final int RED_COLOR = Color.parseColor("#AF0000");
 
-    static final List<Point> POLYGON_COORDINATES = new ArrayList<Point>() {
-      {
-        add(Point.fromLngLat(55.30122473231012, 25.26476622289597 ));
-        add(Point.fromLngLat(55.29743486255916, 25.25827212207261));
-        add(Point.fromLngLat(55.28978863411328, 25.251356725509737));
-        add(Point.fromLngLat(55.300027931336984, 25.246425506635504));
-        add(Point.fromLngLat(55.307474692951274, 25.244200378933655));
-        add(Point.fromLngLat(55.31212891895635, 25.256408010450187));
-        add(Point.fromLngLat(55.30774064871093, 25.26266169122738));
-        add(Point.fromLngLat(55.301357710197806, 25.264946609615492));
-        add(Point.fromLngLat(55.30122473231012, 25.26476622289597 ));
-      }
-    };
-
-    static final List<List<Point>> HOLE_COORDINATES = new ArrayList<List<Point>>() {
-      {
-        add(new ArrayList<>(new ArrayList<Point>() {
-          {
-            add(Point.fromLngLat(55.30084858315658, 25.256531695820797));
-            add(Point.fromLngLat(55.298280197635705, 25.252243254705405));
-            add(Point.fromLngLat(55.30163885563897, 25.250501032248863));
-            add(Point.fromLngLat(55.304059065092645, 25.254700192612702));
-            add(Point.fromLngLat(55.30084858315658, 25.256531695820797));
-          }
-        }));
-        add(new ArrayList<>(new ArrayList<Point>() {
-          {
-            add(Point.fromLngLat(55.30173763969924, 25.262517391695198));
-            add(Point.fromLngLat(55.301095543307355, 25.26122200491396));
-            add(Point.fromLngLat(55.30396028103232, 25.259479911263526));
-            add(Point.fromLngLat(55.30489872958182, 25.261132667394975));
-            add(Point.fromLngLat(55.30173763969924, 25.262517391695198));
-          }
-        }));
-      }
-    };
   }
 
   @Override
@@ -169,5 +128,22 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
   public void onLowMemory() {
     super.onLowMemory();
     mapView.onLowMemory();
+  }
+
+  private String loadGeoJsonFromAsset(String filename) {
+    try {
+      // Load GeoJSON file
+      InputStream is = getAssets().open(filename);
+      int size = is.available();
+      byte[] buffer = new byte[size];
+      is.read(buffer);
+      is.close();
+      return new String(buffer, "UTF-8");
+
+    } catch (Exception exception) {
+      Log.e("PolygonHole", "Exception Loading GeoJSON: " + exception.toString());
+      exception.printStackTrace();
+      return null;
+    }
   }
 }
