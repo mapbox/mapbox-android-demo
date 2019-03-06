@@ -39,9 +39,9 @@ With the first Gradle invocation, Gradle will take the value of the `MAPBOX_ACCE
 ```xml
 <string name="access_token">PASTE_YOUR_TOKEN_HERE</string>
 ```
-##### Build variants
+##### Product flavors
 
-The app has a two build flavors; `global` and `china`. The `global` flavor has the full list of standard examples, whereas the `china` flavor has China-specific examples, which use [the Mapbox China Plugin for Android](https://docs.mapbox.com/android/plugins/overview/china/). The plugin requires a special China Mapbox access token. [Contact our sales team to start the process of receiving this special access token](https://www.mapbox.com/contact/sales/).
+The app has a two product flavors; `global` and `china`. The `global` flavor has the full list of standard examples, whereas the `china` flavor has China-specific examples, which use [the Mapbox China Plugin for Android](https://docs.mapbox.com/android/plugins/overview/china/). The plugin requires a special China Mapbox access token. [Contact our sales team to start the process of receiving this special access token](https://www.mapbox.com/contact/sales/).
 
 You might see China-related examples when you locally run the app on your device. This is because Android Studio is set on the `china` flavor. Find and click on the "Build Variants" tab in the lower left hand corner of the Android Studio window. Then choose `globalDebug` to change the flavor to the `global` flavor. Re-run the app on your device to see the "regular" demo app examples.
 
