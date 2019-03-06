@@ -30,6 +30,7 @@
     <string name="activity_style_image_source_description">Use an image source to easily display images on the map.</string>
     <string name="activity_style_hillshade_description">Use elevation data to show and customize hills and mountains.</string>
     <string name="activity_styles_fade_switch_description">Fade map styles in and out based on zoom level.</string>
+    <string name="activity_styles_text_field_multiple_formats_description">Use a format expression to style labels in multiple ways.</string>
     <string name="activity_styles_transparent_background_description">Create a transparent background and fill it with something such as moving water.</string>
     <string name="activity_styles_click_to_add_image_description">Select a photo on the device and add it on the map tap location.</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_description">Use data-driven styling and GeoJSON data to set extrusions\' heights.</string>

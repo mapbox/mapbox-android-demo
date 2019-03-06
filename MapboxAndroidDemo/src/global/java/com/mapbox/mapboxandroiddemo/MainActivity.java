@@ -124,6 +124,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.StyleFadeSwitchActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.TextFieldMultipleFormatsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.TransparentBackgroundActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
@@ -577,6 +578,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, StyleFadeSwitchActivity.class),
       null,
       R.string.activity_styles_fade_switch_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_text_field_multiple_formats_title,
+      R.string.activity_styles_text_field_multiple_formats_description,
+      new Intent(MainActivity.this, TextFieldMultipleFormatsActivity.class),
+      null,
+      R.string.activity_styles_text_field_multiple_formats_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_styles,

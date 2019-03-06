@@ -397,6 +397,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.styles.TextFieldMultipleFormatsActivity"
+            android:label="@string/activity_styles_text_field_multiple_formats_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.styles.ClickToAddImageActivity"
             android:label="@string/activity_styles_click_to_add_image_title">
             <meta-data
