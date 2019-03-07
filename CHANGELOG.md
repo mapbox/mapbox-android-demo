@@ -2,6 +2,14 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+
+## 7.2.0
+
+* Added manifest declaration to use CleartextTraffic #980
+* Removing GIF library #979
+* Maps SDK v7.2.0 #978
+* Fix disappearing camera restriction bbox #972
+
 ## 7.1.2
 
 * Localization plugin 0.8.0 bump #960
