@@ -10,7 +10,6 @@ android {
     compileSdkVersion androidVersions.compileSdkVersion
     buildToolsVersion androidVersions.buildToolsVersion
 
-
     playAccountConfigs {
         defaultAccountConfig {
             serviceAccountEmail = 'mapbox-android-demo-publish@android-gl-native.iam.gserviceaccount.com'
@@ -128,7 +127,6 @@ dependencies {
     implementation dependenciesList.mapboxPluginLocalization
     implementation dependenciesList.mapboxPluginTraffic
     implementation dependenciesList.mapboxPluginMarkerView
-    implementation dependenciesList.mapboxPluginAnnotation
 
     // Firebase
     globalImplementation dependenciesList.firebaseCrash
