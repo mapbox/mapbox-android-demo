@@ -98,6 +98,7 @@ import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerViewPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.SymbolListenerActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.BuildingOutlineActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
@@ -665,6 +666,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, PlacesPluginActivity.class),
       null,
       R.string.activity_plugins_places_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+            R.id.nav_plugins,
+            R.string.activity_plugins_symbol_listener_title, R.string.activity_plugins_symbol_listener_description,
+            new Intent(MainActivity.this, SymbolListenerActivity.class),
+            null,
+            R.string.activity_plugins_symbol_listener_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
