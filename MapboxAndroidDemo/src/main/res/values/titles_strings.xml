@@ -62,6 +62,7 @@
     <string name="activity_dds_polygon_holes_title">Draw a polygon with holes</string>
     <string name="activity_dds_symbol_collision_detection_title">Toggle collision detection</string>
     <string name="activity_dds_polygon_revealed_hole_outline_title">Outlined polygon hole</string>
+    <string name="activity_dds_polygon_select_toggle_title">Polygon toggle</string>
     <string name="activity_styles_text_field_formatting_title">Adjust text labels</string>
     <string name="activity_annotation_marker_view_title">Draw a marker view</string>
     <string name="activity_annotation_custom_info_window_title">Custom info window</string>
@@ -119,6 +120,7 @@
     <string name="activity_lab_animated_interpolator_icon_drop_title">Animated icon movement</string>
     <string name="activity_dds_polygon_select_toggle_title">Polygon toggle</string>
     <string name="activity_lab_drag_draw_title">Drawing search area</string>
+    <string name="activity_lab_dotted_and_solid_line_icon_title">Dotted and solid line</string>
     <string name="activity_china_simple_china_mapview_title">China map view</string>
     <string name="activity_lab_home_screen_widget_title">Homescreen geocoding widget</string>
     <string name="activity_java_turf_ring_title">Hollow circle</string>

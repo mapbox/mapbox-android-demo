@@ -82,6 +82,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.DottedAndSolidLineIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.LocationPickerActivity;
@@ -1154,8 +1155,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_lab_animated_interpolator_icon_drop_description,
       new Intent(MainActivity.this, ValueAnimatorIconAnimationActivity.class),
       null,
-      R.string.activity_lab_animated_interpolator_icon_drop_url, false, BuildConfig.MIN_SDK_VERSION
+      R.string.activity_lab_animated_interpolator_icon_drop_url, true, BuildConfig.MIN_SDK_VERSION
     ));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_dotted_and_solid_line_icon_title,
+      R.string.activity_lab_dotted_and_solid_line_icon_description,
+      new Intent(MainActivity.this, DottedAndSolidLineIconActivity.class),
+      null,
+      R.string.activity_lab_dotted_and_solid_line_icon_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,

@@ -121,7 +121,8 @@
     <string name="activity_lab_fog_background_url">https://i.imgur.com/NcSGgD8.png</string>
     <string name="activity_lab_animated_interpolator_icon_drop_url">https://i.imgur.com/JfLf69C.png</string>
     <string name="activity_lab_drag_draw_url" translatable="false">https://i.imgur.com/vf5uZyS.png</string>
+    <string name="activity_lab_dotted_and_solid_line_icon_url">https://i.imgur.com/BucXqf2.png</string>
+    <string name="activity_china_simple_china_mapview_url" translatable="false">https://i.imgur.com/KwoEynZ.png</string>
     <string name="activity_lab_home_screen_widget_url" translatable="false">https://i.imgur.com/H5N9jDn.png</string>
     <string name="activity_java_turf_ring_url" translatable="false">https://i.imgur.com/nG8xeXH.png</string>
-    <string name="activity_china_simple_china_mapview_url" translatable="false">https://i.imgur.com/KwoEynZ.png</string>
 </resources>

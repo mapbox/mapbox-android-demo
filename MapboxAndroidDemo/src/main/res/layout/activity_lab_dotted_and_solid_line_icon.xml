@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    tools:context=".examples.labs.DottedAndSolidLineIconActivity">
+
+<com.mapbox.mapboxsdk.maps.MapView
+    android:id="@+id/mapView"
+    mapbox:mapbox_cameraTargetLat="43.590589"
+    mapbox:mapbox_cameraTargetLng="-96.395380"
+    mapbox:mapbox_cameraZoom="2.291616"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+</RelativeLayout>
