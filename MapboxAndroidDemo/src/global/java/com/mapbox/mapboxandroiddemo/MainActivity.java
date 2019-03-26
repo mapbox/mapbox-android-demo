@@ -82,12 +82,14 @@ import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.HomeScreenWidgetActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.InsetMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.LocationPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MagicWindowKotlinActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MapFogBackgroundActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.MovingIconWithTrailingLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
@@ -137,15 +139,14 @@ import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MissingIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.RotatingTextAnchorPositionActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SatelliteOpacityOnZoomActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.TextFieldFormattingActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.TextFieldMultipleFormatsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.TransparentBackgroundActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VariableLabelPlacementActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
-import com.mapbox.mapboxandroiddemo.examples.labs.HomeScreenWidgetActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 import com.mapbox.mapboxandroiddemo.utils.SettingsDialogView;
@@ -1177,6 +1178,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ));
 
     exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_moving_icon_with_trailing_line_title,
+      R.string.activity_lab_moving_icon_with_trailing_line_description,
+      new Intent(MainActivity.this, MovingIconWithTrailingLineActivity.class),
+      null,
+      R.string.activity_lab_moving_icon_with_trailing_line_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
       R.string.activity_dds_geojson_line_title,
       R.string.activity_dds_geojson_line_description,
@@ -1332,12 +1341,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_dds_satellite_land_select_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_dds,
-      R.string.activity_dds_symbol_zoom_switch_title,
-      R.string.activity_dds_symbol_zoom_switch_description,
-      new Intent(MainActivity.this, SymbolSwitchOnZoomActivity.class),
-      null,
-      R.string.activity_dds_symbol_zoom_switch_url, true, BuildConfig.MIN_SDK_VERSION));
+        R.id.nav_dds,
+        R.string.activity_dds_symbol_zoom_switch_title,
+        R.string.activity_dds_symbol_zoom_switch_description,
+        new Intent(MainActivity.this, SymbolSwitchOnZoomActivity.class),
+        null,
+        R.string.activity_dds_symbol_zoom_switch_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
