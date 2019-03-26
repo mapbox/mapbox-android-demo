@@ -4,11 +4,8 @@ import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.animation.LinearInterpolator;
 import android.widget.Toast;
 
-import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -34,6 +31,7 @@ public class SymbolListenerActivity extends AppCompatActivity implements
 
     private MapView mapView;
     private MapboxMap mapboxMap;
+    private static final String LOG = "SymbolListenerActivity";
     private static final String MAKI_ICON_CAFE = "cafe-15";
     private static final String MAKI_ICON_HARBOR = "harbor-15";
     private static final String MAKI_ICON_AIRPORT = "airport-15";
@@ -73,7 +71,7 @@ public class SymbolListenerActivity extends AppCompatActivity implements
                 symbolManager.setTextAllowOverlap(true);
 
                 // Add symbol at specified lat/lon
-                symbolManager.create(new SymbolOptions()
+                symbol = symbolManager.create(new SymbolOptions()
                         .withLatLng(new LatLng(60.169091, 24.939876))
                         .withIconImage(MAKI_ICON_HARBOR)
                         .withIconSize(2.0f)
@@ -105,61 +103,19 @@ public class SymbolListenerActivity extends AppCompatActivity implements
                 symbolManager.addDragListener(new OnSymbolDragListener() {
                     @Override
                     public void onAnnotationDragStarted(Symbol annotation) {
-                        Log.v("started", "annotation drag started");
                     }
 
                     @Override
                     public void onAnnotationDrag(Symbol symbol) {
-                        Log.v("dragging", "annotation is dragging");
-                        symbol.setDraggable(!symbol.isDraggable());
-                        easeSymbol(symbol, new LatLng(60.169091, 24.939876));
                     }
 
                     @Override
                     public void onAnnotationDragFinished(Symbol annotation) {
-                        Log.v("started", "annotation drag finished");
                     }
                 });
             }
         });
     }
-
-    private void easeSymbol(Symbol symbol, final LatLng location) {
-        final LatLng originalPosition = symbol.getLatLng();
-        final boolean changeLocation = originalPosition.distanceTo(location) > 0;
-
-
-        Log.v("change location", "annotation change location is" + changeLocation);
-
-        ValueAnimator moveSymbol = ValueAnimator.ofFloat(0, 1).setDuration(5000);
-        moveSymbol.setInterpolator(new LinearInterpolator());
-        moveSymbol.addUpdateListener(animation -> {
-            if (symbolManager == null || symbolManager.getAnnotations().indexOfValue(symbol) < 0) {
-                return;
-            }
-            float fraction = (float) animation.getAnimatedValue();
-
-            if (changeLocation) {
-                double lat = ((location.getLatitude() - originalPosition.getLatitude()) * fraction) + originalPosition.getLatitude();
-                double lng = ((location.getLongitude() - originalPosition.getLongitude()) * fraction) + originalPosition.getLongitude();
-
-                Log.v("lat", "annotation lat is " + lat);
-                Log.v("lng", "annotation lng is " + lng);
-
-                symbol.setGeometry(Point.fromLngLat(lng, lat));
-            }
-            Log.v("symbol", "annotation symbol is " + symbol);
-            symbolManager.update(symbol);
-        });
-
-        moveSymbol.start();
-        animators.add(moveSymbol);
-    }
-
-//    private void resetSymbol() {
-//        symbol.setGeometry(Point.fromLngLat(6.687337, 0.381457));
-//        symbolManager.update(symbol);
-//    }
 
     @Override
     public void onResume() {
@@ -176,9 +132,6 @@ public class SymbolListenerActivity extends AppCompatActivity implements
     @Override
     protected void onStop() {
         super.onStop();
-        for (ValueAnimator animator : animators) {
-            animator.cancel();
-        }
         mapView.onStop();
     }
 
