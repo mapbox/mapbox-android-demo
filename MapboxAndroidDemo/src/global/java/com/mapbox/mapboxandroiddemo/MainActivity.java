@@ -135,6 +135,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MissingIconActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.PulsingTextSizeActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.RotatingTextAnchorPositionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SatelliteOpacityOnZoomActivity;
@@ -668,6 +669,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, VariableLabelPlacementActivity.class),
             null,
        R.string.activity_styles_variable_label_placement_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_pulsing_text_size_title,
+      R.string.activity_styles_pulsing_text_size_description,
+      new Intent(MainActivity.this, PulsingTextSizeActivity.class),
+      null,
+      R.string.activity_styles_pulsing_text_size_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_extrusions,
