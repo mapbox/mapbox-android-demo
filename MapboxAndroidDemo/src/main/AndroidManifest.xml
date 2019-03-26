@@ -425,6 +425,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.labs.MovingIconWithTrailingLineActivity"
+            android:label="@string/activity_lab_moving_icon_with_trailing_line_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.query.SelectBuildingActivity"
             android:label="@string/activity_query_select_building_title">
             <meta-data
