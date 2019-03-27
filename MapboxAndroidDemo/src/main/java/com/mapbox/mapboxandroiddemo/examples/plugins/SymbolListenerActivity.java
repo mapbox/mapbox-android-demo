@@ -30,14 +30,12 @@ public class SymbolListenerActivity extends AppCompatActivity implements
         OnMapReadyCallback {
 
     private MapView mapView;
-    private MapboxMap mapboxMap;
     private static final String LOG = "SymbolListenerActivity";
     private static final String MAKI_ICON_CAFE = "cafe-15";
     private static final String MAKI_ICON_HARBOR = "harbor-15";
     private static final String MAKI_ICON_AIRPORT = "airport-15";
     private SymbolManager symbolManager;
     private Symbol symbol;
-    private final List<ValueAnimator> animators = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +51,10 @@ public class SymbolListenerActivity extends AppCompatActivity implements
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
-
     }
 
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-
-        this.mapboxMap = mapboxMap;
         mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
             @Override
             public void onStyleLoaded(@NonNull Style style) {
@@ -102,14 +97,17 @@ public class SymbolListenerActivity extends AppCompatActivity implements
 
                 symbolManager.addDragListener(new OnSymbolDragListener() {
                     @Override
+                    // Left empty on purpose
                     public void onAnnotationDragStarted(Symbol annotation) {
                     }
 
                     @Override
+                    // Left empty on purpose
                     public void onAnnotationDrag(Symbol symbol) {
                     }
 
                     @Override
+                    // Left empty on purpose
                     public void onAnnotationDragFinished(Symbol annotation) {
                     }
                 });
