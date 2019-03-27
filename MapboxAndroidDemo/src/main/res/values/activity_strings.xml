@@ -308,4 +308,7 @@
     <string name="light_azimuth_angle">Light azimuthal angle</string>
     <string name="light_polar_angle">Light polar angle</string>
     <string name="building_opacity">Building opacity</string>
+
+    <!-- Rotating anchor position change-->
+    <string name="position_textview">\"State-label\" layer\'s anchor position: %1$s \n%2$s</string>
 </resources>

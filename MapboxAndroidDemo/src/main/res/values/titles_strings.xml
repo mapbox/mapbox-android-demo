@@ -30,6 +30,7 @@
     <string name="activity_styles_text_field_multiple_formats_title">Multiple text formats</string>
     <string name="activity_styles_transparent_background_title">Transparent render surface</string>
     <string name="activity_styles_click_to_add_image_title">Click to add photo</string>
+    <string name="activity_styles_rotating_anchor_text_title">Text anchor position</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_title">Use GeoJSON data to set extrusion height</string>
     <string name="activity_extrusions_population_density_extrusions_title">Display 3D building height based on vector data</string>
     <string name="activity_extrusions_adjust_extrusions_title">Adjust light location and color</string>
