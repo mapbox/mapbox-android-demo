@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.plugins;
 
-import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -20,9 +19,6 @@ import com.mapbox.mapboxsdk.plugins.annotation.SymbolOptions;
 import com.mapbox.mapboxsdk.plugins.annotation.Symbol;
 import com.mapbox.mapboxsdk.plugins.annotation.OnSymbolClickListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Change symbol icon by pressing on icon
  */
@@ -30,7 +26,6 @@ public class SymbolListenerActivity extends AppCompatActivity implements
         OnMapReadyCallback {
 
     private MapView mapView;
-    private static final String LOG = "SymbolListenerActivity";
     private static final String MAKI_ICON_CAFE = "cafe-15";
     private static final String MAKI_ICON_HARBOR = "harbor-15";
     private static final String MAKI_ICON_AIRPORT = "airport-15";
@@ -77,8 +72,8 @@ public class SymbolListenerActivity extends AppCompatActivity implements
                     @Override
                     public void onAnnotationClick(Symbol symbol) {
                         Toast.makeText(SymbolListenerActivity.this,
-                            String.format("Symbol clicked"),
-                            Toast.LENGTH_SHORT).show();
+                                String.format("Symbol clicked"),
+                                Toast.LENGTH_SHORT).show();
                         symbol.setIconImage(MAKI_ICON_CAFE);
                         symbolManager.update(symbol);
                     }});
