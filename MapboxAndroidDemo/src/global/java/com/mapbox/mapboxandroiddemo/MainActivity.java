@@ -30,8 +30,6 @@ import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
-import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivityKotlin;
@@ -46,6 +44,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ExpressionIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
@@ -73,6 +72,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivi
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
@@ -98,6 +98,7 @@ import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerViewPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.SymbolListenerActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.BuildingOutlineActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
@@ -668,6 +669,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
+      R.string.activity_plugins_symbol_listener_title, R.string.activity_plugins_symbol_listener_description,
+      new Intent(MainActivity.this, SymbolListenerActivity.class),
+      null,
+      R.string.activity_plugins_symbol_listener_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_plugins,
       R.string.activity_plugins_localization_plugin_title,
       R.string.activity_plugins_localization_plugin_description,
       new Intent(MainActivity.this, LocalizationPluginActivity.class),
@@ -1011,12 +1019,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ));
 
     exampleItemModels.add(new ExampleItemModel(
-        R.id.nav_lab,
-        R.string.activity_lab_fog_background_title,
-        R.string.activity_lab_fog_background_description,
-        new Intent(MainActivity.this, MapFogBackgroundActivity.class),
-        null,
-        R.string.activity_lab_fog_background_url, false, BuildConfig.MIN_SDK_VERSION
+      R.id.nav_lab,
+      R.string.activity_lab_fog_background_title,
+      R.string.activity_lab_fog_background_description,
+      new Intent(MainActivity.this, MapFogBackgroundActivity.class),
+      null,
+      R.string.activity_lab_fog_background_url, false, BuildConfig.MIN_SDK_VERSION
     ));
 
     exampleItemModels.add(new ExampleItemModel(

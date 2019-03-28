@@ -81,6 +81,7 @@
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
     <string name="activity_plugins_geojson_plugin_description">Easily retrieve GeoJSON data from a url, asset, or path</string>
     <string name="activity_plugins_places_plugin_description">Add location search ("geocoding") functionality and UI to search for any place in the world</string>
+    <string name="activity_plugins_symbol_listener_description">Listen for Symbol interaction using the Annotation plugin its and built-in listeners</string>
     <string name="activity_plugins_localization_plugin_description">Use the plugin to automatically change map label text to the language set on the device.</string>
     <string name="activity_plugins_place_picker_plugin_description">Use the place picker function of the Places Plugin to choose a specific location in the world.</string>
     <string name="activity_plugins_markerview_plugin_description">Create a marker with an Android-system View.</string>
