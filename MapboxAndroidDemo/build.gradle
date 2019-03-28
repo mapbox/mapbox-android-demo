@@ -10,6 +10,11 @@ android {
     compileSdkVersion androidVersions.compileSdkVersion
     buildToolsVersion androidVersions.buildToolsVersion
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
     playAccountConfigs {
         defaultAccountConfig {
             serviceAccountEmail = 'mapbox-android-demo-publish@android-gl-native.iam.gserviceaccount.com'
