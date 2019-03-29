@@ -50,6 +50,7 @@
     <string name="activity_dds_image_clustering_url" translatable="false">https://i.imgur.com/KjgNcS0.png</string>
     <string name="activity_dds_expression_integration_url" translatable="false">https://imgur.com/YiBeH0I.png</string>
     <string name="activity_dds_satellite_land_select_url" translatable="false">https://i.imgur.com/tfbO1m4.png</string>
+    <string name="activity_dds_symbol_zoom_switch_url" translatable="false">https://i.imgur.com/sbWU4Ui.png</string>
     <string name="activity_annotation_marker_url" translatable="false">http://i.imgur.com/X59UoaY.png</string>
     <string name="activity_dds_geojson_line_url" translatable="false">https://i.imgur.com/Bs0X98z.png</string>
     <string name="activity_dds_polygon_url" translatable="false">http://i.imgur.com/v9X28id.png</string>
