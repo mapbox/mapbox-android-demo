@@ -51,17 +51,14 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
   private MapView mapView;
   private SymbolLayer pinSymbolLayer;
   private Style style;
-  private TimeInterpolator currentSelectedTimeInterpolator;
+  private TimeInterpolator currentSelectedTimeInterpolator = new BounceInterpolator();
   private ValueAnimator animator;
-  private boolean firstRunThrough;
+  private boolean firstRunThrough = true;
   private boolean animationHasStarted;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    currentSelectedTimeInterpolator = new BounceInterpolator();
-    firstRunThrough = true;
 
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
@@ -113,20 +110,19 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
         ))
         .withImage(ICON_ID, BitmapUtils.getBitmapFromDrawable(
           getResources().getDrawable(R.drawable.map_marker_push_pin_pink))), new Style.OnStyleLoaded() {
-        @Override
-        public void onStyleLoaded(@NonNull Style style) {
-          ValueAnimatorIconAnimationActivity.this.style = style;
-          mapView.addOnDidFinishRenderingMapListener(ValueAnimatorIconAnimationActivity.this);
-        }
-      }
+            @Override
+            public void onStyleLoaded(@NonNull Style style) {
+              ValueAnimatorIconAnimationActivity.this.style = style;
+              mapView.addOnDidFinishRenderingMapListener(ValueAnimatorIconAnimationActivity.this);
+            }
+          }
     );
   }
-
 
   /**
    * Implementing this interface so that animation only starts once all tiles have been loaded
    *
-   * @param fully whether or not the mapy is finished rendering
+   * @param fully whether or not the map is finished rendering
    */
   @Override
   public void onDidFinishRenderingMap(boolean fully) {
@@ -156,7 +152,7 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
           initSymbolLayer();
           animationHasStarted = true;
         }
-        pinSymbolLayer.setProperties(iconTranslate(new Float[]{0f, (Float) valueAnimator.getAnimatedValue()}));
+        pinSymbolLayer.setProperties(iconTranslate(new Float[] {0f, (Float) valueAnimator.getAnimatedValue()}));
       }
     });
   }
@@ -166,7 +162,7 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
    */
   private void initSymbolLayer() {
     pinSymbolLayer = new SymbolLayer(SYMBOL_LAYER_ID,
-        "source-id");
+      "source-id");
     pinSymbolLayer.setProperties(
       iconImage(ICON_ID),
       iconIgnorePlacement(true),
