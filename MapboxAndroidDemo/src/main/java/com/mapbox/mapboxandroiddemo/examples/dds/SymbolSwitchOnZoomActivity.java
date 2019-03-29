@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +16,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.step;
@@ -55,73 +55,63 @@ public class SymbolSwitchOnZoomActivity extends AppCompatActivity implements OnM
 
   @Override
   public void onMapReady(final MapboxMap mapboxMap) {
-    mapboxMap.setStyle(Style.OUTDOORS, new Style.OnStyleLoaded() {
-      @Override
-      public void onStyleLoaded(@NonNull Style style) {
-        initLayerIcons(style);
-        addDataToMap(style);
-        Toast.makeText(SymbolSwitchOnZoomActivity.this,
-          R.string.zoom_map_in_and_out_icon_switch_instruction, Toast.LENGTH_SHORT).show();
-      }
-    });
-  }
 
-  /**
-   * Add images to the map so that the SymbolLayers can reference the images.
-   */
-  private void initLayerIcons(@NonNull Style loadedMapStyle) {
-    loadedMapStyle.addImage(BLUE_PERSON_ICON_ID, BitmapFactory.decodeResource(
-      getResources(), R.drawable.ic_person));
-    loadedMapStyle.addImage(BLUE_PIN_ICON_ID, BitmapFactory.decodeResource(
-      getResources(), R.drawable.blue_marker));
-  }
+    mapboxMap.setStyle(new Style.Builder().fromUrl(Style.OUTDOORS)
 
-  /**
-   * Add the data, source, and SymbolLayer to the map
-   */
-  private void addDataToMap(@NonNull Style loadedMapStyle) {
-    // Add random data to the GeoJsonSource and then add the GeoJsonSource to the map
-    loadedMapStyle.addSource(
-      new GeoJsonSource("source-id",
-        FeatureCollection.fromFeatures(new Feature[] {
-          Feature.fromGeometry(Point.fromLngLat(
-            9.205394983291626,
-            45.47661043757903)),
-          Feature.fromGeometry(Point.fromLngLat(
-            9.223880767822266,
-            45.47623240235297)),
-          Feature.fromGeometry(Point.fromLngLat(
-            9.15530204772949,
-            45.4706650227671)),
-          Feature.fromGeometry(Point.fromLngLat(
-            9.153714179992676,
-            45.48625229963004)),
-          Feature.fromGeometry(Point.fromLngLat(
-            9.158306121826172,
-            45.482731998239636)),
-          Feature.fromGeometry(Point.fromLngLat(
-            9.188523888587952,
-            45.4923746929562)),
-          Feature.fromGeometry(Point.fromLngLat(
-            9.20929491519928,
-            45.45314676076135)),
-          Feature.fromGeometry(Point.fromLngLat(
-            9.177778959274292,
-            45.45569808340158))
-        })
-      )
+        // Add images to the map so that the SymbolLayers can reference the images.
+        .withImage(BLUE_PERSON_ICON_ID, BitmapUtils.getBitmapFromDrawable(
+          getResources().getDrawable(R.drawable.ic_person)))
+        .withImage(BLUE_PIN_ICON_ID, BitmapUtils.getBitmapFromDrawable(
+          getResources().getDrawable(R.drawable.blue_marker)))
+
+        // Add random data to the GeoJsonSource and then add the GeoJsonSource to the map
+        .withSource(new GeoJsonSource("source-id",
+          FeatureCollection.fromFeatures(new Feature[] {
+            Feature.fromGeometry(Point.fromLngLat(
+              9.205394983291626,
+              45.47661043757903)),
+            Feature.fromGeometry(Point.fromLngLat(
+              9.223880767822266,
+              45.47623240235297)),
+            Feature.fromGeometry(Point.fromLngLat(
+              9.15530204772949,
+              45.4706650227671)),
+            Feature.fromGeometry(Point.fromLngLat(
+              9.153714179992676,
+              45.48625229963004)),
+            Feature.fromGeometry(Point.fromLngLat(
+              9.158306121826172,
+              45.482731998239636)),
+            Feature.fromGeometry(Point.fromLngLat(
+              9.188523888587952,
+              45.4923746929562)),
+            Feature.fromGeometry(Point.fromLngLat(
+              9.20929491519928,
+              45.45314676076135)),
+            Feature.fromGeometry(Point.fromLngLat(
+              9.177778959274292,
+              45.45569808340158))
+          })
+        )), new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+
+            // Create a SymbolLayer and use the {@link com.mapbox.mapboxsdk.style.expressions.Expression.step()}
+            // to adjust the SymbolLayer icon based on the zoom level. The blue person icon is set as the default
+            // icon and then a step is used to switch to the blue person icon at a certain map camera zoom level.
+            SymbolLayer singleLayer = new SymbolLayer("symbol-layer-id", "source-id");
+            singleLayer.setProperties(
+              iconImage(step(zoom(), literal(BLUE_PERSON_ICON_ID),
+                stop(ZOOM_LEVEL_FOR_SWITCH, BLUE_PIN_ICON_ID))),
+              iconIgnorePlacement(true),
+              iconAllowOverlap(true));
+            style.addLayer(singleLayer);
+
+            Toast.makeText(SymbolSwitchOnZoomActivity.this,
+              R.string.zoom_map_in_and_out_icon_switch_instruction, Toast.LENGTH_SHORT).show();
+          }
+        }
     );
-
-    // Create a SymbolLayer and use the {@link com.mapbox.mapboxsdk.style.expressions.Expression.step()}
-    // to adjust the SymbolLayer icon based on the zoom level. The blue person icon is set as the default
-    // icon and then a step is used to switch to the blue person icon at a certain map camera zoom level.
-    SymbolLayer singleLayer = new SymbolLayer("symbol-layer-id", "source-id");
-    singleLayer.setProperties(
-      iconImage(step(zoom(), literal(BLUE_PERSON_ICON_ID),
-        stop(ZOOM_LEVEL_FOR_SWITCH, BLUE_PIN_ICON_ID))),
-      iconIgnorePlacement(true),
-      iconAllowOverlap(true));
-    loadedMapStyle.addLayer(singleLayer);
   }
 
   @Override
