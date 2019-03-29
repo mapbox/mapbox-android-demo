@@ -47,6 +47,7 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
   private static final float DEFAULT_DESIRED_ICON_OFFSET = -16;
   private static final float STARTING_DROP_HEIGHT = -100;
   private static final long DROP_SPEED_MILLISECONDS = 1200;
+  private static final String SYMBOL_LAYER_ID = "symbol-layer-id";
   private MapView mapView;
   private SymbolLayer pinSymbolLayer;
   private Style style;
@@ -154,6 +155,9 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
    *                                SymbolLayer icons with.
    */
   private void initAnimation(TimeInterpolator desiredTimeInterpolator) {
+    if (animator != null) {
+      animator.cancel();
+    }
     animator = ValueAnimator.ofFloat(STARTING_DROP_HEIGHT, 0);
     animator.setDuration(DROP_SPEED_MILLISECONDS);
     animator.setInterpolator(desiredTimeInterpolator);
@@ -175,7 +179,7 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
    * Add the SymbolLayer to the map
    */
   private void initSymbolLayer() {
-    pinSymbolLayer = new SymbolLayer("symbol-layer-id",
+    pinSymbolLayer = new SymbolLayer(SYMBOL_LAYER_ID,
         "source-id");
     pinSymbolLayer.setProperties(
       iconImage(ICON_ID),
@@ -226,7 +230,6 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
     decelerateInterpolatorFab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-
         currentSelectedTimeInterpolator = new DecelerateInterpolator();
         firstRunThrough = false;
         resetIcons();
@@ -237,7 +240,7 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
   private void resetIcons() {
     if (!firstRunThrough) {
       animationHasStarted = false;
-      style.removeLayer("symbol-layer-id");
+      style.removeLayer(SYMBOL_LAYER_ID);
       initLayerIcon(style);
       initAnimation(currentSelectedTimeInterpolator);
     }
