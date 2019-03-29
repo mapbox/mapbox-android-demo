@@ -58,6 +58,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.SatelliteLandSelectActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.SymbolSwitchOnZoomActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
@@ -556,6 +557,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, ImageSourceActivity.class),
       null,
       R.string.activity_style_image_source_url, false, BuildConfig.MIN_SDK_VERSION
+    ));
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_styles,
+        R.string.activity_styles_click_to_add_image_title,
+        R.string.activity_styles_click_to_add_image_description,
+        new Intent(MainActivity.this, ClickToAddImageActivity.class),
+        null,
+        R.string.activity_styles_click_to_add_image_url, false, BuildConfig.MIN_SDK_VERSION
     ));
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_styles,
@@ -1214,6 +1223,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, SatelliteLandSelectActivity.class),
       null,
       R.string.activity_dds_satellite_land_select_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_symbol_zoom_switch_title,
+      R.string.activity_dds_symbol_zoom_switch_description,
+      new Intent(MainActivity.this, SymbolSwitchOnZoomActivity.class),
+      null,
+      R.string.activity_dds_symbol_zoom_switch_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_basics,
