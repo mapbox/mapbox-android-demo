@@ -2,7 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +23,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
@@ -78,16 +78,50 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
 
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-    mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
-      @Override
-      public void onStyleLoaded(@NonNull Style style) {
-        ValueAnimatorIconAnimationActivity.this.style = style;
-        mapView.addOnDidFinishRenderingMapListener(ValueAnimatorIconAnimationActivity.this);
-        initLayerIcon(style);
-        initDataSource(style);
+    mapboxMap.setStyle(new Style.Builder().fromUrl(Style.LIGHT)
+        // Add GeoJsonSource with random Features to the map.
+        .withSource(new GeoJsonSource("source-id",
+          FeatureCollection.fromFeatures(new Feature[] {
+            Feature.fromGeometry(Point.fromLngLat(
+              119.86083984375,
+              -1.834403324493515)),
+            Feature.fromGeometry(Point.fromLngLat(
+              116.06637239456177,
+              5.970619502704659)),
+            Feature.fromGeometry(Point.fromLngLat(
+              114.58740234375,
+              4.54357027937176)),
+            Feature.fromGeometry(Point.fromLngLat(
+              118.19091796875,
+              5.134714634014467)),
+            Feature.fromGeometry(Point.fromLngLat(
+              110.36865234374999,
+              1.4500404973608074)),
+            Feature.fromGeometry(Point.fromLngLat(
+              109.40185546874999,
+              0.3076157096439005)),
+            Feature.fromGeometry(Point.fromLngLat(
+              115.79589843749999,
+              1.5159363834516861)),
+            Feature.fromGeometry(Point.fromLngLat(
+              113.291015625,
+              -0.9667509997666298)),
+            Feature.fromGeometry(Point.fromLngLat(
+              116.40083312988281,
+              -0.3392008994314591))
+          })
+        ))
+        .withImage(ICON_ID, BitmapUtils.getBitmapFromDrawable(
+          getResources().getDrawable(R.drawable.map_marker_push_pin_pink))), new Style.OnStyleLoaded() {
+        @Override
+        public void onStyleLoaded(@NonNull Style style) {
+          ValueAnimatorIconAnimationActivity.this.style = style;
+          mapView.addOnDidFinishRenderingMapListener(ValueAnimatorIconAnimationActivity.this);
+        }
       }
-    });
+    );
   }
+
 
   /**
    * Implementing this interface so that animation only starts once all tiles have been loaded
@@ -98,54 +132,6 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
   public void onDidFinishRenderingMap(boolean fully) {
     initAnimation(currentSelectedTimeInterpolator);
     initInterpolatorButtons();
-  }
-
-  /**
-   * Add images to the map so that the SymbolLayers can reference the images.
-   */
-  private void initLayerIcon(@NonNull Style loadedMapStyle) {
-    loadedMapStyle.addImage(ICON_ID, BitmapFactory.decodeResource(
-      getResources(), R.drawable.map_marker_push_pin_pink));
-  }
-
-  /**
-   * Add GeoJsonSource with random Features to the map.
-   */
-  private void initDataSource(@NonNull Style loadedMapStyle) {
-    // Add a new source from the GeoJSON data
-    loadedMapStyle.addSource(
-      new GeoJsonSource("source-id",
-        FeatureCollection.fromFeatures(new Feature[] {
-          Feature.fromGeometry(Point.fromLngLat(
-            119.86083984375,
-            -1.834403324493515)),
-          Feature.fromGeometry(Point.fromLngLat(
-            116.06637239456177,
-            5.970619502704659)),
-          Feature.fromGeometry(Point.fromLngLat(
-            114.58740234375,
-            4.54357027937176)),
-          Feature.fromGeometry(Point.fromLngLat(
-            118.19091796875,
-            5.134714634014467)),
-          Feature.fromGeometry(Point.fromLngLat(
-            110.36865234374999,
-            1.4500404973608074)),
-          Feature.fromGeometry(Point.fromLngLat(
-            109.40185546874999,
-            0.3076157096439005)),
-          Feature.fromGeometry(Point.fromLngLat(
-            115.79589843749999,
-            1.5159363834516861)),
-          Feature.fromGeometry(Point.fromLngLat(
-            113.291015625,
-            -0.9667509997666298)),
-          Feature.fromGeometry(Point.fromLngLat(
-            116.40083312988281,
-            -0.3392008994314591))
-        })
-      )
-    );
   }
 
   /**
@@ -241,7 +227,6 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
     if (!firstRunThrough) {
       animationHasStarted = false;
       style.removeLayer(SYMBOL_LAYER_ID);
-      initLayerIcon(style);
       initAnimation(currentSelectedTimeInterpolator);
     }
   }
