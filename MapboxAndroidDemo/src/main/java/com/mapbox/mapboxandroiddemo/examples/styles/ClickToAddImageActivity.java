@@ -47,12 +47,12 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
   private static final String ID_IMAGE_SOURCE = "source-id";
   private static final String CIRCLE_SOURCE_ID = "circle-source-id";
   private static final String ID_IMAGE_LAYER = "layer-id";
+  private static int PHOTO_PICK_CODE = 4;
   private MapView mapView;
   private MapboxMap mapboxMap;
   private LatLngQuad quad;
   private List<Feature> boundsFeatureList;
   private List<Point> boundsCirclePointList;
-  private static int PHOTO_PICK_CODE = 4;
   private int imageCountIndex;
 
   @Override
@@ -99,7 +99,7 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
 
     boundsFeatureList.add(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
 
-    // Add the click point to the circle layer and update the display of the circle layer data
+    // Add the click point to the CircleLayer and update the display of the CircleLayer data
     boundsCirclePointList.add(Point.fromLngLat(point.getLongitude(), point.getLatitude()));
 
     Style style = mapboxMap.getStyle();
@@ -130,7 +130,6 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
       pickPhotoIntent.setType("image/*");
       startActivityForResult(pickPhotoIntent, PHOTO_PICK_CODE);
     }
-
     return true;
   }
 
@@ -172,7 +171,7 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
           @Override
           public void onStyleLoaded(@NonNull Style style) {
             Uri selectedImage = data.getData();
-            InputStream imageStream = null;
+            InputStream imageStream;
             try {
               imageStream = getContentResolver().openInputStream(selectedImage);
 

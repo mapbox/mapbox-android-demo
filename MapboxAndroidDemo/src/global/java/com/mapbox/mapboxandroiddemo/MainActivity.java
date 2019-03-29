@@ -557,6 +557,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_style_image_source_url, false, BuildConfig.MIN_SDK_VERSION
     ));
     exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_styles,
+        R.string.activity_styles_click_to_add_image_title,
+        R.string.activity_styles_click_to_add_image_description,
+        new Intent(MainActivity.this, ClickToAddImageActivity.class),
+        null,
+        R.string.activity_styles_click_to_add_image_url, false, BuildConfig.MIN_SDK_VERSION
+    ));
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_styles,
       R.string.activity_style_image_source_time_lapse_title,
       R.string.activity_style_image_source_time_lapse_description,
