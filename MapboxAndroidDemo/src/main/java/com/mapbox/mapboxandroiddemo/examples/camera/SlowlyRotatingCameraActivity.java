@@ -78,6 +78,9 @@ public class SlowlyRotatingCameraActivity extends AppCompatActivity implements O
    * @param mapCameraTargetLocation the map location that the map camera should spin around
    */
   private void startMapCameraSpinningAnimation(@NonNull final LatLng mapCameraTargetLocation) {
+    if (animator != null) {
+      animator.cancel();
+    }
     animator = ValueAnimator.ofFloat(0, DESIRED_NUM_OF_SPINS * 360);
     animator.setDuration(
       // Multiplying by 1000 to convert to milliseconds
@@ -91,7 +94,7 @@ public class SlowlyRotatingCameraActivity extends AppCompatActivity implements O
         Float newBearingValue = (Float) valueAnimator.getAnimatedValue();
 
         // Use the animation number in a new camera position and then direct the map camera to move to the new position
-        mapboxMap.animateCamera(CameraUpdateFactory
+        mapboxMap.moveCamera(CameraUpdateFactory
           .newCameraPosition(new CameraPosition.Builder()
             .target(new LatLng(mapCameraTargetLocation.getLatitude(), mapCameraTargetLocation.getLongitude()))
             .bearing(newBearingValue)
