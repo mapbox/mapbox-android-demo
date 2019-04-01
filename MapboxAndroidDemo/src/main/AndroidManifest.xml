@@ -643,6 +643,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.camera.SlowlyRotatingCameraActivity"
+            android:label="@string/activity_camera_slowly_rotating_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.plugins.BuildingPluginActivity"
             android:label="@string/activity_plugins_building_plugin_title">
             <meta-data

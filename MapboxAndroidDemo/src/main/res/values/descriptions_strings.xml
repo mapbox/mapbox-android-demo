@@ -61,6 +61,7 @@
     <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
     <string name="activity_camera_restrict_description">Prevent a map from being panned to a different place.</string>
+    <string name="activity_camera_slowly_rotating_description">Slowly have the camera circle around a single point.</string>
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Maps SDK.</string>
     <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
     <string name="activity_description">Download, view, navigate to, and delete an offline region.</string>

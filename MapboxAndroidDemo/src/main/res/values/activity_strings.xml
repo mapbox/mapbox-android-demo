@@ -309,6 +309,9 @@
     <string name="light_polar_angle">Light polar angle</string>
     <string name="building_opacity">Building opacity</string>
 
+    <!-- Rotating camera -->
+    <string name="rotating_camera_toast_instruction">Try tapping on the map and/or adjusting the zoom</string>
+
     <!-- Zoom based icon change -->
     <string name="zoom_map_in_and_out_icon_switch_instruction">Zoom in and out to see the icons change</string>
 

@@ -60,6 +60,7 @@
     <string name="activity_camera_animate_url" translatable="false">http://i.imgur.com/PN3vyNJ.jpg</string>
     <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string>
     <string name="activity_camera_restrict_url" translatable="false">http://i.imgur.com/A227BEs.jpg</string>
+    <string name="activity_camera_slowly_rotating_url" translatable="false">https://i.imgur.com/uuiOK5D.png</string>
     <string name="activity_offline_simple_url" translatable="false">http://i.imgur.com/dV4DgDT.png</string>
     <string name="activity_offline_manager_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
     <string name="activity_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
