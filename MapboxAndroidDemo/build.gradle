@@ -119,6 +119,7 @@ dependencies {
     implementation dependenciesList.supportCustomTabs
     implementation dependenciesList.supportV4
     implementation dependenciesList.supportConstraintLayout
+    implementation dependenciesList.supportAnimation
 
     // Mapbox dependencies
     chinaImplementation dependenciesList.mapboxChinaPlugin
