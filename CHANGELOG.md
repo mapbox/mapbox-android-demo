@@ -2,6 +2,15 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 7.3.0
+
+* Multiple text field format
+* Symbol listener
+* Click to add image
+* Symbol switch based on zoom level
+* Rotating map camera
+* Animated SymbolLayer icon
+
 
 ## 7.2.0
 
