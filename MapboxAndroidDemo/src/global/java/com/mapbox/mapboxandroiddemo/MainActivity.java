@@ -126,6 +126,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.RotatingTextAnchorPositionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.StyleFadeSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.TextFieldMultipleFormatsActivity;
@@ -614,6 +615,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, ClickToAddImageActivity.class),
       null,
       R.string.activity_styles_click_to_add_image_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_rotating_anchor_text_title,
+      R.string.activity_styles_rotating_anchor_text_description,
+      new Intent(MainActivity.this, RotatingTextAnchorPositionActivity.class),
+      null,
+      R.string.activity_styles_rotating_anchor_text_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_extrusions,

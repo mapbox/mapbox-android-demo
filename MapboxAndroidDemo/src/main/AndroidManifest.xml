@@ -503,6 +503,14 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.styles.RotatingTextAnchorPositionActivity"
+            android:label="@string/activity_styles_rotating_anchor_text_title"
+            android:screenOrientation="portrait">]
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.labs.PulsingLayerOpacityColorActivity"
             android:label="@string/activity_lab_pulsing_layer_opacity_color_title">
             <meta-data
