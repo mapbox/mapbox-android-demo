@@ -127,7 +127,6 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
             markerIconCurrentLocation = (LatLng) markerIconAnimator.getAnimatedValue();
             markerIconAnimator.cancel();
           }
-
           if (latLngEvaluator != null) {
             markerIconAnimator = ObjectAnimator
               .ofObject(latLngEvaluator, count == 0 ? new LatLng(37.61501, -122.385374)

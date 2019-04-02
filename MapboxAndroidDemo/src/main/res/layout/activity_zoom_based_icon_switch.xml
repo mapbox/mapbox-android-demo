@@ -5,15 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".examples.basics.SimpleMapViewActivity">
+    tools:context=".examples.dds.SymbolSwitchOnZoomActivity">
 
-    <!-- Set the starting camera position and map style using xml-->
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="40.73581"
-        mapbox:mapbox_cameraTargetLng="-73.99155"
-        mapbox:mapbox_cameraZoom="11" />
+        mapbox:mapbox_cameraTargetLat="45.459145"
+        mapbox:mapbox_cameraTargetLng="9.186176"
+        mapbox:mapbox_cameraZoom="10.662822"/>
 
 </FrameLayout>

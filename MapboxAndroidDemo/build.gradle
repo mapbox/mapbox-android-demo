@@ -10,6 +10,11 @@ android {
     compileSdkVersion androidVersions.compileSdkVersion
     buildToolsVersion androidVersions.buildToolsVersion
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
     playAccountConfigs {
         defaultAccountConfig {
             serviceAccountEmail = 'mapbox-android-demo-publish@android-gl-native.iam.gserviceaccount.com'
@@ -114,6 +119,7 @@ dependencies {
     implementation dependenciesList.supportCustomTabs
     implementation dependenciesList.supportV4
     implementation dependenciesList.supportConstraintLayout
+    implementation dependenciesList.supportAnimation
 
     // Mapbox dependencies
     chinaImplementation dependenciesList.mapboxChinaPlugin
@@ -127,6 +133,7 @@ dependencies {
     implementation dependenciesList.mapboxPluginLocalization
     implementation dependenciesList.mapboxPluginTraffic
     implementation dependenciesList.mapboxPluginMarkerView
+    implementation dependenciesList.mapboxPluginAnnotation
 
     // Firebase
     globalImplementation dependenciesList.firebaseCrash

@@ -1,1 +1,8 @@
-This update is in line with the 7.2.0 release of the Mapbox Maps SDK for Android and includes several improvements.
+This update is in line with the 7.3.0 release of the Mapbox Maps SDK for Android and includes several improvements and new examples:
+
+•Multiple text field format
+•Symbol listener
+•Click to add image
+•Symbol switch based on zoom level
+•Rotating map camera
+•Animated SymbolLayer icon

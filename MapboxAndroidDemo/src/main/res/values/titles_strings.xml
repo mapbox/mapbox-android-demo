@@ -52,6 +52,7 @@
     <string name="activity_dds_expression_integration_title">Temperature change</string>
     <string name="activity_dds_satellite_land_select_title">Satellite land select</string>
     <string name="activity_dds_line_gradient_title">Line gradient</string>
+    <string name="activity_dds_symbol_zoom_switch_title">Zoom-based icon switch</string>
     <string name="activity_annotation_marker_title">Draw a marker</string>
     <string name="activity_dds_geojson_line_title">Draw a GeoJSON line</string>
     <string name="activity_dds_polygon_title">Draw a polygon</string>
@@ -61,6 +62,7 @@
     <string name="activity_camera_animate_title">Animate the map camera</string>
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
     <string name="activity_camera_restrict_title">Restrict map panning</string>
+    <string name="activity_camera_slowly_rotating_title">Rotating camera</string>
     <string name="activity_offline_simple_title">A simple offline map</string>
     <string name="activity_offline_manager_title">Offline manager</string>
     <string name="activity_query_feature_title">Query a map feature</string>
@@ -82,6 +84,7 @@
     <string name="activity_plugins_localization_plugin_title">Change map text to device language</string>
     <string name="activity_plugins_geojson_plugin_title">Load GeoJSON data</string>
     <string name="activity_plugins_places_plugin_title">Location search</string>
+    <string name="activity_plugins_symbol_listener_title">Symbol listener</string>
     <string name="activity_plugins_place_picker_plugin_title">Place picker</string>
     <string name="activity_plugins_markerview_plugin_title">MarkerView</string>
     <string name="activity_location_user_location_map_frag_title">Show a user\'s location on a map fragment</string>
@@ -107,6 +110,7 @@
     <string name="activity_lab_calendar_integration_title">Calendar integration</string>
     <string name="activity_lab_magic_window_title">Magic Window</string>
     <string name="activity_lab_fog_background_title">Background fog</string>
+    <string name="activity_lab_animated_interpolator_icon_drop_title">Animated icon movement</string>
     <string name="activity_china_simple_china_mapview_title">China map view</string>
 
 </resources>

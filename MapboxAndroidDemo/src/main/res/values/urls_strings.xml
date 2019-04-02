@@ -51,6 +51,7 @@
     <string name="activity_dds_image_clustering_url" translatable="false">https://i.imgur.com/KjgNcS0.png</string>
     <string name="activity_dds_expression_integration_url" translatable="false">https://imgur.com/YiBeH0I.png</string>
     <string name="activity_dds_satellite_land_select_url" translatable="false">https://i.imgur.com/tfbO1m4.png</string>
+    <string name="activity_dds_symbol_zoom_switch_url" translatable="false">https://i.imgur.com/sbWU4Ui.png</string>
     <string name="activity_annotation_marker_url" translatable="false">http://i.imgur.com/X59UoaY.png</string>
     <string name="activity_dds_geojson_line_url" translatable="false">https://i.imgur.com/Bs0X98z.png</string>
     <string name="activity_dds_polygon_url" translatable="false">http://i.imgur.com/v9X28id.png</string>
@@ -60,6 +61,7 @@
     <string name="activity_camera_animate_url" translatable="false">http://i.imgur.com/PN3vyNJ.jpg</string>
     <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string>
     <string name="activity_camera_restrict_url" translatable="false">http://i.imgur.com/A227BEs.jpg</string>
+    <string name="activity_camera_slowly_rotating_url" translatable="false">https://i.imgur.com/uuiOK5D.png</string>
     <string name="activity_offline_simple_url" translatable="false">http://i.imgur.com/dV4DgDT.png</string>
     <string name="activity_offline_manager_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
     <string name="activity_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
@@ -80,6 +82,7 @@
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
     <string name="activity_plugins_places_plugin_url" translatable="false">https://i.imgur.com/oKHx3bv.png</string>
+    <string name="activity_plugins_symbol_listener_url" translatable="false">https://i.imgur.com/r9fuJBJ.png</string>
     <string name="activity_plugins_geojson_plugin_url" translatable="false">http://i.imgur.com/kju0sKw.jpg</string>
     <string name="activity_plugins_localization_plugin_url" translatable="false">https://i.imgur.com/tsOM1am.png</string>
     <string name="activity_plugins_place_picker_plugin_url" translatable="false">https://i.imgur.com/fPZQg7z.png</string>
@@ -109,6 +112,7 @@
     <string name="activity_lab_calendar_integration_url" translatable="false">https://i.imgur.com/M8TU7nH.png</string>
     <string name="activity_lab_magic_window_image_url">https://i.imgur.com/Nw78ZrV.png</string>
     <string name="activity_lab_fog_background_url">https://i.imgur.com/NcSGgD8.png</string>
+    <string name="activity_lab_animated_interpolator_icon_drop_url">https://i.imgur.com/JfLf69C.png</string>
     <string name="activity_china_simple_china_mapview_url" translatable="false">https://i.imgur.com/KwoEynZ.png</string>
 
 </resources>
