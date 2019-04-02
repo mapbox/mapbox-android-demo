@@ -13,6 +13,7 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -44,7 +45,7 @@ public class LocationComponentFragmentActivity extends AppCompatActivity impleme
       // Create fragment
       final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-      // Build mapboxMap
+      // Build a Mapbox map
       MapboxMapOptions options = new MapboxMapOptions();
       options.camera(new CameraPosition.Builder()
         .target(new LatLng(38.899895, -77.03401))
@@ -79,12 +80,21 @@ public class LocationComponentFragmentActivity extends AppCompatActivity impleme
   private void enableLocationComponent(@NonNull Style loadedMapStyle) {
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
-      // Get an instance of the location component. Adding in LocationComponentOptions is also an optional
-      // parameter
+
+      // Get an instance of the LocationComponent.
       LocationComponent locationComponent = mapboxMap.getLocationComponent();
-      locationComponent.activateLocationComponent(this, loadedMapStyle);
+
+      // Activate the LocationComponent
+      locationComponent.activateLocationComponent(
+        LocationComponentActivationOptions.builder(this, loadedMapStyle).build());
+
+      // Enable the LocationComponent so that it's actually visible on the map
       locationComponent.setLocationComponentEnabled(true);
+
+      // Set the LocationComponent's camera mode
       locationComponent.setCameraMode(CameraMode.TRACKING);
+
+      // Set the LocationComponent's render mode
       locationComponent.setRenderMode(RenderMode.NORMAL);
     } else {
       permissionsManager = new PermissionsManager(this);
