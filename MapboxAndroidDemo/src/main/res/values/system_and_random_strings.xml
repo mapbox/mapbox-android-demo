@@ -22,8 +22,20 @@
     <string name="description_query">Examples here show how to query the map data to obtain information such as a features geometry or properties.</string>
     <string name="description_offline">Don\'t forget that client-side static maps can be made with the "snapshotter". Click here for some examples.</string>
 
+    <!-- home screen widget card instructions -->
+    <string name="homescreen_geocode_widget">Have you allowed the location permission for this app? To check, go to the Location section in the navigation sidebar and select the
+        \"Show a user\'s location\" example. If you\'re not asked to enable it, then the permission is already enabled. Go to your device\'s home screen and add this app\'s widget.
+        Add it to your home screen and you should see the address of your device\'s location appear.</string>
+    <string name="no_place_name_for_home_screen_widget">No place name associated with this location.</string>
+    <string name="reverse_geocode_failure">Failed to make a reverse geocode request.</string>
+
     <!-- snapshotter -->
     <string name="loading_snapshot_image">Loading snapshot image</string>
+
+    <!-- home screen widget textview -->
+    <string name="title">Your location:</string>
+    <string name="widget_unknown_location">Unknown location</string>
+    <string name="enable_location">Allow the location permission in the \"Show a user\'s location\" example first!</string>
 
     <!-- toolbar items -->
     <string name="info">Info</string>
