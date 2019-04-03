@@ -6,15 +6,14 @@
 
 This is a public demo of the Mapbox Maps SDK for Android. The demo app is [available now in the Google Play Store](https://play.google.com/store/apps/details?id=com.mapbox.mapboxandroiddemo) and it shows off many of the examples found on:
 
-- [mapbox.com/android-docs/map-sdk/examples](https://www.mapbox.com/android-docs/map-sdk/examples/)
-- [mapbox.com/android-docs/navigation/examples/](https://www.mapbox.com/android-docs/navigation/examples/)
-- [mapbox.com/android-docs/java/examples/](https://www.mapbox.com/android-docs/java/examples/)
-- [mapbox.com/android-docs/plugins/examples/](https://www.mapbox.com/android-docs/plugins/examples/)
+- [https://docs.mapbox.com/android/maps/examples](https://docs.mapbox.com/android/maps/examples/)
+- [https://docs.mapbox.com/android/java/examples](https://docs.mapbox.com/android/java/examples/)
+- [https://docs.mapbox.com/android/plugins/examples](https://docs.mapbox.com/android/plugins/examples/)
 
 
 There are also examples that only live in the app. The app's "labs" section has examples which often combine various Mapbox tools to create more complex examples.
 
-Visit [the overview page](https://www.mapbox.com/android-sdk/) to get started using the Mapbox Maps SDK for Android in your Android project.
+Visit [the overview page](https://docs.mapbox.com/android/maps/overview/) to get started using the Mapbox Maps SDK for Android in your Android project.
 
 ### Steps to adding a new example
 Feedback and contribution are encouraged in this repo. If you'd like to see a new example added into the app, either [open an issue](https://github.com/mapbox/mapbox-android-demo/issues) or create it yourself and open a pull request following these steps:

@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.animation.LinearInterpolator;
 
 import com.mapbox.geojson.FeatureCollection;
@@ -32,6 +31,8 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Scanner;
+
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
@@ -126,22 +127,24 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
             markerIconCurrentLocation = (LatLng) markerIconAnimator.getAnimatedValue();
             markerIconAnimator.cancel();
           }
-          markerIconAnimator = ObjectAnimator
-            .ofObject(latLngEvaluator, count == 0 ? new LatLng(37.61501, -122.385374)
-                : markerIconCurrentLocation,
-              new LatLng(nextLocation.latitude(), nextLocation.longitude()))
-            .setDuration(300);
-          markerIconAnimator.setInterpolator(new LinearInterpolator());
+          if (latLngEvaluator != null) {
+            markerIconAnimator = ObjectAnimator
+              .ofObject(latLngEvaluator, count == 0 ? new LatLng(37.61501, -122.385374)
+                  : markerIconCurrentLocation,
+                new LatLng(nextLocation.latitude(), nextLocation.longitude()))
+              .setDuration(300);
+            markerIconAnimator.setInterpolator(new LinearInterpolator());
 
-          markerIconAnimator.addUpdateListener(animatorUpdateListener);
-          markerIconAnimator.start();
+            markerIconAnimator.addUpdateListener(animatorUpdateListener);
+            markerIconAnimator.start();
 
-          // Keeping the current point count we are on.
-          count++;
+            // Keeping the current point count we are on.
+            count++;
 
-          // Once we finish we need to repeat the entire process by executing the
-          // handler again once the ValueAnimator is finished.
-          handler.postDelayed(this, 300);
+            // Once we finish we need to repeat the entire process by executing the
+            // handler again once the ValueAnimator is finished.
+            handler.postDelayed(this, 300);
+          }
         }
       }
     };
@@ -273,7 +276,7 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
           return FeatureCollection.fromJson(convertStreamToString(inputStream));
         }
       } catch (Exception exception) {
-        Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
+        Timber.e(exception.toString());
       }
       return null;
     }

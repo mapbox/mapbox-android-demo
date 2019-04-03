@@ -30,8 +30,6 @@ import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
-import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivityKotlin;
@@ -39,6 +37,7 @@ import com.mapbox.mapboxandroiddemo.examples.basics.SupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
+import com.mapbox.mapboxandroiddemo.examples.camera.SlowlyRotatingCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.BathymetryActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
@@ -46,6 +45,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ExpressionIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
@@ -58,6 +58,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.SatelliteLandSelectActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.SymbolSwitchOnZoomActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
@@ -73,6 +74,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivi
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
@@ -82,6 +84,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.MagicWindowKotlinActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MapFogBackgroundActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PictureInPictureActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.ValueAnimatorIconAnimationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity;
@@ -98,6 +101,7 @@ import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerViewPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.SymbolListenerActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.BuildingOutlineActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
@@ -122,8 +126,10 @@ import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.RotatingTextAnchorPositionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.StyleFadeSwitchActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.TextFieldMultipleFormatsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.TransparentBackgroundActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
@@ -556,6 +562,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_style_image_source_url, false, BuildConfig.MIN_SDK_VERSION
     ));
     exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_styles,
+        R.string.activity_styles_click_to_add_image_title,
+        R.string.activity_styles_click_to_add_image_description,
+        new Intent(MainActivity.this, ClickToAddImageActivity.class),
+        null,
+        R.string.activity_styles_click_to_add_image_url, false, BuildConfig.MIN_SDK_VERSION
+    ));
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_styles,
       R.string.activity_style_image_source_time_lapse_title,
       R.string.activity_style_image_source_time_lapse_description,
@@ -581,6 +595,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_styles,
+      R.string.activity_styles_text_field_multiple_formats_title,
+      R.string.activity_styles_text_field_multiple_formats_description,
+      new Intent(MainActivity.this, TextFieldMultipleFormatsActivity.class),
+      null,
+      R.string.activity_styles_text_field_multiple_formats_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
       R.string.activity_styles_transparent_background_title,
       R.string.activity_styles_transparent_background_description,
       new Intent(MainActivity.this, TransparentBackgroundActivity.class),
@@ -594,6 +616,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, ClickToAddImageActivity.class),
       null,
       R.string.activity_styles_click_to_add_image_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_rotating_anchor_text_title,
+      R.string.activity_styles_rotating_anchor_text_description,
+      new Intent(MainActivity.this, RotatingTextAnchorPositionActivity.class),
+      null,
+      R.string.activity_styles_rotating_anchor_text_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_extrusions,
@@ -657,6 +687,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, PlacesPluginActivity.class),
       null,
       R.string.activity_plugins_places_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_plugins,
+      R.string.activity_plugins_symbol_listener_title, R.string.activity_plugins_symbol_listener_description,
+      new Intent(MainActivity.this, SymbolListenerActivity.class),
+      null,
+      R.string.activity_plugins_symbol_listener_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
@@ -741,6 +778,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, RestrictCameraActivity.class),
       null,
       R.string.activity_camera_restrict_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_camera,
+      R.string.activity_camera_slowly_rotating_title,
+      R.string.activity_camera_slowly_rotating_description,
+      new Intent(MainActivity.this, SlowlyRotatingCameraActivity.class),
+      null,
+      R.string.activity_camera_slowly_rotating_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_offline,
@@ -1003,12 +1048,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ));
 
     exampleItemModels.add(new ExampleItemModel(
-        R.id.nav_lab,
-        R.string.activity_lab_fog_background_title,
-        R.string.activity_lab_fog_background_description,
-        new Intent(MainActivity.this, MapFogBackgroundActivity.class),
-        null,
-        R.string.activity_lab_fog_background_url, false, BuildConfig.MIN_SDK_VERSION
+      R.id.nav_lab,
+      R.string.activity_lab_fog_background_title,
+      R.string.activity_lab_fog_background_description,
+      new Intent(MainActivity.this, MapFogBackgroundActivity.class),
+      null,
+      R.string.activity_lab_fog_background_url, false, BuildConfig.MIN_SDK_VERSION
     ));
 
     exampleItemModels.add(new ExampleItemModel(
@@ -1051,6 +1096,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, HomeScreenWidgetActivity.class),
       null,
       R.string.activity_lab_home_screen_widget_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_animated_interpolator_icon_drop_title,
+      R.string.activity_lab_animated_interpolator_icon_drop_description,
+      new Intent(MainActivity.this, ValueAnimatorIconAnimationActivity.class),
+      null,
+      R.string.activity_lab_animated_interpolator_icon_drop_url, false, BuildConfig.MIN_SDK_VERSION
+    ));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
@@ -1206,6 +1260,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, SatelliteLandSelectActivity.class),
       null,
       R.string.activity_dds_satellite_land_select_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_symbol_zoom_switch_title,
+      R.string.activity_dds_symbol_zoom_switch_description,
+      new Intent(MainActivity.this, SymbolSwitchOnZoomActivity.class),
+      null,
+      R.string.activity_dds_symbol_zoom_switch_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_basics,

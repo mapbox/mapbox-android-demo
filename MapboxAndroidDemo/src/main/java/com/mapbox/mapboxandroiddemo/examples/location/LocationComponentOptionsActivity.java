@@ -12,6 +12,7 @@ import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
 import com.mapbox.mapboxsdk.location.LocationComponentOptions;
 import com.mapbox.mapboxsdk.location.OnCameraTrackingChangedListener;
 import com.mapbox.mapboxsdk.location.OnLocationClickListener;
@@ -69,7 +70,7 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
       // Create and customize the LocationComponent's options
-      LocationComponentOptions options = LocationComponentOptions.builder(this)
+      LocationComponentOptions customLocationComponentOptions = LocationComponentOptions.builder(this)
         .elevation(5)
         .accuracyAlpha(.6f)
         .accuracyColor(Color.RED)
@@ -79,8 +80,13 @@ public class LocationComponentOptionsActivity extends AppCompatActivity implemen
       // Get an instance of the component
       locationComponent = mapboxMap.getLocationComponent();
 
+      LocationComponentActivationOptions locationComponentActivationOptions =
+        LocationComponentActivationOptions.builder(this, loadedMapStyle)
+          .locationComponentOptions(customLocationComponentOptions)
+          .build();
+
       // Activate with options
-      locationComponent.activateLocationComponent(this, loadedMapStyle, options);
+      locationComponent.activateLocationComponent(locationComponentActivationOptions);
 
       // Enable to make component visible
       locationComponent.setLocationComponentEnabled(true);

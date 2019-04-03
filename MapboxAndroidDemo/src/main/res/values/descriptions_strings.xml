@@ -30,8 +30,10 @@
     <string name="activity_style_image_source_description">Use an image source to easily display images on the map.</string>
     <string name="activity_style_hillshade_description">Use elevation data to show and customize hills and mountains.</string>
     <string name="activity_styles_fade_switch_description">Fade map styles in and out based on zoom level.</string>
+    <string name="activity_styles_text_field_multiple_formats_description">Use a format expression to style labels in multiple ways.</string>
     <string name="activity_styles_transparent_background_description">Create a transparent background and fill it with something such as moving water.</string>
     <string name="activity_styles_click_to_add_image_description">Select a photo on the device and add it on the map tap location.</string>
+    <string name="activity_styles_rotating_anchor_text_description">Adjust the anchor position of SymbolLayer text fields.</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_description">Use data-driven styling and GeoJSON data to set extrusions\' heights.</string>
     <string name="activity_extrusions_population_density_extrusions_description">Use extrusions to display 3D building height based on imported vector data.</string>
     <string name="activity_extrusions_adjust_extrusions_description">Change the location and color of the light shined on extrusions.</string>
@@ -50,6 +52,7 @@
     <string name="activity_dds_info_window_symbol_layer_description">Use SymbolLayer and icons to show data in a BubbleLayout "info window".</string>
     <string name="activity_dds_expression_integration_description">Use multiple expressions to visualize unit change in data.</string>
     <string name="activity_dds_satellite_land_select_description">View satellite photos and click to outline an area of land.</string>
+    <string name="activity_dds_symbol_zoom_switch_description">Change SymbolLayer icons based on the camera\'s zoom level.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_dds_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Maps SDK.</string>
     <string name="activity_dds_polygon_description">Draw a vector polygon on a map with the Mapbox Maps SDK.</string>
@@ -59,6 +62,7 @@
     <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
     <string name="activity_camera_restrict_description">Prevent a map from being panned to a different place.</string>
+    <string name="activity_camera_slowly_rotating_description">Slowly have the camera circle around a single point.</string>
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Maps SDK.</string>
     <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
     <string name="activity_description">Download, view, navigate to, and delete an offline region.</string>
@@ -72,7 +76,7 @@
     <string name="activity_java_services_directions_description">Use Mapbox Java Services to request directions.</string>
     <string name="activity_java_services_optimization_description">Use Mapbox\'s Optimization API to retrieve and display the quickest multi-stop route.</string>
     <string name="activity_java_services_static_image_description">Use Mapbox Java Services to build a url and download a static map.</string>
-    <string name="activity_java_services_matrix_api_description">Use the Directions Matrix API to receive driving times between 2-25 different locations.</string>
+    <string name="activity_java_services_matrix_api_description">Use the Matrix API to receive driving times between 2-25 different locations.</string>
     <string name="activity_java_services_geocoding_description">Use the Geocoding API to receive information about specific coordinates.</string>
     <string name="activity_java_services_isochrone_description">Use the Isochrone API to receive information about how far you can travel within a given time.</string>
     <string name="activity_java_services_tilequery_description">Use the Tilequery API to search for features in a tileset. This example queries for up to 10 buildings which are within 50 meters of the single map click location.</string>
@@ -80,6 +84,7 @@
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
     <string name="activity_plugins_geojson_plugin_description">Easily retrieve GeoJSON data from a url, asset, or path</string>
     <string name="activity_plugins_places_plugin_description">Add location search ("geocoding") functionality and UI to search for any place in the world</string>
+    <string name="activity_plugins_symbol_listener_description">Listen for Symbol interaction using the Annotation plugin its and built-in listeners</string>
     <string name="activity_plugins_localization_plugin_description">Use the plugin to automatically change map label text to the language set on the device.</string>
     <string name="activity_plugins_place_picker_plugin_description">Use the place picker function of the Places Plugin to choose a specific location in the world.</string>
     <string name="activity_plugins_markerview_plugin_description">Create a marker with an Android-system View.</string>
@@ -107,6 +112,7 @@
     <string name="activity_lab_calendar_integration_description">Show calendar event locations on the map.</string>
     <string name="activity_lab_magic_window_description">Combine two maps for a magic window effect</string>
     <string name="activity_lab_fog_background_description">Add a gradient on top of a MapView to show a background fog effect.</string>
+    <string name="activity_lab_animated_interpolator_icon_drop_description">Use Android system interpolators to animate SymbolLayer icons movement.</string>
     <string name="activity_china_simple_china_mapview_description">Show an accurate and government-approved China map in your app using the Mapbox Maps SDK.</string>
     <string name="activity_lab_home_screen_widget_description">Show the device\'s current location or other information in a homescreen widget.</string>
 </resources>

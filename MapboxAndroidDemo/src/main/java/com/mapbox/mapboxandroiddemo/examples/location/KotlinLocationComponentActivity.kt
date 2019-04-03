@@ -1,8 +1,8 @@
 package com.mapbox.mapboxandroiddemo.examples.location
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
-import android.support.annotation.NonNull
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
@@ -10,6 +10,7 @@ import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxandroiddemo.R
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions
 import com.mapbox.mapboxsdk.location.LocationComponentOptions
 import com.mapbox.mapboxsdk.location.modes.CameraMode
 import com.mapbox.mapboxsdk.location.modes.RenderMode
@@ -55,27 +56,31 @@ class KotlinLocationComponentActivity : AppCompatActivity(), OnMapReadyCallback,
     // Check if permissions are enabled and if not request
     if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
-      val options = LocationComponentOptions.builder(this)
+      // Create and customize the LocationComponent's options
+      val customLocationComponentOptions = LocationComponentOptions.builder(this)
               .trackingGesturesManagement(true)
               .accuracyColor(ContextCompat.getColor(this, R.color.mapboxGreen))
               .build()
 
-      // Get an instance of the component
-      val locationComponent = mapboxMap.locationComponent
+      val locationComponentActivationOptions = LocationComponentActivationOptions.builder(this, loadedMapStyle)
+              .locationComponentOptions(customLocationComponentOptions)
+              .build()
 
-      // Activate the component
-      locationComponent.activateLocationComponent(this, loadedMapStyle)
+      // Get an instance of the LocationComponent and then adjust its settings
+      mapboxMap.locationComponent.apply {
 
-      // Apply the options to the LocationComponent
-      locationComponent.applyStyle(options)
+        // Activate the LocationComponent with options
+        activateLocationComponent(locationComponentActivationOptions)
 
-      // Enable to make component visible
-      locationComponent.isLocationComponentEnabled = true
+        // Enable to make the LocationComponent visible
+        isLocationComponentEnabled = true
 
-      // Set the component's camera mode
-      locationComponent.cameraMode = CameraMode.TRACKING
-      locationComponent.renderMode = RenderMode.COMPASS
+        // Set the LocationComponent's camera mode
+        cameraMode = CameraMode.TRACKING
 
+        // Set the LocationComponent's render mode
+        renderMode = RenderMode.COMPASS
+      }
 
     } else {
       permissionsManager = PermissionsManager(this)

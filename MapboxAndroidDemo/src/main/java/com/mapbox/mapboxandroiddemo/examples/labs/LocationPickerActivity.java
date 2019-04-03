@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +40,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.layers.Property.NONE;
 import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
@@ -278,11 +278,11 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
 
         @Override
         public void onFailure(Call<GeocodingResponse> call, Throwable throwable) {
-          Log.e(TAG, "Geocoding Failure: " + throwable.getMessage());
+          Timber.e("Geocoding Failure: %s", throwable.getMessage());
         }
       });
     } catch (ServicesException servicesException) {
-      Log.e(TAG, "Error geocoding: " + servicesException.toString());
+      Timber.e("Error geocoding: %s", servicesException.toString());
       servicesException.printStackTrace();
     }
   }

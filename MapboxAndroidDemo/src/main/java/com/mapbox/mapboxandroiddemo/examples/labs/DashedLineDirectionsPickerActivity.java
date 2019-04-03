@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -34,6 +33,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 import static com.mapbox.core.constants.Constants.PRECISION_6;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
@@ -148,10 +148,10 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
       @Override
       public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
         if (response.body() == null) {
-          Log.d("DashedLineActivity", "No routes found, make sure you set the right user and access token.");
+          Timber.d( "No routes found, make sure you set the right user and access token.");
           return;
         } else if (response.body().routes().size() < 1) {
-          Log.d("DashedLineActivity", "No routes found");
+          Timber.d( "No routes found");
           return;
         }
         drawNavigationPolylineRoute(response.body().routes().get(0));
@@ -159,7 +159,7 @@ public class DashedLineDirectionsPickerActivity extends AppCompatActivity
 
       @Override
       public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
-        Log.d("DashedLineActivity", "Error: " + throwable.getMessage());
+        Timber.d("Error: %s", throwable.getMessage());
         if (!throwable.getMessage().equals("Coordinate is invalid: 0,0")) {
           Toast.makeText(DashedLineDirectionsPickerActivity.this,
             "Error: " + throwable.getMessage(), Toast.LENGTH_SHORT).show();

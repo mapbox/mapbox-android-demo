@@ -31,15 +31,15 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
  * Restrict the map camera to certain bounds.
  */
 public class RestrictCameraActivity extends AppCompatActivity implements OnMapReadyCallback {
-
-  private static final List<List<Point>> POINTS = new ArrayList<>();
-  private static final List<Point> OUTER_POINTS = new ArrayList<>();
   private static final LatLng BOUND_CORNER_NW = new LatLng(-8.491377105132457, 108.26584125231903);
   private static final LatLng BOUND_CORNER_SE = new LatLng(-42.73740968175186, 158.19629538046348);
   private static final LatLngBounds RESTRICTED_BOUNDS_AREA = new LatLngBounds.Builder()
     .include(BOUND_CORNER_NW)
     .include(BOUND_CORNER_SE)
     .build();
+
+  private final List<List<Point>> points = new ArrayList<>();
+  private final List<Point> outerPoints = new ArrayList<>();
   private MapView mapView;
 
   @Override
@@ -83,20 +83,20 @@ public class RestrictCameraActivity extends AppCompatActivity implements OnMapRe
    * @param loadedMapStyle a Style object which has been loaded by the map
    */
   private void showBoundsArea(@NonNull Style loadedMapStyle) {
-    OUTER_POINTS.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getNorthWest().getLongitude(),
+    outerPoints.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getNorthWest().getLongitude(),
       RESTRICTED_BOUNDS_AREA.getNorthWest().getLatitude()));
-    OUTER_POINTS.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getNorthEast().getLongitude(),
+    outerPoints.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getNorthEast().getLongitude(),
       RESTRICTED_BOUNDS_AREA.getNorthEast().getLatitude()));
-    OUTER_POINTS.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getSouthEast().getLongitude(),
+    outerPoints.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getSouthEast().getLongitude(),
       RESTRICTED_BOUNDS_AREA.getSouthEast().getLatitude()));
-    OUTER_POINTS.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getSouthWest().getLongitude(),
+    outerPoints.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getSouthWest().getLongitude(),
       RESTRICTED_BOUNDS_AREA.getSouthWest().getLatitude()));
-    OUTER_POINTS.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getNorthWest().getLongitude(),
+    outerPoints.add(Point.fromLngLat(RESTRICTED_BOUNDS_AREA.getNorthWest().getLongitude(),
       RESTRICTED_BOUNDS_AREA.getNorthWest().getLatitude()));
-    POINTS.add(OUTER_POINTS);
+    points.add(outerPoints);
 
     loadedMapStyle.addSource(new GeoJsonSource("source-id",
-      Polygon.fromLngLats(POINTS)));
+      Polygon.fromLngLats(points)));
 
     loadedMapStyle.addLayer(new FillLayer("layer-id", "source-id").withProperties(
       fillColor(Color.RED),

@@ -2,6 +2,36 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 7.3.0
+
+* Multiple text field format
+* Symbol listener
+* Click to add image
+* Symbol switch based on zoom level
+* Rotating map camera
+* Animated SymbolLayer icon
+
+
+## 7.2.0
+
+* Added manifest declaration to use CleartextTraffic #980
+* Removing GIF library #979
+* Maps SDK v7.2.0 #978
+* Fix disappearing camera restriction bbox #972
+
+## 7.1.2
+
+* Localization plugin 0.8.0 bump #960
+* Add data point icon as an SDF in the CircleLayerClusteringActivity #964 
+* Place search SF office address change #941
+* Replacing all Log. with Timber #956
+* Added wearable declaration tag to manifest #963 
+* Fixing wearable black screen #627
+
+## 7.0.0
+
+* Maps SDK 7.0.0 bump
+
 ## 6.8.1
 
 * Maps SDK 6.8.1 bump

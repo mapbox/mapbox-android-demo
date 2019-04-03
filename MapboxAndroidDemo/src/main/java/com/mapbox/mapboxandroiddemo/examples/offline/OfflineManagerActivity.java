@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +29,8 @@ import com.mapbox.mapboxsdk.offline.OfflineTilePyramidRegionDefinition;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import timber.log.Timber;
 
 /**
  * Download, view, navigate to, and delete an offline region.
@@ -218,7 +219,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
       String json = jsonObject.toString();
       metadata = json.getBytes(JSON_CHARSET);
     } catch (Exception exception) {
-      Log.e(TAG, "Failed to encode metadata: " + exception.getMessage());
+      Timber.e("Failed to encode metadata: %s", exception.getMessage());
       metadata = null;
     }
 
@@ -226,14 +227,14 @@ public class OfflineManagerActivity extends AppCompatActivity {
     offlineManager.createOfflineRegion(definition, metadata, new OfflineManager.CreateOfflineRegionCallback() {
       @Override
       public void onCreate(OfflineRegion offlineRegion) {
-        Log.d(TAG, "Offline region created: " + regionName);
+        Timber.d( "Offline region created: %s" , regionName);
         OfflineManagerActivity.this.offlineRegion = offlineRegion;
         launchDownload();
       }
 
       @Override
       public void onError(String error) {
-        Log.e(TAG, "Error: " + error);
+        Timber.e( "Error: %s" , error);
       }
     });
   }
@@ -259,21 +260,21 @@ public class OfflineManagerActivity extends AppCompatActivity {
         }
 
         // Log what is being currently downloaded
-        Log.d(TAG, String.format("%s/%s resources; %s bytes downloaded.",
+        Timber.d("%s/%s resources; %s bytes downloaded.",
           String.valueOf(status.getCompletedResourceCount()),
           String.valueOf(status.getRequiredResourceCount()),
-          String.valueOf(status.getCompletedResourceSize())));
+          String.valueOf(status.getCompletedResourceSize()));
       }
 
       @Override
       public void onError(OfflineRegionError error) {
-        Log.e(TAG, "onError reason: " + error.getReason());
-        Log.e(TAG, "onError message: " + error.getMessage());
+        Timber.e("onError reason: %s", error.getReason());
+        Timber.e("onError message: %s", error.getMessage());
       }
 
       @Override
       public void mapboxTileCountLimitExceeded(long limit) {
-        Log.e(TAG, "Mapbox tile count limit exceeded: " + limit);
+        Timber.e("Mapbox tile count limit exceeded: %s", limit);
       }
     });
 
@@ -363,7 +364,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
                 public void onError(String error) {
                   progressBar.setVisibility(View.INVISIBLE);
                   progressBar.setIndeterminate(false);
-                  Log.e(TAG, "Error: " + error);
+                  Timber.e( "Error: %s", error);
                 }
               });
             }
@@ -381,7 +382,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
       @Override
       public void onError(String error) {
-        Log.e(TAG, "Error: " + error);
+        Timber.e( "Error: %s", error);
       }
     });
   }
@@ -396,7 +397,7 @@ public class OfflineManagerActivity extends AppCompatActivity {
       JSONObject jsonObject = new JSONObject(json);
       regionName = jsonObject.getString(JSON_FIELD_REGION_NAME);
     } catch (Exception exception) {
-      Log.e(TAG, "Failed to decode metadata: " + exception.getMessage());
+      Timber.e("Failed to decode metadata: %s", exception.getMessage());
       regionName = String.format(getString(R.string.region_name), offlineRegion.getID());
     }
     return regionName;

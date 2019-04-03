@@ -8,16 +8,20 @@
                                              android:background="@color/mapboxWhite"
                                              tools:context="com.mapbox.mapboxandroiddemo.account.LoadingActivity">
 
-    <com.cunoraz.gifview.library.GifView
+    <ImageView
         android:id="@+id/imageView3"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        custom:gif="@mipmap/mapbox_changing_hands_astronaut"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:src="@drawable/waving_mapbox_astronaut"
         custom:layout_constraintBottom_toTopOf="@+id/guideline3"
-        custom:layout_constraintLeft_toLeftOf="parent"
-        custom:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp"/>
+        custom:layout_constraintEnd_toEndOf="parent"
+        custom:layout_constraintStart_toStartOf="parent"
+        custom:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"

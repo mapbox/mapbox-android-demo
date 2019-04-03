@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.mapbox.api.matching.v5.MapboxMapMatching;
 import com.mapbox.api.matching.v5.models.MapMatchingMatching;
@@ -35,13 +34,13 @@ import java.util.Scanner;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 import static com.mapbox.api.directions.v5.DirectionsCriteria.PROFILE_DRIVING;
 import static com.mapbox.core.constants.Constants.PRECISION_6;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
-
 
 /**
  * Match raw GPS points to the map so they align with roads and pathways.
@@ -139,7 +138,7 @@ public class MapMatchingActivity extends AppCompatActivity {
           return FeatureCollection.fromJson(convertStreamToString(inputStream));
         }
       } catch (Exception exception) {
-        Log.e(TAG, "Exception Loading GeoJSON: " + exception.toString());
+        Timber.e("Exception Loading GeoJSON: %s", exception.toString());
       }
       return null;
     }
@@ -202,17 +201,17 @@ public class MapMatchingActivity extends AppCompatActivity {
             drawMapMatched(Objects.requireNonNull(response.body()).matchings());
           } else {
             // If the response code does not response "OK" an error has occurred.
-            Log.e(TAG, "MapboxMapMatching failed with " + response.code());
+            Timber.e("MapboxMapMatching failed with %s", response.code());
           }
         }
 
         @Override
         public void onFailure(Call<MapMatchingResponse> call, Throwable throwable) {
-          Log.e(TAG, "MapboxMapMatching error: ", throwable);
+          Timber.e(throwable, "MapboxMapMatching error");
         }
       });
     } catch (ServicesException servicesException) {
-      Log.e(TAG, "MapboxMapMatching error: ", servicesException);
+      Timber.e(servicesException, "MapboxMapMatching error");
     }
   }
 

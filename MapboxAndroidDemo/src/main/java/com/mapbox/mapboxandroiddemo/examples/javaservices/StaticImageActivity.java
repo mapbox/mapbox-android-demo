@@ -4,7 +4,6 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,6 +22,8 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.utils.MathUtils;
 import com.squareup.picasso.Picasso;
+
+import timber.log.Timber;
 
 /**
  * Use the Mapbox Static Image API found inside the Mapbox Java SDK to create a URL. After receiving the newly
@@ -74,7 +75,7 @@ public class StaticImageActivity extends AppCompatActivity implements
             @Override
             public void onStyleLoaded(@NonNull Style style) {
               // one of the radio buttons is checked
-              Log.d("Static", "onClick: initViews style.getUrl() = " + style.getUrl());
+              Timber.d("onClick: initViews style.getUrl() = %s", style.getUrl());
               Picasso.with(StaticImageActivity.this).load(takeSnapshot(
                 mapboxMap.getCameraPosition(),
                 style.getUrl().contains("mapbox/dark-v")

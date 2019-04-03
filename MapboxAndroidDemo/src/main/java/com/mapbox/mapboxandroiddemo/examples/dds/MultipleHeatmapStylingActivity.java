@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -20,6 +19,8 @@ import com.mapbox.mapboxsdk.style.layers.HeatmapLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.InputStream;
+
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.heatmapDensity;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
@@ -423,7 +424,7 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
       return new String(buffer, "UTF-8");
 
     } catch (Exception exception) {
-      Log.e("MultipleHeatmapStyling", "Exception loading GeoJSON: " + exception.toString());
+      Timber.e("Exception loading GeoJSON: %s", exception.toString());
       exception.printStackTrace();
       return null;
     }
