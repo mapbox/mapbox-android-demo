@@ -59,17 +59,17 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
   private static final String DRIVING_ROUTE_POLYLINE_LINE_LAYER_ID = "DRIVING_ROUTE_POLYLINE_LINE_LAYER_ID";
   private static final String DRIVING_ROUTE_POLYLINE_SOURCE_ID = "DRIVING_ROUTE_POLYLINE_SOURCE_ID";
   private static final int DRAW_SPEED_MILLISECONDS = 500;
-  private MapView mapView;
-  private MapboxMap mapboxMap;
-  private MapboxDirections mapboxDirectionsClient;
-  private Handler handler;
-  private Runnable runnable;
-
   // Origin point in Paris, France
   private static final Point PARIS_ORIGIN_POINT = Point.fromLngLat(2.35222, 48.856614);
 
   // Destination point in Lyon, France
-  private static Point LYON_DESTINATION_POINT = Point.fromLngLat(4.83565, 45.76404);
+  private static final Point LYON_DESTINATION_POINT = Point.fromLngLat(4.83565, 45.76404);
+
+  private MapView mapView;
+  private MapboxMap mapboxMap;
+  private MapboxDirections mapboxDirectionsClient;
+  private Handler handler = new Handler();
+  private Runnable runnable;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -92,57 +92,38 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    this.mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
-      @Override
-      public void onStyleLoaded(@NonNull Style style) {
+    this.mapboxMap.setStyle(new Style.Builder().fromUrl(Style.LIGHT)
 
-        initDrivingRouteSourceAndLayer(style);
+      // Add origin and destination SymbolLayer marker icons to the map
+      .withImage("icon-id", BitmapFactory.decodeResource(
+        getResources(), R.drawable.red_marker))
+      .withSource(new GeoJsonSource("source-id",
+        FeatureCollection.fromFeatures(new Feature[] {
+          Feature.fromGeometry(Point.fromLngLat(PARIS_ORIGIN_POINT.longitude(), PARIS_ORIGIN_POINT.latitude())),
+          Feature.fromGeometry(Point.fromLngLat(LYON_DESTINATION_POINT.longitude(), LYON_DESTINATION_POINT.latitude())),
+        })))
+      .withLayer(new SymbolLayer("layer-id",
+        "source-id").withProperties(
+        iconImage("icon-id"),
+        iconOffset(new Float[] {0f, -8f})
+      ))
 
-        addMarkerIconsToMap(style);
-
-        getDirectionsRoute(PARIS_ORIGIN_POINT, LYON_DESTINATION_POINT);
-      }
-    });
-  }
-
-  /**
-   * Add origin and destination SymbolLayer marker icons to the map
-   *
-   * @param loadedMapStyle A fully loaded {@link Style} object
-   */
-  private void addMarkerIconsToMap(@NonNull Style loadedMapStyle) {
-    loadedMapStyle.addImage("icon-id", BitmapFactory.decodeResource(
-      getResources(), R.drawable.red_marker));
-
-    loadedMapStyle.addSource(new GeoJsonSource("source-id",
-      FeatureCollection.fromFeatures(new Feature[] {
-        Feature.fromGeometry(Point.fromLngLat(PARIS_ORIGIN_POINT.longitude(), PARIS_ORIGIN_POINT.latitude())),
-        Feature.fromGeometry(Point.fromLngLat(LYON_DESTINATION_POINT.longitude(), LYON_DESTINATION_POINT.latitude())),
-      })));
-
-    loadedMapStyle.addLayer(new SymbolLayer("layer-id",
-      "source-id").withProperties(
-      iconImage("icon-id"),
-      iconOffset(new Float[] {0f, -8f})
-    ));
-  }
-
-  /**
-   * Add a source and LineLayer for the snaking directions route line
-   *
-   * @param loadedMapStyle A fully loaded {@link Style} object
-   */
-  private void initDrivingRouteSourceAndLayer(@NonNull Style loadedMapStyle) {
-    loadedMapStyle.addSource(new GeoJsonSource(DRIVING_ROUTE_POLYLINE_SOURCE_ID));
-    loadedMapStyle.addLayer(new LineLayer(DRIVING_ROUTE_POLYLINE_LINE_LAYER_ID,
-      DRIVING_ROUTE_POLYLINE_SOURCE_ID)
-      .withProperties(
-        lineWidth(NAVIGATION_LINE_WIDTH),
-        lineOpacity(NAVIGATION_LINE_OPACITY),
-        lineCap(LINE_CAP_ROUND),
-        lineJoin(LINE_JOIN_ROUND),
-        lineColor(Color.parseColor("#d742f4"))
-      ));
+      // Add a source and LineLayer for the snaking directions route line
+      .withSource(new GeoJsonSource(DRIVING_ROUTE_POLYLINE_SOURCE_ID))
+      .withLayerBelow(new LineLayer(DRIVING_ROUTE_POLYLINE_LINE_LAYER_ID,
+        DRIVING_ROUTE_POLYLINE_SOURCE_ID)
+        .withProperties(
+          lineWidth(NAVIGATION_LINE_WIDTH),
+          lineOpacity(NAVIGATION_LINE_OPACITY),
+          lineCap(LINE_CAP_ROUND),
+          lineJoin(LINE_JOIN_ROUND),
+          lineColor(Color.parseColor("#d742f4"))
+        ), "layer-id"), new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            getDirectionsRoute(PARIS_ORIGIN_POINT, LYON_DESTINATION_POINT);
+          }
+          });
   }
 
   /**
@@ -168,10 +149,10 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
       public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
         // Create log messages in case no response or routes are present
         if (response.body() == null) {
-          Timber.d( "No routes found, make sure you set the right user and access token.");
+          Timber.d("No routes found, make sure you set the right user and access token.");
           return;
         } else if (response.body().routes().size() < 1) {
-          Timber.d( "No routes found");
+          Timber.d("No routes found");
           return;
         }
 
@@ -179,7 +160,7 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
         DirectionsRoute currentRoute = response.body().routes().get(0);
 
         // Start the step-by-step process of drawing the route
-        runnable = new DrawRouteRunnable(mapboxMap, currentRoute.legs().get(0).steps(), handler = new Handler());
+        runnable = new DrawRouteRunnable(mapboxMap, currentRoute.legs().get(0).steps(), handler);
         handler.postDelayed(runnable, DRAW_SPEED_MILLISECONDS);
       }
 
