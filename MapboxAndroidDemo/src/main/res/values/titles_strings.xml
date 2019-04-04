@@ -57,6 +57,7 @@
     <string name="activity_dds_geojson_line_title">Draw a GeoJSON line</string>
     <string name="activity_dds_polygon_title">Draw a polygon</string>
     <string name="activity_dds_polygon_holes_title">Draw a polygon with holes</string>
+    <string name="activity_styles_text_field_formatting_title">Adjust text labels</string>
     <string name="activity_annotation_marker_view_title">Draw a marker view</string>
     <string name="activity_annotation_custom_info_window_title">Custom info window</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
@@ -101,7 +102,7 @@
     <string name="activity_lab_marker_following_route_title">Marker following route</string>
     <string name="activity_lab_picture_in_picture_title">Picture in picture</string>
     <string name="activity_lab_off_route_title">Off route detection</string>
-    <string name="activity_lab_pulsing_layer_opacity_color_title">Los Angeles for tourists</string>
+    <string name="activity_lab_pulsing_layer_opacity_color_title">Pulsing layer opacity</string>
     <string name="activity_lab_indoor_map_title">Indoor Map</string>
     <string name="activity_labs_inset_map_title">Inset map</string>
     <string name="activity_labs_gif_on_map_title">Animated image source (GIF)</string>
