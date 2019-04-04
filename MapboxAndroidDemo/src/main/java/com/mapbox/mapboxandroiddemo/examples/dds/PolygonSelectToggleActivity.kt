@@ -30,16 +30,19 @@ import java.util.*
  */
 class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickListener {
 
-    private val BASE_NEIGHBORHOOD_FILL_LAYER_ID = "BASE_NEIGHBORHOOD_FILL_LAYER_ID"
-    private val COLORED_FILL_LAYER_ID = "COLORED_FILL_LAYER_ID"
-    private val LINE_LAYER_ID = "LINE_LAYER_ID"
-    private val NEIGHBORHOOD_POLYGON_SOURCE_ID = "NEIGHBORHOOD_POLYGON_SOURCE_ID"
-    private val PROPERTY_SELECTED = "selected"
-    private val PROPERTY_FILL_COLOR = "fill_color"
-    private val NEIGHBORHOOD_NAME_PROPERTY = "neighborhood_name"
-    private var mapboxMap: MapboxMap? = null
+    private lateinit var mapboxMap: MapboxMap
     private var featureCollection: FeatureCollection? = null
     private var geoJsonSource: GeoJsonSource? = null
+
+    companion object {
+        const val BASE_NEIGHBORHOOD_FILL_LAYER_ID = "BASE_NEIGHBORHOOD_FILL_LAYER_ID"
+        const val COLORED_FILL_LAYER_ID = "COLORED_FILL_LAYER_ID"
+        const val LINE_LAYER_ID = "LINE_LAYER_ID"
+        const val NEIGHBORHOOD_POLYGON_SOURCE_ID = "NEIGHBORHOOD_POLYGON_SOURCE_ID"
+        const val PROPERTY_SELECTED = "selected"
+        const val PROPERTY_FILL_COLOR = "fill_color"
+        const val NEIGHBORHOOD_NAME_PROPERTY = "neighborhood_name"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +67,7 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
     }
 
     override fun onMapClick(point: LatLng): Boolean {
-        return handleClickIcon(mapboxMap?.projection!!.toScreenLocation(point))
+        return handleClickIcon(mapboxMap.projection.toScreenLocation(point))
     }
 
     /**
@@ -73,9 +76,6 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
      * @param collection the FeatureCollection returned by the data loading AsyncTask.
      */
     fun setUpData(collection: FeatureCollection) {
-        if (mapboxMap == null) {
-            return
-        }
 
         // Set `featureCollection` equal to the FeatureCollection returned by the
         // the data loading AsyncTask.
@@ -84,7 +84,7 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
         // Create a GeoJsonSource and add it to the map.
         geoJsonSource = GeoJsonSource(NEIGHBORHOOD_POLYGON_SOURCE_ID, featureCollection)
 
-        mapboxMap?.style?.addSource(geoJsonSource!!)
+        mapboxMap.style?.addSource(geoJsonSource!!)
 
         // Create a FillLayer which will show a background of all neighborhoods on the map.
         val neighborhoodPolygonBaseFillLayer = FillLayer(BASE_NEIGHBORHOOD_FILL_LAYER_ID,
@@ -93,7 +93,7 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
                 fillOpacity(.2f))
 
         // Add neighborhood layer below the city label layer
-        mapboxMap?.style?.addLayerBelow(neighborhoodPolygonBaseFillLayer, "settlement-label")
+        mapboxMap.style?.addLayerBelow(neighborhoodPolygonBaseFillLayer, "settlement-label")
 
         // Add a FillLayer which will only show "selected" features/polygons/neighborhoods.
         val neighborhoodPolygonColoredFillLayer = FillLayer(COLORED_FILL_LAYER_ID,
@@ -103,18 +103,18 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
                 // Use data-driven styling to use each Feature's color property, which was set in
                 // `onPostExecute()` of the data loading AsyncTask.
                 fillColor(toColor(get(PROPERTY_FILL_COLOR))),
-                fillOpacity(.95f))
+                fillOpacity(.45f))
 
         // Add a filter to ensure that only "selected" features/polygons/neighborhoods are displayed.
         neighborhoodPolygonColoredFillLayer.withFilter(eq((get(PROPERTY_SELECTED)), literal(true)))
-        mapboxMap?.style?.addLayerBelow(neighborhoodPolygonColoredFillLayer, "settlement-label")
+        mapboxMap.style?.addLayerBelow(neighborhoodPolygonColoredFillLayer, "settlement-label")
 
         // Add LineLayer to outline the various neighborhoods' areas
         val neighborhoodOutlineLineLayer = LineLayer(LINE_LAYER_ID, NEIGHBORHOOD_POLYGON_SOURCE_ID)
         neighborhoodOutlineLineLayer.withProperties(
                 lineColor(Color.GRAY),
                 lineWidth(2.2f))
-        mapboxMap?.style?.addLayerBelow(neighborhoodOutlineLineLayer, "settlement-label")
+        mapboxMap.style?.addLayerBelow(neighborhoodOutlineLineLayer, "settlement-label")
     }
 
     /**
@@ -123,23 +123,17 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
      * @param screenPoint the point on screen clicked
      */
     private fun handleClickIcon(screenPoint: PointF): Boolean {
-        val features = mapboxMap?.queryRenderedFeatures(screenPoint, BASE_NEIGHBORHOOD_FILL_LAYER_ID)
-        if (features?.isEmpty() == false) {
-            val name = features[0].getStringProperty(NEIGHBORHOOD_NAME_PROPERTY)
-            val featureList = featureCollection?.features()
-            for (i in featureList!!.indices) {
-                if (featureList[i].getStringProperty(NEIGHBORHOOD_NAME_PROPERTY) == name) {
-                    if (featureSelectStatus(i)) {
-                        setFeatureSelectState(featureList.get(i), false)
-                    } else {
-                        setSelected(i)
-                    }
-                }
+        val features = mapboxMap.queryRenderedFeatures(screenPoint, BASE_NEIGHBORHOOD_FILL_LAYER_ID)
+        val name = features[0].getStringProperty(NEIGHBORHOOD_NAME_PROPERTY)
+        val featureList = featureCollection?.features()
+        (0 until featureList!!.size).iterator().forEach {
+            if (featureList[it].getStringProperty(NEIGHBORHOOD_NAME_PROPERTY) == name) {
+                if (featureSelectStatus(it))
+                    setFeatureSelectState(featureList.get(it), false) else
+                    setSelected(it)
             }
-            return true
-        } else {
-            return false
         }
+        return true
     }
 
     /**
@@ -169,9 +163,7 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
      * Updates the display of data on the map after the FeatureCollection has been modified
      */
     private fun refreshSource() {
-        if (geoJsonSource != null && featureCollection != null) {
-            geoJsonSource?.setGeoJson(featureCollection)
-        }
+        geoJsonSource?.setGeoJson(featureCollection)
     }
 
     /**
@@ -239,12 +231,9 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
             internal fun loadGeoJsonFromAsset(context: Context, filename: String): String {
                 try {
                     // Load GeoJSON file
-                    val `is` = context.assets.open(filename)
-                    val size = `is`.available()
-                    val buffer = ByteArray(size)
-                    `is`.read(buffer)
-                    `is`.close()
-                    return String(buffer)
+                    context.assets.open(filename).bufferedReader().use {
+                        return it.readText()
+                    }
                 } catch (exception: Exception) {
                     throw RuntimeException(exception)
                 }
@@ -279,7 +268,7 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
 
     override fun onDestroy() {
         super.onDestroy()
-        mapboxMap?.removeOnMapClickListener(this)
+        mapboxMap.removeOnMapClickListener(this)
         mapView.onDestroy()
     }
 
