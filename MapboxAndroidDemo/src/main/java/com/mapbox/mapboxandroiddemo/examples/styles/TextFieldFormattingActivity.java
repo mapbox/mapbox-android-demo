@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -25,13 +24,16 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
  */
 public class TextFieldFormattingActivity extends AppCompatActivity {
 
-  private final String[] textFonts = new String[] {"Roboto Black", "Arial Unicode MS Regular"};
-  private final Float[] textSizes = new Float[] {25f, 13f};
-  private final String[] textColors = new String[] {"#00FF08", "#ffd43a"};
+  private static final String[] textFonts = new String[] {"Roboto Black", "Arial Unicode MS Regular"};
+  private static final Float[] textSizes = new Float[] {25f, 13f};
+  private static final String[] textColors = new String[] {"#00FF08", "#ffd43a"};
+  private static final String WATER_RELATED_LAYER = "water-";
+  private static final String WATER_SHADOW_LAYER_ID = "water-shadow";
   private MapView mapView;
-  private boolean fontChanged = false;
-  private boolean sizeChanged = false;
-  private boolean colorChanged = false;
+  private MapboxMap mapboxMap;
+  private boolean fontChanged;
+  private boolean sizeChanged;
+  private boolean colorChanged;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,38 +50,36 @@ public class TextFieldFormattingActivity extends AppCompatActivity {
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
-      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+      public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull final Style style) {
 
+            TextFieldFormattingActivity.this.mapboxMap = mapboxMap;
             Toast.makeText(TextFieldFormattingActivity.this, getString(R.string.instruction_toast),
               Toast.LENGTH_SHORT).show();
 
             // Set click listeners for the text adjustment buttons
-            FloatingActionButton textFontFab = findViewById(R.id.fab_toggle_font);
-            textFontFab.setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.fab_toggle_font).setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                adjustText(style, textFont(fontChanged ? new String[] {textFonts[1]} : new String[] {textFonts[0]}));
+                adjustText(textFont(fontChanged ? new String[] {textFonts[1]} : new String[] {textFonts[0]}));
                 fontChanged = !fontChanged;
               }
             });
 
-            FloatingActionButton textSizeFab = findViewById(R.id.fab_toggle_text_size);
-            textSizeFab.setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.fab_toggle_text_size).setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                adjustText(style, textSize(sizeChanged ? textSizes[1] : textSizes[0]));
+                adjustText(textSize(sizeChanged ? textSizes[1] : textSizes[0]));
                 sizeChanged = !sizeChanged;
               }
             });
 
-            FloatingActionButton textColorFab = findViewById(R.id.fab_toggle_text_color);
-            textColorFab.setOnClickListener(new View.OnClickListener() {
+            findViewById(R.id.fab_toggle_text_color).setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                adjustText(style, textColor(colorChanged ? textColors[1] : textColors[0]));
+                adjustText(textColor(colorChanged ? textColors[1] : textColors[0]));
                 colorChanged = !colorChanged;
               }
             });
@@ -92,15 +92,19 @@ public class TextFieldFormattingActivity extends AppCompatActivity {
   /**
    * Retrieve a specific layer and adjust a property of its text field.
    *
-   * @param loadedMapStyle a fully loaded map {@link Style} object
    * @param propertyValue the {@link com.mapbox.mapboxsdk.style.layers.PropertyFactory} to adjust for
    *                      the specific layer's text field.
    */
-  private void adjustText(@NonNull Style loadedMapStyle, @NonNull PropertyValue propertyValue) {
-    for (Layer singleMapLayer : loadedMapStyle.getLayers()) {
-      if (singleMapLayer.getId().contains("water-") && !singleMapLayer.getId().equals("water-shadow")) {
-        singleMapLayer.setProperties(propertyValue);
+  private void adjustText(@NonNull PropertyValue propertyValue) {
+    if (mapboxMap.getStyle() != null) {
+      for (Layer singleMapLayer : mapboxMap.getStyle().getLayers()) {
+        if (singleMapLayer.getId().contains(WATER_RELATED_LAYER)
+          && !singleMapLayer.getId().equals(WATER_SHADOW_LAYER_ID)) {
+          singleMapLayer.setProperties(propertyValue);
+        }
       }
+    } else {
+      Toast.makeText(this, R.string.map_style_not_loaded_yet, Toast.LENGTH_SHORT).show();
     }
   }
 
