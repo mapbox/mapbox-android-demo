@@ -3,7 +3,8 @@
           package="com.mapbox.mapboxandroiddemo">
 
 
-    <application>
+    <application
+        android:name=".MapboxApplication">
 
         <activity
             android:name=".account.LandingActivity"

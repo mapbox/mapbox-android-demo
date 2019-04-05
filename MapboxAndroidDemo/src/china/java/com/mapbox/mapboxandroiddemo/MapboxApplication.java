@@ -2,9 +2,13 @@ package com.mapbox.mapboxandroiddemo;
 
 import android.app.Application;
 
+import com.mapbox.mapboxandroiddemo.utils.TileLoadingInterceptor;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.module.http.HttpRequestUtil;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
+
+import okhttp3.OkHttpClient;
 
 public class MapboxApplication extends Application {
 
@@ -13,6 +17,8 @@ public class MapboxApplication extends Application {
     super.onCreate();
     setUpPicasso();
     Mapbox.getInstance(this, getString(R.string.access_token));
+    Mapbox.getTelemetry().setDebugLoggingEnabled(true);
+    setUpTileLoadingMeasurement();
   }
 
   private void setUpPicasso() {
@@ -21,5 +27,12 @@ public class MapboxApplication extends Application {
     Picasso built = builder.build();
     built.setLoggingEnabled(true);
     Picasso.setSingletonInstance(built);
+  }
+
+  private void setUpTileLoadingMeasurement() {
+    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+            .addNetworkInterceptor(new TileLoadingInterceptor())
+            .build();
+    HttpRequestUtil.setOkHttpClient(okHttpClient);
   }
 }

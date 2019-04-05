@@ -4,9 +4,13 @@ import android.support.multidex.MultiDexApplication;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.mapbox.mapboxandroiddemo.utils.TileLoadingInterceptor;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.module.http.HttpRequestUtil;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
+
+import okhttp3.OkHttpClient;
 
 public class MapboxApplication extends MultiDexApplication {
 
@@ -16,6 +20,9 @@ public class MapboxApplication extends MultiDexApplication {
     initializeFirebaseApp();
     setUpPicasso();
     Mapbox.getInstance(this, getString(R.string.access_token));
+    Mapbox.getTelemetry().setDebugLoggingEnabled(true);
+    setUpTileLoadingMeasurement();
+
   }
 
   private void initializeFirebaseApp() {
@@ -32,5 +39,12 @@ public class MapboxApplication extends MultiDexApplication {
     Picasso built = builder.build();
     built.setLoggingEnabled(true);
     Picasso.setSingletonInstance(built);
+  }
+
+  private void setUpTileLoadingMeasurement() {
+    OkHttpClient okHttpClient = new OkHttpClient.Builder()
+      .addNetworkInterceptor(new TileLoadingInterceptor())
+      .build();
+    HttpRequestUtil.setOkHttpClient(okHttpClient);
   }
 }
