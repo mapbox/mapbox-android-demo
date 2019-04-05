@@ -630,6 +630,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.dds.PolygonSelectToggleActivity"
+            android:label="@string/activity_dds_polygon_select_toggle_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.dds.LineGradientActivity"
             android:label="@string/activity_dds_line_gradient_title">
             <meta-data
