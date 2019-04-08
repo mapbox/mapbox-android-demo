@@ -1,15 +1,11 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
-import android.animation.ObjectAnimator;
-import android.animation.TypeEvaluator;
-import android.animation.ValueAnimator;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.animation.LinearInterpolator;
 import android.widget.Toast;
 
 import com.mapbox.api.directions.v5.DirectionsCriteria;
@@ -63,16 +59,15 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
   private static final String LINE_SOURCE_ID = "line-source-id";
   private static final Point ORIGIN_COFFEE_SHOP = Point.fromLngLat(38.7508, 9.0309);
   private static final Point DESTINATION_AIRPORT = Point.fromLngLat(38.795902, 8.984467);
+  private static final int MARKER_AND_LINE_UPDATE_SPEED_MILLISECONDS = 50;
   private List<Point> routeCoordinateList;
-  private List<Point> markerLinePointList;
+  private List<Point> markerLinePointList = new ArrayList<>();
   private MapView mapView;
   private MapboxMap mapboxMap;
   private DirectionsRoute currentRoute;
   private Handler handler;
   private Runnable runnable;
   private GeoJsonSource dotGeoJsonSource;
-  private ValueAnimator markerIconAnimator;
-  private LatLng markerIconCurrentLocation;
   private int indexCounterForMovingDotAndLine = 0;
 
   @Override
@@ -96,9 +91,6 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-
-            markerLinePointList = new ArrayList<>();
-
             // Use the Mapbox Directions API to get a directions route
             getRoute(style, ORIGIN_COFFEE_SHOP, DESTINATION_AIRPORT);
           }
@@ -130,9 +122,6 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
    * Set up the repeat logic for moving the icon along the route.
    */
   private void initRunnable() {
-    // Animating the marker requires the use of both the ValueAnimator and a handler.
-    // The ValueAnimator is used to move the marker between the GeoJSON points, this is
-    // done linearly. The handler is used to move the marker along the GeoJSON points.
     handler = new Handler();
     runnable = new Runnable() {
       @Override
@@ -140,32 +129,24 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
         // Check if we are at the end of the points list, if so we want to stop using
         // the handler.
         if ((routeCoordinateList.size() - 1 > indexCounterForMovingDotAndLine)) {
-
-          Point nextLocationPoint = routeCoordinateList.get(indexCounterForMovingDotAndLine + 1);
-
-          if (markerIconAnimator != null && markerIconAnimator.isStarted()) {
-            markerIconCurrentLocation = (LatLng) markerIconAnimator.getAnimatedValue();
-            markerIconAnimator.cancel();
+          Point indexPoint = routeCoordinateList.get(indexCounterForMovingDotAndLine);
+          Point newPoint = Point.fromLngLat(indexPoint.longitude(), indexPoint.latitude());
+          if (dotGeoJsonSource != null) {
+            dotGeoJsonSource.setGeoJson(newPoint);
+            if (mapboxMap.getStyle() != null) {
+              GeoJsonSource lineSource = mapboxMap.getStyle().getSourceAs(LINE_SOURCE_ID);
+              markerLinePointList.add(newPoint);
+              if (lineSource != null) {
+                lineSource.setGeoJson(Feature.fromGeometry(LineString.fromLngLats(markerLinePointList)));
+              }
+            }
           }
 
-          if (latLngEvaluator != null) {
-            markerIconAnimator = ObjectAnimator
-              .ofObject(latLngEvaluator, indexCounterForMovingDotAndLine == 0 ? new LatLng(
-                ORIGIN_COFFEE_SHOP.latitude(), ORIGIN_COFFEE_SHOP.longitude())
-                  : markerIconCurrentLocation,
-                new LatLng(nextLocationPoint.latitude(), nextLocationPoint.longitude()))
-              .setDuration(150);
-            markerIconAnimator.setInterpolator(new LinearInterpolator());
-            markerIconAnimator.addUpdateListener(animatorUpdateListener);
-            markerIconAnimator.start();
+          // Keeping the current point indexCounterForMovingDotAndLine we are on.
+          indexCounterForMovingDotAndLine++;
 
-            // Keeping the current point indexCounterForMovingDotAndLine we are on.
-            indexCounterForMovingDotAndLine++;
-
-            // Once we finish we need to repeat the entire process by executing the
-            // handler again once the ValueAnimator is finished.
-            handler.postDelayed(this, 150);
-          }
+          // Once we finish we need to repeat the entire process by executing the handler again.
+          handler.postDelayed(this, MARKER_AND_LINE_UPDATE_SPEED_MILLISECONDS);
         }
       }
     };
@@ -221,34 +202,12 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
 
       @Override
       public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
-        Timber.e("Error: " + throwable.getMessage());
+        Timber.e("Error: %s", throwable.getMessage());
         Toast.makeText(MovingIconWithTrailingLineActivity.this, "Error: " + throwable.getMessage(),
           Toast.LENGTH_SHORT).show();
       }
     });
   }
-
-  /**
-   * Listener interface for when the ValueAnimator provides an updated value
-   */
-  private final ValueAnimator.AnimatorUpdateListener animatorUpdateListener =
-    new ValueAnimator.AnimatorUpdateListener() {
-      @Override
-      public void onAnimationUpdate(ValueAnimator valueAnimator) {
-        LatLng animatedPosition = (LatLng) valueAnimator.getAnimatedValue();
-        Point newPoint = Point.fromLngLat(animatedPosition.getLongitude(), animatedPosition.getLatitude());
-        if (dotGeoJsonSource != null) {
-          dotGeoJsonSource.setGeoJson(newPoint);
-          if (mapboxMap.getStyle() != null) {
-            GeoJsonSource lineSource = mapboxMap.getStyle().getSourceAs(LINE_SOURCE_ID);
-            markerLinePointList.add(newPoint);
-            if (lineSource != null) {
-              lineSource.setGeoJson(Feature.fromGeometry(LineString.fromLngLats(markerLinePointList)));
-            }
-          }
-        }
-      }
-    };
 
   /**
    * Add various sources to the map.
@@ -310,9 +269,6 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
     if (handler != null && runnable != null) {
       handler.removeCallbacksAndMessages(null);
     }
-    if (markerIconAnimator != null) {
-      markerIconAnimator.end();
-    }
     mapView.onStop();
   }
 
@@ -339,22 +295,5 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
   }
-
-  /**
-   * Method is used to interpolate the SymbolLayer icon animation.
-   */
-  private static final TypeEvaluator<LatLng> latLngEvaluator = new TypeEvaluator<LatLng>() {
-
-    private final LatLng latLng = new LatLng();
-
-    @Override
-    public LatLng evaluate(float fraction, LatLng startValue, LatLng endValue) {
-      latLng.setLatitude(startValue.getLatitude()
-        + ((endValue.getLatitude() - startValue.getLatitude()) * fraction));
-      latLng.setLongitude(startValue.getLongitude()
-        + ((endValue.getLongitude() - startValue.getLongitude()) * fraction));
-      return latLng;
-    }
-  };
 }
 
