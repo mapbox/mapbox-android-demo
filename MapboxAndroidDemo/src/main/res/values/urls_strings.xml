@@ -73,7 +73,7 @@
     <string name="activity_camera_slowly_rotating_url" translatable="false">https://i.imgur.com/uuiOK5D.png</string>
     <string name="activity_offline_simple_url" translatable="false">http://i.imgur.com/dV4DgDT.png</string>
     <string name="activity_offline_manager_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
-    <string name="activity_url" translatable="false">http://i.imgur.com/tDlcNIg.png</string>
+    <string name="activity_offline_cache_management_url" translatable="false">https://i.imgur.com/pJ8dmbU.png</string>
     <string name="activity_query_select_building_url" translatable="false">http://i.imgur.com/bImud7u.png</string>
     <string name="activity_query_feature_url" translatable="false">http://i.imgur.com/HXxRBAF.png</string>
     <string name="activity_query_feature_count_url" translatable="false">http://i.imgur.com/phzOt81.png</string>

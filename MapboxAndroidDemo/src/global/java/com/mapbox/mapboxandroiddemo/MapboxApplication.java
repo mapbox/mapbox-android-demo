@@ -1,7 +1,7 @@
 package com.mapbox.mapboxandroiddemo;
 
 import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.core.CrashlyticsCore;
+import com.google.firebase.FirebaseApp;
 import com.mapbox.mapboxandroiddemo.utils.TileLoadingInterceptor;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.module.http.HttpRequestUtil;
@@ -18,10 +18,13 @@ public class MapboxApplication extends MultiDexApplication {
   public void onCreate() {
     super.onCreate();
     setUpPicasso();
+    if (!BuildConfig.DEBUG) {
+      FirebaseApp.initializeApp(this);
+      setUpCrashlytics();
+    }
     Mapbox.getInstance(this, getString(R.string.access_token));
     Mapbox.getTelemetry().setDebugLoggingEnabled(true);
     setUpTileLoadingMeasurement();
-    setUpCrashlytics();
   }
 
   private void setUpPicasso() {
@@ -40,10 +43,6 @@ public class MapboxApplication extends MultiDexApplication {
   }
 
   private void setUpCrashlytics() {
-    Fabric.with(this, new Crashlytics.Builder()
-        .core(new CrashlyticsCore.Builder()
-            .disabled(BuildConfig.DEBUG)
-            .build())
-        .build());
+    Fabric.with(this, new Crashlytics());
   }
 }

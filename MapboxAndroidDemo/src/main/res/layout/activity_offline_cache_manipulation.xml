@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/materialGrey"
+    tools:context=".examples.offline.CacheManagementActivity">
+
+    <!-- Set the starting camera position and map style using xml-->
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        mapbox:layout_constraintBottom_toTopOf="@+id/guideline7"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toTopOf="parent"
+        mapbox:mapbox_cameraTargetLat="40.73581"
+        mapbox:mapbox_cameraTargetLng="-73.99155"
+        mapbox:mapbox_cameraZoom="11"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        mapbox:layout_constraintGuide_percent="0.54"/>
+
+    <Button
+        android:id="@+id/invalidate_ambient_cache_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/invalidate_cache_button"
+        android:textAllCaps="false"
+        mapbox:layout_constraintBottom_toTopOf="@+id/set_max_ambient_cache_size_button_editText"
+        mapbox:layout_constraintEnd_toStartOf="@+id/reset_database_button"
+        mapbox:layout_constraintHorizontal_bias="0.5"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toTopOf="@+id/guideline7"/>
+
+    <Button
+        android:id="@+id/reset_database_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reset_database_button"
+        android:textAllCaps="false"
+        mapbox:layout_constraintBottom_toBottomOf="@+id/invalidate_ambient_cache_button"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintHorizontal_bias="0.5"
+        mapbox:layout_constraintStart_toEndOf="@+id/invalidate_ambient_cache_button"
+        mapbox:layout_constraintTop_toTopOf="@+id/invalidate_ambient_cache_button"/>
+
+    <Button
+        android:id="@+id/set_max_ambient_cache_size_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/set_ambient_cache_max"
+        android:textAllCaps="false"
+        mapbox:layout_constraintBottom_toTopOf="@+id/set_max_ambient_cache_size_button_textView"
+        mapbox:layout_constraintEnd_toEndOf="@+id/set_max_ambient_cache_size_button_editText"
+        mapbox:layout_constraintStart_toStartOf="@+id/set_max_ambient_cache_size_button_editText"/>
+
+    <TextView
+        android:id="@+id/set_max_ambient_cache_size_button_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:text="@string/set_max_ambient_cache_size_textview"
+        mapbox:layout_constraintBottom_toBottomOf="parent"
+        mapbox:layout_constraintEnd_toEndOf="@+id/set_max_ambient_cache_size_button"
+        mapbox:layout_constraintStart_toStartOf="@+id/set_max_ambient_cache_size_button"/>
+
+    <EditText
+        android:id="@+id/set_max_ambient_cache_size_button_editText"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/set_ambient_cache_max_hint"
+        android:textAllCaps="false"
+        mapbox:layout_constraintBottom_toTopOf="@+id/set_max_ambient_cache_size_button"
+        mapbox:layout_constraintEnd_toEndOf="@+id/invalidate_ambient_cache_button"
+        mapbox:layout_constraintStart_toStartOf="@+id/invalidate_ambient_cache_button"/>
+
+    <Button
+        android:id="@+id/clear_ambient_cache_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_ambient_cache_button"
+        android:textAllCaps="false"
+        mapbox:layout_constraintBottom_toBottomOf="@+id/set_max_ambient_cache_size_button"
+        mapbox:layout_constraintEnd_toEndOf="@+id/reset_database_button"
+        mapbox:layout_constraintStart_toStartOf="@+id/reset_database_button"
+        mapbox:layout_constraintTop_toTopOf="@+id/set_max_ambient_cache_size_button_editText"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -124,6 +124,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.offline.CacheManagementActivity"
+            android:label="@string/activity_offline_cache_management_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.javaservices.DirectionsActivity"
             android:label="@string/activity_java_services_directions_title">
             <meta-data
@@ -586,7 +593,7 @@
         <activity
             android:name=".examples.styles.RotatingTextAnchorPositionActivity"
             android:label="@string/activity_styles_rotating_anchor_text_title"
-            android:screenOrientation="portrait">]
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
@@ -594,7 +601,7 @@
         <activity
             android:name=".examples.styles.VariableLabelPlacementActivity"
             android:label="@string/activity_styles_variable_label_placement_title"
-            android:screenOrientation="portrait">]
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
@@ -879,10 +886,10 @@
         <activity
             android:name=".examples.labs.MapFogBackgroundActivity"
             android:label="@string/activity_lab_fog_background_title"
-        android:screenOrientation="portrait">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
             android:name=".examples.javaservices.TurfRingActivity"
@@ -935,12 +942,25 @@
             android:name="android.appwidget.provider"
             android:resource="@xml/demo_app_home_screen_widget_info" />
     </receiver>
-
         <!-- Set value to true to have SKU token generation on -->
         <meta-data
             android:name="com.mapbox.EnableSkuToken"
             android:value="true" />
 
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/mapbox_logo_icon" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/mapboxBlueDark" />
+
+        <service android:name=".utils.CustomFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

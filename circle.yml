@@ -54,10 +54,11 @@ jobs:
               echo "${GOOGLE_SERVICES_JSON_RELEASE}" > MapboxAndroidDemo/google-services.json
             fi
       - run:
-          name: Add preferences to fabric.properties file
+          name: Add Fabric keys to fabric.properties file
           command: |
-            if [ -n "${FABRIC_PROPERTIES_CONFIG_FILE}" ]; then
-              echo "${FABRIC_PROPERTIES_CONFIG_FILE}" > MapboxAndroidDemo/fabric.properties
+            if [ -n "${FABRIC_API_SECRET}" && -n "${FABRIC_API_KEY}" ]; then
+              echo "${FABRIC_API_SECRET}" >> MapboxAndroidDemo/fabric.properties
+              echo "${FABRIC_API_KEY}" >> MapboxAndroidDemo/fabric.properties
             fi
       - run:
           name: Log in to Google Cloud Platform
