@@ -65,7 +65,7 @@ public class SymbolListenerActivity extends AppCompatActivity implements
           .withLatLng(new LatLng(60.169091, 24.939876))
           .withIconImage(MAKI_ICON_HARBOR)
           .withIconSize(2.0f)
-          .setDraggable(true));
+          .withDraggable(true));
 
         // Add click listener and change the symbol to a cafe icon on click
         symbolManager.addClickListener(new OnSymbolClickListener() {
