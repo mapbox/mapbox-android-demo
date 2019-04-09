@@ -1,11 +1,13 @@
 // https://hackernoon.com/configuring-android-project-version-name-code-b168952f3323#.fcoiok3lv
 
+apply from: "${rootDir}/gradle/dependencies.gradle"
+
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'org.ajoberstar:grgit:2.3.0'
+        classpath pluginDependencies.grgit
     }
 }
 

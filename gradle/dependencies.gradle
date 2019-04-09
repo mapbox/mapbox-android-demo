@@ -58,7 +58,9 @@ ext {
             firebase           : '1.1.1',
             gradle             : '3.2.1',
             gradlePlayPublisher: '1.2.2',
-            kotlin             : '1.2.71'
+            kotlin             : '1.2.71',
+            dependencyGraph    : '0.3.0',
+            grgit              : '2.3.0'
     ]
 
     dependenciesList = [
@@ -120,11 +122,13 @@ ext {
     ]
 
     pluginDependencies = [
-            gradle       : "com.android.tools.build:gradle:${pluginVersion.gradle}",
-            checkstyle   : "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
-            firebase     : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
-            playPublisher: "com.github.triplet.gradle:play-publisher:${pluginVersion.gradlePlayPublisher}",
-            kotlin       : "org.jetbrains.kotlin:kotlin-gradle-plugin:${pluginVersion.kotlin}"
+            gradle          : "com.android.tools.build:gradle:${pluginVersion.gradle}",
+            checkstyle      : "com.puppycrawl.tools:checkstyle:${pluginVersion.checkstyle}",
+            firebase        : "com.google.firebase:firebase-plugins:${pluginVersion.firebase}",
+            playPublisher   : "com.github.triplet.gradle:play-publisher:${pluginVersion.gradlePlayPublisher}",
+            kotlin          : "org.jetbrains.kotlin:kotlin-gradle-plugin:${pluginVersion.kotlin}",
+            dependencyGraph : "com.vanniktech:gradle-dependency-graph-generator-plugin:${pluginVersion.dependencyGraph}",
+            grgit           : "org.ajoberstar:grgit:${pluginVersion.grgit}"
     ]
 
     wearDependencies = [
