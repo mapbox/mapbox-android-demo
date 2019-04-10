@@ -55,25 +55,9 @@ public class AnimatedImageGifActivity extends AppCompatActivity implements OnMap
     map.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-
-        // Set the bounds/size of the gif. Then create an image source object with a unique id,
-        // the bounds, and drawable image
-        ImageSource imageSource = new ImageSource(ID_IMAGE_SOURCE,
-          new LatLngQuad(
-            new LatLng(46.437, -80.425),
-            new LatLng(46.437, -71.516),
-            new LatLng(37.936, -71.516),
-            new LatLng(37.936, -80.425)), R.drawable.waving_bear_gif);
-
-        // Add the source to the map
-        style.addSource(imageSource);
-
-        // Create an raster layer with a unique id and the image source created above. Then add the layer to the map.
-        style.addLayer(new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE));
-
         // Use the RefreshImageRunnable class and runnable to quickly display images for a GIF/video UI experience
         InputStream gifInputStream = getResources().openRawResource(R.raw.waving_bear);
-        runnable = new RefreshImageRunnable(imageSource, Movie.decodeStream(gifInputStream), handler = new Handler());
+        runnable = new RefreshImageRunnable(style, Movie.decodeStream(gifInputStream), handler = new Handler());
         handler.postDelayed(runnable, 100);
       }
     });
@@ -121,14 +105,15 @@ public class AnimatedImageGifActivity extends AppCompatActivity implements OnMap
   private static class RefreshImageRunnable implements Runnable {
 
     private ImageSource imageSource;
+    private Style style;
     private Movie movie;
     private Handler handler;
     private long movieStart;
     private Bitmap bitmap;
     private Canvas canvas;
 
-    RefreshImageRunnable(ImageSource imageSource, Movie movie, Handler handler) {
-      this.imageSource = imageSource;
+    RefreshImageRunnable(Style style, Movie movie, Handler handler) {
+      this.style = style;
       this.movie = movie;
       this.handler = handler;
       bitmap = Bitmap.createBitmap(movie.width(), movie.height(), Bitmap.Config.ARGB_8888);
@@ -149,6 +134,23 @@ public class AnimatedImageGifActivity extends AppCompatActivity implements OnMap
 
       movie.setTime((int) ((now - movieStart) % dur));
       movie.draw(canvas, 0, 0);
+
+      if (imageSource == null) {
+        // Set the bounds/size of the gif. Then create an image source object with a unique id,
+        // the bounds, and drawable image
+        imageSource = new ImageSource(ID_IMAGE_SOURCE,
+          new LatLngQuad(
+            new LatLng(46.437, -80.425),
+            new LatLng(46.437, -71.516),
+            new LatLng(37.936, -71.516),
+            new LatLng(37.936, -80.425)), bitmap);
+
+        // Add the source to the map
+        style.addSource(imageSource);
+
+        // Create an raster layer with a unique id and the image source created above. Then add the layer to the map.
+        style.addLayer(new RasterLayer(ID_IMAGE_LAYER, ID_IMAGE_SOURCE));
+      }
 
       imageSource.setImage(bitmap);
       handler.postDelayed(this, 50);
