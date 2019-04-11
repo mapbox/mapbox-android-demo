@@ -1043,15 +1043,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,
-      R.string.activity_labs_snaking_directions_route_title,
-      R.string.activity_labs_snaking_directions_route_description,
-      new Intent(MainActivity.this, SnakingDirectionsRouteActivity.class),
-      null,
-      R.string.activity_labs_snaking_directions_route_url, false, BuildConfig.MIN_SDK_VERSION
-    ));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_lab,
       R.string.activity_lab_fog_background_title,
       R.string.activity_lab_fog_background_description,
       new Intent(MainActivity.this, MapFogBackgroundActivity.class),
