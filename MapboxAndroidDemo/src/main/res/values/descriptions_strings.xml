@@ -24,7 +24,8 @@
     <string name="activity_dds_image_clustering_description">Use GeoJSON and SymbolLayer icons to view clustered images.</string>
     <string name="activity_styles_line_layer_description">Create a GeoJSON line source, style it using properties, and add the layer to the map.</string>
     <string name="activity_dds_line_gradient_description">Style a line with colored gradient.</string>
-    <string name="activity_styles_basic_symbol_layer_description">Display markers on the map by adding a symbol layer. Query the map and animate the icon size if clicked on.</string>
+    <string name="activity_styles_basic_symbol_layer_description">Use a SymbolLayer to display icons on the map.</string>
+    <string name="activity_styles_symbol_icon_onclick_size_change_description">Query the map and animate the change in a SymbolLayer icon\'s size if clicked on.</string>
     <string name="activity_styles_local_style_or_raster_source_description">Load a locally stored map style JSON file or custom raster style via a URL.</string>
     <string name="activity_style_image_source_time_lapse_description">Use an image source and a runnable to show data changes over time.</string>
     <string name="activity_style_image_source_description">Use an image source to easily display images on the map.</string>

@@ -21,7 +21,8 @@
     <string name="activity_dds_create_hotspots_points_title">Create hotspots from points</string>
     <string name="activity_styles_dds_geojson_circle_layer_clusters_title">CircleLayer clusters</string>
     <string name="activity_styles_line_layer_title">Create a line layer</string>
-    <string name="activity_styles_basic_symbol_layer_title">Marker symbol layer</string>
+    <string name="activity_styles_basic_symbol_layer_title">Symbol layer icons</string>
+    <string name="activity_styles_symbol_icon_onclick_size_change_title">Symbol layer icon size change</string>
     <string name="activity_styles_local_style_or_raster_source_title">Local style or custom raster style</string>
     <string name="activity_style_image_source_time_lapse_title">Show time lapse</string>
     <string name="activity_style_image_source_title">Use an image source</string>

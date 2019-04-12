@@ -488,6 +488,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.styles.IconSizeChangeOnClickActivity"
+            android:label="@string/activity_styles_symbol_icon_onclick_size_change_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.styles.ImageSourceActivity"
             android:label="@string/activity_style_image_source_title">
             <meta-data
