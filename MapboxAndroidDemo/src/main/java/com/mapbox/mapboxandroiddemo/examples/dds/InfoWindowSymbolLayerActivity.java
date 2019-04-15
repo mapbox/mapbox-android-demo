@@ -145,7 +145,8 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
     loadedStyle.addLayer(new SymbolLayer(MARKER_LAYER_ID, GEOJSON_SOURCE_ID)
       .withProperties(
         iconImage(MARKER_IMAGE_ID),
-        iconAllowOverlap(true)
+        iconAllowOverlap(true),
+        iconOffset(new Float[] {0f, -8f})
       ));
   }
 
@@ -168,7 +169,7 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
         iconAllowOverlap(true),
 
         /* offset the info window to be above the marker */
-        iconOffset(new Float[] {-2f, -25f})
+        iconOffset(new Float[] {-2f, -28f})
       )
       /* add a filter to show only when selected feature property is true */
       .withFilter(eq((get(PROPERTY_SELECTED)), literal(true))));
