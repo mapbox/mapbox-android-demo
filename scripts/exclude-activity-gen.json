@@ -7,5 +7,6 @@
 	"StaticImageActivity",
 	"PulsingLayerOpacityColorActivity",
 	"LocationComponentFragmentActivity",
-	"InsetMapActivity"
+	"InsetMapActivity",
+	"HomeScreenWidgetActivity"
 ]

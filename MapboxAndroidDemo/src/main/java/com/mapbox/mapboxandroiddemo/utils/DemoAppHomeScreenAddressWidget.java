@@ -34,8 +34,9 @@ import timber.log.Timber;
 import static android.os.Looper.getMainLooper;
 
 /**
- * Use the Mapbox Java SDK to make a reverse geocode search with the device's current coordinates. Display
- * the address in an Android home screen widget.
+ * A home screen widget. The widget retrieves the device's location,
+ * makes a reverse geocoding request to the Mapbox Geocoding API, and displays the real-world
+ * address that's associated with the device's location.
  */
 public class DemoAppHomeScreenAddressWidget extends AppWidgetProvider implements
   PermissionsListener {
