@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.animation.LinearInterpolator;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -20,7 +21,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
 public class PulsingTextSizeActivity extends AppCompatActivity {
 
-  private static final float DESIRED_MAX_TEXT_SIZE = 22;
+  private static final float DESIRED_MAX_TEXT_SIZE = 13;
   private static final long SIZE_CHANGE_SPEED_MILLISECONDS = 3000;
   private MapView mapView;
   private Layer stateLabelSymbolLayer;
@@ -50,8 +51,8 @@ public class PulsingTextSizeActivity extends AppCompatActivity {
             stateLabelSymbolLayer = style.getLayer("state-label");
 
             stateLabelSymbolLayer.setProperties(
-              textIgnorePlacement(true),
-              textAllowOverlap(true)
+              /*textIgnorePlacement(true),
+              textAllowOverlap(true)*/
             );
             initAnimation();
           }
@@ -73,6 +74,9 @@ public class PulsingTextSizeActivity extends AppCompatActivity {
     animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
       @Override
       public void onAnimationUpdate(ValueAnimator valueAnimator) {
+        Log.d("PulsingTextSizeActivity", "onAnimationUpdate: (Float) valueAnimator.getAnimatedValue()) = " +
+          (Float) valueAnimator.getAnimatedValue());
+
         stateLabelSymbolLayer.setProperties(textSize((Float) valueAnimator.getAnimatedValue()));
       }
     });
