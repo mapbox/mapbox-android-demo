@@ -46,6 +46,9 @@
     </group>
     <group android:id="@+id/settings_group" android:checkableBehavior="single">
         <item
+            android:id="@+id/show_login_screen_in_nav_drawer"
+            android:title="@string/login_screen"/>
+        <item
             android:id="@+id/share_app_in_nav_drawer"
             android:title="@string/share"/>
         <item

@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private ExampleAdapter adapter;
   private RecyclerView recyclerView;
   private TextView noExamplesTv;
+  private NavigationView navigationView;
 
   private boolean loggedIn;
   private int currentCategory = R.id.nav_basics;
@@ -114,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+      .getBoolean(TOKEN_SAVED_KEY, false);
 
     toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
@@ -174,15 +178,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     toggle.syncState();
 
-    NavigationView navigationView = findViewById(R.id.nav_view);
+    navigationView = findViewById(R.id.nav_view);
     if (navigationView != null) {
       navigationView.setNavigationItemSelectedListener(this);
       navigationView.setCheckedItem(R.id.nav_basics);
+      navigationView.getMenu().findItem(R.id.show_login_screen_in_nav_drawer).setVisible(false);
     }
-
-    loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-      .getBoolean(TOKEN_SAVED_KEY, false);
-
     if (loggedIn) {
       analytics.setMapboxUsername();
       analytics.viewedScreen(MainActivity.class.getSimpleName(), loggedIn);
@@ -212,7 +213,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   public boolean onNavigationItemSelected(@NonNull MenuItem item) {
     // Handle navigation view item clicks here.
     int id = item.getItemId();
-
     if (id == R.id.settings_in_nav_drawer) {
       buildSettingsDialog();
     }
@@ -246,6 +246,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           models.add(model);
         }
       }
+
     }
 
     adapter.updateDataSet(models, currentCategory);
@@ -308,6 +309,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           }
         })
         .show();
+
       return true;
     } else if (id == R.id.action_show_other_language) {
       if (showJavaExamples) {
@@ -339,10 +341,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     final View customView = inflater.inflate(R.layout.settings_dialog_layout, null);
     Switch analyticsOptOutSwitch = customView.findViewById(R.id.analytics_opt_out_switch);
+    Switch alwaysShowLandingSwitch = customView.findViewById(R.id.login_or_create_account_switch);
     analyticsOptOutSwitch.setChecked(!analytics.isAnalyticsEnabled());
 
     final SettingsDialogView dialogView = new SettingsDialogView(customView,
-      this, analyticsOptOutSwitch, analytics, loggedIn);
+      this, analyticsOptOutSwitch, alwaysShowLandingSwitch, analytics, loggedIn);
 
     dialogView.buildDialog();
 
@@ -351,11 +354,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     if (!loggedIn) {
       logOutOfMapboxAccountButton.setVisibility(View.GONE);
     } else {
-      logOutOfMapboxAccountButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          dialogView.logOut(loggedIn);
-        }
+      logOutOfMapboxAccountButton.setOnClickListener(view -> {
+        dialogView.logOut(loggedIn);
       });
     }
   }

@@ -20,6 +20,7 @@ import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.OPTED_OUT_OF
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.AVATAR_IMAGE_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.EMAIL_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.FROM_LOG_OUT_BUTTON_KEY;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.LOGIN_SIGNIN_IGNORE_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.USERNAME_KEY;
@@ -30,21 +31,25 @@ public class SettingsDialogView {
   private View customDialogView;
   private Context context;
   private Switch analyticsOptOutSwitch;
+  private Switch alwaysShowLandingSwitch;
   private AnalyticsTracker analytics;
   private boolean loggedInOrNot;
 
 
-  public SettingsDialogView(View view, Context context, Switch analyticsOptOutSwitch,
+  public SettingsDialogView(View view, Context context, Switch analyticsOptOutSwitch,Switch alwaysShowLandingSwitch,
                             AnalyticsTracker analytics, boolean loggedInOrNot) {
     this.customDialogView = view;
     this.context = context;
     this.analyticsOptOutSwitch = analyticsOptOutSwitch;
+    this.alwaysShowLandingSwitch = alwaysShowLandingSwitch;
     this.analytics = analytics;
     this.loggedInOrNot = loggedInOrNot;
   }
 
   public void buildDialog() {
     analyticsOptOutSwitch.setChecked(!analytics.isAnalyticsEnabled());
+    alwaysShowLandingSwitch.setChecked(!PreferenceManager
+      .getDefaultSharedPreferences(context).getBoolean(LOGIN_SIGNIN_IGNORE_KEY, false));
     new AlertDialog.Builder(context)
       .setView(customDialogView)
       .setTitle(R.string.settings_dialog_title)
@@ -52,12 +57,18 @@ public class SettingsDialogView {
         @Override
         public void onClick(DialogInterface dialog, int which) {
           if (analyticsOptOutSwitch.isChecked()) {
-            changeAnalyticsSettings(false, context.getString(
-              R.string.settings_status_toast_analytics_opt_out), loggedInOrNot);
+            changeAnalyticsSettings(false, loggedInOrNot);
           } else {
-            changeAnalyticsSettings(true, context.getString(
-              R.string.settings_status_toast_analytics_opt_in), loggedInOrNot);
+            changeAnalyticsSettings(true, loggedInOrNot);
           }
+
+          SharedPreferences.Editor sharePrefEditor = PreferenceManager
+            .getDefaultSharedPreferences(context).edit()
+            .putBoolean(LOGIN_SIGNIN_IGNORE_KEY, !alwaysShowLandingSwitch.isChecked());
+          sharePrefEditor.apply();
+
+          Toast.makeText(context, context.getString(R.string.settings_status_toast_settings_saved),
+            Toast.LENGTH_SHORT).show();
         }
       })
       .setNegativeButton(R.string.settings_dialog_negative_button_text, new DialogInterface.OnClickListener() {
@@ -69,7 +80,7 @@ public class SettingsDialogView {
       .show();
   }
 
-  private void changeAnalyticsSettings(boolean optedIn, String toastMessage, boolean loggedIn) {
+  private void changeAnalyticsSettings(boolean optedIn, boolean loggedIn) {
     if (optedIn) {
       analytics.optUserIntoAnalytics(optedIn);
       analytics.trackEvent(OPTED_IN_TO_ANALYTICS, loggedIn);
@@ -77,7 +88,6 @@ public class SettingsDialogView {
       analytics.trackEvent(OPTED_OUT_OF_ANALYTICS, loggedIn);
       analytics.optUserIntoAnalytics(optedIn);
     }
-    Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show();
   }
 
   public void logOut(boolean loggedIn) {
@@ -93,5 +103,9 @@ public class SettingsDialogView {
     Intent intent = new Intent(context, LandingActivity.class);
     intent.putExtra(FROM_LOG_OUT_BUTTON_KEY, true);
     context.startActivity(intent);
+  }
+
+  private void goToLandingActivity(String stringExtraKey) {
+
   }
 }
