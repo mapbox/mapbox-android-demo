@@ -2,6 +2,18 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 7.3.3 (Release corresponds to v7.3.2 release of maps sdk)
+* Refactoring LocationComponent examples to use LocationComponentActivationOptions[#1010](https://github.com/mapbox/mapbox-android-demo/pull/1010)
+* Bumped dependencies for new plugin releases [#1014](https://github.com/mapbox/mapbox-android-demo/pull/1014)
+* Bumped china plugin to 2.1.1 [#1026](https://github.com/mapbox/mapbox-android-demo/pull/1026)
+* Fixes waving bear's image decoding on Android Pie [#1025](https://github.com/mapbox/mapbox-android-demo/pull/1025)
+* Using dependencies.gradle file for Gradle plugin script version setup [#1017](https://github.com/mapbox/mapbox-android-demo/pull/1017)
+* Removed duplicate snaking directions line example [#1027](https://github.com/mapbox/mapbox-android-demo/pull/1027)
+* Bumped turf and services to 4.6.0 [#1028](https://github.com/mapbox/mapbox-android-demo/pull/1028)
+* Tweaks to SymbolLayer icon offset spacing [#1016](https://github.com/mapbox/mapbox-android-demo/pull/1016)
+* Bumped maps sdk to 7.3.2 [#1035](https://github.com/mapbox/mapbox-android-demo/pull/1035)
+* Fix to geocoding example XML[#1006](https://github.com/mapbox/mapbox-android-demo/pull/1006), [#1007](https://github.com/mapbox/mapbox-android-demo/pull/1007)
+
 ## 7.3.0
 
 * Multiple text field format
