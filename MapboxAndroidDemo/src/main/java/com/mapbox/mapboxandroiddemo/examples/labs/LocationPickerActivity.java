@@ -20,7 +20,6 @@ import com.mapbox.api.geocoding.v5.MapboxGeocoding;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
 import com.mapbox.api.geocoding.v5.models.GeocodingResponse;
 import com.mapbox.core.exceptions.ServicesException;
-import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -129,8 +128,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
               if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
                 GeoJsonSource source = style.getSourceAs("dropped-marker-source-id");
                 if (source != null) {
-                  source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(
-                    mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude())));
+                  source.setGeoJson(Point.fromLngLat(mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude()));
                 }
                 style.getLayer(DROPPED_MARKER_LAYER_ID).setProperties(visibility(VISIBLE));
               }

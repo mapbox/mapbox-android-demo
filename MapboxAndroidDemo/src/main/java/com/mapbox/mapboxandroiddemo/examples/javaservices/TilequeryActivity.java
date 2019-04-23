@@ -138,8 +138,7 @@ public class TilequeryActivity extends AppCompatActivity implements
       // Move and display the click center layer's red marker icon to wherever the map was clicked on
       GeoJsonSource clickLocationSource = style.getSourceAs(CLICK_CENTER_GEOJSON_SOURCE_ID);
       if (clickLocationSource != null) {
-        clickLocationSource.setGeoJson(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(),
-          point.getLatitude())));
+        clickLocationSource.setGeoJson(Point.fromLngLat(point.getLongitude(), point.getLatitude()));
       }
 
       // Use the map click location to make a Tilequery API call
