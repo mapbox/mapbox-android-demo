@@ -333,4 +333,7 @@
 
     <!-- Polygon toggle -->
     <string name="tap_on_neighborhood">Tap on a neighborhood area to toggle its color</string>
+
+    <!-- Turf circle ring-->
+    <string name="tap_on_map">Tap on the map to move the ring</string>
 </resources>
