@@ -160,8 +160,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
   private void resetDestinationMarkers(@NonNull Style style) {
     GeoJsonSource optimizedLineSource = style.getSourceAs(ICON_GEOJSON_SOURCE_ID);
     if (optimizedLineSource != null) {
-      optimizedLineSource.setGeoJson(Feature.fromGeometry(Point.fromLngLat(origin.longitude(),
-        origin.latitude())));
+      optimizedLineSource.setGeoJson(Point.fromLngLat(origin.longitude(), origin.latitude()));
     }
   }
 

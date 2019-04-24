@@ -123,7 +123,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
     if (style != null) {
       GeoJsonSource source = style.getSourceAs("click-source-id");
       if (source != null) {
-        source.setGeoJson(Feature.fromGeometry(Point.fromLngLat(point.getLongitude(), point.getLatitude())));
+        source.setGeoJson(Point.fromLngLat(point.getLongitude(), point.getLatitude()));
       }
 
       // Request and redraw the Isochrone information based on the map click point
