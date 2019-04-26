@@ -2,7 +2,13 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
-## 7.3.3 (Release corresponds to v7.3.2 release of maps sdk)
+## 7.4.0-beta.2
+
+* Adding SKU generation (via Maps SDK bump to 7.4.0-beta.2) (#1043)
+* Refactoring #setGeoJson() to pass in Point object directly as a parameter (#1040)
+* Adding note about product flavors to README (#987)
+
+## 7.3.3 (This release corresponds to v7.3.2 release of the Maps SDK)
 * Refactoring LocationComponent examples to use LocationComponentActivationOptions[#1010](https://github.com/mapbox/mapbox-android-demo/pull/1010)
 * Bumped dependencies for new plugin releases [#1014](https://github.com/mapbox/mapbox-android-demo/pull/1014)
 * Bumped china plugin to 2.1.1 [#1026](https://github.com/mapbox/mapbox-android-demo/pull/1026)
