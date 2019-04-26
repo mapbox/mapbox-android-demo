@@ -1,10 +1,1 @@
-* Refactoring LocationComponent examples to use LocationComponentActivationOptions
-* Bumped dependencies for new plugin releases
-* Bumped china plugin to 2.1.1
-* Fixes waving bear's image decoding on Android Pie
-* Using dependencies.gradle file for Gradle plugin script version setup
-* Removed duplicate snaking directions line example
-* Bumped turf and services to 4.6.0
-* Tweaks to SymbolLayer icon offset spacing
-* Bumped maps sdk to 7.3.2
-* Fix to geocoding example XML
+This update is in line with the 7.4.0-beta.2 release of the Mapbox Maps SDK for Android and includes several fixes.
