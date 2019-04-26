@@ -816,6 +816,11 @@
             android:name="android.appwidget.provider"
             android:resource="@xml/demo_app_home_screen_widget_info" />
     </receiver>
+
+        <!-- Set value to true to have SKU token generation on -->
+        <meta-data
+            android:name="com.mapbox.EnableSkuToken"
+            android:value="true" />
     </application>
 
 </manifest>
