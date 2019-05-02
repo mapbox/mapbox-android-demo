@@ -394,4 +394,16 @@
     <string name="live_within_textview">You want to live within how many minutes from your downtown Vienna office?</string>
     <string name="minutes_textview">%1$d min</string>
 
+    <!-- Turf polygon circle transformation -->
+    <string name="polygon_circle_transformation_click_map_instruction">Click map to move circle</string>
+    <string name="polygon_circle_transformation_circle_steps">Steps: %1$d</string>
+    <string name="polygon_circle_transformation_circle_radius">Radius: %1$d</string>
+    <string name="polygon_circle_transformation_circle_distance_units">Unit: </string>
+    <string-array name="polygon_circle_transformation_circle_distance_units_array">
+        <item>Kilometers</item>
+        <item>Miles</item>
+        <item>Degrees</item>
+        <item>Radians</item>
+    </string-array>
+
 </resources>
