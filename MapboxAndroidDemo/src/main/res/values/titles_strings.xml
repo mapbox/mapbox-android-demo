@@ -60,6 +60,7 @@
     <string name="activity_dds_polygon_title">Draw a polygon</string>
     <string name="activity_dds_polygon_holes_title">Draw a polygon with holes</string>
     <string name="activity_dds_symbol_collision_detection_title">Toggle collision detection</string>
+    <string name="activity_dds_polygon_revealed_hole_outline_title">Outlined polygon hole</string>
     <string name="activity_styles_text_field_formatting_title">Adjust text labels</string>
     <string name="activity_annotation_marker_view_title">Draw a marker view</string>
     <string name="activity_annotation_custom_info_window_title">Custom info window</string>
