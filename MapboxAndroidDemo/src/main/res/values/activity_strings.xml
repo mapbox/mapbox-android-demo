@@ -336,4 +336,13 @@
 
     <!-- Turf circle ring-->
     <string name="tap_on_map">Tap on the map to move the ring</string>
+
+    <!-- Collision toggle -->
+    <string name="collision_enabled">true</string>
+    <string name="collision_disabled">false</string>
+    <string name="placement_explanation">textIgnorePlacement: other symbols can be visible even if \n they collide with the text</string>
+    <string name="overlap_explanation">textAllowOverlap: if true, the text will be visible even if it collides with other previously drawn symbols</string>
+    <string name="icon_overlap_explanation">iconAllowOverlap: the icon will be visible even if it collides with other previously drawn symbols</string>
+    <string name="icon_placement_explanation">iconIgnorePlacement: other symbols can be visible even if \n they collide with the icon</string>
+
 </resources>
