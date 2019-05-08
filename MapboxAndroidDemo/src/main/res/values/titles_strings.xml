@@ -28,6 +28,7 @@
     <string name="activity_styles_hillshade_title">Hillshading</string>
     <string name="activity_styles_fade_switch_title">Switch map styles with fade</string>
     <string name="activity_styles_text_field_multiple_formats_title">Multiple text formats</string>
+    <string name="activity_styles_text_field_multiple_colors_title">Multiple text colors</string>
     <string name="activity_styles_transparent_background_title">Transparent render surface</string>
     <string name="activity_styles_click_to_add_image_title">Click to add photo</string>
     <string name="activity_styles_rotating_anchor_text_title">Text anchor position</string>

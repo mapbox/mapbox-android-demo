@@ -19,6 +19,7 @@
     <string name="activity_styles_vector_source_description">Add a vector source to a map and display it as a layer.</string>
     <string name="activity_styles_add_wms_source_description">Adding an external Web Map Service layer to the map.</string>
     <string name="activity_styles_zoom_dependent_fill_color_description">Make a property depend on the map zoom level, in this case, the water layers fill color.</string>
+    <string name="activity_styles_text_field_multiple_colors_description">Use runtime styling to create SymbolLayer text labels that have different colors.</string>
     <string name="activity_dds_create_hotspots_points_description">Use the Mapbox Maps SDK to visualize point data as hotspots.</string>
     <string name="activity_styles_dds_geojson_circle_layer_clusters_description">Use GeoJSON and circle layers to visualize point data in clusters.</string>
     <string name="activity_dds_image_clustering_description">Use GeoJSON and SymbolLayer icons to view clustered images.</string>

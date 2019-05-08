@@ -99,6 +99,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.styles.TextFieldMultipleColorActivity"
+            android:label="@string/activity_styles_text_field_multiple_colors_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.offline.SimpleOfflineMapActivity"
             android:label="@string/activity_offline_simple_title">
             <meta-data
