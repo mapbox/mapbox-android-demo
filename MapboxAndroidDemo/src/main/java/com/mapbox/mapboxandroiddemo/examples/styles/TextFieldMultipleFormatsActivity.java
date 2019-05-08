@@ -1,5 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.FormatOption.formatFontScale;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.FormatOption.formatTextColor;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.FormatOption.formatTextFont;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.format;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.formatEntry;
@@ -22,8 +24,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 
 
 /**
- * Use runtime styling to create labels with a SymbolLayer that include multiple
- * text fonts and sizes.
+ * Use runtime styling to create labels with a SymbolLayer that include multiple text
+ * languages, fonts, sizes, and colors.
  */
 public class TextFieldMultipleFormatsActivity extends AppCompatActivity {
 
@@ -53,16 +55,19 @@ public class TextFieldMultipleFormatsActivity extends AppCompatActivity {
             Expression.FormatEntry bigLabel = formatEntry(
               get("name_en"),
               formatFontScale(1.5),
+              formatTextColor(Color.BLUE),
               formatTextFont(new String[] {"Ubuntu Medium", "Arial Unicode MS Regular"})
             );
 
             Expression.FormatEntry newLine = formatEntry(
+              // Add "\n" in order to break the line and have the second label underneath
               "\n",
               formatFontScale(0.5)
             );
 
             Expression.FormatEntry smallLabel = formatEntry(
               get("name"),
+              formatTextColor(Color.parseColor("#d6550a")),
               formatTextFont(new String[] {"Caveat Regular", "Arial Unicode MS Regular"})
             );
 
