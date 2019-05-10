@@ -19,14 +19,29 @@ class SimpleMapViewActivityKotlin : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mapboxMap: MapboxMap
 
-    private val idleListener = object : MapView.OnDidBecomeIdleListener {
-        override fun onDidBecomeIdle() {
-            mapView.removeOnDidBecomeIdleListener(this)
-            Log.v("idle", "Idle listener removed")
-            mapboxMap.snapshot { snapshot ->
-                imageView.setImageBitmap(snapshot)
-                mapView.addOnDidBecomeIdleListener(this)
-                Log.v("idle", "Idle listener added")
+//    private val idleListener = object : MapView.OnDidBecomeIdleListener {
+//        override fun onDidBecomeIdle() {
+//            mapView.removeOnDidBecomeIdleListener(this)
+//            Log.v("idle", "Idle listener removed")
+//            mapboxMap.snapshot { snapshot ->
+//                imageView.setImageBitmap(snapshot)
+//                mapView.addOnDidBecomeIdleListener(this)
+//                Log.v("idle", "Idle listener added")
+//            }
+//        }
+//    }
+
+    private val idleListener = object : MapView.OnDidFinishRenderingFrameListener {
+        override fun onDidFinishRenderingFrame(fully: Boolean) {
+            mapView.removeOnDidFinishRenderingFrameListener(this)
+            if (fully) {
+                mapView.removeOnDidFinishRenderingFrameListener(this)
+                Log.v("idle", "idle listener removed")
+                mapboxMap.snapshot { snapshot ->
+                    imageView.setImageBitmap(snapshot)
+                    mapView.addOnDidFinishRenderingFrameListener(this)
+                    Log.v("idle", "idle listener added")
+                }
             }
         }
     }
@@ -42,7 +57,7 @@ class SimpleMapViewActivityKotlin : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(map: MapboxMap) {
         mapboxMap = map
-        mapboxMap.setStyle(Style.Builder().fromUrl(Style.OUTDOORS)) { mapView.addOnDidBecomeIdleListener(idleListener) }
+        mapboxMap.setStyle(Style.Builder().fromUrl(Style.OUTDOORS)) { mapView.addOnDidFinishRenderingFrameListener(idleListener) }
     }
 
     override fun onStart() {
@@ -80,7 +95,7 @@ class SimpleMapViewActivityKotlin : AppCompatActivity(), OnMapReadyCallback {
 
     public override fun onDestroy() {
         super.onDestroy()
-        mapView.removeOnDidBecomeIdleListener(idleListener)
+        mapView.removeOnDidFinishRenderingFrameListener(idleListener)
         mapView.onDestroy()
     }
 }
