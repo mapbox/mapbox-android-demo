@@ -33,6 +33,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 public class IconSizeChangeOnClickActivity extends AppCompatActivity implements
   OnMapReadyCallback, MapboxMap.OnMapClickListener {
 
+  private ValueAnimator markerAnimator;
   private MapView mapView;
   private MapboxMap mapboxMap;
   private boolean markerSelected = false;
@@ -138,7 +139,7 @@ public class IconSizeChangeOnClickActivity extends AppCompatActivity implements
   }
 
   private void selectMarker(final SymbolLayer iconLayer) {
-    ValueAnimator markerAnimator = new ValueAnimator();
+    markerAnimator = new ValueAnimator();
     markerAnimator.setObjectValues(1f, 2f);
     markerAnimator.setDuration(300);
     markerAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -155,7 +156,6 @@ public class IconSizeChangeOnClickActivity extends AppCompatActivity implements
   }
 
   private void deselectMarker(final SymbolLayer iconLayer) {
-    ValueAnimator markerAnimator = new ValueAnimator();
     markerAnimator.setObjectValues(2f, 1f);
     markerAnimator.setDuration(300);
     markerAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -206,6 +206,9 @@ public class IconSizeChangeOnClickActivity extends AppCompatActivity implements
     super.onDestroy();
     if (mapboxMap != null) {
       mapboxMap.removeOnMapClickListener(this);
+    }
+    if (markerAnimator != null) {
+      markerAnimator.cancel();
     }
     mapView.onDestroy();
   }
