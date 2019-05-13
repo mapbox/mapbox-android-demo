@@ -36,6 +36,7 @@
     <string name="activity_styles_click_to_add_image_description">Select a photo on the device and add it on the map tap location.</string>
     <string name="activity_styles_rotating_anchor_text_description">Adjust the anchor position of SymbolLayer text fields.</string>
     <string name="activity_styles_missing_icon_description">Provide an icon when a Style failed to load one.</string>
+    <string name="activity_styles_variable_label_placement_description">To increase the chance of high-priority labels staying visible, provide the map renderer a list of preferred text anchor positions.</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_description">Use data-driven styling and GeoJSON data to set extrusions\' heights.</string>
     <string name="activity_extrusions_population_density_extrusions_description">Use extrusions to display 3D building height based on imported vector data.</string>
     <string name="activity_extrusions_adjust_extrusions_description">Change the location and color of the light shined on extrusions.</string>
