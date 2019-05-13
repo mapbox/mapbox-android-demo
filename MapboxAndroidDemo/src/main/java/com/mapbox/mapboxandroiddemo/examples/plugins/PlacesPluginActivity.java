@@ -105,8 +105,8 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
 
   private void addUserLocations() {
     home = CarmenFeature.builder().text("Mapbox SF Office")
-      .geometry(Point.fromLngLat(-122.399854, 37.7884400))
-      .placeName("50 Beale st, San Francisco, CA")
+      .geometry(Point.fromLngLat(-122.3964485, 37.7912561))
+      .placeName("50 Beale St, San Francisco, CA")
       .id("mapbox-sf")
       .properties(new JsonObject())
       .build();
