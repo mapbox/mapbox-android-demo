@@ -31,7 +31,6 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.division;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.gt;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.gte;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.has;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
@@ -208,7 +207,7 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
           ? all(has("point_count"),
           gte(pointCount, literal(layers[i][0]))
         ) : all(has("point_count"),
-          gt(pointCount, literal(layers[i][0])),
+          gte(pointCount, literal(layers[i][0])),
           lt(pointCount, literal(layers[i - 1][0]))
         )
       );
