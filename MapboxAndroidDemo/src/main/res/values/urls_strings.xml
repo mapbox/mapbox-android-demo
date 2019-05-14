@@ -117,4 +117,5 @@
     <string name="activity_dds_polygon_select_toggle_url" translatable="false">https://i.imgur.com/gVIfE3G.png</string>
     <string name="activity_china_simple_china_mapview_url" translatable="false">https://i.imgur.com/KwoEynZ.png</string>
     <string name="activity_lab_home_screen_widget_url" translatable="false">https://i.imgur.com/H5N9jDn.png</string>
+    <string name="activity_java_turf_ring_url" translatable="false">https://i.imgur.com/nG8xeXH.png</string>
 </resources>

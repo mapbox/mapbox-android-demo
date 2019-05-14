@@ -115,4 +115,5 @@
     <string name="activity_dds_polygon_select_toggle_title">Polygon toggle</string>
     <string name="activity_china_simple_china_mapview_title">China map view</string>
     <string name="activity_lab_home_screen_widget_title">Homescreen geocoding widget</string>
+    <string name="activity_java_turf_ring_title">Hollow circle</string>
 </resources>

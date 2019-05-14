@@ -117,4 +117,5 @@
     <string name="activity_dds_polygon_select_toggle_description">Tap on various polygons to "select" them and toggle their colors.</string>
     <string name="activity_china_simple_china_mapview_description">Show an accurate and government-approved China map in your app using the Mapbox Maps SDK.</string>
     <string name="activity_lab_home_screen_widget_description">Show the device\'s current location or other information in a homescreen widget.</string>
+    <string name="activity_java_turf_ring_description">Use Turf to calculate coordinates to eventually draw a ring around a center coordinate.</string>
 </resources>
