@@ -57,6 +57,7 @@
     <string name="activity_dds_geojson_line_url" translatable="false">https://i.imgur.com/Bs0X98z.png</string>
     <string name="activity_dds_polygon_url" translatable="false">http://i.imgur.com/v9X28id.png</string>
     <string name="activity_dds_polygon_holes_url" translatable="false">https://i.imgur.com/6hcqbNw.png</string>
+    <string name="activity_dds_symbol_collision_detection_url" translatable="false">https://i.imgur.com/nV1YnIv.png</string>
     <string name="activity_styles_text_field_formatting_url" translatable="false">https://i.imgur.com/MSoIYmU.png</string>
     <string name="activity_annotation_basic_marker_view_url" translatable="false">http://i.imgur.com/vbWTLIE.png</string>
     <string name="activity_annotation_custom_info_window_url" translatable="false">http://i.imgur.com/mCWbosy.png</string>

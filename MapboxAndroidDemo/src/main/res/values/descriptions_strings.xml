@@ -58,6 +58,9 @@
     <string name="activity_dds_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Maps SDK.</string>
     <string name="activity_dds_polygon_description">Draw a vector polygon on a map with the Mapbox Maps SDK.</string>
     <string name="activity_dds_polygon_holes_description">Draw a vector polygon with holes on a map using the Mapbox Maps SDK.</string>
+    <string name="activity_dds_symbol_collision_detection_description">Draw a vector polygon with holes on a map using the Mapbox Maps SDK.</string>
+
+
     <string name="activity_styles_text_field_formatting_description">Adjust the color, size, and fonts of SymbolLayer text fields.</string>
     <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
     <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize the info window.</string>

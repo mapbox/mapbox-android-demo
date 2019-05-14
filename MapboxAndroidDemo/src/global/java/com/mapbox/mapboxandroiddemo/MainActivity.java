@@ -59,6 +59,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.PolygonSelectToggleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.SatelliteLandSelectActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.StyleLineIdentityPropertyActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.SymbolCollisionDetectionActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.SymbolSwitchOnZoomActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.AdjustExtrusionLightActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
@@ -1289,6 +1290,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       null,
       new Intent(MainActivity.this, PolygonSelectToggleActivity.class),
       R.string.activity_dds_polygon_select_toggle_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_symbol_collision_detection_title,
+      R.string.activity_dds_symbol_collision_detection_description,
+      new Intent(MainActivity.this, SymbolCollisionDetectionActivity.class),
+      null,
+      R.string.activity_dds_symbol_collision_detection_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_basics,
