@@ -23,8 +23,9 @@
     <string name="activity_styles_dds_geojson_circle_layer_clusters_url" translatable="false">http://i.imgur.com/fGeZhcD.png</string>
     <string name="activity_styles_line_layer_url" translatable="false">http://i.imgur.com/Iqxoing.png</string>
     <string name="activity_dds_line_gradient_url" translatable="false">https://i.imgur.com/cXthmpV.png</string>
-    <string name="activity_styles_symbol_layer_url" translatable="false">http://i.imgur.com/TQ4iA0L.png</string>
+    <string name="activity_styles_symbol_layer_url" translatable="false">https://i.imgur.com/Q5TJIca.png</string>
     <string name="activity_styles_local_style_or_raster_source_url" translatable="false">https://i.imgur.com/ckKOHg6.png</string>
+    <string name="activity_styles_symbol_icon_onclick_size_change_url" translatable="false">http://i.imgur.com/TQ4iA0L.png</string>
     <string name="activity_style_image_source_time_lapse_url" translatable="false">http://i.imgur.com/ijoGPrF.png</string>
     <string name="activity_style_image_source_url" translatable="false">https://i.imgur.com/I6B6cCE.png</string>
     <string name="activity_style_hillshade_url" translatable="false">https://i.imgur.com/U2OKixV.png</string>

@@ -122,6 +122,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.HillShadeActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.IconSizeChangeOnClickActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ImageSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ImageSourceTimeLapseActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LanguageSwitchActivity;
@@ -467,6 +468,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, BasicSymbolLayerActivity.class),
       null,
       R.string.activity_styles_symbol_layer_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_symbol_icon_onclick_size_change_title,
+      R.string.activity_styles_symbol_icon_onclick_size_change_description,
+      new Intent(MainActivity.this, IconSizeChangeOnClickActivity.class),
+      null,
+      R.string.activity_styles_symbol_icon_onclick_size_change_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_styles,
