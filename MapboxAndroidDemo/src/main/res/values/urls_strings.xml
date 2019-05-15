@@ -15,7 +15,7 @@
     <string name="activity_styles_color_switcher_url" translatable="false">http://i.imgur.com/a0ZaKHG.png</string>
     <string name="activity_styles_language_switch_url" translatable="false">http://i.imgur.com/bu7GV5T.png</string>
     <string name="activity_styles_show_hide_layer_url" translatable="false">http://i.imgur.com/amDMa1M.png</string>
-    <string name="activity_styles_geojson_layer_in_stack_url" translatable="false">http://i.imgur.com/mngiJUj.png</string>
+    <string name="activity_styles_geojson_layer_in_stack_url" translatable="false">https://i.imgur.com/gn6fJBw.png</string>
     <string name="activity_styles_adjust_layer_opacity_url" translatable="false">http://i.imgur.com/0Av8kWD.png</string>
     <string name="activity_styles_vector_source_url" translatable="false">http://i.imgur.com/N0altyP.png</string>
     <string name="activity_styles_add_wms_source_url" translatable="false">http://i.imgur.com/k14WdRG.png</string>
