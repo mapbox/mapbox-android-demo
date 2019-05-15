@@ -352,9 +352,14 @@
     <string name="zoom_map_in_and_out_variable_label_instruction">Zoom in and out to see red labels try to avoid collisions</string>
 
     <!-- Finger drag to draw -->
-    <string name="draw_instruction">Draw your finger on the map to draw a line.</string>
+    <string name="draw_instruction">Move your finger on the map to draw a search area</string>
     <string name="toggle_search_data_points_title">Toggle searchable data</string>
-    <string name="search_result_size">%1$d locations in drawn search area</string>
+    <string name="search_result_size">Move map around to explore the %1$d locations in the drawn search area</string>
+    <string name="move_map_drawn_line">Move map around to explore your drawn line</string>
     <string name="clear_map">Clear map for new draw</string>
+    <string name="toggle_straight_line_drawing">Toggle drawing single line only</string>
+    <string name="now_drawing">Now drawing %1$s</string>
+    <string name="single_line">single line</string>
+    <string name="polygon">polygon</string>
 
 </resources>

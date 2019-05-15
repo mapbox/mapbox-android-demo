@@ -19,8 +19,6 @@ import com.mapbox.geojson.Point;
 import com.mapbox.geojson.Polygon;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -58,9 +56,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 
 /**
  * Use the Android system {@link android.view.View.OnTouchListener} to draw
- * an area and perform a search for features in that area.
+ * an polygon and/or a line. Also perform a search for data points within the drawn polygon area.
  */
-public class FingerDrawActivity extends AppCompatActivity {
+public class FingerDrawQueryActivity extends AppCompatActivity {
 
   private static final String SEARCH_DATA_SYMBOL_LAYER_SOURCE_ID = "SEARCH_DATA_SYMBOL_LAYER_SOURCE_ID";
   private static final String FREEHAND_DRAW_LINE_LAYER_SOURCE_ID = "FREEHAND_DRAW_LINE_LAYER_SOURCE_ID";
@@ -70,21 +68,22 @@ public class FingerDrawActivity extends AppCompatActivity {
   private static final String FREEHAND_DRAW_FILL_LAYER_ID = "FREEHAND_DRAW_FILL_LAYER_ID";
   private static final String SEARCH_DATA_SYMBOL_LAYER_ID = "SEARCH_DATA_SYMBOL_LAYER_ID";
   private static final String SEARCH_DATA_MARKER_ID = "SEARCH_DATA_MARKER_ID";
+  private static final String LINE_COLOR = "#a0861c";
+  private static final float LINE_WIDTH = 5f;
+  private static final float LINE_OPACITY = 1f;
+  private static final float FILL_OPACITY = .4f;
+
   private MapView mapView;
   private MapboxMap mapboxMap;
   private FeatureCollection searchPointFeatureCollection;
   private GeoJsonSource drawLineSource;
   private GeoJsonSource fillPolygonSource;
-  private List<Point> freehandDrawLineLayerPointList;
+  private List<Point> freehandTouchPointListForPolygon = new ArrayList<>();
+  private List<Point> freehandTouchPointListForLine = new ArrayList<>();
   private List<List<Point>> polygonList;
-
-  /**
-   * Customize search UI with these booleans
-   */
-  private boolean fillSearchAreaWithPolygonWhileDrawing = true;
-  private boolean fillSearchAreaWithPolygon = true;
-  private boolean closePolygonSearchAreaOnceDrawingIsDone = true;
+  private Point firstScreenTouchPoint;
   private boolean showSearchDataLocations = true;
+  private boolean drawSingleLineOnly = false;
 
   private View.OnTouchListener customOnTouchListener = new View.OnTouchListener() {
     @Override
@@ -93,55 +92,72 @@ public class FingerDrawActivity extends AppCompatActivity {
       LatLng latLngTouchCoordinate = mapboxMap.getProjection().fromScreenLocation(
         new PointF(motionEvent.getX(), motionEvent.getY()));
 
-      Point touchPoint = Point.fromLngLat(latLngTouchCoordinate.getLongitude(), latLngTouchCoordinate.getLatitude());
+      Point screenTouchPoint = Point.fromLngLat(latLngTouchCoordinate.getLongitude(),
+        latLngTouchCoordinate.getLatitude());
 
-      if (freehandDrawLineLayerPointList != null) {
+      // Draw the line on the map as the finger is dragged along the map
+      freehandTouchPointListForLine.add(screenTouchPoint);
+      drawLineSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_LINE_LAYER_SOURCE_ID);
+      drawLineSource.setGeoJson(LineString.fromLngLats(freehandTouchPointListForLine));
 
-        // Draw the line as drawing on the map happens
-        freehandDrawLineLayerPointList.add(touchPoint);
-        drawLineSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_LINE_LAYER_SOURCE_ID);
-        drawLineSource.setGeoJson(LineString.fromLngLats(freehandDrawLineLayerPointList));
-
-        if (fillSearchAreaWithPolygonWhileDrawing) {
-          drawSearchFillArea();
+      // Draw a polygon area if drawSingleLineOnly == false
+      if (!drawSingleLineOnly) {
+        if (freehandTouchPointListForPolygon.size() == 0) {
+          firstScreenTouchPoint = screenTouchPoint;
+        }
+        if (freehandTouchPointListForPolygon.size() < 3) {
+          freehandTouchPointListForPolygon.add(screenTouchPoint);
+        } else if (freehandTouchPointListForPolygon.size() == 3) {
+          freehandTouchPointListForPolygon.add(screenTouchPoint);
+          freehandTouchPointListForPolygon.add(firstScreenTouchPoint);
+        } else {
+          freehandTouchPointListForPolygon.remove(freehandTouchPointListForPolygon.size() - 1);
+          freehandTouchPointListForPolygon.add(screenTouchPoint);
+          freehandTouchPointListForPolygon.add(firstScreenTouchPoint);
         }
 
-        // Take certain actions when the drawing is done
-        if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-          if (closePolygonSearchAreaOnceDrawingIsDone) {
-            freehandDrawLineLayerPointList.add(freehandDrawLineLayerPointList.get(0));
-          }
+        // Create and show a FillLayer polygon where the search area is
+        fillPolygonSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID);
+        polygonList = new ArrayList<>();
+        polygonList.add(freehandTouchPointListForPolygon);
+        fillPolygonSource.setGeoJson(Polygon.fromLngLats(polygonList));
+      }
 
-          if (!fillSearchAreaWithPolygonWhileDrawing && fillSearchAreaWithPolygon) {
-            drawSearchFillArea();
-          }
+      // Take certain actions when the drawing is done
+      if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
 
-          if (closePolygonSearchAreaOnceDrawingIsDone) {
-            FeatureCollection pointsInSearchAreaFeatureCollection =
-              TurfJoins.pointsWithinPolygon(searchPointFeatureCollection,
-                FeatureCollection.fromFeature(Feature.fromGeometry(
-                  Polygon.fromLngLats(polygonList))));
-            if (VISIBLE.equals(mapboxMap.getStyle().getLayer(
-              SEARCH_DATA_SYMBOL_LAYER_ID).getVisibility().getValue())) {
-              Toast.makeText(FingerDrawActivity.this, String.format(
-                getString(R.string.search_result_size),
-                pointsInSearchAreaFeatureCollection.features().size()), Toast.LENGTH_SHORT).show();
-            }
-          }
-          enableMapMovement();
+        // If drawing polygon, add the first screen touch point to the end of
+        // the LineLayer list so that it's
+        if (!drawSingleLineOnly) {
+          freehandTouchPointListForLine.add(firstScreenTouchPoint);
         }
+
+        if (showSearchDataLocations && !drawSingleLineOnly) {
+
+          // Use Turf to calculate the number of data points within a certain Polygon area
+          FeatureCollection pointsInSearchAreaFeatureCollection =
+            TurfJoins.pointsWithinPolygon(searchPointFeatureCollection,
+              FeatureCollection.fromFeature(Feature.fromGeometry(
+                Polygon.fromLngLats(polygonList))));
+
+          // Create a Toast which say show many data points within a certain Polygon area
+          if (VISIBLE.equals(mapboxMap.getStyle().getLayer(
+            SEARCH_DATA_SYMBOL_LAYER_ID).getVisibility().getValue())) {
+            Toast.makeText(FingerDrawQueryActivity.this, String.format(
+              getString(R.string.search_result_size),
+              pointsInSearchAreaFeatureCollection.features().size()), Toast.LENGTH_SHORT).show();
+          }
+        }
+
+        if (drawSingleLineOnly) {
+          Toast.makeText(FingerDrawQueryActivity.this,
+            getString(R.string.move_map_drawn_line), Toast.LENGTH_SHORT).show();
+        }
+        enableMapMovement();
       }
       return true;
     }
   };
-
-  private void drawSearchFillArea() {
-    // Create and show a FillLayer polygon where the search area is
-    fillPolygonSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID);
-    polygonList = new ArrayList<>();
-    polygonList.add(freehandDrawLineLayerPointList);
-    fillPolygonSource.setGeoJson(Polygon.fromLngLats(polygonList));
-  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -163,10 +179,10 @@ public class FingerDrawActivity extends AppCompatActivity {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
 
-            FingerDrawActivity.this.mapboxMap = mapboxMap;
+            FingerDrawQueryActivity.this.mapboxMap = mapboxMap;
 
             if (showSearchDataLocations) {
-              new LoadGeoJson(FingerDrawActivity.this).execute();
+              new LoadGeoJson(FingerDrawQueryActivity.this).execute();
             } else {
               setUpExample(null);
             }
@@ -178,29 +194,32 @@ public class FingerDrawActivity extends AppCompatActivity {
 
                   // Reset ArrayLists
                   polygonList = new ArrayList<>();
-                  freehandDrawLineLayerPointList = new ArrayList<>();
+                  freehandTouchPointListForPolygon = new ArrayList<>();
+                  freehandTouchPointListForLine = new ArrayList<>();
 
                   // Add empty Feature array to the sources
-                  drawLineSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_LINE_LAYER_SOURCE_ID);
+                  drawLineSource = style.getSourceAs(FREEHAND_DRAW_LINE_LAYER_SOURCE_ID);
                   if (drawLineSource != null) {
-                    drawLineSource.setGeoJson(FeatureCollection.fromFeatures(new Feature[]{}));
+                    drawLineSource.setGeoJson(FeatureCollection.fromFeatures(new Feature[] {}));
                   }
 
-                  fillPolygonSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID);
+                  fillPolygonSource = style.getSourceAs(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID);
                   if (fillPolygonSource != null) {
-                    fillPolygonSource.setGeoJson(FeatureCollection.fromFeatures(new Feature[]{}));
+                    fillPolygonSource.setGeoJson(FeatureCollection.fromFeatures(new Feature[] {}));
                   }
 
-                  // Reset camera position to default location
-                  mapboxMap.easeCamera(CameraUpdateFactory
-                    .newCameraPosition(new CameraPosition.Builder()
-                      .target(new LatLng(35.087497, -106.651261))
-                      .zoom(11.679132)
-                      .tilt(0)
-                      .bearing(0)
-                      .build()));
+                  enableMapDrawing();
+                }
+              });
 
-                  enabledMapDrawing();
+            findViewById(R.id.switch_to_single_line_only_fab)
+              .setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                  drawSingleLineOnly = !drawSingleLineOnly;
+                  Toast.makeText(FingerDrawQueryActivity.this, String.format(
+                    getString(R.string.now_drawing), drawSingleLineOnly ? getString(R.string.single_line) :
+                      getString(R.string.polygon)), Toast.LENGTH_SHORT).show();
                 }
               });
           }
@@ -213,82 +232,77 @@ public class FingerDrawActivity extends AppCompatActivity {
    * Enable moving the map
    */
   private void enableMapMovement() {
-    mapView.setOnTouchListener(new View.OnTouchListener() {
-      @Override
-      public boolean onTouch(View view, MotionEvent motionEvent) {
-        return false;
-      }
-    });
-    mapboxMap.getUiSettings().setAllGesturesEnabled(true);
+    mapView.setOnTouchListener(null);
   }
 
   /**
    * Enable drawing on the map by setting the custom touch listener on the {@link MapView}
    */
-  private void enabledMapDrawing() {
+  private void enableMapDrawing() {
     mapView.setOnTouchListener(customOnTouchListener);
-    mapboxMap.getUiSettings().setAllGesturesEnabled(false);
   }
 
   private void setUpExample(FeatureCollection searchDataFeatureCollection) {
 
     searchPointFeatureCollection = searchDataFeatureCollection;
 
-    Style style = mapboxMap.getStyle();
+    mapboxMap.getStyle(new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style loadedStyle) {
+        loadedStyle.addImage(SEARCH_DATA_MARKER_ID, BitmapFactory.decodeResource(
+          FingerDrawQueryActivity.this.getResources(), R.drawable.blue_marker_view));
 
-    if (style != null) {
-      freehandDrawLineLayerPointList = new ArrayList<>();
+        // Add sources to the map
+        loadedStyle.addSource(new GeoJsonSource(SEARCH_DATA_SYMBOL_LAYER_SOURCE_ID,
+          searchDataFeatureCollection));
+        loadedStyle.addSource(new GeoJsonSource(FREEHAND_DRAW_LINE_LAYER_SOURCE_ID));
+        loadedStyle.addSource(new GeoJsonSource(MARKER_SYMBOL_LAYER_SOURCE_ID));
+        loadedStyle.addSource(new GeoJsonSource(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID));
 
-      style.addImage(SEARCH_DATA_MARKER_ID, BitmapFactory.decodeResource(
-        FingerDrawActivity.this.getResources(), R.drawable.blue_marker_view));
+        loadedStyle.addLayer(new SymbolLayer(SEARCH_DATA_SYMBOL_LAYER_ID,
+          SEARCH_DATA_SYMBOL_LAYER_SOURCE_ID).withProperties(
+          iconImage(SEARCH_DATA_MARKER_ID),
+          iconAllowOverlap(true),
+          iconOffset(new Float[] {0f, -8f}),
+          iconIgnorePlacement(true))
+        );
 
-      // Add sources to the map
-      style.addSource(new GeoJsonSource(SEARCH_DATA_SYMBOL_LAYER_SOURCE_ID, searchDataFeatureCollection));
-      style.addSource(new GeoJsonSource(FREEHAND_DRAW_LINE_LAYER_SOURCE_ID));
-      style.addSource(new GeoJsonSource(MARKER_SYMBOL_LAYER_SOURCE_ID));
-      style.addSource(new GeoJsonSource(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID));
+        // Add freehand draw LineLayer to the map
+        loadedStyle.addLayerBelow(new LineLayer(FREEHAND_DRAW_LINE_LAYER_ID,
+          FREEHAND_DRAW_LINE_LAYER_SOURCE_ID).withProperties(
+          lineWidth(LINE_WIDTH),
+          lineJoin(LINE_JOIN_ROUND),
+          lineOpacity(LINE_OPACITY),
+          lineColor(Color.parseColor(LINE_COLOR))), SEARCH_DATA_SYMBOL_LAYER_ID
+        );
 
-      style.addLayer(new SymbolLayer(SEARCH_DATA_SYMBOL_LAYER_ID, SEARCH_DATA_SYMBOL_LAYER_SOURCE_ID).withProperties(
-        iconImage(SEARCH_DATA_MARKER_ID),
-        iconAllowOverlap(true),
-        iconOffset(new Float[]{0f, -8f}),
-        iconIgnorePlacement(true))
-      );
+        // Add freehand draw polygon FillLayer to the map
+        loadedStyle.addLayerBelow(new FillLayer(FREEHAND_DRAW_FILL_LAYER_ID,
+          FREEHAND_DRAW_FILL_LAYER_SOURCE_ID).withProperties(
+          fillColor(Color.RED),
+          fillOpacity(FILL_OPACITY)), FREEHAND_DRAW_LINE_LAYER_ID
+        );
 
-      // Add freehand draw LineLayer to the map
-      style.addLayerBelow(new LineLayer(FREEHAND_DRAW_LINE_LAYER_ID, FREEHAND_DRAW_LINE_LAYER_SOURCE_ID).withProperties(
-        lineWidth(5f),
-        lineJoin(LINE_JOIN_ROUND),
-        lineOpacity(1f),
-        lineColor(Color.parseColor("#a0861c"))), SEARCH_DATA_SYMBOL_LAYER_ID
-      );
+        enableMapDrawing();
 
-      // Add freehand draw polygon FillLayer to the map
-      style.addLayerBelow(new FillLayer(FREEHAND_DRAW_FILL_LAYER_ID, FREEHAND_DRAW_FILL_LAYER_SOURCE_ID).withProperties(
-        fillColor(Color.RED),
-        fillOpacity(.4f)), FREEHAND_DRAW_LINE_LAYER_ID
-      );
-
-      enabledMapDrawing();
-
-      if (showSearchDataLocations) {
         findViewById(R.id.show_search_data_points_fab).setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
+            showSearchDataLocations = !showSearchDataLocations;
 
             // Toggle the visibility of the fake data point SymbolLayer icons
-            Layer dataLayer = mapboxMap.getStyle().getLayer(SEARCH_DATA_SYMBOL_LAYER_ID);
+            Layer dataLayer = loadedStyle.getLayer(SEARCH_DATA_SYMBOL_LAYER_ID);
             if (dataLayer != null) {
               dataLayer.setProperties(
                 VISIBLE.equals(dataLayer.getVisibility().getValue()) ? visibility(NONE) : visibility(VISIBLE));
             }
           }
         });
-      }
 
-      Toast.makeText(FingerDrawActivity.this,
-        getString(R.string.draw_instruction), Toast.LENGTH_SHORT).show();
-    }
+        Toast.makeText(FingerDrawQueryActivity.this,
+          getString(R.string.draw_instruction), Toast.LENGTH_SHORT).show();
+      }
+    });
   }
 
   /**
@@ -296,16 +310,16 @@ public class FingerDrawActivity extends AppCompatActivity {
    */
   private static class LoadGeoJson extends AsyncTask<Void, Void, FeatureCollection> {
 
-    private WeakReference<FingerDrawActivity> weakReference;
+    private WeakReference<FingerDrawQueryActivity> weakReference;
 
-    LoadGeoJson(FingerDrawActivity activity) {
+    LoadGeoJson(FingerDrawQueryActivity activity) {
       this.weakReference = new WeakReference<>(activity);
     }
 
     @Override
     protected FeatureCollection doInBackground(Void... voids) {
       try {
-        FingerDrawActivity activity = weakReference.get();
+        FingerDrawQueryActivity activity = weakReference.get();
         if (activity != null) {
           InputStream inputStream = activity.getAssets().open("albuquerque_locations.geojson");
           return FeatureCollection.fromJson(convertStreamToString(inputStream));
@@ -321,10 +335,11 @@ public class FingerDrawActivity extends AppCompatActivity {
       return scanner.hasNext() ? scanner.next() : "";
     }
 
+
     @Override
     protected void onPostExecute(@Nullable FeatureCollection featureCollection) {
       super.onPostExecute(featureCollection);
-      FingerDrawActivity activity = weakReference.get();
+      FingerDrawQueryActivity activity = weakReference.get();
       if (activity != null && featureCollection != null) {
         activity.setUpExample(featureCollection);
       }

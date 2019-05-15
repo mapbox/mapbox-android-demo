@@ -27,6 +27,15 @@
         fab:fab_labelStyle="@style/menu_labels_style">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/switch_to_single_line_only_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/mapboxOrange"
+            fab:fab_colorPressed="@color/mapboxWhite"
+            fab:fab_size="mini"
+            fab:fab_title="@string/toggle_straight_line_drawing"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/clear_map_for_new_draw_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

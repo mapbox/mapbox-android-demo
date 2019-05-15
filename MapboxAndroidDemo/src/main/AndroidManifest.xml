@@ -682,7 +682,7 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.query.FingerDrawActivity"
+            android:name=".examples.query.FingerDrawQueryActivity"
             android:label="@string/activity_lab_drag_draw_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
