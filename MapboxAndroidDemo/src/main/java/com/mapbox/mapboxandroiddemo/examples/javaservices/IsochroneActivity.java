@@ -107,7 +107,9 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
                 @Override
                 public void onClick(View view) {
                   usePolygon = !usePolygon;
-                  makeIsochroneApiCall(style, lastSelectedLatLng);
+                  if (lastSelectedLatLng != null) {
+                    makeIsochroneApiCall(style, lastSelectedLatLng);
+                  }
                 }
               });
 
