@@ -42,7 +42,7 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
   private static final String TAG = "SimplifyLineActivity";
 
   private MapView mapView;
-  private MapboxMap map;
+  private Style style;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +60,10 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
-        map = mapboxMap;
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
+            SimplifyPolylineActivity.this.style = style;
             new DrawGeoJson(SimplifyPolylineActivity.this).execute();
           }
         });
@@ -170,7 +170,6 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
   }
 
   private void addLine(String layerId, Feature feature, String lineColorHex) {
-    Style style = map.getStyle();
     if (style != null) {
       style.addSource(new GeoJsonSource(layerId, feature));
       style.addLayer(new LineLayer(layerId, layerId).withProperties(

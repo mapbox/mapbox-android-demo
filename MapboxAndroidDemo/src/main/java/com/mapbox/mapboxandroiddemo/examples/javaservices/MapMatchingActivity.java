@@ -50,7 +50,7 @@ public class MapMatchingActivity extends AppCompatActivity {
   private static final String TAG = "MapMatchingActivity";
 
   private MapView mapView;
-  private MapboxMap map;
+  private Style style;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +68,10 @@ public class MapMatchingActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
-        map = mapboxMap;
-        map.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
+            MapMatchingActivity.this.style = style;
             new LoadGeoJson(MapMatchingActivity.this).execute();
           }
         });
@@ -168,7 +168,6 @@ public class MapMatchingActivity extends AppCompatActivity {
   }
 
   private void drawBeforeMapMatching(Feature feature) {
-    Style style = map.getStyle();
     if (style != null) {
       style.addSource(new GeoJsonSource("pre-matched-source-id", feature));
       style.addLayer(new LineLayer("pre-matched-layer-id", "pre-matched-source-id").withProperties(
@@ -216,7 +215,6 @@ public class MapMatchingActivity extends AppCompatActivity {
   }
 
   private void drawMapMatched(@NonNull List<MapMatchingMatching> matchings) {
-    Style style = map.getStyle();
     if (style != null && !matchings.isEmpty()) {
       style.addSource(new GeoJsonSource("matched-source-id", Feature.fromGeometry(LineString.fromPolyline(
         Objects.requireNonNull(matchings.get(0).geometry()), PRECISION_6)))
