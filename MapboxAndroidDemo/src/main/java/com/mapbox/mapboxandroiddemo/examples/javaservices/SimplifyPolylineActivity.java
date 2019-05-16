@@ -64,7 +64,7 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            new DrawGeoJson(SimplifyPolylineActivity.this).execute();
+            new DrawGeoJson(style,SimplifyPolylineActivity.this).execute();
           }
         });
       }
@@ -116,9 +116,11 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
   private static class DrawGeoJson extends AsyncTask<Void, Void, FeatureCollection> {
 
     private WeakReference<SimplifyPolylineActivity> weakReference;
+    private Style style;
 
-    DrawGeoJson(SimplifyPolylineActivity activity) {
+    DrawGeoJson(Style style, SimplifyPolylineActivity activity) {
       this.weakReference = new WeakReference<>(activity);
+      this.style = style;
     }
 
     @Override
@@ -145,32 +147,31 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
       super.onPostExecute(featureCollection);
       SimplifyPolylineActivity activity = weakReference.get();
       if (activity != null && featureCollection != null) {
-        activity.drawLines(featureCollection);
+        activity.drawLines(style,featureCollection);
       }
     }
   }
 
-  private void drawLines(@NonNull FeatureCollection featureCollection) {
+  private void drawLines(@NonNull Style style, @NonNull FeatureCollection featureCollection) {
     List<Feature> features = featureCollection.features();
     if (features != null && features.size() > 0) {
       Feature feature = features.get(0);
-      drawBeforeSimplify(feature);
-      drawSimplify(feature);
+      drawBeforeSimplify(style,feature);
+      drawSimplify(style,feature);
     }
   }
 
-  private void drawBeforeSimplify(@NonNull Feature lineStringFeature) {
-    addLine("rawLine", lineStringFeature, "#8a8acb");
+  private void drawBeforeSimplify(@NonNull Style style, @NonNull Feature lineStringFeature) {
+    addLine(style,"rawLine", lineStringFeature, "#8a8acb");
   }
 
-  private void drawSimplify(@NonNull Feature feature) {
+  private void drawSimplify(@NonNull Style style, @NonNull Feature feature) {
     List<Point> points = ((LineString) Objects.requireNonNull(feature.geometry())).coordinates();
     List<Point> after = PolylineUtils.simplify(points, 0.001);
-    addLine("simplifiedLine", Feature.fromGeometry(LineString.fromLngLats(after)), "#3bb2d0");
+    addLine(style,"simplifiedLine", Feature.fromGeometry(LineString.fromLngLats(after)), "#3bb2d0");
   }
 
-  private void addLine(String layerId, Feature feature, String lineColorHex) {
-    Style style = map.getStyle();
+  private void addLine(@NonNull Style style, String layerId, Feature feature, String lineColorHex) {
     if (style != null) {
       style.addSource(new GeoJsonSource(layerId, feature));
       style.addLayer(new LineLayer(layerId, layerId).withProperties(
