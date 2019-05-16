@@ -72,7 +72,8 @@ public class MapMatchingActivity extends AppCompatActivity {
         map.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            new LoadGeoJson(MapMatchingActivity.this).execute();
+            new LoadGeoJson(style, MapMatchingActivity.this).execute();
+
           }
         });
       }
@@ -124,9 +125,11 @@ public class MapMatchingActivity extends AppCompatActivity {
   private static class LoadGeoJson extends AsyncTask<Void, Void, FeatureCollection> {
 
     private WeakReference<MapMatchingActivity> weakReference;
+    private Style style;
 
-    LoadGeoJson(MapMatchingActivity activity) {
+    LoadGeoJson(@NonNull Style style, MapMatchingActivity activity) {
       this.weakReference = new WeakReference<>(activity);
+      this.style = style;
     }
 
     @Override
@@ -153,22 +156,21 @@ public class MapMatchingActivity extends AppCompatActivity {
       super.onPostExecute(featureCollection);
       MapMatchingActivity activity = weakReference.get();
       if (activity != null && featureCollection != null) {
-        activity.drawLines(featureCollection);
+        activity.drawLines(style,featureCollection);
       }
     }
   }
 
-  private void drawLines(@NonNull FeatureCollection featureCollection) {
+  private void drawLines(@NonNull Style style, @NonNull FeatureCollection featureCollection) {
     List<Feature> features = featureCollection.features();
     if (features != null && features.size() > 0) {
       Feature feature = features.get(0);
-      drawBeforeMapMatching(feature);
-      requestMapMatched(feature);
+      drawBeforeMapMatching(style,feature);
+      requestMapMatched(style, feature);
     }
   }
 
-  private void drawBeforeMapMatching(Feature feature) {
-    Style style = map.getStyle();
+  private void drawBeforeMapMatching(@NonNull Style style, Feature feature) {
     if (style != null) {
       style.addSource(new GeoJsonSource("pre-matched-source-id", feature));
       style.addLayer(new LineLayer("pre-matched-layer-id", "pre-matched-source-id").withProperties(
@@ -181,7 +183,7 @@ public class MapMatchingActivity extends AppCompatActivity {
     }
   }
 
-  private void requestMapMatched(Feature feature) {
+  private void requestMapMatched(@NonNull Style style, Feature feature) {
     List<Point> points = ((LineString) Objects.requireNonNull(feature.geometry())).coordinates();
 
     try {
@@ -198,7 +200,7 @@ public class MapMatchingActivity extends AppCompatActivity {
         public void onResponse(@NonNull Call<MapMatchingResponse> call,
                                @NonNull Response<MapMatchingResponse> response) {
           if (response.code() == 200) {
-            drawMapMatched(Objects.requireNonNull(response.body()).matchings());
+            drawMapMatched(style,Objects.requireNonNull(response.body()).matchings());
           } else {
             // If the response code does not response "OK" an error has occurred.
             Timber.e("MapboxMapMatching failed with %s", response.code());
@@ -215,8 +217,7 @@ public class MapMatchingActivity extends AppCompatActivity {
     }
   }
 
-  private void drawMapMatched(@NonNull List<MapMatchingMatching> matchings) {
-    Style style = map.getStyle();
+  private void drawMapMatched(@NonNull Style style, @NonNull List<MapMatchingMatching> matchings) {
     if (style != null && !matchings.isEmpty()) {
       style.addSource(new GeoJsonSource("matched-source-id", Feature.fromGeometry(LineString.fromPolyline(
         Objects.requireNonNull(matchings.get(0).geometry()), PRECISION_6)))
