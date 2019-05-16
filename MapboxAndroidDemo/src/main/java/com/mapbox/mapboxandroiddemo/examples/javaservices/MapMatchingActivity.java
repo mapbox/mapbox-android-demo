@@ -224,7 +224,7 @@ public class MapMatchingActivity extends AppCompatActivity {
       );
       style.addLayer(new LineLayer("matched-layer-id", "matched-source-id")
         .withProperties(
-          lineColor(ColorUtils.colorToRgbaString(Color.parseColor("#3bb2d0"))),
+          lineColor(ColorUtils.colorToRgbaString(Color.parseColor("#f90921"))),
           lineWidth(6f))
       );
     }
