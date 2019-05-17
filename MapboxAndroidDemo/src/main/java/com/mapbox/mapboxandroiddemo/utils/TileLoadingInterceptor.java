@@ -27,7 +27,6 @@ import java.util.Locale;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-import timber.log.Timber;
 
 /**
  * This Interceptor allows to measure time spent getting a response object over network.
@@ -85,16 +84,12 @@ public class TileLoadingInterceptor implements Interceptor {
     Mapbox.getTelemetry().onPerformanceEvent(bundle);
 
     Mapbox.getTelemetry().setUserTelemetryRequestState(true);
-
-    Timber.d(">>> PERF Event CODE=" + response.code()
-            + " elapsed=" + elapsedMs
-            + " connectionState=" + connectionState
-            + " url=" + request);
   }
 
   private static String getUrl(Request request) {
     String url = request.url().toString();
-    return url.substring(0, url.indexOf('?'));
+    int questionIndex = url.indexOf('?');
+    return questionIndex > 0 ? url.substring(0, questionIndex) : url;
   }
 
   private static String getMetadata() {
