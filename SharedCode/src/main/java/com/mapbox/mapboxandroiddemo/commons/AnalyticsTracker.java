@@ -32,6 +32,8 @@ public class AnalyticsTracker {
   public static final String LOGGED_OUT_OF_MAPBOX_ACCOUNT = "Logged out of Mapbox account";
   public static final String CLICKED_ON_CREATE_ACCOUNT_BUTTON = "Clicked on create account button";
   public static final String CLICKED_ON_SIGN_IN_BUTTON = "Clicked on sign in button";
+  public static final String CLICKED_ON_DO_NOT_ASK_AGAIN_BUTTON = "Clicked on do not ask sign in again button";
+  public static final String CLICKED_ON_ACCOUNT_CREATION_OR_LOGIN_BUTTON = "Clicked account creation or login button in settings";
 
   private Context appContext;
   private static volatile AnalyticsTracker analyticsInstance;

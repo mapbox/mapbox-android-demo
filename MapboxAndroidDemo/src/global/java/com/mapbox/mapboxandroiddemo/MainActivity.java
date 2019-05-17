@@ -27,6 +27,7 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 import com.google.firebase.perf.metrics.AddTrace;
+import com.mapbox.mapboxandroiddemo.account.LandingActivity;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
@@ -87,12 +88,12 @@ import com.mapbox.mapboxandroiddemo.examples.labs.MagicWindowKotlinActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MapFogBackgroundActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PictureInPictureActivity;
-import com.mapbox.mapboxandroiddemo.examples.labs.ValueAnimatorIconAnimationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.ValueAnimatorIconAnimationActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
@@ -154,6 +155,7 @@ import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_I
 import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_SETTINGS_IN_NAV_DRAWER;
 import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.OPENED_APP;
 import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.SKIPPED_ACCOUNT_CREATION;
+import static com.mapbox.mapboxandroiddemo.commons.StringConstants.FROM_LOGIN_SCREEN_MENU_ITEM_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.SKIPPED_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
 
@@ -174,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private ExampleAdapter adapter;
   private RecyclerView recyclerView;
   private TextView noExamplesTv;
+  private NavigationView navigationView;
 
   private boolean loggedIn;
   private int currentCategory = R.id.nav_basics;
@@ -184,6 +187,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+      .getBoolean(TOKEN_SAVED_KEY, false);
 
     toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
@@ -244,14 +250,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     toggle.syncState();
 
-    NavigationView navigationView = findViewById(R.id.nav_view);
+    navigationView = findViewById(R.id.nav_view);
     if (navigationView != null) {
       navigationView.setNavigationItemSelectedListener(this);
       navigationView.setCheckedItem(R.id.nav_basics);
+      if (loggedIn) {
+        navigationView.getMenu().findItem(R.id.show_login_screen_in_nav_drawer).setVisible(false);
+      }
     }
 
-    loggedIn = PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-      .getBoolean(TOKEN_SAVED_KEY, false);
 
     if (loggedIn) {
       analytics.setMapboxUsername();
@@ -282,7 +289,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   public boolean onNavigationItemSelected(@NonNull MenuItem item) {
     // Handle navigation view item clicks here.
     int id = item.getItemId();
-
+    if (id == R.id.show_login_screen_in_nav_drawer) {
+      Intent intent = new Intent(this, LandingActivity.class);
+      intent.putExtra(FROM_LOGIN_SCREEN_MENU_ITEM_KEY, true);
+      this.startActivity(intent);
+    }
     if (id == R.id.settings_in_nav_drawer) {
       buildSettingsDialog();
     }
@@ -412,10 +423,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     final View customView = inflater.inflate(R.layout.settings_dialog_layout, null);
     Switch analyticsOptOutSwitch = customView.findViewById(R.id.analytics_opt_out_switch);
+    Switch alwaysShowLandingSwitch = customView.findViewById(R.id.login_or_create_account_switch);
     analyticsOptOutSwitch.setChecked(!analytics.isAnalyticsEnabled());
 
     final SettingsDialogView dialogView = new SettingsDialogView(customView,
-      this, analyticsOptOutSwitch, analytics, loggedIn);
+      this, analyticsOptOutSwitch, alwaysShowLandingSwitch, analytics, loggedIn);
 
     dialogView.buildDialog();
 
@@ -424,11 +436,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     if (!loggedIn) {
       logOutOfMapboxAccountButton.setVisibility(View.GONE);
     } else {
-      logOutOfMapboxAccountButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          dialogView.logOut(loggedIn);
-        }
+      logOutOfMapboxAccountButton.setOnClickListener(view -> {
+        dialogView.logOut(loggedIn);
       });
     }
   }
