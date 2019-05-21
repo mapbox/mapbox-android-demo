@@ -35,6 +35,7 @@
     <string name="activity_styles_transparent_background_description">Create a transparent background and fill it with something such as moving water.</string>
     <string name="activity_styles_click_to_add_image_description">Select a photo on the device and add it on the map tap location.</string>
     <string name="activity_styles_rotating_anchor_text_description">Adjust the anchor position of SymbolLayer text fields.</string>
+    <string name="activity_styles_missing_icon_description">Provide an icon when a Style failed to load one.</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_description">Use data-driven styling and GeoJSON data to set extrusions\' heights.</string>
     <string name="activity_extrusions_population_density_extrusions_description">Use extrusions to display 3D building height based on imported vector data.</string>
     <string name="activity_extrusions_adjust_extrusions_description">Change the location and color of the light shined on extrusions.</string>

@@ -412,6 +412,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.styles.MissingIconActivity"
+            android:label="@string/activity_styles_missing_icon_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.query.QueryFeatureActivity"
             android:label="@string/activity_query_feature_title">
             <meta-data
