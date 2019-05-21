@@ -5,6 +5,7 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -18,7 +19,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
-import com.mapbox.mapboxsdk.style.layers.FillLayer;
+import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.util.List;
@@ -27,8 +28,8 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.zoom;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOpacity;
 
 /**
  * Use MapboxMap.queryRenderedFeatures() to find and highlight certain features within the map viewport.
@@ -39,7 +40,7 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
 
   private static final String FILL_LAYER_ID = "FILL_LAYER_ID";
   private static final String GEO_JSON_SOURCE_ID = "GEO_JSON_SOURCE_ID";
-  private static final String ID_OF_LAYER_TO_HIGHLIGHT = "landuse";
+  private static final String ID_OF_LAYER_TO_HIGHLIGHT = "road-street";
   private MapView mapView;
   private MapboxMap mapboxMap;
   private GeoJsonSource dataGeoJsonSource;
@@ -76,30 +77,27 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
         style.addSource(new GeoJsonSource(GEO_JSON_SOURCE_ID,
           FeatureCollection.fromFeatures(new Feature[] {})));
 
-        style.addLayer(new FillLayer(FILL_LAYER_ID,
+        style.addLayer(new LineLayer(FILL_LAYER_ID,
           GEO_JSON_SOURCE_ID).withProperties(
-          fillOpacity(interpolate(exponential(1f), zoom(),
+          lineOpacity(interpolate(exponential(1f), zoom(),
             stop(3, 0f),
             stop(8, .5f),
             stop(15f, 1f))),
-          fillColor(Color.parseColor("#00F7FF"))
+          lineColor(Color.parseColor("#00F7FF"))
         ));
 
-        redoSearchButton.setOnClickListener(new View.OnClickListener() {
+        mapboxMap.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
           @Override
-          public void onClick(View view) {
-            if (!moveMapInstructionShown) {
-              Toast.makeText(RedoSearchInAreaActivity.this,
-                R.string.move_the_map_and_research, Toast.LENGTH_SHORT).show();
-              moveMapInstructionShown = true;
-            }
+          public void onCameraMove() {
+            Toast.makeText(RedoSearchInAreaActivity.this, "onCameraMove", Toast.LENGTH_LONG).show();
             FeatureCollection featureCollection = null;
             if (style.getLayer(ID_OF_LAYER_TO_HIGHLIGHT) != null) {
+              Log.v("test", "id of layer to highlight is " + ID_OF_LAYER_TO_HIGHLIGHT);
               featureCollection = FeatureCollection.fromFeatures(getFeaturesInViewport(ID_OF_LAYER_TO_HIGHLIGHT));
             } else {
               Toast.makeText(RedoSearchInAreaActivity.this,
-                String.format(getString(R.string.layer_not_found), ID_OF_LAYER_TO_HIGHLIGHT),
-                Toast.LENGTH_SHORT).show();
+                      String.format(getString(R.string.layer_not_found), ID_OF_LAYER_TO_HIGHLIGHT),
+                      Toast.LENGTH_SHORT).show();
             }
             // Retrieve and update the GeoJSON source used in the FillLayer
             dataGeoJsonSource = style.getSourceAs(GEO_JSON_SOURCE_ID);
@@ -109,9 +107,11 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
             redoSearchButton.setVisibility(View.INVISIBLE);
           }
         });
+          }
+        });
       }
-    });
-  }
+//    });
+//  }
 
   /**
    * Perform feature query within the viewport.
@@ -134,7 +134,7 @@ public class RedoSearchInAreaActivity extends AppCompatActivity implements OnMap
 
   @Override
   public void onMove(MoveGestureDetector detector) {
-    // Left empty on purpose
+    Log.v("mapMove", "the map is moving and detector is " + detector);
   }
 
   @Override
