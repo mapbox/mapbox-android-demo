@@ -2,6 +2,29 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+
+## 8.0.0
+
+* bump Maps SDK to v7.4.0 (#1061)
+* get only fully loaded style when returning from async tasks (#1019)
+* Fixed description for collision detection example (#1075) 
+* Adding example of onStyleImageMissing listener usage (#1070)
+* Adding ignore sign in button (#1033) 
+* Adjusted HomeScreenWidgetActivity class' location and its javadocs (#1031)
+* Fix StringIndexOutOfBounds for urls that do not have `?` (#1073) 
+* Tile loading performance measurement (#1012) 
+* Adjusted GeojsonLayerInStackActivity example card image (#1067) 
+* Camera adjustment to GeojsonLayerInStackActivity (#1064) 
+* Adding coordinate check in IsochroneActivity (#1065) 
+* Adding example of ignorePlacement/allowOverlap for text and icons (#1063) 
+* Switching to greater than or equals for circle clustering example (#1049) 
+* Refactoring and splitting basic SymbolLayer icon examples (#1030)
+* Adding example of using TurfTransformation#circle to create visual ring (#1039)
+* bumped turf and services to 4.8.0 (#1062) 
+* Updated Mapbox SF office coordinates for PlacesPluginActivity (#1041) 
+* Adding multiple color formatting to TextFieldMultipleFormatsActivity (#1054)
+* Isochrone API refactor to use Java SDK wrapper (#1029)
+
 ## 7.4.0-beta.2
 
 * Adding SKU generation (via Maps SDK bump to 7.4.0-beta.2) (#1043)
