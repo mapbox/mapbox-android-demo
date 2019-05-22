@@ -84,37 +84,39 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
         // Create a GeoJsonSource and add it to the map.
         geoJsonSource = GeoJsonSource(NEIGHBORHOOD_POLYGON_SOURCE_ID, featureCollection)
 
-        mapboxMap.style?.addSource(geoJsonSource!!)
+        mapboxMap.getStyle {style ->
+            style.addSource(geoJsonSource!!)
 
-        // Create a FillLayer which will show a background of all neighborhoods on the map.
-        val neighborhoodPolygonBaseFillLayer = FillLayer(BASE_NEIGHBORHOOD_FILL_LAYER_ID,
-                NEIGHBORHOOD_POLYGON_SOURCE_ID)
-        neighborhoodPolygonBaseFillLayer.withProperties(
-                fillOpacity(.2f))
+            // Create a FillLayer which will show a background of all neighborhoods on the map.
+            val neighborhoodPolygonBaseFillLayer = FillLayer(BASE_NEIGHBORHOOD_FILL_LAYER_ID,
+              NEIGHBORHOOD_POLYGON_SOURCE_ID)
+            neighborhoodPolygonBaseFillLayer.withProperties(
+              fillOpacity(.2f))
 
-        // Add neighborhood layer below the city label layer
-        mapboxMap.style?.addLayerBelow(neighborhoodPolygonBaseFillLayer, "settlement-label")
+            // Add neighborhood layer below the city label layer
+            style.addLayerBelow(neighborhoodPolygonBaseFillLayer, "settlement-label")
 
-        // Add a FillLayer which will only show "selected" features/polygons/neighborhoods.
-        val neighborhoodPolygonColoredFillLayer = FillLayer(COLORED_FILL_LAYER_ID,
-                NEIGHBORHOOD_POLYGON_SOURCE_ID)
-        neighborhoodPolygonColoredFillLayer.withProperties(
+            // Add a FillLayer which will only show "selected" features/polygons/neighborhoods.
+            val neighborhoodPolygonColoredFillLayer = FillLayer(COLORED_FILL_LAYER_ID,
+              NEIGHBORHOOD_POLYGON_SOURCE_ID)
+            neighborhoodPolygonColoredFillLayer.withProperties(
 
-                // Use data-driven styling to use each Feature's color property, which was set in
-                // `onPostExecute()` of the data loading AsyncTask.
-                fillColor(toColor(get(PROPERTY_FILL_COLOR))),
-                fillOpacity(.45f))
+              // Use data-driven styling to use each Feature's color property, which was set in
+              // `onPostExecute()` of the data loading AsyncTask.
+              fillColor(toColor(get(PROPERTY_FILL_COLOR))),
+              fillOpacity(.45f))
 
-        // Add a filter to ensure that only "selected" features/polygons/neighborhoods are displayed.
-        neighborhoodPolygonColoredFillLayer.withFilter(eq((get(PROPERTY_SELECTED)), literal(true)))
-        mapboxMap.style?.addLayerBelow(neighborhoodPolygonColoredFillLayer, "settlement-label")
+            // Add a filter to ensure that only "selected" features/polygons/neighborhoods are displayed.
+            neighborhoodPolygonColoredFillLayer.withFilter(eq((get(PROPERTY_SELECTED)), literal(true)))
+            style.addLayerBelow(neighborhoodPolygonColoredFillLayer, "settlement-label")
 
-        // Add LineLayer to outline the various neighborhoods' areas
-        val neighborhoodOutlineLineLayer = LineLayer(LINE_LAYER_ID, NEIGHBORHOOD_POLYGON_SOURCE_ID)
-        neighborhoodOutlineLineLayer.withProperties(
-                lineColor(Color.GRAY),
-                lineWidth(2.2f))
-        mapboxMap.style?.addLayerBelow(neighborhoodOutlineLineLayer, "settlement-label")
+            // Add LineLayer to outline the various neighborhoods' areas
+            val neighborhoodOutlineLineLayer = LineLayer(LINE_LAYER_ID, NEIGHBORHOOD_POLYGON_SOURCE_ID)
+            neighborhoodOutlineLineLayer.withProperties(
+              lineColor(Color.GRAY),
+              lineWidth(2.2f))
+            style.addLayerBelow(neighborhoodOutlineLineLayer, "settlement-label")
+        }
     }
 
     /**

@@ -168,17 +168,14 @@ public class MapMatchingActivity extends AppCompatActivity {
   }
 
   private void drawBeforeMapMatching(Feature feature) {
-    Style style = map.getStyle();
-    if (style != null) {
+    map.getStyle(style -> {
       style.addSource(new GeoJsonSource("pre-matched-source-id", feature));
       style.addLayer(new LineLayer("pre-matched-layer-id", "pre-matched-source-id").withProperties(
         lineColor(ColorUtils.colorToRgbaString(Color.parseColor("#3bb2d0"))),
         lineWidth(6f),
         lineOpacity(1f)
       ));
-    } else {
-      throw new IllegalStateException("Style isn't ready yet.");
-    }
+    });
   }
 
   private void requestMapMatched(Feature feature) {

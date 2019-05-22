@@ -62,8 +62,7 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
 
   private void drawLines(@NonNull FeatureCollection featureCollection) {
     if (mapboxMap != null) {
-      Style style = mapboxMap.getStyle();
-      if (style != null) {
+      mapboxMap.getStyle(style -> {
         if (featureCollection.features().size() > 0) {
           style.addSource(new GeoJsonSource("line-source", featureCollection));
 
@@ -76,7 +75,7 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
               PropertyFactory.lineWidth(7f),
               PropertyFactory.lineColor(Color.parseColor("#3bb2d0"))));
         }
-      }
+      });
     }
   }
 
