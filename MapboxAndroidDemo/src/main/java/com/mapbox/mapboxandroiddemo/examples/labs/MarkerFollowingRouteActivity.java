@@ -96,13 +96,12 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
     LineString lineString = (LineString) featureCollection.features().get(0).geometry();
     routeCoordinateList = lineString.coordinates();
     if (mapboxMap != null) {
-      Style style = mapboxMap.getStyle();
-      if (style != null) {
+      mapboxMap.getStyle(style -> {
         initSources(style, featureCollection);
         initSymbolLayer(style);
         initDotLinePath(style);
         initRunnable();
-      }
+      });
     }
   }
 

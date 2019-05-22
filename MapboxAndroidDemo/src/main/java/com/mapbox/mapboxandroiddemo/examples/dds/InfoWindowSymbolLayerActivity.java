@@ -103,13 +103,12 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
   public void setUpData(final FeatureCollection collection) {
     featureCollection = collection;
     if (mapboxMap != null) {
-      Style style = mapboxMap.getStyle();
-      if (style != null) {
+      mapboxMap.getStyle(style -> {
         setupSource(style);
         setUpImage(style);
         setUpMarkerLayer(style);
         setUpInfoWindowLayer(style);
-      }
+      });
     }
   }
 
@@ -242,11 +241,10 @@ public class InfoWindowSymbolLayerActivity extends AppCompatActivity implements
    */
   public void setImageGenResults(HashMap<String, Bitmap> imageMap) {
     if (mapboxMap != null) {
-      Style style = mapboxMap.getStyle();
-      if (style != null) {
+      mapboxMap.getStyle(style -> {
         // calling addImages is faster as separate addImage calls for each bitmap.
         style.addImages(imageMap);
-      }
+      });
     }
   }
 

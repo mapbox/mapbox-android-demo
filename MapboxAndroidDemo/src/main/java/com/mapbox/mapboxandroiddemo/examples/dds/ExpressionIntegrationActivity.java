@@ -140,8 +140,7 @@ public class ExpressionIntegrationActivity
     // Retrieves GeoJSON from local file and adds it to the map
     GeoJsonSource geoJsonSource = new GeoJsonSource(GEOJSON_SRC_ID, featureCollection);
     if (mapboxMap != null) {
-      final Style style = mapboxMap.getStyle();
-      if (style != null) {
+      mapboxMap.getStyle(style -> {
         style.addSource(geoJsonSource);
         initTemperatureLayers(style);
         populateMenu();
@@ -159,7 +158,7 @@ public class ExpressionIntegrationActivity
             }
           }
         });
-      }
+      });
     }
   }
 

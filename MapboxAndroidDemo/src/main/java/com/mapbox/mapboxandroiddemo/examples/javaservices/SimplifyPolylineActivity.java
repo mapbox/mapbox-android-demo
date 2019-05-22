@@ -170,15 +170,12 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
   }
 
   private void addLine(String layerId, Feature feature, String lineColorHex) {
-    Style style = map.getStyle();
-    if (style != null) {
+    map.getStyle(style -> {
       style.addSource(new GeoJsonSource(layerId, feature));
       style.addLayer(new LineLayer(layerId, layerId).withProperties(
         lineColor(ColorUtils.colorToRgbaString(Color.parseColor(lineColorHex))),
         lineWidth(4f)
       ));
-    } else {
-      throw new IllegalStateException("Style hasn't been fully initialised");
-    }
+    });
   }
 }
