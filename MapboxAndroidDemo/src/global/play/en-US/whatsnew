@@ -1,1 +1,7 @@
-This update is in line with the 7.4.0-beta.2 release of the Mapbox Maps SDK for Android and includes several fixes.
+This update is in line with the 8.0.0 release of the Mapbox Maps SDK for Android and includes several fixes and new examples:
+
+- onStyleImageMissing listener usage
+- IgnorePlacement/allowOverlap for text and icons
+- New basic SymbolLayer icon example
+- Using TurfTransformation#circle to create visual ring
+- Multiple color formatting to TextFieldMultipleFormatsActivity
