@@ -13,8 +13,8 @@ import com.mapbox.geojson.Point;
 import com.mapbox.geojson.Polygon;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.camera.CameraPosition;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -46,8 +46,8 @@ public class RevealedPolygonHoleOutlineActivity extends AppCompatActivity implem
   private static final String LINE_SOURCE_ID = "LINE_SOURCE_ID";
   private static final String FILL_LAYER_ID = "FILL-LAYER-ID";
   private static final String LINE_LAYER_ID = "LINE-LAYER-ID";
-  private static final float FILL_OPACITY = .55f;
-  private static final float LINE_WIDTH = 3f;
+  private static final float FILL_OPACITY = .7f;
+  private static final float LINE_WIDTH = 5f;
   private static final int GREY_COLOR = Color.parseColor("#c2c2c2");
   private static final int RED_COLOR = Color.parseColor("#BF544C");
   private MapView mapView;
@@ -61,6 +61,10 @@ public class RevealedPolygonHoleOutlineActivity extends AppCompatActivity implem
       add(Point.fromLngLat(-121.9921875, 37.27787748952485));
     }
   };
+  private static final LatLngBounds RESTRICTED_BOUNDS_AREA = new LatLngBounds.Builder()
+    .include(new LatLng(37.27787748952485, -121.9921875))
+    .include(new LatLng(37.40452830389465, -121.79580688476562))
+    .build();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,9 @@ public class RevealedPolygonHoleOutlineActivity extends AppCompatActivity implem
   @Override
   public void onMapReady(final MapboxMap map) {
     this.mapboxMap = map;
+    // Set the boundary area for the map camera
+    mapboxMap.setLatLngBoundsForCameraTarget(RESTRICTED_BOUNDS_AREA);
+
     map.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
@@ -90,37 +97,30 @@ public class RevealedPolygonHoleOutlineActivity extends AppCompatActivity implem
   }
 
   private void addStyling(@NonNull List<Point> pointList) {
-    if (mapboxMap.getStyle() != null) {
-      Style loadedStyle = mapboxMap.getStyle();
+    mapboxMap.getStyle(new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style loadedStyle) {
+        List<LineString> innerList = new ArrayList<>();
+        LineString innerLineString = LineString.fromLngLats(pointList);
+        innerList.add(innerLineString);
 
-      List<LineString> innerList = new ArrayList<>();
-      innerList.add(LineString.fromLngLats(pointList));
+        loadedStyle.addSource(new GeoJsonSource(FILL_SOURCE_ID,
+          Polygon.fromOuterInner(LineString.fromLngLats(OUTER_POLYGON_COORDINATES), innerList)));
 
-      List<List<Point>> megaInnerList = new ArrayList<>();
-      megaInnerList.add(pointList);
+        loadedStyle.addSource(new GeoJsonSource(LINE_SOURCE_ID, innerLineString));
 
-      loadedStyle.addSource(new GeoJsonSource(FILL_SOURCE_ID,
-        Polygon.fromOuterInner(LineString.fromLngLats(OUTER_POLYGON_COORDINATES), innerList)));
+        loadedStyle.addLayerBelow(new FillLayer(FILL_LAYER_ID, FILL_SOURCE_ID).withProperties(
+          fillColor(GREY_COLOR),
+          fillOpacity(FILL_OPACITY)), "road-street");
 
-      loadedStyle.addSource(new GeoJsonSource(LINE_SOURCE_ID,
-        Polygon.fromLngLats(megaInnerList)));
-
-      loadedStyle.addLayerBelow(new FillLayer(FILL_LAYER_ID, FILL_SOURCE_ID).withProperties(
-        fillColor(GREY_COLOR),
-        fillOpacity(FILL_OPACITY)), "road-street");
-
-      loadedStyle.addLayer(new LineLayer(LINE_LAYER_ID, LINE_SOURCE_ID).withProperties(
-        lineColor(RED_COLOR),
-        lineWidth(LINE_WIDTH),
-        lineCap(Property.LINE_CAP_ROUND),
-        lineJoin(Property.LINE_JOIN_ROUND)
-      ));
-
-      mapboxMap.animateCamera(
-        CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
-          .zoom(11)
-          .build()), 3000);
-    }
+        loadedStyle.addLayer(new LineLayer(LINE_LAYER_ID, LINE_SOURCE_ID).withProperties(
+          lineColor(RED_COLOR),
+          lineWidth(LINE_WIDTH),
+          lineCap(Property.LINE_CAP_ROUND),
+          lineJoin(Property.LINE_JOIN_ROUND)
+        ));
+      }
+    });
   }
 
   private static class LoadGeoJson extends AsyncTask<Void, Void, List<Point>> {

@@ -11,8 +11,9 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="37.34109311809737"
-        mapbox:mapbox_cameraTargetLng="-121.89262390136717"
-        mapbox:mapbox_cameraZoom="7"/>
+        mapbox:mapbox_cameraTargetLat="37.331383"
+        mapbox:mapbox_cameraTargetLng="-121.888902"
+        mapbox:mapbox_cameraZoom="12"
+        mapbox:mapbox_cameraZoomMin="11.6" />
 
 </FrameLayout>
