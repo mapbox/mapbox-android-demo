@@ -1,0 +1,74 @@
+{
+    "type": "FeatureCollection",
+    "features": [{
+        "type": "Feature",
+        "properties": {
+            "description": "Ford's\nTheater",
+            "icon": "theatre"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-77.038659, 38.931567]
+        }
+    }, {
+        "type": "Feature",
+        "properties": {
+            "description": "The\nGaslight",
+            "icon": "theatre"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-77.003168, 38.894651]
+        }
+    }, {
+        "type": "Feature",
+        "properties": {
+            "description": "Horrible\nHarry's",
+            "icon": "bar"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-77.090372, 38.881189]
+        }
+    }, {
+        "type": "Feature",
+        "properties": {
+            "description": "Bike\nParty",
+            "icon": "bicycle"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-77.052477, 38.943951]
+        }
+    }, {
+        "type": "Feature",
+        "properties": {
+            "description": "Rockabilly\nRockstars",
+            "icon": "music"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-77.031706, 38.914581]
+        }
+    }, {
+        "type": "Feature",
+        "properties": {
+            "description": "District\nDrum Tribe",
+            "icon": "music"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-77.020945, 38.878241]
+        }
+    }, {
+        "type": "Feature",
+        "properties": {
+            "description": "Motown\nMemories",
+            "icon": "music"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [-77.007481, 38.876516]
+        }
+    }]
+}

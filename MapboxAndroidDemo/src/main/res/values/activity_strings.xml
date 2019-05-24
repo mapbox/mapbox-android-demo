@@ -348,4 +348,7 @@
     <string name="icon_overlap_explanation">iconAllowOverlap: the icon will be visible even if it collides with other previously drawn symbols</string>
     <string name="icon_placement_explanation">iconIgnorePlacement: other symbols can be visible even if \n they collide with the icon</string>
 
+    <!-- Variable label placement-->
+    <string name="zoom_map_in_and_out_variable_label_instruction">Zoom in and out to see red labels try to avoid collisions</string>
+
 </resources>
