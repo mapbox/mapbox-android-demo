@@ -23,6 +23,14 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mapbox.mapboxsdk.style.expressions.Expression.bool;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.step;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.switchCase;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.zoom;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
@@ -43,6 +51,8 @@ public class DottedAndSolidLineIconActivity extends AppCompatActivity {
   private static final Point NEWARK_AIRPORT_POINT = Point.fromLngLat(-74.17799, 40.69297);
   private static final Point SAN_FRANCISCO_AIRPORT_POINT = Point.fromLngLat(-122.38709, 37.616714);
   private static final Point MINNEAPOLIS_CITY_AIRPORT_POINT = Point.fromLngLat(-93.224, 44.8815);
+  private static final String PLANE_SOURCE_ID = "plane-source-id";
+  private static final String PLANE_SYMBOL_LAYER_ID = "plane-symbol-layer-id";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -60,32 +70,50 @@ public class DottedAndSolidLineIconActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
+
+        Feature newarkFeature = Feature.fromGeometry(NEWARK_AIRPORT_POINT);
+        newarkFeature.addBooleanProperty("startorend", true);
+        Feature sanFranciscoFeature = Feature.fromGeometry(SAN_FRANCISCO_AIRPORT_POINT);
+        sanFranciscoFeature.addBooleanProperty("startorend", true);
+
+        Feature minneapolisFeature = Feature.fromGeometry(MINNEAPOLIS_CITY_AIRPORT_POINT);
+        minneapolisFeature.addBooleanProperty("startorend", false);
+
+        Feature alreadyTraveledLine = LineString.fromLngLats(dotList);
+        Feature alreadyTraveledLine = LineString.fromLngLats(dotList);
+
+
+        GeoJsonSource DATA_GEOJSON_SOURCE = new GeoJsonSource(PLANE_SOURCE_ID,
+          FeatureCollection.fromFeatures(new Feature[] {
+
+          }));
+
         mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
 
+            style.addSource(DATA_GEOJSON_SOURCE);
+
             // Add the plane SymbolLayer icon to the map
             style.addImage("plane-icon-id", BitmapFactory.decodeResource(
-              getResources(), R.drawable.ic_action_plane));
-            style.addSource(new GeoJsonSource("plane-source-id", MINNEAPOLIS_CITY_AIRPORT_POINT));
-            style.addLayer(new SymbolLayer("plane-symbol-layer-id", "plane-source-id").withProperties(
+              getResources(), R.drawable.ic_action_plane_white));
+
+            style.addImage("destination-and-origin-icon-id", BitmapFactory.decodeResource(
+              getResources(), R.drawable.red_marker));
+
+
+            style.addLayer(new SymbolLayer(PLANE_SYMBOL_LAYER_ID, PLANE_SOURCE_ID).withProperties(
               iconImage("plane-icon-id"),
-              iconSize(1.2f),
+              iconSize(1.5f),
+              iconImage(),
               iconIgnorePlacement(true),
               iconAllowOverlap(true)
             ));
 
             // Add the marker icons which represent the plane's origin and destination locations
-            style.addImage("destination-and-origin-icon-id", BitmapFactory.decodeResource(
-              getResources(), R.drawable.red_marker));
-            style.addSource(new GeoJsonSource("destination-and-origin-source-id",
-              FeatureCollection.fromFeatures(
-                new Feature[] {
-                  Feature.fromGeometry(NEWARK_AIRPORT_POINT),
-                  Feature.fromGeometry(SAN_FRANCISCO_AIRPORT_POINT)
-                })));
+
             style.addLayer(new SymbolLayer("destination-and-origin-symbol-layer-id",
-              "destination-and-origin-source-id").withProperties(
+              PLANE_SOURCE_ID).withProperties(
               iconImage("destination-and-origin-icon-id"),
               iconSize(1f),
               iconIgnorePlacement(true),
@@ -94,27 +122,27 @@ public class DottedAndSolidLineIconActivity extends AppCompatActivity {
             ));
 
             // Add the dotted line LineLayer and use runtime-styling to style it
-            List<Point> dotList = new ArrayList<>();
+          /*  List<Point> dotList = new ArrayList<>();
             dotList.add(NEWARK_AIRPORT_POINT);
             dotList.add(MINNEAPOLIS_CITY_AIRPORT_POINT);
             style.addSource(new GeoJsonSource("dotted-line-source-id",
-              Feature.fromGeometry(LineString.fromLngLats(dotList))));
+              Feature.fromGeometry(LineString.fromLngLats(dotList))));*/
             style.addLayerBelow(
-              new LineLayer("dotted-line-layer-id", "dotted-line-source-id")
+              new LineLayer("dotted-line-layer-id", PLANE_SOURCE_ID)
                 .withProperties(lineWidth(4.5f),
                   lineColor(Color.RED),
-                  lineDasharray(new Float[] {1f, 1f})), "plane-symbol-layer-id");
+                  lineDasharray(new Float[] {1f, 1f})), PLANE_SYMBOL_LAYER_ID);
 
 
-            // Add the solid line LineLayer and use runtime-styling to style it
+           /* // Add the solid line LineLayer and use runtime-styling to style it
             List<Point> solidLineList = new ArrayList<>();
             solidLineList.add(MINNEAPOLIS_CITY_AIRPORT_POINT);
             solidLineList.add(SAN_FRANCISCO_AIRPORT_POINT);
             style.addSource(new GeoJsonSource("solid-line-source-id",
-              Feature.fromGeometry(LineString.fromLngLats(solidLineList))));
-            style.addLayerBelow(new LineLayer("solid-line-layer-id", "solid-line-source-id")
+              Feature.fromGeometry(LineString.fromLngLats(solidLineList))));*/
+            style.addLayerBelow(new LineLayer("solid-line-layer-id", PLANE_SOURCE_ID)
               .withProperties(lineWidth(4.5f),
-                lineColor(Color.BLUE)), "plane-symbol-layer-id");
+                lineColor(Color.BLUE)), PLANE_SYMBOL_LAYER_ID);
           }
         });
       }
