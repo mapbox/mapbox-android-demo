@@ -86,6 +86,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.dds.RevealedPolygonHoleOutlineActivity"
+            android:label="@string/activity_dds_polygon_revealed_hole_outline_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.dds.DrawPolygonActivity"
             android:label="@string/activity_dds_polygon_title">
             <meta-data

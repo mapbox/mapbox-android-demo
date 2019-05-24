@@ -55,14 +55,16 @@
     <string name="activity_dds_expression_integration_url" translatable="false">https://imgur.com/YiBeH0I.png</string>
     <string name="activity_dds_satellite_land_select_url" translatable="false">https://i.imgur.com/tfbO1m4.png</string>
     <string name="activity_dds_symbol_zoom_switch_url" translatable="false">https://i.imgur.com/sbWU4Ui.png</string>
-    <string name="activity_annotation_marker_url" translatable="false">http://i.imgur.com/X59UoaY.png</string>
+    <string name="activity_dds_polygon_select_toggle_url" translatable="false">https://i.imgur.com/gVIfE3G.png</string>
     <string name="activity_dds_geojson_line_url" translatable="false">https://i.imgur.com/Bs0X98z.png</string>
     <string name="activity_dds_polygon_url" translatable="false">http://i.imgur.com/v9X28id.png</string>
     <string name="activity_dds_polygon_holes_url" translatable="false">https://i.imgur.com/6hcqbNw.png</string>
     <string name="activity_dds_symbol_collision_detection_url" translatable="false">https://i.imgur.com/nV1YnIv.png</string>
+    <string name="activity_dds_polygon_revealed_hole_outline_url" translatable="false">http://i.imgur.com/19GZh8H.jpg</string>
     <string name="activity_styles_text_field_formatting_url" translatable="false">https://i.imgur.com/MSoIYmU.png</string>
     <string name="activity_annotation_basic_marker_view_url" translatable="false">http://i.imgur.com/vbWTLIE.png</string>
     <string name="activity_annotation_custom_info_window_url" translatable="false">http://i.imgur.com/mCWbosy.png</string>
+    <string name="activity_annotation_marker_url" translatable="false">http://i.imgur.com/X59UoaY.png</string>
     <string name="activity_camera_animate_url" translatable="false">http://i.imgur.com/PN3vyNJ.jpg</string>
     <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string>
     <string name="activity_camera_restrict_url" translatable="false">http://i.imgur.com/A227BEs.jpg</string>
@@ -118,8 +120,7 @@
     <string name="activity_lab_magic_window_image_url">https://i.imgur.com/Nw78ZrV.png</string>
     <string name="activity_lab_fog_background_url">https://i.imgur.com/NcSGgD8.png</string>
     <string name="activity_lab_animated_interpolator_icon_drop_url">https://i.imgur.com/JfLf69C.png</string>
-    <string name="activity_dds_polygon_select_toggle_url" translatable="false">https://i.imgur.com/gVIfE3G.png</string>
-    <string name="activity_china_simple_china_mapview_url" translatable="false">https://i.imgur.com/KwoEynZ.png</string>
     <string name="activity_lab_home_screen_widget_url" translatable="false">https://i.imgur.com/H5N9jDn.png</string>
     <string name="activity_java_turf_ring_url" translatable="false">https://i.imgur.com/nG8xeXH.png</string>
+    <string name="activity_china_simple_china_mapview_url" translatable="false">https://i.imgur.com/KwoEynZ.png</string>
 </resources>

@@ -58,11 +58,11 @@
     <string name="activity_dds_symbol_zoom_switch_description">Change SymbolLayer icons based on the camera\'s zoom level.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_dds_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Maps SDK.</string>
+    <string name="activity_dds_polygon_select_toggle_description">Tap on various polygons to "select" them and toggle their colors.</string>
     <string name="activity_dds_polygon_description">Draw a vector polygon on a map with the Mapbox Maps SDK.</string>
     <string name="activity_dds_polygon_holes_description">Draw a vector polygon with holes on a map using the Mapbox Maps SDK.</string>
     <string name="activity_dds_symbol_collision_detection_description">Allow or deny text and icons to overlap and collide.</string>
-
-
+    <string name="activity_dds_polygon_revealed_hole_outline_description">Outline a polygon hole to highlight a revealed region.</string>
     <string name="activity_styles_text_field_formatting_description">Adjust the color, size, and fonts of SymbolLayer text fields.</string>
     <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
     <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize the info window.</string>
@@ -120,7 +120,6 @@
     <string name="activity_lab_magic_window_description">Combine two maps for a magic window effect</string>
     <string name="activity_lab_fog_background_description">Add a gradient on top of a MapView to show a background fog effect.</string>
     <string name="activity_lab_animated_interpolator_icon_drop_description">Use Android system interpolators to animate SymbolLayer icons movement.</string>
-    <string name="activity_dds_polygon_select_toggle_description">Tap on various polygons to "select" them and toggle their colors.</string>
     <string name="activity_china_simple_china_mapview_description">Show an accurate and government-approved China map in your app using the Mapbox Maps SDK.</string>
     <string name="activity_lab_home_screen_widget_description">Show the device\'s current location or other information in a homescreen widget.</string>
     <string name="activity_java_turf_ring_description">Use Turf to calculate coordinates to eventually draw a ring around a center coordinate.</string>
