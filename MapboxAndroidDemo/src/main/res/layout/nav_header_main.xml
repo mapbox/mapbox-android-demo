@@ -26,4 +26,10 @@
         android:layout_height="wrap_content"
         android:text="@string/examples"/>
 
+    <FrameLayout
+        android:id="@+id/nav_drawer_map_frag_container"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+
 </LinearLayout>

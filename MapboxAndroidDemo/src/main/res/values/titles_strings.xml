@@ -148,4 +148,6 @@
     <string name="activity_lab_change_attribution_color_title">Style attribution</string>
     <string name="activity_lab_shared_preferences_title">Saving to SharedPreferences</string>
     <string name="activity_lab_biometric_fingerprint_title">Biometric fingerprint</string>
+    <string name="activity_lab_map_in_nav_drawer_title">Map in navigation drawer</string>
+    <string name="activity_java_turf_ring_title">Hollow circle</string>
 </resources>

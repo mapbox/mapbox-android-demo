@@ -705,6 +705,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
+
+        <activity
+            android:name=".examples.labs.MapInNavDrawerActivity"
+            android:label="@string/activity_lab_map_in_nav_drawer_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+
         <activity
             android:name=".examples.dds.CircleIconToggleOnClickActivity"
             android:label="@string/activity_dds_circle_icon_toggle_on_click_title">
