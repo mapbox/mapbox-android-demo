@@ -78,7 +78,6 @@ public class FingerDrawQueryActivity extends AppCompatActivity {
   private FeatureCollection searchPointFeatureCollection;
   private List<Point> freehandTouchPointListForPolygon = new ArrayList<>();
   private List<Point> freehandTouchPointListForLine = new ArrayList<>();
-  private Polygon drawnPolygon;
   private boolean showSearchDataLocations = true;
   private boolean drawSingleLineOnly = false;
 
@@ -109,14 +108,14 @@ public class FingerDrawQueryActivity extends AppCompatActivity {
           freehandTouchPointListForPolygon.add(screenTouchPoint);
           freehandTouchPointListForPolygon.add(freehandTouchPointListForPolygon.get(0));
         }
-
-        // Create and show a FillLayer polygon where the search area is
-        GeoJsonSource fillPolygonSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID);
-        List<List<Point>> polygonList = new ArrayList<>();
-        polygonList.add(freehandTouchPointListForPolygon);
-        drawnPolygon = Polygon.fromLngLats(polygonList);
-        fillPolygonSource.setGeoJson(drawnPolygon);
       }
+
+      // Create and show a FillLayer polygon where the search area is
+      GeoJsonSource fillPolygonSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID);
+      List<List<Point>> polygonList = new ArrayList<>();
+      polygonList.add(freehandTouchPointListForPolygon);
+      Polygon drawnPolygon = Polygon.fromLngLats(polygonList);
+      fillPolygonSource.setGeoJson(drawnPolygon);
 
       // Take certain actions when the drawing is done
       if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
