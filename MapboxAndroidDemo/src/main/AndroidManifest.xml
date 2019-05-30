@@ -691,6 +691,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.dds.CircleToIconTransitionActivity"
+            android:label="@string/activity_dds_circle_to_icon_smooth_transition_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.dds.BathymetryActivity"
             android:label="@string/activity_dds_bathymetry_title">
             <meta-data
