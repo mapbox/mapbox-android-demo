@@ -34,11 +34,11 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.lt;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.toNumber;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconTranslate;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textIgnorePlacement;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
 /**
@@ -119,8 +119,7 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
       SymbolLayer symbolLayer = new SymbolLayer("cluster-" + i, "earthquakes");
 
       symbolLayer.setProperties(
-        iconImage("quake-triangle-icon-id"),
-        iconTranslate(new Float[] {0f, -9f})
+        iconImage("quake-triangle-icon-id")
       );
       Expression pointCount = toNumber(get("point_count"));
 
@@ -143,6 +142,9 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
       textSize(12f),
       textColor(Color.BLACK),
       textIgnorePlacement(true),
+      // The .5f offset moves the data numbers down a little bit so that they're
+      // in the middle of the triangle cluster image
+      textOffset(new Float[] {0f, .5f}),
       textAllowOverlap(true)
     ));
   }

@@ -29,7 +29,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconTranslate;
 
 /**
  * Combine SymbolLayer icons with the Android system's ValueAnimator and interpolator
@@ -140,7 +139,7 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
     if (animator != null) {
       animator.cancel();
     }
-    animator = ValueAnimator.ofFloat(STARTING_DROP_HEIGHT, 0);
+    animator = ValueAnimator.ofFloat(STARTING_DROP_HEIGHT, -17);
     animator.setDuration(DROP_SPEED_MILLISECONDS);
     animator.setInterpolator(desiredTimeInterpolator);
     animator.setStartDelay(1000);
@@ -152,7 +151,7 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
           initSymbolLayer();
           animationHasStarted = true;
         }
-        pinSymbolLayer.setProperties(iconTranslate(new Float[] {0f, (Float) valueAnimator.getAnimatedValue()}));
+        pinSymbolLayer.setProperties(iconOffset(new Float[] {0f, (Float) valueAnimator.getAnimatedValue()}));
       }
     });
   }
