@@ -76,12 +76,9 @@ public class FingerDrawQueryActivity extends AppCompatActivity {
   private MapView mapView;
   private MapboxMap mapboxMap;
   private FeatureCollection searchPointFeatureCollection;
-  private GeoJsonSource drawLineSource;
-  private GeoJsonSource fillPolygonSource;
   private List<Point> freehandTouchPointListForPolygon = new ArrayList<>();
   private List<Point> freehandTouchPointListForLine = new ArrayList<>();
-  private List<List<Point>> polygonList;
-  private Point firstScreenTouchPoint;
+  private Polygon drawnPolygon;
   private boolean showSearchDataLocations = true;
   private boolean drawSingleLineOnly = false;
 
@@ -90,37 +87,35 @@ public class FingerDrawQueryActivity extends AppCompatActivity {
     public boolean onTouch(View view, MotionEvent motionEvent) {
 
       LatLng latLngTouchCoordinate = mapboxMap.getProjection().fromScreenLocation(
-        new PointF(motionEvent.getX(), motionEvent.getY()));
+          new PointF(motionEvent.getX(), motionEvent.getY()));
 
       Point screenTouchPoint = Point.fromLngLat(latLngTouchCoordinate.getLongitude(),
-        latLngTouchCoordinate.getLatitude());
+          latLngTouchCoordinate.getLatitude());
 
       // Draw the line on the map as the finger is dragged along the map
       freehandTouchPointListForLine.add(screenTouchPoint);
-      drawLineSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_LINE_LAYER_SOURCE_ID);
+      GeoJsonSource drawLineSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_LINE_LAYER_SOURCE_ID);
       drawLineSource.setGeoJson(LineString.fromLngLats(freehandTouchPointListForLine));
 
       // Draw a polygon area if drawSingleLineOnly == false
       if (!drawSingleLineOnly) {
-        if (freehandTouchPointListForPolygon.size() == 0) {
-          firstScreenTouchPoint = screenTouchPoint;
-        }
-        if (freehandTouchPointListForPolygon.size() < 3) {
+        if (freehandTouchPointListForPolygon.size() < 2) {
           freehandTouchPointListForPolygon.add(screenTouchPoint);
-        } else if (freehandTouchPointListForPolygon.size() == 3) {
+        } else if (freehandTouchPointListForPolygon.size() == 2) {
           freehandTouchPointListForPolygon.add(screenTouchPoint);
-          freehandTouchPointListForPolygon.add(firstScreenTouchPoint);
+          freehandTouchPointListForPolygon.add(freehandTouchPointListForPolygon.get(0));
         } else {
           freehandTouchPointListForPolygon.remove(freehandTouchPointListForPolygon.size() - 1);
           freehandTouchPointListForPolygon.add(screenTouchPoint);
-          freehandTouchPointListForPolygon.add(firstScreenTouchPoint);
+          freehandTouchPointListForPolygon.add(freehandTouchPointListForPolygon.get(0));
         }
 
         // Create and show a FillLayer polygon where the search area is
-        fillPolygonSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID);
-        polygonList = new ArrayList<>();
+        GeoJsonSource fillPolygonSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID);
+        List<List<Point>> polygonList = new ArrayList<>();
         polygonList.add(freehandTouchPointListForPolygon);
-        fillPolygonSource.setGeoJson(Polygon.fromLngLats(polygonList));
+        drawnPolygon = Polygon.fromLngLats(polygonList);
+        fillPolygonSource.setGeoJson(drawnPolygon);
       }
 
       // Take certain actions when the drawing is done
@@ -129,16 +124,16 @@ public class FingerDrawQueryActivity extends AppCompatActivity {
         // If drawing polygon, add the first screen touch point to the end of
         // the LineLayer list so that it's
         if (!drawSingleLineOnly) {
-          freehandTouchPointListForLine.add(firstScreenTouchPoint);
+          freehandTouchPointListForLine.add(freehandTouchPointListForPolygon.get(0));
         }
 
         if (showSearchDataLocations && !drawSingleLineOnly) {
 
           // Use Turf to calculate the number of data points within a certain Polygon area
           FeatureCollection pointsInSearchAreaFeatureCollection =
-            TurfJoins.pointsWithinPolygon(searchPointFeatureCollection,
-              FeatureCollection.fromFeature(Feature.fromGeometry(
-                Polygon.fromLngLats(polygonList))));
+              TurfJoins.pointsWithinPolygon(searchPointFeatureCollection,
+                  FeatureCollection.fromFeature(Feature.fromGeometry(
+                      drawnPolygon)));
 
           // Create a Toast which say show many data points within a certain Polygon area
           if (VISIBLE.equals(mapboxMap.getStyle().getLayer(
@@ -188,29 +183,28 @@ public class FingerDrawQueryActivity extends AppCompatActivity {
             }
 
             findViewById(R.id.clear_map_for_new_draw_fab)
-              .setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                .setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View view) {
 
-                  // Reset ArrayLists
-                  polygonList = new ArrayList<>();
-                  freehandTouchPointListForPolygon = new ArrayList<>();
-                  freehandTouchPointListForLine = new ArrayList<>();
+                    // Reset ArrayLists
+                    freehandTouchPointListForPolygon = new ArrayList<>();
+                    freehandTouchPointListForLine = new ArrayList<>();
 
-                  // Add empty Feature array to the sources
-                  drawLineSource = style.getSourceAs(FREEHAND_DRAW_LINE_LAYER_SOURCE_ID);
-                  if (drawLineSource != null) {
-                    drawLineSource.setGeoJson(FeatureCollection.fromFeatures(new Feature[] {}));
+                    // Add empty Feature array to the sources
+                    GeoJsonSource drawLineSource = style.getSourceAs(FREEHAND_DRAW_LINE_LAYER_SOURCE_ID);
+                    if (drawLineSource != null) {
+                      drawLineSource.setGeoJson(FeatureCollection.fromFeatures(new Feature[]{}));
+                    }
+
+                    GeoJsonSource fillPolygonSource = style.getSourceAs(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID);
+                    if (fillPolygonSource != null) {
+                      fillPolygonSource.setGeoJson(FeatureCollection.fromFeatures(new Feature[]{}));
+                    }
+
+                    enableMapDrawing();
                   }
-
-                  fillPolygonSource = style.getSourceAs(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID);
-                  if (fillPolygonSource != null) {
-                    fillPolygonSource.setGeoJson(FeatureCollection.fromFeatures(new Feature[] {}));
-                  }
-
-                  enableMapDrawing();
-                }
-              });
+                });
 
             findViewById(R.id.switch_to_single_line_only_fab)
               .setOnClickListener(new View.OnClickListener() {
