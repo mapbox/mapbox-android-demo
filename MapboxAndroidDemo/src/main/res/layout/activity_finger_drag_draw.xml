@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="35.087497"
+        mapbox:mapbox_cameraZoom="11.679132"
+        mapbox:mapbox_cameraTargetLng="-106.651261"/>
+
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/multiple_actions_parent_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        fab:fab_addButtonColorNormal="@color/mapboxRed"
+        fab:fab_addButtonColorPressed="@color/mapboxWhite"
+        fab:fab_addButtonPlusIconColor="@color/mapboxWhite"
+        fab:fab_labelStyle="@style/menu_labels_style">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/switch_to_single_line_only_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/mapboxOrange"
+            fab:fab_colorPressed="@color/mapboxWhite"
+            fab:fab_size="mini"
+            fab:fab_title="@string/toggle_straight_line_drawing"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/clear_map_for_new_draw_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/mapboxBlue"
+            fab:fab_colorPressed="@color/mapboxWhite"
+            fab:fab_size="mini"
+            fab:fab_title="@string/clear_map"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/show_search_data_points_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/mapboxGreen"
+            fab:fab_colorPressed="@color/mapboxWhite"
+            fab:fab_size="mini"
+            fab:fab_title="@string/toggle_search_data_points_title"/>
+
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+</FrameLayout>

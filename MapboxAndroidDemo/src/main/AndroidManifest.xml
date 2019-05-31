@@ -23,9 +23,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:launchMode="singleTop"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
 
         <uses-library
             android:name="com.google.android.wearable"
@@ -676,6 +676,14 @@
         <activity
             android:name=".examples.dds.SymbolSwitchOnZoomActivity"
             android:label="@string/activity_dds_symbol_zoom_switch_title">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
+            android:name=".examples.query.FingerDrawQueryActivity"
+            android:label="@string/activity_lab_drag_draw_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
