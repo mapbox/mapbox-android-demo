@@ -2,7 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.support.wearable.activity.WearableActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -39,7 +39,7 @@ public class MapFragmentActivity extends WearableActivity {
       LatLng patagonia = new LatLng(-52.6885, -70.1395);
 
       // Build mapboxMap
-      MapboxMapOptions options = new MapboxMapOptions();
+      MapboxMapOptions options = MapboxMapOptions.createFromAttributes(this, null);
       options.camera(new CameraPosition.Builder()
         .target(patagonia)
         .zoom(9)

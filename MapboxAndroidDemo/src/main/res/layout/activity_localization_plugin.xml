@@ -13,11 +13,11 @@
         app:mapbox_cameraTargetLng="136.711369"
         app:mapbox_cameraZoom="4.5257" />
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/language_one_cardview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,9 +35,9 @@
                 android:text="@string/arabic"
                 android:textColor="@color/mapboxWhite" />
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/language_two_cardview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,10 +54,10 @@
                 android:text="@string/russian"
                 android:textColor="@color/mapboxWhite" />
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/language_three_cardview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,11 +74,11 @@
                 android:text="@string/chinese"
                 android:textColor="@color/mapboxWhite" />
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/match_map_to_device_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

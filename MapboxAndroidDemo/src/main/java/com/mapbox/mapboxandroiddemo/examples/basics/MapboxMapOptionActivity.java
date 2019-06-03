@@ -1,8 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.basics;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -13,6 +11,9 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Add a map view in a dynamically created layout
@@ -29,7 +30,7 @@ public class MapboxMapOptionActivity extends AppCompatActivity {
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
 
-    MapboxMapOptions options = new MapboxMapOptions()
+    MapboxMapOptions options = MapboxMapOptions.createFromAttributes(this, null)
       .camera(new CameraPosition.Builder()
         .target(new LatLng(43.7383, 7.4094))
         .zoom(12)

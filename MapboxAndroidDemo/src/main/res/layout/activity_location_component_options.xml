@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraZoom="15" />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/back_to_camera_tracking_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

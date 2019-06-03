@@ -7,7 +7,7 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.StringDef;
+import androidx.annotation.StringDef;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;

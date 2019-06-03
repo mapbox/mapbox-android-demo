@@ -2,8 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -15,10 +13,13 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 /**
  * Change various properties of a map based on user interaction and other runtime situations.
  */
-public class RuntimeStylingActivity extends AppCompatActivity  {
+public class RuntimeStylingActivity extends AppCompatActivity {
 
   private MapView mapView;
   private Layer waterLayer;

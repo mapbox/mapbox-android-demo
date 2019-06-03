@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.triplet.play'
+apply plugin: 'io.fabric'
 apply from: "$project.rootDir/gradle/script-git-version.gradle"
 apply from: "$project.rootDir/gradle/gradle-dependencies-graph.gradle"
 
@@ -38,7 +39,7 @@ android {
         buildConfigField "int", "MIN_SDK_VERSION", "$minSdkVersion.apiLevel"
 
         playAccountConfig = playAccountConfigs.defaultAccountConfig
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     flavorDimensions "default"
@@ -72,6 +73,7 @@ android {
             applicationIdSuffix '.debug'
             versionNameSuffix '-Debug'
             minifyEnabled false
+            ext.enableCrashlytics = false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -107,17 +109,16 @@ if (isGlobal) {
 dependencies {
 
     // Wearable application module
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     globalWearApp project(':MapboxAndroidWearDemo')
 
     // Support libraries
     implementation dependenciesList.supportGridLayout
+    implementation dependenciesList.supportAppcompatV4
     implementation dependenciesList.supportAppcompatV7
     implementation dependenciesList.supportCardView
     implementation dependenciesList.supportRecyclerView
-    implementation dependenciesList.supportDesign
+    implementation dependenciesList.supportMaterialDesign
     implementation dependenciesList.supportCustomTabs
-    implementation dependenciesList.supportV4
     implementation dependenciesList.supportConstraintLayout
     implementation dependenciesList.supportAnimation
 
@@ -137,8 +138,9 @@ dependencies {
     implementation dependenciesList.mapboxPluginScalebar
 
     // Firebase
-    globalImplementation dependenciesList.firebaseCrash
+    globalImplementation dependenciesList.firebaseCore
     globalImplementation dependenciesList.firebasePerf
+    globalImplementation dependenciesList.firebaseCrashlytics
 
     // Other dependencies
     implementation dependenciesList.gson

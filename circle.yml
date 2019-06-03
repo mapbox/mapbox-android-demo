@@ -34,12 +34,31 @@ jobs:
           name: Clean gradle
           command: ./gradlew clean
       - run:
+          name: Add preferences to gradle.properties file
+          command: |
+            echo "android.useAndroidX=true" >> gradle.properties
+            echo "android.enableJetifier=true" >> gradle.properties
+            echo "org.gradle.jvmargs=-Xmx4608M" >> gradle.properties
+      - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "MapboxAndroidDemo/build.gradle" }}
+      - run:
+          name: Create google-services.json file
+          shell: /bin/bash -euo pipefail
+          command: |
+            if [ -n "${GOOGLE_SERVICES_JSON_RELEASE}" ]; then
+              echo "${GOOGLE_SERVICES_JSON_RELEASE}" > MapboxAndroidDemo/google-services.json
+            fi
+      - run:
+          name: Add preferences to fabric.properties file
+          command: |
+            if [ -n "${FABRIC_PROPERTIES_CONFIG_FILE}" ]; then
+              echo "${FABRIC_PROPERTIES_CONFIG_FILE}" > MapboxAndroidDemo/fabric.properties
+            fi
       - run:
           name: Log in to Google Cloud Platform
           shell: /bin/bash -euo pipefail

@@ -1,13 +1,14 @@
 package com.mapbox.mapboxsdk.testapp.utils;
 
 import android.app.Activity;
-import android.support.test.espresso.IdlingResource;
 
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 import java.lang.reflect.Field;
+
+import androidx.test.espresso.IdlingResource;
 
 public class OnMapReadyIdlingResource implements IdlingResource, OnMapReadyCallback {
 

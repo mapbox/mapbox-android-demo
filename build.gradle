@@ -7,15 +7,17 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url 'https://maven.fabric.io/public' }
     }
 
     dependencies {
         classpath pluginDependencies.gradle
-        classpath pluginDependencies.firebase
+        classpath pluginDependencies.firebasePerformance
         classpath pluginDependencies.playPublisher
         classpath pluginDependencies.kotlin
+        classpath pluginDependencies.fabric
+        classpath pluginDependencies.googleServices
     }
-
 }
 
 plugins {
@@ -25,9 +27,9 @@ plugins {
 allprojects {
     repositories {
         google()
+        jcenter()
         maven { url "https://jitpack.io" }
         maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
-        jcenter()
         maven { url 'https://oss.jfrog.org/artifactory/oss-snapshot-local/' }
     }
 }
@@ -40,3 +42,4 @@ subprojects {
     // apply plugin: 'idea'
     apply from: "${rootDir}/gradle/dependencies.gradle"
 }
+

@@ -1,8 +1,8 @@
 package com.mapbox.mapboxandroiddemo.examples;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import android.view.Menu;
 import android.view.MenuItem;
 

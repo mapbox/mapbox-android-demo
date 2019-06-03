@@ -1,9 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.location;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mapbox.android.core.permissions.PermissionsListener;
@@ -23,6 +20,10 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.maps.SupportMapFragment;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 public class LocationComponentFragmentActivity extends AppCompatActivity implements PermissionsListener {
 
@@ -46,7 +47,7 @@ public class LocationComponentFragmentActivity extends AppCompatActivity impleme
       final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
       // Build a Mapbox map
-      MapboxMapOptions options = new MapboxMapOptions();
+      MapboxMapOptions options = MapboxMapOptions.createFromAttributes(this, null);
       options.camera(new CameraPosition.Builder()
         .target(new LatLng(38.899895, -77.03401))
         .zoom(9)

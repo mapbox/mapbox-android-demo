@@ -4,9 +4,9 @@ import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.RawRes;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.RawRes;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.VideoView;
 
 import com.mapbox.mapboxandroiddemo.R;
