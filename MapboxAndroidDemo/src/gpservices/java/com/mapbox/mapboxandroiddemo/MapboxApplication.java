@@ -7,6 +7,7 @@ import android.util.Log;
 import com.crashlytics.android.Crashlytics;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
@@ -24,6 +25,25 @@ public class MapboxApplication extends Application {
       Timber.plant(new CrashReportingTree());
     }
     setUpPicasso();
+    Mapbox.getInstance(this, getString(R.string.access_token));
+  }
+
+  /**
+   * A tree which logs important information for crash reporting.
+   */
+  private static class CrashReportingTree extends Timber.Tree {
+    @Override
+    protected void log(int priority, String tag, String message, Throwable throwable) {
+      if (priority == Log.VERBOSE || priority == Log.DEBUG) {
+        return;
+      }
+      if (!TextUtils.isEmpty(message)) {
+        Crashlytics.log(priority, tag, message);
+      }
+      if (throwable != null && priority == Log.ERROR || priority == Log.WARN) {
+        Crashlytics.logException(throwable);
+      }
+    }
   }
 
   /**

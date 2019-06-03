@@ -1,21 +1,19 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
+// #-code-snippet: image-cluster-activity full-java
+
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
-import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
-import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
@@ -26,22 +24,16 @@ import java.net.URL;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.division;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.gt;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.gte;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.has;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.lt;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.rgb;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.toNumber;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconTranslate;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
@@ -49,9 +41,9 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textIgnorePlacem
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
 
 /**
- * Use GeoJSON to visualize point data as a clusters.
+ * Use GeoJson data with SymbolLayers to create a data clustering effect.
  */
-public class GeoJsonClusteringActivity extends AppCompatActivity {
+public class ImageClusteringActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -66,28 +58,21 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_geojson_clustering);
+    setContentView(R.layout.activity_dds_image_clustering);
 
     mapView = findViewById(R.id.mapView);
 
     mapView.onCreate(savedInstanceState);
-    mapView.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(MapboxMap map) {
+    mapView.getMapAsync(this);
+  }
 
-        mapboxMap = map;
-
-        mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
-          12.099, -79.045), 3));
-
-        addClusteredGeoJsonSource();
-        mapboxMap.addImage("cross-icon-id", BitmapUtils.getBitmapFromDrawable(
-          getResources().getDrawable(R.drawable.ic_cross)));
-
-        Toast.makeText(GeoJsonClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
-          Toast.LENGTH_SHORT).show();
-      }
-    });
+  @Override
+  public void onMapReady(MapboxMap mapboxMap) {
+    this.mapboxMap = mapboxMap;
+    initLayerIcons();
+    addClusteredGeoJsonSource();
+    Toast.makeText(ImageClusteringActivity.this, R.string.zoom_map_in_and_out_instruction,
+      Toast.LENGTH_SHORT).show();
   }
 
   @Override
@@ -132,9 +117,14 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 
+  private void initLayerIcons() {
+    mapboxMap.addImage("single-quake-icon-id", BitmapUtils.getBitmapFromDrawable(
+      getResources().getDrawable(R.drawable.single_quake_icon)));
+    mapboxMap.addImage("quake-triangle-icon-id", BitmapUtils.getBitmapFromDrawable(
+      getResources().getDrawable(R.drawable.earthquake_triangle)));
+  }
 
   private void addClusteredGeoJsonSource() {
-
     // Add a new source from the GeoJSON data and set the 'cluster' option to true.
     try {
       mapboxMap.addSource(
@@ -152,68 +142,54 @@ public class GeoJsonClusteringActivity extends AppCompatActivity {
       Log.e("dataClusterActivity", "Check the URL " + malformedUrlException.getMessage());
     }
 
-
-    // Use the earthquakes GeoJSON source to create three layers: One layer for each cluster category.
-    // Each point range gets a different fill color.
-    int[][] layers = new int[][] {
-      new int[] {150, ContextCompat.getColor(this, R.color.mapboxRed)},
-      new int[] {20, ContextCompat.getColor(this, R.color.mapboxGreen)},
-      new int[] {0, ContextCompat.getColor(this, R.color.mapbox_blue)}
-    };
-
-    //Creating a marker layer for single data points
+    //Creating a SymbolLayer icon layer for single data/icon points
     SymbolLayer unclustered = new SymbolLayer("unclustered-points", "earthquakes");
-
     unclustered.setProperties(
-      iconImage("cross-icon-id"),
+      iconImage("single-quake-icon-id"),
       iconSize(
         division(
           get("mag"), literal(4.0f)
-        )
-      ),
-      iconColor(
-        interpolate(exponential(1), get("mag"),
-          stop(2.0, rgb(0, 255, 0)),
-          stop(4.5, rgb(0, 0, 255)),
-          stop(7.0, rgb(255, 0, 0))
         )
       )
     );
     mapboxMap.addLayer(unclustered);
 
-    for (int i = 0; i < layers.length; i++) {
-      //Add clusters' circles
-      CircleLayer circles = new CircleLayer("cluster-" + i, "earthquakes");
-      circles.setProperties(
-        circleColor(layers[i][1]),
-        circleRadius(18f)
-      );
+    // Use the earthquakes GeoJSON source to create three point ranges.
+    int[] layers = new int[] {150, 20, 0};
 
+    for (int i = 0; i < layers.length; i++) {
+      //Add clusters' SymbolLayers images
+      SymbolLayer symbolLayer = new SymbolLayer("cluster-" + i, "earthquakes");
+
+      symbolLayer.setProperties(
+        iconImage("quake-triangle-icon-id"),
+        iconTranslate(new Float[] {0f, -9f})
+      );
       Expression pointCount = toNumber(get("point_count"));
 
-      // Add a filter to the cluster layer that hides the circles based on "point_count"
-      circles.setFilter(
+      // Add a filter to the cluster layer that hides the icons based on "point_count"
+      symbolLayer.setFilter(
         i == 0
           ? all(has("point_count"),
-          gte(pointCount, literal(layers[i][0]))
+          gte(pointCount, literal(layers[i]))
         ) : all(has("point_count"),
-          gt(pointCount, literal(layers[i][0])),
-          lt(pointCount, literal(layers[i - 1][0]))
+          gt(pointCount, literal(layers[i])),
+          lt(pointCount, literal(layers[i - 1]))
         )
       );
-      mapboxMap.addLayer(circles);
+      mapboxMap.addLayer(symbolLayer);
     }
 
-    //Add the count labels
+    //Add a SymbolLayer for the cluster data number point count
     SymbolLayer count = new SymbolLayer("count", "earthquakes");
     count.setProperties(
       textField(Expression.toString(get("point_count"))),
       textSize(12f),
-      textColor(Color.WHITE),
+      textColor(Color.BLACK),
       textIgnorePlacement(true),
       textAllowOverlap(true)
     );
     mapboxMap.addLayer(count);
-
   }
 }
+// #-end-code-snippet: image-cluster-activity full-java

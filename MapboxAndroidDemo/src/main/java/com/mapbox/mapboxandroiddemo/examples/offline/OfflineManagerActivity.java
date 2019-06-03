@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.offline;
 
+// #-code-snippet: offline-manager-activity full-java
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -431,3 +433,4 @@ public class OfflineManagerActivity extends AppCompatActivity {
     Toast.makeText(OfflineManagerActivity.this, message, Toast.LENGTH_LONG).show();
   }
 }
+// #-end-code-snippet: offline-manager-activity full-java

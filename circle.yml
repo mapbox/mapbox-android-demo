@@ -51,12 +51,19 @@ jobs:
           name: Check code style
           command: make checkstyle
       - run:
+          name: Generate Espresso sanity tests
+          command: make sanity-test-example-activities
+      - run:
           name: Run Firebase instrumentation tests
           command: |
             #!/bin/bash
-            echo "Build seperate test apk:"
             ./gradlew :MapboxAndroidDemo:assembleGpservicesDebug --continue
-            gcloud firebase test android run --type robo --app MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk --device-ids shamu --os-version-ids 22 --locales en --orientations portrait --timeout 5m
+            ./gradlew :MapboxAndroidDemo:assembleAndroidTest --continue
+            gcloud firebase test android run \
+            --type instrumentation \
+            --app MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk \
+            --test MapboxAndroidDemo/build/outputs/apk/androidTest/gpservices/debug/MapboxAndroidDemo-gpservices-debug-androidTest.apk \
+            --device-ids sailfish --os-version-ids 26 --locales en --orientations portrait --timeout 5m
       - store_artifacts:
           path: MapboxAndroidDemo/build/outputs/apk/gpservices/debug/MapboxAndroidDemo-gpservices-debug.apk
 # ------------------------------------------------------------------------------

@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
+// #-code-snippet: add-wms-source-activity full-java
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -94,3 +96,4 @@ public class AddWmsSourceActivity extends AppCompatActivity {
     mapView.onSaveInstanceState(outState);
   }
 }
+// #-end-code-snippet: add-wms-source-activity full-java

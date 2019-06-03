@@ -47,8 +47,9 @@ import com.mapbox.mapboxandroiddemo.examples.dds.BathymetryActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
-import com.mapbox.mapboxandroiddemo.examples.dds.GeoJsonClusteringActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.InfoWindowSymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleHeatmapStylingActivity;
@@ -66,13 +67,27 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.MatrixApiActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.InsetMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.LocationPickerActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.LosAngelesTourismActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.PictureInPictureActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocationPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.query.BuildingOutlineActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.ClickOnLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.FeatureCountActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.QueryFeatureActivity;
@@ -97,17 +112,6 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.StyleFadeSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
-import com.mapbox.mapboxandroiddemo.labs.AnimatedImageGifActivity;
-import com.mapbox.mapboxandroiddemo.labs.IndoorMapActivity;
-import com.mapbox.mapboxandroiddemo.labs.InsetMapActivity;
-import com.mapbox.mapboxandroiddemo.labs.LocationPickerActivity;
-import com.mapbox.mapboxandroiddemo.labs.LosAngelesTourismActivity;
-import com.mapbox.mapboxandroiddemo.labs.MarkerFollowingRouteActivity;
-import com.mapbox.mapboxandroiddemo.labs.PictureInPictureActivity;
-import com.mapbox.mapboxandroiddemo.labs.RecyclerViewOnMapActivity;
-import com.mapbox.mapboxandroiddemo.labs.SnakingDirectionsRouteActivity;
-import com.mapbox.mapboxandroiddemo.labs.SpaceStationLocationActivity;
-import com.mapbox.mapboxandroiddemo.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
 import com.mapbox.mapboxandroiddemo.utils.SettingsDialogView;
@@ -436,6 +440,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           new Intent(MainActivity.this, LocalizationPluginActivity.class),
           R.string.activity_plugins_localization_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
         );
+
+        exampleItemModels.add(new ExampleItemModel(
+            R.string.activity_plugins_place_picker_plugin_title,
+            R.string.activity_plugins_place_picker_plugin_description,
+            new Intent(MainActivity.this, PlaceSelectionPluginActivity.class),
+            R.string.activity_plugins_place_picker_plugin_url, true, BuildConfig.MIN_SDK_VERSION)
+        );
         currentCategory = R.id.nav_plugins;
         break;
 
@@ -545,7 +556,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_query_redo_search_in_area_title,
           R.string.activity_query_redo_search_in_area_description,
           new Intent(MainActivity.this, RedoSearchInAreaActivity.class),
-          R.string.activity_query_redo_search_in_area_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_query_redo_search_in_area_url, false, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_query_building_outline_title,
+          R.string.activity_query_building_outline_description,
+          new Intent(MainActivity.this, BuildingOutlineActivity.class),
+          R.string.activity_query_building_outline_url, false, BuildConfig.MIN_SDK_VERSION));
+
         currentCategory = R.id.nav_query_map;
         break;
       case R.id.nav_java_services:
@@ -676,7 +694,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_labs_snaking_directions_route_title,
           R.string.activity_labs_snaking_directions_route_description,
           new Intent(MainActivity.this, SnakingDirectionsRouteActivity.class),
-          R.string.activity_labs_snaking_directions_route_url, true, BuildConfig.MIN_SDK_VERSION
+          R.string.activity_labs_snaking_directions_route_url, false, BuildConfig.MIN_SDK_VERSION
+        ));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_dashed_line_directions_picker_title,
+          R.string.activity_dashed_line_directions_picker_description,
+          new Intent(MainActivity.this, DashedLineDirectionsPickerActivity.class),
+          R.string.activity_dashed_line_directions_picker_url, false, BuildConfig.MIN_SDK_VERSION
         ));
         currentCategory = R.id.nav_lab;
         break;
@@ -697,14 +722,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_bathymetry_title,
           R.string.activity_dds_bathymetry_description,
           new Intent(MainActivity.this, BathymetryActivity.class),
-          R.string.activity_dds_bathymetry_url, true, BuildConfig.MIN_SDK_VERSION
+          R.string.activity_dds_bathymetry_url, false, BuildConfig.MIN_SDK_VERSION
         ));
 
         exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_styles_dds_geojson_clusters_title,
-          R.string.activity_styles_dds_geojson_clusters_description,
-          new Intent(MainActivity.this, GeoJsonClusteringActivity.class),
-          R.string.activity_styles_dds_geojson_clusters_url, false, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_styles_dds_geojson_circle_layer_clusters_title,
+          R.string.activity_styles_dds_geojson_circle_layer_clusters_description,
+          new Intent(MainActivity.this, CircleLayerClusteringActivity.class),
+          R.string.activity_styles_dds_geojson_circle_layer_clusters_url, false, BuildConfig.MIN_SDK_VERSION));
+
+        exampleItemModels.add(new ExampleItemModel(
+          R.string.activity_dds_image_clustering_title,
+          R.string.activity_dds_image_clustering_description,
+          new Intent(MainActivity.this, ImageClusteringActivity.class),
+          R.string.activity_dds_image_clustering_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_style_circle_categorically_title,
@@ -737,12 +768,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_json_vector_mix_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_dds_time_lapse_rainfall_points_title,
-          R.string.activity_dds_time_lapse_rainfall_points_description,
-          new Intent(MainActivity.this, AddRainFallStyleActivity.class),
-          R.string.activity_dds_time_lapse_rainfall_url, false, BuildConfig.MIN_SDK_VERSION));
-
-        exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_multiple_geometries_title,
           R.string.activity_dds_multiple_geometries_description,
           new Intent(MainActivity.this, MultipleGeometriesActivity.class),
@@ -752,19 +777,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
           R.string.activity_dds_info_window_symbol_layer_title,
           R.string.activity_dds_info_window_symbol_layer_description,
           new Intent(MainActivity.this, InfoWindowSymbolLayerActivity.class),
-          R.string.activity_dds_info_window_symbol_layer_url, true, BuildConfig.MIN_SDK_VERSION));
+          R.string.activity_dds_info_window_symbol_layer_url, false, BuildConfig.MIN_SDK_VERSION));
 
         exampleItemModels.add(new ExampleItemModel(
           R.string.activity_dds_time_lapse_rainfall_points_title,
           R.string.activity_dds_time_lapse_rainfall_points_description,
           new Intent(MainActivity.this, AddRainFallStyleActivity.class),
           R.string.activity_dds_time_lapse_rainfall_url, false, BuildConfig.MIN_SDK_VERSION));
-
-        exampleItemModels.add(new ExampleItemModel(
-          R.string.activity_dds_multiple_geometries_title,
-          R.string.activity_dds_multiple_geometries_description,
-          new Intent(MainActivity.this, MultipleGeometriesActivity.class),
-          R.string.activity_dds_multiple_geometries_url, false, BuildConfig.MIN_SDK_VERSION));
 
         currentCategory = R.id.nav_dds;
         break;

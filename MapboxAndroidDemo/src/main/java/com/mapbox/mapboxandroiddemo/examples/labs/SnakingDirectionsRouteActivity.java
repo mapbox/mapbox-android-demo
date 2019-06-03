@@ -1,4 +1,6 @@
-package com.mapbox.mapboxandroiddemo.labs;
+package com.mapbox.mapboxandroiddemo.examples.labs;
+
+// #-code-snippet: snaking-directions-activity full-java
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -228,3 +230,4 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
     mapView.onLowMemory();
   }
 }
+// #-end-code-snippet: snaking-directions-activity full-java

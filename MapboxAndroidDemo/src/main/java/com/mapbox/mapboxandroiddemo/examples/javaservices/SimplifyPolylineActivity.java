@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
+// #-code-snippet: simplify-polyline-activity full-java
+
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -49,7 +51,7 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_simplify_polyline);
 
-    mapView = findViewById(R.id.mapview);
+    mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
@@ -192,3 +194,4 @@ public class SimplifyPolylineActivity extends AppCompatActivity {
       .width(4));
   }
 }
+// #-end-code-snippet: simplify-polyline-activity full-java

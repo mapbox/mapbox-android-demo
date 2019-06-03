@@ -1,8 +1,6 @@
 # Retrofit 2
 # Platform calls Class.forName on types which do not exist on Android to determine platform.
 -dontnote retrofit2.Platform
-# Platform used when running on RoboVM on iOS. Will not be used at runtime.
--dontnote retrofit2.Platform$IOS$MainThreadExecutor
 # Platform used when running on Java 8 VMs. Will not be used at runtime.
 -dontwarn retrofit2.Platform$Java8
 # Retain generic type information for use by reflection by converters and adapters.
@@ -15,7 +13,6 @@
 # Gson specific classes
 -dontwarn sun.misc.**
 
--dontwarn okio.**
 -dontwarn okhttp3.**
 -keep class retrofit.**
 -keep class retrofit.** { *; }
@@ -25,14 +22,13 @@
 -dontwarn retrofit.**
 
 # Picasso
--dontwarn com.squareup.okhttp.**
+-dontnote com.squareup.**
 
 -dontwarn android.support.**
 -dontwarn java.lang.**
 -dontwarn org.codehaus.**
 -dontwarn com.google.**
 -dontwarn java.nio.**
--dontwarn javax.annotation.**
 
 
 -keep class com.segment.analytics.** { *; }
@@ -56,20 +52,67 @@
 # Retain generic type information for use by reflection by converters and adapters.
 -keepattributes Signature
 # Retain service method parameters.
--keepclassmembernames,allowobfuscation interface * {
+-keepclassmembernames interface * {
     @retrofit2.http.* <methods>;
 }
 # Ignore annotation used for build tooling.
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+-dontwarn org.codehaus.mojo.animal_sniffer.*
 
 # --- OkHttp ---
 -dontwarn okhttp3.**
 -dontwarn okio.**
+-dontwarn okio.BufferedSink
 -dontwarn javax.annotation.**
 -dontwarn org.conscrypt.**
 # A resource is loaded with a relative path so the package of this class must be preserved.
 -keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
 
+-dontwarn okhttp3.internal.platform.ConscryptPlatform
+
 # --- Java ---
+-dontwarn java.awt.Color
 -dontwarn com.mapbox.api.staticmap.v1.models.StaticMarkerAnnotation
 -dontwarn com.mapbox.api.staticmap.v1.models.StaticPolylineAnnotation
+
+
+## Android architecture components: Lifecycle
+# LifecycleObserver's empty constructor is considered to be unused by proguard
+-keepclassmembers class * implements android.arch.lifecycle.LifecycleObserver {
+    <init>(...);
+}
+# ViewModel's empty constructor is considered to be unused by proguard
+-keepclassmembers class * extends android.arch.lifecycle.ViewModel {
+    <init>(...);
+}
+
+# keep Lifecycle State and Event enums values
+-keepclassmembers class android.arch.lifecycle.Lifecycle$State { *; }
+-keepclassmembers class android.arch.lifecycle.Lifecycle$Event { *; }
+# keep methods annotated with @OnLifecycleEvent even if they seem to be unused
+# (Mostly for LiveData.LifecycleBoundObserver.onStateChange(), but who knows)
+-keepclassmembers class * {
+    @android.arch.lifecycle.OnLifecycleEvent *;
+}
+
+-keepclassmembers class * implements android.arch.lifecycle.LifecycleObserver {
+    <init>(...);
+}
+
+-keep class * implements android.arch.lifecycle.LifecycleObserver {
+    <init>(...);
+}
+-keepclassmembers class android.arch.** { *; }
+-keep class android.arch.** { *; }
+-dontwarn android.arch.**
+
+
+# Other Android
+-dontnote android.net.http.*
+-dontnote org.apache.commons.codec.**
+-dontnote org.apache.http.**
+
+-dontwarn org.xmlpull.v1.**
+-dontnote org.xmlpull.v1.**
+-keep class org.xmlpull.** { *; }
+-keepclassmembers class org.xmlpull.** { *; }
+

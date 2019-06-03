@@ -1,4 +1,6 @@
-package com.mapbox.mapboxandroiddemo.labs;
+package com.mapbox.mapboxandroiddemo.examples.labs;
+
+// #-code-snippet: mapillary-symbol-layer-activity full-java
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
@@ -1178,3 +1180,4 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     void onClick(View view, int position);
   }
 }
+// #-end-code-snippet: mapillary-symbol-layer-activity full-java

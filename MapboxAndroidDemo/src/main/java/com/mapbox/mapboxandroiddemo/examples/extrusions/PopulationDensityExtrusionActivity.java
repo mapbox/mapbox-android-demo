@@ -1,5 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
+// #-code-snippet: population-density-extrusion-activity full-java
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -47,8 +49,6 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
     Mapbox.getInstance(this, getString(R.string.access_token));
-    Log.d("PopulationDensityExtrusion", "access_token = "
-      + getString(R.string.access_token));
     setContentView(R.layout.activity_population_density_extrusion);
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -214,3 +214,4 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
   }
 
 }
+// #-end-code-snippet: population-density-extrusion-activity full-java

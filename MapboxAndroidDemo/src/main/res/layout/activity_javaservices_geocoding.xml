@@ -37,7 +37,7 @@
                 <Button
                     android:id="@+id/choose_city_spinner_button"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="44dp"
                     android:layout_weight="1.25"
                     android:background="@color/mapboxBlue"
                     android:gravity="center"
