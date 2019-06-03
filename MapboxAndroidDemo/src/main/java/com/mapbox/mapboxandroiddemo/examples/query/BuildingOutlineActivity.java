@@ -128,13 +128,15 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
       if (features.size() > 0) {
         Feature buildingFeature = features.get(0);
         // Build a list of Point objects from the building Feature's coordinates
-        for (int i = 0; i < ((Polygon) buildingFeature.geometry()).coordinates().size(); i++) {
-          for (int j = 0;
-               j < ((Polygon) buildingFeature.geometry()).coordinates().get(i).size(); j++) {
-            pointList.add(Point.fromLngLat(
-              ((Polygon) buildingFeature.geometry()).coordinates().get(i).get(j).longitude(),
-              ((Polygon) buildingFeature.geometry()).coordinates().get(i).get(j).latitude()
-            ));
+        if (buildingFeature.geometry() instanceof Polygon) {
+          for (int i = 0; i < ((Polygon) buildingFeature.geometry()).coordinates().size(); i++) {
+            for (int j = 0;
+                 j < ((Polygon) buildingFeature.geometry()).coordinates().get(i).size(); j++) {
+              pointList.add(Point.fromLngLat(
+                ((Polygon) buildingFeature.geometry()).coordinates().get(i).get(j).longitude(),
+                ((Polygon) buildingFeature.geometry()).coordinates().get(i).get(j).latitude()
+              ));
+            }
           }
         }
         // Create a LineString from the list of Point objects
