@@ -1,5 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
@@ -30,10 +32,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
+import static com.mapbox.mapboxsdk.style.expressions.Expression.concat;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.geometryType;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.linear;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.toColor;
+import static com.mapbox.mapboxsdk.style.layers.Property.NONE;
+import static com.mapbox.mapboxsdk.style.layers.Property.SYMBOL_PLACEMENT_LINE;
+import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
@@ -43,6 +53,18 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.symbolPlacement;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textFont;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textHaloColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textHaloWidth;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textLetterSpacing;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textMaxAngle;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textPadding;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textSize;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 
 /**
  * See how far a car can travel in certain time periods by requesting information from the Mapbox
@@ -53,11 +75,12 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
   private static final String ISOCHRONE_RESPONSE_GEOJSON_SOURCE_ID = "ISOCHRONE_RESPONSE_GEOJSON_SOURCE_ID";
   private static final String ISOCHRONE_FILL_LAYER = "ISOCHRONE_FILL_LAYER";
   private static final String ISOCHRONE_LINE_LAYER = "ISOCHRONE_LINE_LAYER";
+  private static final String TIME_LABEL_LAYER_ID = "TIME_LABEL_LAYER_ID";
   private static final String MAP_CLICK_SOURCE_ID = "MAP_CLICK_SOURCE_ID";
   private static final String MAP_CLICK_MARKER_ICON_ID = "MAP_CLICK_MARKER_ICON_ID";
   private static final String MAP_CLICK_MARKER_LAYER_ID = "MAP_CLICK_MARKER_LAYER_ID";
-  private static final String[] contourColors = new String[] {"80f442", "403bd3", "bc404c"};
-  private static final int[] contourMinutes = new int[] {14, 35, 53};
+  private static final String[] contourColors = new String[]{"80f442", "41f4f1", "bc404c"};
+  private static final int[] contourMinutes = new int[]{14, 35, 53};
   private MapView mapView;
   private MapboxMap mapboxMap;
   private LatLng lastSelectedLatLng;
@@ -79,46 +102,72 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
-        mapboxMap.setStyle(new Style.Builder().fromUrl(Style.LIGHT)
+        mapboxMap.setStyle(new Style.Builder().fromUrl(Style.DARK)
 
-          //Add a SymbolLayer to the map so that the map click point has a visual marker. This is where the
-          // Isochrone API information radiates from.
-          .withImage(MAP_CLICK_MARKER_ICON_ID, BitmapUtils.getBitmapFromDrawable(
-            getResources().getDrawable(R.drawable.red_marker)))
-          .withSource(new GeoJsonSource(MAP_CLICK_SOURCE_ID))
-          .withSource(new GeoJsonSource(ISOCHRONE_RESPONSE_GEOJSON_SOURCE_ID))
-          .withLayer(new SymbolLayer(MAP_CLICK_MARKER_LAYER_ID, MAP_CLICK_SOURCE_ID).withProperties(
-            iconImage(MAP_CLICK_MARKER_ICON_ID),
-            iconIgnorePlacement(true),
-            iconAllowOverlap(true),
-            iconOffset(new Float[] {0f, -4f})
-          )), new Style.OnStyleLoaded() {
-            @Override
-            public void onStyleLoaded(@NonNull Style style) {
-
-              IsochroneActivity.this.mapboxMap = mapboxMap;
-
-              initFillLayer(style);
-
-              initLineLayer(style);
-
-              // Set the click listener for the floating action button
-              findViewById(R.id.switch_isochrone_style_fab).setOnClickListener(new View.OnClickListener() {
+            //Add a SymbolLayer to the map so that the map click point has a visual marker. This is where the
+            // Isochrone API information radiates from.
+            .withImage(MAP_CLICK_MARKER_ICON_ID, BitmapUtils.getBitmapFromDrawable(
+                getResources().getDrawable(R.drawable.red_marker)))
+            .withSource(new GeoJsonSource(MAP_CLICK_SOURCE_ID))
+            .withSource(new GeoJsonSource(ISOCHRONE_RESPONSE_GEOJSON_SOURCE_ID))
+            .withLayer(new SymbolLayer(MAP_CLICK_MARKER_LAYER_ID, MAP_CLICK_SOURCE_ID).withProperties(
+                iconImage(MAP_CLICK_MARKER_ICON_ID),
+                iconIgnorePlacement(true),
+                iconAllowOverlap(true),
+                iconOffset(new Float[]{0f, -4f})
+            )), new Style.OnStyleLoaded() {
                 @Override
-                public void onClick(View view) {
-                  usePolygon = !usePolygon;
-                  if (lastSelectedLatLng != null) {
-                    makeIsochroneApiCall(style, lastSelectedLatLng);
-                  }
+                public void onStyleLoaded(@NonNull Style style) {
+
+                  IsochroneActivity.this.mapboxMap = mapboxMap;
+
+                  initFillLayer(style);
+
+                  initLineLayer(style);
+
+                  // Set the click listener for the floating action button
+                  findViewById(R.id.switch_isochrone_style_fab).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                      usePolygon = !usePolygon;
+                      if (lastSelectedLatLng != null) {
+                        makeIsochroneApiCall(style, lastSelectedLatLng);
+                      }
+                    }
+                  });
+
+                  // Set the click listener for the floating action button
+                  findViewById(R.id.toggle_isochrone_time_label_fab).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                      mapboxMap.getStyle(new Style.OnStyleLoaded() {
+                        @Override
+                        public void onStyleLoaded(@NonNull Style style) {
+
+                          SymbolLayer timeSymbolLayer = style.getLayerAs(TIME_LABEL_LAYER_ID);
+
+                          if (timeSymbolLayer != null) {
+                            timeSymbolLayer.setProperties(
+                                VISIBLE.equals(timeSymbolLayer.getVisibility().getValue())
+                                    ? visibility(NONE) : visibility(VISIBLE));
+
+                            if (VISIBLE.equals(timeSymbolLayer.getVisibility().getValue())) {
+                              Toast.makeText(IsochroneActivity.this,
+                                  getString(R.string.showing_time_labels_on_line_toast),
+                                  Toast.LENGTH_SHORT).show();
+                            }
+                          }
+                        }
+                      });
+                    }
+                  });
+
+                  mapboxMap.addOnMapClickListener(IsochroneActivity.this);
+
+                  Toast.makeText(IsochroneActivity.this,
+                      getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
                 }
               });
-
-              mapboxMap.addOnMapClickListener(IsochroneActivity.this);
-
-              Toast.makeText(IsochroneActivity.this,
-                getString(R.string.click_on_map_instruction), Toast.LENGTH_SHORT).show();
-            }
-            });
       }
     });
   }
@@ -170,7 +219,33 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
           if (source != null && response.body().features().size() > 0) {
             source.setGeoJson(response.body());
           }
-          // Move the camera from the map in case it's too zoomed in. This is here so that the isochrone information
+
+          if (!usePolygon) {
+            mapboxMap.getStyle(new Style.OnStyleLoaded() {
+              @Override
+              public void onStyleLoaded(@NonNull Style style) {
+
+                SymbolLayer timeLabelSymbolLayer;
+
+                // Check to see whether the LineLayer for time labels has already been created
+                if (style.getLayerAs(TIME_LABEL_LAYER_ID) == null) {
+                  timeLabelSymbolLayer = new SymbolLayer(TIME_LABEL_LAYER_ID,
+                      ISOCHRONE_RESPONSE_GEOJSON_SOURCE_ID);
+
+                  styleLineLayer(timeLabelSymbolLayer);
+
+                  // Add the time label LineLayer to the map
+                  style.addLayer(timeLabelSymbolLayer);
+
+                } else {
+                  styleLineLayer(style.getLayerAs(TIME_LABEL_LAYER_ID));
+                }
+              }
+            });
+          }
+
+          // Move the camera from the map in case it's too zoomed in.
+          // This is here so that the isochrone information
           // can be seen if the camera is too close to the map.
           if (mapboxMap.getCameraPosition().zoom > 14) {
             CameraPosition zoomOut = new CameraPosition.Builder()
@@ -186,6 +261,30 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
         Timber.d("Request failed: %s", throwable.getMessage());
       }
     });
+  }
+
+  private SymbolLayer styleLineLayer(@NonNull SymbolLayer timeLabelLayerToStyle) {
+    // Use the Maps SDK's data-driven styling properties to style the
+    // the time label LineLayer
+    timeLabelLayerToStyle.setProperties(
+        visibility(Property.VISIBLE),
+        textField(concat(get("contour"), literal(" MIN"))),
+        textFont(new String[]{"DIN Offc Pro Bold", "Roboto Black"}),
+        symbolPlacement(SYMBOL_PLACEMENT_LINE),
+        textAllowOverlap(true),
+        textPadding(1f),
+        textMaxAngle(90f),
+        textSize(interpolate(linear(), literal(1.2f),
+            stop(2, 14),
+            stop(8, 18),
+            stop(22, 30)
+        )),
+        textLetterSpacing(0.1f),
+        textHaloColor(Color.parseColor("#343332")),
+        textColor(toColor(get("color"))),
+        textHaloWidth(4f)
+    );
+    return timeLabelLayerToStyle;
   }
 
   /**
@@ -210,7 +309,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
     isochroneLineLayer.setProperties(
       lineColor(get("color")),
       lineWidth(5f),
-      lineOpacity(get("opacity")));
+      lineOpacity(.8f)); // You could also pass in get("opacity")) instead of a hardcoded value
     isochroneLineLayer.setFilter(eq(geometryType(), literal("LineString")));
     style.addLayerBelow(isochroneLineLayer, MAP_CLICK_MARKER_LAYER_ID);
   }

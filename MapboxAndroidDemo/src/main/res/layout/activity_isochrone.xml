@@ -15,6 +15,20 @@
         mapbox:mapbox_cameraTargetLng="12.48278"
         mapbox:mapbox_cameraZoom="11" />
 
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/toggle_isochrone_time_label_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="74dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_text_icon_24dp"
+        mapbox:fabSize="normal" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/switch_isochrone_style_fab"
         android:layout_width="wrap_content"

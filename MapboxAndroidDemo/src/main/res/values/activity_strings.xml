@@ -289,6 +289,7 @@
 
     <!-- Isochrone change -->
     <string name="click_on_map_instruction">Tap on the map</string>
+    <string name="showing_time_labels_on_line_toast">Now showing minute labels on lines</string>
 
     <!--Custom location layer plugin icon-->
     <string name="tap_the_icon">Tap the location icon</string>
