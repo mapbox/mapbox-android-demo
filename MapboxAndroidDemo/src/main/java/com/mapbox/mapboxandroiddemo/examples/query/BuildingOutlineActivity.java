@@ -39,7 +39,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
  * Query the building layer to draw an outline around the building that is in the middle of the map
  */
 public class BuildingOutlineActivity extends AppCompatActivity implements
-  OnMapReadyCallback, MapboxMap.OnCameraIdleListener {
+    OnMapReadyCallback, MapboxMap.OnCameraIdleListener {
 
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -71,7 +71,7 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
         mapboxMap.addOnCameraIdleListener(BuildingOutlineActivity.this);
         showCrosshair();
         Toast.makeText(BuildingOutlineActivity.this, R.string.move_map_around_instruction,
-          Toast.LENGTH_SHORT).show();
+            Toast.LENGTH_SHORT).show();
         updateOutline(style);
       }
     });
@@ -83,25 +83,25 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
   private void setUpLineLayer(@NonNull Style loadedMapStyle) {
     // Create a GeoJSONSource from an empty FeatureCollection
     loadedMapStyle.addSource(new GeoJsonSource("source",
-      FeatureCollection.fromFeatures(new Feature[] {})));
+        FeatureCollection.fromFeatures(new Feature[]{})));
 
     // Use runtime styling to adjust the look of the building outline LineLayer
     loadedMapStyle.addLayer(new LineLayer("lineLayer", "source").withProperties(
-      lineColor(Color.RED),
-      lineWidth(6f),
-      lineCap(LINE_CAP_ROUND),
-      lineJoin(LINE_JOIN_BEVEL)
+        lineColor(Color.RED),
+        lineWidth(6f),
+        lineCap(LINE_CAP_ROUND),
+        lineJoin(LINE_JOIN_BEVEL)
     ));
   }
 
   @Override
   public void onCameraIdle() {
-    Style style = mapboxMap.getStyle();
-    if (style != null) {
-      updateOutline(style);
-    } else {
-      Toast.makeText(this, R.string.building_layer_not_present, Toast.LENGTH_SHORT).show();
-    }
+    mapboxMap.getStyle(new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        updateOutline(style);
+      }
+    });
   }
 
   /**
@@ -114,8 +114,8 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
   private LineString getBuildingFeatureOutline(@NonNull Style style) {
     // Retrieve the middle of the map
     final PointF pixel = mapboxMap.getProjection().toScreenLocation(new LatLng(
-      mapboxMap.getCameraPosition().target.getLatitude(),
-      mapboxMap.getCameraPosition().target.getLongitude()
+        mapboxMap.getCameraPosition().target.getLatitude(),
+        mapboxMap.getCameraPosition().target.getLongitude()
     ));
 
     List<Point> pointList = new ArrayList<>();
@@ -126,21 +126,23 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
       // Retrieve the building Feature that is displayed in the middle of the map
       List<Feature> features = mapboxMap.queryRenderedFeatures(pixel, "building");
       if (features.size() > 0) {
-        Feature buildingFeature = features.get(0);
-        // Build a list of Point objects from the building Feature's coordinates
-        if (buildingFeature.geometry() instanceof Polygon) {
-          for (int i = 0; i < ((Polygon) buildingFeature.geometry()).coordinates().size(); i++) {
+        if (features.get(0).geometry() instanceof Polygon) {
+          Polygon buildingFeature = (Polygon) features.get(0).geometry();
+          // Build a list of Point objects from the building Feature's coordinates
+          for (int i = 0; i < buildingFeature.coordinates().size(); i++) {
             for (int j = 0;
-                 j < ((Polygon) buildingFeature.geometry()).coordinates().get(i).size(); j++) {
+                 j < buildingFeature.coordinates().get(i).size(); j++) {
               pointList.add(Point.fromLngLat(
-                ((Polygon) buildingFeature.geometry()).coordinates().get(i).get(j).longitude(),
-                ((Polygon) buildingFeature.geometry()).coordinates().get(i).get(j).latitude()
+                  buildingFeature.coordinates().get(i).get(j).longitude(),
+                  buildingFeature.coordinates().get(i).get(j).latitude()
               ));
             }
           }
         }
         // Create a LineString from the list of Point objects
       }
+    } else {
+      Toast.makeText(this, R.string.building_layer_not_present, Toast.LENGTH_SHORT).show();
     }
     return LineString.fromLngLats(pointList);
   }
