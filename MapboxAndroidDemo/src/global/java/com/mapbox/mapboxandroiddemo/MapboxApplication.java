@@ -22,7 +22,6 @@ public class MapboxApplication extends MultiDexApplication {
     Mapbox.getInstance(this, getString(R.string.access_token));
     Mapbox.getTelemetry().setDebugLoggingEnabled(true);
     setUpTileLoadingMeasurement();
-
   }
 
   private void initializeFirebaseApp() {
