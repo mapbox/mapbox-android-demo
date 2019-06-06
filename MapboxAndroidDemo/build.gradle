@@ -46,8 +46,8 @@ android {
     productFlavors {
         global {
             isGlobal = true
-            resValue "string", "firebase_app_id", "1:557332920931:android:bdf11618ae45dd61"
-            resValue "string", "firebase_api_key", "AIzaSyCGCYLyLoi31Hv-pkBO0D51zCyxjngJbz8"
+            resValue "string", "firebase_app_id", System.getenv('FIREBASE_APP_ID') ? System.getenv('FIREBASE_APP_ID') : "blank_place_holder_string"
+            resValue "string", "firebase_api_key", System.getenv('FIREBASE_API_KEY') ? System.getenv('FIREBASE_API_KEY') : "blank_place_holder_string"
         }
 
         china {
