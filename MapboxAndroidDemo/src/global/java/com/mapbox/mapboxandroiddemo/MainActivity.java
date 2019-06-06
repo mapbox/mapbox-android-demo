@@ -80,6 +80,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfRingActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.BottomSheetCenteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
@@ -1157,6 +1158,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_lab_animated_interpolator_icon_drop_url, false, BuildConfig.MIN_SDK_VERSION
     ));
 
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_bottom_sheet_centering_title,
+      R.string.activity_lab_bottom_sheet_centering_description,
+      new Intent(MainActivity.this, BottomSheetCenteringActivity.class),
+      null,
+      R.string.activity_lab_bottom_sheet_centering_url, false, BuildConfig.MIN_SDK_VERSION
+    ));
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
       R.string.activity_dds_geojson_line_title,

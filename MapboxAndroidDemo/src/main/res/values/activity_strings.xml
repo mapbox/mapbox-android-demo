@@ -363,4 +363,9 @@
     <string name="single_line">single line</string>
     <string name="polygon">polygon</string>
 
+
+    <!-- Bottom sheet centering-->
+    <string name="bottom_sheet_peek">Peek section here</string>
+    <string name="bottom_sheet_content">Content section here</string>
+
 </resources>

@@ -121,5 +121,6 @@
     <string name="activity_lab_drag_draw_title">Drawing search area</string>
     <string name="activity_china_simple_china_mapview_title">China map view</string>
     <string name="activity_lab_home_screen_widget_title">Homescreen geocoding widget</string>
+    <string name="activity_lab_bottom_sheet_centering_title">Map with bottom sheet</string>
     <string name="activity_java_turf_ring_title">Hollow circle</string>
 </resources>
