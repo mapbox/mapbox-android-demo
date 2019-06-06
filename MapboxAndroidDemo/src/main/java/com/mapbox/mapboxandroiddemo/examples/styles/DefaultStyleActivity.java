@@ -100,6 +100,7 @@ public class DefaultStyleActivity extends AppCompatActivity {
         return true;
       case R.id.menu_dark:
         mapboxMap.setStyle(Style.DARK);
+        mapboxMap.setLatLngBoundsForCameraTarget(null);
         return true;
       case R.id.menu_light:
         mapboxMap.setStyle(Style.LIGHT);
