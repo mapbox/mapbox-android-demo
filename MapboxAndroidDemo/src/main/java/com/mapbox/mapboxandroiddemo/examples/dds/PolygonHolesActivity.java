@@ -46,16 +46,14 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // Configure initial map state
-    MapboxMapOptions options = new MapboxMapOptions()
+    MapboxMapOptions mapboxMapOptions = MapboxMapOptions.createFromAttributes(this, null);
+    mapboxMapOptions
+      .camera(new CameraPosition.Builder().zoom(13).target(new LatLng(25.255377, 55.3089185))
+        .build())
       .attributionTintColor(RED_COLOR)
-      .compassFadesWhenFacingNorth(false)
-      .camera(new CameraPosition.Builder()
-        .target(new LatLng(25.255377, 55.3089185))
-        .zoom(11.86)
-        .tilt(10)
-        .build());
+      .compassFadesWhenFacingNorth(true);
 
-    mapView = new MapView(this, options);
+    mapView = new MapView(this, mapboxMapOptions);
     mapView.setId(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
@@ -80,9 +78,9 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
         style.addSource(new GeoJsonSource("source-id",
           Feature.fromGeometry(Polygon.fromOuterInner(outerLineString, innerList))));
 
-        style.addLayer(new FillLayer("layer-id", "source-id").withProperties(
+        style.addLayerBelow(new FillLayer("layer-id", "source-id").withProperties(
           PropertyFactory.fillColor(BLUE_COLOR)
-        ));
+        ), "road-number-shield");
       }
     });
   }

@@ -398,8 +398,8 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.styles.StyleFadeSwitchActivity"
-            android:label="@string/activity_styles_fade_switch_title">
+            android:name=".examples.styles.SatelliteOpacityOnZoomActivity"
+            android:label="@string/activity_styles_satellite_opacity_on_zoom_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
