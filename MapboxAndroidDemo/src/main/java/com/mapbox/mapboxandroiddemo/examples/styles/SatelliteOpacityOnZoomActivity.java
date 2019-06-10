@@ -26,7 +26,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.rasterOpacity;
  * Go from the Mapbox Streets style to a satellite photo raster layer as the map camera zooms in.
  * This is similar to how Snap uses Mapbox for Snap Maps.
  */
-public class StyleFadeSwitchActivity extends AppCompatActivity implements
+public class SatelliteOpacityOnZoomActivity extends AppCompatActivity implements
   OnMapReadyCallback {
 
   private MapView mapView;
@@ -40,7 +40,7 @@ public class StyleFadeSwitchActivity extends AppCompatActivity implements
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_style_fade_switch);
+    setContentView(R.layout.activity_satellite_opacity_on_zoom);
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -71,7 +71,6 @@ public class StyleFadeSwitchActivity extends AppCompatActivity implements
           CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
             .zoom(19)
             .build()), 9000);
-
       }
     });
   }

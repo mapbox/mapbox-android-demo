@@ -113,7 +113,7 @@ public class ExpressionIntegrationActivity
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_dds_temperature_change);
+    setContentView(R.layout.activity_dds_multiple_expression_integration);
 
     unitsFab = findViewById(R.id.change_units_fab);
 

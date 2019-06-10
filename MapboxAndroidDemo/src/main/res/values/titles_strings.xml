@@ -27,7 +27,7 @@
     <string name="activity_style_image_source_time_lapse_title">Show time lapse</string>
     <string name="activity_style_image_source_title">Use an image source</string>
     <string name="activity_styles_hillshade_title">Hillshading</string>
-    <string name="activity_styles_fade_switch_title">Switch map styles with fade</string>
+    <string name="activity_styles_satellite_opacity_on_zoom_title">Opacity fade</string>
     <string name="activity_styles_text_field_multiple_formats_title">Multiple text formats</string>
     <string name="activity_styles_transparent_background_title">Transparent render surface</string>
     <string name="activity_styles_click_to_add_image_title">Click to add photo</string>
@@ -52,7 +52,7 @@
     <string name="activity_dds_bathymetry_title">Display water depth</string>
     <string name="activity_dds_info_window_symbol_layer_title">Symbol layer info window</string>
     <string name="activity_dds_image_clustering_title">SymbolLayer clustering</string>
-    <string name="activity_dds_expression_integration_title">Temperature change</string>
+    <string name="activity_dds_expression_integration_title">Multiple expressions</string>
     <string name="activity_dds_satellite_land_select_title">Satellite land select</string>
     <string name="activity_dds_line_gradient_title">Line gradient</string>
     <string name="activity_dds_symbol_zoom_switch_title">Zoom-based icon switch</string>

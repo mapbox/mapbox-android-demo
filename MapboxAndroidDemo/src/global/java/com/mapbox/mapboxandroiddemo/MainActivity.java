@@ -136,7 +136,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MissingIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.RotatingTextAnchorPositionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
-import com.mapbox.mapboxandroiddemo.examples.styles.StyleFadeSwitchActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.SatelliteOpacityOnZoomActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.TextFieldFormattingActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.TextFieldMultipleFormatsActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.TransparentBackgroundActivity;
@@ -638,11 +638,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_styles,
-      R.string.activity_styles_fade_switch_title,
-      R.string.activity_styles_fade_switch_description,
-      new Intent(MainActivity.this, StyleFadeSwitchActivity.class),
+      R.string.activity_styles_satellite_opacity_on_zoom_title,
+      R.string.activity_style_satellite_opacity_on_zoom_description,
+      new Intent(MainActivity.this, SatelliteOpacityOnZoomActivity.class),
       null,
-      R.string.activity_styles_fade_switch_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_style_satellite_opacity_on_zoom_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_styles,

@@ -70,7 +70,7 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
         setUpLineLayer(style);
         mapboxMap.addOnCameraIdleListener(BuildingOutlineActivity.this);
         showCrosshair();
-        Toast.makeText(BuildingOutlineActivity.this, R.string.move_map_around_instruction,
+        Toast.makeText(BuildingOutlineActivity.this, R.string.move_map_around_building_out_instruction,
             Toast.LENGTH_SHORT).show();
         updateOutline(style);
       }

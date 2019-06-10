@@ -68,8 +68,8 @@ public class DrawPolygonActivity extends AppCompatActivity {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
             style.addSource(new GeoJsonSource("source-id", Polygon.fromLngLats(POINTS)));
-            style.addLayer(new FillLayer("layer-id", "source-id").withProperties(
-              fillColor(Color.parseColor("#3bb2d0")))
+            style.addLayerBelow(new FillLayer("layer-id", "source-id").withProperties(
+              fillColor(Color.parseColor("#3bb2d0"))), "settlement-label"
             );
           }
         });

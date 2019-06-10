@@ -30,7 +30,7 @@
     <string name="activity_style_image_source_time_lapse_description">Use an image source and a runnable to show data changes over time.</string>
     <string name="activity_style_image_source_description">Use an image source to easily display images on the map.</string>
     <string name="activity_style_hillshade_description">Use elevation data to show and customize hills and mountains.</string>
-    <string name="activity_styles_fade_switch_description">Fade map styles in and out based on zoom level.</string>
+    <string name="activity_style_satellite_opacity_on_zoom_description">Adjust the opacity of a satellite raster layer based on zoom level.</string>
     <string name="activity_styles_text_field_multiple_formats_description">Use a format expression to style labels with multiple languages, fonts, sizes, and colors.</string>
     <string name="activity_styles_transparent_background_description">Create a transparent background and fill it with something such as moving water.</string>
     <string name="activity_styles_click_to_add_image_description">Select a photo on the device and add it on the map tap location.</string>
@@ -53,7 +53,7 @@
     <string name="activity_dds_multiple_geometries_description">Filter and draw multiple geometries from a single GeoJSON file.</string>
     <string name="activity_dds_bathymetry_description">Use data-driven styling to show bathymetry (water depth) data</string>
     <string name="activity_dds_info_window_symbol_layer_description">Use SymbolLayer and icons to show data in a BubbleLayout "info window".</string>
-    <string name="activity_dds_expression_integration_description">Use multiple expressions to visualize unit change in data.</string>
+    <string name="activity_dds_expression_integration_description">Use multiple expressions to convert and visualize data.</string>
     <string name="activity_dds_satellite_land_select_description">View satellite photos and click to outline an area of land.</string>
     <string name="activity_dds_symbol_zoom_switch_description">Change SymbolLayer icons based on the camera\'s zoom level.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
