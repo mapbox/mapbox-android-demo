@@ -364,4 +364,8 @@
     <string name="single_line">single line</string>
     <string name="polygon">polygon</string>
 
+    <!-- Scale bar plugin-->
+    <string name="zoom_map_fab_instruction">Zoom the map in and out. Click the button to change the scale bar styling.</string>
+
+
 </resources>
