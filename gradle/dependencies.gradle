@@ -10,16 +10,17 @@ ext {
     version = [
 
             // Mapbox
+            mapboxMapPrefix          : 'v8',
             mapboxMapSdk             : '8.0.0',
             mapboxTurf               : '4.8.0',
             mapboxServices           : '4.8.0',
-            mapboxPluginBuilding     : '0.5.0',
-            mapboxPluginPlaces       : '0.8.0',
-            mapboxPluginLocalization : '0.9.0',
-            mapboxPluginTraffic      : '0.8.0',
+            mapboxPluginBuilding     : '0.6.0',
+            mapboxPluginPlaces       : '0.9.0',
+            mapboxPluginLocalization : '0.10.0',
+            mapboxPluginTraffic      : '0.9.0',
             mapboxChinaPlugin        : '2.2.0',
-            mapboxPluginMarkerView   : '0.2.0',
-            mapboxPluginAnnotation   : '0.6.0',
+            mapboxPluginMarkerView   : '0.3.0',
+            mapboxPluginAnnotation   : '0.7.0',
 
             // Support
             supportLib               : '28.0.0',
@@ -70,13 +71,13 @@ ext {
             mapboxServices           : "com.mapbox.mapboxsdk:mapbox-sdk-services:${version.mapboxServices}",
 
             // Mapbox plugins
-            mapboxPluginBuilding     : "com.mapbox.mapboxsdk:mapbox-android-plugin-building-v7:${version.mapboxPluginBuilding}",
-            mapboxPluginPlaces       : "com.mapbox.mapboxsdk:mapbox-android-plugin-places-v7:${version.mapboxPluginPlaces}",
-            mapboxPluginLocalization : "com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v7:${version.mapboxPluginLocalization}",
-            mapboxPluginTraffic      : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic-v7:${version.mapboxPluginTraffic}",
+            mapboxPluginBuilding     : "com.mapbox.mapboxsdk:mapbox-android-plugin-building-${version.mapboxMapPrefix}:${version.mapboxPluginBuilding}",
+            mapboxPluginPlaces       : "com.mapbox.mapboxsdk:mapbox-android-plugin-places-${version.mapboxMapPrefix}:${version.mapboxPluginPlaces}",
+            mapboxPluginLocalization : "com.mapbox.mapboxsdk:mapbox-android-plugin-localization-${version.mapboxMapPrefix}:${version.mapboxPluginLocalization}",
+            mapboxPluginTraffic      : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic-${version.mapboxMapPrefix}:${version.mapboxPluginTraffic}",
             mapboxChinaPlugin        : "com.mapbox.mapboxsdk:mapbox-android-plugin-china:${version.mapboxChinaPlugin}",
-            mapboxPluginMarkerView   : "com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-v7:${version.mapboxPluginMarkerView}",
-            mapboxPluginAnnotation   : "com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v7:${version.mapboxPluginAnnotation}",
+            mapboxPluginMarkerView   : "com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-${version.mapboxMapPrefix}:${version.mapboxPluginMarkerView}",
+            mapboxPluginAnnotation   : "com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-${version.mapboxMapPrefix}:${version.mapboxPluginAnnotation}",
 
             // Support
             supportV4                : "com.android.support:support-v4:${version.supportLib}",
@@ -88,7 +89,7 @@ ext {
             supportCustomTabs        : "com.android.support:customtabs:${version.supportLib}",
             supportConstraintLayout  : "com.android.support.constraint:constraint-layout:${version.constraintLayout}",
             supportAnnotations       : "com.android.support:support-annotations:${version.supportAnnotations}",
-            supportAnimation       : "com.android.support:support-dynamic-animation:${version.supportLib}",
+            supportAnimation         : "com.android.support:support-dynamic-animation:${version.supportLib}",
 
             // Square
             timber                   : "com.jakewharton.timber:timber:${version.timber}",
