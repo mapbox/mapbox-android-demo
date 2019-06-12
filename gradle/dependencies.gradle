@@ -10,6 +10,7 @@ ext {
     version = [
 
             // Mapbox
+            mapboxMapPrefix          : 'v8',
             mapboxMapSdk             : '8.0.0',
             mapboxTurf               : '4.8.0',
             mapboxServices           : '4.8.0',
@@ -70,13 +71,13 @@ ext {
             mapboxServices           : "com.mapbox.mapboxsdk:mapbox-sdk-services:${version.mapboxServices}",
 
             // Mapbox plugins
-            mapboxPluginBuilding     : "com.mapbox.mapboxsdk:mapbox-android-plugin-building-v8:${version.mapboxPluginBuilding}",
-            mapboxPluginPlaces       : "com.mapbox.mapboxsdk:mapbox-android-plugin-places-v8:${version.mapboxPluginPlaces}",
-            mapboxPluginLocalization : "com.mapbox.mapboxsdk:mapbox-android-plugin-localization-v8:${version.mapboxPluginLocalization}",
-            mapboxPluginTraffic      : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic-v8:${version.mapboxPluginTraffic}",
+            mapboxPluginBuilding     : "com.mapbox.mapboxsdk:mapbox-android-plugin-building-${version.mapboxMapPrefix}:${version.mapboxPluginBuilding}",
+            mapboxPluginPlaces       : "com.mapbox.mapboxsdk:mapbox-android-plugin-places-${version.mapboxMapPrefix}:${version.mapboxPluginPlaces}",
+            mapboxPluginLocalization : "com.mapbox.mapboxsdk:mapbox-android-plugin-localization-${version.mapboxMapPrefix}:${version.mapboxPluginLocalization}",
+            mapboxPluginTraffic      : "com.mapbox.mapboxsdk:mapbox-android-plugin-traffic-${version.mapboxMapPrefix}:${version.mapboxPluginTraffic}",
             mapboxChinaPlugin        : "com.mapbox.mapboxsdk:mapbox-android-plugin-china:${version.mapboxChinaPlugin}",
-            mapboxPluginMarkerView   : "com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-v8:${version.mapboxPluginMarkerView}",
-            mapboxPluginAnnotation   : "com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v8:${version.mapboxPluginAnnotation}",
+            mapboxPluginMarkerView   : "com.mapbox.mapboxsdk:mapbox-android-plugin-markerview-${version.mapboxMapPrefix}:${version.mapboxPluginMarkerView}",
+            mapboxPluginAnnotation   : "com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-${version.mapboxMapPrefix}:${version.mapboxPluginAnnotation}",
 
             // Support
             supportV4                : "com.android.support:support-v4:${version.supportLib}",
