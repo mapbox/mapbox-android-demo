@@ -94,6 +94,7 @@
     <string name="activity_plugins_localization_plugin_url" translatable="false">https://i.imgur.com/tsOM1am.png</string>
     <string name="activity_plugins_place_picker_plugin_url" translatable="false">https://i.imgur.com/fPZQg7z.png</string>
     <string name="activity_plugins_markerview_plugin_url" translatable="false">https://i.imgur.com/DyDVUJr.png</string>
+    <string name="activity_plugins_scalebar_plugin_url" translatable="false">https://i.imgur.com/YIGSu0C.png</string>
     <string name="activity_location_location_component_url" translatable="false">https://i.imgur.com/77PVsni.png</string>
     <string name="activity_location_user_location_fragment_plugin_url" translatable="false">https://i.imgur.com/1jG8WQG.png</string>
     <string name="activity_location_location_component_options_url" translatable="false">https://i.imgur.com/4HiEJC1.png</string>

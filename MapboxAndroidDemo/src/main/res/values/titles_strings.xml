@@ -90,9 +90,10 @@
     <string name="activity_plugins_localization_plugin_title">Change map text to device language</string>
     <string name="activity_plugins_geojson_plugin_title">Load GeoJSON data</string>
     <string name="activity_plugins_places_plugin_title">Location search</string>
-    <string name="activity_plugins_symbol_listener_title">Symbol listener</string>
+    <string name="activity_plugins_symbol_listener_title">Symbol annotation listener</string>
     <string name="activity_plugins_place_picker_plugin_title">Place picker</string>
     <string name="activity_plugins_markerview_plugin_title">MarkerView</string>
+    <string name="activity_plugins_scalebar_plugin_title">Scale bar</string>
     <string name="activity_location_user_location_map_frag_title">Show a user\'s location on a map fragment</string>
     <string name="activity_location_location_component_title">Show a user\'s location</string>
     <string name="activity_location_location_component_options_title">Customized location icon</string>

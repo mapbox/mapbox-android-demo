@@ -106,6 +106,7 @@ import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerViewPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.ScalebarPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.SymbolListenerActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.TrafficPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.query.BuildingOutlineActivity;
@@ -763,6 +764,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, MarkerViewPluginActivity.class),
       null,
       R.string.activity_plugins_markerview_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_plugins,
+      R.string.activity_plugins_scalebar_plugin_title,
+      R.string.activity_plugins_scalebar_plugin_description,
+      new Intent(MainActivity.this, ScalebarPluginActivity.class),
+      null,
+      R.string.activity_plugins_scalebar_plugin_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
