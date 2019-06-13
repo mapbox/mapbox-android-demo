@@ -1,7 +1,7 @@
-This update is in line with the 8.0.0 release of the Mapbox Maps SDK for Android and includes several fixes and new examples:
+This update is in line with the 8.0.1 release of the Mapbox Maps SDK for Android and includes several fixes and new examples:
 
-- onStyleImageMissing listener usage
-- IgnorePlacement/allowOverlap for text and icons
-- New basic SymbolLayer icon example
-- Using TurfTransformation#circle to create visual ring
-- Multiple color formatting to TextFieldMultipleFormatsActivity
+- Variable label placement example
+- "Revealed" polygon hole with outline
+- Draw on map for search
+- Refactoring Isochrone API example to add time labels
+- Mapbox's new Scale Bar Plugin

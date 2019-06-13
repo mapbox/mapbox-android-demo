@@ -2,6 +2,21 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 8.0.1 - June 13, 2019
+
+* Variable label placement example #1066
+* Adding example of "revealed" polygon hole with outline #1050
+* Adding draw on map for search example #983
+* Refactoring Isochrone example to add time label toggle #1087
+* Adding Scale Bar Plugin example #1103
+* China plugin bump to 2.2.0 #1081
+* Making needed iconTranslate -> iconOffset refactoring changes #1084
+* Added geometry check to building outline example #1086
+* Moving Firebase crash configuration to CI #1089
+* Fixes to various small issues found during QA #1099
+* Bumped plugins as part of giant plugin release following Maps SDK 8.0.0 release #1102
+* Bumped Maps SDK to 8.0.1 #1105
+
 
 ## 8.0.0
 
