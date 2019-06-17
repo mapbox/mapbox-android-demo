@@ -1,13 +1,16 @@
 package com.mapbox.mapboxandroiddemo.examples.labs;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.TypeEvaluator;
+import android.animation.ValueAnimator;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.animation.LinearInterpolator;
 import android.widget.Toast;
-
 import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.MapboxDirections;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
@@ -29,14 +32,14 @@ import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import com.mapbox.turf.TurfMeasurement;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.mapbox.core.constants.Constants.PRECISION_6;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
@@ -57,18 +60,17 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
 
   private static final String DOT_SOURCE_ID = "dot-source-id";
   private static final String LINE_SOURCE_ID = "line-source-id";
-  private static final Point ORIGIN_COFFEE_SHOP = Point.fromLngLat(38.7508, 9.0309);
-  private static final Point DESTINATION_AIRPORT = Point.fromLngLat(38.795902, 8.984467);
-  private static final int MARKER_AND_LINE_UPDATE_SPEED_MILLISECONDS = 50;
-  private List<Point> routeCoordinateList;
-  private List<Point> markerLinePointList = new ArrayList<>();
+
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private DirectionsRoute currentRoute;
-  private Handler handler;
-  private Runnable runnable;
-  private GeoJsonSource dotGeoJsonSource;
-  private int indexCounterForMovingDotAndLine = 0;
+
+  private GeoJsonSource pointSource;
+  private GeoJsonSource lineSource;
+  private List<Point> routeCoordinateList;
+  private List<Point> markerLinePointList = new ArrayList<>();
+  private int routeIndex;
+
+  private Animator currentAnimator;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +94,10 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
             // Use the Mapbox Directions API to get a directions route
-            getRoute(style, ORIGIN_COFFEE_SHOP, DESTINATION_AIRPORT);
+            getRoute(style,
+              Point.fromLngLat(38.7508, 9.0309), // coffee shop
+              Point.fromLngLat(38.795902, 8.984467) // airport
+            );
           }
         });
       }
@@ -105,15 +110,14 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
    * @param featureCollection returned GeoJSON FeatureCollection from the Directions API route request
    */
   private void initData(@NonNull FeatureCollection featureCollection) {
-    LineString lineString = (LineString) featureCollection.features().get(0).geometry();
-    routeCoordinateList = lineString.coordinates();
+    routeCoordinateList = ((LineString) featureCollection.features().get(0).geometry()).coordinates();
     if (mapboxMap != null) {
       Style style = mapboxMap.getStyle();
       if (style != null) {
         initSources(style, featureCollection);
         initSymbolLayer(style);
         initDotLinePath(style);
-        initRunnable();
+        animate();
       }
     }
   }
@@ -121,36 +125,50 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
   /**
    * Set up the repeat logic for moving the icon along the route.
    */
-  private void initRunnable() {
-    handler = new Handler();
-    runnable = new Runnable() {
+  private void animate() {
+    // Check if we are at the end of the points list
+    if ((routeCoordinateList.size() - 1 > routeIndex)) {
+      Point indexPoint = routeCoordinateList.get(routeIndex);
+      Point newPoint = Point.fromLngLat(indexPoint.longitude(), indexPoint.latitude());
+      currentAnimator = createLatLngAnimator(indexPoint, newPoint);
+      currentAnimator.start();
+      routeIndex++;
+    }
+  }
+
+  private static class PointEvaluator implements TypeEvaluator<Point> {
+
+    @Override
+    public Point evaluate(float fraction, Point startValue, Point endValue) {
+      return Point.fromLngLat(
+        startValue.longitude() + ((endValue.longitude() - startValue.longitude()) * fraction),
+        startValue.latitude() + ((endValue.latitude() - startValue.latitude()) * fraction)
+      );
+    }
+  }
+
+  private Animator createLatLngAnimator(Point currentPosition, Point targetPosition) {
+    ValueAnimator latLngAnimator = ValueAnimator.ofObject(new PointEvaluator(), currentPosition, targetPosition);
+    latLngAnimator.setDuration((long) TurfMeasurement.distance(currentPosition, targetPosition, "meters"));
+    latLngAnimator.setInterpolator(new LinearInterpolator());
+    latLngAnimator.addListener(new AnimatorListenerAdapter() {
       @Override
-      public void run() {
-        // Check if we are at the end of the points list, if so we want to stop using
-        // the handler.
-        if ((routeCoordinateList.size() - 1 > indexCounterForMovingDotAndLine)) {
-          Point indexPoint = routeCoordinateList.get(indexCounterForMovingDotAndLine);
-          Point newPoint = Point.fromLngLat(indexPoint.longitude(), indexPoint.latitude());
-          if (dotGeoJsonSource != null) {
-            dotGeoJsonSource.setGeoJson(newPoint);
-            if (mapboxMap.getStyle() != null) {
-              GeoJsonSource lineSource = mapboxMap.getStyle().getSourceAs(LINE_SOURCE_ID);
-              markerLinePointList.add(newPoint);
-              if (lineSource != null) {
-                lineSource.setGeoJson(Feature.fromGeometry(LineString.fromLngLats(markerLinePointList)));
-              }
-            }
-          }
-
-          // Keeping the current point indexCounterForMovingDotAndLine we are on.
-          indexCounterForMovingDotAndLine++;
-
-          // Once we finish we need to repeat the entire process by executing the handler again.
-          handler.postDelayed(this, MARKER_AND_LINE_UPDATE_SPEED_MILLISECONDS);
-        }
+      public void onAnimationEnd(Animator animation) {
+        super.onAnimationEnd(animation);
+        animate();
       }
-    };
-    handler.post(runnable);
+    });
+    latLngAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+      @Override
+      public void onAnimationUpdate(ValueAnimator animation) {
+        Point point = (Point) animation.getAnimatedValue();
+        pointSource.setGeoJson(point);
+        markerLinePointList.add(point);
+        lineSource.setGeoJson(Feature.fromGeometry(LineString.fromLngLats(markerLinePointList)));
+      }
+    });
+
+    return latLngAnimator;
   }
 
   /**
@@ -161,7 +179,6 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
    * @param destination the desired finish point of the route
    */
   private void getRoute(@NonNull final Style style, final Point origin, final Point destination) {
-
     MapboxDirections client = MapboxDirections.builder()
       .origin(origin)
       .destination(destination)
@@ -186,7 +203,7 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
         }
 
         // Get the directions route
-        currentRoute = response.body().routes().get(0);
+        DirectionsRoute currentRoute = response.body().routes().get(0);
 
         if (style.isFullyLoaded()) {
           mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(
@@ -213,9 +230,8 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
    * Add various sources to the map.
    */
   private void initSources(@NonNull Style loadedMapStyle, @NonNull FeatureCollection featureCollection) {
-    dotGeoJsonSource = new GeoJsonSource(DOT_SOURCE_ID, featureCollection);
-    loadedMapStyle.addSource(dotGeoJsonSource);
-    loadedMapStyle.addSource(new GeoJsonSource(LINE_SOURCE_ID));
+    loadedMapStyle.addSource(pointSource = new GeoJsonSource(DOT_SOURCE_ID, featureCollection));
+    loadedMapStyle.addSource(lineSource = new GeoJsonSource(LINE_SOURCE_ID));
   }
 
   /**
@@ -249,10 +265,6 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
   public void onResume() {
     super.onResume();
     mapView.onResume();
-    // When the activity is resumed we restart the marker animating.
-    if (handler != null && runnable != null) {
-      handler.post(runnable);
-    }
   }
 
   @Override
@@ -264,11 +276,6 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
   @Override
   protected void onStop() {
     super.onStop();
-    // Check if the marker is currently animating and if so, we pause the animation so we aren't
-    // using resources when the activities not in view.
-    if (handler != null && runnable != null) {
-      handler.removeCallbacksAndMessages(null);
-    }
     mapView.onStop();
   }
 
@@ -287,6 +294,9 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (currentAnimator != null) {
+      currentAnimator.cancel();
+    }
     mapView.onDestroy();
   }
 
