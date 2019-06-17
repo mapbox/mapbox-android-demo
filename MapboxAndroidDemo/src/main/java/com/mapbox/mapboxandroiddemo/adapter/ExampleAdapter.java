@@ -105,6 +105,9 @@ public class ExampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
   }
 
   public ExampleItemModel getItemAt(int position) {
+    if (position < 0 || position >= dataSource.size()) {
+      return null;
+    }
     return dataSource.get(position);
   }
 
