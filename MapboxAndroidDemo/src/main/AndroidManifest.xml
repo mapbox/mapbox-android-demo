@@ -184,6 +184,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.location.LocationComponentCameraOptionsActivity"
+            android:label="@string/activity_location_location_component_camera_options_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.location.LocationComponentOptionsActivity"
             android:label="@string/activity_location_location_component_options_title">
             <meta-data

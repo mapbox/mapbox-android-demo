@@ -367,5 +367,17 @@
     <!-- Scale bar plugin-->
     <string name="zoom_map_fab_instruction">Zoom the map in and out. Click the button to change the scale bar styling.</string>
 
+    <!-- LocationComponent camera options -->
+    <string name="normal">Normal</string>
+    <string name="compass">Compass</string>
+    <string name="gps">GPS</string>
+    <string name="none">None</string>
+    <string name="none_compass">None Compass</string>
+    <string name="none_gps">None GPS</string>
+    <string name="tracking">Tracking</string>
+    <string name="tracking_compass">Tracking Compass</string>
+    <string name="tracking_gps">Tracking GPS</string>
+    <string name="tracking_gps_north">Tracking GPS North</string>
+    <string name="clicked_on_location_component">Clicked on LocationComponent</string>
 
 </resources>

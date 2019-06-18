@@ -97,6 +97,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.ValueAnimatorIconAnimationActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentCameraOptionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentOptionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
@@ -805,6 +806,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, LocationComponentOptionsActivity.class),
       null,
       R.string.activity_location_location_component_options_url, false, BuildConfig.MIN_SDK_VERSION)
+    );
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_location,
+      R.string.activity_location_location_component_camera_options_title,
+      R.string.activity_location_location_component_camera_options_description,
+      new Intent(MainActivity.this, LocationComponentCameraOptionsActivity.class),
+      null,
+      R.string.activity_location_location_component_camera_options_url, false, BuildConfig.MIN_SDK_VERSION)
     );
 
     exampleItemModels.add(new ExampleItemModel(
