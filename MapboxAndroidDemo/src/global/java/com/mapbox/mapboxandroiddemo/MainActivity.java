@@ -1129,11 +1129,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,
-      R.string.activity_dashed_line_directions_picker_title,
-      R.string.activity_dashed_line_directions_picker_description,
+      R.string.activity_lab_dashed_line_directions_picker_title,
+      R.string.activity_lab_dashed_line_directions_picker_description,
       new Intent(MainActivity.this, DashedLineDirectionsPickerActivity.class),
       null,
-      R.string.activity_dashed_line_directions_picker_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_lab_dashed_line_directions_picker_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,

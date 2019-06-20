@@ -249,7 +249,7 @@
         </activity>
         <activity
             android:name=".examples.labs.DashedLineDirectionsPickerActivity"
-            android:label="@string/activity_dashed_line_directions_picker_title">
+            android:label="@string/activity_lab_dashed_line_directions_picker_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
