@@ -117,8 +117,8 @@
     <string name="activity_labs_inset_map_description">Show a smaller inset map fragment and link it to a larger map for two map interaction. Great for gaming!</string>
     <string name="activity_labs_gif_on_map_description">Show an animated image (GIF) anywhere on the map</string>
     <string name="activity_labs_snaking_directions_route_description">Rather than showing the directions route all at once, have it "snake" from the origin to destination.</string>
-    <string name="activity_lab_moving_icon_with_trailing_line_description">Draw a vector polygon with holes on a map using the Mapbox Maps SDK.</string>
-    <string name="activity_dashed_line_directions_picker_description">Draw a line behind a moving SymbolLayer icon which moves along a Mapbox Directions API route.</string>
+    <string name="activity_lab_moving_icon_with_trailing_line_description">Draw a line behind a moving SymbolLayer icon which moves along a Mapbox Directions API route.</string>
+    <string name="activity_lab_dashed_line_directions_picker_description">Show a dotted directions route to a location that\'s based on map movement.</string>
     <string name="activity_lab_calendar_integration_description">Show calendar event locations on the map.</string>
     <string name="activity_lab_magic_window_description">Combine two maps for a magic window effect</string>
     <string name="activity_lab_fog_background_description">Add a gradient on top of a MapView to show a background fog effect.</string>
