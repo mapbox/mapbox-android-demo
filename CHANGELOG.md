@@ -2,6 +2,13 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 8.1.0 - June 21, 2019
+
+* Adding LocationComponent camera mode example #1038
+* Drawn line behind moving SymbolLayer icon #998
+* Fix index out of bound exception #1108
+* Bumped maps sdk to 8.1.0 #1088
+
 ## 8.0.1 - June 13, 2019
 
 * Variable label placement example #1066
@@ -16,7 +23,6 @@ Mapbox welcomes participation and contributions from everyone.
 * Fixes to various small issues found during QA #1099
 * Bumped plugins as part of giant plugin release following Maps SDK 8.0.0 release #1102
 * Bumped Maps SDK to 8.0.1 #1105
-
 
 ## 8.0.0
 
