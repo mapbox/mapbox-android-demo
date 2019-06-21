@@ -1,7 +1,4 @@
-This update is in line with the 8.0.1 release of the Mapbox Maps SDK for Android and includes several fixes and new examples:
+This update is in line with the 8.1.0 release of the Mapbox Maps SDK for Android and includes several fixes and new examples:
 
-- Variable label placement example
-- "Revealed" polygon hole with outline
-- Draw on map for search
-- Refactoring Isochrone API example to add time labels
-- Mapbox's new Scale Bar Plugin
+- LocationComponent camera mode example
+- Drawn line behind moving SymbolLayer icon
