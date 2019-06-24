@@ -139,7 +139,6 @@ dependencies {
     // Firebase
     globalImplementation dependenciesList.firebaseCrash
     globalImplementation dependenciesList.firebasePerf
-    globalImplementation dependenciesList.firebaseCrash
 
     // Other dependencies
     implementation dependenciesList.gson
