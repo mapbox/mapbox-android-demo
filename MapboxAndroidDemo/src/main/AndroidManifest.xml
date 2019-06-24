@@ -626,6 +626,7 @@
         </activity>
         <activity
             android:name=".examples.dds.AddRainFallStyleActivity"
+            android:exported="true"
             android:label="@string/activity_dds_time_lapse_rainfall_points_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
