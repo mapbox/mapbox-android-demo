@@ -380,4 +380,8 @@
     <string name="tracking_gps_north">Tracking GPS North</string>
     <string name="clicked_on_location_component">Clicked on LocationComponent</string>
 
+    <!-- Isochone with seekbar-->
+    <string name="live_within_textview">You want to live within how many minutes from your downtown Vienna office?</string>
+    <string name="minutes_textview">%1$d min</string>
+
 </resources>

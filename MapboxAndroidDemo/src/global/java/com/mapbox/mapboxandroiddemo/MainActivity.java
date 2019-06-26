@@ -71,6 +71,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivit
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.IsochroneActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.IsochroneSeekbarActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.MapMatchingActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.MatrixApiActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.OptimizationActivity;
@@ -993,6 +994,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, IsochroneActivity.class),
       null,
       R.string.activity_java_services_isochrone_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_java_services,
+      R.string.activity_java_services_isochrone_with_seekbar_title,
+      R.string.activity_java_services_isochrone_with_seekbar_description,
+      new Intent(MainActivity.this, IsochroneSeekbarActivity.class),
+      null,
+      R.string.activity_java_services_isochrone_with_seekbar_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_java_services,
