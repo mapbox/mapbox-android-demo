@@ -62,7 +62,7 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
     symbolLayerIconFeatureList.add(Feature.fromGeometry(
       Point.fromLngLat(-56.990533, -30.583266)));
 
-    mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/mapbox/cjf4m44iw0uza2spb3q0a7s41")
+    mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/mapbox/cjf4m44iw0uza2spb3q0a7s41")
 
       // Add the SymbolLayer icon image to the map style
       .withImage(ICON_ID, BitmapFactory.decodeResource(

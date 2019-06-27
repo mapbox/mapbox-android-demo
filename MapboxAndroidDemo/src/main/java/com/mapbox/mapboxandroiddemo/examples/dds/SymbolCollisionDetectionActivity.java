@@ -66,7 +66,7 @@ public class SymbolCollisionDetectionActivity extends AppCompatActivity implemen
   public void onMapReady(final MapboxMap mapboxMap) {
     initIconCoordinates();
 
-    mapboxMap.setStyle(new Style.Builder().fromUrl(Style.MAPBOX_STREETS)
+    mapboxMap.setStyle(new Style.Builder().fromUri(Style.MAPBOX_STREETS)
 
       // Add the SymbolLayer icon image to the map style
       .withImage(ICON_ID, BitmapFactory.decodeResource(

@@ -80,7 +80,7 @@ public class MissingIconActivity extends AppCompatActivity {
 
         // Use a URL to build and add a Style object to the map. Then add a source to the Style.
         mapboxMap.setStyle(
-          new Style.Builder().fromUrl(Style.LIGHT)
+          new Style.Builder().fromUri(Style.LIGHT)
             .withSource(new GeoJsonSource(ICON_SOURCE_ID,
               FeatureCollection.fromFeatures(new Feature[] {
                 carlosFeature,

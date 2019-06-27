@@ -77,7 +77,7 @@ public class InsetMapActivity extends AppCompatActivity {
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
       InsetMapActivity.this.mainMapboxMap = mapboxMap;
-      mapboxMap.setStyle(new Style.Builder().fromUrl(STYLE_URL), new Style.OnStyleLoaded() {
+      mapboxMap.setStyle(new Style.Builder().fromUri(STYLE_URL), new Style.OnStyleLoaded() {
         @Override
         public void onStyleLoaded(@NonNull Style style) {
           mainMapboxMap.addOnCameraMoveListener(mainCameraMoveListener);
@@ -90,7 +90,7 @@ public class InsetMapActivity extends AppCompatActivity {
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
       insetMapboxMap = mapboxMap;
-      mapboxMap.setStyle(new Style.Builder().fromUrl(STYLE_URL));
+      mapboxMap.setStyle(new Style.Builder().fromUri(STYLE_URL));
     }
   };
 
