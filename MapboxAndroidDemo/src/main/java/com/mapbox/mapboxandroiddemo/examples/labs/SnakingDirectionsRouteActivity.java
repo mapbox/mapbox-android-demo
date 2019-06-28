@@ -92,7 +92,7 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
     this.mapboxMap = mapboxMap;
 
-    this.mapboxMap.setStyle(new Style.Builder().fromUrl(Style.LIGHT)
+    this.mapboxMap.setStyle(new Style.Builder().fromUri(Style.LIGHT)
 
       // Add origin and destination SymbolLayer marker icons to the map
       .withImage("icon-id", BitmapFactory.decodeResource(

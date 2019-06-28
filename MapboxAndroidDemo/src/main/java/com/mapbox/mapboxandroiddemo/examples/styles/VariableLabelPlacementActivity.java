@@ -60,7 +60,7 @@ public class VariableLabelPlacementActivity extends AppCompatActivity {
         GeoJsonSource source = new GeoJsonSource(GEOJSON_SRC_ID);
         source.setUrl("asset://poi_places.geojson");
 
-        mapboxMap.setStyle(new Style.Builder().fromUrl(Style.LIGHT)
+        mapboxMap.setStyle(new Style.Builder().fromUri(Style.LIGHT)
             .withSource(source)
             // Adds a SymbolLayer to display POI labels
             .withLayer(new SymbolLayer(POI_LABELS_LAYER_ID, GEOJSON_SRC_ID)

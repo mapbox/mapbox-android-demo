@@ -102,7 +102,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
-        mapboxMap.setStyle(new Style.Builder().fromUrl(Style.DARK)
+        mapboxMap.setStyle(new Style.Builder().fromUri(Style.DARK)
 
             //Add a SymbolLayer to the map so that the map click point has a visual marker. This is where the
             // Isochrone API information radiates from.

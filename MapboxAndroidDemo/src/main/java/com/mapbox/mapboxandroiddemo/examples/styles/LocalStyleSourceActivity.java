@@ -42,7 +42,7 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
           @Override
           public void onClick(View view) {
             // Reference the custom raster file URL and pass through as the string parameter
-            mapboxMap.setStyle(new Style.Builder().fromUrl("https://www.mapbox.com/android-docs/files/mapbox-raster-v8.json"));
+            mapboxMap.setStyle(new Style.Builder().fromUri("https://www.mapbox.com/android-docs/files/mapbox-raster-v8.json"));
           }
         });
 
@@ -50,7 +50,7 @@ public class LocalStyleSourceActivity extends AppCompatActivity {
           @Override
           public void onClick(View view) {
             // Reference the local JSON style file in the assets folder and pass through as the string parameter
-            mapboxMap.setStyle(new Style.Builder().fromUrl("asset://local_style_file.json"));
+            mapboxMap.setStyle(new Style.Builder().fromUri("asset://local_style_file.json"));
           }
         });
       }

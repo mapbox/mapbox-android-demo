@@ -59,7 +59,7 @@ public class TurfRingActivity extends AppCompatActivity implements MapboxMap.OnM
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
         TurfRingActivity.this.mapboxMap = mapboxMap;
         mapboxMap.setStyle(new Style.Builder()
-            .fromUrl(Style.LIGHT)
+            .fromUri(Style.LIGHT)
             .withSource(new GeoJsonSource(OUTER_CIRCLE_GEOJSON_SOURCE_ID))
             .withSource(new GeoJsonSource(INNER_CIRCLE_GEOJSON_SOURCE_ID))
             .withLayer(new FillLayer(OUTER_CIRCLE_LAYER_ID, OUTER_CIRCLE_GEOJSON_SOURCE_ID).withProperties(

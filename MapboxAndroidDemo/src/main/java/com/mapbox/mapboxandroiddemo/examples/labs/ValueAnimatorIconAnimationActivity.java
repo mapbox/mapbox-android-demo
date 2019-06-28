@@ -74,7 +74,7 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
 
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-    mapboxMap.setStyle(new Style.Builder().fromUrl(Style.LIGHT)
+    mapboxMap.setStyle(new Style.Builder().fromUri(Style.LIGHT)
         // Add GeoJsonSource with random Features to the map.
         .withSource(new GeoJsonSource("source-id",
           FeatureCollection.fromFeatures(new Feature[] {
