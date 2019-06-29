@@ -248,6 +248,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.labs.RecyclerViewDirectionsActivity"
+            android:label="@string/activity_lab_rv_directions_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.labs.AnimatedImageGifActivity"
             android:label="@string/activity_labs_gif_on_map_title">
             <meta-data
@@ -848,7 +855,7 @@
         </activity>
         <activity
             android:name=".examples.javaservices.TurfRingActivity"
-            android:label="@string/activity_java_turf_ring_title"
+            android:label="@string/activity_java_services_turf_ring_title"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

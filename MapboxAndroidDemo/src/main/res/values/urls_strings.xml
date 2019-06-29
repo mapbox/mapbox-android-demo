@@ -87,6 +87,9 @@
     <string name="activity_java_services_isochrone_url" translatable="false">https://i.imgur.com/eUByGvt.png</string>
     <string name="activity_java_services_isochrone_with_seekbar_url" translatable="false">https://i.imgur.com/hCVswtE.png</string>
     <string name="activity_java_services_tilequery_url" translatable="false">http://i.imgur.com/VkOCYwq.jpg</string>
+    <string name="activity_java_services_simplify_polyline_url" translatable="false">http://i.imgur.com/uATgul1.png</string>
+    <string name="activity_java_services_map_matching_url" translatable="false">https://i.imgur.com/ig8gGnY.png</string>
+    <string name="activity_java_services_turf_ring_url" translatable="false">https://i.imgur.com/nG8xeXH.png</string>
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
     <string name="activity_plugins_places_plugin_url" translatable="false">https://i.imgur.com/oKHx3bv.png</string>
@@ -100,8 +103,6 @@
     <string name="activity_location_user_location_fragment_plugin_url" translatable="false">https://i.imgur.com/1jG8WQG.png</string>
     <string name="activity_location_location_component_options_url" translatable="false">https://i.imgur.com/4HiEJC1.png</string>
     <string name="activity_location_location_component_camera_options_url" translatable="false">https://i.imgur.com/Q2cB3NY.png</string>
-    <string name="activity_java_services_simplify_polyline_url" translatable="false">http://i.imgur.com/uATgul1.png</string>
-    <string name="activity_java_services_map_matching_url" translatable="false">https://i.imgur.com/ig8gGnY.png</string>
     <string name="activity_image_generator_snapshot_notification_url" translatable="false">https://i.imgur.com/OiveDFG.png</string>
     <string name="activity_image_generator_snapshot_share_url" translatable="false">https://i.imgur.com/KgfsY3s.png</string>
     <string name="activity_lab_animated_marker_url" translatable="false">http://i.imgur.com/XegvIKr.png</string>
@@ -126,6 +127,6 @@
     <string name="activity_lab_animated_interpolator_icon_drop_url">https://i.imgur.com/JfLf69C.png</string>
     <string name="activity_lab_drag_draw_url" translatable="false">https://i.imgur.com/vf5uZyS.png</string>
     <string name="activity_lab_home_screen_widget_url" translatable="false">https://i.imgur.com/H5N9jDn.png</string>
-    <string name="activity_java_turf_ring_url" translatable="false">https://i.imgur.com/nG8xeXH.png</string>
+    <string name="activity_lab_rv_directions_url" translatable="false">https://i.imgur.com/LurOuXQ.png</string>
     <string name="activity_china_simple_china_mapview_url" translatable="false">https://i.imgur.com/KwoEynZ.png</string>
 </resources>
