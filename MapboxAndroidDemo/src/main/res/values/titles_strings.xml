@@ -48,6 +48,7 @@
     <string name="activity_dds_multiple_geometries_title">Draw multiple geometries</string>
     <string name="activity_dds_heatmap_title">Show heatmap data</string>
     <string name="activity_dds_multiple_heatmap_styling_title">Styling heatmaps</string>
+    <string name="activity_dds_circle_radius_title">Circle radius</string>
     <string name="activity_lab_space_station_location_title">Space station current location</string>
     <string name="activity_dds_bathymetry_title">Display water depth</string>
     <string name="activity_dds_info_window_symbol_layer_title">Symbol layer info window</string>

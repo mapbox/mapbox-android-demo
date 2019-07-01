@@ -1392,6 +1392,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_basics,
+      R.string.activity_map_and_marker_title,
+      R.string.activity_basic_simple_mapview_description,
+      new Intent(MainActivity.this, MapAndMarkerActivity.class),
+      R.string.activity_basic_simple_mapview_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_basics,
       R.string.activity_basic_simple_mapview_title,
       R.string.activity_basic_simple_mapview_description,
       new Intent(MainActivity.this, SimpleMapViewActivity.class),
