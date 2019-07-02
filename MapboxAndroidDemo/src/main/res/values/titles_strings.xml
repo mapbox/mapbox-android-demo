@@ -34,6 +34,7 @@
     <string name="activity_styles_rotating_anchor_text_title">Text anchor position</string>
     <string name="activity_styles_missing_icon_title">Style with missing icon</string>
     <string name="activity_styles_variable_label_placement_title">Variable label placement</string>
+    <string name="activity_styles_runtime_styling_title">Style features at runtime</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_title">Use GeoJSON data to set extrusion height</string>
     <string name="activity_extrusions_population_density_extrusions_title">Display 3D building height based on vector data</string>
     <string name="activity_extrusions_adjust_extrusions_title">Adjust light location and color</string>
@@ -103,6 +104,7 @@
     <string name="activity_location_location_component_title">Show a user\'s location</string>
     <string name="activity_location_location_component_camera_options_title">Location camera options</string>
     <string name="activity_location_location_component_options_title">Customized location icon</string>
+    <string name="activity_location_location_change_listening_title">Track device location</string>
     <string name="activity_image_generator_snapshot_notification_title">Snapshot Notification</string>
     <string name="activity_image_generator_snapshot_share_title">Share snapshot image</string>
     <string name="activity_lab_animated_marker_title">Animate marker position</string>

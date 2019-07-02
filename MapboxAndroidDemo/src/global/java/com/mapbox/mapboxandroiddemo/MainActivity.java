@@ -44,6 +44,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.BathymetryActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.CircleRadiusActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
@@ -100,6 +101,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.ValueAnimatorIconAnimationActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.LocationChangeListeningActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentCameraOptionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
@@ -141,6 +143,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MissingIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.RotatingTextAnchorPositionActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.RuntimeStylingActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SatelliteOpacityOnZoomActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ShowHideLayersActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.TextFieldFormattingActivity;
@@ -1392,13 +1395,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_basics,
-      R.string.activity_map_and_marker_title,
-      R.string.activity_basic_simple_mapview_description,
-      new Intent(MainActivity.this, MapAndMarkerActivity.class),
-      R.string.activity_basic_simple_mapview_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_basics,
       R.string.activity_basic_simple_mapview_title,
       R.string.activity_basic_simple_mapview_description,
       new Intent(MainActivity.this, SimpleMapViewActivity.class),
@@ -1420,5 +1416,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, MapboxMapOptionActivity.class),
       null,
       R.string.activity_basic_mapbox_options_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_circle_radius_title,
+      R.string.activity_dds_circle_radius_description,
+      new Intent(MainActivity.this, CircleRadiusActivity.class),
+      null,
+      R.string.activity_dds_circle_radius_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_location,
+      R.string.activity_location_location_change_listening_title,
+      R.string.activity_location_location_change_listening_description,
+      new Intent(MainActivity.this, LocationChangeListeningActivity.class),
+      null,
+      R.string.activity_location_location_change_listening_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_runtime_styling_title,
+      R.string.activity_styles_runtime_styling_description,
+      new Intent(MainActivity.this, RuntimeStylingActivity.class),
+      null,
+      R.string.activity_styles_runtime_styling_url, false, BuildConfig.MIN_SDK_VERSION));
   }
 }

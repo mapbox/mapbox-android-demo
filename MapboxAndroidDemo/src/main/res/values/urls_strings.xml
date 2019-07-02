@@ -36,6 +36,7 @@
     <string name="activity_styles_rotating_anchor_text_url" translatable="false">https://i.imgur.com/w8cP6Wn.png</string>
     <string name="activity_styles_missing_icon_url" translatable="false">https://i.imgur.com/lSk2tDB.png</string>
     <string name="activity_styles_variable_label_placement_url" translatable="false">https://i.imgur.com/vLgFvlZ.jpg</string>
+    <string name="activity_styles_runtime_styling_url" translatable="false">https://i.imgur.com/1l6YUFG.png</string>
     <string name="activity_extrusions_population_density_extrusions_url" translatable="false">http://i.imgur.com/se1z8Wb.png</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_url" translatable="false">http://i.imgur.com/6j848JL.jpg</string>
     <string name="activity_extrusions_adjust_extrusions_url" translatable="false">http://i.imgur.com/XNTyIO5.png</string>
@@ -104,6 +105,7 @@
     <string name="activity_location_user_location_fragment_plugin_url" translatable="false">https://i.imgur.com/1jG8WQG.png</string>
     <string name="activity_location_location_component_options_url" translatable="false">https://i.imgur.com/4HiEJC1.png</string>
     <string name="activity_location_location_component_camera_options_url" translatable="false">https://i.imgur.com/Q2cB3NY.png</string>
+    <string name="activity_location_location_change_listening_url" translatable="false">https://i.imgur.com/ReiY5jj.png</string>
     <string name="activity_image_generator_snapshot_notification_url" translatable="false">https://i.imgur.com/OiveDFG.png</string>
     <string name="activity_image_generator_snapshot_share_url" translatable="false">https://i.imgur.com/KgfsY3s.png</string>
     <string name="activity_lab_animated_marker_url" translatable="false">http://i.imgur.com/XegvIKr.png</string>
