@@ -93,6 +93,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.MarkerFollowingRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.MovingIconWithTrailingLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PictureInPictureActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.PulsingLayerOpacityColorActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewDirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
@@ -1013,11 +1014,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_java_services,
-      R.string.activity_java_turf_ring_title,
-      R.string.activity_java_turf_ring_description,
+      R.string.activity_java_services_turf_ring_title,
+      R.string.activity_java_services_turf_ring_description,
       new Intent(MainActivity.this, TurfRingActivity.class),
       null,
-      R.string.activity_java_turf_ring_url, false, BuildConfig.MIN_SDK_VERSION
+      R.string.activity_java_services_turf_ring_url, false, BuildConfig.MIN_SDK_VERSION
     ));
 
     exampleItemModels.add(new ExampleItemModel(
@@ -1193,6 +1194,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, MovingIconWithTrailingLineActivity.class),
       null,
       R.string.activity_lab_moving_icon_with_trailing_line_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_lab,
+        R.string.activity_lab_rv_directions_title,
+        R.string.activity_lab_rv_directions_description,
+        new Intent(MainActivity.this, RecyclerViewDirectionsActivity.class),
+        null,
+        R.string.activity_lab_rv_directions_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,

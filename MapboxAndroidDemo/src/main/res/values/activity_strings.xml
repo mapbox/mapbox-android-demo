@@ -192,7 +192,12 @@
     <!-- Recyclerview on map -->
     <string name="rv_card_name">Location #%1$d</string>
     <string name="rv_card_bed_info">This location has %1$d beds</string>
-    <string name="toast_instruction">Click on cards below</string>
+    <string name="toast_instruction">Tap on cards below</string>
+
+    <!-- Recyclerview Directions on map -->
+    <string name="rv_directions_route_card_name">Restaurant #%1$d</string>
+    <string name="rv_directions_route_available_table_info">%1$d tables available</string>
+    <string name="rv_directions_route_toast_instruction">Tap on cards below</string>
 
     <!-- Optimization API activity -->
     <string name="origin">Origin</string>
