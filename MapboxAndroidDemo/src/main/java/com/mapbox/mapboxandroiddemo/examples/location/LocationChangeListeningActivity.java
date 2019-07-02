@@ -1,52 +1,49 @@
 package com.mapbox.mapboxandroiddemo.examples.location;
 
-import com.mapbox.mapboxandroiddemo.R;
 import android.annotation.SuppressLint;
 import android.location.Location;
-import android.util.Log;
-import android.widget.Toast;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-// Classes needed to initialize the map
-import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.maps.MapView;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
-import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.maps.Style;
-// Classes needed to handle location permissions
-import com.mapbox.android.core.permissions.PermissionsListener;
-import com.mapbox.android.core.permissions.PermissionsManager;
-import java.util.List;
-// Classes needed to add the location engine
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.Toast;
+
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineCallback;
 import com.mapbox.android.core.location.LocationEngineProvider;
 import com.mapbox.android.core.location.LocationEngineRequest;
 import com.mapbox.android.core.location.LocationEngineResult;
-import java.lang.ref.WeakReference;
-// Classes needed to add the location component
+import com.mapbox.android.core.permissions.PermissionsListener;
+import com.mapbox.android.core.permissions.PermissionsManager;
+import com.mapbox.mapboxandroiddemo.R;
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
+
+import java.lang.ref.WeakReference;
+import java.util.List;
+
 
 /**
- * Use the Mapbox Core Library to listen to device location updates
+ * Use the Mapbox Core Library to receive updates when the device changes location.
  */
 public class LocationChangeListeningActivity extends AppCompatActivity implements
         OnMapReadyCallback, PermissionsListener {
-  // Variables needed to initialize a map
+
+  private static final long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
+  private static final long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
   private MapboxMap mapboxMap;
   private MapView mapView;
-  // Variables needed to handle location permissions
   private PermissionsManager permissionsManager;
-  // Variables needed to add the location engine
   private LocationEngine locationEngine;
-  private long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
-  private long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
-  // Variables needed to listen to location updates
-  private LocationChangeListeningActivityLocationCallback callback = new LocationChangeListeningActivityLocationCallback(this);
+  private LocationChangeListeningActivityLocationCallback callback =
+    new LocationChangeListeningActivityLocationCallback(this);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +66,11 @@ public class LocationChangeListeningActivity extends AppCompatActivity implement
     this.mapboxMap = mapboxMap;
 
     mapboxMap.setStyle(Style.TRAFFIC_NIGHT,
-            new Style.OnStyleLoaded() {
-              @Override
-              public void onStyleLoaded(@NonNull Style style) {
-                enableLocationComponent(style);
-              }
-            });
+      new Style.OnStyleLoaded() {
+        @Override public void onStyleLoaded(@NonNull Style style) {
+          enableLocationComponent(style);
+        }
+      });
   }
 
   /**
@@ -129,13 +125,15 @@ public class LocationChangeListeningActivity extends AppCompatActivity implement
   }
 
   @Override
-  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+  public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                         @NonNull int[] grantResults) {
     permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
 
   @Override
   public void onExplanationNeeded(List<String> permissionsToExplain) {
-    Toast.makeText(this, R.string.user_location_permission_explanation, Toast.LENGTH_LONG).show();
+    Toast.makeText(this, R.string.user_location_permission_explanation,
+      Toast.LENGTH_LONG).show();
   }
 
   @Override
@@ -177,7 +175,8 @@ public class LocationChangeListeningActivity extends AppCompatActivity implement
 
         // Create a Toast which displays the new location's coordinates
         Toast.makeText(activity, String.format(activity.getString(R.string.new_location),
-                String.valueOf(result.getLastLocation().getLatitude()), String.valueOf(result.getLastLocation().getLongitude())),
+                String.valueOf(result.getLastLocation().getLatitude()),
+          String.valueOf(result.getLastLocation().getLongitude())),
                 Toast.LENGTH_SHORT).show();
 
         // Pass the new location to the Maps SDK's LocationComponent
@@ -188,7 +187,7 @@ public class LocationChangeListeningActivity extends AppCompatActivity implement
     }
 
     /**
-     * The LocationEngineCallback interface's method which fires when the device's location can not be captured
+     * The LocationEngineCallback interface's method which fires when the device's location can't be captured
      *
      * @param exception the exception message
      */

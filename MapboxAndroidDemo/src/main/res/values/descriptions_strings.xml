@@ -57,7 +57,7 @@
     <string name="activity_dds_expression_integration_description">Use multiple expressions to convert and visualize data.</string>
     <string name="activity_dds_satellite_land_select_description">View satellite photos and click to outline an area of land.</string>
     <string name="activity_dds_symbol_zoom_switch_description">Change SymbolLayer icons based on the camera\'s zoom level.</string>
-    <string name="activity_dds_circle_radius_description">Set the circle radius of features in a circle layer based on a data property.</string>
+    <string name="activity_dds_circle_radius_description">Set the radii of a circle layer\'s circles based on a data property.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_dds_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Maps SDK.</string>
     <string name="activity_dds_polygon_select_toggle_description">Tap on various polygons to "select" them and toggle their colors.</string>
@@ -106,7 +106,7 @@
     <string name="activity_location_user_location_map_frag_plugin_description">Use the LocationComponent to display a user\'s location on a map fragment.</string>
     <string name="activity_location_location_component_options_description">Use LocationComponent options to customize the user location information.</string>
     <string name="activity_location_location_component_camera_options_description">Use LocationComponent camera options to customize map camera behavior.</string>
-    <string name="activity_location_location_change_listening_description">Display a Mapbox map on an Android device and receive updates on the current device location.</string>
+    <string name="activity_location_location_change_listening_description">Receive updates when the device changes location.</string>
     <string name="activity_image_generator_snapshot_share_description">Send and share a map snapshot image.</string>
     <string name="activity_image_generator_snapshot_notification_description">Show a snapshotted image in a notification.</string>
     <string name="activity_lab_animated_marker_description">Animate the marker to a new position on the map.</string>

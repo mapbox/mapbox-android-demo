@@ -4,25 +4,27 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import com.mapbox.mapboxandroiddemo.R;
 
+import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
-
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 
+/**
+ * Set the radii of a CircleLayer's circles based on a data property.
+ */
 public class CircleRadiusActivity extends AppCompatActivity {
 
   private MapView mapView;
@@ -37,13 +39,13 @@ public class CircleRadiusActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-
         mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
             // replace examples.8mj5l1r9 with the map ID for the tileset
             // you created by uploading data to your Mapbox account
             style.addSource(new VectorSource("trees-source", "mapbox://examples.8mj5l1r9"));
+
             CircleLayer circleLayer = new CircleLayer("trees-style", "trees-source");
             // replace street-trees-DC-9gvg5l with the name of your source layer
             circleLayer.setSourceLayer("street-trees-DC-9gvg5l");
@@ -64,7 +66,6 @@ public class CircleRadiusActivity extends AppCompatActivity {
       }
     });
   }
-
 
   // Add the mapView's own lifecycle methods to the activity's lifecycle methods
   @Override
