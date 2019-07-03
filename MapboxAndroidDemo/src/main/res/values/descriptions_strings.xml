@@ -37,6 +37,7 @@
     <string name="activity_styles_rotating_anchor_text_description">Adjust the anchor position of SymbolLayer text fields.</string>
     <string name="activity_styles_missing_icon_description">Provide an icon when a Style failed to load one.</string>
     <string name="activity_styles_variable_label_placement_description">To increase the chance of high-priority labels staying visible, provide the map renderer a list of preferred text anchor positions.</string>
+    <string name="activity_styles_runtime_styling_description">Change various properties of a map based on user interaction and other runtime situations.</string>
     <string name="activity_extrusions_catalina_marathon_extrusions_description">Use data-driven styling and GeoJSON data to set extrusions\' heights.</string>
     <string name="activity_extrusions_population_density_extrusions_description">Use extrusions to display 3D building height based on imported vector data.</string>
     <string name="activity_extrusions_adjust_extrusions_description">Change the location and color of the light shined on extrusions.</string>
@@ -56,6 +57,7 @@
     <string name="activity_dds_expression_integration_description">Use multiple expressions to convert and visualize data.</string>
     <string name="activity_dds_satellite_land_select_description">View satellite photos and click to outline an area of land.</string>
     <string name="activity_dds_symbol_zoom_switch_description">Change SymbolLayer icons based on the camera\'s zoom level.</string>
+    <string name="activity_dds_circle_radius_description">Set the radii of a circle layer\'s circles based on a data property.</string>
     <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_dds_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Maps SDK.</string>
     <string name="activity_dds_polygon_select_toggle_description">Tap on various polygons to "select" them and toggle their colors.</string>
@@ -104,6 +106,7 @@
     <string name="activity_location_user_location_map_frag_plugin_description">Use the LocationComponent to display a user\'s location on a map fragment.</string>
     <string name="activity_location_location_component_options_description">Use LocationComponent options to customize the user location information.</string>
     <string name="activity_location_location_component_camera_options_description">Use LocationComponent camera options to customize map camera behavior.</string>
+    <string name="activity_location_location_change_listening_description">Receive updates when the device changes location.</string>
     <string name="activity_image_generator_snapshot_share_description">Send and share a map snapshot image.</string>
     <string name="activity_image_generator_snapshot_notification_description">Show a snapshotted image in a notification.</string>
     <string name="activity_lab_animated_marker_description">Animate the marker to a new position on the map.</string>

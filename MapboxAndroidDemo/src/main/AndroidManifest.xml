@@ -219,6 +219,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.location.LocationChangeListeningActivity"
+            android:label="@string/activity_location_location_change_listening_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.camera.BoundingBoxCameraActivity"
             android:label="@string/activity_camera_bounding_box_title">
             <meta-data
@@ -229,6 +236,13 @@
         <activity
             android:name=".examples.basics.MapboxMapOptionActivity"
             android:label="@string/activity_basic_mapbox_options_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
+            android:name=".examples.dds.CircleRadiusActivity"
+            android:label="@string/activity_dds_circle_radius_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
@@ -442,6 +456,13 @@
         <activity
             android:name=".examples.styles.MissingIconActivity"
             android:label="@string/activity_styles_missing_icon_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
+            android:name=".examples.styles.RuntimeStylingActivity"
+            android:label="@string/activity_styles_runtime_styling_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />

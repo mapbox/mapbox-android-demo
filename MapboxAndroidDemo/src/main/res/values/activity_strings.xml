@@ -42,6 +42,11 @@
     <!--Location Component on Fragment below textview in test activity-->
     <string name="location_component_fragment_text">User\'s current location on a map fragment</string>
 
+    <!-- Location change listening -->
+    <string name="title_location_tracking">Location tracking</string>
+    <string name="description_location_tracking">Use the Mapbox Core Library to receive device location updates</string>
+    <string name="new_location">New lat: %1$s New longitude: %2$s</string>
+
     <!-- Settings dialog -->
     <string name="settings_dialog_title">Settings</string>
     <string name="settings_dialog_positive_button_text">Save</string>
