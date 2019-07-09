@@ -39,6 +39,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circlePitchAlignment;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circlePitchScale;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.rasterOpacity;
 
 /**
@@ -86,8 +87,8 @@ public class NightSpaceOrbitActivity extends AppCompatActivity implements
         style.addLayer(
             new RasterLayer(SATELLITE_RASTER_LAYER_ID, SATELLITE_RASTER_SOURCE_ID).withProperties(
                 rasterOpacity(interpolate(linear(), zoom(),
-                    stop(15, 0),
-                    stop(18, 1)
+                    stop(6, 0),
+                    stop(15, 1)
                 ))));
 
         try {
@@ -101,6 +102,11 @@ public class NightSpaceOrbitActivity extends AppCompatActivity implements
 
         style.addLayer(
             new CircleLayer(POPULATION_CIRCLE_LAYER_ID, POPULATION_SOURCE_ID).withProperties(
+                circleBlur(interpolate(linear(), get("mag"),
+                    stop(1, 10),
+                    stop(6, 7),
+                    stop(18, 4)
+                )),
                 circleOpacity(.8f),
                 circleColor(Color.parseColor("#FDF9D0")),
                 circlePitchAlignment(CIRCLE_PITCH_ALIGNMENT_MAP),
@@ -111,8 +117,8 @@ public class NightSpaceOrbitActivity extends AppCompatActivity implements
                     stop(18, 1)
                 ))
             ));
-/*
 
+        /*
         // Create a new camera position and animate the map camera to show the fade in/out UI of the satellite layer
         mapboxMap.animateCamera(
             CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder()
