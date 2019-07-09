@@ -3,42 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mapbox.mapboxandroiddemo">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_CALENDAR" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
-    <uses-feature
-        android:name="android.hardware.location.gps"
-        android:required="false" />
-    <uses-feature
-        android:name="android.hardware.touchscreen"
-        android:required="false" />
-
     <application
         android:name=".MapboxApplication"
         android:allowBackup="true"
+        android:appComponentFactory="placeholderString"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:launchMode="singleTop"
-        tools:replace="android:appComponentFactory"
-        android:appComponentFactory="placeholderString"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-
-        <uses-library
-            android:name="com.google.android.wearable"
-            android:required="false" />
+        android:usesCleartextTraffic="true"
+        tools:replace="android:appComponentFactory">
 
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".examples.basics.SimpleMapViewActivity"
             android:label="@string/activity_basic_simple_mapview_title">
@@ -263,7 +245,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
-
         <activity
             android:name=".examples.basics.MapboxMapOptionActivity"
             android:label="@string/activity_basic_mapbox_options_title">
@@ -271,6 +252,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
+
         <activity
             android:name=".examples.dds.CircleRadiusActivity"
             android:label="@string/activity_dds_circle_radius_title">
@@ -316,6 +298,13 @@
         <activity
             android:name=".examples.labs.ChangeAttributionColorActivity"
             android:label="@string/activity_lab_change_attribution_color_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
+            android:name=".examples.labs.NightSpaceOrbitActivity"
+            android:label="@string/activity_lab_night_space_orbit_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
@@ -803,7 +792,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
-
         <activity
             android:name=".examples.camera.RestrictCameraActivity"
             android:label="@string/activity_camera_restrict_title">
@@ -811,6 +799,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
+
         <activity
             android:name=".examples.camera.SlowlyRotatingCameraActivity"
             android:label="@string/activity_camera_slowly_rotating_title">
@@ -989,18 +978,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
-
-        <service android:name=".account.AccountRetrievalService" />
-    <receiver android:name=".utils.DemoAppHomeScreenAddressWidget">
-        <intent-filter>
-            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-        </intent-filter>
-
-        <meta-data
-            android:name="android.appwidget.provider"
-            android:resource="@xml/demo_app_home_screen_widget_info" />
-    </receiver>
-        <!-- Set value to true to have SKU token generation on -->
         <meta-data
             android:name="com.mapbox.EnableSkuToken"
             android:value="true" />
@@ -1008,17 +985,47 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/mapbox_logo_icon" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/mapboxBlueDark" />
+        <!-- Set value to true to have SKU token generation on -->
+        <receiver android:name=".utils.DemoAppHomeScreenAddressWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/demo_app_home_screen_widget_info" />
+        </receiver>
+
+        <service android:name=".account.AccountRetrievalService" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
         <service android:name=".utils.CustomFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="false" />
     </application>
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
 </manifest>

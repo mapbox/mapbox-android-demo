@@ -144,6 +144,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.LineLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.LocalStyleSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MapboxStudioStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.MissingIconActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.NightSpaceOrbitActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.RotatingTextAnchorPositionActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.RuntimeStylingActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.SatelliteOpacityOnZoomActivity;
@@ -1286,6 +1287,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new Intent(MainActivity.this, SharedPreferencesActivity.class),
         null,
         R.string.activity_lab_shared_preferences_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_lab,
+        R.string.activity_lab_night_space_orbit_title,
+        R.string.activity_lab_night_space_orbit_description,
+        new Intent(MainActivity.this, NightSpaceOrbitActivity.class),
+        null,
+        R.string.activity_lab_night_space_orbit_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
