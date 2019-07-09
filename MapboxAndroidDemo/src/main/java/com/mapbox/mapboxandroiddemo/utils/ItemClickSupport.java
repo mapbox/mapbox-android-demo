@@ -1,9 +1,9 @@
 package com.mapbox.mapboxandroiddemo.utils;
 
-import static android.support.v7.widget.RecyclerView.OnChildAttachStateChangeListener;
-import static android.support.v7.widget.RecyclerView.ViewHolder;
+import static androidx.recyclerview.widget.RecyclerView.OnChildAttachStateChangeListener;
+import static androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 import com.mapbox.mapboxandroiddemo.R;

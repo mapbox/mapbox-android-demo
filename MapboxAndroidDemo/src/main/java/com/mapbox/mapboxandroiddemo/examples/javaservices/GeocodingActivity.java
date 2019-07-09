@@ -1,9 +1,9 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ListPopupWindow;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ListPopupWindow;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;

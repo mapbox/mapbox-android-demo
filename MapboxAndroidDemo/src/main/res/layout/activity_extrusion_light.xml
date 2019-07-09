@@ -15,7 +15,7 @@
         mapbox:mapbox_cameraZoom="16"
         />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabLightPosition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         mapbox:backgroundTint="@color/mapboxPink"
         mapbox:layout_anchorGravity="top"/>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabLightColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

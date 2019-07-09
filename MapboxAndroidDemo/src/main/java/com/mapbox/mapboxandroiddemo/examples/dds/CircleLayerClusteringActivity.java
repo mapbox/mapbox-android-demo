@@ -2,9 +2,9 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;

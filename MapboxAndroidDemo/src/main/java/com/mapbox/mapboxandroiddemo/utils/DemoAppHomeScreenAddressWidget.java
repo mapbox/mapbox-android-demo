@@ -6,7 +6,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.location.Location;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 

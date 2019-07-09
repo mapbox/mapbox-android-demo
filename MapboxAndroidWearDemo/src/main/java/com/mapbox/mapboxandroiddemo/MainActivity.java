@@ -7,7 +7,6 @@ import android.support.wearable.view.WearableRecyclerView;
 
 import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
-
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.LocationTrackingActivity;

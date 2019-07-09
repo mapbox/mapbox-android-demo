@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
@@ -19,4 +20,4 @@
         mapbox:mapbox_cameraTargetLng="-77.0295"
         mapbox:mapbox_cameraZoom="15" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

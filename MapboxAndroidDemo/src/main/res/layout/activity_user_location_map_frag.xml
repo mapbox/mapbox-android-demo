@@ -16,7 +16,7 @@
         android:gravity="center_horizontal"
         android:text="@string/location_component_fragment_text"/>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/location_frag_cardview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,5 +31,5 @@
             android:id="@+id/location_frag_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

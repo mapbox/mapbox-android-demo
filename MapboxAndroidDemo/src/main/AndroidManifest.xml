@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.mapbox.mapboxandroiddemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,6 +24,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:launchMode="singleTop"
+        tools:replace="android:appComponentFactory"
+        android:appComponentFactory="placeholderString"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
@@ -930,6 +933,7 @@
         <meta-data
             android:name="com.mapbox.EnableSkuToken"
             android:value="true" />
+
     </application>
 
 </manifest>

@@ -12,7 +12,7 @@
         mapbox:mapbox_cameraTargetLng="-122.439004"
         mapbox:mapbox_cameraZoom="10"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_on_top_of_map"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -16,7 +16,7 @@
         mapbox:mapbox_cameraZoom="8" />
 
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/toggle_isochrone_time_label_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         app:srcCompat="@drawable/ic_text_icon_24dp"
         mapbox:fabSize="normal" />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/switch_isochrone_style_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

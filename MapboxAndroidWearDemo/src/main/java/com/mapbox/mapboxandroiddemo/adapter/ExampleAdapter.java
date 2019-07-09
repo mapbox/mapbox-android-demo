@@ -1,8 +1,6 @@
 package com.mapbox.mapboxandroiddemo.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.support.wearable.view.WearableRecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +11,9 @@ import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 
 import java.util.ArrayList;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.wear.widget.WearableRecyclerView;
 
 public class ExampleAdapter extends WearableRecyclerView.Adapter<ExampleAdapter.ViewHolder> {
 

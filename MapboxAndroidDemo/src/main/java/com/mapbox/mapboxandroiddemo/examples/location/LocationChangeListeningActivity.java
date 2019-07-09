@@ -1,10 +1,9 @@
 package com.mapbox.mapboxandroiddemo.examples.location;
 
+
 import android.annotation.SuppressLint;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -29,12 +28,14 @@ import com.mapbox.mapboxsdk.maps.Style;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Use the Mapbox Core Library to receive updates when the device changes location.
  */
 public class LocationChangeListeningActivity extends AppCompatActivity implements
-        OnMapReadyCallback, PermissionsListener {
+    OnMapReadyCallback, PermissionsListener {
 
   private static final long DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L;
   private static final long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
@@ -87,7 +88,7 @@ public class LocationChangeListeningActivity extends AppCompatActivity implement
       // Set the LocationComponent activation options
       LocationComponentActivationOptions locationComponentActivationOptions =
               LocationComponentActivationOptions.builder(this, loadedMapStyle)
-                      .useDefaultLocationEngine(false)
+                  .useDefaultLocationEngine(false)
                       .build();
 
       // Activate with the LocationComponentActivationOptions object
