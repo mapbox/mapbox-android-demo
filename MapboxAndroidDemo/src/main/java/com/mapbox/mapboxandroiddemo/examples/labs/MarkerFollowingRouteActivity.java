@@ -128,7 +128,8 @@ public class MarkerFollowingRouteActivity extends AppCompatActivity {
           }
           if (latLngEvaluator != null) {
             markerIconAnimator = ObjectAnimator
-              .ofObject(latLngEvaluator, count == 0 ? new LatLng(37.61501, -122.385374)
+              .ofObject(latLngEvaluator, count == 0 || markerIconCurrentLocation == null
+                  ? new LatLng(37.61501, -122.385374)
                   : markerIconCurrentLocation,
                 new LatLng(nextLocation.latitude(), nextLocation.longitude()))
               .setDuration(300);
