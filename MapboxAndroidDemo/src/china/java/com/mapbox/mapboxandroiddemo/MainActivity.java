@@ -31,8 +31,8 @@ import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.SimpleChinaMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
+import com.mapbox.mapboxandroiddemo.examples.basics.KotlinSimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
-import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivityKotlin;
 import com.mapbox.mapboxandroiddemo.examples.camera.AnimateMapCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
@@ -708,7 +708,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.id.nav_basics,
       R.string.activity_basic_mapbox_kotlin_title,
       R.string.activity_basic_mapbox_kotlin_description,
-      new Intent(MainActivity.this, SimpleMapViewActivityKotlin.class),
+      new Intent(MainActivity.this, KotlinSimpleMapViewActivity.class),
       null,
       R.string.activity_basic_simple_mapview_url, true, BuildConfig.MIN_SDK_VERSION));
   }

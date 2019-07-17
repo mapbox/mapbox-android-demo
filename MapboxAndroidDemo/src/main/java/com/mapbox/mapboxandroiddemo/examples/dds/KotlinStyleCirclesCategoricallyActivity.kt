@@ -30,7 +30,7 @@ class KotlinStyleCirclesCategoricallyActivity : AppCompatActivity() {
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync { mapboxMap ->
 
-            mapboxMap.setStyle(Style.LIGHT){
+            mapboxMap.setStyle(Style.LIGHT) {
                 val vectorSource = VectorSource(
                         "ethnicity-source",
                         "http://api.mapbox.com/v4/examples.8fgz4egr.json?access_token=" + Mapbox.getAccessToken()!!
