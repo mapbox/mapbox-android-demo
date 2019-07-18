@@ -1,7 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.location
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
@@ -81,7 +80,6 @@ class KotlinLocationComponentActivity : AppCompatActivity(), OnMapReadyCallback,
         // Set the LocationComponent's render mode
         renderMode = RenderMode.COMPASS
       }
-
     } else {
       permissionsManager = PermissionsManager(this)
       permissionsManager.requestLocationPermissions(this)

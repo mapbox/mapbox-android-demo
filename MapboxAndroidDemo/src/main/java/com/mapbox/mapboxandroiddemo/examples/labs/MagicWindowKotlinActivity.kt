@@ -99,7 +99,7 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineCallback<Lo
     }
 
     fun checkLocationPermissionsAndInitialize() {
-        val allowed = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        val allowed = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
         if (allowed) {
             initializeLocationEngine()
         } else {

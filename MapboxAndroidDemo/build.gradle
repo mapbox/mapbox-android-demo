@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'io.fabric'
+apply plugin: 'org.jmailen.kotlinter'
 apply from: "$project.rootDir/gradle/script-git-version.gradle"
 apply from: "$project.rootDir/gradle/gradle-dependencies-graph.gradle"
 
@@ -101,6 +102,10 @@ android {
         track = 'alpha'
         untrackOld = true
     }
+}
+
+kotlinter {
+    indentSize = 2
 }
 
 if (isGlobal) {

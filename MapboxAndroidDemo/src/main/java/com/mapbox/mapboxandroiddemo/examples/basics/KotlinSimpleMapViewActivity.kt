@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_basic_simple_kotlin.*
 /**
  * The most basic example of adding a map to an activity with Kotlin code
  */
-class SimpleMapViewActivityKotlin : AppCompatActivity() {
+class KotlinSimpleMapViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,6 @@ class SimpleMapViewActivityKotlin : AppCompatActivity() {
             mapboxMap.setStyle(Style.MAPBOX_STREETS) {
 
                 // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
-
             }
         }
     }

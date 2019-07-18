@@ -70,6 +70,7 @@ ext {
             grgit               : '2.3.0',
             fabric              : '1.29.0',
             googleServices      : '4.2.0',
+            kotlinLint          : '1.26.0',
     ]
 
     dependenciesList = [
@@ -142,6 +143,7 @@ ext {
             grgit               : "org.ajoberstar:grgit:${pluginVersion.grgit}",
             fabric              : "io.fabric.tools:gradle:${pluginVersion.fabric}",
             googleServices      : "com.google.gms:google-services:${pluginVersion.googleServices}",
+            kotlinLint          : "org.jmailen.gradle:kotlinter-gradle:${pluginVersion.kotlinLint}"
     ]
 
     wearDependencies = [

@@ -1,6 +1,5 @@
 package com.mapbox.mapboxandroiddemo.examples.dds
 
-
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PointF
@@ -84,7 +83,7 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
         // Create a GeoJsonSource and add it to the map.
         geoJsonSource = GeoJsonSource(NEIGHBORHOOD_POLYGON_SOURCE_ID, featureCollection)
 
-        mapboxMap.getStyle {style ->
+        mapboxMap.getStyle { style ->
             style.addSource(geoJsonSource!!)
 
             // Create a FillLayer which will show a background of all neighborhoods on the map.
