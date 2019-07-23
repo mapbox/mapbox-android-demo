@@ -72,6 +72,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivi
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfRingActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfPhysicalCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
@@ -1023,6 +1024,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       null,
       R.string.activity_java_services_turf_ring_url, false, BuildConfig.MIN_SDK_VERSION
     ));
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_java_services,
+      R.string.activity_java_services_turf_physical_circle_title,
+      R.string.activity_java_services_turf_physical_circle_description,
+      new Intent(MainActivity.this, TurfPhysicalCircleActivity.class),
+      null,
+      R.string.activity_java_services_tilequery_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,

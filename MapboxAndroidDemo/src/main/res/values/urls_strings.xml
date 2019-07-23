@@ -88,10 +88,11 @@
     <string name="activity_java_services_geocoding_url" translatable="false">https://i.imgur.com/9xl3EF8.png</string>
     <string name="activity_java_services_isochrone_url" translatable="false">https://i.imgur.com/eUByGvt.png</string>
     <string name="activity_java_services_isochrone_with_seekbar_url" translatable="false">https://i.imgur.com/hCVswtE.png</string>
-    <string name="activity_java_services_tilequery_url" translatable="false">http://i.imgur.com/VkOCYwq.jpg</string>
+    <string name="activity_java_services_tilequery_url" translatable="false">https://i.imgur.com/mjUbe2H.png</string>
     <string name="activity_java_services_simplify_polyline_url" translatable="false">http://i.imgur.com/uATgul1.png</string>
     <string name="activity_java_services_map_matching_url" translatable="false">https://i.imgur.com/ig8gGnY.png</string>
     <string name="activity_java_services_turf_ring_url" translatable="false">https://i.imgur.com/nG8xeXH.png</string>
+    <string name="activity_java_services_turf_physical_circle_url" translatable="false">https://i.imgur.com/nG8xeXH.png</string>
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
     <string name="activity_plugins_places_plugin_url" translatable="false">https://i.imgur.com/oKHx3bv.png</string>

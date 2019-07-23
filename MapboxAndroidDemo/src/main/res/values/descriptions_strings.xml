@@ -85,14 +85,15 @@
     <string name="activity_java_services_directions_description">Use Mapbox Java Services to request directions.</string>
     <string name="activity_java_services_optimization_description">Use Mapbox\'s Optimization API to retrieve and display the quickest multi-stop route.</string>
     <string name="activity_java_services_static_image_description">Use Mapbox Java Services to build a url and download a static map.</string>
-    <string name="activity_java_services_matrix_api_description">Use the Matrix API to receive driving times between 2-25 different locations.</string>
+    <string name="activity_java_services_matrix_api_description">Use the Matrix API to receive driving times between 2&#8211;25 different locations.</string>
     <string name="activity_java_services_geocoding_description">Use the Geocoding API to receive information about specific coordinates.</string>
     <string name="activity_java_services_isochrone_description">Use the Isochrone API to receive information about how far you can travel within a given time.</string>
-    <string name="activity_java_services_isochrone_with_seekbar_description">Use an Android seekbar slider to retrieve info from the the Isochrone API. Display the data and adjust the camera accordingly.</string>
+    <string name="activity_java_services_isochrone_with_seekbar_description">Use an Android seekbar slider to retrieve info from the Isochrone API. Display the data and adjust the camera accordingly.</string>
     <string name="activity_java_services_tilequery_description">Use the Tilequery API to search for features in a tileset. This example queries for up to 10 buildings which are within 50 meters of the single map click location.</string>
     <string name="activity_java_services_simplify_polyline_description">Using the polylines utility, simplify a polyline which reduces the amount of coordinates making up the polyline depending on tolerance.</string>
     <string name="activity_java_services_map_matching_description">Match raw GPS points to the map so they aligns with the roads/pathways.</string>
     <string name="activity_java_services_turf_ring_description">Use Turf to calculate coordinates to eventually draw a ring around a center coordinate.</string>
+    <string name="activity_java_services_turf_physical_circle_description">Use Turf to generate a circle with a radius expressed in physical units (e.g. miles, kilometers, etc).</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
     <string name="activity_plugins_geojson_plugin_description">Easily retrieve GeoJSON data from a url, asset, or path</string>

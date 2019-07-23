@@ -159,6 +159,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.javaservices.TurfPhysicalCircleActivity"
+            android:label="@string/activity_java_services_turf_physical_circle_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.labs.SnakingDirectionsRouteActivity"
             android:label="@string/activity_labs_snaking_directions_route_title">
             <meta-data
