@@ -2,8 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.LineString;
@@ -19,23 +17,25 @@ import com.mapbox.mapboxsdk.maps.MapboxMapOptions;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import static com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity.Config.BLUE_COLOR;
 import static com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity.Config.HOLE_COORDINATES;
 import static com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity.Config.POLYGON_COORDINATES;
 import static com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity.Config.RED_COLOR;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 
 /**
  * Add holes to a polygon drawn on top of the map.
  */
 public class PolygonHolesActivity extends AppCompatActivity implements OnMapReadyCallback {
   private MapView mapView;
-  private MapboxMap mapboxMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,9 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
     // Configure initial map state
     MapboxMapOptions mapboxMapOptions = MapboxMapOptions.createFromAttributes(this, null);
     mapboxMapOptions
-      .camera(new CameraPosition.Builder().zoom(13).target(new LatLng(25.255377, 55.3089185))
+      .camera(new CameraPosition.Builder()
+        .zoom(13)
+        .target(new LatLng(25.255377, 55.3089185))
         .build())
       .attributionTintColor(RED_COLOR)
       .compassFadesWhenFacingNorth(true);
@@ -62,7 +64,6 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
 
   @Override
   public void onMapReady(final MapboxMap map) {
-    this.mapboxMap = map;
     map.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
@@ -78,9 +79,14 @@ public class PolygonHolesActivity extends AppCompatActivity implements OnMapRead
         style.addSource(new GeoJsonSource("source-id",
           Feature.fromGeometry(Polygon.fromOuterInner(outerLineString, innerList))));
 
-        style.addLayerBelow(new FillLayer("layer-id", "source-id").withProperties(
-          PropertyFactory.fillColor(BLUE_COLOR)
-        ), "road-number-shield");
+        FillLayer polygonFillLayer = new FillLayer("layer-id", "source-id")
+          .withProperties(fillColor(BLUE_COLOR));
+
+        if (style.getLayer("road-number-shield") != null) {
+          style.addLayerBelow(polygonFillLayer, "road-number-shield");
+        } else {
+          style.addLayer(polygonFillLayer);
+        }
       }
     });
   }
