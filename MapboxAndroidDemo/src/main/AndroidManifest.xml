@@ -54,7 +54,7 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
-            android:name=".examples.basics.MapViewActivityKotlin"
+            android:name=".examples.basics.KotlinSimpleMapViewActivity"
             android:label="@string/activity_basic_mapbox_kotlin_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
