@@ -71,6 +71,9 @@
     <string name="activity_dds_property_icon_switch_title">Icon setting based on Feature property</string>
     <string name="activity_dds_circle_icon_toggle_on_click_title">Circle icon toggle</string>
     <string name="activity_dds_within_expression_title">Within filter</string>
+    <string name="activity_dds_expanding_circle_radius_animation_title">Expanding circle animation</string>
+    <string name="activity_annotation_marker_view_title">Draw a marker view</string>
+    <string name="activity_annotation_custom_info_window_title">Custom info window</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
     <string name="activity_camera_restrict_title">Restrict map panning</string>
