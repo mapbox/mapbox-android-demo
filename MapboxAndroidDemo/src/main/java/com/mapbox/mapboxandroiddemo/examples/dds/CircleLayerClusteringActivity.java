@@ -2,9 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -22,9 +19,12 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
@@ -151,15 +151,15 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
         // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
         new GeoJsonSource("earthquakes",
-          new URL("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"),
+          new URI("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"),
           new GeoJsonOptions()
             .withCluster(true)
             .withClusterMaxZoom(14)
             .withClusterRadius(50)
         )
       );
-    } catch (MalformedURLException malformedUrlException) {
-      Timber.e("Check the URL %s", malformedUrlException.getMessage());
+    } catch (URISyntaxException uriSyntaxException) {
+      Timber.e("Check the URL %s", uriSyntaxException.getMessage());
     }
 
 

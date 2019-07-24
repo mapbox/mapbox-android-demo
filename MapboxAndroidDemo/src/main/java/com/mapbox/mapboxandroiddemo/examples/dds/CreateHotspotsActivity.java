@@ -2,8 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -16,9 +14,11 @@ import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
@@ -69,15 +69,15 @@ public class CreateHotspotsActivity extends AppCompatActivity {
         // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes from
         // 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
         new GeoJsonSource("earthquakes",
-          new URL("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"),
+          new URI("https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson"),
           new GeoJsonOptions()
             .withCluster(true)
             .withClusterMaxZoom(15) // Max zoom to cluster points on
             .withClusterRadius(20) // Use small cluster radius for the hotspots look
         )
       );
-    } catch (MalformedURLException malformedUrlException) {
-      Timber.e("Check the URL %s", malformedUrlException.getMessage());
+    } catch (URISyntaxException uriSyntaxException) {
+      Timber.e("Check the URL %s", uriSyntaxException.getMessage());
     }
 
     // Use the earthquakes source to create four layers:
