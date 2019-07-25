@@ -3,8 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.query;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
@@ -18,9 +16,11 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
-import java.net.URL;
+import java.net.URI;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
@@ -92,7 +92,7 @@ public class ClickOnLayerActivity extends AppCompatActivity implements OnMapRead
   private void addGeoJsonSourceToMap(@NonNull Style loadedMapStyle) {
     try {
       // Add GeoJsonSource to map
-      loadedMapStyle.addSource(new GeoJsonSource(geoJsonSourceId, new URL("https://gist.githubusercontent"
+      loadedMapStyle.addSource(new GeoJsonSource(geoJsonSourceId, new URI("https://gist.githubusercontent"
         + ".com/tobrun/cf0d689c8187d42ebe62757f6d0cf137/raw/4d8ac3c8333f1517df9d303"
         + "d58f20f4a1d8841e8/regions.geojson")));
     } catch (Throwable throwable) {
