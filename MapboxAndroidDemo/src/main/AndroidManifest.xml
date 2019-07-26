@@ -96,6 +96,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.javaservices.MultipleGeometriesDirectionsRouteActivity"
+            android:label="@string/activity_java_services_multiple_geometries_from_directions_route_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.dds.DrawPolygonActivity"
             android:label="@string/activity_dds_polygon_title">
             <meta-data
