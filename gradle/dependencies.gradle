@@ -21,7 +21,7 @@ ext {
             mapboxChinaPlugin        : '2.2.0',
             mapboxPluginMarkerView   : '0.3.0',
             mapboxPluginAnnotation   : '0.7.0',
-            mapboxPluginScalebar     : '0.1.0',
+            mapboxPluginScalebar     : '0.2.0',
 
             // Support
             legacySupportV4          : '1.0.0',
