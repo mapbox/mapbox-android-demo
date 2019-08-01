@@ -2,6 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.snapshot;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -9,6 +10,8 @@ import android.os.StrictMode;
 import androidx.annotation.NonNull;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,11 +24,21 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshot;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshotter;
+import com.mapbox.mapboxsdk.style.layers.CircleLayer;
+import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleOpacity;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
 
 public class SnapshotShareActivity extends AppCompatActivity {
   private MapView mapView;
@@ -57,10 +70,27 @@ public class SnapshotShareActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-        mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
+        mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
             SnapshotShareActivity.this.style = style;
+            style.addSource(new VectorSource("trees-source", "mapbox://examples.8mj5l1r9"));
+
+            CircleLayer circleLayer = new CircleLayer("trees-style", "trees-source");
+            // replace street-trees-DC-9gvg5l with the name of your source layer
+            circleLayer.setSourceLayer("street-trees-DC-9gvg5l");
+            circleLayer.withProperties(
+              circleOpacity(0.6f),
+              circleColor(Color.parseColor("#ffffff")),
+              circleRadius(
+                interpolate(exponential(1.0f), get("DBH"),
+                  stop(0, 0f),
+                  stop(1, 1f),
+                  stop(110, 11f)
+                )
+              )
+            );
+            style.addLayer(circleLayer);
             // When user clicks the map, start the snapshotting process with the given parameters
             cameraFab.setOnClickListener(new View.OnClickListener() {
               @Override
