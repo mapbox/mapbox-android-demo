@@ -74,6 +74,7 @@
     <string name="activity_camera_slowly_rotating_description">Slowly have the camera circle around a single point.</string>
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Maps SDK.</string>
     <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
+    <string name="activity_offline_cache_management_description">Explore the various ways to manage the Maps SDK cache.</string>
     <string name="activity_description">Download, view, navigate to, and delete an offline region.</string>
     <string name="activity_query_feature_description">Click the map to add a marker at the location and display the maps property information for that feature.</string>
     <string name="activity_query_select_building_description">Use the query feature to select a building, get its geometry and draw a polygon highlighting it.</string>

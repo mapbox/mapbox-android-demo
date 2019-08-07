@@ -99,6 +99,7 @@ import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentCameraOptionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentOptionsActivity;
+import com.mapbox.mapboxandroiddemo.examples.offline.CacheManagementActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.OfflineManagerActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
@@ -871,6 +872,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, OfflineManagerActivity.class),
       null,
       R.string.activity_offline_manager_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_offline,
+      R.string.activity_offline_cache_management_title,
+      R.string.activity_offline_cache_management_description,
+      new Intent(MainActivity.this, CacheManagementActivity.class),
+      null,
+      R.string.activity_offline_cache_management_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_query_map,

@@ -41,6 +41,11 @@ android {
 
         playAccountConfig = playAccountConfigs.defaultAccountConfig
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
 
     flavorDimensions "default"
@@ -143,9 +148,11 @@ dependencies {
     implementation dependenciesList.mapboxPluginScalebar
 
     // Firebase
+    globalImplementation dependenciesList.firebaseCrashlytics
     globalImplementation dependenciesList.firebaseCore
     globalImplementation dependenciesList.firebasePerf
-    globalImplementation dependenciesList.firebaseCrashlytics
+    implementation       dependenciesList.firebaseMessaging
+    implementation       dependenciesList.firebaseRemoteConfig
 
     // Other dependencies
     implementation dependenciesList.gson
@@ -177,3 +184,6 @@ dependencies {
 
 apply from: "${rootDir}/gradle/checkstyle.gradle"
 apply plugin: 'kotlin-android-extensions'
+if (getGradle().getStartParameter().getTaskRequests().toString().contains("Release")) {
+    apply plugin: 'com.google.gms.google-services'
+}

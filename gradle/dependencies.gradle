@@ -32,6 +32,8 @@ ext {
             firebaseCore             : '17.0.0',
             firebasePerf             : '18.0.1',
             firebaseCrashlytics      : '2.10.1',
+            firebaseMessaging        : '19.0.1',
+            firebaseRemoteConfig     : '18.0.0',
 
             // Square
             leakCanary               : '1.5.4',
@@ -55,22 +57,22 @@ ext {
     ]
 
     wearVersion = [
-            googleWearable   : '2.0.4',
+            googleWearable   : '2.3.0',
             googlePlayService: '17.0.0',
-            wearableUi       : '1.0.0',
+            wearableUiX      : '1.0.0',
     ]
 
     pluginVersion = [
             checkstyle          : '8.2',
             firebasePerformance : '1.2.1',
-            gradle              : '3.2.1',
+            gradle              : '3.4.2',
             gradlePlayPublisher : '1.2.2',
-            kotlin              : '1.2.71',
+            kotlin              : '1.3.41',
             dependencyGraph     : '0.3.0',
             grgit               : '2.3.0',
             fabric              : '1.29.0',
-            googleServices      : '4.2.0',
             kotlinLint          : '1.26.0',
+            googleServices      : '4.3.0',
     ]
 
     dependenciesList = [
@@ -114,6 +116,8 @@ ext {
             firebasePerf             : "com.google.firebase:firebase-perf:${version.firebasePerf}",
             firebaseCore             : "com.google.firebase:firebase-core:${version.firebaseCore}",
             firebaseCrashlytics      : "com.crashlytics.sdk.android:crashlytics:${version.firebaseCrashlytics}",
+            firebaseMessaging        : "com.google.firebase:firebase-messaging:${version.firebaseMessaging}",
+            firebaseRemoteConfig     : "com.google.firebase:firebase-config:${version.firebaseRemoteConfig}",
 
             // Other
             gson                     : "com.google.code.gson:gson:${version.gson}",
@@ -148,7 +152,7 @@ ext {
 
     wearDependencies = [
             googleWearable       : "com.google.android.wearable:wearable:${wearVersion.googleWearable}",
-            wearableUi           : "androidx.wear:wear:${wearVersion.wearableUi}",
+            wearableUiX          : "androidx.wear:wear:${wearVersion.wearableUiX}",
             supportGoogleWearable: "com.google.android.support:wearable:${wearVersion.googleWearable}",
             gpsWearable          : "com.google.android.gms:play-services-wearable:${wearVersion.googlePlayService}",
             gpsLocation          : "com.google.android.gms:play-services-location:${wearVersion.googlePlayService}"

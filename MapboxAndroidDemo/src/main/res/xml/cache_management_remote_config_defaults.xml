@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>invalidate_ambient_cache_key</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>set_max_ambient_cache_size_boolean_key</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>set_max_ambient_cache_size_amount_key</key>
+        <value>5000000</value>
+    </entry>
+    <entry>
+        <key>clear_ambient_cache_key</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>reset_database_remote_config_key</key>
+        <value>false</value>
+    </entry>
+</defaultsMap>

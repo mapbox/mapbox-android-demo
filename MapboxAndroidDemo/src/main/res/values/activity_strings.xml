@@ -390,7 +390,7 @@
     <string name="tracking_gps_north">Tracking GPS North</string>
     <string name="clicked_on_location_component">Clicked on LocationComponent</string>
 
-    <!-- Isochone with seekbar-->
+    <!-- Isochrone with seekbar-->
     <string name="live_within_textview">You want to live within how many minutes from your downtown Vienna office?</string>
     <string name="minutes_textview">%1$d min</string>
 
@@ -406,4 +406,22 @@
         <item>Radians</item>
     </string-array>
 
+    <!-- Cache management -->
+    <string name="cache_invalidated_toast_confirmation">Ambient cache successfully invalidated</string>
+    <string name="cache_invalidated_toast_error">Error with invalidating the ambient cache: %1$s</string>
+    <string name="reset_database_toast_confirmation">Database successfully reset</string>
+    <string name="reset_database_toast_error">Error with resetting database: %1$s</string>
+    <string name="set_max_ambient_cache_size_textview">Enter new max\ncache size in bytes</string>
+    <string name="set_max_ambient_cache_size_edit_text_hint">Enter new cache size</string>
+    <string name="set_max_ambient_cache_size_toast_confirmation">Max cache size successfully set to %1$d bytes</string>
+    <string name="set_max_ambient_cache_size_toast_error">Error with setting new max cache size: %1$s</string>
+    <string name="clear_ambient_cache_size_toast_confirmation">Ambient cache successfully cleared</string>
+    <string name="clear_ambient_cache_size_toast_error">Error with clearing ambient cache: %1$s</string>
+    <string name="invalidate_cache_button">Invalidate cache</string>
+    <string name="reset_database_button">Reset database</string>
+    <string name="set_ambient_cache_max_hint">New max</string>
+    <string name="set_ambient_cache_max">Set ambient\nmax cache</string>
+    <string name="invalid_max_ambient_cache_size">Set ambient\nmax cache</string>
+    <string name="clear_ambient_cache_button">Clear ambient\ncache</string>
+    <string name="adjust_map_button">Adjust map</string>
 </resources>

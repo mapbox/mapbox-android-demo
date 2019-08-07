@@ -45,7 +45,7 @@ dependencies {
 
     compileOnly wearDependencies.googleWearable
     implementation wearDependencies.supportGoogleWearable
-    implementation wearDependencies.wearableUi
+    implementation wearDependencies.wearableUiX
     implementation wearDependencies.gpsWearable
     implementation wearDependencies.gpsLocation
 
