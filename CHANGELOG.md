@@ -2,6 +2,28 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 8.2.1 - August 7, 2019
+
+* Added example of cache management methods usage #1139
+* Bumped maps sdk to 8.2.1 #1155
+* Scalebar plugin bump to 0.2.0 #1154
+* Bumped Maps SDK to stable 8.2.0 #1129 
+* Refactoring GeoJsonSource creation with URL to URI #1150
+* Refactor QueryFeatureActivity to use SymbolLayer instead of MarkerViewOptions #1148  
+* Adjusted manifest to fix SimpleMapView kotlin example #1149
+* Add gradle.properties file to fix compile error. #1147
+* Define a Circle's Radius with Physical Units #1047 
+* Polygon hole layer below null check #1145
+* Adding kotlin lint plugin and needed tweaks #1140
+* Fix NPE #1130
+* Adding Firebase crashlytics and AndroidX support #1104
+* Add tutorial demos #1127)  
+* Added RecyclerView + Directions route example #1123
+* Refactoring fromUrl() to fromUri() #1120  
+* Adding interactive isochrone + seekbar slider example #1121
+* Removing a duplicate globalImplementation dependenciesList.firebaseCrash line #1115
+* Adjusted strings for trailing line example and dashed directions example ##111
+
 ## 8.1.0 - June 21, 2019
 
 * Adding LocationComponent camera mode example #1038
