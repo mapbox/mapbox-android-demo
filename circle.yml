@@ -112,6 +112,13 @@ jobs:
             #!/bin/bash
             echo "${PLAY_PUBLISH_AUTH_JSON}" > android-gl-native-6d21dd280e7b.json
       - run:
+          name: Create google-services.json file
+          shell: /bin/bash -euo pipefail
+          command: |
+            if [ -n "${GOOGLE_SERVICES_JSON_RELEASE}" ]; then
+              echo "${GOOGLE_SERVICES_JSON_RELEASE}" > MapboxAndroidDemo/google-services.json
+            fi      
+      - run:
           name: Release to Google Play
           command: ./gradlew publishGlobalRelease
 # ------------------------------------------------------------------------------
