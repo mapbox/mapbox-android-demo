@@ -2,6 +2,10 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 8.2.1-1 - August 9, 2019
+
+* Added CircleCI command to create google services json file in Release job #1166
+
 ## 8.2.1 - August 7, 2019
 
 * Added example of cache management methods usage #[1139](https://github.com/mapbox/mapbox-android-demo/pull/1139)
