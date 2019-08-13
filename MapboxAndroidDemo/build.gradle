@@ -17,12 +17,7 @@ android {
         targetCompatibility 1.8
     }
 
-    playAccountConfigs {
-        defaultAccountConfig {
-            serviceAccountEmail = 'mapbox-android-demo-publish@android-gl-native.iam.gserviceaccount.com'
-            jsonFile = file("$project.rootDir/android-gl-native-6d21dd280e7b.json")
-        }
-    }
+
 
     defaultConfig {
         applicationId "com.mapbox.mapboxandroiddemo"
@@ -39,7 +34,6 @@ android {
 
         buildConfigField "int", "MIN_SDK_VERSION", "$minSdkVersion.apiLevel"
 
-        playAccountConfig = playAccountConfigs.defaultAccountConfig
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -48,7 +42,7 @@ android {
         }
     }
 
-    flavorDimensions "default"
+    flavorDimensions 'default'
 
     productFlavors {
         global {
@@ -103,10 +97,12 @@ android {
         disable 'MissingTranslation', 'ExtraTranslation'
     }
 
-    play {
-        track = 'alpha'
-        untrackOld = true
-    }
+}
+
+play {
+    track = 'alpha'
+    resolutionStrategy = 'auto'
+    serviceAccountCredentials = file("$project.rootDir/android-gl-native-6d21dd280e7b.json")
 }
 
 kotlinter {
