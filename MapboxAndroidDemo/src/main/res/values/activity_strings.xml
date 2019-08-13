@@ -447,4 +447,10 @@
     <string name="response_body_null">Response body null. Try again later.</string>
     <string name="tap_on_map_to_change_destination">Tap on map to change destination</string>
 
+    <!-- Tilequery API -->
+    <string name="elevation_api_response_textview">Elevation data response from Tilequery API</string>
+    <string name="elevation_api_response_ten_meter_textview">Data is mapped to 10 meter height increments</string>
+    <string name="elevation_tilequery_api_response_error">Error with the request. Do you have internet access?</string>
+    <string name="elevation_tilequery_no_features">No features in the response.</string>
+    <string name="elevation_numbers_only_textview">%1$d Features in the API response: %2$s</string>
 </resources>
