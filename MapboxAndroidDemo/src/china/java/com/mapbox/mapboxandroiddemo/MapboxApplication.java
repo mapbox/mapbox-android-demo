@@ -17,7 +17,7 @@ public class MapboxApplication extends Application {
     super.onCreate();
     setUpPicasso();
     Mapbox.getInstance(this, getString(R.string.access_token));
-    Mapbox.getTelemetry().setDebugLoggingEnabled(true);
+//    Mapbox.getTelemetry().setDebugLoggingEnabled(true);
     setUpTileLoadingMeasurement();
   }
 

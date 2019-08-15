@@ -99,7 +99,7 @@ public class BoundingBoxCameraActivity extends AppCompatActivity implements OnMa
       .include(locationTwo) // Southwest
       .build();
 
-    mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 50), 5000);
+    mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 0, 50, 50), 5000);
     return true;
   }
 
