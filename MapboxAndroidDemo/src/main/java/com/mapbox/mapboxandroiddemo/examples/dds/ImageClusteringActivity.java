@@ -26,7 +26,6 @@ import timber.log.Timber;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.division;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.gt;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.gte;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.has;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
@@ -129,7 +128,7 @@ public class ImageClusteringActivity extends AppCompatActivity implements OnMapR
           ? all(has("point_count"),
           gte(pointCount, literal(layers[i]))
         ) : all(has("point_count"),
-          gt(pointCount, literal(layers[i])),
+          gte(pointCount, literal(layers[i])),
           lt(pointCount, literal(layers[i - 1]))
         )
       );
