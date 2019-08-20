@@ -16,7 +16,7 @@ ext {
             mapboxServices           : '4.8.0',
             mapboxPluginBuilding     : '0.6.0',
             mapboxPluginPlaces       : '0.9.0',
-            mapboxPluginLocalization : '0.10.0',
+            mapboxPluginLocalization : '0.11.0',
             mapboxPluginTraffic      : '0.9.0',
             mapboxChinaPlugin        : '2.2.0',
             mapboxPluginMarkerView   : '0.3.0',
