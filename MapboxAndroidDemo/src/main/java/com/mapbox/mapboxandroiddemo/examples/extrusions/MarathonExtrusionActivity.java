@@ -2,8 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.extrusions;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -14,8 +12,12 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
@@ -47,28 +49,28 @@ public class MarathonExtrusionActivity extends AppCompatActivity implements OnMa
 
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-
     mapboxMap.setStyle(Style.SATELLITE, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        // Add the marathon route source to the map
-        // Create a GeoJsonSource and use the Mapbox Datasets API to retrieve the GeoJSON data
-        // More info about the Datasets API at https://www.mapbox.com/api-documentation/#retrieve-a-dataset
-        GeoJsonSource courseRouteGeoJson = new GeoJsonSource(
-          "coursedata", loadJsonFromAsset("marathon_route.geojson"));
+        try {
+          // Add the marathon route source to the map
+          // Create a GeoJsonSource and use the Mapbox Datasets API to retrieve the GeoJSON data
+          // More info about the Datasets API at https://www.mapbox.com/api-documentation/#retrieve-a-dataset
+          GeoJsonSource courseRouteGeoJson = new GeoJsonSource(
+            "coursedata", new URI("asset://marathon_route.geojson"));
+          style.addSource(courseRouteGeoJson);
 
-        style.addSource(courseRouteGeoJson);
-        addExtrusionsLayerToMap(style);
+          // Add FillExtrusion layer to map using GeoJSON data
+          style.addLayer(new FillExtrusionLayer("course", "coursedata").withProperties(
+            fillExtrusionColor(Color.YELLOW),
+            fillExtrusionOpacity(0.7f),
+            fillExtrusionHeight(get("e"))));
+
+        } catch (URISyntaxException exception) {
+          Timber.d(exception);
+        }
       }
     });
-  }
-
-  private void addExtrusionsLayerToMap(@NonNull Style loadedMapStyle) {
-    // Add FillExtrusion layer to map using GeoJSON data
-    loadedMapStyle.addLayer(new FillExtrusionLayer("course", "coursedata").withProperties(
-      fillExtrusionColor(Color.YELLOW),
-      fillExtrusionOpacity(0.7f),
-      fillExtrusionHeight(get("e"))));
   }
 
   @Override
@@ -111,20 +113,5 @@ public class MarathonExtrusionActivity extends AppCompatActivity implements OnMa
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
-  }
-
-  private String loadJsonFromAsset(String filename) {
-    // Using this method to load in GeoJSON files from the assets folder.
-    try {
-      InputStream is = getAssets().open(filename);
-      int size = is.available();
-      byte[] buffer = new byte[size];
-      is.read(buffer);
-      is.close();
-      return new String(buffer, "UTF-8");
-    } catch (IOException ex) {
-      ex.printStackTrace();
-      return null;
-    }
   }
 }

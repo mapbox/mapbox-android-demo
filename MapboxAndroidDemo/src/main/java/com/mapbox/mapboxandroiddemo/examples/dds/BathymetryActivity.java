@@ -2,10 +2,7 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -18,8 +15,11 @@ import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
-import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
@@ -44,7 +44,6 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
     .include(new LatLng(44.936236, -85.673450))
     .include(new LatLng(44.932955, -85.669272))
     .build();
-  private FeatureCollection featureCollection;
   private MapView mapView;
 
   @Override
@@ -75,13 +74,12 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
         // Remove lake label layer
         style.removeLayer("water-label");
 
-        // Initialize FeatureCollection object for future use with layers
-        featureCollection = FeatureCollection.fromJson(loadGeoJsonFromAsset(
-            "bathymetry-data.geojson"));
-
-        // Retrieve GeoJSON from local file and add it to the map
-        style.addSource(new GeoJsonSource(GEOJSON_SOURCE_ID,
-            featureCollection));
+        try {
+          // Retrieve GeoJSON from local file and add it to the map's style
+          style.addSource(new GeoJsonSource(GEOJSON_SOURCE_ID, new URI("asset://bathymetry-data.geojson")));
+        } catch (URISyntaxException exception) {
+          Timber.d(exception);
+        }
 
         setUpDepthFillLayers(style);
         setUpDepthNumberSymbolLayer(style);
@@ -165,22 +163,5 @@ public class BathymetryActivity extends AppCompatActivity implements OnMapReadyC
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
-  }
-
-  private String loadGeoJsonFromAsset(String filename) {
-    try {
-      // Load GeoJSON file
-      InputStream is = getAssets().open(filename);
-      int size = is.available();
-      byte[] buffer = new byte[size];
-      is.read(buffer);
-      is.close();
-      return new String(buffer, "UTF-8");
-
-    } catch (Exception exception) {
-      Timber.e("Exception Loading GeoJSON: %s", exception.toString());
-      exception.printStackTrace();
-      return null;
-    }
   }
 }
