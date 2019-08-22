@@ -16,7 +16,8 @@ import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
-import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,7 +37,8 @@ public class SpinningSymbolLayerIconActivity extends AppCompatActivity implement
   private static final String SOURCE_ID = "SOURCE_ID";
   private static final String ICON_ID = "ICON_ID";
   private static final String LAYER_ID = "LAYER_ID";
-  private static final int DESIRED_SECONDS_PER_ONE_FULL_360_SPIN = 1;
+  private final int desiredSecondsPerOneFull360Spin = 1;
+  private final int desiredMillisecondsPerOneFull360Spin = desiredSecondsPerOneFull360Spin * 1000;
   private MapView mapView;
   private MapboxMap mapboxMap;
   private ValueAnimator iconSpinningAnimator;
@@ -64,24 +66,27 @@ public class SpinningSymbolLayerIconActivity extends AppCompatActivity implement
 
     // Create a Style object
     mapboxMap.setStyle(new Style.Builder().fromUri(Style.MAPBOX_STREETS)
-
-      // Add the SymbolLayer icon image to the map style
       .withImage(ICON_ID, BitmapUtils.getBitmapFromDrawable(
-        getResources().getDrawable(R.drawable.hurricane_icon)))
+        getResources().getDrawable(R.drawable.hurricane_icon))), new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            try {
+              // Adding a GeoJson source for the SymbolLayer icons.
+              style.addSource(new GeoJsonSource(SOURCE_ID, new URI("asset://spinning_icon.geojson")));
 
-      // Adding a GeoJson source for the SymbolLayer icons.
-      .withSource(new GeoJsonSource(SOURCE_ID, loadGeoJsonFromAsset("spinning_icon.geojson")))
+              // Adding the actual SymbolLayer to the map style.
+              style.addLayer(new SymbolLayer(LAYER_ID, SOURCE_ID)
+                .withProperties(PropertyFactory.iconImage(ICON_ID),
+                  iconAllowOverlap(true),
+                  iconPitchAlignment(ICON_PITCH_ALIGNMENT_MAP)));
 
-      // Adding the actual SymbolLayer to the map style.
-      .withLayer(new SymbolLayer(LAYER_ID, SOURCE_ID)
-        .withProperties(PropertyFactory.iconImage(ICON_ID),
-          iconAllowOverlap(true))
-      ), new Style.OnStyleLoaded() {
-        @Override
-        public void onStyleLoaded(@NonNull Style style) {
-          startIconSpinningAnimation();
-        }
-      });
+              startIconSpinningAnimation();
+
+            } catch (URISyntaxException exception) {
+              Timber.d(exception);
+            }
+          }
+        });
   }
 
   /**
@@ -93,7 +98,7 @@ public class SpinningSymbolLayerIconActivity extends AppCompatActivity implement
       iconSpinningAnimator.cancel();
     }
     iconSpinningAnimator = ValueAnimator.ofFloat(0, 360);
-    iconSpinningAnimator.setDuration(DESIRED_SECONDS_PER_ONE_FULL_360_SPIN * 1000);
+    iconSpinningAnimator.setDuration(desiredMillisecondsPerOneFull360Spin);
     iconSpinningAnimator.setInterpolator(new LinearInterpolator());
     iconSpinningAnimator.setRepeatCount(ValueAnimator.INFINITE);
     iconSpinningAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -106,30 +111,13 @@ public class SpinningSymbolLayerIconActivity extends AppCompatActivity implement
           public void onStyleLoaded(@NonNull Style style) {
             Layer iconSymbolLayer = style.getLayerAs(LAYER_ID);
             iconSymbolLayer.setProperties(
-              iconRotate(newIconRotateValue),
-              iconPitchAlignment(ICON_PITCH_ALIGNMENT_MAP)
+              iconRotate(newIconRotateValue)
             );
           }
         });
       }
     });
     iconSpinningAnimator.start();
-  }
-
-  private String loadGeoJsonFromAsset(String filename) {
-    try {
-      // Load GeoJSON file
-      InputStream is = getAssets().open(filename);
-      int size = is.available();
-      byte[] buffer = new byte[size];
-      is.read(buffer);
-      is.close();
-      return new String(buffer, "UTF-8");
-    } catch (Exception exception) {
-      Timber.e("Exception Loading GeoJSON: %s", exception.toString());
-      exception.printStackTrace();
-      return null;
-    }
   }
 
   @Override
@@ -172,7 +160,7 @@ public class SpinningSymbolLayerIconActivity extends AppCompatActivity implement
   protected void onDestroy() {
     super.onDestroy();
     if (iconSpinningAnimator != null) {
-      iconSpinningAnimator.end();
+      iconSpinningAnimator.cancel();
     }
     mapView.onDestroy();
   }
