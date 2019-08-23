@@ -10,7 +10,6 @@ import android.graphics.PointF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.widget.Toast;
@@ -57,7 +56,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
  * past calendar events on the map.
  */
 public class CalendarIntegrationActivity extends AppCompatActivity implements
-  OnMapReadyCallback, PermissionsListener, MapboxMap.OnMapClickListener {
+    OnMapReadyCallback, PermissionsListener, MapboxMap.OnMapClickListener {
 
   private static final int MY_CAL_REQ = 0;
   private static final int TITLE_INDEX = 1;
@@ -94,7 +93,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
     mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        featureCollection = FeatureCollection.fromFeatures(new Feature[] {});
+        featureCollection = FeatureCollection.fromFeatures(new Feature[]{});
         getCalendarData(style);
         mapboxMap.addOnMapClickListener(CalendarIntegrationActivity.this);
       }
@@ -128,19 +127,12 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
    */
   public void getCalendarData(@NonNull Style style) {
     if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR)
-      != PackageManager.PERMISSION_GRANTED) {
+        != PackageManager.PERMISSION_GRANTED) {
       ActivityCompat.requestPermissions(this, new String[]
-        {Manifest.permission.READ_CALENDAR}, MY_CAL_REQ);
+        { Manifest.permission.READ_CALENDAR}, MY_CAL_REQ);
     } else {
       Uri calendarUri;
-      if (Integer.parseInt(Build.VERSION.SDK) >= 8 && Integer.parseInt(Build.VERSION.SDK) <= 13) {
-        calendarUri = Uri.parse("content://com.android.calendar/events");
-      } else if (Integer.parseInt(Build.VERSION.SDK) >= 14) {
-        calendarUri = CalendarContract.Events.CONTENT_URI;
-      } else {
-        calendarUri = Uri.parse("content://calendar/events");
-      }
-
+      calendarUri = CalendarContract.Events.CONTENT_URI;
       Calendar startTime = Calendar.getInstance();
       startTime.set(2018, 2, 1, 0, 0);
 
@@ -148,12 +140,13 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
       endTime.set(2018, 6, 1, 0, 0);
 
       String selection = "(( " + CalendarContract.Events.DTSTART + " >= "
-        + startTime.getTimeInMillis() + " )" + " AND ( " + CalendarContract.Events.DTSTART
-        + " <= " + endTime.getTimeInMillis() + " ))";
+          + startTime.getTimeInMillis() + " )" + " AND ( " + CalendarContract.Events.DTSTART
+          + " <= " + endTime.getTimeInMillis() + " ))";
 
-      String[] projection = new String[] {CalendarContract.Events.CALENDAR_ID, CalendarContract.Events.TITLE,
+      String[] projection = new String[] {
+        CalendarContract.Events.CALENDAR_ID, CalendarContract.Events.TITLE,
         CalendarContract.Events.EVENT_LOCATION,
-        CalendarContract.Events.DTSTART};
+        CalendarContract.Events.DTSTART };
 
       Cursor cur = this.getContentResolver().query(calendarUri, projection, selection, null, null);
 
@@ -192,11 +185,11 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
     try {
       // Build a Mapbox geocoding request
       MapboxGeocoding client = MapboxGeocoding.builder()
-        .accessToken(getString(R.string.access_token))
-        .query(eventLocation)
-        .geocodingTypes(GeocodingCriteria.TYPE_ADDRESS)
-        .mode(GeocodingCriteria.MODE_PLACES)
-        .build();
+          .accessToken(getString(R.string.access_token))
+          .query(eventLocation)
+          .geocodingTypes(GeocodingCriteria.TYPE_ADDRESS)
+          .mode(GeocodingCriteria.MODE_PLACES)
+          .build();
       client.enqueueCall(new Callback<GeocodingResponse>() {
         @Override
         public void onResponse(Call<GeocodingResponse> call,
@@ -211,7 +204,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
                 public void onStyleLoaded(@NonNull Style style) {
                   LatLng featureLatLng = new LatLng(feature.center().latitude(), feature.center().longitude());
                   Feature singleFeature = Feature.fromGeometry(Point.fromLngLat(featureLatLng.getLongitude(),
-                    featureLatLng.getLatitude()));
+                      featureLatLng.getLatitude()));
                   singleFeature.addStringProperty(PROPERTY_TITLE, eventTitle);
                   singleFeature.addStringProperty(PROPERTY_LOCATION, eventLocation);
                   featureList.add(singleFeature);
@@ -225,9 +218,6 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
                 }
               });
             }
-          } else {
-            Toast.makeText(CalendarIntegrationActivity.this, R.string.no_results,
-              Toast.LENGTH_SHORT).show();
           }
         }
 
@@ -236,6 +226,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
           Timber.d("Geocoding Failure: %s", throwable.getMessage());
         }
       });
+
     } catch (ServicesException servicesException) {
       Timber.d("Error geocoding: %s", servicesException.toString());
       servicesException.printStackTrace();
@@ -252,7 +243,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
     setUpImage(style);
     setUpCalendarIconLayer(style);
     Toast.makeText(CalendarIntegrationActivity.this, R.string.click_on_calendar_icon_instruction,
-      Toast.LENGTH_SHORT).show();
+        Toast.LENGTH_SHORT).show();
   }
 
   /**
@@ -267,7 +258,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
    */
   private void setUpImage(@NonNull Style style) {
     Bitmap icon = BitmapFactory.decodeResource(
-      this.getResources(), R.drawable.calendar_event_icon);
+        this.getResources(), R.drawable.calendar_event_icon);
     style.addImage(MARKER_IMAGE_ID, icon);
   }
 
@@ -277,10 +268,10 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
   private void setUpCalendarIconLayer(@NonNull Style style) {
     SymbolLayer eventSymbolLayer = new SymbolLayer(MARKER_LAYER_ID, geojsonSourceId);
     eventSymbolLayer.withProperties(
-      iconImage(MARKER_IMAGE_ID),
-      iconSize(1.8f),
-      iconAllowOverlap(true),
-      iconIgnorePlacement(true)
+        iconImage(MARKER_IMAGE_ID),
+        iconSize(1.8f),
+        iconAllowOverlap(true),
+        iconIgnorePlacement(true)
     );
     style.addLayer(eventSymbolLayer);
   }
@@ -296,32 +287,28 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
   }
 
   @Override
-  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-    switch (requestCode) {
-      case MY_CAL_REQ: {
-        if (grantResults.length > 0
+  public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                         int[] grantResults) {
+    if (requestCode == MY_CAL_REQ) {
+      if (grantResults.length > 0
           && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-          if (mapboxMap != null) {
-            mapboxMap.getStyle(new Style.OnStyleLoaded() {
-              @Override
-              public void onStyleLoaded(@NonNull Style style) {
-                getCalendarData(style);
-              }
-            });
-          }
-        } else {
-          Toast.makeText(this, R.string.user_calendar_permission_explanation, Toast.LENGTH_LONG).show();
+        if (mapboxMap != null) {
+          mapboxMap.getStyle(new Style.OnStyleLoaded() {
+            @Override
+            public void onStyleLoaded(@NonNull Style style) {
+              getCalendarData(style);
+            }
+          });
         }
-        return;
+      } else {
+        Toast.makeText(this, R.string.user_calendar_permission_explanation, Toast.LENGTH_LONG).show();
       }
-      default:
-        return;
     }
   }
 
   public boolean deviceHasInternetConnection() {
     ConnectivityManager connectivityManager = (ConnectivityManager)
-      getApplicationContext().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        getApplicationContext().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
     NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
     return activeNetwork != null && activeNetwork.isConnected();
   }

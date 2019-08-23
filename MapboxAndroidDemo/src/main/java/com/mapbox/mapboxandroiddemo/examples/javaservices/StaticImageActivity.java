@@ -61,7 +61,6 @@ public class StaticImageActivity extends AppCompatActivity implements
 
   private void initViews() {
     staticMapImageView = findViewById(R.id.static_map_imageview);
-
     Button createStaticImageButton = findViewById(R.id.create_static_image_button);
     createStaticImageButton.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -86,7 +85,6 @@ public class StaticImageActivity extends AppCompatActivity implements
         }
       }
     });
-
     mapStyleRadioGroup = findViewById(R.id.map_style_radio_group);
     mapStyleRadioGroup.setOnCheckedChangeListener(StaticImageActivity.this);
   }

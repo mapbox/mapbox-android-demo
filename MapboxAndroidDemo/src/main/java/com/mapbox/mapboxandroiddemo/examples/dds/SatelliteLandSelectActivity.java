@@ -143,7 +143,7 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
         } else if (circleLayerFeatureList.size() == 3) {
           lineLayerPointList.add(mapTargetPoint);
           lineLayerPointList.add(firstPointOfPolygon);
-        } else if (circleLayerFeatureList.size() >= 4) {
+        } else {
           lineLayerPointList.remove(circleLayerFeatureList.size() - 1);
           lineLayerPointList.add(mapTargetPoint);
           lineLayerPointList.add(firstPointOfPolygon);
@@ -159,7 +159,7 @@ public class SatelliteLandSelectActivity extends AppCompatActivity implements
         } else if (circleLayerFeatureList.size() == 3) {
           fillLayerPointList.add(mapTargetPoint);
           fillLayerPointList.add(firstPointOfPolygon);
-        } else if (circleLayerFeatureList.size() >= 4) {
+        } else {
           fillLayerPointList.remove(fillLayerPointList.size() - 1);
           fillLayerPointList.add(mapTargetPoint);
           fillLayerPointList.add(firstPointOfPolygon);

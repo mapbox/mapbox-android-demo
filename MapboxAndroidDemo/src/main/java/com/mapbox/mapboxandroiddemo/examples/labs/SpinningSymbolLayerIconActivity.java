@@ -91,13 +91,14 @@ public class SpinningSymbolLayerIconActivity extends AppCompatActivity implement
 
   /**
    * Set up and start the icon spinning animation. The Android system ValueAnimator emits a new value, which is
-   * used as the SymbolLayer icons' rotation value.
+   * used as the SymbolLayer icons' rotation value. The value is animated from 360 to 0 because of the
+   * hurricane icon's spin design. You might have to adjust the values depending on the design of your icon.
    */
   private void startIconSpinningAnimation() {
     if (iconSpinningAnimator != null) {
       iconSpinningAnimator.cancel();
     }
-    iconSpinningAnimator = ValueAnimator.ofFloat(0, 360);
+    iconSpinningAnimator = ValueAnimator.ofFloat(360, 0);
     iconSpinningAnimator.setDuration(desiredMillisecondsPerOneFull360Spin);
     iconSpinningAnimator.setInterpolator(new LinearInterpolator());
     iconSpinningAnimator.setRepeatCount(ValueAnimator.INFINITE);

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:custom="http://schemas.android.com/apk/res-auto"
-                                             xmlns:mapbox="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             android:background="@color/mapboxWhite"
-                                             tools:context="com.mapbox.mapboxandroiddemo.account.LoadingActivity">
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mapboxWhite"
+    tools:context="com.mapbox.mapboxandroiddemo.account.LoadingActivity">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -27,28 +26,28 @@
         android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
         android:layout_marginLeft="0dp"
+        android:layout_marginBottom="0dp"
         android:gravity="center_horizontal"
         android:text="@string/loading_textview"
         android:textSize="30sp"
         custom:layout_constraintBottom_toTopOf="@+id/guideline2"
         custom:layout_constraintHorizontal_bias="0.0"
         custom:layout_constraintLeft_toLeftOf="parent"
-        custom:layout_constraintRight_toRightOf="parent"/>
+        custom:layout_constraintRight_toRightOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        custom:layout_constraintGuide_percent="0.7"/>
+        custom:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        custom:layout_constraintGuide_percent="0.5"/>
+        custom:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

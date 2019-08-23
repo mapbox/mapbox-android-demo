@@ -179,9 +179,6 @@ public class ValueAnimatorIconAnimationActivity extends AppCompatActivity implem
     bounceInterpolatorFab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if (firstRunThrough) {
-          firstRunThrough = true;
-        }
         currentSelectedTimeInterpolator = new BounceInterpolator();
         resetIcons();
       }

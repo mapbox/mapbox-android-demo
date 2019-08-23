@@ -112,11 +112,19 @@ public class SymbolCollisionDetectionActivity extends AppCompatActivity implemen
       @Override
       public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
         switchUi.setText(checked ? getString(R.string.collision_enabled) : getString(R.string.collision_disabled));
-        Layer singleLayer = mapboxMap.getStyle().getLayer(adjustIconIgnorePlacement ? ICON_LAYER_ID : "country-label");
-        singleLayer.setProperties(
-          adjustTextIgnorePlacement ? textIgnorePlacement(checked) : textAllowOverlap(checked),
-          adjustIconIgnorePlacement ? iconIgnorePlacement(checked) : iconAllowOverlap(checked)
-        );
+
+        mapboxMap.getStyle(new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            Layer singleLayer = style.getLayer(adjustIconIgnorePlacement ? ICON_LAYER_ID : "country-label");
+            if (singleLayer != null) {
+              singleLayer.setProperties(
+                adjustTextIgnorePlacement ? textIgnorePlacement(checked) : textAllowOverlap(checked),
+                adjustIconIgnorePlacement ? iconIgnorePlacement(checked) : iconAllowOverlap(checked)
+              );
+            }
+          }
+        });
       }
     });
   }

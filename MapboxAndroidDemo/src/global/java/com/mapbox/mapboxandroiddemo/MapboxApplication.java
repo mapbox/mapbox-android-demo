@@ -23,7 +23,13 @@ public class MapboxApplication extends MultiDexApplication {
       setUpCrashlytics();
     }
     Mapbox.getInstance(this, getString(R.string.access_token));
-    Mapbox.getTelemetry().setDebugLoggingEnabled(true);
+    if (BuildConfig.DEBUG) {
+      if (Mapbox.getTelemetry() == null) {
+        throw new RuntimeException("Mapbox.getTelemetry() == null in debug config");
+      } else {
+        Mapbox.getTelemetry().setDebugLoggingEnabled(true);
+      }
+    }
     setUpTileLoadingMeasurement();
   }
 

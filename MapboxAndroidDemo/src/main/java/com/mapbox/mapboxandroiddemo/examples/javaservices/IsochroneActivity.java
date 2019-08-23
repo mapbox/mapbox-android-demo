@@ -214,7 +214,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
       @Override
       public void onResponse(Call<FeatureCollection> call, Response<FeatureCollection> response) {
         // Redraw Isochrone information based on response body
-        if (response.body() != null) {
+        if (response.body() != null && response.body().features() != null) {
           GeoJsonSource source = style.getSourceAs(ISOCHRONE_RESPONSE_GEOJSON_SOURCE_ID);
           if (source != null && response.body().features().size() > 0) {
             source.setGeoJson(response.body());
@@ -230,7 +230,7 @@ public class IsochroneActivity extends AppCompatActivity implements MapboxMap.On
                 // Check to see whether the LineLayer for time labels has already been created
                 if (style.getLayerAs(TIME_LABEL_LAYER_ID) == null) {
                   timeLabelSymbolLayer = new SymbolLayer(TIME_LABEL_LAYER_ID,
-                      ISOCHRONE_RESPONSE_GEOJSON_SOURCE_ID);
+                    ISOCHRONE_RESPONSE_GEOJSON_SOURCE_ID);
 
                   styleLineLayer(timeLabelSymbolLayer);
 

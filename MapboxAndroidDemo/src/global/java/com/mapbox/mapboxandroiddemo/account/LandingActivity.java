@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -15,6 +12,10 @@ import com.google.firebase.perf.metrics.AddTrace;
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
 
 import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_CREATE_ACCOUNT_BUTTON;
 import static com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker.CLICKED_ON_SIGN_IN_BUTTON;
@@ -35,7 +36,6 @@ public class LandingActivity extends AppCompatActivity {
   private static final String REDIRECT_URI = "mapbox-android-dev-preview://authorize";
   private static String CREATE_ACCOUNT_AUTH_URL;
   private boolean loggedIn;
-  private boolean alreadyIgnoredLandingAsk;
   private boolean ignoreCheckboxIsChecked;
   private AnalyticsTracker analytics;
 
@@ -48,7 +48,7 @@ public class LandingActivity extends AppCompatActivity {
       getApplicationContext())
       .getBoolean(TOKEN_SAVED_KEY, false);
 
-    alreadyIgnoredLandingAsk = PreferenceManager.getDefaultSharedPreferences(
+    boolean alreadyIgnoredLandingAsk = PreferenceManager.getDefaultSharedPreferences(
       getApplicationContext())
       .getBoolean(LOGIN_SIGNIN_IGNORE_KEY, false);
 
@@ -60,7 +60,9 @@ public class LandingActivity extends AppCompatActivity {
     if (!loggedIn && !alreadyIgnoredLandingAsk || getIntent().getBooleanExtra(
       FROM_LOGIN_SCREEN_MENU_ITEM_KEY, false)) {
       setContentView(R.layout.activity_landing);
-      getSupportActionBar().hide();
+      if (getSupportActionBar() != null) {
+        getSupportActionBar().hide();
+      }
       buildAccountAuthUrl();
       setUpButtons();
     } else {
@@ -81,18 +83,20 @@ public class LandingActivity extends AppCompatActivity {
       Toast.makeText(getApplicationContext(), R.string.log_out_toast_confirm, Toast.LENGTH_LONG).show();
     } else if (getIntent().getAction() != null && getIntent().getAction().equals(Intent.ACTION_VIEW)) {
       Uri uri = getIntent().getData();
-      String error = uri.getQueryParameter("error");
-      if (error != null) {
-        showErrorDialog();
-      } else {
-        String authCode = uri.getQueryParameter("code");
-        Intent intent = new Intent(this, AccountRetrievalService.class);
-        intent.putExtra(AUTHCODE_KEY, authCode);
-        intent.putExtra(REDIRECT_URI_KEY, REDIRECT_URI);
-        intent.putExtra(CLIENT_ID_KEY, CLIENT_ID);
-        startService(intent);
-        Intent loadingActivityIntent = new Intent(this, LoadingActivity.class);
-        startActivity(loadingActivityIntent);
+      if (uri != null) {
+        String error = uri.getQueryParameter("error");
+        if (error != null) {
+          showErrorDialog();
+        } else {
+          String authCode = uri.getQueryParameter("code");
+          Intent intent = new Intent(this, AccountRetrievalService.class);
+          intent.putExtra(AUTHCODE_KEY, authCode);
+          intent.putExtra(REDIRECT_URI_KEY, REDIRECT_URI);
+          intent.putExtra(CLIENT_ID_KEY, CLIENT_ID);
+          startService(intent);
+          Intent loadingActivityIntent = new Intent(this, LoadingActivity.class);
+          startActivity(loadingActivityIntent);
+        }
       }
     }
   }

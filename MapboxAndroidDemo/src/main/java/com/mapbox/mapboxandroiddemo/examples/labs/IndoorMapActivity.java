@@ -24,6 +24,7 @@ import com.mapbox.turf.TurfJoins;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -220,7 +221,7 @@ public class IndoorMapActivity extends AppCompatActivity {
       byte[] buffer = new byte[size];
       is.read(buffer);
       is.close();
-      return new String(buffer, "UTF-8");
+      return new String(buffer, Charset.forName("UTF-8"));
 
     } catch (IOException ex) {
       ex.printStackTrace();

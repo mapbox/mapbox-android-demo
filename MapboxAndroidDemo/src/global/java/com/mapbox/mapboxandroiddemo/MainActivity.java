@@ -193,7 +193,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private ExampleAdapter adapter;
   private RecyclerView recyclerView;
   private TextView noExamplesTv;
-  private NavigationView navigationView;
 
   private boolean loggedIn;
   private int currentCategory = R.id.nav_basics;
@@ -267,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     toggle.syncState();
 
-    navigationView = findViewById(R.id.nav_view);
+    NavigationView navigationView = findViewById(R.id.nav_view);
     if (navigationView != null) {
       navigationView.setNavigationItemSelectedListener(this);
       navigationView.setCheckedItem(R.id.nav_basics);

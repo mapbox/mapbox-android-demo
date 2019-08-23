@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import android.support.wearable.activity.WearableActivity;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +30,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+
 /**
  * Download and view an offline map using the Mapbox Android SDK.
  */
@@ -44,7 +45,6 @@ public class OfflineMapActivity extends WearableActivity implements OnMapReadyCa
   // JSON encoding/decoding
   public static final String JSON_CHARSET = "UTF-8";
   public static final String JSON_FIELD_REGION_NAME = "FIELD_REGION_NAME";
-  private MapView mapView;
   private MapboxMap map;
   private Button downloadRegion;
   private Button listRegions;
@@ -58,7 +58,7 @@ public class OfflineMapActivity extends WearableActivity implements OnMapReadyCa
 
     // This contains the MapView in XML and needs to be called after the account manager
     setContentView(R.layout.simple_offline_map);
-    mapView = findViewById(R.id.mapView);
+    MapView mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
     downloadRegion = findViewById(R.id.downloadRegionButton);
@@ -139,7 +139,7 @@ public class OfflineMapActivity extends WearableActivity implements OnMapReadyCa
 
     // Create offline definition using the current
     // style and boundaries of visible map area
-    String styleUrl = map.getStyle().getUrl();
+    String styleUrl = map.getStyle().getUri();
     LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
     double minZoom = map.getCameraPosition().zoom;
     double maxZoom = map.getMaxZoomLevel();
@@ -162,19 +162,21 @@ public class OfflineMapActivity extends WearableActivity implements OnMapReadyCa
     }
 
     // Create the offline region and launch the download
-    offlineManager.createOfflineRegion(definition, metadata, new OfflineManager.CreateOfflineRegionCallback() {
-      @Override
-      public void onCreate(OfflineRegion offlineRegion) {
-        Log.d(TAG, "Offline region created: " + regionName);
-        offlineRegionDownloaded = offlineRegion;
-        launchDownload();
-      }
+    if (metadata != null) {
+      offlineManager.createOfflineRegion(definition, metadata, new OfflineManager.CreateOfflineRegionCallback() {
+        @Override
+        public void onCreate(OfflineRegion offlineRegion) {
+          Log.d(TAG, "Offline region created: " + regionName);
+          offlineRegionDownloaded = offlineRegion;
+          launchDownload();
+        }
 
-      @Override
-      public void onError(String error) {
-        Log.e(TAG, "Error: " + error);
-      }
-    });
+        @Override
+        public void onError(String error) {
+          Log.e(TAG, "Error: " + error);
+        }
+      });
+    }
   }
 
   private void launchDownload() {

@@ -154,9 +154,7 @@ public class DemoAppHomeScreenAddressWidget extends AppWidgetProvider implements
       if (context != null) {
         Location lastKnownLocation = result.getLastLocation();
 
-        if (lastKnownLocation == null) {
-          return;
-        } else {
+        if (lastKnownLocation != null) {
           // Build a Mapbox reverse geocode request
           MapboxGeocoding reverseGeocode = MapboxGeocoding.builder()
             .accessToken(context.getString(R.string.access_token))
@@ -167,15 +165,28 @@ public class DemoAppHomeScreenAddressWidget extends AppWidgetProvider implements
             @Override
             public void onResponse(Call<GeocodingResponse> call, Response<GeocodingResponse> response) {
               try {
-                List<CarmenFeature> carmenFeatureList = response.body().features();
+                if (response.body() != null) {
+                  List<CarmenFeature> carmenFeatureList = response.body().features();
 
-                String textForWidgetTextView;
+                  String textForWidgetTextView;
 
-                // Check that the reverse geocoding response has a place name to display
-                if (carmenFeatureList.size() > 0 && !carmenFeatureList.get(0).placeName().isEmpty()) {
+                  // Check that the reverse geocoding response has a place name to display
+                  if (carmenFeatureList.size() > 0 && !carmenFeatureList.get(0).placeName().isEmpty()) {
 
-                  // Parse through the response to get the place name
-                  textForWidgetTextView = carmenFeatureList.get(0).placeName();
+                    // Parse through the response to get the place name
+                    textForWidgetTextView = carmenFeatureList.get(0).placeName();
+
+                    // Construct the RemoteViews object
+                    RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.demo_app_home_screen_widget);
+                    views.setTextViewText(R.id.device_location_textview, textForWidgetTextView);
+
+                    // Instruct the widget manager to update the widget
+                    appWidgetManager.updateAppWidget(singleWidgetId, views);
+
+                  } else {
+                    textForWidgetTextView = context.getString(R.string.no_place_name_for_home_screen_widget);
+                    Timber.d("onResponse: no place name");
+                  }
 
                   // Construct the RemoteViews object
                   RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.demo_app_home_screen_widget);
@@ -183,24 +194,10 @@ public class DemoAppHomeScreenAddressWidget extends AppWidgetProvider implements
 
                   // Instruct the widget manager to update the widget
                   appWidgetManager.updateAppWidget(singleWidgetId, views);
-
-                } else {
-                  textForWidgetTextView = context.getString(R.string.no_place_name_for_home_screen_widget);
-                  Timber.d("onResponse: no place name");
                 }
-
-                // Construct the RemoteViews object
-                RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.demo_app_home_screen_widget);
-                views.setTextViewText(R.id.device_location_textview, textForWidgetTextView);
-
-                // Instruct the widget manager to update the widget
-                appWidgetManager.updateAppWidget(singleWidgetId, views);
-
-
               } catch (NullPointerException exception) {
                 Timber.d("onResponse: exception = %s", exception);
               }
-
             }
 
             @Override

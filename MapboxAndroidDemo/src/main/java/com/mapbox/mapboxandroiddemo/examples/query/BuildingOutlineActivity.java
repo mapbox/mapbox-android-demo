@@ -43,7 +43,6 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
 
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private FeatureCollection featureCollection;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -129,13 +128,15 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
         if (features.get(0).geometry() instanceof Polygon) {
           Polygon buildingFeature = (Polygon) features.get(0).geometry();
           // Build a list of Point objects from the building Feature's coordinates
-          for (int i = 0; i < buildingFeature.coordinates().size(); i++) {
-            for (int j = 0;
-                 j < buildingFeature.coordinates().get(i).size(); j++) {
-              pointList.add(Point.fromLngLat(
+          if (buildingFeature != null) {
+            for (int i = 0; i < buildingFeature.coordinates().size(); i++) {
+              for (int j = 0;
+                   j < buildingFeature.coordinates().get(i).size(); j++) {
+                pointList.add(Point.fromLngLat(
                   buildingFeature.coordinates().get(i).get(j).longitude(),
                   buildingFeature.coordinates().get(i).get(j).latitude()
-              ));
+                ));
+              }
             }
           }
         }
@@ -152,7 +153,7 @@ public class BuildingOutlineActivity extends AppCompatActivity implements
    */
   private void updateOutline(@NonNull Style style) {
     // Update the data source used by the building outline LineLayer and refresh the map
-    featureCollection = FeatureCollection.fromFeatures(new Feature[]
+    FeatureCollection featureCollection = FeatureCollection.fromFeatures(new Feature[]
       {Feature.fromGeometry(getBuildingFeatureOutline(style))});
     GeoJsonSource source = style.getSourceAs("source");
     if (source != null) {

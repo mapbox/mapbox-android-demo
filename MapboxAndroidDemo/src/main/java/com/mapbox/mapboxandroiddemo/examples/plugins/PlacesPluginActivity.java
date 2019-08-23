@@ -90,7 +90,7 @@ public class PlacesPluginActivity extends AppCompatActivity implements OnMapRead
       @Override
       public void onClick(View view) {
         Intent intent = new PlaceAutocomplete.IntentBuilder()
-          .accessToken(Mapbox.getAccessToken())
+          .accessToken(Mapbox.getAccessToken() != null ? Mapbox.getAccessToken() : getString(R.string.access_token))
           .placeOptions(PlaceOptions.builder()
             .backgroundColor(Color.parseColor("#EEEEEE"))
             .limit(10)

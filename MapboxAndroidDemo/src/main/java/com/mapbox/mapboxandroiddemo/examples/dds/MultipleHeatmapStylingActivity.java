@@ -14,6 +14,7 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.HeatmapLayer;
+import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.net.URI;
@@ -88,8 +89,9 @@ public class MultipleHeatmapStylingActivity extends AppCompatActivity
             if (index == listOfHeatmapColors.length - 1) {
               index = 0;
             }
-            if (style.getLayer(HEATMAP_LAYER_ID) != null) {
-              style.getLayer(HEATMAP_LAYER_ID).setProperties(
+            Layer heatmapLayer = style.getLayer(HEATMAP_LAYER_ID);
+            if (heatmapLayer != null) {
+              heatmapLayer.setProperties(
                 heatmapColor(listOfHeatmapColors[index]),
                 heatmapRadius(listOfHeatmapRadiusStops[index]),
                 heatmapIntensity(listOfHeatmapIntensityStops[index])

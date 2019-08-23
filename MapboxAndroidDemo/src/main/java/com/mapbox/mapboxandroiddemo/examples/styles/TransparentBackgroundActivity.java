@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 
 import timber.log.Timber;
 
@@ -138,7 +139,7 @@ public class TransparentBackgroundActivity extends AppCompatActivity implements 
       Writer writer = new StringWriter();
       char[] buffer = new char[1024];
       try (InputStream is = context.getResources().openRawResource(rawResource)) {
-        Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+        Reader reader = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
         int numRead;
         while ((numRead = reader.read(buffer)) != -1) {
           writer.write(buffer, 0, numRead);

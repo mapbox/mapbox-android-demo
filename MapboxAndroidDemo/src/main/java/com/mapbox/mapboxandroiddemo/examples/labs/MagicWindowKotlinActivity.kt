@@ -47,11 +47,10 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineCallback<Lo
     private var initialPosition = LatLng(39.0, -77.0)
     private var initialZoom = 8.0
 
-    private val DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L
-    private val DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5
-
     companion object {
         const val TAG = "DragActivityTag"
+        const val DEFAULT_INTERVAL_IN_MILLISECONDS = 1000L
+        const val DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5
         const val PERMISSION_REQUEST_LOCATION = 404
         const val BASE_MAP_BUNDLE = "$TAG.basemap.bundle"
         const val REVEAL_MAP_BUNDLE = "$TAG.revealedMap.bundle"
@@ -98,7 +97,7 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineCallback<Lo
         }
     }
 
-    fun checkLocationPermissionsAndInitialize() {
+    private fun checkLocationPermissionsAndInitialize() {
         val allowed = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
         if (allowed) {
             initializeLocationEngine()
@@ -120,7 +119,7 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineCallback<Lo
         }
     }
 
-    fun setInitialMapPosition(ll: LatLng) {
+    private fun setInitialMapPosition(ll: LatLng) {
         initialPosition = ll
         initialZoom = 9.0
         base?.moveCamera(CameraUpdateFactory.newLatLngZoom(initialPosition, 12.0))
@@ -130,7 +129,7 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineCallback<Lo
     fun initializeLocationEngine() {
         locationEngine = LocationEngineProvider.getBestLocationEngine(this)
 
-        var request = LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
+        val request = LocationEngineRequest.Builder(DEFAULT_INTERVAL_IN_MILLISECONDS)
                 .setPriority(LocationEngineRequest.PRIORITY_HIGH_ACCURACY)
                 .setMaxWaitTime(DEFAULT_MAX_WAIT_TIME).build()
 
@@ -152,7 +151,7 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineCallback<Lo
                 Toast.LENGTH_SHORT).show()
     }
 
-    fun synchronizeMaps() {
+    private fun synchronizeMaps() {
         val base = base
         val revealed = revealed
 
@@ -219,10 +218,10 @@ class MagicWindowKotlinActivity : AppCompatActivity(), LocationEngineCallback<Lo
 }
 
 class DragListener(val yMax: Float = Float.POSITIVE_INFINITY, val yMin: Float = Float.NEGATIVE_INFINITY) : View.OnTouchListener {
-    var offsetX = 0.0f
-    var offsetY = 0.0f
-    var dragging = false
-    val listeners: MutableList<() -> Unit> = mutableListOf()
+    private var offsetX = 0.0f
+    private var offsetY = 0.0f
+    private var dragging = false
+    private val listeners: MutableList<() -> Unit> = mutableListOf()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -230,11 +229,10 @@ class DragListener(val yMax: Float = Float.POSITIVE_INFINITY, val yMin: Float = 
             v.requestPointerCapture()
 
             // restrict dragging to a circular selectable area
-            val r = v.width / 2.0f
-            val cx = r
-            val cy = r
-            val delta2 = (event.x - cx) * (event.x - cx) + (event.y - cy) * (event.y - cy)
-            if (delta2 > r * r) {
+            val restrictWidth = v.width / 2.0f
+            val delta2 = (event.x - restrictWidth) * (event.x - restrictWidth) +
+                    (event.y - restrictWidth) * (event.y - restrictWidth)
+            if (delta2 > restrictWidth * restrictWidth) {
                 dragging = false
                 return false
             }
@@ -264,11 +262,11 @@ class DragListener(val yMax: Float = Float.POSITIVE_INFINITY, val yMin: Float = 
         return true
     }
 
-    fun constrainX(x: Float): Float {
+    private fun constrainX(x: Float): Float {
         return x
     }
 
-    fun constrainY(y: Float): Float {
+    private fun constrainY(y: Float): Float {
         return min(max(y, yMin), yMax)
     }
 
@@ -282,8 +280,8 @@ class MaskedView : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    val strokeWidth = dpToPixels(1.0f)
-    val mask by lazy {
+    private val strokeWidth = dpToPixels(1.0f)
+    private val mask by lazy {
         val b = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888)
         val c = Canvas(b)
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -293,14 +291,14 @@ class MaskedView : FrameLayout {
         b
     }
 
-    val paint by lazy {
+    private val paint by lazy {
         val p = Paint(Paint.ANTI_ALIAS_FLAG)
         p.isAntiAlias = true
         p.xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_IN)
         p
     }
 
-    val stroke by lazy {
+    private val stroke by lazy {
         val p = Paint(Paint.ANTI_ALIAS_FLAG)
         p.isAntiAlias = true
         p.style = Paint.Style.STROKE
@@ -309,7 +307,7 @@ class MaskedView : FrameLayout {
         p
     }
 
-    fun dpToPixels(dp: Float) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics)
+    private fun dpToPixels(dp: Float) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.displayMetrics)
 
     override fun dispatchDraw(canvas: Canvas?) {
         super.dispatchDraw(canvas)
