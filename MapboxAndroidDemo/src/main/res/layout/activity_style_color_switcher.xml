@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,11 +8,20 @@
     android:orientation="vertical"
     tools:context=".examples.styles.ColorSwitcherActivity">
 
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="45.4385"
+        mapbox:mapbox_cameraTargetLng="12.338"
+        mapbox:mapbox_cameraZoom="17.4"/>
+
     <LinearLayout
         android:id="@+id/color_picker_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
         android:background="#ffffff"
         android:orientation="vertical"
         android:paddingBottom="10dp"
@@ -86,13 +95,5 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/color_picker_content"
-        mapbox:mapbox_cameraTargetLat="45.4385"
-        mapbox:mapbox_cameraTargetLng="12.338"
-        mapbox:mapbox_cameraZoom="17.4"/>
 
-</RelativeLayout>
+</FrameLayout>

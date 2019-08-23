@@ -21,8 +21,8 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="25dp"
-        android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
         android:visibility="gone"/>

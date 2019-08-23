@@ -42,7 +42,7 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_annotation_geojson_line);
+    setContentView(R.layout.activity_dds_draw_geojson_line);
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);

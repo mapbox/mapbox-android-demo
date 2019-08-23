@@ -12,8 +12,7 @@
         mapbox:mapbox_cameraTargetLat="40.7359"
         mapbox:mapbox_cameraTargetLng="-74.0151"
         mapbox:mapbox_cameraZoom="12"
-        mapbox:mapbox_cameraZoomMin="12"
-        />
+        mapbox:mapbox_cameraZoomMin="12" />
 
     <Button
         android:id="@+id/downloadRegionButton"

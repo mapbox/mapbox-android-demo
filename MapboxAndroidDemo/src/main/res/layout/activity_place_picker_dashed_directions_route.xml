@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
@@ -11,7 +11,6 @@
         mapbox:mapbox_cameraTargetLat="60.1698556"
         mapbox:mapbox_cameraTargetLng="24.9383791"
         mapbox:mapbox_cameraZoom="12"
-        mapbox:mapbox_cameraZoomMin="11"
-        />
+        mapbox:mapbox_cameraZoomMin="11"/>
 
-</RelativeLayout>
+</FrameLayout>
