@@ -892,6 +892,14 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.labs.SpinningSymbolLayerIconActivity"
+            android:label="@string/activity_lab_spinning_icon_title"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.javaservices.TurfRingActivity"
             android:label="@string/activity_java_services_turf_ring_title"
             android:screenOrientation="portrait">

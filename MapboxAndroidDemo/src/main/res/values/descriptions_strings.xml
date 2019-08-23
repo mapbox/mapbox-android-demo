@@ -133,6 +133,7 @@
     <string name="activity_lab_drag_draw_description">Drag a finger on the map to draw a search area.</string>
     <string name="activity_lab_home_screen_widget_description">Show the device\'s current location or other information in a homescreen widget.</string>
     <string name="activity_lab_rv_directions_description">Quickly show the directions route associated with a RecyclerView item.</string>
+    <string name="activity_lab_spinning_icon_description">Use a ValueAnimator to adjust SymbolLayer icons\' rotation values and create a spinning effect.</string>
     <string name="activity_china_simple_china_mapview_description">Show an accurate and government-approved China map in your app using the Mapbox Maps SDK.</string>
 
 </resources>
