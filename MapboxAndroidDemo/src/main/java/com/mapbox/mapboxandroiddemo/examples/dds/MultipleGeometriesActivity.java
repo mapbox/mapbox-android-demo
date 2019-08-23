@@ -2,8 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -16,8 +14,12 @@ import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
@@ -56,9 +58,13 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
   }
 
   private void createGeoJsonSource(@NonNull Style loadedMapStyle) {
-    // Load data from GeoJSON file in the assets folder
-    loadedMapStyle.addSource(new GeoJsonSource(GEOJSON_SOURCE_ID,
-      loadJsonFromAsset("fake_norway_campsites.geojson")));
+    try {
+      // Load data from GeoJSON file in the assets folder
+      loadedMapStyle.addSource(new GeoJsonSource(GEOJSON_SOURCE_ID,
+        new URI("asset://fake_norway_campsites.geojson")));
+    } catch (URISyntaxException exception) {
+      Timber.d(exception);
+    }
   }
 
   private void addPolygonLayer(@NonNull Style loadedMapStyle) {
@@ -122,20 +128,5 @@ public class MultipleGeometriesActivity extends AppCompatActivity implements OnM
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
-  }
-
-  private String loadJsonFromAsset(String filename) {
-    try {
-      InputStream is = getAssets().open(filename);
-      int size = is.available();
-      byte[] buffer = new byte[size];
-      is.read(buffer);
-      is.close();
-      return new String(buffer, "UTF-8");
-
-    } catch (IOException ex) {
-      ex.printStackTrace();
-      return null;
-    }
   }
 }

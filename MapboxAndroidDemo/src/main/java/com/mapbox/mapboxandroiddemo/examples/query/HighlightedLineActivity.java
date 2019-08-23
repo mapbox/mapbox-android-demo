@@ -4,8 +4,6 @@ import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
@@ -19,9 +17,12 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
-import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.layers.Property.LINE_CAP_ROUND;
@@ -105,8 +106,11 @@ public class HighlightedLineActivity extends AppCompatActivity implements
    * Set up the line layer source
    */
   private void initSource(@NonNull Style loadedMapStyle) {
-    loadedMapStyle.addSource(new GeoJsonSource("source-id", loadGeoJsonFromAsset(
-      "brussels_station_exits.geojson")));
+    try {
+      loadedMapStyle.addSource(new GeoJsonSource("source-id", new URI("asset://brussels_station_exits.geojson")));
+    } catch (URISyntaxException exception) {
+      Timber.d(exception);
+    }
     loadedMapStyle.addSource(new GeoJsonSource("background-geojson-source-id"));
   }
 
@@ -184,21 +188,5 @@ public class HighlightedLineActivity extends AppCompatActivity implements
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
-  }
-
-  private String loadGeoJsonFromAsset(String filename) {
-    try {
-      // Load GeoJSON file from local asset folder
-      InputStream is = getAssets().open(filename);
-      int size = is.available();
-      byte[] buffer = new byte[size];
-      is.read(buffer);
-      is.close();
-      return new String(buffer, "UTF-8");
-    } catch (Exception exception) {
-      Timber.d("Exception loading GeoJSON: %s", exception.toString());
-      exception.printStackTrace();
-      return null;
-    }
   }
 }

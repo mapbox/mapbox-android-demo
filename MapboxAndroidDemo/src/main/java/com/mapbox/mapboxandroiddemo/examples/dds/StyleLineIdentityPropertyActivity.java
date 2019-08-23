@@ -1,8 +1,6 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -15,8 +13,11 @@ import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
-import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import timber.log.Timber;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
@@ -51,10 +52,13 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
         mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-
-            // Retrieve GeoJSON from local file and add it to the map
-            style.addSource(new GeoJsonSource("lines",
-                loadGeoJsonFromAsset("golden_gate_lines.geojson")));
+            try {
+              // Retrieve GeoJSON from local file and add it to the map
+              style.addSource(new GeoJsonSource("lines",
+                new URI("asset://golden_gate_lines.geojson")));
+            } catch (URISyntaxException exception) {
+              Timber.d(exception);
+            }
 
             // Create a LineLayer. Use lineColor and stops to draw red and blue lines on the map
             style.addLayer(new LineLayer("finalLines", "lines").withProperties(
@@ -111,24 +115,5 @@ public class StyleLineIdentityPropertyActivity extends AppCompatActivity {
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
-  }
-
-  private String loadGeoJsonFromAsset(String filename) {
-
-    try {
-      // Load GeoJSON file
-      InputStream is = getAssets().open(filename);
-      int size = is.available();
-      byte[] buffer = new byte[size];
-      is.read(buffer);
-      is.close();
-      return new String(buffer, "UTF-8");
-
-    } catch (Exception exception) {
-      Timber.e("Exception Loading GeoJSON: %s", exception.toString());
-      exception.printStackTrace();
-      return null;
-    }
-
   }
 }
