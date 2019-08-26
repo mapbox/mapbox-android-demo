@@ -311,6 +311,7 @@
     <!-- Tilequery API -->
     <string name="api_response">Tilequery API response:</string>
     <string name="api_error">Error with the request. Do you have internet access?</string>
+    <string name="no_tilequery_response_features_toast">No features found where you tapped. Find and tap on a building outline.</string>
 
     <!-- Magic window -->
     <string name="could_not_get_location">Couldn\'t retrieve the device\'s location</string>
