@@ -3,8 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mapbox.api.directions.v5.DirectionsCriteria;
@@ -29,6 +27,8 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -113,7 +113,7 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
       iconSize(1f),
       iconAllowOverlap(true),
       iconIgnorePlacement(true),
-      iconOffset(new Float[] {0f, -4f})
+      iconOffset(new Float[] {0f, -7f})
     ));
   }
 
@@ -212,22 +212,32 @@ public class OptimizationActivity extends AppCompatActivity implements OnMapRead
       @Override
       public void onResponse(Call<OptimizationResponse> call, Response<OptimizationResponse> response) {
         if (!response.isSuccessful()) {
-          Timber.d( getString(R.string.no_success));
+          Timber.d(getString(R.string.no_success));
           Toast.makeText(OptimizationActivity.this, R.string.no_success, Toast.LENGTH_SHORT).show();
-          return;
         } else {
-          if (response.body().trips().isEmpty()) {
-            Timber.d("%s size = %s", getString(R.string.successful_but_no_routes), response.body().trips().size());
-
-            Toast.makeText(OptimizationActivity.this, R.string.successful_but_no_routes,
-              Toast.LENGTH_SHORT).show();
-            return;
+          if (response.body() != null) {
+            List<DirectionsRoute> routes = response.body().trips();
+            if (routes != null) {
+              if (routes.isEmpty()) {
+                Timber.d("%s size = %s", getString(R.string.successful_but_no_routes), routes.size());
+                Toast.makeText(OptimizationActivity.this, R.string.successful_but_no_routes,
+                  Toast.LENGTH_SHORT).show();
+              } else {
+                // Get most optimized route from API response
+                optimizedRoute = routes.get(0);
+                drawOptimizedRoute(style, optimizedRoute);
+              }
+            } else {
+              Timber.d("list of routes in the response is null");
+              Toast.makeText(OptimizationActivity.this, String.format(getString(R.string.null_in_response),
+                "The Optimization API response's list of routes"), Toast.LENGTH_SHORT).show();
+            }
+          } else {
+            Timber.d("response.body() is null");
+            Toast.makeText(OptimizationActivity.this, String.format(getString(R.string.null_in_response),
+              "The Optimization API response's body"), Toast.LENGTH_SHORT).show();
           }
         }
-
-        // Get most optimized route from API response
-        optimizedRoute = response.body().trips().get(0);
-        drawOptimizedRoute(style, optimizedRoute);
       }
 
       @Override
