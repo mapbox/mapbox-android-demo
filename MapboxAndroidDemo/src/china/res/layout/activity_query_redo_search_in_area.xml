@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Set the starting camera position and map style using xml-->
     <com.mapbox.mapboxsdk.plugins.china.maps.ChinaMapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"

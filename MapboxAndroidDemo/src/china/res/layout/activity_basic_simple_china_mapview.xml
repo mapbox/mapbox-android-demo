@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".examples.basics.SimpleMapViewActivity">
 
-    <!-- Set the starting camera position and map style using xml-->
     <com.mapbox.mapboxsdk.plugins.china.maps.ChinaMapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"

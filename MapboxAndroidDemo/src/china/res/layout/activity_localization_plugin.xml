@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.mapbox.mapboxsdk.plugins.china.maps.ChinaMapView
+    <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,76 +13,50 @@
         app:mapbox_cameraTargetLng="136.711369"
         app:mapbox_cameraZoom="4.5257" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/language_one_cardview"
+        <Button
+            android:id="@+id/language_one_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mapboxOrangeDark"
-            app:layout_constraintEnd_toStartOf="@+id/language_two_cardview"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent">
+            android:background="@color/mapboxOrangeDark"
+            android:text="@string/arabic"
+            android:textColor="@color/mapboxWhite" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:text="@string/arabic"
-                android:textColor="@color/mapboxWhite" />
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/language_two_cardview"
+        <Button
+            android:id="@+id/language_two_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/mapboxPurpleDark"
-            app:layout_constraintEnd_toStartOf="@+id/language_three_cardview"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/language_one_cardview"
-            app:layout_constraintTop_toTopOf="@id/language_one_cardview">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:text="@string/russian"
-                android:textColor="@color/mapboxWhite" />
-
-        </androidx.cardview.widget.CardView>
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:background="@color/mapboxPurpleDark"
+            android:text="@string/russian"
+            android:textColor="@color/mapboxWhite" />
 
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/language_three_cardview"
+        <Button
+            android:id="@+id/language_three_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/mapboxGreenDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/language_two_cardview"
-            app:layout_constraintTop_toTopOf="@id/language_two_cardview">
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:background="@color/mapboxGreenDark"
+            android:text="@string/chinese"
+            android:textColor="@color/mapboxWhite" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:text="@string/chinese"
-                android:textColor="@color/mapboxWhite" />
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/match_map_to_device_language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
@@ -90,6 +64,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_swap_horiz_white_24dp"
         mapbox:fabSize="small" />
-
 
 </FrameLayout>

@@ -235,7 +235,7 @@
     <string name="arabic">Arabic</string>
     <string name="change_device_language_instruction">Change the device\'s language to German and then tap this button. Already in German? Try French</string>
     <string name="try_different_language_instruction">Try setting your phone to a different language. German or French perhaps?</string>
-    <string name="instruction_description">Tap the buttons below to
+    <string name="instruction_description">Tap the buttons above to
         switch the map\'s language.</string>
 
     <!-- Matrix API -->
