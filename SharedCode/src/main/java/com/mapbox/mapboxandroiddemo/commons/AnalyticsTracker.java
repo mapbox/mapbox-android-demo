@@ -14,6 +14,7 @@ import com.segment.analytics.messages.TrackMessage;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.MissingResourceException;
 
 /**
  * This class abstracts various analytics calls to Segment analytics' Java library.
@@ -94,7 +95,11 @@ public class AnalyticsTracker {
     properties.put("tags", Build.TAGS);
     properties.put("iso3 language", Locale.getDefault().getISO3Language());
     properties.put("language", Locale.getDefault().getLanguage());
-    properties.put("iso3 country", Locale.getDefault().getISO3Country());
+    try {
+      properties.put("iso3 country", Locale.getDefault().getISO3Country());
+    } catch (MissingResourceException exception) {
+      // Empty on purpose. No need to do anything.
+    }
     properties.put("country", Locale.getDefault().getCountry());
     properties.put("display country", Locale.getDefault().getDisplayCountry());
     properties.put("display name", Locale.getDefault().getDisplayName());
