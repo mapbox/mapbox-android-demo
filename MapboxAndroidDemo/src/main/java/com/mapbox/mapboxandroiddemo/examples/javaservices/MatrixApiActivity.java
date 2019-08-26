@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,8 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.turf.TurfConversion;
 
 import java.io.InputStream;
@@ -46,19 +49,26 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+
 
 /**
- * Use the Mapbox Java Services SDK's Matrix API to retrieve travel times between many points.
+ * Use the Mapbox Java SDK's Matrix API to retrieve travel times between many points.
  */
-public class MatrixApiActivity extends AppCompatActivity {
+public class MatrixApiActivity extends AppCompatActivity implements MapboxMap.OnMapClickListener {
 
+  private static final String ICON_ID = "ICON_ID";
+  private static final String STATION_NAME_PROPERTY = "Station_Name";
+  private static final String SOURCE_ID = "SOURCE_ID";
+  private static final String LAYER_ID = "LAYER_ID";
+  private List<Point> pointList;
+  private List<SingleRecyclerViewMatrixLocation> matrixLocationList;
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private List<Point> pointList;
   private FeatureCollection featureCollection;
-  private RecyclerView recyclerView;
   private MatrixApiLocationRecyclerViewAdapter matrixApiLocationRecyclerViewAdapter;
-  private ArrayList<SingleRecyclerViewMatrixLocation> matrixLocationList;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +81,8 @@ public class MatrixApiActivity extends AppCompatActivity {
     // This contains the MapView in XML and needs to be called after the access token is configured.
     setContentView(R.layout.activity_matrix_api);
 
-    recyclerView = findViewById(R.id.matrix_api_recyclerview);
-
-    // Create list of positions from local GeoJSON file
-    initPositionListFromGeoJsonFile();
+    // Create a FeatureCollection via local GeoJSON file
+    initFeatureCollection();
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
@@ -83,12 +91,24 @@ public class MatrixApiActivity extends AppCompatActivity {
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         MatrixApiActivity.this.mapboxMap = mapboxMap;
 
-        mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/mapbox/cj8gg22et19ot2rnz65958fkn"),
+        mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/mapbox/cj8gg22et19ot2rnz65958fkn")
+            // Add the SymbolLayer icon image to the map style
+            .withImage(ICON_ID, BitmapFactory.decodeResource(
+              MatrixApiActivity.this.getResources(), R.drawable.lightning_bolt))
+
+            // Adding a GeoJson source for the SymbolLayer icons.
+            .withSource(new GeoJsonSource(SOURCE_ID, featureCollection))
+
+            // Adding the actual SymbolLayer to the map style.
+            .withLayer(new SymbolLayer(LAYER_ID, SOURCE_ID)
+              .withProperties(
+                iconImage(ICON_ID),
+                iconAllowOverlap(true),
+                iconIgnorePlacement(true))
+            ),
           new Style.OnStyleLoaded() {
             @Override
             public void onStyleLoaded(@NonNull Style style) {
-              // Add markers to the map
-              addMarkers();
 
               // Set up list of locations to pass to the recyclerview
               initMatrixLocationListForRecyclerView();
@@ -96,16 +116,8 @@ public class MatrixApiActivity extends AppCompatActivity {
               // Set up the recyclerview of charging station cards
               initRecyclerView();
 
-              mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(@NonNull Marker marker) {
+              mapboxMap.addOnMapClickListener(MatrixApiActivity.this);
 
-                  // Make a call to the Mapbox Matrix API
-                  makeMapboxMatrixApiCall(getClickedMarkerNumInPositionList(marker), Point.fromLngLat(
-                    marker.getPosition().getLongitude(), marker.getPosition().getLatitude()));
-                  return false;
-                }
-              });
               Toast.makeText(MatrixApiActivity.this, R.string.click_on_marker_instruction_toast,
                 Toast.LENGTH_SHORT).show();
             }
@@ -114,23 +126,51 @@ public class MatrixApiActivity extends AppCompatActivity {
     });
   }
 
-  private int getClickedMarkerNumInPositionList(Marker clickedMarker) {
-    int clickedMarkerIndexPositionInList = -1;
-    if (clickedMarker != null) {
-      for (Marker singleMarker : mapboxMap.getMarkers()) {
-        if (singleMarker == clickedMarker) {
-          clickedMarkerIndexPositionInList = mapboxMap.getMarkers().indexOf(singleMarker);
+  @Override
+  public boolean onMapClick(@NonNull LatLng point) {
+    List<Feature> renderedStationFeatures = mapboxMap.queryRenderedFeatures(
+      mapboxMap.getProjection().toScreenLocation(point), LAYER_ID);
+    if (!renderedStationFeatures.isEmpty()) {
+      Point pointOfSelectedStation = (Point) renderedStationFeatures.get(0).geometry();
+      if (pointOfSelectedStation != null) {
+        String selectedBoltFeatureName = renderedStationFeatures.get(0).getStringProperty(STATION_NAME_PROPERTY);
+        List<Feature> featureList = featureCollection.features();
+        for (int i = 0; i < featureList.size(); i++) {
+          if (featureList.get(i).getStringProperty(STATION_NAME_PROPERTY).equals(selectedBoltFeatureName)) {
+            makeMapboxMatrixApiCall(i);
+          }
         }
       }
-      return clickedMarkerIndexPositionInList;
-    } else {
-      return 0;
+    }
+    return true;
+  }
+
+  /**
+   * Create a {@link FeatureCollection} from a locally stored asset file.
+   */
+  private void initFeatureCollection() {
+    // Get GeoJSON features from GeoJSON file in the assets folder
+    featureCollection = FeatureCollection.fromJson(loadGeoJsonFromAsset("boston_charge_stations.geojson"));
+
+    // Initialize List<Position> for eventual use in the Matrix API call
+    pointList = new ArrayList<>();
+
+    // Get the position of each GeoJSON feature and build the list of Position
+    // objects for eventual use in the Matrix API call
+    if (featureCollection != null && featureCollection.features() != null) {
+      for (Feature singleLocation : featureCollection.features()) {
+        pointList.add((Point) singleLocation.geometry());
+      }
     }
   }
 
+  /**
+   * Set up the RecyclerView, which will display the travel distances to each charge station.
+   */
   private void initRecyclerView() {
     matrixApiLocationRecyclerViewAdapter = new MatrixApiLocationRecyclerViewAdapter(this,
       matrixLocationList);
+    RecyclerView recyclerView = findViewById(R.id.matrix_api_recyclerview);
     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),
       LinearLayoutManager.HORIZONTAL, true));
     recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -139,7 +179,12 @@ public class MatrixApiActivity extends AppCompatActivity {
     snapHelper.attachToRecyclerView(recyclerView);
   }
 
-  private void makeMapboxMatrixApiCall(final int markerPositionInList, Point pointOfClickedMarker) {
+  /**
+   * Make a call to the Mapbox Matrix API to get the travel distances to each charge station.
+   *
+   * @param markerPositionInList the position of the tapped bolt icon {@link Feature} in the FeatureCollection.
+   */
+  private void makeMapboxMatrixApiCall(final int markerPositionInList) {
 
     // Build Mapbox Matrix API parameters
     MapboxMatrix directionsMatrixClient = MapboxMatrix.builder()
@@ -157,15 +202,12 @@ public class MatrixApiActivity extends AppCompatActivity {
           List<Double[]> durationsToAllOfTheLocationsFromTheOrigin = response.body().durations();
           if (durationsToAllOfTheLocationsFromTheOrigin != null) {
             for (int x = 0; x < durationsToAllOfTheLocationsFromTheOrigin.size(); x++) {
-              String finalConvertedFormattedDistance = String.valueOf(new DecimalFormat("#.##")
-                .format(TurfConversion.convertLength(
+              String finalConvertedFormattedDistance = String.valueOf(new DecimalFormat("#.##").format(
+                TurfConversion.convertLength(
                   durationsToAllOfTheLocationsFromTheOrigin.get(markerPositionInList)[x],
                   "meters", "miles")));
-              if (x == markerPositionInList) {
-                matrixLocationList.get(x).setDistanceFromOrigin(finalConvertedFormattedDistance);
-              }
+              matrixLocationList.get(x).setDistanceFromOrigin(finalConvertedFormattedDistance);
               if (x != markerPositionInList) {
-                matrixLocationList.get(x).setDistanceFromOrigin(finalConvertedFormattedDistance);
                 matrixApiLocationRecyclerViewAdapter.notifyDataSetChanged();
               }
             }
@@ -177,7 +219,7 @@ public class MatrixApiActivity extends AppCompatActivity {
       public void onFailure(Call<MatrixResponse> call, Throwable throwable) {
         Toast.makeText(MatrixApiActivity.this, R.string.call_error,
           Toast.LENGTH_SHORT).show();
-        Timber.d( "onResponse onFailure");
+        Timber.d("onResponse onFailure");
       }
     });
   }
@@ -204,7 +246,7 @@ public class MatrixApiActivity extends AppCompatActivity {
       byte[] buffer = new byte[size];
       is.read(buffer);
       is.close();
-      return new String(buffer, Charset.forName("UTF-8"));
+      return new String(buffer,  Charset.forName("UTF-8"));
     } catch (Exception exception) {
       Timber.d(exception.toString(), "Exception Loading GeoJSON: ");
       exception.printStackTrace();
@@ -212,32 +254,15 @@ public class MatrixApiActivity extends AppCompatActivity {
     }
   }
 
-  private void initPositionListFromGeoJsonFile() {
-
-    // Get GeoJSON features from GeoJSON file in the assets folder
-    featureCollection = FeatureCollection.fromJson(loadGeoJsonFromAsset("boston_charge_stations.geojson"));
-
-    // Initialize List<Position> for eventual use in the Matrix API call
-    pointList = new ArrayList<>();
-
-    // Get the position of each GeoJSON feature and build the list of Position
-    // objects for eventual use in the Matrix API call
-    if (featureCollection.features() != null) {
-      for (Feature singleLocation : featureCollection.features()) {
-        pointList.add((Point) singleLocation.geometry());
-      }
-    }
-  }
-
+  /**
+   * Create a list of {@link SingleRecyclerViewMatrixLocation} objects to eventually use in the RecyclerView.
+   */
   private void initMatrixLocationListForRecyclerView() {
     matrixLocationList = new ArrayList<>();
-    if (featureCollection.features() != null) {
+    if (featureCollection != null && featureCollection.features() != null) {
       for (Feature feature : featureCollection.features()) {
         SingleRecyclerViewMatrixLocation singleRecyclerViewLocation = new SingleRecyclerViewMatrixLocation();
-        singleRecyclerViewLocation.setName(feature.getStringProperty("Station_Name"));
-        singleRecyclerViewLocation.setLocationLatLng(new LatLng(((Point)
-          feature.geometry()).latitude(),
-          ((Point) feature.geometry()).longitude()));
+        singleRecyclerViewLocation.setName(feature.getStringProperty(STATION_NAME_PROPERTY));
         matrixLocationList.add(singleRecyclerViewLocation);
       }
     }
@@ -310,12 +335,11 @@ public class MatrixApiActivity extends AppCompatActivity {
     public void setDistanceFromOrigin(String distanceFromOrigin) {
       this.distanceFromOrigin = distanceFromOrigin;
     }
-
-    public void setLocationLatLng(LatLng locationLatLng) {
-      this.locationLatLng = locationLatLng;
-    }
   }
 
+  /**
+   * The adapter for this example's RecyclerView.
+   */
   static class MatrixApiLocationRecyclerViewAdapter extends
     RecyclerView.Adapter<MatrixApiLocationRecyclerViewAdapter.MyViewHolder> {
 
