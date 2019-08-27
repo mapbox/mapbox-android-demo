@@ -24,6 +24,7 @@ import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.basics.KotlinSimpleMapViewActivity;
+import com.mapbox.mapboxandroiddemo.examples.basics.KotlinSupportMapFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.MapboxMapOptionActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SimpleMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.SupportMapFragmentActivity;
@@ -1442,6 +1443,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, MapboxMapOptionActivity.class),
       null,
       R.string.activity_basic_mapbox_options_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_basics,
+      R.string.activity_basic_kotlin_support_map_frag_title,
+      R.string.activity_basic_kotlin_support_map_frag_description,
+      null,
+      new Intent(MainActivity.this, KotlinSupportMapFragmentActivity.class),
+      R.string.activity_basic_kotlin_support_map_frag_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
