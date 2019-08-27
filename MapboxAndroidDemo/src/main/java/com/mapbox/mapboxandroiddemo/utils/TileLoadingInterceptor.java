@@ -23,6 +23,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.MissingResourceException;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -101,7 +102,11 @@ public class TileLoadingInterceptor implements Interceptor {
       metaData.addProperty("device", Build.MODEL);
       metaData.addProperty("version", Build.VERSION.RELEASE);
       metaData.addProperty("abi", Build.CPU_ABI);
-      metaData.addProperty("country", Locale.getDefault().getISO3Country());
+      try {
+        metaData.addProperty("country", Locale.getDefault().getISO3Country());
+      } catch (MissingResourceException exception) {
+        metaData.addProperty("country", "none");
+      }
       metaData.addProperty("ram", getRam());
       metaData.addProperty("screenSize", getWindowSize());
       metaData.addProperty("buildFlavor", BuildConfig.FLAVOR);
