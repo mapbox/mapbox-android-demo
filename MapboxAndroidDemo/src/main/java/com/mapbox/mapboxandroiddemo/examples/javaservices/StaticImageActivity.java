@@ -2,8 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,7 +21,8 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.utils.MathUtils;
 import com.squareup.picasso.Picasso;
 
-import timber.log.Timber;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Use the Mapbox Static Image API found inside the Mapbox Java SDK to create a URL. After receiving the newly
@@ -36,7 +35,6 @@ public class StaticImageActivity extends AppCompatActivity implements
   private MapView mapView;
   private MapboxMap mapboxMap;
   private ImageView staticMapImageView;
-  private Button createStaticImageButton;
   private RadioGroup mapStyleRadioGroup;
 
   @Override
@@ -64,7 +62,7 @@ public class StaticImageActivity extends AppCompatActivity implements
   private void initViews() {
     staticMapImageView = findViewById(R.id.static_map_imageview);
 
-    createStaticImageButton = findViewById(R.id.create_static_image_button);
+    Button createStaticImageButton = findViewById(R.id.create_static_image_button);
     createStaticImageButton.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -75,10 +73,9 @@ public class StaticImageActivity extends AppCompatActivity implements
             @Override
             public void onStyleLoaded(@NonNull Style style) {
               // one of the radio buttons is checked
-              Timber.d("onClick: initViews style.getUrl() = %s", style.getUrl());
               Picasso.with(StaticImageActivity.this).load(takeSnapshot(
                 mapboxMap.getCameraPosition(),
-                style.getUrl().contains("mapbox/dark-v")
+                style.getUri().contains("mapbox/dark-v")
                   ? StaticMapCriteria.DARK_STYLE :
                   StaticMapCriteria.STREET_STYLE,
                 (int) MathUtils.clamp(findViewById(R.id.static_map_imageview).getMeasuredWidth(), 0, 1280),

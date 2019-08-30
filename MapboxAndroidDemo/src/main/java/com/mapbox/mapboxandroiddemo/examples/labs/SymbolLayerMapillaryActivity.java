@@ -129,7 +129,6 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
 
   private MapView mapView;
   private MapboxMap mapboxMap;
-  private Style style;
   private RecyclerView recyclerView;
 
   private GeoJsonSource source;
@@ -184,7 +183,6 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     mapboxMap.setStyle(Style.DARK, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        SymbolLayerMapillaryActivity.this.style = style;
         mapboxMap.getUiSettings().setCompassEnabled(false);
         mapboxMap.getUiSettings().setLogoEnabled(false);
         mapboxMap.getUiSettings().setAttributionEnabled(false);
@@ -207,7 +205,6 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       // we didn't find a click event on callout layer, try clicking maki layer
       return handleClickIcon(screenPoint);
     }
-
     return true;
   }
 
@@ -216,16 +213,18 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       return;
     }
     featureCollection = collection;
-
-    if (style.isFullyLoaded()) {
-      setupSource(style);
-      setupMakiLayer(style);
-      setupLoadingLayer(style);
-      setupCalloutLayer(style);
-      setupRecyclerView();
-      hideLabelLayers(style);
-      setupMapillaryTiles(style);
-    }
+    mapboxMap.getStyle(new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        setupSource(style);
+        setupMakiLayer(style);
+        setupLoadingLayer(style);
+        setupCalloutLayer(style);
+        setupRecyclerView();
+        hideLabelLayers(style);
+        setupMapillaryTiles(style);
+      }
+    });
   }
 
   private void setupSource(@NonNull Style loadedMapStyle) {
@@ -514,20 +513,28 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
     ImageView imageView = view.findViewById(R.id.logoView);
     imageView.setImageResource(currentState ? R.drawable.ic_favorite : R.drawable.ic_favorite_border);
     Bitmap bitmap = SymbolGenerator.generate(view);
-    style.addImage(title, bitmap);
-    refreshSource();
+    mapboxMap.getStyle(new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        style.addImage(title, bitmap);
+        refreshSource();
+      }
+    });
   }
 
   /**
    * Invoked when the bitmaps have been generated from a view.
    */
   public void setImageGenResults(HashMap<String, View> viewMap, HashMap<String, Bitmap> imageMap) {
-    if (style.isFullyLoaded()) {
-      // calling addImages is faster as separate addImage calls for each bitmap.
-      style.addImages(imageMap);
-    }
+    mapboxMap.getStyle(new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        // calling addImages is faster as separate addImage calls for each bitmap.
+        style.addImages(imageMap);
+      }
+    });
     // need to store reference to views to be able to use them as hitboxes for click events.
-    this.viewMap = viewMap;
+    SymbolLayerMapillaryActivity.this.viewMap = viewMap;
   }
 
   private void setActivityStep(@ActivityStep int activityStep) {
@@ -788,6 +795,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       super.onPostExecute(bitmapHashMap);
       SymbolLayerMapillaryActivity activity = activityRef.get();
       if (activity != null && bitmapHashMap != null) {
+
         activity.setImageGenResults(viewMap, bitmapHashMap);
         if (refreshSource) {
           activity.refreshSource();

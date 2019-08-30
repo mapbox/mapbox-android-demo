@@ -13,10 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mapbox.android.core.permissions.PermissionsListener;
@@ -42,6 +38,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -167,7 +167,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
           while (cur.moveToNext()) {
             if (index <= 80) {
               if (cur.getString(EVENT_LOCATION_INDEX) != null && !cur.getString(EVENT_LOCATION_INDEX).isEmpty()) {
-                makeMapboxGeocodingRequest(style, cur.getString(TITLE_INDEX), cur.getString(EVENT_LOCATION_INDEX));
+                makeMapboxGeocodingRequest(cur.getString(TITLE_INDEX), cur.getString(EVENT_LOCATION_INDEX));
               } else {
                 Timber.d("getCalendarData: location is null or empty");
               }
@@ -188,8 +188,7 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
    *                      eventually displayed in a Toast when a calendar event icon is tapped on.
    * @param eventLocation the event's location. This text is used in the Mapbox geocoding search
    */
-  private void makeMapboxGeocodingRequest(@NonNull final Style style, final String eventTitle,
-                                          final String eventLocation) {
+  private void makeMapboxGeocodingRequest(final String eventTitle, final String eventLocation) {
     try {
       // Build a Mapbox geocoding request
       MapboxGeocoding client = MapboxGeocoding.builder()
@@ -206,20 +205,25 @@ public class CalendarIntegrationActivity extends AppCompatActivity implements
           if (results.size() > 0) {
             // Get the first Feature from the successful geocoding response
             CarmenFeature feature = results.get(0);
-            if (feature != null && style.isFullyLoaded()) {
-              LatLng featureLatLng = new LatLng(feature.center().latitude(), feature.center().longitude());
-              Feature singleFeature = Feature.fromGeometry(Point.fromLngLat(featureLatLng.getLongitude(),
-                featureLatLng.getLatitude()));
-              singleFeature.addStringProperty(PROPERTY_TITLE, eventTitle);
-              singleFeature.addStringProperty(PROPERTY_LOCATION, eventLocation);
-              featureList.add(singleFeature);
-              featureCollection = FeatureCollection.fromFeatures(featureList);
-              GeoJsonSource source = style.getSourceAs(geojsonSourceId);
-              if (source != null) {
-                source.setGeoJson(featureCollection);
-              } else {
-                Timber.d("onResponse: listOfCalendarEvents == null");
-              }
+            if (feature != null) {
+              mapboxMap.getStyle(new Style.OnStyleLoaded() {
+                @Override
+                public void onStyleLoaded(@NonNull Style style) {
+                  LatLng featureLatLng = new LatLng(feature.center().latitude(), feature.center().longitude());
+                  Feature singleFeature = Feature.fromGeometry(Point.fromLngLat(featureLatLng.getLongitude(),
+                    featureLatLng.getLatitude()));
+                  singleFeature.addStringProperty(PROPERTY_TITLE, eventTitle);
+                  singleFeature.addStringProperty(PROPERTY_LOCATION, eventLocation);
+                  featureList.add(singleFeature);
+                  featureCollection = FeatureCollection.fromFeatures(featureList);
+                  GeoJsonSource source = style.getSourceAs(geojsonSourceId);
+                  if (source != null) {
+                    source.setGeoJson(featureCollection);
+                  } else {
+                    Timber.d("onResponse: listOfCalendarEvents == null");
+                  }
+                }
+              });
             }
           } else {
             Toast.makeText(CalendarIntegrationActivity.this, R.string.no_results,

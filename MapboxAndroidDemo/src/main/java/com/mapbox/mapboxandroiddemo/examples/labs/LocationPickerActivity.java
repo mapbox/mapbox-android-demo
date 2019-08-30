@@ -2,9 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.labs;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +33,9 @@ import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,7 +54,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
  */
 public class LocationPickerActivity extends AppCompatActivity implements PermissionsListener, OnMapReadyCallback {
 
-  private static final String TAG = "LocationPickerActivity";
   private static final String DROPPED_MARKER_LAYER_ID = "DROPPED_MARKER_LAYER_ID";
   private MapView mapView;
   private MapboxMap mapboxMap;
@@ -134,7 +133,7 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
               }
 
               // Use the map camera target's coordinates to make a reverse geocoding search
-              reverseGeocode(style, Point.fromLngLat(mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude()));
+              reverseGeocode(Point.fromLngLat(mapTargetLatLng.getLongitude(), mapTargetLatLng.getLatitude()));
 
             } else {
 
@@ -241,11 +240,10 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
   /**
    * This method is used to reverse geocode where the user has dropped the marker.
    *
-   * @param style style
    * @param point The location to use for the search
    */
 
-  private void reverseGeocode(@NonNull final Style style, final Point point) {
+  private void reverseGeocode(final Point point) {
     try {
       MapboxGeocoding client = MapboxGeocoding.builder()
         .accessToken(getString(R.string.access_token))
@@ -262,11 +260,16 @@ public class LocationPickerActivity extends AppCompatActivity implements Permiss
             CarmenFeature feature = results.get(0);
 
             // If the geocoder returns a result, we take the first in the list and show a Toast with the place name.
-            if (style.isFullyLoaded() && style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
-              Toast.makeText(LocationPickerActivity.this,
-                String.format(getString(R.string.location_picker_place_name_result),
-                  feature.placeName()), Toast.LENGTH_SHORT).show();
-            }
+            mapboxMap.getStyle(new Style.OnStyleLoaded() {
+              @Override
+              public void onStyleLoaded(@NonNull Style style) {
+                if (style.getLayer(DROPPED_MARKER_LAYER_ID) != null) {
+                  Toast.makeText(LocationPickerActivity.this,
+                      String.format(getString(R.string.location_picker_place_name_result),
+                          feature.placeName()), Toast.LENGTH_SHORT).show();
+                }
+              }
+            });
 
           } else {
             Toast.makeText(LocationPickerActivity.this,

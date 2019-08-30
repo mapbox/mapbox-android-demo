@@ -6,12 +6,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
-import androidx.annotation.NonNull;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.geometry.LatLngBounds;
@@ -27,12 +25,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class SnapshotShareActivity extends AppCompatActivity {
+
   private MapView mapView;
+  private MapboxMap mapboxMap;
   private MapSnapshotter mapSnapshotter;
   private FloatingActionButton cameraFab;
   private boolean hasStartedSnapshotGeneration;
-  private Style style;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -57,15 +59,14 @@ public class SnapshotShareActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+        SnapshotShareActivity.this.mapboxMap = mapboxMap;
         mapboxMap.setStyle(Style.SATELLITE_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-            SnapshotShareActivity.this.style = style;
             // When user clicks the map, start the snapshotting process with the given parameters
             cameraFab.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-
                 if (!hasStartedSnapshotGeneration) {
                   hasStartedSnapshotGeneration = true;
                   Toast.makeText(SnapshotShareActivity.this, R.string.loading_snapshot_image, Toast.LENGTH_LONG).show();
@@ -94,39 +95,40 @@ public class SnapshotShareActivity extends AppCompatActivity {
    * @param width        of map
    */
   private void startSnapShot(LatLngBounds latLngBounds, int height, int width) {
-    if (!style.isFullyLoaded()) {
-      return;
-    }
-
-    if (mapSnapshotter == null) {
-      // Initialize snapshotter with map dimensions and given bounds
-      MapSnapshotter.Options options =
-        new MapSnapshotter.Options(width, height).withRegion(latLngBounds).withStyle(style.getUrl());
-
-      mapSnapshotter = new MapSnapshotter(SnapshotShareActivity.this, options);
-    } else {
-      // Reuse pre-existing MapSnapshotter instance
-      mapSnapshotter.setSize(width, height);
-      mapSnapshotter.setRegion(latLngBounds);
-      mapSnapshotter.setRegion(latLngBounds);
-    }
-
-    mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
+    mapboxMap.getStyle(new Style.OnStyleLoaded() {
       @Override
-      public void onSnapshotReady(MapSnapshot snapshot) {
+      public void onStyleLoaded(@NonNull Style style) {
+        if (mapSnapshotter == null) {
+          // Initialize snapshotter with map dimensions and given bounds
+          MapSnapshotter.Options options =
+            new MapSnapshotter.Options(width, height).withRegion(latLngBounds).withStyle(style.getUri());
 
-        Bitmap bitmapOfMapSnapshotImage = snapshot.getBitmap();
+          mapSnapshotter = new MapSnapshotter(SnapshotShareActivity.this, options);
+        } else {
+          // Reuse pre-existing MapSnapshotter instance
+          mapSnapshotter.setSize(width, height);
+          mapSnapshotter.setRegion(latLngBounds);
+          mapSnapshotter.setRegion(latLngBounds);
+        }
 
-        Uri bmpUri = getLocalBitmapUri(bitmapOfMapSnapshotImage);
+        mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
+          @Override
+          public void onSnapshotReady(MapSnapshot snapshot) {
 
-        Intent shareIntent = new Intent();
-        shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-        shareIntent.setType("image/png");
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        startActivity(Intent.createChooser(shareIntent, "Share map image"));
+            Bitmap bitmapOfMapSnapshotImage = snapshot.getBitmap();
 
-        hasStartedSnapshotGeneration = false;
+            Uri bmpUri = getLocalBitmapUri(bitmapOfMapSnapshotImage);
+
+            Intent shareIntent = new Intent();
+            shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
+            shareIntent.setType("image/png");
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(Intent.createChooser(shareIntent, "Share map image"));
+
+            hasStartedSnapshotGeneration = false;
+          }
+        });
       }
     });
   }
