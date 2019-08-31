@@ -72,6 +72,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfLineDistanceActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfRingActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfPhysicalCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
@@ -1042,6 +1043,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, TurfPhysicalCircleActivity.class),
       null,
       R.string.activity_java_services_tilequery_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_java_services,
+      R.string.activity_java_services_turf_line_distance_title,
+      R.string.activity_java_services_turf_line_distance_description,
+      new Intent(MainActivity.this, TurfLineDistanceActivity.class),
+      null,
+      R.string.activity_java_services_turf_line_distance_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,

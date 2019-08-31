@@ -426,4 +426,9 @@
     <string name="invalid_max_ambient_cache_size">Set ambient\nmax cache</string>
     <string name="clear_ambient_cache_button">Clear ambient\ncache</string>
     <string name="adjust_map_button">Adjust map</string>
+
+    <!-- Turf measure line distance -->
+    <string name="line_distance_tap_instruction">Tap on map at least twice to create and measure a line</string>
+    <string name="line_distance_textview">Line distance in %1$s: %2$s</string>
+
 </resources>
