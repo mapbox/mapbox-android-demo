@@ -1,9 +1,12 @@
-This update is in line with the 8.2.1 release of the Mapbox Maps SDK for Android and includes several fixes and new examples:
+This update is in line with the 8.3.0 release of the Mapbox Maps SDK for Android and includes several fixes and new examples:
 
 - Isochrone API data + seekbar slider
 - RecyclerView + Directions API route
 - Location change listening
 - Circle radius based on data
 - Runtime styling
-- Define a circle's radius with physical units
+- Define a circle's radius with distance units
 - Cache management
+- Kotlin map fragment
+- Spinning icons
+- Measuring line length in distance units

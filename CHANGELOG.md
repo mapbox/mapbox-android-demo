@@ -2,6 +2,22 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 8.3.0 - September 3, 2019
+
+* Gradle Play Publisher plugin adjustments #1198  
+* Refactoring to replace style.isFullyLoaded() with the `onStyleLoaded()` callback #1192
+* Refactoring RelativeLayout to FrameLayout #1181  
+* Bumping maps sdk version to stable 8.3.0 #1161
+* Adding Kotlin example of adding a map fragment to container #1188  
+* Adding null checks in OptimizationActivity response #1184  
+* Refactored TilequeryActivity with appropriate null checks #1185  
+* Added try/catch for getting getISO3Country for analytics #1182  
+* Fixes to Localization Plugin XML so that language switch buttons appear #1186
+* Added try/catch when TileLoadingInterceptor tries to get country code #1183
+* Refactoring changes to switch loadGeoJsonFromAsset( usage to URI #1179
+* Adding spinning SymbolLayer icons example #1177
+* Added TurfMeasurement distance example #1193
+
 ## 8.2.1-3 - August 13, 2019
 
 * Downgraded gradle version to 3.3.0 #1171
