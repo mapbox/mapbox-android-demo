@@ -100,8 +100,8 @@ android {
 }
 
 play {
-    track = 'alpha'
-    resolutionStrategy = 'auto'
+    track = "alpha"
+    resolutionStrategy = "auto"
     serviceAccountCredentials = file("$project.rootDir/android-gl-native-6d21dd280e7b.json")
 }
 

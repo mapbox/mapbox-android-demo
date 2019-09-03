@@ -2,6 +2,14 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 8.2.1-3 - August 13, 2019
+
+* Downgraded gradle version to 3.3.0 #1171
+
+## 8.2.1-2 - August 13, 2019
+
+* Play Publisher Gradle plugin bump to 2.0.0 and refactoring fixes #1169
+
 ## 8.2.1-1 - August 9, 2019
 
 * Added CircleCI command to create google services json file in Release job #1166
