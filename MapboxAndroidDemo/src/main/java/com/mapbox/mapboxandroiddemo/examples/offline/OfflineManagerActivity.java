@@ -201,40 +201,46 @@ public class OfflineManagerActivity extends AppCompatActivity {
 
     // Create offline definition using the current
     // style and boundaries of visible map area
-    String styleUrl = map.getStyle().getUrl();
-    LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
-    double minZoom = map.getCameraPosition().zoom;
-    double maxZoom = map.getMaxZoomLevel();
-    float pixelRatio = this.getResources().getDisplayMetrics().density;
-    OfflineTilePyramidRegionDefinition definition = new OfflineTilePyramidRegionDefinition(
-      styleUrl, bounds, minZoom, maxZoom, pixelRatio);
 
-    // Build a JSONObject using the user-defined offline region title,
-    // convert it into string, and use it to create a metadata variable.
-    // The metadata variable will later be passed to createOfflineRegion()
-    byte[] metadata;
-    try {
-      JSONObject jsonObject = new JSONObject();
-      jsonObject.put(JSON_FIELD_REGION_NAME, regionName);
-      String json = jsonObject.toString();
-      metadata = json.getBytes(JSON_CHARSET);
-    } catch (Exception exception) {
-      Timber.e("Failed to encode metadata: %s", exception.getMessage());
-      metadata = null;
-    }
-
-    // Create the offline region and launch the download
-    offlineManager.createOfflineRegion(definition, metadata, new OfflineManager.CreateOfflineRegionCallback() {
+    map.getStyle(new Style.OnStyleLoaded() {
       @Override
-      public void onCreate(OfflineRegion offlineRegion) {
-        Timber.d( "Offline region created: %s" , regionName);
-        OfflineManagerActivity.this.offlineRegion = offlineRegion;
-        launchDownload();
-      }
+      public void onStyleLoaded(@NonNull Style style) {
+        String styleUrl = style.getUri();
+        LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
+        double minZoom = map.getCameraPosition().zoom;
+        double maxZoom = map.getMaxZoomLevel();
+        float pixelRatio = OfflineManagerActivity.this.getResources().getDisplayMetrics().density;
+        OfflineTilePyramidRegionDefinition definition = new OfflineTilePyramidRegionDefinition(
+          styleUrl, bounds, minZoom, maxZoom, pixelRatio);
 
-      @Override
-      public void onError(String error) {
-        Timber.e( "Error: %s" , error);
+        // Build a JSONObject using the user-defined offline region title,
+        // convert it into string, and use it to create a metadata variable.
+        // The metadata variable will later be passed to createOfflineRegion()
+        byte[] metadata;
+        try {
+          JSONObject jsonObject = new JSONObject();
+          jsonObject.put(JSON_FIELD_REGION_NAME, regionName);
+          String json = jsonObject.toString();
+          metadata = json.getBytes(JSON_CHARSET);
+        } catch (Exception exception) {
+          Timber.e("Failed to encode metadata: %s", exception.getMessage());
+          metadata = null;
+        }
+
+        // Create the offline region and launch the download
+        offlineManager.createOfflineRegion(definition, metadata, new OfflineManager.CreateOfflineRegionCallback() {
+          @Override
+          public void onCreate(OfflineRegion offlineRegion) {
+            Timber.d( "Offline region created: %s" , regionName);
+            OfflineManagerActivity.this.offlineRegion = offlineRegion;
+            launchDownload();
+          }
+
+          @Override
+          public void onError(String error) {
+            Timber.e( "Error: %s" , error);
+          }
+        });
       }
     });
   }

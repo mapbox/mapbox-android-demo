@@ -69,7 +69,8 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
   private List<Point> routeCoordinateList;
   private List<Point> markerLinePointList = new ArrayList<>();
   private int routeIndex;
-
+  private Point originPoint = Point.fromLngLat(38.7508, 9.0309);
+  private Point destinationPoint = Point.fromLngLat(38.795902, 8.984467);
   private Animator currentAnimator;
 
   @Override
@@ -94,10 +95,7 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
             // Use the Mapbox Directions API to get a directions route
-            getRoute(style,
-                Point.fromLngLat(38.7508, 9.0309), // coffee shop
-                Point.fromLngLat(38.795902, 8.984467) // airport
-            );
+            getRoute(originPoint, destinationPoint);
           }
         });
       }
@@ -173,7 +171,7 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
    * @param origin      the starting point of the route
    * @param destination the desired finish point of the route
    */
-  private void getRoute(@NonNull final Style style, final Point origin, final Point destination) {
+  private void getRoute(final Point origin, final Point destination) {
     MapboxDirections client = MapboxDirections.builder()
         .origin(origin)
         .destination(destination)
@@ -199,17 +197,19 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
 
         // Get the directions route
         DirectionsRoute currentRoute = response.body().routes().get(0);
-
-        if (style.isFullyLoaded()) {
-          mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(
+        mapboxMap.getStyle(new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(
               new LatLngBounds.Builder()
-                  .include(new LatLng(origin.latitude(), origin.longitude()))
-                  .include(new LatLng(destination.latitude(), destination.longitude()))
-                  .build(), 50), 5000);
+                .include(new LatLng(origin.latitude(), origin.longitude()))
+                .include(new LatLng(destination.latitude(), destination.longitude()))
+                .build(), 50), 5000);
 
-          initData(style,FeatureCollection.fromFeature(
+            initData(style,FeatureCollection.fromFeature(
               Feature.fromGeometry(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6))));
-        }
+          }
+        });
       }
 
       @Override

@@ -2,8 +2,6 @@ package com.mapbox.mapboxandroiddemo.examples.javaservices;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mapbox.api.directions.v5.DirectionsCriteria;
@@ -26,6 +24,8 @@ import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -74,7 +74,6 @@ public class DirectionsActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
-
         mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
@@ -89,7 +88,7 @@ public class DirectionsActivity extends AppCompatActivity {
             initLayers(style);
 
             // Get the directions route from the Mapbox Directions API
-            getRoute(style, origin, destination);
+            getRoute(mapboxMap, origin, destination);
           }
         });
       }
@@ -139,12 +138,11 @@ public class DirectionsActivity extends AppCompatActivity {
   /**
    * Make a request to the Mapbox Directions API. Once successful, pass the route to the
    * route layer.
-   *
+   * @param mapboxMap the Mapbox map object that the route will be drawn on
    * @param origin      the starting point of the route
    * @param destination the desired finish point of the route
    */
-  private void getRoute(@NonNull final Style style, Point origin, Point destination) {
-
+  private void getRoute(MapboxMap mapboxMap, Point origin, Point destination) {
     client = MapboxDirections.builder()
       .origin(origin)
       .destination(destination)
@@ -176,17 +174,23 @@ public class DirectionsActivity extends AppCompatActivity {
           getString(R.string.directions_activity_toast_message),
           currentRoute.distance()), Toast.LENGTH_SHORT).show();
 
-        if (style.isFullyLoaded()) {
-          // Retrieve and update the source designated for showing the directions route
-          GeoJsonSource source = style.getSourceAs(ROUTE_SOURCE_ID);
+        if (mapboxMap != null) {
+          mapboxMap.getStyle(new Style.OnStyleLoaded() {
+            @Override
+            public void onStyleLoaded(@NonNull Style style) {
 
-          // Create a LineString with the directions route's geometry and
-          // reset the GeoJSON source for the route LineLayer source
-          if (source != null) {
-            Timber.d("onResponse: source != null");
-            source.setGeoJson(FeatureCollection.fromFeature(
-              Feature.fromGeometry(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6))));
-          }
+              // Retrieve and update the source designated for showing the directions route
+              GeoJsonSource source = style.getSourceAs(ROUTE_SOURCE_ID);
+
+              // Create a LineString with the directions route's geometry and
+              // reset the GeoJSON source for the route LineLayer source
+              if (source != null) {
+                Timber.d("onResponse: source != null");
+                source.setGeoJson(FeatureCollection.fromFeature(
+                    Feature.fromGeometry(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6))));
+              }
+            }
+          });
         }
       }
 

@@ -8,9 +8,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
@@ -24,6 +21,10 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshot;
 import com.mapbox.mapboxsdk.snapshotter.MapSnapshotter;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+
 import static android.app.PendingIntent.getActivity;
 
 /**
@@ -32,11 +33,11 @@ import static android.app.PendingIntent.getActivity;
  */
 public class SnapshotNotificationActivity extends AppCompatActivity implements OnMapReadyCallback,
   MapboxMap.OnMapClickListener {
+
   private MapView mapView;
   private MapSnapshotter mapSnapshotter;
   private MapboxMap mapboxMap;
   private NotificationManager notificationManager;
-  private Style style;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,6 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
     mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        SnapshotNotificationActivity.this.style = style;
         mapboxMap.addOnMapClickListener(SnapshotNotificationActivity.this);
       }
     });
@@ -85,25 +85,29 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
    * @param width        of map
    */
   private void startSnapShot(LatLngBounds latLngBounds, int height, int width) {
-    if (!style.isFullyLoaded()) {
-      return;
-    }
-
-    if (mapSnapshotter == null) {
-      // Initialize snapshotter with map dimensions and given bounds
-      MapSnapshotter.Options options =
-        new MapSnapshotter.Options(width, height).withStyle(style.getUrl()).withRegion(latLngBounds);
-
-      mapSnapshotter = new MapSnapshotter(SnapshotNotificationActivity.this, options);
-    } else {
-      // Reuse pre-existing MapSnapshotter instance
-      mapSnapshotter.setSize(width, height);
-      mapSnapshotter.setRegion(latLngBounds);
-    }
-    mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
+    mapboxMap.getStyle(new Style.OnStyleLoaded() {
       @Override
-      public void onSnapshotReady(MapSnapshot snapshot) {
-        createNotification(snapshot.getBitmap());
+      public void onStyleLoaded(@NonNull Style style) {
+        if (mapSnapshotter == null) {
+          // Initialize snapshotter with map dimensions and given bounds
+          MapSnapshotter.Options options =
+            new MapSnapshotter.Options(width, height)
+              .withCameraPosition(mapboxMap.getCameraPosition())
+              .withStyle(style.getUri())
+              .withRegion(latLngBounds);
+
+          mapSnapshotter = new MapSnapshotter(SnapshotNotificationActivity.this, options);
+        } else {
+          // Reuse pre-existing MapSnapshotter instance
+          mapSnapshotter.setSize(width, height);
+          mapSnapshotter.setRegion(latLngBounds);
+        }
+        mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
+          @Override
+          public void onSnapshotReady(MapSnapshot snapshot) {
+            createNotification(snapshot.getBitmap());
+          }
+        });
       }
     });
   }
