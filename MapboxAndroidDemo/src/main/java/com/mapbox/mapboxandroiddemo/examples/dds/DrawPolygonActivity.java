@@ -57,7 +57,7 @@ public class DrawPolygonActivity extends AppCompatActivity {
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_annotation_polygon);
+    setContentView(R.layout.activity_dds_draw_polygon);
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);

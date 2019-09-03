@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,21 +13,23 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="41.8362"
         mapbox:mapbox_cameraTargetLng="-87.6321"
-        mapbox:mapbox_uiCompassMarginTop="75dp"
         mapbox:mapbox_cameraZoom="9.5"
         mapbox:mapbox_cameraZoomMax="13"
-        mapbox:mapbox_cameraZoomMin="7"/>
+        mapbox:mapbox_cameraZoomMin="7"
+        mapbox:mapbox_uiCompassMarginTop="75dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
-        android:paddingEnd="24dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
+        android:layout_gravity="top"
+        android:layout_marginTop="24dp"
         android:paddingStart="24dp"
-        android:paddingTop="24dp">
+        android:paddingLeft="24dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="24dp"
+        android:paddingRight="24dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/textview_opacity_value"
@@ -44,4 +46,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</FrameLayout>

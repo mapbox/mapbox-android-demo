@@ -41,7 +41,7 @@ public class SymbolListenerActivity extends AppCompatActivity implements
     Mapbox.getInstance(this, getString(R.string.access_token));
 
     // This contains the MapView in XML and needs to be called after the access token is configured.
-    setContentView(R.layout.activity_annotation_plugin_symbol_activity);
+    setContentView(R.layout.activity_annotation_plugin_symbol_listener);
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
