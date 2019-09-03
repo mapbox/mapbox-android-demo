@@ -94,6 +94,7 @@
     <string name="activity_java_services_map_matching_title">Map Matching</string>
     <string name="activity_java_services_turf_ring_title">Hollow circle</string>
     <string name="activity_java_services_turf_physical_circle_title">Define a circle in physical units</string>
+    <string name="activity_java_services_turf_line_distance_title">Measure line distance</string>
     <string name="activity_plugins_traffic_plugin_title">Display real-time traffic</string>
     <string name="activity_plugins_building_plugin_title">Display buildings in 3D</string>
     <string name="activity_plugins_localization_plugin_title">Change map text to device language</string>
