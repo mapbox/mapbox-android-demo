@@ -10,13 +10,11 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.testapp.action.WaitAction;
 import com.mapbox.mapboxsdk.testapp.utils.OnMapReadyIdlingResource;
 
-import junit.framework.Assert;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 
-import androidx.test.espresso.Espresso;
+import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.IdlingResourceTimeoutException;
 import androidx.test.rule.ActivityTestRule;
 import timber.log.Timber;
@@ -25,21 +23,23 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 
 public abstract class BaseActivityTest {
 
   @Rule
   public ActivityTestRule<Activity> rule = new ActivityTestRule<>(getActivityClass());
-  protected MapboxMap mapboxMap;
-  protected OnMapReadyIdlingResource idlingResource;
+  private MapboxMap mapboxMap;
+  private OnMapReadyIdlingResource idlingResource;
 
   @Before
   public void beforeTest() {
     try {
       Timber.e("@Before test: register idle resource");
       idlingResource = new OnMapReadyIdlingResource(rule.getActivity());
-      Espresso.registerIdlingResources(idlingResource);
+      IdlingRegistry.getInstance().register(idlingResource);
       checkViewIsDisplayed(R.id.mapView);
       mapboxMap = idlingResource.getMapboxMap();
     } catch (IdlingResourceTimeoutException idlingResourceTimeoutException) {
@@ -54,9 +54,9 @@ public abstract class BaseActivityTest {
   }
 
   protected void validateTestSetup() {
-    Assert.assertTrue("Device is not connected to the Internet.", isConnected(rule.getActivity()));
+    assertTrue("Device is not connected to the Internet.", isConnected(rule.getActivity()));
     checkViewIsDisplayed(R.id.mapView);
-    Assert.assertNotNull(mapboxMap);
+    assertNotNull(mapboxMap);
   }
 
   protected MapboxMap getMapboxMap() {
@@ -87,7 +87,7 @@ public abstract class BaseActivityTest {
   @After
   public void afterTest() {
     Timber.e("@After test: unregister idle resource");
-    Espresso.unregisterIdlingResources(idlingResource);
+    IdlingRegistry.getInstance().unregister(idlingResource);
   }
 }
 

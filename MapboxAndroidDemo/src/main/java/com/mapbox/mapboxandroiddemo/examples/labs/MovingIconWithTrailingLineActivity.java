@@ -108,11 +108,16 @@ public class MovingIconWithTrailingLineActivity extends AppCompatActivity {
    * @param featureCollection returned GeoJSON FeatureCollection from the Directions API route request
    */
   private void initData(Style fullyLoadedStyle, @NonNull FeatureCollection featureCollection) {
-    routeCoordinateList = ((LineString) featureCollection.features().get(0).geometry()).coordinates();
-    initSources(fullyLoadedStyle, featureCollection);
-    initSymbolLayer(fullyLoadedStyle);
-    initDotLinePath(fullyLoadedStyle);
-    animate();
+    if (featureCollection.features() != null) {
+      LineString lineString = ((LineString) featureCollection.features().get(0).geometry());
+      if (lineString != null) {
+        routeCoordinateList = lineString.coordinates();
+        initSources(fullyLoadedStyle, featureCollection);
+        initSymbolLayer(fullyLoadedStyle);
+        initDotLinePath(fullyLoadedStyle);
+        animate();
+      }
+    }
   }
 
   /**

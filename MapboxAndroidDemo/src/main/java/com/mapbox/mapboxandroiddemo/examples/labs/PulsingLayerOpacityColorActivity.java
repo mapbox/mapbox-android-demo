@@ -4,9 +4,6 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -20,15 +17,20 @@ import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.Property;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import static com.mapbox.mapboxsdk.style.layers.Property.VISIBLE;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 
 /**
  * Use the style API to highlight different types of data.
@@ -69,7 +71,7 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
 
         FillLayer hotelLayer = new FillLayer("hotels", "hotels").withProperties(
           fillColor(Color.parseColor("#5a9fcf")),
-          PropertyFactory.visibility(Property.NONE)
+          visibility(Property.NONE)
         );
 
         style.addLayer(hotelLayer);
@@ -88,12 +90,11 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
 
           @Override
           public void onAnimationUpdate(ValueAnimator animator) {
-
-            hotels.setProperties(
-              fillColor((int) animator.getAnimatedValue())
-            );
+            if (hotels != null) {
+              hotels.setProperties(fillColor((int) animator.getAnimatedValue())
+              );
+            }
           }
-
         });
 
         // Add the attractions source to the map
@@ -102,7 +103,7 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
 
         CircleLayer attractionsLayer = new CircleLayer("attractions", "attractions").withProperties(
           circleColor(Color.parseColor("#5a9fcf")),
-          PropertyFactory.visibility(Property.NONE)
+          visibility(Property.NONE)
         );
 
         style.addLayer(attractionsLayer);
@@ -121,18 +122,18 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
 
           @Override
           public void onAnimationUpdate(ValueAnimator animator) {
-
-            attractions.setProperties(
-              circleColor((int) animator.getAnimatedValue())
-            );
+            if (attractions != null) {
+              attractions.setProperties(
+                circleColor((int) animator.getAnimatedValue())
+              );
+            }
           }
-
         });
 
         final FillLayer parks = (FillLayer) style.getLayer("landuse");
-        parks.setProperties(
-          PropertyFactory.visibility(Property.NONE)
-        );
+        if (parks != null) {
+          parks.setProperties(visibility(Property.NONE));
+        }
 
         parkColorAnimator = ValueAnimator.ofObject(
           new ArgbEvaluator(),
@@ -146,9 +147,9 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
 
           @Override
           public void onAnimationUpdate(ValueAnimator animator) {
-            parks.setProperties(
-              fillColor((int) animator.getAnimatedValue())
-            );
+            if (parks != null) {
+              parks.setProperties(fillColor((int) animator.getAnimatedValue()));
+            }
           }
         });
 
@@ -192,12 +193,12 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
     if (VISIBLE.equals(layer.getVisibility().getValue())) {
       // Layer is visible
       layer.setProperties(
-        PropertyFactory.visibility(Property.NONE)
+        visibility(Property.NONE)
       );
     } else {
       // Layer isn't visible
       layer.setProperties(
-        PropertyFactory.visibility(VISIBLE)
+        visibility(VISIBLE)
       );
     }
   }
@@ -270,7 +271,7 @@ public class PulsingLayerOpacityColorActivity extends AppCompatActivity implemen
       byte[] buffer = new byte[size];
       is.read(buffer);
       is.close();
-      return new String(buffer, "UTF-8");
+      return new String(buffer, Charset.forName("UTF-8"));
 
     } catch (IOException ex) {
       ex.printStackTrace();

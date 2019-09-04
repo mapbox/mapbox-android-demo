@@ -53,20 +53,21 @@ public class SupportMapFragmentActivity extends AppCompatActivity {
       mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
     }
 
-    mapFragment.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(@NonNull MapboxMap mapboxMap) {
+    if (mapFragment != null) {
+      mapFragment.getMapAsync(new OnMapReadyCallback() {
+        @Override
+        public void onMapReady(@NonNull MapboxMap mapboxMap) {
+          mapboxMap.setStyle(Style.SATELLITE, new Style.OnStyleLoaded() {
+            @Override
+            public void onStyleLoaded(@NonNull Style style) {
 
-        mapboxMap.setStyle(Style.SATELLITE, new Style.OnStyleLoaded() {
-          @Override
-          public void onStyleLoaded(@NonNull Style style) {
-
-            // Map is set up and the style has loaded. Now you can add data or make other map adjustments
+              // Map is set up and the style has loaded. Now you can add data or make other map adjustments
 
 
-          }
-        });
-      }
-    });
+            }
+          });
+        }
+      });
+    }
   }
 }

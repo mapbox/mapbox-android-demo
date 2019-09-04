@@ -63,18 +63,20 @@ public class LocationComponentFragmentActivity extends AppCompatActivity impleme
       mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentByTag("com.mapbox.map");
     }
 
-    mapFragment.getMapAsync(new OnMapReadyCallback() {
-      @Override
-      public void onMapReady(@NonNull MapboxMap mapboxMap) {
-        LocationComponentFragmentActivity.this.mapboxMap = mapboxMap;
-        mapboxMap.setStyle(Style.OUTDOORS, new Style.OnStyleLoaded() {
-          @Override
-          public void onStyleLoaded(@NonNull Style style) {
-            enableLocationComponent(style);
-          }
-        });
-      }
-    });
+    if (mapFragment != null) {
+      mapFragment.getMapAsync(new OnMapReadyCallback() {
+        @Override
+        public void onMapReady(@NonNull MapboxMap mapboxMap) {
+          LocationComponentFragmentActivity.this.mapboxMap = mapboxMap;
+          mapboxMap.setStyle(Style.OUTDOORS, new Style.OnStyleLoaded() {
+            @Override
+            public void onStyleLoaded(@NonNull Style style) {
+              enableLocationComponent(style);
+            }
+          });
+        }
+      });
+    }
   }
 
   @SuppressWarnings( {"MissingPermission"})

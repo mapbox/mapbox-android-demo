@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import timber.log.Timber;
+
 import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -14,6 +16,9 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.layers.Property.TEXT_ANCHOR_BOTTOM;
@@ -39,6 +44,7 @@ public class VariableLabelPlacementActivity extends AppCompatActivity {
   private static final String GEOJSON_SRC_ID = "poi_source_id";
   private static final String POI_LABELS_LAYER_ID = "poi_labels_layer_id";
   private MapView mapView;
+  private GeoJsonSource geoJsonSource;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -56,30 +62,32 @@ public class VariableLabelPlacementActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
+        try {
+          geoJsonSource = new GeoJsonSource(GEOJSON_SRC_ID, new URI("asset://poi_places.geojson"));
 
-        GeoJsonSource source = new GeoJsonSource(GEOJSON_SRC_ID);
-        source.setUrl("asset://poi_places.geojson");
-
-        mapboxMap.setStyle(new Style.Builder().fromUri(Style.LIGHT)
-            .withSource(source)
-            // Adds a SymbolLayer to display POI labels
-            .withLayer(new SymbolLayer(POI_LABELS_LAYER_ID, GEOJSON_SRC_ID)
-              .withProperties(
-                textField(get("description")),
-                textSize(17f),
-                textColor(Color.RED),
-                textVariableAnchor(
-                  new String[]{TEXT_ANCHOR_TOP, TEXT_ANCHOR_BOTTOM, TEXT_ANCHOR_LEFT, TEXT_ANCHOR_RIGHT}),
-                textJustify(TEXT_JUSTIFY_AUTO),
-                textRadialOffset(0.5f))),
-          new Style.OnStyleLoaded() {
-            @Override
-            public void onStyleLoaded(@NonNull final Style style) {
-              Toast.makeText(VariableLabelPlacementActivity.this,
-                getString(R.string.zoom_map_in_and_out_variable_label_instruction),
-                Toast.LENGTH_SHORT).show();
-            }
-          });
+          mapboxMap.setStyle(new Style.Builder().fromUri(Style.LIGHT)
+              .withSource(geoJsonSource)
+              // Adds a SymbolLayer to display POI labels
+              .withLayer(new SymbolLayer(POI_LABELS_LAYER_ID, GEOJSON_SRC_ID)
+                .withProperties(
+                  textField(get("description")),
+                  textSize(17f),
+                  textColor(Color.RED),
+                  textVariableAnchor(
+                    new String[]{TEXT_ANCHOR_TOP, TEXT_ANCHOR_BOTTOM, TEXT_ANCHOR_LEFT, TEXT_ANCHOR_RIGHT}),
+                  textJustify(TEXT_JUSTIFY_AUTO),
+                  textRadialOffset(0.5f))),
+            new Style.OnStyleLoaded() {
+              @Override
+              public void onStyleLoaded(@NonNull final Style style) {
+                Toast.makeText(VariableLabelPlacementActivity.this,
+                  getString(R.string.zoom_map_in_and_out_variable_label_instruction),
+                  Toast.LENGTH_SHORT).show();
+              }
+            });
+        } catch (URISyntaxException exception) {
+          Timber.d(exception);
+        }
       }
     });
   }

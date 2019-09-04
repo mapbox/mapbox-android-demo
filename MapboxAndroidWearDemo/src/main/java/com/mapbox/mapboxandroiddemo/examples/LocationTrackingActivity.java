@@ -12,6 +12,7 @@ import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.location.LocationComponent;
+import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
@@ -72,7 +73,8 @@ public class LocationTrackingActivity extends WearableActivity implements Permis
       LocationComponent locationComponent = mapboxMap.getLocationComponent();
 
       // Activate with options
-      locationComponent.activateLocationComponent(this, style);
+      locationComponent.activateLocationComponent(
+        LocationComponentActivationOptions.builder(this, style).build());
 
       // Enable to make component visible
       locationComponent.setLocationComponentEnabled(true);

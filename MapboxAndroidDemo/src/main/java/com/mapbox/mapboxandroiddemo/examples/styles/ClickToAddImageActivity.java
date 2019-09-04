@@ -173,28 +173,30 @@ public class ClickToAddImageActivity extends AppCompatActivity implements
             Uri selectedImage = data.getData();
             InputStream imageStream;
             try {
-              imageStream = getContentResolver().openInputStream(selectedImage);
+              if (selectedImage != null) {
+                imageStream = getContentResolver().openInputStream(selectedImage);
 
-              Bitmap bitmapOfSelectedImage = BitmapFactory.decodeStream(imageStream);
+                Bitmap bitmapOfSelectedImage = BitmapFactory.decodeStream(imageStream);
 
-              // Add the imageSource to the map
-              style.addSource(
-                new ImageSource(ID_IMAGE_SOURCE + imageCountIndex, quad, bitmapOfSelectedImage));
+                // Add the imageSource to the map
+                style.addSource(
+                  new ImageSource(ID_IMAGE_SOURCE + imageCountIndex, quad, bitmapOfSelectedImage));
 
-              // Create a raster layer and use the imageSource's ID as the layer's data// Add the layer to the map
-              style.addLayer(new RasterLayer(ID_IMAGE_LAYER + imageCountIndex,
-                ID_IMAGE_SOURCE + imageCountIndex));
+                // Create a raster layer and use the imageSource's ID as the layer's data// Add the layer to the map
+                style.addLayer(new RasterLayer(ID_IMAGE_LAYER + imageCountIndex,
+                  ID_IMAGE_SOURCE + imageCountIndex));
 
-              // Reset lists in preparation for adding more images
-              boundsFeatureList = new ArrayList<>();
-              boundsCirclePointList = new ArrayList<>();
+                // Reset lists in preparation for adding more images
+                boundsFeatureList = new ArrayList<>();
+                boundsCirclePointList = new ArrayList<>();
 
-              imageCountIndex++;
+                imageCountIndex++;
 
-              // Clear circles from CircleLayer
-              GeoJsonSource circleSource = style.getSourceAs(CIRCLE_SOURCE_ID);
-              if (circleSource != null) {
-                circleSource.setGeoJson(FeatureCollection.fromFeatures(boundsFeatureList));
+                // Clear circles from CircleLayer
+                GeoJsonSource circleSource = style.getSourceAs(CIRCLE_SOURCE_ID);
+                if (circleSource != null) {
+                  circleSource.setGeoJson(FeatureCollection.fromFeatures(boundsFeatureList));
+                }
               }
             } catch (FileNotFoundException exception) {
               exception.printStackTrace();

@@ -73,7 +73,7 @@ public class TileLoadingInterceptor implements Interceptor {
     attributes.add(
             new Attribute<>("connectionState", connectionState));
 
-    List<Attribute<Long>> counters = new ArrayList();
+    List<Attribute<Long>> counters = new ArrayList<>();
     counters.add(new Attribute<>("elapsedMS", elapsedMs));
 
     Bundle bundle = new Bundle();
@@ -82,9 +82,10 @@ public class TileLoadingInterceptor implements Interceptor {
     bundle.putString("counters", gson.toJson(counters));
     bundle.putString("metadata", getMetadata());
 
-    Mapbox.getTelemetry().onPerformanceEvent(bundle);
-
-    Mapbox.getTelemetry().setUserTelemetryRequestState(true);
+    if (Mapbox.getTelemetry() != null) {
+      Mapbox.getTelemetry().onPerformanceEvent(bundle);
+      Mapbox.getTelemetry().setUserTelemetryRequestState(true);
+    }
   }
 
   private static String getUrl(Request request) {
@@ -119,7 +120,9 @@ public class TileLoadingInterceptor implements Interceptor {
     ActivityManager actManager =
             (ActivityManager) Mapbox.getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
     ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
-    actManager.getMemoryInfo(memInfo);
+    if (actManager != null) {
+      actManager.getMemoryInfo(memInfo);
+    }
     return String.valueOf(memInfo.totalMem);
   }
 

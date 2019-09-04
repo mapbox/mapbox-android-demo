@@ -90,57 +90,59 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
             }
 
             // Create the region asynchronously
-            offlineManager.createOfflineRegion(
-              definition,
-              metadata,
-              new OfflineManager.CreateOfflineRegionCallback() {
-                @Override
-                public void onCreate(OfflineRegion offlineRegion) {
-                  offlineRegion.setDownloadState(OfflineRegion.STATE_ACTIVE);
+            if (metadata != null) {
+              offlineManager.createOfflineRegion(
+                definition,
+                metadata,
+                new OfflineManager.CreateOfflineRegionCallback() {
+                  @Override
+                  public void onCreate(OfflineRegion offlineRegion) {
+                    offlineRegion.setDownloadState(OfflineRegion.STATE_ACTIVE);
 
-                  // Display the download progress bar
-                  progressBar = findViewById(R.id.progress_bar);
-                  startProgress();
+                    // Display the download progress bar
+                    progressBar = findViewById(R.id.progress_bar);
+                    startProgress();
 
-                  // Monitor the download progress using setObserver
-                  offlineRegion.setObserver(new OfflineRegion.OfflineRegionObserver() {
-                    @Override
-                    public void onStatusChanged(OfflineRegionStatus status) {
+                    // Monitor the download progress using setObserver
+                    offlineRegion.setObserver(new OfflineRegion.OfflineRegionObserver() {
+                      @Override
+                      public void onStatusChanged(OfflineRegionStatus status) {
 
-                      // Calculate the download percentage and update the progress bar
-                      double percentage = status.getRequiredResourceCount() >= 0
-                        ? (100.0 * status.getCompletedResourceCount() / status.getRequiredResourceCount()) :
-                        0.0;
+                        // Calculate the download percentage and update the progress bar
+                        double percentage = status.getRequiredResourceCount() >= 0
+                          ? (100.0 * status.getCompletedResourceCount() / status.getRequiredResourceCount()) :
+                          0.0;
 
-                      if (status.isComplete()) {
-                        // Download complete
-                        endProgress(getString(R.string.simple_offline_end_progress_success));
-                      } else if (status.isRequiredResourceCountPrecise()) {
-                        // Switch to determinate state
-                        setPercentage((int) Math.round(percentage));
+                        if (status.isComplete()) {
+                          // Download complete
+                          endProgress(getString(R.string.simple_offline_end_progress_success));
+                        } else if (status.isRequiredResourceCountPrecise()) {
+                          // Switch to determinate state
+                          setPercentage((int) Math.round(percentage));
+                        }
                       }
-                    }
 
-                    @Override
-                    public void onError(OfflineRegionError error) {
-                      // If an error occurs, print to logcat
-                      Timber.e("onError reason: %s", error.getReason());
-                      Timber.e("onError message: %s", error.getMessage());
-                    }
+                      @Override
+                      public void onError(OfflineRegionError error) {
+                        // If an error occurs, print to logcat
+                        Timber.e("onError reason: %s", error.getReason());
+                        Timber.e("onError message: %s", error.getMessage());
+                      }
 
-                    @Override
-                    public void mapboxTileCountLimitExceeded(long limit) {
-                      // Notify if offline region exceeds maximum tile count
-                      Timber.e("Mapbox tile count limit exceeded: %s", limit);
-                    }
-                  });
-                }
+                      @Override
+                      public void mapboxTileCountLimitExceeded(long limit) {
+                        // Notify if offline region exceeds maximum tile count
+                        Timber.e("Mapbox tile count limit exceeded: %s", limit);
+                      }
+                    });
+                  }
 
-                @Override
-                public void onError(String error) {
-                  Timber.e("Error: %s", error);
-                }
-              });
+                  @Override
+                  public void onError(String error) {
+                    Timber.e("Error: %s", error);
+                  }
+                });
+            }
           }
         });
       }

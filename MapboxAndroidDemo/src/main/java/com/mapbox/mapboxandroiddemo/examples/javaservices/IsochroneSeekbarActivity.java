@@ -170,18 +170,19 @@ public class IsochroneSeekbarActivity extends AppCompatActivity {
             public void onStyleLoaded(@NonNull Style style) {
               GeoJsonSource fillLayerSource = style.getSourceAs(
                   RESPONSE_FILL_LAYER_GEOJSON_SOURCE_ID);
-              if (fillLayerSource != null && featureCollection.features().size() > 0) {
+              if (fillLayerSource != null && featureCollection.features() != null
+                && featureCollection.features().size() > 0) {
                 fillLayerSource.setGeoJson(featureCollection);
 
                 // Move the camera from the map in case it's too zoomed in.
                 // This is here so that the isochrone information can be seen if the camera
                 // is too close to the map.
                 LatLngBounds latLngBounds = new LatLngBounds.Builder()
-                    .includes(createLatLngsForCameraBounds(featureCollection.features()))
-                    .build();
+                  .includes(createLatLngsForCameraBounds(featureCollection.features()))
+                  .build();
 
                 mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(
-                    latLngBounds, 50), 2000);
+                  latLngBounds, 50), 2000);
               }
             }
           });

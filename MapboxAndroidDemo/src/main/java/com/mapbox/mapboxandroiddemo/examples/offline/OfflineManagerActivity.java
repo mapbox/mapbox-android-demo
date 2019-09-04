@@ -329,10 +329,8 @@ public class OfflineManagerActivity extends AppCompatActivity {
               Toast.makeText(OfflineManagerActivity.this, items[regionSelected], Toast.LENGTH_LONG).show();
 
               // Get the region bounds and zoom
-              LatLngBounds bounds = ((OfflineTilePyramidRegionDefinition)
-                offlineRegions[regionSelected].getDefinition()).getBounds();
-              double regionZoom = ((OfflineTilePyramidRegionDefinition)
-                offlineRegions[regionSelected].getDefinition()).getMinZoom();
+              LatLngBounds bounds = (offlineRegions[regionSelected].getDefinition()).getBounds();
+              double regionZoom = (offlineRegions[regionSelected].getDefinition()).getMinZoom();
 
               // Create new camera position
               CameraPosition cameraPosition = new CameraPosition.Builder()

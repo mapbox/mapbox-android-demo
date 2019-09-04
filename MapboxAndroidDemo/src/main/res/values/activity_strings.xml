@@ -379,6 +379,11 @@
     <!-- Scale bar plugin-->
     <string name="zoom_map_fab_instruction">Zoom the map in and out. Click the button to change the scale bar styling.</string>
 
+    <!-- Symbol listener-->
+    <string name="clicked_symbol_toast">Symbol clicked</string>
+    <string name="long_clicked_symbol_toast">Symbol long clicked</string>
+    <string name="symbol_listener_instruction_toast">Tap, tap and hold, or tap and drag the icon</string>
+
     <!-- LocationComponent camera options -->
     <string name="normal">Normal</string>
     <string name="compass">Compass</string>

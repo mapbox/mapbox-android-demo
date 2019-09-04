@@ -72,8 +72,10 @@ public class PlaceSelectionPluginActivity extends AppCompatActivity {
       // Set the TextView text to the entire CarmenFeature. The CarmenFeature
       // also be parsed through to grab and display certain information such as
       // its placeName, text, or coordinates.
-      selectedLocationTextView.setText(String.format(
-        getString(R.string.selected_place_info), carmenFeature.toJson()));
+      if (carmenFeature != null) {
+        selectedLocationTextView.setText(String.format(
+          getString(R.string.selected_place_info), carmenFeature.toJson()));
+      }
     }
   }
 }

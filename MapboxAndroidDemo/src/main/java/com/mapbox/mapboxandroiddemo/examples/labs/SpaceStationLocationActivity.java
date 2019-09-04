@@ -3,8 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.labs;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.mapbox.geojson.Feature;
@@ -22,6 +20,8 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,7 +54,6 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
   // Map variables
   private MapView mapView;
   private MapboxMap map;
-  private GeoJsonSource spaceStationSource;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -112,9 +111,11 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
           public void onResponse(Call<IssModel> call, Response<IssModel> response) {
 
             // We only need the latitude and longitude from the API.
-            double latitude = response.body().getIssPosition().getLatitude();
-            double longitude = response.body().getIssPosition().getLongitude();
-            updateMarkerPosition(new LatLng(latitude, longitude));
+            if (response.body() != null) {
+              double latitude = response.body().getIssPosition().getLatitude();
+              double longitude = response.body().getIssPosition().getLongitude();
+              updateMarkerPosition(new LatLng(latitude, longitude));
+            }
           }
 
           @Override
@@ -158,7 +159,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
     // check if this is the first time we are executing this handler, the best way to do this is
     // check if marker is null;
     if (map.getStyle() != null) {
-      spaceStationSource = map.getStyle().getSourceAs("source-id");
+      GeoJsonSource spaceStationSource = map.getStyle().getSourceAs("source-id");
       if (spaceStationSource != null) {
         spaceStationSource.setGeoJson(FeatureCollection.fromFeature(
           Feature.fromGeometry(Point.fromLngLat(position.getLongitude(), position.getLatitude()))

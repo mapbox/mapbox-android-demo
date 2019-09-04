@@ -11,7 +11,6 @@ public class OffsettingHelper extends DefaultOffsettingHelper {
    */
   private static final float MAX_ICON_PROGRESS = 0.65f;
 
-  private float progressToCenter;
 
   public OffsettingHelper() {
   }
@@ -26,7 +25,7 @@ public class OffsettingHelper extends DefaultOffsettingHelper {
     float verticalRelativeToCenterOffset = (child.getY() / parent.getHeight()) + centerOffset;
 
     // Normalize for center
-    progressToCenter = Math.abs(0.5f - verticalRelativeToCenterOffset);
+    float progressToCenter = Math.abs(0.5f - verticalRelativeToCenterOffset);
     // Adjust to the maximum scale
     progressToCenter = Math.min(progressToCenter, MAX_ICON_PROGRESS);
 

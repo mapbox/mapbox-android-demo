@@ -93,62 +93,72 @@ public class FingerDrawQueryActivity extends AppCompatActivity {
 
       // Draw the line on the map as the finger is dragged along the map
       freehandTouchPointListForLine.add(screenTouchPoint);
-      GeoJsonSource drawLineSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_LINE_LAYER_SOURCE_ID);
-      drawLineSource.setGeoJson(LineString.fromLngLats(freehandTouchPointListForLine));
+      mapboxMap.getStyle(new Style.OnStyleLoaded() {
+        @Override
+        public void onStyleLoaded(@NonNull Style style) {
+          GeoJsonSource drawLineSource = style.getSourceAs(FREEHAND_DRAW_LINE_LAYER_SOURCE_ID);
+          if (drawLineSource != null) {
+            drawLineSource.setGeoJson(LineString.fromLngLats(freehandTouchPointListForLine));
+          }
 
-      // Draw a polygon area if drawSingleLineOnly == false
-      if (!drawSingleLineOnly) {
-        if (freehandTouchPointListForPolygon.size() < 2) {
-          freehandTouchPointListForPolygon.add(screenTouchPoint);
-        } else if (freehandTouchPointListForPolygon.size() == 2) {
-          freehandTouchPointListForPolygon.add(screenTouchPoint);
-          freehandTouchPointListForPolygon.add(freehandTouchPointListForPolygon.get(0));
-        } else {
-          freehandTouchPointListForPolygon.remove(freehandTouchPointListForPolygon.size() - 1);
-          freehandTouchPointListForPolygon.add(screenTouchPoint);
-          freehandTouchPointListForPolygon.add(freehandTouchPointListForPolygon.get(0));
-        }
-      }
+          // Draw a polygon area if drawSingleLineOnly == false
+          if (!drawSingleLineOnly) {
+            if (freehandTouchPointListForPolygon.size() < 2) {
+              freehandTouchPointListForPolygon.add(screenTouchPoint);
+            } else if (freehandTouchPointListForPolygon.size() == 2) {
+              freehandTouchPointListForPolygon.add(screenTouchPoint);
+              freehandTouchPointListForPolygon.add(freehandTouchPointListForPolygon.get(0));
+            } else {
+              freehandTouchPointListForPolygon.remove(freehandTouchPointListForPolygon.size() - 1);
+              freehandTouchPointListForPolygon.add(screenTouchPoint);
+              freehandTouchPointListForPolygon.add(freehandTouchPointListForPolygon.get(0));
+            }
+          }
 
-      // Create and show a FillLayer polygon where the search area is
-      GeoJsonSource fillPolygonSource = mapboxMap.getStyle().getSourceAs(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID);
-      List<List<Point>> polygonList = new ArrayList<>();
-      polygonList.add(freehandTouchPointListForPolygon);
-      Polygon drawnPolygon = Polygon.fromLngLats(polygonList);
-      fillPolygonSource.setGeoJson(drawnPolygon);
+          // Create and show a FillLayer polygon where the search area is
+          GeoJsonSource fillPolygonSource = style.getSourceAs(FREEHAND_DRAW_FILL_LAYER_SOURCE_ID);
+          List<List<Point>> polygonList = new ArrayList<>();
+          polygonList.add(freehandTouchPointListForPolygon);
+          Polygon drawnPolygon = Polygon.fromLngLats(polygonList);
+          if (fillPolygonSource != null) {
+            fillPolygonSource.setGeoJson(drawnPolygon);
+          }
 
-      // Take certain actions when the drawing is done
-      if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+          // Take certain actions when the drawing is done
+          if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
 
-        // If drawing polygon, add the first screen touch point to the end of
-        // the LineLayer list so that it's
-        if (!drawSingleLineOnly) {
-          freehandTouchPointListForLine.add(freehandTouchPointListForPolygon.get(0));
-        }
+            // If drawing polygon, add the first screen touch point to the end of
+            // the LineLayer list so that it's
+            if (!drawSingleLineOnly) {
+              freehandTouchPointListForLine.add(freehandTouchPointListForPolygon.get(0));
+            }
 
-        if (showSearchDataLocations && !drawSingleLineOnly) {
+            if (showSearchDataLocations && !drawSingleLineOnly) {
 
-          // Use Turf to calculate the number of data points within a certain Polygon area
-          FeatureCollection pointsInSearchAreaFeatureCollection =
-              TurfJoins.pointsWithinPolygon(searchPointFeatureCollection,
+              // Use Turf to calculate the number of data points within a certain Polygon area
+              FeatureCollection pointsInSearchAreaFeatureCollection =
+                TurfJoins.pointsWithinPolygon(searchPointFeatureCollection,
                   FeatureCollection.fromFeature(Feature.fromGeometry(
-                      drawnPolygon)));
+                    drawnPolygon)));
 
-          // Create a Toast which say show many data points within a certain Polygon area
-          if (VISIBLE.equals(mapboxMap.getStyle().getLayer(
-            SEARCH_DATA_SYMBOL_LAYER_ID).getVisibility().getValue())) {
-            Toast.makeText(FingerDrawQueryActivity.this, String.format(
-              getString(R.string.search_result_size),
-              pointsInSearchAreaFeatureCollection.features().size()), Toast.LENGTH_SHORT).show();
+              // Create a Toast which say show many data points within a certain Polygon area
+              if (VISIBLE.equals(style.getLayer(
+                SEARCH_DATA_SYMBOL_LAYER_ID).getVisibility().getValue())) {
+                Toast.makeText(FingerDrawQueryActivity.this, String.format(
+                  getString(R.string.search_result_size),
+                  pointsInSearchAreaFeatureCollection.features().size()), Toast.LENGTH_SHORT).show();
+              }
+            }
+
+            if (drawSingleLineOnly) {
+              Toast.makeText(FingerDrawQueryActivity.this,
+                getString(R.string.move_map_drawn_line), Toast.LENGTH_SHORT).show();
+            }
+            enableMapMovement();
           }
         }
+      });
 
-        if (drawSingleLineOnly) {
-          Toast.makeText(FingerDrawQueryActivity.this,
-            getString(R.string.move_map_drawn_line), Toast.LENGTH_SHORT).show();
-        }
-        enableMapMovement();
-      }
       return true;
     }
   };

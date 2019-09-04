@@ -75,7 +75,12 @@ public class AdjustLayerOpacityActivity extends AppCompatActivity {
           public void onStyleLoaded(@NonNull Style style) {
             style.addSource(new RasterSource("chicago-source", "mapbox://mapbox.u8yyzaor"));
             style.addLayer(new RasterLayer("chicago", "chicago-source"));
-            chicago = map.getStyle().getLayer("chicago");
+            map.getStyle(new Style.OnStyleLoaded() {
+              @Override
+              public void onStyleLoaded(@NonNull Style style) {
+                chicago = style.getLayer("chicago");
+              }
+            });
           }
         });
       }

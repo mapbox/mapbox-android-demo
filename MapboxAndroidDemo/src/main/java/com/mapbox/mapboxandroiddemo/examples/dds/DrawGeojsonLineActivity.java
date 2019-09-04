@@ -63,17 +63,19 @@ public class DrawGeojsonLineActivity extends AppCompatActivity implements OnMapR
   private void drawLines(@NonNull FeatureCollection featureCollection) {
     if (mapboxMap != null) {
       mapboxMap.getStyle(style -> {
-        if (featureCollection.features().size() > 0) {
-          style.addSource(new GeoJsonSource("line-source", featureCollection));
+        if (featureCollection.features() != null) {
+          if (featureCollection.features().size() > 0) {
+            style.addSource(new GeoJsonSource("line-source", featureCollection));
 
-          // The layer properties for our line. This is where we make the line dotted, set the
-          // color, etc.
-          style.addLayer(new LineLayer("linelayer", "line-source")
-            .withProperties(PropertyFactory.lineCap(Property.LINE_CAP_SQUARE),
-              PropertyFactory.lineJoin(Property.LINE_JOIN_MITER),
-              PropertyFactory.lineOpacity(.7f),
-              PropertyFactory.lineWidth(7f),
-              PropertyFactory.lineColor(Color.parseColor("#3bb2d0"))));
+            // The layer properties for our line. This is where we make the line dotted, set the
+            // color, etc.
+            style.addLayer(new LineLayer("linelayer", "line-source")
+              .withProperties(PropertyFactory.lineCap(Property.LINE_CAP_SQUARE),
+                PropertyFactory.lineJoin(Property.LINE_JOIN_MITER),
+                PropertyFactory.lineOpacity(.7f),
+                PropertyFactory.lineWidth(7f),
+                PropertyFactory.lineColor(Color.parseColor("#3bb2d0"))));
+          }
         }
       });
     }

@@ -32,7 +32,7 @@ public class MainActivity extends WearableActivity implements ExampleAdapter.Ite
 
     analytics = AnalyticsTracker.getInstance(this, true);
 
-    WearableRecyclerView wearableRecyclerView = (WearableRecyclerView) findViewById(R.id.recycler_launcher_view);
+    WearableRecyclerView wearableRecyclerView = findViewById(R.id.recycler_launcher_view);
     wearableRecyclerView.setHasFixedSize(true);
 
     OffsettingHelper offsettingHelper = new OffsettingHelper();
@@ -50,7 +50,7 @@ public class MainActivity extends WearableActivity implements ExampleAdapter.Ite
     exampleItemModels.add(new ExampleItemModel(R.string.activity_location_tracking_title,
       R.drawable.simple_map_view_screen, new Intent(MainActivity.this, LocationTrackingActivity.class)));
 
-    ExampleAdapter exampleAdapter = new ExampleAdapter(MainActivity.this, exampleItemModels);
+    ExampleAdapter exampleAdapter = new ExampleAdapter( exampleItemModels);
     wearableRecyclerView.setAdapter(exampleAdapter);
 
     exampleAdapter.setListener(this);

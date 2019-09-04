@@ -130,7 +130,7 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
         (0 until featureList!!.size).iterator().forEach {
             if (featureList[it].getStringProperty(NEIGHBORHOOD_NAME_PROPERTY) == name) {
                 if (featureSelectStatus(it))
-                    setFeatureSelectState(featureList.get(it), false) else
+                    setFeatureSelectState(featureList[it], false) else
                     setSelected(it)
             }
         }
@@ -187,18 +187,12 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
     constructor(activity: PolygonSelectToggleActivity) :
             AsyncTask<Void, Void, FeatureCollection>() {
 
-        private val PROPERTY_SELECTED = "selected"
-        private val PROPERTY_FILL_COLOR = "fill_color"
         private var randomColorListForPolygons = arrayOf("#20B2AA", "#A52A2A", "#FFB6C1", "#D2B48C",
                 "#FAFAD2", "#0000CD", "#FFFFF0", "#C71585", "#9400D3", "#F5F5DC", "#FFFACD", "#FFF5EE",
                 "#191970", "#FF8C00", "#000000", "#66CDAA", "#9ACD32", "#FFA07A", "#4B0082", "#E6E6FA"
         )
 
-        private val activityRef: WeakReference<PolygonSelectToggleActivity>
-
-        init {
-            this.activityRef = WeakReference(activity)
-        }
+        private val activityRef: WeakReference<PolygonSelectToggleActivity> = WeakReference(activity)
 
         override fun doInBackground(vararg params: Void): FeatureCollection? {
             val activity = activityRef.get() ?: return null
@@ -222,13 +216,17 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
                 // is the hex color value to be used in the `neighborhoodPolygonColoredFillLayer`
                 // fill layer.
                 singleFeature.addStringProperty(PROPERTY_FILL_COLOR,
-                        randomColorListForPolygons.get(Random().nextInt(
-                                randomColorListForPolygons.size)))
+                        randomColorListForPolygons[Random().nextInt(
+                                randomColorListForPolygons.size)])
             }
             activity.setUpData(featureCollection)
         }
 
         companion object {
+
+            const val PROPERTY_SELECTED = "selected"
+            const val PROPERTY_FILL_COLOR = "fill_color"
+
             internal fun loadGeoJsonFromAsset(context: Context, filename: String): String {
                 try {
                     // Load GeoJSON file

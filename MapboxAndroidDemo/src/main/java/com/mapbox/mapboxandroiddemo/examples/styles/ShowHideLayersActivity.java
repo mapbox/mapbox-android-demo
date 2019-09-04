@@ -117,13 +117,18 @@ public class ShowHideLayersActivity extends AppCompatActivity {
   }
 
   private void toggleLayer() {
-    Layer layer = map.getStyle().getLayer("museums");
-    if (layer != null) {
-      if (VISIBLE.equals(layer.getVisibility().getValue())) {
-        layer.setProperties(visibility(NONE));
-      } else {
-        layer.setProperties(visibility(VISIBLE));
+    map.getStyle(new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        Layer layer = style.getLayer("museums");
+        if (layer != null) {
+          if (VISIBLE.equals(layer.getVisibility().getValue())) {
+            layer.setProperties(visibility(NONE));
+          } else {
+            layer.setProperties(visibility(VISIBLE));
+          }
+        }
       }
-    }
+    });
   }
 }

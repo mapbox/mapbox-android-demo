@@ -100,29 +100,30 @@ public class LanguageSwitchActivity extends AppCompatActivity {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    Layer mapText = map.getStyle().getLayer("country-label");
-    if (mapText != null) {
-      switch (item.getItemId()) {
-        case R.id.french:
-          mapText.setProperties(textField("{name_fr}"));
-          return true;
-        case R.id.russian:
-          mapText.setProperties(textField("{name_ru}"));
-          return true;
-        case R.id.german:
-          mapText.setProperties(textField("{name_de}"));
-          return true;
-        case R.id.spanish:
-          mapText.setProperties(textField("{name_es}"));
-          return true;
-        default:
-          mapText.setProperties(textField("{name_en}"));
-          return true;
-        case android.R.id.home:
-          finish();
-          return true;
+    map.getStyle(new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        Layer mapText = style.getLayer("country-label");
+        if (mapText != null) {
+          switch (item.getItemId()) {
+            case R.id.french:
+              mapText.setProperties(textField("{name_fr}"));
+              return;
+            case R.id.russian:
+              mapText.setProperties(textField("{name_ru}"));
+              return;
+            case R.id.german:
+              mapText.setProperties(textField("{name_de}"));
+              return;
+            case R.id.spanish:
+              mapText.setProperties(textField("{name_es}"));
+              return;
+            default:
+              mapText.setProperties(textField("{name_en}"));
+          }
+        }
       }
-    }
+    });
     return super.onOptionsItemSelected(item);
   }
 }

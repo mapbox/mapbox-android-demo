@@ -174,11 +174,13 @@ public class QueryFeatureActivity extends AppCompatActivity implements OnMapRead
 
       StringBuilder stringBuilder = new StringBuilder();
 
-      for (Map.Entry<String, JsonElement> entry : feature.properties().entrySet()) {
-        stringBuilder.append(String.format("%s - %s", entry.getKey(), entry.getValue()));
-        stringBuilder.append(System.getProperty("line.separator"));
+      if (feature.properties() != null) {
+        for (Map.Entry<String, JsonElement> entry : feature.properties().entrySet()) {
+          stringBuilder.append(String.format("%s - %s", entry.getKey(), entry.getValue()));
+          stringBuilder.append(System.getProperty("line.separator"));
+        }
+        new GenerateViewIconTask(QueryFeatureActivity.this).execute(FeatureCollection.fromFeature(feature));
       }
-      new GenerateViewIconTask(QueryFeatureActivity.this).execute(FeatureCollection.fromFeature(feature));
     } else {
       Toast.makeText(this, getString(R.string.query_feature_no_properties_found), Toast.LENGTH_SHORT).show();
     }
@@ -227,33 +229,37 @@ public class QueryFeatureActivity extends AppCompatActivity implements OnMapRead
       if (activity != null) {
         LayoutInflater inflater = LayoutInflater.from(activity);
 
-        featureAtMapClickPoint = params[0].features().get(0);
+        if (params[0].features() != null) {
+          featureAtMapClickPoint = params[0].features().get(0);
 
-        StringBuilder stringBuilder = new StringBuilder();
+          StringBuilder stringBuilder = new StringBuilder();
 
-        BubbleLayout bubbleLayout = (BubbleLayout) inflater.inflate(
-          R.layout.activity_query_feature_window_symbol_layer, null);
+          BubbleLayout bubbleLayout = (BubbleLayout) inflater.inflate(
+            R.layout.activity_query_feature_window_symbol_layer, null);
 
-        TextView titleTextView = bubbleLayout.findViewById(R.id.info_window_title);
-        titleTextView.setText(activity.getString(R.string.query_feature_marker_title));
+          TextView titleTextView = bubbleLayout.findViewById(R.id.info_window_title);
+          titleTextView.setText(activity.getString(R.string.query_feature_marker_title));
 
-        for (Map.Entry<String, JsonElement> entry : featureAtMapClickPoint.properties().entrySet()) {
-          stringBuilder.append(String.format("%s - %s", entry.getKey(), entry.getValue()));
-          stringBuilder.append(System.getProperty("line.separator"));
+          if (featureAtMapClickPoint.properties() != null) {
+            for (Map.Entry<String, JsonElement> entry : featureAtMapClickPoint.properties().entrySet()) {
+              stringBuilder.append(String.format("%s - %s", entry.getKey(), entry.getValue()));
+              stringBuilder.append(System.getProperty("line.separator"));
+            }
+
+            TextView propertiesListTextView = bubbleLayout.findViewById(R.id.info_window_feature_properties_list);
+            propertiesListTextView.setText(stringBuilder.toString());
+
+            int measureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+            bubbleLayout.measure(measureSpec, measureSpec);
+
+            float measuredWidth = bubbleLayout.getMeasuredWidth();
+
+            bubbleLayout.setArrowPosition(measuredWidth / 2 - 5);
+
+            Bitmap bitmap = QueryFeatureActivity.SymbolGenerator.generate(bubbleLayout);
+            imagesMap.put(CALLOUT_IMAGE_ID, bitmap);
+          }
         }
-
-        TextView propertiesListTextView = bubbleLayout.findViewById(R.id.info_window_feature_properties_list);
-        propertiesListTextView.setText(stringBuilder.toString());
-
-        int measureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        bubbleLayout.measure(measureSpec, measureSpec);
-
-        int measuredWidth = bubbleLayout.getMeasuredWidth();
-
-        bubbleLayout.setArrowPosition(measuredWidth / 2 - 5);
-
-        Bitmap bitmap = QueryFeatureActivity.SymbolGenerator.generate(bubbleLayout);
-        imagesMap.put(CALLOUT_IMAGE_ID, bitmap);
       }
 
       return imagesMap;

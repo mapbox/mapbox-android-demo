@@ -63,6 +63,7 @@ import java.io.InputStream;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -724,7 +725,7 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
         byte[] buffer = new byte[size];
         is.read(buffer);
         is.close();
-        return new String(buffer, "UTF-8");
+        return new String(buffer, Charset.forName("UTF-8"));
       } catch (Exception exception) {
         throw new RuntimeException(exception);
       }
@@ -995,8 +996,8 @@ public class SymbolLayerMapillaryActivity extends AppCompatActivity implements O
       canvas.drawARGB(0, 0, 0, 0);
       paint.setColor(color);
       // canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
-      canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
-        bitmap.getWidth() / 2, paint);
+      canvas.drawCircle((float) bitmap.getWidth() / 2, (float) bitmap.getHeight() / 2,
+        (float) bitmap.getWidth() / 2, paint);
       paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
       canvas.drawBitmap(bitmap, rect, rect, paint);
       //Bitmap _bmp = Bitmap.createScaledBitmap(output, 60, 60, false);
