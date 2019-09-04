@@ -70,6 +70,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.SingleHighlightedBuildingExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsGradientLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.ElevationQueryActivity;
@@ -783,6 +784,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         null,
         new Intent(MainActivity.this, OpacityZoomChangeExtrusionKotlinActivity.class),
         R.string.activity_extrusions_zoom_opacity_change_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_extrusions,
+      R.string.activity_extrusions_single_highlighted_building_extrusion_title,
+      R.string.activity_extrusions_single_highlighted_building_extrusion_description,
+      new Intent(MainActivity.this, SingleHighlightedBuildingExtrusionActivity.class),
+      null,
+      R.string.activity_extrusions_single_highlighted_building_extrusion_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,

@@ -45,6 +45,7 @@
     <string name="activity_extrusions_rotate_extrusions_description">Rotate and tilt device to change camera and see all around 3D buildings.</string>
     <string name="activity_extrusions_zoom_opacity_change_description">Use runtime styling to make the 3D buildings\' opacity dependent on the map\'s zoom level.</string>
     <string name="activity_extrusions_indoor_3d_description">Create a 3D indoor map with the fill-extrude-height paint property.</string>
+    <string name="activity_extrusions_single_highlighted_building_extrusion_description">Highlight a single building extrusion with a different color when tapped on.</string>
     <string name="activity_dds_style_circle_categorically_description">Using a categorical circle-color property function for a visualization.</string>
     <string name="activity_dds_kotlin_style_circle_categorically_description">Kotlin example for using a categorical circle-color property function for a visualization.</string>
     <string name="activity_dds_heatmap_description">Add and customize a heatmap to visualize data.</string>

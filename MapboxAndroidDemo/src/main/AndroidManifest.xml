@@ -1003,6 +1003,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.extrusions.SingleHighlightedBuildingExtrusionActivity"
+            android:label="@string/activity_extrusions_single_highlighted_building_extrusion_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.dds.SymbolCollisionDetectionActivity"
             android:label="@string/activity_dds_symbol_collision_detection_title">
             <meta-data
