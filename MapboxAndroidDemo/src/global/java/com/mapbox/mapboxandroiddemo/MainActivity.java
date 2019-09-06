@@ -63,6 +63,7 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivit
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsGradientLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.IsochroneActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.IsochroneSeekbarActivity;
@@ -1050,6 +1051,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, TurfLineDistanceActivity.class),
       null,
       R.string.activity_java_services_turf_line_distance_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_java_services,
+      R.string.activity_java_services_directions_gradient_title,
+      R.string.activity_java_services_directions_gradient_description,
+      new Intent(MainActivity.this, DirectionsGradientLineActivity.class),
+      null,
+      R.string.activity_java_services_directions_gradient_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,
