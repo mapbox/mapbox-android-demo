@@ -32,6 +32,7 @@ import retrofit2.Response;
 import timber.log.Timber;
 
 import static com.mapbox.core.constants.Constants.PRECISION_6;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
@@ -109,7 +110,7 @@ public class DirectionsActivity extends AppCompatActivity {
   }
 
   /**
-   * Add the route and maker icon layers to the map
+   * Add the route and marker icon layers to the map
    */
   private void initLayers(@NonNull Style loadedMapStyle) {
     LineLayer routeLayer = new LineLayer(ROUTE_LAYER_ID, ROUTE_SOURCE_ID);
@@ -131,8 +132,8 @@ public class DirectionsActivity extends AppCompatActivity {
     loadedMapStyle.addLayer(new SymbolLayer(ICON_LAYER_ID, ICON_SOURCE_ID).withProperties(
       iconImage(RED_PIN_ICON_ID),
       iconIgnorePlacement(true),
-      iconIgnorePlacement(true),
-      iconOffset(new Float[] {0f, -4f})));
+      iconAllowOverlap(true),
+      iconOffset(new Float[] {0f, -9f})));
   }
 
   /**
@@ -154,8 +155,6 @@ public class DirectionsActivity extends AppCompatActivity {
     client.enqueueCall(new Callback<DirectionsResponse>() {
       @Override
       public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
-        System.out.println(call.request().url().toString());
-
         // You can get the generic HTTP info about the response
         Timber.d("Response code: " + response.code());
         if (response.body() == null) {

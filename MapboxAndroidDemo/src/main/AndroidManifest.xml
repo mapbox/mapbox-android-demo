@@ -279,6 +279,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.javaservices.DirectionsGradientLineActivity"
+            android:label="@string/activity_java_services_directions_gradient_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.labs.RecyclerViewDirectionsActivity"
             android:label="@string/activity_lab_rv_directions_title">
             <meta-data

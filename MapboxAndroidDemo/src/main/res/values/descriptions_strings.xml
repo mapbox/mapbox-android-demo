@@ -97,6 +97,7 @@
     <string name="activity_java_services_turf_ring_description">Use Turf to calculate coordinates to eventually draw a ring around a center coordinate.</string>
     <string name="activity_java_services_turf_physical_circle_description">Use Turf to generate a circle with a radius expressed in physical units (e.g. miles, kilometers, etc).</string>
     <string name="activity_java_services_turf_line_distance_description">Use Turf to generate a circle with a radius expressed in physical units (e.g. miles, kilometers, etc).</string>
+    <string name="activity_java_services_directions_gradient_description">Apply a two-color gradient to a Directions API route line.</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
     <string name="activity_plugins_geojson_plugin_description">Easily retrieve GeoJSON data from a url, asset, or path</string>
