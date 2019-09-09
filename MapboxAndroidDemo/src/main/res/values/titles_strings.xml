@@ -137,4 +137,5 @@
     <string name="activity_lab_home_screen_widget_title">Homescreen geocoding widget</string>
     <string name="activity_lab_rv_directions_title">RecyclerView Directions</string>
     <string name="activity_lab_spinning_icon_title">Spinning icon</string>
+    <string name="activity_lab_change_attribution_color_title">Style attribution</string>
 </resources>

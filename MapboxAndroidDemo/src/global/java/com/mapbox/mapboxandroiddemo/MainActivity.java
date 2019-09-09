@@ -80,6 +80,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfPhysicalCircleActi
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.ChangeAttributionColorActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.HomeScreenWidgetActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
@@ -1259,6 +1260,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, SpinningSymbolLayerIconActivity.class),
       null,
       R.string.activity_lab_spinning_icon_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_change_attribution_color_title,
+      R.string.activity_lab_change_attribution_color_description,
+      new Intent(MainActivity.this, ChangeAttributionColorActivity.class),
+      null,
+      R.string.activity_lab_change_attribution_color_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
