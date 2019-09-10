@@ -441,4 +441,10 @@
     <string name="route_call_failure">Directions API call failed. Try again later.</string>
     <string name="tap_map_instruction_gradient_directions">Tap the map to change the route destination.</string>
 
+    <!-- Multiple geometries directions line-->
+    <string name="no_legs_toast">This directions route has no legs</string>
+    <string name="no_routes_found">No routes found</string>
+    <string name="response_body_null">Response body null. Try again later.</string>
+    <string name="tap_on_map_to_change_destination">Tap on map to change destination</string>
+
 </resources>
