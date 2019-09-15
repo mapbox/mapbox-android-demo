@@ -286,6 +286,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.labs.SharedPreferencesActivity"
+            android:label="@string/activity_lab_shared_preferences_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.labs.RecyclerViewOnMapActivity"
             android:label="@string/activity_lab_rv_on_map_title">
             <meta-data

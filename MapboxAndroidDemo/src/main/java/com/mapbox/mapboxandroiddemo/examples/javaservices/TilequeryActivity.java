@@ -288,6 +288,9 @@ public class TilequeryActivity extends AppCompatActivity implements
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 
