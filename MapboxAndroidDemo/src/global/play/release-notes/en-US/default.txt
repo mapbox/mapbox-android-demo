@@ -1,4 +1,4 @@
-This update is in line with the 8.3.0 release of the Mapbox Maps SDK for Android and includes several fixes and new examples:
+This update is in line with the 8.3.1 release of the Mapbox Maps SDK for Android and includes several fixes and new examples:
 
 - Isochrone API data + seekbar slider
 - RecyclerView + Directions API route
@@ -10,3 +10,8 @@ This update is in line with the 8.3.0 release of the Mapbox Maps SDK for Android
 - Kotlin map fragment
 - Spinning icons
 - Measuring line length in distance units
+- Saving and retrieving coordinates in shared preferences
+- Elevation query
+- Attribution color change
+- Multiple geometries based on Directions route
+
