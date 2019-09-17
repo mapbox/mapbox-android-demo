@@ -139,5 +139,6 @@
     <string name="activity_lab_rv_directions_url" translatable="false">https://i.imgur.com/LurOuXQ.png</string>
     <string name="activity_lab_spinning_icon_url" translatable="false">https://i.imgur.com/jxQpAt2.png</string>
     <string name="activity_lab_change_attribution_color_url" translatable="false">https://i.imgur.com/cGv98jb.png</string>
+    <string name="activity_lab_shared_preferences_url" translatable="false">https://i.imgur.com/znxAhDG.png</string>
     <string name="activity_china_simple_china_mapview_url" translatable="false">https://i.imgur.com/KwoEynZ.png</string>
 </resources>

@@ -453,4 +453,11 @@
     <string name="elevation_tilequery_api_response_error">Error with the request. Do you have internet access?</string>
     <string name="elevation_tilequery_no_features">No features in the response.</string>
     <string name="elevation_numbers_only_textview">%1$d Features in the API response: %2$s</string>
+
+    <!-- Shared preferences save -->
+    <string name="not_saved_yet">Not saved yet</string>
+    <string name="saved_lat_textview">Saved latitude: %1$s</string>
+    <string name="saved_long_textview">Saved longitude: %1$s</string>
+    <string name="tap_on_map_save_to_shared_pref">Tap on the map to save coordinates to the device\'s Shared Preferences</string>
+    <string name="shared_pref_marker_placement">Marker placed at coordinates saved in Shared Preferences.</string>
 </resources>
