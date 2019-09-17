@@ -2,33 +2,41 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 8.3.1 - September 17, 2019
+
+* Adding example of saving and retrieving coordinates in shared preferences#[1210](https://github.com/mapbox/mapbox-android-demo/pull/1210)
+* Updated proguard-rule files to cut down on proguard messages #[1174](https://github.com/mapbox/mapbox-android-demo/pull/1174)
+* Adding elevation query example #[1170](https://github.com/mapbox/mapbox-android-demo/pull/1170)
+* adding attribution color change example #[1208](https://github.com/mapbox/mapbox-android-demo/pull/1208)
+* adding example of multiple geometries based on Directions route #[1158](https://github.com/mapbox/mapbox-android-demo/pull/1158)
+
 ## 8.3.0 - September 3, 2019
 
-* Gradle Play Publisher plugin adjustments #1198  
-* Refactoring to replace style.isFullyLoaded() with the `onStyleLoaded()` callback #1192
-* Refactoring RelativeLayout to FrameLayout #1181  
-* Bumping maps sdk version to stable 8.3.0 #1161
-* Adding Kotlin example of adding a map fragment to container #1188  
-* Adding null checks in OptimizationActivity response #1184  
-* Refactored TilequeryActivity with appropriate null checks #1185  
-* Added try/catch for getting getISO3Country for analytics #1182  
-* Fixes to Localization Plugin XML so that language switch buttons appear #1186
-* Added try/catch when TileLoadingInterceptor tries to get country code #1183
-* Refactoring changes to switch loadGeoJsonFromAsset( usage to URI #1179
-* Adding spinning SymbolLayer icons example #1177
-* Added TurfMeasurement distance example #1193
+* Gradle Play Publisher plugin adjustments #[1198](https://github.com/mapbox/mapbox-android-demo/pull/1198)
+* Refactoring to replace style.isFullyLoaded() with the `onStyleLoaded()` callback #[1192](https://github.com/mapbox/mapbox-android-demo/pull/1192)
+* Refactoring RelativeLayout to FrameLayout #[1181](https://github.com/mapbox/mapbox-android-demo/pull/1181)
+* Bumping maps sdk version to stable 8.3.0 #[1161](https://github.com/mapbox/mapbox-android-demo/pull/1161)
+* Adding Kotlin example of adding a map fragment to container #[1188](https://github.com/mapbox/mapbox-android-demo/pull/1188)
+* Adding null checks in OptimizationActivity response #[1184](https://github.com/mapbox/mapbox-android-demo/pull/1184)
+* Refactored TilequeryActivity with appropriate null checks #[1185](https://github.com/mapbox/mapbox-android-demo/pull/1185)
+* Added try/catch for getting getISO3Country for analytics #[1182](https://github.com/mapbox/mapbox-android-demo/pull/1182)
+* Fixes to Localization Plugin XML so that language switch buttons appear #[1186](https://github.com/mapbox/mapbox-android-demo/pull/1186)
+* Added try/catch when TileLoadingInterceptor tries to get country code #[1183](https://github.com/mapbox/mapbox-android-demo/pull/1183)
+* Refactoring changes to switch loadGeoJsonFromAsset usage to URI #[1179](https://github.com/mapbox/mapbox-android-demo/pull/1179)
+* Adding spinning SymbolLayer icons example #[1177](https://github.com/mapbox/mapbox-android-demo/pull/1177)
+* Added TurfMeasurement distance example #[1193](https://github.com/mapbox/mapbox-android-demo/pull/1193)
 
 ## 8.2.1-3 - August 13, 2019
 
-* Downgraded gradle version to 3.3.0 #1171
+* Downgraded gradle version to 3.3.0 #[1171](https://github.com/mapbox/mapbox-android-demo/pull/1171)
 
 ## 8.2.1-2 - August 13, 2019
 
-* Play Publisher Gradle plugin bump to 2.0.0 and refactoring fixes #1169
+* Play Publisher Gradle plugin bump to 2.0.0 and refactoring fixes #[1169](https://github.com/mapbox/mapbox-android-demo/pull/1169)
 
 ## 8.2.1-1 - August 9, 2019
 
-* Added CircleCI command to create google services json file in Release job #1166
+* Added CircleCI command to create google services json file in Release job #[1166](https://github.com/mapbox/mapbox-android-demo/pull/1166)
 
 ## 8.2.1 - August 7, 2019
 
