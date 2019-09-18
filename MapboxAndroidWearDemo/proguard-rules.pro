@@ -97,9 +97,9 @@
 -keep class com.mapbox.android.core.location.**
 -keep class android.arch.lifecycle.** { *; }
 -keep class com.mapbox.android.core.location.** { *; }
--dontnote class com.mapbox.mapboxsdk.**
--dontnote class com.mapbox.android.gestures.**
--dontnote class com.mapbox.mapboxsdk.plugins.**
+-dontnote com.mapbox.mapboxsdk.**
+-dontnote com.mapbox.android.gestures.**
+-dontnote com.mapbox.mapboxsdk.plugins.**
 
 # Other Android
 -keep public class com.google.firebase.** { public *; }
