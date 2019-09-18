@@ -3,7 +3,6 @@ package com.mapbox.mapboxandroiddemo.examples.labs;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -24,7 +23,6 @@ public class ChangeAttributionColorActivity extends AppCompatActivity implements
   private static final String CUSTOM_GREEN_MONOCHROME_STYLE_URI =
       "mapbox://styles/appsatmapboxcom/ck0cyq1lt0bbo1cmwkpf2w7g9";
   private MapView mapView;
-  private ImageView attributionView;
   private int index = 0;
   private int[] attributionColors;
 
@@ -57,14 +55,12 @@ public class ChangeAttributionColorActivity extends AppCompatActivity implements
     mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        // Get the ImageView from the MapView
-        attributionView = mapView.findViewById(R.id.attributionView);
 
         // Change the color when the floating action button is clicked
         findViewById(R.id.switch_attribution_color_fab).setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            if (index == attributionColors.length - 1) {
+            if (index == attributionColors.length) {
               mapboxMap.setStyle(Style.LIGHT);
               index = 0;
             }
@@ -76,13 +72,13 @@ public class ChangeAttributionColorActivity extends AppCompatActivity implements
 
             // Adjust map to a custom monochrome dark green style to match the
             // "i" attribution's dark green color
-            if (index == 4) {
+            if (index == 5) {
               mapboxMap.setStyle(new Style.Builder()
                   .fromUri(CUSTOM_GREEN_MONOCHROME_STYLE_URI));
             }
 
             // Change the color of the "i" attribution button
-            attributionView.setColorFilter(attributionColors[index]);
+            mapboxMap.getUiSettings().setAttributionTintColor(attributionColors[index]);
 
             index++;
           }
