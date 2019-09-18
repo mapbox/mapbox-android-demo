@@ -95,7 +95,7 @@
     <string name="activity_java_services_simplify_polyline_url" translatable="false">http://i.imgur.com/uATgul1.png</string>
     <string name="activity_java_services_map_matching_url" translatable="false">https://i.imgur.com/ig8gGnY.png</string>
     <string name="activity_java_services_turf_ring_url" translatable="false">https://i.imgur.com/nG8xeXH.png</string>
-    <string name="activity_java_services_turf_physical_circle_url" translatable="false">https://i.imgur.com/nG8xeXH.png</string>
+    <string name="activity_java_services_turf_physical_circle_url" translatable="false">https://i.imgur.com/uPQXVbv.png</string>
     <string name="activity_java_services_multiple_geometries_from_directions_route_url" translatable="false">https://i.imgur.com/Tz35fHA.png</string>
     <string name="activity_java_services_turf_elevation_query_url" translatable="false">https://i.imgur.com/zrE2oSR.png</string>
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
