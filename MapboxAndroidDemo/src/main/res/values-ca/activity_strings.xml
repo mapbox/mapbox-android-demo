@@ -25,7 +25,6 @@
     <string name="zoom_map_in_and_out_instruction">Apropa\'t i allunya\'t per veure com canvien les xifres a les agrupacions</string>
 
     <!--Geocode widget hint text-->
-    <string name="hint_text_in_geocode_widget">Escull ubicació </string>
 
     <!--Tap on feature box instruction-->
     <string name="tap_on_feature_box_instruction">Toqueu al requadre delimitador</string>
@@ -44,36 +43,23 @@
     <!-- Settings dialog -->
     <string name="settings_dialog_title">Ajustos</string>
     <string name="settings_dialog_positive_button_text">Desa</string>
-    <string name="settings_status_toast_analytics_opt_in">Ajust de consentiment desat</string>
-    <string name="settings_status_toast_analytics_opt_out">Ajust de no consentiment desat</string>
     <string name="settings_dialog_negative_button_text">Cancel·lar</string>
     <string name="analytics_opt_out_textview">No consentiment a les analísi de seguiment</string>
     <string name="log_out_of_account_button">Sortir del compte de Mapbox</string>
     <string name="log_out_toast_confirm">Sessió tancada amb èxit</string>
-    <string name="logged_in_username">Compte d\'usuari: %1$s</string>
 
     <!--Basic offline map-->
     <string name="basic_offline_deleted_toast">Mapa offlilne de Yosemite esborrat</string>
 
-    <string name="basic_marker_activity_marker_options_title">Hisense Arena</string>
-    <string name="basic_marker_activity_marker_options_snippet">Olympic Blvd, Melbourne VIC 3001, Australia</string>
-
     <!--Marker strings for MarkerViewPluginActivity activity-->
-    <string name="draw_custom_marker_options_title">Cape Town Harbour</string>
-    <string name="draw_custom_marker_options_snippet">Un dels ports més actius a l\'Àfrica del Sud</string>
 
     <!--Marker strings for DrawMarkerActivity activity-->
     <string name="draw_marker_options_title">Hola Món!</string>
     <string name="draw_marker_options_snippet">Benvingut al meu marcador.</string>
 
     <!--Marker strings for GeocodingActivity activity-->
-    <string name="geocode_activity_marker_options_title">Resultat del geocodificador</string>
 
     <!--Marker strings for DirectionsActivity activity-->
-    <string name="directions_activity_marker_options_origin_title">Origen</string>
-    <string name="directions_activity_marker_options_origin_snippet">Alhambra</string>
-    <string name="directions_activity_marker_options_destination_title">Destinació</string>
-    <string name="directions_activity_marker_options_destination_snippet">Plaza del Triunfo</string>
     <string name="directions_activity_toast_message">La ruta té %1$f metres.</string>
 
     <!--Strings for OfflineManager activity-->
@@ -100,7 +86,6 @@
 
     <!--QueryFeatureActivity activity-->
     <string name="query_feature_marker_title">Propietats:</string>
-    <string name="query_feature_marker_snippet">Cap propietat per aquest element</string>
     <string name="query_feature_no_properties_found">Cap propietat per aquest element</string>
 
     <!--LocationPickerActivity activity-->
@@ -114,9 +99,6 @@
     <string name="fab_title_attractions">Atraccions</string>
 
     <!--OffRouteActivity activity-->
-    <string name="off_route_toast_press_map">Prem el mapa per afegir una destinació</string>
-    <string name="toast_no_routes_found">Cap ruta trobada</string>
-    <string name="off_route_toast_off_route">Fora de la ruta</string>
 
     <!--LanguageSwitchActivity activity-->
     <string name="language_switch_options_menu_language_english">Anglès</string>
@@ -126,13 +108,9 @@
     <string name="language_switch_options_menu_language_spanish">Espanyol</string>
 
     <!--LanguageSwitchActivity activity-->
-    <string name="custom_window_marker_title_spain">Espanya</string>
-    <string name="custom_window_marker_title_egypt">Egipte</string>
-    <string name="custom_window_marker_title_germany">Alemanya</string>
 
     <!--Tap on map instruction for toast-->
     <string name="tap_on_map_instruction">Toqueu en qualsevol lloc al mapa</string>
-    <string name="tap_on_map_turf_inside_instruction">Toqueu a l\'interior del polígon blau</string>
 
     <string name="san_francisco">San Francisco</string>
     <string name="los_angeles">Los Angeles</string>

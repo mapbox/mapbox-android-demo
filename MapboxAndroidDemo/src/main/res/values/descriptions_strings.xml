@@ -10,7 +10,6 @@
     <string name="activity_basic_mapbox_kotlin_description">Display a basic map with Kotlin code.</string>
     <string name="activity_basic_kotlin_support_map_frag_description">Place a map fragment inside of a container.</string>
     <string name="activity_styles_mapbox_studio_description">Use a custom Mapbox-hosted style.</string>
-    <string name="activity_style_raster_description">Use legacy raster tiles in your app.</string>
     <string name="activity_styles_default_description">Use a variety of professionally designed styles with the Mapbox Maps SDK.</string>
     <string name="activity_styles_show_hide_layer_description">Create a custom layer switcher to display different datasets.</string>
     <string name="activity_styles_language_switch_description">Switch the maps language dynamically.</string>
@@ -59,7 +58,6 @@
     <string name="activity_dds_satellite_land_select_description">View satellite photos and click to outline an area of land.</string>
     <string name="activity_dds_symbol_zoom_switch_description">Change SymbolLayer icons based on the camera\'s zoom level.</string>
     <string name="activity_dds_circle_radius_description">Set the radii of a circle layer\'s circles based on a data property.</string>
-    <string name="activity_annotation_marker_description">Create a default marker with an InfoWindow.</string>
     <string name="activity_dds_geojson_line_description">Draw a polyline by parsing a GeoJSON file with the Mapbox Maps SDK.</string>
     <string name="activity_dds_polygon_select_toggle_description">Tap on various polygons to "select" them and toggle their colors.</string>
     <string name="activity_dds_polygon_description">Draw a vector polygon on a map with the Mapbox Maps SDK.</string>
@@ -67,8 +65,6 @@
     <string name="activity_dds_symbol_collision_detection_description">Allow or deny text and icons to overlap and collide.</string>
     <string name="activity_dds_polygon_revealed_hole_outline_description">Outline a polygon hole to highlight a revealed region.</string>
     <string name="activity_styles_text_field_formatting_description">Adjust the color, size, and fonts of SymbolLayer text fields.</string>
-    <string name="activity_annotation_marker_view_description">Attach a view to a given position on the map.</string>
-    <string name="activity_annotation_custom_info_window_description">Use an info window adapter to customize the info window.</string>
     <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
     <string name="activity_camera_restrict_description">Prevent a map from being panned to a different place.</string>
@@ -76,7 +72,6 @@
     <string name="activity_offline_simple_description">Download and view an offline map using the Mapbox Maps SDK.</string>
     <string name="activity_offline_manager_description">Download, view, navigate to, and delete an offline region.</string>
     <string name="activity_offline_cache_management_description">Explore the various ways to manage the Maps SDK cache.</string>
-    <string name="activity_description">Download, view, navigate to, and delete an offline region.</string>
     <string name="activity_query_feature_description">Click the map to add a marker at the location and display the maps property information for that feature.</string>
     <string name="activity_query_select_building_description">Use the query feature to select a building, get its geometry and draw a polygon highlighting it.</string>
     <string name="activity_query_feature_count_description">Get the feature count inside a bounding box and highlight all the buildings.</string>
@@ -102,7 +97,6 @@
     <string name="activity_java_services_turf_elevation_query_description">Use the Tilequery API to query the Mapbox Terrain vector tileset and retrieve elevation information for a specific location.</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
-    <string name="activity_plugins_geojson_plugin_description">Easily retrieve GeoJSON data from a url, asset, or path</string>
     <string name="activity_plugins_places_plugin_description">Add location search ("geocoding") functionality and UI to search for any place in the world</string>
     <string name="activity_plugins_symbol_listener_description">Listen for Symbol interaction using the Annotation plugin its and built-in listeners</string>
     <string name="activity_plugins_localization_plugin_description">Use the plugin to automatically change map label text to the language set on the device.</string>
@@ -121,7 +115,6 @@
     <string name="activity_lab_marker_following_route_description">Using a map matched GeoJSON route, the marker travels along the route at consistent speed.</string>
     <string name="activity_lab_space_station_location_description">See the International Space Station location in real time.</string>
     <string name="activity_lab_picture_in_picture_description">Use the Android O release of picture-in-picture to maintain a map in a separate window.</string>
-    <string name="activity_lab_off_route_description">Detect when the car is off route and reroute them.</string>
     <string name="activity_lab_pulsing_layer_opacity_color_description">Use the style API to highlight parks, hotels, and attractions. A pulsing animation is also added to the colors.</string>
     <string name="activity_lab_indoor_map_description">Display an indoor map of a building with toggles to switch between floor levels.</string>
     <string name="activity_lab_rv_on_map_description">Manipulate the map based on recyclerview interactions.</string>

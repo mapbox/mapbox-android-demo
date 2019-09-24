@@ -28,12 +28,10 @@
     <string name="activity_dds_style_circle_categorically_title">Định kiểu hình tròn tùy loại</string>
     <string name="activity_dds_choropleth_zoom_change_title">Cập nhật lớp vùng giá trị theo mức thu phóng</string>
     <string name="activity_dds_style_line_identity_property_title">Định vị tuyến dùng hàm thuộc tính đồng nhất thức</string>
-    <string name="activity_annotation_marker_title">Vẽ ghim</string>
     <string name="activity_plugins_markerview_plugin_title">Vẽ hình ghim tùy biến</string>
     <string name="activity_dds_geojson_line_title">Kẻ đường GeoJSON</string>
     <string name="activity_dds_polygon_title">Vẽ hình đa giác</string>
     <string name="activity_dds_polygon_holes_title">Vẽ hình đa giác có lỗ</string>
-    <string name="activity_annotation_custom_info_window_title">Cửa sổ thông tin tùy biến</string>
     <string name="activity_lab_animated_marker_title">Làm động vị trí của ghim</string>
     <string name="activity_camera_animate_title">Làm động điểm nhìn của bản đồ</string>
     <string name="activity_camera_bounding_box_title">Làm điểm nhìn vừa hộp bao</string>
@@ -53,7 +51,6 @@
     <string name="activity_lab_location_picker_title">Trình chọn địa điểm</string>
     <string name="activity_lab_marker_following_route_title">Ghim theo dõi tuyến đường</string>
     <string name="activity_lab_picture_in_picture_title">Hình trong hình</string>
-    <string name="activity_lab_off_route_title">Nhận ra vụ lạc đường</string>
     <string name="activity_lab_pulsing_layer_opacity_color_title">Los Angeles dành cho khách du lịch</string>
     <string name="activity_lab_indoor_map_title">Bản đồ trong nhà</string>
 

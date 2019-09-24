@@ -43,42 +43,28 @@
     <string name="location_component_fragment_text">User\'s current location on a map fragment</string>
 
     <!-- Location change listening -->
-    <string name="title_location_tracking">Location tracking</string>
-    <string name="description_location_tracking">Use the Mapbox Core Library to receive device location updates</string>
     <string name="new_location">New lat: %1$s New longitude: %2$s</string>
 
     <!-- Settings dialog -->
     <string name="settings_dialog_title">Settings</string>
     <string name="settings_dialog_positive_button_text">Save</string>
-    <string name="settings_status_toast_analytics_opt_in">Opt in setting saved</string>
     <string name="settings_status_toast_settings_saved">Settings saved</string>
-    <string name="settings_status_toast_analytics_opt_out">Opt out setting saved</string>
     <string name="settings_dialog_negative_button_text">Cancel</string>
     <string name="analytics_opt_out_textview">Opt out of analytics tracking</string>
     <string name="login_or_signup_account_switch_text">Always show account login/creation screen</string>
     <string name="log_out_of_account_button">Log out of Mapbox account</string>
     <string name="log_out_toast_confirm">Successfully logged out</string>
-    <string name="logged_in_username">Account username: %1$s</string>
 
     <!--Basic offline map-->
     <string name="basic_offline_deleted_toast">Yosemite offline map deleted</string>
 
-    <string name="basic_marker_activity_marker_options_title">Hisense Arena</string>
-    <string name="basic_marker_activity_marker_options_snippet">Olympic Blvd, Melbourne VIC 3001, Australia</string>
-
     <!--Marker strings for MarkerViewPluginActivity activity-->
-    <string name="draw_custom_marker_options_title">Cape Town Harbour</string>
-    <string name="draw_custom_marker_options_snippet">One of the busiest ports in South Africa</string>
 
     <!--Marker strings for DrawMarkerActivity activity-->
     <string name="draw_marker_options_title">Hello World!</string>
     <string name="draw_marker_options_snippet">Welcome to my marker.</string>
 
     <!--Marker strings for DirectionsActivity activity-->
-    <string name="directions_activity_marker_options_origin_title">Origin</string>
-    <string name="directions_activity_marker_options_origin_snippet">Alhambra</string>
-    <string name="directions_activity_marker_options_destination_title">Destination</string>
-    <string name="directions_activity_marker_options_destination_snippet">Plaza del Triunfo</string>
     <string name="directions_activity_toast_message">Route is %1$f meters long.</string>
 
     <!--Marker strings for DirectionsActivity activity-->
@@ -108,7 +94,6 @@
 
     <!--QueryFeatureActivity activity-->
     <string name="query_feature_marker_title">Properties:</string>
-    <string name="query_feature_marker_snippet">No feature properties found</string>
     <string name="query_feature_no_properties_found">No feature properties found</string>
 
     <!--LocationPickerActivity activity-->
@@ -123,9 +108,6 @@
     <string name="fab_title_attractions">Attractions</string>
 
     <!--OffRouteActivity activity-->
-    <string name="off_route_toast_press_map">Press map to add destination</string>
-    <string name="toast_no_routes_found">No routes found</string>
-    <string name="off_route_toast_off_route">Off route</string>
 
     <!--LanguageSwitchActivity activity-->
     <string name="language_switch_options_menu_language_english">English</string>
@@ -135,13 +117,9 @@
     <string name="language_switch_options_menu_language_spanish">Spanish</string>
 
     <!--LanguageSwitchActivity activity-->
-    <string name="custom_window_marker_title_spain">Spain</string>
-    <string name="custom_window_marker_title_egypt">Egypt</string>
-    <string name="custom_window_marker_title_germany">Germany</string>
 
     <!--Tap on map instruction for toast-->
     <string name="tap_on_map_instruction">Tap anywhere on the map</string>
-    <string name="tap_on_map_turf_inside_instruction">Tap inside of blue polygon area</string>
     <string name="tap_on_map_for_notification">Tap on map to get a notification with map image</string>
 
     <string name="san_francisco">San Francisco</string>
@@ -202,11 +180,8 @@
     <!-- Recyclerview Directions on map -->
     <string name="rv_directions_route_card_name">Restaurant #%1$d</string>
     <string name="rv_directions_route_available_table_info">%1$d tables available</string>
-    <string name="rv_directions_route_toast_instruction">Tap on cards below</string>
 
     <!-- Optimization API activity -->
-    <string name="origin">Origin</string>
-    <string name="destination">Destination</string>
     <string name="only_twelve_stops_allowed">Only 12 stops allowed on route. Press on the map and hold to clear markers.</string>
     <string name="click_instructions">Tap on the map to select a maximum of 12 locations</string>
     <string name="successful_but_no_routes">No routes found for that location</string>
@@ -218,24 +193,16 @@
     <string name="no_magnetic">This device doesn\'t support a magnetic sensor</string>
 
     <!-- GeoJSON plugin activity-->
-    <string name="find_file_instruction_toast">Select a GeoJSON file on your device</string>
-    <string name="boston_police_stations">Boston police stations</string>
-    <string name="tap_on_markers">Tap on marker</string>
 
     <!-- Raster and local style source activity-->
     <string name="load_raster_button_text">Load custom raster style</string>
     <string name="load_local_style_button_text">Load local style</string>
 
     <!-- Localization plugin -->
-    <string name="map_not_localized">Map not localized to device language and now set to French</string>
-    <string name="map_localized">Map localized to device language</string>
-    <string name="camera_bounds_focus">Camera bounds for country associated with language tag: %1$s</string>
-    <string name="change_language_instruction">Make sure that the device\'s default language is not English</string>
     <string name="chinese">Chinese</string>
     <string name="russian">Russian</string>
     <string name="arabic">Arabic</string>
     <string name="change_device_language_instruction">Change the device\'s language to German and then tap this button. Already in German? Try French</string>
-    <string name="try_different_language_instruction">Try setting your phone to a different language. German or French perhaps?</string>
     <string name="instruction_description">Tap the buttons above to
         switch the map\'s language.</string>
 
@@ -270,9 +237,7 @@
     <string name="go_to_picker_activity">Go to place picker activity</string>
 
     <!-- Static image -->
-    <string name="choose_style">Choose style</string>
     <string name="dark_style">Dark</string>
-    <string name="light_style">Light</string>
     <string name="streets_style">Streets</string>
     <string name="create_image">Create static image</string>
     <string name="select_a_style">Select a style button first</string>
@@ -285,14 +250,12 @@
     <!--Calendar integration toast-->
     <string name="user_calendar_permission_explanation">This example needs calendar access in order to show calendar and map integration.</string>
     <string name="click_on_calendar_icon_instruction">Tap on a calendar event map icon</string>
-    <string name="no_internet">Tap on a calendar event map icon</string>
     <string name="no_connectivity">Calendar events won\'t appear because your device isn\'t connected to the internet.</string>
 
     <!-- Temperature change -->
     <string name="temp_change_feedback"> Showing min and max temperatures up to 2006 in %1$s</string>
 
     <!-- Click to add image -->
-    <string name="file_not_found">File not found</string>
     <string name="tap_instructions">Tap four points on the map in a CLOCKWISE order</string>
 
     <!-- Satellite land selection -->
@@ -304,7 +267,6 @@
     <string name="showing_time_labels_on_line_toast">Now showing minute labels on lines</string>
 
     <!--Custom location layer plugin icon-->
-    <string name="tap_the_icon">Tap the location icon</string>
     <string name="current_location">Lat: %1$f Long: %2$f</string>
     <string name="tracking_enabled">Tracking mode re-enabled</string>
     <string name="tracking_already_enabled">Tracking already enabled. Move the map</string>
@@ -419,7 +381,6 @@
     <string name="reset_database_toast_confirmation">Database successfully reset</string>
     <string name="reset_database_toast_error">Error with resetting database: %1$s</string>
     <string name="set_max_ambient_cache_size_textview">Enter new max\ncache size in bytes</string>
-    <string name="set_max_ambient_cache_size_edit_text_hint">Enter new cache size</string>
     <string name="set_max_ambient_cache_size_toast_confirmation">Max cache size successfully set to %1$d bytes</string>
     <string name="set_max_ambient_cache_size_toast_error">Error with setting new max cache size: %1$s</string>
     <string name="clear_ambient_cache_size_toast_confirmation">Ambient cache successfully cleared</string>
@@ -430,7 +391,6 @@
     <string name="set_ambient_cache_max">Set ambient\nmax cache</string>
     <string name="invalid_max_ambient_cache_size">Set ambient\nmax cache</string>
     <string name="clear_ambient_cache_button">Clear ambient\ncache</string>
-    <string name="adjust_map_button">Adjust map</string>
 
     <!-- Turf measure line distance -->
     <string name="line_distance_tap_instruction">Tap on map at least twice to create and measure a line</string>
