@@ -20,7 +20,6 @@
     <string name="description_labs">While other categories in this app present examples doing one specific thing, the lab category combines examples to show the power of the SDK.</string>
     <string name="description_java_services">Mapbox Java Services bundles many of the Mapbox APIs into a single SDK such as directions, geocoding, and many of the other utilities offered.</string>
     <string name="description_query">Examples here show how to query the map data to obtain information such as a features geometry or properties.</string>
-    <string name="description_offline">Don\'t forget that client-side static maps can be made with the "snapshotter". Click here for some examples.</string>
 
     <!-- home screen widget card instructions -->
     <string name="homescreen_geocode_widget">Have you allowed the location permission for this app? To check, go to the Location section in the navigation sidebar and select the
@@ -34,7 +33,6 @@
 
     <!-- home screen widget textview -->
     <string name="title">Your location:</string>
-    <string name="widget_unknown_location">Unknown location</string>
     <string name="enable_location">Allow the location permission in the \"Show a user\'s location\" example first!</string>
 
     <!-- toolbar items -->
@@ -44,7 +42,6 @@
     <string name="getting_started_category">Getting started</string>
     <string name="styles_category">Styles</string>
     <string name="dds_category">Data-driven styling</string>
-    <string name="annotations_category">Annotations</string>
     <string name="location_category">Location</string>
     <string name="camera_category">Camera</string>
     <string name="offline_category">Offline</string>
@@ -55,7 +52,6 @@
     <string name="share">Share</string>
     <string name="login_screen">Login screen</string>
     <string name="settings">Settings</string>
-    <string name="china">China</string>
 
     <!-- For Kotlin toggles -->
     <string name="no_examples">No examples in the\nchosen programming language</string>
