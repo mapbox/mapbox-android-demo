@@ -121,6 +121,7 @@
     <!--Tap on map instruction for toast-->
     <string name="tap_on_map_instruction">Tap anywhere on the map</string>
     <string name="tap_on_map_for_notification">Tap on map to get a notification with map image</string>
+    <string name="snapshotter_was_already_started">Snapshotter was already started</string>
 
     <string name="san_francisco">San Francisco</string>
     <string name="los_angeles">Los Angeles</string>
