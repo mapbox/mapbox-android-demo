@@ -1,4 +1,4 @@
-This update is in line with the 8.3.1 release of the Mapbox Maps SDK for Android and includes several fixes and new examples:
+This update is in line with the 8.4.0 release of the Mapbox Maps SDK for Android and includes several fixes and new examples:
 
 - Isochrone API data + seekbar slider
 - RecyclerView + Directions API route

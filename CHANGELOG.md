@@ -2,6 +2,19 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 8.4.0 - October 1, 2019
+
+- Added bounding box linelayer toggle of large map to inset map #[1230](https://github.com/mapbox/mapbox-android-demo/pull/1230)
+- Maps SDK to v8.4.0 update #[1217](https://github.com/mapbox/mapbox-android-demo/pull/1217)
+- Removed unused resources #[1224](https://github.com/mapbox/mapbox-android-demo/pull/1224)
+- Fixed turf physical circle units image url duplication #[1225](https://github.com/mapbox/mapbox-android-demo/pull/1225)
+- Bumped Java SDK Turf and Services to 4.9.0 #[1221](https://github.com/mapbox/mapbox-android-demo/pull/1221)
+- Tweaks to attribution color change example #[1218](https://github.com/mapbox/mapbox-android-demo/pull/1218)
+- Removed `class` where needed in proguard rules #[1214](https://github.com/mapbox/mapbox-android-demo/pull/1214)
+- Fixed Turf physical circle units image url #[1215](https://github.com/mapbox/mapbox-android-demo/pull/1215)
+- Adding CameraPosition to snapshotter share example #[1216](https://github.com/mapbox/mapbox-android-demo/pull/1216)
+- Proguard tweak to remove { *; } where needed #[1213](https://github.com/mapbox/mapbox-android-demo/pull/1213)
+
 ## 8.3.1 - September 17, 2019
 
 * Adding example of saving and retrieving coordinates in shared preferences#[1210](https://github.com/mapbox/mapbox-android-demo/pull/1210)
