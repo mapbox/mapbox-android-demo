@@ -80,7 +80,7 @@
 -dontwarn java.awt.Color
 -dontwarn com.mapbox.api.staticmap.v1.models.StaticMarkerAnnotation
 -dontwarn com.mapbox.api.staticmap.v1.models.StaticPolylineAnnotation
-
+-dontwarn com.sun.istack.internal.NotNull
 
 ## Android architecture components: Lifecycle
 # LifecycleObserver's empty constructor is considered to be unused by proguard

@@ -91,6 +91,7 @@
 -dontwarn java.awt.Color
 -dontwarn com.mapbox.api.staticmap.v1.models.StaticMarkerAnnotation
 -dontwarn com.mapbox.api.staticmap.v1.models.StaticPolylineAnnotation
+-dontwarn com.sun.istack.internal.NotNull
 
 # Mapbox
 -keep class com.mapbox.android.telemetry.**
