@@ -38,7 +38,7 @@ jobs:
           command: |
             echo "android.useAndroidX=true" >> gradle.properties
             echo "android.enableJetifier=true" >> gradle.properties
-            echo "org.gradle.jvmargs=-Xmx4608M" >> gradle.properties
+            echo "org.gradle.jvmargs=-Xmx4608m" >> gradle.properties
             echo "android.enableR8=false" >> gradle.properties
       - run:
           name: Download Dependencies
