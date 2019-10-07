@@ -90,7 +90,6 @@ public class MatrixApiActivity extends AppCompatActivity implements MapboxMap.On
       @Override
       public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         MatrixApiActivity.this.mapboxMap = mapboxMap;
-
         mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/mapbox/cj8gg22et19ot2rnz65958fkn")
             // Add the SymbolLayer icon image to the map style
             .withImage(ICON_ID, BitmapFactory.decodeResource(
@@ -131,13 +130,15 @@ public class MatrixApiActivity extends AppCompatActivity implements MapboxMap.On
     List<Feature> renderedStationFeatures = mapboxMap.queryRenderedFeatures(
       mapboxMap.getProjection().toScreenLocation(point), LAYER_ID);
     if (!renderedStationFeatures.isEmpty()) {
-      Point pointOfSelectedStation = (Point) renderedStationFeatures.get(0).geometry();
-      if (pointOfSelectedStation != null) {
-        String selectedBoltFeatureName = renderedStationFeatures.get(0).getStringProperty(STATION_NAME_PROPERTY);
+      Feature featureOfSelectedStation = renderedStationFeatures.get(0);
+      if (featureOfSelectedStation != null) {
+        String selectedBoltFeatureName = featureOfSelectedStation.getStringProperty(STATION_NAME_PROPERTY);
         List<Feature> featureList = featureCollection.features();
-        for (int i = 0; i < featureList.size(); i++) {
-          if (featureList.get(i).getStringProperty(STATION_NAME_PROPERTY).equals(selectedBoltFeatureName)) {
-            makeMapboxMatrixApiCall(i);
+        if (featureList != null) {
+          for (int i = 0; i < featureList.size(); i++) {
+            if (featureList.get(i).getStringProperty(STATION_NAME_PROPERTY).equals(selectedBoltFeatureName)) {
+              makeMapboxMatrixApiCall(i);
+            }
           }
         }
       }
@@ -222,20 +223,6 @@ public class MatrixApiActivity extends AppCompatActivity implements MapboxMap.On
         Timber.d("onResponse onFailure");
       }
     });
-  }
-
-  private void addMarkers() {
-    Icon lightningBoltIcon = IconFactory.getInstance(MatrixApiActivity.this)
-      .fromResource(R.drawable.lightning_bolt);
-    if (featureCollection.features() != null) {
-      for (Feature feature : featureCollection.features()) {
-        mapboxMap.addMarker(new MarkerOptions()
-          .position(new LatLng(feature.getProperty("Latitude").getAsDouble(),
-            feature.getProperty("Longitude").getAsDouble()))
-          .snippet(feature.getStringProperty("Station_Name"))
-          .icon(lightningBoltIcon));
-      }
-    }
   }
 
   private String loadGeoJsonFromAsset(String filename) {
