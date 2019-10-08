@@ -96,7 +96,9 @@ android {
         abortOnError false
         disable 'MissingTranslation', 'ExtraTranslation'
     }
-
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
 }
 
 play {
