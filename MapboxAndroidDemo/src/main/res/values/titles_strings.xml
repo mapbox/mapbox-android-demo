@@ -85,7 +85,7 @@
     <string name="activity_java_services_maxtrix_api_title">Retrieve travel times between many points</string>
     <string name="activity_java_services_geocoding_title">Make a geocode request</string>
     <string name="activity_java_services_isochrone_title">Make a isochrone request</string>
-    <string name="activity_java_services_isochrone_with_seekbar_title">Ischrone time slider</string>
+    <string name="activity_java_services_isochrone_with_seekbar_title">Isochrone time slider</string>
     <string name="activity_java_services_tilequery_title">Make a tilequery request</string>
     <string name="activity_java_services_simplify_polyline_title">Simplify a polyline</string>
     <string name="activity_java_services_map_matching_title">Map Matching</string>
