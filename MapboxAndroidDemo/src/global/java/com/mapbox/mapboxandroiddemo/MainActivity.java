@@ -48,7 +48,6 @@ import com.mapbox.mapboxandroiddemo.examples.dds.InfoWindowSymbolLayerActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.KotlinStyleCirclesCategoricallyActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.LineGradientActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleGeometriesActivity;
-import com.mapbox.mapboxandroiddemo.examples.javaservices.MultipleGeometriesDirectionsRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.MultipleHeatmapStylingActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.PolygonHolesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.PolygonSelectToggleActivity;
@@ -63,21 +62,22 @@ import com.mapbox.mapboxandroiddemo.examples.extrusions.Indoor3DMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.MarathonExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.PopulationDensityExtrusionActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.RotationExtrusionActivity;
-import com.mapbox.mapboxandroiddemo.examples.javaservices.ElevationQueryActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsGradientLineActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.ElevationQueryActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.GeocodingActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.IsochroneActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.IsochroneSeekbarActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.MapMatchingActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.MatrixApiActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.MultipleGeometriesDirectionsRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfLineDistanceActivity;
-import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfRingActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfPhysicalCircleActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfRingActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
@@ -181,12 +181,14 @@ import static com.mapbox.mapboxandroiddemo.commons.StringConstants.FROM_LOGIN_SC
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.SKIPPED_KEY;
 import static com.mapbox.mapboxandroiddemo.commons.StringConstants.TOKEN_SAVED_KEY;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+  ItemClickSupport.OnItemClickListener {
   // Used to track internal navigation to the Snapshotter section
   private static final String EXTRA_NAV = "EXTRA_NAV";
   private static final String STATE_CURRENT_CATEGORY = "STATE_CURRENT_CATEGORY";
   private static final String STATE_TOOLBAR_TITLE = "STATE_TOOLBAR_TITLE";
   private static final String STATE_SHOW_JAVA = "STATE_SHOW_JAVA";
+  private static final String TAG = "MainActivity";
 
   private final ArrayList<ExampleItemModel> exampleItemModels = new ArrayList<>();
 
@@ -198,6 +200,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   private ExampleAdapter adapter;
   private RecyclerView recyclerView;
   private TextView noExamplesTv;
+  private ItemClickSupport itemClickSupport;
 
   private boolean loggedIn;
   private int currentCategory = R.id.nav_basics;
@@ -244,24 +247,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     // Item click listener
-    ItemClickSupport.addTo(recyclerView).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-      @Override
-      public void onItemClicked(RecyclerView recyclerView, int position, View view) {
-        ExampleItemModel model = adapter.getItemAt(position);
-
-        // in case it's an info tile
-        if (model != null) {
-          if (showJavaExamples) {
-            startActivity(model.getJavaActivity());
-          } else {
-            startActivity(model.getKotlinActivity());
-          }
-
-          analytics.clickedOnIndividualExample(getString(model.getTitle()), loggedIn);
-          analytics.viewedScreen(getString(model.getTitle()), loggedIn);
-        }
-      }
-    });
+    itemClickSupport = ItemClickSupport.addTo(recyclerView);
 
     DrawerLayout drawer = findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -292,6 +278,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         .apply();
     }
     analytics.trackEvent(OPENED_APP, loggedIn);
+  }
+
+  @Override
+  public void onItemClicked(RecyclerView recyclerView, int position, View view) {
+    ExampleItemModel model = adapter.getItemAt(position);
+
+    // in case it's an info tile
+    if (model != null) {
+
+      if (showJavaExamples) {
+        startActivity(model.getJavaActivity());
+      } else {
+        startActivity(model.getKotlinActivity());
+      }
+
+      analytics.clickedOnIndividualExample(getString(model.getTitle()), loggedIn);
+      analytics.viewedScreen(getString(model.getTitle()), loggedIn);
+    }
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    itemClickSupport.setOnItemClickListener(this);
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    itemClickSupport.setOnItemClickListener(null);
   }
 
   @Override
