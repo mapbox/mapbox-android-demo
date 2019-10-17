@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="31.4606"
+        mapbox:mapbox_cameraTargetLng="20.7927"
+        mapbox:mapbox_cameraZoom=".5"
+        mapbox:mapbox_cameraZoomMin=".5" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/slider_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="65dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/mapboxGrayFaint"
+        android:elevation="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingEnd="12dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingStart="12dp"
+            android:paddingTop="12dp">
+
+            <TextView
+                android:id="@+id/textview_2015_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/slider_explanatory_text"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/textview_month_of_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <SeekBar
+                android:id="@+id/seek_bar_month_adjuster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="100"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:scaleX="3"
+                android:scaleY="3"
+                android:src="@drawable/earthquake_gradiant"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/gradient_explanatory_text"
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

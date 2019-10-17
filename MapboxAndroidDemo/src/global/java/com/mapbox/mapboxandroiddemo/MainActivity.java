@@ -41,6 +41,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.CircleRadiusActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.EarthquakeSliderActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ExpressionIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.HeatmapActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ImageClusteringActivity;
@@ -1302,6 +1303,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new Intent(MainActivity.this, SharedPreferencesActivity.class),
         null,
         R.string.activity_lab_shared_preferences_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_lab,
+      R.string.activity_lab_time_slider_title,
+      R.string.activity_lab_time_slider_description,
+      new Intent(MainActivity.this, EarthquakeSliderActivity.class),
+      null,
+      R.string.activity_lab_time_slider_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,

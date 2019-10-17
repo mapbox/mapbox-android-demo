@@ -135,4 +135,5 @@
     <string name="activity_lab_spinning_icon_title">Spinning icon</string>
     <string name="activity_lab_change_attribution_color_title">Style attribution</string>
     <string name="activity_lab_shared_preferences_title">Shared preferences</string>
+    <string name="activity_lab_time_slider_title">Time slider</string>
 </resources>

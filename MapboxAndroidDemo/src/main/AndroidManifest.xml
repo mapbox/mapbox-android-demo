@@ -941,6 +941,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
+
+        <activity
+            android:name=".examples.dds.EarthquakeSliderActivity"
+            android:label="@string/activity_lab_time_slider_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity"/>
+        </activity>
         <activity
             android:name=".examples.javaservices.TurfRingActivity"
             android:label="@string/activity_java_services_turf_ring_title"
