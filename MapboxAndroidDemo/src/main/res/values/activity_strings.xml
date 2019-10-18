@@ -420,4 +420,8 @@
     <string name="saved_long_textview">Saved longitude: %1$s</string>
     <string name="tap_on_map_save_to_shared_pref">Tap on the map to save coordinates to the device\'s Shared Preferences</string>
     <string name="shared_pref_marker_placement">Marker placed at coordinates saved in Shared Preferences.</string>
+
+    <!-- Variable label placement-->
+    <string name="zoom_map_in_and_out_circle_to_icon_transition">Zoom in and out to see the circles transition to icons</string>
+
 </resources>

@@ -38,6 +38,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleRadiusActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.CircleToIconTransitionActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
@@ -1491,6 +1492,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_dds_polygon_revealed_hole_outline_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_circle_radius_title,
+      R.string.activity_dds_circle_radius_description,
+      new Intent(MainActivity.this, CircleRadiusActivity.class),
+      null,
+      R.string.activity_dds_circle_radius_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_circle_to_icon_smooth_transition_title,
+      R.string.activity_dds_circle_to_icon_smooth_transition_description,
+      new Intent(MainActivity.this, CircleToIconTransitionActivity.class),
+      null,
+      R.string.activity_dds_circle_to_icon_smooth_transition_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_basics,
       R.string.activity_basic_simple_mapview_title,
       R.string.activity_basic_simple_mapview_description,
@@ -1521,14 +1538,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       null,
       new Intent(MainActivity.this, KotlinSupportMapFragmentActivity.class),
       R.string.activity_basic_kotlin_support_map_frag_url, true, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_dds,
-      R.string.activity_dds_circle_radius_title,
-      R.string.activity_dds_circle_radius_description,
-      new Intent(MainActivity.this, CircleRadiusActivity.class),
-      null,
-      R.string.activity_dds_circle_radius_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_location,

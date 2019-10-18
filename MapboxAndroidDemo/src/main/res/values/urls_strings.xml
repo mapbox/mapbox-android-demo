@@ -62,6 +62,7 @@
     <string name="activity_dds_symbol_collision_detection_url" translatable="false">https://i.imgur.com/nV1YnIv.png</string>
     <string name="activity_dds_polygon_revealed_hole_outline_url" translatable="false">http://i.imgur.com/19GZh8H.jpg</string>
     <string name="activity_dds_circle_radius_url" translatable="false">https://i.imgur.com/MrablT6.png</string>
+    <string name="activity_dds_circle_to_icon_smooth_transition_url" translatable="false">https://i.imgur.com/LYmENg3.png</string>
     <string name="activity_styles_text_field_formatting_url" translatable="false">https://i.imgur.com/MSoIYmU.png</string>
     <string name="activity_camera_animate_url" translatable="false">http://i.imgur.com/PN3vyNJ.jpg</string>
     <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string>
