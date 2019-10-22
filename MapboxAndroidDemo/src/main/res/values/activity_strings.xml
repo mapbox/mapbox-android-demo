@@ -424,4 +424,7 @@
     <!-- Variable label placement-->
     <string name="zoom_map_in_and_out_circle_to_icon_transition">Zoom in and out to see the circles transition to icons</string>
 
+    <!-- China bounds checker-->
+    <string name="device_location">Device %1$s in China</string>
+
 </resources>
