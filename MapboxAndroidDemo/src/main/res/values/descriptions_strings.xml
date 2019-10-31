@@ -134,7 +134,7 @@
     <string name="activity_lab_rv_directions_description">Quickly show the directions route associated with a RecyclerView item.</string>
     <string name="activity_lab_spinning_icon_description">Use a ValueAnimator to adjust SymbolLayer icons\' rotation values and create a spinning effect.</string>
     <string name="activity_lab_change_attribution_color_description">Adjust the attribution "i" to match a map style, app UI, or color motif.</string>
-    <string name="activity_lab_shared_preferences_description">Use the Android system\'s Shared Preferences to save and retrieve coordinates.</string>
+    <string name="activity_lab_shared_preferences_description">Use the Android system\'s SharedPreferences to save and retrieve information such as coordinates.</string>
     <string name="activity_china_simple_china_mapview_description">Show an accurate and government-approved China map in your app using the Mapbox Maps SDK.</string>
     <string name="activity_china_simple_china_bounds_checker_description">Use the China plugin to determine whether or not the device is inside of China.</string>
 
