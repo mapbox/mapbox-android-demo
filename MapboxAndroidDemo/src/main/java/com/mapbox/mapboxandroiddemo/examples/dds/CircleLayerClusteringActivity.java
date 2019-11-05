@@ -162,15 +162,6 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
       Timber.e("Check the URL %s", uriSyntaxException.getMessage());
     }
 
-
-    // Use the earthquakes GeoJSON source to create three layers: One layer for each cluster category.
-    // Each point range gets a different fill color.
-    int[][] layers = new int[][] {
-      new int[] {150, ContextCompat.getColor(this, R.color.mapboxRed)},
-      new int[] {20, ContextCompat.getColor(this, R.color.mapboxGreen)},
-      new int[] {0, ContextCompat.getColor(this, R.color.mapbox_blue)}
-    };
-
     //Creating a marker layer for single data points
     SymbolLayer unclustered = new SymbolLayer("unclustered-points", "earthquakes");
 
@@ -189,7 +180,16 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
         )
       )
     );
+    unclustered.setFilter(has("mag"));
     loadedMapStyle.addLayer(unclustered);
+
+    // Use the earthquakes GeoJSON source to create three layers: One layer for each cluster category.
+    // Each point range gets a different fill color.
+    int[][] layers = new int[][] {
+      new int[] {150, ContextCompat.getColor(this, R.color.mapboxRed)},
+      new int[] {20, ContextCompat.getColor(this, R.color.mapboxGreen)},
+      new int[] {0, ContextCompat.getColor(this, R.color.mapbox_blue)}
+    };
 
     for (int i = 0; i < layers.length; i++) {
       //Add clusters' circles
