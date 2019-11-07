@@ -21,6 +21,7 @@
     <string name="activity_styles_zoom_dependent_fill_color_title">Color dependent on zoom level</string>
     <string name="activity_dds_create_hotspots_points_title">Create hotspots from points</string>
     <string name="activity_styles_dds_geojson_circle_layer_clusters_title">CircleLayer clusters</string>
+    <string name="activity_styles_dds_aggregated_clustering_data_title">Aggregated clustering data</string>
     <string name="activity_styles_line_layer_title">Create a line layer</string>
     <string name="activity_styles_basic_symbol_layer_title">Symbol layer icons</string>
     <string name="activity_styles_symbol_icon_onclick_size_change_title">Symbol layer icon size change</string>

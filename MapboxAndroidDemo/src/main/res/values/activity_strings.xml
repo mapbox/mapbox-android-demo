@@ -25,6 +25,9 @@
     <!--Zoom in and out map instruction for toast-->
     <string name="zoom_map_in_and_out_instruction">Zoom in and out to see cluster numbers change</string>
 
+    <!--Zoom in and out map instruction for toast-->
+    <string name="tap_on_cluster_instructions">Tap on a cluster to see the average magnitude of earthquakes in that cluster</string>
+
     <!--Tap on feature box instruction-->
     <string name="tap_on_feature_box_instruction">Tap on bounding box</string>
 

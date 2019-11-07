@@ -8,14 +8,6 @@
     android:layout_height="match_parent"
     tools:context="com.mapbox.mapboxandroiddemo.examples.styles.RuntimeStylingActivity">
 
-    <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="19.948045"
-        mapbox:mapbox_cameraTargetLng="-84.654463"
-        mapbox:mapbox_cameraZoom="3.371717" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"

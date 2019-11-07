@@ -33,6 +33,7 @@ import com.mapbox.mapboxandroiddemo.examples.camera.BoundingBoxCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.RestrictCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.SlowlyRotatingCameraActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.AddRainFallStyleActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.AggregatedClusteringDataActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.BathymetryActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethJsonVectorMixActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
@@ -1362,6 +1363,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, ImageClusteringActivity.class),
       null,
       R.string.activity_dds_image_clustering_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+            R.id.nav_dds,
+            R.string.activity_styles_dds_aggregated_clustering_data_title,
+            R.string.activity_dds_aggregated_clustering_data_description,
+            new Intent(MainActivity.this, AggregatedClusteringDataActivity.class),
+            null,
+            R.string.activity_dds_aggregated_clustering_data_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
