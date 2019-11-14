@@ -1,16 +1,2 @@
-This update is part of the 8.4.0 release of the Mapbox Maps SDK for Android. New examples include:
+This update is part of the 8.5.0 release of the Mapbox Maps SDK for Android. Many fixes and improvements are included in this update. The update also includes an example showing a smooth circle-to-icon transition.
 
-- Isochrone + seekbar
-- RecyclerView + Directions routes
-- Location change listening
-- Circle radius based on data
-- Runtime styling
-- Circle's radius with distance
-- Cache management
-- Kotlin map fragment
-- Spinning icons
-- Measuring line distance
-- Saving & retrieving coordinates in shared preferences
-- Elevation query
-- Attribution color change
-- Multiple geometries of Directions route

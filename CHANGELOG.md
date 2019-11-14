@@ -1,19 +1,33 @@
-# Changelog for Mapbox Android Demo app
+# Changelog for the Mapbox Android demo app
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 8.5.0 - November 13th, 2019
+
+* Bumped maps sdk to 8.5.0 #[1246](https://github.com/mapbox/mapbox-android-demo/pull/1246)
+* Updated WMS source example to fix missing 3rd party satellite imagery #[1260](https://github.com/mapbox/mapbox-android-demo/pull/1260)
+* Commented out PlaceSelectionPluginActivity place picker example #[1258](https://github.com/mapbox/mapbox-android-demo/pull/1258)
+* Fixed black x icons showing in circle clustering example #[1257](https://github.com/mapbox/mapbox-android-demo/pull/1257)
+* Adjusted SharedPreferences example title and description #[1256](https://github.com/mapbox/mapbox-android-demo/pull/1256)
+* Adding china bounds checker example #[1252](https://github.com/mapbox/mapbox-android-demo/pull/1252)
+* Added example of circle-to-icon smooth transition #[1248](https://github.com/mapbox/mapbox-android-demo/pull/1248)
+* Adjusted listener for example card onClick #[1228](https://github.com/mapbox/mapbox-android-demo/pull/1228)
+* Fixed ischrone seekbar title typo #[1245](https://github.com/mapbox/mapbox-android-demo/pull/1245)
+* Bumped china plugin dependency to 2.3.0 #[1242](https://github.com/mapbox/mapbox-android-demo/pull/1242)
+* Switched fromUrl to fromUri in SimpleChinaMapViewActivity #[1243](https://github.com/mapbox/mapbox-android-demo/pull/1243)
+
 ## 8.4.0 - October 1, 2019
 
-- Added bounding box linelayer toggle of large map to inset map #[1230](https://github.com/mapbox/mapbox-android-demo/pull/1230)
-- Maps SDK to v8.4.0 update #[1217](https://github.com/mapbox/mapbox-android-demo/pull/1217)
-- Removed unused resources #[1224](https://github.com/mapbox/mapbox-android-demo/pull/1224)
-- Fixed turf physical circle units image url duplication #[1225](https://github.com/mapbox/mapbox-android-demo/pull/1225)
-- Bumped Java SDK Turf and Services to 4.9.0 #[1221](https://github.com/mapbox/mapbox-android-demo/pull/1221)
-- Tweaks to attribution color change example #[1218](https://github.com/mapbox/mapbox-android-demo/pull/1218)
-- Removed `class` where needed in proguard rules #[1214](https://github.com/mapbox/mapbox-android-demo/pull/1214)
-- Fixed Turf physical circle units image url #[1215](https://github.com/mapbox/mapbox-android-demo/pull/1215)
-- Adding CameraPosition to snapshotter share example #[1216](https://github.com/mapbox/mapbox-android-demo/pull/1216)
-- Proguard tweak to remove { *; } where needed #[1213](https://github.com/mapbox/mapbox-android-demo/pull/1213)
+* Added bounding box linelayer toggle of large map to inset map #[1230](https://github.com/mapbox/mapbox-android-demo/pull/1230)
+* Maps SDK to v8.4.0 update #[1217](https://github.com/mapbox/mapbox-android-demo/pull/1217)
+* Removed unused resources #[1224](https://github.com/mapbox/mapbox-android-demo/pull/1224)
+* Fixed turf physical circle units image url duplication #[1225](https://github.com/mapbox/mapbox-android-demo/pull/1225)
+* Bumped Java SDK Turf and Services to 4.9.0 #[1221](https://github.com/mapbox/mapbox-android-demo/pull/1221)
+* Tweaks to attribution color change example #[1218](https://github.com/mapbox/mapbox-android-demo/pull/1218)
+* Removed `class` where needed in proguard rules #[1214](https://github.com/mapbox/mapbox-android-demo/pull/1214)
+* Fixed Turf physical circle units image url #[1215](https://github.com/mapbox/mapbox-android-demo/pull/1215)
+* Adding CameraPosition to snapshotter share example #[1216](https://github.com/mapbox/mapbox-android-demo/pull/1216)
+* Proguard tweak to remove { *; } where needed #[1213](https://github.com/mapbox/mapbox-android-demo/pull/1213)
 
 ## 8.3.1 - September 17, 2019
 

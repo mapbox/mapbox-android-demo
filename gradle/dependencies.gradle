@@ -11,14 +11,14 @@ ext {
 
             // Mapbox
             mapboxMapPrefix          : 'v8',
-            mapboxMapSdk             : '8.4.0',
+            mapboxMapSdk             : '8.5.0',
             mapboxTurf               : '4.9.0',
             mapboxServices           : '4.9.0',
             mapboxPluginBuilding     : '0.6.0',
             mapboxPluginPlaces       : '0.9.0',
             mapboxPluginLocalization : '0.11.0',
             mapboxPluginTraffic      : '0.9.0',
-            mapboxChinaPlugin        : '2.3.0',
+            mapboxChinaPlugin        : '2.4.0',
             mapboxPluginMarkerView   : '0.3.0',
             mapboxPluginAnnotation   : '0.7.0',
             mapboxPluginScalebar     : '0.3.0',
