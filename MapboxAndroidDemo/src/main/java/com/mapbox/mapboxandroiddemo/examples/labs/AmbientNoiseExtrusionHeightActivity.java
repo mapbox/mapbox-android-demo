@@ -7,10 +7,6 @@ import android.graphics.Color;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -20,6 +16,11 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
@@ -79,7 +80,7 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
   @Override
   public void onMapReady(@NonNull final MapboxMap mapboxMap) {
 
-    mapboxMap.setStyle(new Style.Builder().fromUrl("mapbox://styles/examples/cj68bstx01a3r2rndlud0pwpv"),
+    mapboxMap.setStyle(new Style.Builder().fromUri("mapbox://styles/examples/cj68bstx01a3r2rndlud0pwpv"),
       new Style.OnStyleLoaded() {
         @Override
         public void onStyleLoaded(@NonNull Style style) {
@@ -120,6 +121,7 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
     }*/
           setAudioMeasurementRunnable();
 
+
         }
       });
   }
@@ -130,8 +132,6 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
     runnable = new Runnable() {
       @Override
       public void run() {
-        // Call the AP  I so we can get the updated coordinates.
-
         double total = soundDb(getAmplitudeEMA()) * soundDb(getAmplitudeEMA());
         double totalDivide = total / 100000000;
         Log.d(TAG, "run: total = " + total);
@@ -260,7 +260,6 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
     } else {
       return 0;
     }
-
   }
 
   public double getAmplitudeEMA() {
@@ -268,5 +267,4 @@ public class AmbientNoiseExtrusionHeightActivity extends AppCompatActivity imple
     mEMA = EMA_FILTER * amp + (1.0 - EMA_FILTER) * mEMA;
     return mEMA;
   }
-
 }
