@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
 
     <uses-feature
         android:name="android.hardware.location.gps"
@@ -288,6 +289,13 @@
         <activity
             android:name=".examples.labs.SharedPreferencesActivity"
             android:label="@string/activity_lab_shared_preferences_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
+            android:name=".examples.labs.BiometricFingerprintLayerUnlockActivity"
+            android:label="@string/activity_lab_biometric_fingerprint_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />

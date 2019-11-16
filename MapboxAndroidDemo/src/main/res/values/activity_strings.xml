@@ -431,4 +431,12 @@
     <!-- China mixed styles based on location-->
     <string name="china_token_warning_toast">This example requires a regular Mapbox token and a China token. Please see the code for more instructions.</string>
 
+    <!-- Biometrics fingerprint-->
+    <string name="prompt_title">Unlock map data</string>
+    <string name="prompt_subtitle">Show hidden data</string>
+    <string name="prompt_description">Touch your finger on the fingerprint sensor to add data to the map.</string>
+    <string name="prompt_negative_button">Cancel</string>
+    <string name="fingerprint_not_possible">Fingerprint authentication not set up on this device or not available yet.</string>
+    <string name="fingerprint_fail">Didn\'t recognize your fingerprint. Please try again!</string>
+
 </resources>
