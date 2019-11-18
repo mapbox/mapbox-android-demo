@@ -42,14 +42,15 @@ class ChinaBoundsCheckerActivity : AppCompatActivity(), OnMapReadyCallback,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Mapbox access token is configured here. This needs to be called either in your application
-        // object or in the same activity which contains the mapview.
         this.savedInstanceState = savedInstanceState
         locationPermissionCheckAndStart()
     }
 
     override fun onMapReady(mapboxMap: MapboxMap) {
         this.mapboxMap = mapboxMap
+
+        Toast.makeText(this, R.string.china_style_with_english_labels_warning_toast, Toast.LENGTH_LONG).show()
+
         mapboxMap.setStyle(Style.Builder().fromUri(
 
                 // TODO: Because of privacy reasons, this file isn't actually included

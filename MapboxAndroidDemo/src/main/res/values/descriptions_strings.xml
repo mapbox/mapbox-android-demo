@@ -137,5 +137,6 @@
     <string name="activity_lab_shared_preferences_description">Use the Android system\'s SharedPreferences to save and retrieve information such as coordinates.</string>
     <string name="activity_china_simple_china_mapview_description">Show an accurate and government-approved China map in your app using the Mapbox Maps SDK.</string>
     <string name="activity_china_simple_china_bounds_checker_description">Use the China plugin to determine whether or not the device is inside of China.</string>
+    <string name="activity_china_mixed_china_and_global_style_description">Load a China style if the device is in China. Load a global/.com style if not.</string>
 
 </resources>

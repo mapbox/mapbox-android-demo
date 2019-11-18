@@ -1005,6 +1005,15 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
 
+        <activity
+            android:name=".examples.MixedChinaAndGlobalStyleActivity"
+            android:label="@string/activity_china_mixed_china_and_global_style_title"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+
         <service android:name=".account.AccountRetrievalService" />
     <receiver android:name=".utils.DemoAppHomeScreenAddressWidget">
         <intent-filter>

@@ -30,6 +30,7 @@ import com.mapbox.mapboxandroiddemo.adapter.ExampleAdapter;
 import com.mapbox.mapboxandroiddemo.commons.AnalyticsTracker;
 import com.mapbox.mapboxandroiddemo.commons.FirstTimeRunChecker;
 import com.mapbox.mapboxandroiddemo.examples.ChinaBoundsCheckerActivity;
+import com.mapbox.mapboxandroiddemo.examples.MixedChinaAndGlobalStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.SimpleChinaMapViewActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.basics.KotlinSimpleMapViewActivity;
@@ -397,6 +398,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new Intent(MainActivity.this, ChinaBoundsCheckerActivity.class),
         null,
         R.string.activity_china_simple_china_bounds_checker_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_basics,
+        R.string.activity_china_mixed_china_and_global_style_title,
+        R.string.activity_china_mixed_china_and_global_style_description,
+        new Intent(MainActivity.this, MixedChinaAndGlobalStyleActivity.class),
+        null,
+        R.string.activity_china_mixed_china_and_global_style_url, false, BuildConfig.MIN_SDK_VERSION));
+
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_styles,
