@@ -15,6 +15,7 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.CircleLayer;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.layers.TransitionOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
@@ -58,7 +59,6 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
   private MapView mapView;
   private MapboxMap mapboxMap;
 
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -82,6 +82,11 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
         map.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
+
+            // Disable any type of fading transition when icons collide on the map. This enhances the visual
+            // look of the data clustering together and breaking apart.
+            style.setTransition(new TransitionOptions(0, 0, false));
+
             mapboxMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
               12.099, -79.045), 3));
 
@@ -99,49 +104,6 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
       }
     });
   }
-
-  @Override
-  public void onStart() {
-    super.onStart();
-    mapView.onStart();
-  }
-
-  @Override
-  public void onResume() {
-    super.onResume();
-    mapView.onResume();
-  }
-
-  @Override
-  public void onPause() {
-    super.onPause();
-    mapView.onPause();
-  }
-
-  @Override
-  public void onStop() {
-    super.onStop();
-    mapView.onStop();
-  }
-
-  @Override
-  public void onLowMemory() {
-    super.onLowMemory();
-    mapView.onLowMemory();
-  }
-
-  @Override
-  protected void onDestroy() {
-    super.onDestroy();
-    mapView.onDestroy();
-  }
-
-  @Override
-  protected void onSaveInstanceState(Bundle outState) {
-    super.onSaveInstanceState(outState);
-    mapView.onSaveInstanceState(outState);
-  }
-
 
   private void addClusteredGeoJsonSource(@NonNull Style loadedMapStyle) {
 
@@ -224,6 +186,47 @@ public class CircleLayerClusteringActivity extends AppCompatActivity {
       textAllowOverlap(true)
     );
     loadedMapStyle.addLayer(count);
+  }
 
+  @Override
+  public void onStart() {
+    super.onStart();
+    mapView.onStart();
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    mapView.onResume();
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    mapView.onPause();
+  }
+
+  @Override
+  public void onStop() {
+    super.onStop();
+    mapView.onStop();
+  }
+
+  @Override
+  public void onLowMemory() {
+    super.onLowMemory();
+    mapView.onLowMemory();
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mapView.onDestroy();
+  }
+
+  @Override
+  protected void onSaveInstanceState(Bundle outState) {
+    super.onSaveInstanceState(outState);
+    mapView.onSaveInstanceState(outState);
   }
 }
