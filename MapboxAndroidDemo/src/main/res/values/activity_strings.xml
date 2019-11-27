@@ -439,4 +439,9 @@
     <string name="fingerprint_not_possible">Fingerprint authentication not set up on this device or not available yet.</string>
     <string name="fingerprint_fail">Didn\'t recognize your fingerprint. Please try again!</string>
 
+    <!-- Thick bordered circle-->
+    <string name="thick_bordered_circle_radius">Radius: %1$d kilometers</string>
+    <string name="thick_bordered_circle_border_difference">Border difference: %1$d kilometers</string>
+    <string name="tap_on_map_to_move_bordered_circle">Tap on the map to move the bordered circle</string>
+
 </resources>

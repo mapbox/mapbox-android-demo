@@ -92,10 +92,11 @@
     <string name="activity_java_services_map_matching_description">Match raw GPS points to the map so they aligns with the roads/pathways.</string>
     <string name="activity_java_services_turf_ring_description">Use Turf to calculate coordinates to eventually draw a ring around a center coordinate.</string>
     <string name="activity_java_services_turf_physical_circle_description">Use Turf to generate a circle with a radius expressed in physical units (e.g. miles, kilometers, etc).</string>
-    <string name="activity_java_services_turf_line_distance_description">Use Turf to generate a circle with a radius expressed in physical units (e.g. miles, kilometers, etc).</string>
+    <string name="activity_java_services_turf_line_distance_description">Use Turf to measure the distance of a line.</string>
     <string name="activity_java_services_directions_gradient_description">Apply a two-color gradient to a Directions API route line.</string>
     <string name="activity_java_services_multiple_geometries_from_directions_route_description">Show multiple geometries based on a single Mapbox Directions API response.</string>
     <string name="activity_java_services_turf_elevation_query_description">Use the Tilequery API to query the Mapbox Terrain vector tileset and retrieve elevation information for a specific location.</string>
+    <string name="activity_java_services_bordered_circle_description">Use Turf to generate a circle with a radius expressed in physical units and to create an adjustable border</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
     <string name="activity_plugins_places_plugin_description">Add location search ("geocoding") functionality and UI to search for any place in the world</string>

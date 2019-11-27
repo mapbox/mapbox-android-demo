@@ -39,6 +39,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleRadiusActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleToIconTransitionActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.KotlinBorderedCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawPolygonActivity;
@@ -1100,6 +1101,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       null,
       R.string.activity_java_services_multiple_geometries_from_directions_route_url,
       true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_java_services,
+      R.string.activity_java_services_bordered_circle_title,
+      R.string.activity_java_services_bordered_circle_description,
+      null,
+      new Intent(MainActivity.this, KotlinBorderedCircleActivity.class),
+      R.string.activity_java_services_bordered_circle_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,
