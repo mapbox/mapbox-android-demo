@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 
 /**
@@ -79,6 +80,7 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
       .withLayer(new SymbolLayer(LAYER_ID, SOURCE_ID)
         .withProperties(PropertyFactory.iconImage(ICON_ID),
           iconAllowOverlap(true),
+          iconIgnorePlacement(true),
           iconOffset(new Float[] {0f, -9f}))
       ), new Style.OnStyleLoaded() {
         @Override

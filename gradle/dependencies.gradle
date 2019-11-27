@@ -53,7 +53,8 @@ ext {
             junit                    : '1.0.0',
             supportAnnotations       : '27.1.1',
             kotlin                   : '1.2.70',
-            multiDex                 : '2.0.0'
+            multiDex                 : '2.0.0',
+            biometric                : '1.0.0'
     ]
 
     wearVersion = [
@@ -126,6 +127,7 @@ ext {
             materialDialogsCommons   : "com.afollestad.material-dialogs:commons:${version.materialDialogsCommons}",
             kotlin                   : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${version.kotlin}",
             multiDex                 : "androidx.multidex:multidex:${version.multiDex}",
+            biometric                : "androidx.biometric:biometric:${version.biometric}",
 
             // Testing
             testEspressoCore         : "androidx.test.espresso:espresso-core:${version.espresso}",
