@@ -8,6 +8,8 @@ import com.mapbox.mapboxsdk.module.http.HttpRequestUtil;
 import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
+import java.util.concurrent.TimeUnit;
+
 import androidx.multidex.MultiDexApplication;
 import io.fabric.sdk.android.Fabric;
 import okhttp3.OkHttpClient;
@@ -43,8 +45,11 @@ public class MapboxApplication extends MultiDexApplication {
 
   private void setUpTileLoadingMeasurement() {
     OkHttpClient okHttpClient = new OkHttpClient.Builder()
-      .addNetworkInterceptor(new TileLoadingInterceptor())
-      .build();
+        .connectTimeout(30, TimeUnit.MINUTES)
+        .readTimeout(30, TimeUnit.MINUTES)
+        .writeTimeout(30, TimeUnit.MINUTES)
+        .addNetworkInterceptor(new TileLoadingInterceptor())
+        .build();
     HttpRequestUtil.setOkHttpClient(okHttpClient);
   }
 

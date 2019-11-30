@@ -92,6 +92,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.BiometricFingerprintLayerUnloc
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.ChangeAttributionColorActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.DragToDrawMapMatchedRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.HomeScreenWidgetActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.InsetMapActivity;
@@ -1385,6 +1386,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new Intent(MainActivity.this, BaseballSprayChartActivity.class),
         null,
         R.string.activity_lab_baseball_spray_chart_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_lab,
+        R.string.activity_lab_drag_to_draw_map_matched_route_title,
+        R.string.activity_lab_drag_to_draw_map_matched_route_description,
+        null,
+        new Intent(MainActivity.this, DragToDrawMapMatchedRouteActivity.class),
+        R.string.activity_lab_drag_to_draw_map_matched_route_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,

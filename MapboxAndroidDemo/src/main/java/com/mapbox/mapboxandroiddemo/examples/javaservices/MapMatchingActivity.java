@@ -47,8 +47,6 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
  */
 public class MapMatchingActivity extends AppCompatActivity {
 
-  private static final String TAG = "MapMatchingActivity";
-
   private MapView mapView;
   private MapboxMap map;
 
@@ -213,16 +211,20 @@ public class MapMatchingActivity extends AppCompatActivity {
   }
 
   private void drawMapMatched(@NonNull List<MapMatchingMatching> matchings) {
-    Style style = map.getStyle();
-    if (style != null && !matchings.isEmpty()) {
-      style.addSource(new GeoJsonSource("matched-source-id", Feature.fromGeometry(LineString.fromPolyline(
-        Objects.requireNonNull(matchings.get(0).geometry()), PRECISION_6)))
-      );
-      style.addLayer(new LineLayer("matched-layer-id", "matched-source-id")
-        .withProperties(
-          lineColor(ColorUtils.colorToRgbaString(Color.parseColor("#3bb2d0"))),
-          lineWidth(6f))
-      );
-    }
+    map.getStyle(new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        if (!matchings.isEmpty()) {
+          style.addSource(new GeoJsonSource("matched-source-id", Feature.fromGeometry(LineString.fromPolyline(
+              Objects.requireNonNull(matchings.get(0).geometry()), PRECISION_6)))
+          );
+          style.addLayer(new LineLayer("matched-layer-id", "matched-source-id")
+              .withProperties(
+                  lineColor(ColorUtils.colorToRgbaString(Color.parseColor("#3bb2d0"))),
+                  lineWidth(6f))
+          );
+        }
+      }
+    });
   }
 }

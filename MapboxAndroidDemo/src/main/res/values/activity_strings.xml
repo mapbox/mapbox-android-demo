@@ -446,6 +446,15 @@
     <string name="thick_bordered_circle_radius">Radius: %1$d kilometers</string>
     <string name="thick_bordered_circle_border_difference">Border difference: %1$d kilometers</string>
     <string name="tap_on_map_to_move_bordered_circle">Tap on the map to move the bordered circle</string>
+    
+    <!-- Draw route-->
+    <string name="move_map_explore_map_matched_route">Move map around to explore your drawn route</string>
+    <string name="draw_route_instruction">Move your finger on the map to draw your desired route</string>
+    <string name="driving_profile">Driving profile</string>
+    <string name="walking_profile">Walking profile</string>
+    <string name="cycling_profile">Cycling profile</string>
+    <string name="drawn_route_now_matched">Your map matched route is now on the map</string>
+    <string name="draw_a_longer_route">Draw a longer route</string>
 
     <!-- Worldview-->
     <string name="now_viewing_worldview">Now viewing the "%1$s" world view</string>
@@ -464,10 +473,12 @@
     <string name="tap_on_cluster_circle_instruction">Tap on a cluster circle to zoom and fit the bounds to its leaves</string>
 
     <!-- Driving profile toggle -->
-    <string name="driving_profile">%1$sm\nby car</string>
-    <string name="walking_profile">%1$sm\non foot</string>
-    <string name="cycling_profile">%1$sm\nby bike</string>
+    <string name="drag_draw_driving_profile">%1$sm\nby car</string>
+    <string name="drag_draw_walking_profile">%1$sm\non foot</string>
+    <string name="drag_draw_cycling_profile">%1$sm\nby bike</string>
     <string name="instruction">Click on map or buttons to change route</string>
+    <string name="move_map_explore_drawn_matched_route">Move map around to explore the walking route</string>
+    <string name="move_map_explore_drawn_matched_route_timeout">Map matching call timed out. Try drawing a new route.</string>
 
     <!-- Baseball spray chart-->
     <string name="baseball_spray_chart_show_icons">Show icons instead</string>

@@ -301,6 +301,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.labs.DragToDrawMapMatchedRouteActivity"
+            android:label="@string/activity_lab_drag_to_draw_map_matched_route_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.labs.SharedPreferencesActivity"
             android:label="@string/activity_lab_shared_preferences_title">
             <meta-data
