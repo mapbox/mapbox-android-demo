@@ -356,6 +356,9 @@ public class TurfPhysicalCircleActivity extends AppCompatActivity implements Map
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 

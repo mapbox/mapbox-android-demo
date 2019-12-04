@@ -29,10 +29,8 @@ import static com.mapbox.turf.TurfConstants.UNIT_MILES;
  * (i.e. ring) around a center coordinate.
  */
 public class TurfRingActivity extends AppCompatActivity implements MapboxMap.OnMapClickListener {
-  private static final String OUTER_CIRCLE_GEOJSON_SOURCE_ID = "OUTER_CIRCLE_GEOJSON_SOURCE_ID";
-  private static final String INNER_CIRCLE_GEOJSON_SOURCE_ID = "INNER_CIRCLE_GEOJSON_SOURCE_ID";
-  private static final String OUTER_CIRCLE_LAYER_ID = "OUTER_CIRCLE_LAYER_ID";
-  private static final String INNER_CIRCLE_LAYER_ID = "INNER_CIRCLE_LAYER_ID";
+  private static final String CIRCLE_GEOJSON_SOURCE_ID = "CIRCLE_GEOJSON_SOURCE_ID";
+  private static final String CIRCLE_LAYER_ID = "CIRCLE_LAYER_ID";
   private static final int OUTER_CIRCLE_MILE_RADIUS = 1;
   private static final double MILE_DIFFERENCE_BETWEEN_CIRCLES = .2;
   private static final int CIRCLE_STEPS = 360;
@@ -60,12 +58,8 @@ public class TurfRingActivity extends AppCompatActivity implements MapboxMap.OnM
         TurfRingActivity.this.mapboxMap = mapboxMap;
         mapboxMap.setStyle(new Style.Builder()
             .fromUri(Style.LIGHT)
-            .withSource(new GeoJsonSource(OUTER_CIRCLE_GEOJSON_SOURCE_ID))
-            .withSource(new GeoJsonSource(INNER_CIRCLE_GEOJSON_SOURCE_ID))
-            .withLayer(new FillLayer(OUTER_CIRCLE_LAYER_ID, OUTER_CIRCLE_GEOJSON_SOURCE_ID).withProperties(
-              fillColor(Color.RED)
-            ))
-            .withLayer(new FillLayer(INNER_CIRCLE_LAYER_ID, INNER_CIRCLE_GEOJSON_SOURCE_ID).withProperties(
+            .withSource(new GeoJsonSource(CIRCLE_GEOJSON_SOURCE_ID))
+            .withLayer(new FillLayer(CIRCLE_LAYER_ID, CIRCLE_GEOJSON_SOURCE_ID).withProperties(
               fillColor(Color.RED)
             )), new Style.OnStyleLoaded() {
               @Override
@@ -85,36 +79,35 @@ public class TurfRingActivity extends AppCompatActivity implements MapboxMap.OnM
 
   @Override
   public boolean onMapClick(@NonNull LatLng point) {
-
     moveRing(Point.fromLngLat(point.getLongitude(), point.getLatitude()));
-
     return true;
   }
 
   private void moveRing(Point centerPoint) {
-    if (mapboxMap.getStyle() != null) {
-      Style style = mapboxMap.getStyle();
+    mapboxMap.getStyle(new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
 
-      // Use Turf to calculate the coordinates for the outer ring of the final Polygon
-      Polygon outerCirclePolygon = getTurfPolygon(OUTER_CIRCLE_MILE_RADIUS, centerPoint);
+        // Use Turf to calculate the coordinates for the outer ring of the final Polygon
+        Polygon outerCirclePolygon = getTurfPolygon(OUTER_CIRCLE_MILE_RADIUS, centerPoint);
 
-      // Use Turf to calculate the coordinates for the inner ring of the final Polygon
-      Polygon innerCirclePolygon = getTurfPolygon(
-        OUTER_CIRCLE_MILE_RADIUS - MILE_DIFFERENCE_BETWEEN_CIRCLES, centerPoint);
+        // Use Turf to calculate the coordinates for the inner ring of the final Polygon
+        Polygon innerCirclePolygon = getTurfPolygon(
+          OUTER_CIRCLE_MILE_RADIUS - MILE_DIFFERENCE_BETWEEN_CIRCLES, centerPoint);
 
-      GeoJsonSource outerCircleSource = style.getSourceAs(OUTER_CIRCLE_GEOJSON_SOURCE_ID);
+        GeoJsonSource outerCircleSource = style.getSourceAs(CIRCLE_GEOJSON_SOURCE_ID);
 
-      if (outerCircleSource != null) {
-
-        // Use the two Polygon objects above to create the final Polygon that visually represents the ring.
-        outerCircleSource.setGeoJson(Polygon.fromOuterInner(
-          // Create outer LineString
-          LineString.fromLngLats(TurfMeta.coordAll(outerCirclePolygon, false)),
-          // Create inter LineString
-          LineString.fromLngLats(TurfMeta.coordAll(innerCirclePolygon, false))
-        ));
+        if (outerCircleSource != null) {
+          // Use the two Polygon objects above to create the final Polygon that visually represents the ring.
+          outerCircleSource.setGeoJson(Polygon.fromOuterInner(
+            // Create outer LineString
+            LineString.fromLngLats(TurfMeta.coordAll(outerCirclePolygon, false)),
+            // Create inter LineString
+            LineString.fromLngLats(TurfMeta.coordAll(innerCirclePolygon, false))
+          ));
+        }
       }
-    }
+    });
   }
 
   private Polygon getTurfPolygon(@NonNull double radius, Point centerPoint) {
@@ -155,6 +148,9 @@ public class TurfRingActivity extends AppCompatActivity implements MapboxMap.OnM
   @Override
   protected void onDestroy() {
     super.onDestroy();
+    if (mapboxMap != null) {
+      mapboxMap.removeOnMapClickListener(this);
+    }
     mapView.onDestroy();
   }
 
