@@ -5,6 +5,7 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;

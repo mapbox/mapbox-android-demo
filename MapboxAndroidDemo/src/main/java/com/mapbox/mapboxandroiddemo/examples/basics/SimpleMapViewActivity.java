@@ -42,7 +42,6 @@ public class SimpleMapViewActivity extends AppCompatActivity {
 
             // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
 
-
           }
         });
       }

@@ -155,6 +155,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.TextFieldMultipleFormatsActi
 import com.mapbox.mapboxandroiddemo.examples.styles.TransparentBackgroundActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VariableLabelPlacementActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.VectorSourceActivity;
+import com.mapbox.mapboxandroiddemo.examples.styles.KotlinWorldviewSwitchActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ZoomDependentFillColorActivity;
 import com.mapbox.mapboxandroiddemo.model.ExampleItemModel;
 import com.mapbox.mapboxandroiddemo.utils.ItemClickSupport;
@@ -702,6 +703,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, VariableLabelPlacementActivity.class),
             null,
        R.string.activity_styles_variable_label_placement_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_worldview_switch_title,
+      R.string.activity_styles_worldview_switch_description,
+      null,
+      new Intent(MainActivity.this, KotlinWorldviewSwitchActivity.class),
+      R.string.activity_styles_worldview_switch_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_extrusions,
