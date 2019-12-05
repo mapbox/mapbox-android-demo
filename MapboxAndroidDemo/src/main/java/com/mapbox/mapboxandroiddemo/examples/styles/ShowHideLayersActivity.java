@@ -28,7 +28,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 public class ShowHideLayersActivity extends AppCompatActivity {
 
   private MapView mapView;
-  private MapboxMap map;
+  private MapboxMap mapboxMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class ShowHideLayersActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
-        map = mapboxMap;
+        ShowHideLayersActivity.this.mapboxMap = mapboxMap;
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
@@ -70,6 +70,23 @@ public class ShowHideLayersActivity extends AppCompatActivity {
             });
           }
         });
+      }
+    });
+  }
+
+
+  private void toggleLayer() {
+    mapboxMap.getStyle(new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        Layer layer = style.getLayer("museums");
+        if (layer != null) {
+          if (VISIBLE.equals(layer.getVisibility().getValue())) {
+            layer.setProperties(visibility(NONE));
+          } else {
+            layer.setProperties(visibility(VISIBLE));
+          }
+        }
       }
     });
   }
@@ -114,21 +131,5 @@ public class ShowHideLayersActivity extends AppCompatActivity {
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
     mapView.onSaveInstanceState(outState);
-  }
-
-  private void toggleLayer() {
-    map.getStyle(new Style.OnStyleLoaded() {
-      @Override
-      public void onStyleLoaded(@NonNull Style style) {
-        Layer layer = style.getLayer("museums");
-        if (layer != null) {
-          if (VISIBLE.equals(layer.getVisibility().getValue())) {
-            layer.setProperties(visibility(NONE));
-          } else {
-            layer.setProperties(visibility(VISIBLE));
-          }
-        }
-      }
-    });
   }
 }

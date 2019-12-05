@@ -424,6 +424,9 @@
     <!-- Variable label placement-->
     <string name="zoom_map_in_and_out_circle_to_icon_transition">Zoom in and out to see the circles transition to icons</string>
 
+    <!-- Zoom opacity swap-->
+    <string name="zoom_in_and_out_instruction">Zoom in and out to see the new order of the satellite and Streets styles</string>
+
     <!-- China bounds checker-->
     <string name="device_location">Device %1$s in China</string>
     <string name="china_style_with_english_labels_warning_toast">This style file isn\'t actually included in the app because of privacy reasons. Add the file to an assets folder. Please email Mapbox at apac-bd@mapbox.com if you need this file and/or have questions.</string>
