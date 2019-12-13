@@ -66,6 +66,7 @@
     <string name="activity_dds_symbol_collision_detection_title">Toggle collision detection</string>
     <string name="activity_dds_circle_to_icon_smooth_transition_title">Circle to icon</string>
     <string name="activity_dds_polygon_revealed_hole_outline_title">Outlined polygon hole</string>
+    <string name="activity_dds_property_icon_switch_title">Icon setting based on Feature property</string>
     <string name="activity_styles_text_field_formatting_title">Adjust text labels</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>

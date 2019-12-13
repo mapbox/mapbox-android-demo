@@ -450,4 +450,6 @@
     <!-- Worldview-->
     <string name="now_viewing_worldview">Now viewing the "%1$s" world view</string>
 
+    <!-- Property icon setting-->
+    <string name="toast_icon_property_info">This Feature\'s icon id is %1$s</string>
 </resources>
