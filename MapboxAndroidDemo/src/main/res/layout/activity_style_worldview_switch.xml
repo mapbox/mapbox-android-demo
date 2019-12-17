@@ -7,9 +7,9 @@
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@id/mapView"
-        mapbox:mapbox_cameraTargetLat="27.57955220"
-        mapbox:mapbox_cameraTargetLng="89.06972592"
-        mapbox:mapbox_cameraZoom="9.2"
+        mapbox:mapbox_cameraTargetLat="28.56"
+        mapbox:mapbox_cameraTargetLng="87.2"
+        mapbox:mapbox_cameraZoom="4.64"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
