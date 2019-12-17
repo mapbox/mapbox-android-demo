@@ -447,4 +447,7 @@
     <string name="thick_bordered_circle_border_difference">Border difference: %1$d kilometers</string>
     <string name="tap_on_map_to_move_bordered_circle">Tap on the map to move the bordered circle</string>
 
+    <!-- Worldview-->
+    <string name="now_viewing_worldview">Now viewing the "%1$s" world view</string>
+
 </resources>
