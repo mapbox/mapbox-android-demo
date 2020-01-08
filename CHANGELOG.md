@@ -2,6 +2,16 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 8.6.0 - January 8th, 2020
+
+* Bumped maps sdk to 8.6.0 #[1282](https://github.com/mapbox/mapbox-android-demo/pull/1282)
+* Adds a worldview switch examples #[1278](https://github.com/mapbox/mapbox-android-demo/pull/1278)
+* Refactoring satellite streets opacity zoom fade example #[1274](https://github.com/mapbox/mapbox-android-demo/pull/1274)
+* Adding bordered circle Kotlin example #[1275](https://github.com/mapbox/mapbox-android-demo/pull/1275)
+* Added fingerprint biometric authentication example #[1272](https://github.com/mapbox/mapbox-android-demo/pull/1272)
+* Disabling collision transition for clustering examples #[1270](https://github.com/mapbox/mapbox-android-demo/pull/1270)
+* Adding example of loading cn or global style based on device location #[1267](https://github.com/mapbox/mapbox-android-demo/pull/1267)
+
 ## 8.5.0 - November 13th, 2019
 
 * Bumped maps sdk to 8.5.0 #[1246](https://github.com/mapbox/mapbox-android-demo/pull/1246)

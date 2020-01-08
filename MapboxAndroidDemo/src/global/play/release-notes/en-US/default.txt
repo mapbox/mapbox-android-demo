@@ -1,2 +1,5 @@
-This update is part of the 8.5.0 release of the Mapbox Maps SDK for Android. Many fixes and improvements are included in this update. The update also includes an example showing a smooth circle-to-icon transition.
+This update is part of the 8.6.0 release of the Mapbox Maps SDK for Android.  New examples include:
 
+• Switching worldview
+• Bordered circle (Kotlin)
+• Show data based on fingerprint biometric authentication
