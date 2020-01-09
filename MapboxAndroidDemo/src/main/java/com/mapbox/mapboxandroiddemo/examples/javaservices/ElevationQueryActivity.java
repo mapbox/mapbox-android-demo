@@ -133,7 +133,7 @@ public class ElevationQueryActivity extends AppCompatActivity implements
   private void makeElevationRequestToTilequeryApi(@NonNull final Style style, @NonNull LatLng point) {
     MapboxTilequery elevationQuery = MapboxTilequery.builder()
       .accessToken(getString(R.string.access_token))
-      .mapIds("mapbox.mapbox-terrain-v2")
+      .tilesetIds("mapbox.mapbox-terrain-v2")
       .query(Point.fromLngLat(point.getLongitude(), point.getLatitude()))
       .geometry("polygon")
       .layers("contour")
