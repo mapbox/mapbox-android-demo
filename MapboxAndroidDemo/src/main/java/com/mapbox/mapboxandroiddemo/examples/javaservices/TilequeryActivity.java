@@ -158,7 +158,7 @@ public class TilequeryActivity extends AppCompatActivity implements
   private void makeTilequeryApiCall(@NonNull LatLng point) {
     MapboxTilequery tilequery = MapboxTilequery.builder()
       .accessToken(getString(R.string.access_token))
-      .mapIds("mapbox.mapbox-streets-v7")
+      .tilesetIds("mapbox.mapbox-streets-v7")
       .query(Point.fromLngLat(point.getLongitude(), point.getLatitude()))
       .radius(50)
       .limit(10)
