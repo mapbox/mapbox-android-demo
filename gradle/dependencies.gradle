@@ -12,8 +12,8 @@ ext {
             // Mapbox
             mapboxMapPrefix          : 'v8',
             mapboxMapSdk             : '8.6.0',
-            mapboxTurf               : '4.9.0',
-            mapboxServices           : '4.9.0',
+            mapboxTurf               : '5.0.0',
+            mapboxServices           : '5.0.0',
             mapboxPluginBuilding     : '0.6.0',
             mapboxPluginPlaces       : '0.9.0',
             mapboxPluginLocalization : '0.11.0',
