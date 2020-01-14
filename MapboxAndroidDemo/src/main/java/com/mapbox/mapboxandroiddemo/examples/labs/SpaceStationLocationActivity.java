@@ -155,7 +155,7 @@ public class SpaceStationLocationActivity extends AppCompatActivity {
   }
 
   private void updateMarkerPosition(LatLng position) {
-    // This method is were we update the marker position once we have new coordinates. First we
+    // This method is where we update the marker position once we have new coordinates. First we
     // check if this is the first time we are executing this handler, the best way to do this is
     // check if marker is null;
     if (map.getStyle() != null) {
