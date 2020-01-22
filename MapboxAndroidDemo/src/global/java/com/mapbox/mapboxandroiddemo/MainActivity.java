@@ -78,6 +78,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StraightLineDistanceMapMovementActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageNotificationActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfLineDistanceActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfPhysicalCircleActivity;
@@ -1128,6 +1129,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, StraightLineDistanceMapMovementActivity.class),
       null,
       R.string.activity_java_services_straight_line_distance_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_java_services,
+      R.string.activity_java_services_static_image_notification_title,
+      R.string.activity_java_services_static_image_notification_description,
+      new Intent(MainActivity.this, StaticImageNotificationActivity.class),
+      null,
+      R.string.activity_java_services_static_image_notification_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,

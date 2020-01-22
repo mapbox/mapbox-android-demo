@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".examples.javaservices.StaticImageNotificationActivity">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="40.729050870527914"
+        mapbox:mapbox_cameraTargetLng="-73.9879401159224"
+        mapbox:mapbox_cameraZoom="4" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingLeft="24dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="24dp"
+        android:paddingRight="24dp"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:id="@+id/tilequery_radius_value_textView"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_pressed"
+            tools:text="80 feet" />
+
+        <SeekBar
+            android:id="@+id/tilequery_radius_seekbar"
+            android:layout_width="match_parent"
+            android:progress="250"
+            android:thumbTint="@color/mapboxGreenDark"
+            android:progressBackgroundTintMode="@color/mapboxGreenDark"
+            android:progressTint="@color/mapboxGreenDark"
+            android:max="500"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</FrameLayout>
