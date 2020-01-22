@@ -77,6 +77,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.MultipleGeometriesDire
 import com.mapbox.mapboxandroiddemo.examples.javaservices.OptimizationActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.SimplifyPolylineActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.StraightLineDistanceMapMovementActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfLineDistanceActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfPhysicalCircleActivity;
@@ -1119,6 +1120,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       null,
       new Intent(MainActivity.this, KotlinBorderedCircleActivity.class),
       R.string.activity_java_services_bordered_circle_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_java_services,
+      R.string.activity_java_services_straight_line_distance_title,
+      R.string.activity_java_services_straight_line_distance_description,
+      new Intent(MainActivity.this, StraightLineDistanceMapMovementActivity.class),
+      null,
+      R.string.activity_java_services_straight_line_distance_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,

@@ -514,6 +514,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.javaservices.StraightLineDistanceMapMovementActivity"
+            android:label="@string/activity_java_services_straight_line_distance_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.styles.TextFieldMultipleFormatsActivity"
             android:label="@string/activity_styles_text_field_multiple_formats_title">
             <meta-data

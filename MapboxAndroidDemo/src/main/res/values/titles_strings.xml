@@ -99,6 +99,7 @@
     <string name="activity_java_services_multiple_geometries_from_directions_route_title">Multiple geometries from Directions route</string>
     <string name="activity_java_services_turf_elevation_query_title">Retrieve elevation data</string>
     <string name="activity_java_services_bordered_circle_title">Bordered circle</string>
+    <string name="activity_java_services_straight_line_distance_title">Straight line distance</string>
     <string name="activity_plugins_traffic_plugin_title">Display real-time traffic</string>
     <string name="activity_plugins_building_plugin_title">Display buildings in 3D</string>
     <string name="activity_plugins_localization_plugin_title">Change map text to device language</string>
