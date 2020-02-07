@@ -100,6 +100,7 @@
     <string name="activity_java_services_turf_elevation_query_description">Use the Tilequery API to query the Mapbox Terrain vector tileset and retrieve elevation information for a specific location.</string>
     <string name="activity_java_services_bordered_circle_description">Use Turf to generate a circle with a radius expressed in physical units and to create an adjustable border</string>
     <string name="activity_java_services_straight_line_distance_description">Use Turf to calculate a straight line distance ("as the crow flies") between the device location and the map camera\'s target.</string>
+    <string name="activity_java_services_static_image_notification_description">Use the Static Image API to eventually place and continually update an notification image</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
     <string name="activity_plugins_places_plugin_description">Add location search ("geocoding") functionality and UI to search for any place in the world</string>
