@@ -475,4 +475,10 @@
     <!-- Circle icon toggling on click-->
     <string name="tap_on_map_to_toggle_instruction">Tap on a circle and then marker to toggle. Tap elsewhere to reset to circles.</string>
 
+    <!-- Nextbus integration-->
+    <string name="nextbus_integration_toast_could_not_load_agency">Couldn\'t load agency list.</string>
+    <string name="nextbus_integration_toast_select_agency">Select a transit agency from the spinner menu.</string>
+    <string name="nextbus_integration_toast_no_routes">No routes for this agency. Try selecting a different agency.</string>
+    <string name="nextbus_integration_toast_no_vehicles">No vehicles found for this route.</string>
+    <string name="nextbus_integration_toast_could_not_draw_route">Couldn\'t draw this route. Try selecting a different route.</string>
 </resources>
