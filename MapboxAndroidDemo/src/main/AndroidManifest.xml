@@ -755,6 +755,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.camera.ZoomToShowClusterLeavesActivity"
+            android:label="@string/activity_camera_zoom_to_show_cluster_leaves_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.dds.CircleLayerClusteringActivity"
             android:label="@string/activity_styles_dds_geojson_circle_layer_clusters_title">
             <meta-data
