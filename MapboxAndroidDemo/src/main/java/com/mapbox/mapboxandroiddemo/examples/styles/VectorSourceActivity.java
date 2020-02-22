@@ -56,7 +56,7 @@ public class VectorSourceActivity extends AppCompatActivity {
               lineJoin(Property.LINE_JOIN_ROUND),
               lineCap(Property.LINE_CAP_ROUND),
               lineColor(Color.parseColor("#ff69b4")),
-              lineWidth(1f)
+              lineWidth(1.9f)
             );
 
             style.addLayer(terrainData);

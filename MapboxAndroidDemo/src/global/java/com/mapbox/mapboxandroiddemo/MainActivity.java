@@ -87,6 +87,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfPhysicalCircleActi
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfRingActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.BaseballSprayChartActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.BiometricFingerprintLayerUnlockActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.ChangeAttributionColorActivity;
@@ -1369,6 +1370,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, BiometricFingerprintLayerUnlockActivity.class),
       null,
       R.string.activity_lab_biometric_fingerprint_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_lab,
+        R.string.activity_lab_baseball_spray_chart_title,
+        R.string.activity_lab_baseball_spray_chart_description,
+        new Intent(MainActivity.this, BaseballSprayChartActivity.class),
+        null,
+        R.string.activity_lab_baseball_spray_chart_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
