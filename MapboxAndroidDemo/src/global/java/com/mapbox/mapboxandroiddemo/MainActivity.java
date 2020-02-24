@@ -41,6 +41,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.CircleRadiusActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleToIconTransitionActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.PropertyIconDeterminationActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.ZoomToShowClusterLeavesActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsProfileToggleActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.KotlinBorderedCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
@@ -1146,6 +1147,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, StaticImageNotificationActivity.class),
       null,
       R.string.activity_java_services_static_image_notification_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_java_services,
+        R.string.activity_java_services_directions_profile_toggle_title,
+        R.string.activity_java_services_directions_profile_toggle_description,
+        new Intent(MainActivity.this, DirectionsProfileToggleActivity.class),
+        null,
+        R.string.activity_java_services_directions_profile_toggle_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".examples.javaservices.DirectionsProfileToggleActivity">
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        mapbox:mapbox_cameraTargetLat="19.42777430539"
+        mapbox:mapbox_cameraTargetLng="-99.1523793414"
+        mapbox:mapbox_cameraZoom="11.7" />
+
+    <Button
+        android:id="@+id/driving_profile_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:background="@color/mapboxPurple"
+        android:padding="8dp"
+        android:textAllCaps="false"
+        android:textStyle="normal"
+        mapbox:layout_constraintBottom_toBottomOf="parent"
+        mapbox:layout_constraintEnd_toStartOf="@+id/walking_profile_button"
+        mapbox:layout_constraintHorizontal_bias="0.5"
+        mapbox:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/walking_profile_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/mapboxPurple"
+        android:padding="8dp"
+        android:textAllCaps="false"
+        android:textStyle="normal"
+        mapbox:layout_constraintBottom_toBottomOf="@+id/driving_profile_button"
+        mapbox:layout_constraintEnd_toStartOf="@+id/cycling_profile_button"
+        mapbox:layout_constraintHorizontal_bias="0.5"
+        mapbox:layout_constraintStart_toEndOf="@+id/driving_profile_button" />
+
+    <Button
+        android:id="@+id/cycling_profile_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/mapboxPurple"
+        android:padding="8dp"
+        android:textAllCaps="false"
+        android:textStyle="normal"
+        mapbox:layout_constraintBottom_toBottomOf="@+id/driving_profile_button"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintHorizontal_bias="0.5"
+        mapbox:layout_constraintStart_toEndOf="@+id/walking_profile_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

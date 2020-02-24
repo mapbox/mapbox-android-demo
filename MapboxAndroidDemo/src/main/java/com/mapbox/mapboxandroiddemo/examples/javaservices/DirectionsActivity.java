@@ -100,8 +100,7 @@ public class DirectionsActivity extends AppCompatActivity {
    * Add the route and marker sources to the map
    */
   private void initSource(@NonNull Style loadedMapStyle) {
-    loadedMapStyle.addSource(new GeoJsonSource(ROUTE_SOURCE_ID,
-      FeatureCollection.fromFeatures(new Feature[] {})));
+    loadedMapStyle.addSource(new GeoJsonSource(ROUTE_SOURCE_ID));
 
     GeoJsonSource iconGeoJsonSource = new GeoJsonSource(ICON_SOURCE_ID, FeatureCollection.fromFeatures(new Feature[] {
       Feature.fromGeometry(Point.fromLngLat(origin.longitude(), origin.latitude())),
@@ -184,9 +183,7 @@ public class DirectionsActivity extends AppCompatActivity {
               // Create a LineString with the directions route's geometry and
               // reset the GeoJSON source for the route LineLayer source
               if (source != null) {
-                Timber.d("onResponse: source != null");
-                source.setGeoJson(FeatureCollection.fromFeature(
-                    Feature.fromGeometry(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6))));
+                source.setGeoJson(LineString.fromPolyline(currentRoute.geometry(), PRECISION_6));
               }
             }
           });
