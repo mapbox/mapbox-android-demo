@@ -471,4 +471,8 @@
 
     <!-- Baseball spray chart-->
     <string name="baseball_spray_chart_show_icons">Show icons instead</string>
+
+    <!-- Circle icon toggling on click-->
+    <string name="tap_on_map_to_toggle_instruction">Tap on a circle and then marker to toggle. Tap elsewhere to reset to circles.</string>
+
 </resources>

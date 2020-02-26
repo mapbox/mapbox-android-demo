@@ -144,6 +144,7 @@ import com.mapbox.mapboxandroiddemo.examples.styles.ColorSwitcherActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.DefaultStyleActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.GeojsonLayerInStackActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.HillShadeActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.CircleIconToggleOnClickActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.IconSizeChangeOnClickActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ImageSourceActivity;
 import com.mapbox.mapboxandroiddemo.examples.styles.ImageSourceTimeLapseActivity;
@@ -717,6 +718,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       null,
       new Intent(MainActivity.this, KotlinWorldviewSwitchActivity.class),
       R.string.activity_styles_worldview_switch_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_styles,
+      R.string.activity_styles_runtime_styling_title,
+      R.string.activity_styles_runtime_styling_description,
+      new Intent(MainActivity.this, RuntimeStylingActivity.class),
+      null,
+      R.string.activity_styles_runtime_styling_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_extrusions,
@@ -1591,6 +1600,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_dds_property_icon_switch_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_circle_icon_toggle_on_click_title,
+      R.string.activity_dds_circle_icon_toggle_on_click_description,
+      new Intent(MainActivity.this, CircleIconToggleOnClickActivity.class),
+      null,
+      R.string.activity_dds_circle_icon_toggle_on_click_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_basics,
       R.string.activity_basic_simple_mapview_title,
       R.string.activity_basic_simple_mapview_description,
@@ -1629,13 +1646,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, LocationChangeListeningActivity.class),
       null,
       R.string.activity_location_location_change_listening_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_styles,
-      R.string.activity_styles_runtime_styling_title,
-      R.string.activity_styles_runtime_styling_description,
-      new Intent(MainActivity.this, RuntimeStylingActivity.class),
-      null,
-      R.string.activity_styles_runtime_styling_url, false, BuildConfig.MIN_SDK_VERSION));
   }
 }
