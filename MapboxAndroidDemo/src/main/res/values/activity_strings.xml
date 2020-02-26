@@ -460,4 +460,6 @@
     <string name="static_image_api_notification_seekbar_feet">%1$d feet</string>
     <string name="static_image_api_notification_no_wifi_nearby">Zero wifi locations nearby</string>
 
+    <!-- Zoom to cluster leaves -->
+    <string name="tap_on_cluster_circle_instruction">Tap on a cluster circle to zoom and fit the bounds to its leaves</string>
 </resources>

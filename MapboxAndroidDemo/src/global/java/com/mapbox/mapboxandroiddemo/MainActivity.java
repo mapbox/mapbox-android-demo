@@ -40,6 +40,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleRadiusActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleToIconTransitionActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.PropertyIconDeterminationActivity;
+import com.mapbox.mapboxandroiddemo.examples.camera.ZoomToShowClusterLeavesActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.KotlinBorderedCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.DrawGeojsonLineActivity;
@@ -896,6 +897,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, SlowlyRotatingCameraActivity.class),
       null,
       R.string.activity_camera_slowly_rotating_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_camera,
+      R.string.activity_camera_zoom_to_show_cluster_leaves_title,
+      R.string.activity_camera_zoom_to_show_cluster_leaves_description,
+      new Intent(MainActivity.this, ZoomToShowClusterLeavesActivity.class),
+      null,
+      R.string.activity_camera_zoom_to_show_cluster_leaves_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_offline,
