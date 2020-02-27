@@ -1016,6 +1016,14 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.javaservices.DirectionsProfileToggleActivity"
+            android:label="@string/activity_java_services_directions_profile_toggle_title"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.labs.ValueAnimatorIconAnimationActivity"
             android:label="@string/activity_lab_animated_interpolator_icon_drop_title"
 

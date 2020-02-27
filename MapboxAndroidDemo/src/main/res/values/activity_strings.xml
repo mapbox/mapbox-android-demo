@@ -462,4 +462,10 @@
 
     <!-- Zoom to cluster leaves -->
     <string name="tap_on_cluster_circle_instruction">Tap on a cluster circle to zoom and fit the bounds to its leaves</string>
+
+    <!-- Driving profile toggle -->
+    <string name="driving_profile">%1$sm\nby car</string>
+    <string name="walking_profile">%1$sm\non foot</string>
+    <string name="cycling_profile">%1$sm\nby bike</string>
+    <string name="instruction">Click on map or buttons to change route</string>
 </resources>
