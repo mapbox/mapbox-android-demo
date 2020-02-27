@@ -468,4 +468,7 @@
     <string name="walking_profile">%1$sm\non foot</string>
     <string name="cycling_profile">%1$sm\nby bike</string>
     <string name="instruction">Click on map or buttons to change route</string>
+
+    <!-- Baseball spray chart-->
+    <string name="baseball_spray_chart_show_icons">Show icons instead</string>
 </resources>

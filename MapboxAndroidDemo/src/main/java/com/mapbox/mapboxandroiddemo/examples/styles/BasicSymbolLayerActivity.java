@@ -14,7 +14,6 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -23,6 +22,7 @@ import java.util.List;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 
 /**
@@ -78,10 +78,11 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
       // the coordinate point. This is offset is not always needed and is dependent on the image
       // that you use for the SymbolLayer icon.
       .withLayer(new SymbolLayer(LAYER_ID, SOURCE_ID)
-        .withProperties(PropertyFactory.iconImage(ICON_ID),
-          iconAllowOverlap(true),
-          iconIgnorePlacement(true),
-          iconOffset(new Float[] {0f, -9f}))
+        .withProperties(
+            iconImage(ICON_ID),
+            iconAllowOverlap(true),
+            iconIgnorePlacement(true),
+            iconOffset(new Float[] {0f, -9f}))
       ), new Style.OnStyleLoaded() {
         @Override
         public void onStyleLoaded(@NonNull Style style) {
