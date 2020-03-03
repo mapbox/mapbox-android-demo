@@ -717,7 +717,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_styles_worldview_switch_description,
       null,
       new Intent(MainActivity.this, KotlinWorldviewSwitchActivity.class),
-      R.string.activity_styles_worldview_switch_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_styles_worldview_switch_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_styles,
@@ -915,7 +915,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_camera_zoom_to_show_cluster_leaves_description,
       new Intent(MainActivity.this, ZoomToShowClusterLeavesActivity.class),
       null,
-      R.string.activity_camera_zoom_to_show_cluster_leaves_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_camera_zoom_to_show_cluster_leaves_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_offline,
@@ -1075,7 +1075,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_java_services_isochrone_with_seekbar_description,
       new Intent(MainActivity.this, IsochroneSeekbarActivity.class),
       null,
-      R.string.activity_java_services_isochrone_with_seekbar_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_java_services_isochrone_with_seekbar_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_java_services,
@@ -1099,7 +1099,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_java_services_turf_physical_circle_description,
       new Intent(MainActivity.this, TurfPhysicalCircleActivity.class),
       null,
-      R.string.activity_java_services_turf_physical_circle_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_java_services_turf_physical_circle_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
         R.id.nav_java_services,
@@ -1107,7 +1107,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_java_services_turf_elevation_query_description,
         new Intent(MainActivity.this, ElevationQueryActivity.class),
         null,
-        R.string.activity_java_services_turf_elevation_query_url, true, BuildConfig.MIN_SDK_VERSION));
+        R.string.activity_java_services_turf_elevation_query_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_java_services,
@@ -1132,7 +1132,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, MultipleGeometriesDirectionsRouteActivity.class),
       null,
       R.string.activity_java_services_multiple_geometries_from_directions_route_url,
-      true, BuildConfig.MIN_SDK_VERSION));
+      false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_java_services,
@@ -1140,7 +1140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_java_services_bordered_circle_description,
       null,
       new Intent(MainActivity.this, KotlinBorderedCircleActivity.class),
-      R.string.activity_java_services_bordered_circle_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_java_services_bordered_circle_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_java_services,
@@ -1346,7 +1346,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_lab_rv_directions_description,
         new Intent(MainActivity.this, RecyclerViewDirectionsActivity.class),
         null,
-        R.string.activity_lab_rv_directions_url, true, BuildConfig.MIN_SDK_VERSION));
+        R.string.activity_lab_rv_directions_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,
@@ -1354,7 +1354,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_lab_spinning_icon_description,
       new Intent(MainActivity.this, SpinningSymbolLayerIconActivity.class),
       null,
-      R.string.activity_lab_spinning_icon_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_lab_spinning_icon_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,
@@ -1362,7 +1362,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_lab_change_attribution_color_description,
       new Intent(MainActivity.this, ChangeAttributionColorActivity.class),
       null,
-      R.string.activity_lab_change_attribution_color_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_lab_change_attribution_color_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
         R.id.nav_lab,
@@ -1370,7 +1370,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_lab_shared_preferences_description,
         new Intent(MainActivity.this, SharedPreferencesActivity.class),
         null,
-        R.string.activity_lab_shared_preferences_url, true, BuildConfig.MIN_SDK_VERSION));
+        R.string.activity_lab_shared_preferences_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,
@@ -1378,7 +1378,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_lab_biometric_fingerprint_description,
       new Intent(MainActivity.this, BiometricFingerprintLayerUnlockActivity.class),
       null,
-      R.string.activity_lab_biometric_fingerprint_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_lab_biometric_fingerprint_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
         R.id.nav_lab,
@@ -1597,7 +1597,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_dds_property_icon_switch_description,
       new Intent(MainActivity.this, PropertyIconDeterminationActivity.class),
       null,
-      R.string.activity_dds_property_icon_switch_url, false, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_dds_property_icon_switch_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
@@ -1637,7 +1637,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_basic_kotlin_support_map_frag_description,
       null,
       new Intent(MainActivity.this, KotlinSupportMapFragmentActivity.class),
-      R.string.activity_basic_kotlin_support_map_frag_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_basic_kotlin_support_map_frag_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_location,

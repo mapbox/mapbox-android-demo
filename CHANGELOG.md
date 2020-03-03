@@ -2,6 +2,20 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 9.0.0 - March 2nd, 2020
+
+- Bumped the Maps SDK to 9.0.0 #[1305](https://github.com/mapbox/mapbox-android-demo/pull/1305)
+- Adding circle icon toggling OnClick example #[1304](https://github.com/mapbox/mapbox-android-demo/pull/1304)
+- Adding baseball spray chart example #[1302](https://github.com/mapbox/mapbox-android-demo/pull/1302)
+- Adding directions profile toggle example #[1303](https://github.com/mapbox/mapbox-android-demo/pull/1303)
+- Adding example of zooming to cluster children #[1301](https://github.com/mapbox/mapbox-android-demo/pull/1301)
+- Adding Tilequery API + Static Images API notification example #[1297](https://github.com/mapbox/mapbox-android-demo/pull/1297)
+- Bumped Maps SDK to 8.6.2 #[1291](https://github.com/mapbox/mapbox-android-demo/pull/1291)
+- Adding straight line Turf distance measurement ("as the crow flies") example #[1289](https://github.com/mapbox/mapbox-android-demo/pull/1289)
+- Added example of SymbolLayer icon being set based on property #[1290](https://github.com/mapbox/mapbox-android-demo/pull/1290)
+- Fix typo in SpaceStationLocationActivity comment #[1288](https://github.com/mapbox/mapbox-android-demo/pull/1288)
+- Bumped Java SDK to 5.0.0 #[1287](https://github.com/mapbox/mapbox-android-demo/pull/1287)
+
 ## 8.6.0 - January 8th, 2020
 
 * Bumped maps sdk to 8.6.0 #[1282](https://github.com/mapbox/mapbox-android-demo/pull/1282)
