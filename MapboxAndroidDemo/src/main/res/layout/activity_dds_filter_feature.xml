@@ -9,17 +9,18 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraZoom="0.346515"
-         />
+        mapbox:mapbox_cameraTargetLat="17.184917"
+        mapbox:mapbox_cameraTargetLng="9.386903"
+        mapbox:mapbox_cameraZoom="2" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_location_search"
+        android:id="@+id/toggle_feature_filter_visibility_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:tint="@android:color/white"
         app:backgroundTint="@color/colorPrimary"
-        app:srcCompat="@android:drawable/ic_search_category_default" />
+        app:srcCompat="@drawable/ic_cycle_through" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

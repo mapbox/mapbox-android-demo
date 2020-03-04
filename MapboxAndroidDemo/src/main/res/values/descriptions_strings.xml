@@ -70,6 +70,7 @@
     <string name="activity_dds_property_icon_switch_description">Create a SymbolLayer and set the iconId to be dependent on each Feature\'s property key/value pair. </string>
     <string name="activity_dds_circle_icon_toggle_on_click_description">Use layer filters and feature properties to create the visual effect of toggling between circles and icons when they\'re tapped on.</string>
     <string name="activity_dds_within_expression_description">Check whether or not a feature is fully within the bounds of a GeoJSON polygon.</string>
+    <string name="activity_dds_filter_features_description">Use filters to toggle the visibility of specific features. In this example, specific country labels are filtered out from a single layer.</string>
     <string name="activity_styles_text_field_formatting_description">Adjust the color, size, and fonts of SymbolLayer text fields.</string>
     <string name="activity_camera_animate_description">"Animate the map's camera position, tilt, bearing, and zoom."</string>
     <string name="activity_camera_bounding_box_description">Position the camera so that all the given markers are in view.</string>
