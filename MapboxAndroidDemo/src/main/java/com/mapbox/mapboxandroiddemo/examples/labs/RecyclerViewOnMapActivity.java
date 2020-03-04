@@ -93,7 +93,6 @@ public class RecyclerViewOnMapActivity extends AppCompatActivity implements OnMa
   }
 
   private void initFeatureCollection() {
-    featureCollection = FeatureCollection.fromFeatures(new Feature[] {});
     List<Feature> featureList = new ArrayList<>();
     if (featureCollection != null) {
       for (LatLng latLng : coordinates) {
