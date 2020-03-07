@@ -1,11 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds;
 
-import android.animation.ValueAnimator;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.mapbox.mapboxandroiddemo.R;
@@ -15,34 +11,25 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.expressions.Expression;
-import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.linear;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.match;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.rgb;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.rgba;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.toColor;
-import static com.mapbox.mapboxsdk.style.expressions.Expression.toRgba;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.zoom;
-import static com.mapbox.mapboxsdk.style.layers.Property.LINE_CAP_ROUND;
-import static com.mapbox.mapboxsdk.style.layers.Property.LINE_JOIN_ROUND;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineBlur;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineCap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineDasharray;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineJoin;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 
@@ -53,14 +40,13 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.lineWidth;
 public class AnimatedDashLineActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private static final String ANIMATE_LINE_LAYER_ID = "animated_line_layer_id";
+  private static final String TRAFFIC_DATA_SOURCE_ID = "traffic-data-source-id";
   private MapView mapView;
   private MapboxMap mapboxMap;
   private Handler handler;
-  private String TAG = "AnimatedDashLine";
-  private Layer animatedLineLayer;
+  private String TAG = "AnimatedDashLineActivity";
   private RefreshDashAndGapRunnable refreshDashAndGapRunnable;
   private int animationSpeedMillseconds = 50;
-  private ValueAnimator animator;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -82,93 +68,88 @@ public class AnimatedDashLineActivity extends AppCompatActivity implements OnMap
   @Override
   public void onMapReady(final MapboxMap mapboxMap) {
     AnimatedDashLineActivity.this.mapboxMap = mapboxMap;
+    mapboxMap.setStyle(Style.TRAFFIC_NIGHT, new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
+        // initAnimation();
+        style.addSource(new VectorSource(TRAFFIC_DATA_SOURCE_ID, "mapbox://mapbox.mapbox-traffic-v1"));
+        addAnimatedTrafficLayer();
+        refreshDashAndGapRunnable = new RefreshDashAndGapRunnable();
+        handler.postDelayed(refreshDashAndGapRunnable, animationSpeedMillseconds);
+      }
+    });
+  }
 
-//    try {
-    mapboxMap.setStyle(Style.TRAFFIC_NIGHT
-        /*.withSource(new GeoJsonSource("animated_line_source", new URL(
-            "https://raw.githubusercontent.com/Chicago/osd-bike-routes/master/data/Bikeroutes.geojson"
-          ))
-        )*/, new Style.OnStyleLoaded() {
-        @Override
-        public void onStyleLoaded(@NonNull Style style) {
-//          initAnimation();
+  private void addAnimatedTrafficLayer() {
+    mapboxMap.getStyle(new Style.OnStyleLoaded() {
+      @Override
+      public void onStyleLoaded(@NonNull Style style) {
 
-          style.addSource(new VectorSource("traffic-data-source-id", "mapbox://mapbox.mapbox-traffic-v1"));
+        LineLayer animatedTrafficLayer = new LineLayer(ANIMATE_LINE_LAYER_ID,
+            TRAFFIC_DATA_SOURCE_ID).withProperties(
 
-          LineLayer antsTrafficLayer = new LineLayer(ANIMATE_LINE_LAYER_ID,
-            "traffic-data-source-id").withProperties(
             lineBlur(4f),
 
-            lineDasharray(new Float[] {2f, 2f}),
+            lineDasharray(new Float[]{4f, 4f}),
 
             lineWidth(interpolate(exponential(1.5f), zoom(),
-              stop(6, 1),
-              stop(13, 4),
-              stop(18, match(get("class"), literal(0f),
-                stop("motorway", 18),
-                stop("trunk", 18),
-                stop("primary", 11),
-                stop("tertiary", 7),
-                stop("secondary", 7)
-              )),
-              stop(20, match(get("class"), literal(0f),
-                stop("motorway", 33),
-                stop("trunk", 33),
-                stop("primary", 18.5),
-                stop("tertiary", 14),
-                stop("secondary", 14)
-              )))),
+                stop(6, 1),
+                stop(13, 4),
+                stop(18, match(get("class"), literal(0f),
+                    stop("motorway", 18),
+                    stop("trunk", 18),
+                    stop("primary", 11),
+                    stop("tertiary", 7),
+                    stop("secondary", 7)
+                )),
+                stop(20, match(get("class"), literal(0f),
+                    stop("motorway", 33),
+                    stop("trunk", 33),
+                    stop("primary", 18.5),
+                    stop("tertiary", 14),
+                    stop("secondary", 14)
+                )))),
 
             lineColor(
-              match(get("congestion"), toColor(rgba(0, 0, 0,0)),
-                stop("low", toColor(rgb(62, 116, 85))),
-                stop("moderate", toColor(rgb(182, 116, 58))),
-                stop("heavy", toColor(rgb(205, 112, 112))),
-                stop("severe", toColor(rgb(102, 0, 17)))
-              )),
+                match(get("congestion"), toColor(rgba(0, 0, 0, 0)),
+                    stop("low", toColor(rgb(62, 116, 85))),
+                    stop("moderate", toColor(rgb(182, 116, 58))),
+                    stop("heavy", toColor(rgb(205, 112, 112))),
+                    stop("severe", toColor(rgb(102, 0, 17)))
+                )),
 
             lineOffset(interpolate(exponential(1.5), zoom(),
-              stop(7, 0),
-              stop(9, 1),
-              stop(15, match(get("class"), literal(1f),
-                stop("motorway", 4),
-                stop("trunk", 4),
-                stop("primary", 4),
-                stop("tertiary", 3),
-                stop("secondary", 3)
-              )),
-              stop(18, match(get("class"), literal(0f),
-                stop("motorway", 11),
-                stop("trunk", 11),
-                stop("primary", 10),
-                stop("tertiary", 9),
-                stop("secondary", 9)
-              )),
-              stop(20, 21.5)
+                stop(7, 0),
+                stop(9, 1),
+                stop(15, match(get("class"), literal(1f),
+                    stop("motorway", 4),
+                    stop("trunk", 4),
+                    stop("primary", 4),
+                    stop("tertiary", 3),
+                    stop("secondary", 3)
+                )),
+                stop(18, match(get("class"), literal(0f),
+                    stop("motorway", 11),
+                    stop("trunk", 11),
+                    stop("primary", 10),
+                    stop("tertiary", 9),
+                    stop("secondary", 9)
+                )),
+                stop(20, 21.5)
             ))
-          );
+        );
 
-          antsTrafficLayer.setSourceLayer("traffic");
-          antsTrafficLayer.setFilter(match(get("class"), literal(false),
+        animatedTrafficLayer.setSourceLayer("traffic");
+        animatedTrafficLayer.setFilter(match(get("class"), literal(false),
             stop("motorway", literal(true)),
             stop("trunk", literal(true)),
             stop("primary", literal(true)),
             stop("secondary", literal(true)),
             stop("tertiary", literal(true))
-          ));
-          style.addLayerBelow(antsTrafficLayer, "bridge-oneway-arrows-blue-major");
-
-
-          animatedLineLayer = mapboxMap.getStyle().getLayer(ANIMATE_LINE_LAYER_ID);
-
-          Runnable runnable = new RefreshDashAndGapRunnable();
-          handler.postDelayed(runnable, animationSpeedMillseconds);
-        }
-      });
-
-    /*} catch (MalformedURLException malformedUrlException) {
-      Log.d("AnimatedDashLine", "Check the URL: " + malformedUrlException.getMessage());
-    }*/
+        ));
+        style.addLayerBelow(animatedTrafficLayer, "bridge-oneway-arrows-blue-major");
+      }
+    });
   }
 
   private class RefreshDashAndGapRunnable implements Runnable {
@@ -190,8 +171,6 @@ public class AnimatedDashLineActivity extends AppCompatActivity implements OnMap
 //    private int currentStep = 0;
     private int gap = 0;
 
-    private String TAG = "AnimatedDashLine";
-
     @Override
     public void run() {
 
@@ -202,13 +181,25 @@ public class AnimatedDashLineActivity extends AppCompatActivity implements OnMap
       }
 */
 
-      Float[] newFloatArray = new Float[] {
-        0f, Float.valueOf(gap++ / 10 % 4), 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f
+      Float[] newFloatArray = new Float[]{
+          0f, (float) (gap++ / 10 % 4), 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f
       };
 
-      mapboxMap.getStyle().getLayer(ANIMATE_LINE_LAYER_ID).setProperties(
-        lineDasharray(newFloatArray));
-      handler.postDelayed(this, animationSpeedMillseconds);
+
+      if (mapboxMap != null) {
+        mapboxMap.getStyle(new Style.OnStyleLoaded() {
+          @Override
+          public void onStyleLoaded(@NonNull Style style) {
+            LineLayer animatedLineLayer = style.getLayerAs(ANIMATE_LINE_LAYER_ID);
+            if (animatedLineLayer != null) {
+              animatedLineLayer.setProperties(lineDasharray(newFloatArray));
+            }
+          }
+        });
+        if (handler != null) {
+          handler.postDelayed(this, animationSpeedMillseconds);
+        }
+      }
     }
   }
 
@@ -292,6 +283,7 @@ public class AnimatedDashLineActivity extends AppCompatActivity implements OnMap
   public void onResume() {
     super.onResume();
     mapView.onResume();
+    Log.d(TAG, "onResume: ");
   }
 
   @Override
@@ -303,9 +295,6 @@ public class AnimatedDashLineActivity extends AppCompatActivity implements OnMap
   @Override
   protected void onStop() {
     super.onStop();
-    if (animator != null) {
-      animator.cancel();
-    }
     mapView.onStop();
     handler.removeCallbacks(refreshDashAndGapRunnable);
   }
