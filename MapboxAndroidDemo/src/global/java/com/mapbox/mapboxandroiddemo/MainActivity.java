@@ -92,6 +92,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.BiometricFingerprintLayerUnloc
 import com.mapbox.mapboxandroiddemo.examples.labs.CalendarIntegrationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.ChangeAttributionColorActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.DashedLineDirectionsPickerActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.FullScreenToggleActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.HomeScreenWidgetActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.IndoorMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.InsetMapActivity;
@@ -1387,6 +1388,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new Intent(MainActivity.this, BaseballSprayChartActivity.class),
         null,
         R.string.activity_lab_baseball_spray_chart_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_lab,
+        R.string.activity_lab_full_screen_toggle_title,
+        R.string.activity_lab_full_screen_toggle_description,
+        new Intent(MainActivity.this, FullScreenToggleActivity.class),
+        null,
+        R.string.activity_lab_full_screen_toggle_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
