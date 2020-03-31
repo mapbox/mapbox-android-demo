@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".examples.basics.SimpleMapViewActivity">
+    tools:context=".examples.basics.KotlinSimpleMapViewActivity">
 
     <com.mapbox.mapboxsdk.plugins.china.maps.ChinaMapView
         android:id="@+id/mapView"
@@ -14,7 +14,6 @@
         mapbox:mapbox_cameraTargetLat="-34.069040"
         mapbox:mapbox_cameraTargetLng="-69.837955"
         mapbox:mapbox_cameraTilt="54.9710"
-        mapbox:mapbox_cameraZoom="7.899536"
-        />
+        mapbox:mapbox_cameraZoom="7.899536" />
 
 </FrameLayout>
