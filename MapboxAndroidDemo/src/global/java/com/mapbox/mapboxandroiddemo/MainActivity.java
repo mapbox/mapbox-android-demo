@@ -122,6 +122,7 @@ import com.mapbox.mapboxandroiddemo.examples.offline.SimpleOfflineMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.BuildingPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.LocalizationPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.MarkerViewPluginActivity;
+import com.mapbox.mapboxandroiddemo.examples.plugins.PlaceSelectionPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.PlacesPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.ScalebarPluginActivity;
 import com.mapbox.mapboxandroiddemo.examples.plugins.SymbolListenerActivity;
@@ -806,17 +807,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_plugins_localization_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
     );
 
-    // TODO: The example below is currently commented out because it crashes due
-    //  to incompatibility between the Mapbox Places Plugin and this app's usage
-    //  of AndroidX. This is being tracked at:
-    //  https://github.com/mapbox/mapbox-plugins-android/issues/908
-    /* exampleItemModels.add(new ExampleItemModel(
-    R.id.nav_plugins,
-    R.string.activity_plugins_place_picker_plugin_title,
-    R.string.activity_plugins_place_picker_plugin_description,
-    new Intent(MainActivity.this, PlaceSelectionPluginActivity.class),
-    null, R.string.activity_plugins_place_picker_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
-    );*/
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_plugins,
+        R.string.activity_plugins_place_picker_plugin_title,
+        R.string.activity_plugins_place_picker_plugin_description,
+        new Intent(MainActivity.this, PlaceSelectionPluginActivity.class),
+        null,
+        R.string.activity_plugins_place_picker_plugin_url, false, BuildConfig.MIN_SDK_VERSION)
+    );
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
