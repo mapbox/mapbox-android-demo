@@ -2,6 +2,15 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 9.1.0 - April 8, 2020
+
+- Bumped Maps SDK to 9.1.0 #[1324](https://github.com/mapbox/mapbox-android-demo/pull/1324)
+- Fixed tools:context in activity_basic_simple_kotlin.xml #[1320](https://github.com/mapbox/mapbox-android-demo/pull/1320)
+- Bumped scalebar plugin to 0.5.0 #[1323](https://github.com/mapbox/mapbox-android-demo/pull/1323)
+- Places plugin 0.11.0 bump #[1322](https://github.com/mapbox/mapbox-android-demo/pull/1322)
+- Bumped Java SDK to 5.1.0 #[1319](https://github.com/mapbox/mapbox-android-demo/pull/1319)
+- Bumped plugin dependencies and prefix for v9 plugin release #[1309](https://github.com/mapbox/mapbox-android-demo/pull/1309)
+
 ## 9.0.0 - March 2nd, 2020
 
 - Bumped the Maps SDK to 9.0.0 #[1305](https://github.com/mapbox/mapbox-android-demo/pull/1305)
