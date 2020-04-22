@@ -15,7 +15,7 @@ ext {
             mapboxTurf               : '5.1.0',
             mapboxServices           : '5.1.0',
             mapboxPluginBuilding     : '0.7.0',
-            mapboxPluginPlaces       : '0.11.0',
+            mapboxPluginPlaces       : '0.12.0',
             mapboxPluginLocalization : '0.12.0',
             mapboxPluginTraffic      : '0.10.0',
             mapboxChinaPlugin        : '2.4.0',
