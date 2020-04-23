@@ -148,4 +148,5 @@
     <string name="activity_lab_change_attribution_color_title">Style attribution</string>
     <string name="activity_lab_shared_preferences_title">Saving to SharedPreferences</string>
     <string name="activity_lab_biometric_fingerprint_title">Biometric fingerprint</string>
+    <string name="activity_lab_full_screen_toggle_title">Fullscreen toggle</string>
 </resources>
