@@ -69,6 +69,7 @@
     <string name="activity_dds_polygon_revealed_hole_outline_title">Outlined polygon hole</string>
     <string name="activity_dds_property_icon_switch_title">Icon setting based on Feature property</string>
     <string name="activity_dds_circle_icon_toggle_on_click_title">Circle icon toggle</string>
+    <string name="activity_dds_within_expression_title">Within filter</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
     <string name="activity_camera_restrict_title">Restrict map panning</string>
