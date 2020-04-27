@@ -42,6 +42,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.CircleToIconTransitionActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.PropertyIconDeterminationActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.ZoomToShowClusterLeavesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.WithinExpressionActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.StretchableIconWindowActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsProfileToggleActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.KotlinBorderedCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
@@ -1613,6 +1614,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         null,
         new Intent(MainActivity.this, WithinExpressionActivity.class),
         R.string.activity_dds_within_expression_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_dds,
+        R.string.activity_dds_stretchable_icon_title,
+        R.string.activity_dds_stretchable_icon_description,
+        new Intent(MainActivity.this, StretchableIconWindowActivity.class),
+        null,
+        R.string.activity_dds_stretchable_icon_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_basics,

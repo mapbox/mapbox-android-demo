@@ -854,6 +854,14 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.dds.StretchableIconWindowActivity"
+            android:label="@string/activity_dds_stretchable_icon_title">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.query.FingerDrawQueryActivity"
             android:label="@string/activity_lab_drag_draw_title">
             <meta-data
