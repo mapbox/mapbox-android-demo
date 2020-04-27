@@ -925,6 +925,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.dds.WithinExpressionActivity"
+            android:label="@string/activity_dds_within_expression_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.extrusions.MarathonExtrusionActivity"
             android:label="@string/activity_extrusions_catalina_marathon_extrusions_title">
             <meta-data
