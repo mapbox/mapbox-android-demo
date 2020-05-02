@@ -106,6 +106,7 @@
     <string name="activity_java_services_static_image_notification_title">Static image notification</string>
     <string name="activity_java_services_directions_profile_toggle_title">Directions route profiles</string>
     <string name="activity_java_services_turf_circle_poi_within_filter_title">Moveable POI within filter</string>
+    <string name="activity_java_services_two_person_meetup_isochrone_within_title">Two person meetup POIs</string>
     <string name="activity_plugins_traffic_plugin_title">Display real-time traffic</string>
     <string name="activity_plugins_building_plugin_title">Display buildings in 3D</string>
     <string name="activity_plugins_localization_plugin_title">Change map text to device language</string>

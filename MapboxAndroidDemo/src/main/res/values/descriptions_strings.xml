@@ -106,6 +106,7 @@
     <string name="activity_java_services_static_image_notification_description">Use the Static Image API to eventually place and continually update an notification image</string>
     <string name="activity_java_services_directions_profile_toggle_description">Retrieve Mapbox Directions API routes for different profiles and toggle between them.</string>
     <string name="activity_java_services_turf_circle_poi_within_filter_description">Use the within expression to only show POIs that are inside of a moveable circle polygon.</string>
+    <string name="activity_java_services_two_person_meetup_isochrone_within_description">See which places of interest (POIs) are within a 15 minute walk from two peoples\' current locations.</string>
     <string name="activity_plugins_traffic_plugin_description">Use the traffic plugin to display live car congestion data on top of a map.</string>
     <string name="activity_plugins_building_plugin_description">Use the building plugin to easily display 3D building height</string>
     <string name="activity_plugins_places_plugin_description">Add location search ("geocoding") functionality and UI to search for any place in the world</string>
