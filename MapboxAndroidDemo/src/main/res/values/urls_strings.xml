@@ -103,6 +103,7 @@
     <string name="activity_java_services_straight_line_distance_url" translatable="false">https://i.imgur.com/1vGQqBh.png</string>
     <string name="activity_java_services_static_image_notification_url" translatable="false">https://i.imgur.com/crbB91w.png</string>
     <string name="activity_java_services_directions_profile_toggle_url" translatable="false">https://i.imgur.com/GckrLt3.png</string>
+    <string name="activity_java_services_turf_circle_poi_within_filter_url" translatable="false">https://i.imgur.com/56JawQ2.png</string>
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
     <string name="activity_plugins_places_plugin_url" translatable="false">https://i.imgur.com/oKHx3bv.png</string>
