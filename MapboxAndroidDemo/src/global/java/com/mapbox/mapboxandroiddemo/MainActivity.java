@@ -42,6 +42,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.CircleToIconTransitionActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.PropertyIconDeterminationActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.ZoomToShowClusterLeavesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.WithinExpressionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.OpacityZoomChangeExtrusionKotlinActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsProfileToggleActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.KotlinBorderedCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
@@ -770,6 +771,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, RotationExtrusionActivity.class),
       null,
       R.string.activity_extrusions_rotate_extrusions_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_extrusions,
+        R.string.activity_extrusions_zoom_opacity_change_title,
+        R.string.activity_extrusions_zoom_opacity_change_description,
+        null,
+        new Intent(MainActivity.this, OpacityZoomChangeExtrusionKotlinActivity.class),
+        R.string.activity_extrusions_zoom_opacity_change_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
