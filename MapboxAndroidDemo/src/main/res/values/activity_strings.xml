@@ -481,4 +481,6 @@
         <item>Kilometers</item>
     </string-array>
 
+    <!-- Two-person meetup location isochrone within  -->
+    <string name="drag_faces_instruction">Tap on, hold, and drag a face to move it to a new location</string>
 </resources>

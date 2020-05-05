@@ -87,6 +87,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfCirclePoiWithinFil
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfLineDistanceActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfPhysicalCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfRingActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.TwoPersonMeetupLocationIsochroneWithinActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.BaseballSprayChartActivity;
@@ -1173,6 +1174,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new Intent(MainActivity.this, TurfCirclePoiWithinFilterActivity.class),
         null,
         R.string.activity_java_services_turf_circle_poi_within_filter_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_java_services,
+        R.string.activity_java_services_two_person_meetup_isochrone_within_title,
+        R.string.activity_java_services_two_person_meetup_isochrone_within_description,
+        new Intent(MainActivity.this, TwoPersonMeetupLocationIsochroneWithinActivity.class),
+        null,
+        R.string.activity_java_services_two_person_meetup_isochrone_within_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,
