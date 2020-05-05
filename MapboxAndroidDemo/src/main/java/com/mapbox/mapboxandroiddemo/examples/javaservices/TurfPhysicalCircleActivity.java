@@ -45,7 +45,7 @@ import static com.mapbox.turf.TurfConstants.UNIT_RADIANS;
 
 /**
  * Use {@link TurfTransformation#circle(Point, double, int, String)} to draw a circle
- * at a center coordinate with it's radius specified in physical units (i.e. "miles").
+ * at a center coordinate with its radius specified in physical units (i.e. "miles").
  * Default number of steps is 64 and default unit of distance is kilometers.
  * More information can be found at https://github.com/mapbox/mapbox-java/blob/
  * master/services-turf/src/main/java/com/mapbox/turf/TurfTransformation.java and

@@ -364,9 +364,9 @@
     <string name="minutes_textview">%1$d min</string>
 
     <!-- Turf polygon circle transformation -->
-    <string name="polygon_circle_transformation_click_map_instruction">Click map to move circle</string>
+    <string name="polygon_circle_transformation_click_map_instruction">Tap the map to move the circle</string>
     <string name="polygon_circle_transformation_circle_steps">Steps: %1$d</string>
-    <string name="polygon_circle_transformation_circle_radius">Radius: %1$d</string>
+    <string name="polygon_circle_transformation_circle_radius">Radius: %1$s</string>
     <string name="polygon_circle_transformation_circle_distance_units">Unit: </string>
     <string-array name="polygon_circle_transformation_circle_distance_units_array">
         <item>Kilometers</item>
@@ -474,5 +474,11 @@
 
     <!-- Circle icon toggling on click-->
     <string name="tap_on_map_to_toggle_instruction">Tap on a circle and then marker to toggle. Tap elsewhere to reset to circles.</string>
+
+    <!-- Within circle filter-->
+    <string-array name="within_poi_filter_circle_distance_units_array">
+        <item>Miles</item>
+        <item>Kilometers</item>
+    </string-array>
 
 </resources>

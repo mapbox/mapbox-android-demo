@@ -83,6 +83,7 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StraightLineDistanceMapMovementActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageNotificationActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfCirclePoiWithinFilterActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfLineDistanceActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfPhysicalCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfRingActivity;
@@ -1164,6 +1165,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new Intent(MainActivity.this, DirectionsProfileToggleActivity.class),
         null,
         R.string.activity_java_services_directions_profile_toggle_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_java_services,
+        R.string.activity_java_services_turf_circle_poi_within_filter_title,
+        R.string.activity_java_services_turf_circle_poi_within_filter_description,
+        new Intent(MainActivity.this, TurfCirclePoiWithinFilterActivity.class),
+        null,
+        R.string.activity_java_services_turf_circle_poi_within_filter_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,
