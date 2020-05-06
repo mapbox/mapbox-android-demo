@@ -42,6 +42,7 @@
     <string name="activity_extrusions_adjust_extrusions_url" translatable="false">http://i.imgur.com/XNTyIO5.png</string>
     <string name="activity_extrusions_indoor_3d_url" translatable="false">http://i.imgur.com/1at7cMf.png</string>
     <string name="activity_extrusions_rotate_extrusions_url" translatable="false">http://i.imgur.com/OzcCsB2.png</string>
+    <string name="activity_extrusions_zoom_opacity_change_url" translatable="false">https://i.imgur.com/7FomeoZ.png</string>
     <string name="activity_dds_style_circle_categorically_url" translatable="false">http://i.imgur.com/C3mtfgF.png</string>
     <string name="activity_dds_heatmap_url" translatable="false">https://i.imgur.com/VektJUJ.png</string>
     <string name="activity_dds_multiple_heatmap_styling_url" translatable="false">https://i.imgur.com/Uw2DHWB.png</string>
