@@ -121,6 +121,8 @@
     <string name="activity_location_location_component_camera_options_title">Location camera options</string>
     <string name="activity_location_location_component_options_title">Customized location icon</string>
     <string name="activity_location_location_change_listening_title">Track device location</string>
+    <string name="activity_location_location_basic_pulsing_title">Basic pulsing location</string>
+    <string name="activity_location_location_custom_pulsing_title">Custom pulsing location</string>
     <string name="activity_image_generator_snapshot_notification_title">Snapshot Notification</string>
     <string name="activity_image_generator_snapshot_share_title">Share snapshot image</string>
     <string name="activity_lab_animated_marker_title">Animate marker position</string>

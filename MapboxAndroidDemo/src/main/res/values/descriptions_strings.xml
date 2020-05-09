@@ -121,6 +121,8 @@
     <string name="activity_location_location_component_options_description">Use LocationComponent options to customize the user location information.</string>
     <string name="activity_location_location_component_camera_options_description">Use LocationComponent camera options to customize map camera behavior.</string>
     <string name="activity_location_location_change_listening_description">Receive updates when the device changes location.</string>
+    <string name="activity_location_location_basic_pulsing_description">Show the standard LocationComponent pulsing circle.</string>
+    <string name="activity_location_location_custom_pulsing_description">Customize the LocationComponent pulsing circle\'s color, speed, and opacity.</string>
     <string name="activity_image_generator_snapshot_share_description">Send and share a map snapshot image.</string>
     <string name="activity_image_generator_snapshot_notification_description">Show a snapshotted image in a notification.</string>
     <string name="activity_lab_animated_marker_description">Animate the marker to a new position on the map.</string>

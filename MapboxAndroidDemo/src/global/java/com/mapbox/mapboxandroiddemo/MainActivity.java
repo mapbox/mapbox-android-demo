@@ -118,7 +118,9 @@ import com.mapbox.mapboxandroiddemo.examples.labs.VibrateOnPinDropKotlinActivity
 import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationChangeListeningActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentBasicPulsingActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentCameraOptionsActivity;
+import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentCustomPulsingActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentFragmentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentOptionsActivity;
 import com.mapbox.mapboxandroiddemo.examples.offline.CacheManagementActivity;
@@ -886,6 +888,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, LocationComponentCameraOptionsActivity.class),
       null,
       R.string.activity_location_location_component_camera_options_url, false, BuildConfig.MIN_SDK_VERSION)
+    );
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_location,
+        R.string.activity_location_location_change_listening_title,
+        R.string.activity_location_location_change_listening_description,
+        new Intent(MainActivity.this, LocationChangeListeningActivity.class),
+        null,
+        R.string.activity_location_location_change_listening_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_location,
+        R.string.activity_location_location_basic_pulsing_title,
+        R.string.activity_location_location_basic_pulsing_description,
+        new Intent(MainActivity.this, LocationComponentBasicPulsingActivity.class),
+        null,
+        R.string.activity_location_location_basic_pulsing_url, false, BuildConfig.MIN_SDK_VERSION)
+    );
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_location,
+        R.string.activity_location_location_custom_pulsing_title,
+        R.string.activity_location_location_custom_pulsing_description,
+        new Intent(MainActivity.this, LocationComponentCustomPulsingActivity.class),
+        null,
+        R.string.activity_location_location_custom_pulsing_url, false, BuildConfig.MIN_SDK_VERSION)
     );
 
     exampleItemModels.add(new ExampleItemModel(
@@ -1681,13 +1709,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       null,
       new Intent(MainActivity.this, KotlinSupportMapFragmentActivity.class),
       R.string.activity_basic_kotlin_support_map_frag_url, false, BuildConfig.MIN_SDK_VERSION));
-
-    exampleItemModels.add(new ExampleItemModel(
-      R.id.nav_location,
-      R.string.activity_location_location_change_listening_title,
-      R.string.activity_location_location_change_listening_description,
-      new Intent(MainActivity.this, LocationChangeListeningActivity.class),
-      null,
-      R.string.activity_location_location_change_listening_url, false, BuildConfig.MIN_SDK_VERSION));
   }
 }

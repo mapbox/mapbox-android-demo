@@ -231,6 +231,20 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.location.LocationComponentBasicPulsingActivity"
+            android:label="@string/activity_location_location_basic_pulsing_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
+            android:name=".examples.location.LocationComponentCustomPulsingActivity"
+            android:label="@string/activity_location_location_custom_pulsing_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.location.LocationComponentActivity"
             android:label="@string/activity_location_location_component_title">
             <meta-data
