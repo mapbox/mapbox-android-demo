@@ -114,6 +114,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SpinningSymbolLayerIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.ValueAnimatorIconAnimationActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.VibrateOnPinDropKotlinActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.KotlinLocationComponentActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationChangeListeningActivity;
 import com.mapbox.mapboxandroiddemo.examples.location.LocationComponentActivity;
@@ -1413,6 +1414,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new Intent(MainActivity.this, BaseballSprayChartActivity.class),
         null,
         R.string.activity_lab_baseball_spray_chart_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_lab,
+        R.string.activity_lab_vibrate_on_pin_drop_title,
+        R.string.activity_lab_vibrate_on_pin_drop_description,
+        null,
+        new Intent(MainActivity.this, VibrateOnPinDropKotlinActivity.class),
+        R.string.activity_lab_vibrate_on_pin_drop_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
