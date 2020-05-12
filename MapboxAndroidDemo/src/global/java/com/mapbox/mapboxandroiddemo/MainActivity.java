@@ -41,6 +41,8 @@ import com.mapbox.mapboxandroiddemo.examples.dds.CircleRadiusActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleToIconTransitionActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.PropertyIconDeterminationActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.ZoomToShowClusterLeavesActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.WithinExpressionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.OpacityZoomChangeExtrusionKotlinActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsProfileToggleActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.KotlinBorderedCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CreateHotspotsActivity;
@@ -82,9 +84,11 @@ import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StraightLineDistanceMapMovementActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.StaticImageNotificationActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TilequeryActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfCirclePoiWithinFilterActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfLineDistanceActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfPhysicalCircleActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.TurfRingActivity;
+import com.mapbox.mapboxandroiddemo.examples.javaservices.TwoPersonMeetupLocationIsochroneWithinActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedImageGifActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.AnimatedMarkerActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.BaseballSprayChartActivity;
@@ -770,6 +774,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_extrusions_rotate_extrusions_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_extrusions,
+        R.string.activity_extrusions_zoom_opacity_change_title,
+        R.string.activity_extrusions_zoom_opacity_change_description,
+        null,
+        new Intent(MainActivity.this, OpacityZoomChangeExtrusionKotlinActivity.class),
+        R.string.activity_extrusions_zoom_opacity_change_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
       R.string.activity_plugins_traffic_plugin_title,
       R.string.activity_plugins_traffic_plugin_description,
@@ -1164,6 +1176,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         new Intent(MainActivity.this, DirectionsProfileToggleActivity.class),
         null,
         R.string.activity_java_services_directions_profile_toggle_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_java_services,
+        R.string.activity_java_services_turf_circle_poi_within_filter_title,
+        R.string.activity_java_services_turf_circle_poi_within_filter_description,
+        new Intent(MainActivity.this, TurfCirclePoiWithinFilterActivity.class),
+        null,
+        R.string.activity_java_services_turf_circle_poi_within_filter_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_java_services,
+        R.string.activity_java_services_two_person_meetup_isochrone_within_title,
+        R.string.activity_java_services_two_person_meetup_isochrone_within_description,
+        new Intent(MainActivity.this, TwoPersonMeetupLocationIsochroneWithinActivity.class),
+        null,
+        R.string.activity_java_services_two_person_meetup_isochrone_within_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,
@@ -1613,6 +1641,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, CircleIconToggleOnClickActivity.class),
       null,
       R.string.activity_dds_circle_icon_toggle_on_click_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+        R.id.nav_dds,
+        R.string.activity_dds_within_expression_title,
+        R.string.activity_dds_within_expression_description,
+        null,
+        new Intent(MainActivity.this, WithinExpressionActivity.class),
+        R.string.activity_dds_within_expression_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_basics,

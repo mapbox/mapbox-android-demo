@@ -364,9 +364,9 @@
     <string name="minutes_textview">%1$d min</string>
 
     <!-- Turf polygon circle transformation -->
-    <string name="polygon_circle_transformation_click_map_instruction">Click map to move circle</string>
+    <string name="polygon_circle_transformation_click_map_instruction">Tap the map to move the circle</string>
     <string name="polygon_circle_transformation_circle_steps">Steps: %1$d</string>
-    <string name="polygon_circle_transformation_circle_radius">Radius: %1$d</string>
+    <string name="polygon_circle_transformation_circle_radius">Radius: %1$s</string>
     <string name="polygon_circle_transformation_circle_distance_units">Unit: </string>
     <string-array name="polygon_circle_transformation_circle_distance_units_array">
         <item>Kilometers</item>
@@ -478,4 +478,12 @@
     <!-- Vibrate-->
     <string name="long_press_to_add_pin">Long press on the map to add a pin icon</string>
 
+    <!-- Within circle filter-->
+    <string-array name="within_poi_filter_circle_distance_units_array">
+        <item>Miles</item>
+        <item>Kilometers</item>
+    </string-array>
+
+    <!-- Two-person meetup location isochrone within  -->
+    <string name="drag_faces_instruction">Tap on, hold, and drag a face to move it to a new location</string>
 </resources>

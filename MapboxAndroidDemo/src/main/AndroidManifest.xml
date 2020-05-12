@@ -417,6 +417,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.javaservices.TwoPersonMeetupLocationIsochroneWithinActivity"
+            android:label="@string/activity_java_services_two_person_meetup_isochrone_within_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.javaservices.MapMatchingActivity"
             android:label="@string/activity_java_services_map_matching_title">
             <meta-data
@@ -926,8 +933,22 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.extrusions.OpacityZoomChangeExtrusionKotlinActivity"
+            android:label="@string/activity_extrusions_zoom_opacity_change_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.dds.PolygonHolesActivity"
             android:label="@string/activity_dds_polygon_holes_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
+            android:name=".examples.dds.WithinExpressionActivity"
+            android:label="@string/activity_dds_within_expression_title">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
@@ -1032,6 +1053,14 @@
         <activity
             android:name=".examples.javaservices.TurfLineDistanceActivity"
             android:label="@string/activity_java_services_turf_line_distance_title"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
+            android:name=".examples.javaservices.TurfCirclePoiWithinFilterActivity"
+            android:label="@string/activity_java_services_turf_circle_poi_within_filter_title"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

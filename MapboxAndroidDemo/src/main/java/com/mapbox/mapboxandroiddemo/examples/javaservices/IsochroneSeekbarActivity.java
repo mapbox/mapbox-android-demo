@@ -206,7 +206,7 @@ public class IsochroneSeekbarActivity extends AppCompatActivity {
    * @return a list of {@link LatLng}.
    */
   private List<LatLng> createLatLngsForCameraBounds(List<Feature> featureList) {
-    List<LatLng> latLngList = new ArrayList(featureList.size());
+    List<LatLng> latLngList = new ArrayList<>(featureList.size());
     for (Feature singleFeature : featureList) {
       for (Point singlePoint : TurfMeta.coordAll(singleFeature, false)) {
         latLngList.add(new LatLng((singlePoint.latitude()), singlePoint.longitude()));

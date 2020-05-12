@@ -42,6 +42,7 @@
     <string name="activity_extrusions_adjust_extrusions_url" translatable="false">http://i.imgur.com/XNTyIO5.png</string>
     <string name="activity_extrusions_indoor_3d_url" translatable="false">http://i.imgur.com/1at7cMf.png</string>
     <string name="activity_extrusions_rotate_extrusions_url" translatable="false">http://i.imgur.com/OzcCsB2.png</string>
+    <string name="activity_extrusions_zoom_opacity_change_url" translatable="false">https://i.imgur.com/7FomeoZ.png</string>
     <string name="activity_dds_style_circle_categorically_url" translatable="false">http://i.imgur.com/C3mtfgF.png</string>
     <string name="activity_dds_heatmap_url" translatable="false">https://i.imgur.com/VektJUJ.png</string>
     <string name="activity_dds_multiple_heatmap_styling_url" translatable="false">https://i.imgur.com/Uw2DHWB.png</string>
@@ -66,6 +67,7 @@
     <string name="activity_dds_circle_to_icon_smooth_transition_url" translatable="false">https://i.imgur.com/LYmENg3.png</string>
     <string name="activity_dds_property_icon_switch_url" translatable="false">https://i.imgur.com/GE1DZMp.png</string>
     <string name="activity_dds_circle_icon_toggle_on_click_url" translatable="false">https://i.imgur.com/5ewVbqM.png</string>
+    <string name="activity_dds_within_expression_url" translatable="false">https://i.imgur.com/9kChmHL.png</string>
     <string name="activity_styles_text_field_formatting_url" translatable="false">https://i.imgur.com/MSoIYmU.png</string>
     <string name="activity_camera_animate_url" translatable="false">http://i.imgur.com/PN3vyNJ.jpg</string>
     <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string>
@@ -102,6 +104,8 @@
     <string name="activity_java_services_straight_line_distance_url" translatable="false">https://i.imgur.com/1vGQqBh.png</string>
     <string name="activity_java_services_static_image_notification_url" translatable="false">https://i.imgur.com/crbB91w.png</string>
     <string name="activity_java_services_directions_profile_toggle_url" translatable="false">https://i.imgur.com/GckrLt3.png</string>
+    <string name="activity_java_services_turf_circle_poi_within_filter_url" translatable="false">https://i.imgur.com/56JawQ2.png</string>
+    <string name="activity_java_services_two_person_meetup_isochrone_within_url" translatable="false">https://i.imgur.com/rS14uiG.png</string>
     <string name="activity_plugins_traffic_plugin_url" translatable="false">http://i.imgur.com/HRriOVR.png</string>
     <string name="activity_plugins_building_plugin_url" translatable="false">http://i.imgur.com/Vcu67UR.png</string>
     <string name="activity_plugins_places_plugin_url" translatable="false">https://i.imgur.com/oKHx3bv.png</string>

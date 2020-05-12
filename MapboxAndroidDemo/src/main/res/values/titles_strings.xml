@@ -43,6 +43,7 @@
     <string name="activity_extrusions_adjust_extrusions_title">Adjust light location and color</string>
     <string name="activity_extrusions_rotate_extrusions_title">Rotate and tilt with 3D buildings</string>
     <string name="activity_extrusions_indoor_3d_title">Extrude polygons for 3D indoor mapping</string>
+    <string name="activity_extrusions_zoom_opacity_change_title">Zoom-based opacity</string>
     <string name="activity_dds_style_circle_categorically_title">Style circles categorically</string>
     <string name="activity_dds_style_kotlin_circle_categorically_title">Kotlin: Styled circles</string>
     <string name="activity_dds_choropleth_zoom_change_title">Update a choropleth layer by zoom level</string>
@@ -69,6 +70,7 @@
     <string name="activity_dds_polygon_revealed_hole_outline_title">Outlined polygon hole</string>
     <string name="activity_dds_property_icon_switch_title">Icon setting based on Feature property</string>
     <string name="activity_dds_circle_icon_toggle_on_click_title">Circle icon toggle</string>
+    <string name="activity_dds_within_expression_title">Within filter</string>
     <string name="activity_camera_animate_title">Animate the map camera</string>
     <string name="activity_camera_bounding_box_title">Fit camera in bounding box</string>
     <string name="activity_camera_restrict_title">Restrict map panning</string>
@@ -104,6 +106,8 @@
     <string name="activity_java_services_straight_line_distance_title">Straight line distance</string>
     <string name="activity_java_services_static_image_notification_title">Static image notification</string>
     <string name="activity_java_services_directions_profile_toggle_title">Directions route profiles</string>
+    <string name="activity_java_services_turf_circle_poi_within_filter_title">Moveable POI within filter</string>
+    <string name="activity_java_services_two_person_meetup_isochrone_within_title">Two person meetup POIs</string>
     <string name="activity_plugins_traffic_plugin_title">Display real-time traffic</string>
     <string name="activity_plugins_building_plugin_title">Display buildings in 3D</string>
     <string name="activity_plugins_localization_plugin_title">Change map text to device language</string>
