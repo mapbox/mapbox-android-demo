@@ -2,6 +2,19 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 9.2.0 - May 13, 2020
+
+- Java SDK bump to 5.2.1 #[1346](https://github.com/mapbox/mapbox-android-demo/pull/1346)
+- Added pulsing LocationComponent examples #[1344](https://github.com/mapbox/mapbox-android-demo/pull/1344)
+- Java SDK bump to 5.2.0 #[1345)](https://github.com/mapbox/mapbox-android-demo/pull/1345))
+- Added vibrate on pin drop example #[1330](https://github.com/mapbox/mapbox-android-demo/pull/1330)
+- Bump maps sdk to 9.2.0 #[1342](https://github.com/mapbox/mapbox-android-demo/pull/1342)
+- Added 3d extrusions zoom-based opacity example #[1341](https://github.com/mapbox/mapbox-android-demo/pull/1341)
+- Added two person isochrone poi within filter example #[1339](https://github.com/mapbox/mapbox-android-demo/pull/1339)
+- Added within poi circle polygon filter example #[1340](https://github.com/mapbox/mapbox-android-demo/pull/1340)
+- Added within expression filter example #[1334](https://github.com/mapbox/mapbox-android-demo/pull/1334)
+- Bumped places plugin to 0.12.0 #[1331](https://github.com/mapbox/mapbox-android-demo/pull/1331)
+
 ## 9.1.0 - April 8, 2020
 
 - Bumped Maps SDK to 9.1.0 #[1324](https://github.com/mapbox/mapbox-android-demo/pull/1324)
