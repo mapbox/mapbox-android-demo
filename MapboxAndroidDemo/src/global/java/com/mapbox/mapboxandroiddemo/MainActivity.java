@@ -781,7 +781,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_extrusions_zoom_opacity_change_description,
         null,
         new Intent(MainActivity.this, OpacityZoomChangeExtrusionKotlinActivity.class),
-        R.string.activity_extrusions_zoom_opacity_change_url, false, BuildConfig.MIN_SDK_VERSION));
+        R.string.activity_extrusions_zoom_opacity_change_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
@@ -904,7 +904,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_location_location_basic_pulsing_description,
         new Intent(MainActivity.this, LocationComponentBasicPulsingActivity.class),
         null,
-        R.string.activity_location_location_basic_pulsing_url, false, BuildConfig.MIN_SDK_VERSION)
+        R.string.activity_location_location_basic_pulsing_url, true, BuildConfig.MIN_SDK_VERSION)
     );
 
     exampleItemModels.add(new ExampleItemModel(
@@ -913,7 +913,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_location_location_custom_pulsing_description,
         new Intent(MainActivity.this, LocationComponentCustomPulsingActivity.class),
         null,
-        R.string.activity_location_location_custom_pulsing_url, false, BuildConfig.MIN_SDK_VERSION)
+        R.string.activity_location_location_custom_pulsing_url, true, BuildConfig.MIN_SDK_VERSION)
     );
 
     exampleItemModels.add(new ExampleItemModel(
@@ -954,7 +954,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_camera_zoom_to_show_cluster_leaves_description,
       new Intent(MainActivity.this, ZoomToShowClusterLeavesActivity.class),
       null,
-      R.string.activity_camera_zoom_to_show_cluster_leaves_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_camera_zoom_to_show_cluster_leaves_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_offline,
@@ -1187,7 +1187,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_java_services_straight_line_distance_description,
       new Intent(MainActivity.this, StraightLineDistanceMapMovementActivity.class),
       null,
-      R.string.activity_java_services_straight_line_distance_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_java_services_straight_line_distance_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
         R.id.nav_java_services,
@@ -1195,7 +1195,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_java_services_static_image_notification_description,
       new Intent(MainActivity.this, StaticImageNotificationActivity.class),
       null,
-      R.string.activity_java_services_static_image_notification_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_java_services_static_image_notification_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
         R.id.nav_java_services,
@@ -1203,7 +1203,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_java_services_directions_profile_toggle_description,
         new Intent(MainActivity.this, DirectionsProfileToggleActivity.class),
         null,
-        R.string.activity_java_services_directions_profile_toggle_url, true, BuildConfig.MIN_SDK_VERSION));
+        R.string.activity_java_services_directions_profile_toggle_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
         R.id.nav_java_services,
@@ -1441,7 +1441,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_lab_baseball_spray_chart_description,
         new Intent(MainActivity.this, BaseballSprayChartActivity.class),
         null,
-        R.string.activity_lab_baseball_spray_chart_url, true, BuildConfig.MIN_SDK_VERSION));
+        R.string.activity_lab_baseball_spray_chart_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
         R.id.nav_lab,
@@ -1660,7 +1660,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_dds_property_icon_switch_description,
       new Intent(MainActivity.this, PropertyIconDeterminationActivity.class),
       null,
-      R.string.activity_dds_property_icon_switch_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_dds_property_icon_switch_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
@@ -1668,7 +1668,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_dds_circle_icon_toggle_on_click_description,
       new Intent(MainActivity.this, CircleIconToggleOnClickActivity.class),
       null,
-      R.string.activity_dds_circle_icon_toggle_on_click_url, true, BuildConfig.MIN_SDK_VERSION));
+      R.string.activity_dds_circle_icon_toggle_on_click_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
         R.id.nav_dds,
