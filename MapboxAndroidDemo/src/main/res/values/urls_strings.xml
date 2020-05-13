@@ -118,6 +118,8 @@
     <string name="activity_location_user_location_fragment_plugin_url" translatable="false">https://i.imgur.com/1jG8WQG.png</string>
     <string name="activity_location_location_component_options_url" translatable="false">https://i.imgur.com/4HiEJC1.png</string>
     <string name="activity_location_location_component_camera_options_url" translatable="false">https://i.imgur.com/Q2cB3NY.png</string>
+    <string name="activity_location_location_basic_pulsing_url" translatable="false">https://i.imgur.com/0c0HbMe.png</string>
+    <string name="activity_location_location_custom_pulsing_url" translatable="false">https://i.imgur.com/QD90E5R.png</string>
     <string name="activity_location_location_change_listening_url" translatable="false">https://i.imgur.com/ReiY5jj.png</string>
     <string name="activity_image_generator_snapshot_notification_url" translatable="false">https://i.imgur.com/OiveDFG.png</string>
     <string name="activity_image_generator_snapshot_share_url" translatable="false">https://i.imgur.com/KgfsY3s.png</string>

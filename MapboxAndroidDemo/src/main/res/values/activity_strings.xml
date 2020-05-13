@@ -486,4 +486,9 @@
 
     <!-- Two-person meetup location isochrone within  -->
     <string name="drag_faces_instruction">Tap on, hold, and drag a face to move it to a new location</string>
+
+    <!-- Custom LocationComponent pulsing  -->
+    <string name="duration">Duration:</string>
+    <string name="color">Color:</string>
+    <string name="select">Select</string>
 </resources>
