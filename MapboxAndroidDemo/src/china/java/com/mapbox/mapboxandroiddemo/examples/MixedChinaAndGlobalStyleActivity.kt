@@ -56,6 +56,8 @@ class MixedChinaAndGlobalStyleActivity : AppCompatActivity(), OnMapReadyCallback
 
         this.savedInstanceState = savedInstanceState
 
+        Toast.makeText(this, R.string.china_token_warning_toast, Toast.LENGTH_LONG).show()
+
         // Check location permissions
         locationPermissionCheckAndStart()
     }
@@ -82,8 +84,6 @@ class MixedChinaAndGlobalStyleActivity : AppCompatActivity(), OnMapReadyCallback
      */
     override fun onSuccess(result: LocationEngineResult?) {
         val lastLocation = result?.lastLocation
-
-        Toast.makeText(this, R.string.china_token_warning_toast, Toast.LENGTH_LONG).show()
 
         if (deviceInChina == null) {
 
