@@ -125,13 +125,19 @@ class PolygonSelectToggleActivity : AppCompatActivity(), MapboxMap.OnMapClickLis
      */
     private fun handleClickIcon(screenPoint: PointF): Boolean {
         val features = mapboxMap.queryRenderedFeatures(screenPoint, BASE_NEIGHBORHOOD_FILL_LAYER_ID)
-        val name = features[0].getStringProperty(NEIGHBORHOOD_NAME_PROPERTY)
-        val featureList = featureCollection?.features()
-        (0 until featureList!!.size).iterator().forEach {
-            if (featureList[it].getStringProperty(NEIGHBORHOOD_NAME_PROPERTY) == name) {
-                if (featureSelectStatus(it))
-                    setFeatureSelectState(featureList[it], false) else
-                    setSelected(it)
+        if (features.isNotEmpty()) {
+            val name = features[0].getStringProperty(NEIGHBORHOOD_NAME_PROPERTY)
+            val featureList = featureCollection?.features()
+            if (featureList != null) {
+                if (featureList.isNotEmpty()) {
+                    (0 until featureList.size).forEach {
+                        if (featureList[it].getStringProperty(NEIGHBORHOOD_NAME_PROPERTY) == name) {
+                            if (featureSelectStatus(it)) {
+                                setFeatureSelectState(featureList[it], false)
+                            } else setSelected(it)
+                        }
+                    }
+                }
             }
         }
         return true
