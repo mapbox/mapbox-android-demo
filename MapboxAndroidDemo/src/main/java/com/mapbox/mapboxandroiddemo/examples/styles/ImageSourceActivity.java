@@ -21,8 +21,8 @@ import com.mapbox.mapboxsdk.style.sources.ImageSource;
 public class ImageSourceActivity extends AppCompatActivity implements OnMapReadyCallback {
 
   private MapView mapView;
-  private static final String ID_IMAGE_SOURCE = "animated_image_source";
-  private static final String ID_IMAGE_LAYER = "animated_image_layer";
+  private static final String ID_IMAGE_SOURCE = "image_source-id";
+  private static final String ID_IMAGE_LAYER = "image_layer-id";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
