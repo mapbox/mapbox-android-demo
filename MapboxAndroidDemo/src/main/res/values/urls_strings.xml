@@ -68,6 +68,7 @@
     <string name="activity_dds_property_icon_switch_url" translatable="false">https://i.imgur.com/GE1DZMp.png</string>
     <string name="activity_dds_circle_icon_toggle_on_click_url" translatable="false">https://i.imgur.com/5ewVbqM.png</string>
     <string name="activity_dds_within_expression_url" translatable="false">https://i.imgur.com/9kChmHL.png</string>
+    <string name="activity_dds_filter_features_url" translatable="false">https://i.imgur.com/fnn6RMI.png</string>
     <string name="activity_styles_text_field_formatting_url" translatable="false">https://i.imgur.com/MSoIYmU.png</string>
     <string name="activity_camera_animate_url" translatable="false">http://i.imgur.com/PN3vyNJ.jpg</string>
     <string name="activity_camera_bounding_box_url" translatable="false">http://i.imgur.com/A0JL21Q.png</string>
