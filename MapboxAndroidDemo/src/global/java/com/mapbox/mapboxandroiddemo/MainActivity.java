@@ -39,6 +39,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.ChoroplethZoomChangeActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleLayerClusteringActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleRadiusActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.CircleToIconTransitionActivity;
+import com.mapbox.mapboxandroiddemo.examples.dds.KotlinFilterFeaturesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.PropertyIconDeterminationActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.ZoomToShowClusterLeavesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.WithinExpressionActivity;
@@ -1677,6 +1678,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         null,
         new Intent(MainActivity.this, WithinExpressionActivity.class),
         R.string.activity_dds_within_expression_url, true, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_dds,
+      R.string.activity_dds_filter_features_title,
+      R.string.activity_dds_filter_features_description,
+      null,
+      new Intent(MainActivity.this, KotlinFilterFeaturesActivity.class),
+      R.string.activity_dds_filter_features_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_basics,

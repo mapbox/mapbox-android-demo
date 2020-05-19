@@ -491,4 +491,8 @@
     <string name="duration">Duration:</string>
     <string name="color">Color:</string>
     <string name="select">Select</string>
+
+    <!-- Feature filter  -->
+    <string name="showing_all_country_labels">Showing all country labels</string>
+    <string name="filtering_countries">Match filter using "name_en", applied to layer to hide some countries\' labels</string>
 </resources>
