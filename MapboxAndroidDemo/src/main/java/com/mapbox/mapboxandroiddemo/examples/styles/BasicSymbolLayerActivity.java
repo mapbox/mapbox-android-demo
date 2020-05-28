@@ -23,7 +23,6 @@ import java.util.List;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconIgnorePlacement;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 
 /**
  * Display {@link SymbolLayer} icons on the map.
@@ -67,7 +66,7 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
 
       // Add the SymbolLayer icon image to the map style
       .withImage(ICON_ID, BitmapFactory.decodeResource(
-        BasicSymbolLayerActivity.this.getResources(), R.drawable.red_marker))
+        BasicSymbolLayerActivity.this.getResources(), R.drawable.mapbox_marker_icon_default))
 
       // Adding a GeoJson source for the SymbolLayer icons.
       .withSource(new GeoJsonSource(SOURCE_ID,
@@ -82,7 +81,6 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
             iconImage(ICON_ID),
             iconAllowOverlap(true),
             iconIgnorePlacement(true),
-            iconOffset(new Float[] {0f, -9f}))
       ), new Style.OnStyleLoaded() {
         @Override
         public void onStyleLoaded(@NonNull Style style) {
