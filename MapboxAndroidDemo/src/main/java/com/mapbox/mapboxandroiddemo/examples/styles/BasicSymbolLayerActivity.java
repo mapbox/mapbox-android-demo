@@ -80,7 +80,7 @@ public class BasicSymbolLayerActivity extends AppCompatActivity implements
         .withProperties(
             iconImage(ICON_ID),
             iconAllowOverlap(true),
-            iconIgnorePlacement(true),
+            iconIgnorePlacement(true)
       ), new Style.OnStyleLoaded() {
         @Override
         public void onStyleLoaded(@NonNull Style style) {
