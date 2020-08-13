@@ -70,22 +70,24 @@ public class SymbolListenerActivity extends AppCompatActivity implements
         // Add click listener and change the symbol to a cafe icon on click
         symbolManager.addClickListener(new OnSymbolClickListener() {
           @Override
-          public void onAnnotationClick(Symbol symbol) {
+          public boolean onAnnotationClick(Symbol symbol) {
             Toast.makeText(SymbolListenerActivity.this,
               getString(R.string.clicked_symbol_toast), Toast.LENGTH_SHORT).show();
             symbol.setIconImage(MAKI_ICON_CAFE);
             symbolManager.update(symbol);
+            return true;
           }
         });
 
         // Add long click listener and change the symbol to an airport icon on long click
         symbolManager.addLongClickListener((new OnSymbolLongClickListener() {
           @Override
-          public void onAnnotationLongClick(Symbol symbol) {
+          public boolean onAnnotationLongClick(Symbol symbol) {
             Toast.makeText(SymbolListenerActivity.this,
               getString(R.string.long_clicked_symbol_toast), Toast.LENGTH_SHORT).show();
             symbol.setIconImage(MAKI_ICON_AIRPORT);
             symbolManager.update(symbol);
+            return true;
           }
         }));
 
