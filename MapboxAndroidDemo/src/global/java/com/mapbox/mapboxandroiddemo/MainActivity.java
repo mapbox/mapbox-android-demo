@@ -782,7 +782,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_extrusions_zoom_opacity_change_description,
         null,
         new Intent(MainActivity.this, OpacityZoomChangeExtrusionKotlinActivity.class),
-        R.string.activity_extrusions_zoom_opacity_change_url, true, BuildConfig.MIN_SDK_VERSION));
+        R.string.activity_extrusions_zoom_opacity_change_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,
@@ -905,7 +905,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_location_location_basic_pulsing_description,
         new Intent(MainActivity.this, LocationComponentBasicPulsingActivity.class),
         null,
-        R.string.activity_location_location_basic_pulsing_url, true, BuildConfig.MIN_SDK_VERSION)
+        R.string.activity_location_location_basic_pulsing_url, false, BuildConfig.MIN_SDK_VERSION)
     );
 
     exampleItemModels.add(new ExampleItemModel(
@@ -914,7 +914,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_location_location_custom_pulsing_description,
         new Intent(MainActivity.this, LocationComponentCustomPulsingActivity.class),
         null,
-        R.string.activity_location_location_custom_pulsing_url, true, BuildConfig.MIN_SDK_VERSION)
+        R.string.activity_location_location_custom_pulsing_url, false, BuildConfig.MIN_SDK_VERSION)
     );
 
     exampleItemModels.add(new ExampleItemModel(
@@ -1212,7 +1212,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_java_services_turf_circle_poi_within_filter_description,
         new Intent(MainActivity.this, TurfCirclePoiWithinFilterActivity.class),
         null,
-        R.string.activity_java_services_turf_circle_poi_within_filter_url, true, BuildConfig.MIN_SDK_VERSION));
+        R.string.activity_java_services_turf_circle_poi_within_filter_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
         R.id.nav_java_services,
@@ -1220,7 +1220,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_java_services_two_person_meetup_isochrone_within_description,
         new Intent(MainActivity.this, TwoPersonMeetupLocationIsochroneWithinActivity.class),
         null,
-        R.string.activity_java_services_two_person_meetup_isochrone_within_url, true, BuildConfig.MIN_SDK_VERSION));
+        R.string.activity_java_services_two_person_meetup_isochrone_within_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_snapshot_image_generator,
@@ -1360,7 +1360,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       R.string.activity_lab_magic_window_description,
       null,
       new Intent(MainActivity.this, MagicWindowKotlinActivity.class),
-      R.string.activity_lab_magic_window_image_url, true, Build.VERSION_CODES.O));
+      R.string.activity_lab_magic_window_image_url, false, Build.VERSION_CODES.O));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_lab,
@@ -1450,7 +1450,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_lab_vibrate_on_pin_drop_description,
         null,
         new Intent(MainActivity.this, VibrateOnPinDropKotlinActivity.class),
-        R.string.activity_lab_vibrate_on_pin_drop_url, true, BuildConfig.MIN_SDK_VERSION));
+        R.string.activity_lab_vibrate_on_pin_drop_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
@@ -1677,7 +1677,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         R.string.activity_dds_within_expression_description,
         null,
         new Intent(MainActivity.this, WithinExpressionActivity.class),
-        R.string.activity_dds_within_expression_url, true, BuildConfig.MIN_SDK_VERSION));
+        R.string.activity_dds_within_expression_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
