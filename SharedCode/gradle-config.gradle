@@ -35,9 +35,23 @@ task secretKeysSetup {
             mapboxAccessToken = "YOUR_MAPBOX_ACCESS_TOKEN_GOES_HERE"
         }
 
+        /**
+         * More info about this token can be found at https://docs.mapbox.com/android/maps/overview/#configure-credentials
+         * and https://docs.mapbox.com/android/maps/overview/#configure-your-secret-token
+         */
+        String mapsSdkDownloadToken = "$System.env.MAPBOX_DOWNLOADS_TOKEN"
+        if (mapsSdkDownloadToken == "null") {
+            System.out.println("You should set the MAPBOX_DOWNLOADS_TOKEN environment variable." +
+                    " More info about this token can be found at " +
+                    "https://docs.mapbox.com/android/maps/overview/#configure-credentials" +
+                    " and https://docs.mapbox.com/android/maps/overview/#configure-your-secret-token")
+            mapsSdkDownloadToken = "MAPBOX_DOWNLOADS_TOKEN"
+        }
+
         String tokenFileContents = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
                 "<resources>\n" +
                 "    <string name=\"access_token\" translatable=\"false\">" + mapboxAccessToken + "</string>\n" +
+                "    <string name=\"mapsSdkDownloadToken\" translatable=\"false\">" + mapsSdkDownloadToken + "</string>\n" +
                 "    <string name=\"mapbox_auth_flow_secret\">" + mapboxFlowSecret + "</string>\n" +
                 "    <string name=\"mapbox_segment_write_key\">" + segmentWriteKey + "</string>\n" +
                 "    <string name=\"mapbox_segment_wearable_write_key\">" + segmentWearableWriteKey + "</string>\n" +
