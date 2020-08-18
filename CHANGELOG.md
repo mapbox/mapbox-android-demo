@@ -2,6 +2,20 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 9.3.1 - August 18, 2020
+
+- Bumped annotation plugin to 0.9.0 #[1362](https://github.com/mapbox/mapbox-android-demo/pull/1362)
+- Java SDK bump to 5.4.1 #[1359](https://github.com/mapbox/mapbox-android-demo/pull/1359)
+- Java SDK bump to 5.3.0 #[1354](https://github.com/mapbox/mapbox-android-demo/pull/1354)
+- Use default marker icon #[1353](https://github.com/mapbox/mapbox-android-demo/pull/1353)
+- Added feature list size check in PolygonSelectToggleActivity #[1352](https://github.com/mapbox/mapbox-android-demo/pull/1352)
+- Light cleanup of FeatureCollection and Source initialization #[1310](https://github.com/mapbox/mapbox-android-demo/pull/1310)
+- Adding example of removing feature visibility with layer filter #[1308](https://github.com/mapbox/mapbox-android-demo/pull/1308)
+- Fixed source and layer name for ImageSourceActivity #[1298](https://github.com/mapbox/mapbox-android-demo/pull/1298)
+- Added mapbox token init to PlaceSelectionPluginActivity #[1351](https://github.com/mapbox/mapbox-android-demo/pull/1351)
+- Fixed location of MixedChinaAndGlobalStyleActivity token toast message #[1350](https://github.com/mapbox/mapbox-android-demo/pull/1350)
+- Updated gradle options in circle.yml file #[1349](https://github.com/mapbox/mapbox-android-demo/pull/1349)
+
 ## 9.2.0 - May 13, 2020
 
 - Java SDK bump to 5.2.1 #[1346](https://github.com/mapbox/mapbox-android-demo/pull/1346)

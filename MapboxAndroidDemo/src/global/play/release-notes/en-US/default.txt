@@ -1,8 +1,1 @@
-This update is part of the 9.2.0 release of the Mapbox Maps SDK for Android. New examples include:
-
-- Pulsing LocationComponent circle
-- Vibrate on pin drop
-- 3D extrusions zoom-based opacity
-- Two person isochrone poi within filter
-- Within poi circle polygon filter
-- Within expression filter
+This release provides several bug fixes and improvements to existing examples
