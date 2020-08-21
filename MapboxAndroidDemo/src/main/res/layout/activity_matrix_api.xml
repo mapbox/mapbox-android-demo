@@ -11,6 +11,7 @@
         mapbox:mapbox_cameraTargetLat="42.3600825"
         mapbox:mapbox_cameraTargetLng="-71.0588801"
         mapbox:mapbox_cameraZoom="11.193"
+        mapbox:mapbox_uiCompassMarginTop="79dp"
         />
 
     <androidx.recyclerview.widget.RecyclerView
