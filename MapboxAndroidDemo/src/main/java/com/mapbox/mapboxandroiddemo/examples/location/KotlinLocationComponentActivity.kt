@@ -42,8 +42,7 @@ class KotlinLocationComponentActivity : AppCompatActivity(), OnMapReadyCallback,
 
   override fun onMapReady(mapboxMap: MapboxMap) {
     this.mapboxMap = mapboxMap
-    mapboxMap.setStyle(Style.Builder().fromUri(
-            "mapbox://styles/mapbox/cjerxnqt3cgvp2rmyuxbeqme7")) {
+    mapboxMap.setStyle(Style.OUTDOORS) {
 
       // Map is set up and the style has loaded. Now you can add data or make other map adjustments
       enableLocationComponent(it)

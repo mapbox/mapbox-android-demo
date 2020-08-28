@@ -41,7 +41,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.visibility;
 
 public class InsetMapActivity extends AppCompatActivity implements MapboxMap.OnCameraMoveListener {
 
-  private static final String STYLE_URL = "mapbox://styles/mapbox/cj5l80zrp29942rmtg0zctjto";
+  private static final String STYLE_URL = Style.DARK;
   private static final String INSET_FRAGMENT_TAG = "com.mapbox.insetMapFragment";
   private static final String BOUNDS_LINE_LAYER_SOURCE_ID = "BOUNDS_LINE_LAYER_SOURCE_ID";
   private static final String BOUNDS_LINE_LAYER_LAYER_ID = "BOUNDS_LINE_LAYER_LAYER_ID";
