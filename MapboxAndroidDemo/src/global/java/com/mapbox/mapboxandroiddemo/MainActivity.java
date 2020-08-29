@@ -43,6 +43,7 @@ import com.mapbox.mapboxandroiddemo.examples.dds.KotlinFilterFeaturesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.PropertyIconDeterminationActivity;
 import com.mapbox.mapboxandroiddemo.examples.camera.ZoomToShowClusterLeavesActivity;
 import com.mapbox.mapboxandroiddemo.examples.dds.WithinExpressionActivity;
+import com.mapbox.mapboxandroiddemo.examples.extrusions.ExtrusionColorExpressionKotlinActivity;
 import com.mapbox.mapboxandroiddemo.examples.extrusions.OpacityZoomChangeExtrusionKotlinActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.DirectionsProfileToggleActivity;
 import com.mapbox.mapboxandroiddemo.examples.javaservices.KotlinBorderedCircleActivity;
@@ -792,6 +793,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
       new Intent(MainActivity.this, SingleHighlightedBuildingExtrusionActivity.class),
       null,
       R.string.activity_extrusions_single_highlighted_building_extrusion_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+      R.id.nav_extrusions,
+      R.string.activity_extrusions_color_expression_title,
+      R.string.activity_extrusions_color_expression_description,
+      null,
+      new Intent(MainActivity.this, ExtrusionColorExpressionKotlinActivity.class),
+      R.string.activity_extrusions_color_expression_url, false, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_plugins,

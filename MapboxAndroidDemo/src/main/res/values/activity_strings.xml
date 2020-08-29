@@ -499,4 +499,7 @@
     <!-- Single building highlight  -->
     <string name="tap_on_building">Tap on a building to get started</string>
     <string name="keep_tapping_on_building_footprint">Keep tapping on any building footprints!</string>
+
+    <!-- Extrusion color expression highlight -->
+    <string name="tap_on_building_to_highlight">Tap on a building to highlight it</string>
 </resources>
