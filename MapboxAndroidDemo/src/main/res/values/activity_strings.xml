@@ -495,4 +495,8 @@
     <!-- Feature filter  -->
     <string name="showing_all_country_labels">Showing all country labels</string>
     <string name="filtering_countries">Match filter using "name_en", applied to layer to hide some countries\' labels</string>
+
+    <!-- Single building highlight  -->
+    <string name="tap_on_building">Tap on a building to get started</string>
+    <string name="keep_tapping_on_building_footprint">Keep tapping on any building footprints!</string>
 </resources>
