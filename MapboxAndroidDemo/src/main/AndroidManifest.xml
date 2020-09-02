@@ -961,6 +961,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.extrusions.ExtrusionColorExpressionKotlinActivity"
+            android:label="@string/activity_extrusions_color_expression_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.dds.PolygonHolesActivity"
             android:label="@string/activity_dds_polygon_holes_title">
             <meta-data
