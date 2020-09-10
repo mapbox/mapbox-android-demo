@@ -12,7 +12,7 @@ ext {
             // Mapbox
             mapboxMapPluginPrefix    : 'v9',
             mapboxMapSdk             : '9.2.0',
-            mapboxJavaSdk            : '5.4.1',
+            mapboxJavaSdk            : '5.5.0',
             mapboxPluginBuilding     : '0.7.0',
             mapboxPluginPlaces       : '0.12.0',
             mapboxPluginLocalization : '0.12.0',
