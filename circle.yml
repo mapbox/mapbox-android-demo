@@ -20,7 +20,7 @@ workflows:
 jobs:
   primary:
     docker:
-      - image: mbgl/61abee1674:android-ndk-r18
+      - image: mbgl/android-ndk-r21:769c31f1d8
     working_directory: ~/code
     environment:
       JVM_OPTS: -Xmx3200m
@@ -91,7 +91,7 @@ jobs:
 # ------------------------------------------------------------------------------
   release:
     docker:
-      - image: mbgl/61abee1674:android-ndk-r18
+      - image: mbgl/android-ndk-r21:769c31f1d8
     working_directory: ~/code
     environment:
       JVM_OPTS: -Xmx3200m
