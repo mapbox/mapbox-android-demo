@@ -728,6 +728,13 @@
                 android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
         </activity>
         <activity
+            android:name=".examples.labs.SpinningRadarActivity"
+            android:label="@string/activity_lab_spinning_radar_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.mapbox.mapboxandroiddemo.MainActivity" />
+        </activity>
+        <activity
             android:name=".examples.labs.BaseballSprayChartActivity"
             android:label="@string/activity_lab_baseball_spray_chart_title">
             <meta-data
