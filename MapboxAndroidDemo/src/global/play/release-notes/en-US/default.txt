@@ -1,1 +1,1 @@
-This release provides several bug fixes and improvements to existing examples
+This release provides several bug fixes and add examples for 3D building extrusion highlight and extrusion coloring match expression Kotlin

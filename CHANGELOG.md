@@ -2,6 +2,15 @@
 
 Mapbox welcomes participation and contributions from everyone.
 
+## 9.5.0- September 25, 2020
+* Removed v7 style usage and upgraded to v8 styles ([#1369](https://github.com/mapbox/mapbox-android-demo/pull/1369))
+* Added single 3D building extrusion highlight example ([#1368](https://github.com/mapbox/mapbox-android-demo/pull/1368))
+* Adding extrusion coloring match expression Kotlin example ([#1370](https://github.com/mapbox/mapbox-android-demo/pull/1370))
+* Java SDK bump to 5.5.0 ([#1373](https://github.com/mapbox/mapbox-android-demo/pull/1373))
+* Bump target SDK, compile SDK, and buildtools to 29 ([#1375](https://github.com/mapbox/mapbox-android-demo/pull/1375))
+* Update map sdk to 9.5.0-beta.1 ([#1376](https://github.com/mapbox/mapbox-android-demo/pull/1376))
+* Update version to 9.5.0 ([#1378](https://github.com/mapbox/mapbox-android-demo/pull/1378))
+
 ## 9.3.1 - August 18, 2020
 
 - Bumped annotation plugin to 0.9.0 #[1362](https://github.com/mapbox/mapbox-android-demo/pull/1362)
