@@ -1,35 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/english"
         android:orderInCategory="100"
         android:title="@string/language_switch_options_menu_language_english"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/french"
         android:orderInCategory="100"
         android:title="@string/language_switch_options_menu_language_french"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/russian"
         android:orderInCategory="100"
         android:title="@string/language_switch_options_menu_language_russian"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/german"
         android:orderInCategory="100"
         android:title="@string/language_switch_options_menu_language_german"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/spanish"
         android:orderInCategory="100"
         android:title="@string/language_switch_options_menu_language_spanish"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/italian"
+        android:orderInCategory="100"
+        android:title="@string/language_switch_options_menu_language_italian"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/vietnamese"
+        android:orderInCategory="100"
+        android:title="@string/language_switch_options_menu_language_vietnamese"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/korean"
+        android:orderInCategory="100"
+        android:title="@string/language_switch_options_menu_language_korean"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/japanese"
+        android:orderInCategory="100"
+        android:title="@string/language_switch_options_menu_language_japanese"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/simplified_chinese"
+        android:orderInCategory="100"
+        android:title="@string/language_switch_options_menu_language_simplified_chinese"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/traditional_chinese"
+        android:orderInCategory="100"
+        android:title="@string/language_switch_options_menu_language_traditional_chinese"
+        app:showAsAction="never" />
 </menu>
