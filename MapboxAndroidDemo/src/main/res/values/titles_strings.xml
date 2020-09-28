@@ -158,4 +158,5 @@
     <string name="activity_lab_shared_preferences_title">Saving to SharedPreferences</string>
     <string name="activity_lab_biometric_fingerprint_title">Biometric fingerprint</string>
     <string name="activity_lab_vibrate_on_pin_drop_title">Vibrate device on pin drop</string>
+    <string name="activity_lab_spinning_radar_title">Spinning radar scan</string>
 </resources>

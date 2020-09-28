@@ -114,6 +114,7 @@ import com.mapbox.mapboxandroiddemo.examples.labs.RecyclerViewOnMapActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SharedPreferencesActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SnakingDirectionsRouteActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SpaceStationLocationActivity;
+import com.mapbox.mapboxandroiddemo.examples.labs.SpinningRadarActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SpinningSymbolLayerIconActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.SymbolLayerMapillaryActivity;
 import com.mapbox.mapboxandroiddemo.examples.labs.ValueAnimatorIconAnimationActivity;
@@ -1469,6 +1470,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         null,
         new Intent(MainActivity.this, VibrateOnPinDropKotlinActivity.class),
         R.string.activity_lab_vibrate_on_pin_drop_url, false, BuildConfig.MIN_SDK_VERSION));
+
+    exampleItemModels.add(new ExampleItemModel(
+            R.id.nav_lab,
+            R.string.activity_lab_spinning_radar_title,
+            R.string.activity_lab_spinning_radar_description,
+            null,
+            new Intent(MainActivity.this, SpinningRadarActivity.class),
+            R.string.activity_lab_spinning_radar_url, true, BuildConfig.MIN_SDK_VERSION));
 
     exampleItemModels.add(new ExampleItemModel(
       R.id.nav_dds,
