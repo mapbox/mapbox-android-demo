@@ -1,10 +1,11 @@
 package com.mapbox.mapboxandroiddemo.examples.styles;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.mapbox.mapboxandroiddemo.R;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -12,7 +13,7 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
-import com.mapbox.mapboxsdk.style.layers.Layer;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 
@@ -22,7 +23,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 public class LanguageSwitchActivity extends AppCompatActivity {
 
   private MapView mapView;
-  private MapboxMap map;
+  private MapboxMap mapboxMap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +41,10 @@ public class LanguageSwitchActivity extends AppCompatActivity {
     mapView.getMapAsync(new OnMapReadyCallback() {
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
-        map = mapboxMap;
         mapboxMap.setStyle(Style.LIGHT, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
+            LanguageSwitchActivity.this.mapboxMap = mapboxMap;
           }
         });
       }
@@ -100,26 +101,44 @@ public class LanguageSwitchActivity extends AppCompatActivity {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    map.getStyle(new Style.OnStyleLoaded() {
+    mapboxMap.getStyle(new Style.OnStyleLoaded() {
       @Override
       public void onStyleLoaded(@NonNull Style style) {
-        Layer mapText = style.getLayer("country-label");
-        if (mapText != null) {
+        SymbolLayer countryLabelTextSymbolLayer = style.getLayerAs("country-label");
+        if (countryLabelTextSymbolLayer != null) {
           switch (item.getItemId()) {
             case R.id.french:
-              mapText.setProperties(textField("{name_fr}"));
+              countryLabelTextSymbolLayer.setProperties(textField("{name_fr}"));
               return;
             case R.id.russian:
-              mapText.setProperties(textField("{name_ru}"));
+              countryLabelTextSymbolLayer.setProperties(textField("{name_ru}"));
               return;
             case R.id.german:
-              mapText.setProperties(textField("{name_de}"));
+              countryLabelTextSymbolLayer.setProperties(textField("{name_de}"));
               return;
             case R.id.spanish:
-              mapText.setProperties(textField("{name_es}"));
+              countryLabelTextSymbolLayer.setProperties(textField("{name_es}"));
+              return;
+            case R.id.italian:
+              countryLabelTextSymbolLayer.setProperties(textField("{name_it}"));
+              return;
+            case R.id.vietnamese:
+              countryLabelTextSymbolLayer.setProperties(textField("{name_vi}"));
+              return;
+            case R.id.korean:
+              countryLabelTextSymbolLayer.setProperties(textField("{name_ko}"));
+              return;
+            case R.id.japanese:
+              countryLabelTextSymbolLayer.setProperties(textField("{name_ja}"));
+              return;
+            case R.id.simplified_chinese:
+              countryLabelTextSymbolLayer.setProperties(textField("{name_zh-Hans}"));
+              return;
+            case R.id.traditional_chinese:
+              countryLabelTextSymbolLayer.setProperties(textField("{name_zh-Hant}"));
               return;
             default:
-              mapText.setProperties(textField("{name_en}"));
+              countryLabelTextSymbolLayer.setProperties(textField("{name_en}"));
           }
         }
       }
