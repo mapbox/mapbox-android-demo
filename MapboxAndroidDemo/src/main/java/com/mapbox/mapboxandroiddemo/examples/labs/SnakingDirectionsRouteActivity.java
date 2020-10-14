@@ -64,7 +64,7 @@ public class SnakingDirectionsRouteActivity extends AppCompatActivity
   private static final String MARKER_SOURCE_ID = "MARKER_SOURCE_ID";
   private static final String MARKER_LAYER_ID = "MARKER_LAYER_ID";
   private static final String MARKER_ICON_ID = "MARKER_ICON_ID";
-  private static final int DRAW_SPEED_MILLISECONDS_FOR_EACH_ROUTE_SECTION = 20;
+  private static final int DRAW_SPEED_MILLISECONDS_FOR_EACH_ROUTE_SECTION = 4;
   private static final String ROUTE_LINE_COLOR = "#d742f4";
 
   // Origin point in Paris, France
