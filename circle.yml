@@ -49,13 +49,6 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "MapboxAndroidDemo/build.gradle" }}
       - run:
-          name: Create google-services.json file
-          shell: /bin/bash -euo pipefail
-          command: |
-            if [ -n "${GOOGLE_SERVICES_JSON_RELEASE}" ]; then
-              echo "${GOOGLE_SERVICES_JSON_RELEASE}" > MapboxAndroidDemo/google-services.json
-            fi
-      - run:
           name: Add Fabric keys to fabric.properties file
           command: |
             if [ -n "${FABRIC_API_SECRET}" && -n "${FABRIC_API_KEY}" ]; then
@@ -114,13 +107,6 @@ jobs:
           command: |
             #!/bin/bash
             echo "${PLAY_PUBLISH_AUTH_JSON}" > android-gl-native-6d21dd280e7b.json
-      - run:
-          name: Create google-services.json file
-          shell: /bin/bash -euo pipefail
-          command: |
-            if [ -n "${GOOGLE_SERVICES_JSON_RELEASE}" ]; then
-              echo "${GOOGLE_SERVICES_JSON_RELEASE}" > MapboxAndroidDemo/google-services.json
-            fi      
       - run:
           name: Release to Google Play
           command: ./gradlew publishGlobalRelease
