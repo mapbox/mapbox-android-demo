@@ -11,6 +11,7 @@ import com.mapbox.mapboxsdk.maps.Style;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import android.util.TimingLogger;
 
 
 /**
@@ -19,10 +20,17 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SimpleMapViewActivity extends AppCompatActivity {
 
   private MapView mapView;
+  private TimingLogger timings;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    timings = new TimingLogger("MyTag", "methodA");
+    timings.addSplit("onStart");
+
+    String style = Style.MAPBOX_STREETS;
+
+    SimpleMapViewActivity.this.timings = timings;
 
     // Mapbox access token is configured here. This needs to be called either in your application
     // object or in the same activity which contains the mapview.
@@ -33,15 +41,23 @@ public class SimpleMapViewActivity extends AppCompatActivity {
 
     mapView = findViewById(R.id.mapView);
     mapView.onCreate(savedInstanceState);
+    mapView.addOnDidFinishLoadingMapListener(new MapView.OnDidFinishLoadingMapListener() {
+      @Override
+      public void onDidFinishLoadingMap() {
+        timings.addSplit("OnDidFinishLoadingMapListener");
+        timings.dumpToLog();
+      }
+    });
     mapView.getMapAsync(new OnMapReadyCallback() {
+
       @Override
       public void onMapReady(@NonNull MapboxMap mapboxMap) {
-        mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
+        timings.addSplit("onMapReady");
+
+        mapboxMap.setStyle(style, new Style.OnStyleLoaded() {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
-
-            // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
-
+            timings.addSplit("onStyleLoaded");
           }
         });
       }
