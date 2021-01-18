@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'com.google.firebase.crashlytics'
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'org.jmailen.kotlinter'
 apply from: "$project.rootDir/gradle/script-git-version.gradle"
 apply from: "$project.rootDir/gradle/gradle-dependencies-graph.gradle"
