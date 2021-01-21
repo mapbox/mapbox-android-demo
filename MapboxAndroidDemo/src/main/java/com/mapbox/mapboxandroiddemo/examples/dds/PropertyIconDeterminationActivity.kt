@@ -1,6 +1,7 @@
 package com.mapbox.mapboxandroiddemo.examples.dds
 
 import android.graphics.BitmapFactory
+import com.mapbox.mapboxandroiddemo.R
 import android.graphics.PointF
 import android.os.Bundle
 import android.widget.TextView
