@@ -39,7 +39,7 @@ allprojects {
             }
             credentials {
                 username = "mapbox"
-                password = System.getenv("SDK_REGISTRY_TOKEN") ?: project.property("SDK_REGISTRY_TOKEN") as String
+                password = System.getenv("MAPBOX_DOWNLOADS_TOKEN") ?: project.property("MAPBOX_DOWNLOADS_TOKEN") as String
             }
         }
     }
