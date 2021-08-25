@@ -73,7 +73,7 @@ public class TurfPhysicalCircleActivity extends AppCompatActivity implements Map
   private MapboxMap mapboxMap;
 
   // Not static final because they will be adjusted by the seekbars and spinner menu
-  private String circleUnit = "kilometers";
+  private String circleUnit = kilometers;
   private int circleSteps = 180;
   private int circleRadius = 100;
 
