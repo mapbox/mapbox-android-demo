@@ -433,13 +433,6 @@
     <!-- Zoom opacity swap-->
     <string name="zoom_in_and_out_instruction">Zoom in and out to see the new order of the satellite and Streets styles</string>
 
-    <!-- China bounds checker-->
-    <string name="device_location">Device %1$s in China</string>
-    <string name="china_style_with_english_labels_warning_toast">This style file isn\'t actually included in the app because of privacy reasons. Add the file to an assets folder. Please email Mapbox at apac-bd@mapbox.com if you need this file and/or have questions.</string>
-
-    <!-- China mixed styles based on location-->
-    <string name="china_token_warning_toast">This example requires a regular Mapbox token and a China token. Please see the code for more instructions.</string>
-
     <!-- Biometrics fingerprint-->
     <string name="prompt_title">Unlock map data</string>
     <string name="prompt_subtitle">Show hidden data</string>

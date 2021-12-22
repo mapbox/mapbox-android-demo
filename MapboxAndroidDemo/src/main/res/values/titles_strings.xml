@@ -148,9 +148,6 @@
     <string name="activity_lab_baseball_spray_chart_title">Baseball spray chart</string>
     <string name="activity_dds_polygon_select_toggle_title">Polygon toggle</string>
     <string name="activity_lab_drag_draw_title">Drawing search area</string>
-    <string name="activity_china_simple_china_mapview_title">China map view</string>
-    <string name="activity_china_simple_china_bounds_checker_title">Device in China</string>
-    <string name="activity_china_mixed_china_and_global_style_title">Load style based on location</string>
     <string name="activity_lab_home_screen_widget_title">Homescreen geocoding widget</string>
     <string name="activity_lab_rv_directions_title">RecyclerView Directions</string>
     <string name="activity_lab_spinning_icon_title">Spinning icon</string>
