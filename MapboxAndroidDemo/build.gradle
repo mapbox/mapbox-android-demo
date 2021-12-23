@@ -7,7 +7,6 @@ apply plugin: 'org.jmailen.kotlinter'
 apply from: "$project.rootDir/gradle/script-git-version.gradle"
 apply from: "$project.rootDir/gradle/gradle-dependencies-graph.gradle"
 
-def isGlobal
 android {
     compileSdkVersion androidVersions.compileSdkVersion
     buildToolsVersion androidVersions.buildToolsVersion
@@ -16,8 +15,6 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
-
-
 
     defaultConfig {
         applicationId "com.mapbox.mapboxandroiddemo"
@@ -46,16 +43,8 @@ android {
 
     productFlavors {
         global {
-            isGlobal = true
             resValue "string", "firebase_app_id", System.getenv('FIREBASE_APP_ID') ? System.getenv('FIREBASE_APP_ID') : "blank_place_holder_string"
             resValue "string", "firebase_api_key", System.getenv('FIREBASE_API_KEY') ? System.getenv('FIREBASE_API_KEY') : "blank_place_holder_string"
-        }
-
-        china {
-            isGlobal = false
-            repositories {
-                maven { url "https://mapbox.bintray.com/mapbox" }
-            }
         }
     }
 
@@ -110,10 +99,8 @@ play {
 kotlinter {
     indentSize = 2
 }
+apply plugin: 'com.google.firebase.firebase-perf'
 
-if (isGlobal) {
-    apply plugin: 'com.google.firebase.firebase-perf'
-}
 dependencies {
 
     // Wearable application module
@@ -131,7 +118,6 @@ dependencies {
     implementation dependenciesList.supportAnimation
 
     // Mapbox dependencies
-    chinaImplementation dependenciesList.mapboxChinaPlugin
     implementation dependenciesList.mapboxMapSdk
     implementation dependenciesList.mapboxTurf
     implementation dependenciesList.mapboxServices
