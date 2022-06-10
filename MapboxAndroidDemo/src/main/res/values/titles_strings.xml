@@ -64,6 +64,8 @@
     <string name="activity_dds_satellite_land_select_title">Satellite land select</string>
     <string name="activity_dds_line_gradient_title">Line gradient</string>
     <string name="activity_dds_symbol_zoom_switch_title">Zoom-based icon switch</string>
+    <string name="activity_dds_animated_dash_line_title">Animated line layer</string>
+    <string name="activity_annotation_marker_title">Draw a marker</string>
     <string name="activity_dds_geojson_line_title">Draw a GeoJSON line</string>
     <string name="activity_dds_polygon_title">Draw a polygon</string>
     <string name="activity_dds_polygon_holes_title">Draw a polygon with holes</string>
