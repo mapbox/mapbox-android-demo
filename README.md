@@ -1,3 +1,16 @@
+# Mapbox Android Demo app [ARCHIVED]
+
+**Note: This repository has been archived and is no longer maintained.**
+
+This repository contains a public demo of the Mapbox Maps SDK for Android. The app is no longer actively maintained or updated and will be removed/was removed from the Google Play store on October 25,2024.
+
+For up-to-date information and examples of using Mapbox in Android applications, please refer to:
+
+- [Mapbox Maps SDK for Android Documentation](https://docs.mapbox.com/android/maps/guides/)
+- [Mapbox Maps SDK for Android GitHub Repository](https://github.com/mapbox/mapbox-maps-android/)
+
+## Historical README Content
+
 # Mapbox Android Demo app
 
 ![](https://github.com/mapbox/mapbox-android-demo/blob/master/screenshots/splash.png)
