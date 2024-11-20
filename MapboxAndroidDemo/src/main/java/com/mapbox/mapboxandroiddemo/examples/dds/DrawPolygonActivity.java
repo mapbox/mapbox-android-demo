@@ -16,7 +16,8 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
@@ -28,25 +29,21 @@ public class DrawPolygonActivity extends AppCompatActivity {
 
   private MapView mapView;
 
-  private static final List<List<Point>> POINTS = new ArrayList<>();
-  private static final List<Point> OUTER_POINTS = new ArrayList<>();
-
-  static {
-    OUTER_POINTS.add(Point.fromLngLat(-122.685699, 45.522585));
-    OUTER_POINTS.add(Point.fromLngLat(-122.708873, 45.534611));
-    OUTER_POINTS.add(Point.fromLngLat(-122.678833, 45.530883));
-    OUTER_POINTS.add(Point.fromLngLat(-122.667503, 45.547115));
-    OUTER_POINTS.add(Point.fromLngLat(-122.660121, 45.530643));
-    OUTER_POINTS.add(Point.fromLngLat(-122.636260, 45.533529));
-    OUTER_POINTS.add(Point.fromLngLat(-122.659091, 45.521743));
-    OUTER_POINTS.add(Point.fromLngLat(-122.648792, 45.510677));
-    OUTER_POINTS.add(Point.fromLngLat(-122.664070, 45.515008));
-    OUTER_POINTS.add(Point.fromLngLat(-122.669048, 45.502496));
-    OUTER_POINTS.add(Point.fromLngLat(-122.678489, 45.515369));
-    OUTER_POINTS.add(Point.fromLngLat(-122.702007, 45.506346));
-    OUTER_POINTS.add(Point.fromLngLat(-122.685699, 45.522585));
-    POINTS.add(OUTER_POINTS);
-  }
+  private static final List<List<Point>> POINTS = Collections.singletonList(Arrays.asList(
+    Point.fromLngLat(-122.685699, 45.522585),
+    Point.fromLngLat(-122.708873, 45.534611),
+    Point.fromLngLat(-122.678833, 45.530883),
+    Point.fromLngLat(-122.667503, 45.547115),
+    Point.fromLngLat(-122.660121, 45.530643),
+    Point.fromLngLat(-122.636260, 45.533529),
+    Point.fromLngLat(-122.659091, 45.521743),
+    Point.fromLngLat(-122.648792, 45.510677),
+    Point.fromLngLat(-122.664070, 45.515008),
+    Point.fromLngLat(-122.669048, 45.502496),
+    Point.fromLngLat(-122.678489, 45.515369),
+    Point.fromLngLat(-122.702007, 45.506346),
+    Point.fromLngLat(-122.685699, 45.522585)
+  ));
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +65,9 @@ public class DrawPolygonActivity extends AppCompatActivity {
           @Override
           public void onStyleLoaded(@NonNull Style style) {
             style.addSource(new GeoJsonSource("source-id", Polygon.fromLngLats(POINTS)));
-            style.addLayerBelow(new FillLayer("layer-id", "source-id").withProperties(
-              fillColor(Color.parseColor("#3bb2d0"))), "settlement-label"
+            style.addLayerBelow(
+              new FillLayer("layer-id", "source-id").withProperties(fillColor("#3bb2d0")),
+              "settlement-label"
             );
           }
         });
