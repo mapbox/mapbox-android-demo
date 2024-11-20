@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.mapbox.mapboxandroiddemo.MainActivity;
 import com.mapbox.mapboxandroiddemo.R;
@@ -24,6 +25,7 @@ import com.mapbox.mapboxsdk.snapshotter.MapSnapshotter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import timber.log.Timber;
 
 import static android.app.PendingIntent.getActivity;
 
@@ -102,12 +104,18 @@ public class SnapshotNotificationActivity extends AppCompatActivity implements O
           mapSnapshotter.setSize(width, height);
           mapSnapshotter.setRegion(latLngBounds);
         }
-        mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
-          @Override
-          public void onSnapshotReady(MapSnapshot snapshot) {
-            createNotification(snapshot.getBitmap());
-          }
-        });
+        try {
+          mapSnapshotter.start(new MapSnapshotter.SnapshotReadyCallback() {
+            @Override
+            public void onSnapshotReady(MapSnapshot snapshot) {
+              createNotification(snapshot.getBitmap());
+            }
+          });
+        } catch (IllegalStateException exception) {
+          Timber.d(exception);
+          Toast.makeText(SnapshotNotificationActivity.this,
+              R.string.snapshotter_was_already_started, Toast.LENGTH_SHORT).show();
+        }
       }
     });
   }
